@@ -1,0 +1,14 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8.12
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies from our offline mirror
+          command: yarn install --offline
+      - run:
+          name: Run all Continuous Integration checks
+          command: yarn ci-check

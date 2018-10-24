@@ -1,0 +1,50 @@
+{
+  "name": "carbon-components-vue",
+  "description": "[Experimental] Vue implementation of the Carbon Design System",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon-components-vue.git"
+  },
+  "bugs": {
+    "url": "https://github.com/carbon-design-system/carbon-components-vue/issues/new"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "ci-check": "",
+    "format": "prettier --write \"**/*.{scss,css,js,md,vue}\"",
+    "format:diff": "prettier --list-different \"**/*.{scss,css,js,md,vue}\""
+  },
+  "peerDependencies": {},
+  "dependencies": {},
+  "devDependencies": {
+    "@commitlint/cli": "^7.2.1",
+    "@commitlint/config-conventional": "^7.1.2",
+    "husky": "^1.1.2",
+    "lint-staged": "^7.3.0",
+    "prettier": "^1.14.3"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "*.{scss,css,js,md,vue}": [
+      "yarn format",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "printWidth": 80,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  }
+}
