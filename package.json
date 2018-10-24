@@ -12,7 +12,7 @@
   },
   "sideEffects": false,
   "scripts": {
-    "ci-check": "",
+    "ci-check": "yarn format:diff",
     "format": "prettier --write \"**/*.{scss,css,js,md,vue}\"",
     "format:diff": "prettier --list-different \"**/*.{scss,css,js,md,vue}\""
   },
