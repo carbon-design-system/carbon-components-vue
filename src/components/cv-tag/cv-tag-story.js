@@ -58,7 +58,6 @@ stories.add(
     const templateViewString = `
     <sv-template-view
       sv-margin
-      sv-alt-back
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
     </sv-template-view>

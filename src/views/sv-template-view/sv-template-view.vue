@@ -54,11 +54,13 @@ export default {
 
 <style lang="scss">
 @import '~highlight.js/styles/default.css';
-$alt-back-color: #f5f7fa;
+$back-color: #f5f7fa;
+$alt-back-color: #fff;
 $border: 1px solid #dfe3e6;
 
 .sv-template-view__component {
   border: $border;
+  background-color: $back-color;
 
   .sv-template-view--margin & {
     margin: 40px;
