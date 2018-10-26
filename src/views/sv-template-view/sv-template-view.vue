@@ -2,6 +2,7 @@
   <main class="sv-template-view" :class="[{'sv-template-view--margin': svMargin, 'sv-template-view--alt-back': svAltBack}]">
     <section class="sv-template-view__component">
       <slot name="component"></slot>
+      <br/>
       <slot name="other"></slot>
     </section>
     <section class="sv-template-view__code">
