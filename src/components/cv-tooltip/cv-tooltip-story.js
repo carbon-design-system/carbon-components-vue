@@ -70,7 +70,6 @@ stories.add(
     const templateViewString = `
     <sv-template-view
       sv-margin
-      sv-alt-back
       sv-source='${templateString.trim()}'>
       <template slot="other">
         <button @click="show" style="margin-left: 500px;">Show tip</button>
@@ -145,7 +144,6 @@ stories.add(
     const templateViewString = `
     <sv-template-view
       sv-margin
-      sv-alt-back
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
     </sv-template-view>
@@ -204,7 +202,6 @@ stories.add(
     const templateViewString = `
     <sv-template-view
       sv-margin
-      sv-alt-back
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
     </sv-template-view>
