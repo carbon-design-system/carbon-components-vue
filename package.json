@@ -19,7 +19,10 @@
     "storybook-build": "build-storybook"
   },
   "peerDependencies": {},
-  "dependencies": {},
+  "dependencies": {
+    "carbon-components": "^9.39.0",
+    "carbon-icons": "^7.0.7"
+  },
   "devDependencies": {
     "@commitlint/cli": "^7.2.1",
     "@commitlint/config-conventional": "^7.1.2",
@@ -29,8 +32,6 @@
     "@storybook/addon-storysource": "^3.4.11",
     "@storybook/vue": "^3.4.11",
     "babel-core": "^6.26.3",
-    "carbon-components": "^9.39.0",
-    "carbon-icons": "^7.0.7",
     "husky": "^1.1.2",
     "lint-staged": "^7.3.0",
     "node-sass": "^4.9.4",
