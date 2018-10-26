@@ -6,6 +6,11 @@ module.exports = (baseConfig, env, defaultConfig) => {
     test: /-story\.js$/,
     include: path.resolve(__dirname, '../src'),
     loader: require.resolve('@storybook/addon-storysource/loader'),
+    options: {
+      prettierConfig: {
+        parser: 'babylon', // Remove warnings when loading story source files
+      },
+    },
     enforce: 'pre',
   });
   defaultConfig.resolve.extensions.push('.js', '.vue', '.json');
