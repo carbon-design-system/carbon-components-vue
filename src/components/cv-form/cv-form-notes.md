@@ -1,4 +1,4 @@
-# CvIcon
+# CvForm
 
 These components are purely wrapper elements for use in creating forms.
 
