@@ -14,6 +14,7 @@ stories.addDecorator(withKnobs);
 
 const knobs = () => ({
   label: text('label', 'checkbox', consts.CONFIG),
+  value: `\n value="${text('value', 'check-1', consts.CONFIG)}"`,
   checked: boolean('checked', false, consts.CONFIG) ? '\n  checked' : '',
   mixed: boolean('mixed', false, consts.CONFIG) ? `\n  mixed` : '',
   disabled: boolean('disabled', false, consts.CONFIG) ? '\n  disabled' : '',
@@ -36,11 +37,11 @@ stories.add(
       : '';
 
     // ----------------------------------------------------------------
-
+    console.dir(settings);
     const templateString = `
-<cv-checkbox${settings.checked}${settings.mixed}${settings.label}${
-      settings.disabled
-    }${settings.vModel}${settings.otherAttributes}
+<cv-checkbox${settings.checked}${settings.value}${settings.mixed}${
+      settings.label
+    }${settings.disabled}${settings.vModel}${settings.otherAttributes}
   @change="actionChange"
   @keydown="actionKeydown"
   >
