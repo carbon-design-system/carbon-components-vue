@@ -18,10 +18,13 @@ const knobs = () => ({
   kind: selectV2(
     'kind',
     {
+      Wibble: '',
       Primary: 'primary',
       Secondary: 'secondary',
+      Tertiary: 'tertiary',
       Ghost: 'ghost',
       Danger: 'danger',
+      DangerPrimary: 'danger--primary',
     },
     'primary',
     consts.CONFIG
