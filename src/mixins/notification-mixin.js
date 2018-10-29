@@ -7,7 +7,7 @@ export default {
     kind: {
       type: String,
       required: true,
-      validator: value => kinds.indexOf(value) !== -1,
+      validator: value => kinds.includes(value),
     },
     title: String,
     subTitle: String,
