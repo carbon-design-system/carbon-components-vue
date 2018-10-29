@@ -20,7 +20,6 @@ export default {
       default: 'primary',
       validator: val =>
         [
-          '',
           'primary',
           'secondary',
           'tertiary',

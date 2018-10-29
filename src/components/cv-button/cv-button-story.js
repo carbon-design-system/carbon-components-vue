@@ -18,7 +18,7 @@ const knobs = () => ({
   kind: selectV2(
     'kind',
     {
-      Wibble: '',
+      Blank: '',
       Primary: 'primary',
       Secondary: 'secondary',
       Tertiary: 'tertiary',
@@ -43,19 +43,24 @@ stories.add(
   withNotes(CvButtonNotesMD)(() => {
     const settings = knobs();
 
+    settings.kind = settings.kind.length ? `\n  kind="${settings.kind}"` : '';
+
     settings.otherAttributes = settings.otherAttributes
-      ? `\n  ${settings.otherAttributes}`
+      ? `${settings.otherAttributes}`
       : '';
 
     // ----------------------------------------------------------------
+    console.dir(settings);
 
     const templateString = `
-<cv-button${settings.disabled}${settings.small}
-  kind="${settings.kind}"${settings.iconHref}${settings.otherAttributes}
+<cv-button${settings.kind}${settings.disabled}${settings.small}${
+      settings.otherAttributes
+    }
   @click="actionClick">
   ${settings.slotContent}
 </cv-button>
   `;
+    console.log(templateString);
 
     // ----------------------------------------------------------------
 
