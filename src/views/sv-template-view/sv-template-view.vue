@@ -64,6 +64,8 @@ $border: 1px solid #dfe3e6;
   background-color: $back-color;
 
   .sv-template-view--margin & {
+    position: relative; // needed to keep modal components on top
+    z-index: 999; // needed to keep modal components on top
     margin: 40px;
     padding: 40px;
   }
