@@ -28,6 +28,7 @@ http://www.carbondesignsystem.com/components/modal/code
 - label: optional
 - title:
 - content:
+- kind: 'danger' other wise default modal.
 - primary-button: optional, no primary button if not specified
 - secondary-button: optional, no secondary button if not specified
 

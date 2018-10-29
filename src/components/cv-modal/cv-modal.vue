@@ -27,12 +27,12 @@
       </div>
 
       <div class="bx--modal-footer" v-if="hasFooter">
-        <cv-button kind="secondary" @click="secondaryClick" v-if="this.$slots['secondary-button']" :data-modal-primary-focus="initialFocus === 'secondary'">
+        <cv-button :kind="secondaryKind" @click="secondaryClick" v-if="this.$slots['secondary-button']" :data-modal-primary-focus="initialFocus === 'secondary'">
           <slot name="secondary-button">
             Secondary button
           </slot>
         </cv-button>
-        <cv-button kind="primary" @click="primaryClick" v-if="this.$slots['primary-button']" :data-modal-primary-focus="initialFocus === 'primary'">
+        <cv-button :kind="primaryKind" @click="primaryClick" v-if="this.$slots['primary-button']" :data-modal-primary-focus="initialFocus === 'primary'">
           <slot name="primary-button">
             Primary button
           </slot>
@@ -64,6 +64,20 @@ export default {
     };
   },
   computed: {
+    primaryKind() {
+      if (this.kind === 'danger') {
+        return 'danger--primary';
+      } else {
+        return 'primary';
+      }
+    },
+    secondaryKind() {
+      if (this.kind === 'danger') {
+        return 'tertiary';
+      } else {
+        return 'secondary';
+      }
+    },
     hasFooter() {
       return this.$slots['primary-button'] || this.$slots['secondary-button'];
     },

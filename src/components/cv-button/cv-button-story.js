@@ -18,7 +18,7 @@ const knobs = () => ({
   kind: selectV2(
     'kind',
     {
-      Blank: '',
+      Default: '',
       Primary: 'primary',
       Secondary: 'secondary',
       Tertiary: 'tertiary',

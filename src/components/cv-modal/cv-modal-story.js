@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text } from '@storybook/addon-knobs/vue';
+import { withKnobs, text, selectV2 } from '@storybook/addon-knobs/vue';
 import { withNotes } from '@storybook/addon-notes';
 import { action } from '@storybook/addon-actions';
 
@@ -20,6 +20,15 @@ const knobs = () => ({
     `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, seed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>`,
     consts.CONTENT
   ),
+  kind: selectV2(
+    'kind',
+    {
+      Default: '',
+      Danger: 'danger',
+    },
+    'primary',
+    consts.CONFIG
+  ),
   secondaryButton: text('slot:secondary-button', '', consts.CONTENT),
   primaryButton: text('slot:primary-button', '', consts.CONTENT),
   otherAttributes: text('other attributes', '', consts.OTHER),
@@ -39,6 +48,7 @@ stories.add(
     settings.content = settings.content.length
       ? `\n  <template slot="content">${settings.content}</template>`
       : '';
+    settings.kind = settings.kind.length ? `\n  kind="${settings.kind}"` : '';
     settings.secondaryButton = settings.secondaryButton.length
       ? `\n <template slot="secondary-button">${
           settings.secondaryButton
@@ -56,7 +66,7 @@ stories.add(
     // ----------------------------------------------------------------
 
     const templateString = `
-<cv-modal${settings.otherAttributes}
+<cv-modal${settings.kind}${settings.otherAttributes}
   @modal-beingshown="actionBeforeShown"
   @modal-shown="actionShown"
   @modal-beinghidden="actionBeforeHidden"
