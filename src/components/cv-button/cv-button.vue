@@ -15,7 +15,19 @@
 export default {
   name: 'CvButton',
   props: {
-    kind: { type: String, default: 'primary' },
+    kind: {
+      type: String,
+      default: 'primary',
+      validator: val =>
+        [
+          'primary',
+          'secondary',
+          'tertiary',
+          'ghost',
+          'danger',
+          'danger--primary',
+        ].includes(val),
+    },
     small: { type: Boolean, default: false },
   },
 };
