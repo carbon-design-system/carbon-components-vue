@@ -56,7 +56,11 @@ export default {
     CvIcon,
   },
   props: {
-    kind: { type: String, default: '', validator: val => ['', 'danger'] },
+    kind: {
+      type: String,
+      default: '',
+      validator: val => ['', 'danger'].includes(val),
+    },
   },
   data() {
     return {

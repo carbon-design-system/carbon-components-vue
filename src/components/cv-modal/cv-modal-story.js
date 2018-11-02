@@ -26,7 +26,7 @@ const knobs = () => ({
       Default: '',
       Danger: 'danger',
     },
-    'primary',
+    '',
     consts.CONFIG
   ),
   secondaryButton: text('slot:secondary-button', '', consts.CONTENT),

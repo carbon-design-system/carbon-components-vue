@@ -20,7 +20,7 @@ export default {
 
       for (let c of components) {
         // register only components specified in the options
-        if (options.indexOf(c.default.name) !== -1) {
+        if (options.includes(c.default.name)) {
           Vue.component(c.default.name, c.default);
         }
       }

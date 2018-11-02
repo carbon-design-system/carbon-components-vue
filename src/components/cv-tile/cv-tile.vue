@@ -32,9 +32,9 @@ export default {
       type: String,
       default: '',
       validator: value =>
-        ['clickable', 'expandable', 'selectable', 'standard', ''].indexOf(
+        ['clickable', 'expandable', 'selectable', 'standard', ''].includes(
           value
-        ) !== -1,
+        ),
     },
   },
   computed: {

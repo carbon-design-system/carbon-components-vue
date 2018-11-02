@@ -1,4 +1,4 @@
-# cv-toggle
+# cv-modal
 
 A Vue implementation of a Carbon Components modal
 
