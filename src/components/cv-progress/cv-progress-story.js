@@ -27,7 +27,7 @@ stories.add(
   withNotes(CvProgressNotesMD)(() => {
     const settings = knobs();
 
-    settings.initialStep = `\n initial-step="${parseInt(
+    settings.initialStep = `\n :initial-step="${parseInt(
       settings.initialStep
     )}"`;
     settings.otherAttributes = settings.otherAttributes
