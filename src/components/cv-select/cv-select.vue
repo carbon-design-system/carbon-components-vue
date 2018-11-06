@@ -15,7 +15,7 @@
       <svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5">
         <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
       </svg>
-      <label :for="uid" class="bx--label">{{label}}</label>
+      <label :for="uid" class="bx--label" :class="{'bx--visually-hidden': hideLabel}">{{label}}</label>
     </div>
   </div>
 </template>
@@ -29,20 +29,35 @@ export default {
   mixins: [uidMixin],
   props: {
     inline: Boolean,
-    label: String,
+    hideLabel: Boolean,
+    label: { type: String, required: true },
     _modelValue: { type: String, default: undefined },
     // *********************
     // declare here to prevent the following from being added to the select
     // *********************
     // multiple does not work with styling from carbon-components 9.20
-    multiple: { type: [Boolean, String] },
-    // value gets picked up by vues $attrs and set's select.value
-    // this results in selected being overridden
-    value: String,
+    multiple: {
+      type: String,
+      validator: val => {
+        console.log('multiple not supported in cv-select');
+        return false;
+      },
+    },
   },
   model: {
     event: '_modelEvent',
     prop: '_modelValue',
+  },
+  beforeCreate() {
+    // *********************
+    // delete here to prevent the following from being added to the select
+    // *********************
+    // multiple does not work with styling from carbon-components 9.20
+    delete this.$attrs.multiple;
+    // value gets picked up by vues $attrs and set's select.value
+    // the standard HTML control does not do this.
+    // value: String,
+    delete this.$attrs.value;
   },
   computed: {
     // Bind listeners at the component level to the embedded input element and
@@ -66,6 +81,14 @@ export default {
   watch: {
     _modelValue(val) {
       this.$refs.select.value = val;
+    },
+  },
+  methods: {
+    value(val) {
+      if (val !== undefined) {
+        this.$refs.select.value = val;
+      }
+      return this.$refs.select.value;
     },
   },
 };
