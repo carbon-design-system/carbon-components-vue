@@ -102,10 +102,7 @@ export default {
     pageSizesLabel: { type: String, default: 'Number of items per page:' },
     numberOfItems: { type: Number, default: Infinity },
     page: { type: [Number, Symbol], default: notSupplied },
-    pageSizes: {
-      type: Array,
-      default: () => [10, 20, 30, 40, 50],
-    },
+    pageSizes: { type: Array, default: () => [10, 20, 30, 40, 50] },
   },
   data() {
     return {
