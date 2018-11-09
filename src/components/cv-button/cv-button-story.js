@@ -5,6 +5,7 @@ import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
 import consts from '../../utils/storybook-consts';
+import preKnobParser from '../../utils/storybook-preknobs';
 
 import CvButtonNotesMD from './cv-button-notes.md';
 import CvButton from './cv-button';
@@ -13,71 +14,81 @@ import CvIcon from '../cv-icon/cv-icon';
 const stories = storiesOf('CvButton', module);
 stories.addDecorator(withKnobs);
 
-const knobs = () => ({
-  small: boolean('small', false, consts.CONFIG) ? '\n  small' : '',
-  kind: selectV2(
-    'kind',
-    {
-      Default: '',
-      Primary: 'primary',
-      Secondary: 'secondary',
-      Tertiary: 'tertiary',
-      Ghost: 'ghost',
-      Danger: 'danger',
-      DangerPrimary: 'danger--primary',
-    },
-    'primary',
-    consts.CONFIG
-  ),
-  slotContent: text(
-    'slot:content',
-    'I am a button <cv-icon href="cv(icon--add)" class="bx--btn__icon"></cv-icon>',
-    consts.CONTENT
-  ),
-  disabled: boolean('disabled', false, consts.CONFIG) ? '\n  disabled' : '',
-  otherAttributes: text('other attributes', '', consts.OTHER),
-});
+const kinds = {
+  options: {
+    primary: 'primary',
+    secondary: 'secondary',
+    tertiary: 'tertiary',
+    ghost: 'ghost',
+    danger: 'danger',
+    'danger-primary': 'danger--primary',
+  },
+  default: 'primary',
+};
 
-stories.add(
-  'All',
-  withNotes(CvButtonNotesMD)(() => {
-    const settings = knobs();
+const preKnobs = {
+  small: {
+    group: 'attr',
+    type: boolean,
+    config: ['small', false, consts.CONFIG],
+    value: val => (val ? '\n  small' : ''),
+  },
+  slotContent: {
+    group: 'slot',
+    type: text,
+    config: [
+      'slot:content',
+      'I am a button <cv-icon href="cv(icon--add)" class="bx--btn__icon"></cv-icon>',
+      consts.CONTENT,
+    ],
+  },
+  disabled: {
+    group: 'attr',
+    type: boolean,
+    config: ['disabled', false, consts.CONFIG],
+    value: val => (val ? '\n  disabled' : ''),
+  },
+  otherAttributes: {
+    group: 'attr',
+    type: text,
+    config: ['other attributes', '', consts.OTHER],
+    value: val => (val.length ? `\n  ${val}` : ''),
+  },
+};
 
-    settings.kind = settings.kind.length ? `\n  kind="${settings.kind}"` : '';
+const storySet = preKnobParser.getStorySet(kinds, preKnobs);
 
-    settings.otherAttributes = settings.otherAttributes
-      ? `${settings.otherAttributes}`
-      : '';
+for (const story of storySet) {
+  stories.add(
+    story.name,
+    withNotes(CvButtonNotesMD)(() => {
+      const settings = story.knobs();
 
-    // ----------------------------------------------------------------
-    console.dir(settings);
-
-    const templateString = `
-<cv-button${settings.kind}${settings.disabled}${settings.small}${
-      settings.otherAttributes
-    }
+      const templateString = `
+<cv-button${settings.kind}${settings.attr}
   @click="actionClick">
-  ${settings.slotContent}
+  ${settings.slot}
 </cv-button>
-  `;
-    console.log(templateString);
+    `;
+      // console.log(templateString);
 
-    // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-    const templateViewString = `
-    <sv-template-view
-      :sv-margin="true"
-      sv-source='${templateString.trim()}'>
-      <template slot="component">${templateString}</template>
-    </sv-template-view>
-  `;
+      const templateViewString = `
+      <sv-template-view
+        :sv-margin="true"
+        sv-source='${templateString.trim()}'>
+        <template slot="component">${templateString}</template>
+      </sv-template-view>
+    `;
 
-    return {
-      components: { CvButton, CvIcon, SvTemplateView },
-      methods: {
-        actionClick: action('Cv Button - click'),
-      },
-      template: templateViewString,
-    };
-  })
-);
+      return {
+        components: { CvButton, CvIcon, SvTemplateView },
+        methods: {
+          actionClick: action('Cv Button - click'),
+        },
+        template: templateViewString,
+      };
+    })
+  );
+}
