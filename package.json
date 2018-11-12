@@ -23,7 +23,7 @@
   "peerDependencies": {},
   "dependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "carbon-components": "^9.39.0",
+    "carbon-components": "^9.48.1",
     "carbon-icons": "^7.0.7"
   },
   "devDependencies": {
