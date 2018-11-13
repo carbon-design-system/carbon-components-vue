@@ -12,3 +12,24 @@ jobs:
       - run:
           name: Run all Continuous Integration checks
           command: yarn ci-check
+      - deploy:
+          name: deploy to IBM Cloud
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              # Install `ibmcloud` CLI
+              curl -fsSL https://clis.ng.bluemix.net/install/linux | sh
+
+              # Login and push staging manifest
+              ibmcloud login \
+                --apikey $CLOUD_API_KEY \
+                -a https://api.ng.bluemix.net \
+                -o carbon-design-system \
+                -s production
+              ibmcloud cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
+              ibmcloud cf install-plugin blue-green-deploy -f -r CF-Community
+
+              yarn storybook-build
+              ibmcloud cf blue-green-deploy carbon-storybook-vue \
+                -f .circleci/manifest.yml \
+                --delete-old-apps
+            fi
