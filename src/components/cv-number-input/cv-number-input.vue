@@ -1,5 +1,5 @@
 <template>
-  <div data-numberinput class="cv-number-input bx--number" :data-invalid="invalid">
+  <div data-numberinput class="cv-number-input bx--number" :class="{'bx--number--light': theme === 'light'}" :data-invalid="invalid">
     <div class="bx--number__controls">
       <button class="bx--number__control-btn up-icon">
         <svg width="10" height="5" viewBox="0 0 10 5">
@@ -30,11 +30,12 @@
 
 <script>
 import uidMixin from '../../mixins/uid-mixin';
+import themeMixin from '../../mixins/theme-mixin';
 import { NumberInput } from 'carbon-components';
 
 export default {
   name: 'CvNumberInput',
-  mixins: [uidMixin],
+  mixins: [uidMixin, themeMixin],
   inheritAttrs: false,
   data() {
     return {

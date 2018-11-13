@@ -1,16 +1,17 @@
 <template>
   <div class="bx--form-item">
     <label :for="uid" :class="['bx--label', {'bx--label--disabled': $attrs.disabled !== undefined}]">{{label}}</label>
-    <input :id="uid" class="bx--text-input" v-bind="$attrs" :value="value" v-on="inputListeners">
+    <input :id="uid" class="bx--text-input" :class="{'bx--text-input--light': theme === 'light'}" v-bind="$attrs" :value="value" v-on="inputListeners">
   </div>
 </template>
 
 <script>
 import uidMixin from '../../mixins/uid-mixin';
+import themeMixin from '../../mixins/theme-mixin';
 
 export default {
   name: 'CvTextInput',
-  mixins: [uidMixin],
+  mixins: [uidMixin, themeMixin],
   inheritAttrs: false,
   props: {
     label: String,

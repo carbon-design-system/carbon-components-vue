@@ -29,6 +29,7 @@
       <input
         type="number"
         class="bx--text-input bx--slider-text-input"
+        :class="{'bx--text-input--light': theme === 'light'}"
         :placeholder="min"
         v-model="internalValue"
         @change="onChange"
@@ -42,12 +43,13 @@
 
 <script>
 import uidMixin from '../../mixins/uid-mixin';
+import themeMixin from '../../mixins/theme-mixin';
 
 const notSupplied = Symbol('slider - no model value'); // a unique identifier
 
 export default {
   name: 'CvSlider',
-  mixins: [uidMixin],
+  mixins: [uidMixin, themeMixin],
   props: {
     disabled: Boolean,
     label: String,

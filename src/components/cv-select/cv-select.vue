@@ -1,6 +1,6 @@
 <template>
   <div class="bx--form-item cv-select">
-    <div class="bx--select" :class="{'bx--select--inline': inline}">
+    <div class="bx--select" :class="{'bx--select--inline': inline, 'bx--select--light': theme === 'light'}">
       <select
         v-bind="$attrs"
         :id="uid"
@@ -22,11 +22,12 @@
 
 <script>
 import uidMixin from '../../mixins/uid-mixin';
+import themeMixin from '../../mixins/theme-mixin';
 
 export default {
   name: 'CvSelect',
   inheritAttrs: false,
-  mixins: [uidMixin],
+  mixins: [uidMixin, themeMixin],
   props: {
     inline: Boolean,
     hideLabel: Boolean,

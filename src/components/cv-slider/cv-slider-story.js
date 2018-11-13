@@ -13,6 +13,9 @@ const stories = storiesOf('CvSlider', module);
 stories.addDecorator(withKnobs);
 
 const knobs = () => ({
+  light: boolean('light-theme', false, consts.CONFIG)
+    ? '\n  theme="light"'
+    : '',
   label: text('Label', 'Text input label', consts.CONTENT),
   disabled: boolean('disabled', false, consts.CONFIG) ? '\n  disabled' : '',
   min: text('min', '', consts.CONFIG),
@@ -68,7 +71,8 @@ stories.add(
 
     const templateViewString = `
     <sv-template-view
-      :sv-margin="true"
+      sv-margin
+      :sv-alt-back="light"
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">
@@ -84,6 +88,7 @@ stories.add(
       data() {
         return {
           modelValue: '45',
+          light: settings.light.length === 0,
         };
       },
       components: { CvSlider, SvTemplateView },

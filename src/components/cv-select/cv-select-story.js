@@ -13,6 +13,9 @@ const stories = storiesOf('CvSelect', module);
 stories.addDecorator(withKnobs);
 
 const knobs = () => ({
+  light: boolean('light-theme', false, consts.CONFIG)
+    ? '\n  theme="light"'
+    : '',
   inline: boolean('inline', false, consts.CONFIG) ? ' inline' : '',
   vModel: boolean('v-model', false, consts.OTHER)
     ? 'v-model="selectValue" '
@@ -33,7 +36,7 @@ stories.add(
     const templateString = `
   <cv-select label="test-label" @change="actionChange" ${settings.inline} ${
       settings.vModel
-    } ${settings.otherAttributes}>
+    }${settings.light} ${settings.otherAttributes}>
     <cv-select-option disabled selected hidden>Choose an option</cv-select-option>
     <cv-select-option value="solong">A much longer cv-select-option that is worth having around to check how text flows</cv-select-option>
     <cv-select-optgroup label="Category 1">
@@ -51,7 +54,8 @@ stories.add(
 
     const templateViewString = `
     <sv-template-view
-      :sv-margin="true"
+      sv-margin
+      :sv-alt-back="light"
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
 
@@ -68,6 +72,7 @@ stories.add(
       data() {
         return {
           selectValue: 'cv-select-option3',
+          light: settings.light.length === 0,
         };
       },
       // test changing of selectValue
