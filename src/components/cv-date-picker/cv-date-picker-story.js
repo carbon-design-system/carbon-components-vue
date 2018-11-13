@@ -31,6 +31,9 @@ const knobs = () => ({
     'simple',
     consts.CONFIG
   ),
+  light: boolean('light-theme', false, consts.CONFIG)
+    ? '\n  theme="light"'
+    : '',
   dateLabel: text('date-label', '', consts.CONTENT),
   dateEndLabel: text('date-end-label', '', consts.CONTENT),
   pattern: text('pattern', '\\d{1,2}/\\d{1,2}/\\d{4}', consts.CONFIG),
@@ -82,8 +85,8 @@ stories.add(
 <cv-date-picker${settings.kind}${settings.dateLabel}${settings.dateEndLabel}${
       settings.pattern
     }${settings.placeholder}${settings.invalid}${settings.invalidDateMessage}${
-      settings.otherAttributes
-    } :flatpickr-options="flatpickrOptions"
+      settings.light
+    }${settings.otherAttributes} :flatpickr-options="flatpickrOptions"
   @onChange="actionChange"
   >
 </cv-date-picker>
@@ -94,7 +97,8 @@ stories.add(
 
     const templateViewString = `
     <sv-template-view
-      :sv-margin="true"
+      sv-margin
+      :sv-alt-back="light"
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
     </sv-template-view>
@@ -105,6 +109,7 @@ stories.add(
       data() {
         return {
           flatpickrOptions: settings.flatpickrOptions,
+          light: settings.light.length === 0,
         };
       },
       methods: {

@@ -2,7 +2,7 @@
   <div :data-date-picker="['single', 'range'].includes(kind)"
     :data-date-picker-type="kind"
     class="cv-date-picker bx--date-picker"
-    :class="kindClass" ref="date-picker">
+    :class="[kindClass, {'bx--date-picker--light': theme==='light'}]" ref="date-picker">
     <div :class="{'bx--date-picker-container': ['single', 'range'].includes(kind)}" @change="onSimpleChange">
       <svg v-if="kind === 'single'" data-date-picker-icon class="bx--date-picker__icon"
         width="14" height="16" viewBox="0 0 14 16">
@@ -34,10 +34,11 @@
 <script>
 import { DatePicker } from 'carbon-components';
 import uidMixin from '../../mixins/uid-mixin';
+import themeMixin from '../../mixins/theme-mixin';
 
 export default {
   name: 'CvDatePicker',
-  mixins: [uidMixin],
+  mixins: [uidMixin, themeMixin],
   props: {
     dateLabel: String,
     dateEndLabel: String,

@@ -3,7 +3,7 @@
     <div
       data-search
       class="bx--search"
-      :class="sizeClass"
+      :class="searchClasses"
       role="search"
       ref="search">
       <label :id="uid" class="bx--label" for="search__input-1">{{label}}</label>
@@ -39,10 +39,11 @@
 import { Search } from 'carbon-components';
 
 import uidMixin from '../../mixins/uid-mixin';
+import themeMixin from '../../mixins/theme-mixin';
 
 export default {
   name: 'CvSearch',
-  mixins: [uidMixin],
+  mixins: [uidMixin, themeMixin],
   inheritAttrs: false,
   props: {
     label: String,
@@ -60,8 +61,11 @@ export default {
         input: event => this.$emit('input', event.target.value),
       };
     },
-    sizeClass() {
-      return this.large ? 'bx--search--lg' : 'bx--search--sm';
+    searchClasses() {
+      const themeClass = this.theme.length ? `bx--search--${this.theme}` : '';
+      const sizeClass = `bx--search--${this.large ? 'lg' : 'sm'}`;
+
+      return `${themeClass} ${sizeClass}`;
     },
   },
   methods: {
