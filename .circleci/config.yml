@@ -19,7 +19,7 @@ jobs:
               # Install `ibmcloud` CLI
               curl -fsSL https://clis.ng.bluemix.net/install/linux | sh
 
-              # Login and push staging manifest
+              # Login and push storybook
               ibmcloud login \
                 --apikey $CLOUD_API_KEY \
                 -a https://api.ng.bluemix.net \
@@ -29,6 +29,7 @@ jobs:
               ibmcloud cf install-plugin blue-green-deploy -f -r CF-Community
 
               yarn storybook-build
+
               ibmcloud cf blue-green-deploy carbon-storybook-vue \
                 -f .circleci/manifest.yml \
                 --delete-old-apps
