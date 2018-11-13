@@ -3,6 +3,7 @@ es
 lib
 dist
 umd
+storybook-static
 
 # Config files
 .npmrc
