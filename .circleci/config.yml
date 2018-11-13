@@ -19,7 +19,7 @@ jobs:
               # Install `ibmcloud` CLI
               curl -fsSL https://clis.ng.bluemix.net/install/linux | sh
 
-              # Login and push storybook
+              # Login and install blue-green-deploy plugin
               ibmcloud login \
                 --apikey $CLOUD_API_KEY \
                 -a https://api.ng.bluemix.net \
@@ -28,8 +28,10 @@ jobs:
               ibmcloud cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
               ibmcloud cf install-plugin blue-green-deploy -f -r CF-Community
 
+              # Build default storybook
               yarn storybook-build
 
+              # Use blue-green-deploy for our buildpack
               ibmcloud cf blue-green-deploy carbon-storybook-vue \
                 -f .circleci/manifest.yml \
                 --delete-old-apps
