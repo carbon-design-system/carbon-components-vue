@@ -35,9 +35,7 @@ export default {
       this.$refs.clippy.select();
       document.execCommand('copy');
 
-      Vue.nextTick(
-        this.$refs.copyButton.classList.add('sv-template-view__copy--copied')
-      );
+      Vue.nextTick(this.$refs.copyButton.classList.add('sv-template-view__copy--copied'));
     },
     method(methodName) {
       const result = this.$slots.component[0].componentInstance[methodName];
@@ -74,7 +72,8 @@ $border: 1px solid #dfe3e6;
     background-color: $alt-back-color;
   }
 
-  .bx--form-item {
+  > .bx--form-item {
+    // only for
     margin-bottom: 1.5rem;
   }
 }

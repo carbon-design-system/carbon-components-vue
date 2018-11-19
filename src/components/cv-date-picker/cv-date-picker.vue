@@ -116,10 +116,7 @@ export default {
   },
   mounted() {
     if (['single', 'range'].includes(this.kind)) {
-      this.carbonComponent = DatePicker.create(
-        this.$refs['date-picker'],
-        this.getOptions()
-      );
+      this.carbonComponent = DatePicker.create(this.$refs['date-picker'], this.getOptions());
     }
   },
   beforeDestroy() {
@@ -136,18 +133,5 @@ export default {
 
 .cv-date-picker {
   display: inline-flex; // otherwise 100% width
-}
-
-.bx--visually-hidden {
-  visibility: visible;
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-  white-space: nowrap;
 }
 </style>
