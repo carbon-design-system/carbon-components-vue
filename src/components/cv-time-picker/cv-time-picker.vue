@@ -42,20 +42,6 @@ import themeMixin from '../../mixins/theme-mixin';
 
 const noModelValue = Symbol('no model value'); // a unique identifier
 
-const setValueInner = (value, newValue) => {
-  value.time = newValue.time || '';
-  value.ampm = newValue.ampm || '';
-  value.timezone = newValue.timezone || '';
-};
-
-const setValue = (value, modelValue, initialValue) => {
-  if (modelValue === noModelValue) {
-    setValueInner(value, initialValue);
-  } else {
-    setValueInner(value, modelValue);
-  }
-};
-
 export default {
   name: 'CvTimePicker',
   mixins: [uidMixin, themeMixin],
@@ -71,23 +57,14 @@ export default {
     timezones: { type: Array, default: () => [] },
     timezonesSelectLabel: { type: String, default: 'Select time zone' },
   },
-  data() {
-    return {
-      value: {
-        type: Object,
-        default: () => ({ time: '', ampm: '', timezone: '' }),
-      },
-    };
-  },
-  mounted() {
-    setValue(this.value, this._modelValue, this.initialValue);
-  },
-  watch: {
-    initialValue(val) {
-      setValue(this.value, this._modelValue, val);
-    },
-    _modelValue(val) {
-      setValue(this.value, val, this.initialValue);
+  computed: {
+    value() {
+      // NOTE: Should we use current value everywhere for this?
+      if (this._modelValue === noModelValue) {
+        return this.initialValue;
+      } else {
+        return this._modelValue;
+      }
     },
   },
   methods: {
