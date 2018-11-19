@@ -35,7 +35,9 @@ export default {
       this.$refs.clippy.select();
       document.execCommand('copy');
 
-      Vue.nextTick(this.$refs.copyButton.classList.add('sv-template-view__copy--copied'));
+      Vue.nextTick(
+        this.$refs.copyButton.classList.add('sv-template-view__copy--copied')
+      );
     },
     method(methodName) {
       const result = this.$slots.component[0].componentInstance[methodName];

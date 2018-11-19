@@ -116,7 +116,10 @@ export default {
   },
   mounted() {
     if (['single', 'range'].includes(this.kind)) {
-      this.carbonComponent = DatePicker.create(this.$refs['date-picker'], this.getOptions());
+      this.carbonComponent = DatePicker.create(
+        this.$refs['date-picker'],
+        this.getOptions()
+      );
     }
   },
   beforeDestroy() {
