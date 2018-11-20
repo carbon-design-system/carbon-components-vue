@@ -1,5 +1,11 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean, array } from '@storybook/addon-knobs/vue';
+import {
+  withKnobs,
+  text,
+  boolean,
+  array,
+  object,
+} from '@storybook/addon-knobs/vue';
 import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
@@ -17,9 +23,9 @@ const knobs = () => ({
     ? '\n  theme="light"'
     : '',
   label: text('label', '', consts.CONTENT),
-  initialValue: text(
+  initialValue: object(
     'initial-value',
-    `{ time: '', ampm: '', timezone: ''}`,
+    { time: '', ampm: '', timezone: '' },
     consts.CONFIG
   ),
   pattern: text('pattern', '', consts.CONFIG),
@@ -103,6 +109,7 @@ stories.add(
 
     return {
       data() {
+        console.dir(`initial-value: ${settings.initialValue}`);
         return {
           initialValue: settings.initialValue,
           modelValue: { value: '', ampm: 'AM', timezone: '' },

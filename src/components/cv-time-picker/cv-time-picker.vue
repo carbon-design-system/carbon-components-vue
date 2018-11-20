@@ -28,6 +28,7 @@
           class="bx--select-option"
           v-for="timezone in timezones"
           :key="timezone.value"
+          :data-test="value.timezone"
           :selected="value.timezone === timezone.value"
           :value="timezone.value"
           @change="onTimezoneChange">{{timezone.label}}</cv-select-option>
@@ -49,7 +50,10 @@ export default {
   props: {
     _modelValue: { type: [Object, Symbol], default: noModelValue },
     ampmSelectLabel: { type: String, default: 'Select AM/PM' },
-    initialValue: { type: String, default: '' },
+    initialValue: {
+      type: Object,
+      default: () => ({ time: '', ampm: 'AM', timezone: '' }),
+    },
     invalidMessage: { type: String, default: '' },
     label: { type: String, default: 'Select a time' },
     pattern: { type: String, default: '"(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)' },
@@ -59,12 +63,32 @@ export default {
   },
   computed: {
     value() {
-      // NOTE: Should we use current value everywhere for this?
       if (this._modelValue === noModelValue) {
         return this.initialValue;
       } else {
         return this._modelValue;
       }
+      // },
+      // currentAmpm() {
+      //   console.log('wobble');
+      //   console.dir(this.initialValue);
+      //   if (this._modelValue === noModelValue) {
+      //     console.log('i', this.initialValue.ampm);
+      //     return this.initialValue.ampm;
+      //   } else {
+      //     console.log('m', this._modelValue.ampm);
+      //     return this._modelValue.ampm;
+      //   }
+      // },
+      // currentTimezone() {
+      //   console.log('wibble');
+      //   if (this._modelValue === noModelValue) {
+      //     console.log('i', this.initialValue.timezone);
+      //     return this.initialValue.timezone;
+      //   } else {
+      //     console.log('m', this._modelValue.timezone);
+      //     return this._modelValue.timezone;
+      //   }
     },
   },
   methods: {
