@@ -111,4 +111,10 @@ export default {
   border: 0;
   white-space: nowrap;
 }
+
+.cv-select {
+  // todo carbon issues? test in date picker
+  display: inline-flex;
+  flex: initial;
+}
 </style>

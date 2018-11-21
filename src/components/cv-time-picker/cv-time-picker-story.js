@@ -30,12 +30,14 @@ const knobs = () => ({
   ),
   pattern: text('pattern', '', consts.CONFIG),
   placeholder: text('placeholder', '', consts.CONFIG),
-  timezones: array(
+  timezones: object(
     'timezones',
-    [
-      { label: 'Timezone-1', value: 'timezone1' },
-      { label: 'Timezone-2', value: 'timezone2' },
-    ],
+    {
+      list: [
+        { label: 'Timezone-1', value: 'timezone1' },
+        { label: 'Timezone-2', value: 'timezone2' },
+      ],
+    },
     consts.CONFIG
   ),
   timezonesSelectLabel: text('timzones-select-label', '', consts.CONTENT),
@@ -81,13 +83,13 @@ stories.add(
 
     // ----------------------------------------------------------------
     const templateString = `
-<cv-time-picker :initial-value="initialValue" ${settings.vModel}${
-      settings.label
-    }${settings.pattern}${settings.placeholder}${settings.light}${
-      settings.timezonesSelectLabel
-    }${settings.ampmSelectLabel}${settings.invalidMessage}${settings.disabled}${
-      settings.otherAttributes
-    }${settings.listeners}>
+<cv-time-picker :initial-value="initialValue" :timezones="timezones" ${
+      settings.vModel
+    }${settings.label}${settings.pattern}${settings.placeholder}${
+      settings.light
+    }${settings.timezonesSelectLabel}${settings.ampmSelectLabel}${
+      settings.invalidMessage
+    }${settings.disabled}${settings.otherAttributes}${settings.listeners}>
 </cv-time-picker>
   `;
 
@@ -109,10 +111,14 @@ stories.add(
 
     return {
       data() {
-        console.dir(`initial-value: ${settings.initialValue}`);
+        // console.dir(settings.timezones.list);
         return {
           initialValue: settings.initialValue,
-          modelValue: { value: '', ampm: 'AM', timezone: '' },
+          timezones:
+            settings.timezones && settings.timezones.list
+              ? settings.timezones.list
+              : [],
+          modelValue: { time: '', ampm: 'AM', timezone: '' },
           light: settings.light.length === 0,
         };
       },

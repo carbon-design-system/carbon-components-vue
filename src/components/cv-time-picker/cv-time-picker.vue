@@ -18,12 +18,12 @@
         </div>
         <label :for="uid" class="bx--label">{{label}}</label>
       </div>
-      <cv-select class="bx--time-picker__select" inline hide-label :label="ampmSelectLabel" @change="onAmpmChange">
+      <cv-select class="bx--time-picker__select" inline hide-label :label="ampmSelectLabel" @change="onAmpmChange" :disabled="disabled">
         <cv-select-option class="bx--select-option" value="AM" :selected="value.ampm === 'AM'">AM</cv-select-option>
         <cv-select-option class="bx--select-option" value="PM" :selected="value.ampm === 'PM'">PM</cv-select-option>
       </cv-select>
 
-      <cv-select class="bx--time-picker__select" inline hide-label :label="timezonesSelectLabel" v-if="timezones.length > 0">
+      <cv-select class="bx--time-picker__select" inline hide-label :label="timezonesSelectLabel" v-if="timezones.length > 0" @change="onTimezoneChange" :disabled="disabled">
         <cv-select-option
           class="bx--select-option"
           v-for="timezone in timezones"
@@ -31,7 +31,7 @@
           :data-test="value.timezone"
           :selected="value.timezone === timezone.value"
           :value="timezone.value"
-          @change="onTimezoneChange">{{timezone.label}}</cv-select-option>
+          >{{timezone.label}}</cv-select-option>
       </cv-select>
     </div>
   </div>
@@ -50,59 +50,51 @@ export default {
   props: {
     _modelValue: { type: [Object, Symbol], default: noModelValue },
     ampmSelectLabel: { type: String, default: 'Select AM/PM' },
+    disabled: Boolean,
     initialValue: {
       type: Object,
       default: () => ({ time: '', ampm: 'AM', timezone: '' }),
     },
     invalidMessage: { type: String, default: '' },
     label: { type: String, default: 'Select a time' },
-    pattern: { type: String, default: '"(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)' },
+    pattern: { type: String, default: '([01][0-9]:[0-6][0-9])' },
     placeholder: { type: String, default: 'hh:mm' },
     timezones: { type: Array, default: () => [] },
     timezonesSelectLabel: { type: String, default: 'Select time zone' },
   },
+  model: {
+    prop: '_modelValue',
+    event: 'change',
+  },
+  mounted() {
+    // console.dir(this.timezones);
+  },
   computed: {
     value() {
+      let _value;
       if (this._modelValue === noModelValue) {
-        return this.initialValue;
+        _value = { ...this.initialValue };
       } else {
-        return this._modelValue;
+        _value = { ...this._modelValue };
       }
-      // },
-      // currentAmpm() {
-      //   console.log('wobble');
-      //   console.dir(this.initialValue);
-      //   if (this._modelValue === noModelValue) {
-      //     console.log('i', this.initialValue.ampm);
-      //     return this.initialValue.ampm;
-      //   } else {
-      //     console.log('m', this._modelValue.ampm);
-      //     return this._modelValue.ampm;
-      //   }
-      // },
-      // currentTimezone() {
-      //   console.log('wibble');
-      //   if (this._modelValue === noModelValue) {
-      //     console.log('i', this.initialValue.timezone);
-      //     return this.initialValue.timezone;
-      //   } else {
-      //     console.log('m', this._modelValue.timezone);
-      //     return this._modelValue.timezone;
-      //   }
+      return _value;
     },
   },
   methods: {
     onInput(ev) {
       const result = { ...this.value };
       result.time = ev.target.value;
+      this.$emit('change', result);
     },
     onAmpmChange(ev) {
       const result = { ...this.value };
       result.ampm = ev.target.value;
+      this.$emit('change', result);
     },
     onTimezoneChange(ev) {
       const result = { ...this.value };
       result.timezone = ev.target.value;
+      this.$emit('change', result);
     },
   },
 };
