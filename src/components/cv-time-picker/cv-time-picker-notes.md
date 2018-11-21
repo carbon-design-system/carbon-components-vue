@@ -90,4 +90,4 @@ timezonesSelectLabel: { type: String, default: 'Select time zone' },
 
 ## Computed
 
-- value
+- value in object form { time: '', ampm: 'AM', timezone: '' }
