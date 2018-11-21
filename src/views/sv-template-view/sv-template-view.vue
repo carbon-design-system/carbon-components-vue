@@ -74,7 +74,8 @@ $border: 1px solid #dfe3e6;
     background-color: $alt-back-color;
   }
 
-  .bx--form-item {
+  > .bx--form-item {
+    // only for
     margin-bottom: 1.5rem;
   }
 }
