@@ -7,12 +7,7 @@ const parsePreKnobs = (kinds, preKnobs, kind) => {
 
     if (kind === undefined) {
       if (kinds && kinds.options) {
-        _knobs.kind = ` kind="${selectV2(
-          'kind',
-          kinds.options,
-          kinds.default,
-          consts.CONFIG
-        )}"`;
+        _knobs.kind = ` kind="${selectV2('kind', kinds.options, kinds.default, consts.CONFIG)}"`;
       }
     } else {
       _knobs.kind = `  kind="${kind}"`;
@@ -25,9 +20,7 @@ const parsePreKnobs = (kinds, preKnobs, kind) => {
       }
 
       if (_preKnob.value) {
-        _knobs[_preKnob.group] += _preKnob.value(
-          _preKnob.type(..._preKnob.config)
-        );
+        _knobs[_preKnob.group] += _preKnob.value(_preKnob.type(..._preKnob.config));
       } else {
         _knobs[_preKnob.group] = _preKnob.type(..._preKnob.config);
       }

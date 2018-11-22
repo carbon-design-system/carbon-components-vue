@@ -5,7 +5,7 @@ import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
 import consts from '../../utils/storybook-consts';
-import preKnobParser from '../../utils/storybook-preknobs';
+import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvButtonNotesMD from './cv-button-notes.md';
 import CvButton from './cv-button';
@@ -56,7 +56,7 @@ const preKnobs = {
   },
 };
 
-const storySet = preKnobParser.getStorySet(kinds, preKnobs);
+const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 
 for (const story of storySet) {
   stories.add(
