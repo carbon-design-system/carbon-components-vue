@@ -65,9 +65,9 @@ for (const story of storySet) {
       const settings = story.knobs();
 
       const templateString = `
-<cv-button${settings.kind}${settings.attr}
+<cv-button${settings.kind}${settings.group.attr}
   @click="actionClick">
-  ${settings.slot}
+  ${settings.group.slot}
 </cv-button>
     `;
       // console.log(templateString);

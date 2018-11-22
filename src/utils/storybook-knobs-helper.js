@@ -3,11 +3,16 @@ import { selectV2 } from '@storybook/addon-knobs/vue';
 
 const parsePreKnobs = (kinds, preKnobs, kind) => {
   return () => {
-    const _knobs = {};
+    const _knobs = { group: [], data: {}, raw: {} };
 
     if (kind === undefined) {
       if (kinds && kinds.options) {
-        _knobs.kind = ` kind="${selectV2('kind', kinds.options, kinds.default, consts.CONFIG)}"`;
+        _knobs.kind = ` kind="${selectV2(
+          'kind',
+          kinds.options,
+          kinds.default,
+          consts.CONFIG
+        )}"`;
       }
     } else {
       _knobs.kind = `  kind="${kind}"`;
@@ -15,14 +20,20 @@ const parsePreKnobs = (kinds, preKnobs, kind) => {
     for (let key in preKnobs) {
       const _preKnob = preKnobs[key];
 
-      if (!_knobs[_preKnob.group]) {
-        _knobs[_preKnob.group] = '';
+      if (!_knobs.group[_preKnob.group]) {
+        _knobs.group[_preKnob.group] = '';
       }
 
+      const val = _preKnob.type(..._preKnob.config);
       if (_preKnob.value) {
-        _knobs[_preKnob.group] += _preKnob.value(_preKnob.type(..._preKnob.config));
+        _knobs.group[_preKnob.group] += _preKnob.value(val);
       } else {
-        _knobs[_preKnob.group] = _preKnob.type(..._preKnob.config);
+        _knobs.group[_preKnob.group] += val;
+      }
+      _knobs.raw[key] = val;
+
+      if (_preKnob.data) {
+        _preKnob.data(_knobs.data, key, val);
       }
     }
     return _knobs;
