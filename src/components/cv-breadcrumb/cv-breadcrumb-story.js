@@ -26,7 +26,7 @@ const preKnobs = {
     group: 'attr',
     type: text,
     config: ['other attributes', '', consts.OTHER],
-    value: val => val,
+    value: val => (val.length ? `\n  ${val}` : ''),
   },
 };
 

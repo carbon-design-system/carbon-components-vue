@@ -68,8 +68,7 @@ $z-indexes: (
     group: 'attr',
     type: text,
     config: ['other attributes', '', consts.OTHER],
-    value: val => val,
-    data: (obj, key, val) => (obj[key] = val),
+    value: val => (val.length ? `\n  ${val}` : ''),
   },
 };
 
