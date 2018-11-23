@@ -5,6 +5,7 @@ import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
 import consts from '../../utils/storybook-consts';
+import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvCheckboxNotesMD from './cv-checkbox-notes.md';
 import CvCheckbox from './cv-checkbox';
@@ -12,73 +13,104 @@ import CvCheckbox from './cv-checkbox';
 const stories = storiesOf('CvCheckbox', module);
 stories.addDecorator(withKnobs);
 
-const knobs = () => ({
-  label: text('label', 'checkbox', consts.CONFIG),
-  value: `\n value="${text('value', 'check-1', consts.CONFIG)}"`,
-  checked: boolean('checked', false, consts.CONFIG) ? '\n  checked' : '',
-  mixed: boolean('mixed', false, consts.CONFIG) ? `\n  mixed` : '',
-  disabled: boolean('disabled', false, consts.CONFIG) ? '\n  disabled' : '',
-  vModel: boolean('v-model', false, consts.OTHER)
-    ? '\n  v-model="checked"'
-    : '',
-  otherAttributes: text('other attributes', '', consts.OTHER),
-});
+const kinds = null;
 
-stories.add(
-  'Default',
-  withNotes(CvCheckboxNotesMD)(() => {
-    const settings = knobs();
+const preKnobs = {
+  label: {
+    group: 'attr',
+    type: text,
+    config: ['label', 'checkbox', consts.CONFIG],
+    value: val => (val.length ? `\n  label="${val}"` : ''),
+    data: (obj, key, val) => (obj[key] = val),
+  },
+  value: {
+    group: 'attr',
+    type: text,
+    config: ['value', 'check-1', consts.CONFIG],
+    value: val => (val.length ? `\n  value="${val}"` : ''),
+  },
+  checked: {
+    group: 'attr',
+    type: boolean,
+    config: ['checked', false, consts.CONFIG],
+    value: val => (val ? '\n  checked' : ''),
+  },
+  mixed: {
+    group: 'attr',
+    type: boolean,
+    config: ['mixed', false, consts.CONFIG],
+    value: val => (val ? `\n  mixed` : ''),
+  },
+  disabled: {
+    group: 'attr',
+    type: boolean,
+    config: ['disabled', false, consts.CONFIG],
+    value: val => (val ? '\n  disabled' : ''),
+  },
+  vModel: {
+    group: 'attr',
+    type: boolean,
+    config: ['v-model', false, consts.OTHER],
+    value: val =>
+      val
+        ? '\n  v-model="checked"'
+        : '\n   @change="actionChange"\n  @keydown="actionKeydown"',
+  },
+  otherAttributes: {
+    group: 'attr',
+    type: text,
+    config: ['other attributes', '', consts.OTHER],
+    value: val => val,
+    data: (obj, key, val) => (obj[key] = val),
+  },
+};
 
-    settings.label = settings.label.length
-      ? `\n  label="${settings.label}"`
-      : '';
-    settings.otherAttributes = settings.otherAttributes
-      ? `\n  ${settings.otherAttributes}`
-      : '';
+const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 
-    // ----------------------------------------------------------------
-    console.dir(settings);
-    const templateString = `
-<cv-checkbox${settings.checked}${settings.value}${settings.mixed}${
-      settings.label
-    }${settings.disabled}${settings.vModel}${settings.otherAttributes}
-  @change="actionChange"
-  @keydown="actionKeydown"
-  >
+for (const story of storySet) {
+  stories.add(
+    'Default',
+    withNotes(CvCheckboxNotesMD)(() => {
+      const settings = story.knobs();
+
+      // ----------------------------------------------------------------
+      const templateString = `
+<cv-checkbox${settings.group.attr}>
 </cv-checkbox>
   `;
 
-    // ----------------------------------------------------------------
-
-    const templateViewString = `
+      // ----------------------------------------------------------------
+      console.dir(settings);
+      const templateViewString = `
     <sv-template-view
       :sv-margin="true"
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
 
       <template slot="other">
-        <span class="v-model-example" v-if="${settings.vModel.includes(
-          'v-model'
-        )}">Checked value {{checked}}</span>
+        <span class="v-model-example" v-if="${
+          settings.raw.vModel
+        }">Checked value {{checked}}</span>
       </template>
     </sv-template-view>
   `;
 
-    return {
-      components: { CvCheckbox, SvTemplateView },
-      data() {
-        return {
-          checked: settings.checked.includes('checked'),
-        };
-      },
-      methods: {
-        actionChange: action('CV Checkbox - change'),
-        actionKeydown: action('CV Checkbox - keydown'),
-      },
-      template: templateViewString,
-    };
-  })
-);
+      return {
+        components: { CvCheckbox, SvTemplateView },
+        data() {
+          return {
+            checked: settings.raw.checked,
+          };
+        },
+        methods: {
+          actionChange: action('CV Checkbox - change'),
+          actionKeydown: action('CV Checkbox - keydown'),
+        },
+        template: templateViewString,
+      };
+    })
+  );
+}
 
 stories.add(
   'Array v-model',
