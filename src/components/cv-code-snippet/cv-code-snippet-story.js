@@ -4,6 +4,7 @@ import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
 import consts from '../../utils/storybook-consts';
+import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvCodeSnippetNotesMD from './cv-code-snippet-notes.md';
 import CvCodeSnippet from './cv-code-snippet';
@@ -11,22 +12,34 @@ import CvCodeSnippet from './cv-code-snippet';
 const stories = storiesOf('CvCodeSnippet', module);
 stories.addDecorator(withKnobs);
 
-const knobs = () => ({
-  kind: selectV2(
-    'kind',
-    {
-      Default: '',
-      Inline: 'inline',
-      Multiline: 'multiline',
-    },
-    '',
-    consts.CONFIG
-  ),
-  lessText: text('Less text', '', consts.CONTENT),
-  moreText: text('More text', '', consts.CONTENT),
-  content: text(
-    'slot:content',
-    `@mixin grid-container {
+const kinds = {
+  options: {
+    inline: 'inline',
+    multiline: 'multiline',
+    oneline: 'oneline',
+  },
+  default: 'oneline',
+};
+
+const preKnobs = {
+  lessText: {
+    group: 'attr',
+    type: text,
+    config: ['Less text', '', consts.CONTENT],
+    value: val => (val.length ? `\n  less-text="${val}"` : ''),
+  },
+  moreText: {
+    group: 'attr',
+    type: text,
+    config: ['More text', '', consts.CONTENT],
+    value: val => (val.length ? `\n  more-text="${val}"` : ''),
+  },
+  content: {
+    group: 'slot-content',
+    type: text,
+    config: [
+      'slot:content',
+      `@mixin grid-container {
   width: 100%;
   padding-right: padding(mobile);
   padding-left: padding(mobile);
@@ -47,40 +60,38 @@ $z-indexes: (
   overflowHidden: - 1,
   floating: 10000
 );`,
-    consts.CONTENT
-  ),
-  otherAttributes: text('other attributes', '', consts.OTHER),
-});
+      consts.CONTENT,
+    ],
+    value: val => val,
+  },
+  otherAttributes: {
+    group: 'attr',
+    type: text,
+    config: ['other attributes', '', consts.OTHER],
+    value: val => val,
+    data: (obj, key, val) => (obj[key] = val),
+  },
+};
 
-stories.add(
-  'All',
-  withNotes(CvCodeSnippetNotesMD)(() => {
-    const settings = knobs();
+const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 
-    settings.content = settings.content.length ? `\n  ${settings.content}` : '';
-    settings.kind = settings.kind.length ? `\n  kind="${settings.kind}"` : '';
-    settings.lessText = settings.lessText.length
-      ? `\n  less-text="${settings.lessText}"`
-      : '';
-    settings.moreText = settings.moreText.length
-      ? `\n  more-text="${settings.moreText}"`
-      : '';
-    settings.otherAttributes = settings.otherAttributes
-      ? `\n  ${settings.otherAttributes}`
-      : '';
+for (const story of storySet) {
+  stories.add(
+    story.name,
+    withNotes(CvCodeSnippetNotesMD)(() => {
+      const settings = story.knobs();
 
-    // ----------------------------------------------------------------
-
-    const templateString = `
-<cv-code-snippet${settings.kind}${settings.lessText}${settings.moreText}${
-      settings.otherAttributes
-    }>${settings.content}
+      // ----------------------------------------------------------------
+      console.dir(settings);
+      const templateString = `
+<cv-code-snippet${settings.kind}${settings.group.attr}>
+  ${settings.group['slot-content']}
 </cv-code-snippet>
   `;
 
-    // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-    const templateViewString = `
+      const templateViewString = `
     <sv-template-view ref="view"
       sv-margin
       :sv-alt-back="${settings.kind.indexOf('inline') > -1}"
@@ -89,9 +100,10 @@ stories.add(
     </sv-template-view>
   `;
 
-    return {
-      components: { CvCodeSnippet, SvTemplateView },
-      template: templateViewString,
-    };
-  })
-);
+      return {
+        components: { CvCodeSnippet, SvTemplateView },
+        template: templateViewString,
+      };
+    })
+  );
+}

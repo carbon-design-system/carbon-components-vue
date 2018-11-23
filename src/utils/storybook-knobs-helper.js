@@ -25,10 +25,12 @@ const parsePreKnobs = (kinds, preKnobs, kind) => {
       }
 
       const val = _preKnob.type(..._preKnob.config);
-      if (_preKnob.value) {
-        _knobs.group[_preKnob.group] += _preKnob.value(val);
-      } else {
-        _knobs.group[_preKnob.group] += val;
+      if (_preKnob.group.length) {
+        if (_preKnob.value) {
+          _knobs.group[_preKnob.group] += _preKnob.value(val);
+        } else {
+          _knobs.group[_preKnob.group] += val;
+        }
       }
       _knobs.raw[key] = val;
 
