@@ -4,6 +4,7 @@ import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
 import consts from '../../utils/storybook-consts';
+import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvAccordionNotesMD from './cv-accordion-notes.md';
 import CvAccordion from './cv-accordion';
@@ -12,48 +13,75 @@ import CvAccordionItem from './cv-accordion-item';
 const stories = storiesOf('CvAccordion', module);
 stories.addDecorator(withKnobs);
 
-const knobs = () => ({
-  open1: boolean('open for item 1', false, consts.CONFIG) ? ' open' : '',
-  open2: boolean('open for item 2', false, consts.CONFIG) ? ' open' : '',
-  open3: boolean('open for item 3', false, consts.CONFIG) ? ' open' : '',
-  open4: boolean('open for item 4', false, consts.CONFIG) ? ' open' : '',
-  otherAttributes: text('other attributes', '', consts.OTHER),
-});
+const kinds = null;
 
-stories.add(
-  'All',
-  withNotes(CvAccordionNotesMD)(() => {
-    const settings = knobs();
-    settings.otherAttributes = settings.otherAttributes
-      ? `\n  ${settings.otherAttributes}`
-      : '';
+const preKnobs = {
+  open1: {
+    group: 'one',
+    type: boolean,
+    config: ['open for item 1', false, consts.CONFIG],
+    value: val => (val ? ' open' : ''),
+  },
+  open2: {
+    group: 'two',
+    type: boolean,
+    config: ['open for item 2', false, consts.CONFIG],
+    value: val => (val ? ' open' : ''),
+  },
+  open3: {
+    group: 'three',
+    type: boolean,
+    config: ['open for item 3', false, consts.CONFIG],
+    value: val => (val ? ' open' : ''),
+  },
+  open4: {
+    group: 'four',
+    type: boolean,
+    config: ['open for item 4', false, consts.CONFIG],
+    value: val => (val ? ' open' : ''),
+  },
+  otherAttributes: {
+    group: 'attr',
+    type: text,
+    config: ['other attributes', '', consts.OTHER],
+    value: val => val,
+  },
+};
 
-    // ----------------------------------------------------------------
+const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 
-    const templateString = `
-  <cv-accordion${settings.otherAttributes}>
-    <cv-accordion-item${settings.open1}>
+for (const story of storySet) {
+  stories.add(
+    story.name,
+    withNotes(CvAccordionNotesMD)(() => {
+      const settings = story.knobs();
+
+      // ----------------------------------------------------------------
+
+      const templateString = `
+  <cv-accordion${settings.group.attr}>
+    <cv-accordion-item${settings.group.one}>
       <template slot="title">Section 1 title </template>
       <template slot="content">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
           aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
       </template>
     </cv-accordion-item>
-    <cv-accordion-item${settings.open2}>
+    <cv-accordion-item${settings.group.two}>
       <template slot="title">Section 2 title</template>
       <template slot="content">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
           aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
       </template>
     </cv-accordion-item>
-    <cv-accordion-item${settings.open3}>
+    <cv-accordion-item${settings.group.three}>
       <template slot="title">Section 3 title</template>
       <template slot="content">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
           aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
       </template>
     </cv-accordion-item>
-    <cv-accordion-item${settings.open4}>
+    <cv-accordion-item${settings.group.four}>
       <template slot="title">Section 4 title</template>
       <template slot="content">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
@@ -63,9 +91,9 @@ stories.add(
   </cv-accordion>
   `;
 
-    // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-    const templateViewString = `
+      const templateViewString = `
     <sv-template-view
       sv-margin
       sv-source='${templateString.trim()}'>
@@ -73,9 +101,10 @@ stories.add(
     </sv-template-view>
   `;
 
-    return {
-      components: { CvAccordion, CvAccordionItem, SvTemplateView },
-      template: templateViewString,
-    };
-  })
-);
+      return {
+        components: { CvAccordion, CvAccordionItem, SvTemplateView },
+        template: templateViewString,
+      };
+    })
+  );
+}
