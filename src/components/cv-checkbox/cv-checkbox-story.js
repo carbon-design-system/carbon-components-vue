@@ -79,7 +79,7 @@ for (const story of storySet) {
   `;
 
       // ----------------------------------------------------------------
-      console.dir(settings);
+      // console.dir(settings);
       const templateViewString = `
     <sv-template-view
       :sv-margin="true"

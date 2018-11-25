@@ -5,6 +5,7 @@ import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
 import consts from '../../utils/storybook-consts';
+import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvLoadingNotesMD from './cv-loading-notes.md';
 import CvLoading from './cv-loading';
@@ -12,31 +13,54 @@ import CvLoading from './cv-loading';
 const stories = storiesOf('CvLoading', module);
 stories.addDecorator(withKnobs);
 
-const knobs = () => ({
-  overlay: boolean('overlay', true, consts.CONFIG) ? ' overlay' : '',
-  small: boolean('small', false, consts.CONFIG) ? ' small' : '',
-  otherAttributes: text(' other attributes', '', consts.OTHER),
-});
+const kinds = null;
+const preKnobs = {
+  overlay: {
+    group: 'attr',
+    type: boolean,
+    config: ['overlay', true, consts.CONFIG],
+    value: val => (val ? ' overlay' : ''),
+  },
+  small: {
+    group: 'attr',
+    type: boolean,
+    config: ['small', false, consts.CONFIG],
+    value: val => (val ? ' small' : ''),
+  },
+  otherAttributes: {
+    group: 'attr',
+    type: text,
+    config: [' other attributes', '', consts.OTHER],
+    value: val => (val.length ? `\n  ${val}` : ''),
+  },
+  withEvents: {
+    group: 'attr',
+    type: boolean,
+    config: ['with events', false, consts.OTHER],
+    value: val =>
+      val
+        ? `
+  @loading-end="actionEnd"`
+        : '',
+  },
+};
 
-stories.add(
-  'All',
-  withNotes(CvLoadingNotesMD)(() => {
-    const settings = knobs();
+const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 
-    settings.otherAttributes = settings.otherAttributes
-      ? `\n  ${settings.otherAttributes}`
-      : '';
+for (const story of storySet) {
+  stories.add(
+    story.name,
+    withNotes(CvLoadingNotesMD)(() => {
+      const settings = story.knobs();
 
-    // ----------------------------------------------------------------
-    const templateString = `
-<cv-loading${settings.overlay}${settings.small}${settings.otherAttributes}
-  @loading-end="actionEnd"
-  ></cv-loading>
+      // ----------------------------------------------------------------
+      const templateString = `
+<cv-loading${settings.group.attr}></cv-loading>
   `;
 
-    // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-    const templateViewString = `
+      const templateViewString = `
     <sv-template-view
       :sv-margin="true"
       sv-source='${templateString.trim()}'>
@@ -50,19 +74,20 @@ stories.add(
     </sv-template-view>
   `;
 
-    return {
-      components: { CvLoading, SvTemplateView },
-      template: templateViewString,
-      methods: {
-        actionEnd: action('CvLoading - loading-end'),
-        end() {
-          this.$children[0].$children[0].end();
+      return {
+        components: { CvLoading, SvTemplateView },
+        template: templateViewString,
+        methods: {
+          actionEnd: action('CvLoading - loading-end'),
+          end() {
+            this.$children[0].$children[0].end();
+          },
+          toggle() {
+            console.log(`state: ${this.$children[0].$children[0].isActive()}`);
+            this.$children[0].$children[0].toggle();
+          },
         },
-        toggle() {
-          console.log(`state: ${this.$children[0].$children[0].isActive()}`);
-          this.$children[0].$children[0].toggle();
-        },
-      },
-    };
-  })
-);
+      };
+    })
+  );
+}

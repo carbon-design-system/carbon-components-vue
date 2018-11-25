@@ -28,6 +28,13 @@ import notificationMixin from '../../mixins/notification-mixin';
 export default {
   name: 'CvInlineNotification',
   mixins: [notificationMixin],
+  props: {
+    kind: {
+      type: String,
+      default: 'info',
+      validator: val => ['error', 'info', 'warning', 'success'].includes(val),
+    },
+  },
   computed: {
     icon() {
       switch (this.kind) {

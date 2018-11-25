@@ -1,11 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import {
-  withKnobs,
-  text,
-  boolean,
-  selectV2,
-  object,
-} from '@storybook/addon-knobs/vue';
+import { withKnobs, text, boolean, object } from '@storybook/addon-knobs/vue';
 import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
@@ -22,12 +16,13 @@ stories.addDecorator(withKnobs);
 
 const kinds = {
   options: {
+    Default: '',
     Short: 'short',
     Simple: 'simple',
     Single: 'single',
     Range: 'range',
   },
-  default: 'single',
+  default: '',
 };
 
 const preKnobs = {
@@ -81,6 +76,16 @@ const preKnobs = {
     config: ['invalid-date-message', '', consts.CONTENT],
     value: val => (val.length ? `\n  invalid-date-message="${val}"` : ''),
   },
+  withEvents: {
+    group: 'attr',
+    type: boolean,
+    config: ['with events', false, consts.OTHER],
+    value: val =>
+      val
+        ? `
+  @onChange="actionChange"`
+        : '',
+  },
   otherAttributes: {
     group: 'attr',
     type: text,
@@ -102,9 +107,7 @@ for (const story of storySet) {
       // console.dir(settings.flatpickrOptions);
 
       const templateString = `
-  <cv-date-picker${settings.kind}${settings.group.attr}
-    @onChange="actionChange"
-    >
+  <cv-date-picker${settings.kind}${settings.group.attr}>
   </cv-date-picker>
     `;
       // console.log(templateString);

@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean, selectV2 } from '@storybook/addon-knobs/vue';
+import { withKnobs, text, boolean } from '@storybook/addon-knobs/vue';
 import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
@@ -16,6 +16,7 @@ stories.addDecorator(withKnobs);
 
 const kinds = {
   options: {
+    Default: '',
     primary: 'primary',
     secondary: 'secondary',
     tertiary: 'tertiary',
@@ -23,7 +24,7 @@ const kinds = {
     danger: 'danger',
     'danger-primary': 'danger--primary',
   },
-  default: 'primary',
+  default: '',
 };
 
 const preKnobs = {
@@ -48,6 +49,16 @@ const preKnobs = {
     config: ['disabled', false, consts.CONFIG],
     value: val => (val ? '\n  disabled' : ''),
   },
+  withEvents: {
+    group: 'attr',
+    type: boolean,
+    config: ['with events', false, consts.OTHER],
+    value: val =>
+      val
+        ? `
+  @click="actionClick"`
+        : '',
+  },
   otherAttributes: {
     group: 'attr',
     type: text,
@@ -65,8 +76,7 @@ for (const story of storySet) {
       const settings = story.knobs();
 
       const templateString = `
-<cv-button${settings.kind}${settings.group.attr}
-  @click="actionClick">
+<cv-button${settings.kind}${settings.group.attr}>
   ${settings.group.slot}
 </cv-button>
     `;

@@ -4,6 +4,7 @@ import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
 import consts from '../../utils/storybook-consts';
+import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvListNotesMD from './cv-list-notes.md';
 import CvList from './cv-list';
@@ -11,43 +12,58 @@ import CvList from './cv-list';
 const stories = storiesOf('CvList', module);
 stories.addDecorator(withKnobs);
 
-const knobs = () => ({
-  ordered: boolean('ordered', false, consts.CONFIG) ? `\n ordered` : '',
-  nested: boolean('nested', false, consts.CONFIG),
-  otherAttributes: text('other attributes', '', consts.OTHER),
-});
-
-stories.add(
-  'All',
-  withNotes(CvListNotesMD)(() => {
-    const settings = knobs();
-
-    settings.nested = !settings.nested
-      ? ''
-      : `
-    <cv-list${settings.ordered} nested>
+const kinds = null;
+const preKnobs = {
+  ordered: {
+    group: 'attr',
+    type: boolean,
+    config: ['ordered', false, consts.CONFIG],
+    value: val => (val ? `\n ordered` : ''),
+  },
+  nested: {
+    group: 'nested',
+    type: boolean,
+    config: ['nested', false, consts.CONFIG],
+    value: val =>
+      val
+        ? `
+    <cv-list nested>
       <cv-list-item>nested item 1</cv-list-item>
       <cv-list-item>nested item 2</cv-list-item>
       <cv-list-item>nested item 3</cv-list-item>
     </cv-list>
-    `;
-    settings.otherAttributes = settings.otherAttributes
-      ? `\n  ${settings.otherAttributes}`
-      : '';
+    `
+        : '',
+  },
+  otherAttributes: {
+    group: 'attr',
+    type: text,
+    config: ['other attributes', '', consts.OTHER],
+    value: val => (val.length ? `\n  ${val}` : ''),
+  },
+};
 
-    // ----------------------------------------------------------------
+const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 
-    const templateString = `
-<cv-list${settings.ordered}${settings.otherAttributes}>
-  <cv-list-item>list item 1${settings.nested}</cv-list-item>
+for (const story of storySet) {
+  stories.add(
+    story.name,
+    withNotes(CvListNotesMD)(() => {
+      const settings = story.knobs();
+
+      // ----------------------------------------------------------------
+
+      const templateString = `
+<cv-list${settings.group.attr}>
+  <cv-list-item>list item 1${settings.group.nested}</cv-list-item>
   <cv-list-item>list item 2</cv-list-item>
   <cv-list-item>list item 3</cv-list-item>
 </cv-list>
   `;
 
-    // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-    const templateViewString = `
+      const templateViewString = `
     <sv-template-view
       :sv-margin="true"
       sv-source='${templateString.trim()}'>
@@ -55,9 +71,10 @@ stories.add(
     </sv-template-view>
   `;
 
-    return {
-      components: { CvList, SvTemplateView },
-      template: templateViewString,
-    };
-  })
-);
+      return {
+        components: { CvList, SvTemplateView },
+        template: templateViewString,
+      };
+    })
+  );
+}

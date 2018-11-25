@@ -1,10 +1,11 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, selectV2 } from '@storybook/addon-knobs/vue';
+import { withKnobs, text, boolean } from '@storybook/addon-knobs/vue';
 import { withNotes } from '@storybook/addon-notes';
 import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
 import consts from '../../utils/storybook-consts';
+import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvModalNotesMD from './cv-modal-notes.md';
 import CvModal from './cv-modal';
@@ -12,74 +13,93 @@ import CvModal from './cv-modal';
 const stories = storiesOf('CvModal', module);
 stories.addDecorator(withKnobs);
 
-const knobs = () => ({
-  label: text('slot:label', 'label', consts.CONTENT),
-  title: text('slot:title', '', consts.CONTENT),
-  content: text(
-    'slot:content',
-    `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, seed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>`,
-    consts.CONTENT
-  ),
-  kind: selectV2(
-    'kind',
-    {
-      Default: '',
-      Danger: 'danger',
-    },
-    '',
-    consts.CONFIG
-  ),
-  secondaryButton: text('slot:secondary-button', '', consts.CONTENT),
-  primaryButton: text('slot:primary-button', '', consts.CONTENT),
-  otherAttributes: text('other attributes', '', consts.OTHER),
-});
-
-stories.add(
-  'All',
-  withNotes(CvModalNotesMD)(() => {
-    const settings = knobs();
-
-    settings.label = settings.label.length
-      ? `\n  <template slot="label">${settings.label}</template>`
-      : '';
-    settings.title = settings.title.length
-      ? `\n  <template slot="title">${settings.title}</template>`
-      : '';
-    settings.content = settings.content.length
-      ? `\n  <template slot="content">${settings.content}</template>`
-      : '';
-    settings.kind = settings.kind.length ? `\n  kind="${settings.kind}"` : '';
-    settings.secondaryButton = settings.secondaryButton.length
-      ? `\n <template slot="secondary-button">${
-          settings.secondaryButton
-        }</template>`
-      : '';
-    settings.primaryButton = settings.primaryButton.length
-      ? `\n <template slot="primary-button">${
-          settings.primaryButton
-        }</template>`
-      : '';
-    settings.otherAttributes = settings.otherAttributes
-      ? `\n  ${settings.otherAttributes}`
-      : '';
-
-    // ----------------------------------------------------------------
-
-    const templateString = `
-<cv-modal${settings.kind}${settings.otherAttributes}
+const kinds = {
+  options: {
+    Default: '',
+    Danger: 'danger',
+  },
+  default: '',
+};
+const preKnobs = {
+  label: {
+    group: 'content',
+    type: text,
+    config: ['slot:label', 'label', consts.CONTENT],
+    value: val =>
+      val.length ? `\n  <template slot="label">${val}</template>` : '',
+  },
+  title: {
+    group: 'content',
+    type: text,
+    config: ['slot:title', '', consts.CONTENT],
+    value: val =>
+      val.length ? `\n  <template slot="title">${val}</template>` : '',
+  },
+  content: {
+    group: 'content',
+    type: text,
+    config: [
+      'slot:content',
+      `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, seed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>`,
+      consts.CONTENT,
+    ],
+    value: val => `\n  <template slot="content">${val}</template>`,
+  },
+  secondaryButton: {
+    group: 'content',
+    type: text,
+    config: ['slot:secondary-button', '', consts.CONTENT],
+    value: val =>
+      val.length
+        ? `\n <template slot="secondary-button">${val}</template>`
+        : '',
+  },
+  primaryButton: {
+    group: 'content',
+    type: text,
+    config: ['slot:primary-button', '', consts.CONTENT],
+    value: val =>
+      val.length ? `\n <template slot="primary-button">${val}</template>` : '',
+  },
+  withEvents: {
+    group: 'attr',
+    type: boolean,
+    config: ['with events', false, consts.OTHER],
+    value: val =>
+      val
+        ? `
   @modal-beingshown="actionBeforeShown"
   @modal-shown="actionShown"
   @modal-beinghidden="actionBeforeHidden"
-  @modal-hidden="actionHidden"
-  >${settings.label}${settings.title}${settings.content}${
-      settings.secondaryButton
-    }${settings.primaryButton}
+  @modal-hidden="actionHidden"`
+        : '',
+  },
+  otherAttributes: {
+    group: 'attr',
+    type: text,
+    config: ['other attributes', '', consts.OTHER],
+    value: val => (val.length ? `\n  ${val}` : ''),
+  },
+};
+
+const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+
+for (const story of storySet) {
+  stories.add(
+    story.name,
+    withNotes(CvModalNotesMD)(() => {
+      const settings = story.knobs();
+
+      // ----------------------------------------------------------------
+      const templateString = `
+<cv-modal${settings.kind}${settings.group.attr}>${settings.group.content}
 </cv-modal>
   `;
+      // console.log(templateString);
 
-    // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-    const templateViewString = `
+      const templateViewString = `
     <sv-template-view ref="view"
       :sv-margin="true"
       sv-source='${templateString.trim()}'>
@@ -88,23 +108,24 @@ stories.add(
     </sv-template-view>
   `;
 
-    return {
-      components: { CvModal, SvTemplateView },
-      methods: {
-        doSave() {
-          this.$refs.view.method('hide')();
+      return {
+        components: { CvModal, SvTemplateView },
+        methods: {
+          doSave() {
+            this.$refs.view.method('hide')();
+          },
+          show() {
+            this.$refs.view.method('show')();
+          },
+          actionBeforeShown: action('CV Modal - modal-beingshown'),
+          actionShown: action('CV Modal - modal-shown'),
+          actionHidden: action('CV Modal - modal-hidden'),
+          actionBeforeHidden: action('CV Modal - modal-beinghidden'),
+          actionPrimary: action('CV Modal - primary-click'),
+          actionSecondary: action('CV Modal - secondary-click'),
         },
-        show() {
-          this.$refs.view.method('show')();
-        },
-        actionBeforeShown: action('CV Modal - modal-beingshown'),
-        actionShown: action('CV Modal - modal-shown'),
-        actionHidden: action('CV Modal - modal-hidden'),
-        actionBeforeHidden: action('CV Modal - modal-beinghidden'),
-        actionPrimary: action('CV Modal - primary-click'),
-        actionSecondary: action('CV Modal - secondary-click'),
-      },
-      template: templateViewString,
-    };
-  })
-);
+        template: templateViewString,
+      };
+    })
+  );
+}

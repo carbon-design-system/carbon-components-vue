@@ -4,6 +4,7 @@ import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
 import consts from '../../utils/storybook-consts';
+import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvLinkNotesMD from './cv-link-notes.md';
 import CvLink from './cv-link';
@@ -11,34 +12,47 @@ import CvLink from './cv-link';
 const stories = storiesOf('CvLink', module);
 stories.addDecorator(withKnobs);
 
-const knobs = () => ({
-  href: text('href', '#', consts.CONFIG),
-  disabled: boolean('disabled', false, consts.CONFIG)
-    ? ' tabindex="-1" aria-disabled="true"'
-    : '',
-  otherAttributes: text('other attributes', '', consts.OTHER),
-});
+const kinds = null;
+const preKnobs = {
+  href: {
+    group: 'attr',
+    type: text,
+    config: ['href', '#', consts.CONFIG],
+    value: val => (val.length ? ` href="${val}"` : ''),
+  },
+  disabled: {
+    group: 'attr',
+    type: boolean,
+    config: ['disabled', false, consts.CONFIG],
+    value: val => (val ? ' tabindex="-1" aria-disabled="true"' : ''),
+  },
+  otherAttributes: {
+    group: 'attr',
+    type: text,
+    config: ['other attributes', '', consts.OTHER],
+    value: val => (val.length ? `\n  ${val}` : ''),
+  },
+};
 
-stories.add(
-  'All',
-  withNotes(CvLinkNotesMD)(() => {
-    const settings = knobs();
+const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 
-    settings.otherAttributes = settings.otherAttributes
-      ? `\n  ${settings.otherAttributes}`
-      : '';
+for (const story of storySet) {
+  stories.add(
+    story.name,
+    withNotes(CvLinkNotesMD)(() => {
+      const settings = story.knobs();
 
-    // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-    const templateString = `
-<cv-link href="${settings.href}"${settings.disabled}${settings.otherAttributes}>
+      const templateString = `
+<cv-link${settings.group.attr}>
   Link
 </cv-link>
   `;
 
-    // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-    const templateViewString = `
+      const templateViewString = `
     <sv-template-view
       :sv-margin="true"
       sv-source='${templateString.trim()}'>
@@ -46,9 +60,10 @@ stories.add(
     </sv-template-view>
   `;
 
-    return {
-      components: { CvLink, SvTemplateView },
-      template: templateViewString,
-    };
-  })
-);
+      return {
+        components: { CvLink, SvTemplateView },
+        template: templateViewString,
+      };
+    })
+  );
+}

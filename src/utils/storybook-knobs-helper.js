@@ -7,15 +7,24 @@ const parsePreKnobs = (kinds, preKnobs, kind) => {
 
     if (kind === undefined) {
       if (kinds && kinds.options) {
-        _knobs.kind = ` kind="${selectV2(
+        const _kind = selectV2(
           'kind',
           kinds.options,
           kinds.default,
           consts.CONFIG
-        )}"`;
+        );
+        if (_kind.length) {
+          _knobs.kind = ` kind="${_kind}"`;
+        } else {
+          _knobs.kind = '';
+        }
       }
     } else {
-      _knobs.kind = `  kind="${kind}"`;
+      if (kind.length) {
+        _knobs.kind = `  kind="${kind}"`;
+      } else {
+        _knobs.kind = '';
+      }
     }
     for (let key in preKnobs) {
       const _preKnob = preKnobs[key];
@@ -38,6 +47,7 @@ const parsePreKnobs = (kinds, preKnobs, kind) => {
         _preKnob.data(_knobs.data, key, val);
       }
     }
+
     return _knobs;
   };
 };

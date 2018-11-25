@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, selectV2 } from '@storybook/addon-knobs/vue';
+import { withKnobs, text, selectV2, boolean } from '@storybook/addon-knobs/vue';
 import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
@@ -31,6 +31,17 @@ const preKnobs = {
       consts.CONFIG,
     ],
   },
+  withEvents: {
+    group: 'attr',
+    type: boolean,
+    config: ['with events', false, consts.OTHER],
+    value: val =>
+      val
+        ? `
+  @content-switcher-selected="actionSelected"
+  @content-switcher-beingselected="actionBeingSelected"`
+        : '',
+  },
   otherAttributes: {
     group: 'attr',
     type: text,
@@ -49,10 +60,7 @@ for (const story of storySet) {
       // ----------------------------------------------------------------
 
       const templateString = `
-  <cv-content-switcher
-    @content-switcher-selected="actionSelected"
-    @content-switcher-beingselected="actionBeingSelected"${settings.group.attr}
-    >
+  <cv-content-switcher${settings.group.attr}>
     <cv-content-switcher-button content-selector=".content-1" ${
       settings.raw.initialSelected === '0' ? ' selected' : ''
     }>Button Name 1</cv-content-switcher-button>

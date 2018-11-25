@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, selectV2 } from '@storybook/addon-knobs/vue';
+import { withKnobs, text, boolean } from '@storybook/addon-knobs/vue';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
@@ -14,11 +14,12 @@ stories.addDecorator(withKnobs);
 
 const kinds = {
   options: {
+    default: '',
     inline: 'inline',
     multiline: 'multiline',
     oneline: 'oneline',
   },
-  default: 'oneline',
+  default: '',
 };
 
 const preKnobs = {
@@ -81,7 +82,7 @@ for (const story of storySet) {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
-      console.dir(settings);
+      // console.dir(settings);
       const templateString = `
 <cv-code-snippet${settings.kind}${settings.group.attr}>
   ${settings.group['slot-content']}

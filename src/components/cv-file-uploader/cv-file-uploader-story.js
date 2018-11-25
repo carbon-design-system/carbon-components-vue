@@ -52,6 +52,16 @@ const preKnobs = {
     config: ['removable', false, consts.CONFIG],
     value: val => (val ? '\n  removable' : ''),
   },
+  withEvents: {
+    group: 'attr',
+    type: boolean,
+    config: ['with events', false, consts.OTHER],
+    value: val =>
+      val
+        ? `
+  @input="onInput"`
+        : '',
+  },
   otherAttributes: {
     group: 'attr',
     type: text,
@@ -71,8 +81,7 @@ for (const story of storySet) {
       // ----------------------------------------------------------------
 
       const templateString = `
-<cv-file-uploader${settings.group.attr}${settings.listeners}
-  @input="onInput">
+<cv-file-uploader${settings.group.attr}>
 </cv-file-uploader>
   `;
 
