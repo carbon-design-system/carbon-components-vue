@@ -4,6 +4,7 @@ import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
 import consts from '../../utils/storybook-consts';
+import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvProgressNotesMD from './cv-progress-notes.md';
 import CvProgress from './cv-progress';
@@ -11,40 +12,51 @@ import CvProgress from './cv-progress';
 const stories = storiesOf('CvProgress', module);
 stories.addDecorator(withKnobs);
 
-const knobs = () => ({
-  steps: array(
-    'Steps',
-    ['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5'],
-    ',',
-    consts.CONFIG
-  ),
-  initialStep: text('Initial step index', '0', consts.CONFIG),
-  otherAttributes: text('other attributes', '', consts.OTHER),
-});
+const kinds = null;
+const preKnobs = {
+  steps: {
+    group: 'attr',
+    type: array,
+    config: [
+      'Steps',
+      ['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5'],
+      ',',
+      consts.CONFIG,
+    ],
+    value: val => '\n  :steps="steps"',
+    data: (obj, key, val) => (obj[key] = val),
+  },
+  initialStep: {
+    group: 'attr',
+    type: text,
+    config: ['Initial step index', '0', consts.CONFIG],
+    value: val => (val.length ? `\n :initial-step="${parseInt(val, 10)}"` : ''),
+  },
+  otherAttributes: {
+    group: 'attr',
+    type: text,
+    config: ['other attributes', '', consts.OTHER],
+    value: val => (val.length ? `\n  ${val}` : ''),
+  },
+};
 
-stories.add(
-  'All',
-  withNotes(CvProgressNotesMD)(() => {
-    const settings = knobs();
+const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 
-    settings.initialStep = `\n :initial-step="${parseInt(
-      settings.initialStep
-    )}"`;
-    settings.otherAttributes = settings.otherAttributes
-      ? `\n  ${settings.otherAttributes}`
-      : '';
+for (const story of storySet) {
+  stories.add(
+    story.name,
+    withNotes(CvProgressNotesMD)(() => {
+      const settings = story.knobs();
 
-    // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-    const templateString = `
-<cv-progress :steps="steps"${settings.initialStep}${
-      settings.otherAttributes
-    }></cv-progress>
+      const templateString = `
+<cv-progress${settings.group.attr}></cv-progress>
   `;
 
-    // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-    const templateViewString = `
+      const templateViewString = `
     <sv-template-view
       :sv-margin="true"
       sv-source='${templateString.trim()}'>
@@ -52,12 +64,13 @@ stories.add(
     </sv-template-view>
   `;
 
-    return {
-      components: { CvProgress, SvTemplateView },
-      data() {
-        return { steps: settings.steps };
-      },
-      template: templateViewString,
-    };
-  })
-);
+      return {
+        components: { CvProgress, SvTemplateView },
+        data() {
+          return settings.data;
+        },
+        template: templateViewString,
+      };
+    })
+  );
+}

@@ -31,7 +31,6 @@ const preKnobs = {
     type: boolean,
     config: ['light-theme', false, consts.CONFIG],
     value: val => (val ? '\n  theme="light"' : ''),
-    data: (obj, key, val) => (obj[key] = val),
   },
   dateLabel: {
     group: 'attr',
