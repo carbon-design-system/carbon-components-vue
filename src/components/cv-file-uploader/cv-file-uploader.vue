@@ -147,12 +147,6 @@ export default {
       }
     },
   },
-  // mounted() {
-  //   this.carbonComponent = FileUploader.create(this.$el);
-  // },
-  // beforeDestroy() {
-  //   this.carbonComponent.release();
-  // },
 };
 </script>
 

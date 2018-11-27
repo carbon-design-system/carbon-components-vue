@@ -5,6 +5,7 @@ import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
 import consts from '../../utils/storybook-consts';
+import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvSliderNotesMD from './cv-slider-notes.md';
 import CvSlider from './cv-slider';
@@ -12,91 +13,137 @@ import CvSlider from './cv-slider';
 const stories = storiesOf('CvSlider', module);
 stories.addDecorator(withKnobs);
 
-const knobs = () => ({
-  light: boolean('light-theme', false, consts.CONFIG)
-    ? '\n  theme="light"'
-    : '',
-  label: text('Label', 'Text input label', consts.CONTENT),
-  disabled: boolean('disabled', false, consts.CONFIG) ? '\n  disabled' : '',
-  min: text('min', '', consts.CONFIG),
-  max: text('max', '', consts.CONFIG),
-  value: text('initial-value', '', consts.CONFIG),
-  step: text('step', '', consts.CONFIG),
-  stepMultiplier: text('step-multiplier', '', consts.CONFIG),
-  minLabel: text('min-label', '', consts.CONFIG),
-  maxLabel: text('max-label', '', consts.CONFIG),
-  vModel: boolean('v-model', false, consts.OTHER)
-    ? '\n  v-model="modelValue"'
-    : '',
-  otherAttributes: text('other attributes', '', consts.OTHER),
-});
+const kinds = null;
+const preKnobs = {
+  light: {
+    group: 'attr',
+    type: boolean,
+    config: ['light-theme', false, consts.CONFIG],
+    value: val => (val ? '\n  theme="light"' : ''),
+  },
+  label: {
+    group: 'attr',
+    type: text,
+    config: ['Label', 'Text input label', consts.CONTENT],
+    value: val => (val.length ? `\n  Label="${val}"` : ''),
+  },
+  disabled: {
+    group: 'attr',
+    type: boolean,
+    config: ['disabled', false, consts.CONFIG],
+    value: val => (val ? '\n  disabled' : ''),
+  },
+  min: {
+    group: 'attr',
+    type: text,
+    config: ['min', '', consts.CONFIG],
+    value: val => (val.length ? `\n  min="${val}"` : ''),
+  },
+  max: {
+    group: 'attr',
+    type: text,
+    config: ['max', '', consts.CONFIG],
+    value: val => (val.length ? `\n  max="${val}"` : ''),
+  },
+  value: {
+    group: 'attr',
+    type: text,
+    config: ['initial-value', '', consts.CONFIG],
+    value: val => (val.length ? `\n  value="${val}"` : ''),
+  },
+  step: {
+    group: 'attr',
+    type: text,
+    config: ['step', '', consts.CONFIG],
+    value: val => (val.length ? `\n  step="${val}"` : ''),
+  },
+  stepMultiplier: {
+    group: 'attr',
+    type: text,
+    config: ['step-multiplier', '', consts.CONFIG],
+    value: val => (val.length ? `\n  step-multiplier="${val}"` : ''),
+  },
+  minLabel: {
+    group: 'attr',
+    type: text,
+    config: ['min-label', '', consts.CONFIG],
+    value: val => (val.length ? `\n  min-label="${val}"` : ''),
+  },
+  maxLabel: {
+    group: 'attr',
+    type: text,
+    config: ['max-label', '', consts.CONFIG],
+    value: val => (val.length ? `\n  max-label="${val}"` : ''),
+  },
+  vModel: {
+    group: 'attr',
+    type: boolean,
+    config: ['v-model', false, consts.OTHER],
+    value: val => (val ? '\n  v-model="modelValue"' : ''),
+  },
+  events: {
+    group: 'attr',
+    type: boolean,
+    config: ['with events', false, consts.OTHER],
+    value: val =>
+      val
+        ? `
+  @change="afterChange"`
+        : '',
+  },
+  otherAttributes: {
+    group: 'attr',
+    type: text,
+    config: ['other attributes', '', consts.OTHER],
+    value: val => (val.length ? `\n  ${val}` : ''),
+  },
+};
 
-stories.add(
-  'All',
-  withNotes(CvSliderNotesMD)(() => {
-    const settings = knobs();
+const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 
-    settings.label = settings.label.length
-      ? `\n  label="${settings.label}"`
-      : '';
-    settings.min = settings.min.length ? `\n  min="${settings.min}"` : '';
-    settings.max = settings.max.length ? `\n  max="${settings.max}"` : '';
-    settings.value = settings.value.length
-      ? `\n  value="${settings.value}"`
-      : '';
-    settings.stepMultiplier = settings.stepMultiplier.length
-      ? `\n  step-multiplier="${settings.stepMultiplier}"`
-      : '';
-    settings.step = settings.step.length ? `\n  step="${settings.step}"` : '';
-    settings.minLabel = settings.minLabel.length
-      ? `\n  min-label="${settings.minLabel}"`
-      : ``;
-    settings.maxLabel = settings.maxLabel.length
-      ? `\n  max-label="${settings.maxLabel}"`
-      : ``;
-    settings.listeners = !settings.vModel.includes('v-model')
-      ? '\n @change="afterChange"'
-      : '';
-    settings.otherAttributes = settings.otherAttributes
-      ? `\n  ${settings.otherAttributes}`
-      : '';
+for (const story of storySet) {
+  stories.add(
+    story.name,
+    withNotes(CvSliderNotesMD)(() => {
+      const settings = story.knobs();
 
-    // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-    const templateString = `
-<cv-slider${Object.values(settings).join('')}></cv-slider>
+      const templateString = `
+<cv-slider${settings.group.attr}></cv-slider>
   `;
 
-    // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-    const templateViewString = `
+      const templateViewString = `
     <sv-template-view
       sv-margin
-      :sv-alt-back="light"
+      :sv-alt-back="!light"
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">
-        <div class="v-model-example" v-if="${settings.vModel.includes(
-          'v-model'
-        )}">Model value: {{modelValue}}</div>
+        <div class="v-model-example" v-if="${
+          settings.raw.vModel
+        }">Model value: {{modelValue}}</div>
         <div>Note slider defaults to min: 0, max: 100, value: Math.floor((min + max) / 2). This is consistent with standard slider when submitted.</div>
       </template>
     </sv-template-view>
   `;
 
-    return {
-      data() {
-        return {
-          modelValue: '45',
-          light: settings.light.length === 0,
-        };
-      },
-      components: { CvSlider, SvTemplateView },
-      template: templateViewString,
-      methods: {
-        afterChange: action('cv-slider - after change event'),
-        // afterChange() { console.log('after change event'); },
-      },
-    };
-  })
-);
+      return {
+        data() {
+          return {
+            modelValue: '45',
+            light: settings.raw.light,
+          };
+        },
+        components: { CvSlider, SvTemplateView },
+        template: templateViewString,
+        methods: {
+          afterChange: action('cv-slider - after change event'),
+          // afterChange() { console.log('after change event'); },
+        },
+      };
+    })
+  );
+}

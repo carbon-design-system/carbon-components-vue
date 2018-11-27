@@ -1,5 +1,9 @@
 <template>
-  <div data-numberinput class="cv-number-input bx--number" :class="{'bx--number--light': theme === 'light'}" :data-invalid="invalid">
+  <div data-numberinput class="cv-number-input bx--number"
+    :class="{
+      'bx--number--light': theme === 'light',
+      'bx--number--helpertext': $slots['helper-text']
+    }" :data-invalid="invalid">
     <div class="bx--number__controls">
       <button class="bx--number__control-btn up-icon">
         <svg width="10" height="5" viewBox="0 0 10 5">

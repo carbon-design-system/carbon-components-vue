@@ -5,6 +5,7 @@ import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
 import consts from '../../utils/storybook-consts';
+import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvNumberInputNotesMD from './cv-number-input-notes.md';
 import CvNumberInput from './cv-number-input';
@@ -12,93 +13,130 @@ import CvNumberInput from './cv-number-input';
 const stories = storiesOf('CvNumberInput', module);
 stories.addDecorator(withKnobs);
 
-const knobs = () => ({
-  light: boolean('light-theme', false, consts.CONFIG)
-    ? '\n  theme="light"'
-    : '',
-  label: text('Label', 'Text input label', consts.CONTENT),
-  invalidMessage: text('slot:Invalid message', '', consts.CONTENT),
-  helperText: text('slot:Helper text', '', consts.CONTENT),
-  disabled: boolean('disabled', false, consts.CONFIG) ? '\n  disabled' : '',
-  invalid: boolean('invalid', false, consts.CONFIG) ? '\n  invalid' : '',
-  value: text('initial-value', '', consts.CONFIG),
-  vModel: boolean('v-model', false, consts.OTHER)
-    ? '\n  v-model="modelValue"'
-    : '',
-  otherAttributes: text('other attributes', '', consts.OTHER),
-});
-
-stories.add(
-  'All',
-  withNotes(CvNumberInputNotesMD)(() => {
-    const settings = knobs();
-
-    settings.label = settings.label.length
-      ? `\n  label="${settings.label}"`
-      : '';
-    settings.value = settings.value.length
-      ? `\n  value="${settings.value}"`
-      : '';
-    settings.invalidMessage = settings.invalidMessage.length
-      ? `
-
+const kinds = null;
+const preKnobs = {
+  light: {
+    group: 'attr',
+    type: boolean,
+    config: ['light-theme', false, consts.CONFIG],
+    value: val => (val ? '\n  theme="light"' : ''),
+  },
+  label: {
+    group: 'attr',
+    type: text,
+    config: ['Label', 'Text input label', consts.CONTENT],
+    value: val => (val.length ? `\n  label="${val}"` : ''),
+  },
+  invalidMessage: {
+    group: 'content',
+    type: text,
+    config: ['slot:Invalid message', '', consts.CONTENT],
+    value: val =>
+      val.length
+        ? `
   <template slot="invalid-message">
-    ${settings.invalidMessage}
+    ${val}
   </template>`
-      : '';
-    settings.helperText = settings.helperText.length
-      ? `
-
+        : '',
+  },
+  helperText: {
+    group: 'content',
+    type: text,
+    config: ['slot:Helper text', '', consts.CONTENT],
+    value: val =>
+      val.length
+        ? `
   <template slot="helper-text">
-    ${settings.helperText}
+    ${val}
   </template>`
-      : '';
-    settings.listeners = !settings.vModel.includes('v-model')
-      ? '\n   @change="onChange"'
-      : '';
-    settings.otherAttributes = settings.otherAttributes
-      ? `\n  ${settings.otherAttributes}`
-      : '';
+        : '',
+  },
+  disabled: {
+    group: 'attr',
+    type: boolean,
+    config: ['disabled', false, consts.CONFIG],
+    value: val => (val ? '\n  disabled' : ''),
+  },
+  invalid: {
+    group: 'attr',
+    type: boolean,
+    config: ['invalid', false, consts.CONFIG],
+    value: val => (val ? '\n  invalid' : ''),
+  },
+  value: {
+    group: 'attr',
+    type: text,
+    config: ['initial-value', '', consts.CONFIG],
+    value: val => (val.length ? `\n  initial-value="${val}"` : ''),
+  },
+  vModel: {
+    group: 'attr',
+    type: boolean,
+    config: ['v-model', false, consts.OTHER],
+    value: val => (val ? '\n  v-model="modelValue"' : ''),
+  },
+  events: {
+    group: 'attr',
+    type: boolean,
+    config: ['with events', false, consts.OTHER],
+    value: val =>
+      val
+        ? `
+  @change="onChange"`
+        : '',
+  },
+  otherAttributes: {
+    group: 'attr',
+    type: text,
+    config: ['other attributes', '', consts.OTHER],
+    value: val => (val.length ? `\n  ${val}` : ''),
+  },
+};
 
-    // ----------------------------------------------------------------
+const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 
-    const templateString = `
-<cv-number-input${settings.disabled}${settings.invalid}${settings.vModel}${
-      settings.value
-    }${settings.light}${settings.otherAttributes} ${settings.label} ${
-      settings.listeners
-    }>${settings.invalidMessage}${settings.helperText}
+for (const story of storySet) {
+  stories.add(
+    story.name,
+    withNotes(CvNumberInputNotesMD)(() => {
+      const settings = story.knobs();
+
+      // ----------------------------------------------------------------
+
+      const templateString = `
+<cv-number-input${settings.group.attr}>${settings.group.content}
 </cv-number-input>
   `;
 
-    // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-    const templateViewString = `
+      const templateViewString = `
     <sv-template-view
     sv-margin
-    :sv-alt-back="light"
+    :sv-alt-back="!light"
     sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">
-        <span class="v-model-example" v-if="${settings.vModel.includes(
-          'v-model'
-        )}">Model value: {{modelValue}}</span>
+        <span class="v-model-example" v-if="${
+          settings.raw.vModel
+        }">Model value: {{modelValue}}</span>
       </template>
     </sv-template-view>
   `;
 
-    return {
-      data() {
-        return {
-          modelValue: '100',
-          light: settings.light.length === 0,
-        };
-      },
-      components: { CvNumberInput, SvTemplateView },
-      template: templateViewString,
-      methods: {
-        onChange: action('cv-number-input - change event'),
-      },
-    };
-  })
-);
+      return {
+        data() {
+          return {
+            modelValue: '100',
+            light: settings.raw.light,
+          };
+        },
+        components: { CvNumberInput, SvTemplateView },
+        template: templateViewString,
+        methods: {
+          onChange: action('cv-number-input - change event'),
+        },
+      };
+    })
+  );
+}

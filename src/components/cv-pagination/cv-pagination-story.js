@@ -1,10 +1,11 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, number, array } from '@storybook/addon-knobs/vue';
+import { withKnobs, text, boolean } from '@storybook/addon-knobs/vue';
 import { withNotes } from '@storybook/addon-notes';
 import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
 import consts from '../../utils/storybook-consts';
+import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvPaginationNotesMD from './cv-pagination-notes.md';
 import CvPagination from './cv-pagination';
@@ -12,70 +13,85 @@ import CvPagination from './cv-pagination';
 const stories = storiesOf('CvPagination', module);
 stories.addDecorator(withKnobs);
 
-const knobs = () => ({
-  backwardsText: text('backwards button text', 'Previous page', consts.CONFIG),
-  forwardsText: text('forwards button text', 'Next page', consts.CONFIG),
-  pageNumberLabel: text('page number label', 'Page number', consts.CONFIG),
-  pageSizesLabel: text(
-    'page sizes label',
-    'Number of items per page:',
-    consts.CONTENT
-  ),
-  numberOfItems: text('Number of items', '103', consts.CONFIG),
-  pageSizes: text(
-    'Page sizes',
-    '[10, { value: 20, selected: true }, 30, 40, 50]',
-    consts.CONFIG
-  ),
-  otherAttributes: text('other attributes', '', consts.OTHER),
-});
+const kinds = null;
+const preKnobs = {
+  backwardsText: {
+    group: 'attr',
+    type: text,
+    config: ['backwards button text', 'Previous page', consts.CONFIG],
+    value: val => (val.length ? `\n  backwards-text="${val}"` : ''),
+  },
+  forwardsText: {
+    group: 'attr',
+    type: text,
+    config: ['forwards button text', 'Next page', consts.CONFIG],
+    value: val => (val.length ? `\n  forwards-text="${val}"` : ''),
+  },
+  pageNumberLabel: {
+    group: 'attr',
+    type: text,
+    config: ['page number label', 'Page number', consts.CONFIG],
+    value: val => (val.length ? `\n  page-number-label="${val}"` : ''),
+  },
+  pageSizesLabel: {
+    group: 'attr',
+    type: text,
+    config: ['page sizes label', 'Number of items per page:', consts.CONTENT],
+    value: val => (val.length ? `\n  page-sizes-label="${val}"` : ''),
+    //   data: (obj, key, val) => (obj[key] = val),
+  },
+  numberOfItems: {
+    group: 'attr',
+    type: text,
+    config: ['Number of items', '103', consts.CONFIG],
+    value: val =>
+      val.length ? `\n  :number-of-items="${parseInt(val, 10)}"` : '',
+  },
+  pageSizes: {
+    group: 'attr',
+    type: text,
+    config: [
+      'Page sizes',
+      '[10, { value: 20, selected: true }, 30, 40, 50]',
+      consts.CONFIG,
+    ],
+    value: val => (val.length ? `\n  :page-sizes="${val}"` : ''),
+  },
+  events: {
+    group: 'attr',
+    type: boolean,
+    config: ['with events', false, consts.OTHER],
+    value: val =>
+      val
+        ? `
+  @change="onChange"`
+        : '',
+  },
+  otherAttributes: {
+    group: 'attr',
+    type: text,
+    config: ['other attributes', '', consts.OTHER],
+    value: val => (val.length ? `\n  ${val}` : ''),
+  },
+};
 
-stories.add(
-  'All',
-  withNotes(CvPaginationNotesMD)(() => {
-    const settings = knobs();
+const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 
-    settings.backwardsText = settings.backwardsText.length
-      ? `\n  backwards-text="${settings.backwardsText}"`
-      : '';
+for (const story of storySet) {
+  stories.add(
+    story.name,
+    withNotes(CvPaginationNotesMD)(() => {
+      const settings = story.knobs();
 
-    settings.forwardsText = settings.forwardsText.length
-      ? `\n  forwards-text="${settings.forwardsText}"`
-      : '';
+      // ----------------------------------------------------------------
 
-    settings.pageNumberLabel = settings.pageNumberLabel.length
-      ? `\n  page-number-label="${settings.pageNumberLabel}"`
-      : '';
-
-    settings.pageSizesLabel = settings.pageSizesLabel.length
-      ? `\n  page-sizes-label="${settings.pageSizesLabel}"`
-      : '';
-
-    settings.numberOfItems = settings.numberOfItems.length
-      ? `\n  :number-of-items="${parseInt(settings.numberOfItems, 10)}"`
-      : '';
-
-    settings.pageSizes = settings.pageSizes.length
-      ? `\n  :page-sizes="${settings.pageSizes}"`
-      : '';
-
-    settings.otherAttributes = settings.otherAttributes.length
-      ? `\n  ${settings.otherAttributes}`
-      : '';
-
-    // ----------------------------------------------------------------
-
-    const templateString = `
-<cv-pagination ${settings.backwardsText}${settings.forwardsText}${
-      settings.pageNumberLabel
-    }${settings.pageSizesLabel}${settings.numberOfItems}${settings.pageSizes} ${
-      settings.otherAttributes
-    } @change="onChange"></cv-pagination>
+      const templateString = `
+<cv-pagination${settings.group.attr}></cv-pagination>
   `;
 
-    // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-    const templateViewString = `
+      const templateViewString = `
     <sv-template-view
       sv-margin
       sv-source='${templateString.trim()}'>
@@ -83,12 +99,13 @@ stories.add(
     </sv-template-view>
   `;
 
-    return {
-      components: { CvPagination, SvTemplateView },
-      template: templateViewString,
-      methods: {
-        onChange: action('cv-paginationr - change event'),
-      },
-    };
-  })
-);
+      return {
+        components: { CvPagination, SvTemplateView },
+        template: templateViewString,
+        methods: {
+          onChange: action('cv-paginationr - change event'),
+        },
+      };
+    })
+  );
+}

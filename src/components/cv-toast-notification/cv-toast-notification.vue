@@ -28,6 +28,11 @@ export default {
   mixins: [notificationMixin],
   props: {
     caption: String,
+    kind: {
+      type: String,
+      default: 'info',
+      validator: val => ['error', 'info', 'warning', 'success'].includes(val),
+    },
   },
 };
 </script>

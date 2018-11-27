@@ -5,6 +5,7 @@ import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
 import consts from '../../utils/storybook-consts';
+import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvStructuredListNotesMD from './cv-structured-list-notes.md';
 import CvStructuredList from './cv-structured-list';
@@ -12,136 +13,171 @@ import CvStructuredList from './cv-structured-list';
 const stories = storiesOf('CvStructuredList', module);
 stories.addDecorator(withKnobs);
 
-const knobs = () => ({
-  selectable: boolean('selectable', false, consts.CONFIG),
-  border: boolean('border', false, consts.CONFIG) ? ' border' : '',
-  condensed: boolean('condensed', false, consts.CONFIG) ? ' condensed' : '',
-  noWrap: boolean('Prevent wrapping', false, consts.CONFIG) ? ' no-wrap' : '',
-  vModel: boolean('v-model', false, consts.OTHER) ? 'v-model="listVal" ' : '',
-  otherAttributes: text('list:other attributes', '', consts.OTHER),
-  otherAttributesItem: text('item:other attributes', '', consts.OTHER),
-});
+const kinds = null;
+const preKnobs = {
+  selectable: {
+    group: 'attrSelectable',
+    type: boolean,
+    config: ['selectable', false, consts.CONFIG],
+    value: val => (val ? ' selectable' : ''),
+  },
+  border: {
+    group: 'attr',
+    type: boolean,
+    config: ['border', false, consts.CONFIG],
+    value: val => (val ? ' border' : ''),
+  },
+  condensed: {
+    group: 'attr',
+    type: boolean,
+    config: ['condensed', false, consts.CONFIG],
+    value: val => (val ? ' condensed' : ''),
+  },
+  noWrap: {
+    group: 'data',
+    type: boolean,
+    config: ['Prevent wrapping', false, consts.CONFIG],
+    value: val => (val ? ' no-wrap' : ''),
+  },
+  vModel: {
+    group: 'checksSelectable',
+    type: boolean,
+    config: ['v-model', false, consts.OTHER],
+    value: val => (val ? 'v-model="listVal" ' : ''),
+  },
+  events: {
+    group: 'attrSelectable',
+    type: boolean,
+    config: ['withEvnets', false, consts.OTHER],
+    value: val => (val ? ' @change="actionChange"' : ''),
+  },
+  otherAttributes: {
+    group: 'attr',
+    type: text,
+    config: ['list:other attributes', '', consts.OTHER],
+    value: val => (val.length ? `\n  ${val}` : ''),
+  },
+  otherAttributesItem: {
+    group: 'attrItem',
+    type: text,
+    config: ['item:other attributes', '', consts.OTHER],
+    value: val => (val.length ? `\n  ${val}` : ''),
+  },
+};
 
-stories.add(
-  'All',
-  withNotes(CvStructuredListNotesMD)(() => {
-    const settings = knobs();
-    settings.otherAttributes = settings.otherAttributes
-      ? `\n  ${settings.otherAttributes}`
-      : '';
-    settings.otherAttributesItem = settings.otherAttributesItem
-      ? `\n  ${settings.otherAttributesItem}`
-      : '';
+const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+for (const story of storySet) {
+  stories.add(
+    story.name,
+    withNotes(CvStructuredListNotesMD)(() => {
+      const settings = story.knobs();
 
-    // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-    let templateString = '';
+      let templateString = '';
 
-    if (settings.selectable) {
-      templateString = `
-    <cv-structured-list @change="actionChange" selectable${settings.border}${
-        settings.condensed
-      }${settings.otherAttributes}>
+      if (settings.raw.selectable) {
+        templateString = `
+    <cv-structured-list${settings.group.attrSelectable}${settings.group.attr}>
       <template slot="headings">
         <cv-structured-list-heading>Heading 1</cv-structured-list-heading>
         <cv-structured-list-heading>Heading 2</cv-structured-list-heading>
         <cv-structured-list-heading>Heading 3</cv-structured-list-heading>
       </template>
       <template slot="items">
-        <cv-structured-list-item-selectable name="group-1" value="value-1"${
-          settings.vModel ? settings.vModel : 'checked'
-        }${settings.otherAttributesItem}>
+        <cv-structured-list-item-selectable name="group-1" value="value-1" ${
+          settings.raw.vModel ? settings.group.checksSelectable : 'checked'
+        }${settings.group.attrItem}>
           <cv-structured-list-data>Item_1</cv-structured-list-data>
           <cv-structured-list-data>Item_1</cv-structured-list-data>
           <cv-structured-list-data${
-            settings.noWrap
+            settings.group.data
           }>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.</cv-structured-list-data>
-        </cv-structured-list-item-selectable$>
+        </cv-structured-list-item-selectable>
         <cv-structured-list-item-selectable name="group-1" value="value-2" ${
-          settings.vModel
-        }${settings.otherAttributesItem}>
+          settings.group.checksSelectable
+        }${settings.group.attrItem}>
           <cv-structured-list-data>Item_2</cv-structured-list-data>
           <cv-structured-list-data>Item_2</cv-structured-list-data>
           <cv-structured-list-data${
-            settings.noWrap
+            settings.group.data
           }>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.</cv-structured-list-data>
-        </cv-structured-list-item-selectable$>
+        </cv-structured-list-item-selectable>
         <cv-structured-list-item-selectable name="group-1" value="value-3" ${
-          settings.vModel
-        }${settings.otherAttributesItem}>
-          <cv-structured-list-data>Item_3</cv-structured-list-data>
+          settings.group.checksSelectable
+        }${settings.group.attrItem}>
+        <cv-structured-list-data>Item_3</cv-structured-list-data>
           <cv-structured-list-data>Item_3</cv-structured-list-data>
           <cv-structured-list-data${
-            settings.noWrap
+            settings.group.data
           }>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.</cv-structured-list-data>
-        </cv-structured-list-item-selectable$>
+        </cv-structured-list-item-selectable>
       </template>
     </cv-structured-list>
     `;
-    } else {
-      templateString = `
-    <cv-structured-list ${settings.border}${settings.condensed}${
-        settings.otherAttributes
-      }>
+      } else {
+        templateString = `
+    <cv-structured-list${settings.group.attr}>
       <template slot="headings">
         <cv-structured-list-heading>Heading 1</cv-structured-list-heading>
         <cv-structured-list-heading>Heading 2</cv-structured-list-heading>
         <cv-structured-list-heading>Heading 3</cv-structured-list-heading>
       </template>
       <template slot="items">
-        <cv-structured-list-item${settings.otherAttributesItem}>
+        <cv-structured-list-item${settings.group.attrItem}>
           <cv-structured-list-data>Item_1</cv-structured-list-data>
           <cv-structured-list-data>Item_1</cv-structured-list-data>
           <cv-structured-list-data${
-            settings.noWrap
+            settings.group.data
           }>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.</cv-structured-list-data>
         </cv-structured-list-item>
-        <cv-structured-list-item${settings.otherAttributesItem}>
+        <cv-structured-list-item${settings.group.attrItem}>
           <cv-structured-list-data>Item_2</cv-structured-list-data>
           <cv-structured-list-data>Item_2</cv-structured-list-data>
           <cv-structured-list-data${
-            settings.noWrap
+            settings.group.data
           }>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.</cv-structured-list-data>
         </cv-structured-list-item>
-        <cv-structured-list-item${settings.otherAttributesItem}>
+        <cv-structured-list-item${settings.group.attrItem}>
           <cv-structured-list-data>Item_3</cv-structured-list-data>
           <cv-structured-list-data>Item_3</cv-structured-list-data>
           <cv-structured-list-data${
-            settings.noWrap
+            settings.group.data
           }>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.</cv-structured-list-data>
         </cv-structured-list-item>
       </template>
     </cv-structured-list>
     `;
-    }
+      }
 
-    // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-    const templateViewString = `
+      const templateViewString = `
     <sv-template-view
-      :sv-margin="true"
+      sv-margin
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
 
       <template slot="other">
-        <span class="v-model-example" v-if="${settings.vModel.includes(
-          'v-model'
-        )}">Selected value ''{{listVal}}''</span>
+        <span class="v-model-example" v-if="${
+          settings.raw.vModel
+        }">Selected value ''{{listVal}}''</span>
       </template>
     </sv-template-view>
   `;
 
-    return {
-      components: { CvStructuredList, SvTemplateView },
-      data() {
-        return {
-          listVal: 'value-3',
-        };
-      },
-      methods: {
-        actionChange: action('Structured list - change'),
-      },
-      template: templateViewString,
-    };
-  })
-);
+      return {
+        components: { CvStructuredList, SvTemplateView },
+        data() {
+          return {
+            listVal: 'value-3',
+          };
+        },
+        methods: {
+          actionChange: action('Structured list - change'),
+        },
+        template: templateViewString,
+      };
+    })
+  );
+}

@@ -5,6 +5,7 @@ import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
 import consts from '../../utils/storybook-consts';
+import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvFileUploaderNotesMD from './cv-file-uploader-notes.md';
 import CvFileUploader from './cv-file-uploader';
@@ -12,53 +13,83 @@ import CvFileUploader from './cv-file-uploader';
 const stories = storiesOf('CvFileUploader', module);
 stories.addDecorator(withKnobs);
 
-const knobs = () => ({
-  label: text('label', 'Add file', consts.CONTENT),
-  accept: text('accept', '.jpg,.png', consts.CONFIG),
-  clearOnReselect: boolean('Clear on reselect', false, consts.CONFIG)
-    ? '\n  clear-on-reselect'
-    : '',
-  initialStateUploading: boolean(
-    'Initial state uploading',
-    false,
-    consts.CONFIG
-  )
-    ? '\n  initial-state-uploading'
-    : '',
-  multiple: boolean('multiple', false, consts.CONFIG) ? '\n  multiple' : '',
-  removable: boolean('removable', false, consts.CONFIG) ? '\n  removable' : '',
-  otherAttributes: text('other attributes', '', consts.OTHER),
-});
+const kinds = null;
 
-stories.add(
-  'All',
-  withNotes(CvFileUploaderNotesMD)(() => {
-    const settings = knobs();
+const preKnobs = {
+  label: {
+    group: 'attr',
+    type: text,
+    config: ['label', 'Add file', consts.CONTENT],
+    value: val => (val.length ? `\n  label="${val}"` : ''),
+  },
+  accept: {
+    group: 'attr',
+    type: text,
+    config: ['accept', '.jpg,.png', consts.CONFIG],
+    value: val => (val.length ? `\n  accept="${val}"` : ''),
+  },
+  clearOnReselect: {
+    group: 'attr',
+    type: boolean,
+    config: ['Clear on reselect', false, consts.CONFIG],
+    value: val => (val ? '\n  clear-on-reselect' : ''),
+  },
+  initialStateUploading: {
+    group: 'attr',
+    type: boolean,
+    config: ['Initial state uploading', false, consts.CONFIG],
+    value: val => (val ? '\n  initial-state-uploading' : ''),
+  },
+  multiple: {
+    group: 'attr',
+    type: boolean,
+    config: ['multiple', false, consts.CONFIG],
+    value: val => (val ? '\n  multiple' : ''),
+  },
+  removable: {
+    group: 'attr',
+    type: boolean,
+    config: ['removable', false, consts.CONFIG],
+    value: val => (val ? '\n  removable' : ''),
+  },
+  events: {
+    group: 'attr',
+    type: boolean,
+    config: ['with events', false, consts.OTHER],
+    value: val =>
+      val
+        ? `
+  @input="onInput"`
+        : '',
+  },
+  otherAttributes: {
+    group: 'attr',
+    type: text,
+    config: ['other attributes', '', consts.OTHER],
+    value: val => (val.length ? `\n  ${val}` : ''),
+  },
+};
 
-    settings.label = settings.label.length ? `${settings.label}` : '';
-    settings.accept = settings.accept.length
-      ? `\n  accept="${settings.accept}"`
-      : '';
-    settings.listeners = '\n   @input="onInput"';
-    settings.otherAttributes = settings.otherAttributes
-      ? `\n  ${settings.otherAttributes}`
-      : '';
+const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 
-    // ----------------------------------------------------------------
+for (const story of storySet) {
+  stories.add(
+    story.name,
+    withNotes(CvFileUploaderNotesMD)(() => {
+      const settings = story.knobs();
 
-    const templateString = `
-<cv-file-uploader${settings.accept}${settings.clearOnReselect}${
-      settings.initialStateUploading
-    }${settings.multiple}${settings.removable}${settings.otherAttributes}
-  label="${settings.label}" ${settings.listeners}>
+      // ----------------------------------------------------------------
+
+      const templateString = `
+<cv-file-uploader${settings.group.attr}>
 </cv-file-uploader>
   `;
 
-    // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-    const templateViewString = `
+      const templateViewString = `
     <sv-template-view
-      :sv-margin="true"
+      sv-margin
       sv-alt-back
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
@@ -78,52 +109,51 @@ stories.add(
     </sv-template-view>
   `;
 
-    return {
-      data() {
-        return {
-          modelValue: 'initial value',
-        };
-      },
-      components: { CvFileUploader, SvTemplateView },
-      template: templateViewString,
-      methods: {
-        onInput: action('cv-file-uploader - input event'),
-        setState() {
-          const index = parseInt(
-            document.querySelector('.file-index').value,
-            10
-          );
-          const state = document.querySelector('.file-state').value;
+      return {
+        components: { CvFileUploader, SvTemplateView },
+        template: templateViewString,
+        methods: {
+          onInput: action('cv-file-uploader - input event'),
+          setState() {
+            console.log('setState');
+            const index = parseInt(
+              document.querySelector('.file-index').value,
+              10
+            );
+            const state = document.querySelector('.file-state').value;
 
-          try {
-            // setState with index
-            this.$children[0].$children[0].setState(index, state);
+            try {
+              // setState with index
+              this.$children[0].$children[0].setState(index, state);
 
-            // setState directly on file object
-            // this.$children[0].$children[0].files[index].setState(state);
-          } catch (err) {
-            // ignore;
-          }
-        },
-        remove() {
-          const index = parseInt(
-            document.querySelector('.file-index').value,
-            10
-          );
-          try {
-            // remove with index
-            // this.$children[0].$children[0].remove(index);
+              // setState directly on file object
+              // this.$children[0].$children[0].files[index].setState(state);
+            } catch (err) {
+              // ignore;
+            }
+          },
+          remove() {
+            console.log('remove');
+            const index = parseInt(
+              document.querySelector('.file-index').value,
+              10
+            );
+            try {
+              // remove with index
+              // this.$children[0].$children[0].remove(index);
 
-            // remove directly on file object
-            this.$children[0].$children[0].files[index].remove();
-          } catch (err) {
-            // ignore;
-          }
+              // remove directly on file object
+              this.$children[0].$children[0].files[index].remove();
+            } catch (err) {
+              // ignore;
+            }
+          },
+          clear() {
+            console.log('clear');
+            this.$children[0].$children[0].clear();
+          },
         },
-        clear() {
-          this.$children[0].$children[0].clear();
-        },
-      },
-    };
-  })
-);
+      };
+    })
+  );
+}

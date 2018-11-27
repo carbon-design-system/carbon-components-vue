@@ -1,16 +1,11 @@
 import { storiesOf } from '@storybook/vue';
-import {
-  withKnobs,
-  text,
-  boolean,
-  array,
-  object,
-} from '@storybook/addon-knobs/vue';
+import { withKnobs, text, boolean, object } from '@storybook/addon-knobs/vue';
 import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
 import consts from '../../utils/storybook-consts';
+import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvTimePickerNotesMD from './cv-time-picker-notes.md';
 import CvTimePicker from './cv-time-picker';
@@ -18,115 +13,152 @@ import CvTimePicker from './cv-time-picker';
 const stories = storiesOf('CvTimePicker', module);
 stories.addDecorator(withKnobs);
 
-const knobs = () => ({
-  light: boolean('light-theme', false, consts.CONFIG)
-    ? '\n  theme="light"'
-    : '',
-  label: text('label', '', consts.CONTENT),
-  initialValue: object(
-    'initial-value',
-    { time: '', ampm: '', timezone: '' },
-    consts.CONFIG
-  ),
-  pattern: text('pattern', '', consts.CONFIG),
-  placeholder: text('placeholder', '', consts.CONFIG),
-  timezones: object(
-    'timezones',
-    {
-      list: [
-        { label: 'Timezone-1', value: 'timezone1' },
-        { label: 'Timezone-2', value: 'timezone2' },
-      ],
-    },
-    consts.CONFIG
-  ),
-  timezonesSelectLabel: text('timzones-select-label', '', consts.CONTENT),
-  ampmSelectLabel: text('ampm-select-label', '', consts.CONTENT),
-  invalidMessage: text('invalid-message', '', consts.CONTENT),
-  disabled: boolean('disabled', false, consts.CONFIG) ? '\n  disabled' : '',
-  vModel: boolean('v-model', false, consts.OTHER)
-    ? '\n  v-model="modelValue"'
-    : '',
+const kinds = null;
 
-  otherAttributes: text('other attributes', '', consts.OTHER),
-});
+const preKnobs = {
+  light: {
+    group: 'attr',
+    type: boolean,
+    config: ['light-theme', false, consts.CONFIG],
+    value: val => (val ? '\n  theme="light"' : ''),
+    data: (obj, key, val) => (obj[key] = val),
+  },
+  label: {
+    group: 'attr',
+    type: text,
+    config: ['label', '', consts.CONTENT],
+    value: val => (val ? `\n  label="${val}"` : ''),
+  },
+  initialValue: {
+    group: 'attr',
+    type: object,
+    config: [
+      'initial-value',
+      { time: '', ampm: '', timezone: '' },
+      consts.CONFIG,
+    ],
+    value: val =>
+      val && Object.keys(val).length ? `\n  :initial-value="initialValue"` : '',
+    data: (obj, key, val) => (obj[key] = val),
+  },
+  pattern: {
+    group: 'attr',
+    type: text,
+    config: ['pattern', '', consts.CONFIG],
+    value: val => (val ? `\n  pattern="${val}"` : ''),
+  },
+  placeholder: {
+    group: 'attr',
+    type: text,
+    config: ['placeholder', '', consts.CONFIG],
+    value: val => (val ? `\n  placeholder="${val}"` : ''),
+  },
+  timezones: {
+    group: 'attr',
+    type: object,
+    config: [
+      'timezones',
+      {
+        list: [
+          { label: 'Timezone-1', value: 'timezone1' },
+          { label: 'Timezone-2', value: 'timezone2' },
+        ],
+      },
+      consts.CONFIG,
+    ],
+    value: val =>
+      val && val.list && val.list.length ? `\n  :timezones="timezones"` : '',
+    data: (obj, key, val) => (obj[key] = val.list),
+  },
+  timezonesSelectLabel: {
+    group: 'attr',
+    type: text,
+    config: ['timzones-select-label', '', consts.CONTENT],
+    value: val => (val ? `\n  timzones-select-label="${val}"` : ''),
+  },
+  ampmSelectLabel: {
+    group: 'attr',
+    type: text,
+    config: ['ampm-select-label', '', consts.CONTENT],
+    value: val => (val ? `\n  ampm-select-label="${val}"` : ''),
+  },
+  invalidMessage: {
+    group: 'attr',
+    type: text,
+    config: ['invalid-message', '', consts.CONTENT],
+    value: val => (val ? `\n  invalid-message="${val}"` : ''),
+  },
+  disabled: {
+    group: 'attr',
+    type: boolean,
+    config: ['disabled', false, consts.CONFIG],
+    value: val => (val ? `\n  disabled` : ''),
+  },
+  vModel: {
+    group: 'attr',
+    type: boolean,
+    config: ['v-model', false, consts.OTHER],
+    value: val => (val ? `\n  v-model="modelValue"` : ''),
+    data: obj => (obj.modelValue = { time: '', ampm: '', timezone: '' }),
+  },
+  events: {
+    group: 'attr',
+    type: boolean,
+    config: ['with events', false, consts.OTHER],
+    value: val =>
+      val
+        ? `
+  @change="onChange"`
+        : '',
+  },
+  otherAttributes: {
+    group: 'attr',
+    type: text,
+    config: ['other attributes', '', consts.OTHER],
+    value: val => (val.length ? `\n  ${val}` : ''),
+  },
+};
 
-stories.add(
-  'All',
-  withNotes(CvTimePickerNotesMD)(() => {
-    const settings = knobs();
+const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 
-    settings.label = settings.label.length
-      ? `\n  label="${settings.label}"`
-      : '';
-    settings.pattern = settings.pattern.length
-      ? `\n  pattern="${settings.pattern}"`
-      : '';
-    settings.placeholder = settings.placeholder.length
-      ? `\n  placeholder="${settings.placeholder}"`
-      : '';
-    settings.timezonesSelectLabel = settings.timezonesSelectLabel.length
-      ? `\n  timezonesSelectLabel="${settings.timezonesSelectLabel}"`
-      : '';
-    settings.ampmSelectLabel = settings.ampmSelectLabel.length
-      ? `\n  ampmSelectLabel="${settings.ampmSelectLabel}"`
-      : '';
-    settings.invalidMessage = settings.invalidMessage.length
-      ? `\n  invalidMessage="${settings.invalidMessage}"`
-      : '';
-    settings.listeners = !settings.vModel.includes('v-model')
-      ? '\n   @change="onChange"'
-      : '';
-    settings.otherAttributes = settings.otherAttributes
-      ? `\n  ${settings.otherAttributes}`
-      : '';
+for (const story of storySet) {
+  stories.add(
+    story.name,
+    withNotes(CvTimePickerNotesMD)(() => {
+      const settings = story.knobs();
 
-    // ----------------------------------------------------------------
-    const templateString = `
-<cv-time-picker :initial-value="initialValue" :timezones="timezones" ${
-      settings.vModel
-    }${settings.label}${settings.pattern}${settings.placeholder}${
-      settings.light
-    }${settings.timezonesSelectLabel}${settings.ampmSelectLabel}${
-      settings.invalidMessage
-    }${settings.disabled}${settings.otherAttributes}${settings.listeners}>
-</cv-time-picker>
-  `;
+      // ----------------------------------------------------------------
+      const templateString = `
+  <cv-time-picker ${settings.kind}${settings.group.attr}>
+  </cv-time-picker>
+    `;
 
-    // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-    const templateViewString = `
+      const templateViewString = `
     <sv-template-view
       sv-margin
-      :sv-alt-back="light"
+      :sv-alt-back="!light"
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">
-        <span class="v-model-example" v-if="${settings.vModel.includes(
-          'v-model'
-        )}">Model value: {{modelValue}}</span>
+        <span class="v-model-example" v-if="${settings.raw.vModel}">
+          Model value: {{modelValue}}
+          </span>
       </template>
     </sv-template-view>
   `;
 
-    return {
-      data() {
-        // console.dir(settings.timezones.list);
-        return {
-          initialValue: settings.initialValue,
-          timezones:
-            settings.timezones && settings.timezones.list
-              ? settings.timezones.list
-              : [],
-          modelValue: { time: '', ampm: 'AM', timezone: '' },
-          light: settings.light.length === 0,
-        };
-      },
-      components: { CvTimePicker, SvTemplateView },
-      template: templateViewString,
-      methods: {
-        onChange: action('cv-time-picker - chnage event'),
-      },
-    };
-  })
-);
+      return {
+        data() {
+          return settings.data;
+        },
+        components: { CvTimePicker, SvTemplateView },
+        template: templateViewString,
+        methods: {
+          onChange: action('cv-time-picker - chnage event'),
+        },
+      };
+    })
+  );
+}
