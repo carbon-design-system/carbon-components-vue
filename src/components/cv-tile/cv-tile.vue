@@ -32,9 +32,7 @@ export default {
       type: String,
       default: '',
       validator: value =>
-        ['clickable', 'expandable', 'selectable', 'standard', ''].includes(
-          value
-        ),
+        ['clickable', 'expandable', 'selectable', 'standard'].includes(value),
     },
   },
   computed: {
