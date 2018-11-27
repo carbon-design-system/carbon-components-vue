@@ -5,6 +5,7 @@ import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
 import consts from '../../utils/storybook-consts';
+import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvTextInputNotesMD from './cv-text-input-notes.md';
 import CvTextInput from './cv-text-input';
@@ -12,69 +13,84 @@ import CvTextInput from './cv-text-input';
 const stories = storiesOf('CvTextInput', module);
 stories.addDecorator(withKnobs);
 
-const knobs = () => ({
-  light: boolean('light-theme', false, consts.CONFIG)
-    ? '\n  theme="light"'
-    : '',
-  label: text('label', 'Text input label', consts.CONTENT),
-  disabled: boolean('disabled', false, consts.CONFIG) ? '\n  disabled' : '',
-  vModel: boolean('v-model', false, consts.OTHER)
-    ? '\n  v-model="modelValue"'
-    : '',
-  otherAttributes: text('other attributes', '', consts.OTHER),
-});
+const kinds = null;
+const preKnobs = {
+  light: {
+    group: 'attr',
+    type: boolean,
+    config: ['light-theme', false, consts.CONFIG],
+    value: val => (val ? '\n  theme="light"' : ''),
+  },
+  label: {
+    group: 'attr',
+    type: text,
+    config: ['label', 'Text input label', consts.CONTENT],
+    value: val => (val.length ? `\n  label="${val}"` : ''),
+  },
+  disabled: {
+    group: 'attr',
+    type: boolean,
+    config: ['disabled', false, consts.CONFIG],
+    value: val => (val ? '\n  disabled' : ''),
+  },
+  vModel: {
+    group: 'attr',
+    type: boolean,
+    config: ['v-model', false, consts.OTHER],
+    value: val => (val ? '\n  v-model="modelValue"' : '\n  @input="onInput"'),
+  },
+  otherAttributes: {
+    group: 'attr',
+    type: text,
+    config: ['other attributes', '', consts.OTHER],
+    value: val => (val.length ? `\n  ${val}` : ''),
+  },
+};
 
-stories.add(
-  'All',
-  withNotes(CvTextInputNotesMD)(() => {
-    const settings = knobs();
+const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 
-    settings.label = settings.label.length ? `${settings.label}` : '';
-    settings.listeners = !settings.vModel.includes('v-model')
-      ? '\n   @input="onInput"'
-      : '';
-    settings.otherAttributes = settings.otherAttributes
-      ? `\n  ${settings.otherAttributes}`
-      : '';
+for (const story of storySet) {
+  stories.add(
+    story.name,
+    withNotes(CvTextInputNotesMD)(() => {
+      const settings = story.knobs();
 
-    // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-    const templateString = `
-<cv-text-input${settings.disabled}${settings.vModel}${settings.light}${
-      settings.otherAttributes
-    }
-  label="${settings.label}" ${settings.listeners}>
+      const templateString = `
+<cv-text-input${settings.group.attr}>
 </cv-text-input>
   `;
 
-    // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-    const templateViewString = `
+      const templateViewString = `
     <sv-template-view
       sv-margin
-      :sv-alt-back="light"
+      :sv-alt-back="!light"
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">
-        <span class="v-model-example" v-if="${settings.vModel.includes(
-          'v-model'
-        )}">Model value: {{modelValue}}</span>
+        <span class="v-model-example" v-if="${
+          settings.raw.vModel
+        }">Model value: {{modelValue}}</span>
       </template>
     </sv-template-view>
   `;
 
-    return {
-      data() {
-        return {
-          modelValue: 'initial value',
-          light: settings.light.length === 0,
-        };
-      },
-      components: { CvTextInput, SvTemplateView },
-      template: templateViewString,
-      methods: {
-        onInput: action('cv-text-input - input event'),
-      },
-    };
-  })
-);
+      return {
+        data() {
+          return {
+            modelValue: 'initial value',
+            light: settings.raw.light,
+          };
+        },
+        components: { CvTextInput, SvTemplateView },
+        template: templateViewString,
+        methods: {
+          onInput: action('cv-text-input - input event'),
+        },
+      };
+    })
+  );
+}
