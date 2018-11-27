@@ -82,7 +82,7 @@ for (const story of storySet) {
       // console.dir(settings);
       const templateViewString = `
     <sv-template-view
-      :sv-margin="true"
+      sv-margin
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
 
@@ -125,7 +125,7 @@ stories.add(
 
     const templateViewString = `
     <sv-template-view
-      :sv-margin="true"
+      sv-margin
       sv-source='${templateString.trim()}'>
       <p>This story only demonstrates the array syntax for v-model</p>
       <template slot="component">${templateString}</template>

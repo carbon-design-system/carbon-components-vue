@@ -5,6 +5,7 @@ import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
 import consts from '../../utils/storybook-consts';
+import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvToggleNotesMD from './cv-toggle-notes.md';
 import CvToggle from './cv-toggle';
@@ -12,76 +13,112 @@ import CvToggle from './cv-toggle';
 const stories = storiesOf('CvToggle', module);
 stories.addDecorator(withKnobs);
 
-const knobs = () => ({
-  small: boolean('small', false, consts.CONFIG) ? '\n  small' : '',
-  textLeft: text('slot:text-left', 'Off', consts.CONTENT),
-  textRight: text('slot:text-right', 'On', consts.CONTENT),
-  checked: boolean('checked', false, consts.CONFIG) ? '\n  checked' : '',
-  disabled: boolean('disabled', false, consts.CONFIG) ? '\n  disabled' : '',
-  vModel: boolean('v-model', false, consts.OTHER)
-    ? '\n  v-model="checked"'
-    : '',
-  otherAttributes: text('other attributes', '', consts.OTHER),
-});
-
-stories.add(
-  'Default',
-  withNotes(CvToggleNotesMD)(() => {
-    const settings = knobs();
-
-    settings.textLeft = settings.textLeft.length
-      ? `\n  <template slot="text-left">${settings.textLeft}</template>`
-      : '';
-    settings.textRight = settings.textRight.length
-      ? `\n  <template slot="text-right">${settings.textRight}</template>`
-      : '';
-    settings.otherAttributes = settings.otherAttributes
-      ? `\n  ${settings.otherAttributes}`
-      : '';
-
-    // ----------------------------------------------------------------
-
-    const templateString = `
-<cv-toggle${settings.checked}${settings.disabled}${settings.small}${
-      settings.vModel
-    }${settings.otherAttributes}
+const kinds = null;
+const preKnobs = {
+  small: {
+    group: 'attr',
+    type: boolean,
+    config: ['small', false, consts.CONFIG],
+    value: val => (val ? '\n  small' : ''),
+  },
+  textLeft: {
+    group: 'slots',
+    type: text,
+    config: ['slot:text-left', 'Off', consts.CONTENT],
+    value: val =>
+      val.length ? `\n  <template slot="text-left">${val}</template>` : '',
+  },
+  textRight: {
+    group: 'slots',
+    type: text,
+    config: ['slot:text-right', 'On', consts.CONTENT],
+    value: val =>
+      val.length ? `\n  <template slot="text-right">${val}</template>` : '',
+  },
+  checked: {
+    group: 'attr',
+    type: boolean,
+    config: ['checked', false, consts.CONFIG],
+    value: val => (val ? '\n  checked' : ''),
+  },
+  disabled: {
+    group: 'attr',
+    type: boolean,
+    config: ['disabled', false, consts.CONFIG],
+    value: val => (val ? '\n  disabled' : ''),
+  },
+  vModel: {
+    group: 'attr',
+    type: boolean,
+    config: ['v-model', false, consts.OTHER],
+    value: val => (val ? '\n  v-model="checked"' : ''),
+  },
+  withEvents: {
+    group: 'attr',
+    type: boolean,
+    config: ['with events', false, consts.OTHER],
+    value: val =>
+      val
+        ? `
   @change="actionChange"
-  @keydown="actionKeydown"
-  >${settings.textLeft}${settings.textRight}
+  @keydown="actionKeydown"`
+        : '',
+  },
+  otherAttributes: {
+    group: 'attr',
+    type: text,
+    config: ['other attributes', '', consts.OTHER],
+    value: val => (val.length ? `\n  ${val}` : ''),
+  },
+};
+
+const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+
+for (const story of storySet) {
+  stories.add(
+    'Default',
+    withNotes(CvToggleNotesMD)(() => {
+      const settings = story.knobs();
+
+      // ----------------------------------------------------------------
+
+      const templateString = `
+<cv-toggle${settings.group.attr}>${settings.group.slots}
 </cv-toggle>
   `;
 
-    // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-    const templateViewString = `
+      const templateViewString = `
     <sv-template-view
-      :sv-margin="true"
+      sv-margin
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
 
       <template slot="other">
-        <span class="v-model-example" v-if="${settings.vModel.includes(
-          'v-model'
-        )}">Checked value {{checked}}</span>
+        <span class="v-model-example" v-if="${
+          settings.raw.vModel
+        }">Checked value {{checked}}</span>
       </template>
     </sv-template-view>
   `;
 
-    return {
-      components: { CvToggle, SvTemplateView },
-      data() {
-        return {
-          checked: settings.checked.includes('checked'),
-        };
-      },
-      methods: {
-        actionChange: action('CV Toggle - change'),
-        actionKeydown: action('CV Toggle - keydown'),
-      },
-      template: templateViewString,
-    };
-  })
-);
+      return {
+        components: { CvToggle, SvTemplateView },
+        data() {
+          return {
+            checked: settings.raw.checked,
+          };
+        },
+        methods: {
+          actionChange: action('CV Toggle - change'),
+          actionKeydown: action('CV Toggle - keydown'),
+        },
+        template: templateViewString,
+      };
+    })
+  );
+}
 
 stories.add(
   'Array v-model',
@@ -90,22 +127,22 @@ stories.add(
 <cv-toggle v-model="checks" name="check-1" value="check-1" @change="actionChange"></cv-toggle>
 <cv-toggle v-model="checks" name="check-2" value="check-2" @change="actionChange"></cv-toggle>
 <cv-toggle v-model="checks" name="check-3" value="check-3" @change="actionChange"></cv-toggle>
-  `;
+`;
 
     // ----------------------------------------------------------------
 
     const templateViewString = `
-    <sv-template-view
-      :sv-margin="true"
-      sv-source='${templateString.trim()}'>
-      <p>This story only demonstrates the array syntax for v-model</p>
-      <template slot="component">${templateString}</template>
+  <sv-template-view
+    sv-margin
+    sv-source='${templateString.trim()}'>
+    <p>This story only demonstrates the array syntax for v-model</p>
+    <template slot="component">${templateString}</template>
 
-      <template slot="other">
-        <span class="v-model-example">Checked values: {{checks}}</span>
-      </template>
-    </sv-template-view>
-  `;
+    <template slot="other">
+      <span class="v-model-example">Checked values: {{checks}}</span>
+    </template>
+  </sv-template-view>
+`;
 
     return {
       components: { CvToggle, SvTemplateView },

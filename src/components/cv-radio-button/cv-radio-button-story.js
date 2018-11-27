@@ -79,7 +79,7 @@ for (const story of storySet) {
 
       const templateViewString = `
     <sv-template-view
-      :sv-margin="true"
+      sv-margin
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
 
