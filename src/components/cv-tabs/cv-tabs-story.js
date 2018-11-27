@@ -17,7 +17,7 @@ stories.addDecorator(withKnobs);
 
 const kinds = null;
 const preKnobs = {
-  withEvents: {
+  events: {
     group: 'attr',
     type: boolean,
     config: ['with events', false, consts.OTHER],

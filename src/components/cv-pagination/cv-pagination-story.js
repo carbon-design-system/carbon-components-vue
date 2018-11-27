@@ -57,7 +57,7 @@ const preKnobs = {
     ],
     value: val => (val.length ? `\n  :page-sizes="${val}"` : ''),
   },
-  withEvents: {
+  events: {
     group: 'attr',
     type: boolean,
     config: ['with events', false, consts.OTHER],

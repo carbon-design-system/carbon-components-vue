@@ -53,7 +53,7 @@ const preKnobs = {
     config: ['v-model', false, consts.OTHER],
     value: val => (val ? '\n  v-model="checked"' : ''),
   },
-  withEvents: {
+  events: {
     group: 'attr',
     type: boolean,
     config: ['with events', false, consts.OTHER],

@@ -33,7 +33,7 @@ const preKnobs = {
     config: [' other attributes', '', consts.OTHER],
     value: val => (val.length ? `\n  ${val}` : ''),
   },
-  withEvents: {
+  events: {
     group: 'attr',
     type: boolean,
     config: ['with events', false, consts.OTHER],

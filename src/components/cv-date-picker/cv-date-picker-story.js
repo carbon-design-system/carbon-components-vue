@@ -75,7 +75,7 @@ const preKnobs = {
     config: ['invalid-date-message', '', consts.CONTENT],
     value: val => (val.length ? `\n  invalid-date-message="${val}"` : ''),
   },
-  withEvents: {
+  events: {
     group: 'attr',
     type: boolean,
     config: ['with events', false, consts.OTHER],

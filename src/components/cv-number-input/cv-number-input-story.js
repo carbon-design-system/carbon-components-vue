@@ -73,8 +73,17 @@ const preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['v-model', false, consts.OTHER],
+    value: val => (val ? '\n  v-model="modelValue"' : ''),
+  },
+  events: {
+    group: 'attr',
+    type: boolean,
+    config: ['with events', false, consts.OTHER],
     value: val =>
-      val ? '\n  v-model="modelValue"' : '\n   @change="onChange"',
+      val
+        ? `
+  @change="onChange"`
+        : '',
   },
   otherAttributes: {
     group: 'attr',

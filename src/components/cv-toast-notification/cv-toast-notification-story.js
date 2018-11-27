@@ -43,7 +43,7 @@ const preKnobs = {
     config: ['caption', 'Time stamp [00:00:00]', consts.CONTENT],
     value: val => (val.length ? `\n  caption="${val}"` : ''),
   },
-  withEvents: {
+  events: {
     group: 'attr',
     type: boolean,
     config: ['with events', false, consts.OTHER],

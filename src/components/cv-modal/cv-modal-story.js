@@ -61,7 +61,7 @@ const preKnobs = {
     value: val =>
       val.length ? `\n <template slot="primary-button">${val}</template>` : '',
   },
-  withEvents: {
+  events: {
     group: 'attr',
     type: boolean,
     config: ['with events', false, consts.OTHER],

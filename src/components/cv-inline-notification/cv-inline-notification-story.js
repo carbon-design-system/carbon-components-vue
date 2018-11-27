@@ -37,7 +37,7 @@ const preKnobs = {
     config: ['subtitle', 'a subtitle', consts.CONTENT],
     value: val => (val.length ? `\n  sub-title="${val}"` : ''),
   },
-  withEvents: {
+  events: {
     group: 'attr',
     type: boolean,
     config: ['with events', false, consts.OTHER],

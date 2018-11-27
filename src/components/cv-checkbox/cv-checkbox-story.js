@@ -51,10 +51,18 @@ const preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['v-model', false, consts.OTHER],
+    value: val => (val ? '\n  v-model="checked"' : ''),
+  },
+  events: {
+    group: 'attr',
+    type: boolean,
+    config: ['with events', false, consts.OTHER],
     value: val =>
       val
-        ? '\n  v-model="checked"'
-        : '\n   @change="actionChange"\n  @keydown="actionKeydown"',
+        ? `
+  @change="actionChange"
+  @keydown="actionKeydown"`
+        : '',
   },
   otherAttributes: {
     group: 'attr',

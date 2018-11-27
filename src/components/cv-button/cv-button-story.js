@@ -49,7 +49,7 @@ const preKnobs = {
     config: ['disabled', false, consts.CONFIG],
     value: val => (val ? '\n  disabled' : ''),
   },
-  withEvents: {
+  events: {
     group: 'attr',
     type: boolean,
     config: ['with events', false, consts.OTHER],

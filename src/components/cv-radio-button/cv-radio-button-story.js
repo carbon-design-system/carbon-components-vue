@@ -33,7 +33,7 @@ const preKnobs = {
     config: ['v-model', false, consts.OTHER],
     value: val => (val ? 'v-model="radioVal" ' : ''),
   },
-  withEvents: {
+  events: {
     group: 'attr',
     type: boolean,
     config: ['with events', false, consts.OTHER],

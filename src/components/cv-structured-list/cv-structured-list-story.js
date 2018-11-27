@@ -45,7 +45,7 @@ const preKnobs = {
     config: ['v-model', false, consts.OTHER],
     value: val => (val ? 'v-model="listVal" ' : ''),
   },
-  withEvents: {
+  events: {
     group: 'attrSelectable',
     type: boolean,
     config: ['withEvnets', false, consts.OTHER],

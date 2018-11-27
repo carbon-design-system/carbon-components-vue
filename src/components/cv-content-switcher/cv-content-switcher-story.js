@@ -31,7 +31,7 @@ const preKnobs = {
       consts.CONFIG,
     ],
   },
-  withEvents: {
+  events: {
     group: 'attr',
     type: boolean,
     config: ['with events', false, consts.OTHER],

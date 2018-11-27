@@ -52,7 +52,7 @@ const preKnobs = {
     config: ['removable', false, consts.CONFIG],
     value: val => (val ? '\n  removable' : ''),
   },
-  withEvents: {
+  events: {
     group: 'attr',
     type: boolean,
     config: ['with events', false, consts.OTHER],

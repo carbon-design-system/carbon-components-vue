@@ -37,10 +37,17 @@ const preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['v-model', false, consts.OTHER],
+    value: val => (val ? '@change="actionChange"v-model="selectValue" ' : ''),
+  },
+  events: {
+    group: 'attr',
+    type: boolean,
+    config: ['with events', false, consts.OTHER],
     value: val =>
       val
-        ? '@change="actionChange"v-model="selectValue" '
-        : '@change="actionChange"@change="actionChange"',
+        ? `
+  @change="actionChange"`
+        : '',
   },
   otherAttributes: {
     group: 'attr',
