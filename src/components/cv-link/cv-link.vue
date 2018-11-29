@@ -11,5 +11,4 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~carbon-components/scss/components/link/link';
 </style>

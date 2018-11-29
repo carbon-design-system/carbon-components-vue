@@ -60,9 +60,6 @@ export default {
 </script>
 
 <style lang="scss">
-// Import Style Definitions
-@import '~carbon-components/scss/components/code-snippet/code-snippet';
-
 .cv-code-snippet__clippy {
   // cannot be hidden for clipboard to work
   position: absolute;

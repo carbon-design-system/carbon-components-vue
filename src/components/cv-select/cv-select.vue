@@ -96,9 +96,6 @@ export default {
 </script>
 
 <style lang="scss">
-// Import Style Definitions
-@import '~carbon-components/scss/components/select/select';
-
 .bx--visually-hidden {
   visibility: visible;
   position: absolute;

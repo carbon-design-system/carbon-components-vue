@@ -216,5 +216,4 @@ export default {
 </script>
 
 <style lang="sass">
-@import '~carbon-components/scss/components/slider/slider';
 </style>

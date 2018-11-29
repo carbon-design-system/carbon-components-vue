@@ -131,9 +131,6 @@ export default {
 </script>
 
 <style lang="scss">
-// Import Style Definitions
-@import '~carbon-components/scss/components/date-picker/date-picker';
-
 .cv-date-picker {
   display: inline-flex; // otherwise 100% width
 }

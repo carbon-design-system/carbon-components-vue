@@ -54,6 +54,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import '~carbon-components/scss/globals/scss/styles.scss';
 @import '~highlight.js/styles/default.css';
 $back-color: #f5f7fa;
 $alt-back-color: #fff;

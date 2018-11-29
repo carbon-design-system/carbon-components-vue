@@ -7,6 +7,7 @@ storybook-static
 
 # Config files
 .npmrc
+.nvmrc
 
 # Cache folders
 .cache
