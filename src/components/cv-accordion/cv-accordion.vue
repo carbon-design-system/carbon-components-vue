@@ -28,6 +28,4 @@ export default {
 </script>
 
 <style lang="scss">
-// Import Style Definitions
-@import '~carbon-components/scss/components/accordion/accordion';
 </style>

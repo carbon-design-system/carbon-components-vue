@@ -17,5 +17,4 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~carbon-components/scss/components/breadcrumb/breadcrumb';
 </style>

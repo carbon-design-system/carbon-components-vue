@@ -196,9 +196,6 @@ export default {
 </script>
 
 <style lang="scss">
-// Import Style Definitions
-@import '~carbon-components/scss/components/pagination/pagination';
-
 .cv-pagination .cv-select {
   margin-bottom: 0;
 }

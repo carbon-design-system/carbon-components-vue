@@ -35,6 +35,4 @@ export default {
 </script>
 
 <style lang="scss">
-// Import Style Definitions
-@import '~carbon-components/scss/components/toggle/toggle';
 </style>

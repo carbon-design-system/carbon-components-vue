@@ -151,9 +151,6 @@ export default {
 </script>
 
 <style lang="scss">
-// Import Style Definitions
-@import '~carbon-components/scss/components/file-uploader/file-uploader';
-
 .cv-file-uploader__close {
   width: 16px;
   height: 16px;

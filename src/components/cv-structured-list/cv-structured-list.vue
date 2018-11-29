@@ -67,6 +67,4 @@ export default {
 </script>
 
 <style lang="scss">
-// Import Style Definitions
-@import '~carbon-components/scss/components/structured-list/structured-list';
 </style>

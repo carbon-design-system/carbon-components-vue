@@ -79,6 +79,11 @@ View available Vue.js components [here](http://vue.carbondesignsystem.com). Usag
 
 ## Usage
 
+### General
+
+The components do not import any of the carbon styles themselves. Use the SCSS or CSS from carbon-components to provide the styling.
+You can also use the unpkg cdn to bring in the styles wholesale - unpkg.com/carbon-components/css/carbon-components.css aliases the latest css file.
+
 ### All at once
 
 In your main js file (where you include Vue)

@@ -43,5 +43,4 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~carbon-components/scss/components/copy-button/copy-button';
 </style>

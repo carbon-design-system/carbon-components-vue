@@ -53,5 +53,4 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~carbon-components/scss/components/notification/inline-notification';
 </style>
