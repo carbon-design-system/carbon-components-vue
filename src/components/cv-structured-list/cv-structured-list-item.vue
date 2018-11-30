@@ -1,8 +1,6 @@
 <template>
-  <div class="bx--structured-list-row">
-    <slot>
-
-    </slot>
+  <div class="cv-structured-list-item bx--structured-list-row">
+    <slot></slot>
   </div>
 </template>
 

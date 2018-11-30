@@ -1,5 +1,5 @@
 <template>
-  <div class="bx--tooltip--definition cv-definition-tooltip">
+  <div class="cv-definition-tooltip bx--tooltip--definition">
     <p class="bx--tooltip__trigger" tabindex="0">{{term}}</p>
     <div :class="`bx--tooltip--definition__${direction}`">
       <span class="bx--tooltip__caret"></span>

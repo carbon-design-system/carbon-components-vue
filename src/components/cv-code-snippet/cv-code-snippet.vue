@@ -1,9 +1,5 @@
 <template>
-  <component
-    :is="theComponent"
-    v-bind="$attrs"
-    @copy-code="onCopyCode"
-    >
+  <component class="cv-code-snippet" :is="theComponent" v-bind="$attrs" @copy-code="onCopyCode">
     <code ref="code">
       <slot></slot>
     </code>

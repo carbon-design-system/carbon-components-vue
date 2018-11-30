@@ -1,8 +1,9 @@
 <template>
   <nav
-    class="bx--breadcrumb"
+    class="cv-breadcrumb bx--breadcrumb"
     :class="{'bx--breadcrumb--no-trailing-slash': noTrailingSlash}"
-    aria-label="breadcrumb">
+    aria-label="breadcrumb"
+  >
     <slot></slot>
   </nav>
 </template>

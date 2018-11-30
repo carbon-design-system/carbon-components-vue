@@ -1,8 +1,6 @@
 <template>
-  <form class="bx--form">
-    <slot>
-
-    </slot>
+  <form class="cv-form bx--form">
+    <slot></slot>
   </form>
 </template>
 

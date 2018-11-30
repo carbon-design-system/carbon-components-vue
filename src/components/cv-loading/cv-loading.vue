@@ -1,18 +1,17 @@
 <template>
-  <div :class="overlayClasses">
-    <div data-loading
+  <div class="cv-loading" :class="overlayClasses">
+    <div
+      data-loading
       class="bx--loading"
       :class="{
         'bx--loading--stop': !active,
         'bx--loading--small': small,
       }"
       ref="loading"
-      >
-      <svg
-        class="bx--loading__svg"
-        viewBox="-75 -75 150 150">
+    >
+      <svg class="bx--loading__svg" viewBox="-75 -75 150 150">
         <title>Loading</title>
-        <circle cx="0" cy="0" r="37.5" />
+        <circle cx="0" cy="0" r="37.5"></circle>
       </svg>
     </div>
   </div>

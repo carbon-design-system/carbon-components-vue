@@ -1,5 +1,5 @@
 <template>
-  <div class="bx--form-item bx--checkbox-wrapper">
+  <div class="cv-checkbox bx--form-item bx--checkbox-wrapper">
     <label :class="['bx--checkbox-label', {'bx--label--disabled': $attrs.disabled !== undefined}]">
       <input
         ref="input"
@@ -8,7 +8,8 @@
         class="bx--checkbox"
         type="checkbox"
         :checked="isChecked"
-        :aria-checked="state">
+        :aria-checked="state"
+      >
       {{label}}
     </label>
   </div>

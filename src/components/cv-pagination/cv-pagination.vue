@@ -1,52 +1,65 @@
 <template>
-<div class="bx--pagination cv-pagination" data-pagination>
-  <div class="bx--pagination__left">
-    <cv-select :label="`${pageSizesLabel}`" inline ref="pageSizeSelect"
-      @change="pageSizeChange">
-      <cv-select-option
-        v-for="(size, index) in pageSizes"
-        :key="index"
-        :value="`${size.value ? size.value : size}`"
-        :selected="size.selected ? size.selected : false"
+  <div class="cv-pagination bx--pagination" data-pagination>
+    <div class="bx--pagination__left">
+      <cv-select :label="`${pageSizesLabel}`" inline ref="pageSizeSelect" @change="pageSizeChange">
+        <cv-select-option
+          v-for="(size, index) in pageSizes"
+          :key="index"
+          :value="`${size.value ? size.value : size}`"
+          :selected="size.selected ? size.selected : false"
         >{{size.label ? size.label : (size.value ? size.value : size)}}</cv-select-option>
-    </cv-select>
+      </cv-select>
 
-    <span class="bx--pagination__text">
-      <span>|&nbsp;</span>
-      <span data-displayed-item-range>{{rangeText}}</span>
-    </span>
-  </div>
+      <span class="bx--pagination__text">
+        <span>|&nbsp;</span>
+        <span data-displayed-item-range>{{rangeText}}</span>
+      </span>
+    </div>
 
-  <div class="bx--pagination__right bx--pagination--inline">
-    <span class="bx--pagination__text">{{pageOfPages}}</span>
+    <div class="bx--pagination__right bx--pagination--inline">
+      <span class="bx--pagination__text">{{pageOfPages}}</span>
+      
+      <button
+        class="bx--pagination__button bx--pagination__button--backward"
+        data-page-backward
+        :aria-label="backwardText"
+        @click="prevPage"
+      >
+        <svg class="bx--pagination__button-icon" width="7" height="12" viewBox="0 0 7 12">
+          <path fill-rule="nonzero" d="M1.45 6.002L7 11.27l-.685.726L0 6.003 6.315 0 7 .726z"></path>
+        </svg>
+      </button>
 
-    <button class="bx--pagination__button bx--pagination__button--backward" data-page-backward :aria-label="backwardText" @click="prevPage">
-      <svg class="bx--pagination__button-icon" width="7" height="12" viewBox="0 0 7 12">
-        <path fill-rule="nonzero" d="M1.45 6.002L7 11.27l-.685.726L0 6.003 6.315 0 7 .726z"/>
-      </svg>
-    </button>
-
-    <cv-select :label="`${pageNumberLabel}:`" inline hideLabel ref="pageSelect"
-       v-if="pages.length > 0" @change="pageChange">
-      <cv-select-option
-        v-for="pageNumber in pages"
-        :key="pageNumber"
-        :value="`${pageNumber}`"
-        :selected="page === pageNumber"
+      <cv-select
+        :label="`${pageNumberLabel}:`"
+        inline
+        hideLabel
+        ref="pageSelect"
+        v-if="pages.length > 0"
+        @change="pageChange"
+      >
+        <cv-select-option
+          v-for="pageNumber in pages"
+          :key="pageNumber"
+          :value="`${pageNumber}`"
+          :selected="page === pageNumber"
         >{{pageNumber}}</cv-select-option>
-    </cv-select>
-    <span v-if="pages.length == 0">{{pageValue}}</span>
-
-    <button class="bx--pagination__button bx--pagination__button--forward"
-      data-page-forward :aria-label="forwardText"
-      @click="nextPage"
-      :disabled="this.pageValue === this.pageCount">
-      <svg class="bx--pagination__button-icon" width="7" height="12" viewBox="0 0 7 12">
-        <path fill-rule="nonzero" d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"/>
-      </svg>
-    </button>
+      </cv-select>
+      <span v-if="pages.length == 0">{{pageValue}}</span>
+      
+      <button
+        class="bx--pagination__button bx--pagination__button--forward"
+        data-page-forward
+        :aria-label="forwardText"
+        @click="nextPage"
+        :disabled="this.pageValue === this.pageCount"
+      >
+        <svg class="bx--pagination__button-icon" width="7" height="12" viewBox="0 0 7 12">
+          <path fill-rule="nonzero" d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"></path>
+        </svg>
+      </button>
+    </div>
   </div>
-</div>
 </template>
 
 <script>

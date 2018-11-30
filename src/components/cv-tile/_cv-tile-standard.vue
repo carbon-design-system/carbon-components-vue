@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="cv-tile-standard">
     <slot></slot>
   </div>
 </template>

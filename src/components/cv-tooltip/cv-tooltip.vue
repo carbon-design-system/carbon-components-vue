@@ -1,12 +1,20 @@
 <template>
-  <div class="bx--tooltip--icon cv-tooltip">
-    <div tabindex="0" class="bx--tooltip__trigger" :class="`bx--tooltip--icon__${direction}`" :aria-label="tip">
+  <div class="cv-tooltip bx--tooltip--icon">
+    <div
+      tabindex="0"
+      class="bx--tooltip__trigger"
+      :class="`bx--tooltip--icon__${direction}`"
+      :aria-label="tip"
+    >
       <slot>
         <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
           <g fill-rule="evenodd">
-            <path d="M8 14.5a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" fill-rule="nonzero" />
-            <path fill-rule="nonzero" d="M9 13H7V7h2z" />
-            <circle cx="8" cy="4" r="1" />
+            <path
+              d="M8 14.5a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
+              fill-rule="nonzero"
+            ></path>
+            <path fill-rule="nonzero" d="M9 13H7V7h2z"></path>
+            <circle cx="8" cy="4" r="1"></circle>
           </g>
         </svg>
       </slot>

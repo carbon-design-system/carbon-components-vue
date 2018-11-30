@@ -1,5 +1,12 @@
 <template>
-  <div :id="id" role="tabpanel" :aria-labelledby="tabsButtonId" :aria-hidden="!selected" :hidden="!selected">
+  <div
+    class="cv-tabs-panel"
+    :id="id"
+    role="tabpanel"
+    :aria-labelledby="tabsButtonId"
+    :aria-hidden="!selected"
+    :hidden="!selected"
+  >
     <slot>
       <!-- Content for first tab goes here. -->
     </slot>

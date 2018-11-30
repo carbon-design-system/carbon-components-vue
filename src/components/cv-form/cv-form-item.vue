@@ -1,5 +1,5 @@
 <template>
-  <div class="bx--form-item">
+  <div class="cv-form-item bx--form-item">
     <slot></slot>
   </div>
 </template>

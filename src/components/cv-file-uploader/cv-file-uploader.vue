@@ -1,10 +1,11 @@
 <template>
-  <div class="bx--file" data-file>
+  <div class="cv-file-uploader bx--file" data-file>
     <label
       :for="uid"
       class="bx--file-btn bx--btn bx--btn--secondary"
       role="button"
-      tabindex="0">{{label}}</label>
+      tabindex="0"
+    >{{label}}</label>
     <input
       v-bind="$attrs"
       type="file"
@@ -13,23 +14,64 @@
       data-file-uploader
       data-target="[data-file-container]"
       v-on="inputListeners"
-    />
+    >
     <div data-file-container class="bx--file-container">
       <div data-file-container class="bx--file-container" v-for="file, index in files" :key="index">
         <span class="bx--file__selected-file">
           <p class="bx--file-filename">{{file.file.name}}</p>
-          <span :data-for="uid" class="bx--file__state-container" :data-test="file.state" wibble="banana">
-            <div v-if="file.state === 'uploading'" class="bx--loading" tabindex="0" style="width: 1rem; height: 1rem;">
-              <svg class="bx--loading__svg" viewBox="-42 -42 84 84"><circle cx="0" cy="0" r="37.5"></circle></svg>
+          <span
+            :data-for="uid"
+            class="bx--file__state-container"
+            :data-test="file.state"
+            wibble="banana"
+          >
+            <div
+              v-if="file.state === 'uploading'"
+              class="bx--loading"
+              tabindex="0"
+              style="width: 1rem; height: 1rem;"
+            >
+              <svg class="bx--loading__svg" viewBox="-42 -42 84 84">
+                <circle cx="0" cy="0" r="37.5"></circle>
+              </svg>
             </div>
-            <svg v-if="file.state === 'complete'" class="bx--file-complete" fill-rule="evenodd" height="16" role="img" viewBox="0 0 16 16" width="16" tabindex="0" aria-label="Complete" alt="Complete">
+            <svg
+              v-if="file.state === 'complete'"
+              class="bx--file-complete"
+              fill-rule="evenodd"
+              height="16"
+              role="img"
+              viewBox="0 0 16 16"
+              width="16"
+              tabindex="0"
+              aria-label="Complete"
+              alt="Complete"
+            >
               <title>Complete</title>
-              <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zm3.293-11.332L6.75 9.21 4.707 7.168 3.293 8.582 6.75 12.04l5.957-5.957-1.414-1.414z"></path>
+              <path
+                d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zm3.293-11.332L6.75 9.21 4.707 7.168 3.293 8.582 6.75 12.04l5.957-5.957-1.414-1.414z"
+              ></path>
             </svg>
-            <button v-if="removable" class="cv-file-uploader__close" @click="remove(index)" aria-label="Remove">
-              <svg class="bx--file-close" fill-rule="evenodd" role="img" height="100%" width="100%" viewBox="0 0 16 16" tabindex="0" alt="Remove">
+            <button
+              v-if="removable"
+              class="cv-file-uploader__close"
+              @click="remove(index)"
+              aria-label="Remove"
+            >
+              <svg
+                class="bx--file-close"
+                fill-rule="evenodd"
+                role="img"
+                height="100%"
+                width="100%"
+                viewBox="0 0 16 16"
+                tabindex="0"
+                alt="Remove"
+              >
                 <title>Remove</title>
-                <path d="M8 6.586L5.879 4.464 4.464 5.88 6.586 8l-2.122 2.121 1.415 1.415L8 9.414l2.121 2.122 1.415-1.415L9.414 8l2.122-2.121-1.415-1.415L8 6.586zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"></path>
+                <path
+                  d="M8 6.586L5.879 4.464 4.464 5.88 6.586 8l-2.122 2.121 1.415 1.415L8 9.414l2.121 2.122 1.415-1.415L9.414 8l2.122-2.121-1.415-1.415L8 6.586zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
+                ></path>
               </svg>
             </button>
           </span>

@@ -1,7 +1,11 @@
 <template>
   <label
-    :for="uid" :aria-label="label" class="bx--structured-list-row"
-    :class="{' bx--structured-list-row--selected': isChecked}" tabindex="0">
+    :for="uid"
+    :aria-label="label"
+    class="cv-structured-list-item-selectable bx--structured-list-row"
+    :class="{' bx--structured-list-row--selected': isChecked}"
+    tabindex="0"
+  >
     <input
       v-if
       v-bind="$attrs"
@@ -12,16 +16,16 @@
       :checked="isChecked"
       :value="value"
       type="radio"
-    />
+    >
     <div class="bx--structured-list-td">
       <svg class="bx--structured-list-svg" width="16" height="16" viewBox="0 0 16 16">
-        <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zm3.646-10.854L6.75 10.043 4.354 7.646l-.708.708 3.104 3.103 5.604-5.603-.708-.708z"
-          fill-rule="evenodd" />
+        <path
+          d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zm3.646-10.854L6.75 10.043 4.354 7.646l-.708.708 3.104 3.103 5.604-5.603-.708-.708z"
+          fill-rule="evenodd"
+        ></path>
       </svg>
     </div>
-    <slot>
-
-    </slot>
+    <slot></slot>
   </label>
 </template>
 
@@ -59,12 +63,12 @@ export default {
     // https://vuejs.org/v2/guide/components-custom-events.html#Customizing-Component-v-model
     inputListeners() {
       return Object.assign({}, this.$listeners, {
-        change: event => this.onchange(event),
+        change: event => this.onChange(event),
       });
     },
   },
   methods: {
-    onchange(ev) {
+    onChange(ev) {
       this.$emit('change', ev);
       // console.log(this.value === noModelValue, this.value);
       this.$emit('_modelEvent', this.value);

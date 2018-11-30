@@ -1,7 +1,17 @@
 <template>
-  <div class="bx--form-item">
-    <label :for="uid" :class="['bx--label', {'bx--label--disabled': $attrs.disabled !== undefined}]">{{label}}</label>
-    <textarea :id="uid" class="bx--text-area" :class="{'bx--text-area--light': theme === 'light'}" v-bind="$attrs" :value="value" v-on="inputListeners"></textarea>
+  <div class="cv-text-area bx--form-item">
+    <label
+      :for="uid"
+      :class="['bx--label', {'bx--label--disabled': $attrs.disabled !== undefined}]"
+    >{{label}}</label>
+    <textarea
+      :id="uid"
+      class="bx--text-area"
+      :class="{'bx--text-area--light': theme === 'light'}"
+      v-bind="$attrs"
+      :value="value"
+      v-on="inputListeners"
+    ></textarea>
   </div>
 </template>
 

@@ -1,12 +1,12 @@
 <template>
-  <ul data-progress data-progress-current class="bx--progress">
+  <ul data-progress data-progress-current class="cv-progress bx--progress">
     <cv-progress-step
       v-for="(step, index) in steps"
       :key="index"
       :label="step"
       :state="state(index)"
       ref="steps"
-      />
+    />
   </ul>
 </template>
 
