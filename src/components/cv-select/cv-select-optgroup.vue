@@ -1,8 +1,6 @@
 <template>
-  <optgroup class="bx--select-optgroup">
-    <slot>
-
-    </slot>
+  <optgroup class="cv-select-optgroup bx--select-optgroup">
+    <slot></slot>
   </optgroup>
 </template>
 

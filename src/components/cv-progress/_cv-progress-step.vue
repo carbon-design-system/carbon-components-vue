@@ -1,5 +1,5 @@
 <template>
-  <li class="bx--progress-step" :class="stateClass">
+  <li class="cv-progress-step bx--progress-step" :class="stateClass">
     <cv-progress-step-complete v-if="isComplete"/>
     <cv-progress-step-incomplete v-if="!isComplete" :is-current="isCurrent"/>
     <p class="bx--progress-label">{{label}}</p>

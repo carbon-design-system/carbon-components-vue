@@ -1,8 +1,6 @@
 <template>
-  <option class="bx--select-option">
-    <slot>
-
-    </slot>
+  <option class="cv-select-option bx--select-option">
+    <slot></slot>
   </option>
 </template>
 

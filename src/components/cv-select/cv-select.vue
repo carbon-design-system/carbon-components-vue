@@ -1,19 +1,14 @@
 <template>
-  <div class="bx--form-item cv-select">
-    <div class="bx--select" :class="{'bx--select--inline': inline, 'bx--select--light': theme === 'light'}">
-      <select
-        v-bind="$attrs"
-        :id="uid"
-        class="bx--select-input"
-        v-on="inputListeners"
-        ref="select"
-      >
-        <slot>
-
-        </slot>
+  <div class="cv-select bx--form-item">
+    <div
+      class="bx--select"
+      :class="{'bx--select--inline': inline, 'bx--select--light': theme === 'light'}"
+    >
+      <select v-bind="$attrs" :id="uid" class="bx--select-input" v-on="inputListeners" ref="select">
+        <slot></slot>
       </select>
       <svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5">
-        <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
+        <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd"></path>
       </svg>
       <label :for="uid" class="bx--label" :class="{'bx--visually-hidden': hideLabel}">{{label}}</label>
     </div>

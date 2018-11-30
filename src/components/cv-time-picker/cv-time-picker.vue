@@ -1,5 +1,5 @@
 <template>
-  <div class="bx--form-item">
+  <div class="cv-time-picker bx--form-item">
     <div class="bx--time-picker" :class="{'bx--time-picker--light': theme==='light'}">
       <div class="bx--time-picker__input">
         <input
@@ -12,18 +12,32 @@
           :maxlength="placeholder.length"
           :data-invalid="invalidMessage.length > 0"
           :value="value.time"
-          @input="onInput"/>
-        <div class="bx--form-requirement" v-if="invalidMessage.length > 0">
-          {{invalidMessage}}
-        </div>
+          @input="onInput"
+        >
+        <div class="bx--form-requirement" v-if="invalidMessage.length > 0">{{invalidMessage}}</div>
         <label :for="uid" class="bx--label">{{label}}</label>
       </div>
-      <cv-select class="bx--time-picker__select" inline hide-label :label="ampmSelectLabel" @change="onAmpmChange" :disabled="disabled">
+      <cv-select
+        class="bx--time-picker__select"
+        inline
+        hide-label
+        :label="ampmSelectLabel"
+        @change="onAmpmChange"
+        :disabled="disabled"
+      >
         <cv-select-option class="bx--select-option" value="AM" :selected="value.ampm === 'AM'">AM</cv-select-option>
         <cv-select-option class="bx--select-option" value="PM" :selected="value.ampm === 'PM'">PM</cv-select-option>
       </cv-select>
 
-      <cv-select class="bx--time-picker__select" inline hide-label :label="timezonesSelectLabel" v-if="timezones.length > 0" @change="onTimezoneChange" :disabled="disabled">
+      <cv-select
+        class="bx--time-picker__select"
+        inline
+        hide-label
+        :label="timezonesSelectLabel"
+        v-if="timezones.length > 0"
+        @change="onTimezoneChange"
+        :disabled="disabled"
+      >
         <cv-select-option
           class="bx--select-option"
           v-for="timezone in timezones"
@@ -31,7 +45,7 @@
           :data-test="value.timezone"
           :selected="value.timezone === timezone.value"
           :value="timezone.value"
-          >{{timezone.label}}</cv-select-option>
+        >{{timezone.label}}</cv-select-option>
       </cv-select>
     </div>
   </div>

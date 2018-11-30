@@ -1,12 +1,17 @@
 <template>
-  <component :is="tagType"
-    class="bx--tile"
+  <component
+    :is="tagType"
+    class="cv-tile bx--tile"
     :checked="selected"
     :expanded="expanded"
     v-bind="$attrs"
-    >
-    <template><slot></slot></template>
-    <template slot="below"><slot name="below"></slot></template>
+  >
+    <template>
+      <slot></slot>
+    </template>
+    <template slot="below">
+      <slot name="below"></slot>
+    </template>
   </component>
 </template>
 

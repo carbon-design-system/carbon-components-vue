@@ -1,12 +1,14 @@
 <template>
-  <button :class="[
-          'bx--btn',
-          'bx--btn--' + kind.toLowerCase(),
-          { 'bx--btn--sm': small },
-          ]"
-          v-on="$listeners"
-          role="button"
-          >
+  <button
+    class="cv-button"
+    :class="[
+    'bx--btn',
+    'bx--btn--' + kind.toLowerCase(),
+    { 'bx--btn--sm': small },
+    ]"
+    v-on="$listeners"
+    role="button"
+  >
     <slot></slot>
   </button>
 </template>

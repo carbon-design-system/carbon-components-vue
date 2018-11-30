@@ -1,5 +1,5 @@
 <template>
-  <div class="bx--form-item">
+  <div class="cv-toggle bx--form-item">
     <input
       v-bind="$attrs"
       v-on="inputListeners"
@@ -7,7 +7,8 @@
       class="bx--toggle"
       type="checkbox"
       :id="uid"
-      :checked="isChecked">
+      :checked="isChecked"
+    >
     <label class="bx--toggle__label" :for="uid">
       <div class="bx--toggle__text--left" v-if="!small">
         <slot name="text-left">Off</slot>

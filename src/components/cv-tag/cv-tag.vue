@@ -1,5 +1,5 @@
 <template>
-  <span class="bx--tag" :class="`bx--tag--${kind}`">{{label}}</span>
+  <span class="cv-tag bx--tag" :class="`bx--tag--${kind}`">{{label}}</span>
 </template>
 
 <script>
