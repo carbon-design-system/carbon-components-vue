@@ -19,14 +19,18 @@ https://www.carbondesignsystem.com/components/dropdown/code
 ## Attributes
 
 ### cv-dropdown
+
 - placeholder - The descriptive text appearing at the top of the dropdown
 
 ### cv-dropdown-item
+
 - value - The value that will be returned upon selection of the dropdown item by users
 
 ## Slots
+
 - cv-dropdown - Takes a list of cv-dropdown-item as children
 - cv-dropdown-item - Takes the text to display as child
 
 ## Events
+
 - @change sends the value as it changes.
