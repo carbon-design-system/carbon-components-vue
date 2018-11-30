@@ -29,4 +29,4 @@ https://www.carbondesignsystem.com/components/dropdown/code
 - cv-dropdown-item - Takes the text to display as child
 
 ## Events
-TBD
+- @change sends the value as it changes.
