@@ -63,12 +63,12 @@ export default {
     // https://vuejs.org/v2/guide/components-custom-events.html#Customizing-Component-v-model
     inputListeners() {
       return Object.assign({}, this.$listeners, {
-        change: event => this.onchange(event),
+        change: event => this.onChange(event),
       });
     },
   },
   methods: {
-    onchange(ev) {
+    onChange(ev) {
       this.$emit('change', ev);
       // console.log(this.value === noModelValue, this.value);
       this.$emit('_modelEvent', this.value);
