@@ -24,7 +24,7 @@
       <path d="M10 0L5 5 0 0z"></path>
     </svg>
     <li>
-      <ul class="bx--dropdown-list">
+      <ul class="bx--dropdown-list" v-on:change="onChange">
         <slot></slot>
       </ul>
     </li>
@@ -32,18 +32,32 @@
 </template>
 
 <script>
-  import {Dropdown} from 'carbon-components';
+  import { Dropdown } from 'carbon-components';
 
   export default {
     name: 'CvDropdown',
+    data () {
+      return {
+        selected: null,
+        carbonComponent: null
+      };
+    },
     props: {
       placeholder: {
         type: String,
-        default: "Choose an option"
+        default: 'Choose an option'
+      }
+    },
+    methods: {
+      onChange: function (value) {
+        this.selected = value;
       }
     },
     mounted() {
-      Dropdown.init(this.$el);
+      this.carbonComponent = Dropdown.create(this.$el);
+    },
+    beforeDestroy() {
+      this.carbonComponent.release();
     }
   };
 </script>

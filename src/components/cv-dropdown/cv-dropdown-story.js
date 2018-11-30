@@ -3,7 +3,7 @@ import { withKnobs, text } from '@storybook/addon-knobs/vue';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/consts';
+import consts from '../../utils/storybook-consts';
 
 import CvDropdownNotesMD from './cv-dropdown-notes.md';
 import CvDropdown from './cv-dropdown';
