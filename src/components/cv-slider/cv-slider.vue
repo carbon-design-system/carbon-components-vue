@@ -1,9 +1,14 @@
 <template>
-  <div class="bx--form-item">
+  <div class="cv-slider bx--form-item">
     <label :for="uid" class="bx--label">{{label}}</label>
     <div class="bx--slider-container">
       <span class="bx--slider__range-label">{{minLabelInternal}}</span>
-      <div class="bx--slider" :class="{'bx--slider--disabled': disabled}" data-slider data-slider-input-box="#slider-input-box">
+      <div
+        class="bx--slider"
+        :class="{'bx--slider--disabled': disabled}"
+        data-slider
+        data-slider-input-box="#slider-input-box"
+      >
         <div class="bx--slider__track" @click="jumpTo" ref="track"></div>
         <div class="bx--slider__filled-track" :style="`width: ${percentage};`"></div>
         <div
@@ -16,14 +21,17 @@
           ref="thumb"
           @keydown.up.right.prevent="onUp"
           @keydown.down.left.prevent="onDown"
-          @mousedown="startDrag"></div>
-        <input :id="uid"
+          @mousedown="startDrag"
+        ></div>
+        <input
+          :id="uid"
           class="bx--slider__input"
           type="range"
           :step="step"
           :min="min"
           :max="max"
-          ref="range">
+          ref="range"
+        >
       </div>
       <span class="bx--slider__range-label">{{maxLabelInternal}}</span>
       <input
@@ -36,7 +44,8 @@
         ref="inputBox"
         @keydown.up.prevent="onUp"
         @keydown.down.prevent="onDown"
-        :disabled="disabled">
+        :disabled="disabled"
+      >
     </div>
   </div>
 </template>

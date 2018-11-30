@@ -1,8 +1,6 @@
 <template>
-  <div class="bx--structured-list-th">
-    <slot>
-
-    </slot>
+  <div class="cv-structured-list-heading bx--structured-list-th">
+    <slot></slot>
   </div>
 </template>
 

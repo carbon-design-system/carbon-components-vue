@@ -1,6 +1,10 @@
 <template>
-  <div data-tile="expandable" class="bx--tile--expandable" tabindex="0"
-    :class="[{'bx--tile--is-expanded': expanded}]">
+  <div
+    data-tile="expandable"
+    class="cv-tile-expandable bx--tile--expandable"
+    tabindex="0"
+    :class="[{'bx--tile--is-expanded': expanded}]"
+  >
     <button class="bx--tile__chevron">
       <svg width="12" height="8" viewBox="0 0 12 8" fill-rule="evenodd">
         <path d="M10.6 0L6 4.7 1.4 0 0 1.4l6 6.1 6-6.1z"></path>
@@ -14,7 +18,8 @@
       </span>
       <span class="bx--tile-content__below-the-fold">
         <slot name="below">
-          <!-- Rest of the content here --></slot>
+          <!-- Rest of the content here -->
+        </slot>
       </span>
     </div>
   </div>

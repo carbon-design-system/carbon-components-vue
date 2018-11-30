@@ -1,10 +1,12 @@
 <template>
-  <div class="bx--structured-list"
+  <div
+    class="cv-structured-list bx--structured-list"
     :class="{
       'bx--structured-list--selection': selectable,
       'bx--structured-list--border': border,
       'bx--structured-list--condensed': condensed
-      }">
+      }"
+  >
     <div class="bx--structured-list-thead">
       <div class="bx--structured-list-row bx--structured-list-row--header-row">
         <div v-if="selectable" class="bx--structured-list-th"></div>

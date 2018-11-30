@@ -1,11 +1,17 @@
 <template>
-  <button v-bind="$attrs" data-copy-btn
+  <button
+    class="cv-feedback-button"
+    v-bind="$attrs"
+    data-copy-btn
     :class="buttonClasses"
-    @click="onClick">
+    @click="onClick"
+  >
     <slot></slot>
-    <div class="bx--btn--copy__feedback"
+    <div
+      class="bx--btn--copy__feedback"
       :class="{'bx--btn--copy__feedback--displayed': showFeedback}"
-      :data-feedback="feedback"></div>
+      :data-feedback="feedback"
+    ></div>
   </button>
 </template>
 

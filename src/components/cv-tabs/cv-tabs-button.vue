@@ -1,19 +1,21 @@
 <template>
   <li
-    class="bx--tabs__nav-item"
+    class="cv-tabs-button bx--tabs__nav-item"
     :class="{'bx--tabs__nav-item--selected': selected}"
     :data-target="contentSelector"
-    role="presentation">
+    role="presentation"
+  >
     <a
       class="bx--tabs__nav-link"
       href="javascript:void(0)"
       role="tab"
       :aria-controls="tabsPanelId"
-      aria-selected="false">
-        <slot>
-          <!-- tabs button content -->
-        </slot>
-      </a>
+      aria-selected="false"
+    >
+      <slot>
+        <!-- tabs button content -->
+      </slot>
+    </a>
   </li>
 </template>
 
