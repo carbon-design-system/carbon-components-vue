@@ -1,13 +1,9 @@
 <template>
-  <fieldset class="bx--fieldset">
+  <fieldset class="cv-form-group bx--fieldset">
     <legend class="bx--label">
-      <slot name="label">
-
-      </slot>
+      <slot name="label"></slot>
     </legend>
-    <slot name="content">
-
-    </slot>
+    <slot name="content"></slot>
   </fieldset>
 </template>
 

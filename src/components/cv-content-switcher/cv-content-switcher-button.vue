@@ -12,12 +12,14 @@
 
 <template>
   <button
+    class="cv-content-switcher-button"
     :class="[
       'bx--content-switcher-btn', {
         'bx--content-switcher--selected' : selected
       }]"
-    :data-target="contentSelector">
-      <slot></slot>
+    :data-target="contentSelector"
+  >
+    <slot></slot>
   </button>
 </template>
 

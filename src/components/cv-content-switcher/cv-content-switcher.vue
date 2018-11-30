@@ -1,7 +1,5 @@
 <template>
-  <div data-content-switcher class="bx--content-switcher"
-    v-on="$listeners"
-    >
+  <div data-content-switcher class="cv-content-switcher bx--content-switcher" v-on="$listeners">
     <slot></slot>
   </div>
 </template>
