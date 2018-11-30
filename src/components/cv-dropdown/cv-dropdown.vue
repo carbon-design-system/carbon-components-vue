@@ -17,9 +17,7 @@
 
 <template>
   <ul data-dropdown data-value class="bx--dropdown" tabindex="0">
-    <li class="bx--dropdown-text">
-      {{placeholder}}
-    </li>
+    <li class="bx--dropdown-text">{{placeholder}}</li>
     <svg class="bx--dropdown__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
       <path d="M10 0L5 5 0 0z"></path>
     </svg>
@@ -32,36 +30,36 @@
 </template>
 
 <script>
-  import { Dropdown } from 'carbon-components';
+import { Dropdown } from 'carbon-components';
 
-  export default {
-    name: 'CvDropdown',
-    data () {
-      return {
-        selected: null,
-        carbonComponent: null
-      };
+export default {
+  name: 'CvDropdown',
+  data() {
+    return {
+      selected: null,
+      carbonComponent: null,
+    };
+  },
+  props: {
+    placeholder: {
+      type: String,
+      default: 'Choose an option',
     },
-    props: {
-      placeholder: {
-        type: String,
-        default: 'Choose an option'
-      }
+  },
+  methods: {
+    onChange: function(value) {
+      this.selected = value;
     },
-    methods: {
-      onChange: function (value) {
-        this.selected = value;
-      }
-    },
-    mounted() {
-      this.carbonComponent = Dropdown.create(this.$el);
-    },
-    beforeDestroy() {
-      this.carbonComponent.release();
-    }
-  };
+  },
+  mounted() {
+    this.carbonComponent = Dropdown.create(this.$el);
+  },
+  beforeDestroy() {
+    this.carbonComponent.release();
+  },
+};
 </script>
 
 <style lang="scss">
-  @import '~carbon-components/scss/components/dropdown/dropdown';
+@import '~carbon-components/scss/components/dropdown/dropdown';
 </style>
