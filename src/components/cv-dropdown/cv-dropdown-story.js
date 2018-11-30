@@ -12,7 +12,7 @@ const stories = storiesOf('CvDropdown', module);
 stories.addDecorator(withKnobs);
 
 const knobs = () => ({
-  placeholder: text('Placeholder', 'Choose an option', consts.CONTENT)
+  placeholder: text('Placeholder', 'Choose an option', consts.CONTENT),
 });
 
 stories.add(
@@ -44,9 +44,9 @@ stories.add(
     return {
       components: {
         CvDropdown,
-        SvTemplateView
+        SvTemplateView,
       },
-      template: templateViewString
+      template: templateViewString,
     };
   })
 );
