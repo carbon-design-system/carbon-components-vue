@@ -46,7 +46,7 @@ Current Version: 0.1
 | CvDataTable              | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/51           |
 |                          |
 | CvDatePicker             | :warning:          | http://vue.carbondesignsystem.com/?selectedKind=CvDatePicker&selectedStory=All    |
-| CvDropdown               | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/47           |
+| **CvDropdown**           | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/47           |
 |                          |
 | CvFileUploader           | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvFileUploader&selectedStory=All |
 | **CvForm**               | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvForm                           |
@@ -62,7 +62,7 @@ Current Version: 0.1
 | **CvModal**              | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvModal                          |
 | **CvNumberInput**        | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvNumberInput                    |
 | **CvOverflowMenu**       | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvOverflowMenu                   |
-| CvPagination             | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvPagination&selectedStory=All   |
+| **CvPagination**         | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvPagination&selectedStory=All   |
 | CvPieChart               | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/52           |
 |                          |
 | **CvProgress**           | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvProgress                       |
