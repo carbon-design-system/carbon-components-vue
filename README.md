@@ -29,53 +29,58 @@ Initial development ongoing.
 
 View available Vue.js components [here](http://vue.carbondesignsystem.com). Usage information is available when you click the blue ? icon in the top right corner of the selected component.
 
-| **Components**           | **State**                                | **Link**                                                                          |
-| ------------------------ | ---------------------------------------- | --------------------------------------------------------------------------------- |
-| **CvAccordion**          | Ready, uses core js                      | http://vue.carbondesignsystem.com//?selectedKind=CvAccordion                      |
-| CvBarGraph               |                                          |                                                                                   |
-| **CvBreadcrumb**         | Ready, uses core js                      | http://vue.carbondesignsystem.com//?selectedKind=CvBreadcrumb                     |
-| **CvButton**             | Ready, uses core js                      | http://vue.carbondesignsystem.com//?selectedKind=CvButton                         |
-| **CvCheckbox**           | Ready, uses core js                      | http://vue.carbondesignsystem.com//?selectedKind=CvCheckbox                       |
-| CvCodeSnippet            | Ready                                    | http://vue.carbondesignsystem.com//?selectedKind=CvCodeSnippet&selectedStory=All  |
-| **CvContentSwitcher**    | Ready, uses core js                      | http://vue.carbondesignsystem.com//?selectedKind=CvContentSwitcher                |
-| CvDataTable              |                                          | https://github.com/carbon-design-system/carbon-components-vue/issues/51           |
+Current Version: 0.1
+:white_check_mark: Ready
+:warning: Under review
+:heavy_minus-sign: Not available
+
+| **Components**           | **State**          | **Link**                                                                          |
+| ------------------------ | ------------------ | --------------------------------------------------------------------------------- |
+| **CvAccordion**          | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvAccordion                      |
+| CvBarGraph               | :heavy_minus_sign: |                                                                                   |
+| **CvBreadcrumb**         | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvBreadcrumb                     |
+| **CvButton**             | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvButton                         |
+| **CvCheckbox**           | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvCheckbox                       |
+| CvCodeSnippet            | Ready              | http://vue.carbondesignsystem.com//?selectedKind=CvCodeSnippet&selectedStory=All  |
+| **CvContentSwitcher**    | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvContentSwitcher                |
+| CvDataTable              | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/51           |
 |                          |
-| CvDatePicker             | Ready, uses core js                      | http://vue.carbondesignsystem.com/?selectedKind=CvDatePicker&selectedStory=All    |
-| CvDropdown               |                                          | https://github.com/carbon-design-system/carbon-components-vue/issues/47           |
+| CvDatePicker             | :warning:          | http://vue.carbondesignsystem.com/?selectedKind=CvDatePicker&selectedStory=All    |
+| CvDropdown               | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/47           |
 |                          |
-| CvFileUploader           | Ready                                    | http://vue.carbondesignsystem.com//?selectedKind=CvFileUploader&selectedStory=All |
-| **CvForm**               | Ready, uses core js                      | http://vue.carbondesignsystem.com//?selectedKind=CvForm                           |
-| CvGauge                  |                                          | https://github.com/carbon-design-system/carbon-components-vue/issues/49           |
+| CvFileUploader           | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvFileUploader&selectedStory=All |
+| **CvForm**               | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvForm                           |
+| CvGauge                  | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/49           |
 |                          |
-| **CvIcon**               | Ready, non-core requries on carbon-icons | http://vue.carbondesignsystem.com//?selectedKind=CvIcon                           |
-| **CvInlineNotification** | Ready, uses core js                      | http://vue.carbondesignsystem.com//?selectedKind=CvInlineNotification             |
-| CvLineGraph              |                                          | https://github.com/carbon-design-system/carbon-components-vue/issues/53           |
+| **CvIcon**               | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvIcon                           |
+| **CvInlineNotification** | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvInlineNotification             |
+| CvLineGraph              | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/53           |
 |                          |
-| **CvLink**               | Ready, uses core js                      | http://vue.carbondesignsystem.com//?selectedKind=CvLink                           |
-| **CvList**               | Ready, uses core js                      | http://vue.carbondesignsystem.com//?selectedKind=CvList                           |
-| **CvLoading**            | Ready, uses core js                      | http://vue.carbondesignsystem.com//?selectedKind=CvLoading                        |
-| **CvModal**              | Ready, uses core js                      | http://vue.carbondesignsystem.com//?selectedKind=CvModal                          |
-| **CvNumberInput**        | Ready, uses core js                      | http://vue.carbondesignsystem.com//?selectedKind=CvNumberInput                    |
-| **CvOverflowMenu**       | Ready, uses core js                      | http://vue.carbondesignsystem.com//?selectedKind=CvOverflowMenu                   |
-| CvPagination             | Ready                                    | http://vue.carbondesignsystem.com//?selectedKind=CvPagination&selectedStory=All   |
-| CvPieChart               |                                          | https://github.com/carbon-design-system/carbon-components-vue/issues/52           |
+| **CvLink**               | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvLink                           |
+| **CvList**               | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvList                           |
+| **CvLoading**            | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvLoading                        |
+| **CvModal**              | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvModal                          |
+| **CvNumberInput**        | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvNumberInput                    |
+| **CvOverflowMenu**       | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvOverflowMenu                   |
+| CvPagination             | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvPagination&selectedStory=All   |
+| CvPieChart               | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/52           |
 |                          |
-| **CvProgress**           | Ready, uses core js                      | http://vue.carbondesignsystem.com//?selectedKind=CvProgress                       |
-| **CvRadioButton**        | Ready, uses core js                      | http://vue.carbondesignsystem.com//?selectedKind=CvRadioButton                    |
-| CvScatterPlot            |                                          | https://github.com/carbon-design-system/carbon-components-vue/issues/50           |
+| **CvProgress**           | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvProgress                       |
+| **CvRadioButton**        | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvRadioButton                    |
+| CvScatterPlot            | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/50           |
 |                          |
-| **CvSearch**             | Ready, uses core js                      | http://vue.carbondesignsystem.com//?selectedKind=CvSearch                         |
-| **CvSelect**             | Ready, uses core js                      | http://vue.carbondesignsystem.com//?selectedKind=CvSelect                         |
-| **CvSlider**             | Ready                                    | http://vue.carbondesignsystem.com//?selectedKind=CvSlider                         |
-| **CvStructuredList**     | Ready, uses core js                      | http://vue.carbondesignsystem.com//?selectedKind=CvStructuredList                 |
-| **CvTabs**               | Ready, uses core js                      | http://vue.carbondesignsystem.com//?selectedKind=CvTabs                           |
-| **CvTag**                | Ready, uses core js                      | http://vue.carbondesignsystem.com//?selectedKind=CvTag                            |
-| **CvTextArea**           | Ready, uses core js                      | http://vue.carbondesignsystem.com//?selectedKind=CvTextArea                       |
-| **CvTextInput**          | Ready, uses core js                      | http://vue.carbondesignsystem.com//?selectedKind=CvTextInput                      |
-| **CvTile**               | Ready, uses core js                      | http://vue.carbondesignsystem.com//?selectedKind=CvTile                           |
-| **CvToastNotification**  | Ready, uses core js                      | http://vue.carbondesignsystem.com//?selectedKind=CvToastNotification              |
-| **CvToggle**             | Ready, uses core js                      | http://vue.carbondesignsystem.com//?selectedKind=CvToggle                         |
-| **CvTooltip**            | Ready, uses core js                      | http://vue.carbondesignsystem.com//?selectedKind=CvTooltip                        |
+| **CvSearch**             | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvSearch                         |
+| **CvSelect**             | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvSelect                         |
+| **CvSlider**             | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvSlider                         |
+| **CvStructuredList**     | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvStructuredList                 |
+| **CvTabs**               | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvTabs                           |
+| **CvTag**                | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvTag                            |
+| **CvTextArea**           | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvTextArea                       |
+| **CvTextInput**          | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvTextInput                      |
+| **CvTile**               | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvTile                           |
+| **CvToastNotification**  | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvToastNotification              |
+| **CvToggle**             | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvToggle                         |
+| **CvTooltip**            | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvTooltip                        |
 
 ## Usage
 
