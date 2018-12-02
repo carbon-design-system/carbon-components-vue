@@ -41,7 +41,7 @@ Current Version: 0.1
 | **CvBreadcrumb**         | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvBreadcrumb                     |
 | **CvButton**             | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvButton                         |
 | **CvCheckbox**           | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvCheckbox                       |
-| CvCodeSnippet            | Ready              | http://vue.carbondesignsystem.com//?selectedKind=CvCodeSnippet&selectedStory=All  |
+| **CvCodeSnippet**        | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvCodeSnippet&selectedStory=All  |
 | **CvContentSwitcher**    | :warning:          | http://vue.carbondesignsystem.com//?selectedKind=CvContentSwitcher                |
 | CvDataTable              | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/51           |
 |                          |
