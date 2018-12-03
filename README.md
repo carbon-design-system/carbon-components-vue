@@ -82,7 +82,6 @@ Current Version: 0.1
 | **CvToggle**             | :warning:          | http://vue.carbondesignsystem.com/?selectedKind=CvToggle                         |
 | **CvTooltip**            | :warning:          | http://vue.carbondesignsystem.com/?selectedKind=CvTooltip                        |
 
-
 ## Usage
 
 ### General
