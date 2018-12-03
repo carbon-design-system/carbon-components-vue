@@ -32,7 +32,7 @@ View available Vue.js components [here](http://vue.carbondesignsystem.com). Usag
 Current Version: 0.1
 :white_check_mark: Ready
 :warning: Under review
-:heavy_minus-sign: Not available
+:heavy_minus_sign: Not available
 
 | **Components**           | **State**          | **Link**                                                                         |
 | ------------------------ | ------------------ | -------------------------------------------------------------------------------- |
