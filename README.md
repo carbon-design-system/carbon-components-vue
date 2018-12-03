@@ -23,7 +23,9 @@ This project is intended to be strictly focused on Vue.js implementations of the
 
 ## Project State
 
-Initial development ongoing.
+**v0.1.0 - First draft of carbon-components-vue implementation**
+
+This initial set of components, based on v9 of carbon components, includes draft implementations of all non-data viz components found in the core carbon components library. Public parts of the component: properties, events, data, methods, computed values are at this point subject to review at this point.
 
 ### Current Components
 
@@ -46,7 +48,7 @@ Current Version: 0.1
 | CvDataTable              | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/51          |
 |                          |
 | CvDatePicker             | :warning:          | http://vue.carbondesignsystem.com/?selectedKind=CvDatePicker&selectedStory=All   |
-| **CvDropdown**           | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/47          |
+| **CvDropdown**           | :heavy_minus_sign: | http://vue.carbondesignsystem.com/?selectedKind=CvDropdown                       |
 |                          |
 | CvFileUploader           | :warning:          | http://vue.carbondesignsystem.com/?selectedKind=CvFileUploader&selectedStory=All |
 | **CvForm**               | :warning:          | http://vue.carbondesignsystem.com/?selectedKind=CvForm                           |
