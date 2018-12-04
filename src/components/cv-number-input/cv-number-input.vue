@@ -1,6 +1,6 @@
 <template>
-  <div class="bx--form-item">
-    <div data-numberinput class="cv-number-input bx--number"
+  <div class="cv-number-input bx--form-item">
+    <div data-numberinput class="bx--number"
       :class="{
         'bx--number--light': theme === 'light',
         'bx--number--helpertext': $slots['helper-text']

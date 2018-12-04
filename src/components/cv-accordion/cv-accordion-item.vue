@@ -6,9 +6,19 @@
 -->
 
 <template>
-  <li data-accordion-item class="bx--accordion__item" :class="{'bx--accordion__item--active': open}">
+  <li
+    data-accordion-item
+    class="cv-accordion-item bx--accordion__item"
+    :class="{'bx--accordion__item--active': open}"
+  >
     <button class="bx--accordion__heading" aria-expanded="false" :aria-controls="uid">
-      <svg class="bx--accordion__arrow" width="8" height="12" viewBox="0 0 8 12" fill-rule="evenodd">
+      <svg
+        class="bx--accordion__arrow"
+        width="8"
+        height="12"
+        viewBox="0 0 8 12"
+        fill-rule="evenodd"
+      >
         <path d="M0 10.6L4.7 6 0 1.4 1.4 0l6.1 6-6.1 6z"></path>
       </svg>
       <p class="bx--accordion__title">
