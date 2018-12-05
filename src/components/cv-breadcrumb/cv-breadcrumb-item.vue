@@ -1,5 +1,5 @@
 <template>
-  <div class="bx--breadcrumb-item">
+  <div class="cv-breadcrumb-item bx--breadcrumb-item">
     <slot></slot>
   </div>
 </template>
