@@ -95,11 +95,6 @@ export default {
     invalid: Boolean,
     invalidDateMessage: { type: String, default: 'Invalid date format' },
   },
-  data() {
-    return {
-      carbonComponent: null,
-    };
-  },
   computed: {
     kindClass() {
       if (this.kind === 'short') {

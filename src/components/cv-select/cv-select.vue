@@ -27,7 +27,7 @@ export default {
     inline: Boolean,
     hideLabel: Boolean,
     label: { type: String, required: true },
-    _modelValue: { type: String, default: undefined },
+    modelValue: { type: String, default: undefined },
     // *********************
     // declare here to prevent the following from being added to the select
     // *********************
@@ -35,14 +35,14 @@ export default {
     multiple: {
       type: String,
       validator: val => {
-        console.log('multiple not supported in cv-select');
+        console.warn('property multiple not supported in CvSelect');
         return false;
       },
     },
   },
   model: {
     event: '_modelEvent',
-    prop: '_modelValue',
+    prop: 'modelValue',
   },
   beforeCreate() {
     // *********************
@@ -70,12 +70,12 @@ export default {
     },
   },
   mounted() {
-    if (this._modelValue) {
-      this.$refs.select.value = this._modelValue;
+    if (this.modelValue) {
+      this.$refs.select.value = this.modelValue;
     }
   },
   watch: {
-    _modelValue(val) {
+    modelValue(val) {
       this.$refs.select.value = val;
     },
   },

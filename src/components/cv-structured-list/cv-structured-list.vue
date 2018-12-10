@@ -29,13 +29,8 @@ export default {
     border: Boolean,
     condensed: Boolean,
   },
-  data() {
-    return {
-      carbonComponent: null,
-    };
-  },
   methods: {
-    updateSelectable(val) {
+    applySelectable(val) {
       if (val) {
         this.$el.setAttribute('data-structured-list', 'true');
       } else {
@@ -46,7 +41,7 @@ export default {
   mounted() {
     this.carbonComponent = StructuredList.create(this.$el);
 
-    this.updateSelectable(this.selectable);
+    this.applySelectable(this.selectable);
 
     // listen children to raise change events
     for (let child of this.$children) {
@@ -62,7 +57,7 @@ export default {
   },
   watch: {
     selectable(val) {
-      this.updateSelectable(val);
+      this.applySelectable(val);
     },
   },
 };

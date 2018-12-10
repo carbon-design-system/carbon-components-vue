@@ -99,7 +99,7 @@ export default {
   mixins: [uidMixin],
   inheritAttrs: false,
   props: {
-    _modelValue: { type: [String, Symbol], default: noModelValue },
+    modelValue: { type: [String, Symbol], default: noModelValue },
     clearOnReselect: Boolean,
     initialStateUploading: Boolean,
     removable: Boolean,

@@ -4,25 +4,30 @@
 
 export default {
   props: {
-    _modelValue: { type: [Array, Boolean], default: () => undefined },
+    modelValue: { type: [Array, Boolean], default: () => undefined },
     checked: Boolean,
     name: String,
     value: { type: String, required: true },
   },
   model: {
-    prop: '_modelValue',
+    prop: 'modelValue',
     event: '_modelEvent',
+  },
+  beforeCreate() {
+    console.log(
+      `WARNING(${this.$options._componentTag}): v-model under review`
+    );
   },
   computed: {
     isArrayModel() {
-      return Array.isArray(this._modelValue);
+      return Array.isArray(this.modelValue);
     },
     isChecked() {
-      if (this.$props._modelValue !== undefined) {
+      if (this.$props.modelValue !== undefined) {
         if (this.isArrayModel) {
-          return this._modelValue.includes(this.value);
+          return this.modelValue.includes(this.value);
         } else {
-          return this._modelValue;
+          return this.modelValue;
         }
       } else {
         return this.checked;
@@ -42,7 +47,7 @@ export default {
       let modelValue;
 
       if (this.isArrayModel) {
-        let modelSet = new Set(this._modelValue);
+        let modelSet = new Set(this.modelValue);
 
         if (!ev.target.checked) {
           modelSet.delete(this.value);

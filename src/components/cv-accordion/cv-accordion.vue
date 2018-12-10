@@ -9,11 +9,6 @@ import { Accordion } from 'carbon-components';
 
 export default {
   name: 'CvAccordion',
-  data() {
-    return {
-      carbonComponent: null,
-    };
-  },
   methods: {
     register() {
       if (!this.carbonComponent) {

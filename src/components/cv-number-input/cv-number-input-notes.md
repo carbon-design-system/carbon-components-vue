@@ -8,7 +8,7 @@ http://www.carbondesignsystem.com/components/number-input/code
 
 ```html
 <cv-number-input
-  label="Label"
+  label="label"
   v-model="modelValue">
 </cv-number-input>
 ```

@@ -24,8 +24,8 @@ const preKnobs = {
   label: {
     group: 'attr',
     type: text,
-    config: ['Label', 'Text input label', consts.CONTENT],
-    value: val => (val.length ? `\n  Label="${val}"` : ''),
+    config: ['label', 'Text input label', consts.CONTENT],
+    value: val => (val.length ? `\n  label="${val}"` : ''),
   },
   disabled: {
     group: 'attr',

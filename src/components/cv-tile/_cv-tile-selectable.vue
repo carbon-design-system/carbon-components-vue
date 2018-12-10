@@ -41,11 +41,6 @@ export default {
   name: 'CvTileSelectable',
   mixins: [uidMixin, checkMixin],
   inheritAttrs: false,
-  data() {
-    return {
-      carbonComponent: null,
-    };
-  },
   mounted() {
     this.carbonComponent = Tile.create(this.$el);
   },

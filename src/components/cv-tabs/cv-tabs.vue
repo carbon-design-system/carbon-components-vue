@@ -19,11 +19,6 @@ import { Tab } from 'carbon-components';
 
 export default {
   name: 'CvTabs',
-  data() {
-    return {
-      carbonComponent: null,
-    };
-  },
   mounted() {
     this.carbonComponent = Tab.create(this.$el);
   },

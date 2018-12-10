@@ -37,7 +37,6 @@ export default {
   data() {
     return {
       selected: null,
-      carbonComponent: null,
     };
   },
   props: {

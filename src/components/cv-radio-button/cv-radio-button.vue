@@ -9,7 +9,7 @@
       ref="input"
       type="radio"
       :value="value"
-      >
+    >
     <label :for="uid" class="bx--radio-button__label">
       <span class="bx--radio-button__appearance"></span>
       {{label}}
@@ -27,21 +27,21 @@ export default {
   mixins: [uidMixin],
   inheritAttrs: false,
   props: {
-    _modelValue: { type: [String, Symbol], default: noModelValue },
+    modelValue: { type: [String, Symbol], default: noModelValue },
     checked: Boolean,
     label: String,
     value: { type: String, default: null },
   },
   model: {
-    prop: '_modelValue',
+    prop: 'modelValue',
     event: '_modelEvent',
   },
   computed: {
     isChecked() {
-      if (this._modelValue === noModelValue) {
+      if (this.modelValue === noModelValue) {
         return this.checked;
       } else {
-        return this._modelValue === this.value;
+        return this.modelValue === this.value;
       }
     },
     // Bind listeners at the component level to the embedded input element and

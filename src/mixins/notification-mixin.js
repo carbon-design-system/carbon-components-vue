@@ -13,14 +13,9 @@ export default {
     subTitle: String,
   },
   computed: {
-    useAlert() {
+    isAlert() {
       return kinds.indexOf(this.kind) < 2;
     },
-  },
-  data() {
-    return {
-      carbonComponent: null,
-    };
   },
   mounted() {
     this.carbonComponent = Notification.create(this.$el);
