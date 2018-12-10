@@ -45,6 +45,9 @@ export default {
       default: 'Choose an option',
     },
   },
+  beforeCreate() {
+    console.warn(`${this.$options._componentTag}: public API under review`);
+  },
   methods: {
     onChange: function(value) {
       this.selected = value;

@@ -31,6 +31,9 @@ export default {
       required: true,
     },
   },
+  beforeCreate() {
+    console.warn(`${this.$options._componentTag}: public API under review`);
+  },
   methods: {
     selectValue: function(event) {
       if (event) {

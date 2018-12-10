@@ -1,6 +1,6 @@
 <template>
   <svg class="cv-icon">
-    <use :xlink:href="iconHref"></use>
+    <use xlink:href="iconHref"></use>
   </svg>
 </template>
 
@@ -11,6 +11,13 @@ export default {
   name: 'CvIcon',
   props: {
     href: { type: String, required: true },
+  },
+  beforeCreate() {
+    console.warn(
+      `${
+        this.$options._componentTag
+      }: may be replaced by carbon resource library`
+    );
   },
   computed: {
     iconHref() {

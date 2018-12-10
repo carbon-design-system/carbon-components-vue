@@ -8,7 +8,7 @@
   >
     <button
       class="bx--overflow-menu-options__btn"
-      :data-floating-menu-primary-focus="primary"
+      :data-floating-menu-primary-focus="primaryFocus"
       :disabled="disabled"
     >
       <slot></slot>
@@ -20,7 +20,7 @@
 export default {
   name: 'CvOverflowMenuItem',
   props: {
-    primary: Boolean,
+    primaryFocus: Boolean,
     disabled: Boolean,
     danger: Boolean,
   },

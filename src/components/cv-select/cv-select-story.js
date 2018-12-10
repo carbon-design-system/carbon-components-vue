@@ -31,13 +31,13 @@ const preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['inline', false, consts.CONFIG],
-    value: val => (val ? '@change="actionChange"inline' : ''),
+    value: val => (val ? '\n  inline' : ''),
   },
   vModel: {
     group: 'attr',
     type: boolean,
     config: ['v-model', false, consts.OTHER],
-    value: val => (val ? '@change="actionChange"v-model="selectValue" ' : ''),
+    value: val => (val ? '\n  v-model="selectValue" ' : ''),
   },
   events: {
     group: 'attr',

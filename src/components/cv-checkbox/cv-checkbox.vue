@@ -33,8 +33,6 @@ export default {
     },
   },
   mounted() {
-    // debugger;
-    // Checkbox.init(this.$el);
     this.carbonComponent = Checkbox.create(this.$refs.input);
   },
   beforeDestroy() {

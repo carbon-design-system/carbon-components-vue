@@ -7,6 +7,11 @@
 <script>
 export default {
   name: 'CvLink',
+  beforeCreate() {
+    console.warn(
+      `${this.$options._componentTag}: review use/offer a router-link option? `
+    );
+  },
 };
 </script>
 

@@ -95,6 +95,13 @@ export default {
     invalid: Boolean,
     invalidDateMessage: { type: String, default: 'Invalid date format' },
   },
+  beforeCreate() {
+    console.log(
+      `WARNING(${
+        this.$options._componentTag
+      }): public API and properties under review`
+    );
+  },
   computed: {
     kindClass() {
       if (this.kind === 'short') {

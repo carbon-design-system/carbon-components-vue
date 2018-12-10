@@ -37,7 +37,7 @@
       <div class="bx--modal-footer" v-if="hasFooter">
         <cv-button
           :kind="secondaryKind"
-          @click="secondaryClick"
+          @click="onSecondaryClick"
           v-if="this.$slots['secondary-button']"
           :data-modal-primary-focus="initialFocus === 'secondary'"
         >
@@ -45,7 +45,7 @@
         </cv-button>
         <cv-button
           :kind="primaryKind"
-          @click="primaryClick"
+          @click="onPrimaryClick"
           v-if="this.$slots['primary-button']"
           :data-modal-primary-focus="initialFocus === 'primary'"
         >
@@ -111,13 +111,13 @@ export default {
     hide: function() {
       Modal.components.get(this.$el).hide();
     },
-    primaryClick() {
+    onPrimaryClick() {
       this.$emit('primary-click');
       if (!this.$listeners['primary-click']) {
         this.hide();
       }
     },
-    secondaryClick() {
+    onSecondaryClick() {
       this.$emit('secondary-click');
       if (!this.$listeners['secondary-click']) {
         this.hide();

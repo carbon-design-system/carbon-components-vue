@@ -68,23 +68,23 @@ export default {
         },
       };
     },
+    internalValue: {
+      get() {
+        return this.$refs.select.value;
+      },
+      set(val) {
+        this.$refs.select.value = val;
+      },
+    },
   },
   mounted() {
     if (this.modelValue) {
-      this.$refs.select.value = this.modelValue;
+      this.internalValue = this.modelValue;
     }
   },
   watch: {
     modelValue(val) {
-      this.$refs.select.value = val;
-    },
-  },
-  methods: {
-    value(val) {
-      if (val !== undefined) {
-        this.$refs.select.value = val;
-      }
-      return this.$refs.select.value;
+      this.internalValue = val;
     },
   },
 };

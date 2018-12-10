@@ -6,6 +6,7 @@
       'bx--structured-list--border': border,
       'bx--structured-list--condensed': condensed
       }"
+    :data-structured-list="selectable"
   >
     <div class="bx--structured-list-thead">
       <div class="bx--structured-list-row bx--structured-list-row--header-row">
@@ -29,19 +30,8 @@ export default {
     border: Boolean,
     condensed: Boolean,
   },
-  methods: {
-    applySelectable(val) {
-      if (val) {
-        this.$el.setAttribute('data-structured-list', 'true');
-      } else {
-        this.$el.removeAttribute('data-structured-list');
-      }
-    },
-  },
   mounted() {
     this.carbonComponent = StructuredList.create(this.$el);
-
-    this.applySelectable(this.selectable);
 
     // listen children to raise change events
     for (let child of this.$children) {
@@ -54,11 +44,6 @@ export default {
   },
   beforeDestroy() {
     this.carbonComponent.release();
-  },
-  watch: {
-    selectable(val) {
-      this.applySelectable(val);
-    },
   },
 };
 </script>

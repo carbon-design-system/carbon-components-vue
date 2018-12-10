@@ -6,12 +6,12 @@
         inline
         ref="pageSizeSelect"
         @change="onPageSizeChange"
+        :model-value="`${pageSizeValue}`"
       >
         <cv-select-option
           v-for="(size, index) in pageSizes"
           :key="index"
           :value="`${size.value ? size.value : size}`"
-          :selected="size.selected ? size.selected : false"
         >{{size.label ? size.label : (size.value ? size.value : size)}}</cv-select-option>
       </cv-select>
 
@@ -42,12 +42,12 @@
         ref="pageSelect"
         v-if="pages.length > 0"
         @change="onPageChange"
+        :model-value="`${pageValue}`"
       >
         <cv-select-option
           v-for="pageNumber in pages"
           :key="pageNumber"
           :value="`${pageNumber}`"
-          :selected="page === pageNumber"
         >{{pageNumber}}</cv-select-option>
       </cv-select>
       <span v-if="pages.length == 0">{{pageValue}}</span>
@@ -169,18 +169,18 @@ export default {
         return `${start}-${end}`;
       }
     },
-    value() {
+    internalValue() {
       return { start: this.firstItem, length: parseInt(this.pageSizeValue) };
     },
   },
   methods: {
-    onPageChange() {
-      this.pageValue = parseInt(this.$refs.pageSelect.value(), 10);
+    onPageChange(ev) {
+      this.pageValue = parseInt(ev.target.value, 10);
       this.firstItem = newFirstItem(this.pageValue, this.pageSizeValue);
-      this.$emit('change', this.value);
+      this.$emit('change', this.internalValue);
     },
-    onPageSizeChange() {
-      this.pageSizeValue = parseInt(this.$refs.pageSizeSelect.value(), 10);
+    onPageSizeChange(ev) {
+      this.pageSizeValue = parseInt(ev.target.value, 10);
       this.pageCount = newPageCount(this.numberOfItems, this.pageSizeValue);
       this.pages = newPagesArray(this.pageCount);
       // what page is firstItem on
@@ -188,25 +188,22 @@ export default {
         // setting pageValue immediately seems to cause a problem - test set pageSize to 40, page to 3, set pageSize to 10
         // this previously resulted in 1 being set on Chrome (other browsers untested)
         this.pageValue = Math.ceil(this.firstItem / this.pageSizeValue);
-        this.$refs.pageSelect.value(this.pageValue);
         this.firstItem = newFirstItem(this.pageValue, this.pageSizeValue);
-        this.$emit('change', this.value);
+        this.$emit('change', this.internalValue);
       }, 1);
     },
     onPrevPage() {
       if (this.pageValue > 1) {
         this.pageValue--;
-        this.$refs.pageSelect.value(this.pageValue);
         this.firstItem = newFirstItem(this.pageValue, this.pageSizeValue);
-        this.$emit('change', this.value);
+        this.$emit('change', this.internalValue);
       }
     },
     onNextPage() {
       if (this.pageValue < this.pageCount) {
         this.pageValue++;
-        this.$refs.pageSelect.value(this.pageValue);
         this.firstItem = newFirstItem(this.pageValue, this.pageSizeValue);
-        this.$emit('change', this.value);
+        this.$emit('change', this.internalValue);
       }
     },
   },

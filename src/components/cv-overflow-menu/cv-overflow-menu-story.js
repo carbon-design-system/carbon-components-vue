@@ -46,7 +46,7 @@ for (const story of storySet) {
 
       const templateString = `
 <cv-overflow-menu${settings.group.attr}>
-  <cv-overflow-menu-item primary>list item 1</cv-overflow-menu-item>
+  <cv-overflow-menu-item primary-focus>list item 1</cv-overflow-menu-item>
   <cv-overflow-menu-item disabled>list item 2</cv-overflow-menu-item>
   <cv-overflow-menu-item danger>list item 3</cv-overflow-menu-item>
 </cv-overflow-menu>
