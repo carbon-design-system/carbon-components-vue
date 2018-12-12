@@ -24,8 +24,7 @@
   "dependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "carbon-components": "^9.48.1",
-    "carbon-icons": "^7.0.7",
-    "vue-cli": "^2.9.6"
+    "carbon-icons": "^7.0.7"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.2.1",
