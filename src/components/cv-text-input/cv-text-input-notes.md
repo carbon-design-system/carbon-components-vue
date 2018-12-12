@@ -8,7 +8,7 @@ http://www.carbondesignsystem.com/components/text-input/code
 
 ```html
 <cv-text-input
-  label="Label"
+  label="label"
   v-model="modelValue">
 </cv-text-input>
 ```

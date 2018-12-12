@@ -37,7 +37,6 @@ export default {
   data() {
     return {
       selected: null,
-      carbonComponent: null,
     };
   },
   props: {
@@ -45,6 +44,9 @@ export default {
       type: String,
       default: 'Choose an option',
     },
+  },
+  beforeCreate() {
+    console.warn(`${this.$options._componentTag}: public API under review`);
   },
   methods: {
     onChange: function(value) {

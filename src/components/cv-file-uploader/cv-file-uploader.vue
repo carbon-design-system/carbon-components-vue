@@ -99,7 +99,7 @@ export default {
   mixins: [uidMixin],
   inheritAttrs: false,
   props: {
-    _modelValue: { type: [String, Symbol], default: noModelValue },
+    modelValue: { type: [String, Symbol], default: noModelValue },
     clearOnReselect: Boolean,
     initialStateUploading: Boolean,
     removable: Boolean,
@@ -129,7 +129,7 @@ export default {
     this.initialFilelist = this.$el.querySelector('.bx--file-input').files;
   },
   methods: {
-    _index(item) {
+    getIndex(item) {
       if (typeof item === 'object') {
         return this.files.indexOf(item);
       } else {
@@ -138,7 +138,7 @@ export default {
     },
     remove(item) {
       // debugger; // eslint-disable-line
-      const index = this._index(item);
+      const index = this.getIndex(item);
       if (this.files[index]) {
         this.files.splice(index, 1);
         this.$emit('change', this.files);
@@ -146,7 +146,7 @@ export default {
     },
     setState(item, state) {
       // debugger; // eslint-disable-line
-      const index = this._index(item);
+      const index = this.getIndex(item);
       if (this.files[index] && state !== this.files[index].STATES) {
         if (
           state === CONSTS.STATES.UPLOADING ||

@@ -55,7 +55,7 @@ for (const story of storySet) {
 
       // ----------------------------------------------------------------
       const templateString = `
-<cv-loading${settings.group.attr}></cv-loading>
+<cv-loading${settings.group.attr} :active="active"></cv-loading>
   `;
 
       // ----------------------------------------------------------------
@@ -69,7 +69,6 @@ for (const story of storySet) {
       </template>
       <template slot="other">
       <button @click="toggle" style="position: relative; margin-left: 500px;">Toggle</button>
-        <button @click="end" style="position: relative; margin-left: 10px;">End</button>
       </template>
     </sv-template-view>
   `;
@@ -77,14 +76,15 @@ for (const story of storySet) {
       return {
         components: { CvLoading, SvTemplateView },
         template: templateViewString,
+        data() {
+          return {
+            active: true,
+          };
+        },
         methods: {
           actionEnd: action('CvLoading - loading-end'),
-          end() {
-            this.$children[0].$children[0].end();
-          },
           toggle() {
-            console.log(`state: ${this.$children[0].$children[0].isActive()}`);
-            this.$children[0].$children[0].toggle();
+            this.active = !this.active;
           },
         },
       };

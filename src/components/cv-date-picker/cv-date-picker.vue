@@ -95,10 +95,10 @@ export default {
     invalid: Boolean,
     invalidDateMessage: { type: String, default: 'Invalid date format' },
   },
-  data() {
-    return {
-      carbonComponent: null,
-    };
+  beforeCreate() {
+    console.warn(
+      `${this.$options._componentTag}: public API and properties under review`
+    );
   },
   computed: {
     kindClass() {

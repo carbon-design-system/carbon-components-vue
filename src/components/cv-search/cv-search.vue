@@ -26,7 +26,7 @@
         class="bx--search-close bx--search-close--hidden"
         title="Clear search input"
         aria-label="Clear search input"
-        @click="doClear"
+        @click="onClearClick"
       >
         <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -73,7 +73,7 @@ export default {
     },
   },
   methods: {
-    doClear() {
+    onClearClick() {
       this.$emit('input', '');
     },
   },

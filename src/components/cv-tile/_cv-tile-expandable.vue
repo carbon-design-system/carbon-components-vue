@@ -33,11 +33,6 @@ export default {
   props: {
     expanded: Boolean,
   },
-  data() {
-    return {
-      carbonComponent: null,
-    };
-  },
   mounted() {
     this.carbonComponent = Tile.create(this.$el);
 

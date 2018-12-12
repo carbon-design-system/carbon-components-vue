@@ -1,11 +1,7 @@
 <template>
-  <component
-    :is="element.tag"
-    class="cv-list"
-    :class="element.selector"
-    >
-      <slot></slot>
-    </component>
+  <component :is="tagType.tag" class="cv-list" :class="tagType.selector">
+    <slot></slot>
+  </component>
 </template>
 
 <script>
@@ -16,20 +12,20 @@ export default {
     nested: Boolean,
   },
   computed: {
-    element() {
-      let _element;
+    tagType() {
+      let _tagType;
 
       if (this.ordered) {
-        _element = { tag: 'ol', selector: 'bx--list--ordered' };
+        _tagType = { tag: 'ol', selector: 'bx--list--ordered' };
       } else {
-        _element = { tag: 'ul', selector: 'bx--list--unordered' };
+        _tagType = { tag: 'ul', selector: 'bx--list--unordered' };
       }
 
       if (this.nested) {
-        _element.selector = 'bx--list--nested';
+        _tagType.selector = 'bx--list--nested';
       }
 
-      return _element;
+      return _tagType;
     },
   },
 };

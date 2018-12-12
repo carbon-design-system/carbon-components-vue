@@ -27,7 +27,7 @@ export default {
     inline: Boolean,
     hideLabel: Boolean,
     label: { type: String, required: true },
-    _modelValue: { type: String, default: undefined },
+    modelValue: { type: String, default: undefined },
     // *********************
     // declare here to prevent the following from being added to the select
     // *********************
@@ -35,14 +35,14 @@ export default {
     multiple: {
       type: String,
       validator: val => {
-        console.log('multiple not supported in cv-select');
+        console.warn('property multiple not supported in CvSelect');
         return false;
       },
     },
   },
   model: {
-    event: '_modelEvent',
-    prop: '_modelValue',
+    event: 'modelEvent',
+    prop: 'modelValue',
   },
   beforeCreate() {
     // *********************
@@ -63,28 +63,28 @@ export default {
       return {
         ...this.$listeners,
         change: event => {
-          this.$emit('_modelEvent', event.target.value);
+          this.$emit('modelEvent', event.target.value);
           this.$emit('change', event);
         },
       };
     },
+    internalValue: {
+      get() {
+        return this.$refs.select.value;
+      },
+      set(val) {
+        this.$refs.select.value = val;
+      },
+    },
   },
   mounted() {
-    if (this._modelValue) {
-      this.$refs.select.value = this._modelValue;
+    if (this.modelValue) {
+      this.internalValue = this.modelValue;
     }
   },
   watch: {
-    _modelValue(val) {
-      this.$refs.select.value = val;
-    },
-  },
-  methods: {
-    value(val) {
-      if (val !== undefined) {
-        this.$refs.select.value = val;
-      }
-      return this.$refs.select.value;
+    modelValue(val) {
+      this.internalValue = val;
     },
   },
 };

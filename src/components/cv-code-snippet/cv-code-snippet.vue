@@ -27,11 +27,6 @@ export default {
       validator: value => ['inline', 'multiline', 'oneline'].includes(value),
     },
   },
-  data() {
-    return {
-      carbonComponent: null,
-    };
-  },
   computed: {
     theComponent() {
       switch (this.kind) {

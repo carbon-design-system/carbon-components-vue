@@ -9,11 +9,6 @@ import { ContentSwitcher } from 'carbon-components';
 
 export default {
   name: 'CvContentSwitcher',
-  data() {
-    return {
-      carbonComponent: null,
-    };
-  },
   mounted() {
     this.carbonComponent = ContentSwitcher.create(this.$el);
   },

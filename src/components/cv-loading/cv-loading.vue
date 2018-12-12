@@ -21,6 +21,7 @@
 export default {
   name: 'CvLoading',
   props: {
+    active: { type: Boolean, default: true },
     overlay: Boolean,
     small: Boolean,
   },
@@ -35,41 +36,31 @@ export default {
   },
   data() {
     return {
-      active: true,
       stopped: false,
     };
   },
+  watch: {
+    active(val) {
+      this.onActiveUpdate(val);
+    },
+  },
   methods: {
-    end() {
-      const onEnd = ev => {
-        if (ev.animationName === 'rotate-end-p2') {
-          this.$refs.loading.removeEventListener('animationend', onEnd);
+    onEnd(ev) {
+      if (ev.animationName === 'rotate-end-p2') {
+        this.$refs.loading.removeEventListener('animationend', this.onEnd);
 
-          this.stopped = true;
-          this.$emit('loading-end');
-        }
-      };
-
-      this.$refs.loading.addEventListener('animationend', onEnd);
-      this.active = false;
+        this.stopped = true;
+        this.$emit('loading-end');
+      }
     },
-    isActive() {
-      return this.active;
-    },
-    set(value) {
-      const newValue = value !== false;
-
-      if (newValue !== this.active) {
+    onActiveUpdate(newValue, oldValue) {
+      if (newValue !== oldValue) {
         if (newValue) {
           this.stopped = false;
         } else {
-          this.end();
+          this.$refs.loading.addEventListener('animationend', this.onEnd);
         }
       }
-      this.active = newValue;
-    },
-    toggle() {
-      this.set(!this.active);
     },
   },
 };

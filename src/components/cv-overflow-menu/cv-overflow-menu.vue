@@ -39,11 +39,6 @@ export default {
       },
     },
   },
-  data() {
-    return {
-      carbonComponent: null,
-    };
-  },
   mounted() {
     let options = {};
     if (this.offset) {

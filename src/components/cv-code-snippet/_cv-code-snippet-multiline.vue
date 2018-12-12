@@ -55,7 +55,6 @@ export default {
   data() {
     return {
       expanded: false,
-      showFeedback: false,
     };
   },
   computed: {

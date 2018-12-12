@@ -4,8 +4,8 @@
     class="cv-notifiation bx--toast-notification"
     :class="`bx--toast-notification--${kind}`"
     v-on="$listeners"
-    :aria-role="useAlert ? 'alert' : false"
-    :aria-live="!useAlert ? 'polite' : false"
+    :aria-role="isAlert ? 'alert' : false"
+    :aria-live="!isAlert ? 'polite' : false"
   >
     <div class="bx--toast-notification__details">
       <h3 class="bx--toast-notification__title">{{title}}</h3>

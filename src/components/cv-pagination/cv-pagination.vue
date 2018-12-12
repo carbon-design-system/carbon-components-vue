@@ -1,12 +1,17 @@
 <template>
   <div class="cv-pagination bx--pagination" data-pagination>
     <div class="bx--pagination__left">
-      <cv-select :label="`${pageSizesLabel}`" inline ref="pageSizeSelect" @change="pageSizeChange">
+      <cv-select
+        :label="`${pageSizesLabel}`"
+        inline
+        ref="pageSizeSelect"
+        @change="onPageSizeChange"
+        :model-value="`${pageSizeValue}`"
+      >
         <cv-select-option
           v-for="(size, index) in pageSizes"
           :key="index"
           :value="`${size.value ? size.value : size}`"
-          :selected="size.selected ? size.selected : false"
         >{{size.label ? size.label : (size.value ? size.value : size)}}</cv-select-option>
       </cv-select>
 
@@ -23,7 +28,7 @@
         class="bx--pagination__button bx--pagination__button--backward"
         data-page-backward
         :aria-label="backwardText"
-        @click="prevPage"
+        @click="onPrevPage"
       >
         <svg class="bx--pagination__button-icon" width="7" height="12" viewBox="0 0 7 12">
           <path fill-rule="nonzero" d="M1.45 6.002L7 11.27l-.685.726L0 6.003 6.315 0 7 .726z"></path>
@@ -36,13 +41,13 @@
         hideLabel
         ref="pageSelect"
         v-if="pages.length > 0"
-        @change="pageChange"
+        @change="onPageChange"
+        :model-value="`${pageValue}`"
       >
         <cv-select-option
           v-for="pageNumber in pages"
           :key="pageNumber"
           :value="`${pageNumber}`"
-          :selected="page === pageNumber"
         >{{pageNumber}}</cv-select-option>
       </cv-select>
       <span v-if="pages.length == 0">{{pageValue}}</span>
@@ -51,7 +56,7 @@
         class="bx--pagination__button bx--pagination__button--forward"
         data-page-forward
         :aria-label="forwardText"
-        @click="nextPage"
+        @click="onNextPage"
         :disabled="this.pageValue === this.pageCount"
       >
         <svg class="bx--pagination__button-icon" width="7" height="12" viewBox="0 0 7 12">
@@ -164,18 +169,18 @@ export default {
         return `${start}-${end}`;
       }
     },
-    value() {
+    internalValue() {
       return { start: this.firstItem, length: parseInt(this.pageSizeValue) };
     },
   },
   methods: {
-    pageChange() {
-      this.pageValue = parseInt(this.$refs.pageSelect.value(), 10);
+    onPageChange(ev) {
+      this.pageValue = parseInt(ev.target.value, 10);
       this.firstItem = newFirstItem(this.pageValue, this.pageSizeValue);
-      this.$emit('change', this.value);
+      this.$emit('change', this.internalValue);
     },
-    pageSizeChange() {
-      this.pageSizeValue = parseInt(this.$refs.pageSizeSelect.value(), 10);
+    onPageSizeChange(ev) {
+      this.pageSizeValue = parseInt(ev.target.value, 10);
       this.pageCount = newPageCount(this.numberOfItems, this.pageSizeValue);
       this.pages = newPagesArray(this.pageCount);
       // what page is firstItem on
@@ -183,25 +188,22 @@ export default {
         // setting pageValue immediately seems to cause a problem - test set pageSize to 40, page to 3, set pageSize to 10
         // this previously resulted in 1 being set on Chrome (other browsers untested)
         this.pageValue = Math.ceil(this.firstItem / this.pageSizeValue);
-        this.$refs.pageSelect.value(this.pageValue);
         this.firstItem = newFirstItem(this.pageValue, this.pageSizeValue);
-        this.$emit('change', this.value);
+        this.$emit('change', this.internalValue);
       }, 1);
     },
-    prevPage() {
+    onPrevPage() {
       if (this.pageValue > 1) {
         this.pageValue--;
-        this.$refs.pageSelect.value(this.pageValue);
         this.firstItem = newFirstItem(this.pageValue, this.pageSizeValue);
-        this.$emit('change', this.value);
+        this.$emit('change', this.internalValue);
       }
     },
-    nextPage() {
+    onNextPage() {
       if (this.pageValue < this.pageCount) {
         this.pageValue++;
-        this.$refs.pageSelect.value(this.pageValue);
         this.firstItem = newFirstItem(this.pageValue, this.pageSizeValue);
-        this.$emit('change', this.value);
+        this.$emit('change', this.internalValue);
       }
     },
   },

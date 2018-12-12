@@ -21,24 +21,17 @@
 - Log all raised events as actions in the story.
 - Where Carbon components have associated Javascript initialise them and cleanup as follows:
 
-  ```
-  data() {
-    return {
-      carbonComponent: null
-    };
-  },
-
-  ...
-
   mounted() {
-    this.carbonComponent = ContentSwitcher.create(this.$el);
+  // no need to declare first
+  this.carbonComponent = ContentSwitcher.create(this.$el);
   },
   beforeDestroy() {
-    this.carbonComponent.release();
+  this.carbonComponent.release();
   }
-  ```
 
+  ```
   Note that in certain cases the element passes to `create()` may not be the root element of the Vue component, and also in some cases (e.g. Tooltip) it may be necessary to use `init()` rather than `create()`.
+  ```
 
 ## Add a complete compoennt
 

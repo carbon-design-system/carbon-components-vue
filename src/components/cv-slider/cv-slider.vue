@@ -9,7 +9,7 @@
         data-slider
         data-slider-input-box="#slider-input-box"
       >
-        <div class="bx--slider__track" @click="jumpTo" ref="track"></div>
+        <div class="bx--slider__track" @click="onTrackClick" ref="track"></div>
         <div class="bx--slider__filled-track" :style="`width: ${percentage};`"></div>
         <div
           class="bx--slider__thumb"
@@ -21,7 +21,7 @@
           ref="thumb"
           @keydown.up.right.prevent="onUp"
           @keydown.down.left.prevent="onDown"
-          @mousedown="startDrag"
+          @mousedown="onStartDrag"
         ></div>
         <input
           :id="uid"
@@ -79,7 +79,7 @@ export default {
   },
   model: {
     prop: 'value',
-    event: '_modelEvent',
+    event: 'modelEvent',
   },
   data() {
     return {
@@ -105,33 +105,33 @@ export default {
   mounted() {
     this.$refs.range.value = this.value;
     this.internalValue = this.$refs.range.value;
-    this.percentage = `${((this.internalValue - this._min()) * 100) /
-      (this._max() - this._min())}%`;
+    this.percentage = `${((this.internalValue - this.getMin()) * 100) /
+      (this.getMax() - this.getMin())}%`;
   },
   methods: {
     // NOTE: It is not safe to rely on Numbers for non-integer steps
-    _min() {
+    getMin() {
       if (this.$refs.range) {
         const val = parseFloat(this.$refs.range.min);
         return isNaN(val) ? 0 : val;
       }
       return 0;
     },
-    _max() {
+    getMax() {
       if (this.$refs.range) {
         const val = parseFloat(this.$refs.range.max);
         return isNaN(val) ? 0 : val;
       }
       return 100;
     },
-    _value() {
+    getValue() {
       if (this.$refs.range) {
         const val = parseFloat(this.$refs.range.value);
         return isNaN(val) ? 0 : val;
       }
-      return (this._max() + this._min()) / 2;
+      return (this.getMax() + this.getMin()) / 2;
     },
-    _step() {
+    getStep() {
       if (this.$refs.range) {
         const val = parseFloat(this.$refs.range.step);
         return isNaN(val) ? 0 : val;
@@ -139,30 +139,30 @@ export default {
       return 1;
     },
 
-    doChange(newValue) {
+    setValue(newValue) {
       if (this.disabled) return;
 
       this.$refs.range.value = newValue;
       this.internalValue = this.$refs.range.value;
 
-      this.percentage = `${((this.internalValue - this._min()) * 100) /
-        (this._max() - this._min())}%`;
+      this.percentage = `${((this.internalValue - this.getMin()) * 100) /
+        (this.getMax() - this.getMin())}%`;
 
-      this.$emit('_modelEvent', this.$refs.range.value);
+      this.$emit('modelEvent', this.$refs.range.value);
       this.$emit('change', this.$refs.range.value);
     },
     onChange(ev) {
       let newValue = this.internalValue.length
         ? parseFloat(this.internalValue)
-        : this._min();
-      this.doChange(newValue);
+        : this.getMin();
+      this.setValue(newValue);
     },
-    startDrag(ev) {
+    onStartDrag(ev) {
       document.body.addEventListener('mousemove', this.onDrag);
-      document.body.addEventListener('mouseup', this.stopDrag);
+      document.body.addEventListener('mouseup', this.onStopDrag);
 
       this.dragStartX = ev.clientX;
-      this.dragStartValue = this._value();
+      this.dragStartValue = this.getValue();
       this.isDragging = true;
     },
     onDrag(ev) {
@@ -171,17 +171,18 @@ export default {
         let newValue =
           (ev.clientX - this.dragStartX) / this.$refs.track.offsetWidth;
         // uncapped new value
-        newValue = this.dragStartValue + (this._max() - this._min()) * newValue;
+        newValue =
+          this.dragStartValue + (this.getMax() - this.getMin()) * newValue;
 
-        this.doChange(newValue, ev);
+        this.setValue(newValue, ev);
       }
     },
-    stopDrag(ev) {
+    onStopDrag(ev) {
       this.isDragging = false;
       document.body.removeEventListener('mousemove', this.onDrag);
-      document.body.removeEventListener('mouseup', this.stopDrag);
+      document.body.removeEventListener('mouseup', this.onStopDrag);
     },
-    jumpTo(ev) {
+    onTrackClick(ev) {
       const afterAnimate = ev => {
         if (ev.propertyName === 'left') {
           this.animateClick = false;
@@ -190,35 +191,35 @@ export default {
       };
 
       let newValue = ev.offsetX / this.$refs.track.offsetWidth;
-      newValue = (this._max() - this._min()) * newValue + this._min();
+      newValue = (this.getMax() - this.getMin()) * newValue + this.getMin();
       this.$refs.thumb.addEventListener('transitionend', afterAnimate);
       this.animateClick = true;
 
-      this.doChange(newValue, ev);
+      this.setValue(newValue, ev);
     },
     onUp(ev) {
       let curValue =
         ev.target.type === 'number'
           ? parseFloat(ev.target.value)
-          : this._value();
+          : this.getValue();
       let newValue =
         curValue +
         (ev.shiftKey
-          ? parseFloat(this.stepMultiplier) * this._step()
-          : this._step());
-      this.doChange(newValue, ev);
+          ? parseFloat(this.stepMultiplier) * this.getStep()
+          : this.getStep());
+      this.setValue(newValue, ev);
     },
     onDown(ev) {
       let curValue =
         ev.target.type === 'number'
           ? parseFloat(ev.target.value)
-          : this._value();
+          : this.getValue();
       let newValue =
         curValue -
         (ev.shiftKey
-          ? parseFloat(this.stepMultiplier) * this._step()
-          : this._step());
-      this.doChange(newValue, ev);
+          ? parseFloat(this.stepMultiplier) * this.getStep()
+          : this.getStep());
+      this.setValue(newValue, ev);
     },
   },
 };

@@ -82,7 +82,8 @@ const preKnobs = {
     value: val =>
       val
         ? `
-  @onChange="actionChange"`
+  @onChange="actionChange"
+  @onSimpleChange="actionSimpleChange"`
         : '',
   },
   otherAttributes: {
@@ -132,6 +133,7 @@ for (const story of storySet) {
         },
         methods: {
           actionChange: action('Cv Date Picker - change'),
+          actionSimpleChange: action('Cv Date Picker - simple change'),
         },
         template: templateViewString,
       };

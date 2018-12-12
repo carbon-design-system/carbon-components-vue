@@ -24,7 +24,7 @@ Minimal
 - backwards-text: Aria label on page down arrow. Optional defaults to "Previous page"
 - forwards-text: Aria label on page up arrow. Optional defaults to "Next page"
 - page-number-label: Hidden label for page number select. Defaults to "Page number"
-- page-sizes-label: Label for page size select. Defaults to "Number of items per page:"
+- page-sizes-label: label for page size select. Defaults to "Number of items per page:"
 - number-of-items: Number of items accross all pages, defaults to Infinity
 - page-sizes: Array of page size values.
   Defaults to [10, 20, 30, 40, 50]

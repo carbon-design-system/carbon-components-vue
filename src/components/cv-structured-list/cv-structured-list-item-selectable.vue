@@ -41,21 +41,21 @@ export default {
   mixins: [uidMixin],
   inheritAttrs: false,
   props: {
-    _modelValue: { type: [String, Symbol], default: noModelValue },
+    modelValue: { type: [String, Symbol], default: noModelValue },
     checked: Boolean,
     label: String,
     value: { type: String, default: null },
   },
   model: {
-    prop: '_modelValue',
-    event: '_modelEvent',
+    prop: 'modelValue',
+    event: 'modelEvent',
   },
   computed: {
     isChecked() {
-      if (this._modelValue === noModelValue) {
+      if (this.modelValue === noModelValue) {
         return this.checked;
       } else {
-        return this._modelValue === this.value;
+        return this.modelValue === this.value;
       }
     },
     // Bind listeners at the component level to the embedded input element and
@@ -71,7 +71,7 @@ export default {
     onChange(ev) {
       this.$emit('change', ev);
       // console.log(this.value === noModelValue, this.value);
-      this.$emit('_modelEvent', this.value);
+      this.$emit('modelEvent', this.value);
     },
   },
 };

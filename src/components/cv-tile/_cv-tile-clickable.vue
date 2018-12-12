@@ -9,11 +9,6 @@ import { Tile } from 'carbon-components';
 
 export default {
   name: 'CvTileClickable',
-  data() {
-    return {
-      carbonComponent: null,
-    };
-  },
   mounted() {
     this.carbonComponent = Tile.create(this.$el);
   },

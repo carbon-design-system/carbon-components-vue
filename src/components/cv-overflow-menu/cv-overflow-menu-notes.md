@@ -36,4 +36,4 @@ One default content
 
 danger: Boolean, optionally make use danger colors for item
 disabled: Boolean, optionally disable the item
-primary: Boolean, optional initially selected item on menu
+primary-focus: Boolean, optional initially selected item on menu

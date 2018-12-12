@@ -4,8 +4,8 @@
     class="cv-inline-notification bx--inline-notification"
     :class="`bx--inline-notification--${kind.toLowerCase()}`"
     v-on="$listeners"
-    :aria-role="useAlert ? 'alert' : false"
-    :aria-live="!useAlert ? 'polite' : false"
+    :aria-role="isAlert ? 'alert' : false"
+    :aria-live="!isAlert ? 'polite' : false"
   >
     <div class="bx--inline-notification__details">
       <cv-icon :href="`cv(${icon})`" class="bx--inline-notification__icon" width="16" height="16"></cv-icon>

@@ -115,7 +115,6 @@ for (const story of storySet) {
         methods: {
           onInput: action('cv-file-uploader - input event'),
           setState() {
-            console.log('setState');
             const index = parseInt(
               document.querySelector('.file-index').value,
               10
@@ -133,7 +132,6 @@ for (const story of storySet) {
             }
           },
           remove() {
-            console.log('remove');
             const index = parseInt(
               document.querySelector('.file-index').value,
               10
@@ -149,7 +147,6 @@ for (const story of storySet) {
             }
           },
           clear() {
-            console.log('clear');
             this.$children[0].$children[0].clear();
           },
         },
