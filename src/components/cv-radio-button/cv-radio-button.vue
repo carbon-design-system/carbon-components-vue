@@ -34,7 +34,7 @@ export default {
   },
   model: {
     prop: 'modelValue',
-    event: '_modelEvent',
+    event: 'modelEvent',
   },
   computed: {
     isChecked() {
@@ -57,7 +57,7 @@ export default {
     onChange(ev) {
       this.$emit('change', ev);
       // console.log(this.value === null);
-      this.$emit('_modelEvent', this.value);
+      this.$emit('modelEvent', this.value);
     },
   },
 };

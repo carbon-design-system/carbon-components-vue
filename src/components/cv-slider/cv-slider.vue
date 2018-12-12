@@ -79,7 +79,7 @@ export default {
   },
   model: {
     prop: 'value',
-    event: '_modelEvent',
+    event: 'modelEvent',
   },
   data() {
     return {
@@ -148,7 +148,7 @@ export default {
       this.percentage = `${((this.internalValue - this.getMin()) * 100) /
         (this.getMax() - this.getMin())}%`;
 
-      this.$emit('_modelEvent', this.$refs.range.value);
+      this.$emit('modelEvent', this.$refs.range.value);
       this.$emit('change', this.$refs.range.value);
     },
     onChange(ev) {

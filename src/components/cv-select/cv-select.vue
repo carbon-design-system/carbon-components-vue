@@ -41,7 +41,7 @@ export default {
     },
   },
   model: {
-    event: '_modelEvent',
+    event: 'modelEvent',
     prop: 'modelValue',
   },
   beforeCreate() {
@@ -63,7 +63,7 @@ export default {
       return {
         ...this.$listeners,
         change: event => {
-          this.$emit('_modelEvent', event.target.value);
+          this.$emit('modelEvent', event.target.value);
           this.$emit('change', event);
         },
       };

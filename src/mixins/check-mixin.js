@@ -11,7 +11,7 @@ export default {
   },
   model: {
     prop: 'modelValue',
-    event: '_modelEvent',
+    event: 'modelEvent',
   },
   beforeCreate() {
     console.warn(`${this.$options._componentTag}: v-model under review`);
@@ -59,7 +59,7 @@ export default {
         modelValue = ev.target.checked;
         this.$emit('change', ev.target.checked);
       }
-      this.$emit('_modelEvent', modelValue);
+      this.$emit('modelEvent', modelValue);
     },
   },
 };
