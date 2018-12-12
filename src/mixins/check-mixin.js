@@ -14,9 +14,7 @@ export default {
     event: '_modelEvent',
   },
   beforeCreate() {
-    console.log(
-      `WARNING(${this.$options._componentTag}): v-model under review`
-    );
+    console.warn(`${this.$options._componentTag}: v-model under review`);
   },
   computed: {
     isArrayModel() {

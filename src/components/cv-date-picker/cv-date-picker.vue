@@ -96,10 +96,8 @@ export default {
     invalidDateMessage: { type: String, default: 'Invalid date format' },
   },
   beforeCreate() {
-    console.log(
-      `WARNING(${
-        this.$options._componentTag
-      }): public API and properties under review`
+    console.warn(
+      `${this.$options._componentTag}: public API and properties under review`
     );
   },
   computed: {
