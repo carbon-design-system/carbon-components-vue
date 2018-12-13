@@ -13,7 +13,6 @@
           :data-invalid="invalidMessage.length > 0"
           :value="time"
           @input="$emit('update:time', $event.target.value)"
-          ref="time"
         >
         <div class="bx--form-requirement" v-if="invalidMessage.length > 0">{{invalidMessage}}</div>
         <label :for="uid" class="bx--label">{{label}}</label>
@@ -26,7 +25,6 @@
         @input="$emit('update:ampm', $event)"
         :value="ampm"
         :disabled="disabled"
-        ref="ampm"
       >
         <cv-select-option class="bx--select-option" value="AM">AM</cv-select-option>
         <cv-select-option class="bx--select-option" value="PM">PM</cv-select-option>
@@ -38,10 +36,9 @@
         hide-label
         :label="timezonesSelectLabel"
         v-if="timezones.length > 0"
-        :value="internalTimezone"
+        :value="validTimezone"
         @input="$emit('update:timezone', $event)"
         :disabled="disabled"
-        ref="timezone"
       >
         <cv-select-option
           class="bx--select-option"
@@ -66,7 +63,6 @@ export default {
     ampm: {
       type: String,
       default: 'AM',
-      validator: val => ['AM', 'PM'].includes(val),
     },
     ampmSelectLabel: { type: String, default: 'Select AM/PM' },
     disabled: Boolean,
@@ -80,11 +76,29 @@ export default {
     timezonesSelectLabel: { type: String, default: 'Select time zone' },
   },
   computed: {
-    internalTimezone() {
+    validAmpm() {
+      let result = this.ampm;
+      if (!['AM', 'PM'].includes(this.ampm)) {
+        console.error(
+          `[carbon-components-vue]: invalid value '${
+            this.ampm
+          }' supplied for prop ampm. Default applied.`
+        );
+        // set to valid value
+        result = this.ampm[0].value;
+        this.$emit('update:ampm', result);
+      }
+    },
+    validTimezone() {
       // Validate timezone setting
       let result = this.timezone;
       if (this.timezones && this.timezones.length) {
         if (!this.timezones.find(item => item.value === this.timezone)) {
+          console.error(
+            `[carbon-components-vue]: invalid value '${
+              this.timezone
+            }' supplied for prop timezone. Default applied.`
+          );
           // set to first valid value
           result = this.timezones[0].value;
           this.$emit('update:timezone', result);

@@ -12,16 +12,35 @@ http://www.carbondesignsystem.com/components/time-picker/code
 <cv-time-picker>
 </cv-time-picker>```
 
-### v-model
+### .sync
+The following properties support the .sync modifier.
 ```html
-<cv-time-picker v-model="modelValue">
-</cv-time-picker>
+<cv-time-picker
+  :time.sync="time"
+  :ampm.sync="ampm"
+  :timezone.sync="timezone"
+  :timezones="timezones">
+  </cv-time-picker>
 
 <script>
 ...
 data() {
   return {
-    modelValue: { time: '12:00', ampm: 'AM', timezone: '' }
+    time: '12:00',
+    ampm: 'AM',
+    timezone: 'timezone2',
+    timezons: {
+      "list": [
+        {
+          "label": "Timezone-1",
+          "value": "timezone1"
+        },
+        {
+          "label": "Timezone-2",
+          "value": "timezone2"
+        }
+      ]
+    },
   }
 }
 ...
@@ -31,7 +50,11 @@ data() {
 ### All in
 
 ```html
-<cv-time-picker :initial-value="initialValue" :timezones="timezones"
+<cv-time-picker
+  time="11:11"
+  ampm="PM"
+  timezone="timezone2"
+  :timezones="timezones"
   label="Time select label"
   pattern="[01][0-9]:[0-6][0-9]"
   placeholder="hh:mm"
@@ -40,14 +63,16 @@ data() {
   ampmSelectLabel="ampm label"
   invalidMessage="invalid time"
   disabled
-  @change="onChange">
+  @update:time="onUpdateTime"
+  @update:ampm="onUpdateAmpm"
+  @update:timezone="onUpdateTimezone"`
+  >
 </cv-time-picker>
 
 <script>
 ...
 data() {
   return {
-    initialValue: { time: '12:00', ampm: 'AM', timezone: '' },
     timezons: {
       "list": [
         {
@@ -62,10 +87,11 @@ data() {
     },
   }
 },
+
 methods: {
-  onChange() {
-    ...
-  }
+  onUpdateTime(val) {...},
+  onUpdateAmpm(val) {...},
+  onUpdateTimezone(val) {...},
 }
 ...
 <script>
@@ -87,7 +113,3 @@ placeholder: { type: String, default: 'hh:mm' },
 timezones: { type: Array, default: () => [] },
 timezonesSelectLabel: { type: String, default: 'Select time zone' },
 ```
-
-## Computed
-
-- value in object form { time: '', ampm: 'AM', timezone: '' }
