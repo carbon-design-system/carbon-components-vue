@@ -107,12 +107,6 @@ for (const story of storySet) {
             light: settings.raw.light,
           };
         },
-        // test changing of selectValue
-        // mounted() {
-        //   setTimeout(() => {
-        //     this.selectValue = 'cv-select-option1';
-        //   }, 1000);
-        // },
         methods: {
           actionChange: action('CV Select - change'),
         },

@@ -22,19 +22,16 @@
         inline
         hide-label
         :label="ampmSelectLabel"
-        @change="onAmpmChange"
+        @input="onAmpmChange"
+        :value="internalValue.ampm"
         :disabled="disabled"
       >
         <cv-select-option
           class="bx--select-option"
-          internalValue="AM"
+          value="AM"
           :selected="internalValue.ampm === 'AM'"
         >AM</cv-select-option>
-        <cv-select-option
-          class="bx--select-option"
-          internalValue="PM"
-          :selected="internalValue.ampm === 'PM'"
-        >PM</cv-select-option>
+        <cv-select-option class="bx--select-option" value="PM">PM</cv-select-option>
       </cv-select>
 
       <cv-select
@@ -43,16 +40,15 @@
         hide-label
         :label="timezonesSelectLabel"
         v-if="timezones.length > 0"
-        @change="onTimezoneChange"
+        @input="onTimezoneChange"
+        :value="internalValue.timezone"
         :disabled="disabled"
       >
         <cv-select-option
           class="bx--select-option"
           v-for="timezone in timezones"
           :key="timezone.internalValue"
-          :data-test="internalValue.timezone"
-          :selected="internalValue.timezone === timezone.internalValue"
-          :internalValue="timezone.internalValue"
+          :value="timezone.value"
         >{{timezone.label}}</cv-select-option>
       </cv-select>
     </div>
@@ -102,17 +98,17 @@ export default {
   methods: {
     onInput(ev) {
       const result = { ...this.internalValue };
-      result.time = ev.target.internalValue;
+      result.time = ev.target.value;
       this.$emit('change', result);
     },
-    onAmpmChange(ev) {
+    onAmpmChange(newValue) {
       const result = { ...this.internalValue };
-      result.ampm = ev.target.internalValue;
+      result.ampm = newValue;
       this.$emit('change', result);
     },
-    onTimezoneChange(ev) {
+    onTimezoneChange(newValue) {
       const result = { ...this.internalValue };
-      result.timezone = ev.target.internalValue;
+      result.timezone = newValue;
       this.$emit('change', result);
     },
   },
