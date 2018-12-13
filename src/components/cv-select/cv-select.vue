@@ -4,7 +4,14 @@
       class="bx--select"
       :class="{'bx--select--inline': inline, 'bx--select--light': theme === 'light'}"
     >
-      <select v-bind="$attrs" :id="uid" class="bx--select-input" v-on="inputListeners" ref="select">
+      <select
+        v-bind="$attrs"
+        :id="uid"
+        class="bx--select-input"
+        v-on="inputListeners"
+        ref="select"
+        :value="value"
+      >
         <slot></slot>
       </select>
       <svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5">
@@ -27,7 +34,6 @@ export default {
     inline: Boolean,
     hideLabel: Boolean,
     label: { type: String, required: true },
-    modelValue: { type: String, default: undefined },
     // *********************
     // declare here to prevent the following from being added to the select
     // *********************
@@ -39,10 +45,7 @@ export default {
         return false;
       },
     },
-  },
-  model: {
-    event: 'modelEvent',
-    prop: 'modelValue',
+    value: { type: String },
   },
   beforeCreate() {
     // *********************
@@ -50,10 +53,6 @@ export default {
     // *********************
     // multiple does not work with styling from carbon-components 9.20
     delete this.$attrs.multiple;
-    // value gets picked up by vues $attrs and set's select.value
-    // the standard HTML control does not do this.
-    // value: String,
-    delete this.$attrs.value;
   },
   computed: {
     // Bind listeners at the component level to the embedded input element and
@@ -62,29 +61,8 @@ export default {
     inputListeners() {
       return {
         ...this.$listeners,
-        change: event => {
-          this.$emit('modelEvent', event.target.value);
-          this.$emit('change', event);
-        },
+        input: event => this.$emit('input', event.target.value),
       };
-    },
-    internalValue: {
-      get() {
-        return this.$refs.select.value;
-      },
-      set(val) {
-        this.$refs.select.value = val;
-      },
-    },
-  },
-  mounted() {
-    if (this.modelValue) {
-      this.internalValue = this.modelValue;
-    }
-  },
-  watch: {
-    modelValue(val) {
-      this.internalValue = val;
     },
   },
 };

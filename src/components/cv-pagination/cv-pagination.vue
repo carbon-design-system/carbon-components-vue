@@ -5,8 +5,8 @@
         :label="`${pageSizesLabel}`"
         inline
         ref="pageSizeSelect"
-        @change="onPageSizeChange"
-        :model-value="`${pageSizeValue}`"
+        @input="onPageSizeChange"
+        :value="`${pageSizeValue}`"
       >
         <cv-select-option
           v-for="(size, index) in pageSizes"
@@ -41,8 +41,8 @@
         hideLabel
         ref="pageSelect"
         v-if="pages.length > 0"
-        @change="onPageChange"
-        :model-value="`${pageValue}`"
+        @input="onPageChange"
+        :value="`${pageValue}`"
       >
         <cv-select-option
           v-for="pageNumber in pages"
@@ -174,13 +174,13 @@ export default {
     },
   },
   methods: {
-    onPageChange(ev) {
-      this.pageValue = parseInt(ev.target.value, 10);
+    onPageChange(newVal) {
+      this.pageValue = parseInt(newVal, 10);
       this.firstItem = newFirstItem(this.pageValue, this.pageSizeValue);
       this.$emit('change', this.internalValue);
     },
-    onPageSizeChange(ev) {
-      this.pageSizeValue = parseInt(ev.target.value, 10);
+    onPageSizeChange(newVal) {
+      this.pageSizeValue = parseInt(newVal, 10);
       this.pageCount = newPageCount(this.numberOfItems, this.pageSizeValue);
       this.pages = newPagesArray(this.pageCount);
       // what page is firstItem on
