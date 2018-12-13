@@ -26,6 +26,10 @@ const parsePreKnobs = (kinds, preKnobs, kind) => {
         _knobs.kind = '';
       }
     }
+
+    const dotSync = preKnobs.dotSync;
+    const doDotSync = dotSync ? dotSync.type(...dotSync.config) : false;
+
     for (let key in preKnobs) {
       const _preKnob = preKnobs[key];
 
@@ -34,9 +38,9 @@ const parsePreKnobs = (kinds, preKnobs, kind) => {
       }
 
       const val = _preKnob.type(..._preKnob.config);
-      if (_preKnob.group.length) {
+      if (_preKnob.group.length && _preKnob.key !== 'dotSync') {
         if (_preKnob.value) {
-          _knobs.group[_preKnob.group] += _preKnob.value(val);
+          _knobs.group[_preKnob.group] += _preKnob.value(val, doDotSync);
         } else {
           _knobs.group[_preKnob.group] += val;
         }

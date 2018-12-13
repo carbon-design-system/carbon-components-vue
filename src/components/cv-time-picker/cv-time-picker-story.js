@@ -1,5 +1,11 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean, object } from '@storybook/addon-knobs/vue';
+import {
+  withKnobs,
+  text,
+  boolean,
+  object,
+  selectV2,
+} from '@storybook/addon-knobs/vue';
 import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
@@ -29,29 +35,44 @@ const preKnobs = {
     config: ['label', '', consts.CONTENT],
     value: val => (val ? `\n  label="${val}"` : ''),
   },
-  initialValue: {
+  time: {
     group: 'attr',
-    type: object,
+    type: text,
+    config: ['time', '', consts.CONFIG],
+    value: (val, dotSync) =>
+      dotSync ? '\n  :time.sync="time"' : val.length ? `\n  time="${val}"` : '',
+    data: (obj, key, val) => (obj[key] = val),
+    canDotSync: true,
+  },
+  ampm: {
+    group: 'attr',
+    type: selectV2,
     config: [
-      'initial-value',
-      { time: '', ampm: '', timezone: '' },
+      'ampm',
+      {
+        AM: 'AM',
+        PM: 'PM',
+      },
+      'AM',
       consts.CONFIG,
     ],
-    value: val =>
-      val && Object.keys(val).length ? `\n  :initial-value="initialValue"` : '',
+    value: (val, dotSync) =>
+      dotSync ? '\n  :ampm.sync="ampm"' : val.length ? `\n  ampm="${val}"` : '',
     data: (obj, key, val) => (obj[key] = val),
+    canDotSync: true,
   },
-  pattern: {
+  timezone: {
     group: 'attr',
     type: text,
-    config: ['pattern', '', consts.CONFIG],
-    value: val => (val ? `\n  pattern="${val}"` : ''),
-  },
-  placeholder: {
-    group: 'attr',
-    type: text,
-    config: ['placeholder', '', consts.CONFIG],
-    value: val => (val ? `\n  placeholder="${val}"` : ''),
+    config: ['timezone', '', consts.CONFIG],
+    value: (val, dotSync) =>
+      dotSync
+        ? '\n  :timezone.sync="timezone"'
+        : val.length
+          ? `\n  timezone="${val}"`
+          : '',
+    data: (obj, key, val) => (obj[key] = val),
+    canDotSync: true,
   },
   timezones: {
     group: 'attr',
@@ -69,6 +90,18 @@ const preKnobs = {
     value: val =>
       val && val.list && val.list.length ? `\n  :timezones="timezones"` : '',
     data: (obj, key, val) => (obj[key] = val.list),
+  },
+  pattern: {
+    group: 'attr',
+    type: text,
+    config: ['pattern', '', consts.CONFIG],
+    value: val => (val ? `\n  pattern="${val}"` : ''),
+  },
+  placeholder: {
+    group: 'attr',
+    type: text,
+    config: ['placeholder', '', consts.CONTENT],
+    value: val => (val ? `\n  placeholder="${val}"` : ''),
   },
   timezonesSelectLabel: {
     group: 'attr',
@@ -94,12 +127,10 @@ const preKnobs = {
     config: ['disabled', false, consts.CONFIG],
     value: val => (val ? `\n  disabled` : ''),
   },
-  vModel: {
-    group: 'attr',
+  dotSync: {
+    group: '',
     type: boolean,
-    config: ['v-model', false, consts.OTHER],
-    value: val => (val ? `\n  v-model="modelValue"` : ''),
-    data: obj => (obj.modelValue = { time: '', ampm: '', timezone: '' }),
+    config: ['.sync', false, consts.OTHER],
   },
   events: {
     group: 'attr',
@@ -108,7 +139,9 @@ const preKnobs = {
     value: val =>
       val
         ? `
-  @change="onChange"`
+  @update:time="onUpdateTime"
+  @update:ampm="onUpdateAmpm"
+  @update:timezone="onUpdateTimezone"`
         : '',
   },
   otherAttributes: {
@@ -129,7 +162,7 @@ for (const story of storySet) {
 
       // ----------------------------------------------------------------
       const templateString = `
-  <cv-time-picker ${settings.kind}${settings.group.attr}>
+  <cv-time-picker${settings.group.attr}>
   </cv-time-picker>
     `;
 
@@ -142,8 +175,8 @@ for (const story of storySet) {
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">
-        <span class="v-model-example" v-if="${settings.raw.vModel}">
-          Model value: {{modelValue}}
+        <span class="sync-example" v-if="${settings.raw.dotSync}">
+          time: {{time}}, ampm: {{ampm}}, timezone: {{timezone}}
           </span>
       </template>
     </sv-template-view>
@@ -156,7 +189,9 @@ for (const story of storySet) {
         components: { CvTimePicker, SvTemplateView },
         template: templateViewString,
         methods: {
-          onChange: action('cv-time-picker - chnage event'),
+          onUpdateTime: action('cv-time-picker - update:time event'),
+          onUpdateAmpm: action('cv-time-picker - update:ampm event'),
+          onUpdateTimezone: action('cv-time-picker - update:timezone event'),
         },
       };
     })

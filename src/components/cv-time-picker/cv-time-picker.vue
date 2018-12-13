@@ -11,8 +11,9 @@
           :placeholder="placeholder"
           :maxlength="placeholder.length"
           :data-invalid="invalidMessage.length > 0"
-          :internalValue="internalValue.time"
-          @input="onInput"
+          :value="time"
+          @input="$emit('update:time', $event.target.value)"
+          ref="time"
         >
         <div class="bx--form-requirement" v-if="invalidMessage.length > 0">{{invalidMessage}}</div>
         <label :for="uid" class="bx--label">{{label}}</label>
@@ -22,19 +23,13 @@
         inline
         hide-label
         :label="ampmSelectLabel"
-        @change="onAmpmChange"
+        @input="$emit('update:ampm', $event)"
+        :value="ampm"
         :disabled="disabled"
+        ref="ampm"
       >
-        <cv-select-option
-          class="bx--select-option"
-          internalValue="AM"
-          :selected="internalValue.ampm === 'AM'"
-        >AM</cv-select-option>
-        <cv-select-option
-          class="bx--select-option"
-          internalValue="PM"
-          :selected="internalValue.ampm === 'PM'"
-        >PM</cv-select-option>
+        <cv-select-option class="bx--select-option" value="AM">AM</cv-select-option>
+        <cv-select-option class="bx--select-option" value="PM">PM</cv-select-option>
       </cv-select>
 
       <cv-select
@@ -43,17 +38,17 @@
         hide-label
         :label="timezonesSelectLabel"
         v-if="timezones.length > 0"
-        @change="onTimezoneChange"
+        :value="internalTimezone"
+        @input="$emit('update:timezone', $event)"
         :disabled="disabled"
+        ref="timezone"
       >
         <cv-select-option
           class="bx--select-option"
-          v-for="timezone in timezones"
-          :key="timezone.internalValue"
-          :data-test="internalValue.timezone"
-          :selected="internalValue.timezone === timezone.internalValue"
-          :internalValue="timezone.internalValue"
-        >{{timezone.label}}</cv-select-option>
+          v-for="item in timezones"
+          :key="item.value"
+          :value="item.value"
+        >{{item.label}}</cv-select-option>
       </cv-select>
     </div>
   </div>
@@ -63,57 +58,39 @@
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
 
-const noModelValue = Symbol('no model internalValue'); // a unique identifier
-
 export default {
   name: 'CvTimePicker',
   mixins: [uidMixin, themeMixin],
   inheritAttrs: false,
   props: {
-    modelValue: { type: [Object, Symbol], default: noModelValue },
+    ampm: {
+      type: String,
+      default: 'AM',
+      validator: val => ['AM', 'PM'].includes(val),
+    },
     ampmSelectLabel: { type: String, default: 'Select AM/PM' },
     disabled: Boolean,
-    initialValue: {
-      type: Object,
-      default: () => ({ time: '', ampm: 'AM', timezone: '' }),
-    },
     invalidMessage: { type: String, default: '' },
     label: { type: String, default: 'Select a time' },
     pattern: { type: String, default: '([01][0-9]:[0-6][0-9])' },
     placeholder: { type: String, default: 'hh:mm' },
+    time: String,
+    timezone: String,
     timezones: { type: Array, default: () => [] },
     timezonesSelectLabel: { type: String, default: 'Select time zone' },
   },
-  model: {
-    prop: 'modelValue',
-    event: 'change',
-  },
   computed: {
-    internalValue() {
-      let _value;
-      if (this.modelValue === noModelValue) {
-        _value = { ...this.initialValue };
-      } else {
-        _value = { ...this.modelValue };
+    internalTimezone() {
+      // Validate timezone setting
+      let result = this.timezone;
+      if (this.timezones && this.timezones.length) {
+        if (!this.timezones.find(item => item.value === this.timezone)) {
+          // set to first valid value
+          result = this.timezones[0].value;
+          this.$emit('update:timezone', result);
+        }
       }
-      return _value;
-    },
-  },
-  methods: {
-    onInput(ev) {
-      const result = { ...this.internalValue };
-      result.time = ev.target.internalValue;
-      this.$emit('change', result);
-    },
-    onAmpmChange(ev) {
-      const result = { ...this.internalValue };
-      result.ampm = ev.target.internalValue;
-      this.$emit('change', result);
-    },
-    onTimezoneChange(ev) {
-      const result = { ...this.internalValue };
-      result.timezone = ev.target.internalValue;
-      this.$emit('change', result);
+      return result;
     },
   },
 };
