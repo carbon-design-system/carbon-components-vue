@@ -11,8 +11,8 @@
           :placeholder="placeholder"
           :maxlength="placeholder.length"
           :data-invalid="invalidMessage.length > 0"
-          :internalValue="internalValue.time"
-          @input="onInput"
+          :value="time"
+          @input="$emit('update:time', $event.target.value)"
         >
         <div class="bx--form-requirement" v-if="invalidMessage.length > 0">{{invalidMessage}}</div>
         <label :for="uid" class="bx--label">{{label}}</label>
@@ -22,15 +22,11 @@
         inline
         hide-label
         :label="ampmSelectLabel"
-        @input="onAmpmChange"
-        :value="internalValue.ampm"
+        @input="$emit('update:ampm', $event)"
+        :value="ampm"
         :disabled="disabled"
       >
-        <cv-select-option
-          class="bx--select-option"
-          value="AM"
-          :selected="internalValue.ampm === 'AM'"
-        >AM</cv-select-option>
+        <cv-select-option class="bx--select-option" value="AM">AM</cv-select-option>
         <cv-select-option class="bx--select-option" value="PM">PM</cv-select-option>
       </cv-select>
 
@@ -40,16 +36,16 @@
         hide-label
         :label="timezonesSelectLabel"
         v-if="timezones.length > 0"
-        @input="onTimezoneChange"
-        :value="internalValue.timezone"
+        :value="validTimezone"
+        @input="$emit('update:timezone', $event)"
         :disabled="disabled"
       >
         <cv-select-option
           class="bx--select-option"
-          v-for="timezone in timezones"
-          :key="timezone.internalValue"
-          :value="timezone.value"
-        >{{timezone.label}}</cv-select-option>
+          v-for="item in timezones"
+          :key="item.value"
+          :value="item.value"
+        >{{item.label}}</cv-select-option>
       </cv-select>
     </div>
   </div>
@@ -59,57 +55,56 @@
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
 
-const noModelValue = Symbol('no model internalValue'); // a unique identifier
-
 export default {
   name: 'CvTimePicker',
   mixins: [uidMixin, themeMixin],
   inheritAttrs: false,
   props: {
-    modelValue: { type: [Object, Symbol], default: noModelValue },
+    ampm: {
+      type: String,
+      default: 'AM',
+    },
     ampmSelectLabel: { type: String, default: 'Select AM/PM' },
     disabled: Boolean,
-    initialValue: {
-      type: Object,
-      default: () => ({ time: '', ampm: 'AM', timezone: '' }),
-    },
     invalidMessage: { type: String, default: '' },
     label: { type: String, default: 'Select a time' },
     pattern: { type: String, default: '([01][0-9]:[0-6][0-9])' },
     placeholder: { type: String, default: 'hh:mm' },
+    time: String,
+    timezone: String,
     timezones: { type: Array, default: () => [] },
     timezonesSelectLabel: { type: String, default: 'Select time zone' },
   },
-  model: {
-    prop: 'modelValue',
-    event: 'change',
-  },
   computed: {
-    internalValue() {
-      let _value;
-      if (this.modelValue === noModelValue) {
-        _value = { ...this.initialValue };
-      } else {
-        _value = { ...this.modelValue };
+    validAmpm() {
+      let result = this.ampm;
+      if (!['AM', 'PM'].includes(this.ampm)) {
+        console.error(
+          `[carbon-components-vue]: invalid value '${
+            this.ampm
+          }' supplied for prop ampm. Default applied.`
+        );
+        // set to valid value
+        result = this.ampm[0].value;
+        this.$emit('update:ampm', result);
       }
-      return _value;
     },
-  },
-  methods: {
-    onInput(ev) {
-      const result = { ...this.internalValue };
-      result.time = ev.target.value;
-      this.$emit('change', result);
-    },
-    onAmpmChange(newValue) {
-      const result = { ...this.internalValue };
-      result.ampm = newValue;
-      this.$emit('change', result);
-    },
-    onTimezoneChange(newValue) {
-      const result = { ...this.internalValue };
-      result.timezone = newValue;
-      this.$emit('change', result);
+    validTimezone() {
+      // Validate timezone setting
+      let result = this.timezone;
+      if (this.timezones && this.timezones.length) {
+        if (!this.timezones.find(item => item.value === this.timezone)) {
+          console.error(
+            `[carbon-components-vue]: invalid value '${
+              this.timezone
+            }' supplied for prop timezone. Default applied.`
+          );
+          // set to first valid value
+          result = this.timezones[0].value;
+          this.$emit('update:timezone', result);
+        }
+      }
+      return result;
     },
   },
 };

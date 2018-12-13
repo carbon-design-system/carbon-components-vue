@@ -38,52 +38,52 @@ Current Version: 0.1
 
 | **Components**           | **State**          | **Link**                                                                         |
 | ------------------------ | ------------------ | -------------------------------------------------------------------------------- |
-| **CvAccordion**          | :white_check_mark:      | http://vue.carbondesignsystem.com/?selectedKind=CvAccordion                      |
+| **CvAccordion**          | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvAccordion                      |
 | CvBarGraph               | :heavy_minus_sign: |                                                                                  |
-| **CvBreadcrumb**         | :white_check_mark:      | http://vue.carbondesignsystem.com/?selectedKind=CvBreadcrumb                     |
-| **CvButton**             | :white_check_mark:      | http://vue.carbondesignsystem.com/?selectedKind=CvButton                         |
+| **CvBreadcrumb**         | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvBreadcrumb                     |
+| **CvButton**             | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvButton                         |
 | **CvCheckbox**           | :warning:          | http://vue.carbondesignsystem.com/?selectedKind=CvCheckbox                       |
-| **CvCodeSnippet**        | :white_check_mark:      | http://vue.carbondesignsystem.com/?selectedKind=CvCodeSnippet&selectedStory=All  |
-| **CvContentSwitcher**    | :white_check_mark:      | http://vue.carbondesignsystem.com/?selectedKind=CvContentSwitcher                |
+| **CvCodeSnippet**        | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvCodeSnippet&selectedStory=All  |
+| **CvContentSwitcher**    | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvContentSwitcher                |
 | CvDataTable              | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/51          |
 |                          |
 | CvDatePicker             | :warning:          | http://vue.carbondesignsystem.com/?selectedKind=CvDatePicker&selectedStory=All   |
 | **CvDropdown**           | :heavy_minus_sign: | http://vue.carbondesignsystem.com/?selectedKind=CvDropdown                       |
 |                          |
-| CvFileUploader           | :white_check_mark:      | http://vue.carbondesignsystem.com/?selectedKind=CvFileUploader&selectedStory=All |
+| CvFileUploader           | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvFileUploader&selectedStory=All |
 | **CvForm**               | :warning:          | http://vue.carbondesignsystem.com/?selectedKind=CvForm                           |
 | CvGauge                  | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/49          |
 |                          |
 | **CvIcon**               | :warning:          | http://vue.carbondesignsystem.com/?selectedKind=CvIcon                           |
-| **CvInlineNotification** | :white_check_mark:      | http://vue.carbondesignsystem.com/?selectedKind=CvInlineNotification             |
+| **CvInlineNotification** | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvInlineNotification             |
 | CvLineGraph              | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/53          |
 |                          |
 | **CvLink**               | :warning:          | http://vue.carbondesignsystem.com/?selectedKind=CvLink                           |
-| **CvList**               | :white_check_mark:      | http://vue.carbondesignsystem.com/?selectedKind=CvList                           |
-| **CvLoading**            | :white_check_mark:      | http://vue.carbondesignsystem.com/?selectedKind=CvLoading                        |
-| **CvModal**              | :white_check_mark:      | http://vue.carbondesignsystem.com/?selectedKind=CvModal                          |
-| **CvNumberInput**        | :white_check_mark:      | http://vue.carbondesignsystem.com/?selectedKind=CvNumberInput                    |
-| **CvOverflowMenu**       | :white_check_mark:      | http://vue.carbondesignsystem.com/?selectedKind=CvOverflowMenu                   |
-| **CvPagination**         | :white_check_mark:      | http://vue.carbondesignsystem.com/?selectedKind=CvPagination&selectedStory=All   |
+| **CvList**               | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvList                           |
+| **CvLoading**            | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvLoading                        |
+| **CvModal**              | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvModal                          |
+| **CvNumberInput**        | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvNumberInput                    |
+| **CvOverflowMenu**       | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvOverflowMenu                   |
+| **CvPagination**         | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvPagination&selectedStory=All   |
 | CvPieChart               | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/52          |
 |                          |
-| **CvProgress**           | :white_check_mark:      | http://vue.carbondesignsystem.com/?selectedKind=CvProgress                       |
-| **CvRadioButton**        | :white_check_mark:      | http://vue.carbondesignsystem.com/?selectedKind=CvRadioButton                    |
+| **CvProgress**           | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvProgress                       |
+| **CvRadioButton**        | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvRadioButton                    |
 | CvScatterPlot            | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/50          |
 |                          |
-| **CvSearch**             | :white_check_mark:      | http://vue.carbondesignsystem.com/?selectedKind=CvSearch                         |
-| **CvSelect**             | :white_check_mark:      | http://vue.carbondesignsystem.com/?selectedKind=CvSelect                         |
-| **CvSlider**             | :white_check_mark:      | http://vue.carbondesignsystem.com/?selectedKind=CvSlider                         |
-| **CvStructuredList**     | :white_check_mark:      | http://vue.carbondesignsystem.com/?selectedKind=CvStructuredList                 |
-| **CvTabs**               | :white_check_mark:      | http://vue.carbondesignsystem.com/?selectedKind=CvTabs                           |
-| **CvTag**                | :white_check_mark:      | http://vue.carbondesignsystem.com/?selectedKind=CvTag                            |
-| **CvTextArea**           | :white_check_mark:      | http://vue.carbondesignsystem.com/?selectedKind=CvTextArea                       |
-| **CvTextInput**          | :white_check_mark:      | http://vue.carbondesignsystem.com/?selectedKind=CvTextInput                      |
-| CvTimePicker             | :white_check_mark:      | http://vue.carbondesignsystem.com/?selectedKind=CvTimePicker&selectedStory=All   |
-| **CvTile**               | :white_check_mark:      | http://vue.carbondesignsystem.com/?selectedKind=CvTile                           |
-| **CvToastNotification**  | :white_check_mark:      | http://vue.carbondesignsystem.com/?selectedKind=CvToastNotification              |
-| **CvToggle**             | :white_check_mark:      | http://vue.carbondesignsystem.com/?selectedKind=CvToggle                         |
-| **CvTooltip**            | :white_check_mark:      | http://vue.carbondesignsystem.com/?selectedKind=CvTooltip                        |
+| **CvSearch**             | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvSearch                         |
+| **CvSelect**             | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvSelect                         |
+| **CvSlider**             | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvSlider                         |
+| **CvStructuredList**     | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvStructuredList                 |
+| **CvTabs**               | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvTabs                           |
+| **CvTag**                | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvTag                            |
+| **CvTextArea**           | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvTextArea                       |
+| **CvTextInput**          | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvTextInput                      |
+| CvTimePicker             | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvTimePicker&selectedStory=All   |
+| **CvTile**               | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvTile                           |
+| **CvToastNotification**  | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvToastNotification              |
+| **CvToggle**             | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvToggle                         |
+| **CvTooltip**            | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvTooltip                        |
 
 ## Usage
 
