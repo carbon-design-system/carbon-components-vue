@@ -4,7 +4,7 @@
       :data-date-picker="['single', 'range'].includes(kind)"
       :data-date-picker-type="kind"
       class="bx--date-picker"
-      :class="[kindClass, {'bx--date-picker--light': theme==='light'}]"
+      :class="[kindClasses, {'bx--date-picker--light': theme==='light'}]"
       ref="date-picker"
     >
       <div
@@ -18,13 +18,14 @@
           width="14"
           height="16"
           viewBox="0 0 14 16"
+          @click="cal.open()"
         >
           <path
             d="M0 5h14v1H0V5zm3-5h1v4H3V0zm7 0h1v4h-1V0zM0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v12a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 0 14.5v-12zm1 0v12a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5v-12a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5z"
             fill-rule="nonzero"
           ></path>
         </svg>
-        <label :for="`${uid}-input-1`" class="bx--label">{{dateLabelValue}}</label>
+        <label :for="`${uid}-input-1`" class="bx--label">{{getDateLabel}}</label>
         <input
           :data-invalid="invalid"
           type="text"
@@ -34,11 +35,12 @@
           :placeholder="placeholder"
           data-date-picker-input
           :data-date-picker-input-from="kind === 'range'"
+          ref="date"
         >
         <div class="bx--form-requirement" v-if="invalid">{{invalidDateMessage}}</div>
       </div>
       <div :class="{'bx--date-picker-container': kind === 'range'}" v-if="kind === 'range'">
-        <label :for="`${uid}-input-2`" class="bx--label">{{dateEndLabelValue}}</label>
+        <label :for="`${uid}-input-2`" class="bx--label">{{getDateEndLabel}}</label>
         <input
           type="text"
           :id="`${uid}-input-2`"
@@ -47,6 +49,7 @@
           :placeholder="placeholder"
           data-date-picker-input
           :data-date-picker-input-to="kind === 'range'"
+          ref="todate"
         >
       </div>
       <svg
@@ -56,6 +59,7 @@
         width="14"
         height="16"
         viewBox="0 0 14 16"
+        @click="cal.open()"
       >
         <path
           d="M0 5h14v1H0V5zm3-5h1v4H3V0zm7 0h1v4h-1V0zM0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v12a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 0 14.5v-12zm1 0v12a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5v-12a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5z"
@@ -67,9 +71,21 @@
 </template>
 
 <script>
-import { DatePicker } from 'carbon-components';
+import Flatpickr from 'flatpickr';
+import l10n from 'flatpickr/dist/l10n/index';
+import RangePlugin from 'flatpickr/dist/plugins/rangePlugin';
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
+
+// Weekdays shorthand for english locale
+l10n.en.weekdays.shorthand.forEach((day, index) => {
+  const currentDay = l10n.en.weekdays.shorthand;
+  if (currentDay[index] === 'Thu' || currentDay[index] === 'Th') {
+    currentDay[index] = 'Th';
+  } else {
+    currentDay[index] = currentDay[index].charAt(0);
+  }
+});
 
 export default {
   name: 'CvDatePicker',
@@ -82,7 +98,7 @@ export default {
       default: 'simple',
       validator: val => ['short', 'simple', 'single', 'range'].includes(val),
     },
-    flatpickrOptions: {
+    calOptions: {
       type: Object,
       default: () => {
         return {
@@ -95,19 +111,14 @@ export default {
     invalid: Boolean,
     invalidDateMessage: { type: String, default: 'Invalid date format' },
   },
-  beforeCreate() {
-    console.warn(
-      `${this.$options._componentTag}: public API and properties under review`
-    );
-  },
   computed: {
-    kindClass() {
+    kindClasses() {
       if (this.kind === 'short') {
         return 'bx--date-picker--short bx--date-picker--simple';
       }
       return `bx--date-picker--${this.kind}`;
     },
-    dateLabelValue() {
+    getDateLabel() {
       if (this.dateLabel && this.dateLabel.length) {
         return this.dateLabel;
       } else {
@@ -118,7 +129,7 @@ export default {
         }
       }
     },
-    dateEndLabelValue() {
+    getDateEndLabel() {
       if (this.dateEndLabel && this.dateEndLabel.length) {
         return this.dateEndLabel;
       } else {
@@ -129,37 +140,39 @@ export default {
         }
       }
     },
-  },
-  methods: {
-    onChange(ev) {
-      this.$emit('onChange', ev);
-    },
-    onSimpleChange(ev) {
-      if (!['single', 'range'].includes(this.kind)) {
-        this.$emit('onSimpleChange', ev);
-      }
-    },
     getOptions() {
-      const _options = { ...this.flatpickrOptions };
+      const _options = { ...this.calOptions };
 
       // add events update based on parameters
       _options.onChange = this.onChange;
       _options.onValueUpdate = this.onChange;
 
+      if (this.kind === 'range') {
+        _options.plugins = [new RangePlugin({ input: this.$refs.todate })];
+      }
+
       return _options;
+    },
+  },
+  methods: {
+    onChange(ev) {
+      // this.$emit('onChange', ev); // this is a property time
+      this.$emit('onChange', this.$refs.date.value);
+    },
+    onSimpleChange(ev) {
+      if (!['single', 'range'].includes(this.kind)) {
+        this.$emit('onSimpleChange', ev.target.value);
+      }
     },
   },
   mounted() {
     if (['single', 'range'].includes(this.kind)) {
-      this.carbonComponent = DatePicker.create(
-        this.$refs['date-picker'],
-        this.getOptions()
-      );
+      this.cal = new Flatpickr(this.$refs.date, this.getOptions);
     }
   },
   beforeDestroy() {
-    if (this.carbonComponent) {
-      this.carbonComponent.release();
+    if (this.cal) {
+      this.cal.destroy();
     }
   },
 };

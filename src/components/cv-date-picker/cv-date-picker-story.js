@@ -56,11 +56,11 @@ const preKnobs = {
     config: ['placeholder', 'mm/dd/yyyy', consts.CONFIG],
     value: val => (val.length ? `\n  placeholder="${val}"` : ''),
   },
-  flatpickrOptions: {
+  calOptions: {
     group: 'attr',
     type: object,
-    config: ['flatpickrOptions', { dateFormat: 'm/d/Y' }, consts.CONFIG],
-    value: () => '\n  :flatpickr-options="flatpickrOptions"',
+    config: ['calOptions', { dateFormat: 'm/d/Y' }, consts.CONFIG],
+    value: () => '\n  :cal-options="calOptions"',
     data: (obj, key, val) => (obj[key] = val),
   },
   invalid: {
@@ -104,7 +104,7 @@ for (const story of storySet) {
 
       // ----------------------------------------------------------------
       // console.dir(settings);
-      // console.dir(settings.flatpickrOptions);
+      // console.dir(settings.calOptions);
 
       const templateString = `
   <cv-date-picker${settings.kind}${settings.group.attr}>
@@ -127,7 +127,7 @@ for (const story of storySet) {
         components: { CvDatePicker, CvIcon, SvTemplateView },
         data() {
           return {
-            flatpickrOptions: settings.flatpickrOptions,
+            calOptions: settings.raw.calOptions,
             light: settings.raw.light,
           };
         },
