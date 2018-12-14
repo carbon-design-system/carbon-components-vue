@@ -9,9 +9,14 @@
   <li
     data-accordion-item
     class="cv-accordion-item bx--accordion__item"
-    :class="{'bx--accordion__item--active': open}"
+    :class="{'bx--accordion__item--active': dataOpen}"
   >
-    <button class="bx--accordion__heading" aria-expanded="false" :aria-controls="uid">
+    <button
+      class="bx--accordion__heading"
+      :aria-expanded="`${dataOpen}`"
+      :aria-controls="uid"
+      @click="toggle"
+    >
       <svg
         class="bx--accordion__arrow"
         width="8"
@@ -41,7 +46,21 @@ export default {
     open: { type: Boolean, default: false },
   },
   mounted() {
-    this.$parent.register();
+    this.dataOpen = this.open;
+  },
+  data() {
+    return {
+      dataOpen: false,
+    };
+  },
+  methods: {
+    toggle(force) {
+      if (typeof force === 'boolean') {
+        this.dataOpen = force === true;
+      } else {
+        this.dataOpen = !this.dataOpen;
+      }
+    },
   },
 };
 </script>

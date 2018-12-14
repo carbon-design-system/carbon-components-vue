@@ -5,20 +5,8 @@
 </template>
 
 <script>
-import { Accordion } from 'carbon-components';
-
 export default {
   name: 'CvAccordion',
-  methods: {
-    register() {
-      if (!this.carbonComponent) {
-        this.carbonComponent = Accordion.create(this.$el);
-      }
-    },
-  },
-  beforeDestroy() {
-    this.carbonComponent.release();
-  },
 };
 </script>
 
