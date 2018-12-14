@@ -13,7 +13,7 @@
   >
     <button
       class="bx--accordion__heading"
-      :aria-expanded="dataOpen"
+      :aria-expanded="`${dataOpen}`"
       :aria-controls="uid"
       @click="toggle"
     >
