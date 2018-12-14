@@ -47,7 +47,7 @@ Current Version: 0.1
 | **CvContentSwitcher**    | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvContentSwitcher                |
 | CvDataTable              | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/51          |
 |                          |
-| CvDatePicker             | :warning:          | http://vue.carbondesignsystem.com/?selectedKind=CvDatePicker&selectedStory=All   |
+| CvDatePicker             | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvDatePicker&selectedStory=All   |
 | **CvDropdown**           | :heavy_minus_sign: | http://vue.carbondesignsystem.com/?selectedKind=CvDropdown                       |
 |                          |
 | CvFileUploader           | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvFileUploader&selectedStory=All |
