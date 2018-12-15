@@ -83,7 +83,7 @@ for (const story of storySet) {
       // ----------------------------------------------------------------
 
       const templateString = `
-<cv-toggle${settings.group.attr}>${settings.group.slots}
+<cv-toggle${settings.group.attr}\n  value="toggle-1">${settings.group.slots}
 </cv-toggle>
   `;
 

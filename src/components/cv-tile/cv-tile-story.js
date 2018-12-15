@@ -50,7 +50,8 @@ const preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['selected', false, consts.CONFIG],
-    value: val => (val ? '\n  selected' : ''),
+    value: val =>
+      val ? '\n  selected\n  value="selected-1"' : '\n  value="selected-1"',
   },
   otherAttributes: {
     group: 'attr',
