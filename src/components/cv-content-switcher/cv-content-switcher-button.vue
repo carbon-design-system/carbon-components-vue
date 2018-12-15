@@ -15,20 +15,72 @@
     class="cv-content-switcher-button"
     :class="[
       'bx--content-switcher-btn', {
-        'bx--content-switcher--selected' : selected
+        'bx--content-switcher--selected' : dataSelected
       }]"
     :data-target="contentSelector"
+    :aria-selected="`${dataSelected}`"
+    @click="open"
   >
     <slot></slot>
   </button>
 </template>
 
 <script>
+const toggleContent = (selector, on) => {
+  // hide content
+  const content = document.querySelectorAll(selector);
+  for (const element of content) {
+    // element.style.visibility = on;
+    if (!on) {
+      element.setAttribute('hidden', 'hidden');
+    } else {
+      element.removeAttribute('hidden');
+    }
+    element.setAttribute('aria-hidden', `${!on}`);
+  }
+};
+
 export default {
   name: 'CvContentSwitcherButton',
   props: {
     contentSelector: String,
     selected: Boolean,
+  },
+  data() {
+    return {
+      buttonId: undefined,
+      dataSelected: false,
+      onOpenFunction: undefined,
+    };
+  },
+  mounted() {
+    this.buttonId = Symbol('content switcher button');
+    this.dataSelected = this.selected;
+    this.onOpenFunction = this.$parent.register(
+      this.buttonId,
+      this.contentSelector,
+      this.close
+    );
+
+    if (this.selected) {
+      this.open();
+    } else {
+      this.close();
+    }
+  },
+  beforeDestroy() {
+    this.$parent.deregister(this.buttonId);
+  },
+  methods: {
+    close() {
+      this.dataSelected = false;
+      toggleContent(this.contentSelector, false);
+    },
+    open() {
+      this.onOpenFunction(this.buttonId);
+      this.dataSelected = true;
+      toggleContent(this.contentSelector, true);
+    },
   },
 };
 </script>
