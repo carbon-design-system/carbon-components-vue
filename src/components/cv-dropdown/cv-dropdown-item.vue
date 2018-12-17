@@ -15,8 +15,8 @@
       class="bx--dropdown-link"
       :class="{'bx--dropdown--selected': internalSelected}"
       href="javascript:void(0)"
-      @click="onClick"
       ref="link"
+      tabindex="-1"
     >
       <slot></slot>
     </a>
@@ -32,13 +32,6 @@ export default {
       required: true,
     },
     selected: Boolean,
-  },
-  mounted() {
-    this.itemId = Symbol('dropdown item');
-    this.parentClick = this.$parent.register(this);
-  },
-  beforeDestroy() {
-    this.$parent.deregister(this);
   },
   data() {
     return {
@@ -61,8 +54,8 @@ export default {
     },
   },
   methods: {
-    onClick() {
-      this.parentClick(this);
+    setFocus(val) {
+      this.$refs.link.focus();
     },
   },
 };

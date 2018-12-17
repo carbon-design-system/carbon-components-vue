@@ -18,16 +18,16 @@
 <template>
   <ul
     data-dropdown
-    :data-value="dataValue"
+    :data-value="internalValue"
     class="cv-dropdown bx--dropdown"
     tabindex="0"
-    :class="{'bx--text-input--light': theme === 'light', 'bx--dropdown--up': up, 'bx--dropdown--open': open}"
+    :class="{'bx--dropdown--light': theme === 'light', 'bx--dropdown--up': up, 'bx--dropdown--open': open}"
     v-bind="$attrs"
     @keypress.down.prevent="onDown"
-    @keypress.up.prevent="onDown"
-    @keypress.enter.prevent="toggle"
-    @keypress.esc.prevent="toggle"
-    @click="toggle"
+    @keypress.up.prevent="onUp"
+    @keypress.enter.prevent="onClick"
+    @keypress.esc.prevent="onEsc"
+    @click="onClick"
   >
     <li class="bx--dropdown-text" ref="valueContent">{{placeholder}}</li>
     <svg class="bx--dropdown__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
@@ -44,6 +44,8 @@
 <script>
 import themeMixin from '../../mixins/theme-mixin';
 
+const notSupplied = Symbol('cv-dropdown');
+
 export default {
   name: 'CvDropdown',
   mixins: [themeMixin],
@@ -53,78 +55,100 @@ export default {
       default: 'Choose an option',
     },
     up: false,
-    value: { type: String }, // initial value of the dropdown
+    value: { type: String }, // initial value of the dropdown,
+    modelValue: { type: [String, Symbol], default: notSupplied },
   },
   data() {
     return {
       open: false,
-      items: [],
-      dataValue: '',
+      dataValue: this.value,
     };
   },
   beforeCreate() {
     console.warn(`${this.$options._componentTag}: public API under review`);
   },
-  methods: {
-    register(childItem) {
-      this.deregister(childItem);
-      this.items.push(childItem);
-
-      console.dir(this.$children);
-      return this.onChildClick;
-    },
-    deregister(childItem) {
-      let index = this.items.findIndex(
-        item => item.itemId === childItem.itemId
-      );
-      this.items.slice(index, index + 1);
-    },
-    onChildClick(childItem) {
-      // requery could have changed
-      const childEls = this.$el.querySelectorAll('.cv-dropdown-item');
-
-      for (let index in this.items) {
-        this.items[index].internalSelected =
-          childItem.value === this.items[index].value;
+  mounted() {
+    this.$el.addEventListener('focusout', ev => {
+      if (ev.relatedTarget === null || !this.$el.contains(ev.relatedTarget)) {
+        this.open = false;
       }
-
-      this.dataValue = childItem.value;
-      this.$refs.valueContent.innerHTML = childItem.internalContent;
+    });
+    this.internalValue = this.internalValue; // forces update of value
+  },
+  model: {
+    prop: 'modelValue',
+    event: 'change',
+  },
+  watch: {
+    modelValue(val) {
+      // ensure model updates happen
+      this.internalValue = val;
     },
+  },
+  computed: {
+    internalValue: {
+      get() {
+        if (this.modelValue !== notSupplied) {
+          return this.modelValue;
+        } else {
+          return this.dataValue && this.dataValue.length
+            ? this.dataValue
+            : this.value;
+        }
+      },
+      set(val) {
+        console.log('woo');
+        for (let index in this.$children) {
+          let child = this.$children[index];
+          let selected = child.value === val;
+          child.internalSelected = selected;
+
+          console.log('loop');
+          if (selected) {
+            this.$refs.valueContent.innerHTML = child.internalContent;
+          }
+        }
+        if (val && val !== this.dataValue) {
+          this.dataValue = val;
+          this.$emit('change', this.dataValue);
+        }
+      },
+    },
+  },
+  methods: {
     doMove(up) {
       // requery could have changed
-      let nextValue;
-      let nextEl;
+      let currentFocusEl = this.$el.querySelector('.cv-dropdown-item :focus');
+      let currentFocusValue;
+      let last = this.$children.length - 1;
+      let currentFocusIndex = up ? 0 : last;
+      let nextFocusIndex;
 
-      if (this.dataValue.length) {
-        if (up) {
-          nextEl = this.$el
-            .querySelector(`.cv-dropdown-item[data-value="${this.dataValue}"]`)
-            .previousElementSibling();
-        } else {
-          nextEl = this.$el
-            .querySelector(`.cv-dropdown-item[data-value="${this.dataValue}"]`)
-            .nextElementSibling();
-        }
+      if (currentFocusEl) {
+        currentFocusValue = currentFocusEl.parentNode.getAttribute(
+          'data-value'
+        );
       }
-      if (!nextEl) {
-        if (up) {
-          nextValue = this.$el
-            .querySelector('.cv-dropdown-item:last-child')
-            .getAttribute('data-value');
-        } else {
-          nextValue = this.$el
-            .querySelector('.cv-dropdown-item:first-child')
-            .getAttribute('data-value');
+
+      if (currentFocusValue !== undefined) {
+        currentFocusIndex = this.$children.findIndex(
+          child => child.value === currentFocusValue
+        );
+      }
+
+      if (up) {
+        nextFocusIndex = currentFocusIndex > 0 ? currentFocusIndex - 1 : last;
+        if (this.$children[nextFocusIndex].internalSelected) {
+          nextFocusIndex = nextFocusIndex > 0 ? nextFocusIndex - 1 : last;
         }
       } else {
-        nextValue = nextEl.getAttribute('data-value');
+        nextFocusIndex = currentFocusIndex < last ? currentFocusIndex + 1 : 0;
+        if (this.$children[nextFocusIndex].internalSelected) {
+          nextFocusIndex = nextFocusIndex < last ? nextFocusIndex + 1 : 0;
+        }
       }
 
-      for (let index in this.items) {
-        this.items[index].internalSelected =
-          nextValue === this.items[index].value;
-      }
+      this.$children[nextFocusIndex].setFocus();
     },
     onDown() {
       if (!this.open) {
@@ -140,9 +164,20 @@ export default {
     },
     onEsc() {
       this.open = false;
+      this.$el.focus();
     },
-    toggle() {
+    onClick(ev) {
       this.open = !this.open;
+      if (!this.open) {
+        this.$el.focus();
+      }
+
+      if (ev.target.classList.contains('bx--dropdown-link')) {
+        const targetItemEl = ev.target.parentNode;
+        const newValue = targetItemEl.getAttribute('data-value');
+
+        this.internalValue = newValue;
+      }
     },
   },
 };
