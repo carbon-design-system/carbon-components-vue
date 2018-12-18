@@ -44,8 +44,6 @@
 <script>
 import themeMixin from '../../mixins/theme-mixin';
 
-const notSupplied = Symbol('cv-dropdown');
-
 export default {
   name: 'CvDropdown',
   mixins: [themeMixin],
@@ -56,7 +54,6 @@ export default {
     },
     up: false,
     value: { type: String }, // initial value of the dropdown,
-    modelValue: { type: [String, Symbol], default: notSupplied },
   },
   data() {
     return {
@@ -76,42 +73,31 @@ export default {
     this.internalValue = this.internalValue; // forces update of value
   },
   model: {
-    prop: 'modelValue',
+    prop: 'value',
     event: 'change',
   },
   watch: {
-    modelValue(val) {
-      // ensure model updates happen
+    value(val) {
       this.internalValue = val;
     },
   },
   computed: {
     internalValue: {
       get() {
-        if (this.modelValue !== notSupplied) {
-          return this.modelValue;
-        } else {
-          return this.dataValue && this.dataValue.length
-            ? this.dataValue
-            : this.value;
-        }
+        return this.dataValue;
       },
       set(val) {
-        console.log('woo');
         for (let index in this.$children) {
           let child = this.$children[index];
           let selected = child.value === val;
           child.internalSelected = selected;
 
-          console.log('loop');
           if (selected) {
             this.$refs.valueContent.innerHTML = child.internalContent;
           }
         }
-        if (val && val !== this.dataValue) {
-          this.dataValue = val;
-          this.$emit('change', this.dataValue);
-        }
+        this.dataValue = val;
+        this.$emit('change', this.dataValue);
       },
     },
   },

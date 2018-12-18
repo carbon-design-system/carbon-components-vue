@@ -44,7 +44,8 @@ const preKnobs = {
       '',
       consts.CONTENT,
     ],
-    value: val => (val.length ? `\n  value="${val}"` : ''),
+    value: val => `\n  :value="value"`,
+    data: (obj, key, val) => (obj[key] = val),
   },
   vModel: {
     group: 'attr',
@@ -61,6 +62,12 @@ const preKnobs = {
         ? `
   @change="actionChange"`
         : '',
+  },
+  otherAttributes: {
+    group: 'attr',
+    type: text,
+    config: ['other attributes', '', consts.OTHER],
+    value: val => (val.length ? `\n  ${val}` : ''),
   },
 };
 
@@ -112,9 +119,9 @@ for (const story of storySet) {
         },
         data() {
           return {
-            value: '20',
             light: settings.raw.light,
             showVModel: settings.raw.vModel,
+            value: settings.data.value,
           };
         },
         methods: {
