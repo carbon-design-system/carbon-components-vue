@@ -61,9 +61,6 @@ export default {
       dataValue: this.value,
     };
   },
-  beforeCreate() {
-    console.warn(`${this.$options._componentTag}: public API under review`);
-  },
   mounted() {
     this.$el.addEventListener('focusout', ev => {
       if (ev.relatedTarget === null || !this.$el.contains(ev.relatedTarget)) {
