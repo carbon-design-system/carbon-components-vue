@@ -15,17 +15,17 @@ stories.addDecorator(withKnobs);
 
 const kinds = null;
 const preKnobs = {
-  checked: {
+  checked1: {
     group: 'attr1',
     type: boolean,
     config: ['radio-1:checked', true, consts.CONFIG],
-    value: val => (val ? 'checked' : ''),
+    value: val => (val ? ' checked' : ''),
   },
-  disabled: {
+  disabled2: {
     group: 'attr2',
     type: boolean,
     config: ['radio-2:disabled', true, consts.CONFIG],
-    value: val => (val ? 'disabled' : ''),
+    value: val => (val ? ' disabled' : ''),
   },
   vModel: {
     group: 'each',
@@ -84,9 +84,11 @@ for (const story of storySet) {
       <template slot="component">${templateString}</template>
 
       <template slot="other">
-        <span class="v-model-example" v-if="${
-          settings.raw.vModel
-        }">Radio value ''{{radioVal}}''</span>
+        <div class="v-model-example" v-if="${settings.raw.vModel}">V-Model:
+          <input type="radio" value="value-1" v-model="radioVal" group="story">Radio 1</input>
+          <input type="radio" value="value-2" v-model="radioVal" group="story">Radio 2</input>
+          <input type="radio" value="value-3" v-model="radioVal" group="story">Radio 3</input>
+        </div>
       </template>
     </sv-template-view>
   `;

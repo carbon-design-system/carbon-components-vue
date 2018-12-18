@@ -167,5 +167,4 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~carbon-components/scss/components/dropdown/dropdown';
 </style>
