@@ -65,7 +65,6 @@ export default {
     console.warn(`${this.$options._componentTag}: public API under review`);
   },
   mounted() {
-    console.log('up:', this.$props.up);
     this.$el.addEventListener('focusout', ev => {
       if (ev.relatedTarget === null || !this.$el.contains(ev.relatedTarget)) {
         this.open = false;
