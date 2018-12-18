@@ -10,13 +10,14 @@
 -->
 
 <template>
-  <li
-    data-option
-    :data-value="value"
-    class="cv-dropdown-item bx--dropdown-item"
-    v-on:click="selectValue"
-  >
-    <a class="bx--dropdown-link" href="javascript:void(0)">
+  <li data-option :data-value="value" class="cv-dropdown-item bx--dropdown-item">
+    <a
+      class="bx--dropdown-link"
+      :class="{'bx--dropdown--selected': internalSelected}"
+      href="javascript:void(0)"
+      ref="link"
+      tabindex="-1"
+    >
       <slot></slot>
     </a>
   </li>
@@ -30,15 +31,31 @@ export default {
       type: String,
       required: true,
     },
+    selected: Boolean,
   },
-  beforeCreate() {
-    console.warn(`${this.$options._componentTag}: public API under review`);
+  data() {
+    return {
+      dataSelected: undefined,
+    };
+  },
+  computed: {
+    internalSelected: {
+      get() {
+        return this.dataSelected === undefined
+          ? this.selected
+          : this.dataSelected === true;
+      },
+      set(val) {
+        this.dataSelected = val;
+      },
+    },
+    internalContent() {
+      return this.$refs.link.innerHTML;
+    },
   },
   methods: {
-    selectValue: function(event) {
-      if (event) {
-        this.$parent.$emit('change', this.value);
-      }
+    setFocus(val) {
+      this.$refs.link.focus();
     },
   },
 };

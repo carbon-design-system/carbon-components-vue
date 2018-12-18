@@ -21,6 +21,8 @@ https://www.carbondesignsystem.com/components/dropdown/code
 ### cv-dropdown
 
 - placeholder - The descriptive text appearing at the top of the dropdown
+- up - diretction of dropdown
+- value - string matching value of one of the options or ''
 
 ### cv-dropdown-item
 

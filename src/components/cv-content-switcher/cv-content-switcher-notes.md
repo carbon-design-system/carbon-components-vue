@@ -33,6 +33,11 @@ http://www.carbondesignsystem.com/components/content-switcher/code
 
 N/A
 
+## Events
+
+- selected
+  - contentSelector
+
 ### Additional
 
 N/A
