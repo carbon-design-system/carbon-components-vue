@@ -85,7 +85,6 @@
 import uidMixin from '../../mixins/uid-mixin';
 // import { FileUploader } from 'carbon-components';
 
-const noModelValue = Symbol('file uploader - no model value'); // a unique identifier
 const CONSTS = {
   STATES: {
     NONE: '',
@@ -99,7 +98,6 @@ export default {
   mixins: [uidMixin],
   inheritAttrs: false,
   props: {
-    modelValue: { type: [String, Symbol], default: noModelValue },
     clearOnReselect: Boolean,
     initialStateUploading: Boolean,
     removable: Boolean,
