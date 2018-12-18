@@ -38,8 +38,7 @@ const preKnobs = {
     value: val =>
       val
         ? `
-  @content-switcher-selected="actionSelected"
-  @content-switcher-beingselected="actionBeingSelected"`
+  @selected="actionSelected"`
         : '',
   },
   otherAttributes: {
@@ -76,13 +75,13 @@ for (const story of storySet) {
     <div class="content-1">
       <p>This is the content for option 1</p>
     </div>
-    <div class="content-2" hidden>
+    <div class="content-2">
       <p>This is the content for option 2</p>
     </div>
-    <div class="content-2" hidden >
+    <div class="content-2" >
       <p>This is more content for option 2</p>
     </div>
-    <div class="content-3" hidden>
+    <div class="content-3">
       <p>This is the content for option 3</p>
     </div>
   </section>
@@ -105,12 +104,7 @@ for (const story of storySet) {
           SvTemplateView,
         },
         methods: {
-          actionSelected: action(
-            'Cv Content Switcher - content-switcher-selected'
-          ),
-          actionBeingSelected: action(
-            'Cv Content Switcher - content-switcher-beingselected'
-          ),
+          actionSelected: action('Cv Content Switcher - selected'),
         },
         template: templateViewString,
       };
