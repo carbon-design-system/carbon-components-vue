@@ -1,14 +1,18 @@
 <template>
   <div class="cv-checkbox bx--form-item bx--checkbox-wrapper">
-    <label :class="['bx--checkbox-label', {'bx--label--disabled': $attrs.disabled !== undefined}]">
+    <label
+      :class="['bx--checkbox-label', {'bx--label--disabled': $attrs.disabled !== undefined}]"
+      :data-contained-checkbox-state="isChecked"
+    >
       <input
         ref="input"
         v-bind="$attrs"
         v-on="inputListeners"
         class="bx--checkbox"
         type="checkbox"
-        :checked="isChecked"
-        :aria-checked="state"
+        :checked="isChecked === true"
+        :aria-checked="`${isChecked}`"
+        @change="onChange"
       >
       {{label}}
     </label>
@@ -16,7 +20,6 @@
 </template>
 
 <script>
-import { Checkbox } from 'carbon-components';
 import checkMixin from '../../mixins/check-mixin';
 
 export default {
@@ -27,16 +30,10 @@ export default {
     label: String,
     mixed: Boolean,
   },
-  computed: {
-    state() {
-      return !this.checked && this.mixed ? 'mixed' : this.checked;
-    },
-  },
-  mounted() {
-    this.carbonComponent = Checkbox.create(this.$refs.input);
-  },
-  beforeDestroy() {
-    this.carbonComponent.release();
+  data() {
+    return {
+      dataMixed: this.mixed,
+    };
   },
 };
 </script>

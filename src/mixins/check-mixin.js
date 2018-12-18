@@ -5,13 +5,18 @@
 export default {
   props: {
     modelValue: { type: [Array, Boolean], default: () => undefined },
-    checked: Boolean,
+    checked: { type: Boolean, default: undefined },
     name: String,
     value: { type: String, required: true },
   },
   model: {
     prop: 'modelValue',
     event: 'modelEvent',
+  },
+  data() {
+    return {
+      dataChecked: undefined,
+    };
   },
   beforeCreate() {
     console.warn(`${this.$options._componentTag}: v-model under review`);
@@ -21,14 +26,37 @@ export default {
       return Array.isArray(this.modelValue);
     },
     isChecked() {
+      const nonModelChecked = () => {
+        // dataChecked before checked / mixed properties
+        if (this.dataChecked !== undefined) {
+          return this.dataChecked;
+        } else {
+          // if checked defined
+          if (this.checked !== undefined) {
+            return this.checked;
+          }
+
+          if (this.mixed) {
+            return 'mixed';
+          }
+        }
+
+        return false;
+      };
+
       if (this.$props.modelValue !== undefined) {
+        // model value always comes first
         if (this.isArrayModel) {
-          return this.modelValue.includes(this.value);
+          if (this.modelValue.includes(this.value)) {
+            return true;
+          } else {
+            return nonModelChecked();
+          }
         } else {
           return this.modelValue;
         }
       } else {
-        return this.checked;
+        return nonModelChecked();
       }
     },
     // Bind listeners at the component level to the embedded input element and
@@ -42,8 +70,6 @@ export default {
   },
   methods: {
     onChange(ev) {
-      let modelValue;
-
       if (this.isArrayModel) {
         let modelSet = new Set(this.modelValue);
 
@@ -54,12 +80,12 @@ export default {
           modelSet.add(this.value);
           this.$emit('change', true);
         }
-        modelValue = Array.from(modelSet);
+        this.dataChecked = Array.from(modelSet);
       } else {
-        modelValue = ev.target.checked;
+        this.dataChecked = ev.target.checked;
         this.$emit('change', ev.target.checked);
       }
-      this.$emit('modelEvent', modelValue);
+      this.$emit('modelEvent', this.dataChecked);
     },
   },
 };

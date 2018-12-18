@@ -6,15 +6,14 @@
     data-tile="selectable"
     tabindex="0"
     :class="[{'bx--tile--is-selected': isChecked}]"
+    :data-contained-checkbox-state="isChecked"
   >
     <input
       tabindex="-1"
       data-tile-input
       :id="uid"
       type="checkbox"
-      :checked="isChecked"
       class="bx--tile-input"
-      :value="value"
       v-bind="$attrs"
     >
     <div class="bx--tile__checkmark">
