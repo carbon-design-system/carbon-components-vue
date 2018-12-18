@@ -47,6 +47,12 @@ const preKnobs = {
     value: val => `\n  :value="value"`,
     data: (obj, key, val) => (obj[key] = val),
   },
+  up: {
+    group: 'attr',
+    type: boolean,
+    config: ['up', false, consts.CONFIG],
+    value: val => (val ? '\n  up' : ''),
+  },
   vModel: {
     group: 'attr',
     type: boolean,
@@ -80,7 +86,7 @@ for (const story of storySet) {
       const settings = story.knobs();
 
       const templateString = `
-  <cv-dropdown class="cv-dropdown" ${settings.group.attr}>
+  <cv-dropdown ${settings.group.attr}>
     <cv-dropdown-item value="10">Option with value 10</cv-dropdown-item>
     <cv-dropdown-item value="20">Option with value 20</cv-dropdown-item>
     <cv-dropdown-item value="30">Option with value 30</cv-dropdown-item>

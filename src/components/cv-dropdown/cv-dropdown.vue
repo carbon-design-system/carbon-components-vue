@@ -52,8 +52,8 @@ export default {
       type: String,
       default: 'Choose an option',
     },
-    up: false,
-    value: { type: String }, // initial value of the dropdown,
+    up: Boolean,
+    value: String, // initial value of the dropdown,
   },
   data() {
     return {
@@ -65,6 +65,7 @@ export default {
     console.warn(`${this.$options._componentTag}: public API under review`);
   },
   mounted() {
+    console.log('up:', this.$props.up);
     this.$el.addEventListener('focusout', ev => {
       if (ev.relatedTarget === null || !this.$el.contains(ev.relatedTarget)) {
         this.open = false;
