@@ -7,7 +7,6 @@
     tabindex="0"
   >
     <input
-      v-if
       v-bind="$attrs"
       v-on="inputListeners"
       tabindex="-1"
@@ -31,49 +30,11 @@
 
 <script>
 import uidMixin from '../../mixins/uid-mixin';
-
-const noModelValue = Symbol(
-  'cv-structured list item selectable - no model value'
-); // a unique identifier
+import radioMixin from '../../mixins/radio-mixin';
 
 export default {
   name: 'CvStructuredListItemSelectable',
-  mixins: [uidMixin],
-  inheritAttrs: false,
-  props: {
-    modelValue: { type: [String, Symbol], default: noModelValue },
-    checked: Boolean,
-    label: String,
-    value: { type: String, default: null },
-  },
-  model: {
-    prop: 'modelValue',
-    event: 'modelEvent',
-  },
-  computed: {
-    isChecked() {
-      if (this.modelValue === noModelValue) {
-        return this.checked;
-      } else {
-        return this.modelValue === this.value;
-      }
-    },
-    // Bind listeners at the component level to the embedded input element and
-    // add our own input listener to service the v-model. See:
-    // https://vuejs.org/v2/guide/components-custom-events.html#Customizing-Component-v-model
-    inputListeners() {
-      return Object.assign({}, this.$listeners, {
-        change: event => this.onChange(event),
-      });
-    },
-  },
-  methods: {
-    onChange(ev) {
-      this.$emit('change', ev);
-      // console.log(this.value === noModelValue, this.value);
-      this.$emit('modelEvent', this.value);
-    },
-  },
+  mixins: [uidMixin, radioMixin],
 };
 </script>
 
