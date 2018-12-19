@@ -94,9 +94,11 @@ for (const story of storySet) {
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">
-        <span class="v-model-example" v-if="${
-          settings.raw.vModel
-        }">Model value: {{modelValue}}</span>
+        <div class="v-model-example" v-if="${settings.raw.vModel}">
+          <label>Model value:
+            <input type="text" v-model="modelValue" />
+          </label>
+        </div>
       </template>
     </sv-template-view>
   `;

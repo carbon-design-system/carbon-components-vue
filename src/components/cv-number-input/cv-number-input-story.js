@@ -82,7 +82,7 @@ const preKnobs = {
     value: val =>
       val
         ? `
-  @change="onChange"`
+  @input="onInput"`
         : '',
   },
   otherAttributes: {
@@ -117,9 +117,11 @@ for (const story of storySet) {
     sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">
-        <span class="v-model-example" v-if="${
-          settings.raw.vModel
-        }">Model value: {{modelValue}}</span>
+        <div class="v-model-example" v-if="${settings.raw.vModel}">
+          <label>Model value:
+            <input type="number" v-model="modelValue" />
+          </label>
+        </div>
       </template>
     </sv-template-view>
   `;
@@ -134,7 +136,7 @@ for (const story of storySet) {
         components: { CvNumberInput, SvTemplateView },
         template: templateViewString,
         methods: {
-          onChange: action('cv-number-input - change event'),
+          onInput: action('cv-number-input - input event'),
         },
       };
     })

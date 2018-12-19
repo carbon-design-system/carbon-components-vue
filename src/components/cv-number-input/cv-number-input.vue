@@ -53,13 +53,13 @@ export default {
     // https://vuejs.org/v2/guide/components-custom-events.html#Customizing-Component-v-model
     inputListeners() {
       return Object.assign({}, this.$listeners, {
-        change: event => this.$emit('change', event.target.value),
+        input: event => this.$emit('input', event.target.value),
       });
     },
   },
   model: {
     prop: 'value',
-    event: 'change',
+    event: 'input',
   },
   mounted() {
     this.carbonComponent = NumberInput.create(this.$el);
