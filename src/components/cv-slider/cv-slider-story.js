@@ -124,8 +124,11 @@ for (const story of storySet) {
       <template slot="other">
         <div class="v-model-example" v-if="${
           settings.raw.vModel
-        }">Model value: {{modelValue}}</div>
-        <div>Note slider defaults to min: 0, max: 100, value: Math.floor((min + max) / 2). This is consistent with standard slider when submitted.</div>
+        }">Model value: <input type="range" step="${settings.raw.step}" min="${
+        settings.raw.min
+      }" max="${settings.raw.max}" v-model="modelValue">
+        </div>
+        <div>Note cv-slider defaults to min: 0, max: 100, value: Math.floor((min + max) / 2). This is consistent with standard slider when submitted.</div>
       </template>
     </sv-template-view>
   `;

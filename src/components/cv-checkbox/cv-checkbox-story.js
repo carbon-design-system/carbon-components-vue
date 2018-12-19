@@ -23,12 +23,6 @@ const preKnobs = {
     value: val => (val.length ? `\n  label="${val}"` : ''),
     data: (obj, key, val) => (obj[key] = val),
   },
-  value: {
-    group: 'attr',
-    type: text,
-    config: ['value', 'check-1', consts.CONFIG],
-    value: val => (val.length ? `\n  value="${val}"` : ''),
-  },
   checked: {
     group: 'attr',
     type: boolean,
@@ -82,7 +76,7 @@ for (const story of storySet) {
 
       // ----------------------------------------------------------------
       const templateString = `
-<cv-checkbox${settings.group.attr}>
+<cv-checkbox${settings.group.attr} value="check-1">
 </cv-checkbox>
   `;
 
@@ -95,9 +89,19 @@ for (const story of storySet) {
       <template slot="component">${templateString}</template>
 
       <template slot="other">
-        <span class="v-model-example" v-if="${
-          settings.raw.vModel
-        }">Checked value {{checked}}</span>
+        <div v-if="${settings.raw.vModel}">
+          <br>
+          <br>
+          <span>
+            V-model:
+          </span>
+          <label>Check 1:
+            <input type="checkbox" value="check-1" v-model="checked">
+          </label>
+          <br>
+          <br>
+          <span>Checked: {{ checked }}</span>
+        </div>
       </template>
     </sv-template-view>
   `;
@@ -139,7 +143,28 @@ stories.add(
       <template slot="component">${templateString}</template>
 
       <template slot="other">
-        <span class="v-model-example">Checked values: {{checks}}</span>
+        <div>
+          <br>
+          <br>
+          <span>
+            V-model:
+          </span>
+          <label>Check 1:
+            <input type="checkbox" value="check-1" v-model="checks">
+          </label>
+          <label>Check 2:
+            <input type="checkbox" value="check-2" v-model="checks">
+          </label>
+          <label>Check 3:
+            <input type="checkbox" value="check-3" v-model="checks">
+          </label>
+          <label>Check 4:
+            <input type="checkbox" value="check-4" v-model="checks">
+          </label>
+          <br>
+          <br>
+          <span>Checks: {{ checks }}</span>
+        </div>
       </template>
     </sv-template-view>
   `;

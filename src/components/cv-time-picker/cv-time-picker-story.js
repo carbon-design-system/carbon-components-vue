@@ -175,9 +175,23 @@ for (const story of storySet) {
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">
-        <span class="sync-example" v-if="${settings.raw.dotSync}">
-          time: {{time}}, ampm: {{ampm}}, timezone: {{timezone}}
-          </span>
+        <div class="sync-example" v-if="${settings.raw.dotSync}">
+          <label>time:
+            <input type="text" v-model="time" />
+          </label>
+          <label>Ampm:
+            <select v-model="ampm">
+              <option value="AM">AM</option>
+              <option value="PM">PM</option>
+            </select>
+          </label>
+          <label>Timezone:
+            <select v-model="timezone">
+              <option value="timezone1">Timezone 1</option>
+              <option value="timezone2">Timezone 2</option>
+            </select>
+          </label>
+        </div>
       </template>
     </sv-template-view>
   `;

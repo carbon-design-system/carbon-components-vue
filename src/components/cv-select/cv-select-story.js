@@ -92,9 +92,16 @@ for (const story of storySet) {
       <template slot="component">${templateString}</template>
 
       <template slot="other">
-        <span class="v-model-example" v-if="${
-          settings.raw.vModel
-        }">Select value ''{{selectValue}}''</span>
+        <div v-if="showVModel">
+          <span>V-Model value</span>
+            <select v-model="selectValue" >
+              <option value="cv-select-option1">cv-select-option 1</option>
+              <option value="cv-select-option2">cv-select-option 2</option>
+              <option value="cv-select-option3">cv-select-option 3</option>
+              <option value="cv-select-option4">cv-select-option 4</option>
+            </select>
+          </span>
+        </div>
       </template>
     </sv-template-view>
   `;
@@ -103,6 +110,7 @@ for (const story of storySet) {
         components: { CvSelect, SvTemplateView },
         data() {
           return {
+            showVModel: settings.raw.vModel,
             selectValue: 'cv-select-option3',
             light: settings.raw.light,
           };

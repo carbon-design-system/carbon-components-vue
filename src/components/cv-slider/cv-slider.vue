@@ -108,6 +108,11 @@ export default {
     this.percentage = `${((this.internalValue - this.getMin()) * 100) /
       (this.getMax() - this.getMin())}%`;
   },
+  watch: {
+    value(val) {
+      this.setValue(val);
+    },
+  },
   methods: {
     // NOTE: It is not safe to rely on Numbers for non-integer steps
     getMin() {
