@@ -36,8 +36,8 @@ export default {
     // listen children to raise change events
     for (let child of this.$children) {
       if (child.constructor.options.name === 'CvStructuredListItemSelectable') {
-        child.$on('change', ev => {
-          this.$emit('change', ev.target.value);
+        child.$on('change', val => {
+          this.$emit('change', val);
         });
       }
     }
