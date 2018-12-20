@@ -3,12 +3,12 @@
     data-modal
     :id="uid"
     class="cv-modal bx--modal"
-    :class="{'bx--modal--danger': kind === 'danger'}"
+    :class="{
+      'is-visible': dataVisible,
+      'bx--modal--danger': kind === 'danger'
+    }"
     tabindex="-1"
-    @modal-beingshown="$emit('modal-beingshown')"
-    @modal-shown="$emit('modal-shown')"
-    @modal-beinghidden="$emit('modal-beinghidden')"
-    @modal-hidden="$emit('modal-hidden')"
+    @keydown.esc.prevent="hide"
   >
     <div class="bx--modal-container">
       <div class="bx--modal-header">
@@ -18,12 +18,7 @@
         <h2 class="bx--modal-header__heading">
           <slot name="title">Modal Title</slot>
         </h2>
-        <button
-          class="bx--modal-close"
-          type="button"
-          data-modal-close
-          :data-modal-primary-focus="initialFocus === 'close'"
-        >
+        <button class="bx--modal-close" type="button" @click="hide" ref="close">
           <cv-icon class="bx--modal-close__icon" href="cv(icon--close)" height="10px" width="10px"></cv-icon>
         </button>
       </div>
@@ -39,7 +34,7 @@
           :kind="secondaryKind"
           @click="onSecondaryClick"
           v-if="this.$slots['secondary-button']"
-          :data-modal-primary-focus="initialFocus === 'secondary'"
+          ref="secondary"
         >
           <slot name="secondary-button">Secondary button</slot>
         </cv-button>
@@ -47,7 +42,7 @@
           :kind="primaryKind"
           @click="onPrimaryClick"
           v-if="this.$slots['primary-button']"
-          :data-modal-primary-focus="initialFocus === 'primary'"
+          ref="primary"
         >
           <slot name="primary-button">Primary button</slot>
         </cv-button>
@@ -59,7 +54,6 @@
 <script>
 import CvButton from '../cv-button/cv-button';
 import CvIcon from '../cv-icon/cv-icon';
-import { Modal } from 'carbon-components';
 import uidMixin from '../../mixins/uid-mixin';
 
 export default {
@@ -74,6 +68,26 @@ export default {
       type: String,
       default: '',
       validator: val => ['', 'danger'].includes(val),
+    },
+    visible: Boolean,
+  },
+  data() {
+    return {
+      dataVisible: false,
+    };
+  },
+  mounted() {
+    if (this.visible) {
+      this.show();
+    }
+  },
+  watch: {
+    visible(val) {
+      if (val) {
+        this.show();
+      } else {
+        this.hide();
+      }
     },
   },
   computed: {
@@ -94,22 +108,29 @@ export default {
     hasFooter() {
       return this.$slots['primary-button'] || this.$slots['secondary-button'];
     },
-    initialFocus() {
-      let _initialFocus = 'close';
-      if (this.$slots['primary-button']) {
-        _initialFocus = 'primary';
-      } else if (this.$slots['secondary-button']) {
-        _initialFocus = 'secondary';
-      }
-      return _initialFocus;
-    },
   },
   methods: {
+    onShown() {
+      if (this.$slots['primary-button']) {
+        this.$refs.primary.$el.focus();
+      } else if (this.$slots['secondary-button']) {
+        this.$refs.secondary.$el.focus();
+      } else {
+        this.$refs.close.focus();
+      }
+      this.$emit('modal-shown');
+
+      this.$el.removeEventListener('transitionend', this.onShown);
+    },
     show: function() {
-      Modal.components.get(this.$el).show();
+      this.$el.addEventListener('transitionend', this.onShown);
+      this.$el.addEventListener('focusout', this.hide);
+      this.dataVisible = true;
     },
     hide: function() {
-      Modal.components.get(this.$el).hide();
+      this.dataVisible = false;
+      this.$emit('modal-hidden');
+      this.$el.removeEventListener('focusout', this.hide);
     },
     onPrimaryClick() {
       this.$emit('primary-click');
@@ -123,12 +144,6 @@ export default {
         this.hide();
       }
     },
-  },
-  mounted() {
-    this.carbonComponent = Modal.create(this.$el);
-  },
-  beforeDestroy() {
-    this.carbonComponent.release();
   },
 };
 </script>
