@@ -61,6 +61,12 @@ const preKnobs = {
     value: val =>
       val.length ? `\n <template slot="primary-button">${val}</template>` : '',
   },
+  visible: {
+    group: 'attr',
+    type: boolean,
+    config: ['visible', false, consts.CONFIG],
+    value: val => (val ? '\n  visible' : ''),
+  },
   events: {
     group: 'attr',
     type: boolean,
@@ -68,9 +74,7 @@ const preKnobs = {
     value: val =>
       val
         ? `
-  @modal-beingshown="actionBeforeShown"
   @modal-shown="actionShown"
-  @modal-beinghidden="actionBeforeHidden"
   @modal-hidden="actionHidden"`
         : '',
   },
@@ -117,10 +121,8 @@ for (const story of storySet) {
           show() {
             this.$refs.view.method('show')();
           },
-          actionBeforeShown: action('CV Modal - modal-beingshown'),
           actionShown: action('CV Modal - modal-shown'),
           actionHidden: action('CV Modal - modal-hidden'),
-          actionBeforeHidden: action('CV Modal - modal-beinghidden'),
           actionPrimary: action('CV Modal - primary-click'),
           actionSecondary: action('CV Modal - secondary-click'),
         },
