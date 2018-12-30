@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs/vue';
+import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
@@ -9,7 +9,6 @@ import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvDropdownNotesMD from './cv-dropdown-notes.md';
 import CvDropdown from './cv-dropdown';
-import { selectV2 } from '@storybook/addon-knobs/dist/vue';
 
 const stories = storiesOf('CvDropdown', module);
 stories.addDecorator(withKnobs);
@@ -30,7 +29,7 @@ const preKnobs = {
   },
   value: {
     group: 'attr',
-    type: selectV2,
+    type: select,
     config: [
       'value',
       {

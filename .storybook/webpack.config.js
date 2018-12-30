@@ -13,11 +13,18 @@ module.exports = (baseConfig, env, defaultConfig) => {
     },
     enforce: 'pre',
   });
+
+  defaultConfig.module.rules.push({
+    test: /\.scss$/,
+    loaders: ['style-loader', 'css-loader', 'sass-loader'],
+    include: path.resolve(__dirname, '../'),
+  });
+
   defaultConfig.resolve.extensions.push('.js', '.vue', '.json');
 
-  let vueLoaderConfig = defaultConfig.module.rules.find(
-    item => item.loader.indexOf('vue-loader') > -1
-  );
+  let vueLoaderConfig = defaultConfig.module.rules.find(item => {
+    return item.loader && item.loader.indexOf('vue-loader') > -1;
+  });
   vueLoaderConfig.options = {
     ...vueLoaderConfig.options,
     postcss: [autoprefixer],

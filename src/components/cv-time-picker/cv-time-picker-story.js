@@ -4,8 +4,8 @@ import {
   text,
   boolean,
   object,
-  selectV2,
-} from '@storybook/addon-knobs/vue';
+  select,
+} from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
@@ -46,7 +46,7 @@ const preKnobs = {
   },
   ampm: {
     group: 'attr',
-    type: selectV2,
+    type: select,
     config: [
       'ampm',
       {
@@ -69,8 +69,8 @@ const preKnobs = {
       dotSync
         ? '\n  :timezone.sync="timezone"'
         : val.length
-          ? `\n  timezone="${val}"`
-          : '',
+        ? `\n  timezone="${val}"`
+        : '',
     data: (obj, key, val) => (obj[key] = val),
     canDotSync: true,
   },

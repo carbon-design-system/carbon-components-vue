@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, selectV2, boolean } from '@storybook/addon-knobs/vue';
+import { withKnobs, text, select, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
@@ -19,7 +19,7 @@ const kinds = null;
 const preKnobs = {
   initialSelected: {
     group: '',
-    type: selectV2,
+    type: select,
     config: [
       'Initiallly selected',
       {
