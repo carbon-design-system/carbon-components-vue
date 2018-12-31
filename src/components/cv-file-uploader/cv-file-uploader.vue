@@ -5,7 +5,8 @@
       class="bx--file-btn bx--btn bx--btn--secondary"
       role="button"
       tabindex="0"
-    >{{label}}</label>
+      >{{ label }}</label
+    >
     <input
       v-bind="$attrs"
       type="file"
@@ -14,11 +15,16 @@
       data-file-uploader
       data-target="[data-file-container]"
       v-on="inputListeners"
-    >
+    />
     <div data-file-container class="bx--file-container">
-      <div data-file-container class="bx--file-container" v-for="file, index in files" :key="index">
+      <div
+        data-file-container
+        class="bx--file-container"
+        v-for="(file, index) in files"
+        :key="index"
+      >
         <span class="bx--file__selected-file">
-          <p class="bx--file-filename">{{file.file.name}}</p>
+          <p class="bx--file-filename">{{ file.file.name }}</p>
           <span
             :data-for="uid"
             class="bx--file__state-container"

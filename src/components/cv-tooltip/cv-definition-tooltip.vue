@@ -1,9 +1,9 @@
 <template>
   <div class="cv-definition-tooltip bx--tooltip--definition">
-    <p class="bx--tooltip__trigger" tabindex="0">{{term}}</p>
+    <p class="bx--tooltip__trigger" tabindex="0">{{ term }}</p>
     <div :class="`bx--tooltip--definition__${direction}`">
       <span class="bx--tooltip__caret"></span>
-      <p>{{definition}}</p>
+      <p>{{ definition }}</p>
     </div>
   </div>
 </template>
@@ -32,5 +32,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

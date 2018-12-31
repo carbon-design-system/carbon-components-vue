@@ -4,7 +4,7 @@
     :class="{
       'bx--overflow-menu-options__option--disabled': disabled,
       'bx--overflow-menu-options__option--danger': danger,
-      }"
+    }"
   >
     <button
       class="bx--overflow-menu-options__btn"
@@ -27,5 +27,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

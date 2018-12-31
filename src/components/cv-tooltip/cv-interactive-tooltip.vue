@@ -12,7 +12,12 @@
         ref="trigger"
       >
         <slot name="trigger">
-          <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <g fill-rule="evenodd">
               <path
                 d="M8 14.5a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
@@ -25,9 +30,12 @@
         </slot>
       </div>
     </div>
-    <div :id="uid" :data-floating-menu-direction="direction" class="bx--tooltip">
-      <span class="bx--tooltip__caret"></span>
-      <slot name="content"></slot>
+    <div
+      :id="uid"
+      :data-floating-menu-direction="direction"
+      class="bx--tooltip"
+    >
+      <span class="bx--tooltip__caret"></span> <slot name="content"></slot>
     </div>
   </div>
 </template>
@@ -77,5 +85,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

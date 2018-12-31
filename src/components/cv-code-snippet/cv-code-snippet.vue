@@ -1,9 +1,16 @@
 <template>
-  <component class="cv-code-snippet" :is="theComponent" v-bind="$attrs" @copy-code="onCopyCode">
-    <code ref="code">
-      <slot></slot>
-    </code>
-    <textarea class="cv-code-snippet__clippy" aria-hidden="true" ref="clippy"></textarea>
+  <component
+    class="cv-code-snippet"
+    :is="theComponent"
+    v-bind="$attrs"
+    @copy-code="onCopyCode"
+  >
+    <code ref="code"> <slot></slot> </code>
+    <textarea
+      class="cv-code-snippet__clippy"
+      aria-hidden="true"
+      ref="clippy"
+    ></textarea>
   </component>
 </template>
 

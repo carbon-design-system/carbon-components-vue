@@ -1,5 +1,5 @@
 <template>
-  <span class="cv-tag bx--tag" :class="`bx--tag--${kind}`">{{label}}</span>
+  <span class="cv-tag bx--tag" :class="`bx--tag--${kind}`">{{ label }}</span>
 </template>
 
 <script>
@@ -28,5 +28,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

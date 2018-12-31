@@ -2,16 +2,20 @@
   <div class="cv-text-input bx--form-item">
     <label
       :for="uid"
-      :class="['bx--label', {'bx--label--disabled': $attrs.disabled !== undefined}]"
-    >{{label}}</label>
+      :class="[
+        'bx--label',
+        { 'bx--label--disabled': $attrs.disabled !== undefined },
+      ]"
+      >{{ label }}</label
+    >
     <input
       :id="uid"
       class="bx--text-input"
-      :class="{'bx--text-input--light': theme === 'light'}"
+      :class="{ 'bx--text-input--light': theme === 'light' }"
       v-bind="$attrs"
       :value="value"
       v-on="inputListeners"
-    >
+    />
   </div>
 </template>
 
@@ -41,5 +45,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

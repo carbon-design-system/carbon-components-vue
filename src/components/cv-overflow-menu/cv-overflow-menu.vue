@@ -5,7 +5,12 @@
     :aria-label="label"
     class="cv-overflow-menu bx--overflow-menu"
   >
-    <svg class="bx--overflow-menu__icon" width="3" height="15" viewBox="0 0 3 15">
+    <svg
+      class="bx--overflow-menu__icon"
+      width="3"
+      height="15"
+      viewBox="0 0 3 15"
+    >
       <g fill-rule="evenodd">
         <circle cx="1.5" cy="1.5" r="1.5"></circle>
         <circle cx="1.5" cy="7.5" r="1.5"></circle>
@@ -15,7 +20,7 @@
     <ul
       class="bx--overflow-menu-options"
       :class="{
-        'bx--overflow-menu--flip': flipMenu
+        'bx--overflow-menu--flip': flipMenu,
       }"
       tabindex="-1"
     >
@@ -57,5 +62,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

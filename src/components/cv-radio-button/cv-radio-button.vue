@@ -9,10 +9,9 @@
       ref="input"
       type="radio"
       :value="value"
-    >
+    />
     <label :for="uid" class="bx--radio-button__label">
-      <span class="bx--radio-button__appearance"></span>
-      {{label}}
+      <span class="bx--radio-button__appearance"></span> {{ label }}
     </label>
   </div>
 </template>
@@ -27,5 +26,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

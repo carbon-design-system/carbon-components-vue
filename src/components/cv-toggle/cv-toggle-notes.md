@@ -9,14 +9,13 @@ http://www.carbondesignsystem.com/components/toggle/code
 ### Default
 
 ```html
-<cv-toggle
-  checked
-  disabled
-  small
-  @change="actionChanged"
+<cv-toggle checked disabled small @change="actionChanged">
+  <template slot="text-left"
+    >Off</template
   >
-  <template slot="text-left">Off</template>
-  <template slot="text-right">On</template>
+  <template slot="text-right"
+    >On</template
+  >
 </cv-toggle>
 ```
 

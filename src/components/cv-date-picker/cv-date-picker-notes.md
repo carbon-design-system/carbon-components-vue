@@ -12,9 +12,10 @@ http://www.carbondesignsystem.com/components/date-picker/code
 <cv-date-picker
   kind="short"
   pattern="\d{1,2}/\d{2}"
-  placeholder="mm/yy" :flatpickr-options="flatpickrOptions"
+  placeholder="mm/yy"
+  :flatpickr-options="flatpickrOptions"
   @onChange="actionChange"
-  >
+>
 </cv-date-picker>
 ```
 
@@ -24,9 +25,10 @@ http://www.carbondesignsystem.com/components/date-picker/code
 <cv-date-picker
   kind="simple"
   pattern="\d{1,2}/\d{1,2}/\d{4}"
-  placeholder="mm/dd/yyyy" :flatpickr-options="flatpickrOptions"
+  placeholder="mm/dd/yyyy"
+  :flatpickr-options="flatpickrOptions"
   @onChange="actionChange"
-  >
+>
 </cv-date-picker>
 ```
 
@@ -36,9 +38,10 @@ http://www.carbondesignsystem.com/components/date-picker/code
 <cv-date-picker
   kind="single"
   pattern="\d{1,2}/\d{1,2}/\d{4}"
-  placeholder="mm/dd/yyyy" :flatpickr-options="flatpickrOptions"
+  placeholder="mm/dd/yyyy"
+  :flatpickr-options="flatpickrOptions"
   @onChange="actionChange"
-  >
+>
 </cv-date-picker>
 ```
 
@@ -48,9 +51,10 @@ http://www.carbondesignsystem.com/components/date-picker/code
 <cv-date-picker
   kind="range"
   pattern="\d{1,2}/\d{1,2}/\d{4}"
-  placeholder="mm/dd/yyyy" :flatpickr-options="flatpickrOptions"
+  placeholder="mm/dd/yyyy"
+  :flatpickr-options="flatpickrOptions"
   @onChange="actionChange"
-  >
+>
 </cv-date-picker>
 ```
 

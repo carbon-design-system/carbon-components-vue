@@ -14,9 +14,11 @@
   <button
     class="cv-content-switcher-button"
     :class="[
-      'bx--content-switcher-btn', {
-        'bx--content-switcher--selected' : dataSelected
-      }]"
+      'bx--content-switcher-btn',
+      {
+        'bx--content-switcher--selected': dataSelected,
+      },
+    ]"
     :data-target="contentSelector"
     :aria-selected="`${dataSelected}`"
     @click="open"
@@ -85,6 +87,4 @@ export default {
 };
 </script>
 
-
-<style lang="scss">
-</style>
+<style lang="scss"></style>

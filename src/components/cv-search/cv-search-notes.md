@@ -7,11 +7,7 @@ http://www.carbondesignsystem.com/components/text-input/code
 ## Usage
 
 ```html
-<cv-search
-  large
-  v-model="modelValue"
-  label="Search label" >
-</cv-search>
+<cv-search large v-model="modelValue" label="Search label"> </cv-search>
 ```
 
 ## Attributes

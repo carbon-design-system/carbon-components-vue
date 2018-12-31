@@ -1,7 +1,7 @@
 <template>
   <li
     class="cv-tabs-button bx--tabs__nav-item"
-    :class="{'bx--tabs__nav-item--selected': selected}"
+    :class="{ 'bx--tabs__nav-item--selected': selected }"
     :data-target="contentSelector"
     role="presentation"
   >
@@ -12,9 +12,7 @@
       :aria-controls="tabsPanelId"
       aria-selected="false"
     >
-      <slot>
-        <!-- tabs button content -->
-      </slot>
+      <slot> <!-- tabs button content --> </slot>
     </a>
   </li>
 </template>
@@ -31,5 +29,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

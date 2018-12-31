@@ -1,8 +1,6 @@
 <template>
   <div class="cv-radio-group bx--form-item">
-    <div class="bx--radio-button-group">
-      <slot></slot>
-    </div>
+    <div class="bx--radio-button-group"><slot></slot></div>
   </div>
 </template>
 

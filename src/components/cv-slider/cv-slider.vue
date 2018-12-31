@@ -1,21 +1,24 @@
 <template>
   <div class="cv-slider bx--form-item">
-    <label :for="uid" class="bx--label">{{label}}</label>
+    <label :for="uid" class="bx--label">{{ label }}</label>
     <div class="bx--slider-container">
-      <span class="bx--slider__range-label">{{minLabelInternal}}</span>
+      <span class="bx--slider__range-label">{{ minLabelInternal }}</span>
       <div
         class="bx--slider"
-        :class="{'bx--slider--disabled': disabled}"
+        :class="{ 'bx--slider--disabled': disabled }"
         data-slider
         data-slider-input-box="#slider-input-box"
       >
         <div class="bx--slider__track" @click="onTrackClick" ref="track"></div>
-        <div class="bx--slider__filled-track" :style="`width: ${percentage};`"></div>
+        <div
+          class="bx--slider__filled-track"
+          :style="`width: ${percentage};`"
+        ></div>
         <div
           class="bx--slider__thumb"
           :class="{
             'bx--slider__thumb--clicked': animateClick,
-           }"
+          }"
           tabindex="0"
           :style="`left: ${percentage};`"
           ref="thumb"
@@ -31,13 +34,13 @@
           :min="min"
           :max="max"
           ref="range"
-        >
+        />
       </div>
-      <span class="bx--slider__range-label">{{maxLabelInternal}}</span>
+      <span class="bx--slider__range-label">{{ maxLabelInternal }}</span>
       <input
         type="number"
         class="bx--text-input bx--slider-text-input"
-        :class="{'bx--text-input--light': theme === 'light'}"
+        :class="{ 'bx--text-input--light': theme === 'light' }"
         :placeholder="min"
         v-model="internalValue"
         @change="onChange"
@@ -45,7 +48,7 @@
         @keydown.up.prevent="onUp"
         @keydown.down.prevent="onDown"
         :disabled="disabled"
-      >
+      />
     </div>
   </div>
 </template>
@@ -230,5 +233,4 @@ export default {
 };
 </script>
 
-<style lang="sass">
-</style>
+<style lang="sass"></style>

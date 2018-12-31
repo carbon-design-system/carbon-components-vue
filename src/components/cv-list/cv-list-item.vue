@@ -1,7 +1,5 @@
 <template>
-  <li class="cv-list-item bx--list__item">
-    <slot></slot>
-  </li>
+  <li class="cv-list-item bx--list__item"><slot></slot></li>
 </template>
 
 <script>

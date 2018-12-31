@@ -1,7 +1,5 @@
 <template>
-  <form class="cv-form bx--form">
-    <slot></slot>
-  </form>
+  <form class="cv-form bx--form"><slot></slot></form>
 </template>
 
 <script>
@@ -10,5 +8,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

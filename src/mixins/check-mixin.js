@@ -1,6 +1,6 @@
 /*
-* Provides common checkbox behaviour
-*/
+ * Provides common checkbox behaviour
+ */
 
 export default {
   props: {
