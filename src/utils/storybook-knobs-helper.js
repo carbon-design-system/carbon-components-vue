@@ -1,5 +1,5 @@
 import consts from './storybook-consts';
-import { selectV2 } from '@storybook/addon-knobs/vue';
+import { select } from '@storybook/addon-knobs/vue';
 
 const parsePreKnobs = (kinds, preKnobs, kind) => {
   return () => {
@@ -7,7 +7,7 @@ const parsePreKnobs = (kinds, preKnobs, kind) => {
 
     if (kind === undefined) {
       if (kinds && kinds.options) {
-        const _kind = selectV2(
+        const _kind = select(
           'kind',
           kinds.options,
           kinds.default,

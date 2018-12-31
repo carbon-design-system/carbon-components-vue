@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, selectV2 } from '@storybook/addon-knobs/vue';
+import { withKnobs, text, select } from '@storybook/addon-knobs';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
@@ -18,7 +18,7 @@ stories.add(
   'Interactive tooltip',
   withNotes(CvTooltipNotesMD)(() => {
     const settings = {
-      direction: selectV2(
+      direction: select(
         'direction',
         {
           Top: 'top',
@@ -99,7 +99,7 @@ stories.add(
   'Tooltip',
   withNotes(CvTooltipNotesMD)(() => {
     const settings = {
-      direction: selectV2(
+      direction: select(
         'direction',
         {
           Top: 'top',
@@ -161,7 +161,7 @@ stories.add(
   'Definition tooltip',
   withNotes(CvTooltipNotesMD)(() => {
     const settings = {
-      direction: selectV2(
+      direction: select(
         'direction',
         {
           Top: 'top',
