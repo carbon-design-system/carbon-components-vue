@@ -11,6 +11,7 @@ import CvList from './cv-list';
 
 const stories = storiesOf('CvList', module);
 stories.addDecorator(withKnobs);
+stories.addDecorator(withNotes);
 
 const kinds = null;
 const preKnobs = {
@@ -48,7 +49,7 @@ const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvListNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
@@ -75,6 +76,9 @@ for (const story of storySet) {
         components: { CvList, SvTemplateView },
         template: templateViewString,
       };
-    })
+    },
+    {
+      notes: { markdown: CvListNotesMD },
+    }
   );
 }

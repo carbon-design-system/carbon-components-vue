@@ -11,6 +11,7 @@ import CvTile from './cv-tile';
 
 const stories = storiesOf('CvTile', module);
 stories.addDecorator(withKnobs);
+stories.addDecorator(withNotes);
 
 const kinds = {
   options: {
@@ -66,7 +67,7 @@ const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvTileNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       if (settings.kind === 'selectable') {
@@ -94,6 +95,9 @@ for (const story of storySet) {
         components: { CvTile, SvTemplateView },
         template: templateViewString,
       };
-    })
+    },
+    {
+      notes: { markdown: CvTileNotesMD },
+    }
   );
 }

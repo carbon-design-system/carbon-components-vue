@@ -12,6 +12,7 @@ import CvAccordionItem from './cv-accordion-item';
 
 const stories = storiesOf('CvAccordion', module);
 stories.addDecorator(withKnobs);
+stories.addDecorator(withNotes);
 
 const kinds = null;
 
@@ -53,7 +54,7 @@ const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvAccordionNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
@@ -105,6 +106,9 @@ for (const story of storySet) {
         components: { CvAccordion, CvAccordionItem, SvTemplateView },
         template: templateViewString,
       };
-    })
+    },
+    {
+      notes: { markdown: CvAccordionNotesMD },
+    }
   );
 }

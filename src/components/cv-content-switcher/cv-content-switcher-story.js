@@ -13,6 +13,7 @@ import CvContentSwitcherButton from './cv-content-switcher-button';
 
 const stories = storiesOf('CvContentSwitcher', module);
 stories.addDecorator(withKnobs);
+stories.addDecorator(withNotes);
 
 const kinds = null;
 
@@ -54,7 +55,7 @@ const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvContentSwitcherNotesMD)(() => {
+    () => {
       const settings = story.knobs();
       // ----------------------------------------------------------------
 
@@ -108,6 +109,9 @@ for (const story of storySet) {
         },
         template: templateViewString,
       };
-    })
+    },
+    {
+      notes: { markdown: CvContentSwitcherNotesMD },
+    }
   );
 }

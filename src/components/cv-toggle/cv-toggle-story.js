@@ -12,6 +12,7 @@ import CvToggle from './cv-toggle';
 
 const stories = storiesOf('CvToggle', module);
 stories.addDecorator(withKnobs);
+stories.addDecorator(withNotes);
 
 const kinds = null;
 const preKnobs = {
@@ -77,7 +78,7 @@ const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 for (const story of storySet) {
   stories.add(
     'Default',
-    withNotes(CvToggleNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
@@ -126,13 +127,16 @@ for (const story of storySet) {
         },
         template: templateViewString,
       };
-    })
+    },
+    {
+      notes: { markdown: CvToggleNotesMD },
+    }
   );
 }
 
 stories.add(
   'Array v-model',
-  withNotes(CvToggleNotesMD)(() => {
+  () => {
     const templateString = `
 <cv-toggle v-model="checks" name="check-1" value="check-1" @change="actionChange"></cv-toggle>
 <cv-toggle v-model="checks" name="check-2" value="check-2" @change="actionChange"></cv-toggle>
@@ -189,5 +193,8 @@ stories.add(
       },
       template: templateViewString,
     };
-  })
+  },
+  {
+    notes: { markdown: CvToggleNotesMD },
+  }
 );

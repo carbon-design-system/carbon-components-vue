@@ -12,6 +12,7 @@ import CvDropdown from './cv-dropdown';
 
 const stories = storiesOf('CvDropdown', module);
 stories.addDecorator(withKnobs);
+stories.addDecorator(withNotes);
 
 const kinds = null;
 const preKnobs = {
@@ -81,7 +82,7 @@ const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvDropdownNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       const templateString = `
@@ -134,6 +135,9 @@ for (const story of storySet) {
         },
         template: templateViewString,
       };
-    })
+    },
+    {
+      notes: { markdown: CvDropdownNotesMD },
+    }
   );
 }

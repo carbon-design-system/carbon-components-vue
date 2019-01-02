@@ -12,6 +12,7 @@ import CvNumberInput from './cv-number-input';
 
 const stories = storiesOf('CvNumberInput', module);
 stories.addDecorator(withKnobs);
+stories.addDecorator(withNotes);
 
 const kinds = null;
 const preKnobs = {
@@ -98,7 +99,7 @@ const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvNumberInputNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
@@ -139,6 +140,9 @@ for (const story of storySet) {
           onInput: action('cv-number-input - input event'),
         },
       };
-    })
+    },
+    {
+      notes: { markdown: CvNumberInputNotesMD },
+    }
   );
 }

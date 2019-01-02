@@ -12,6 +12,7 @@ import CvFileUploader from './cv-file-uploader';
 
 const stories = storiesOf('CvFileUploader', module);
 stories.addDecorator(withKnobs);
+stories.addDecorator(withNotes);
 
 const kinds = null;
 
@@ -75,7 +76,7 @@ const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvFileUploaderNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
@@ -151,6 +152,9 @@ for (const story of storySet) {
           },
         },
       };
-    })
+    },
+    {
+      notes: { markdown: CvFileUploaderNotesMD },
+    }
   );
 }

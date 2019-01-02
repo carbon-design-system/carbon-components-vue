@@ -13,6 +13,7 @@ import CvIcon from '../cv-icon/cv-icon';
 
 const stories = storiesOf('CvButton', module);
 stories.addDecorator(withKnobs);
+stories.addDecorator(withNotes);
 
 const kinds = {
   options: {
@@ -72,7 +73,7 @@ const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvButtonNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       const templateString = `
@@ -99,6 +100,9 @@ for (const story of storySet) {
         },
         template: templateViewString,
       };
-    })
+    },
+    {
+      notes: { markdown: CvButtonNotesMD },
+    }
   );
 }

@@ -12,6 +12,7 @@ import CvInlineNotification from './cv-inline-notification';
 
 const stories = storiesOf('CvInlineNotification', module);
 stories.addDecorator(withKnobs);
+stories.addDecorator(withNotes);
 
 const kinds = {
   options: {
@@ -61,7 +62,7 @@ const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvInlineNotificationNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
@@ -93,6 +94,9 @@ for (const story of storySet) {
           ),
         },
       };
-    })
+    },
+    {
+      notes: { markdown: CvInlineNotificationNotesMD },
+    }
   );
 }

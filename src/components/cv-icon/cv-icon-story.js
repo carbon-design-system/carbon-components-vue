@@ -11,6 +11,7 @@ import CvIcon from './cv-icon';
 
 const stories = storiesOf('CvIcon', module);
 stories.addDecorator(withKnobs);
+stories.addDecorator(withNotes);
 
 const fullIconHref =
   require('carbon-icons/dist/carbon-icons.svg') + '#icon--error';
@@ -44,7 +45,7 @@ const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvIconNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
@@ -68,6 +69,9 @@ for (const story of storySet) {
         components: { CvIcon, SvTemplateView },
         template: templateViewString,
       };
-    })
+    },
+    {
+      notes: { markdown: CvIconNotesMD },
+    }
   );
 }

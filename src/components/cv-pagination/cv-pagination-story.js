@@ -12,6 +12,7 @@ import CvPagination from './cv-pagination';
 
 const stories = storiesOf('CvPagination', module);
 stories.addDecorator(withKnobs);
+stories.addDecorator(withNotes);
 
 const kinds = null;
 const preKnobs = {
@@ -80,7 +81,7 @@ const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvPaginationNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
@@ -106,6 +107,9 @@ for (const story of storySet) {
           onChange: action('cv-paginationr - change event'),
         },
       };
-    })
+    },
+    {
+      notes: { markdown: CvPaginationNotesMD },
+    }
   );
 }

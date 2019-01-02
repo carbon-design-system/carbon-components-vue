@@ -12,6 +12,7 @@ import CvCheckbox from './cv-checkbox';
 
 const stories = storiesOf('CvCheckbox', module);
 stories.addDecorator(withKnobs);
+stories.addDecorator(withNotes);
 
 const kinds = null;
 
@@ -71,7 +72,7 @@ const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 for (const story of storySet) {
   stories.add(
     'Default',
-    withNotes(CvCheckboxNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
@@ -119,13 +120,16 @@ for (const story of storySet) {
         },
         template: templateViewString,
       };
-    })
+    },
+    {
+      notes: { markdown: CvCheckboxNotesMD },
+    }
   );
 }
 
 stories.add(
   'Array v-model',
-  withNotes(CvCheckboxNotesMD)(() => {
+  () => {
     const templateString = `
 <cv-checkbox v-model="checks" name="check-1" value="check-1" @change="actionChange" label="check-1"></cv-checkbox>
 <cv-checkbox v-model="checks" name="check-2" value="check-2" @change="actionChange" label="check-2" mixed></cv-checkbox>
@@ -186,5 +190,8 @@ stories.add(
       },
       template: templateViewString,
     };
-  })
+  },
+  {
+    notes: { markdown: CvCheckboxNotesMD },
+  }
 );

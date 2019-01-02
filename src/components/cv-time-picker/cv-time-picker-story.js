@@ -18,6 +18,7 @@ import CvTimePicker from './cv-time-picker';
 
 const stories = storiesOf('CvTimePicker', module);
 stories.addDecorator(withKnobs);
+stories.addDecorator(withNotes);
 
 const kinds = null;
 
@@ -64,7 +65,7 @@ const preKnobs = {
   timezone: {
     group: 'attr',
     type: text,
-    config: ['timezone', '', consts.CONFIG],
+    config: ['timezone', 'timezone1', consts.CONFIG],
     value: (val, dotSync) =>
       dotSync
         ? '\n  :timezone.sync="timezone"'
@@ -157,7 +158,7 @@ const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvTimePickerNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
@@ -165,6 +166,8 @@ for (const story of storySet) {
   <cv-time-picker${settings.group.attr}>
   </cv-time-picker>
     `;
+
+      console.log(templateString);
 
       // ----------------------------------------------------------------
 
@@ -208,6 +211,9 @@ for (const story of storySet) {
           onUpdateTimezone: action('cv-time-picker - update:timezone event'),
         },
       };
-    })
+    },
+    {
+      notes: { markdown: CvTimePickerNotesMD },
+    }
   );
 }

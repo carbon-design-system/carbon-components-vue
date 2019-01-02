@@ -11,6 +11,7 @@ import CvTag from './cv-tag';
 
 const stories = storiesOf('CvTag', module);
 stories.addDecorator(withKnobs);
+stories.addDecorator(withNotes);
 
 const kinds = {
   options: {
@@ -48,7 +49,7 @@ const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvTagNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
@@ -71,6 +72,9 @@ for (const story of storySet) {
         components: { CvTag, SvTemplateView },
         template: templateViewString,
       };
-    })
+    },
+    {
+      notes: { markdown: CvTagNotesMD },
+    }
   );
 }

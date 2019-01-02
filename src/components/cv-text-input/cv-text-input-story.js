@@ -12,6 +12,7 @@ import CvTextInput from './cv-text-input';
 
 const stories = storiesOf('CvTextInput', module);
 stories.addDecorator(withKnobs);
+stories.addDecorator(withNotes);
 
 const kinds = null;
 const preKnobs = {
@@ -62,7 +63,7 @@ const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvTextInputNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
@@ -103,6 +104,9 @@ for (const story of storySet) {
           onInput: action('cv-text-input - input event'),
         },
       };
-    })
+    },
+    {
+      notes: { markdown: CvTextInputNotesMD },
+    }
   );
 }

@@ -12,6 +12,7 @@ import CvTextArea from './cv-text-area';
 
 const stories = storiesOf('CvTextArea', module);
 stories.addDecorator(withKnobs);
+stories.addDecorator(withNotes);
 
 const kinds = null;
 const preKnobs = {
@@ -62,7 +63,7 @@ const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvTextAreaNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
@@ -103,6 +104,9 @@ for (const story of storySet) {
           onInput: action('cv-text-area - input event'),
         },
       };
-    })
+    },
+    {
+      notes: { markdown: CvTextAreaNotesMD },
+    }
   );
 }

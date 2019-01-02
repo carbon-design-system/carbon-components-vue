@@ -12,11 +12,12 @@ import CvDefinitionTooltip from './cv-definition-tooltip';
 
 const stories = storiesOf('CvTooltip', module);
 stories.addDecorator(withKnobs);
+stories.addDecorator(withNotes);
 
 /* ----------------------------------------------------- */
 stories.add(
   'Interactive tooltip',
-  withNotes(CvTooltipNotesMD)(() => {
+  () => {
     const settings = {
       direction: select(
         'direction',
@@ -91,13 +92,16 @@ stories.add(
         },
       },
     };
-  })
+  },
+  {
+    notes: { markdown: CvTooltipNotesMD },
+  }
 );
 
 /* ----------------------------------------------------- */
 stories.add(
   'Tooltip',
-  withNotes(CvTooltipNotesMD)(() => {
+  () => {
     const settings = {
       direction: select(
         'direction',
@@ -153,13 +157,16 @@ stories.add(
       components: { CvDefinitionTooltip, SvTemplateView },
       template: templateViewString,
     };
-  })
+  },
+  {
+    notes: { markdown: CvTooltipNotesMD },
+  }
 );
 
 /* ----------------------------------------------------- */
 stories.add(
   'Definition tooltip',
-  withNotes(CvTooltipNotesMD)(() => {
+  () => {
     const settings = {
       direction: select(
         'direction',
@@ -211,5 +218,8 @@ stories.add(
       components: { CvTooltip, SvTemplateView },
       template: templateViewString,
     };
-  })
+  },
+  {
+    notes: { markdown: CvTooltipNotesMD },
+  }
 );

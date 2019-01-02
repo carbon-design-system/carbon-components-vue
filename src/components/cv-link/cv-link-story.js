@@ -11,6 +11,7 @@ import CvLink from './cv-link';
 
 const stories = storiesOf('CvLink', module);
 stories.addDecorator(withKnobs);
+stories.addDecorator(withNotes);
 
 const kinds = null;
 const preKnobs = {
@@ -39,7 +40,7 @@ const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvLinkNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
@@ -64,6 +65,9 @@ for (const story of storySet) {
         components: { CvLink, SvTemplateView },
         template: templateViewString,
       };
-    })
+    },
+    {
+      notes: { markdown: CvLinkNotesMD },
+    }
   );
 }

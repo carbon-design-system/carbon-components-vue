@@ -12,6 +12,7 @@ import CvSlider from './cv-slider';
 
 const stories = storiesOf('CvSlider', module);
 stories.addDecorator(withKnobs);
+stories.addDecorator(withNotes);
 
 const kinds = null;
 const preKnobs = {
@@ -104,7 +105,7 @@ const storySet = knobsHelper.getStorySet(kinds, preKnobs);
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvSliderNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
@@ -147,6 +148,9 @@ for (const story of storySet) {
           // afterChange() { console.log('after change event'); },
         },
       };
-    })
+    },
+    {
+      notes: { markdown: CvSliderNotesMD },
+    }
   );
 }
