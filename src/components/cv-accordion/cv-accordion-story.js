@@ -54,7 +54,7 @@ for (const story of storySet) {
       // ----------------------------------------------------------------
 
       const templateString = `
-  <cv-accordion${settings.group.attr}>
+  <cv-accordion>
     <cv-accordion-item${settings.group.one}>
       <template slot="title">Section 1 title </template>
       <template slot="content">
