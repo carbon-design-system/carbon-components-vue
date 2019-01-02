@@ -41,7 +41,6 @@ stories.add(
         `,
         consts.CONTENT
       ),
-      otherAttributes: text('other attributes', '', consts.OTHER),
     };
 
     settings.label = settings.label.length
@@ -53,14 +52,11 @@ stories.add(
     settings.content = settings.content.length
       ? `\n  <template slot="content">${settings.content}</template>`
       : '';
-    settings.otherAttributes = settings.otherAttributes
-      ? `\n  ${settings.otherAttributes}`
-      : '';
 
     // ----------------------------------------------------------------
 
     const templateString = `
-<cv-interactive-tooltip${settings.otherAttributes}
+<cv-interactive-tooltip
   direction="${settings.direction}"
   >${settings.label}${settings.term}${settings.content}
 </cv-interactive-tooltip>
@@ -123,21 +119,17 @@ stories.add(
 `,
         consts.CONTENT
       ),
-      otherAttributes: text('other attributes', '', consts.OTHER),
     };
 
     settings.tip = settings.tip.length ? `\n  tip="${settings.tip}"` : '';
     settings.trigger = settings.trigger.length
       ? `\n  <template>${settings.trigger}</template>`
       : '';
-    settings.otherAttributes = settings.otherAttributes
-      ? `\n  ${settings.otherAttributes}`
-      : '';
 
     // ----------------------------------------------------------------
 
     const templateString = `
-<cv-tooltip${settings.otherAttributes}
+<cv-tooltip
   direction="${settings.direction}"${settings.tip}
   >${settings.trigger}
 </cv-tooltip>
@@ -184,21 +176,17 @@ stories.add(
         consts.CONTENT
       ),
       term: text('term', `Definition tooltip`, consts.CONTENT),
-      otherAttributes: text('other attributes', '', consts.OTHER),
     };
 
     settings.definition = settings.definition.length
       ? `\n  definition="${settings.definition}"`
       : '';
     settings.term = settings.term.length ? `\n  term="${settings.term}"` : '';
-    settings.otherAttributes = settings.otherAttributes
-      ? `\n  ${settings.otherAttributes}`
-      : '';
 
     // ----------------------------------------------------------------
 
     const templateString = `
-<cv-definition-tooltip${settings.otherAttributes}
+<cv-definition-tooltip
   direction="${settings.direction}"${settings.definition}${settings.term}
   >
 </cv-definition-tooltip>

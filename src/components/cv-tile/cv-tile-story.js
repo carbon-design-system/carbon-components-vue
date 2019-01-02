@@ -54,12 +54,6 @@ const preKnobs = {
     value: val =>
       val ? '\n  selected\n  value="selected-1"' : '\n  value="selected-1"',
   },
-  otherAttributes: {
-    group: 'attr',
-    type: text,
-    config: ['other attributes', '', consts.OTHER],
-    value: val => (val.length ? `\n  ${val}` : ''),
-  },
 };
 
 const storySet = knobsHelper.getStorySet(kinds, preKnobs);

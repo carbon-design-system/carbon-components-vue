@@ -52,18 +52,6 @@ const preKnobs = {
     config: ['withEvnets', false, consts.OTHER],
     value: val => (val ? ' @change="actionChange"' : ''),
   },
-  otherAttributes: {
-    group: 'attr',
-    type: text,
-    config: ['list:other attributes', '', consts.OTHER],
-    value: val => (val.length ? `\n  ${val}` : ''),
-  },
-  otherAttributesItem: {
-    group: 'attrItem',
-    type: text,
-    config: ['item:other attributes', '', consts.OTHER],
-    value: val => (val.length ? `\n  ${val}` : ''),
-  },
 };
 
 const storySet = knobsHelper.getStorySet(kinds, preKnobs);

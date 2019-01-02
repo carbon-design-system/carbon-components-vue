@@ -27,12 +27,6 @@ const preKnobs = {
     config: ['disabled', false, consts.CONFIG],
     value: val => (val ? ' tabindex="-1" aria-disabled="true"' : ''),
   },
-  otherAttributes: {
-    group: 'attr',
-    type: text,
-    config: ['other attributes', '', consts.OTHER],
-    value: val => (val.length ? `\n  ${val}` : ''),
-  },
 };
 
 const storySet = knobsHelper.getStorySet(kinds, preKnobs);

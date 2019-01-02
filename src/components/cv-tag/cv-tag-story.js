@@ -36,12 +36,6 @@ const preKnobs = {
     config: ['Tag label', 'I ama a tag', consts.CONTENT],
     value: val => `\n  label="${val}"`,
   },
-  otherAttributes: {
-    group: 'attr',
-    type: text,
-    config: ['other attributes', '', consts.OTHER],
-    value: val => (val.length ? `\n  ${val}` : ''),
-  },
 };
 
 const storySet = knobsHelper.getStorySet(kinds, preKnobs);

@@ -27,12 +27,6 @@ const preKnobs = {
     config: ['offset example', false, consts.CONFIG],
     value: val => (val ? '\n :offset="{ left: 0), top: 200 }"' : ''),
   },
-  otherAttributes: {
-    group: 'attr',
-    type: text,
-    config: ['other attributes', '', consts.OTHER],
-    value: val => (val.length ? `\n  ${val}` : ''),
-  },
 };
 
 const storySet = knobsHelper.getStorySet(kinds, preKnobs);

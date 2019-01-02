@@ -28,12 +28,6 @@ const preKnobs = {
     config: ['small', false, consts.CONFIG],
     value: val => (val ? ' small' : ''),
   },
-  otherAttributes: {
-    group: 'attr',
-    type: text,
-    config: [' other attributes', '', consts.OTHER],
-    value: val => (val.length ? `\n  ${val}` : ''),
-  },
   events: {
     group: 'attr',
     type: boolean,

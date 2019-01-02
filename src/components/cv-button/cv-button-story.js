@@ -60,12 +60,6 @@ const preKnobs = {
   @click="actionClick"`
         : '',
   },
-  otherAttributes: {
-    group: 'attr',
-    type: text,
-    config: ['other attributes', '', consts.OTHER],
-    value: val => (val.length ? `\n  ${val}` : ''),
-  },
 };
 
 const storySet = knobsHelper.getStorySet(kinds, preKnobs);

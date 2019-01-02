@@ -23,12 +23,6 @@ const preKnobs = {
     config: ['No trailing slash', false, consts.CONFIG],
     value: val => (val ? ' no-trailing-slash' : ''),
   },
-  otherAttributes: {
-    group: 'attr',
-    type: text,
-    config: ['other attributes', '', consts.OTHER],
-    value: val => (val.length ? `\n  ${val}` : ''),
-  },
 };
 
 const storySet = knobsHelper.getStorySet(kinds, preKnobs);

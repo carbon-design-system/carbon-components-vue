@@ -33,12 +33,6 @@ const preKnobs = {
     config: ['Initial step index', '0', consts.CONFIG],
     value: val => (val.length ? `\n :initial-step="${parseInt(val, 10)}"` : ''),
   },
-  otherAttributes: {
-    group: 'attr',
-    type: text,
-    config: ['other attributes', '', consts.OTHER],
-    value: val => (val.length ? `\n  ${val}` : ''),
-  },
 };
 
 const storySet = knobsHelper.getStorySet(kinds, preKnobs);
