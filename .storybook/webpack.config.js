@@ -1,7 +1,7 @@
 const path = require('path');
 const autoprefixer = require('autoprefixer')({ browsers: ['last 2 versions'] });
 
-module.exports = (baseConfig, env, defaultConfig) => {
+module.exports = (storybookBaseConfig, configType, defaultConfig) => {
   defaultConfig.module.rules.push({
     test: /-story\.js$/,
     include: path.resolve(__dirname, '../src'),
@@ -15,13 +15,13 @@ module.exports = (baseConfig, env, defaultConfig) => {
   });
 
   defaultConfig.module.rules.push({
-    test: /\.scss$/,
-    loaders: ['style-loader', 'css-loader', 'sass-loader'],
+    test: /\.(s){0,1}css$/,
+    loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
     include: path.resolve(__dirname, '../'),
   });
 
+  // auto prefix anything in a vue file
   defaultConfig.resolve.extensions.push('.js', '.vue', '.json');
-
   let vueLoaderConfig = defaultConfig.module.rules.find(item => {
     return item.loader && item.loader.indexOf('vue-loader') > -1;
   });
