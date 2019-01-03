@@ -16,30 +16,52 @@ stories.addDecorator(withNotes);
 
 const kinds = null;
 
+// console.dir(CvAccordionItem);
+
 const preKnobs = {
   open1: {
     group: 'one',
     type: boolean,
     config: ['open for item 1', false, consts.CONFIG],
-    value: val => (val ? ' open' : ''),
+    prop: {
+      type: Boolean,
+      optional: true,
+      name: 'open',
+      inline: true,
+    },
   },
   open2: {
     group: 'two',
     type: boolean,
     config: ['open for item 2', false, consts.CONFIG],
-    value: val => (val ? ' open' : ''),
+    prop: {
+      type: Boolean,
+      optional: true,
+      name: 'open',
+      inline: true,
+    },
   },
   open3: {
     group: 'three',
     type: boolean,
     config: ['open for item 3', false, consts.CONFIG],
-    value: val => (val ? ' open' : ''),
+    prop: {
+      type: Boolean,
+      optional: true,
+      name: 'open',
+      inline: true,
+    },
   },
   open4: {
     group: 'four',
     type: boolean,
     config: ['open for item 4', false, consts.CONFIG],
-    value: val => (val ? ' open' : ''),
+    prop: {
+      type: Boolean,
+      optional: true,
+      name: 'open',
+      inline: true,
+    },
   },
 };
 
@@ -50,7 +72,6 @@ for (const story of storySet) {
     story.name,
     () => {
       const settings = story.knobs();
-
       // ----------------------------------------------------------------
 
       const templateString = `
@@ -95,6 +116,7 @@ for (const story of storySet) {
       return {
         components: { CvAccordion, CvAccordionItem, SvTemplateView },
         template: templateViewString,
+        props: settings.props,
       };
     },
     {

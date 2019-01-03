@@ -20,19 +20,30 @@ const preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['light-theme', false, consts.CONFIG],
-    value: val => (val ? '\n  theme="light"' : ''),
+    prop: {
+      type: String,
+      optional: true,
+      name: 'theme',
+      value: `theme="light ? 'light' : ''"`,
+    },
   },
   label: {
-    group: 'attr',
-    type: text,
-    config: ['label', 'Text input label', consts.CONTENT],
-    value: val => (val.length ? `\n  label="${val}"` : ''),
+    group: 'content',
+    slot: {
+      name: 'label',
+      value: 'Text input label',
+    },
   },
   disabled: {
     group: 'attr',
     type: boolean,
     config: ['disabled', false, consts.CONFIG],
-    value: val => (val ? '\n  disabled' : ''),
+    prop: {
+      type: Boolean,
+      optional: true,
+      default: false,
+      name: 'disabled',
+    },
   },
   vModel: {
     group: 'attr',
@@ -89,11 +100,11 @@ for (const story of storySet) {
         data() {
           return {
             modelValue: 'initial value',
-            light: settings.raw.light,
           };
         },
         components: { CvTextInput, SvTemplateView },
         template: templateViewString,
+        props: settings.props,
         methods: {
           onInput: action('cv-text-input - input event'),
         },
