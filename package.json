@@ -25,6 +25,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "carbon-components": "^9.48.1",
     "carbon-icons": "^7.0.7",
+    "d3": "^5.7.0",
     "flatpickr": "4.5.1"
   },
   "devDependencies": {
