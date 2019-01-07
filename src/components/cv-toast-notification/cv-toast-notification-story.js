@@ -18,7 +18,7 @@ const preKnobs = {
   title: {
     group: 'attr',
     type: text,
-    config: ['title', 'notification title', consts.CONTENT],
+    config: ['title', 'notification title'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: {
       type: String,
       name: 'title',
@@ -27,7 +27,7 @@ const preKnobs = {
   subTitle: {
     group: 'attr',
     type: text,
-    config: ['subtitle', 'a subtitle', consts.CONTENT],
+    config: ['subtitle', 'a subtitle'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: {
       type: String,
       name: 'sub-title',
@@ -36,7 +36,7 @@ const preKnobs = {
   caption: {
     group: 'attr',
     type: text,
-    config: ['caption', 'Time stamp [00:00:00]', consts.CONTENT],
+    config: ['caption', 'Time stamp [00:00:00]'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: {
       type: String,
       name: 'caption',
@@ -50,7 +50,7 @@ const preKnobs = {
 };
 
 const variants = [
-  { name: 'default', extra: { kind: { group: 'attr', value: 'kind=""' } } },
+  { name: 'default' },
   { name: 'error', extra: { kind: { group: 'attr', value: 'kind="error"' } } },
   { name: 'info', extra: { kind: { group: 'attr', value: 'kind="info"' } } },
   {

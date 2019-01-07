@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import { withKnobs, object, boolean } from '@storybook/addon-knobs';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
@@ -13,23 +13,24 @@ const stories = storiesOf('CvOverflowMenu', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
-const kinds = null;
 const preKnobs = {
   flipMenu: {
     group: 'attr',
     type: boolean,
-    config: ['flip menu', false, consts.CONFIG],
-    value: val => (val ? '\n  flip-menu' : ''),
+    config: ['flip menu', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: { type: Boolean, name: 'flip-menu' },
   },
   offset: {
     group: 'attr',
-    type: boolean,
-    config: ['offset example', false, consts.CONFIG],
-    value: val => (val ? '\n :offset="{ left: 0), top: 200 }"' : ''),
+    type: object,
+    config: ['offset example', { left: 0, top: 200 }], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: { type: Object, name: 'offset' },
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [{ name: 'default' }];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
@@ -61,6 +62,7 @@ for (const story of storySet) {
       return {
         components: { CvOverflowMenu, SvTemplateView },
         template: templateViewString,
+        props: settings.props,
       };
     },
     {

@@ -18,17 +18,16 @@ const preKnobs = {
   checked: {
     group: 'attr',
     type: boolean,
-    config: ['checked', false, consts.CONFIG],
+    config: ['checked', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
       type: Boolean,
-      default: false,
       name: 'checked',
     },
   },
   value: {
     group: 'attr',
     type: text,
-    config: ['value', 'check-1', consts.CONFIG],
+    config: ['value', 'check-1'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
       type: String,
       name: 'value',
@@ -37,10 +36,9 @@ const preKnobs = {
   disabled: {
     group: 'attr',
     type: boolean,
-    config: ['disabled', false, consts.CONFIG],
+    config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
       type: Boolean,
-      default: false,
       name: 'disabled',
     },
   },

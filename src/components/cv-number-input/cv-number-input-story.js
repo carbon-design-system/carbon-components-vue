@@ -14,81 +14,86 @@ const stories = storiesOf('CvNumberInput', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
-const kinds = null;
 const preKnobs = {
-  light: {
+  theme: {
     group: 'attr',
     type: boolean,
-    config: ['light-theme', false, consts.CONFIG],
-    value: val => (val ? '\n  theme="light"' : ''),
+    config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: String,
+      name: 'theme',
+      value: val => (val ? 'light' : ''),
+    },
   },
   label: {
     group: 'attr',
     type: text,
-    config: ['label', 'Text input label', consts.CONTENT],
-    value: val => (val.length ? `\n  label="${val}"` : ''),
+    config: ['label', 'Text input label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: String,
+      name: 'label',
+    },
   },
   invalidMessage: {
     group: 'content',
-    type: text,
-    config: ['slot:Invalid message', '', consts.CONTENT],
-    value: val =>
-      val.length
-        ? `
-  <template slot="invalid-message">
-    ${val}
-  </template>`
-        : '',
+    slot: {
+      name: 'invalid-message',
+      value: 'Not a valid number',
+    },
   },
   helperText: {
     group: 'content',
-    type: text,
-    config: ['slot:Helper text', '', consts.CONTENT],
-    value: val =>
-      val.length
-        ? `
-  <template slot="helper-text">
-    ${val}
-  </template>`
-        : '',
+    slot: {
+      name: 'helper-text',
+      value: 'This is some helpful text',
+    },
   },
   disabled: {
     group: 'attr',
     type: boolean,
-    config: ['disabled', false, consts.CONFIG],
-    value: val => (val ? '\n  disabled' : ''),
+    config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: Boolean,
+      name: 'disabled',
+    },
   },
   invalid: {
     group: 'attr',
     type: boolean,
-    config: ['invalid', false, consts.CONFIG],
-    value: val => (val ? '\n  invalid' : ''),
+    config: ['invalid', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      name: 'invalid',
+      type: Boolean,
+    },
   },
   value: {
     group: 'attr',
     type: text,
-    config: ['initial-value', '', consts.CONFIG],
-    value: val => (val.length ? `\n  initial-value="${val}"` : ''),
+    config: ['initial-value', ''], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      name: 'initial-value',
+      type: String,
+    },
   },
   vModel: {
     group: 'attr',
-    type: boolean,
-    config: ['v-model', false, consts.OTHER],
-    value: val => (val ? '\n  v-model="modelValue"' : ''),
+    value: `v-model="modelValue"`,
   },
   events: {
     group: 'attr',
-    type: boolean,
-    config: ['with events', false, consts.OTHER],
-    value: val =>
-      val
-        ? `
-  @input="onInput"`
-        : '',
+    value: `@input="onInput"
+  @change="onChange"`,
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [
+  { name: 'default', excludes: ['vModel', 'events'] },
+  { name: 'minimal', includes: ['label'] },
+  { name: 'events', includes: ['label', 'events'] },
+  { name: 'vModel', includes: ['label', 'vModel'] },
+];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
@@ -108,11 +113,12 @@ for (const story of storySet) {
       const templateViewString = `
     <sv-template-view
     sv-margin
-    :sv-alt-back="!light"
+    :sv-alt-back="this.$options.propsData.theme !== 'light'"
     sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">
-        <div class="v-model-example" v-if="${settings.raw.vModel}">
+        <div class="v-model-example" v-if="${templateString.indexOf('v-model') >
+          0}"
           <label>Model value:
             <input type="number" v-model="modelValue" />
           </label>
@@ -122,15 +128,16 @@ for (const story of storySet) {
   `;
 
       return {
+        components: { CvNumberInput, SvTemplateView },
+        template: templateViewString,
+        props: settings.props,
         data() {
           return {
             modelValue: '100',
-            light: settings.raw.light,
           };
         },
-        components: { CvNumberInput, SvTemplateView },
-        template: templateViewString,
         methods: {
+          onChange: action('cv-number-change - change event'),
           onInput: action('cv-number-input - input event'),
         },
       };

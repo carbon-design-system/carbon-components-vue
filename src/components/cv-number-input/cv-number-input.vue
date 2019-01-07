@@ -60,6 +60,7 @@ export default {
     inputListeners() {
       return Object.assign({}, this.$listeners, {
         input: event => this.$emit('input', event.target.value),
+        change: event => this.$emit('change', event.target.value),
       });
     },
   },

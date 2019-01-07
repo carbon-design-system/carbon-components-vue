@@ -86,6 +86,7 @@ export default {
     };
   },
   mounted() {
+    console.warn(`CVModal API under review`);
     if (this.visible) {
       this.show();
     }

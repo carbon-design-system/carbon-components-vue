@@ -17,7 +17,7 @@ const preKnobs = {
   lessText: {
     group: 'attr',
     type: text,
-    config: ['Less text', '', consts.CONTENT],
+    config: ['Less text', ''], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     inline: true,
     prop: {
       name: 'less-text',
@@ -27,7 +27,7 @@ const preKnobs = {
   moreText: {
     group: 'attr',
     type: text,
-    config: ['More text', '', consts.CONTENT],
+    config: ['More text', ''], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     inline: true,
     prop: {
       name: 'more-text',

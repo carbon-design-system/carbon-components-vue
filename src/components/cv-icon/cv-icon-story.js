@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, select } from '@storybook/addon-knobs';
+import { withKnobs, number, select } from '@storybook/addon-knobs';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
@@ -15,7 +15,6 @@ stories.addDecorator(withNotes);
 
 const fullIconHref =
   require('carbon-icons/dist/carbon-icons.svg') + '#icon--error';
-const kinds = null;
 
 const preKnobs = {
   href: {

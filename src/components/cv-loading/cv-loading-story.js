@@ -14,33 +14,37 @@ const stories = storiesOf('CvLoading', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
-const kinds = null;
 const preKnobs = {
+  active: {
+    group: 'attr',
+    type: boolean,
+    config: ['active', true], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: { name: 'active', type: Boolean },
+  },
   overlay: {
     group: 'attr',
     type: boolean,
-    config: ['overlay', true, consts.CONFIG],
-    value: val => (val ? ' overlay' : ''),
+    config: ['overlay', true], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: { name: 'overlay', type: Boolean },
   },
   small: {
     group: 'attr',
     type: boolean,
-    config: ['small', false, consts.CONFIG],
-    value: val => (val ? ' small' : ''),
+    config: ['small', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: { name: 'small', type: Boolean },
   },
   events: {
     group: 'attr',
-    type: boolean,
-    config: ['with events', false, consts.OTHER],
-    value: val =>
-      val
-        ? `
-  @loading-end="actionEnd"`
-        : '',
+    value: `@loading-end="actionEnd"`,
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [
+  { name: 'default', excludes: ['events'] },
+  { name: 'events' },
+];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
@@ -50,7 +54,7 @@ for (const story of storySet) {
 
       // ----------------------------------------------------------------
       const templateString = `
-<cv-loading${settings.group.attr} :active="active"></cv-loading>
+<cv-loading${settings.group.attr}></cv-loading>
   `;
 
       // ----------------------------------------------------------------
@@ -62,25 +66,15 @@ for (const story of storySet) {
       <template slot="component" ref="component">
         ${templateString}
       </template>
-      <template slot="other">
-      <button @click="toggle" style="position: relative; margin-left: 500px;">Toggle</button>
-      </template>
     </sv-template-view>
   `;
 
       return {
         components: { CvLoading, SvTemplateView },
         template: templateViewString,
-        data() {
-          return {
-            active: true,
-          };
-        },
+        props: settings.props,
         methods: {
           actionEnd: action('CvLoading - loading-end'),
-          toggle() {
-            this.active = !this.active;
-          },
         },
       };
     },

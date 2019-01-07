@@ -14,58 +14,56 @@ const stories = storiesOf('CvFileUploader', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
-const kinds = null;
-
 const preKnobs = {
   label: {
     group: 'attr',
     type: text,
-    config: ['label', 'Add file', consts.CONTENT],
-    value: val => (val.length ? `\n  label="${val}"` : ''),
+    config: ['label', 'Add file'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    prop: { name: 'label', type: String },
   },
   accept: {
     group: 'attr',
     type: text,
-    config: ['accept', '.jpg,.png', consts.CONFIG],
-    value: val => (val.length ? `\n  accept="${val}"` : ''),
+    config: ['accept', '.jpg,.png'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: { name: 'accept', type: String },
   },
   clearOnReselect: {
     group: 'attr',
     type: boolean,
-    config: ['Clear on reselect', false, consts.CONFIG],
-    value: val => (val ? '\n  clear-on-reselect' : ''),
+    config: ['Clear on reselect', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: { name: 'clear-on-reselect', type: Boolean },
   },
   initialStateUploading: {
     group: 'attr',
     type: boolean,
-    config: ['Initial state uploading', false, consts.CONFIG],
-    value: val => (val ? '\n  initial-state-uploading' : ''),
+    config: ['Initial state uploading', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: { name: 'initial-state-uploading', type: Boolean },
   },
   multiple: {
     group: 'attr',
     type: boolean,
-    config: ['multiple', false, consts.CONFIG],
-    value: val => (val ? '\n  multiple' : ''),
+    config: ['multiple', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: { name: 'multiple', type: Boolean },
   },
   removable: {
     group: 'attr',
     type: boolean,
-    config: ['removable', false, consts.CONFIG],
-    value: val => (val ? '\n  removable' : ''),
+    config: ['removable', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: { name: 'removable', type: Boolean },
   },
   events: {
     group: 'attr',
-    type: boolean,
-    config: ['with events', false, consts.OTHER],
-    value: val =>
-      val
-        ? `
-  @input="onInput"`
-        : '',
+    value: `@input="onInput"`,
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [
+  { name: 'default', excludes: ['events'] },
+  { name: 'minimal', includes: [] },
+  { name: 'events', includes: ['value', 'events'] },
+];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
@@ -107,6 +105,7 @@ for (const story of storySet) {
       return {
         components: { CvFileUploader, SvTemplateView },
         template: templateViewString,
+        props: settings.props,
         methods: {
           onInput: action('cv-file-uploader - input event'),
           setState() {

@@ -14,45 +14,71 @@ const stories = storiesOf('CvSelect', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
-const kinds = null;
 const preKnobs = {
-  light: {
+  theme: {
     group: 'attr',
     type: boolean,
-    config: ['light-theme', false, consts.CONFIG],
-    value: val => (val ? '\n  theme="light"' : ''),
+    config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: String,
+      name: 'theme',
+      value: val => (val ? 'light' : ''),
+    },
   },
   label: {
     group: 'attr',
     type: text,
-    config: ['label', 'Select label', consts.CONTENT],
-    value: val => (val.length ? `\n  label="${val}"` : ''),
+    config: ['label', 'Select label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: String,
+      name: 'label',
+    },
+  },
+  hideLabel: {
+    group: 'attr',
+    type: boolean,
+    config: ['hide-label', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: Boolean,
+      name: 'hide-label',
+    },
   },
   inline: {
     group: 'attr',
     type: boolean,
-    config: ['inline', false, consts.CONFIG],
-    value: val => (val ? '\n  inline' : ''),
+    config: ['inline', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: Boolean,
+      name: 'inline',
+    },
+  },
+  disabled: {
+    group: 'attr',
+    type: boolean,
+    config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: Boolean,
+      name: 'disabled',
+    },
   },
   vModel: {
     group: 'attr',
-    type: boolean,
-    config: ['v-model', false, consts.OTHER],
-    value: val => (val ? '\n  v-model="selectValue" ' : ''),
+    value: `v-model="selectValue"`,
   },
   events: {
     group: 'attr',
-    type: boolean,
-    config: ['with events', false, consts.OTHER],
-    value: val =>
-      val
-        ? `
-  @change="actionChange"`
-        : '',
+    value: `@change="actionChange"`,
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [
+  { name: 'default', excludes: ['vModel', 'events'] },
+  { name: 'minimal', includes: ['label'] },
+  { name: 'events', includes: ['label', 'events'] },
+  { name: 'vModel', includes: ['label', 'vModel'] },
+];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
@@ -82,12 +108,13 @@ for (const story of storySet) {
       const templateViewString = `
     <sv-template-view
       sv-margin
-      :sv-alt-back="light"
+      :sv-alt-back="this.$options.propsData.theme !== 'light'"
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
 
       <template slot="other">
-        <div v-if="showVModel">
+        <div class="v-model-example" v-if="${templateString.indexOf('v-model') >
+          0}">
           <span>V-Model value</span>
             <select v-model="selectValue" >
               <option value="cv-select-option1">cv-select-option 1</option>
@@ -103,11 +130,10 @@ for (const story of storySet) {
 
       return {
         components: { CvSelect, SvTemplateView },
+        props: settings.props,
         data() {
           return {
-            showVModel: settings.raw.vModel,
             selectValue: 'cv-select-option3',
-            light: settings.raw.light,
           };
         },
         methods: {

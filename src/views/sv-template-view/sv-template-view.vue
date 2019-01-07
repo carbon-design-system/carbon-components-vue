@@ -17,8 +17,8 @@
       <pre v-highlightjs="svSource">
         <code class="html"></code>
       </pre>
-      <h2 class="sv-tempate-view__label">Sample settings</h2>
-      <pre v-highlightjs="propsData">
+      <h2 class="sv-tempate-view__label">Sample props</h2>
+      <pre v-highlightjs="propsJSON">
         <code class="javascript"></code>
       </pre>
       <button
@@ -54,14 +54,14 @@ export default {
   },
   data() {
     return {
-      propsData: '',
+      propsJSON: '',
     };
   },
   mounted() {
-    this.propsData = JSON.stringify(this.$vnode.context.$options.propsData);
+    this.propsJSON = JSON.stringify(this.$vnode.context.$options.propsData);
   },
   updated() {
-    this.propsData = JSON.stringify(this.$vnode.context.$options.propsData);
+    this.propsJSON = JSON.stringify(this.$vnode.context.$options.propsData);
   },
   methods: {
     sourceToClipboard() {

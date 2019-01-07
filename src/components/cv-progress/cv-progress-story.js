@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, select, array, text } from '@storybook/addon-knobs';
+import { withKnobs, array, number } from '@storybook/addon-knobs';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
@@ -13,8 +13,16 @@ const stories = storiesOf('CvProgress', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
-const kinds = null;
 const preKnobs = {
+  initialStep: {
+    group: 'attr',
+    type: number,
+    config: ['Initial step index', 2], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      name: 'initial-step',
+      type: Number,
+    },
+  },
   steps: {
     group: 'attr',
     type: array,
@@ -22,20 +30,18 @@ const preKnobs = {
       'Steps',
       ['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5'],
       ',',
-      consts.CONFIG,
+      'consts.CONFIG', // , - does not seem to work in storybook 4
     ],
-    value: val => '\n  :steps="steps"',
-    data: (obj, key, val) => (obj[key] = val),
-  },
-  initialStep: {
-    group: 'attr',
-    type: text,
-    config: ['Initial step index', '0', consts.CONFIG],
-    value: val => (val.length ? `\n :initial-step="${parseInt(val, 10)}"` : ''),
+    prop: {
+      name: 'steps',
+      type: Array,
+    },
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [{ name: 'default' }];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
@@ -50,7 +56,6 @@ for (const story of storySet) {
   `;
 
       // ----------------------------------------------------------------
-
       const templateViewString = `
     <sv-template-view
       sv-margin
@@ -61,10 +66,8 @@ for (const story of storySet) {
 
       return {
         components: { CvProgress, SvTemplateView },
-        data() {
-          return settings.data;
-        },
         template: templateViewString,
+        props: settings.props,
       };
     },
     {

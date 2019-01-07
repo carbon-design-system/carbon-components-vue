@@ -18,7 +18,7 @@ const preKnobs = {
   theme: {
     group: 'attr',
     type: boolean,
-    config: ['light-theme', false, consts.CONFIG],
+    config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
       type: String,
       name: 'theme',
@@ -28,7 +28,7 @@ const preKnobs = {
   label: {
     group: 'attr',
     type: text,
-    config: ['label', 'Text input label', consts.CONTENT],
+    config: ['label', 'Text input label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: {
       type: String,
       name: 'label',
@@ -37,7 +37,7 @@ const preKnobs = {
   disabled: {
     group: 'attr',
     type: boolean,
-    config: ['disabled', false, consts.CONFIG],
+    config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
       type: Boolean,
       name: 'disabled',

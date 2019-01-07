@@ -19,7 +19,7 @@ const preKnobs = {
   small: {
     group: 'attr',
     type: boolean,
-    config: ['small', false, consts.CONFIG],
+    config: ['small', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
       name: 'small',
       type: Boolean,
@@ -28,7 +28,7 @@ const preKnobs = {
   disabled: {
     group: 'attr',
     type: boolean,
-    config: ['disabled', false, consts.CONFIG],
+    config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
       name: 'disabled',
       type: Boolean,

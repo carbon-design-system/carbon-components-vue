@@ -27,10 +27,11 @@ export default {
   },
   computed: {
     overlayClasses() {
+      console.log(this.overlay, this.stopped);
       if (!this.overlay) return '';
 
       return `bx--loading-overlay ${
-        this.stopped ? 'bx--loading-overlay--stopped' : ''
+        this.stopped ? 'bx--loading-overlay--stop' : ''
       }`;
     },
   },
@@ -53,13 +54,11 @@ export default {
         this.$emit('loading-end');
       }
     },
-    onActiveUpdate(newValue, oldValue) {
-      if (newValue !== oldValue) {
-        if (newValue) {
-          this.stopped = false;
-        } else {
-          this.$refs.loading.addEventListener('animationend', this.onEnd);
-        }
+    onActiveUpdate(newValue) {
+      if (newValue) {
+        this.stopped = false;
+      } else {
+        this.$refs.loading.addEventListener('animationend', this.onEnd);
       }
     },
   },

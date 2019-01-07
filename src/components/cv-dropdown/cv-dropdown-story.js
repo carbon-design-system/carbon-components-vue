@@ -18,7 +18,7 @@ const preKnobs = {
   theme: {
     group: 'attr',
     type: boolean,
-    config: ['light-theme', false, consts.CONFIG],
+    config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
       type: String,
       name: 'theme',
@@ -28,7 +28,7 @@ const preKnobs = {
   placeholder: {
     group: 'attr',
     type: text,
-    config: ['placeholder', 'Choose an option', consts.CONTENT],
+    config: ['placeholder', 'Choose an option'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: {
       type: String,
       name: 'placeholder',
@@ -58,7 +58,7 @@ const preKnobs = {
   up: {
     group: 'attr',
     type: boolean,
-    config: ['up', false, consts.CONFIG],
+    config: ['up', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
       name: 'up',
       type: Boolean,

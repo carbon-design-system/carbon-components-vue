@@ -13,32 +13,30 @@ const stories = storiesOf('CvList', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
-const kinds = null;
 const preKnobs = {
   ordered: {
     group: 'attr',
     type: boolean,
-    config: ['ordered', false, consts.CONFIG],
-    value: val => (val ? `\n ordered` : ''),
+    config: ['ordered', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: { name: 'ordered', type: Boolean },
   },
   nested: {
     group: 'nested',
-    type: boolean,
-    config: ['nested', false, consts.CONFIG],
-    value: val =>
-      val
-        ? `
-    <cv-list nested>
+    value: `<cv-list nested>
       <cv-list-item>nested item 1</cv-list-item>
       <cv-list-item>nested item 2</cv-list-item>
       <cv-list-item>nested item 3</cv-list-item>
     </cv-list>
-    `
-        : '',
+    `,
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [
+  { name: 'default', excludes: ['nested'] },
+  { name: 'nested' },
+];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
@@ -69,6 +67,7 @@ for (const story of storySet) {
       return {
         components: { CvList, SvTemplateView },
         template: templateViewString,
+        props: settings.props,
       };
     },
     {

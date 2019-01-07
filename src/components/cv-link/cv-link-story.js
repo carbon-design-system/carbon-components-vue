@@ -17,7 +17,7 @@ const preKnobs = {
   href: {
     group: 'attr',
     type: text,
-    config: ['href', '#', consts.CONFIG],
+    config: ['href', '#'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
       name: 'href',
       type: String,

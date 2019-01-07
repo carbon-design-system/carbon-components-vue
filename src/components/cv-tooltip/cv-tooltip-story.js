@@ -39,7 +39,6 @@ let preKnobs = {
     group: 'content',
     slot: {
       name: 'label',
-      optional: true,
       value: `
     Tooltip label
   `,
@@ -49,7 +48,6 @@ let preKnobs = {
     group: 'content',
     slot: {
       name: 'trigger',
-      optional: true,
       value: `<svg width="16" height="12" viewBox="0 0 16 12">
       <path d="M8.05 2a2.5 2.5 0 0 1 4.9 0H16v1h-3.05a2.5 2.5 0 0 1-4.9 0H0V2h8.05zm2.45 2a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM3.05 9a2.5 2.5 0 0 1 4.9 0H16v1H7.95a2.5 2.5 0 0 1-4.9 0H0V9h3.05zm2.45 2a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
     </svg>
@@ -145,7 +143,7 @@ preKnobs = {
   tip: {
     group: 'attr',
     type: text,
-    config: ['tip', 'This is your tip!', consts.CONTENT],
+    config: ['tip', 'This is your tip!'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     inline: true,
     prop: {
       component: CvTooltip,
@@ -231,14 +229,13 @@ preKnobs = {
     inline: true,
     prop: {
       type: Boolean,
-      optional: true,
       name: 'definition',
     },
   },
   term: {
     group: 'attr',
     type: text,
-    config: ['term', 'A term needeing definition', consts.CONTENT],
+    config: ['term', 'A term needeing definition'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     inline: true,
     prop: {
       component: CvDefinitionTooltip,
