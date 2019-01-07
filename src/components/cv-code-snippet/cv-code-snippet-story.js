@@ -13,35 +13,32 @@ const stories = storiesOf('CvCodeSnippet', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
-const kinds = {
-  options: {
-    default: '',
-    inline: 'inline',
-    multiline: 'multiline',
-    oneline: 'oneline',
-  },
-  default: '',
-};
-
 const preKnobs = {
   lessText: {
     group: 'attr',
     type: text,
     config: ['Less text', '', consts.CONTENT],
-    value: val => (val.length ? `\n  less-text="${val}"` : ''),
+    inline: true,
+    prop: {
+      name: 'less-text',
+      type: String,
+    },
   },
   moreText: {
     group: 'attr',
     type: text,
     config: ['More text', '', consts.CONTENT],
-    value: val => (val.length ? `\n  more-text="${val}"` : ''),
+    inline: true,
+    prop: {
+      name: 'more-text',
+      type: String,
+    },
   },
   content: {
-    group: 'slot-content',
-    type: text,
-    config: [
-      'slot:content',
-      `@mixin grid-container {
+    group: 'content',
+    slot: {
+      name: '',
+      value: `@mixin grid-container {
   width: 100%;
   padding-right: padding(mobile);
   padding-left: padding(mobile);
@@ -62,13 +59,37 @@ $z-indexes: (
   overflowHidden: - 1,
   floating: 10000
 );`,
-      consts.CONTENT,
-    ],
-    value: val => val,
+    },
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [
+  {
+    name: 'default',
+    includes: ['content'],
+  },
+  {
+    name: 'inline',
+    includes: ['content'],
+    extra: { kind: { group: 'attr', value: 'kind="inline"', inline: true } },
+  },
+  {
+    name: 'multiline',
+    extra: { kind: { group: 'attr', value: 'kind="multiline"', inline: true } },
+  },
+  {
+    name: 'multiline (minimal)',
+    includes: ['content'],
+    extra: { kind: { group: 'attr', value: 'kind="multiline"', inline: true } },
+  },
+  {
+    name: 'oneline',
+    includes: ['content'],
+    extra: { kind: { group: 'attr', value: 'kind="oneline"', inline: true } },
+  },
+];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
@@ -79,8 +100,8 @@ for (const story of storySet) {
       // ----------------------------------------------------------------
       // console.dir(settings);
       const templateString = `
-<cv-code-snippet${settings.kind}${settings.group.attr}>
-  ${settings.group['slot-content']}
+<cv-code-snippet${settings.group.attr}>
+  ${settings.group['content']}
 </cv-code-snippet>
   `;
 
@@ -89,7 +110,8 @@ for (const story of storySet) {
       const templateViewString = `
     <sv-template-view ref="view"
       sv-margin
-      :sv-alt-back="${settings.kind.indexOf('inline') > -1}"
+      :sv-alt-back="${settings.group.attr &&
+        settings.group.attr.indexOf('inline') > -1}"
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
     </sv-template-view>
@@ -98,6 +120,7 @@ for (const story of storySet) {
       return {
         components: { CvCodeSnippet, SvTemplateView },
         template: templateViewString,
+        props: settings.props,
       };
     },
     {

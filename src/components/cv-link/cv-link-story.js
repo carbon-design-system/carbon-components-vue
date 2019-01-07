@@ -13,23 +13,21 @@ const stories = storiesOf('CvLink', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
-const kinds = null;
 const preKnobs = {
   href: {
     group: 'attr',
     type: text,
     config: ['href', '#', consts.CONFIG],
-    value: val => (val.length ? ` href="${val}"` : ''),
-  },
-  disabled: {
-    group: 'attr',
-    type: boolean,
-    config: ['disabled', false, consts.CONFIG],
-    value: val => (val ? ' tabindex="-1" aria-disabled="true"' : ''),
+    prop: {
+      name: 'href',
+      type: String,
+    },
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [{ name: 'default' }];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
@@ -58,6 +56,7 @@ for (const story of storySet) {
       return {
         components: { CvLink, SvTemplateView },
         template: templateViewString,
+        props: settings.props,
       };
     },
     {

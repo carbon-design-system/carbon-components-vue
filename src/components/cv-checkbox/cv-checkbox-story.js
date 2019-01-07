@@ -14,88 +14,122 @@ const stories = storiesOf('CvCheckbox', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
-const kinds = null;
-
 const preKnobs = {
   label: {
     group: 'attr',
     type: text,
     config: ['label', 'checkbox', consts.CONFIG],
-    value: val => (val.length ? `\n  label="${val}"` : ''),
-    data: (obj, key, val) => (obj[key] = val),
+    prop: {
+      type: String,
+      name: 'label',
+    },
+  },
+  small: {
+    group: 'attr',
+    type: boolean,
+    config: ['small', false, consts.CONFIG],
+    prop: {
+      type: Boolean,
+      default: false,
+      name: 'small',
+    },
   },
   checked: {
     group: 'attr',
     type: boolean,
     config: ['checked', false, consts.CONFIG],
-    value: val => (val ? '\n  checked' : ''),
+    prop: {
+      type: Boolean,
+      default: false,
+      name: 'checked',
+    },
   },
-  mixed: {
+  value: {
     group: 'attr',
-    type: boolean,
-    config: ['mixed', false, consts.CONFIG],
-    value: val => (val ? `\n  mixed` : ''),
+    type: text,
+    config: ['value', 'check-1', consts.CONFIG],
+    prop: {
+      type: String,
+      name: 'value',
+    },
   },
   disabled: {
     group: 'attr',
     type: boolean,
     config: ['disabled', false, consts.CONFIG],
-    value: val => (val ? '\n  disabled' : ''),
+    prop: {
+      type: Boolean,
+      name: 'disabled',
+    },
   },
   vModel: {
     group: 'attr',
-    type: boolean,
-    config: ['v-model', false, consts.OTHER],
-    value: val => (val ? '\n  v-model="checked"' : ''),
+    value: `v-model="modelValue"`,
   },
   events: {
     group: 'attr',
-    type: boolean,
-    config: ['with events', false, consts.OTHER],
-    value: val =>
-      val
-        ? `
-  @change="actionChange"
-  @keydown="actionKeydown"`
-        : '',
+    value: `@change="actionChange"`,
+  },
+  textLeft: {
+    group: 'slots',
+    slot: {
+      name: 'text-left',
+      value: '0',
+    },
+  },
+  textRight: {
+    group: 'slots',
+    slot: {
+      name: 'text-right',
+      value: '1',
+    },
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [
+  { name: 'default', excludes: ['vModel', 'events'] },
+  { name: 'minimal', includes: ['value'] },
+  { name: 'events', includes: ['value', 'events'] },
+  { name: 'vModel', includes: ['value', 'vModel'] },
+];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
-    'Default',
+    story.name,
     () => {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
+
       const templateString = `
-<cv-checkbox${settings.group.attr} value="check-1">
+<cv-checkbox${settings.group.attr}>${settings.group.slots}
 </cv-checkbox>
   `;
 
       // ----------------------------------------------------------------
-      // console.dir(settings);
+
       const templateViewString = `
     <sv-template-view
       sv-margin
+      :sv-alt-back="this.$options.propsData.theme !== 'light'"
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
-
       <template slot="other">
-        <div v-if="${settings.raw.vModel}">
+        <div class="v-model-example" v-if="${templateString.indexOf('v-model') >
+          0}">
           <br>
           <br>
           <span>
             V-model:
           </span>
           <label>Check 1:
-            <input type="checkbox" value="check-1" v-model="checked">
+            <input type="checkbox" value="check-1" v-model="modelValue">
           </label>
           <br>
           <br>
-          <span>Checked: {{ checked }}</span>
+          <span>Checked: {{ modelValue }}</span>
         </div>
       </template>
     </sv-template-view>
@@ -103,9 +137,10 @@ for (const story of storySet) {
 
       return {
         components: { CvCheckbox, SvTemplateView },
+        props: settings.props,
         data() {
           return {
-            checked: settings.raw.checked,
+            modelValue: this.$options.propsData.checked || false,
           };
         },
         methods: {
@@ -125,47 +160,43 @@ stories.add(
   'Array v-model',
   () => {
     const templateString = `
-<cv-checkbox v-model="checks" name="check-1" value="check-1" @change="actionChange" label="check-1"></cv-checkbox>
-<cv-checkbox v-model="checks" name="check-2" value="check-2" @change="actionChange" label="check-2" mixed></cv-checkbox>
-<cv-checkbox v-model="checks" name="check-3" value="check-3" @change="actionChange" label="check-3"></cv-checkbox>
-<cv-checkbox v-model="checks" name="check-4" value="check-4" @change="actionChange" label="check-4" mixed></cv-checkbox>
-  `;
+<cv-checkbox v-model="checks" name="check-1" value="check-1" @change="actionChange"></cv-checkbox>
+<cv-checkbox v-model="checks" name="check-2" value="check-2" @change="actionChange"></cv-checkbox>
+<cv-checkbox v-model="checks" name="check-3" value="check-3" @change="actionChange"></cv-checkbox>
+`;
 
     // ----------------------------------------------------------------
 
     const templateViewString = `
-    <sv-template-view
-      sv-margin
-      sv-source='${templateString.trim()}'>
-      <p>This story only demonstrates the array syntax for v-model</p>
-      <template slot="component">${templateString}</template>
+  <sv-template-view
+    sv-margin
+    sv-source='${templateString.trim()}'>
+    <p>This story only demonstrates the array syntax for v-model</p>
+    <template slot="component">${templateString}</template>
 
-      <template slot="other">
-        <div>
-          <br>
-          <br>
-          <span>
-            V-model:
-          </span>
-          <label>Check 1:
-            <input type="checkbox" value="check-1" v-model="checks">
-          </label>
-          <label>Check 2:
-            <input type="checkbox" value="check-2" v-model="checks">
-          </label>
-          <label>Check 3:
-            <input type="checkbox" value="check-3" v-model="checks">
-          </label>
-          <label>Check 4:
-            <input type="checkbox" value="check-4" v-model="checks">
-          </label>
-          <br>
-          <br>
-          <span>Checks: {{ checks }}</span>
-        </div>
-      </template>
-    </sv-template-view>
-  `;
+    <template slot="other">
+      <div>
+        <br>
+        <br>
+        <span>
+          V-model:
+        </span>
+        <label>Check 1:
+          <input type="checkbox" value="check-1" v-model="checks">
+        </label>
+        <label>Check 2:
+          <input type="checkbox" value="check-2" v-model="checks">
+        </label>
+        <label>Check 3:
+          <input type="checkbox" value="check-3" v-model="checks">
+        </label>
+        <br>
+        <br>
+        <span>Checks: {{ checks }}</span>
+      </div>
+    </template>
+  </sv-template-view>
+`;
 
     return {
       components: { CvCheckbox, SvTemplateView },
@@ -173,7 +204,7 @@ stories.add(
         return {
           checks: array(
             'Initial cheks',
-            ['check-3', 'check-4'],
+            ['check-3', 'check-2'],
             ',',
             consts.CONFIG
           ),

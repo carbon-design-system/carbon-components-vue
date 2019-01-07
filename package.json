@@ -28,8 +28,7 @@
     "babel-preset-vue": "^2.0.2",
     "carbon-components": "^9.48.1",
     "carbon-icons": "^7.0.7",
-    "flatpickr": "4.5.1",
-    "storybook-addon-vue-info": "^0.7.0"
+    "flatpickr": "4.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.2.0",

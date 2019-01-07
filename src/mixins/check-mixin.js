@@ -18,9 +18,6 @@ export default {
       dataChecked: undefined,
     };
   },
-  beforeCreate() {
-    console.warn(`${this.$options._componentTag}: v-model under review`);
-  },
   computed: {
     isArrayModel() {
       return Array.isArray(this.modelValue);

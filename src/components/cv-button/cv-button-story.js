@@ -15,54 +15,66 @@ const stories = storiesOf('CvButton', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
-const kinds = {
-  options: {
-    Default: '',
-    primary: 'primary',
-    secondary: 'secondary',
-    tertiary: 'tertiary',
-    ghost: 'ghost',
-    danger: 'danger',
-    'danger-primary': 'danger--primary',
-  },
-  default: '',
-};
-
 const preKnobs = {
   small: {
     group: 'attr',
     type: boolean,
     config: ['small', false, consts.CONFIG],
-    value: val => (val ? '\n  small' : ''),
-  },
-  slotContent: {
-    group: 'slot',
-    type: text,
-    config: [
-      'slot:content',
-      'I am a button <cv-icon href="cv(icon--add)" class="bx--btn__icon"></cv-icon>',
-      consts.CONTENT,
-    ],
+    prop: {
+      name: 'small',
+      type: Boolean,
+    },
   },
   disabled: {
     group: 'attr',
     type: boolean,
     config: ['disabled', false, consts.CONFIG],
-    value: val => (val ? '\n  disabled' : ''),
+    prop: {
+      name: 'disabled',
+      type: Boolean,
+    },
   },
   events: {
     group: 'attr',
-    type: boolean,
-    config: ['with events', false, consts.OTHER],
-    value: val =>
-      val
-        ? `
-  @click="actionClick"`
-        : '',
+    value: `@click="actionClick"`,
+  },
+  content: {
+    group: 'slots',
+    slot: {
+      name: '',
+      value:
+        'I am a button <cv-icon href="cv(icon--add)" class="bx--btn__icon"></cv-icon>',
+    },
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [
+  { name: 'default' },
+  { name: 'minimal', exclude: ['small', 'disabled'] },
+  {
+    name: 'primary',
+    extra: { kind: { group: 'attr', value: 'kind="primary"' } },
+  },
+  {
+    name: 'secondary',
+    extra: { kind: { group: 'attr', value: 'kind="secondary"' } },
+  },
+  {
+    name: 'tertiary',
+    extra: { kind: { group: 'attr', value: 'kind="tertiary"' } },
+  },
+  { name: 'ghost', extra: { kind: { group: 'attr', value: 'kind="ghost"' } } },
+  {
+    name: 'danger',
+    extra: { kind: { group: 'attr', value: 'kind="danger"' } },
+  },
+  {
+    name: 'danger-primary',
+    extra: { kind: { group: 'attr', value: 'kind="danger--primary"' } },
+  },
+];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
@@ -71,8 +83,8 @@ for (const story of storySet) {
       const settings = story.knobs();
 
       const templateString = `
-<cv-button${settings.kind}${settings.group.attr}>
-  ${settings.group.slot}
+<cv-button${settings.group.attr}>
+  ${settings.group.slots}
 </cv-button>
     `;
       // console.log(templateString);
@@ -93,6 +105,7 @@ for (const story of storySet) {
           actionClick: action('Cv Button - click'),
         },
         template: templateViewString,
+        props: settings.props,
       };
     },
     {

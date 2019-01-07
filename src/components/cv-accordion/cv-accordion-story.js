@@ -11,61 +11,54 @@ import CvAccordion from './cv-accordion';
 import CvAccordionItem from './cv-accordion-item';
 
 const stories = storiesOf('CvAccordion', module);
-stories.addDecorator(withKnobs);
-stories.addDecorator(withNotes);
-
-const kinds = null;
-
-// console.dir(CvAccordionItem);
+stories.addDecorator(withKnobs).addDecorator(withNotes);
 
 const preKnobs = {
   open1: {
     group: 'one',
     type: boolean,
     config: ['open for item 1', false, consts.CONFIG],
+    inline: true,
     prop: {
       type: Boolean,
-      optional: true,
       name: 'open',
-      inline: true,
     },
   },
   open2: {
     group: 'two',
     type: boolean,
     config: ['open for item 2', false, consts.CONFIG],
+    inline: true,
     prop: {
       type: Boolean,
-      optional: true,
       name: 'open',
-      inline: true,
     },
   },
   open3: {
     group: 'three',
     type: boolean,
     config: ['open for item 3', false, consts.CONFIG],
+    inline: true,
     prop: {
       type: Boolean,
-      optional: true,
       name: 'open',
-      inline: true,
     },
   },
   open4: {
     group: 'four',
     type: boolean,
     config: ['open for item 4', false, consts.CONFIG],
+    inline: true,
     prop: {
       type: Boolean,
-      optional: true,
       name: 'open',
-      inline: true,
     },
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [{ name: 'default' }, { name: 'minimal', includes: [] }];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(

@@ -46,6 +46,11 @@ export default {
   mounted() {
     this.dataOpen = this.open;
   },
+  watch: {
+    open(val) {
+      this.dataOpen = val;
+    },
+  },
   data() {
     return {
       dataOpen: false,

@@ -9040,16 +9040,6 @@ stdout-stream@^1.4.0:
   dependencies:
     readable-stream "^2.0.1"
 
-storybook-addon-vue-info@^0.7.0:
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/storybook-addon-vue-info/-/storybook-addon-vue-info-0.7.0.tgz#d9c4d4b5e07048da16953bffece2b91e4b55532f"
-  integrity sha512-Y+REqCCqUhg0jc9S3pitiNmOi6MSyJDZF7I5WW1tU/Y6rcBUdGk3NNcCXpUCDU1DK3csobW+9Nptgvw0i6kROA==
-  dependencies:
-    dedent "^0.7.0"
-    highlight.js "^9.12.0"
-    marked "^0.3.19"
-    vue-template-compiler "^2.5.16"
-
 stream-browserify@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/stream-browserify/-/stream-browserify-2.0.1.tgz#66266ee5f9bdb9940a4e4514cafb43bb71e5c9db"

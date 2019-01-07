@@ -10,6 +10,7 @@
       :checked="isChecked === true"
       :aria-checked="`${isChecked}`"
       @change="onChange"
+      :value="value"
     />
     <label
       class="bx--toggle__label"

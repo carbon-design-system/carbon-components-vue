@@ -4,7 +4,10 @@
       :for="uid"
       :class="[
         'bx--label',
-        { 'bx--label--disabled': $attrs.disabled !== undefined },
+        {
+          'bx--label--disabled':
+            $attrs.disabled !== undefined && $attrs.disabled,
+        },
       ]"
       >{{ label }}</label
     >

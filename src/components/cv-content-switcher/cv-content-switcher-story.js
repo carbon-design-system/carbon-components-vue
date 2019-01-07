@@ -15,36 +15,38 @@ const stories = storiesOf('CvContentSwitcher', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
-const kinds = null;
-
 const preKnobs = {
   initialSelected: {
-    group: '',
+    group: 'other',
     type: select,
     config: [
       'Initiallly selected',
       {
-        'Button Name 1': '0',
-        'Button Name 2': '1',
-        'Button Name 3': '2',
+        'Button Name 1': 0,
+        'Button Name 2': 1,
+        'Button Name 3': 2,
       },
-      '0',
+      0,
       consts.CONFIG,
     ],
+    prop: {
+      name: 'selected',
+      type: Number,
+    },
   },
   events: {
     group: 'attr',
-    type: boolean,
-    config: ['with events', false, consts.OTHER],
-    value: val =>
-      val
-        ? `
-  @selected="actionSelected"`
-        : '',
+    value: `@selected="actionSelected"`,
+    inline: true,
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [
+  { name: 'default', excludes: ['events'] },
+  { name: 'events' },
+];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
@@ -55,15 +57,9 @@ for (const story of storySet) {
 
       const templateString = `
   <cv-content-switcher${settings.group.attr}>
-    <cv-content-switcher-button content-selector=".content-1" ${
-      settings.raw.initialSelected === '0' ? ' selected' : ''
-    }>Button Name 1</cv-content-switcher-button>
-    <cv-content-switcher-button content-selector=".content-2" ${
-      settings.raw.initialSelected === '1' ? ' selected' : ''
-    }>Button Name 2</cv-content-switcher-button>
-    <cv-content-switcher-button content-selector=".content-3" ${
-      settings.raw.initialSelected === '2' ? ' selected' : ''
-    }>Button Name 3</cv-content-switcher-button>
+    <cv-content-switcher-button content-selector=".content-1" :selected="isSelected(0)">Button Name 1</cv-content-switcher-button>
+    <cv-content-switcher-button content-selector=".content-2" :selected="isSelected(1)">Button Name 2</cv-content-switcher-button>
+    <cv-content-switcher-button content-selector=".content-3" :selected="isSelected(2)">Button Name 3</cv-content-switcher-button>
   </cv-content-switcher>
 
   <section style="margin: 10px 0;">
@@ -97,6 +93,12 @@ for (const story of storySet) {
           CvContentSwitcher,
           CvContentSwitcherButton,
           SvTemplateView,
+        },
+        props: settings.props,
+        computed: {
+          isSelected() {
+            return index => this.initialSelected === index;
+          },
         },
         methods: {
           actionSelected: action('Cv Content Switcher - selected'),

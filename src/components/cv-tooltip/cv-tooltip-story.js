@@ -14,8 +14,6 @@ import CvDefinitionTooltip from './cv-definition-tooltip';
 const stories = storiesOf('CvTooltip', module);
 stories.addDecorator(withKnobs).addDecorator(withNotes);
 
-const kinds = null;
-
 let preKnobs = {
   direction: {
     group: 'attr',
@@ -31,10 +29,10 @@ let preKnobs = {
       'bottom',
       consts.CONFIG,
     ],
+    inline: true,
     prop: {
       type: String,
       name: 'direction',
-      inline: true,
     },
   },
   label: {
@@ -70,7 +68,12 @@ let preKnobs = {
   },
 };
 
-let storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [
+  { name: 'default' },
+  { name: 'minimal', includes: ['content', 'definition', 'term', 'tip'] },
+];
+
+let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
@@ -133,26 +136,25 @@ preKnobs = {
       'bottom',
       consts.CONFIG,
     ],
+    inline: true,
     prop: {
       component: CvTooltip,
       name: 'direction',
-      inline: true,
     },
   },
   tip: {
     group: 'attr',
     type: text,
     config: ['tip', 'This is your tip!', consts.CONTENT],
+    inline: true,
     prop: {
       component: CvTooltip,
       name: 'tip',
-      inline: true,
     },
   },
   trigger: {
     group: 'content',
     slot: {
-      optional: true,
       value: `<svg width="16" height="12" viewBox="0 0 16 12">
   <path d="M8.05 2a2.5 2.5 0 0 1 4.9 0H16v1h-3.05a2.5 2.5 0 0 1-4.9 0H0V2h8.05zm2.45 2a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM3.05 9a2.5 2.5 0 0 1 4.9 0H16v1H7.95a2.5 2.5 0 0 1-4.9 0H0V9h3.05zm2.45 2a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
 </svg>`,
@@ -160,7 +162,7 @@ preKnobs = {
   },
 };
 
-storySet = knobsHelper.getStorySet(kinds, preKnobs);
+storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
@@ -212,10 +214,10 @@ preKnobs = {
       'bottom',
       consts.CONFIG,
     ],
+    inline: true,
     prop: {
       type: String,
       name: 'direction',
-      inline: true,
     },
   },
   definition: {
@@ -226,26 +228,26 @@ preKnobs = {
       'Brief description of the dotted, underlined term',
       consts.CONTENT,
     ],
+    inline: true,
     prop: {
       type: Boolean,
       optional: true,
       name: 'definition',
-      inline: true,
     },
   },
   term: {
     group: 'attr',
     type: text,
     config: ['term', 'A term needeing definition', consts.CONTENT],
+    inline: true,
     prop: {
       component: CvDefinitionTooltip,
       name: 'term',
-      inline: true,
     },
   },
 };
 
-storySet = knobsHelper.getStorySet(kinds, preKnobs);
+storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(

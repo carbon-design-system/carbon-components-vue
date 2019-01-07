@@ -3,7 +3,10 @@
     <label
       :class="[
         'bx--checkbox-label',
-        { 'bx--label--disabled': $attrs.disabled !== undefined },
+        {
+          'bx--label--disabled':
+            $attrs.disabled !== undefined && $attrs.disabled,
+        },
       ]"
       :data-contained-checkbox-state="isChecked"
     >
@@ -16,6 +19,7 @@
         :checked="isChecked === true"
         :aria-checked="`${isChecked}`"
         @change="onChange"
+        :value="value"
       />
       {{ label }}
     </label>

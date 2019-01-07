@@ -48,6 +48,13 @@ export default {
     contentSelector: String,
     selected: Boolean,
   },
+  watch: {
+    selected(val) {
+      if (val) {
+        this.open();
+      }
+    },
+  },
   data() {
     return {
       buttonId: undefined,

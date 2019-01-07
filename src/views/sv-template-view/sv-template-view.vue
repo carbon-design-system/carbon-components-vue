@@ -13,8 +13,13 @@
       <slot name="other"></slot>
     </section>
     <section class="sv-template-view__code">
+      <h2 class="sv-tempate-view__label">Sample code</h2>
       <pre v-highlightjs="svSource">
         <code class="html"></code>
+      </pre>
+      <h2 class="sv-tempate-view__label">Sample settings</h2>
+      <pre v-highlightjs="propsData">
+        <code class="javascript"></code>
       </pre>
       <button
         @click="sourceToClipboard"
@@ -46,6 +51,17 @@ export default {
     svMargin: { type: Boolean, default: true },
     svSource: String,
     svAltBack: Boolean,
+  },
+  data() {
+    return {
+      propsData: '',
+    };
+  },
+  mounted() {
+    this.propsData = JSON.stringify(this.$vnode.context.$options.propsData);
+  },
+  updated() {
+    this.propsData = JSON.stringify(this.$vnode.context.$options.propsData);
   },
   methods: {
     sourceToClipboard() {
@@ -121,7 +137,7 @@ $border: 1px solid #dfe3e6;
 }
 .sv-template-view__copy {
   position: absolute;
-  top: 56px;
+  top: 78px;
   left: 40px;
   &.sv-template-view__copy--copied::after {
     content: 'Copied!';
@@ -136,5 +152,9 @@ $border: 1px solid #dfe3e6;
 .sv-template-view__clippy {
   position: absolute;
   opacity: 0;
+}
+
+.sv-tempate-view__label {
+  font-size: 18px;
 }
 </style>

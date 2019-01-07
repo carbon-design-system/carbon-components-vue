@@ -14,50 +14,56 @@ const stories = storiesOf('CvToastNotification', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
-const kinds = {
-  options: {
-    Default: '',
-    Error: 'error',
-    Info: 'info',
-    Success: 'success',
-    Warning: 'warning',
-  },
-  default: '',
-};
-
 const preKnobs = {
   title: {
     group: 'attr',
     type: text,
     config: ['title', 'notification title', consts.CONTENT],
-    value: val => (val.length ? `\n  title="${val}"` : ''),
+    prop: {
+      type: String,
+      name: 'title',
+    },
   },
-  subtitle: {
+  subTitle: {
     group: 'attr',
     type: text,
     config: ['subtitle', 'a subtitle', consts.CONTENT],
-    value: val => (val.length ? `\n  subtitle="${val}"` : ''),
+    prop: {
+      type: String,
+      name: 'sub-title',
+    },
   },
   caption: {
     group: 'attr',
     type: text,
     config: ['caption', 'Time stamp [00:00:00]', consts.CONTENT],
-    value: val => (val.length ? `\n  caption="${val}"` : ''),
+    prop: {
+      type: String,
+      name: 'caption',
+    },
   },
   events: {
     group: 'attr',
-    type: boolean,
-    config: ['with events', false, consts.OTHER],
-    value: val =>
-      val
-        ? `
-  @notification-before-delete="actionBeforeDelete"
-  @notification-after-delete="actionAfterDelete"`
-        : '',
+    value: `@notification-before-delete="actionBeforeDelete"
+  @notification-after-delete="actionAfterDelete"`,
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [
+  { name: 'default', extra: { kind: { group: 'attr', value: 'kind=""' } } },
+  { name: 'error', extra: { kind: { group: 'attr', value: 'kind="error"' } } },
+  { name: 'info', extra: { kind: { group: 'attr', value: 'kind="info"' } } },
+  {
+    name: 'success',
+    extra: { kind: { group: 'attr', value: 'kind="success"' } },
+  },
+  {
+    name: 'warning',
+    extra: { kind: { group: 'attr', value: 'kind="warning"' } },
+  },
+];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
@@ -68,9 +74,7 @@ for (const story of storySet) {
       // ----------------------------------------------------------------
 
       const templateString = `
-<cv-toast-notification${settings.kind}${
-        settings.group.attr
-      }></cv-toast-notification>
+<cv-toast-notification${settings.group.attr}></cv-toast-notification>
   `;
 
       // ----------------------------------------------------------------
@@ -86,6 +90,7 @@ for (const story of storySet) {
       return {
         components: { CvToastNotification, SvTemplateView },
         template: templateViewString,
+        props: settings.props,
         methods: {
           actionBeforeDelete: action(
             'CV ToastNotification - notification-before-delete'

@@ -14,19 +14,25 @@ const stories = storiesOf('CvDropdown', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
-const kinds = null;
 const preKnobs = {
-  light: {
+  theme: {
     group: 'attr',
     type: boolean,
     config: ['light-theme', false, consts.CONFIG],
-    value: val => (val ? '\n  theme="light"' : ''),
+    prop: {
+      type: String,
+      name: 'theme',
+      value: val => (val ? 'light' : ''),
+    },
   },
   placeholder: {
     group: 'attr',
     type: text,
-    config: ['Placeholder', 'Choose an option', consts.CONFIG],
-    value: val => (val.length ? `\n  placeholder="${val}"` : ''),
+    config: ['placeholder', 'Choose an option', consts.CONTENT],
+    prop: {
+      type: String,
+      name: 'placeholder',
+    },
   },
   value: {
     group: 'attr',
@@ -44,35 +50,38 @@ const preKnobs = {
       '',
       consts.CONTENT,
     ],
-    value: val => `\n  :value="value"`,
-    data: (obj, key, val) => (obj[key] = val),
+    prop: {
+      name: 'value',
+      type: String,
+    },
   },
   up: {
     group: 'attr',
     type: boolean,
     config: ['up', false, consts.CONFIG],
-    value: val => (val ? '\n  up' : ''),
+    prop: {
+      name: 'up',
+      type: Boolean,
+    },
   },
   vModel: {
     group: 'attr',
-    type: boolean,
-    config: ['v-model', false, consts.OTHER],
-    value: val => (val ? '\n  v-model="value" ' : ''),
+    value: `v-model="modelValue"`,
   },
   events: {
     group: 'attr',
-    type: boolean,
-    config: ['with events', false, consts.OTHER],
-    value: val =>
-      val
-        ? `
-  @change="actionChange"`
-        : '',
+    value: `@change="actionChange"`,
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [
+  { name: 'default', excludes: ['vModel', 'events'] },
+  { name: 'minimal', includes: ['value'] },
+  { name: 'events', includes: ['value', 'events'] },
+  { name: 'vModel', includes: ['value', 'vModel'] },
+];
 
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 for (const story of storySet) {
   stories.add(
     story.name,
@@ -93,13 +102,13 @@ for (const story of storySet) {
       const templateViewString = `
   <sv-template-view
     sv-margin
-    :sv-alt-back="!light"
+    :sv-alt-back="this.$options.propsData.theme !== 'light'"
     sv-source='${templateString.trim()}'>
     <template slot="component">${templateString}</template>
     <template slot="other">
-      <div v-if="showVModel">
+      <div v-if="${templateString.indexOf('v-model') > 0}">
         <span>V-Model value</span>
-          <select v-model="value" >
+          <select v-model="modelValue" >
             <option value="10">10</option>
             <option value="20">20</option>
             <option value="30">30</option>
@@ -117,11 +126,10 @@ for (const story of storySet) {
           CvDropdown,
           SvTemplateView,
         },
+        props: settings.props,
         data() {
           return {
-            light: settings.raw.light,
-            showVModel: settings.raw.vModel,
-            value: settings.data.value,
+            modelValue: this.value,
           };
         },
         methods: {

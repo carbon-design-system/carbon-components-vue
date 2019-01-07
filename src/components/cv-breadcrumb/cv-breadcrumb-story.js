@@ -14,18 +14,21 @@ const stories = storiesOf('CvBreadcrumb', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
-const kinds = null;
-
 const preKnobs = {
   noTrailingSlash: {
     group: 'attr',
     type: boolean,
     config: ['No trailing slash', false, consts.CONFIG],
-    value: val => (val ? ' no-trailing-slash' : ''),
+    prop: {
+      type: Boolean,
+      name: 'no-trailing-slash',
+    },
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [{ name: 'default' }];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
@@ -62,6 +65,7 @@ for (const story of storySet) {
       return {
         components: { CvBreadcrumb, CvBreadcrumbItem, SvTemplateView },
         template: templateViewString,
+        props: settings.props,
       };
     },
     {

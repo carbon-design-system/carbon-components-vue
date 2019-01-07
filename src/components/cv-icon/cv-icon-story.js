@@ -30,11 +30,16 @@ const preKnobs = {
       'cv(icon--add)',
       consts.CONFIG,
     ],
-    value: val => `\n  href="${val}"`,
+    prop: {
+      name: 'href',
+      type: String,
+    },
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [{ name: 'default' }];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
@@ -62,6 +67,7 @@ for (const story of storySet) {
       return {
         components: { CvIcon, SvTemplateView },
         template: templateViewString,
+        props: settings.props,
       };
     },
     {
