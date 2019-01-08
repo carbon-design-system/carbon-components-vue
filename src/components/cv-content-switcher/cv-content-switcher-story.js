@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvContentSwitcherNotesMD from './cv-content-switcher-notes.md';
@@ -27,7 +27,7 @@ const preKnobs = {
         'Button Name 3': 2,
       },
       0,
-      consts.CONFIG,
+      // consts.CONFIG, // fails when used with number in storybook 4.1.4
     ],
     prop: {
       name: 'selected',

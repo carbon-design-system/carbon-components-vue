@@ -3,7 +3,7 @@ import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvCodeSnippetNotesMD from './cv-code-snippet-notes.md';
@@ -71,21 +71,21 @@ const variants = [
   {
     name: 'inline',
     includes: ['content'],
-    extra: { kind: { group: 'attr', value: 'kind="inline"', inline: true } },
+    extra: { kind: { group: 'attr', value: 'inline', inline: true } },
   },
   {
     name: 'multiline',
-    extra: { kind: { group: 'attr', value: 'kind="multiline"', inline: true } },
+    extra: { kind: { group: 'attr', value: 'multiline', inline: true } },
   },
   {
     name: 'multiline (minimal)',
     includes: ['content'],
-    extra: { kind: { group: 'attr', value: 'kind="multiline"', inline: true } },
+    extra: { kind: { group: 'attr', value: 'multiline', inline: true } },
   },
   {
     name: 'oneline',
     includes: ['content'],
-    extra: { kind: { group: 'attr', value: 'kind="oneline"', inline: true } },
+    extra: { kind: { group: 'attr', value: 'oneline', inline: true } },
   },
 ];
 

@@ -4,7 +4,7 @@ import { withNotes } from '@storybook/addon-notes';
 import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvPaginationNotesMD from './cv-pagination-notes.md';

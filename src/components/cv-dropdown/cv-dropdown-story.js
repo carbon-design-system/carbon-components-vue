@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvDropdownNotesMD from './cv-dropdown-notes.md';
@@ -48,7 +48,7 @@ const preKnobs = {
         'Value 50': '50',
       },
       '',
-      consts.CONTENT,
+      // consts.CONTENT, // fails when used with number in storybook 4.1.4
     ],
     prop: {
       name: 'value',

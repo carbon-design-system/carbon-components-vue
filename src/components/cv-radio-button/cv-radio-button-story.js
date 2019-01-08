@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvRadioButtonNotesMD from './cv-radio-button-notes.md';
@@ -14,39 +14,43 @@ const stories = storiesOf('CvRadioButton', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
-const kinds = null;
 const preKnobs = {
   checked1: {
     group: 'attr1',
     type: boolean,
-    config: ['radio-1:checked', true, consts.CONFIG],
-    value: val => (val ? ' checked' : ''),
+    config: ['radio-1:checked', true], // consts.CONFIG],
+    prop: {
+      name: 'checked',
+      type: Boolean,
+    },
   },
   disabled2: {
     group: 'attr2',
     type: boolean,
-    config: ['radio-2:disabled', true, consts.CONFIG],
-    value: val => (val ? ' disabled' : ''),
+    config: ['radio-2:disabled', true], // consts.CONFIG],
+    prop: {
+      name: 'disabled',
+      type: Boolean,
+    },
   },
   vModel: {
     group: 'each',
-    type: boolean,
-    config: ['v-model', false, consts.OTHER],
-    value: val => (val ? 'v-model="radioVal" ' : ''),
+    value: `v-model="radioVal"`,
+    inline: true,
   },
   events: {
     group: 'attr',
-    type: boolean,
-    config: ['with events', false, consts.OTHER],
-    value: val =>
-      val
-        ? `
-  @change="actionChange"`
-        : '',
+    value: `@change="actionChange"`,
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [
+  { name: 'default', excludes: ['vModel', 'events'] },
+  { name: 'events', excludes: ['vModel'] },
+  { name: 'vModel', excludes: ['events'] },
+];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
@@ -59,14 +63,14 @@ for (const story of storySet) {
       const templateString = `
   <cv-radio-group ${settings.group.attr}>
     <cv-radio-button name="group-1" label="radio-1" value="value-1" ${
-      settings.group.each
-    }${settings.group.attr1} />
+      settings.group.attr1
+    }${settings.group.each} />
     <cv-radio-button name="group-1" label="radio-2" value="value-2" ${
+      settings.group.attr2
+    }${settings.group.each} />
+    <cv-radio-button name="group-1" label="radio-3" value="value-3"${
       settings.group.each
-    }${settings.group.attr2} />
-    <cv-radio-button name="group-1" label="radio-3" value="value-3" ${
-      settings.group.each
-    }${settings.group.attr3} />
+    }/>
   </cv-radio-group>
   `;
 
@@ -79,7 +83,7 @@ for (const story of storySet) {
       <template slot="component">${templateString}</template>
 
       <template slot="other">
-        <div class="v-model-example" v-if="${settings.raw.vModel}">V-Model:
+        <div v-if="${templateString.indexOf('v-model') > 0}">V-Model:
           <input type="radio" value="value-1" v-model="radioVal" group="story">Radio 1</input>
           <input type="radio" value="value-2" v-model="radioVal" group="story">Radio 2</input>
           <input type="radio" value="value-3" v-model="radioVal" group="story">Radio 3</input>
@@ -90,6 +94,8 @@ for (const story of storySet) {
 
       return {
         components: { CvRadioButton, SvTemplateView },
+        template: templateViewString,
+        props: settings.props,
         data() {
           return {
             radioVal: 'value-2',
@@ -98,7 +104,6 @@ for (const story of storySet) {
         methods: {
           actionChange: action('CV Radio Button - change'),
         },
-        template: templateViewString,
       };
     },
     {

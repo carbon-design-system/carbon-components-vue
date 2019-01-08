@@ -3,7 +3,7 @@ import { withKnobs, text } from '@storybook/addon-knobs';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvTagNotesMD from './cv-tag-notes.md';
@@ -13,32 +13,39 @@ const stories = storiesOf('CvTag', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
-const kinds = {
-  options: {
-    IBM: 'ibm',
-    Beta: 'beta',
-    'Third-party': 'third-party',
-    Local: 'local',
-    Dedicated: 'dedicated',
-    Custom: 'custom',
-    Experimental: 'experimental',
-    Community: 'community',
-    Private: 'private',
-    Deprecated: 'deprecated',
-  },
-  default: 'ibm',
-};
-
 const preKnobs = {
   label: {
     group: 'attr',
     type: text,
-    config: ['Tag label', 'I ama a tag', consts.CONTENT],
-    value: val => `\n  label="${val}"`,
+    config: ['Tag label', 'I am a tag'], // consts.CONTENT],
+    prop: { name: 'label', type: String },
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [
+  { name: 'default', extra: { kind: { group: 'attr', value: 'ibm' } } },
+  { name: 'IBM', extra: { kind: { group: 'attr', value: 'ibm' } } },
+  { name: 'beta', extra: { kind: { group: 'attr', value: 'beta' } } },
+  {
+    name: 'third party',
+    extra: { group: 'attr', kind: { value: 'third-party' } },
+  },
+  { name: 'local', extra: { kind: { group: 'attr', value: 'local' } } },
+  { name: 'dedicated', extra: { kind: { group: 'attr', value: 'dedicated' } } },
+  { name: 'custom', extra: { kind: { group: 'attr', value: 'custom' } } },
+  {
+    name: 'experimental',
+    extra: { kind: { group: 'attr', value: 'experimental' } },
+  },
+  { name: 'community', extra: { kind: { group: 'attr', value: 'community' } } },
+  { name: 'private', extra: { kind: { group: 'attr', value: 'private' } } },
+  {
+    name: 'deprecated',
+    extra: { kind: { group: 'attr', value: 'deprecated' } },
+  },
+];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
@@ -49,7 +56,7 @@ for (const story of storySet) {
       // ----------------------------------------------------------------
 
       const templateString = `
-<cv-tag${settings.kind}${settings.group.attr}></cv-tag>
+<cv-tag${settings.group.attr}></cv-tag>
   `;
 
       // ----------------------------------------------------------------
@@ -65,6 +72,7 @@ for (const story of storySet) {
       return {
         components: { CvTag, SvTemplateView },
         template: templateViewString,
+        props: settings.props,
       };
     },
     {

@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvButtonNotesMD from './cv-button-notes.md';
@@ -53,24 +53,24 @@ const variants = [
   { name: 'minimal', exclude: ['small', 'disabled'] },
   {
     name: 'primary',
-    extra: { kind: { group: 'attr', value: 'kind="primary"' } },
+    extra: { kind: { group: 'attr', value: 'primary' } },
   },
   {
     name: 'secondary',
-    extra: { kind: { group: 'attr', value: 'kind="secondary"' } },
+    extra: { kind: { group: 'attr', value: 'secondary' } },
   },
   {
     name: 'tertiary',
-    extra: { kind: { group: 'attr', value: 'kind="tertiary"' } },
+    extra: { kind: { group: 'attr', value: 'tertiary' } },
   },
-  { name: 'ghost', extra: { kind: { group: 'attr', value: 'kind="ghost"' } } },
+  { name: 'ghost', extra: { kind: { group: 'attr', value: 'ghost' } } },
   {
     name: 'danger',
-    extra: { kind: { group: 'attr', value: 'kind="danger"' } },
+    extra: { kind: { group: 'attr', value: 'danger' } },
   },
   {
     name: 'danger-primary',
-    extra: { kind: { group: 'attr', value: 'kind="danger--primary"' } },
+    extra: { kind: { group: 'attr', value: 'danger--primary' } },
   },
 ];
 

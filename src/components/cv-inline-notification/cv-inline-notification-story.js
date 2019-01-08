@@ -4,7 +4,7 @@ import { withNotes } from '@storybook/addon-notes';
 import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvInlineNotificationNotesMD from './cv-inline-notification-notes.md';
@@ -36,15 +36,15 @@ const preKnobs = {
 
 const variants = [
   { name: 'default' },
-  { name: 'error', extra: { kind: { group: 'attr', value: 'kind="error"' } } },
-  { name: 'info', extra: { kind: { group: 'attr', value: 'kind="info"' } } },
+  { name: 'error', extra: { kind: { group: 'attr', value: 'error' } } },
+  { name: 'info', extra: { kind: { group: 'attr', value: 'info' } } },
   {
     name: 'success',
-    extra: { kind: { group: 'attr', value: 'kind="success"' } },
+    extra: { kind: { group: 'attr', value: 'success' } },
   },
   {
     name: 'warning',
-    extra: { kind: { group: 'attr', value: 'kind="warning"' } },
+    extra: { kind: { group: 'attr', value: 'warning' } },
   },
 ];
 

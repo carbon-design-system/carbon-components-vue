@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvSelectNotesMD from './cv-select-notes.md';
@@ -113,8 +113,7 @@ for (const story of storySet) {
       <template slot="component">${templateString}</template>
 
       <template slot="other">
-        <div class="v-model-example" v-if="${templateString.indexOf('v-model') >
-          0}">
+        <div v-if="${templateString.indexOf('v-model') > 0}">
           <span>V-Model value</span>
             <select v-model="selectValue" >
               <option value="cv-select-option1">cv-select-option 1</option>

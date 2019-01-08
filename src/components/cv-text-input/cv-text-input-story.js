@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvTextInputNotesMD from './cv-text-input-notes.md';
@@ -83,8 +83,7 @@ for (const story of storySet) {
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">
-        <div class="v-model-example" v-if="${templateString.indexOf('v-model') >
-          0}">
+        <div v-if="${templateString.indexOf('v-model') > 0}">
           <label>Model value:
             <input type="text" v-model="modelValue" />
           </label>

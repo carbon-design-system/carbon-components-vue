@@ -2,7 +2,7 @@
   <div class="cv-slider bx--form-item">
     <label :for="uid" class="bx--label">{{ label }}</label>
     <div class="bx--slider-container">
-      <span class="bx--slider__range-label">{{ minLabelInternal }}</span>
+      <span class="bx--slider__range-label">{{ internalMinLabel }}</span>
       <div
         class="bx--slider"
         :class="{ 'bx--slider--disabled': disabled }"
@@ -30,18 +30,18 @@
           :id="uid"
           class="bx--slider__input"
           type="range"
-          :step="step"
-          :min="min"
-          :max="max"
+          :step="internalStep"
+          :min="internalMin"
+          :max="internalMax"
           ref="range"
         />
       </div>
-      <span class="bx--slider__range-label">{{ maxLabelInternal }}</span>
+      <span class="bx--slider__range-label">{{ internalMaxLabel }}</span>
       <input
         type="number"
         class="bx--text-input bx--slider-text-input"
         :class="{ 'bx--text-input--light': theme === 'light' }"
-        :placeholder="min"
+        :placeholder="internalMin"
         v-model="internalValue"
         @change="onChange"
         ref="inputBox"
@@ -73,7 +73,14 @@ export default {
       type: String,
       default: '4',
       validator(val) {
-        return parseInt(val) >= 1;
+        if (val.length) {
+          let intMultiplier = parseInt(val);
+          if (isNaN(intMultiplier) || intMultiplier < 1) {
+            console.warn('cv-slider: multiplier must be >= 1');
+            return false;
+          }
+        }
+        return true;
       },
     },
     value: String,
@@ -95,14 +102,25 @@ export default {
     };
   },
   computed: {
-    minLabelInternal() {
-      return this.minLabel !== notSupplied ? this.minLabel : this.min;
+    internalMin() {
+      return this.min && this.min.length ? this.min : '0';
     },
-    maxLabelInternal() {
-      return this.maxLabel !== notSupplied ? this.maxLabel : this.max;
+    internalMinLabel() {
+      return this.minLabel !== notSupplied ? this.minLabel : this.internalMin;
     },
-    multiplier() {
-      return isNaN(this.stepMltiplier) ? 0 : this.stepMultiplier;
+    internalMax() {
+      return this.max && this.max.length ? this.max : '100';
+    },
+    internalMaxLabel() {
+      return this.maxLabel !== notSupplied ? this.maxLabel : this.internalMax;
+    },
+    internalMultiplier() {
+      let intMultiplier = parseInt(this.stepMultiplier);
+      // default to 4 fro multiplier
+      return isNaN(intMultiplier) ? 4 : Math.max(intMultiplier, 1);
+    },
+    internalStep() {
+      return this.step && this.step.length ? this.step : '1';
     },
   },
   mounted() {
@@ -213,7 +231,7 @@ export default {
       let newValue =
         curValue +
         (ev.shiftKey
-          ? parseFloat(this.stepMultiplier) * this.getStep()
+          ? this.internalMultiplier * this.getStep()
           : this.getStep());
       this.setValue(newValue, ev);
     },
@@ -225,7 +243,7 @@ export default {
       let newValue =
         curValue -
         (ev.shiftKey
-          ? parseFloat(this.stepMultiplier) * this.getStep()
+          ? this.internalMultiplier * this.getStep()
           : this.getStep());
       this.setValue(newValue, ev);
     },

@@ -3,7 +3,7 @@ import { withKnobs, number, select } from '@storybook/addon-knobs';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvIconNotesMD from './cv-icon-notes.md';
@@ -27,7 +27,7 @@ const preKnobs = {
         "require('carbon-icons/dist/carbon-icons.svg') + '#icon--error'": fullIconHref,
       },
       'cv(icon--add)',
-      consts.CONFIG,
+      // consts.CONFIG, // fails when used with number in storybook 4.1.4
     ],
     prop: {
       name: 'href',

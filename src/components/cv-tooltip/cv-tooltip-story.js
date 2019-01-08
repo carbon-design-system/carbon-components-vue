@@ -3,7 +3,7 @@ import { withKnobs, text, select } from '@storybook/addon-knobs';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvTooltipNotesMD from './cv-tooltip-notes.md';
@@ -27,7 +27,7 @@ let preKnobs = {
         Left: 'left',
       },
       'bottom',
-      consts.CONFIG,
+      // consts.CONFIG,// fails when used with number in storybook 4.1.4
     ],
     inline: true,
     prop: {
@@ -132,7 +132,7 @@ preKnobs = {
         Bottom: 'bottom',
       },
       'bottom',
-      consts.CONFIG,
+      // consts.CONFIG,// fails when used with number in storybook 4.1.4
     ],
     inline: true,
     prop: {
@@ -210,7 +210,7 @@ preKnobs = {
         Bottom: 'bottom',
       },
       'bottom',
-      consts.CONFIG,
+      // consts.CONFIG,// fails when used with number in storybook 4.1.4
     ],
     inline: true,
     prop: {
@@ -224,7 +224,7 @@ preKnobs = {
     config: [
       'definition',
       'Brief description of the dotted, underlined term',
-      consts.CONTENT,
+      // consts.CONTENT,// fails when used with number in storybook 4.1.4
     ],
     inline: true,
     prop: {

@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvCheckboxNotesMD from './cv-checkbox-notes.md';
@@ -22,15 +22,6 @@ const preKnobs = {
     prop: {
       type: String,
       name: 'label',
-    },
-  },
-  small: {
-    group: 'attr',
-    type: boolean,
-    config: ['small', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: Boolean,
-      name: 'small',
     },
   },
   checked: {
@@ -86,9 +77,9 @@ const preKnobs = {
 
 const variants = [
   { name: 'default', excludes: ['vModel', 'events'] },
-  { name: 'minimal', includes: ['value'] },
-  { name: 'events', includes: ['value', 'events'] },
-  { name: 'vModel', includes: ['value', 'vModel'] },
+  { name: 'minimal', includes: ['label', 'value'] },
+  { name: 'events', includes: ['label', 'value', 'events'] },
+  { name: 'vModel', includes: ['label', 'value', 'vModel'] },
 ];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
@@ -115,8 +106,7 @@ for (const story of storySet) {
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">
-        <div class="v-model-example" v-if="${templateString.indexOf('v-model') >
-          0}">
+        <div v-if="${templateString.indexOf('v-model') > 0}">
           <br>
           <br>
           <span>
@@ -158,9 +148,9 @@ stories.add(
   'Array v-model',
   () => {
     const templateString = `
-<cv-checkbox v-model="checks" name="check-1" value="check-1" @change="actionChange"></cv-checkbox>
-<cv-checkbox v-model="checks" name="check-2" value="check-2" @change="actionChange"></cv-checkbox>
-<cv-checkbox v-model="checks" name="check-3" value="check-3" @change="actionChange"></cv-checkbox>
+<cv-checkbox v-model="checks" label="Check 1" name="check-1" value="check-1" @change="actionChange"></cv-checkbox>
+<cv-checkbox v-model="checks" label="Check 2" name="check-2" value="check-2" @change="actionChange"></cv-checkbox>
+<cv-checkbox v-model="checks" label="Check 3" name="check-3" value="check-3" @change="actionChange"></cv-checkbox>
 `;
 
     // ----------------------------------------------------------------
@@ -203,8 +193,8 @@ stories.add(
           checks: array(
             'Initial cheks',
             ['check-3', 'check-2'],
-            ',',
-            consts.CONFIG
+            ','
+            // consts.CONFIG
           ),
         };
       },

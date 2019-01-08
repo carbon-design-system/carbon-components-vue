@@ -58,7 +58,8 @@ const parsePreKnobs = (preKnobs, includes, excludes, variantExtra) => {
             }
             break;
           default:
-            knobs.group[preKnob.group] += `${prefix}${preKnob.value}`;
+            let name = preKnob.name ? preKnob.name : key;
+            knobs.group[preKnob.group] += `${prefix}${name}="${preKnob.value}"`;
             break;
         }
       }
