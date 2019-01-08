@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvStructuredListNotesMD from './cv-structured-list-notes.md';
@@ -14,47 +14,49 @@ const stories = storiesOf('CvStructuredList', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
-const kinds = null;
 const preKnobs = {
-  selectable: {
-    group: 'attrSelectable',
-    type: boolean,
-    config: ['selectable', false, consts.CONFIG],
-    value: val => (val ? ' selectable' : ''),
-  },
   border: {
     group: 'attr',
     type: boolean,
-    config: ['border', false, consts.CONFIG],
-    value: val => (val ? ' border' : ''),
+    inline: true,
+    config: ['border', false], // consts.CONFIG],
+    prop: { name: 'border', type: Boolean },
   },
   condensed: {
     group: 'attr',
     type: boolean,
-    config: ['condensed', false, consts.CONFIG],
-    value: val => (val ? ' condensed' : ''),
+    inline: true,
+    config: ['condensed', false], // consts.CONFIG],
+    prop: { name: 'condensed', type: Boolean },
   },
   noWrap: {
     group: 'data',
     type: boolean,
-    config: ['Prevent wrapping', false, consts.CONFIG],
-    value: val => (val ? ' no-wrap' : ''),
+    inline: true,
+    config: ['Prevent wrapping', false], // consts.CONFIG],
+    prop: { name: 'no-wrap', type: Boolean },
   },
   vModel: {
     group: 'checksSelectable',
-    type: boolean,
-    config: ['v-model', false, consts.OTHER],
-    value: val => (val ? 'v-model="listVal" ' : ''),
+    inline: true,
+    value: 'v-model="listVal"',
   },
   events: {
-    group: 'attrSelectable',
-    type: boolean,
-    config: ['withEvnets', false, consts.OTHER],
-    value: val => (val ? ' @change="actionChange"' : ''),
+    group: 'attr',
+    inline: true,
+    value: '@change="actionChange"',
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [
+  { name: 'default', excludes: ['vModel', 'events', 'selectable'] },
+  { name: 'minimal', includes: [] },
+  { name: 'selectable with events', includes: ['selectable', 'events'] },
+  { name: 'selectable with vModel', includes: ['selectable', 'vModel'] },
+];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
+
 for (const story of storySet) {
   stories.add(
     story.name,
@@ -65,9 +67,11 @@ for (const story of storySet) {
 
       let templateString = '';
 
-      if (settings.raw.selectable) {
+      if (story.name.startsWith('selectable')) {
+        let isVModel = story.name.indexOf('vModel') > -1;
+
         templateString = `
-    <cv-structured-list${settings.group.attrSelectable}${settings.group.attr}>
+    <cv-structured-list selectable${settings.group.attr}>
       <template slot="headings">
         <cv-structured-list-heading>Heading 1</cv-structured-list-heading>
         <cv-structured-list-heading>Heading 2</cv-structured-list-heading>
@@ -75,8 +79,8 @@ for (const story of storySet) {
       </template>
       <template slot="items">
         <cv-structured-list-item-selectable name="group-1" value="value-1" ${
-          settings.raw.vModel ? settings.group.checksSelectable : 'checked'
-        }${settings.group.attrItem}>
+          isVModel ? settings.group.checksSelectable : 'checked'
+        }>
           <cv-structured-list-data>Item_1</cv-structured-list-data>
           <cv-structured-list-data>Item_1</cv-structured-list-data>
           <cv-structured-list-data${
@@ -85,7 +89,7 @@ for (const story of storySet) {
         </cv-structured-list-item-selectable>
         <cv-structured-list-item-selectable name="group-1" value="value-2" ${
           settings.group.checksSelectable
-        }${settings.group.attrItem}>
+        }>
           <cv-structured-list-data>Item_2</cv-structured-list-data>
           <cv-structured-list-data>Item_2</cv-structured-list-data>
           <cv-structured-list-data${
@@ -94,7 +98,7 @@ for (const story of storySet) {
         </cv-structured-list-item-selectable>
         <cv-structured-list-item-selectable name="group-1" value="value-3" ${
           settings.group.checksSelectable
-        }${settings.group.attrItem}>
+        }>
         <cv-structured-list-data>Item_3</cv-structured-list-data>
           <cv-structured-list-data>Item_3</cv-structured-list-data>
           <cv-structured-list-data${
@@ -113,21 +117,21 @@ for (const story of storySet) {
         <cv-structured-list-heading>Heading 3</cv-structured-list-heading>
       </template>
       <template slot="items">
-        <cv-structured-list-item${settings.group.attrItem}>
+        <cv-structured-list-item>
           <cv-structured-list-data>Item_1</cv-structured-list-data>
           <cv-structured-list-data>Item_1</cv-structured-list-data>
           <cv-structured-list-data${
             settings.group.data
           }>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.</cv-structured-list-data>
         </cv-structured-list-item>
-        <cv-structured-list-item${settings.group.attrItem}>
+        <cv-structured-list-item>
           <cv-structured-list-data>Item_2</cv-structured-list-data>
           <cv-structured-list-data>Item_2</cv-structured-list-data>
           <cv-structured-list-data${
             settings.group.data
           }>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.</cv-structured-list-data>
         </cv-structured-list-item>
-        <cv-structured-list-item${settings.group.attrItem}>
+        <cv-structured-list-item>
           <cv-structured-list-data>Item_3</cv-structured-list-data>
           <cv-structured-list-data>Item_3</cv-structured-list-data>
           <cv-structured-list-data${
@@ -148,15 +152,20 @@ for (const story of storySet) {
       <template slot="component">${templateString}</template>
 
       <template slot="other">
-        <span class="v-model-example" v-if="${
-          settings.raw.vModel
-        }">Selected value ''{{listVal}}''</span>
+        <div v-if="${templateString.indexOf('v-model') > 0}">
+          Selected value ''{{listVal}}''
+          <input type="radio" value="value-1" v-model="listVal" group="story">Radio 1</input>
+          <input type="radio" value="value-2" v-model="listVal" group="story">Radio 2</input>
+          <input type="radio" value="value-3" v-model="listVal" group="story">Radio 3</input>
+        </div>
       </template>
     </sv-template-view>
   `;
 
       return {
         components: { CvStructuredList, SvTemplateView },
+        template: templateViewString,
+        props: settings.props,
         data() {
           return {
             listVal: 'value-3',
@@ -165,7 +174,6 @@ for (const story of storySet) {
         methods: {
           actionChange: action('Structured list - change'),
         },
-        template: templateViewString,
       };
     },
     {

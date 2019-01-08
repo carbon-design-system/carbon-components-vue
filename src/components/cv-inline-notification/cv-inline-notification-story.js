@@ -36,15 +36,15 @@ const preKnobs = {
 
 const variants = [
   { name: 'default' },
-  { name: 'error', extra: { kind: { group: 'attr', value: 'error' } } },
-  { name: 'info', extra: { kind: { group: 'attr', value: 'info' } } },
+  { name: 'error', extra: { kind: { group: 'attr', value: 'kind="error"' } } },
+  { name: 'info', extra: { kind: { group: 'attr', value: 'kind="info"' } } },
   {
     name: 'success',
-    extra: { kind: { group: 'attr', value: 'success' } },
+    extra: { kind: { group: 'attr', value: 'kind="success"' } },
   },
   {
     name: 'warning',
-    extra: { kind: { group: 'attr', value: 'warning' } },
+    extra: { kind: { group: 'attr', value: 'kind="warning"' } },
   },
 ];
 

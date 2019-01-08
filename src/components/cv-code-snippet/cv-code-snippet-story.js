@@ -71,21 +71,21 @@ const variants = [
   {
     name: 'inline',
     includes: ['content'],
-    extra: { kind: { group: 'attr', value: 'inline', inline: true } },
+    extra: { kind: { group: 'attr', value: 'kind="inline"', inline: true } },
   },
   {
     name: 'multiline',
-    extra: { kind: { group: 'attr', value: 'multiline', inline: true } },
+    extra: { kind: { group: 'attr', value: 'kind="multiline"', inline: true } },
   },
   {
     name: 'multiline (minimal)',
     includes: ['content'],
-    extra: { kind: { group: 'attr', value: 'multiline', inline: true } },
+    extra: { kind: { group: 'attr', value: 'kind="multiline"', inline: true } },
   },
   {
     name: 'oneline',
     includes: ['content'],
-    extra: { kind: { group: 'attr', value: 'oneline', inline: true } },
+    extra: { kind: { group: 'attr', value: 'kind="oneline"', inline: true } },
   },
 ];
 

@@ -23,25 +23,37 @@ const preKnobs = {
 };
 
 const variants = [
-  { name: 'default', extra: { kind: { group: 'attr', value: 'ibm' } } },
-  { name: 'IBM', extra: { kind: { group: 'attr', value: 'ibm' } } },
-  { name: 'beta', extra: { kind: { group: 'attr', value: 'beta' } } },
+  { name: 'default', extra: { kind: { group: 'attr', value: 'kind="ibm"' } } },
+  { name: 'IBM', extra: { kind: { group: 'attr', value: 'kind="ibm"' } } },
+  { name: 'beta', extra: { kind: { group: 'attr', value: 'kind="beta"' } } },
   {
     name: 'third party',
-    extra: { group: 'attr', kind: { value: 'third-party' } },
+    extra: { kind: { group: 'attr', value: 'kind="third-party"' } },
   },
-  { name: 'local', extra: { kind: { group: 'attr', value: 'local' } } },
-  { name: 'dedicated', extra: { kind: { group: 'attr', value: 'dedicated' } } },
-  { name: 'custom', extra: { kind: { group: 'attr', value: 'custom' } } },
+  { name: 'local', extra: { kind: { group: 'attr', value: 'kind="local"' } } },
+  {
+    name: 'dedicated',
+    extra: { kind: { group: 'attr', value: 'kind="dedicated"' } },
+  },
+  {
+    name: 'custom',
+    extra: { kind: { group: 'attr', value: 'kind="custom"' } },
+  },
   {
     name: 'experimental',
-    extra: { kind: { group: 'attr', value: 'experimental' } },
+    extra: { kind: { group: 'attr', value: 'kind="experimental"' } },
   },
-  { name: 'community', extra: { kind: { group: 'attr', value: 'community' } } },
-  { name: 'private', extra: { kind: { group: 'attr', value: 'private' } } },
+  {
+    name: 'community',
+    extra: { kind: { group: 'attr', value: 'kind="community"' } },
+  },
+  {
+    name: 'private',
+    extra: { kind: { group: 'attr', value: 'kind="private"' } },
+  },
   {
     name: 'deprecated',
-    extra: { kind: { group: 'attr', value: 'deprecated' } },
+    extra: { kind: { group: 'attr', value: 'kind="deprecated"' } },
   },
 ];
 

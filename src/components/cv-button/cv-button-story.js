@@ -53,24 +53,24 @@ const variants = [
   { name: 'minimal', exclude: ['small', 'disabled'] },
   {
     name: 'primary',
-    extra: { kind: { group: 'attr', value: 'primary' } },
+    extra: { kind: { group: 'attr', value: 'kind="primary"' } },
   },
   {
     name: 'secondary',
-    extra: { kind: { group: 'attr', value: 'secondary' } },
+    extra: { kind: { group: 'attr', value: 'kind="secondary"' } },
   },
   {
     name: 'tertiary',
-    extra: { kind: { group: 'attr', value: 'tertiary' } },
+    extra: { kind: { group: 'attr', value: 'kind="tertiary"' } },
   },
-  { name: 'ghost', extra: { kind: { group: 'attr', value: 'ghost' } } },
+  { name: 'ghost', extra: { kind: { group: 'attr', value: 'kind="ghost"' } } },
   {
     name: 'danger',
-    extra: { kind: { group: 'attr', value: 'danger' } },
+    extra: { kind: { group: 'attr', value: 'kind="danger"' } },
   },
   {
     name: 'danger-primary',
-    extra: { kind: { group: 'attr', value: 'danger--primary' } },
+    extra: { kind: { group: 'attr', value: 'kind="danger--primary"' } },
   },
 ];
 
