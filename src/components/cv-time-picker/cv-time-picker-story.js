@@ -10,7 +10,7 @@ import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvTimePickerNotesMD from './cv-time-picker-notes.md';
@@ -20,60 +20,73 @@ const stories = storiesOf('CvTimePicker', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
-const kinds = null;
+const ampmConfig = [
+  'ampm',
+  {
+    AM: 'AM',
+    PM: 'PM',
+  },
+  'AM',
+  // consts.CONFIG,// fails when used with number in storybook 4.1.4
+];
+const timezoneConfig = ['timezone', 'timezone1']; // consts.CONFIG],
+const timeConfig = ['time', ' '];
 
 const preKnobs = {
-  light: {
+  theme: {
     group: 'attr',
     type: boolean,
-    config: ['light-theme', false, consts.CONFIG],
-    value: val => (val ? '\n  theme="light"' : ''),
-    data: (obj, key, val) => (obj[key] = val),
+    config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: String,
+      name: 'theme',
+      value: val => (val ? 'light' : ''),
+    },
   },
   label: {
     group: 'attr',
     type: text,
-    config: ['label', '', consts.CONTENT],
-    value: val => (val ? `\n  label="${val}"` : ''),
+    config: ['label', 'Text input label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: String,
+      name: 'label',
+    },
   },
   time: {
     group: 'attr',
     type: text,
-    config: ['time', '', consts.CONFIG],
-    value: (val, dotSync) =>
-      dotSync ? '\n  :time.sync="time"' : val.length ? `\n  time="${val}"` : '',
-    data: (obj, key, val) => (obj[key] = val),
-    canDotSync: true,
+    config: timeConfig,
+    prop: { name: 'time', type: String },
   },
   ampm: {
     group: 'attr',
     type: select,
-    config: [
-      'ampm',
-      {
-        AM: 'AM',
-        PM: 'PM',
-      },
-      'AM',
-      consts.CONFIG,
-    ],
-    value: (val, dotSync) =>
-      dotSync ? '\n  :ampm.sync="ampm"' : val.length ? `\n  ampm="${val}"` : '',
-    data: (obj, key, val) => (obj[key] = val),
-    canDotSync: true,
+    config: ampmConfig,
+    prop: { name: 'ampm', type: String },
   },
   timezone: {
     group: 'attr',
     type: text,
-    config: ['timezone', 'timezone1', consts.CONFIG],
-    value: (val, dotSync) =>
-      dotSync
-        ? '\n  :timezone.sync="timezone"'
-        : val.length
-        ? `\n  timezone="${val}"`
-        : '',
-    data: (obj, key, val) => (obj[key] = val),
-    canDotSync: true,
+    config: timezoneConfig,
+    prop: { name: 'timezone', type: String },
+  },
+  timeSync: {
+    group: 'attr',
+    type: text,
+    config: timeConfig,
+    sync: { name: 'time', type: String },
+  },
+  ampmSync: {
+    group: 'attr',
+    type: select,
+    config: ampmConfig,
+    sync: { name: 'ampm', type: String },
+  },
+  timezoneSync: {
+    group: 'attr',
+    type: text,
+    config: timezoneConfig,
+    sync: { name: 'timezone', type: String },
   },
   timezones: {
     group: 'attr',
@@ -86,68 +99,68 @@ const preKnobs = {
           { label: 'Timezone-2', value: 'timezone2' },
         ],
       },
-      consts.CONFIG,
+      // consts.CONFIG,
     ],
-    value: val =>
-      val && val.list && val.list.length ? `\n  :timezones="timezones"` : '',
-    data: (obj, key, val) => (obj[key] = val.list),
+    prop: { name: 'timezones', type: Array, value: val => val.list },
   },
   pattern: {
     group: 'attr',
     type: text,
-    config: ['pattern', '', consts.CONFIG],
-    value: val => (val ? `\n  pattern="${val}"` : ''),
+    config: ['pattern', '(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)'], // consts.CONFIG],
+    prop: { name: 'pattern', type: String },
   },
   placeholder: {
     group: 'attr',
     type: text,
-    config: ['placeholder', '', consts.CONTENT],
-    value: val => (val ? `\n  placeholder="${val}"` : ''),
+    config: ['placeholder', 'hh:mm'], // consts.CONTENT],
+    prop: { name: 'placeholder', type: String },
   },
   timezonesSelectLabel: {
     group: 'attr',
     type: text,
-    config: ['timzones-select-label', '', consts.CONTENT],
-    value: val => (val ? `\n  timzones-select-label="${val}"` : ''),
+    config: ['timzones-select-label', 'Timezone label'], // consts.CONTENT],
+    prop: { name: 'timzones-select-label', type: String },
   },
   ampmSelectLabel: {
     group: 'attr',
     type: text,
-    config: ['ampm-select-label', '', consts.CONTENT],
-    value: val => (val ? `\n  ampm-select-label="${val}"` : ''),
+    config: ['ampm-select-label', 'AM/PM'], // consts.CONTENT],
+    prop: { name: 'ampm-select-label', type: String },
   },
   invalidMessage: {
     group: 'attr',
     type: text,
-    config: ['invalid-message', '', consts.CONTENT],
-    value: val => (val ? `\n  invalid-message="${val}"` : ''),
+    config: ['invalid-message', ''], // consts.CONTENT],
+    prop: { name: 'invalid-message', type: String },
   },
   disabled: {
     group: 'attr',
     type: boolean,
-    config: ['disabled', false, consts.CONFIG],
-    value: val => (val ? `\n  disabled` : ''),
-  },
-  dotSync: {
-    group: '',
-    type: boolean,
-    config: ['.sync', false, consts.OTHER],
+    config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: { name: 'disabled', type: Boolean },
   },
   events: {
     group: 'attr',
-    type: boolean,
-    config: ['with events', false, consts.OTHER],
-    value: val =>
-      val
-        ? `
-  @update:time="onUpdateTime"
+    value: `@update:time="onUpdateTime"
   @update:ampm="onUpdateAmpm"
-  @update:timezone="onUpdateTimezone"`
-        : '',
+  @update:timezone="onUpdateTimezone"`,
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [
+  {
+    name: 'default',
+    excludes: ['vModel', 'events', 'timeSync', 'ampmSync', 'timezoneSync'],
+  },
+  { name: 'minimal', includes: [] },
+  { name: 'events', includes: ['events'] },
+  {
+    name: 'dotsync',
+    includes: ['timeSync', 'ampmSync', 'timezoneSync', 'timezones'],
+  },
+];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
@@ -157,33 +170,31 @@ for (const story of storySet) {
 
       // ----------------------------------------------------------------
       const templateString = `
-  <cv-time-picker${settings.group.attr}>
+  <cv-time-picker${settings.group.attr} :form-item="true">
   </cv-time-picker>
     `;
-
-      console.log(templateString);
 
       // ----------------------------------------------------------------
 
       const templateViewString = `
     <sv-template-view
       sv-margin
-      :sv-alt-back="!light"
+      :sv-alt-back="this.$options.propsData.theme !== 'light'"
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">
-        <div class="sync-example" v-if="${settings.raw.dotSync}">
+        <div v-if="${templateString.indexOf('.sync') > 0}">
           <label>time:
-            <input type="text" v-model="time" />
+            <input type="text" v-model="timeSync" />
           </label>
           <label>Ampm:
-            <select v-model="ampm">
+            <select v-model="ampmSync">
               <option value="AM">AM</option>
               <option value="PM">PM</option>
             </select>
           </label>
           <label>Timezone:
-            <select v-model="timezone">
+            <select v-model="timezoneSync">
               <option value="timezone1">Timezone 1</option>
               <option value="timezone2">Timezone 2</option>
             </select>
@@ -194,15 +205,19 @@ for (const story of storySet) {
   `;
 
       return {
+        components: { CvTimePicker, SvTemplateView },
+        template: templateViewString,
+        props: settings.props,
         data() {
           return settings.data;
         },
-        components: { CvTimePicker, SvTemplateView },
-        template: templateViewString,
         methods: {
           onUpdateTime: action('cv-time-picker - update:time event'),
           onUpdateAmpm: action('cv-time-picker - update:ampm event'),
           onUpdateTimezone: action('cv-time-picker - update:timezone event'),
+        },
+        mounted() {
+          console.dir(this);
         },
       };
     },

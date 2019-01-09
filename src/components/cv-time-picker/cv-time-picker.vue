@@ -15,6 +15,7 @@
           :maxlength="placeholder.length"
           :data-invalid="invalidMessage.length > 0"
           :value="time"
+          :disabled="disabled"
           @input="$emit('update:time', $event.target.value)"
         />
         <div class="bx--form-requirement" v-if="invalidMessage.length > 0">
@@ -25,6 +26,7 @@
       <cv-select
         class="bx--time-picker__select"
         inline
+        :form-item="false"
         hide-label
         :label="ampmSelectLabel"
         @input="$emit('update:ampm', $event)"
@@ -42,6 +44,7 @@
       <cv-select
         class="bx--time-picker__select"
         inline
+        :form-item="false"
         hide-label
         :label="timezonesSelectLabel"
         v-if="timezones.length > 0"
