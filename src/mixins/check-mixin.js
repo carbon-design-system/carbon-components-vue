@@ -13,6 +13,13 @@ export default {
     prop: 'modelValue',
     event: 'modelEvent',
   },
+  watch: {
+    checked(val) {
+      if (this.$props.modelValue !== undefined) {
+        this.dataChecked = val;
+      }
+    },
+  },
   data() {
     return {
       dataChecked: undefined,

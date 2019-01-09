@@ -13,6 +13,7 @@
       data-tile-input
       :id="uid"
       type="checkbox"
+      :checked="isChecked"
       class="bx--tile-input"
       v-bind="$attrs"
     />
@@ -38,12 +39,6 @@ export default {
   name: 'CvTileSelectable',
   mixins: [uidMixin, checkMixin],
   inheritAttrs: false,
-  mounted() {
-    this.carbonComponent = Tile.create(this.$el);
-  },
-  beforeDestroy() {
-    this.carbonComponent.release();
-  },
 };
 </script>
 
