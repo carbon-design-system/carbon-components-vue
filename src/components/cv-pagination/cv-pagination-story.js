@@ -1,10 +1,10 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs/vue';
+import { withKnobs, text, object, number } from '@storybook/addon-knobs';
 import { withNotes } from '@storybook/addon-notes';
 import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvPaginationNotesMD from './cv-pagination-notes.md';
@@ -12,75 +12,66 @@ import CvPagination from './cv-pagination';
 
 const stories = storiesOf('CvPagination', module);
 stories.addDecorator(withKnobs);
+stories.addDecorator(withNotes);
 
-const kinds = null;
 const preKnobs = {
   backwardsText: {
     group: 'attr',
     type: text,
-    config: ['backwards button text', 'Previous page', consts.CONFIG],
-    value: val => (val.length ? `\n  backwards-text="${val}"` : ''),
+    config: ['backwards button text', 'Previous page'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: { name: 'backwards-text', type: String },
   },
   forwardsText: {
     group: 'attr',
     type: text,
-    config: ['forwards button text', 'Next page', consts.CONFIG],
-    value: val => (val.length ? `\n  forwards-text="${val}"` : ''),
+    config: ['forwards button text', 'Next page'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: { name: 'forwards-text', type: String },
   },
   pageNumberLabel: {
     group: 'attr',
     type: text,
-    config: ['page number label', 'Page number', consts.CONFIG],
-    value: val => (val.length ? `\n  page-number-label="${val}"` : ''),
+    config: ['page number label', 'Page number'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: { name: 'page-number-label', type: String },
   },
   pageSizesLabel: {
     group: 'attr',
     type: text,
-    config: ['page sizes label', 'Number of items per page:', consts.CONTENT],
-    value: val => (val.length ? `\n  page-sizes-label="${val}"` : ''),
-    //   data: (obj, key, val) => (obj[key] = val),
+    config: ['page sizes label', 'Number of items per page:'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    prop: { name: 'page-sizes-label', type: String },
   },
   numberOfItems: {
     group: 'attr',
-    type: text,
-    config: ['Number of items', '103', consts.CONFIG],
-    value: val =>
-      val.length ? `\n  :number-of-items="${parseInt(val, 10)}"` : '',
+    type: number,
+    config: ['Number of items', 103],
+    prop: { name: 'number-of-items', type: Number },
   },
   pageSizes: {
     group: 'attr',
-    type: text,
+    type: object,
     config: [
       'Page sizes',
-      '[10, { value: 20, selected: true }, 30, 40, 50]',
-      consts.CONFIG,
+      { list: [10, { value: 20, selected: true }, 30, 40, 50] },
     ],
-    value: val => (val.length ? `\n  :page-sizes="${val}"` : ''),
+    prop: { name: 'page-sizes', type: Array, value: val => val.list },
   },
   events: {
     group: 'attr',
-    type: boolean,
-    config: ['with events', false, consts.OTHER],
-    value: val =>
-      val
-        ? `
-  @change="onChange"`
-        : '',
-  },
-  otherAttributes: {
-    group: 'attr',
-    type: text,
-    config: ['other attributes', '', consts.OTHER],
-    value: val => (val.length ? `\n  ${val}` : ''),
+    value: `@change="onChange"`,
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [
+  { name: 'default', excludes: ['events'] },
+  { name: 'minimal', includes: [] },
+  { name: 'events', includes: ['events'] },
+];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvPaginationNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
@@ -102,10 +93,14 @@ for (const story of storySet) {
       return {
         components: { CvPagination, SvTemplateView },
         template: templateViewString,
+        props: settings.props,
         methods: {
           onChange: action('cv-paginationr - change event'),
         },
       };
-    })
+    },
+    {
+      notes: { markdown: CvPaginationNotesMD },
+    }
   );
 }

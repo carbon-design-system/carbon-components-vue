@@ -8,13 +8,22 @@
     :aria-live="!isAlert ? 'polite' : false"
   >
     <div class="bx--inline-notification__details">
-      <cv-icon :href="`cv(${icon})`" class="bx--inline-notification__icon" width="16" height="16"></cv-icon>
+      <cv-icon
+        :href="`cv(${icon})`"
+        class="bx--inline-notification__icon"
+        width="16"
+        height="16"
+      ></cv-icon>
       <div class="bx--inline-notification__text-wrapper">
-        <p class="bx--inline-notification__title">{{title}}</p>
-        <p class="bx--inline-notification__subtitle">{{subTitle}}.</p>
+        <p class="bx--inline-notification__title">{{ title }}</p>
+        <p class="bx--inline-notification__subtitle">{{ subTitle }}.</p>
       </div>
     </div>
-    <button data-notification-btn class="bx--inline-notification__close-button" type="button">
+    <button
+      data-notification-btn
+      class="bx--inline-notification__close-button"
+      type="button"
+    >
       <svg
         class="bx--inline-notification__close-icon"
         aria-label="close"
@@ -62,5 +71,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

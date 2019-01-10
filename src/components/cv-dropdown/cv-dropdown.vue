@@ -21,7 +21,11 @@
     :data-value="internalValue"
     class="cv-dropdown bx--dropdown"
     tabindex="0"
-    :class="{'bx--dropdown--light': theme === 'light', 'bx--dropdown--up': up, 'bx--dropdown--open': open}"
+    :class="{
+      'bx--dropdown--light': theme === 'light',
+      'bx--dropdown--up': up,
+      'bx--dropdown--open': open,
+    }"
     v-bind="$attrs"
     @keypress.down.prevent="onDown"
     @keypress.up.prevent="onUp"
@@ -29,8 +33,14 @@
     @keypress.esc.prevent="onEsc"
     @click="onClick"
   >
-    <li class="bx--dropdown-text" ref="valueContent">{{placeholder}}</li>
-    <svg class="bx--dropdown__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
+    <li class="bx--dropdown-text" ref="valueContent">{{ placeholder }}</li>
+    <svg
+      class="bx--dropdown__arrow"
+      width="10"
+      height="5"
+      viewBox="0 0 10 5"
+      fill-rule="evenodd"
+    >
       <path d="M10 0L5 5 0 0z"></path>
     </svg>
     <li>
@@ -166,5 +176,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

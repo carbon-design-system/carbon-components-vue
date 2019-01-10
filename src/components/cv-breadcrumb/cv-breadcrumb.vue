@@ -1,7 +1,7 @@
 <template>
   <nav
     class="cv-breadcrumb bx--breadcrumb"
-    :class="{'bx--breadcrumb--no-trailing-slash': noTrailingSlash}"
+    :class="{ 'bx--breadcrumb--no-trailing-slash': noTrailingSlash }"
     aria-label="breadcrumb"
   >
     <slot></slot>
@@ -17,5 +17,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

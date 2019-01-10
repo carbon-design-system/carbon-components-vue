@@ -5,7 +5,7 @@
     class="cv-tile-selectable bx--tile--selectable"
     data-tile="selectable"
     tabindex="0"
-    :class="[{'bx--tile--is-selected': isChecked}]"
+    :class="[{ 'bx--tile--is-selected': isChecked }]"
     :data-contained-checkbox-state="isChecked"
   >
     <input
@@ -13,9 +13,10 @@
       data-tile-input
       :id="uid"
       type="checkbox"
+      :checked="isChecked"
       class="bx--tile-input"
       v-bind="$attrs"
-    >
+    />
     <div class="bx--tile__checkmark">
       <svg width="16" height="16" viewBox="0 0 16 16" fill-rule="evenodd">
         <path
@@ -24,9 +25,7 @@
       </svg>
     </div>
     <div class="bx--tile-content">
-      <slot>
-        <!-- Tile content here -->
-      </slot>
+      <slot> <!-- Tile content here --> </slot>
     </div>
   </label>
 </template>
@@ -40,14 +39,7 @@ export default {
   name: 'CvTileSelectable',
   mixins: [uidMixin, checkMixin],
   inheritAttrs: false,
-  mounted() {
-    this.carbonComponent = Tile.create(this.$el);
-  },
-  beforeDestroy() {
-    this.carbonComponent.release();
-  },
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

@@ -1,7 +1,5 @@
 <template>
-  <div class="cv-breadcrumb-item bx--breadcrumb-item">
-    <slot></slot>
-  </div>
+  <div class="cv-breadcrumb-item bx--breadcrumb-item"><slot></slot></div>
 </template>
 
 <script>
@@ -10,5 +8,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

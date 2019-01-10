@@ -1,9 +1,9 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs/vue';
+import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvBreadcrumbNotesMD from './cv-breadcrumb-notes.md';
@@ -12,30 +12,28 @@ import CvBreadcrumbItem from './cv-breadcrumb-item';
 
 const stories = storiesOf('CvBreadcrumb', module);
 stories.addDecorator(withKnobs);
-
-const kinds = null;
+stories.addDecorator(withNotes);
 
 const preKnobs = {
   noTrailingSlash: {
     group: 'attr',
     type: boolean,
-    config: ['No trailing slash', false, consts.CONFIG],
-    value: val => (val ? ' no-trailing-slash' : ''),
-  },
-  otherAttributes: {
-    group: 'attr',
-    type: text,
-    config: ['other attributes', '', consts.OTHER],
-    value: val => (val.length ? `\n  ${val}` : ''),
+    config: ['No trailing slash', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: Boolean,
+      name: 'no-trailing-slash',
+    },
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [{ name: 'default' }];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvBreadcrumbNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
@@ -67,7 +65,11 @@ for (const story of storySet) {
       return {
         components: { CvBreadcrumb, CvBreadcrumbItem, SvTemplateView },
         template: templateViewString,
+        props: settings.props,
       };
-    })
+    },
+    {
+      notes: { markdown: CvBreadcrumbNotesMD },
+    }
   );
 }

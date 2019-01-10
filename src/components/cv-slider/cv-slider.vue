@@ -1,21 +1,24 @@
 <template>
   <div class="cv-slider bx--form-item">
-    <label :for="uid" class="bx--label">{{label}}</label>
+    <label :for="uid" class="bx--label">{{ label }}</label>
     <div class="bx--slider-container">
-      <span class="bx--slider__range-label">{{minLabelInternal}}</span>
+      <span class="bx--slider__range-label">{{ internalMinLabel }}</span>
       <div
         class="bx--slider"
-        :class="{'bx--slider--disabled': disabled}"
+        :class="{ 'bx--slider--disabled': disabled }"
         data-slider
         data-slider-input-box="#slider-input-box"
       >
         <div class="bx--slider__track" @click="onTrackClick" ref="track"></div>
-        <div class="bx--slider__filled-track" :style="`width: ${percentage};`"></div>
+        <div
+          class="bx--slider__filled-track"
+          :style="`width: ${percentage};`"
+        ></div>
         <div
           class="bx--slider__thumb"
           :class="{
             'bx--slider__thumb--clicked': animateClick,
-           }"
+          }"
           tabindex="0"
           :style="`left: ${percentage};`"
           ref="thumb"
@@ -31,13 +34,13 @@
           :min="min"
           :max="max"
           ref="range"
-        >
+        />
       </div>
-      <span class="bx--slider__range-label">{{maxLabelInternal}}</span>
+      <span class="bx--slider__range-label">{{ internalMaxLabel }}</span>
       <input
         type="number"
         class="bx--text-input bx--slider-text-input"
-        :class="{'bx--text-input--light': theme === 'light'}"
+        :class="{ 'bx--text-input--light': theme === 'light' }"
         :placeholder="min"
         v-model="internalValue"
         @change="onChange"
@@ -45,7 +48,7 @@
         @keydown.up.prevent="onUp"
         @keydown.down.prevent="onDown"
         :disabled="disabled"
-      >
+      />
     </div>
   </div>
 </template>
@@ -70,7 +73,14 @@ export default {
       type: String,
       default: '4',
       validator(val) {
-        return parseInt(val) >= 1;
+        if (val.length) {
+          let intMultiplier = parseInt(val);
+          if (isNaN(intMultiplier) || intMultiplier < 1) {
+            console.warn('cv-slider: multiplier must be >= 1');
+            return false;
+          }
+        }
+        return true;
       },
     },
     value: String,
@@ -92,14 +102,16 @@ export default {
     };
   },
   computed: {
-    minLabelInternal() {
-      return this.minLabel !== notSupplied ? this.minLabel : this.min;
+    internalMinLabel() {
+      return this.minLabel !== notSupplied ? this.minLabel : this.getMin();
     },
-    maxLabelInternal() {
-      return this.maxLabel !== notSupplied ? this.maxLabel : this.max;
+    internalMaxLabel() {
+      return this.maxLabel !== notSupplied ? this.maxLabel : this.getMax();
     },
-    multiplier() {
-      return isNaN(this.stepMltiplier) ? 0 : this.stepMultiplier;
+    internalMultiplier() {
+      let intMultiplier = parseInt(this.stepMultiplier);
+      // default to 4 fro multiplier
+      return isNaN(intMultiplier) ? 4 : Math.max(intMultiplier, 1);
     },
   },
   mounted() {
@@ -111,6 +123,22 @@ export default {
   watch: {
     value(val) {
       this.setValue(val);
+    },
+    min(val) {
+      setTimeout(() => {
+        this.setValue(this.internalValue);
+      }, 1);
+      //      this.internalMin = val && val.length ? val : '0';
+    },
+    max(val) {
+      setTimeout(() => {
+        this.setValue(this.internalValue);
+      }, 1);
+    },
+    step(val) {
+      setTimeout(() => {
+        this.setValue(this.internalValue);
+      }, 1);
     },
   },
   methods: {
@@ -125,7 +153,7 @@ export default {
     getMax() {
       if (this.$refs.range) {
         const val = parseFloat(this.$refs.range.max);
-        return isNaN(val) ? 0 : val;
+        return isNaN(val) ? 100 : val;
       }
       return 100;
     },
@@ -210,7 +238,7 @@ export default {
       let newValue =
         curValue +
         (ev.shiftKey
-          ? parseFloat(this.stepMultiplier) * this.getStep()
+          ? this.internalMultiplier * this.getStep()
           : this.getStep());
       this.setValue(newValue, ev);
     },
@@ -222,7 +250,7 @@ export default {
       let newValue =
         curValue -
         (ev.shiftKey
-          ? parseFloat(this.stepMultiplier) * this.getStep()
+          ? this.internalMultiplier * this.getStep()
           : this.getStep());
       this.setValue(newValue, ev);
     },
@@ -230,5 +258,4 @@ export default {
 };
 </script>
 
-<style lang="sass">
-</style>
+<style lang="sass"></style>

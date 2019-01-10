@@ -1,6 +1,6 @@
 /*
-* Provides common checkbox behaviour
-*/
+ * Provides common checkbox behaviour
+ */
 
 export default {
   props: {
@@ -13,21 +13,35 @@ export default {
     prop: 'modelValue',
     event: 'modelEvent',
   },
+  watch: {
+    checked(val) {
+      if (this.$options.propsData.modelValue === undefined) {
+        this.dataChecked = val;
+      }
+    },
+  },
   data() {
     return {
       dataChecked: undefined,
     };
-  },
-  beforeCreate() {
-    console.warn(`${this.$options._componentTag}: v-model under review`);
   },
   computed: {
     isArrayModel() {
       return Array.isArray(this.modelValue);
     },
     isChecked() {
-      const nonModelChecked = () => {
-        // dataChecked before checked / mixed properties
+      if (this.$props.modelValue !== undefined) {
+        // model value always comes first
+        if (this.isArrayModel) {
+          if (this.modelValue.includes(this.value)) {
+            return true;
+          } else {
+            return false;
+          }
+        } else {
+          return this.modelValue;
+        }
+      } else {
         if (this.dataChecked !== undefined) {
           return this.dataChecked;
         } else {
@@ -42,21 +56,6 @@ export default {
         }
 
         return false;
-      };
-
-      if (this.$props.modelValue !== undefined) {
-        // model value always comes first
-        if (this.isArrayModel) {
-          if (this.modelValue.includes(this.value)) {
-            return true;
-          } else {
-            return nonModelChecked();
-          }
-        } else {
-          return this.modelValue;
-        }
-      } else {
-        return nonModelChecked();
       }
     },
     // Bind listeners at the component level to the embedded input element and

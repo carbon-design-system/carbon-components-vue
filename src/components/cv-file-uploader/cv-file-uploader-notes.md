@@ -14,7 +14,8 @@ http://www.carbondesignsystem.com/components/file-uploader/code
   multiple
   removable
   label="Add file"
-   @input="onInput">
+  @input="onInput"
+>
 </cv-file-uploader>
 ```
 

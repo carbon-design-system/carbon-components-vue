@@ -3,7 +3,7 @@
     data-tile="expandable"
     class="cv-tile-expandable bx--tile--expandable"
     tabindex="0"
-    :class="[{'bx--tile--is-expanded': expanded}]"
+    :class="[{ 'bx--tile--is-expanded': expanded }]"
   >
     <button class="bx--tile__chevron">
       <svg width="12" height="8" viewBox="0 0 12 8" fill-rule="evenodd">
@@ -12,14 +12,10 @@
     </button>
     <div class="bx--tile-content">
       <span data-tile-atf class="bx--tile-content__above-the-fold">
-        <slot>
-          <!-- Above the fold content here -->
-        </slot>
+        <slot> <!-- Above the fold content here --> </slot>
       </span>
       <span class="bx--tile-content__below-the-fold">
-        <slot name="below">
-          <!-- Rest of the content here -->
-        </slot>
+        <slot name="below"> <!-- Rest of the content here --> </slot>
       </span>
     </div>
   </div>
@@ -50,5 +46,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

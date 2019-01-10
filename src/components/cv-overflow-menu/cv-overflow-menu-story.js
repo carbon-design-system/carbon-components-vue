@@ -1,9 +1,9 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs/vue';
+import { withKnobs, object, boolean } from '@storybook/addon-knobs';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvOverflowMenuNotesMD from './cv-overflow-menu-notes.md';
@@ -11,35 +11,31 @@ import CvOverflowMenu from './cv-overflow-menu';
 
 const stories = storiesOf('CvOverflowMenu', module);
 stories.addDecorator(withKnobs);
+stories.addDecorator(withNotes);
 
-const kinds = null;
 const preKnobs = {
   flipMenu: {
     group: 'attr',
     type: boolean,
-    config: ['flip menu', false, consts.CONFIG],
-    value: val => (val ? '\n  flip-menu' : ''),
+    config: ['flip menu', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: { type: Boolean, name: 'flip-menu' },
   },
   offset: {
     group: 'attr',
-    type: boolean,
-    config: ['offset example', false, consts.CONFIG],
-    value: val => (val ? '\n :offset="{ left: 0), top: 200 }"' : ''),
-  },
-  otherAttributes: {
-    group: 'attr',
-    type: text,
-    config: ['other attributes', '', consts.OTHER],
-    value: val => (val.length ? `\n  ${val}` : ''),
+    type: object,
+    config: ['offset example', { left: 0, top: 0 }], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: { type: Object, name: 'offset' },
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [{ name: 'default' }];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvOverflowMenuNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
@@ -66,7 +62,11 @@ for (const story of storySet) {
       return {
         components: { CvOverflowMenu, SvTemplateView },
         template: templateViewString,
+        props: settings.props,
       };
-    })
+    },
+    {
+      notes: { markdown: CvOverflowMenuNotesMD },
+    }
   );
 }

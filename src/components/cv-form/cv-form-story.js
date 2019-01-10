@@ -1,9 +1,9 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs/vue';
+import { withKnobs, number } from '@storybook/addon-knobs';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvFormNotesMD from './cv-form-notes.md';
@@ -11,30 +11,24 @@ import CvForm from './cv-form';
 
 const stories = storiesOf('CvForm', module);
 stories.addDecorator(withKnobs);
+stories.addDecorator(withNotes);
 
-const kinds = null;
+const preKnobs = {};
 
-const preKnobs = {
-  otherAttributes: {
-    group: 'attr',
-    type: text,
-    config: ['other attributes', '', consts.OTHER],
-    value: val => (val.length ? `\n  ${val}` : ''),
-  },
-};
+const variants = [{ name: 'default' }];
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvFormNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
 
       const templateString = `
-  <cv-form${settings.group.attr}>
+  <cv-form>
     <cv-form-item>
       <label for="text-input-3" class="bx--label">Text Input label</label>
       <input id="text-input-3" type="text" class="bx--text-input" placeholder="Optional placeholder text">
@@ -71,7 +65,11 @@ for (const story of storySet) {
       return {
         components: { CvForm, SvTemplateView },
         template: templateViewString,
+        props: settings.props,
       };
-    })
+    },
+    {
+      notes: { markdown: CvFormNotesMD },
+    }
   );
 }

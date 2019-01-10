@@ -7,7 +7,10 @@ Icons set or custom icons.
 
 ```html
 <cv-icon class="my-icon-class" href="cv(icon--add)"></cv-icon>
-<cv-icon style="fill: #00f" href="require('assets/icons/my-icons.svg') + '#my-icon-id'"></cv-icon>
+<cv-icon
+  style="fill: #00f"
+  href="require('assets/icons/my-icons.svg') + '#my-icon-id'"
+></cv-icon>
 ```
 
 ## Attributes

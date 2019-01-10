@@ -1,15 +1,18 @@
-import { configure } from '@storybook/vue';
-import { setOptions } from '@storybook/addon-options';
+import { configure, addDecorator } from '@storybook/vue';
+import { withOptions } from '@storybook/addon-options';
 
 import Vue from 'vue';
 import VueHighlightJS from 'vue-highlightjs';
 
 import CarbonComponentsVue from '../src';
 
-setOptions({
-  name: `carbon components vue`,
-  url: 'https://github.com/carbon-design-system/carbon-components-vue',
-});
+addDecorator(
+  withOptions({
+    name: `carbon components vue`,
+    url: 'https://github.com/carbon-design-system/carbon-components-vue',
+    // hierarchyRootSeparator: /\|/,
+  })
+);
 
 Vue.use(CarbonComponentsVue);
 Vue.use(VueHighlightJS);

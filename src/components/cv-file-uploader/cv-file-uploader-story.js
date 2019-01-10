@@ -1,10 +1,10 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs/vue';
+import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvFileUploaderNotesMD from './cv-file-uploader-notes.md';
@@ -12,70 +12,63 @@ import CvFileUploader from './cv-file-uploader';
 
 const stories = storiesOf('CvFileUploader', module);
 stories.addDecorator(withKnobs);
-
-const kinds = null;
+stories.addDecorator(withNotes);
 
 const preKnobs = {
   label: {
     group: 'attr',
     type: text,
-    config: ['label', 'Add file', consts.CONTENT],
-    value: val => (val.length ? `\n  label="${val}"` : ''),
+    config: ['label', 'Add file'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    prop: { name: 'label', type: String },
   },
   accept: {
     group: 'attr',
     type: text,
-    config: ['accept', '.jpg,.png', consts.CONFIG],
-    value: val => (val.length ? `\n  accept="${val}"` : ''),
+    config: ['accept', '.jpg,.png'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: { name: 'accept', type: String },
   },
   clearOnReselect: {
     group: 'attr',
     type: boolean,
-    config: ['Clear on reselect', false, consts.CONFIG],
-    value: val => (val ? '\n  clear-on-reselect' : ''),
+    config: ['Clear on reselect', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: { name: 'clear-on-reselect', type: Boolean },
   },
   initialStateUploading: {
     group: 'attr',
     type: boolean,
-    config: ['Initial state uploading', false, consts.CONFIG],
-    value: val => (val ? '\n  initial-state-uploading' : ''),
+    config: ['Initial state uploading', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: { name: 'initial-state-uploading', type: Boolean },
   },
   multiple: {
     group: 'attr',
     type: boolean,
-    config: ['multiple', false, consts.CONFIG],
-    value: val => (val ? '\n  multiple' : ''),
+    config: ['multiple', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: { name: 'multiple', type: Boolean },
   },
   removable: {
     group: 'attr',
     type: boolean,
-    config: ['removable', false, consts.CONFIG],
-    value: val => (val ? '\n  removable' : ''),
+    config: ['removable', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: { name: 'removable', type: Boolean },
   },
   events: {
     group: 'attr',
-    type: boolean,
-    config: ['with events', false, consts.OTHER],
-    value: val =>
-      val
-        ? `
-  @input="onInput"`
-        : '',
-  },
-  otherAttributes: {
-    group: 'attr',
-    type: text,
-    config: ['other attributes', '', consts.OTHER],
-    value: val => (val.length ? `\n  ${val}` : ''),
+    value: `@input="onInput"`,
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [
+  { name: 'default', excludes: ['events'] },
+  { name: 'minimal', includes: ['label'] },
+  { name: 'events', includes: ['label', 'value', 'events'] },
+];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvFileUploaderNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
@@ -112,6 +105,7 @@ for (const story of storySet) {
       return {
         components: { CvFileUploader, SvTemplateView },
         template: templateViewString,
+        props: settings.props,
         methods: {
           onInput: action('cv-file-uploader - input event'),
           setState() {
@@ -151,6 +145,9 @@ for (const story of storySet) {
           },
         },
       };
-    })
+    },
+    {
+      notes: { markdown: CvFileUploaderNotesMD },
+    }
   );
 }

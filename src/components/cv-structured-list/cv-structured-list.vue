@@ -4,8 +4,8 @@
     :class="{
       'bx--structured-list--selection': selectable,
       'bx--structured-list--border': border,
-      'bx--structured-list--condensed': condensed
-      }"
+      'bx--structured-list--condensed': condensed,
+    }"
     :data-structured-list="selectable"
   >
     <div class="bx--structured-list-thead">
@@ -14,9 +14,7 @@
         <slot name="headings"></slot>
       </div>
     </div>
-    <div class="bx--structured-list-tbody">
-      <slot name="items"></slot>
-    </div>
+    <div class="bx--structured-list-tbody"><slot name="items"></slot></div>
   </div>
 </template>
 
@@ -48,5 +46,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

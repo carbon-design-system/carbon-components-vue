@@ -1,9 +1,9 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs/vue';
+import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvCodeSnippetNotesMD from './cv-code-snippet-notes.md';
@@ -11,36 +11,34 @@ import CvCodeSnippet from './cv-code-snippet';
 
 const stories = storiesOf('CvCodeSnippet', module);
 stories.addDecorator(withKnobs);
-
-const kinds = {
-  options: {
-    default: '',
-    inline: 'inline',
-    multiline: 'multiline',
-    oneline: 'oneline',
-  },
-  default: '',
-};
+stories.addDecorator(withNotes);
 
 const preKnobs = {
   lessText: {
     group: 'attr',
     type: text,
-    config: ['Less text', '', consts.CONTENT],
-    value: val => (val.length ? `\n  less-text="${val}"` : ''),
+    config: ['Less text', ''], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    inline: true,
+    prop: {
+      name: 'less-text',
+      type: String,
+    },
   },
   moreText: {
     group: 'attr',
     type: text,
-    config: ['More text', '', consts.CONTENT],
-    value: val => (val.length ? `\n  more-text="${val}"` : ''),
+    config: ['More text', ''], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    inline: true,
+    prop: {
+      name: 'more-text',
+      type: String,
+    },
   },
   content: {
-    group: 'slot-content',
-    type: text,
-    config: [
-      'slot:content',
-      `@mixin grid-container {
+    group: 'content',
+    slot: {
+      name: '',
+      value: `@mixin grid-container {
   width: 100%;
   padding-right: padding(mobile);
   padding-left: padding(mobile);
@@ -61,31 +59,49 @@ $z-indexes: (
   overflowHidden: - 1,
   floating: 10000
 );`,
-      consts.CONTENT,
-    ],
-    value: val => val,
-  },
-  otherAttributes: {
-    group: 'attr',
-    type: text,
-    config: ['other attributes', '', consts.OTHER],
-    value: val => (val.length ? `\n  ${val}` : ''),
+    },
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [
+  {
+    name: 'default',
+    includes: ['content'],
+  },
+  {
+    name: 'inline',
+    includes: ['content'],
+    extra: { kind: { group: 'attr', value: 'kind="inline"', inline: true } },
+  },
+  {
+    name: 'multiline',
+    extra: { kind: { group: 'attr', value: 'kind="multiline"', inline: true } },
+  },
+  {
+    name: 'multiline (minimal)',
+    includes: ['content'],
+    extra: { kind: { group: 'attr', value: 'kind="multiline"', inline: true } },
+  },
+  {
+    name: 'oneline',
+    includes: ['content'],
+    extra: { kind: { group: 'attr', value: 'kind="oneline"', inline: true } },
+  },
+];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvCodeSnippetNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
       // console.dir(settings);
       const templateString = `
-<cv-code-snippet${settings.kind}${settings.group.attr}>
-  ${settings.group['slot-content']}
+<cv-code-snippet${settings.group.attr}>
+  ${settings.group['content']}
 </cv-code-snippet>
   `;
 
@@ -94,7 +110,7 @@ for (const story of storySet) {
       const templateViewString = `
     <sv-template-view ref="view"
       sv-margin
-      :sv-alt-back="${settings.kind.indexOf('inline') > -1}"
+      :sv-alt-back="${settings.group.attr.indexOf('inline') > -1}"
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
     </sv-template-view>
@@ -103,7 +119,11 @@ for (const story of storySet) {
       return {
         components: { CvCodeSnippet, SvTemplateView },
         template: templateViewString,
+        props: settings.props,
       };
-    })
+    },
+    {
+      notes: { markdown: CvCodeSnippetNotesMD },
+    }
   );
 }

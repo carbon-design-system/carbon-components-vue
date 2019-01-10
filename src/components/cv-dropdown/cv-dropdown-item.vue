@@ -10,10 +10,14 @@
 -->
 
 <template>
-  <li data-option :data-value="value" class="cv-dropdown-item bx--dropdown-item">
+  <li
+    data-option
+    :data-value="value"
+    class="cv-dropdown-item bx--dropdown-item"
+  >
     <a
       class="bx--dropdown-link"
-      :class="{'bx--dropdown--selected': internalSelected}"
+      :class="{ 'bx--dropdown--selected': internalSelected }"
       href="javascript:void(0)"
       ref="link"
       tabindex="-1"

@@ -1,6 +1,9 @@
 <template>
   <div class="cv-time-picker bx--form-item">
-    <div class="bx--time-picker" :class="{'bx--time-picker--light': theme==='light'}">
+    <div
+      class="bx--time-picker"
+      :class="{ 'bx--time-picker--light': theme === 'light' }"
+    >
       <div class="bx--time-picker__input">
         <input
           :id="uid"
@@ -12,27 +15,36 @@
           :maxlength="placeholder.length"
           :data-invalid="invalidMessage.length > 0"
           :value="time"
+          :disabled="disabled"
           @input="$emit('update:time', $event.target.value)"
-        >
-        <div class="bx--form-requirement" v-if="invalidMessage.length > 0">{{invalidMessage}}</div>
-        <label :for="uid" class="bx--label">{{label}}</label>
+        />
+        <div class="bx--form-requirement" v-if="invalidMessage.length > 0">
+          {{ invalidMessage }}
+        </div>
+        <label :for="uid" class="bx--label">{{ label }}</label>
       </div>
       <cv-select
         class="bx--time-picker__select"
         inline
+        :form-item="false"
         hide-label
         :label="ampmSelectLabel"
         @input="$emit('update:ampm', $event)"
         :value="ampm"
         :disabled="disabled"
       >
-        <cv-select-option class="bx--select-option" value="AM">AM</cv-select-option>
-        <cv-select-option class="bx--select-option" value="PM">PM</cv-select-option>
+        <cv-select-option class="bx--select-option" value="AM"
+          >AM</cv-select-option
+        >
+        <cv-select-option class="bx--select-option" value="PM"
+          >PM</cv-select-option
+        >
       </cv-select>
 
       <cv-select
         class="bx--time-picker__select"
         inline
+        :form-item="false"
         hide-label
         :label="timezonesSelectLabel"
         v-if="timezones.length > 0"
@@ -45,7 +57,8 @@
           v-for="item in timezones"
           :key="item.value"
           :value="item.value"
-        >{{item.label}}</cv-select-option>
+          >{{ item.label }}</cv-select-option
+        >
       </cv-select>
     </div>
   </div>
@@ -110,5 +123,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

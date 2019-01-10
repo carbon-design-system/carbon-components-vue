@@ -13,7 +13,9 @@ http://www.carbondesignsystem.com/components/pagination/code
   page-number-label="Page number"
   page-sizes-label="Number of items per page:"
   :number-of-items="103"
-  :page-sizes="[10, { value: 20, selected: true }, 30, 40, 50]"  @change="onChange"></cv-pagination>
+  :page-sizes="[10, { value: 20, selected: true }, 30, 40, 50]"
+  @change="onChange"
+></cv-pagination>
 ```
 
 Minimal

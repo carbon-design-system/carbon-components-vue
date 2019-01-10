@@ -1,9 +1,9 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, selectV2 } from '@storybook/addon-knobs/vue';
+import { withKnobs, number, select } from '@storybook/addon-knobs';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvIconNotesMD from './cv-icon-notes.md';
@@ -11,15 +11,15 @@ import CvIcon from './cv-icon';
 
 const stories = storiesOf('CvIcon', module);
 stories.addDecorator(withKnobs);
+stories.addDecorator(withNotes);
 
 const fullIconHref =
   require('carbon-icons/dist/carbon-icons.svg') + '#icon--error';
-const kinds = null;
 
 const preKnobs = {
   href: {
     group: 'attr',
-    type: selectV2,
+    type: select,
     config: [
       'href',
       {
@@ -27,24 +27,23 @@ const preKnobs = {
         "require('carbon-icons/dist/carbon-icons.svg') + '#icon--error'": fullIconHref,
       },
       'cv(icon--add)',
-      consts.CONFIG,
+      // consts.CONFIG, // fails when used with number in storybook 4.1.4
     ],
-    value: val => `\n  href="${val}"`,
-  },
-  otherAttributes: {
-    group: 'attr',
-    type: text,
-    config: ['other attributes', '', consts.OTHER],
-    value: val => (val.length ? `\n  ${val}` : ''),
+    prop: {
+      name: 'href',
+      type: String,
+    },
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [{ name: 'default' }];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvIconNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
@@ -67,7 +66,11 @@ for (const story of storySet) {
       return {
         components: { CvIcon, SvTemplateView },
         template: templateViewString,
+        props: settings.props,
       };
-    })
+    },
+    {
+      notes: { markdown: CvIconNotesMD },
+    }
   );
 }

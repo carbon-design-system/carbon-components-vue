@@ -32,6 +32,11 @@ export default {
   mounted() {
     this.currentStep = this.initialStep;
   },
+  watch: {
+    initialStep() {
+      this.currentStep = this.initialStep;
+    },
+  },
   computed: {
     state() {
       return step => {
@@ -67,5 +72,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

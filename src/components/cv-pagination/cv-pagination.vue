@@ -12,26 +12,36 @@
           v-for="(size, index) in pageSizes"
           :key="index"
           :value="`${size.value ? size.value : size}`"
-        >{{size.label ? size.label : (size.value ? size.value : size)}}</cv-select-option>
+        >
+          {{ size.label ? size.label : size.value ? size.value : size }}
+        </cv-select-option>
       </cv-select>
 
       <span class="bx--pagination__text">
         <span>|&nbsp;</span>
-        <span data-displayed-item-range>{{rangeText}}</span>
+        <span data-displayed-item-range>{{ rangeText }}</span>
       </span>
     </div>
 
     <div class="bx--pagination__right bx--pagination--inline">
-      <span class="bx--pagination__text">{{pageOfPages}}</span>
-      
+      <span class="bx--pagination__text">{{ pageOfPages }}</span>
+
       <button
         class="bx--pagination__button bx--pagination__button--backward"
         data-page-backward
         :aria-label="backwardText"
         @click="onPrevPage"
       >
-        <svg class="bx--pagination__button-icon" width="7" height="12" viewBox="0 0 7 12">
-          <path fill-rule="nonzero" d="M1.45 6.002L7 11.27l-.685.726L0 6.003 6.315 0 7 .726z"></path>
+        <svg
+          class="bx--pagination__button-icon"
+          width="7"
+          height="12"
+          viewBox="0 0 7 12"
+        >
+          <path
+            fill-rule="nonzero"
+            d="M1.45 6.002L7 11.27l-.685.726L0 6.003 6.315 0 7 .726z"
+          ></path>
         </svg>
       </button>
 
@@ -48,10 +58,11 @@
           v-for="pageNumber in pages"
           :key="pageNumber"
           :value="`${pageNumber}`"
-        >{{pageNumber}}</cv-select-option>
+          >{{ pageNumber }}</cv-select-option
+        >
       </cv-select>
-      <span v-if="pages.length == 0">{{pageValue}}</span>
-      
+      <span v-if="pages.length == 0">{{ pageValue }}</span>
+
       <button
         class="bx--pagination__button bx--pagination__button--forward"
         data-page-forward
@@ -59,8 +70,16 @@
         @click="onNextPage"
         :disabled="this.pageValue === this.pageCount"
       >
-        <svg class="bx--pagination__button-icon" width="7" height="12" viewBox="0 0 7 12">
-          <path fill-rule="nonzero" d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"></path>
+        <svg
+          class="bx--pagination__button-icon"
+          width="7"
+          height="12"
+          viewBox="0 0 7 12"
+        >
+          <path
+            fill-rule="nonzero"
+            d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"
+          ></path>
         </svg>
       </button>
     </div>
@@ -139,6 +158,9 @@ export default {
     this.firstItem = newFirstItem(this.pageValue, this.pageSizeValue);
   },
   watch: {
+    numberOfItems() {
+      this.pageCount = newPageCount(this.numberOfItems, this.pageSizeValue);
+    },
     page() {
       this.pageValue = newPageValue(this.page, this.pageCount);
       this.firstItem = newFirstItem(this.pageValue, this.pageSizeValue);

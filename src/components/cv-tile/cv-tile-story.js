@@ -1,9 +1,9 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, selectV2, boolean } from '@storybook/addon-knobs/vue';
+import { withKnobs, text, select, boolean } from '@storybook/addon-knobs';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvTileNotesMD from './cv-tile-notes.md';
@@ -11,62 +11,74 @@ import CvTile from './cv-tile';
 
 const stories = storiesOf('CvTile', module);
 stories.addDecorator(withKnobs);
-
-const kinds = {
-  options: {
-    Default: '',
-    Standard: 'standard',
-    Selectable: 'selectable',
-    Expandable: 'expandable',
-    Clickable: 'clickable',
-  },
-  default: '',
-};
+stories.addDecorator(withNotes);
 
 const preKnobs = {
   slotDefault: {
     group: 'slots',
-    type: text,
-    config: ['slot:default', 'Tile content', consts.CONTENT],
-    value: val => val,
+    slot: {
+      name: '',
+      value: '<p>This is some tile content</p>',
+    },
   },
   slotBelow: {
     group: 'slots',
-    type: text,
-    config: [
-      'slot:below',
-      '<h2>Below the fold content</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>',
-      consts.CONTENT,
-    ],
-    value: val => `\n  <template slot="below">${val}</template>`,
+    slot: {
+      name: 'below',
+      value:
+        '<ul><li>This</li><li>is some</li>li>more</li>li>content</li></ul>',
+    },
   },
   expanded: {
     group: 'attr',
     type: boolean,
-    config: ['expended', false, consts.CONFIG],
-    value: val => (val ? '\n  expanded' : ''),
+    prop: { name: 'expanded', type: Boolean },
   },
   selected: {
     group: 'attr',
     type: boolean,
-    config: ['selected', false, consts.CONFIG],
-    value: val =>
-      val ? '\n  selected\n  value="selected-1"' : '\n  value="selected-1"',
+    config: ['selected', false], // consts.CONFIG],
+    prop: {
+      name: 'selected',
+      type: Boolean,
+    },
   },
-  otherAttributes: {
+  value: {
     group: 'attr',
-    type: text,
-    config: ['other attributes', '', consts.OTHER],
-    value: val => (val.length ? `\n  ${val}` : ''),
+    value: 'value="selected-1"',
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [
+  { name: 'default', excludes: ['expanded', 'selected', 'value'] },
+  {
+    name: 'standard',
+    excludes: ['expanded', 'selected', 'value'],
+    extra: { kind: { group: 'attr', value: 'kind="standard"' } },
+  },
+  {
+    name: 'selectable',
+    excludes: ['expanded'],
+    extra: { kind: { group: 'attr', value: 'kind="selectable"' } },
+  },
+  {
+    name: 'expandable',
+    excludes: ['selected'],
+    extra: { kind: { group: 'attr', value: 'kind="expandable"' } },
+  },
+  {
+    name: 'clickable',
+    includes: ['slotDefault'],
+    extra: { kind: { group: 'attr', value: 'kind="clickable"' } },
+  },
+];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvTileNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       if (settings.kind === 'selectable') {
@@ -76,7 +88,7 @@ for (const story of storySet) {
       // ----------------------------------------------------------------
 
       const templateString = `
-<cv-tile${settings.kind}${settings.group.attr}>${settings.group.slots}
+<cv-tile${settings.group.attr}>${settings.group.slots}
 </cv-tile>
   `;
 
@@ -93,7 +105,11 @@ for (const story of storySet) {
       return {
         components: { CvTile, SvTemplateView },
         template: templateViewString,
+        props: settings.props,
       };
-    })
+    },
+    {
+      notes: { markdown: CvTileNotesMD },
+    }
   );
 }

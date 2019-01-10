@@ -1,5 +1,9 @@
 <template>
-  <a data-tile="clickable" class="cv-tile-clickable bx--tile--clickable" tabindex="0">
+  <a
+    data-tile="clickable"
+    class="cv-tile-clickable bx--tile--clickable"
+    tabindex="0"
+  >
     <slot></slot>
   </a>
 </template>
@@ -18,5 +22,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

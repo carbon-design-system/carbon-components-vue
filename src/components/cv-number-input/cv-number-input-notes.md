@@ -7,17 +7,11 @@ http://www.carbondesignsystem.com/components/number-input/code
 ## Usage
 
 ```html
-<cv-number-input
-  label="label"
-  v-model="modelValue">
-</cv-number-input>
+<cv-number-input label="label" v-model="modelValue"> </cv-number-input>
 ```
 
 ```html
-<cv-number-input
-  label="Text input label"
-   @change="onChange">
-
+<cv-number-input label="Text input label" @change="onChange">
   <template slot="invalid-message">
     Number not valid
   </template>

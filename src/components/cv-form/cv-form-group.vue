@@ -1,8 +1,6 @@
 <template>
   <fieldset class="cv-form-group bx--fieldset">
-    <legend class="bx--label">
-      <slot name="label"></slot>
-    </legend>
+    <legend class="bx--label"><slot name="label"></slot></legend>
     <slot name="content"></slot>
   </fieldset>
 </template>
@@ -13,5 +11,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

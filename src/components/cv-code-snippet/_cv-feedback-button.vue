@@ -9,7 +9,7 @@
     <slot></slot>
     <div
       class="bx--btn--copy__feedback"
-      :class="{'bx--btn--copy__feedback--displayed': showFeedback}"
+      :class="{ 'bx--btn--copy__feedback--displayed': showFeedback }"
       :data-feedback="feedback"
     ></div>
   </button>
@@ -48,5 +48,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

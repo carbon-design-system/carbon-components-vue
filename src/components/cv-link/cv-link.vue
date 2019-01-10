@@ -1,7 +1,5 @@
 <template>
-  <a class="cv-link bx--link" v-on="$listeners">
-    <slot></slot>
-  </a>
+  <a class="cv-link bx--link" v-on="$listeners"> <slot></slot> </a>
 </template>
 
 <script>
@@ -15,5 +13,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

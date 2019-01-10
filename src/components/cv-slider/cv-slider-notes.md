@@ -7,21 +7,13 @@ http://www.carbondesignsystem.com/components/slider/code
 ## Usage
 
 ```html
-<cv-slider
-  label="Text input label"
-  min="0"
-  max="100"
-  value="45"></cv-slider>
+<cv-slider label="Text input label" min="0" max="100" value="45"></cv-slider>
 ```
 
 ### v-model
 
 ```html
-<cv-slider
-  label="Text input label"
-  min="0"
-  max="100"
-  v-model="modelValue">
+<cv-slider label="Text input label" min="0" max="100" v-model="modelValue">
 </cv-slider>
 ```
 

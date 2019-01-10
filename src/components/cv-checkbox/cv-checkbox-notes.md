@@ -9,32 +9,19 @@ http://www.carbondesignsystem.com/components/checkbox/code
 ### Default
 
 ```html
-<cv-checkbox
-  label="checkbox"
-  @change="actionChange"
-  >
-</cv-checkbox>
+<cv-checkbox label="checkbox" @change="actionChange"> </cv-checkbox>
 ```
 
 ### mixed
 
 ```html
-<cv-checkbox
-  label="checkbox"
-  mixed
-  @change="actionChange"
-  >
-</cv-checkbox>
+<cv-checkbox label="checkbox" mixed @change="actionChange"> </cv-checkbox>
 ```
 
 ### With v-model
 
 ```html
-<cv-checkbox
-  label="checkbox"
-  v-model="checked"
-  @change="actionChange"
-  >
+<cv-checkbox label="checkbox" v-model="checked" @change="actionChange">
 </cv-checkbox>
 ```
 

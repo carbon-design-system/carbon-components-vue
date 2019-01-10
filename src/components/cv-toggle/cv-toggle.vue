@@ -3,15 +3,20 @@
     <input
       v-bind="$attrs"
       v-on="inputListeners"
-      :class="{'bx--toggle--small': small}"
+      :class="{ 'bx--toggle--small': small }"
       class="bx--toggle"
       type="checkbox"
       :id="uid"
       :checked="isChecked === true"
       :aria-checked="`${isChecked}`"
       @change="onChange"
+      :value="value"
+    />
+    <label
+      class="bx--toggle__label"
+      :for="uid"
+      :data-contained-checkbox-state="isChecked"
     >
-    <label class="bx--toggle__label" :for="uid" :data-contained-checkbox-state="isChecked">
       <div class="bx--toggle__text--left" v-if="!small">
         <slot name="text-left">Off</slot>
       </div>
@@ -37,5 +42,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>
