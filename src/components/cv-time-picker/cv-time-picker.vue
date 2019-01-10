@@ -101,6 +101,7 @@ export default {
         result = this.ampm[0].value;
         this.$emit('update:ampm', result);
       }
+      return result;
     },
     validTimezone() {
       // Validate timezone setting
