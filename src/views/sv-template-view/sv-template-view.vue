@@ -84,7 +84,7 @@ export default {
     method(methodName) {
       const result = this.$slots.component[0].componentInstance[methodName];
       if (!result) {
-        console.dir(this.$slots.component[0].componentInstance);
+        // console.dir(this.$slots.component[0].componentInstance);
         return () => {
           console.warn(
             `sv-template-view: Method ${methodName} does not exist.`

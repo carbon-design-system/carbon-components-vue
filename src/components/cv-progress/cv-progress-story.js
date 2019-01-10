@@ -30,7 +30,7 @@ const preKnobs = {
       'Steps',
       ['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5'],
       ',',
-      'consts.CONFIG', // , - does not seem to work in storybook 4
+      // 'consts.CONFIG', // , - does not seem to work in storybook 4
     ],
     prop: {
       name: 'steps',

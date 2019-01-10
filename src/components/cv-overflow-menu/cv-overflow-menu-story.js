@@ -23,7 +23,7 @@ const preKnobs = {
   offset: {
     group: 'attr',
     type: object,
-    config: ['offset example', { left: 0, top: 200 }], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    config: ['offset example', { left: 0, top: 0 }], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: { type: Object, name: 'offset' },
   },
 };

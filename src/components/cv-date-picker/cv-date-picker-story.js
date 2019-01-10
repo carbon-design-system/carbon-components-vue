@@ -96,7 +96,7 @@ const preKnobs = {
 };
 
 const variants = [
-  { name: 'default', excludes: ['calOptions', 'events'] },
+  { name: 'default', excludes: ['calOptions', 'events', 'dateEndLabel'] },
   { name: 'minimal', includes: ['eventsSimple'] },
   {
     name: 'short',
@@ -118,7 +118,7 @@ const variants = [
   },
   {
     name: 'range',
-    includes: ['events', 'calOptions'],
+    includes: ['events', 'calOptions', 'dateEndLabel'],
     extra: { kind: { group: 'attr', value: 'kind="range"' } },
   },
 ];

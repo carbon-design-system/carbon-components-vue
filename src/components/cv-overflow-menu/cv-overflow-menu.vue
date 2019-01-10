@@ -2,8 +2,13 @@
   <div
     data-overflow-menu
     tabindex="0"
+    @click="doToggle"
+    @keydown.enter.prevent="doToggle"
+    @keyup.space.prevent="doToggle"
     :aria-label="label"
+    aria-role="button"
     class="cv-overflow-menu bx--overflow-menu"
+    :class="{ 'bx--overflow-menu--open': open }"
   >
     <svg
       class="bx--overflow-menu__icon"
@@ -21,8 +26,12 @@
       class="bx--overflow-menu-options"
       :class="{
         'bx--overflow-menu--flip': flipMenu,
+        'bx--overflow-menu-options--open': open,
       }"
       tabindex="-1"
+      ref="popup"
+      :id="uid"
+      :style="{ left: left + 'px', top: top + 'px' }"
     >
       <slot></slot>
     </ul>
@@ -31,9 +40,11 @@
 
 <script>
 import { OverflowMenu } from 'carbon-components';
+import uidMixin from '../../mixins/uid-mixin';
 
 export default {
   name: 'CvOverflowMenu',
+  mixins: [uidMixin],
   props: {
     label: String,
     flipMenu: Boolean,
@@ -44,22 +55,88 @@ export default {
       },
     },
   },
-  mounted() {
-    let options = {};
-    if (this.offset) {
-      if (this.flipMenu) {
-        options.objMenuOffsetFlip = this.offset;
-      } else {
-        options.objMenuOffset = this.offset;
-      }
-    }
-
-    this.carbonComponent = OverflowMenu.create(this.$el, options);
+  watch: {
+    offset(val) {
+      this.offset.left = val.left;
+      this.offset.top = val.top;
+    },
+    flipMenu(val) {
+      this.flipMenu = val;
+    },
   },
-  beforeDestroy() {
-    this.carbonComponent.release();
+  data() {
+    return {
+      open: false,
+      left: 0,
+      top: 0,
+    };
+  },
+  mounted() {
+    // Check for los of focus
+    this.$el.addEventListener('focusout', this.checkFocusOut);
+
+    // move popup out to body to ensure it appears above other elements
+    document.body.appendChild(this.$refs.popup);
+
+    //
+  },
+  methods: {
+    checkFocusOut(ev) {
+      if (this.open) {
+        if (
+          ev.relatedTarget === null ||
+          !(
+            this.$el === ev.relatedTarget ||
+            this.$refs.popup.contains(ev.relatedTarget)
+          )
+        ) {
+          this.open = false;
+          setTimeout(() => {
+            this.$el.focus();
+          }, 1);
+        }
+      }
+    },
+    menuItemFocusOut(ev) {
+      this.checkFocusOut(ev);
+    },
+    menuItemclick() {
+      this.open = false;
+      setTimeout(() => {
+        this.$el.focus();
+      }, 1);
+    },
+    doToggle(ev) {
+      this.open = !this.open;
+
+      if (this.open) {
+        const menuPosition = this.$el.getBoundingClientRect();
+        setTimeout(() => {
+          if (this.flipMenu) {
+            this.left =
+              menuPosition.left +
+              20 +
+              this.offset.left -
+              this.$refs.popup.offsetWidth +
+              this.$el.offsetWidth;
+            this.top = menuPosition.bottom + 2 + this.offset.top;
+          } else {
+            this.left = menuPosition.left - 20 + this.offset.left;
+            this.top = menuPosition.bottom + 2 + this.offset.top;
+          }
+
+          this.$refs.popup
+            .querySelector('.bx--overflow-menu-options__btn')
+            .focus();
+        }, 1);
+      }
+    },
   },
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.cv-overflow-menu {
+  background: none;
+}
+</style>

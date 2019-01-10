@@ -50,7 +50,7 @@ const preKnobs = {
 
 const variants = [
   { name: 'default' },
-  { name: 'minimal', exclude: ['small', 'disabled'] },
+  { name: 'minimal', excludes: ['small', 'disabled'] },
   {
     name: 'primary',
     extra: { kind: { group: 'attr', value: 'kind="primary"' } },

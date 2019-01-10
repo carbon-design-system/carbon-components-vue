@@ -10,6 +10,9 @@
       class="bx--overflow-menu-options__btn"
       :data-floating-menu-primary-focus="primaryFocus"
       :disabled="disabled"
+      v-on="$listeners"
+      @click="onClick"
+      @focusout="onFocusOut"
     >
       <slot></slot>
     </button>
@@ -23,6 +26,14 @@ export default {
     primaryFocus: Boolean,
     disabled: Boolean,
     danger: Boolean,
+  },
+  methods: {
+    onClick() {
+      this.$parent.menuItemclick();
+    },
+    onFocusOut(ev) {
+      this.$parent.menuItemFocusOut(ev);
+    },
   },
 };
 </script>

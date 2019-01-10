@@ -228,7 +228,7 @@ preKnobs = {
     ],
     inline: true,
     prop: {
-      type: Boolean,
+      type: String,
       name: 'definition',
     },
   },

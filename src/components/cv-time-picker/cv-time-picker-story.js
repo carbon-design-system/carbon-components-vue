@@ -30,7 +30,7 @@ const ampmConfig = [
   // consts.CONFIG,// fails when used with number in storybook 4.1.4
 ];
 const timezoneConfig = ['timezone', 'timezone1']; // consts.CONFIG],
-const timeConfig = ['time', ' '];
+const timeConfig = ['time', ''];
 
 const preKnobs = {
   theme: {
@@ -217,7 +217,7 @@ for (const story of storySet) {
           onUpdateTimezone: action('cv-time-picker - update:timezone event'),
         },
         mounted() {
-          console.dir(this);
+          // console.dir(this);
         },
       };
     },

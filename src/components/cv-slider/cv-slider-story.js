@@ -58,7 +58,7 @@ const preKnobs = {
   value: {
     group: 'attr',
     type: text,
-    config: ['initial-value', '50'], // consts.CONFIG],
+    config: ['value', '50'], // consts.CONFIG],
     prop: { name: 'value', type: String },
   },
   step: {

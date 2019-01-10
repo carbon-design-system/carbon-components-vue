@@ -15,7 +15,7 @@ export default {
   },
   watch: {
     checked(val) {
-      if (this.$props.modelValue !== undefined) {
+      if (this.$options.propsData.modelValue === undefined) {
         this.dataChecked = val;
       }
     },
@@ -30,8 +30,18 @@ export default {
       return Array.isArray(this.modelValue);
     },
     isChecked() {
-      const nonModelChecked = () => {
-        // dataChecked before checked / mixed properties
+      if (this.$props.modelValue !== undefined) {
+        // model value always comes first
+        if (this.isArrayModel) {
+          if (this.modelValue.includes(this.value)) {
+            return true;
+          } else {
+            return false;
+          }
+        } else {
+          return this.modelValue;
+        }
+      } else {
         if (this.dataChecked !== undefined) {
           return this.dataChecked;
         } else {
@@ -46,21 +56,6 @@ export default {
         }
 
         return false;
-      };
-
-      if (this.$props.modelValue !== undefined) {
-        // model value always comes first
-        if (this.isArrayModel) {
-          if (this.modelValue.includes(this.value)) {
-            return true;
-          } else {
-            return nonModelChecked();
-          }
-        } else {
-          return this.modelValue;
-        }
-      } else {
-        return nonModelChecked();
       }
     },
     // Bind listeners at the component level to the embedded input element and

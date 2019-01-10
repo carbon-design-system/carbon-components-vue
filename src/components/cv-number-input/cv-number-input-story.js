@@ -69,9 +69,9 @@ const preKnobs = {
   value: {
     group: 'attr',
     type: text,
-    config: ['initial-value', ''], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    config: ['value', ''], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      name: 'initial-value',
+      name: 'value',
       type: String,
     },
   },
@@ -117,7 +117,7 @@ for (const story of storySet) {
     sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">
-        <div v-if="${templateString.indexOf('v-model') > 0}"
+        <div v-if="${templateString.indexOf('v-model') > 0}">
           <label>Model value:
             <input type="number" v-model="modelValue" />
           </label>

@@ -13,16 +13,7 @@ const stories = storiesOf('CvForm', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
-const preKnobs = {
-  test: {
-    type: number,
-    config: ['test', 13],
-    prop: {
-      name: 'test',
-      type: Number,
-    },
-  },
-};
+const preKnobs = {};
 
 const variants = [{ name: 'default' }];
 

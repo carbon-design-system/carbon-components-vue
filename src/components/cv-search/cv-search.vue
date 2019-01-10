@@ -7,9 +7,9 @@
       role="search"
       ref="search"
     >
-      <label :id="uid" class="bx--label" for="search__input-1">
-        {{ label }}
-      </label>
+      <label :id="uid" class="bx--label" for="search__input-1">{{
+        label
+      }}</label>
 
       <input
         :id="uid"
@@ -96,7 +96,7 @@ export default {
     },
   },
   mounted() {
-    console.dir(this.$options.propsData);
+    // console.dir(this.$options.propsData);
     this.carbonComponent = Search.create(this.$refs.search);
   },
   beforeDestroy() {

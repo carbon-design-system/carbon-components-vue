@@ -58,7 +58,7 @@ const variants = [
   },
   {
     name: 'selectable',
-    excludes: ['expanded', 'value'],
+    excludes: ['expanded'],
     extra: { kind: { group: 'attr', value: 'kind="selectable"' } },
   },
   {

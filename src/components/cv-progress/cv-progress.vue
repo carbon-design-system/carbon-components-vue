@@ -32,6 +32,11 @@ export default {
   mounted() {
     this.currentStep = this.initialStep;
   },
+  watch: {
+    initialStep() {
+      this.currentStep = this.initialStep;
+    },
+  },
   computed: {
     state() {
       return step => {

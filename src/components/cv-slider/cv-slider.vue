@@ -30,9 +30,9 @@
           :id="uid"
           class="bx--slider__input"
           type="range"
-          :step="internalStep"
-          :min="internalMin"
-          :max="internalMax"
+          :step="step"
+          :min="min"
+          :max="max"
           ref="range"
         />
       </div>
@@ -41,7 +41,7 @@
         type="number"
         class="bx--text-input bx--slider-text-input"
         :class="{ 'bx--text-input--light': theme === 'light' }"
-        :placeholder="internalMin"
+        :placeholder="min"
         v-model="internalValue"
         @change="onChange"
         ref="inputBox"
@@ -102,25 +102,16 @@ export default {
     };
   },
   computed: {
-    internalMin() {
-      return this.min && this.min.length ? this.min : '0';
-    },
     internalMinLabel() {
-      return this.minLabel !== notSupplied ? this.minLabel : this.internalMin;
-    },
-    internalMax() {
-      return this.max && this.max.length ? this.max : '100';
+      return this.minLabel !== notSupplied ? this.minLabel : this.getMin();
     },
     internalMaxLabel() {
-      return this.maxLabel !== notSupplied ? this.maxLabel : this.internalMax;
+      return this.maxLabel !== notSupplied ? this.maxLabel : this.getMax();
     },
     internalMultiplier() {
       let intMultiplier = parseInt(this.stepMultiplier);
       // default to 4 fro multiplier
       return isNaN(intMultiplier) ? 4 : Math.max(intMultiplier, 1);
-    },
-    internalStep() {
-      return this.step && this.step.length ? this.step : '1';
     },
   },
   mounted() {
@@ -132,6 +123,22 @@ export default {
   watch: {
     value(val) {
       this.setValue(val);
+    },
+    min(val) {
+      setTimeout(() => {
+        this.setValue(this.internalValue);
+      }, 1);
+      //      this.internalMin = val && val.length ? val : '0';
+    },
+    max(val) {
+      setTimeout(() => {
+        this.setValue(this.internalValue);
+      }, 1);
+    },
+    step(val) {
+      setTimeout(() => {
+        this.setValue(this.internalValue);
+      }, 1);
     },
   },
   methods: {
@@ -146,7 +153,7 @@ export default {
     getMax() {
       if (this.$refs.range) {
         const val = parseFloat(this.$refs.range.max);
-        return isNaN(val) ? 0 : val;
+        return isNaN(val) ? 100 : val;
       }
       return 100;
     },

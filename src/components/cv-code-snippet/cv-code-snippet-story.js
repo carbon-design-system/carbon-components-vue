@@ -110,8 +110,7 @@ for (const story of storySet) {
       const templateViewString = `
     <sv-template-view ref="view"
       sv-margin
-      :sv-alt-back="${settings.group.attr &&
-        settings.group.attr.indexOf('inline') > -1}"
+      :sv-alt-back="${settings.group.attr.indexOf('inline') > -1}"
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
     </sv-template-view>

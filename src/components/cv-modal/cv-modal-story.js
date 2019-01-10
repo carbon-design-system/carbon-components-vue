@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import { withKnobs, boolean, button } from '@storybook/addon-knobs';
 import { withNotes } from '@storybook/addon-notes';
 import { action } from '@storybook/addon-actions';
 
@@ -75,7 +75,10 @@ const variants = [
   { name: 'primary-only', includes: ['content', 'primaryButton'] },
   { name: 'secondary-only', includes: ['content', 'secondaryButton'] },
   { name: 'minimal', includes: ['content'] },
-  { name: 'danger', extra: { kind: { value: 'danger' } } },
+  {
+    name: 'danger',
+    extra: { kind: { group: 'attr', value: 'kind="danger"' } },
+  },
 ];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
