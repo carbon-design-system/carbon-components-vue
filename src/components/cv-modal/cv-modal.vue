@@ -5,7 +5,7 @@
     class="cv-modal bx--modal"
     :class="{
       'is-visible': dataVisible,
-      'bx--modal--danger': kind === 'danger'
+      'bx--modal--danger': kind === 'danger',
     }"
     tabindex="-1"
     @keydown.esc.prevent="hide"
@@ -19,13 +19,22 @@
           <slot name="title">Modal Title</slot>
         </h2>
         <button class="bx--modal-close" type="button" @click="hide" ref="close">
-          <cv-icon class="bx--modal-close__icon" href="cv(icon--close)" height="10px" width="10px"></cv-icon>
+          <cv-icon
+            class="bx--modal-close__icon"
+            href="cv(icon--close)"
+            height="10px"
+            width="10px"
+          ></cv-icon>
         </button>
       </div>
 
       <div class="bx--modal-content">
         <slot name="content">
-          <p>Passive modal notifications should only appear if there is an action the user needs to address immediately. Passive modal notifications are persistent on the screen.</p>
+          <p>
+            Passive modal notifications should only appear if there is an action
+            the user needs to address immediately. Passive modal notifications
+            are persistent on the screen.
+          </p>
         </slot>
       </div>
 
@@ -77,6 +86,7 @@ export default {
     };
   },
   mounted() {
+    console.warn(`CVModal API under review`);
     if (this.visible) {
       this.show();
     }
@@ -148,5 +158,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

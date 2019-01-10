@@ -1,7 +1,13 @@
 <template>
   <div class="cv-checkbox bx--form-item bx--checkbox-wrapper">
     <label
-      :class="['bx--checkbox-label', {'bx--label--disabled': $attrs.disabled !== undefined}]"
+      :class="[
+        'bx--checkbox-label',
+        {
+          'bx--label--disabled':
+            $attrs.disabled !== undefined && $attrs.disabled,
+        },
+      ]"
       :data-contained-checkbox-state="isChecked"
     >
       <input
@@ -13,8 +19,9 @@
         :checked="isChecked === true"
         :aria-checked="`${isChecked}`"
         @change="onChange"
-      >
-      {{label}}
+        :value="value"
+      />
+      {{ label }}
     </label>
   </div>
 </template>
@@ -38,5 +45,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

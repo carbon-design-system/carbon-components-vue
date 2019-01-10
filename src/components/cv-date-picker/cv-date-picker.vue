@@ -4,11 +4,13 @@
       :data-date-picker="['single', 'range'].includes(kind)"
       :data-date-picker-type="kind"
       class="bx--date-picker"
-      :class="[kindClasses, {'bx--date-picker--light': theme==='light'}]"
+      :class="[kindClasses, { 'bx--date-picker--light': theme === 'light' }]"
       ref="date-picker"
     >
       <div
-        :class="{'bx--date-picker-container': ['single', 'range'].includes(kind)}"
+        :class="{
+          'bx--date-picker-container': ['single', 'range'].includes(kind),
+        }"
         @change="onSimpleChange"
       >
         <svg
@@ -25,7 +27,9 @@
             fill-rule="nonzero"
           ></path>
         </svg>
-        <label :for="`${uid}-input-1`" class="bx--label">{{getDateLabel}}</label>
+        <label :for="`${uid}-input-1`" class="bx--label">{{
+          getDateLabel
+        }}</label>
         <input
           :data-invalid="invalid"
           type="text"
@@ -36,11 +40,18 @@
           data-date-picker-input
           :data-date-picker-input-from="kind === 'range'"
           ref="date"
-        >
-        <div class="bx--form-requirement" v-if="invalid">{{invalidDateMessage}}</div>
+        />
+        <div class="bx--form-requirement" v-if="invalid">
+          {{ invalidDateMessage }}
+        </div>
       </div>
-      <div :class="{'bx--date-picker-container': kind === 'range'}" v-if="kind === 'range'">
-        <label :for="`${uid}-input-2`" class="bx--label">{{getDateEndLabel}}</label>
+      <div
+        :class="{ 'bx--date-picker-container': kind === 'range' }"
+        v-if="kind === 'range'"
+      >
+        <label :for="`${uid}-input-2`" class="bx--label">{{
+          getDateEndLabel
+        }}</label>
         <input
           type="text"
           :id="`${uid}-input-2`"
@@ -50,7 +61,7 @@
           data-date-picker-input
           :data-date-picker-input-to="kind === 'range'"
           ref="todate"
-        >
+        />
       </div>
       <svg
         v-if="kind === 'range'"
@@ -157,7 +168,14 @@ export default {
   methods: {
     onChange(ev) {
       // this.$emit('onChange', ev); // this is a property time
-      this.$emit('onChange', this.$refs.date.value);
+      if (this.kind === 'range') {
+        this.$emit('onChange', {
+          startDate: this.$refs.date.value,
+          endDate: this.$refs.todate.value,
+        });
+      } else {
+        this.$emit('onChange', this.$refs.date.value);
+      }
     },
     onSimpleChange(ev) {
       if (!['single', 'range'].includes(this.kind)) {
@@ -180,6 +198,6 @@ export default {
 
 <style lang="scss">
 .cv-date-picker {
-  display: inline-flex; // otherwise 100% width
+  display: inline-flex;
 }
 </style>

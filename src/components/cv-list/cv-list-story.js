@@ -1,9 +1,9 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean, selectV2 } from '@storybook/addon-knobs/vue';
+import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvListNotesMD from './cv-list-notes.md';
@@ -11,44 +11,37 @@ import CvList from './cv-list';
 
 const stories = storiesOf('CvList', module);
 stories.addDecorator(withKnobs);
+stories.addDecorator(withNotes);
 
-const kinds = null;
 const preKnobs = {
   ordered: {
     group: 'attr',
     type: boolean,
-    config: ['ordered', false, consts.CONFIG],
-    value: val => (val ? `\n ordered` : ''),
+    config: ['ordered', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: { name: 'ordered', type: Boolean },
   },
   nested: {
     group: 'nested',
-    type: boolean,
-    config: ['nested', false, consts.CONFIG],
-    value: val =>
-      val
-        ? `
-    <cv-list nested>
+    value: `<cv-list nested>
       <cv-list-item>nested item 1</cv-list-item>
       <cv-list-item>nested item 2</cv-list-item>
       <cv-list-item>nested item 3</cv-list-item>
     </cv-list>
-    `
-        : '',
-  },
-  otherAttributes: {
-    group: 'attr',
-    type: text,
-    config: ['other attributes', '', consts.OTHER],
-    value: val => (val.length ? `\n  ${val}` : ''),
+    `,
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [
+  { name: 'default', excludes: ['nested'] },
+  { name: 'nested' },
+];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvListNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
@@ -74,7 +67,11 @@ for (const story of storySet) {
       return {
         components: { CvList, SvTemplateView },
         template: templateViewString,
+        props: settings.props,
       };
-    })
+    },
+    {
+      notes: { markdown: CvListNotesMD },
+    }
   );
 }

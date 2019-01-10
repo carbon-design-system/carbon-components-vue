@@ -7,9 +7,7 @@
     :aria-hidden="!selected"
     :hidden="!selected"
   >
-    <slot>
-      <!-- Content for first tab goes here. -->
-    </slot>
+    <slot> <!-- Content for first tab goes here. --> </slot>
   </div>
 </template>
 
@@ -24,5 +22,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

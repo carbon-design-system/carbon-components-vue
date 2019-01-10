@@ -1,71 +1,104 @@
 import consts from './storybook-consts';
-import { selectV2 } from '@storybook/addon-knobs/vue';
+import { select } from '@storybook/addon-knobs/vue';
+import { withKnobsOptions } from '@storybook/addon-knobs';
 
-const parsePreKnobs = (kinds, preKnobs, kind) => {
+const parsePreKnobs = (preKnobs, includes, excludes, variantExtra) => {
   return () => {
-    const _knobs = { group: [], data: {}, raw: {} };
+    const knobs = { group: [], data: {}, raw: {}, props: {} };
+    const parsePreKnobs = (thePreNobs, override) => {
+      for (let key in thePreNobs) {
+        const preKnob = thePreNobs[key];
 
-    if (kind === undefined) {
-      if (kinds && kinds.options) {
-        const _kind = selectV2(
-          'kind',
-          kinds.options,
-          kinds.default,
-          consts.CONFIG
-        );
-        if (_kind.length) {
-          _knobs.kind = ` kind="${_kind}"`;
-        } else {
-          _knobs.kind = '';
+        if (!knobs.group[preKnob.group]) {
+          knobs.group[preKnob.group] = '';
+        }
+
+        if (!override) {
+          // do after creating blank group
+          if (excludes && excludes.includes(key)) {
+            continue; // skip this item
+          }
+
+          if (includes && !includes.includes(key)) {
+            continue; // skip this item
+          }
+        }
+
+        let thingType; // What type of thing is it.
+        if (preKnob.prop) {
+          thingType = 'prop';
+        }
+        if (preKnob.sync) {
+          thingType = 'sync';
+        }
+        if (!thingType && preKnob.slot) {
+          thingType = 'slot';
+        }
+
+        // if (!(preKnob.component[thingType].default !== undefined && minimal)) {
+        let prefix = preKnob.inline ? ' ' : '\n  ';
+        let value;
+
+        switch (thingType) {
+          case 'sync':
+            knobs.group[preKnob.group] += `${prefix}:${
+              preKnob.sync.name
+            }.sync="${key}"`;
+
+            value = preKnob.sync.value ? preKnob.sync.value : val => val;
+
+            knobs.data[key] = value(preKnob.type(...preKnob.config));
+            break;
+          case 'prop':
+            knobs.group[preKnob.group] += `${prefix}:${
+              preKnob.prop.name
+            }="${key}"`;
+
+            value = preKnob.prop.value ? preKnob.prop.value : val => val;
+
+            knobs.props[key] = {
+              type: preKnob.prop.type,
+              default: value(preKnob.type(...preKnob.config)),
+            };
+            break;
+          case 'slot':
+            if (preKnob.slot.name && preKnob.slot.name.length) {
+              knobs.group[preKnob.group] += `${prefix}<template slot="${
+                preKnob.slot.name
+              }">${preKnob.slot.value}</template>`;
+            } else {
+              knobs.group[preKnob.group] += `${prefix}${preKnob.slot.value}`;
+            }
+            break;
+          default:
+            knobs.group[preKnob.group] += `${prefix}${preKnob.value}`;
+            break;
         }
       }
-    } else {
-      if (kind.length) {
-        _knobs.kind = `  kind="${kind}"`;
-      } else {
-        _knobs.kind = '';
-      }
+    };
+
+    if (variantExtra) {
+      parsePreKnobs(variantExtra, true);
     }
+    parsePreKnobs(preKnobs);
 
-    const dotSync = preKnobs.dotSync;
-    const doDotSync = dotSync ? dotSync.type(...dotSync.config) : false;
-
-    for (let key in preKnobs) {
-      const _preKnob = preKnobs[key];
-
-      if (!_knobs.group[_preKnob.group]) {
-        _knobs.group[_preKnob.group] = '';
-      }
-
-      const val = _preKnob.type(..._preKnob.config);
-      if (_preKnob.group.length && _preKnob.key !== 'dotSync') {
-        if (_preKnob.value) {
-          _knobs.group[_preKnob.group] += _preKnob.value(val, doDotSync);
-        } else {
-          _knobs.group[_preKnob.group] += val;
-        }
-      }
-      _knobs.raw[key] = val;
-
-      if (_preKnob.data) {
-        _preKnob.data(_knobs.data, key, val);
-      }
-    }
-
-    return _knobs;
+    return knobs;
   };
 };
 
-const getStorySet = (kinds, preKnobs) => {
-  const storySet = [{ name: 'All', knobs: parsePreKnobs(kinds, preKnobs) }];
+const getStorySet = (variants, preKnobs) => {
+  let storySet = [];
 
-  if (kinds && kinds.options) {
-    for (const key in kinds.options) {
-      storySet.push({
-        name: key,
-        knobs: parsePreKnobs(kinds, preKnobs, kinds.options[key]),
-      });
-    }
+  for (let index in variants) {
+    storySet.push({
+      name: variants[index].name,
+      knobs: parsePreKnobs(
+        preKnobs,
+        variants[index].includes,
+        variants[index].excludes,
+        variants[index].extra
+      ),
+    });
   }
   return storySet;
 };

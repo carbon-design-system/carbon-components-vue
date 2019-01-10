@@ -1,9 +1,9 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text } from '@storybook/addon-knobs/vue';
+import { withKnobs, text } from '@storybook/addon-knobs';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvTagNotesMD from './cv-tag-notes.md';
@@ -11,50 +11,64 @@ import CvTag from './cv-tag';
 
 const stories = storiesOf('CvTag', module);
 stories.addDecorator(withKnobs);
-
-const kinds = {
-  options: {
-    IBM: 'ibm',
-    Beta: 'beta',
-    'Third-party': 'third-party',
-    Local: 'local',
-    Dedicated: 'dedicated',
-    Custom: 'custom',
-    Experimental: 'experimental',
-    Community: 'community',
-    Private: 'private',
-    Deprecated: 'deprecated',
-  },
-  default: 'ibm',
-};
+stories.addDecorator(withNotes);
 
 const preKnobs = {
   label: {
     group: 'attr',
     type: text,
-    config: ['Tag label', 'I ama a tag', consts.CONTENT],
-    value: val => `\n  label="${val}"`,
-  },
-  otherAttributes: {
-    group: 'attr',
-    type: text,
-    config: ['other attributes', '', consts.OTHER],
-    value: val => (val.length ? `\n  ${val}` : ''),
+    config: ['Tag label', 'I am a tag'], // consts.CONTENT],
+    prop: { name: 'label', type: String },
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [
+  { name: 'default', extra: { kind: { group: 'attr', value: 'kind="ibm"' } } },
+  { name: 'IBM', extra: { kind: { group: 'attr', value: 'kind="ibm"' } } },
+  { name: 'beta', extra: { kind: { group: 'attr', value: 'kind="beta"' } } },
+  {
+    name: 'third party',
+    extra: { kind: { group: 'attr', value: 'kind="third-party"' } },
+  },
+  { name: 'local', extra: { kind: { group: 'attr', value: 'kind="local"' } } },
+  {
+    name: 'dedicated',
+    extra: { kind: { group: 'attr', value: 'kind="dedicated"' } },
+  },
+  {
+    name: 'custom',
+    extra: { kind: { group: 'attr', value: 'kind="custom"' } },
+  },
+  {
+    name: 'experimental',
+    extra: { kind: { group: 'attr', value: 'kind="experimental"' } },
+  },
+  {
+    name: 'community',
+    extra: { kind: { group: 'attr', value: 'kind="community"' } },
+  },
+  {
+    name: 'private',
+    extra: { kind: { group: 'attr', value: 'kind="private"' } },
+  },
+  {
+    name: 'deprecated',
+    extra: { kind: { group: 'attr', value: 'kind="deprecated"' } },
+  },
+];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvTagNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
 
       const templateString = `
-<cv-tag${settings.kind}${settings.group.attr}></cv-tag>
+<cv-tag${settings.group.attr}></cv-tag>
   `;
 
       // ----------------------------------------------------------------
@@ -70,7 +84,11 @@ for (const story of storySet) {
       return {
         components: { CvTag, SvTemplateView },
         template: templateViewString,
+        props: settings.props,
       };
-    })
+    },
+    {
+      notes: { markdown: CvTagNotesMD },
+    }
   );
 }

@@ -23,7 +23,7 @@
 
   mounted() {
   // no need to declare first
-  this.carbonComponent = ContentSwitcher.create(this.$el);
+  this.carbonComponent = ContentSwitcher.create(this.\$el);
   },
   beforeDestroy() {
   this.carbonComponent.release();

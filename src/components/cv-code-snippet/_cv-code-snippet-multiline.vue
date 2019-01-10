@@ -1,7 +1,7 @@
 <template>
   <div
     class="cv-code-snippet-multiline bx--snippet bx--snippet--multi"
-    :class="{'bx--snippet--expand': expanded}"
+    :class="{ 'bx--snippet--expand': expanded }"
     data-code-snippet
   >
     <div class="bx--snippet-container" aria-label="Code Snippet Text">
@@ -9,7 +9,11 @@
         <slot></slot>
       </pre>
     </div>
-    <cv-feedback-button feedback="Copied!" aria-label="Copy code" @click="$emit('copy-code')">
+    <cv-feedback-button
+      feedback="Copied!"
+      aria-label="Copy code"
+      @click="$emit('copy-code')"
+    >
       <svg
         class="bx--snippet__icon"
         xmlns="http://www.w3.org/2000/svg"
@@ -24,8 +28,13 @@
       </svg>
     </cv-feedback-button>
 
-    <cv-button kind="ghost" small class="bx--snippet-btn--expand" @click="toggleExpand">
-      <span class="bx--snippet-btn--text">{{expandButtonText}}</span>
+    <cv-button
+      kind="ghost"
+      small
+      class="bx--snippet-btn--expand"
+      @click="toggleExpand"
+    >
+      <span class="bx--snippet-btn--text">{{ expandButtonText }}</span>
       <svg
         class="bx--icon-chevron--down"
         width="12"
@@ -34,7 +43,10 @@
         aria-label="Show more icon"
       >
         <title>Show more icon</title>
-        <path fill-rule="nonzero" d="M6.002 5.55L11.27 0l.726.685L6.003 7 0 .685.726 0z"></path>
+        <path
+          fill-rule="nonzero"
+          d="M6.002 5.55L11.27 0l.726.685L6.003 7 0 .685.726 0z"
+        ></path>
       </svg>
     </cv-button>
   </div>

@@ -7,10 +7,7 @@ http://www.carbondesignsystem.com/components/button/code
 ## Usage
 
 ```html
-<cv-button
-  kind="secondary"
-  icon-href="cv(icon--add)"
-  @click="actionClick">
+<cv-button kind="secondary" icon-href="cv(icon--add)" @click="actionClick">
   Hello I am a button
 </cv-button>
 ```

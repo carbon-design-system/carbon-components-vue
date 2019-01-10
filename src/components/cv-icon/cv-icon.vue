@@ -1,7 +1,5 @@
 <template>
-  <svg class="cv-icon">
-    <use v-bind:xlink:href="iconHref"></use>
-  </svg>
+  <svg class="cv-icon"><use v-bind:xlink:href="iconHref"></use></svg>
 </template>
 
 <script>

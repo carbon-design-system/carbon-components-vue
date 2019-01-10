@@ -1,10 +1,10 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs/vue';
+import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvButtonNotesMD from './cv-button-notes.md';
@@ -13,71 +13,78 @@ import CvIcon from '../cv-icon/cv-icon';
 
 const stories = storiesOf('CvButton', module);
 stories.addDecorator(withKnobs);
-
-const kinds = {
-  options: {
-    Default: '',
-    primary: 'primary',
-    secondary: 'secondary',
-    tertiary: 'tertiary',
-    ghost: 'ghost',
-    danger: 'danger',
-    'danger-primary': 'danger--primary',
-  },
-  default: '',
-};
+stories.addDecorator(withNotes);
 
 const preKnobs = {
   small: {
     group: 'attr',
     type: boolean,
-    config: ['small', false, consts.CONFIG],
-    value: val => (val ? '\n  small' : ''),
-  },
-  slotContent: {
-    group: 'slot',
-    type: text,
-    config: [
-      'slot:content',
-      'I am a button <cv-icon href="cv(icon--add)" class="bx--btn__icon"></cv-icon>',
-      consts.CONTENT,
-    ],
+    config: ['small', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      name: 'small',
+      type: Boolean,
+    },
   },
   disabled: {
     group: 'attr',
     type: boolean,
-    config: ['disabled', false, consts.CONFIG],
-    value: val => (val ? '\n  disabled' : ''),
+    config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      name: 'disabled',
+      type: Boolean,
+    },
   },
   events: {
     group: 'attr',
-    type: boolean,
-    config: ['with events', false, consts.OTHER],
-    value: val =>
-      val
-        ? `
-  @click="actionClick"`
-        : '',
+    value: `@click="actionClick"`,
   },
-  otherAttributes: {
-    group: 'attr',
-    type: text,
-    config: ['other attributes', '', consts.OTHER],
-    value: val => (val.length ? `\n  ${val}` : ''),
+  content: {
+    group: 'slots',
+    slot: {
+      name: '',
+      value:
+        'I am a button <cv-icon href="cv(icon--add)" class="bx--btn__icon"></cv-icon>',
+    },
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [
+  { name: 'default' },
+  { name: 'minimal', excludes: ['small', 'disabled'] },
+  {
+    name: 'primary',
+    extra: { kind: { group: 'attr', value: 'kind="primary"' } },
+  },
+  {
+    name: 'secondary',
+    extra: { kind: { group: 'attr', value: 'kind="secondary"' } },
+  },
+  {
+    name: 'tertiary',
+    extra: { kind: { group: 'attr', value: 'kind="tertiary"' } },
+  },
+  { name: 'ghost', extra: { kind: { group: 'attr', value: 'kind="ghost"' } } },
+  {
+    name: 'danger',
+    extra: { kind: { group: 'attr', value: 'kind="danger"' } },
+  },
+  {
+    name: 'danger-primary',
+    extra: { kind: { group: 'attr', value: 'kind="danger--primary"' } },
+  },
+];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvButtonNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       const templateString = `
-<cv-button${settings.kind}${settings.group.attr}>
-  ${settings.group.slot}
+<cv-button${settings.group.attr}>
+  ${settings.group.slots}
 </cv-button>
     `;
       // console.log(templateString);
@@ -98,7 +105,11 @@ for (const story of storySet) {
           actionClick: action('Cv Button - click'),
         },
         template: templateViewString,
+        props: settings.props,
       };
-    })
+    },
+    {
+      notes: { markdown: CvButtonNotesMD },
+    }
   );
 }

@@ -1,10 +1,10 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, selectV2, boolean } from '@storybook/addon-knobs/vue';
+import { withKnobs, text, select, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvContentSwitcherNotesMD from './cv-content-switcher-notes.md';
@@ -13,62 +13,53 @@ import CvContentSwitcherButton from './cv-content-switcher-button';
 
 const stories = storiesOf('CvContentSwitcher', module);
 stories.addDecorator(withKnobs);
-
-const kinds = null;
+stories.addDecorator(withNotes);
 
 const preKnobs = {
   initialSelected: {
-    group: '',
-    type: selectV2,
+    group: 'other',
+    type: select,
     config: [
       'Initiallly selected',
       {
-        'Button Name 1': '0',
-        'Button Name 2': '1',
-        'Button Name 3': '2',
+        'Button Name 1': 0,
+        'Button Name 2': 1,
+        'Button Name 3': 2,
       },
-      '0',
-      consts.CONFIG,
+      0,
+      // consts.CONFIG, // fails when used with number in storybook 4.1.4
     ],
+    prop: {
+      name: 'selected',
+      type: Number,
+    },
   },
   events: {
     group: 'attr',
-    type: boolean,
-    config: ['with events', false, consts.OTHER],
-    value: val =>
-      val
-        ? `
-  @selected="actionSelected"`
-        : '',
-  },
-  otherAttributes: {
-    group: 'attr',
-    type: text,
-    config: ['other attributes', '', consts.OTHER],
-    value: val => (val.length ? `\n  ${val}` : ''),
+    value: `@selected="actionSelected"`,
+    inline: true,
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [
+  { name: 'default', excludes: ['events'] },
+  { name: 'events' },
+];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvContentSwitcherNotesMD)(() => {
+    () => {
       const settings = story.knobs();
       // ----------------------------------------------------------------
 
       const templateString = `
   <cv-content-switcher${settings.group.attr}>
-    <cv-content-switcher-button content-selector=".content-1" ${
-      settings.raw.initialSelected === '0' ? ' selected' : ''
-    }>Button Name 1</cv-content-switcher-button>
-    <cv-content-switcher-button content-selector=".content-2" ${
-      settings.raw.initialSelected === '1' ? ' selected' : ''
-    }>Button Name 2</cv-content-switcher-button>
-    <cv-content-switcher-button content-selector=".content-3" ${
-      settings.raw.initialSelected === '2' ? ' selected' : ''
-    }>Button Name 3</cv-content-switcher-button>
+    <cv-content-switcher-button content-selector=".content-1" :selected="isSelected(0)">Button Name 1</cv-content-switcher-button>
+    <cv-content-switcher-button content-selector=".content-2" :selected="isSelected(1)">Button Name 2</cv-content-switcher-button>
+    <cv-content-switcher-button content-selector=".content-3" :selected="isSelected(2)">Button Name 3</cv-content-switcher-button>
   </cv-content-switcher>
 
   <section style="margin: 10px 0;">
@@ -103,11 +94,20 @@ for (const story of storySet) {
           CvContentSwitcherButton,
           SvTemplateView,
         },
+        props: settings.props,
+        computed: {
+          isSelected() {
+            return index => this.initialSelected === index;
+          },
+        },
         methods: {
           actionSelected: action('Cv Content Switcher - selected'),
         },
         template: templateViewString,
       };
-    })
+    },
+    {
+      notes: { markdown: CvContentSwitcherNotesMD },
+    }
   );
 }

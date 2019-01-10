@@ -8,11 +8,15 @@
     :aria-live="!isAlert ? 'polite' : false"
   >
     <div class="bx--toast-notification__details">
-      <h3 class="bx--toast-notification__title">{{title}}</h3>
-      <p class="bx--toast-notification__subtitle">{{subTitle}}</p>
-      <p class="bx--toast-notification__caption">{{caption}}</p>
+      <h3 class="bx--toast-notification__title">{{ title }}</h3>
+      <p class="bx--toast-notification__subtitle">{{ subTitle }}</p>
+      <p class="bx--toast-notification__caption">{{ caption }}</p>
     </div>
-    <button data-notification-btn class="bx--toast-notification__close-button" type="button">
+    <button
+      data-notification-btn
+      class="bx--toast-notification__close-button"
+      type="button"
+    >
       <svg
         class="bx--toast-notification-icon"
         aria-label="close"
@@ -47,5 +51,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

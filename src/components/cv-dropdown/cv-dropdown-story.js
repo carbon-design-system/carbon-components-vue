@@ -1,36 +1,42 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs/vue';
+import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvDropdownNotesMD from './cv-dropdown-notes.md';
 import CvDropdown from './cv-dropdown';
-import { selectV2 } from '@storybook/addon-knobs/dist/vue';
 
 const stories = storiesOf('CvDropdown', module);
 stories.addDecorator(withKnobs);
+stories.addDecorator(withNotes);
 
-const kinds = null;
 const preKnobs = {
-  light: {
+  theme: {
     group: 'attr',
     type: boolean,
-    config: ['light-theme', false, consts.CONFIG],
-    value: val => (val ? '\n  theme="light"' : ''),
+    config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: String,
+      name: 'theme',
+      value: val => (val ? 'light' : ''),
+    },
   },
   placeholder: {
     group: 'attr',
     type: text,
-    config: ['Placeholder', 'Choose an option', consts.CONFIG],
-    value: val => (val.length ? `\n  placeholder="${val}"` : ''),
+    config: ['placeholder', 'Choose an option'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: String,
+      name: 'placeholder',
+    },
   },
   value: {
     group: 'attr',
-    type: selectV2,
+    type: select,
     config: [
       'value',
       {
@@ -42,47 +48,44 @@ const preKnobs = {
         'Value 50': '50',
       },
       '',
-      consts.CONTENT,
+      // consts.CONTENT, // fails when used with number in storybook 4.1.4
     ],
-    value: val => `\n  :value="value"`,
-    data: (obj, key, val) => (obj[key] = val),
+    prop: {
+      name: 'value',
+      type: String,
+    },
   },
   up: {
     group: 'attr',
     type: boolean,
-    config: ['up', false, consts.CONFIG],
-    value: val => (val ? '\n  up' : ''),
+    config: ['up', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      name: 'up',
+      type: Boolean,
+    },
   },
   vModel: {
     group: 'attr',
-    type: boolean,
-    config: ['v-model', false, consts.OTHER],
-    value: val => (val ? '\n  v-model="value" ' : ''),
+    value: `v-model="modelValue"`,
   },
   events: {
     group: 'attr',
-    type: boolean,
-    config: ['with events', false, consts.OTHER],
-    value: val =>
-      val
-        ? `
-  @change="actionChange"`
-        : '',
-  },
-  otherAttributes: {
-    group: 'attr',
-    type: text,
-    config: ['other attributes', '', consts.OTHER],
-    value: val => (val.length ? `\n  ${val}` : ''),
+    value: `@change="actionChange"`,
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [
+  { name: 'default', excludes: ['vModel', 'events'] },
+  { name: 'minimal', includes: ['value'] },
+  { name: 'events', includes: ['value', 'events'] },
+  { name: 'vModel', includes: ['value', 'vModel'] },
+];
 
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvDropdownNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       const templateString = `
@@ -99,13 +102,13 @@ for (const story of storySet) {
       const templateViewString = `
   <sv-template-view
     sv-margin
-    :sv-alt-back="!light"
+    :sv-alt-back="this.$options.propsData.theme !== 'light'"
     sv-source='${templateString.trim()}'>
     <template slot="component">${templateString}</template>
     <template slot="other">
-      <div v-if="showVModel">
+      <div v-if="${templateString.indexOf('v-model') > 0}">
         <span>V-Model value</span>
-          <select v-model="value" >
+          <select v-model="modelValue" >
             <option value="10">10</option>
             <option value="20">20</option>
             <option value="30">30</option>
@@ -123,11 +126,10 @@ for (const story of storySet) {
           CvDropdown,
           SvTemplateView,
         },
+        props: settings.props,
         data() {
           return {
-            light: settings.raw.light,
-            showVModel: settings.raw.vModel,
-            value: settings.data.value,
+            modelValue: this.value,
           };
         },
         methods: {
@@ -135,6 +137,9 @@ for (const story of storySet) {
         },
         template: templateViewString,
       };
-    })
+    },
+    {
+      notes: { markdown: CvDropdownNotesMD },
+    }
   );
 }

@@ -7,20 +7,44 @@ http://www.carbondesignsystem.com/components/tabs/code
 ## Usage
 
 ```html
-<cv-tabs @tab-selected="actionSelected" @tab-beingselected="actionBeingSelected">
-  <cv-tabs-button id="tabs-button-1" content-selector="#tabs-panel-1" tabs-panel-id="tabs-panel-5" selected>
+<cv-tabs
+  @tab-selected="actionSelected"
+  @tab-beingselected="actionBeingSelected"
+>
+  <cv-tabs-button
+    id="tabs-button-1"
+    content-selector="#tabs-panel-1"
+    tabs-panel-id="tabs-panel-5"
+    selected
+  >
     Tab label 1
   </cv-tabs-button>
-  <cv-tabs-button id="tabs-button-2" content-selector="#tabs-panel-2" tabs-panel-id="tabs-panel-2">
+  <cv-tabs-button
+    id="tabs-button-2"
+    content-selector="#tabs-panel-2"
+    tabs-panel-id="tabs-panel-2"
+  >
     Tab label 2
   </cv-tabs-button>
-  <cv-tabs-button id="tabs-button-3" content-selector="#tabs-panel-3" tabs-panel-id="tabs-panel-3">
+  <cv-tabs-button
+    id="tabs-button-3"
+    content-selector="#tabs-panel-3"
+    tabs-panel-id="tabs-panel-3"
+  >
     Tab label 3
   </cv-tabs-button>
-  <cv-tabs-button id="tabs-button-4" content-selector="#tabs-panel-4" tabs-panel-id="tabs-panel-4">
+  <cv-tabs-button
+    id="tabs-button-4"
+    content-selector="#tabs-panel-4"
+    tabs-panel-id="tabs-panel-4"
+  >
     Tab label 4
   </cv-tabs-button>
-  <cv-tabs-button id="tabs-button-5" content-selector="#tabs-panel-5" tabs-panel-id="tabs-panel-5">
+  <cv-tabs-button
+    id="tabs-button-5"
+    content-selector="#tabs-panel-5"
+    tabs-panel-id="tabs-panel-5"
+  >
     Tab label 5
   </cv-tabs-button>
 </cv-tabs>

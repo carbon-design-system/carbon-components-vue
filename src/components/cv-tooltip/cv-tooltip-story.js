@@ -1,9 +1,10 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, selectV2 } from '@storybook/addon-knobs/vue';
+import { withKnobs, text, select } from '@storybook/addon-knobs';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
+import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvTooltipNotesMD from './cv-tooltip-notes.md';
 import CvInteractiveTooltip from './cv-interactive-tooltip';
@@ -11,63 +12,82 @@ import CvTooltip from './cv-tooltip';
 import CvDefinitionTooltip from './cv-definition-tooltip';
 
 const stories = storiesOf('CvTooltip', module);
-stories.addDecorator(withKnobs);
+stories.addDecorator(withKnobs).addDecorator(withNotes);
 
-/* ----------------------------------------------------- */
-stories.add(
-  'Interactive tooltip',
-  withNotes(CvTooltipNotesMD)(() => {
-    const settings = {
-      direction: selectV2(
-        'direction',
-        {
-          Top: 'top',
-          Right: 'right',
-          Bottom: 'bottom',
-          Left: 'left',
-        },
-        'bottom',
-        consts.CONFIG
-      ),
+let preKnobs = {
+  direction: {
+    group: 'attr',
+    type: select,
+    config: [
+      'direction',
+      {
+        Top: 'top',
+        Right: 'right',
+        Bottom: 'bottom',
+        Left: 'left',
+      },
+      'bottom',
+      // consts.CONFIG,// fails when used with number in storybook 4.1.4
+    ],
+    inline: true,
+    prop: {
+      type: String,
+      name: 'direction',
+    },
+  },
+  label: {
+    group: 'content',
+    slot: {
+      name: 'label',
+      value: `
+    Tooltip label
+  `,
+    },
+  },
+  trigger: {
+    group: 'content',
+    slot: {
+      name: 'trigger',
+      value: `<svg width="16" height="12" viewBox="0 0 16 12">
+      <path d="M8.05 2a2.5 2.5 0 0 1 4.9 0H16v1h-3.05a2.5 2.5 0 0 1-4.9 0H0V2h8.05zm2.45 2a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM3.05 9a2.5 2.5 0 0 1 4.9 0H16v1H7.95a2.5 2.5 0 0 1-4.9 0H0V9h3.05zm2.45 2a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+    </svg>
+  `,
+    },
+  },
+  content: {
+    group: 'content',
+    slot: {
+      name: 'content',
+      value: `
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, seed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <button class="bx--button">Clicky one</button>
+  `,
+    },
+  },
+};
 
-      label: text('slot:label', 'Tooltip label', consts.CONTENT),
-      trigger: text('slot:trigger', '', consts.CONTENT),
-      content: text(
-        'slot:content',
-        `
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, seed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <button class="bx--button">Clicky one</button>
-        `,
-        consts.CONTENT
-      ),
-      otherAttributes: text('other attributes', '', consts.OTHER),
-    };
+const variants = [
+  { name: 'default' },
+  { name: 'minimal', includes: ['content', 'definition', 'term', 'tip'] },
+];
 
-    settings.label = settings.label.length
-      ? `\n  <template slot="label">${settings.label}</template>`
-      : '';
-    settings.trigger = settings.trigger.length
-      ? `\n  <template slot="trigger">${settings.trigger}</template>`
-      : '';
-    settings.content = settings.content.length
-      ? `\n  <template slot="content">${settings.content}</template>`
-      : '';
-    settings.otherAttributes = settings.otherAttributes
-      ? `\n  ${settings.otherAttributes}`
-      : '';
+let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-    // ----------------------------------------------------------------
+for (const story of storySet) {
+  stories.add(
+    story.name + ' (Interactive tootlip)',
+    () => {
+      const settings = story.knobs();
 
-    const templateString = `
-<cv-interactive-tooltip${settings.otherAttributes}
-  direction="${settings.direction}"
-  >${settings.label}${settings.term}${settings.content}
+      // ----------------------------------------------------------------
+
+      const templateString = `
+<cv-interactive-tooltip${settings.group.attr}>${settings.group.content}
 </cv-interactive-tooltip>
   `;
+      // ----------------------------------------------------------------
 
-    // ----------------------------------------------------------------
-
-    const templateViewString = `
+      const templateViewString = `
     <sv-template-view
       sv-margin
       sv-source='${templateString.trim()}'>
@@ -79,69 +99,85 @@ stories.add(
     </sv-template-view>
   `;
 
-    return {
-      components: { CvInteractiveTooltip, SvTemplateView },
-      template: templateViewString,
-      methods: {
-        show() {
-          this.$children[0].$children[0].show();
+      return {
+        components: { CvInteractiveTooltip, SvTemplateView },
+        template: templateViewString,
+        props: settings.props,
+        methods: {
+          show() {
+            this.$children[0].$children[0].show();
+          },
+          hide() {
+            this.$children[0].$children[0].hide();
+          },
         },
-        hide() {
-          this.$children[0].$children[0].hide();
-        },
+      };
+    },
+    {
+      notes: { markdown: CvTooltipNotesMD },
+    }
+  );
+}
+
+// /* ----------------------------------------------------- */
+
+preKnobs = {
+  direction: {
+    group: 'attr',
+    type: select,
+    config: [
+      'direction',
+      {
+        Top: 'top',
+        Bottom: 'bottom',
       },
-    };
-  })
-);
-
-/* ----------------------------------------------------- */
-stories.add(
-  'Tooltip',
-  withNotes(CvTooltipNotesMD)(() => {
-    const settings = {
-      direction: selectV2(
-        'direction',
-        {
-          Top: 'top',
-          Bottom: 'bottom',
-        },
-        'bottom',
-        consts.CONFIG
-      ),
-
-      tip: text('tip', 'This is your tip!', consts.CONTENT),
-      trigger: text(
-        'slot:trigger',
-        `
-<svg width="16" height="12" viewBox="0 0 16 12">
+      'bottom',
+      // consts.CONFIG,// fails when used with number in storybook 4.1.4
+    ],
+    inline: true,
+    prop: {
+      component: CvTooltip,
+      name: 'direction',
+    },
+  },
+  tip: {
+    group: 'attr',
+    type: text,
+    config: ['tip', 'This is your tip!'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    inline: true,
+    prop: {
+      component: CvTooltip,
+      name: 'tip',
+    },
+  },
+  trigger: {
+    group: 'content',
+    slot: {
+      value: `<svg width="16" height="12" viewBox="0 0 16 12">
   <path d="M8.05 2a2.5 2.5 0 0 1 4.9 0H16v1h-3.05a2.5 2.5 0 0 1-4.9 0H0V2h8.05zm2.45 2a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM3.05 9a2.5 2.5 0 0 1 4.9 0H16v1H7.95a2.5 2.5 0 0 1-4.9 0H0V9h3.05zm2.45 2a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
-</svg>
-`,
-        consts.CONTENT
-      ),
-      otherAttributes: text('other attributes', '', consts.OTHER),
-    };
+</svg>`,
+    },
+  },
+};
 
-    settings.tip = settings.tip.length ? `\n  tip="${settings.tip}"` : '';
-    settings.trigger = settings.trigger.length
-      ? `\n  <template>${settings.trigger}</template>`
-      : '';
-    settings.otherAttributes = settings.otherAttributes
-      ? `\n  ${settings.otherAttributes}`
-      : '';
+storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-    // ----------------------------------------------------------------
+for (const story of storySet) {
+  stories.add(
+    story.name + ' (Tootlip)',
+    () => {
+      const settings = story.knobs();
 
-    const templateString = `
-<cv-tooltip${settings.otherAttributes}
-  direction="${settings.direction}"${settings.tip}
-  >${settings.trigger}
+      // ----------------------------------------------------------------
+
+      const templateString = `
+<cv-tooltip${settings.group.attr}>${settings.group.content}
 </cv-tooltip>
   `;
 
-    // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-    const templateViewString = `
+      const templateViewString = `
     <sv-template-view
       sv-margin
       sv-source='${templateString.trim()}'>
@@ -149,57 +185,82 @@ stories.add(
     </sv-template-view>
   `;
 
-    return {
-      components: { CvDefinitionTooltip, SvTemplateView },
-      template: templateViewString,
-    };
-  })
-);
+      return {
+        components: { CvDefinitionTooltip, SvTemplateView },
+        template: templateViewString,
+        props: settings.props,
+      };
+    },
+    {
+      notes: { markdown: CvTooltipNotesMD },
+    }
+  );
+}
 
-/* ----------------------------------------------------- */
-stories.add(
-  'Definition tooltip',
-  withNotes(CvTooltipNotesMD)(() => {
-    const settings = {
-      direction: selectV2(
-        'direction',
-        {
-          Top: 'top',
-          Bottom: 'bottom',
-        },
-        'bottom',
-        consts.CONFIG
-      ),
+// /* ----------------------------------------------------- */
 
-      definition: text(
-        'definition',
-        'Brief description of the dotted, underlined term.',
-        consts.CONTENT
-      ),
-      term: text('term', `Definition tooltip`, consts.CONTENT),
-      otherAttributes: text('other attributes', '', consts.OTHER),
-    };
+preKnobs = {
+  direction: {
+    group: 'attr',
+    type: select,
+    config: [
+      'direction',
+      {
+        Top: 'top',
+        Bottom: 'bottom',
+      },
+      'bottom',
+      // consts.CONFIG,// fails when used with number in storybook 4.1.4
+    ],
+    inline: true,
+    prop: {
+      type: String,
+      name: 'direction',
+    },
+  },
+  definition: {
+    group: 'attr',
+    type: text,
+    config: [
+      'definition',
+      'Brief description of the dotted, underlined term',
+      // consts.CONTENT,// fails when used with number in storybook 4.1.4
+    ],
+    inline: true,
+    prop: {
+      type: String,
+      name: 'definition',
+    },
+  },
+  term: {
+    group: 'attr',
+    type: text,
+    config: ['term', 'A term needeing definition'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    inline: true,
+    prop: {
+      component: CvDefinitionTooltip,
+      name: 'term',
+    },
+  },
+};
 
-    settings.definition = settings.definition.length
-      ? `\n  definition="${settings.definition}"`
-      : '';
-    settings.term = settings.term.length ? `\n  term="${settings.term}"` : '';
-    settings.otherAttributes = settings.otherAttributes
-      ? `\n  ${settings.otherAttributes}`
-      : '';
+storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-    // ----------------------------------------------------------------
+for (const story of storySet) {
+  stories.add(
+    story.name + ' (Definition Tootlip)',
+    () => {
+      const settings = story.knobs(); // stories.add(
 
-    const templateString = `
-<cv-definition-tooltip${settings.otherAttributes}
-  direction="${settings.direction}"${settings.definition}${settings.term}
-  >
-</cv-definition-tooltip>
+      // ----------------------------------------------------------------
+
+      const templateString = `
+<cv-definition-tooltip${settings.group.attr} />
   `;
 
-    // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-    const templateViewString = `
+      const templateViewString = `
     <sv-template-view
       sv-margin
       sv-source='${templateString.trim()}'>
@@ -207,9 +268,14 @@ stories.add(
     </sv-template-view>
   `;
 
-    return {
-      components: { CvTooltip, SvTemplateView },
-      template: templateViewString,
-    };
-  })
-);
+      return {
+        components: { CvDefinitionTooltip, SvTemplateView },
+        template: templateViewString,
+        props: settings.props,
+      };
+    },
+    {
+      notes: { markdown: CvTooltipNotesMD },
+    }
+  );
+}

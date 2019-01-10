@@ -5,7 +5,7 @@
       class="bx--number"
       :class="{
         'bx--number--light': theme === 'light',
-        'bx--number--helpertext': $slots['helper-text']
+        'bx--number--helpertext': $slots['helper-text'],
       }"
       :data-invalid="invalid"
     >
@@ -21,8 +21,14 @@
           </svg>
         </button>
       </div>
-      <input :id="uid" type="number" :value="value" v-bind="$attrs" v-on="inputListeners">
-      <label :for="uid" class="bx--label">{{label}}</label>
+      <input
+        :id="uid"
+        type="number"
+        :value="value"
+        v-bind="$attrs"
+        v-on="inputListeners"
+      />
+      <label :for="uid" class="bx--label">{{ label }}</label>
       <div class="bx--form-requirement" v-if="$slots['invalid-message']">
         <slot name="invalid-message">Invalid number</slot>
       </div>
@@ -54,6 +60,7 @@ export default {
     inputListeners() {
       return Object.assign({}, this.$listeners, {
         input: event => this.$emit('input', event.target.value),
+        change: event => this.$emit('change', event.target.value),
       });
     },
   },
@@ -70,5 +77,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

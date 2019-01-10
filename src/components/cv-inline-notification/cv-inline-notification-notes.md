@@ -13,7 +13,7 @@ http://www.carbondesignsystem.com/components/notification/code
   sub-title="a subtitle"
   @notification-before-delete="actionBeforeDelete"
   @notification-after-delete="actionAfterDelete"
-  ></cv-inline-notification>
+></cv-inline-notification>
 ```
 
 ## Attributes

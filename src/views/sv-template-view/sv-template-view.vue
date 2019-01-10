@@ -1,16 +1,25 @@
 <template>
   <main
     class="sv-template-view"
-    :class="[{'sv-template-view--margin': svMargin, 'sv-template-view--alt-back': svAltBack}]"
+    :class="[
+      {
+        'sv-template-view--margin': svMargin,
+        'sv-template-view--alt-back': svAltBack,
+      },
+    ]"
   >
     <section class="sv-template-view__component">
-      <slot name="component"></slot>
-      <br>
+      <slot name="component"></slot> <br />
       <slot name="other"></slot>
     </section>
     <section class="sv-template-view__code">
+      <h2 class="sv-tempate-view__label">Sample code</h2>
       <pre v-highlightjs="svSource">
         <code class="html"></code>
+      </pre>
+      <h2 class="sv-tempate-view__label">Sample props</h2>
+      <pre v-highlightjs="propsJSON">
+        <code class="json"></code>
       </pre>
       <button
         @click="sourceToClipboard"
@@ -19,11 +28,17 @@
         ref="copyButton"
       >
         <svg width="18" height="24" viewBox="0 0 18 24" fill-rule="evenodd">
-          <path d="M13 5V0H0v19h5v5h13V5h-5zM2 17V2h9v3H5v12H2zm14 5H7V7h9v15z"></path>
+          <path
+            d="M13 5V0H0v19h5v5h13V5h-5zM2 17V2h9v3H5v12H2zm14 5H7V7h9v15z"
+          ></path>
           <path d="M9 9h5v2H9zM9 12h5v2H9zM9 15h3v2H9z"></path>
         </svg>
       </button>
-      <textarea class="sv-template-view__clippy" aria-hidden="true" ref="clippy"></textarea>
+      <textarea
+        class="sv-template-view__clippy"
+        aria-hidden="true"
+        ref="clippy"
+      ></textarea>
     </section>
   </main>
 </template>
@@ -36,6 +51,25 @@ export default {
     svMargin: { type: Boolean, default: true },
     svSource: String,
     svAltBack: Boolean,
+  },
+  data() {
+    return {
+      propsJSON: '',
+    };
+  },
+  mounted() {
+    this.propsJSON = JSON.stringify(
+      this.$vnode.context.$options.propsData,
+      null,
+      2
+    );
+  },
+  updated() {
+    this.propsJSON = JSON.stringify(
+      this.$vnode.context.$options.propsData,
+      null,
+      2
+    );
   },
   methods: {
     sourceToClipboard() {
@@ -50,7 +84,7 @@ export default {
     method(methodName) {
       const result = this.$slots.component[0].componentInstance[methodName];
       if (!result) {
-        console.dir(this.$slots.component[0].componentInstance);
+        // console.dir(this.$slots.component[0].componentInstance);
         return () => {
           console.warn(
             `sv-template-view: Method ${methodName} does not exist.`
@@ -66,9 +100,11 @@ export default {
 <style lang="scss">
 @import '~carbon-components/scss/globals/scss/styles.scss';
 @import '~highlight.js/styles/default.css';
+
 $back-color: #f5f7fa;
 $alt-back-color: #fff;
 $border: 1px solid #dfe3e6;
+
 .sv-template-view__component {
   border: $border;
   background-color: $back-color;
@@ -109,7 +145,7 @@ $border: 1px solid #dfe3e6;
 }
 .sv-template-view__copy {
   position: absolute;
-  top: 56px;
+  top: 78px;
   left: 40px;
   &.sv-template-view__copy--copied::after {
     content: 'Copied!';
@@ -124,5 +160,9 @@ $border: 1px solid #dfe3e6;
 .sv-template-view__clippy {
   position: absolute;
   opacity: 0;
+}
+
+.sv-tempate-view__label {
+  font-size: 18px;
 }
 </style>

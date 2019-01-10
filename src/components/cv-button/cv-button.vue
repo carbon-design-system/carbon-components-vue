@@ -2,9 +2,9 @@
   <button
     class="cv-button"
     :class="[
-    'bx--btn',
-    'bx--btn--' + kind.toLowerCase(),
-    { 'bx--btn--sm': small },
+      'bx--btn',
+      'bx--btn--' + kind.toLowerCase(),
+      { 'bx--btn--sm': small },
     ]"
     v-on="$listeners"
     role="button"
@@ -35,5 +35,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

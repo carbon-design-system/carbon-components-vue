@@ -11,32 +11,19 @@ The tile comes in four types selected by the kind attribute.
 ### standard
 
 ```html
-<<cv-tile
-  kind="standard"
-  >
-  Tile content
-</cv-tile>
+<<cv-tile kind="standard"> Tile content </cv-tile>
 ```
 
 ### selectable
 
 ```html
-<cv-tile
-  cv-type="selectable"
- cv-selected
-  >
-  Tile content
-</cv-tile>
+<cv-tile cv-type="selectable" cv-selected> Tile content </cv-tile>
 ```
 
 ### Clickable
 
 ```html
-<cv-tile
-  cv-type="clickable"
-  >
-  Tile content
-</cv-tile>
+<cv-tile cv-type="clickable"> Tile content </cv-tile>
 ```
 
 ### Expandable

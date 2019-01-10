@@ -7,10 +7,7 @@ http://www.carbondesignsystem.com/components/text-input/code
 ## Usage
 
 ```html
-<cv-text-area
-  label="label"
-  v-model="modelValue">
-</cv-text-area>
+<cv-text-area label="label" v-model="modelValue"> </cv-text-area>
 ```
 
 ## Attributes

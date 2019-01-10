@@ -1,10 +1,10 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs/vue';
+import { withKnobs, boolean, button } from '@storybook/addon-knobs';
 import { withNotes } from '@storybook/addon-notes';
 import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
+// import consts from '../../utils/storybook-consts';
 import knobsHelper from '../../utils/storybook-knobs-helper';
 
 import CvModalNotesMD from './cv-modal-notes.md';
@@ -12,91 +12,86 @@ import CvModal from './cv-modal';
 
 const stories = storiesOf('CvModal', module);
 stories.addDecorator(withKnobs);
+stories.addDecorator(withNotes);
 
-const kinds = {
-  options: {
-    Default: '',
-    Danger: 'danger',
-  },
-  default: '',
-};
 const preKnobs = {
   label: {
     group: 'content',
-    type: text,
-    config: ['slot:label', 'label', consts.CONTENT],
-    value: val =>
-      val.length ? `\n  <template slot="label">${val}</template>` : '',
+    slot: {
+      name: 'label',
+      value: 'Label of modal',
+    },
   },
   title: {
     group: 'content',
-    type: text,
-    config: ['slot:title', '', consts.CONTENT],
-    value: val =>
-      val.length ? `\n  <template slot="title">${val}</template>` : '',
+    slot: {
+      name: 'title',
+      value: 'Title of modal',
+    },
   },
   content: {
     group: 'content',
-    type: text,
-    config: [
-      'slot:content',
-      `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, seed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>`,
-      consts.CONTENT,
-    ],
-    value: val => `\n  <template slot="content">${val}</template>`,
+    slot: {
+      name: 'content',
+      value: `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, seed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>`,
+    },
   },
   secondaryButton: {
     group: 'content',
-    type: text,
-    config: ['slot:secondary-button', '', consts.CONTENT],
-    value: val =>
-      val.length
-        ? `\n <template slot="secondary-button">${val}</template>`
-        : '',
+    slot: {
+      name: 'secondary-button',
+      value: 'secondary',
+    },
   },
   primaryButton: {
     group: 'content',
-    type: text,
-    config: ['slot:primary-button', '', consts.CONTENT],
-    value: val =>
-      val.length ? `\n <template slot="primary-button">${val}</template>` : '',
+    slot: {
+      name: 'primary-button',
+      value: 'primary',
+    },
   },
   visible: {
     group: 'attr',
     type: boolean,
-    config: ['visible', false, consts.CONFIG],
-    value: val => (val ? '\n  visible' : ''),
+    config: ['visible', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      name: 'visible',
+      type: Boolean,
+    },
   },
   events: {
     group: 'attr',
-    type: boolean,
-    config: ['with events', false, consts.OTHER],
-    value: val =>
-      val
-        ? `
-  @modal-shown="actionShown"
-  @modal-hidden="actionHidden"`
-        : '',
-  },
-  otherAttributes: {
-    group: 'attr',
-    type: text,
-    config: ['other attributes', '', consts.OTHER],
-    value: val => (val.length ? `\n  ${val}` : ''),
+    value: `@modal-shown="actionShown"
+  @modal-hidden="actionHidden"`,
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [
+  { name: 'default', includes: ['content'] },
+  {
+    name: 'buttons',
+    includes: ['content', 'primaryButton', 'secondaryButton'],
+  },
+  { name: 'primary-only', includes: ['content', 'primaryButton'] },
+  { name: 'secondary-only', includes: ['content', 'secondaryButton'] },
+  { name: 'minimal', includes: ['content'] },
+  {
+    name: 'danger',
+    extra: { kind: { group: 'attr', value: 'kind="danger"' } },
+  },
+];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvModalNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
       const templateString = `
-<cv-modal${settings.kind}${settings.group.attr}>${settings.group.content}
+<cv-modal${settings.group.attr}>${settings.group.content}
 </cv-modal>
   `;
       // console.log(templateString);
@@ -114,6 +109,7 @@ for (const story of storySet) {
 
       return {
         components: { CvModal, SvTemplateView },
+        props: settings.props,
         methods: {
           doSave() {
             this.$refs.view.method('hide')();
@@ -128,6 +124,9 @@ for (const story of storySet) {
         },
         template: templateViewString,
       };
-    })
+    },
+    {
+      notes: { markdown: CvModalNotesMD },
+    }
   );
 }
