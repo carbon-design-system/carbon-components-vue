@@ -23,7 +23,7 @@ This project is intended to be strictly focused on Vue.js implementations of the
 
 ## Project State
 
-\*\*v0.2.0 - Moved to Storybook 4
+**v0.2.0 - Moved to Storybook 4**
 
 - Knobs now operate as Vue properties the template is no longer replaced each time (as per Knobs in storybook 3)
 - Story kinds array replaced by variants which define the settings used in each story.
