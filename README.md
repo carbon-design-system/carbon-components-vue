@@ -23,6 +23,12 @@ This project is intended to be strictly focused on Vue.js implementations of the
 
 ## Project State
 
+\*\*v0.2.0 - Moved to Storybook 4
+
+- Knobs now operate as Vue properties the template is no longer replaced each time (as per Knobs in storybook 3)
+- Story kinds array replaced by variants which define the settings used in each story.
+- NOTE: slots no longer editable
+
 **v0.1.0 - First draft of carbon-components-vue implementation**
 
 This initial set of components, based on v9 of carbon components, includes draft implementations of all non-data viz components found in the core carbon components library. Public parts of the component: properties, events, data, methods, computed values are at this point subject to review at this point.
@@ -42,7 +48,7 @@ Current Version: 0.1
 | CvBarGraph               | :heavy_minus_sign: |                                                                                  |
 | **CvBreadcrumb**         | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvBreadcrumb                     |
 | **CvButton**             | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvButton                         |
-| **CvCheckbox**           | :warning:          | http://vue.carbondesignsystem.com/?selectedKind=CvCheckbox                       |
+| **CvCheckbox**           | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvCheckbox                       |
 | **CvCodeSnippet**        | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvCodeSnippet&selectedStory=All  |
 | **CvContentSwitcher**    | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvContentSwitcher                |
 | CvDataTable              | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/51          |
