@@ -12,41 +12,36 @@ import CvGauge from './cv-gauge';
 const stories = storiesOf('CvGauge', module);
 stories.addDecorator(withKnobs);
 
-const kinds = null;
 const preKnobs = {
-  light: {
-    group: 'attr',
-    type: boolean,
-    config: ['light-theme', false, consts.CONFIG],
-    value: val => (val ? '\n  theme="light"' : ''),
-  },
   amount: {
     group: 'attr',
     type: number,
-    config: ['amount', 56, consts.CONFIG],
-    value: val => `\n :amount="${val}"`,
+    config: ['amount', 56], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: { name: 'amount', type: Number },
   },
   total: {
     group: 'attr',
     type: number,
-    config: ['total', 100, consts.CONFIG],
-    value: val => `\n :total="${val}"`,
+    config: ['total', 100], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: { name: 'total', type: Number },
   },
   suffix: {
     group: 'attr',
     type: text,
-    config: ['suffix', 'GB', consts.CONFIG],
-    value: val => (val ? `\n suffix="${val}"` : ''),
+    config: ['suffix', 'GB'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: { name: 'suffix', type: String },
   },
   header: {
     group: 'attr',
     type: text,
-    config: ['header', 'Example Header', consts.CONFIG],
-    value: val => (val ? `\n header="${val}"` : ''),
+    config: ['header', 'Example Header'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: { name: 'header', type: String },
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [{ name: 'default' }];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
@@ -63,7 +58,7 @@ for (const story of storySet) {
       const templateViewString = `
   <sv-template-view
     sv-margin
-    :sv-alt-back="!light"
+    :sv-alt-back="this.$options.propsData.theme !== 'light'"
     sv-source='${templateString.trim()}'>
     <template slot="component">${templateString}</template>
   </sv-template-view>
@@ -74,15 +69,7 @@ for (const story of storySet) {
           CvGauge,
           SvTemplateView,
         },
-        data() {
-          return {
-            light: settings.raw.light,
-            amount: settings.raw.amount,
-            total: settings.raw.total,
-            header: settings.raw.header,
-            suffic: settings.raw.suffix,
-          };
-        },
+        props: settings.props,
         template: templateViewString,
       };
     })
