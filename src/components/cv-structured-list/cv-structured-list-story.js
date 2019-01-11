@@ -3,9 +3,9 @@ import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
-import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-// import consts from '../../utils/storybook-consts';
-import knobsHelper from '../../utils/storybook-knobs-helper';
+import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
+// import consts from '../../_storybook/utils/consts';
+import knobsHelper from '../../_storybook/utils/knobs-helper';
 
 import CvStructuredListNotesMD from './cv-structured-list-notes.md';
 import CvStructuredList from './cv-structured-list';

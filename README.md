@@ -7,19 +7,82 @@
 
 > A collection of [Carbon Components](https://github.com/carbon-design-system/carbon-components) implemented using [<img src="https://vuejs.org/images/logo.png" width="20" alt="Vue logo"> Vue.js](https://vuejs.org/).
 
-## Project goals and principles
+## Usage
 
-The intention is to provide a library of robust and high-quality components to assist
-a developer working with [Vue.js](https://vuejs.org) to leverage the [Carbon Design System](https://github.com/carbon-design-system) in their applications. The components are built with best practices (see our [Contribution Guidelines](./.github/CONTRIBUTING.md) for more details) to make full use of the Vue.js framework and integrate simply and efficiently into Vue.js applications. We intend these components to be exemplary, and therefore value getting the design principles and details right over rushing to a tactical delivery.
+### General
 
-This project is a collaborative effort to embody the Carbon design system in Vue.js. In terms of guidance for the component designs, reference has been made to [carbon components react](https://github.com/carbon-design-system/carbon-components-react).
+The components do not import any of the carbon styles themselves. Use the SCSS or CSS from carbon-components to provide the styling.
+You can also use the unpkg cdn to bring in the styles wholesale - unpkg.com/carbon-components/css/carbon-components.css aliases the latest css file.
 
-This project is intended to be strictly focused on Vue.js implementations of the [Carbon Components](https://github.com/carbon-design-system/carbon-components).
+### List of Available Components
 
-- Each component, used as documented, should render the HTML with attached CSS and JS as specified and illustrated by [Carbon Components](https://github.com/carbon-design-system/carbon-components), nothing more, nothing less.
-- If we find a defect or deficiency in the [Carbon Components](https://github.com/carbon-design-system/carbon-components), we should raise an issue with that project, and assist in delivering a fix if possible, rather than cause this project to deviate from the [Carbon Components](https://github.com/carbon-design-system/carbon-components).
-- This project will not include additional components not part of [Carbon Components](https://github.com/carbon-design-system/carbon-components), however helpful they seem, nor combination components to enable particular patterns of usage. Such add-ons may be very useful but should form satellite projects to this one.
-- In terms of component structure, names and properties, this project will follow the lead established by [carbon components react](https://github.com/carbon-design-system/carbon-components-react), and only deviate if there are compelling reasons to do so.
+View available Vue Components [here](http://vue.carbondesignsystem.com). Usage information is in the notes tab.
+
+### Getting Started
+
+Run the following command using [npm](https://www.npmjs.com/):
+
+```bash
+npm install -S @carbon/vue
+```
+
+If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead:
+
+```bash
+yarn add @carbon/vue
+```
+
+NOTE: https://www.npmjs.com/package/current-script-polyfill is required for older browsers (e.g. IE11)
+
+### Using all at once
+
+In your main js file (where you include Vue)
+
+```javascript
+// No need for Babel
+import CarbonComponentsVue from '@carbon/vue';
+```
+
+alternatively if wanting to specify babel presets
+
+```javascript
+// need babel
+import CarbonComponentsVue from 'carbon-components-vue/src/index';
+Vue.use(CarbonComponentsVue);
+```
+
+### Using one at a time
+
+In your main js file (where you include Vue)
+
+```javascript
+// No need for Babel
+import { CvButton } from '@carbon/vue';
+```
+
+In a component file
+
+```javascript
+<script>
+...
+import CvButton from 'carbon-components-vue/src/components/cv-button/cv-button';
+...
+components: {
+  CvButton,
+},
+...
+</script>
+```
+
+### From unkpg
+
+In your html file, no need to babel.
+
+```html
+<script src="https://unpkg.com/vue@latest" />
+<script src="https://unpkg.com/@carbon/vue" />
+. . . <cv-button>Hello</cv-button>
+```
 
 ## Project State
 
@@ -90,36 +153,6 @@ Current Version: 0.1
 | **CvToastNotification**  | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvToastNotification              |
 | **CvToggle**             | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvToggle                         |
 | **CvTooltip**            | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvTooltip                        |
-
-## Usage
-
-### General
-
-The components do not import any of the carbon styles themselves. Use the SCSS or CSS from carbon-components to provide the styling.
-You can also use the unpkg cdn to bring in the styles wholesale - unpkg.com/carbon-components/css/carbon-components.css aliases the latest css file.
-
-### All at once
-
-In your main js file (where you include Vue)
-
-```javascript
-import CarbonComponentsVue from 'carbon-components-vue/src/index';
-Vue.use(CarbonComponentsVue);
-```
-
-### One at a time
-
-```javascript
-<script>
-...
-import CvButton from 'carbon-components-vue/src/components/cv-button/cv-button';
-...
-components: {
-  CvButton,
-},
-...
-</script>
-```
 
 ## Development
 

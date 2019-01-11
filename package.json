@@ -1,15 +1,39 @@
 {
-  "name": "carbon-components-vue",
+  "name": "@carbon/vue",
   "description": "[Experimental] Vue implementation of the Carbon Design System",
   "version": "0.2.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/carbon-design-system/carbon-components-vue.git"
+    "url": "git+https://github.com/carbon-design-system/carbon-components-vue.git"
   },
   "bugs": {
     "url": "https://github.com/carbon-design-system/carbon-components-vue/issues/new"
   },
+  "homepage": "https://github.com/carbon-design-system/carbon-components-vue#readme",
+  "main": "dist/carbon-components-vue.umd.min.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "keywords": [
+    "carbon",
+    "vue",
+    "components"
+  ],
+  "contributors": [
+    {
+      "name": "Lee Chase",
+      "email": "lee.chase@uk.ibm.com"
+    },
+    {
+      "name": "Simon Moore",
+      "email": "moores@uk.ibm.com"
+    }
+  ],
+  "files": [
+    "/dist",
+    "/src"
+  ],
   "sideEffects": true,
   "scripts": {
     "ci-check": "yarn format:diff",
@@ -18,17 +42,16 @@
     "lint:es": "eslint --ext .js,.vue src",
     "lint:css": "stylelint 'src/**/*.vue'",
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "storybook-build": "build-storybook"
+    "storybook-build": "build-storybook",
+    "build": "vue-cli-service build --target lib --name carbon-components-vue ./src/index.js",
+    "lint": "vue-cli-service lint ./src/index.js"
   },
   "peerDependencies": {},
   "dependencies": {
-    "babel-loader": "^7.0.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-vue": "^2.0.2",
     "carbon-components": "^9.48.1",
     "carbon-icons": "^7.0.7",
-    "flatpickr": "4.5.1"
+    "flatpickr": "4.5.1",
+    "vue": "^2.5.21"
   },
   "devDependencies": {
     "@babel/core": "^7.2.0",
@@ -40,8 +63,17 @@
     "@storybook/addon-options": "^4.1.4",
     "@storybook/addon-storysource": "^4.1.4",
     "@storybook/vue": "^4.1.4",
+    "@vue/cli-plugin-babel": "^3.2.0",
+    "@vue/cli-plugin-eslint": "^3.2.0",
+    "@vue/cli-service": "^3.2.0",
+    "@vue/eslint-config-prettier": "^4.0.0",
+    "@vue/babel-preset-app": "^3.3.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.1",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-vue": "^2.0.2",
     "eslint": "^5.10.0",
     "eslint-plugin-vue": "^5.0.0-0",
     "husky": "^1.3.0",
@@ -52,7 +84,6 @@
     "stylelint": "^9.9.0",
     "stylelint-config-property-sort-order-smacss": "^4.0.1",
     "stylelint-config-sass-guidelines": "^5.3.0",
-    "vue": "^2.5.21",
     "vue-highlightjs": "^1.3.3",
     "vue-loader": "^15.4.2",
     "vue-template-compiler": "^2.5.21"
@@ -78,5 +109,49 @@
     "printWidth": 80,
     "singleQuote": true,
     "trailingComma": "es5"
-  }
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "@vue/prettier"
+    ],
+    "rules": {
+      "no-console": [
+        "error",
+        {
+          "allow": [
+            "warn",
+            "error"
+          ]
+        }
+      ],
+      "no-debugger": "warn",
+      "no-unused-vars": "warn",
+      "no-plusplus": "off",
+      "no-undef": "off",
+      "no-var": "error",
+      "semi": [
+        "error",
+        "always"
+      ],
+      "no-param-reassign": [
+        "error",
+        {
+          "props": false
+        }
+      ]
+    },
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }
