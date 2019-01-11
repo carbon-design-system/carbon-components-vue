@@ -1,15 +1,40 @@
 {
-  "name": "carbon-components-vue",
+  "name": "@carbon/vue",
   "description": "[Experimental] Vue implementation of the Carbon Design System",
   "version": "0.2.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/carbon-design-system/carbon-components-vue.git"
+    "url": "git+https://github.com/carbon-design-system/carbon-components-vue.git"
   },
   "bugs": {
     "url": "https://github.com/carbon-design-system/carbon-components-vue/issues/new"
   },
+  "main": "src/components/index.js",
+  "homepage": "https://github.com/carbon-design-system/carbon-components-vue#readme",
+  "main": "dist/carbon-components-vue.umd.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "keywords": [
+    "carbon",
+    "vue",
+    "components"
+  ],
+  "contributors": [
+    {
+      "name": "Lee Chase",
+      "email": "lee.chase@uk.ibm.com"
+    },
+    {
+      "name": "Simon Moore",
+      "email": "moores@uk.ibm.com"
+    }
+  ],
+  "files": [
+    "/dist",
+    "/src"
+  ],
   "sideEffects": true,
   "scripts": {
     "ci-check": "yarn format:diff",
@@ -128,6 +153,5 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ],
-  "main": "src/components/index.js"
+  ]
 }

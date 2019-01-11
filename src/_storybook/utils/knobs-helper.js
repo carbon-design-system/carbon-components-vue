@@ -1,7 +1,3 @@
-import consts from './storybook-consts';
-import { select } from '@storybook/addon-knobs/vue';
-import { withKnobsOptions } from '@storybook/addon-knobs';
-
 const parsePreKnobs = (preKnobs, includes, excludes, variantExtra) => {
   return () => {
     const knobs = { group: [], data: {}, raw: {}, props: {} };
