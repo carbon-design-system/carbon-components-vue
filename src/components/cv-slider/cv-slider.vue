@@ -124,18 +124,18 @@ export default {
     value(val) {
       this.setValue(val);
     },
-    min(val) {
+    min() {
       setTimeout(() => {
         this.setValue(this.internalValue);
       }, 1);
       //      this.internalMin = val && val.length ? val : '0';
     },
-    max(val) {
+    max() {
       setTimeout(() => {
         this.setValue(this.internalValue);
       }, 1);
     },
-    step(val) {
+    step() {
       setTimeout(() => {
         this.setValue(this.internalValue);
       }, 1);
@@ -184,7 +184,7 @@ export default {
       this.$emit('modelEvent', this.$refs.range.value);
       this.$emit('change', this.$refs.range.value);
     },
-    onChange(ev) {
+    onChange() {
       let newValue = this.internalValue.length
         ? parseFloat(this.internalValue)
         : this.getMin();
@@ -210,7 +210,7 @@ export default {
         this.setValue(newValue, ev);
       }
     },
-    onStopDrag(ev) {
+    onStopDrag() {
       this.isDragging = false;
       document.body.removeEventListener('mousemove', this.onDrag);
       document.body.removeEventListener('mouseup', this.onStopDrag);

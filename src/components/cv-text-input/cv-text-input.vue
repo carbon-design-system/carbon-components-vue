@@ -32,7 +32,7 @@ export default {
   inheritAttrs: false,
   props: {
     label: String,
-    theme: '',
+    theme: String,
     value: String,
   },
   computed: {

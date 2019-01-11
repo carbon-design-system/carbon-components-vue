@@ -37,7 +37,7 @@ export default {
       // Issue - https://github.com/carbon-design-system/carbon-components/issues/781
       this.carbonComponent._setTileHeight();
     } catch (e) {
-      console.log('Unable to set tile height');
+      console.warn('cv-tile-expandable: Unable to set tile height');
     }
   },
   beforeDestroy() {

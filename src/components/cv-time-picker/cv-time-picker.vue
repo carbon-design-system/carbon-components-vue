@@ -93,7 +93,7 @@ export default {
       let result = this.ampm;
       if (!['AM', 'PM'].includes(this.ampm)) {
         console.error(
-          `[carbon-components-vue]: invalid value '${
+          `CvTimePicker: invalid value '${
             this.ampm
           }' supplied for prop ampm. Default applied.`
         );
@@ -101,6 +101,7 @@ export default {
         result = this.ampm[0].value;
         this.$emit('update:ampm', result);
       }
+      return result;
     },
     validTimezone() {
       // Validate timezone setting
@@ -108,7 +109,7 @@ export default {
       if (this.timezones && this.timezones.length) {
         if (!this.timezones.find(item => item.value === this.timezone)) {
           console.error(
-            `[carbon-components-vue]: invalid value '${
+            `CvTimePicker: invalid value '${
               this.timezone
             }' supplied for prop timezone. Default applied.`
           );

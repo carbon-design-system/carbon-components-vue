@@ -27,7 +27,6 @@ export default {
   },
   computed: {
     overlayClasses() {
-      console.log(this.overlay, this.stopped);
       if (!this.overlay) return '';
 
       return `bx--loading-overlay ${

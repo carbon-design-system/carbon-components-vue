@@ -2,9 +2,9 @@ import { storiesOf } from '@storybook/vue';
 import { withKnobs, text } from '@storybook/addon-knobs';
 import { withNotes } from '@storybook/addon-notes';
 
-import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-// import consts from '../../utils/storybook-consts';
-import knobsHelper from '../../utils/storybook-knobs-helper';
+import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
+// import consts from '../../_storybook/utils/consts';
+import knobsHelper from '../../_storybook/utils/knobs-helper';
 
 import CvTagNotesMD from './cv-tag-notes.md';
 import CvTag from './cv-tag';
