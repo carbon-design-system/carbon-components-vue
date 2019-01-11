@@ -10,9 +10,8 @@
   "bugs": {
     "url": "https://github.com/carbon-design-system/carbon-components-vue/issues/new"
   },
-  "main": "src/components/index.js",
   "homepage": "https://github.com/carbon-design-system/carbon-components-vue#readme",
-  "main": "dist/carbon-components-vue.umd.js",
+  "main": "dist/carbon-components-vue.umd.min.js",
   "directories": {
     "doc": "docs"
   },
