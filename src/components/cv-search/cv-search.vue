@@ -37,10 +37,10 @@
 
       <button
         class="bx--search-close"
+        :class="{ 'bx--search-close--hidden': !clearVisible }"
         title="Clear search input"
         aria-label="Clear search input"
         @click="onClearClick"
-        v-show="clearVisible"
       >
         <svg
           width="16"
