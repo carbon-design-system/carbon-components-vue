@@ -86,6 +86,12 @@ In your html file, no need to babel.
 
 ## Project State
 
+**v0.2.1 - Minor fixes**
+
+- Fixed expandable tile and made it native Vue
+- Made notification componentes native Vue
+- Tidied toggle stories.
+
 **v0.2.0 - Moved to Storybook 4**
 
 - Knobs now operate as Vue properties the template is no longer replaced each time (as per Knobs in storybook 3)
