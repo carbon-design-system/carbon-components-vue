@@ -86,7 +86,7 @@ In your html file, no need to babel.
 
 ## Project State
 
-**v0.2.1 - Minor fixes**
+**v0.2.2 - Minor fixes**
 
 - Fixed expandable tile and made it native Vue
 - Made notification componentes native Vue

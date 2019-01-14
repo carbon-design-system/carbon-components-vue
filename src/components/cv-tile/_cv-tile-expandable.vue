@@ -27,8 +27,6 @@
 </template>
 
 <script>
-import { Tile } from 'carbon-components';
-
 export default {
   name: 'CvTileExpandable',
   props: {
