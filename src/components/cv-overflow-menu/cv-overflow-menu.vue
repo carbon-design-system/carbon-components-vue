@@ -4,6 +4,7 @@
     tabindex="0"
     @click="doToggle"
     @keydown.enter.prevent="doToggle"
+    @keydown.space.prevent
     @keyup.space.prevent="doToggle"
     :aria-label="label"
     aria-role="button"
@@ -105,6 +106,9 @@ export default {
       setTimeout(() => {
         this.$el.focus();
       }, 1);
+    },
+    doClose() {
+      this.open = false;
     },
     doToggle(ev) {
       this.open = !this.open;

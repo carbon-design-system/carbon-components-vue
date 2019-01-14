@@ -13,6 +13,7 @@
       v-on="$listeners"
       @click="onClick"
       @focusout="onFocusOut"
+      @keydown.esc.prevent="onEsc"
     >
       <slot></slot>
     </button>
@@ -33,6 +34,9 @@ export default {
     },
     onFocusOut(ev) {
       this.$parent.menuItemFocusOut(ev);
+    },
+    onEsc(ev) {
+      this.$parent.doClose(ev);
     },
   },
 };
