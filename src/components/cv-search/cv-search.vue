@@ -7,9 +7,9 @@
       role="search"
       ref="search"
     >
-      <label :id="uid" class="bx--label" for="search__input-1">{{
-        label
-      }}</label>
+      <label :id="uid" class="bx--label" for="search__input-1">
+        {{ label }}
+      </label>
 
       <input
         :id="uid"
@@ -112,7 +112,7 @@ export default {
     },
     onInput() {
       this.clearVisible = this.internalValue.length > 0;
-      this.$emit('input', this.internalValue);
+      return this.$emit('input', this.internalValue);
     },
   },
 };
