@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, select, boolean } from '@storybook/addon-knobs';
+import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
@@ -18,20 +18,26 @@ const preKnobs = {
     group: 'slots',
     slot: {
       name: '',
-      value: '<p>This is some tile content</p>',
+      value: '<h1>Hello</h1><p>This is some tile content</p>',
     },
   },
   slotBelow: {
     group: 'slots',
     slot: {
       name: 'below',
-      value:
-        '<ul><li>This</li><li>is some</li>li>more</li>li>content</li></ul>',
+      value: `<h2>More</h2>
+        <ul>
+          <li>This</li>
+          <li>is some</li>
+          <li>more</li>
+          <li>content</li>
+        </ul>`,
     },
   },
   expanded: {
     group: 'attr',
     type: boolean,
+    config: ['expanded', false],
     prop: { name: 'expanded', type: Boolean },
   },
   selected: {
@@ -43,6 +49,18 @@ const preKnobs = {
       type: Boolean,
     },
   },
+  href: {
+    group: 'attr',
+    type: text,
+    config: [
+      'where to go when clicked',
+      'https://github.com/carbon-design-system/carbon-components-vue/blob/master/README.md',
+    ],
+    prop: {
+      name: 'href',
+      type: String,
+    },
+  },
   value: {
     group: 'attr',
     value: 'value="selected-1"',
@@ -50,25 +68,26 @@ const preKnobs = {
 };
 
 const variants = [
-  { name: 'default', excludes: ['expanded', 'selected', 'value'] },
+  { name: 'default', includes: ['slotDefault'] },
   {
     name: 'standard',
-    excludes: ['expanded', 'selected', 'value'],
+
+    includes: ['slotDefault'],
     extra: { kind: { group: 'attr', value: 'kind="standard"' } },
   },
   {
     name: 'selectable',
-    excludes: ['expanded'],
+    includes: ['slotDefault', 'value'],
     extra: { kind: { group: 'attr', value: 'kind="selectable"' } },
   },
   {
     name: 'expandable',
-    excludes: ['selected'],
+    includes: ['slotDefault', 'slotBelow', 'expanded'],
     extra: { kind: { group: 'attr', value: 'kind="expandable"' } },
   },
   {
     name: 'clickable',
-    includes: ['slotDefault'],
+    includes: ['slotDefault', 'href'],
     extra: { kind: { group: 'attr', value: 'kind="clickable"' } },
   },
 ];

@@ -13,12 +13,6 @@ import { Tile } from 'carbon-components';
 
 export default {
   name: 'CvTileClickable',
-  mounted() {
-    this.carbonComponent = Tile.create(this.$el);
-  },
-  beforeDestroy() {
-    this.carbonComponent.release();
-  },
 };
 </script>
 
