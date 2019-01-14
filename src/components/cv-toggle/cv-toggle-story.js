@@ -133,7 +133,6 @@ for (const story of storySet) {
         },
         methods: {
           actionChange: action('CV Toggle - change'),
-          actionKeydown: action('CV Toggle - keydown'),
         },
         template: templateViewString,
       };

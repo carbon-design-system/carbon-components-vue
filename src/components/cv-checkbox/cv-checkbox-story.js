@@ -133,7 +133,6 @@ for (const story of storySet) {
         },
         methods: {
           actionChange: action('CV Checkbox - change'),
-          actionKeydown: action('CV Checkbox - keydown'),
         },
         template: templateViewString,
       };
