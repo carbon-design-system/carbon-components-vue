@@ -10,6 +10,9 @@
   >
     <section class="sv-template-view__component">
       <slot name="component"></slot> <br />
+    </section>
+    <section class="sv-template-view__other">
+      <h2 class="sv-tempate-view__label">Sample interaction</h2>
       <slot name="other"></slot>
     </section>
     <section class="sv-template-view__code">
@@ -112,7 +115,7 @@ $border: 1px solid #dfe3e6;
     position: relative; // needed to keep modal components on top
     z-index: 999; // needed to keep modal components on top
     margin: 40px;
-    padding: 40px;
+    padding: 20px;
   }
   .sv-template-view--alt-back & {
     background-color: $alt-back-color;
@@ -122,10 +125,15 @@ $border: 1px solid #dfe3e6;
     margin-bottom: 1.5rem;
   }
 }
+
+.sv-template-view__other {
+  margin: 5px 40px;
+}
+
 .sv-template-view__code {
   position: relative;
   .sv-template-view--margin & {
-    padding: 40px;
+    margin: 40px;
   }
   .html {
     padding: 40px;
@@ -145,8 +153,8 @@ $border: 1px solid #dfe3e6;
 }
 .sv-template-view__copy {
   position: absolute;
-  top: 78px;
-  left: 40px;
+  top: 38px;
+  left: 0;
   &.sv-template-view__copy--copied::after {
     content: 'Copied!';
     display: block;
@@ -164,5 +172,12 @@ $border: 1px solid #dfe3e6;
 
 .sv-tempate-view__label {
   font-size: 18px;
+  margin-bottom: 1em;
+}
+
+.sv-template-view__code {
+  .sv-tempate-view__label {
+    margin: 0;
+  }
 }
 </style>

@@ -11,8 +11,7 @@ http://www.carbondesignsystem.com/components/notification/code
   kind="error"
   title="notification title"
   sub-title="a subtitle"
-  @notification-before-delete="actionBeforeDelete"
-  @notification-after-delete="actionAfterDelete"
+  @close="actionClose"
 ></cv-inline-notification>
 ```
 

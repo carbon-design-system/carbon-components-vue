@@ -17,10 +17,4 @@ export default {
       return kinds.indexOf(this.kind) < 2;
     },
   },
-  mounted() {
-    this.carbonComponent = Notification.create(this.$el);
-  },
-  beforeDestroy() {
-    this.carbonComponent.release();
-  },
 };

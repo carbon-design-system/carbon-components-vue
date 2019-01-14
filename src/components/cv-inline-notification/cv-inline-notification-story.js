@@ -29,8 +29,7 @@ const preKnobs = {
   },
   events: {
     group: 'attr',
-    value: `@notification-before-delete="actionBeforeDelete"
-  @notification-after-delete="actionAfterDelete"`,
+    value: `@close="doClose"`,
   },
 };
 
@@ -59,7 +58,7 @@ for (const story of storySet) {
       // ----------------------------------------------------------------
 
       const templateString = `
-<cv-inline-notification${settings.group.attr}>
+<cv-inline-notification v-if="visible"${settings.group.attr}>
 </cv-inline-notification>
   `;
 
@@ -70,6 +69,7 @@ for (const story of storySet) {
       sv-margin
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
+      <template slot="other"><button @click="visible = true">Show if hidden</button></template>
     </sv-template-view>
   `;
 
@@ -77,13 +77,17 @@ for (const story of storySet) {
         components: { CvInlineNotification, SvTemplateView },
         template: templateViewString,
         props: settings.props,
+        data() {
+          return {
+            visible: true,
+          };
+        },
         methods: {
-          actionBeforeDelete: action(
-            'CV InlineNotification - notification-before-delete'
-          ),
-          actionAfterDelete: action(
-            'CV InlineNotification - notification-after-delete'
-          ),
+          actionClose: action('CV InlineNotification - close'),
+          doClose(ev) {
+            this.visible = false;
+            this.actionClose(ev);
+          },
         },
       };
     },
