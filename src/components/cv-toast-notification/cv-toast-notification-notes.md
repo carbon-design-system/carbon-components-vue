@@ -12,8 +12,7 @@ http://www.carbondesignsystem.com/components/notification/code
   title="notification title"
   sub-title="a subtitle"
   caption="Time stamp [00:00:00]"
-  @notification-before-delete="actionBeforeDelete"
-  @notification-after-delete="actionAfterDelete"
+  @close="actionClose"
 ></cv-toast-notification>
 ```
 

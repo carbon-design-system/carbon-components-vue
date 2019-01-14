@@ -23,6 +23,7 @@
       data-notification-btn
       class="bx--inline-notification__close-button"
       type="button"
+      @click="$emit('close')"
     >
       <svg
         class="bx--inline-notification__close-icon"

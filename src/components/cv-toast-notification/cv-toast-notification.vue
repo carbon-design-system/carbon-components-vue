@@ -16,6 +16,7 @@
       data-notification-btn
       class="bx--toast-notification__close-button"
       type="button"
+      @click="$emit('close')"
     >
       <svg
         class="bx--toast-notification-icon"
