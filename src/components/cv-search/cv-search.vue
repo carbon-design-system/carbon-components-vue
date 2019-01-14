@@ -15,7 +15,7 @@
         :id="uid"
         class="bx--search-input"
         v-bind="$attrs"
-        :value="value"
+        v-model="internalValue"
         v-on="inputListeners"
         type="text"
         role="search"
@@ -36,10 +36,11 @@
       </svg>
 
       <button
-        class="bx--search-close bx--search-close--hidden"
+        class="bx--search-close"
         title="Clear search input"
         aria-label="Clear search input"
         @click="onClearClick"
+        v-show="clearVisible"
       >
         <svg
           width="16"
@@ -58,8 +59,6 @@
 </template>
 
 <script>
-import { Search } from 'carbon-components';
-
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
 
@@ -73,6 +72,18 @@ export default {
     value: String,
     placeholder: { type: String, default: 'Search' },
   },
+  data() {
+    return {
+      clearVisible: this.value ? this.value.length : false,
+      internalValue: this.value,
+    };
+  },
+  watch: {
+    value() {
+      this.clearVisible = this.value ? this.value.length : false;
+      this.internalValue = this.value;
+    },
+  },
   computed: {
     // Bind listeners at the component level to the embedded input element and
     // add our own input listener to service the v-model. See:
@@ -80,7 +91,7 @@ export default {
     inputListeners() {
       return {
         ...this.$listeners,
-        input: event => this.$emit('input', event.target.value),
+        input: this.onInput,
       };
     },
     searchClasses() {
@@ -89,18 +100,20 @@ export default {
 
       return `${themeClass} ${sizeClass}`;
     },
+    closeHiddenClass() {
+      return this.clearVisible ? '' : 'bx--search-close--hidden';
+    },
   },
   methods: {
     onClearClick() {
-      this.$emit('input', '');
+      this.internalValue = '';
+      this.clearVisible = false;
+      this.$emit('input', this.internalValue);
     },
-  },
-  mounted() {
-    // console.dir(this.$options.propsData);
-    this.carbonComponent = Search.create(this.$refs.search);
-  },
-  beforeDestroy() {
-    this.carbonComponent.release();
+    onInput() {
+      this.clearVisible = this.internalValue.length > 0;
+      this.$emit('input', this.internalValue);
+    },
   },
 };
 </script>

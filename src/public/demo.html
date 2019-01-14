@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>ccv demo</title>
+    <script src="https://unpkg.com/vue@latest"></script>
+    <script src="./carbon-components-vue.umd.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://unpkg.com/carbon-components@9.66.3/css/carbon-components.css"
+    />
+    <link rel="stylesheet" href="./carbon-components-vue.css" />
+    <style>
+      body {
+        padding: 40px;
+        background-color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">Test</div>
+
+    <script>
+      Vue.use(window['carbon-components-vue'].default);
+
+      new Vue({
+        el: '#app',
+        template: `<div class="app">
+  <cv-search></cv-search>
+</div>`,
+      });
+    </script>
+  </body>
+</html>
