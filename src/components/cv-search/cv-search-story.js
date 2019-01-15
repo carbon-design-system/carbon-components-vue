@@ -38,7 +38,7 @@ const preKnobs = {
     group: 'attr',
     type: text,
     config: ['placeholder', 'Search placeholder'], // consts.CONFIG],
-    props: { name: 'placeholder', type: String },
+    prop: { name: 'placeholder', type: String },
   },
   disabled: {
     group: 'attr',
@@ -95,8 +95,8 @@ for (const story of storySet) {
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">
-      <div v-if="${templateString.indexOf('v-model') > 0}">
-      <label>Model value:
+        <div v-if="${templateString.indexOf('v-model') > 0}">
+          <label>Model value:
             <input type="text" v-model="modelValue" />
           </label>
         </div>
