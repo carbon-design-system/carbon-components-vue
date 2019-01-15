@@ -67,7 +67,7 @@ const preKnobs = {
 };
 
 const variants = [
-  { name: 'default', includes: ['content'] },
+  { name: 'default', includes: ['content', 'visible'] },
   {
     name: 'buttons',
     includes: ['content', 'primaryButton', 'secondaryButton'],

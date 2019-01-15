@@ -9,8 +9,9 @@
     }"
     tabindex="-1"
     @keydown.esc.prevent="hide"
+    @click="onClick"
   >
-    <div class="bx--modal-container">
+    <div class="bx--modal-container" ref="modalDialog">
       <div class="bx--modal-header">
         <h4 class="bx--modal-header__label" v-if="$slots.label">
           <slot name="label">label (Optional)</slot>
@@ -132,15 +133,18 @@ export default {
 
       this.$el.removeEventListener('transitionend', this.onShown);
     },
-    show: function() {
+    onClick(ev) {
+      if (ev.target === this.$el) {
+        this.hide();
+      }
+    },
+    show() {
       this.$el.addEventListener('transitionend', this.onShown);
-      this.$el.addEventListener('focusout', this.hide);
       this.dataVisible = true;
     },
-    hide: function() {
+    hide() {
       this.dataVisible = false;
       this.$emit('modal-hidden');
-      this.$el.removeEventListener('focusout', this.hide);
     },
     onPrimaryClick() {
       this.$emit('primary-click');
