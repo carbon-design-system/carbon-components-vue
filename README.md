@@ -86,6 +86,12 @@ In your html file, no need to babel.
 
 ## Project State
 
+**v0.2.3 - Minor fixes**
+
+- Fix modal hide on main body click and show visible in story.
+- Make cv-search native Vue.
+- Make cv-number-input native Vue.
+
 **v0.2.2 - Minor fixes**
 
 - Fixed expandable tile and made it native Vue
