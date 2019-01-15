@@ -10,12 +10,12 @@
       :data-invalid="invalid"
     >
       <div class="bx--number__controls">
-        <button class="bx--number__control-btn up-icon">
+        <button class="bx--number__control-btn up-icon" @click="doUp">
           <svg width="10" height="5" viewBox="0 0 10 5">
             <path d="M0 5L5 .002 10 5z" fill-rule="evenodd"></path>
           </svg>
         </button>
-        <button class="bx--number__control-btn down-icon">
+        <button class="bx--number__control-btn down-icon" @click="doDown">
           <svg width="10" height="5" viewBox="0 0 10 5">
             <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd"></path>
           </svg>
@@ -24,7 +24,7 @@
       <input
         :id="uid"
         type="number"
-        :value="value"
+        v-model="internalValue"
         v-bind="$attrs"
         v-on="inputListeners"
       />
@@ -42,7 +42,6 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
-import { NumberInput } from 'carbon-components';
 
 export default {
   name: 'CvNumberInput',
@@ -53,26 +52,43 @@ export default {
     value: String,
     invalid: Boolean,
   },
+  data() {
+    return {
+      internalValue: this.value,
+    };
+  },
+  watch: {
+    value() {
+      this.internalValue = this.value;
+    },
+  },
   computed: {
     // Bind listeners at the component level to the embedded input element and
     // add our own input listener to service the v-model. See:
     // https://vuejs.org/v2/guide/components-custom-events.html#Customizing-Component-v-model
     inputListeners() {
       return Object.assign({}, this.$listeners, {
-        input: event => this.$emit('input', event.target.value),
-        change: event => this.$emit('change', event.target.value),
+        input: () => this.$emit('input', this.internalValue),
       });
     },
+    internalIntValue() {
+      let intVal = parseInt(this.internalValue, 10);
+
+      if (isNaN(intVal)) {
+        intVal = 0;
+      }
+      return intVal;
+    },
   },
-  model: {
-    prop: 'value',
-    event: 'input',
-  },
-  mounted() {
-    this.carbonComponent = NumberInput.create(this.$el);
-  },
-  beforeDestroy() {
-    this.carbonComponent.release();
+  methods: {
+    doUp() {
+      this.internalValue = `${this.internalIntValue + 1}`;
+      this.$emit('input', this.internalValue);
+    },
+    doDown() {
+      this.internalValue = `${this.internalIntValue - 1}`;
+      this.$emit('input', this.internalValue);
+    },
   },
 };
 </script>

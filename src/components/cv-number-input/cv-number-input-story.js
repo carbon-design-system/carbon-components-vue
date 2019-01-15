@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
@@ -68,11 +68,12 @@ const preKnobs = {
   },
   value: {
     group: 'attr',
-    type: text,
-    config: ['value', ''], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    type: number,
+    config: ['value', 0], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
       name: 'value',
       type: String,
+      value: val => `${val}`,
     },
   },
   vModel: {
@@ -81,8 +82,7 @@ const preKnobs = {
   },
   events: {
     group: 'attr',
-    value: `@input="onInput"
-  @change="onChange"`,
+    value: `@input="onInput"`,
   },
 };
 
@@ -136,7 +136,6 @@ for (const story of storySet) {
           };
         },
         methods: {
-          onChange: action('cv-number-change - change event'),
           onInput: action('cv-number-input - input event'),
         },
       };
