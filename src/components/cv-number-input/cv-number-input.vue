@@ -25,8 +25,6 @@
         :id="uid"
         type="number"
         v-model="internalValue"
-        @keypress.down.prevent="doDown"
-        @keypress.up.prevent="doUp"
         v-bind="$attrs"
         v-on="inputListeners"
       />
@@ -51,17 +49,17 @@ export default {
   inheritAttrs: false,
   props: {
     label: String,
-    value: Number,
+    value: String,
     invalid: Boolean,
   },
   data() {
     return {
-      internalValue: this.value ? parseInt(this.value, 10) : 0,
+      internalValue: this.value,
     };
   },
   watch: {
     value() {
-      this.internalValue = this.value ? parseInt(this.value, 10) : 0;
+      this.internalValue = this.value;
     },
   },
   computed: {
@@ -70,27 +68,27 @@ export default {
     // https://vuejs.org/v2/guide/components-custom-events.html#Customizing-Component-v-model
     inputListeners() {
       return Object.assign({}, this.$listeners, {
-        input: event => this.$emit('input', this.internalIntValue),
-        change: event => this.$emit('change', this.internalIntValue),
+        input: () => this.$emit('input', this.internalValue),
       });
     },
     internalIntValue() {
-      return typeof this.internalValue === 'number'
-        ? this.internalValue
-        : parseInt(this.internalValue, 10);
+      let intVal = parseInt(this.internalValue, 10);
+
+      if (isNaN(intVal)) {
+        intVal = 0;
+      }
+      return intVal;
     },
   },
   methods: {
     doUp() {
-      this.internalValue = this.internalIntValue + 1;
+      this.internalValue = `${this.internalIntValue + 1}`;
+      this.$emit('input', this.internalValue);
     },
     doDown() {
-      this.internalValue = this.internalIntValue - 1;
+      this.internalValue = `${this.internalIntValue - 1}`;
+      this.$emit('input', this.internalValue);
     },
-  },
-  model: {
-    prop: 'value',
-    event: 'input',
   },
 };
 </script>

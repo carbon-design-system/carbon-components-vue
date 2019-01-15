@@ -72,7 +72,8 @@ const preKnobs = {
     config: ['value', 0], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
       name: 'value',
-      type: Number,
+      type: String,
+      value: val => `${val}`,
     },
   },
   vModel: {
@@ -81,8 +82,7 @@ const preKnobs = {
   },
   events: {
     group: 'attr',
-    value: `@input="onInput"
-  @change="onChange"`,
+    value: `@input="onInput"`,
   },
 };
 
@@ -132,11 +132,10 @@ for (const story of storySet) {
         props: settings.props,
         data() {
           return {
-            modelValue: 100,
+            modelValue: '100',
           };
         },
         methods: {
-          onChange: action('cv-number-change - change event'),
           onInput: action('cv-number-input - input event'),
         },
       };
