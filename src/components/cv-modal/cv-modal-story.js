@@ -67,13 +67,16 @@ const preKnobs = {
 };
 
 const variants = [
-  { name: 'default', includes: ['content', 'visible'] },
+  { name: 'default', includes: ['content', 'visible', 'events'] },
   {
     name: 'buttons',
-    includes: ['content', 'primaryButton', 'secondaryButton'],
+    includes: ['content', 'primaryButton', 'secondaryButton', 'events'],
   },
-  { name: 'primary-only', includes: ['content', 'primaryButton'] },
-  { name: 'secondary-only', includes: ['content', 'secondaryButton'] },
+  { name: 'primary-only', includes: ['content', 'primaryButton', 'events'] },
+  {
+    name: 'secondary-only',
+    includes: ['content', 'secondaryButton', 'events'],
+  },
   { name: 'minimal', includes: ['content'] },
   {
     name: 'danger',

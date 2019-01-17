@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, select } from '@storybook/addon-knobs';
+import { withKnobs, text, select, boolean } from '@storybook/addon-knobs';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
@@ -62,6 +62,15 @@ let preKnobs = {
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, seed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
     <button class="bx--button">Clicky one</button>
   `,
+    },
+  },
+  visible: {
+    group: 'attr',
+    type: boolean,
+    config: ['visible', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      name: 'visible',
+      type: Boolean,
     },
   },
 };
