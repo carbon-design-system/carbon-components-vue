@@ -40,7 +40,6 @@
 </template>
 
 <script>
-import { OverflowMenu } from 'carbon-components';
 import uidMixin from '../../mixins/uid-mixin';
 
 export default {

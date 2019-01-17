@@ -10,6 +10,12 @@
         role="tooltip"
         class="bx--tooltip__trigger"
         ref="trigger"
+        @click="toggle"
+        @keydown.space.prevent
+        @keyup.space.prevent="toggle"
+        @keydown.enter.prevent="toggle"
+        @keydown.tab="onTriggerTab"
+        @focusout="checkFocusOut"
       >
         <slot name="trigger">
           <svg
@@ -34,15 +40,34 @@
       :id="uid"
       :data-floating-menu-direction="direction"
       class="bx--tooltip"
+      :class="{ 'bx--tooltip--shown': dataVisible }"
+      ref="popup"
+      @focusout="checkFocusOut"
+      :style="{ left: left + 'px', top: top + 'px' }"
+      tabindex="-1"
+      @mousedown.prevent="preventFocusOut"
     >
+      <div
+        class="cv-interactive-tooltip__before-content"
+        ref="beforeContent"
+        tabindex="0"
+        style="position: absolute; height: 1px; width: 1px; left: -9999px"
+        @focus="focusBeforeContent"
+      />
       <span class="bx--tooltip__caret"></span> <slot name="content"></slot>
+      <div
+        class="cv-interactive-tooltip__after-content"
+        ref="afterContent"
+        tabindex="0"
+        style="position: absolute; height: 1px; width: 1px; left: -9999px"
+        @focus="focusAfterContent"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import uidMixin from '../../mixins/uid-mixin';
-import { Tooltip } from 'carbon-components';
 
 export default {
   name: 'CvInteractiveTooltip',
@@ -62,24 +87,131 @@ export default {
         return valid;
       },
     },
+    visible: { type: Boolean, default: false },
+  },
+  data() {
+    return {
+      dataVisible: false,
+      left: -9999, // offscreen
+      top: 0,
+    };
+  },
+  computed: {
+    contentAfter() {
+      return this.direction === 'right' || this.direction === 'bottom';
+    },
+  },
+  watch: {
+    visible() {
+      if (this.visible) {
+        this.show();
+      } else {
+        this.hide();
+      }
+    },
+    direction() {
+      if (this.visible) {
+        this.position();
+      }
+    },
   },
   methods: {
-    show: function() {
-      this.carbonComponent.show();
+    position() {
+      const menuPosition = this.$refs.trigger.getBoundingClientRect();
+
+      if (this.direction === 'top' || this.direction === 'bottom') {
+        this.left =
+          menuPosition.left +
+          0.5 +
+          (this.$refs.trigger.offsetWidth - this.$refs.popup.offsetWidth) / 2;
+
+        if (this.direction === 'bottom') {
+          this.top = menuPosition.bottom + 10;
+        } else {
+          this.top = menuPosition.top - 15 - this.$refs.popup.offsetHeight;
+        }
+      } else {
+        this.top =
+          menuPosition.top +
+          (this.$refs.trigger.offsetHeight -
+            0.5 -
+            this.$refs.popup.offsetHeight) /
+            2;
+        if (this.direction === 'left') {
+          this.left = menuPosition.left - 10 - this.$refs.popup.offsetWidth;
+        } else {
+          this.left = menuPosition.right + 15;
+        }
+      }
     },
-    hide: function() {
-      this.carbonComponent.hide();
+    show() {
+      this.dataVisible = true;
+
+      setTimeout(() => {
+        this.position();
+        this.$refs.trigger.focus();
+      }, 1);
+    },
+    hide() {
+      this.dataVisible = false;
+    },
+    toggle() {
+      if (this.dataVisible) {
+        this.hide();
+      } else {
+        this.show();
+      }
+    },
+    onTriggerTab(ev) {
+      if (!ev.shiftKey) {
+        if (this.contentAfter) {
+          // move focus before content before tab press
+          this.$refs.beforeContent.focus();
+        }
+      } else {
+        if (!this.contentAfter) {
+          // move focus after content before tab press
+          this.$refs.afterContent.focus();
+        }
+      }
+    },
+    checkFocusOut(ev) {
+      this.dataVisible =
+        ev.relatedTarget === this.$refs.trigger ||
+        this.$refs.popup.contains(ev.relatedTarget);
+    },
+    focusBeforeContent(ev) {
+      if (this.contentAfter) {
+        if (this.$refs.popup.contains(ev.relatedTarget)) {
+          this.$refs.trigger.focus();
+        }
+      } else {
+        this.$refs.trigger.focus();
+        this.dataVisible = this.contentAfter;
+      }
+    },
+    focusAfterContent(ev) {
+      if (!this.contentAfter) {
+        if (this.$refs.popup.contains(ev.relatedTarget)) {
+          this.$refs.trigger.focus();
+        }
+      } else {
+        this.$refs.trigger.focus();
+        this.dataVisible = !this.contentAfter;
+      }
+    },
+    preventFocusOut() {
+      // This is here to prevent focus being lost if the user clicks on the contents of the interactive tool tip
     },
   },
   mounted() {
-    this.carbonComponent = Tooltip.create(this.$refs.trigger);
-  },
-  beforeDestroy() {
-    this.carbonComponent.release();
-    // ensure popup destroyed
-    const popupEl = document.getElementById(this.uid);
-    if (popupEl) {
-      popupEl.parentElement.removeChild(popupEl);
+    // move popup out to body to ensure it appears above other elements
+    document.body.appendChild(this.$refs.popup);
+
+    if (this.visible) {
+      this.show();
+    } else {
+      this.hide();
     }
   },
 };
