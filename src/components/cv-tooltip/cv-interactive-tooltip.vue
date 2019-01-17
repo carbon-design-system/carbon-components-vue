@@ -68,7 +68,6 @@
 
 <script>
 import uidMixin from '../../mixins/uid-mixin';
-import { Tooltip } from 'carbon-components';
 
 export default {
   name: 'CvInteractiveTooltip',
