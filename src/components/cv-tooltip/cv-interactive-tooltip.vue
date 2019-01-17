@@ -52,7 +52,7 @@
         ref="beforeContent"
         tabindex="0"
         style="position: absolute; height: 1px; width: 1px; left: -9999px"
-        @focus="focusTrigger"
+        @focus="focusBeforeContent"
       />
       <span class="bx--tooltip__caret"></span> <slot name="content"></slot>
       <div
@@ -60,7 +60,7 @@
         ref="afterContent"
         tabindex="0"
         style="position: absolute; height: 1px; width: 1px; left: -9999px"
-        @focus="focusTriggerClose"
+        @focus="focusAfterContent"
       />
     </div>
   </div>
@@ -96,6 +96,11 @@ export default {
       left: -9999, // offscreen
       top: 0,
     };
+  },
+  computed: {
+    contentAfter() {
+      return this.direction === 'right' || this.direction === 'bottom';
+    },
   },
   watch: {
     visible() {
@@ -160,7 +165,15 @@ export default {
     },
     onTriggerTab(ev) {
       if (!ev.shiftKey) {
-        this.$refs.beforeContent.focus();
+        if (this.contentAfter) {
+          // move focus before content before tab press
+          this.$refs.beforeContent.focus();
+        }
+      } else {
+        if (!this.contentAfter) {
+          // move focus after content before tab press
+          this.$refs.afterContent.focus();
+        }
       }
     },
     checkFocusOut(ev) {
@@ -168,14 +181,25 @@ export default {
         ev.relatedTarget === this.$refs.trigger ||
         this.$refs.popup.contains(ev.relatedTarget);
     },
-    focusTrigger(ev) {
-      if (this.$refs.popup.contains(ev.relatedTarget)) {
+    focusBeforeContent(ev) {
+      if (this.contentAfter) {
+        if (this.$refs.popup.contains(ev.relatedTarget)) {
+          this.$refs.trigger.focus();
+        }
+      } else {
         this.$refs.trigger.focus();
+        this.dataVisible = this.contentAfter;
       }
     },
-    focusTriggerClose() {
-      this.$refs.trigger.focus();
-      this.dataVisible = false;
+    focusAfterContent(ev) {
+      if (!this.contentAfter) {
+        if (this.$refs.popup.contains(ev.relatedTarget)) {
+          this.$refs.trigger.focus();
+        }
+      } else {
+        this.$refs.trigger.focus();
+        this.dataVisible = !this.contentAfter;
+      }
     },
     preventFocusOut() {
       // This is here to prevent focus being lost if the user clicks on the contents of the interactive tool tip
