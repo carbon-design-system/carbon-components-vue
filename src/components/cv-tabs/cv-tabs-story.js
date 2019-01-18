@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
@@ -9,24 +9,31 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 
 import CvTabsNotesMD from './cv-tabs-notes.md';
 import CvTabs from './cv-tabs';
-import CvTabsButton from './cv-tabs-button';
-import CvTabsPanel from './cv-tabs-panel';
+import CvTab from './cv-tab';
 
 const stories = storiesOf('CvTabs', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
 const preKnobs = {
+  selected: {
+    group: 'tab2',
+    type: boolean,
+    config: ['2-selected', false], // consts.CONFIG],
+    prop: {
+      name: 'selected',
+      type: Boolean,
+    },
+  },
   events: {
     group: 'attr',
-    value: `@tab-selected="actionSelected"
-  @tab-beingselected="actionBeingSelected"`,
+    value: `@tab-selected="actionSelected"`,
   },
 };
 
 const variants = [
   { name: 'dafault' },
-  { name: 'minimal', excludes: ['events'] },
+  { name: 'minimal', excludes: ['events', 'selected'] },
 ];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
@@ -41,40 +48,22 @@ for (const story of storySet) {
 
       const templateString = `
 <cv-tabs${settings.group.attr}>
-  <cv-tabs-button id="tabs-button-1" content-selector="#tabs-panel-1" tabs-panel-id="tabs-panel-5" selected>
-    Tab label 1
-  </cv-tabs-button>
-  <cv-tabs-button id="tabs-button-2" content-selector="#tabs-panel-2" tabs-panel-id="tabs-panel-2">
-    Tab label 2
-  </cv-tabs-button>
-  <cv-tabs-button id="tabs-button-3" content-selector="#tabs-panel-3" tabs-panel-id="tabs-panel-3">
-    Tab label 3
-  </cv-tabs-button>
-  <cv-tabs-button id="tabs-button-4" content-selector="#tabs-panel-4" tabs-panel-id="tabs-panel-4">
-    Tab label 4
-  </cv-tabs-button>
-  <cv-tabs-button id="tabs-button-5" content-selector="#tabs-panel-5" tabs-panel-id="tabs-panel-5">
-    Tab label 5
-  </cv-tabs-button>
-</cv-tabs>
-
-<section>
-  <cv-tabs-panel id="tabs-panel-1" tabs-button-id="tabs-button-1" selected>
+  <cv-tab id="tabs-1" label="Tab link 1">
     Sample tab panel content 1
-  </cv-tabs-panel>
-  <cv-tabs-panel id="tabs-panel-2" tabs-button-id="tabs-button-2">
+  </cv-tab>
+  <cv-tab id="tabs-2" label="Tab link 2" ${settings.group.tab2}>
     Sample tab panel content 2
-  </cv-tabs-panel>
-  <cv-tabs-panel id="tabs-panel-3" tabs-button-id="tabs-button-3">
+  </cv-tab>
+  <cv-tab id="tabs-3" label="Tab link 3">
     Sample tab panel content 3
-  </cv-tabs-panel>
-  <cv-tabs-panel id="tabs-panel-4" tabs-button-id="tabs-button-4">
+  </cv-tab>
+  <cv-tab id="tabs-4" label="Tab link 4">
     Sample tab panel content 4
-  </cv-tabs-panel>
-  <cv-tabs-panel id="tabs-panel-5" tabs-button-id="tabs-button-5">
+  </cv-tab>
+  <cv-tab id="tabs-5" label="Tab link 5">
     Sample tab panel content 5
-  </cv-tabs-panel>
-</section>
+  </cv-tab>
+</cv-tabs>
   `;
 
       // ----------------------------------------------------------------
@@ -88,12 +77,13 @@ for (const story of storySet) {
   `;
 
       return {
-        components: { CvTabs, CvTabsButton, CvTabsPanel, SvTemplateView },
+        components: { CvTabs, CvTab, SvTemplateView },
         methods: {
           actionSelected: action('Cv Tabs - tab-selected'),
           actionBeingSelected: action('Cv Tabs - tab-beingselected'),
         },
         template: templateViewString,
+        props: settings.props,
       };
     },
     {
