@@ -86,6 +86,12 @@ In your html file, no need to babel.
 
 ## Project State
 
+**v0.2.4 - Minor fixes**
+
+- Make tooltip native Vue
+- Tidy up a bit of unused code
+- Make tabs native Vue and use carbon react pattern (breaks previous tab use)
+
 **v0.2.3 - Minor fixes**
 
 - Fix modal hide on main body click and show visible in story.
