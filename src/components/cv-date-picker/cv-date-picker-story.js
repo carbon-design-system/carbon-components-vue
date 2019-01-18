@@ -15,17 +15,6 @@ const stories = storiesOf('CvDatePicker', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
-const kinds = {
-  options: {
-    Default: '',
-    Short: 'short',
-    Simple: 'simple',
-    Single: 'single',
-    Range: 'range',
-  },
-  default: '',
-};
-
 const preKnobs = {
   theme: {
     group: 'attr',
