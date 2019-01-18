@@ -1,5 +1,3 @@
-import { Notification } from 'carbon-components';
-
 const kinds = ['error', 'warning', 'info', 'success'];
 
 export default {

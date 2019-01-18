@@ -89,7 +89,6 @@
 
 <script>
 import uidMixin from '../../mixins/uid-mixin';
-// import { FileUploader } from 'carbon-components';
 
 const CONSTS = {
   STATES: {

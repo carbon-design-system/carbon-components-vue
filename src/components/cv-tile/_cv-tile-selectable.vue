@@ -33,7 +33,6 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import checkMixin from '../../mixins/check-mixin';
-import { Tile } from 'carbon-components';
 
 export default {
   name: 'CvTileSelectable',

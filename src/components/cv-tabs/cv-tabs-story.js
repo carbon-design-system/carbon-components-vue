@@ -16,22 +16,20 @@ const stories = storiesOf('CvTabs', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
-const kinds = null;
 const preKnobs = {
   events: {
     group: 'attr',
-    type: boolean,
-    config: ['with events', false], // consts.OTHER],
-    value: val =>
-      val
-        ? `
-  @tab-selected="actionSelected"
-  @tab-beingselected="actionBeingSelected"`
-        : '',
+    value: `@tab-selected="actionSelected"
+  @tab-beingselected="actionBeingSelected"`,
   },
 };
 
-const storySet = knobsHelper.getStorySet(kinds, preKnobs);
+const variants = [
+  { name: 'dafault' },
+  { name: 'minimal', excludes: ['events'] },
+];
+
+const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
