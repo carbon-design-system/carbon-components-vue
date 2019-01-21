@@ -49,7 +49,6 @@
               role="img"
               viewBox="0 0 16 16"
               width="16"
-              tabindex="0"
               aria-label="Complete"
               alt="Complete"
             >
@@ -58,28 +57,27 @@
                 d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zm3.293-11.332L6.75 9.21 4.707 7.168 3.293 8.582 6.75 12.04l5.957-5.957-1.414-1.414z"
               ></path>
             </svg>
-            <button
+            <svg
               v-if="removable"
-              class="cv-file-uploader__close"
+              class="bx--file-close"
+              fill-rule="evenodd"
+              role="button"
+              height="16"
+              width="16"
+              viewBox="0 0 16 16"
+              tabindex="0"
+              alt="Remove file"
+              arial-label="Remove file"
               @click="remove(index)"
-              aria-label="Remove"
+              @keydown.enter.prevent="remove(index)"
+              @keydown.space.prevent
+              @keyup.space.prevent="remove(index)"
             >
-              <svg
-                class="bx--file-close"
-                fill-rule="evenodd"
-                role="img"
-                height="100%"
-                width="100%"
-                viewBox="0 0 16 16"
-                tabindex="0"
-                alt="Remove"
-              >
-                <title>Remove</title>
-                <path
-                  d="M8 6.586L5.879 4.464 4.464 5.88 6.586 8l-2.122 2.121 1.415 1.415L8 9.414l2.121 2.122 1.415-1.415L9.414 8l2.122-2.121-1.415-1.415L8 6.586zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
-                ></path>
-              </svg>
-            </button>
+              <title>Remove</title>
+              <path
+                d="M8 6.586L5.879 4.464 4.464 5.88 6.586 8l-2.122 2.121 1.415 1.415L8 9.414l2.121 2.122 1.415-1.415L9.414 8l2.122-2.121-1.415-1.415L8 6.586zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
+              ></path>
+            </svg>
           </span>
         </span>
       </div>
