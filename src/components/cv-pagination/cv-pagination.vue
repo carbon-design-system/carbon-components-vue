@@ -12,10 +12,9 @@
           v-for="(size, index) in pageSizes"
           :key="index"
           :value="`${size.value ? size.value : size}`"
-          >{{
-            size.label ? size.label : size.value ? size.value : size
-          }}</cv-select-option
         >
+          {{ size.label ? size.label : size.value ? size.value : size }}
+        </cv-select-option>
       </cv-select>
 
       <span class="bx--pagination__text">

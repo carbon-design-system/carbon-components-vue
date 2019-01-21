@@ -193,12 +193,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.cv-file-uploader__close {
-  width: 16px;
-  height: 16px;
-  padding: 0;
-  border: 0;
-  background-color: transparent;
-}
-</style>
+<style lang="scss"></style>
