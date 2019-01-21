@@ -109,7 +109,7 @@ export default {
     doClose() {
       this.open = false;
     },
-    doToggle(ev) {
+    doToggle() {
       this.open = !this.open;
 
       if (this.open) {

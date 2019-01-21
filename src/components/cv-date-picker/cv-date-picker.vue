@@ -27,9 +27,9 @@
             fill-rule="nonzero"
           ></path>
         </svg>
-        <label :for="`${uid}-input-1`" class="bx--label">
-          {{ getDateLabel }}
-        </label>
+        <label :for="`${uid}-input-1`" class="bx--label">{{
+          getDateLabel
+        }}</label>
         <input
           :data-invalid="invalid"
           type="text"
@@ -49,9 +49,9 @@
         :class="{ 'bx--date-picker-container': kind === 'range' }"
         v-if="kind === 'range'"
       >
-        <label :for="`${uid}-input-2`" class="bx--label">
-          {{ getDateEndLabel }}
-        </label>
+        <label :for="`${uid}-input-2`" class="bx--label">{{
+          getDateEndLabel
+        }}</label>
         <input
           type="text"
           :id="`${uid}-input-2`"
@@ -166,7 +166,7 @@ export default {
     },
   },
   methods: {
-    onChange(ev) {
+    onChange() {
       // this.$emit('onChange', ev); // this is a property time
       if (this.kind === 'range') {
         this.$emit('onChange', {
