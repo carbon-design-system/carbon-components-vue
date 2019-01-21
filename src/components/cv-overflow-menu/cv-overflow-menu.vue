@@ -67,7 +67,7 @@ export default {
   data() {
     return {
       open: false,
-      left: 0,
+      left: -9999, // offscreen,
       top: 0,
     };
   },
@@ -109,7 +109,7 @@ export default {
     doClose() {
       this.open = false;
     },
-    doToggle(ev) {
+    doToggle() {
       this.open = !this.open;
 
       if (this.open) {
@@ -138,8 +138,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.cv-overflow-menu {
-  background: none;
-}
-</style>
+<style lang="scss"></style>

@@ -6,8 +6,10 @@
     @copy-code="onCopyCode"
   >
     <code ref="code"> <slot></slot> </code>
+    <!-- textarea cannot be fully hidden for clipboard to work -->
     <textarea
       class="cv-code-snippet__clippy"
+      style="position: absolute; left: -9999px; max-width: 0; opacity: 0; overflow: hidden"
       aria-hidden="true"
       ref="clippy"
     ></textarea>
@@ -57,15 +59,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.cv-code-snippet__clippy {
-  // cannot be hidden for clipboard to work
-  position: absolute;
-  top: -999px;
-  left: -999px;
-  max-width: 0;
-  max-height: 0;
-  overflow: 0;
-  opacity: 0;
-}
-</style>
+<style lang="scss"></style>

@@ -166,7 +166,7 @@ export default {
     },
   },
   methods: {
-    onChange(ev) {
+    onChange() {
       // this.$emit('onChange', ev); // this is a property time
       if (this.kind === 'range') {
         this.$emit('onChange', {
@@ -196,8 +196,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.cv-date-picker {
-  display: inline-flex;
-}
-</style>
+<style lang="scss"></style>

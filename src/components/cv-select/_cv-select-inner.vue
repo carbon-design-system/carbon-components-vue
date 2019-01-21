@@ -47,7 +47,7 @@ export default {
     // multiple does not work with styling from carbon-components 9.20
     multiple: {
       type: String,
-      validator: val => {
+      validator: () => {
         console.warn('property multiple not supported in CvSelect');
         return false;
       },

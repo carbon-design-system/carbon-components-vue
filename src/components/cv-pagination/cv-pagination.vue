@@ -232,8 +232,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.cv-pagination .cv-select {
-  margin-bottom: 0;
-}
-</style>
+<style lang="scss"></style>
