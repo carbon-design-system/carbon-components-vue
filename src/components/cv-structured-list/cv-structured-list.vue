@@ -19,8 +19,6 @@
 </template>
 
 <script>
-import { StructuredList } from 'carbon-components';
-
 export default {
   name: 'CvStructuredList',
   props: {
@@ -28,20 +26,11 @@ export default {
     border: Boolean,
     condensed: Boolean,
   },
-  mounted() {
-    this.carbonComponent = StructuredList.create(this.$el);
-
-    // listen children to raise change events
-    for (let child of this.$children) {
-      if (child.constructor.options.name === 'CvStructuredListItemSelectable') {
-        child.$on('change', val => {
-          this.$emit('change', val);
-        });
-      }
-    }
-  },
-  beforeDestroy() {
-    this.carbonComponent.release();
+  methods: {
+    onItemChange(val) {
+      // for selectable item
+      this.$emit('change', val);
+    },
   },
 };
 </script>

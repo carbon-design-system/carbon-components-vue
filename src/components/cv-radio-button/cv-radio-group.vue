@@ -7,15 +7,10 @@
 <script>
 export default {
   name: 'CvRadioGroup',
-  mounted() {
-    // listen children to raise change events
-    for (let child of this.$children) {
-      if (child.constructor.options.name === 'CvRadioButton') {
-        child.$on('change', val => {
-          this.$emit('change', val);
-        });
-      }
-    }
+  methods: {
+    onItemChange(val) {
+      this.$emit('change', val);
+    },
   },
 };
 </script>

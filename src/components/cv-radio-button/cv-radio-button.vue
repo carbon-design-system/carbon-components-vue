@@ -9,6 +9,7 @@
       ref="input"
       type="radio"
       :value="value"
+      @change="onChange"
     />
     <label :for="uid" class="bx--radio-button__label">
       <span class="bx--radio-button__appearance"></span> {{ label }}

@@ -15,6 +15,7 @@
       :checked="isChecked"
       :value="value"
       type="radio"
+      @change="onChange"
     />
     <div class="bx--structured-list-td">
       <svg

@@ -81,6 +81,10 @@ In your html file, no need to babel.
 ```html
 <script src="https://unpkg.com/vue@latest" />
 <script src="https://unpkg.com/@carbon/vue" />
+<script>
+Vue.use(window['carbon-components-vue'].default);
+<script>
+
 . . . <cv-button>Hello</cv-button>
 ```
 
