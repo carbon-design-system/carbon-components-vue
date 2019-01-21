@@ -2,7 +2,7 @@
   <label
     :for="uid"
     :aria-label="label"
-    class="cv-structured-list-item-selectable bx--structured-list-row"
+    class="cv-structured-list-item--selectable bx--structured-list-row"
     :class="{ ' bx--structured-list-row--selected': isChecked }"
     tabindex="0"
   >
@@ -15,7 +15,6 @@
       :checked="isChecked"
       :value="value"
       type="radio"
-      @change="onChange"
     />
     <div class="bx--structured-list-td">
       <svg
