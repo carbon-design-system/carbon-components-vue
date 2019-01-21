@@ -66,81 +66,49 @@ for (const story of storySet) {
       // ----------------------------------------------------------------
 
       let templateString = '';
-      if (story.name.startsWith('selectable')) {
-        let isVModel = story.name.indexOf('vModel') > -1;
+      let isVModel = story.name.indexOf('vModel') > -1;
+      let isSelectable = story.name.startsWith('selectable');
 
-        templateString = `
-    <cv-structured-list selectable${settings.group.attr}>
-      <template slot="headings">
-        <cv-structured-list-heading>Heading 1</cv-structured-list-heading>
-        <cv-structured-list-heading>Heading 2</cv-structured-list-heading>
-        <cv-structured-list-heading>Heading 3</cv-structured-list-heading>
-      </template>
-      <template slot="items">
-        <cv-structured-list-item-selectable name="group-1" value="value-1" ${
-          isVModel ? settings.group.checksSelectable : 'checked'
-        }>
-          <cv-structured-list-data>Item_1</cv-structured-list-data>
-          <cv-structured-list-data>Item_1</cv-structured-list-data>
-          <cv-structured-list-data${
-            settings.group.data
-          }>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.</cv-structured-list-data>
-        </cv-structured-list-item-selectable>
-        <cv-structured-list-item-selectable name="group-1" value="value-2" ${
-          settings.group.checksSelectable
-        }>
-          <cv-structured-list-data>Item_2</cv-structured-list-data>
-          <cv-structured-list-data>Item_2</cv-structured-list-data>
-          <cv-structured-list-data${
-            settings.group.data
-          }>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.</cv-structured-list-data>
-        </cv-structured-list-item-selectable>
-        <cv-structured-list-item-selectable name="group-1" value="value-3" ${
-          settings.group.checksSelectable
-        }>
+      templateString = `
+  <cv-structured-list${isSelectable ? ' selectable' : ''}${settings.group.attr}>
+    <template slot="headings">
+      <cv-structured-list-heading>Heading 1</cv-structured-list-heading>
+      <cv-structured-list-heading>Heading 2</cv-structured-list-heading>
+      <cv-structured-list-heading>Heading 3</cv-structured-list-heading>
+    </template>
+    <template slot="items">
+      <cv-structured-list-item${
+        isSelectable ? ' name="group-1" value="value-1" ' : ''
+      }${
+        isVModel && isSelectable ? settings.group.checksSelectable : ' checked'
+      }>
+        <cv-structured-list-data>Item_1</cv-structured-list-data>
+        <cv-structured-list-data>Item_1</cv-structured-list-data>
+        <cv-structured-list-data${
+          settings.group.data
+        }>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.</cv-structured-list-data>
+      </cv-structured-list-item>
+      <cv-structured-list-item${
+        isSelectable ? ' name="group-1" value="value-2" ' : ''
+      }${settings.group.checksSelectable}>
+        <cv-structured-list-data>Item_2</cv-structured-list-data>
+        <cv-structured-list-data>Item_2</cv-structured-list-data>
+        <cv-structured-list-data${
+          settings.group.data
+        }>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.</cv-structured-list-data>
+      </cv-structured-list-item>
+      <cv-structured-list-item${
+        isSelectable ? ' name="group-1" value="value-3" ' : ''
+      }${settings.group.checksSelectable}>
+      <cv-structured-list-data>Item_3</cv-structured-list-data>
         <cv-structured-list-data>Item_3</cv-structured-list-data>
-          <cv-structured-list-data>Item_3</cv-structured-list-data>
-          <cv-structured-list-data${
-            settings.group.data
-          }>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.</cv-structured-list-data>
-        </cv-structured-list-item-selectable>
-      </template>
-    </cv-structured-list>
-    `;
-      } else {
-        templateString = `
-    <cv-structured-list${settings.group.attr}>
-      <template slot="headings">
-        <cv-structured-list-heading>Heading 1</cv-structured-list-heading>
-        <cv-structured-list-heading>Heading 2</cv-structured-list-heading>
-        <cv-structured-list-heading>Heading 3</cv-structured-list-heading>
-      </template>
-      <template slot="items">
-        <cv-structured-list-item>
-          <cv-structured-list-data>Item_1</cv-structured-list-data>
-          <cv-structured-list-data>Item_1</cv-structured-list-data>
-          <cv-structured-list-data${
-            settings.group.data
-          }>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.</cv-structured-list-data>
-        </cv-structured-list-item>
-        <cv-structured-list-item>
-          <cv-structured-list-data>Item_2</cv-structured-list-data>
-          <cv-structured-list-data>Item_2</cv-structured-list-data>
-          <cv-structured-list-data${
-            settings.group.data
-          }>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.</cv-structured-list-data>
-        </cv-structured-list-item>
-        <cv-structured-list-item>
-          <cv-structured-list-data>Item_3</cv-structured-list-data>
-          <cv-structured-list-data>Item_3</cv-structured-list-data>
-          <cv-structured-list-data${
-            settings.group.data
-          }>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.</cv-structured-list-data>
-        </cv-structured-list-item>
-      </template>
-    </cv-structured-list>
-    `;
-      }
+        <cv-structured-list-data${
+          settings.group.data
+        }>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.</cv-structured-list-data>
+      </cv-structured-list-item>
+    </template>
+  </cv-structured-list>
+  `;
 
       // ----------------------------------------------------------------
 
