@@ -16,7 +16,7 @@ http://www.carbondesignsystem.com/components/radio-button/code
 </cv-radio-group>
 ```
 
-### With v-model
+### With v-model and events
 
 ```html
 <cv-radio-group @change="actionChange">
@@ -59,3 +59,11 @@ NOTE 2: radioVal is the value of the radio button to be checked.
 - checked: true | false
 - label: radio-button label
 - value:
+
+## Events
+
+Both the radio button and radio button group raise change events.
+
+## v-model
+
+V-model is used directly with radio buttons.

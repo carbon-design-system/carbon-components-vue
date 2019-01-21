@@ -6,7 +6,7 @@ export default {
     modelValue: { type: [String, Symbol], default: noModelValue },
     checked: Boolean,
     label: String,
-    value: { type: String, default: null },
+    value: { type: String, required: true },
   },
   model: {
     prop: 'modelValue',
@@ -30,7 +30,10 @@ export default {
     },
   },
   methods: {
-    onChange(ev) {
+    onChange() {
+      if (this.$parent.onItemChange) {
+        this.$parent.onItemChange(this.value);
+      }
       this.$emit('change', this.value);
     },
   },

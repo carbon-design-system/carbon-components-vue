@@ -66,7 +66,6 @@ for (const story of storySet) {
       // ----------------------------------------------------------------
 
       let templateString = '';
-
       if (story.name.startsWith('selectable')) {
         let isVModel = story.name.indexOf('vModel') > -1;
 
