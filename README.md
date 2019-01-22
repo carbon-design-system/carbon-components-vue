@@ -90,6 +90,13 @@ Vue.use(window['carbon-components-vue'].default);
 
 ## Project State
 
+**v0.2.5 - Minor fixes**
+
+- Make structured list native Vue
+- Simplify structured list components
+- Removed non-core CSS
+- Fix to paginator reactivity
+
 **v0.2.4 - Minor fixes**
 
 - Make tooltip native Vue
