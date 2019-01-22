@@ -58,7 +58,7 @@ export default {
     },
   },
   methods: {
-    setFocus(val) {
+    setFocus() {
       this.$refs.link.focus();
     },
   },

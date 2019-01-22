@@ -11,7 +11,7 @@
     @keydown.esc.prevent="hide"
     @click="onClick"
   >
-    <div class="bx--modal-container" ref="modalDialog">
+    <div class="bx--modal-container" ref="modalDialog" @focusout="checkFocus">
       <div class="bx--modal-header">
         <h4 class="bx--modal-header__label" v-if="$slots.label">
           <slot name="label">label (Optional)</slot>
@@ -121,6 +121,11 @@ export default {
     },
   },
   methods: {
+    checkFocus(ev) {
+      if (!this.$refs.modalDialog.contains(ev.relatedTarget)) {
+        this.hide();
+      }
+    },
     onShown() {
       if (this.$slots['primary-button']) {
         this.$refs.primary.$el.focus();
