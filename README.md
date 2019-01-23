@@ -90,6 +90,11 @@ Vue.use(window['carbon-components-vue'].default);
 
 ## Project State
 
+**v0.2.6**
+
+- Fix tab out of modal
+- Remove unused vars
+
 **v0.2.5 - Minor fixes**
 
 - Make structured list native Vue
