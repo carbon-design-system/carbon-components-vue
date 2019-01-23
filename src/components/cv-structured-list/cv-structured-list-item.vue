@@ -17,6 +17,7 @@ import CvStructuredListItemSelectable from './_cv-structured-list-item-selectabl
 
 export default {
   name: 'CvStructuredListItem',
+  inheritAttrs: false,
   components: { CvStructuredListItemStandard, CvStructuredListItemSelectable },
   props: {
     value: { type: String, default: '' },

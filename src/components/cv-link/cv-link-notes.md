@@ -6,9 +6,21 @@ http://www.carbondesignsystem.com/components/link/code
 
 ## Usage
 
+### <a></a>
+
 ```html
-<cv-link href="#"> Link </cv-link>
+<cv-link href="/about">About</cv-link>
 ```
+
+### <router-link></router-link>
+
+Router links are preferred if vue-router is used
+
+```html
+<cv-link to="/about">About</cv-link>
+```
+
+### Disabled
 
 A link will show as disabled if aria-disabled is true
 
@@ -18,4 +30,4 @@ A link will show as disabled if aria-disabled is true
 
 ## Attributes
 
-Standard HTML for a <a> tag
+Standard HTML for a <a> or <router-link>
