@@ -14,7 +14,7 @@ http://www.carbondesignsystem.com/components/link/code
 
 ### <router-link></router-link>
 
-Router links are preferred if vue-router is used
+Router links are preferred if vue-router is used, simply supply a 'to' instead of a 'href'
 
 ```html
 <cv-link to="/about">About</cv-link>
