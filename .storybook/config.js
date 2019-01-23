@@ -23,3 +23,10 @@ function loadStories() {
 }
 
 configure(loadStories, module);
+
+function loadDataVizStories() {
+  const req = require.context('../src/data-viz', true, /\-story\.js$/);
+  req.keys().forEach(filename => req(filename));
+}
+
+configure(loadDataVizStories, module);
