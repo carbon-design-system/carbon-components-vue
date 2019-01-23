@@ -90,6 +90,10 @@ Vue.use(window['carbon-components-vue'].default);
 
 ## Project State
 
+**v0.2.7**
+
+- Fix click on modal dialog closing it
+
 **v0.2.6**
 
 - Fix tab out of modal
