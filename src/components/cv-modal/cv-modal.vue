@@ -9,9 +9,16 @@
     }"
     tabindex="-1"
     @keydown.esc.prevent="hide"
-    @click="onClick"
+    @click.self="onClick"
   >
-    <div class="bx--modal-container" ref="modalDialog" @focusout="checkFocus">
+    <div class="bx--modal-container" ref="modalDialog">
+      <div
+        class="cv-modal__before-content"
+        ref="beforeContent"
+        tabindex="0"
+        style="position: absolute; height: 1px; width: 1px; left: -9999px"
+        @focus="focusBeforeContent"
+      />
       <div class="bx--modal-header">
         <h4 class="bx--modal-header__label" v-if="$slots.label">
           <slot name="label">label (Optional)</slot>
@@ -57,6 +64,13 @@
           <slot name="primary-button">Primary button</slot>
         </cv-button>
       </div>
+      <div
+        class="cv-modal__after-content"
+        ref="afterContent"
+        tabindex="0"
+        style="position: absolute; height: 1px; width: 1px; left: -9999px"
+        @focus="focusAfterContent"
+      />
     </div>
   </div>
 </template>
@@ -121,10 +135,17 @@ export default {
     },
   },
   methods: {
-    checkFocus(ev) {
-      if (!this.$refs.modalDialog.contains(ev.relatedTarget)) {
-        this.hide();
+    focusBeforeContent() {
+      if (this.$slots['primary-button']) {
+        this.$refs.primary.$el.focus();
+      } else if (this.$slots['secondary-button']) {
+        this.$refs.secondary.$el.focus();
+      } else {
+        this.$refs.close.focus();
       }
+    },
+    focusAfterContent() {
+      this.$refs.close.focus();
     },
     onShown() {
       if (this.$slots['primary-button']) {
