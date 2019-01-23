@@ -1,15 +1,14 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean, number } from '@storybook/addon-knobs/vue';
+import { withKnobs, text, number } from '@storybook/addon-knobs/vue';
 import { withNotes } from '@storybook/addon-notes';
 
-import SvTemplateView from '../../views/sv-template-view/sv-template-view';
-import consts from '../../utils/storybook-consts';
-import knobsHelper from '../../utils/storybook-knobs-helper';
+import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
+import knobsHelper from '../../_storybook/utils/knobs-helper';
 
 import CvGaugeNotesMD from './cv-gauge-notes.md';
 import CvGauge from './cv-gauge';
 
-const stories = storiesOf('CvGauge', module);
+const stories = storiesOf('Data-Viz/CvGauge', module);
 stories.addDecorator(withKnobs);
 
 const preKnobs = {
