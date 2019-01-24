@@ -175,7 +175,7 @@ Current Version: 0.1
 | **CvNumberInput**        | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvNumberInput                    |
 | **CvOverflowMenu**       | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvOverflowMenu                   |
 | **CvPagination**         | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvPagination&selectedStory=All   |
-| CvPieChart               | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/52          |
+| CvPieChart               | :warning:          | https://github.com/carbon-design-system/carbon-components-vue/issues/52          |
 |                          |
 | **CvProgress**           | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvProgress                       |
 | **CvRadioButton**        | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvRadioButton                    |
