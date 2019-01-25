@@ -12,7 +12,10 @@
 ### General
 
 The components do not import any of the carbon styles themselves. Use the SCSS or CSS from carbon-components to provide the styling.
-You can also use the unpkg cdn to bring in the styles wholesale - unpkg.com/carbon-components/css/carbon-components.css aliases the latest css file.
+* In your main js file (where you include Vue) you can include the styles wholesale: ```import "carbon-components/css/carbon-components.min.css";```
+* You can also use the unpkg cdn to bring in the styles wholesale: unpkg.com/carbon-components/css/carbon-components.min.css aliases the latest minified css file.
+* If you prefer to build the SCSS, in the ```<style>``` tag of your top-level component you can include the styles wholesale: ```@import "~carbon-components/scss/globals/scss/styles.scss";```
+* Check out the [Carbon Design System developers](https://www.carbondesignsystem.com/getting-started/developers/vanilla) page for information on including individual component styles into your project.
 
 ### List of Available Components
 
@@ -47,7 +50,7 @@ alternatively if wanting to specify babel presets
 
 ```javascript
 // need babel
-import CarbonComponentsVue from 'carbon-components-vue/src/index';
+import CarbonComponentsVue from '@carbon/vue/src/index';
 Vue.use(CarbonComponentsVue);
 ```
 
@@ -65,7 +68,7 @@ In a component file
 ```javascript
 <script>
 ...
-import CvButton from 'carbon-components-vue/src/components/cv-button/cv-button';
+import CvButton from '@carbon/vue/src/components/cv-button/cv-button';
 ...
 components: {
   CvButton,
