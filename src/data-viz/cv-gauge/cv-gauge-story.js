@@ -10,6 +10,7 @@ import CvGauge from './cv-gauge';
 
 const stories = storiesOf('Data-Viz/CvGauge', module);
 stories.addDecorator(withKnobs);
+stories.addDecorator(withNotes);
 
 const preKnobs = {
   amount: {
@@ -45,7 +46,7 @@ const storySet = knobsHelper.getStorySet(variants, preKnobs);
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvGaugeNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       const templateString = `
@@ -71,6 +72,9 @@ for (const story of storySet) {
         props: settings.props,
         template: templateViewString,
       };
-    })
+    },
+    {
+      notes: { markdown: CvGaugeNotesMD },
+    }
   );
 }
