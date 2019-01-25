@@ -43,7 +43,7 @@ const storySet = knobsHelper.getStorySet(variants, preKnobs);
 for (const story of storySet) {
   stories.add(
     story.name,
-    withNotes(CvPieChartNotesMD)(() => {
+    () => {
       const settings = story.knobs();
 
       const templateString = `
@@ -69,6 +69,9 @@ for (const story of storySet) {
         props: settings.props,
         template: templateViewString,
       };
-    })
+    },
+    {
+      notes: { markdown: CvPieChartNotesMD },
+    }
   );
 }
