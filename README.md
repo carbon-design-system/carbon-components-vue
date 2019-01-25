@@ -90,8 +90,6 @@ Vue.use(window['carbon-components-vue'].default);
 
 ## Project State
 
-**v0.3.0**
-
 **v0.2.8**
 Correct duff deploy
 
