@@ -116,9 +116,7 @@ export default {
             .style('cursor', 'pointer')
             .attr('d', pathTwo);
 
-          const tooltip = d3
-            .select('.cv-pie-chart__tooltip')
-            .style('display', 'inherit');
+          d3.select('.cv-pie-chart__tooltip').style('display', 'inherit');
 
           const amount = d3.select('.cv-pie-chart__amount');
           const item = d3.select('.cv-pie-chart__item');
@@ -127,10 +125,8 @@ export default {
 
           item.text(`${d.data[0]}`);
         })
-        .on('mouseout', function(d) {
-          const tooltip = d3
-            .select('.cv-pie-chart__tooltip')
-            .style('display', 'none');
+        .on('mouseout', function() {
+          d3.select('.cv-pie-chart__tooltip').style('display', 'none');
 
           d3.select(this)
             .transition()
