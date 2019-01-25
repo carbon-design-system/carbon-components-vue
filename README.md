@@ -90,6 +90,12 @@ Vue.use(window['carbon-components-vue'].default);
 
 ## Project State
 
+**v0.2.9**
+
+- Add gauge component - story is Data-viz/CvGauge
+- Add pie chart component - story is Data-viz/CvPieChart
+- Add router-link version of CvLink
+
 **v0.2.8**
 Correct duff deploy
 
@@ -158,17 +164,17 @@ Current Version: 0.1
 | CvDataTable              | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/51          |
 |                          |
 | CvDatePicker             | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvDatePicker&selectedStory=All   |
-| **CvDropdown**           | :heavy_minus_sign: | http://vue.carbondesignsystem.com/?selectedKind=CvDropdown                       |
+| **CvDropdown**           | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvDropdown                       |
 |                          |
-| CvFileUploader           | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvFileUploader&selectedStory=All |
-| **CvForm**               | :warning:          | http://vue.carbondesignsystem.com/?selectedKind=CvForm                           |
+| **CvFileUploader**       | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvFileUploader&selectedStory=All |
+| **CvForm**               | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvForm                           |
 | **CvGauge**              | :warning:          | https://github.com/carbon-design-system/carbon-components-vue/issues/49          |
 |                          |
 | **CvIcon**               | :warning:          | http://vue.carbondesignsystem.com/?selectedKind=CvIcon                           |
 | **CvInlineNotification** | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvInlineNotification             |
 | CvLineGraph              | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/53          |
 |                          |
-| **CvLink**               | :warning:          | http://vue.carbondesignsystem.com/?selectedKind=CvLink                           |
+| **CvLink**               | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvLink                           |
 | **CvList**               | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvList                           |
 | **CvLoading**            | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvLoading                        |
 | **CvModal**              | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvModal                          |
