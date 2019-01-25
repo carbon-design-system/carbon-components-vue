@@ -1,7 +1,7 @@
 {
   "name": "@carbon/vue",
   "description": "A collection of components for the Carbon Design System built using Vue.js",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -46,9 +46,10 @@
     "lint:css": "stylelint 'src/**/*.vue'",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "storybook-build": "build-storybook",
-    "build": "npm run build:core && npm run build:data-viz",
-    "build:core": "vue-cli-service build --target lib --name carbon-vue ./src/index.js",
+    "build": "npm run build:breaking-change-warning && npm run build:core && npm run build:data-viz",
+    "build:core": "vue-cli-service build --target lib --name carbon-vue ./src/index.js --no-clean",
     "build:data-viz": "vue-cli-service build --target lib --name carbon-data-viz-vue ./src/index-data-viz.js --no-clean",
+    "build:breaking-change-warning": "vue-cli-service build --target lib --name carbon-components-vue ./src/index-components-vue.js",
     "lint": "vue-cli-service lint ./src/index.js"
   },
   "peerDependencies": {},
