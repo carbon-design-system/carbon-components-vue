@@ -12,8 +12,9 @@
 ### General
 
 The components do not import any of the carbon styles themselves. Use the SCSS or CSS from carbon-components to provide the styling.
-* In the ```<style>``` tag of your top-level component you can include the styles wholesale: ```@import "~carbon-components/scss/globals/scss/styles.scss";```
+* In your main js file (where you include Vue) you can include the styles wholesale: ```import "carbon-components/css/carbon-components.min.css";```
 * You can also use the unpkg cdn to bring in the styles wholesale: unpkg.com/carbon-components/css/carbon-components.min.css aliases the latest minified css file.
+* If you prefer to build the SCSS, in the ```<style>``` tag of your top-level component you can include the styles wholesale: ```@import "~carbon-components/scss/globals/scss/styles.scss";```
 * Check out the [Carbon Design System developers](https://www.carbondesignsystem.com/getting-started/developers/vanilla) page for information on including individual component styles into your project.
 
 ### List of Available Components
