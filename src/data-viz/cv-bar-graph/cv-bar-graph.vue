@@ -42,7 +42,7 @@ const axisOffset = 16;
 export default {
   name: 'CvBarGraph',
   props: {
-    data: Array,
+    data: { type: Array, required: true },
     keyLabels: Array,
     emptyText: String,
     width: { type: Number, default: 800 },

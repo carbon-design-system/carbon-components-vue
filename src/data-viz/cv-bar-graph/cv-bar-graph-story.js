@@ -105,10 +105,24 @@ const preKnobs = {
     group: 'content',
     slot: {
       name: 'emptyContent',
-      value: `<span style="color:red">There is currently no data for the selected parametersx</span>`,
+      value: `<span style="color:red">There is currently no data for the selected parameters</span>`,
     },
   },
   data: {
+    group: 'attr',
+    type: object,
+    config: [
+      'data',
+      [
+        { x: 'Apples', y: 10 },
+        { x: 'Oranges', y: 40 },
+        { x: 'Pears', y: 20 },
+        { x: 'Bananas', y: 60 },
+      ],
+    ],
+    prop: { name: 'data', type: Array },
+  },
+  groupedData: {
     group: 'attr',
     type: object,
     config: [
@@ -125,8 +139,8 @@ const preKnobs = {
 };
 
 const variants = [
-  { name: 'default', excludes: [] },
-  { name: 'minimal', includes: [] },
+  { name: 'default', excludes: ['data'] },
+  { name: 'minimal', includes: ['data'] },
 ];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
