@@ -159,7 +159,7 @@ Current Version: 0.1
 | **Components**           | **State**          | **Link**                                                                         |
 | ------------------------ | ------------------ | -------------------------------------------------------------------------------- |
 | **CvAccordion**          | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvAccordion                      |
-| CvBarGraph               | :heavy_minus_sign: |                                                                                  |
+| CvBarGraph               | :warning:          | https://github.com/carbon-design-system/carbon-components-vue/issues/54          |
 | **CvBreadcrumb**         | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvBreadcrumb                     |
 | **CvButton**             | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvButton                         |
 | **CvCheckbox**           | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvCheckbox                       |

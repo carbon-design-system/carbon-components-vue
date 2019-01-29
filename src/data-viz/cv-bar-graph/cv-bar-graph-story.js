@@ -150,12 +150,6 @@ for (const story of storySet) {
     story.name,
     () => {
       const settings = story.knobs();
-      settings.data.testData = [
-        { x: new Date('2018-11-01'), y: [10, 20, 30, 15, 50] },
-        { x: new Date('2018-12-01'), y: [40, 30, 70, 11, 110] },
-        { x: new Date('2019-01-01'), y: [20, 0, -110, undefined, 20] },
-        { x: new Date('2019-02-01'), y: [60, 55.3, 50, 30, 90] },
-      ];
       // ----------------------------------------------------------------
 
       const templateString = `
