@@ -38,6 +38,7 @@ import * as d3 from 'd3';
 import 'd3-transition';
 
 const axisOffset = 16;
+const numYAxisTicksHint = 4;
 
 export default {
   name: 'CvBarGraph',
@@ -107,8 +108,8 @@ export default {
     yAxisGenerator() {
       return d3
         .axisLeft()
-        .scale(this.yScale.nice())
-        .ticks(4)
+        .scale(this.yScale)
+        .ticks(numYAxisTicksHint)
         .tickSize(-this.plotArea.width)
         .tickFormat(this.yAxisFormat ? d3.format(this.yAxisFormat) : null);
     },
@@ -152,8 +153,12 @@ export default {
       const key = d3.select(this.$refs.key);
       const emptyContent = d3.select(this.$refs.emptyContent);
       const tooltip = d3.select(this.$refs.tooltip);
+
+      // Determine how many groups/sets of data are to be plotted.
       const numDataGroups = this.noData > 0 ? 0 : this.groupedData[0].y.length;
 
+      // Set up the scales to take account of the plot area size, data ranges
+      // and inter group and bar paddings.
       this.xScale
         .rangeRound([0, this.plotArea.width])
         .domain(this.groupedData.map(d => d.x))
@@ -167,10 +172,19 @@ export default {
 
       this.yScale
         .range([this.plotArea.height, 0])
-        .domain([this.yScaleMin, this.yScaleMax]);
+        .domain([this.yScaleMin, this.yScaleMax])
+        .nice();
 
+      // Set the SVG dimensions and offset the drawing root (top left of the
+      //  plot area) to take the top and left margins into account.
       svg.attr('width', this.width).attr('height', this.height);
 
+      root.attr(
+        'transform',
+        `translate(${this.margins.left}, ${this.margins.top})`
+      );
+
+      // (Re)draw the axes.
       const xAxisYPos =
         this.yScaleMin >= 0 ? this.plotArea.height : this.plotArea.height + 5;
       xAxis
@@ -188,12 +202,16 @@ export default {
         .selectAll('.tick text')
         .attr('x', -axisOffset);
 
-      const yScaleZeroTickIndex = this.yScale.ticks(4).indexOf(0);
+      // Make the y-axis gridline for zero solid, rather than dashed.
+      const yScaleZeroTickIndex = this.yScale
+        .ticks(numYAxisTicksHint)
+        .indexOf(0);
       yAxis
         .selectAll('.tick line')
         .filter((d, i) => i === yScaleZeroTickIndex)
         .attr('stroke-dasharray', 'none');
 
+      // Set up the axis labels.
       xAxisLabel
         .text(this.xAxisLabel)
         .attr(
@@ -209,11 +227,7 @@ export default {
             2}) rotate(-90)`
         );
 
-      root.attr(
-        'transform',
-        `translate(${this.margins.left}, ${this.margins.top})`
-      );
-
+      // (Re)draw the bar groups.
       let barGroups = root
         .selectAll('g.cv-bar-graph__bar-group')
         .data(this.groupedData, d => d.x);
@@ -233,6 +247,7 @@ export default {
         .duration(500)
         .attr('transform', d => `translate(${this.xScale(d.x)}, 0)`);
 
+      // (Re)draw the bars within the bar groups.
       let bars = barGroups
         .selectAll('rect')
         .data(d => d.y.map((y, i) => ({ x: i, y: y })));
@@ -279,12 +294,16 @@ export default {
         .attr('height', d => this.barHeight(d.y))
         .attr('y', d => this.barYPos(d.y));
 
+      // Set the position and height of the key (which may or may not be
+      // visible).
       key.attr(
         'style',
         `top:${this.margins.top}px; width:${this.margins.right -
           20}px; height:${this.plotArea.height}px;`
       );
 
+      // Set the visibility of the empty content overlay and make
+      // it cover the plot area.
       const emptyContentStyle =
         (this.noData ? '' : 'display:none;') +
         'top:' +
@@ -301,6 +320,7 @@ export default {
   },
 
   mounted() {
+    console.warn(`CVBarGraph API under review`);
     this.updateGraph();
   },
 

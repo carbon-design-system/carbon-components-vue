@@ -21,13 +21,18 @@ const preKnobs = {
     prop: {
       name: 'width',
       type: Number,
+      value: val => (val === null ? undefined : val),
     },
   },
   height: {
     group: 'attr',
     type: number,
     config: ['height', 300],
-    prop: { name: 'height', type: Number },
+    prop: {
+      name: 'height',
+      type: Number,
+      value: val => (val === null ? undefined : val),
+    },
   },
   margins: {
     group: 'attr',
@@ -72,13 +77,21 @@ const preKnobs = {
     group: 'attr',
     type: number,
     config: ['x-axis-label-offset', undefined],
-    prop: { name: 'x-axis-label-offset', type: Number },
+    prop: {
+      name: 'x-axis-label-offset',
+      type: Number,
+      value: val => (val === null ? undefined : val),
+    },
   },
   yAxisLabelOffset: {
     group: 'attr',
     type: number,
     config: ['y-axis-label-offset', undefined],
-    prop: { name: 'y-axis-label-offset', type: Number },
+    prop: {
+      name: 'y-axis-label-offset',
+      type: Number,
+      value: val => (val === null ? undefined : val),
+    },
   },
   keyLabels: {
     group: 'attr',
@@ -150,12 +163,6 @@ for (const story of storySet) {
     story.name,
     () => {
       const settings = story.knobs();
-      settings.data.testData = [
-        { x: new Date('2018-11-01'), y: [10, 20, 30, 15, 50] },
-        { x: new Date('2018-12-01'), y: [40, 30, 70, 11, 110] },
-        { x: new Date('2019-01-01'), y: [20, 0, -110, undefined, 20] },
-        { x: new Date('2019-02-01'), y: [60, 55.3, 50, 30, 90] },
-      ];
       // ----------------------------------------------------------------
 
       const templateString = `
