@@ -53,8 +53,15 @@ https://www.carbondesignsystem.com/data-visualization/bar-graph/code
 - height: Overall height of the chart (including x-axis) in pixels. Optional (default 300).
 - margins: An object containing the margins, in pixels, between the overall component and the plot area that contains
   the bars. These margins contain the x and y axes and their labels and any key. Optional (default `{top: 30, right: 20, bottom: 70, left: 65}`)
-- x-axis-time-format: If the x-axis categories are time-based this can be a d3 time format for controlling how the values are displayed, otherwise omitted. Optional (default none).
-- y-axis-format: A d3 number format for controlling how y-axis values are displayed. Optional (default none).
+- x-axis-time-format: If the x-axis categories are time-based this can be a d3
+  time format for controlling how the values are displayed, otherwise omitted.
+  Details of the supported formats can be found here
+  [https://github.com/d3/d3-time-format](https://github.com/d3/d3-time-format)
+  Optional (default none).
+- y-axis-format: A d3 number format for controlling how y-axis values are displayed.
+  Details of the supported formats can be found here
+  [https://github.com/d3/d3-format](https://github.com/d3/d3-format)
+  Optional (default none).
 - x-axis-label: A text string that is the x-axis label. Optional (default none).
 - y-axis-label: A text string that is the y-axis label. Optional (default none).
 - bar-colors: An array of CSS fill color strings for the bars, one color per data set. Optional (default `['#00a78f', '#3b1a40', '#473793', '#3c6df0', '#56d2bb']`)
