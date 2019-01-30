@@ -21,13 +21,18 @@ const preKnobs = {
     prop: {
       name: 'width',
       type: Number,
+      value: val => (val === null ? undefined : val),
     },
   },
   height: {
     group: 'attr',
     type: number,
     config: ['height', 300],
-    prop: { name: 'height', type: Number },
+    prop: {
+      name: 'height',
+      type: Number,
+      value: val => (val === null ? undefined : val),
+    },
   },
   margins: {
     group: 'attr',
@@ -72,13 +77,21 @@ const preKnobs = {
     group: 'attr',
     type: number,
     config: ['x-axis-label-offset', undefined],
-    prop: { name: 'x-axis-label-offset', type: Number },
+    prop: {
+      name: 'x-axis-label-offset',
+      type: Number,
+      value: val => (val === null ? undefined : val),
+    },
   },
   yAxisLabelOffset: {
     group: 'attr',
     type: number,
     config: ['y-axis-label-offset', undefined],
-    prop: { name: 'y-axis-label-offset', type: Number },
+    prop: {
+      name: 'y-axis-label-offset',
+      type: Number,
+      value: val => (val === null ? undefined : val),
+    },
   },
   keyLabels: {
     group: 'attr',
