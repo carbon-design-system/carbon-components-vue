@@ -28,67 +28,48 @@
 </template>
 
 <script>
-const toggleContent = (selector, on) => {
-  // hide content
-  const content = document.querySelectorAll(selector);
-  for (const element of content) {
-    // element.style.visibility = on;
-    if (!on) {
-      element.setAttribute('hidden', 'hidden');
-    } else {
-      element.removeAttribute('hidden');
-    }
-    element.setAttribute('aria-hidden', `${!on}`);
-  }
-};
+import uidMixin from '../../mixins/uid-mixin';
 
 export default {
   name: 'CvContentSwitcherButton',
+  mixins: [uidMixin],
   props: {
-    contentSelector: String,
+    contentSelector: { type: String, required: true },
     selected: Boolean,
   },
   watch: {
     selected(val) {
       if (val) {
         this.open();
+      } else {
+        this.close();
       }
     },
   },
   data() {
     return {
-      buttonId: undefined,
       dataSelected: false,
-      onOpenFunction: undefined,
     };
   },
   mounted() {
-    this.buttonId = Symbol('content switcher button');
     this.dataSelected = this.selected;
-    this.onOpenFunction = this.$parent.register(
-      this.buttonId,
-      this.contentSelector,
-      this.close
-    );
-
-    if (this.selected) {
-      this.open();
-    } else {
-      this.close();
-    }
+    this.$parent.$emit('cv:mounted', this);
   },
-  beforeDestroy() {
-    this.$parent.deregister(this.buttonId);
+  computed: {
+    buttonId() {
+      return this.uid;
+    },
+    isSelected() {
+      return this.selected;
+    },
   },
   methods: {
     close() {
       this.dataSelected = false;
-      toggleContent(this.contentSelector, false);
     },
     open() {
-      this.onOpenFunction(this.buttonId);
+      this.$parent.$emit('cv:open', this);
       this.dataSelected = true;
-      toggleContent(this.contentSelector, true);
     },
   },
 };
