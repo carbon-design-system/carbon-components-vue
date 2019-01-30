@@ -76,11 +76,11 @@ const preKnobs = {
   },
   eventsSimple: {
     group: 'attr',
-    value: `@onSimpleChange="actionSimpleChange"`,
+    value: `@simpleChange="actionSimpleChange"`,
   },
   events: {
     group: 'attr',
-    value: `@onChange="actionChange"`,
+    value: `@change="actionChange"`,
   },
 };
 

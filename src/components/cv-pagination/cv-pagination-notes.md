@@ -33,9 +33,6 @@ Minimal
   - By default the first page size is selected. This can be augmented by passing an object instead of a number e.g.
     [10, { value: 20, selected: true }, 30, 40, 50]
 
-Methods
-value: returns object indicating the start and length of the page - { start, length }
-
 ## Events
 
 Change - Contains value - { start, length }

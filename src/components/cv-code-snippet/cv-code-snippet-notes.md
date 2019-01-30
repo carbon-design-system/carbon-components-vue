@@ -52,11 +52,6 @@ http://www.carbondesignsystem.com/components/code-snippet/code
 1. If no primary or secondary button is specified then no footer is shown.
 2. If no listener is created for 'primary-click' or 'secondary-click' the associated event will cause the code-snippet to close
 
-## Methods
-
-- show
-- hide
-
 ## events
 
 - code-snippet-beingshown

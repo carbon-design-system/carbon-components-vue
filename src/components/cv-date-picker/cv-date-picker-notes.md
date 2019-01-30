@@ -77,5 +77,5 @@ http://www.carbondesignsystem.com/components/date-picker/code
 
 ## Events
 
-- onChange raised when single or ranged date picker value changes.
-- onSimpleChange raised when the simple or short text input fields are changed.
+- change raised when single or ranged date picker value changes.
+- simpleChange raised when the simple or short text input fields are changed.
