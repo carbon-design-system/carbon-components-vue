@@ -21,11 +21,6 @@ const toggleContent = (selector, on) => {
 
 export default {
   name: 'CvContentSwitcher',
-  data() {
-    return {
-      switcherButtons: [],
-    };
-  },
   created() {
     // add these on created otherwise cv:mounted is too early.
     this.$on('cv:open', srcComponent => this.onCvOpen(srcComponent));
