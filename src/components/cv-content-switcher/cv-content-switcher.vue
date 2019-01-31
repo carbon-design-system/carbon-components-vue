@@ -36,7 +36,10 @@ export default {
     onCvBeforeDestroy(srcComponent) {
       if (srcComponent.isSelected) {
         for (let index in this.$children) {
-          if (this.$children[index].buttonId !== srcComponent.buttonId) {
+          if (
+            this.$_CvContnetSwitcherButton &&
+            this.$children[index].buttonId !== srcComponent.buttonId
+          ) {
             this.$children[index].open();
             break;
           }
