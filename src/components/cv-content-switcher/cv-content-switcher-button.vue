@@ -52,15 +52,20 @@ export default {
     };
   },
   mounted() {
+    this.$_CvContnetSwitcherButton = true; // for use by parent with $children
+
     this.dataSelected = this.selected;
     this.$parent.$emit('cv:mounted', this);
+  },
+  beforeDestroy() {
+    this.$parent.$emit('cv:beforeDestroy', this);
   },
   computed: {
     buttonId() {
       return this.uid;
     },
     isSelected() {
-      return this.selected;
+      return this.dataSelected;
     },
   },
   methods: {
