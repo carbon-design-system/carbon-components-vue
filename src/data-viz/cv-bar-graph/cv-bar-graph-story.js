@@ -1,5 +1,11 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, object, number } from '@storybook/addon-knobs';
+import {
+  withKnobs,
+  text,
+  object,
+  number,
+  boolean,
+} from '@storybook/addon-knobs';
 // import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
@@ -92,6 +98,12 @@ const preKnobs = {
       type: Number,
       value: val => (val === null ? undefined : val),
     },
+  },
+  yAxisGridLines: {
+    group: 'attr',
+    type: boolean,
+    config: ['y-axis-grid-lines', true],
+    prop: { name: 'y-axis-grid-lines', type: Boolean },
   },
   keyLabels: {
     group: 'attr',
