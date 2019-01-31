@@ -55,24 +55,33 @@ export default {
       selectedIndex: 0,
     };
   },
+  created() {
+    // add these on created otherwise cv:mounted is too early.
+    this.$on('cv:mounted', srcComponent => this.onCvMount(srcComponent));
+    this.$on('cv:beforeDestory', srcComponent =>
+      this.onCvBeforeDestroy(srcComponent)
+    );
+  },
   methods: {
-    register(tab) {
-      this.tabs.push(tab);
+    onCvMount(srcComponent) {
+      this.tabs.push(srcComponent);
       this.checkSelected();
     },
-    deregister(tab) {
-      const tabIndex = this.tabs.findIndex(item => item.id === tab.id);
+    onCvBeforeDestroy(srcComponent) {
+      const tabIndex = this.tabs.findIndex(item => item.id === srcComponent.id);
       if (tabIndex > -1) {
         this.tabs.splice(tabIndex, 1);
       }
       this.checkSelected();
     },
     onTabClick(index) {
-      this.selectedIndex = index;
       for (let i = 0; i < this.tabs.length; i++) {
         this.tabs[i].internalSelected = i === index;
       }
-      this.$emit('tab-selected', index);
+      if (this.selectedIndex !== index) {
+        this.selectedIndex = index;
+        this.$emit('tab-selected', index); // only needed if changed.
+      }
     },
     selectById(id) {
       for (let i = 0; i < this.tabs.length; i++) {
@@ -83,17 +92,17 @@ export default {
       }
     },
     checkSelected() {
+      const childTabs = this.$children.filter(child => child.$_CvTab);
       let somethingSelected = false;
-      if (this.tabs.length) {
-        for (let i = 0; i < this.tabs.length; i++) {
-          if (this.tabs[i].internalSelected) {
-            this.onTabClick(i);
-            somethingSelected = true;
-          }
+
+      for (let i = 0; i < childTabs.length; i++) {
+        if (childTabs[i].internalSelected) {
+          this.onTabClick(i);
+          somethingSelected = true;
         }
-        if (!somethingSelected) {
-          this.onTabClick(0);
-        }
+      }
+      if (!somethingSelected && childTabs.length) {
+        this.onTabClick(0);
       }
     },
     moveLeft() {
