@@ -64,6 +64,7 @@ export default {
     yAxisLabel: String,
     xAxisLabelOffset: { type: Number, default: 50 },
     yAxisLabelOffset: { type: Number, default: 50 },
+    yAxisGridLines: { type: Boolean, default: true },
   },
   data() {
     return {
@@ -208,7 +209,9 @@ export default {
         .indexOf(0);
       yAxis
         .selectAll('.tick line')
+        .attr('visibility', this.yAxisGridLines ? 'visible' : 'hidden')
         .filter((d, i) => i === yScaleZeroTickIndex)
+        .attr('visibility', 'visible')
         .attr('stroke-dasharray', 'none');
 
       // Set up the axis labels.
@@ -356,6 +359,9 @@ export default {
       this.updateGraph();
     },
     yAxisLabelOffset() {
+      this.updateGraph();
+    },
+    yAxisGridLines() {
       this.updateGraph();
     },
   },
