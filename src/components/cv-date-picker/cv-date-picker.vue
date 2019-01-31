@@ -27,9 +27,9 @@
             fill-rule="nonzero"
           ></path>
         </svg>
-        <label :for="`${uid}-input-1`" class="bx--label">{{
-          getDateLabel
-        }}</label>
+        <label :for="`${uid}-input-1`" class="bx--label">
+          {{ getDateLabel }}
+        </label>
         <input
           :data-invalid="invalid"
           type="text"
@@ -49,9 +49,9 @@
         :class="{ 'bx--date-picker-container': kind === 'range' }"
         v-if="kind === 'range'"
       >
-        <label :for="`${uid}-input-2`" class="bx--label">{{
-          getDateEndLabel
-        }}</label>
+        <label :for="`${uid}-input-2`" class="bx--label">
+          {{ getDateEndLabel }}
+        </label>
         <input
           type="text"
           :id="`${uid}-input-2`"
@@ -167,19 +167,19 @@ export default {
   },
   methods: {
     onChange() {
-      // this.$emit('onChange', ev); // this is a property time
+      // this.$emit('change', ev); // this is a property time
       if (this.kind === 'range') {
-        this.$emit('onChange', {
+        this.$emit('change', {
           startDate: this.$refs.date.value,
           endDate: this.$refs.todate.value,
         });
       } else {
-        this.$emit('onChange', this.$refs.date.value);
+        this.$emit('change', this.$refs.date.value);
       }
     },
     onSimpleChange(ev) {
       if (!['single', 'range'].includes(this.kind)) {
-        this.$emit('onSimpleChange', ev.target.value);
+        this.$emit('simpleChange', ev.target.value);
       }
     },
   },
