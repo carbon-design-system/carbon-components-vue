@@ -42,6 +42,9 @@ export default {
       dataSelected: undefined,
     };
   },
+  mounted() {
+    this.$_CvDropdownItem = true; // for use by parent with $children
+  },
   computed: {
     internalSelected: {
       get() {

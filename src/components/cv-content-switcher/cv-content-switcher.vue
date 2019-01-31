@@ -30,17 +30,22 @@ export default {
     );
   },
   methods: {
+    switcherButtons() {
+      return this.$children.filter(item => item.$_CvContnetSwitcherButton);
+    },
     onCvMount(srcComponent) {
       toggleContent(srcComponent.contentSelector, srcComponent.isSelected);
     },
     onCvBeforeDestroy(srcComponent) {
       if (srcComponent.isSelected) {
-        for (let index in this.$children) {
+        const switcherButtons = this.switcherButtons();
+
+        for (let index in switcherButtons) {
           if (
             this.$_CvContnetSwitcherButton &&
-            this.$children[index].buttonId !== srcComponent.buttonId
+            switcherButtons[index].buttonId !== srcComponent.buttonId
           ) {
-            this.$children[index].open();
+            switcherButtons[index].open();
             break;
           }
         }
@@ -52,9 +57,7 @@ export default {
       this.$emit('selected', srcComponent.contentSelector);
       toggleContent(srcComponent.contentSelector, true);
 
-      const switcherButtons = this.$children.filter(
-        item => item.$_CvContnetSwitcherButton
-      );
+      const switcherButtons = this.switcherButtons();
 
       for (let index in switcherButtons) {
         if (switcherButtons[index].buttonId !== srcComponent.buttonId) {
