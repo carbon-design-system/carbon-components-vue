@@ -18,6 +18,7 @@ https://www.carbondesignsystem.com/data-visualization/bar-graph/code
   :bar-colors="['#00a78f', '#3b1a40', '#473793', '#3c6df0', '#56d2bb']"
   :x-axis-label-offset="50"
   :y-axis-label-offset="50"
+  :y-axis-grid-lines="false"
   :key-labels="['Data set #1', 'Data set #2', 'Data set #3', 'Data set #4', 'Data set #5']"
   :empty-text="There is no data"
   :data="[
@@ -67,6 +68,7 @@ https://www.carbondesignsystem.com/data-visualization/bar-graph/code
 - bar-colors: An array of CSS fill color strings for the bars, one color per data set. Optional (default `['#00a78f', '#3b1a40', '#473793', '#3c6df0', '#56d2bb']`)
 - x-axis-label-offset: The offset, in pixels, of the x-axis label from the x-axis. Optional (default 50).
 - y-axis-label-offset: The offset, in pixels, of the y-axis label from the y-axis. Optional (default 50).
+- y-axis-grid-lines: Whether or not to display grid lines on the graph for the y-axis. Optional (default true).
 - key-labels: An array of label strings to be used in the optional key that describes the data sets. Optional (default none).
 - empty-text: A text message to be displayed when there is no data. This is overridden by the emptyContent slot if one is provided. Optional (default none).
 - data: An array of objects containing the data to be plotted. Each object contains an 'x'
