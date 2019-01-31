@@ -7,10 +7,9 @@
 <script>
 export default {
   name: 'CvRadioGroup',
-  methods: {
-    onItemChange(val) {
-      this.$emit('change', val);
-    },
+  mounted() {
+    // pass on cv-radio-button change events
+    this.$on('cv:change', val => this.$emit('change', val));
   },
 };
 </script>

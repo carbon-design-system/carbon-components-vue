@@ -31,9 +31,7 @@ export default {
   },
   methods: {
     onChange() {
-      if (this.$parent.onItemChange) {
-        this.$parent.onItemChange(this.value);
-      }
+      this.$parent.$emit('cv:change', this.value); // emit to parent
       this.$emit('change', this.value);
     },
   },
