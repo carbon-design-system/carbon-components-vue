@@ -94,6 +94,17 @@ Vue.use(window['carbon-components-vue'].default);
 
 ## Project State
 
+**v1.0.0**
+Issues tagged targetting a v1.0.0 release
+
+**v0.3.0**
+
+- Initial data-viz/bar-graph added
+- Story corrections
+- Change use of \$parent to prefer events
+- Chagne use of \$children to check child type
+- Fix overflow and interactive-tooltip position on scroll/resize
+
 **v0.2.9**
 
 - Add gauge component - story is Data-viz/CvGauge

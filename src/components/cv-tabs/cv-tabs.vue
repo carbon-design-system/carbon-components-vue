@@ -69,7 +69,6 @@ export default {
       this.checkSelected();
     },
     onCvBeforeDestroy(srcComponent) {
-      console.dir(srcComponent);
       const tabIndex = this.tabs.findIndex(item => item.id === srcComponent.id);
       if (tabIndex > -1) {
         this.tabs.splice(tabIndex, 1);
