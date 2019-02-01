@@ -26,7 +26,9 @@ export default {
   },
   watch: {
     selected() {
-      this.$parent.selectById(this.id);
+      if (this.selected && 1) {
+        this.$parent.$emit('cv:selected', this);
+      }
     },
   },
   computed: {

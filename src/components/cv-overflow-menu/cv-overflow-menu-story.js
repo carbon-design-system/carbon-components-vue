@@ -54,6 +54,7 @@ for (const story of storySet) {
     <sv-template-view
       sv-margin
       sv-source='${templateString.trim()}'
+      sv-position="center"
       >
       <template slot="component">${templateString}</template>
     </sv-template-view>

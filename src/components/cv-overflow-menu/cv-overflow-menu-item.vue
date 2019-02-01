@@ -30,13 +30,13 @@ export default {
   },
   methods: {
     onClick() {
-      this.$parent.menuItemclick();
+      this.$parent.$emit('cv:click');
     },
     onFocusOut(ev) {
-      this.$parent.menuItemFocusOut(ev);
+      this.$parent.$emit('cv:focusout', ev);
     },
-    onEsc(ev) {
-      this.$parent.doClose(ev);
+    onEsc() {
+      this.$parent.$emit('cv:close');
     },
   },
 };

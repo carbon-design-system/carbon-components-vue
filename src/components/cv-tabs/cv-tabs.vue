@@ -61,6 +61,7 @@ export default {
     this.$on('cv:beforeDestory', srcComponent =>
       this.onCvBeforeDestroy(srcComponent)
     );
+    this.$on('cv:selected', srcComponent => this.onCvSelected(srcComponent));
   },
   methods: {
     onCvMount(srcComponent) {
@@ -68,6 +69,7 @@ export default {
       this.checkSelected();
     },
     onCvBeforeDestroy(srcComponent) {
+      console.dir(srcComponent);
       const tabIndex = this.tabs.findIndex(item => item.id === srcComponent.id);
       if (tabIndex > -1) {
         this.tabs.splice(tabIndex, 1);
@@ -83,13 +85,9 @@ export default {
         this.$emit('tab-selected', index); // only needed if changed.
       }
     },
-    selectById(id) {
-      for (let i = 0; i < this.tabs.length; i++) {
-        if (this.tabs[i].id === id) {
-          this.onTabClick(i);
-          continue;
-        }
-      }
+    onCvSelected(srcComponent) {
+      const tabIndex = this.tabs.findIndex(item => item.id === srcComponent.id);
+      this.onTabClick(tabIndex);
     },
     checkSelected() {
       const childTabs = this.$children.filter(child => child.$_CvTab);
