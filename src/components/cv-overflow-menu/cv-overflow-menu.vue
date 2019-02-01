@@ -56,10 +56,6 @@ export default {
     },
   },
   watch: {
-    offset(val) {
-      this.offset.left = val.left;
-      this.offset.top = val.top;
-    },
     flipMenu(val) {
       this.flipMenu = val;
     },
@@ -71,14 +67,25 @@ export default {
       top: 0,
     };
   },
+  created() {
+    this.$on('cv:close', this.doClose);
+    this.$on('cv:focusout', this.checkFocusOut);
+    this.$on('cv:click', this.menuItemclick);
+  },
   mounted() {
     // Check for los of focus
     this.$el.addEventListener('focusout', this.checkFocusOut);
 
     // move popup out to body to ensure it appears above other elements
     document.body.appendChild(this.$refs.popup);
-
-    //
+  },
+  computed: {
+    offsetLeft() {
+      return this.offset ? this.offset.left : 0;
+    },
+    offsetTop() {
+      return this.offset ? this.offset.top : 0;
+    },
   },
   methods: {
     checkFocusOut(ev) {
@@ -91,27 +98,34 @@ export default {
           )
         ) {
           this.open = false;
+          this.positionListen(false);
           setTimeout(() => {
             this.$el.focus();
           }, 1);
         }
       }
     },
-    menuItemFocusOut(ev) {
-      this.checkFocusOut(ev);
-    },
     menuItemclick() {
       this.open = false;
+      this.positionListen(false);
       setTimeout(() => {
         this.$el.focus();
       }, 1);
     },
     doClose() {
       this.open = false;
+      this.positionListen(false);
     },
-    doToggle() {
-      this.open = !this.open;
-
+    positionListen(on) {
+      if (on) {
+        window.addEventListener('scroll', this.positionMenu);
+        window.addEventListener('resize', this.positionMenu);
+      } else {
+        window.removeEventListener('scroll', this.positionMenu);
+        window.removeEventListener('resize', this.positionMenu);
+      }
+    },
+    positionMenu() {
       if (this.open) {
         const menuPosition = this.$el.getBoundingClientRect();
         setTimeout(() => {
@@ -119,13 +133,16 @@ export default {
             this.left =
               menuPosition.left +
               20 +
-              this.offset.left -
+              this.offsetLeft -
               this.$refs.popup.offsetWidth +
               this.$el.offsetWidth;
-            this.top = menuPosition.bottom + 2 + this.offset.top;
+            this.top =
+              menuPosition.bottom + 2 + this.offsetTop + window.scrollY;
           } else {
-            this.left = menuPosition.left - 20 + this.offset.left;
-            this.top = menuPosition.bottom + 2 + this.offset.top;
+            this.left =
+              menuPosition.left - 20 + this.offsetLeft + window.scrollX;
+            this.top =
+              menuPosition.bottom + 2 + this.offsetTop + window.scrollY;
           }
 
           this.$refs.popup
@@ -133,6 +150,12 @@ export default {
             .focus();
         }, 1);
       }
+    },
+    doToggle() {
+      this.open = !this.open;
+
+      this.positionMenu();
+      this.positionListen(this.open);
     },
   },
 };

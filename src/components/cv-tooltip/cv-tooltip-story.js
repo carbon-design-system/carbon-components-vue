@@ -99,7 +99,9 @@ for (const story of storySet) {
       const templateViewString = `
     <sv-template-view
       sv-margin
-      sv-source='${templateString.trim()}'>
+      sv-source='${templateString.trim()}'
+      sv-position="center"
+      >
       <template slot="other">
         <button @click="show" style="margin-left: 500px;">Show tip</button>
         <button @click="hide">Hide tip</button>

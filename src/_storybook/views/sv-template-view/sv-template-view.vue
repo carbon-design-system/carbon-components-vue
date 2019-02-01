@@ -8,7 +8,10 @@
       },
     ]"
   >
-    <section class="sv-template-view__component">
+    <section
+      class="sv-template-view__component"
+      :style="{ justifyContent: svPosition }"
+    >
       <slot name="component"></slot> <br />
     </section>
     <section class="sv-template-view__other">
@@ -54,6 +57,7 @@ export default {
     svMargin: { type: Boolean, default: true },
     svSource: String,
     svAltBack: Boolean,
+    svPosition: String, // flex position
   },
   data() {
     return {
@@ -109,6 +113,7 @@ $alt-back-color: #fff;
 $border: 1px solid #dfe3e6;
 
 .sv-template-view__component {
+  display: flex;
   border: $border;
   background-color: $back-color;
   .sv-template-view--margin & {
@@ -116,6 +121,9 @@ $border: 1px solid #dfe3e6;
     z-index: 999; // needed to keep modal components on top
     margin: 40px;
     padding: 20px;
+  }
+
+  .sv-center {
   }
   .sv-template-view--alt-back & {
     background-color: $alt-back-color;
