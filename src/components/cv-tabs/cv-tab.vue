@@ -26,7 +26,9 @@ export default {
   },
   watch: {
     selected() {
-      this.$parent.selectById(this.id);
+      if (this.selected && 1) {
+        this.$parent.$emit('cv:selected', this);
+      }
     },
   },
   computed: {
@@ -40,10 +42,12 @@ export default {
     },
   },
   mounted() {
-    this.$parent.register(this);
+    this.$_CvTab = true; // for use by parent with $children
+
+    this.$parent.$emit('cv:mounted', this);
   },
   beforeDestroy() {
-    this.$parent.deregister(this);
+    this.$parent.$emit('cv:beforeDestroy', this);
   },
 };
 </script>

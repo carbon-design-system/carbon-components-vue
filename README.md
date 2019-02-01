@@ -12,7 +12,11 @@
 ### General
 
 The components do not import any of the carbon styles themselves. Use the SCSS or CSS from carbon-components to provide the styling.
-You can also use the unpkg cdn to bring in the styles wholesale - unpkg.com/carbon-components/css/carbon-components.css aliases the latest css file.
+
+- In your main js file (where you include Vue) you can include the styles wholesale: `import "carbon-components/css/carbon-components.min.css";`
+- You can also use the unpkg cdn to bring in the styles wholesale: unpkg.com/carbon-components/css/carbon-components.min.css aliases the latest minified css file.
+- If you prefer to build the SCSS, in the `<style>` tag of your top-level component you can include the styles wholesale: `@import "~carbon-components/scss/globals/scss/styles.scss";`
+- Check out the [Carbon Design System developers](https://www.carbondesignsystem.com/getting-started/developers/vanilla) page for information on including individual component styles into your project.
 
 ### List of Available Components
 
@@ -47,7 +51,7 @@ alternatively if wanting to specify babel presets
 
 ```javascript
 // need babel
-import CarbonComponentsVue from 'carbon-components-vue/src/index';
+import CarbonComponentsVue from '@carbon/vue/src/index';
 Vue.use(CarbonComponentsVue);
 ```
 
@@ -65,7 +69,7 @@ In a component file
 ```javascript
 <script>
 ...
-import CvButton from 'carbon-components-vue/src/components/cv-button/cv-button';
+import CvButton from '@carbon/vue/src/components/cv-button/cv-button';
 ...
 components: {
   CvButton,
@@ -89,6 +93,24 @@ Vue.use(window['carbon-components-vue'].default);
 ```
 
 ## Project State
+
+**v1.0.0**
+Issues tagged targetting a v1.0.0 release
+https://github.com/carbon-design-system/carbon-components-vue/issues?q=is%3Aissue+is%3Aopen+label%3Av1.0
+
+**v0.3.0**
+
+- Initial data-viz/bar-graph added
+- Story corrections
+- Change use of \$parent to prefer events
+- Chagne use of \$children to check child type
+- Fix overflow and interactive-tooltip position on scroll/resize
+
+**v0.2.9**
+
+- Add gauge component - story is Data-viz/CvGauge
+- Add pie chart component - story is Data-viz/CvPieChart
+- Add router-link version of CvLink
 
 **v0.2.8**
 Correct duff deploy
@@ -149,7 +171,7 @@ Current Version: 0.1
 | **Components**           | **State**          | **Link**                                                                         |
 | ------------------------ | ------------------ | -------------------------------------------------------------------------------- |
 | **CvAccordion**          | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvAccordion                      |
-| CvBarGraph               | :heavy_minus_sign: |                                                                                  |
+| CvBarGraph               | :warning:          | http://vue.carbondesignsystem.com/?selectedKind=Data-Viz%2FCvBarGraph            |
 | **CvBreadcrumb**         | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvBreadcrumb                     |
 | **CvButton**             | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvButton                         |
 | **CvCheckbox**           | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvCheckbox                       |
@@ -158,24 +180,24 @@ Current Version: 0.1
 | CvDataTable              | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/51          |
 |                          |
 | CvDatePicker             | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvDatePicker&selectedStory=All   |
-| **CvDropdown**           | :heavy_minus_sign: | http://vue.carbondesignsystem.com/?selectedKind=CvDropdown                       |
+| **CvDropdown**           | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvDropdown                       |
 |                          |
-| CvFileUploader           | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvFileUploader&selectedStory=All |
-| **CvForm**               | :warning:          | http://vue.carbondesignsystem.com/?selectedKind=CvForm                           |
+| **CvFileUploader**       | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvFileUploader&selectedStory=All |
+| **CvForm**               | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvForm                           |
 | **CvGauge**              | :warning:          | https://github.com/carbon-design-system/carbon-components-vue/issues/49          |
 |                          |
-| **CvIcon**               | :warning:          | http://vue.carbondesignsystem.com/?selectedKind=CvIcon                           |
+| **CvIcon**               | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvIcon                           |
 | **CvInlineNotification** | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvInlineNotification             |
 | CvLineGraph              | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/53          |
 |                          |
-| **CvLink**               | :warning:          | http://vue.carbondesignsystem.com/?selectedKind=CvLink                           |
+| **CvLink**               | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvLink                           |
 | **CvList**               | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvList                           |
 | **CvLoading**            | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvLoading                        |
 | **CvModal**              | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvModal                          |
 | **CvNumberInput**        | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvNumberInput                    |
 | **CvOverflowMenu**       | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvOverflowMenu                   |
 | **CvPagination**         | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvPagination&selectedStory=All   |
-| CvPieChart               | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/52          |
+| CvPieChart               | :warning:          | https://github.com/carbon-design-system/carbon-components-vue/issues/52          |
 |                          |
 | **CvProgress**           | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvProgress                       |
 | **CvRadioButton**        | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvRadioButton                    |

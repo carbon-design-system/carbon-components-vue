@@ -26,11 +26,9 @@ export default {
     border: Boolean,
     condensed: Boolean,
   },
-  methods: {
-    onItemChange(val) {
-      // for selectable item
-      this.$emit('change', val);
-    },
+  mounted() {
+    // pass on cv-structured-list-item change events
+    this.$on('cv:change', val => this.$emit('change', val));
   },
 };
 </script>

@@ -1,7 +1,7 @@
 {
   "name": "@carbon/vue",
   "description": "A collection of components for the Carbon Design System built using Vue.js",
-  "version": "0.2.8",
+  "version": "0.3.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -31,6 +31,10 @@
     {
       "name": "Simon Moore",
       "email": "moores@uk.ibm.com"
+    },
+    {
+      "name": "Mariia Zrianina",
+      "email": "mzrianin@de.ibm.com"
     }
   ],
   "files": [

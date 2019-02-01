@@ -1,40 +1,37 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, number } from '@storybook/addon-knobs/vue';
+import { withKnobs, text, array, object } from '@storybook/addon-knobs/vue';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvGaugeNotesMD from './cv-gauge-notes.md';
-import CvGauge from './cv-gauge';
+import CvPieChartNotesMD from './cv-pie-chart-notes.md';
+import CvPieChart from './cv-pie-chart';
 
-const stories = storiesOf('Data-Viz/CvGauge', module);
+const stories = storiesOf('Data-Viz/CvPieChart', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
 const preKnobs = {
-  amount: {
+  dataArray: {
     group: 'attr',
-    type: number,
-    config: ['amount', 56], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: { name: 'amount', type: Number },
+    type: object,
+    config: [
+      'dataArray',
+      [['Gryffindor', 23], ['Slytherin', 12], ['Ravenclaw', 19]],
+    ],
+    prop: { name: 'dataArray', type: Array },
   },
-  total: {
+  colors: {
     group: 'attr',
-    type: number,
-    config: ['total', 100], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: { name: 'total', type: Number },
-  },
-  suffix: {
-    group: 'attr',
-    type: text,
-    config: ['suffix', 'GB'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: { name: 'suffix', type: String },
+    type: array,
+    config: ['colors', ['#3b1a40', '#473793', '#3c6df0']],
+    prop: { name: 'colors', type: Array },
   },
   header: {
     group: 'attr',
     type: text,
-    config: ['header', 'Example Header'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    config: ['header', 'Example Header'],
     prop: { name: 'header', type: String },
   },
 };
@@ -50,8 +47,8 @@ for (const story of storySet) {
       const settings = story.knobs();
 
       const templateString = `
-  <cv-gauge ${settings.group.attr}>
-  </cv-gauge>
+  <cv-pie-chart ${settings.group.attr}>
+  </cv-pie-chart>
   `;
 
       // ----------------------------------------------------------------
@@ -66,7 +63,7 @@ for (const story of storySet) {
 
       return {
         components: {
-          CvGauge,
+          CvPieChart,
           SvTemplateView,
         },
         props: settings.props,
@@ -74,7 +71,7 @@ for (const story of storySet) {
       };
     },
     {
-      notes: { markdown: CvGaugeNotesMD },
+      notes: { markdown: CvPieChartNotesMD },
     }
   );
 }

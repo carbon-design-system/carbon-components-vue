@@ -27,10 +27,10 @@
       'bx--dropdown--open': open,
     }"
     v-bind="$attrs"
-    @keypress.down.prevent="onDown"
-    @keypress.up.prevent="onUp"
-    @keypress.enter.prevent="onClick"
-    @keypress.esc.prevent="onEsc"
+    @keydown.down.prevent="onDown"
+    @keydown.up.prevent="onUp"
+    @keydown.enter.prevent="onClick"
+    @keydown.esc.prevent="onEsc"
     @click="onClick"
   >
     <li class="bx--dropdown-text" ref="valueContent">{{ placeholder }}</li>
@@ -94,8 +94,9 @@ export default {
         return this.dataValue;
       },
       set(val) {
-        for (let index in this.$children) {
-          let child = this.$children[index];
+        const childItems = this.dropdownItems();
+        for (let index in childItems) {
+          let child = childItems[index];
           let selected = child.value === val;
           child.internalSelected = selected;
 
@@ -103,17 +104,24 @@ export default {
             this.$refs.valueContent.innerHTML = child.internalContent;
           }
         }
-        this.dataValue = val;
-        this.$emit('change', this.dataValue);
+        if (this.dataValue !== val) {
+          // only raise event on change
+          this.dataValue = val;
+          this.$emit('change', this.dataValue);
+        }
       },
     },
   },
   methods: {
+    dropdownItems() {
+      return this.$children.filter(item => item.$_CvDropdownItem);
+    },
     doMove(up) {
       // requery could have changed
       let currentFocusEl = this.$el.querySelector('.cv-dropdown-item :focus');
       let currentFocusValue;
-      let last = this.$children.length - 1;
+      let childItems = this.dropdownItems();
+      let last = childItems.length - 1;
       let currentFocusIndex = up ? 0 : last;
       let nextFocusIndex;
 
@@ -124,24 +132,24 @@ export default {
       }
 
       if (currentFocusValue !== undefined) {
-        currentFocusIndex = this.$children.findIndex(
+        currentFocusIndex = childItems.findIndex(
           child => child.value === currentFocusValue
         );
       }
 
       if (up) {
         nextFocusIndex = currentFocusIndex > 0 ? currentFocusIndex - 1 : last;
-        if (this.$children[nextFocusIndex].internalSelected) {
+        if (childItems[nextFocusIndex].internalSelected) {
           nextFocusIndex = nextFocusIndex > 0 ? nextFocusIndex - 1 : last;
         }
       } else {
         nextFocusIndex = currentFocusIndex < last ? currentFocusIndex + 1 : 0;
-        if (this.$children[nextFocusIndex].internalSelected) {
+        if (childItems[nextFocusIndex].internalSelected) {
           nextFocusIndex = nextFocusIndex < last ? nextFocusIndex + 1 : 0;
         }
       }
 
-      this.$children[nextFocusIndex].setFocus();
+      childItems[nextFocusIndex].setFocus();
     },
     onDown() {
       if (!this.open) {

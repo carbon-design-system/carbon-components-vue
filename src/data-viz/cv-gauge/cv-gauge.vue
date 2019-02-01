@@ -68,11 +68,11 @@ export default {
   },
   watch: {
     amount: function(newVal) {
-      this.setForegroundArc(newVal / this.total);
+      this.updateForegroundArc(newVal / this.total);
       this.setAmountText(`${newVal}${this.suffix}`);
     },
     total: function(newVal) {
-      this.setForegroundArc(this.amount / newVal);
+      this.updateForegroundArc(this.amount / newVal);
       this.setTotalText(`/${newVal}${this.suffix}`);
     },
     suffix: function(newVal) {
@@ -109,7 +109,7 @@ export default {
         .style('opacity', 1)
         .text(val);
     },
-    setForegroundArc(val) {
+    setForegroundArc(quotient) {
       this.g
         .append('path')
         .datum({ endAngle: 0 })
@@ -117,9 +117,21 @@ export default {
         .transition()
         .duration(1000)
         .delay(1000)
-        .attrTween('d', this.arcTween(val * tau));
+        .attrTween('d', this.arcTween(quotient * tau));
+    },
+    setBackgroundArc() {
+      this.g
+        .append('path')
+        .datum({ endAngle: tau })
+        .style('fill', '#dfe3e6')
+        .attr('d', arc);
+    },
+    updateForegroundArc(quotient) {
+      this.g.selectAll('path:last-of-type').remove();
+      this.setForegroundArc(quotient);
     },
     visualizeGauge() {
+      this.setBackgroundArc();
       this.setForegroundArc(this.amount / this.total);
       this.setAmountText(`${this.amount}${this.suffix}`);
       this.setTotalText(`/${this.total}${this.suffix}`);
@@ -133,12 +145,6 @@ export default {
     this.g = svg
       .append('g')
       .attr('transform', `translate(${boxSize / 2}, ${boxSize / 2})`);
-    // Background Arc
-    this.g
-      .append('path')
-      .datum({ endAngle: tau })
-      .style('fill', '#dfe3e6')
-      .attr('d', arc);
 
     this.amountText = d3.select('.cv-gauge__amount');
     this.totalText = d3.select('.cv-gauge__total');

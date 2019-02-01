@@ -17,10 +17,18 @@ import CvStructuredListItemSelectable from './_cv-structured-list-item-selectabl
 
 export default {
   name: 'CvStructuredListItem',
+  inheritAttrs: false,
   components: { CvStructuredListItemStandard, CvStructuredListItemSelectable },
   props: {
     value: { type: String, default: '' },
     modelValue: { type: String },
+  },
+  mounted() {
+    // pass on cv-structured-list-item-selectable change events
+    this.$on('cv:change', val => {
+      this.$parent.$emit('cv:change', this.value); // emit to parent
+      this.$emit('change', val);
+    });
   },
   computed: {
     tagType() {
@@ -30,15 +38,6 @@ export default {
     },
     selectable() {
       return this.$parent.selectable;
-    },
-  },
-  methods: {
-    onItemChange(val) {
-      // this along with relevant props propogates the onItemChange upawards to cv-structured-list
-      if (this.$parent.onItemChange) {
-        this.$parent.onItemChange(val);
-      }
-      this.$emit('change', this.value);
     },
   },
   model: {

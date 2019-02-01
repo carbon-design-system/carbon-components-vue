@@ -23,9 +23,21 @@ const preKnobs = {
       type: String,
     },
   },
+  to: {
+    group: 'attr',
+    type: text,
+    config: ['to', '#'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      name: 'to',
+      type: String,
+    },
+  },
 };
 
-const variants = [{ name: 'default' }];
+const variants = [
+  { name: 'a', includes: ['href'] },
+  { name: 'router-link', includes: ['to'] },
+];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 

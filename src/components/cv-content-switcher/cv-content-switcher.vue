@@ -5,39 +5,66 @@
 </template>
 
 <script>
+const toggleContent = (selector, on) => {
+  // hide content
+  const content = document.querySelectorAll(selector);
+  for (const element of content) {
+    // element.style.visibility = on;
+    if (!on) {
+      element.setAttribute('hidden', 'hidden');
+    } else {
+      element.removeAttribute('hidden');
+    }
+    element.setAttribute('aria-hidden', `${!on}`);
+  }
+};
+
 export default {
   name: 'CvContentSwitcher',
-  data() {
-    return {
-      switcherButtons: [],
-    };
+  created() {
+    // add these on created otherwise cv:mounted is too early.
+    this.$on('cv:open', srcComponent => this.onCvOpen(srcComponent));
+    this.$on('cv:mounted', srcComponent => this.onCvMount(srcComponent));
+    this.$on('cv:beforeDestroy', srcComponent =>
+      this.onCvBeforeDestroy(srcComponent)
+    );
   },
   methods: {
-    onOpen(buttonId) {
-      let openButton;
+    switcherButtons() {
+      return this.$children.filter(item => item.$_CvContnetSwitcherButton);
+    },
+    onCvMount(srcComponent) {
+      toggleContent(srcComponent.contentSelector, srcComponent.isSelected);
+    },
+    onCvBeforeDestroy(srcComponent) {
+      if (srcComponent.isSelected) {
+        const switcherButtons = this.switcherButtons();
 
-      for (let index in this.switcherButtons) {
-        if (this.switcherButtons[index].buttonId !== buttonId) {
-          this.switcherButtons[index].closeFunction();
-        } else {
-          openButton = this.switcherButtons[index];
+        for (let index in switcherButtons) {
+          if (
+            this.$_CvContnetSwitcherButton &&
+            switcherButtons[index].buttonId !== srcComponent.buttonId
+          ) {
+            switcherButtons[index].open();
+            break;
+          }
         }
       }
-      if (openButton !== undefined) {
-        this.$emit('selected', openButton.contentSelector);
-      }
+      // unhide content for destroyed srcComponent
+      toggleContent(srcComponent.contentSelector, true);
     },
-    register(buttonId, contentSelector, closeFunction) {
-      this.deregister(buttonId);
-      this.switcherButtons.push({ buttonId, contentSelector, closeFunction });
+    onCvOpen(srcComponent) {
+      this.$emit('selected', srcComponent.contentSelector);
+      toggleContent(srcComponent.contentSelector, true);
 
-      return this.onOpen;
-    },
-    deregister(buttonId) {
-      let index = this.switcherButtons.findIndex(
-        item => item.buttonId === buttonId
-      );
-      this.switcherButtons.slice(index, index + 1);
+      const switcherButtons = this.switcherButtons();
+
+      for (let index in switcherButtons) {
+        if (switcherButtons[index].buttonId !== srcComponent.buttonId) {
+          switcherButtons[index].close();
+          toggleContent(switcherButtons[index].contentSelector, false);
+        }
+      }
     },
   },
 };
