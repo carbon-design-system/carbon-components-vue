@@ -10,7 +10,7 @@
   >
     <section
       class="sv-template-view__component"
-      :style="{ justifyContent: svPosition }"
+      :style="{ alignItems: svPosition }"
     >
       <slot name="component"></slot> <br />
     </section>
@@ -114,6 +114,7 @@ $border: 1px solid #dfe3e6;
 
 .sv-template-view__component {
   display: flex;
+  flex-direction: column;
   border: $border;
   background-color: $back-color;
   .sv-template-view--margin & {
