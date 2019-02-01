@@ -158,6 +158,9 @@ export default {
       this.positionListen(this.open);
     },
   },
+  beforeDestroy() {
+    this.positionListen(false);
+  },
 };
 </script>
 

@@ -235,6 +235,9 @@ export default {
       this.hide();
     }
   },
+  beforeDestroy() {
+    this.positionListen(false);
+  },
 };
 </script>
 
