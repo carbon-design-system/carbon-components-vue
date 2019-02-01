@@ -10,13 +10,6 @@ export default {
   props: {
     href: { type: String, required: true },
   },
-  beforeCreate() {
-    console.warn(
-      `${
-        this.$options._componentTag
-      }: may be replaced by carbon resource library`
-    );
-  },
   computed: {
     iconHref() {
       if (this.href.toLowerCase().startsWith('cv(')) {
