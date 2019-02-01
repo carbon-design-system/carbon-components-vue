@@ -96,6 +96,7 @@ Vue.use(window['carbon-components-vue'].default);
 
 **v1.0.0**
 Issues tagged targetting a v1.0.0 release
+https://github.com/carbon-design-system/carbon-components-vue/issues?q=is%3Aissue+is%3Aopen+label%3Av1.0
 
 **v0.3.0**
 
@@ -185,7 +186,7 @@ Current Version: 0.1
 | **CvForm**               | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvForm                           |
 | **CvGauge**              | :warning:          | https://github.com/carbon-design-system/carbon-components-vue/issues/49          |
 |                          |
-| **CvIcon**               | :warning:          | http://vue.carbondesignsystem.com/?selectedKind=CvIcon                           |
+| **CvIcon**               | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvIcon                           |
 | **CvInlineNotification** | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvInlineNotification             |
 | CvLineGraph              | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/53          |
 |                          |
