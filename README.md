@@ -94,6 +94,18 @@ Vue.use(window['carbon-components-vue'].default);
 
 ## Project State
 
+**v1.0.0**
+Issues tagged targetting a v1.0.0 release
+https://github.com/carbon-design-system/carbon-components-vue/issues?q=is%3Aissue+is%3Aopen+label%3Av1.0
+
+**v0.3.0**
+
+- Initial data-viz/bar-graph added
+- Story corrections
+- Change use of \$parent to prefer events
+- Chagne use of \$children to check child type
+- Fix overflow and interactive-tooltip position on scroll/resize
+
 **v0.2.9**
 
 - Add gauge component - story is Data-viz/CvGauge
@@ -174,7 +186,7 @@ Current Version: 0.1
 | **CvForm**               | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvForm                           |
 | **CvGauge**              | :warning:          | https://github.com/carbon-design-system/carbon-components-vue/issues/49          |
 |                          |
-| **CvIcon**               | :warning:          | http://vue.carbondesignsystem.com/?selectedKind=CvIcon                           |
+| **CvIcon**               | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvIcon                           |
 | **CvInlineNotification** | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvInlineNotification             |
 | CvLineGraph              | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/53          |
 |                          |
