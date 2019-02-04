@@ -65,14 +65,19 @@ const preKnobs = {
   },
   events: {
     group: 'attr',
-    value: `@change="onChange"`,
+    value: `@change="onChange" :files="storyFiles"`,
+  },
+  vModel: {
+    group: 'attr',
+    value: `v-model="storyFiles"`,
   },
 };
 
 const variants = [
-  { name: 'default', excludes: ['events'] },
+  { name: 'default', excludes: ['events', 'vModel'] },
   { name: 'minimal', includes: [] },
-  { name: 'events', includes: ['value', 'events'] },
+  { name: 'events', excludes: ['vModel'] },
+  { name: 'vModel', excludes: ['events'] },
 ];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
@@ -99,17 +104,18 @@ for (const story of storySet) {
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">
-        <label>Index<input class="file-index" type="number" value="0" /></label>
-        <label>State
-          <select class="file-state">
-            <option value="">''</option>
-            <option value="complete">complete</option>
-            <option value="uploading">uploading</option>
-          </select>
-        </label>
-        <button @click="setState">Set state</button>
-        <button @click="remove">Remove</button>
-        <button @click="clear">Clear all</button>
+        <div v-if="vModelOrEvents">
+          <ul>V-Model value</span>
+            <li v-for="(item, index) in storyFiles" :key="index" style="list-style: initial;">
+              <span>{{item.file.name}}: {{item.file.size}}</span>
+              <button @click="setState(index, '')">No state</button>
+              <button @click="setState(index, 'uploading')">uploading</button>
+              <button @click="setState(index, 'complete')">complete</button>
+              <button @click="remove(index)">remove</button>
+            </li>
+          </ul>
+        </div>
+        <button v-if="vModelOrEvents" @click="clear">Clear</button>
       </template>
     </sv-template-view>
   `;
@@ -118,42 +124,28 @@ for (const story of storySet) {
         components: { CvFileUploader, SvTemplateView },
         template: templateViewString,
         props: settings.props,
+        data() {
+          return {
+            storyFiles: [],
+            vModelOrEvents:
+              settings.group.attr.indexOf('v-model') > 0 ||
+              settings.group.attr.indexOf('@change') > 0,
+          };
+        },
         methods: {
-          onChange: action('cv-file-uploader - change event'),
-          setState() {
-            const index = parseInt(
-              document.querySelector('.file-index').value,
-              10
-            );
-            const state = document.querySelector('.file-state').value;
-
-            try {
-              // setState with index
-              this.$children[0].$children[0].setState(index, state);
-
-              // setState directly on file object
-              // this.$children[0].$children[0].files[index].setState(state);
-            } catch (err) {
-              // ignore;
-            }
+          actionChange: action('cv-file-uploader - change event'),
+          onChange(changedFiles) {
+            this.actionChange(changedFiles);
+            this.storyFiles = changedFiles;
           },
-          remove() {
-            const index = parseInt(
-              document.querySelector('.file-index').value,
-              10
-            );
-            try {
-              // remove with index
-              // this.$children[0].$children[0].remove(index);
-
-              // remove directly on file object
-              this.$children[0].$children[0].files[index].remove();
-            } catch (err) {
-              // ignore;
-            }
+          setState(index, state) {
+            this.storyFiles[index].state = state;
+          },
+          remove(index) {
+            this.storyFiles.splice(index, 1);
           },
           clear() {
-            this.$children[0].$children[0].clear();
+            this.storyFiles = [];
           },
         },
       };
