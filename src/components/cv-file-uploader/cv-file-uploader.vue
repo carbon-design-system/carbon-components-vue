@@ -23,7 +23,7 @@
         <div
           data-file-container
           class="bx--file-container"
-          v-for="(file, index) in files"
+          v-for="(file, index) in internalFiles"
           :key="index"
         >
           <span class="bx--file__selected-file">
@@ -108,14 +108,32 @@ export default {
   inheritAttrs: false,
   props: {
     clearOnReselect: Boolean,
+    files: Array,
     label: String,
     helperText: String,
     initialStateUploading: Boolean,
     removable: Boolean,
     buttonLabel: { type: String, default: 'Select file' },
   },
+  model: {
+    prop: 'files',
+    event: 'change',
+  },
   created() {
-    this.CONSTS = Object.freeze(CONSTS);
+    this.STATES = Object.freeze(CONSTS.STATES);
+  },
+  data() {
+    return {
+      internalFiles: [],
+    };
+  },
+  mounted() {
+    this.internalFiles = this.files ? this.files : [];
+  },
+  watch: {
+    files() {
+      this.internalFiles = this.files ? this.files : [];
+    },
   },
   computed: {
     // Bind listeners at the component level to the embedded input element and
@@ -128,74 +146,31 @@ export default {
       };
     },
   },
-  data() {
-    return {
-      files: [],
-      initialFilelist: {},
-    };
-  },
-  mounted() {
-    this.initialFilelist = this.$el.querySelector('.bx--file-input').files;
-  },
   methods: {
-    getIndex(item) {
-      if (typeof item === 'object') {
-        return this.files.indexOf(item);
-      } else {
-        return item;
-      }
-    },
-    remove(item) {
-      // debugger; // eslint-disable-line
-      const index = this.getIndex(item);
-      if (this.files[index]) {
-        this.files.splice(index, 1);
-        this.$emit('change', this.files);
-      }
-    },
-    setState(item, state) {
-      // debugger; // eslint-disable-line
-      const index = this.getIndex(item);
-      if (this.files[index] && state !== this.files[index].STATES) {
-        if (
-          state === CONSTS.STATES.UPLOADING ||
-          state === CONSTS.STATES.COMPLETE
-        ) {
-          this.files[index].state = state;
-        } else {
-          this.files[index].state = CONSTS.STATES.NONE;
-        }
-        this.$emit('change', this.files);
-      }
-    },
-    clear() {
-      this.files = [];
-      this.$emit('change', this.files);
+    remove(index) {
+      this.internalFiles.splice(index, 1);
+      this.$emit('change', this.internalFiles);
     },
     onChange(ev) {
       if (ev.target.files.length !== 0 && this.clearOnReselect) {
-        this.files = [];
+        this.internalFiles = [];
       }
       for (const file of ev.target.files) {
-        const newPos = this.files.push({ state: CONSTS.STATES.NONE, file }) - 1;
-        const newItem = this.files[newPos];
-        newItem.state = this.initialStateUploading
-          ? CONSTS.STATES.UPLOADING
-          : CONSTS.STATES.NONE;
-        newItem.setState = state => {
-          this.setState(newItem, state);
-        };
-        newItem.remove = () => {
-          this.remove(newItem);
-        };
+        const newPos =
+          this.internalFiles.push({
+            state: this.initialStateUploading
+              ? CONSTS.STATES.UPLOADING
+              : CONSTS.STATES.NONE,
+            file,
+          }) - 1;
       }
-      this.$emit('change', this.files);
-      try {
-        // reset to initial empty Filelist
-        ev.target.files = this.initialFilelist;
-      } catch (err) {
-        // ignore
-      }
+      this.$emit('change', this.internalFiles);
+      // try {
+      //   // reset to initial empty Filelist
+      //   ev.target.files = {};
+      // } catch (err) {
+      //   // ignore
+      // }
     },
   },
 };

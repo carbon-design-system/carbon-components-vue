@@ -1,6 +1,6 @@
 const parsePreKnobs = (preKnobs, includes, excludes, variantExtra) => {
   return () => {
-    const knobs = { group: [], data: {}, raw: {}, props: {} };
+    const knobs = { group: [], data: {}, props: {} };
     const parsePreKnobs = (thePreNobs, override) => {
       for (let key in thePreNobs) {
         const preKnob = thePreNobs[key];
