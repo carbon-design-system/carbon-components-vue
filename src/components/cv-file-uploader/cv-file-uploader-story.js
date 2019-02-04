@@ -18,8 +18,20 @@ const preKnobs = {
   label: {
     group: 'attr',
     type: text,
-    config: ['label', 'Add file'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    config: ['label', 'Choose files to upload'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: { name: 'label', type: String },
+  },
+  helperText: {
+    group: 'attr',
+    type: text,
+    config: ['helper text', 'Select the files you want to upload'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    prop: { name: 'helperText', type: String },
+  },
+  buttonLabel: {
+    group: 'attr',
+    type: text,
+    config: ['button label', 'Add file'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    prop: { name: 'buttonLabel', type: String },
   },
   accept: {
     group: 'attr',
@@ -53,14 +65,14 @@ const preKnobs = {
   },
   events: {
     group: 'attr',
-    value: `@input="onInput"`,
+    value: `@change="onChange"`,
   },
 };
 
 const variants = [
   { name: 'default', excludes: ['events'] },
-  { name: 'minimal', includes: ['label'] },
-  { name: 'events', includes: ['label', 'value', 'events'] },
+  { name: 'minimal', includes: [] },
+  { name: 'events', includes: ['value', 'events'] },
 ];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
@@ -107,7 +119,7 @@ for (const story of storySet) {
         template: templateViewString,
         props: settings.props,
         methods: {
-          onInput: action('cv-file-uploader - input event'),
+          onChange: action('cv-file-uploader - change event'),
           setState() {
             const index = parseInt(
               document.querySelector('.file-index').value,
