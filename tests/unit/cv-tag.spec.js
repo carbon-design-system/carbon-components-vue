@@ -19,4 +19,14 @@ describe('CvTag.vue', () => {
   it('checks props.kind has default', () => {
     expect(CvTag.props.kind.default).toBeDefined();
   });
+
+  it('matches snapshot', () => {
+    const label = 'I am a tag';
+    const kind = 'beta';
+    const wrapper = shallowMount(CvTag, {
+      propsData: { label, kind },
+    });
+
+    expect(wrapper.html()).toMatchSnapshot();
+  });
 });
