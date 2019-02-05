@@ -156,13 +156,12 @@ export default {
         this.internalFiles = [];
       }
       for (const file of ev.target.files) {
-        const newPos =
-          this.internalFiles.push({
-            state: this.initialStateUploading
-              ? CONSTS.STATES.UPLOADING
-              : CONSTS.STATES.NONE,
-            file,
-          }) - 1;
+        this.internalFiles.push({
+          state: this.initialStateUploading
+            ? CONSTS.STATES.UPLOADING
+            : CONSTS.STATES.NONE,
+          file,
+        });
       }
       this.$emit('change', this.internalFiles);
       // try {
