@@ -54,8 +54,7 @@
         style="position: absolute; height: 1px; width: 1px; left: -9999px"
         @focus="focusBeforeContent"
       />
-      <span class="bx--tooltip__caret"></span>
-      <slot name="content"></slot>
+      <span class="bx--tooltip__caret"></span> <slot name="content"></slot>
       <div
         class="cv-interactive-tooltip__after-content"
         ref="afterContent"
