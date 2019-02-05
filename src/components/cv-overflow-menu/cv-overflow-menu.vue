@@ -3,26 +3,29 @@
     data-overflow-menu
     tabindex="0"
     @click="doToggle"
-    @keydown.enter.prevent="doToggle"
     @keydown.space.prevent
     @keyup.space.prevent="doToggle"
+    @keydown.enter.prevent="doToggle"
+    @keydown.tab="onOverflowMenuTab"
     :aria-label="label"
     aria-role="button"
     class="cv-overflow-menu bx--overflow-menu"
     :class="{ 'bx--overflow-menu--open': open }"
   >
-    <svg
-      class="bx--overflow-menu__icon"
-      width="3"
-      height="15"
-      viewBox="0 0 3 15"
-    >
-      <g fill-rule="evenodd">
-        <circle cx="1.5" cy="1.5" r="1.5"></circle>
-        <circle cx="1.5" cy="7.5" r="1.5"></circle>
-        <circle cx="1.5" cy="13.5" r="1.5"></circle>
-      </g>
-    </svg>
+    <slot name="trigger">
+      <svg
+        class="bx--overflow-menu__icon"
+        width="3"
+        height="15"
+        viewBox="0 0 3 15"
+      >
+        <g fill-rule="evenodd">
+          <circle cx="1.5" cy="1.5" r="1.5"></circle>
+          <circle cx="1.5" cy="7.5" r="1.5"></circle>
+          <circle cx="1.5" cy="13.5" r="1.5"></circle>
+        </g>
+      </svg>
+    </slot>
     <ul
       class="bx--overflow-menu-options"
       :class="{
@@ -33,8 +36,24 @@
       ref="popup"
       :id="uid"
       :style="{ left: left + 'px', top: top + 'px' }"
+      @focusout="checkFocusOut"
+      @mousedown.prevent="preventFocusOut"
     >
+      <div
+        class="cv-overflow-menu__before-content"
+        ref="beforeContent"
+        tabindex="0"
+        style="position: absolute; height: 1px; width: 1px; left: -9999px"
+        @focus="focusBeforeContent"
+      />
       <slot></slot>
+      <div
+        class="cv-overflow-menu__after-content"
+        ref="afterContent"
+        tabindex="0"
+        style="position: absolute; height: 1px; width: 1px; left: -9999px"
+        @focus="focusAfterContent"
+      />
     </ul>
   </div>
 </template>
@@ -67,18 +86,6 @@ export default {
       top: 0,
     };
   },
-  created() {
-    this.$on('cv:close', this.doClose);
-    this.$on('cv:focusout', this.checkFocusOut);
-    this.$on('cv:click', this.menuItemclick);
-  },
-  mounted() {
-    // Check for los of focus
-    this.$el.addEventListener('focusout', this.checkFocusOut);
-
-    // move popup out to body to ensure it appears above other elements
-    document.body.appendChild(this.$refs.popup);
-  },
   computed: {
     offsetLeft() {
       return this.offset ? this.offset.left : 0;
@@ -86,6 +93,10 @@ export default {
     offsetTop() {
       return this.offset ? this.offset.top : 0;
     },
+  },
+  created() {
+    this.$on('cv:close', this.doClose);
+    this.$on('cv:click', this.menuItemclick);
   },
   methods: {
     checkFocusOut(ev) {
@@ -100,7 +111,7 @@ export default {
           this.open = false;
           this.positionListen(false);
           setTimeout(() => {
-            this.$el.focus();
+            this.doFocus();
           }, 1);
         }
       }
@@ -109,7 +120,7 @@ export default {
       this.open = false;
       this.positionListen(false);
       setTimeout(() => {
-        this.$el.focus();
+        this.doFocus();
       }, 1);
     },
     doClose() {
@@ -144,19 +155,72 @@ export default {
             this.top =
               menuPosition.bottom + 2 + this.offsetTop + window.scrollY;
           }
-
-          this.$refs.popup
-            .querySelector('.bx--overflow-menu-options__btn')
-            .focus();
         }, 1);
       }
+    },
+    doFocus() {
+      let focusOn;
+      if (this.open) {
+        // set focus somewhere sensible, first focusable item or leave on over flow
+        let focusOnList = this.$refs.popup.querySelectorAll(
+          '.bx--overflow-menu-options__btn, button, link, input, textarea, [contentEditable="true"], [tabindex]'
+        );
+        for (let tryOn of focusOnList) {
+          if (
+            !// don't focus on before after or something that can't be tabbed to
+            (
+              tryOn.classList.contains('cv-overflow-menu__before-content') ||
+              tryOn.classList.contains('cv-overflow-menu__after-content') ||
+              tryOn.tabindex < 0
+            )
+          ) {
+            focusOn = tryOn;
+            break;
+          }
+        }
+        if (focusOn === null) {
+          focusOn = this.$el;
+        }
+      } else {
+        focusOn = this.$el;
+      }
+      setTimeout(() => {
+        focusOn.focus();
+      }, 1);
     },
     doToggle() {
       this.open = !this.open;
 
       this.positionMenu();
       this.positionListen(this.open);
+      this.doFocus();
     },
+    onOverflowMenuTab(ev) {
+      if (!ev.shiftKey) {
+        // move focus before content before tab press
+        this.$refs.beforeContent.focus();
+      }
+    },
+    focusBeforeContent(ev) {
+      if (this.$refs.popup.contains(ev.relatedTarget)) {
+        this.$el.focus();
+        this.open = false;
+      }
+    },
+    focusAfterContent() {
+      this.$el.focus();
+      this.open = false;
+    },
+    preventFocusOut() {
+      // This is here to prevent focus being lost if the user clicks on the contents of the interactive tool tip
+    },
+  },
+  mounted() {
+    // Check for los of focus
+    this.$el.addEventListener('focusout', this.checkFocusOut);
+
+    // move popup out to body to ensure it appears above other elements
+    document.body.appendChild(this.$refs.popup);
   },
   beforeDestroy() {
     this.positionListen(false);

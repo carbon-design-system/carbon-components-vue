@@ -28,7 +28,8 @@ NOTE: Default behaviour (no offset) automatically positions the popup menu.
 
 ### Slots
 
-One default content
+- default content
+- trigger - defaults to three dot icon
 
 ## CvOverflowMenuItem
 
