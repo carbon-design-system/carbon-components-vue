@@ -5,6 +5,7 @@
       'bx--overflow-menu-options__option--disabled': disabled,
       'bx--overflow-menu-options__option--danger': danger,
     }"
+    @keydown.esc.prevent="onEsc"
   >
     <button
       class="bx--overflow-menu-options__btn"
@@ -12,8 +13,6 @@
       :disabled="disabled"
       v-on="$listeners"
       @click="onClick"
-      @focusout="onFocusOut"
-      @keydown.esc.prevent="onEsc"
     >
       <slot></slot>
     </button>
@@ -31,9 +30,6 @@ export default {
   methods: {
     onClick() {
       this.$parent.$emit('cv:click');
-    },
-    onFocusOut(ev) {
-      this.$parent.$emit('cv:focusout', ev);
     },
     onEsc() {
       this.$parent.$emit('cv:close');
