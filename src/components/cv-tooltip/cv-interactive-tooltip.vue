@@ -54,7 +54,8 @@
         style="position: absolute; height: 1px; width: 1px; left: -9999px"
         @focus="focusBeforeContent"
       />
-      <span class="bx--tooltip__caret"></span> <slot name="content"></slot>
+      <span class="bx--tooltip__caret"></span>
+      <slot name="content"></slot>
       <div
         class="cv-interactive-tooltip__after-content"
         ref="afterContent"
@@ -116,6 +117,15 @@ export default {
     },
   },
   methods: {
+    positionListen(on) {
+      if (on) {
+        window.addEventListener('scroll', this.position);
+        window.addEventListener('resize', this.position);
+      } else {
+        window.removeEventListener('scroll', this.position);
+        window.removeEventListener('resize', this.position);
+      }
+    },
     position() {
       const menuPosition = this.$refs.trigger.getBoundingClientRect();
 
@@ -123,12 +133,17 @@ export default {
         this.left =
           menuPosition.left +
           0.5 +
-          (this.$refs.trigger.offsetWidth - this.$refs.popup.offsetWidth) / 2;
+          (this.$refs.trigger.offsetWidth - this.$refs.popup.offsetWidth) / 2 +
+          window.scrollX;
 
         if (this.direction === 'bottom') {
-          this.top = menuPosition.bottom + 10;
+          this.top = menuPosition.bottom + 10 + window.scrollY;
         } else {
-          this.top = menuPosition.top - 15 - this.$refs.popup.offsetHeight;
+          this.top =
+            menuPosition.top -
+            15 -
+            this.$refs.popup.offsetHeight +
+            window.scrollY;
         }
       } else {
         this.top =
@@ -136,16 +151,22 @@ export default {
           (this.$refs.trigger.offsetHeight -
             0.5 -
             this.$refs.popup.offsetHeight) /
-            2;
+            2 +
+          window.scrollY;
         if (this.direction === 'left') {
-          this.left = menuPosition.left - 10 - this.$refs.popup.offsetWidth;
+          this.left =
+            menuPosition.left -
+            10 -
+            this.$refs.popup.offsetWidth +
+            window.scrollX;
         } else {
-          this.left = menuPosition.right + 15;
+          this.left = menuPosition.right + 15 + window.scrollX;
         }
       }
     },
     show() {
       this.dataVisible = true;
+      this.positionListen(true);
 
       setTimeout(() => {
         this.position();
@@ -154,6 +175,7 @@ export default {
     },
     hide() {
       this.dataVisible = false;
+      this.positionListen(true);
     },
     toggle() {
       if (this.dataVisible) {
@@ -213,6 +235,9 @@ export default {
     } else {
       this.hide();
     }
+  },
+  beforeDestroy() {
+    this.positionListen(false);
   },
 };
 </script>

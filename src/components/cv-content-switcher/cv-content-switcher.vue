@@ -25,19 +25,44 @@ export default {
     // add these on created otherwise cv:mounted is too early.
     this.$on('cv:open', srcComponent => this.onCvOpen(srcComponent));
     this.$on('cv:mounted', srcComponent => this.onCvMount(srcComponent));
+    this.$on('cv:beforeDestroy', srcComponent =>
+      this.onCvBeforeDestroy(srcComponent)
+    );
   },
   methods: {
+    switcherButtons() {
+      return this.$children.filter(item => item.$_CvContnetSwitcherButton);
+    },
     onCvMount(srcComponent) {
       toggleContent(srcComponent.contentSelector, srcComponent.isSelected);
+    },
+    onCvBeforeDestroy(srcComponent) {
+      if (srcComponent.isSelected) {
+        const switcherButtons = this.switcherButtons();
+
+        for (let index in switcherButtons) {
+          if (
+            this.$_CvContnetSwitcherButton &&
+            switcherButtons[index].buttonId !== srcComponent.buttonId
+          ) {
+            switcherButtons[index].open();
+            break;
+          }
+        }
+      }
+      // unhide content for destroyed srcComponent
+      toggleContent(srcComponent.contentSelector, true);
     },
     onCvOpen(srcComponent) {
       this.$emit('selected', srcComponent.contentSelector);
       toggleContent(srcComponent.contentSelector, true);
 
-      for (let index in this.$children) {
-        if (this.$children[index].buttonId !== srcComponent.buttonId) {
-          this.$children[index].close();
-          toggleContent(this.$children[index].contentSelector, false);
+      const switcherButtons = this.switcherButtons();
+
+      for (let index in switcherButtons) {
+        if (switcherButtons[index].buttonId !== srcComponent.buttonId) {
+          switcherButtons[index].close();
+          toggleContent(switcherButtons[index].contentSelector, false);
         }
       }
     },
