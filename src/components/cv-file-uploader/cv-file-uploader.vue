@@ -164,12 +164,6 @@ export default {
         });
       }
       this.$emit('change', this.internalFiles);
-      // try {
-      //   // reset to initial empty Filelist
-      //   ev.target.files = {};
-      // } catch (err) {
-      //   // ignore
-      // }
     },
   },
 };
