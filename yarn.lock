@@ -974,7 +974,7 @@
     error-stack-parser "^2.0.0"
     string-width "^2.0.0"
 
-"@storybook/addon-actions@^4.1.4":
+"@storybook/addon-actions@^4.1.11":
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/@storybook/addon-actions/-/addon-actions-4.1.11.tgz#8946ea78f050ae2d06a2f2231ec56d1831942e15"
   integrity sha512-iVsxEPmOCuPMAaJhHbpxQhzEPzKnZad4GELNfKrwmmvv3mY+3UN/z208HguW4NHjhMJZVYSS3H/qic8CQS+pHw==
@@ -994,7 +994,7 @@
     react-inspector "^2.3.0"
     uuid "^3.3.2"
 
-"@storybook/addon-knobs@^4.1.4":
+"@storybook/addon-knobs@^4.1.11":
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/@storybook/addon-knobs/-/addon-knobs-4.1.11.tgz#fd6c90d62a5bf5f94899746a95b02f1ef127cd81"
   integrity sha512-UQzYZoo0WKHKHSayaEBLvyZNqlqCOKahXzT2r+hS3t6wRnHJSfPtEHD0xTYMJSkA5t+bhlIOFJy0tribd0sdPQ==
@@ -1014,7 +1014,7 @@
     react-lifecycles-compat "^3.0.4"
     util-deprecate "^1.0.2"
 
-"@storybook/addon-notes@^4.1.4":
+"@storybook/addon-notes@^4.1.11":
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/@storybook/addon-notes/-/addon-notes-4.1.11.tgz#bda018553e007080e73fce2d33495139a57222e5"
   integrity sha512-Fdc3YIYDVh7+WjcoWEvbyO5qnya4RLGzP2lxvaIllegMHIu8wU0ber7yb7+vRMa4XGbulUm4nU64D+H1liGlQw==
@@ -1025,7 +1025,7 @@
     marked "^0.5.2"
     prop-types "^15.6.2"
 
-"@storybook/addon-options@^4.1.4":
+"@storybook/addon-options@^4.1.11":
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/@storybook/addon-options/-/addon-options-4.1.11.tgz#88da466fa1a220126094de5198c6d2d69ea4e0e0"
   integrity sha512-JqtqnkVFk60LIANDZidv7NinTBxHZYloYNJmBzCM7iwqXQxpgYJ4t1bKkv4u7I4Bkm9w3+VIXV5QnfgDC7Y8uA==
@@ -1034,7 +1034,7 @@
     core-js "^2.5.7"
     util-deprecate "^1.0.2"
 
-"@storybook/addon-storysource@^4.1.4":
+"@storybook/addon-storysource@^4.1.11":
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/@storybook/addon-storysource/-/addon-storysource-4.1.11.tgz#c758a3b4027775fad4602dda1e1ba77cbcc994ce"
   integrity sha512-ZLLRWNEJPLh+aiB28kgG/S/Ea80tPDcvFr8eRP90L+YjW5wufMRDD0fLvojVUiMuCZwWEVOCVriXTQnTzD5WFg==
@@ -1253,7 +1253,7 @@
     react-modal "^3.6.1"
     react-treebeard "^3.1.0"
 
-"@storybook/vue@^4.1.4":
+"@storybook/vue@^4.1.11":
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/@storybook/vue/-/vue-4.1.11.tgz#45e7b037b65b4a28d4025dfab251cb7464875edc"
   integrity sha512-ArZH1F1TWrRsvX2V5pq5qsbS3F0009ceZc4N9n+yGe7/cJSL4USvhIPP3y/dLk4ED+EMI087zD37cuEWObMdNQ==
@@ -12501,7 +12501,7 @@ source-map-support@^0.4.15:
   dependencies:
     source-map "^0.5.6"
 
-source-map-support@^0.5.6, source-map-support@~0.5.6:
+source-map-support@^0.5.6, source-map-support@~0.5.9:
   version "0.5.10"
   resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.5.10.tgz#2214080bc9d51832511ee2bab96e3c2f9353120c"
   integrity sha512-YfQ3tQFTK/yzlGJuX8pTwa4tifQj4QS2Mj7UegOu8jAz59MqIiMGPXxQhVQiIMNzayuUSF/jEuVnfFF5JqybmQ==
@@ -13173,14 +13173,14 @@ terser-webpack-plugin@^1.1.0, terser-webpack-plugin@^1.2.1:
     webpack-sources "^1.1.0"
     worker-farm "^1.5.2"
 
-terser@3.14.1, terser@^3.16.1:
-  version "3.14.1"
-  resolved "https://registry.yarnpkg.com/terser/-/terser-3.14.1.tgz#cc4764014af570bc79c79742358bd46926018a32"
-  integrity sha512-NSo3E99QDbYSMeJaEk9YW2lTg3qS9V0aKGlb+PlOrei1X02r1wSBHCNX/O+yeTRFSWPKPIGj6MqvvdqV4rnVGw==
+terser@^3.16.1:
+  version "3.16.1"
+  resolved "https://registry.yarnpkg.com/terser/-/terser-3.16.1.tgz#5b0dd4fa1ffd0b0b43c2493b2c364fd179160493"
+  integrity sha512-JDJjgleBROeek2iBcSNzOHLKsB/MdDf+E/BOAJ0Tk9r7p9/fVobfv7LMJ/g/k3v9SXdmjZnIlFd5nfn/Rt0Xow==
   dependencies:
     commander "~2.17.1"
     source-map "~0.6.1"
-    source-map-support "~0.5.6"
+    source-map-support "~0.5.9"
 
 test-exclude@^4.2.1:
   version "4.2.3"

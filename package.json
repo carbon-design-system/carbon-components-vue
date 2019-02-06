@@ -68,12 +68,12 @@
     "@babel/core": "^7.2.2",
     "@commitlint/cli": "^7.2.1",
     "@commitlint/config-conventional": "^7.1.2",
-    "@storybook/addon-actions": "^4.1.4",
-    "@storybook/addon-knobs": "^4.1.4",
-    "@storybook/addon-notes": "^4.1.4",
-    "@storybook/addon-options": "^4.1.4",
-    "@storybook/addon-storysource": "^4.1.4",
-    "@storybook/vue": "^4.1.4",
+    "@storybook/addon-actions": "^4.1.11",
+    "@storybook/addon-knobs": "^4.1.11",
+    "@storybook/addon-notes": "^4.1.11",
+    "@storybook/addon-options": "^4.1.11",
+    "@storybook/addon-storysource": "^4.1.11",
+    "@storybook/vue": "^4.1.11",
     "@vue/cli-plugin-babel": "^3.4.0",
     "@vue/cli-plugin-eslint": "^3.4.0",
     "@vue/cli-plugin-unit-jest": "^3.4.0",
@@ -105,9 +105,6 @@
     "vue-jest": "^3.0.2",
     "vue-loader": "^15.4.2",
     "vue-template-compiler": "^2.5.21"
-  },
-  "resolutions": {
-    "terser": "3.14.1"
   },
   "husky": {
     "hooks": {
