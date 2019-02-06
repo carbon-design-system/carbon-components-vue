@@ -6,6 +6,7 @@
         {
           'bx--label--disabled':
             $attrs.disabled !== undefined && $attrs.disabled,
+          'bx--checkbox-label__focus': hasFocus,
         },
       ]"
       :data-contained-checkbox-state="isChecked"
@@ -19,6 +20,8 @@
         :checked="isChecked === true"
         :aria-checked="`${isChecked}`"
         @change="onChange"
+        @focus="onFocus"
+        @blur="onBlur"
         :value="value"
       />
       {{ label }}
@@ -40,7 +43,16 @@ export default {
   data() {
     return {
       dataMixed: this.mixed,
+      hasFocus: false,
     };
+  },
+  methods: {
+    onFocus() {
+      this.hasFocus = true;
+    },
+    onBlur() {
+      this.hasFocus = false;
+    },
   },
 };
 </script>
