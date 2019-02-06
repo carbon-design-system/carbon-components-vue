@@ -6,9 +6,10 @@
 export default {
   name: 'CvTag',
   props: {
-    label: String,
+    label: { type: String, required: true },
     kind: {
       type: String,
+      default: 'ibm',
       validator(val) {
         return [
           'ibm',
