@@ -8,11 +8,9 @@
       },
     ]"
   >
-    <section
-      class="sv-template-view__component"
-      :style="{ alignItems: svPosition }"
-    >
-      <slot name="component"></slot> <br />
+    <section class="sv-template-view__component" :style="style">
+      <slot name="component"></slot>
+      <br />
     </section>
     <section class="sv-template-view__other">
       <h2 class="sv-tempate-view__label">Sample interaction</h2>
@@ -63,6 +61,14 @@ export default {
     return {
       propsJSON: '',
     };
+  },
+  computed: {
+    style() {
+      return {
+        alignItems:
+          this.svPosition && this.svPosition.length ? svPosition : 'flex-start',
+      };
+    },
   },
   mounted() {
     this.propsJSON = JSON.stringify(
