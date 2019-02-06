@@ -21,7 +21,7 @@ const preKnobs = {
       'rowSize',
       {
         Compact: 'compact',
-        Small: 'small',
+        Short: 'short',
         Default: '',
         Tall: 'tall',
       },
@@ -31,6 +31,24 @@ const preKnobs = {
     prop: {
       name: 'row-size',
       type: String,
+    },
+  },
+  autoWidth: {
+    group: 'attr',
+    type: boolean,
+    config: ['auto table width', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: Boolean,
+      name: 'auto-width',
+    },
+  },
+  borderless: {
+    group: 'attr',
+    type: boolean,
+    config: ['borderless', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: Boolean,
+      name: 'borderless',
     },
   },
   zebra: {

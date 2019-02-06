@@ -24,13 +24,15 @@
 export default {
   name: 'CvDataTable',
   props: {
-    tableData: { type: Array, requried: true },
+    autoWidth: Boolean,
+    borderless: Boolean,
     rowSize: {
       type: String,
       default: 'standard',
       validator: val =>
         ['compact', 'short', 'standard', 'tall', ''].includes(val),
     },
+    tableData: { type: Array, requried: true },
     zebra: Boolean,
   },
   mounted() {
@@ -44,12 +46,15 @@ export default {
       return this.tableData.filter((item, index) => index > 0);
     },
     modifierClasses() {
+      const prefix = 'bx--data-table-v2--';
       const sizeClass =
         this.rowSize.length === 0 || this.rowSize === 'standard'
           ? ''
-          : `bx--data-table-v2--${this.rowSize} `;
-      const zebraClass = this.zebra ? 'bx--data-table-v2--zebra ' : '';
-      return `${sizeClass}${zebraClass}`.trimRight();
+          : `${prefix}${this.rowSize} `;
+      const zebraClass = this.zebra ? `${prefix}zebra ` : '';
+      const autoWidthClas = this.autoWidth ? `${prefix}static ` : '';
+      const borderlessClass = this.borderless ? `${prefix}no-border ` : '';
+      return `${sizeClass}${zebraClass}${autoWidthClas}${borderlessClass}`.trimRight();
     },
   },
 };
