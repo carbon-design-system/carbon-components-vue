@@ -23,7 +23,7 @@ const preKnobs = {
 };
 
 const variants = [
-  { name: 'default', extra: { kind: { group: 'attr', value: 'kind="ibm"' } } },
+  { name: 'default' },
   { name: 'IBM', extra: { kind: { group: 'attr', value: 'kind="ibm"' } } },
   { name: 'beta', extra: { kind: { group: 'attr', value: 'kind="beta"' } } },
   {
