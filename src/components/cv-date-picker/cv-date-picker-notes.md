@@ -70,8 +70,11 @@ http://www.carbondesignsystem.com/components/date-picker/code
 
 - pattern: Regex pattern used for form validation '\\d{1,2}/\\d{1,2}/\\d{4}',
 - placeholder: Shown when date picker is empty,
-- invalid: Used to indicate the date selected is invalid,
-- invalidDateMessage: Message displayed if invalid is true
+- invalidMessage: Message displayed if invalid is true
+
+## Slots
+
+invalid-message: Overrides the invalid message property
 
 ###
 
