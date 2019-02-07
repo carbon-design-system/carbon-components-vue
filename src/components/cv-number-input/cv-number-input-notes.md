@@ -24,11 +24,16 @@ http://www.carbondesignsystem.com/components/number-input/code
 
 ## Attributes
 
-- invalid: set to true to indicate the current value is invalid
-- label: the label text for the input label
-- value: value
+- helper-text: optional helper text
+- invalid-message: optional error message
+- label: the label text for the input
+- theme: optional 'light',
+- value: optional initial value of the input,
+
+Other standard props e.g. disabled
 
 ## slots
 
-- invalid-message: Message shown when the invalid attribute is set
-- helper-text: Text to help the user enter appropriate data
+none - helper-text: optional and overrides the helper-text attribute
+
+- invalid-message: optional and overrides the invalid-message attribute
