@@ -51,6 +51,15 @@ const preKnobs = {
       name: 'borderless',
     },
   },
+  sortable: {
+    group: 'attr',
+    type: boolean,
+    config: ['sortable', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: Boolean,
+      name: 'sortable',
+    },
+  },
   zebra: {
     group: 'attr',
     type: boolean,
@@ -60,16 +69,37 @@ const preKnobs = {
       name: 'zebra',
     },
   },
-  tableData: {
+  headings: {
     group: 'attr',
     type: object,
     config: [
-      'Initial cheks',
+      'headings',
       {
-        tableData: [
-          ['Name', 'Protocol', '	Port', 'Rule', '	Attached Groups', 'Status'],
+        headings: [
+          'Name',
+          'Protocol',
+          'Port',
+          'Rule',
+          'Attached Groups',
+          'Status',
+        ],
+      },
+    ],
+    prop: {
+      type: Array,
+      name: 'headings',
+      value: val => val.headings,
+    },
+  },
+  data: {
+    group: 'attr',
+    type: object,
+    config: [
+      'data',
+      {
+        data: [
           [
-            'Load Balancer 1',
+            'Load Balancer 11',
             'HTTP',
             '80',
             'Round Robin',
@@ -77,9 +107,25 @@ const preKnobs = {
             'Active',
           ],
           [
-            'Load Balancer 5',
+            'Load Balancer 4',
             'HTTP',
-            '80',
+            '81',
+            'Round Robin',
+            'Maureen’s VM Groups',
+            'Active',
+          ],
+          [
+            'Load Balancer 2',
+            'HTTP',
+            '82',
+            'Round Robin',
+            'Maureen’s VM Groups',
+            'Active',
+          ],
+          [
+            'Load Balancer 3',
+            'HTTP',
+            '8080',
             'Round Robin',
             'Maureen’s VM Groups',
             'Active',
@@ -87,23 +133,7 @@ const preKnobs = {
           [
             'Load Balancer 5',
             'HTTP',
-            '80',
-            'Round Robin',
-            'Maureen’s VM Groups',
-            'Active',
-          ],
-          [
-            'Load Balancer 5',
-            'HTTP',
-            '80',
-            'Round Robin',
-            'Maureen’s VM Groups',
-            'Active',
-          ],
-          [
-            'Load Balancer 5',
-            'HTTP',
-            '80',
+            '8001',
             'Round Robin',
             'Maureen’s VM Groups',
             'Active',
@@ -113,8 +143,8 @@ const preKnobs = {
     ],
     prop: {
       type: Array,
-      name: 'tableData',
-      value: val => val.tableData,
+      name: 'data',
+      value: val => val.data,
     },
   },
 };
@@ -131,7 +161,7 @@ for (const story of storySet) {
       // ----------------------------------------------------------------
 
       const templateString = `
-<cv-data-table${settings.group.attr}>
+<cv-data-table${settings.group.attr} :table-data="internalData" @sort="onSort">
 </cv-data-table>
   `;
 
@@ -142,6 +172,9 @@ for (const story of storySet) {
       sv-margin
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
+      <template slot="other">
+        NOTE: Sorting and filtering are the responsibility of the component user. This component raises events to facilitate this.
+      </template>
     </sv-template-view>
   `;
 
@@ -152,6 +185,42 @@ for (const story of storySet) {
         },
         template: templateViewString,
         props: settings.props,
+        data() {
+          return {
+            internalData: this.data,
+          };
+        },
+        watch: {
+          data() {
+            this.internalData = this.data;
+          },
+        },
+        methods: {
+          onSort(sortBy) {
+            this.internalData.sort((a, b) => {
+              const itemA = a[sortBy.index];
+              const itemB = b[sortBy.index];
+
+              if (sortBy.order === 'descending') {
+                if (sortBy.index === 2) {
+                  // sort as number
+                  return parseFloat(itemA) - parseFloat(itemB);
+                } else {
+                  return itemB.localeCompare(itemA);
+                }
+              }
+              if (sortBy.order === 'ascending') {
+                if (sortBy.index === 2) {
+                  // sort as number
+                  return parseFloat(itemB) - parseFloat(itemA);
+                } else {
+                  return itemA.localeCompare(itemB);
+                }
+              }
+              return 0;
+            });
+          },
+        },
       };
     },
     {

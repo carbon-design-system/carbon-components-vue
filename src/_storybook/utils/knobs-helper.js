@@ -27,6 +27,9 @@ const parsePreKnobs = (preKnobs, includes, excludes, variantExtra) => {
         if (preKnob.sync) {
           thingType = 'sync';
         }
+        if (preKnob.data) {
+          thingType = 'data';
+        }
         if (!thingType && preKnob.slot) {
           thingType = 'slot';
         }
@@ -36,6 +39,10 @@ const parsePreKnobs = (preKnobs, includes, excludes, variantExtra) => {
         let value;
 
         switch (thingType) {
+          case 'data':
+            value = preKnob.data.value ? preKnob.data.value : val => val;
+            knobs.data[key] = value(preKnob.type(...preKnob.config));
+            break;
           case 'sync':
             knobs.group[preKnob.group] += `${prefix}:${
               preKnob.sync.name

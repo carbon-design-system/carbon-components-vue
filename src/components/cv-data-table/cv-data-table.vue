@@ -2,9 +2,14 @@
   <table class="bx--data-table-v2" :class="modifierClasses">
     <thead>
       <tr>
-        <th v-for="(heading, index) in headings" :key="`${index}:${heading}`">
-          <span class="bx--table-header-label">{{ heading }}</span>
-        </th>
+        <cv-data-table-headnig
+          v-for="(heading, index) in dataHeadings"
+          :key="`${index}:${heading}`"
+          :heading="heading.label ? heading.label : heading"
+          :sortable="sortable"
+          :order="heading.order"
+          @sort="val => onSort(index, val)"
+        />
       </tr>
     </thead>
     <tbody>
@@ -21,8 +26,13 @@
 </template>
 
 <script>
+import CvDataTableHeadnig from './_cv-data-table-heading';
+
 export default {
   name: 'CvDataTable',
+  components: {
+    CvDataTableHeadnig,
+  },
   props: {
     autoWidth: Boolean,
     borderless: Boolean,
@@ -32,18 +42,35 @@ export default {
       validator: val =>
         ['compact', 'short', 'standard', 'tall', ''].includes(val),
     },
-    tableData: { type: Array, requried: true },
+    sortable: Boolean,
+    headings: { type: Array, required: true },
+    data: { type: Array, requried: true },
     zebra: Boolean,
+  },
+  data() {
+    return {
+      dataHeadings: this.sortable
+        ? this.headings.map(item => ({
+            label: item,
+            order: 'none',
+          }))
+        : this.headings,
+    };
+  },
+  watch: {
+    sortable() {
+      this.watchHeadings();
+    },
+    headings() {
+      this.watchHeadings();
+    },
   },
   mounted() {
     console.warn('CvDataTable - Under construction, API will change.');
   },
   computed: {
-    headings() {
-      return this.tableData[0];
-    },
     rows() {
-      return this.tableData.filter((item, index) => index > 0);
+      return this.data;
     },
     modifierClasses() {
       const prefix = 'bx--data-table-v2--';
@@ -55,6 +82,23 @@ export default {
       const autoWidthClas = this.autoWidth ? `${prefix}static ` : '';
       const borderlessClass = this.borderless ? `${prefix}no-border ` : '';
       return `${sizeClass}${zebraClass}${autoWidthClas}${borderlessClass}`.trimRight();
+    },
+  },
+  methods: {
+    watchHeadings() {
+      this.dataHeadings = this.sortable
+        ? this.headings.map(item => ({
+            label: item,
+            order: 'none',
+          }))
+        : this.headings;
+    },
+    onSort(index, val) {
+      for (let heading of this.dataHeadings) {
+        heading.order = 'none';
+      }
+      this.dataHeadings[index].order = val;
+      this.$emit('sort', { index, order: val });
     },
   },
 };
