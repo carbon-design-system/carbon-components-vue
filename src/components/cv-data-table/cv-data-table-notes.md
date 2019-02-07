@@ -11,15 +11,25 @@ http://www.carbondesignsystem.com/components/DataTable/code
 </cv-data-table>
 ```
 
+**NOTE** Sorting and filtering are the responsibility of the component user. This component raises events to facilitate this.
+
 ## Attributes
 
-tableData - two dimensional array including headings of table data. Number of columns is expeccted to match heading count.
+headings - Number of columns is expeccted to match heading count.
+data - Two dimensional array
 
 auto-width - table will size use auto sizing
 borderless - table will have no border
-row-size - optional - default: 'standard'
 options: 'compact', 'small', 'standarad', '' or 'tall'
+sortable: can be sorted
+row-size - optional - default: 'standard'
 zebra - optional - default: false ; boolean is the table striped
+
+## Events
+
+sort({ index, order: 'ascending' or 'descending' or 'none' or ''})
+
+As per note sort and filter behviours are delegated to the component user.
 
 ### Additional
 
