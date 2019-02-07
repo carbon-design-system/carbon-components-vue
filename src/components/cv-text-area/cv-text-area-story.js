@@ -28,10 +28,20 @@ const preKnobs = {
   label: {
     group: 'attr',
     type: text,
-    config: ['label', 'Text input label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    config: ['label', 'Text area label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: {
       type: String,
       name: 'label',
+    },
+  },
+  value: {
+    group: 'attr',
+    type: text,
+    config: ['value', ''], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: String,
+      name: 'value',
+      value: val => (val.length ? val : null),
     },
   },
   disabled: {
@@ -51,10 +61,48 @@ const preKnobs = {
     group: 'attr',
     value: `@input="onInput"`,
   },
+  placeholder: {
+    group: 'attr',
+    value: 'placeholder="sample placeholder"',
+  },
+  helperText: {
+    group: 'attr',
+    type: text,
+    config: ['helper text', ''],
+    prop: {
+      name: 'helper-text',
+      type: String,
+      value: val => (val.length ? val : null),
+    },
+  },
+  helperTextSlot: {
+    group: 'slots',
+    value:
+      '<template slot="helper-text">This is a helpful slot overrides the property helper-text</template>',
+  },
+  invalidMessage: {
+    group: 'attr',
+    type: text,
+    config: ['invalid message', ''],
+    prop: {
+      name: 'invalid-message',
+      type: String,
+      value: val => (val.length ? val : null),
+    },
+  },
+  invalidMessageSlot: {
+    group: 'slots',
+    value:
+      '<template slot="invalid-message">Invalid message slot overrides the invalid-message property</template>',
+  },
 };
 
 const variants = [
-  { name: 'default', excludes: ['vModel', 'events'] },
+  {
+    name: 'default',
+    excludes: ['vModel', 'events', 'helperTextSlot', 'invalidMessageSlot'],
+  },
+  { name: 'helper and error slots', excludes: ['vModel', 'events'] },
   { name: 'minimal', includes: ['label'] },
   { name: 'events', includes: ['label', 'events'] },
   { name: 'vModel', includes: ['label', 'vModel'] },
@@ -71,7 +119,7 @@ for (const story of storySet) {
       // ----------------------------------------------------------------
 
       const templateString = `
-<cv-text-area${settings.group.attr}>
+<cv-text-area${settings.group.attr}>${settings.group.slots}
 </cv-text-area>
   `;
 
