@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
@@ -9,6 +9,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvAccordionNotesMD from './cv-accordion-notes.md';
 import CvAccordion from './cv-accordion';
 import CvAccordionItem from './cv-accordion-item';
+import CvAccordionSkeleton from './cv-accordion-skeleton';
 
 const stories = storiesOf('CvAccordion', module);
 stories.addDecorator(withKnobs).addDecorator(withNotes);
@@ -117,3 +118,23 @@ for (const story of storySet) {
     }
   );
 }
+
+const templateString = `<cv-accordion-skeleton></cv-accordion-skeleton>`;
+stories.add(
+  'skeleton',
+  () => ({
+    components: { SvTemplateView, CvAccordionSkeleton },
+    template: `
+      <sv-template-view
+        sv-margin
+        sv-position="center"
+        sv-source='${templateString.trim()}'>
+        <template slot="component">${templateString}</template>
+      </sv-template-view>
+    `,
+    props: {},
+  }),
+  {
+    notes: { markdown: CvAccordionNotesMD },
+  }
+);
