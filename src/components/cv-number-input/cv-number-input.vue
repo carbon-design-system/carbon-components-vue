@@ -52,7 +52,7 @@ export default {
     invalidMessage: { type: String, default: null },
     label: String,
     value: String,
-    invalid: {
+    invalid: /* deprecate */ {
       type: Boolean,
       default: undefined,
       validator(val) {
