@@ -5,9 +5,9 @@
       class="bx--number"
       :class="{
         'bx--number--light': theme === 'light',
-        'bx--number--helpertext': $slots['helper-text'],
+        'bx--number--helpertext': isHelper,
       }"
-      :data-invalid="invalid"
+      :data-invalid="isInvalid"
     >
       <div class="bx--number__controls">
         <button class="bx--number__control-btn up-icon" @click="doUp">
@@ -29,11 +29,11 @@
         v-on="inputListeners"
       />
       <label :for="uid" class="bx--label">{{ label }}</label>
-      <div class="bx--form-requirement" v-if="$slots['invalid-message']">
-        <slot name="invalid-message">Invalid number</slot>
+      <div class="bx--form-requirement" v-if="isInvalid">
+        <slot name="invalid-message">{{ invalidMessage }}</slot>
       </div>
-      <div class="bx--form__helper-text" v-if="$slots['helper-text']">
-        <slot name="helper-text"></slot>
+      <div class="bx--form__helper-text" v-if="isHelper">
+        <slot name="helper-text">{{ helperText }}</slot>
       </div>
     </div>
   </div>
@@ -48,9 +48,22 @@ export default {
   mixins: [uidMixin, themeMixin],
   inheritAttrs: false,
   props: {
+    helperText: { type: String, default: null },
+    invalidMessage: { type: String, default: null },
     label: String,
     value: String,
-    invalid: Boolean,
+    invalid: {
+      type: Boolean,
+      default: undefined,
+      validator(val) {
+        if (val !== undefined) {
+          console.warn(
+            'CvNumberInput: invalid prop deprecated in favour of invalidMessage'
+          );
+        }
+        return true;
+      },
+    },
   },
   data() {
     return {
@@ -78,6 +91,18 @@ export default {
         intVal = 0;
       }
       return intVal;
+    },
+    isInvalid() {
+      return (
+        this.$slots['invalid-message'] ||
+        (this.invalidMessage && this.invalidMessage.length)
+      );
+    },
+    isHelper() {
+      return (
+        this.$slots['helper-text'] ||
+        (this.helperText && this.helperText.length)
+      );
     },
   },
   methods: {
