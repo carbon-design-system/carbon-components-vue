@@ -77,8 +77,10 @@ const preKnobs = {
   },
   helperTextSlot: {
     group: 'slots',
-    value:
-      '<template slot="helper-text">This is a helpful slot overrides the property helper-text</template>',
+    slot: {
+      name: 'helper-text',
+      value: 'This is a helpful slot overrides the property helper-text',
+    },
   },
   invalidMessage: {
     group: 'attr',
@@ -92,8 +94,10 @@ const preKnobs = {
   },
   invalidMessageSlot: {
     group: 'slots',
-    value:
-      '<template slot="invalid-message">Invalid message slot overrides the invalid-message property</template>',
+    slot: {
+      name: 'invalid-message',
+      value: 'Invalid message slot overrides the invalid-message property',
+    },
   },
 };
 
