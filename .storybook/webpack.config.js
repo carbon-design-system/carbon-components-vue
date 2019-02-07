@@ -8,7 +8,7 @@ module.exports = (storybookBaseConfig, configType, defaultConfig) => {
     loader: require.resolve('@storybook/addon-storysource/loader'),
     options: {
       prettierConfig: {
-        parser: 'babylon', // Remove warnings when loading story source files
+        parser: 'babel', // Remove warnings when loading story source files
       },
     },
     enforce: 'pre',
