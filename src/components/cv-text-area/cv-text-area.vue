@@ -11,6 +11,9 @@
       ]"
       >{{ label }}</label
     >
+    <div class="bx--form__helper-text" v-if="isHelper">
+      <slot name="helper-text">{{ helperText }}</slot>
+    </div>
     <textarea
       :id="uid"
       class="bx--text-area"
@@ -18,7 +21,11 @@
       v-bind="$attrs"
       :value="value"
       v-on="inputListeners"
+      :data-invalid="isInvalid"
     ></textarea>
+    <div class="bx--form-requirement" v-if="isInvalid">
+      <slot name="invalid-message">{{ invalidMessage }}</slot>
+    </div>
   </div>
 </template>
 
@@ -31,6 +38,8 @@ export default {
   mixins: [uidMixin, themeMixin],
   inheritAttrs: false,
   props: {
+    helperText: { type: String, default: null },
+    invalidMessage: { type: String, default: null },
     label: String,
     value: String,
   },
@@ -43,6 +52,18 @@ export default {
         ...this.$listeners,
         input: event => this.$emit('input', event.target.value),
       };
+    },
+    isInvalid() {
+      return (
+        this.$slots['invalid-message'] ||
+        (this.invalidMessage && this.invalidMessage.length)
+      );
+    },
+    isHelper() {
+      return (
+        this.$slots['helper-text'] ||
+        (this.helperText && this.helperText.length)
+      );
     },
   },
 };
