@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import store from './cv-content-switcher-store';
+
 const toggleContent = (selector, on) => {
   // hide content
   const content = document.querySelectorAll(selector);
@@ -29,42 +31,74 @@ export default {
       this.onCvBeforeDestroy(srcComponent)
     );
   },
+  data() {
+    return {
+      store: store,
+    };
+  },
   methods: {
     switcherButtons() {
-      return this.$children.filter(item => item.$_CvContnetSwitcherButton);
+      return this.$children.filter(item => item.$_CvContentSwitcherButton);
     },
     onCvMount(srcComponent) {
-      toggleContent(srcComponent.contentSelector, srcComponent.isSelected);
+      this.processState(srcComponent, srcComponent.isSelected);
     },
     onCvBeforeDestroy(srcComponent) {
+      let nextOpen;
       if (srcComponent.isSelected) {
         const switcherButtons = this.switcherButtons();
 
         for (let index in switcherButtons) {
           if (
-            this.$_CvContnetSwitcherButton &&
+            switcherButtons[index].$_CvContentSwitcherButton &&
             switcherButtons[index].buttonId !== srcComponent.buttonId
           ) {
-            switcherButtons[index].open();
+            nextOpen = switcherButtons[index];
             break;
           }
         }
       }
       // unhide content for destroyed srcComponent
-      toggleContent(srcComponent.contentSelector, true);
+      if (srcComponent.ownerId) {
+        this.store.remove(srcComponent.ownerId);
+      } else {
+        toggleContent(srcComponent.contentSelector, true);
+      }
+      if (nextOpen) {
+        setTimeout(() => {
+          nextOpen.open();
+        }, 1);
+      }
     },
-    onCvOpen(srcComponent) {
-      this.$emit('selected', srcComponent.contentSelector);
-      toggleContent(srcComponent.contentSelector, true);
+    processState(srcComponent, state) {
+      const innerProcessState = (component, newState) => {
+        if (component.ownerId) {
+          this.store.setState(component.ownerId, newState);
+        } else {
+          toggleContent(component.contentSelector, newState);
+        }
+      };
+      innerProcessState(srcComponent, state);
 
-      const switcherButtons = this.switcherButtons();
-
-      for (let index in switcherButtons) {
-        if (switcherButtons[index].buttonId !== srcComponent.buttonId) {
-          switcherButtons[index].close();
-          toggleContent(switcherButtons[index].contentSelector, false);
+      if (state) {
+        // if opening one button close others
+        const switcherButtons = this.switcherButtons();
+        for (let index in switcherButtons) {
+          if (switcherButtons[index].buttonId !== srcComponent.buttonId) {
+            switcherButtons[index].close();
+            innerProcessState(switcherButtons[index], false);
+          }
         }
       }
+    },
+    onCvOpen(srcComponent) {
+      this.$emit(
+        'selected',
+        srcComponent.ownerId
+          ? srcComponent.ownerId
+          : srcComponent.contentSelector
+      );
+      this.processState(srcComponent, true);
     },
   },
 };
