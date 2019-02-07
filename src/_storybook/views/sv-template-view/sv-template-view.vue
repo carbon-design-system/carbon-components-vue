@@ -66,7 +66,9 @@ export default {
     style() {
       return {
         alignItems:
-          this.svPosition && this.svPosition.length ? svPosition : 'flex-start',
+          this.svPosition && this.svPosition.length
+            ? this.svPosition
+            : 'flex-start',
       };
     },
   },
