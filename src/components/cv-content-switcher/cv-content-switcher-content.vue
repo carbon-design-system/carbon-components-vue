@@ -12,7 +12,7 @@
 import store from './cv-content-switcher-store';
 
 export default {
-  name: 'CvContentSwitcherContnent',
+  name: 'CvContentSwitcherContent',
   props: {
     ownerId: { type: String, required: true },
   },

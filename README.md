@@ -93,6 +93,10 @@ Vue.use(window['carbon-vue'].default);
 
 ## Project State
 
+**v1.0.0-beta.1**
+
+- Fix typo in CvContentSwitcherContent component name
+
 **v1.0.0-beta.0**
 
 - Storybook: update views
