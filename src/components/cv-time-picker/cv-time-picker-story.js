@@ -131,7 +131,18 @@ const preKnobs = {
     group: 'attr',
     type: text,
     config: ['invalid-message', ''], // consts.CONTENT],
-    prop: { name: 'invalid-message', type: String },
+    prop: {
+      name: 'invalid-message',
+      type: String,
+      value: val => (val.length ? val : null),
+    },
+  },
+  invalidMessageSlot: {
+    group: 'slot',
+    slot: {
+      name: 'invalid-message',
+      value: 'Invalid message slot overrides the prop invalid-message',
+    },
   },
   disabled: {
     group: 'attr',
@@ -150,6 +161,17 @@ const preKnobs = {
 const variants = [
   {
     name: 'default',
+    excludes: [
+      'vModel',
+      'events',
+      'timeSync',
+      'ampmSync',
+      'timezoneSync',
+      'invalidMessageSlot',
+    ],
+  },
+  {
+    name: 'invalid slot',
     excludes: ['vModel', 'events', 'timeSync', 'ampmSync', 'timezoneSync'],
   },
   { name: 'minimal', includes: [] },
@@ -170,7 +192,7 @@ for (const story of storySet) {
 
       // ----------------------------------------------------------------
       const templateString = `
-  <cv-time-picker${settings.group.attr} :form-item="true">
+  <cv-time-picker${settings.group.attr} :form-item="true">${settings.group.slot}
   </cv-time-picker>
     `;
 

@@ -31,7 +31,7 @@
           {{ getDateLabel }}
         </label>
         <input
-          :data-invalid="invalid"
+          :data-invalid="isInvalid"
           type="text"
           :id="`${uid}-input-1`"
           class="bx--date-picker__input"
@@ -41,8 +41,10 @@
           :data-date-picker-input-from="kind === 'range'"
           ref="date"
         />
-        <div class="bx--form-requirement" v-if="invalid">
-          {{ invalidDateMessage }}
+        <div class="bx--form-requirement" v-if="isInvalid">
+          <slot name="invalid-message">
+            {{ invalidMessage || invalidDateMessage }}
+          </slot>
         </div>
       </div>
       <div
@@ -119,8 +121,31 @@ export default {
     },
     pattern: { type: String, default: '\\d{1,2}/\\d{1,2}/\\d{4}' },
     placeholder: { type: String, default: 'mm/dd/yyyy' },
-    invalid: Boolean,
-    invalidDateMessage: { type: String, default: 'Invalid date format' },
+    invalid: /* deprecate */ {
+      type: Boolean,
+      default: undefined,
+      validator(val) {
+        if (val !== undefined) {
+          console.warn(
+            'CvDatePicker: invalid prop deprecated in favour of invalidMessage'
+          );
+        }
+        return true;
+      },
+    },
+    invalidDateMessage: /* deprecate */ {
+      type: String,
+      default: null,
+      validator(val) {
+        if (val !== null) {
+          console.warn(
+            'CvDatePicker: invalidDateMessage deprecated in favour of invalidMessage'
+          );
+        }
+        return true;
+      },
+    },
+    invalidMessage: { type: String, default: null },
   },
   computed: {
     kindClasses() {
@@ -163,6 +188,13 @@ export default {
       }
 
       return _options;
+    },
+    isInvalid() {
+      return (
+        this.$slots['invalid-message'] ||
+        (this.invalidMessage && this.invalidMessage.length) ||
+        (this.invalidDateMessage && this.invalidDateMessage.length)
+      );
     },
   },
   methods: {

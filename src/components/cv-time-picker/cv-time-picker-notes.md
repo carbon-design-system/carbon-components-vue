@@ -113,3 +113,7 @@ placeholder: { type: String, default: 'hh:mm' },
 timezones: { type: Array, default: () => [] },
 timezonesSelectLabel: { type: String, default: 'Select time zone' },
 ```
+
+## Slots
+
+invalid-message: Overrides the invalid message property

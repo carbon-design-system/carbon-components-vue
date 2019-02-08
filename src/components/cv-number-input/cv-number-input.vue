@@ -10,12 +10,20 @@
       :data-invalid="isInvalid"
     >
       <div class="bx--number__controls">
-        <button class="bx--number__control-btn up-icon" @click="doUp">
+        <button
+          class="bx--number__control-btn up-icon"
+          @click="doUp"
+          type="button"
+        >
           <svg width="10" height="5" viewBox="0 0 10 5">
             <path d="M0 5L5 .002 10 5z" fill-rule="evenodd"></path>
           </svg>
         </button>
-        <button class="bx--number__control-btn down-icon" @click="doDown">
+        <button
+          class="bx--number__control-btn down-icon"
+          @click="doDown"
+          type="button"
+        >
           <svg width="10" height="5" viewBox="0 0 10 5">
             <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd"></path>
           </svg>
@@ -52,7 +60,7 @@ export default {
     invalidMessage: { type: String, default: null },
     label: String,
     value: String,
-    invalid: {
+    invalid: /* deprecate */ {
       type: Boolean,
       default: undefined,
       validator(val) {
