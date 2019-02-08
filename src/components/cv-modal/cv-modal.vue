@@ -77,7 +77,7 @@
 
 <script>
 import CvButton from '../cv-button/cv-button';
-import CvIcon from '../cv-icon/cv-icon';
+import CvIcon from '../cv-icon/_cv-icon';
 import uidMixin from '../../mixins/uid-mixin';
 
 export default {

@@ -9,7 +9,6 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 
 import CvButtonNotesMD from './cv-button-notes.md';
 import CvButton from './cv-button';
-import CvIcon from '../cv-icon/_cv-icon';
 
 const stories = storiesOf('CvButton', module);
 stories.addDecorator(withKnobs);
@@ -114,7 +113,7 @@ for (const story of storySet) {
     `;
 
       return {
-        components: { CvButton, CvIcon, SvTemplateView },
+        components: { CvButton, SvTemplateView },
         methods: {
           actionClick: action('Cv Button - click'),
         },
