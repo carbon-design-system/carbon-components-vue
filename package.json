@@ -60,7 +60,6 @@
   "peerDependencies": {},
   "dependencies": {
     "carbon-components": "^9.48.1",
-    "carbon-icons": "^7.0.7",
     "d3": "^5.7.0",
     "flatpickr": "4.5.1",
     "vue": "^2.5.21"
