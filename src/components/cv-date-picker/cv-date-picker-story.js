@@ -9,7 +9,6 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 
 import CvDatePickerNotesMD from './cv-date-picker-notes.md';
 import CvDatePicker from './cv-date-picker';
-import CvIcon from '../cv-icon/cv-icon';
 
 const stories = storiesOf('CvDatePicker', module);
 stories.addDecorator(withKnobs);
@@ -150,7 +149,7 @@ for (const story of storySet) {
     `;
 
       return {
-        components: { CvDatePicker, CvIcon, SvTemplateView },
+        components: { CvDatePicker, SvTemplateView },
         props: settings.props,
         template: templateViewString,
         methods: {

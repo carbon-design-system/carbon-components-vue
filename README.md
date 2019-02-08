@@ -186,7 +186,6 @@ Current Version: 0.1
 | **CvForm**               | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvForm                           |
 | **CvGauge**              | :warning:          | https://github.com/carbon-design-system/carbon-components-vue/issues/49          |
 |                          |
-| **CvIcon**               | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvIcon                           |
 | **CvInlineNotification** | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvInlineNotification             |
 | CvLineGraph              | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/53          |
 |                          |
