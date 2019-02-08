@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
+import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
