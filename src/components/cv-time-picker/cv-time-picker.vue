@@ -13,13 +13,13 @@
           v-bind="$attrs"
           :placeholder="placeholder"
           :maxlength="placeholder.length"
-          :data-invalid="invalidMessage.length > 0"
+          :data-invalid="isInvalid"
           :value="time"
           :disabled="disabled"
           @input="$emit('update:time', $event.target.value)"
         />
-        <div class="bx--form-requirement" v-if="invalidMessage.length > 0">
-          {{ invalidMessage }}
+        <div class="bx--form-requirement" v-if="isInvalid">
+          <slot name="invalid-message">{{ invalidMessage }}</slot>
         </div>
         <label :for="uid" class="bx--label">{{ label }}</label>
       </div>
@@ -79,7 +79,7 @@ export default {
     },
     ampmSelectLabel: { type: String, default: 'Select AM/PM' },
     disabled: Boolean,
-    invalidMessage: { type: String, default: '' },
+    invalidMessage: { type: String, default: null },
     label: { type: String, default: 'Select a time' },
     pattern: { type: String, default: '([01][0-9]:[0-6][0-9])' },
     placeholder: { type: String, default: 'hh:mm' },
@@ -89,6 +89,12 @@ export default {
     timezonesSelectLabel: { type: String, default: 'Select time zone' },
   },
   computed: {
+    isInvalid() {
+      return (
+        this.$slots['invalid-message'] ||
+        (this.invalidMessage && this.invalidMessage.length > 0)
+      );
+    },
     validAmpm() {
       let result = this.ampm;
       if (!['AM', 'PM'].includes(this.ampm)) {

@@ -35,17 +35,38 @@ const preKnobs = {
     },
   },
   invalidMessage: {
+    group: 'attr',
+    type: text,
+    config: ['invalid message', ''],
+    prop: {
+      name: 'invalid-message',
+      type: String,
+      value: val => (val.length ? val : null),
+    },
+  },
+  invalidMessageSlot: {
     group: 'content',
     slot: {
       name: 'invalid-message',
-      value: 'Not a valid number',
+      value: 'Invalid message slot overrides the invalid-message property',
     },
   },
   helperText: {
+    group: 'attr',
+    type: text,
+    config: ['helper text', ''],
+    prop: {
+      name: 'helper-text',
+      type: String,
+      value: val => (val.length ? val : null),
+    },
+  },
+  helperTextSlot: {
     group: 'content',
     slot: {
       name: 'helper-text',
-      value: 'This is some helpful text',
+      value:
+        'This is a helpful slot overrides the property helper-textThis is some helpful text',
     },
   },
   disabled: {
@@ -55,15 +76,6 @@ const preKnobs = {
     prop: {
       type: Boolean,
       name: 'disabled',
-    },
-  },
-  invalid: {
-    group: 'attr',
-    type: boolean,
-    config: ['invalid', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'invalid',
-      type: Boolean,
     },
   },
   value: {
@@ -87,7 +99,14 @@ const preKnobs = {
 };
 
 const variants = [
-  { name: 'default', excludes: ['vModel', 'events'] },
+  {
+    name: 'default',
+    excludes: ['vModel', 'events', 'invalidMessageSlot', 'helperTextSlot'],
+  },
+  {
+    name: 'helper and invalid slots',
+    excludes: ['vModel', 'events'],
+  },
   { name: 'minimal', includes: ['label'] },
   { name: 'events', includes: ['label', 'events'] },
   { name: 'vModel', includes: ['label', 'vModel'] },
