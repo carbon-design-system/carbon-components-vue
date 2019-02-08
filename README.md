@@ -3,9 +3,8 @@
 [![Carbon Components Vue is released under the Apache-2.0 license](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](./LICENSE)
 [![CircleCI](https://circleci.com/gh/carbon-design-system/carbon-components-vue.svg?style=shield)](https://circleci.com/gh/carbon-design-system/carbon-components-vue)
 
-> **[Experimental]** Vue implementation of the Carbon Design System
-
-> A collection of [Carbon Components](https://github.com/carbon-design-system/carbon-components) implemented using [<img src="https://vuejs.org/images/logo.png" width="20" alt="Vue logo"> Vue.js](https://vuejs.org/).
+> Vue implementation of the Carbon Design System
+> A collection of [Carbon Components](https://github.com/carbon-design-system/carbon-components) implemented using <img src="https://vuejs.org/images/logo.png" width="20" alt="Vue logo"> [Vue.js](https://vuejs.org/).
 
 ## Usage
 
@@ -86,7 +85,7 @@ In your html file, no need to babel.
 <script src="https://unpkg.com/vue@latest" />
 <script src="https://unpkg.com/@carbon/vue" />
 <script>
-Vue.use(window['carbon-components-vue'].default);
+Vue.use(window['carbon-vue'].default);
 <script>
 
 . . . <cv-button>Hello</cv-button>
@@ -94,9 +93,17 @@ Vue.use(window['carbon-components-vue'].default);
 
 ## Project State
 
-**v1.0.0**
-Issues tagged targetting a v1.0.0 release
-https://github.com/carbon-design-system/carbon-components-vue/issues?q=is%3Aissue+is%3Aopen+label%3Av1.0
+**v1.0.0-beta.0**
+
+- Storybook: update views
+- CvFileUploader: added v-model and missing parts to
+- CvToolbar: added
+- CvDataTable: added minus the filter/toolbar
+- Tests - Added unit test suite and first tests (CvTag)
+- CvContentSwitcher - Added non-DOM direct content managment
+- Turned helper and invalidMessages into slops (slot-prop hybrid)
+- CvIcon - Downgraded to helper component to remove dependency on carbon-icons
+- Renamed UMD and CommonJS modules from carbon-components-vue... to carbon-vue...
 
 **v0.3.0**
 
