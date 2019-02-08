@@ -1,4 +1,4 @@
-// This module wires together the cv-content-switcher, cv-content-switcher-button and cv-contnet-switcher-content components.
+// This module wires together the cv-content-switcher, cv-content-switcher-button and cv-content-switcher-content components.
 // It allows the switcher content to appear in an unrelated location to the switcher
 import Vue from 'vue';
 
