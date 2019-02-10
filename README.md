@@ -93,6 +93,11 @@ Vue.use(window['carbon-vue'].default);
 
 ## Project State
 
+**v1.0.0-beta.2**
+
+- Removed Symbol use in prop types, fixing CvRadioButton, CvSlider and CvPagination use with the minified compiled modules.
+- Minor story fixes
+
 **v1.0.0-beta.1**
 
 - Fix typo in CvContentSwitcherContent component name
