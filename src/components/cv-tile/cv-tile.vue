@@ -5,7 +5,9 @@
     :checked="selected"
     :expanded="expanded"
     v-bind="$attrs"
+    v-on="$listeners"
   >
+    <!-- can i now click on this -->
     <template>
       <slot></slot>
     </template>

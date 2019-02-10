@@ -59,20 +59,6 @@ const preKnobs = {
     group: 'attr',
     value: `@change="actionChange"`,
   },
-  textLeft: {
-    group: 'slots',
-    slot: {
-      name: 'text-left',
-      value: '0',
-    },
-  },
-  textRight: {
-    group: 'slots',
-    slot: {
-      name: 'text-right',
-      value: '1',
-    },
-  },
 };
 
 const variants = [
@@ -93,7 +79,7 @@ for (const story of storySet) {
       // ----------------------------------------------------------------
 
       const templateString = `
-<cv-checkbox${settings.group.attr}>${settings.group.slots}
+<cv-checkbox${settings.group.attr}>
 </cv-checkbox>
   `;
 
