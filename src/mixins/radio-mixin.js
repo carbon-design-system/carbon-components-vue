@@ -1,9 +1,7 @@
-const noModelValue = Symbol('radio mixin - no model value'); // a unique identifier
-
 export default {
   inheritAttrs: false,
   props: {
-    modelValue: { type: [String, Symbol], default: noModelValue },
+    modelValue: String,
     checked: Boolean,
     label: String,
     value: { type: String, required: true },
@@ -14,7 +12,7 @@ export default {
   },
   computed: {
     isChecked() {
-      if (this.modelValue === noModelValue) {
+      if (this.modelValue === undefined) {
         return this.checked;
       } else {
         return this.modelValue === this.value;

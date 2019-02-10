@@ -57,8 +57,6 @@
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
 
-const notSupplied = Symbol('slider - no model value'); // a unique identifier
-
 export default {
   name: 'CvSlider',
   mixins: [uidMixin, themeMixin],
@@ -84,8 +82,8 @@ export default {
       },
     },
     value: String,
-    minLabel: { type: [String, Symbol], default: notSupplied },
-    maxLabel: { type: [String, Symbol], default: notSupplied },
+    minLabel: String,
+    maxLabel: String,
   },
   model: {
     prop: 'value',
@@ -103,10 +101,10 @@ export default {
   },
   computed: {
     internalMinLabel() {
-      return this.minLabel !== notSupplied ? this.minLabel : this.getMin();
+      return this.minLabel !== undefined ? this.minLabel : this.getMin();
     },
     internalMaxLabel() {
-      return this.maxLabel !== notSupplied ? this.maxLabel : this.getMax();
+      return this.maxLabel !== undefined ? this.maxLabel : this.getMax();
     },
     internalMultiplier() {
       let intMultiplier = parseInt(this.stepMultiplier);

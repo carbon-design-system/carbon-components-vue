@@ -45,6 +45,12 @@ const preKnobs = {
     config: ['Number of items', 103],
     prop: { name: 'number-of-items', type: Number },
   },
+  page: {
+    group: 'attr',
+    type: number,
+    config: ['initial page', 2],
+    prop: { name: 'page', type: Number },
+  },
   pageSizes: {
     group: 'attr',
     type: object,
