@@ -12,10 +12,9 @@
           v-for="(size, index) in pageSizes"
           :key="index"
           :value="`${size.value ? size.value : size}`"
-          >{{
-            size.label ? size.label : size.value ? size.value : size
-          }}</cv-select-option
         >
+          {{ size.label ? size.label : size.value ? size.value : size }}
+        </cv-select-option>
       </cv-select>
 
       <span class="bx--pagination__text">
@@ -153,7 +152,6 @@ export default {
     this.pageSizeValue = newPageSizeValue(this.pageSizes);
     this.pageCount = newPageCount(this.numberOfItems, this.pageSizeValue);
     this.pageValue = newPageValue(this.page, this.pageCount);
-    console.log(this.pageValue);
     this.pages = newPagesArray(this.pageCount);
     this.firstItem = newFirstItem(this.pageValue, this.pageSizeValue);
   },
@@ -169,7 +167,6 @@ export default {
     },
     page() {
       this.pageValue = newPageValue(this.page, this.pageCount);
-      console.log(this.pageValue);
       this.firstItem = newFirstItem(this.pageValue, this.pageSizeValue);
     },
     pageSizes() {
@@ -183,7 +180,6 @@ export default {
   },
   computed: {
     pageOfPages() {
-      console.log('pageOfPages');
       // console.log(this.pageValue, this.pageCount);
       if (this.numberOfItems !== Infinity) {
         return `${this.pageValue} of ${this.pageCount}`;
