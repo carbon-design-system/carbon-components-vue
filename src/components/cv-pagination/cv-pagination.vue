@@ -188,7 +188,10 @@ export default {
     },
     rangeText() {
       const start = this.firstItem;
-      const end = start + parseInt(this.pageSizeValue, 10) - 1;
+      const end = Math.min(
+        start + parseInt(this.pageSizeValue, 10) - 1,
+        this.numberOfItems
+      );
 
       if (this.numberOfItems !== Infinity) {
         return `${start}-${end} of ${this.numberOfItems}`;

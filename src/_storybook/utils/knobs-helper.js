@@ -27,9 +27,6 @@ const parsePreKnobs = (preKnobs, includes, excludes, variantExtra) => {
         if (preKnob.sync) {
           thingType = 'sync';
         }
-        if (preKnob.data) {
-          thingType = 'data';
-        }
         if (!thingType && preKnob.slot) {
           thingType = 'slot';
         }
@@ -40,7 +37,7 @@ const parsePreKnobs = (preKnobs, includes, excludes, variantExtra) => {
         if (thingType && thingType !== 'slot') {
           if (preKnob[thingType].type === Number) {
             if (preKnob[thingType].value) {
-              value = preKnob[thing].value;
+              value = preKnob[thingType].value;
             } else {
               value = val => (val === null ? 0 : val);
             }
@@ -51,9 +48,6 @@ const parsePreKnobs = (preKnobs, includes, excludes, variantExtra) => {
           }
         }
         switch (thingType) {
-          case 'data':
-            knobs.data[key] = value(preKnob.type(...preKnob.config));
-            break;
           case 'sync':
             knobs.group[preKnob.group] += `${prefix}:${
               preKnob.sync.name
@@ -62,10 +56,11 @@ const parsePreKnobs = (preKnobs, includes, excludes, variantExtra) => {
             knobs.data[key] = value(preKnob.type(...preKnob.config));
             break;
           case 'prop':
-            knobs.group[preKnob.group] += `${prefix}:${
-              preKnob.prop.name
-            }="${key}"`;
-
+            if (preKnob.group) {
+              knobs.group[preKnob.group] += `${prefix}:${
+                preKnob.prop.name
+              }="${key}"`;
+            }
             knobs.props[key] = {
               type: preKnob.prop.type,
               default: value(preKnob.type(...preKnob.config)),
