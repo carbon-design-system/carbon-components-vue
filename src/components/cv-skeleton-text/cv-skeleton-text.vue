@@ -53,7 +53,7 @@ export default {
         {
           length: this.paragraph ? this.lineCount : 1,
         },
-        (el, i) => ({
+        () => ({
           width: this.calcWidth(),
         })
       );
