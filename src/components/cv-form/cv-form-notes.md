@@ -8,7 +8,7 @@ CvForm has no properties and a single default slot
 
 ```html
 <cv-form>
-  <!-- form contnet -->
+  <!-- form content -->
   <button>OK</button>
 </cv-form>
 ```

@@ -10,8 +10,10 @@
       type="radio"
       :value="value"
     />
+    <!-- symbol causes problem in codepen? -->
     <label :for="uid" class="bx--radio-button__label">
-      <span class="bx--radio-button__appearance"></span> {{ label }}
+      <span class="bx--radio-button__appearance"></span>
+      {{ label }}
     </label>
   </div>
 </template>

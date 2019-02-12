@@ -10,6 +10,9 @@
     role="button"
   >
     <slot></slot>
+    <svg v-if="iconHref" class="bx--btn__icon">
+      <use :href="iconHref"></use>
+    </svg>
   </button>
 </template>
 
@@ -17,6 +20,7 @@
 export default {
   name: 'CvButton',
   props: {
+    iconHref: { type: String, default: null },
     kind: {
       type: String,
       default: 'primary',

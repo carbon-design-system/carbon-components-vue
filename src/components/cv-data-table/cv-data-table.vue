@@ -1,28 +1,43 @@
 <template>
-  <table class="bx--data-table-v2" :class="modifierClasses">
-    <thead>
-      <tr>
-        <cv-data-table-headnig
-          v-for="(heading, index) in dataHeadings"
-          :key="`${index}:${heading}`"
-          :heading="heading.label ? heading.label : heading"
-          :sortable="sortable"
-          :order="heading.order"
-          @sort="val => onSort(index, val)"
-        />
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(row, rowIndex) in rows" :key="`row:${rowIndex}`">
-        <td
-          v-for="(cell, colIndex) in row"
-          :key="`cell:${colIndex}:${rowIndex}`"
-        >
-          {{ cell }}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div :style="tableStyle">
+    <div class="bx--data-table-v2-container">
+      <h4 class="bx--data-table-v2-header" v-if="title">{{ title }}</h4>
+
+      <section class="bx--table-toolbar">
+        <slot name="header" />
+      </section>
+
+      <table class="bx--data-table-v2" :class="modifierClasses">
+        <thead>
+          <tr>
+            <cv-data-table-headnig
+              v-for="(column, index) in dataColumns"
+              :key="`${index}:${column}`"
+              :heading="column.label ? column.label : column"
+              :sortable="sortable"
+              :order="column.order"
+              @sort="val => onSort(index, val)"
+              :style="headingStyle(index)"
+            />
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr v-for="(row, rowIndex) in rows" :key="`row:${rowIndex}`">
+            <td
+              v-for="(cell, colIndex) in row"
+              :key="`cell:${colIndex}:${rowIndex}`"
+              :style="dataStyle(colIndex)"
+            >
+              {{ cell }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <slot name="footer" />
+  </div>
 </template>
 
 <script>
@@ -43,34 +58,40 @@ export default {
         ['compact', 'short', 'standard', 'tall', ''].includes(val),
     },
     sortable: Boolean,
-    headings: { type: Array, required: true },
+    title: String,
+    columns: { type: Array, required: true },
     data: { type: Array, requried: true },
     zebra: Boolean,
   },
   data() {
     return {
-      dataHeadings: this.sortable
-        ? this.headings.map(item => ({
+      dataColumns: this.sortable
+        ? this.columns.map(item => ({
             label: item,
             order: 'none',
           }))
-        : this.headings,
+        : this.columns,
     };
   },
   watch: {
     sortable() {
-      this.watchHeadings();
+      this.watchColumns();
     },
-    headings() {
-      this.watchHeadings();
+    columns() {
+      this.watchColumns();
     },
   },
   mounted() {
+    console.dir(this.dataColumns);
+
     console.warn('CvDataTable - Under construction, API will change.');
   },
   computed: {
     rows() {
       return this.data;
+    },
+    tableStyle() {
+      return this.autoWidth ? { width: 'initial' } : { width: '100%' };
     },
     modifierClasses() {
       const prefix = 'bx--data-table-v2--';
@@ -79,25 +100,30 @@ export default {
           ? ''
           : `${prefix}${this.rowSize} `;
       const zebraClass = this.zebra ? `${prefix}zebra ` : '';
-      const autoWidthClas = this.autoWidth ? `${prefix}static ` : '';
       const borderlessClass = this.borderless ? `${prefix}no-border ` : '';
-      return `${sizeClass}${zebraClass}${autoWidthClas}${borderlessClass}`.trimRight();
+      return `${sizeClass}${zebraClass}${borderlessClass}`.trimRight();
+    },
+    headingStyle() {
+      return index => this.columns[index].headingStyle;
+    },
+    dataStyle() {
+      return index => this.columns[index].dataStyle;
     },
   },
   methods: {
-    watchHeadings() {
-      this.dataHeadings = this.sortable
-        ? this.headings.map(item => ({
-            label: item,
+    watchColumns() {
+      this.dataColumns = this.sortable
+        ? this.columns.map(item => ({
+            label: item.label ? item.label : item,
             order: 'none',
           }))
-        : this.headings;
+        : this.columns;
     },
     onSort(index, val) {
-      for (let heading of this.dataHeadings) {
-        heading.order = 'none';
+      for (let column of this.dataColumns) {
+        column.order = 'none';
       }
-      this.dataHeadings[index].order = val;
+      this.dataColumns[index].order = val;
       this.$emit('sort', { index, order: val });
     },
   },

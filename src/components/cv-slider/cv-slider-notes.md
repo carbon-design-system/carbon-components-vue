@@ -7,13 +7,13 @@ http://www.carbondesignsystem.com/components/slider/code
 ## Usage
 
 ```html
-<cv-slider label="Text input label" min="0" max="100" value="45"></cv-slider>
+<cv-slider label="Slider label" min="0" max="100" value="45"></cv-slider>
 ```
 
 ### v-model
 
 ```html
-<cv-slider label="Text input label" min="0" max="100" v-model="modelValue">
+<cv-slider label="Slider input label" min="0" max="100" v-model="modelValue">
 </cv-slider>
 ```
 
@@ -27,10 +27,6 @@ data() {
 ```
 
 ## Attributes
-
-- invalid: set to true to indicate the current value is invalid
-- label: the label text for the input label
-- value: value
 
 - label: String slider label
 - disabled: standard property
