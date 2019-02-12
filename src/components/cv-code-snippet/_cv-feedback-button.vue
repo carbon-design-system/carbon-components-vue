@@ -1,5 +1,6 @@
 <template>
   <button
+    type="button"
     class="cv-feedback-button"
     v-bind="$attrs"
     data-copy-btn

@@ -20,9 +20,9 @@
       </div>
     </div>
     <button
+      type="button"
       data-notification-btn
       class="bx--inline-notification__close-button"
-      type="button"
       @click="$emit('close')"
     >
       <svg

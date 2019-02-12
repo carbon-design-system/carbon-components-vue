@@ -1,6 +1,7 @@
 <template>
   <th :aria-sort="sortOrder">
     <button
+      type="button"
       v-if="sortable"
       class="bx--table-sort-v2"
       :class="{
