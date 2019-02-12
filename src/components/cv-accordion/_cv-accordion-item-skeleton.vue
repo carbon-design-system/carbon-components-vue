@@ -26,6 +26,7 @@ import CvSkeletonText from '../cv-skeleton-text/cv-skeleton-text';
 
 export default {
   name: 'CvAccordionItemcSkeleton',
+  functional: true,
   components: {
     CvSkeletonText,
   },
