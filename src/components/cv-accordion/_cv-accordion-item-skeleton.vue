@@ -1,7 +1,7 @@
-<template>
+<template functional>
   <li
     class="bx--accordion__item"
-    :class="{ 'bx--accordion__item--active': open }"
+    :class="{ 'bx--accordion__item--active': props.open }"
   >
     <button type="button" class="bx--accordion__heading">
       <svg
@@ -25,8 +25,7 @@
 import CvSkeletonText from '../cv-skeleton-text/cv-skeleton-text';
 
 export default {
-  name: 'CvAccordionItemcSkeleton',
-  functional: true,
+  name: 'CvAccordionItemSkeleton',
   components: {
     CvSkeletonText,
   },

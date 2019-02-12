@@ -17,7 +17,6 @@ import CvAccordionItemSkeleton from './_cv-accordion-item-skeleton';
 
 export default {
   name: 'CvAccordionSkeleton',
-  functional: true,
   components: {
     CvSkeletonText,
     CvAccordionItemSkeleton,

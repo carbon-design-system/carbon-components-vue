@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :style="{ width: width }">
     <p
       class="bx--skeleton__text"
       :class="{ 'bx--skeleton__heading': heading }"
