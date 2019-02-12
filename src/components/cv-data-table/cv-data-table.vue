@@ -11,12 +11,13 @@
         <thead>
           <tr>
             <cv-data-table-headnig
-              v-for="(heading, index) in dataHeadings"
-              :key="`${index}:${heading}`"
-              :heading="heading.label ? heading.label : heading"
+              v-for="(column, index) in dataColumns"
+              :key="`${index}:${column}`"
+              :heading="column.label ? column.label : column"
               :sortable="sortable"
-              :order="heading.order"
+              :order="column.order"
               @sort="val => onSort(index, val)"
+              :style="headingStyle(index)"
             />
           </tr>
         </thead>
@@ -26,6 +27,7 @@
             <td
               v-for="(cell, colIndex) in row"
               :key="`cell:${colIndex}:${rowIndex}`"
+              :style="dataStyle(colIndex)"
             >
               {{ cell }}
             </td>
@@ -57,29 +59,31 @@ export default {
     },
     sortable: Boolean,
     title: String,
-    headings: { type: Array, required: true },
+    columns: { type: Array, required: true },
     data: { type: Array, requried: true },
     zebra: Boolean,
   },
   data() {
     return {
-      dataHeadings: this.sortable
-        ? this.headings.map(item => ({
+      dataColumns: this.sortable
+        ? this.columns.map(item => ({
             label: item,
             order: 'none',
           }))
-        : this.headings,
+        : this.columns,
     };
   },
   watch: {
     sortable() {
-      this.watchHeadings();
+      this.watchColumns();
     },
-    headings() {
-      this.watchHeadings();
+    columns() {
+      this.watchColumns();
     },
   },
   mounted() {
+    console.dir(this.dataColumns);
+
     console.warn('CvDataTable - Under construction, API will change.');
   },
   computed: {
@@ -99,21 +103,27 @@ export default {
       const borderlessClass = this.borderless ? `${prefix}no-border ` : '';
       return `${sizeClass}${zebraClass}${borderlessClass}`.trimRight();
     },
+    headingStyle() {
+      return index => this.columns[index].headingStyle;
+    },
+    dataStyle() {
+      return index => this.columns[index].dataStyle;
+    },
   },
   methods: {
-    watchHeadings() {
-      this.dataHeadings = this.sortable
-        ? this.headings.map(item => ({
-            label: item,
+    watchColumns() {
+      this.dataColumns = this.sortable
+        ? this.columns.map(item => ({
+            label: item.label ? item.label : item,
             order: 'none',
           }))
-        : this.headings;
+        : this.columns;
     },
     onSort(index, val) {
-      for (let heading of this.dataHeadings) {
-        heading.order = 'none';
+      for (let column of this.dataColumns) {
+        column.order = 'none';
       }
-      this.dataHeadings[index].order = val;
+      this.dataColumns[index].order = val;
       this.$emit('sort', { index, order: val });
     },
   },

@@ -85,13 +85,13 @@ const preKnobs = {
       name: 'zebra',
     },
   },
-  headings: {
+  columns: {
     group: 'attr',
     type: object,
     config: [
-      'headings',
+      'columns',
       {
-        headings: [
+        columns: [
           'Name',
           'Protocol',
           'Port',
@@ -103,8 +103,41 @@ const preKnobs = {
     ],
     prop: {
       type: Array,
-      name: 'headings',
-      value: val => val.headings,
+      name: 'columns',
+      value: val => val.columns,
+    },
+  },
+  columns2: {
+    group: 'attr',
+    type: object,
+    config: [
+      'columns',
+      {
+        columns: [
+          { label: 'Name', headingStyle: { textTransform: 'uppercase' } },
+          { label: 'Protocol', headingStyle: { textTransform: 'uppercase' } },
+          {
+            label: 'Port',
+            headingStyle: {
+              textTransform: 'uppercase',
+              textAlign: 'right',
+              paddingRight: '2.5rem',
+            },
+            dataStyle: { textAlign: 'right', paddingRight: '2.5rem' },
+          },
+          { label: 'Rule', headingStyle: { textTransform: 'uppercase' } },
+          {
+            label: 'Attached Groups',
+            headingStyle: { textTransform: 'uppercase' },
+          },
+          { label: 'Status', headingStyle: { textTransform: 'uppercase' } },
+        ],
+      },
+    ],
+    prop: {
+      type: Array,
+      name: 'columns',
+      value: val => val.columns,
     },
   },
   data: {
@@ -188,8 +221,9 @@ const preKnobs = {
 };
 
 const variants = [
-  { name: 'default' },
-  { name: 'minimal', includes: ['headings', 'data'] },
+  { name: 'default', excludes: ['columns2'] },
+  { name: 'minimal', includes: ['columns', 'data'] },
+  { name: 'styled columns', includes: ['columns2', 'data'] },
 ];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
