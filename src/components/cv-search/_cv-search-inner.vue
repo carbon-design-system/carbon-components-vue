@@ -17,6 +17,7 @@
     />
 
     <button
+      type="button"
       v-if="isToolbarKind"
       class="bx--toolbar-search__btn"
       aria-label="Toolbar search"
@@ -49,6 +50,7 @@
     </svg>
 
     <button
+      type="button"
       class="bx--search-close"
       :class="{ 'bx--search-close--hidden': !clearVisible }"
       title="Clear search input"

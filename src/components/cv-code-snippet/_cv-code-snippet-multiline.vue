@@ -29,6 +29,7 @@
     </cv-feedback-button>
 
     <cv-button
+      type="button"
       kind="ghost"
       small
       class="bx--snippet-btn--expand"

@@ -12,9 +12,10 @@
           v-for="(size, index) in pageSizes"
           :key="index"
           :value="`${size.value ? size.value : size}`"
+          >{{
+            size.label ? size.label : size.value ? size.value : size
+          }}</cv-select-option
         >
-          {{ size.label ? size.label : size.value ? size.value : size }}
-        </cv-select-option>
       </cv-select>
 
       <span class="bx--pagination__text">
@@ -27,6 +28,7 @@
       <span class="bx--pagination__text">{{ pageOfPages }}</span>
 
       <button
+        type="button"
         class="bx--pagination__button bx--pagination__button--backward"
         data-page-backward
         :aria-label="backwardText"
@@ -64,6 +66,7 @@
       <span v-if="pages.length == 0">{{ pageValue }}</span>
 
       <button
+        type="button"
         class="bx--pagination__button bx--pagination__button--forward"
         data-page-forward
         :aria-label="forwardText"

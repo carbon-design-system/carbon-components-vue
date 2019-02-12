@@ -13,9 +13,9 @@
       <p class="bx--toast-notification__caption">{{ caption }}</p>
     </div>
     <button
+      type="button"
       data-notification-btn
       class="bx--toast-notification__close-button"
-      type="button"
       @click="$emit('close')"
     >
       <svg
