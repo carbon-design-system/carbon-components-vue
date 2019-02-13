@@ -9,6 +9,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 
 import CvButtonNotesMD from './cv-button-notes.md';
 import CvButton from './cv-button';
+import CvButtonSkeleton from './cv-button-skeleton';
 
 const stories = storiesOf('CvButton', module);
 stories.addDecorator(withKnobs);
@@ -126,3 +127,23 @@ for (const story of storySet) {
     }
   );
 }
+
+const templateString = `<cv-button-skeleton></cv-button-skeleton>`;
+stories.add(
+  'skeleton',
+  () => ({
+    components: { SvTemplateView, CvButtonSkeleton },
+    template: `
+      <sv-template-view
+        sv-margin
+        sv-position="center"
+        sv-source='${templateString.trim()}'>
+        <template slot="component">${templateString}</template>
+      </sv-template-view>
+    `,
+    props: {},
+  }),
+  {
+    notes: { markdown: CvButtonNotesMD },
+  }
+);
