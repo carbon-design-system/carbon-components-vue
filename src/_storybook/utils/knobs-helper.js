@@ -34,24 +34,33 @@ const parsePreKnobs = (preKnobs, includes, excludes, variantExtra) => {
         // if (!(preKnob.component[thingType].default !== undefined && minimal)) {
         let prefix = preKnob.inline ? ' ' : '\n  ';
         let value;
-
+        if (thingType && thingType !== 'slot') {
+          if (preKnob[thingType].type === Number) {
+            if (preKnob[thingType].value) {
+              value = preKnob[thingType].value;
+            } else {
+              value = val => (val === null ? 0 : val);
+            }
+          } else {
+            value = preKnob[thingType].value
+              ? preKnob[thingType].value
+              : val => val;
+          }
+        }
         switch (thingType) {
           case 'sync':
             knobs.group[preKnob.group] += `${prefix}:${
               preKnob.sync.name
             }.sync="${key}"`;
 
-            value = preKnob.sync.value ? preKnob.sync.value : val => val;
-
             knobs.data[key] = value(preKnob.type(...preKnob.config));
             break;
           case 'prop':
-            knobs.group[preKnob.group] += `${prefix}:${
-              preKnob.prop.name
-            }="${key}"`;
-
-            value = preKnob.prop.value ? preKnob.prop.value : val => val;
-
+            if (preKnob.group) {
+              knobs.group[preKnob.group] += `${prefix}:${
+                preKnob.prop.name
+              }="${key}"`;
+            }
             knobs.props[key] = {
               type: preKnob.prop.type,
               default: value(preKnob.type(...preKnob.config)),

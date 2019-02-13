@@ -6,7 +6,7 @@
     :class="[{ 'bx--tile--is-expanded': internalExpanded }]"
     :style="styleObject"
   >
-    <button class="bx--tile__chevron" @click="toggle">
+    <button type="button" class="bx--tile__chevron" @click="toggle">
       <svg width="12" height="8" viewBox="0 0 12 8" fill-rule="evenodd">
         <path d="M10.6 0L6 4.7 1.4 0 0 1.4l6 6.1 6-6.1z"></path>
       </svg>
@@ -17,10 +17,14 @@
         class="bx--tile-content__above-the-fold"
         ref="aboveFold"
       >
-        <slot> <!-- Above the fold content here --> </slot>
+        <slot>
+          <!-- Above the fold content here -->
+        </slot>
       </span>
       <span class="bx--tile-content__below-the-fold" ref="belowFold">
-        <slot name="below"> <!-- Rest of the content here --> </slot>
+        <slot name="below">
+          <!-- Rest of the content here -->
+        </slot>
       </span>
     </div>
   </div>

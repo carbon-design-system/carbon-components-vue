@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
+import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
@@ -76,13 +76,13 @@ const preKnobs = {
   minLabel: {
     group: 'attr',
     type: text,
-    config: ['min-label', ''], // consts.CONFIG],
+    config: ['min-label', 'Min'], // consts.CONFIG],
     prop: { name: 'min-label', type: String },
   },
   maxLabel: {
     group: 'attr',
     type: text,
-    config: ['max-label', ''], // consts.CONFIG],
+    config: ['max-label', 'Max'], // consts.CONFIG],
     prop: { name: 'max-label', type: String },
   },
   vModel: {

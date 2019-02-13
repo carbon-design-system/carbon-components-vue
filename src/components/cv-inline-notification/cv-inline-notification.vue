@@ -20,9 +20,9 @@
       </div>
     </div>
     <button
+      type="button"
       data-notification-btn
       class="bx--inline-notification__close-button"
-      type="button"
       @click="$emit('close')"
     >
       <svg
@@ -44,9 +44,11 @@
 
 <script>
 import notificationMixin from '../../mixins/notification-mixin';
+import CvIcon from '../cv-icon/_cv-icon';
 
 export default {
   name: 'CvInlineNotification',
+  components: { CvIcon },
   mixins: [notificationMixin],
   props: {
     kind: {

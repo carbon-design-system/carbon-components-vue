@@ -12,6 +12,7 @@
     :class="{ 'bx--accordion__item--active': dataOpen }"
   >
     <button
+      type="button"
       class="bx--accordion__heading"
       :aria-expanded="`${dataOpen}`"
       :aria-controls="uid"
@@ -26,7 +27,9 @@
       >
         <path d="M0 10.6L4.7 6 0 1.4 1.4 0l6.1 6-6.1 6z"></path>
       </svg>
-      <p class="bx--accordion__title"><slot name="title"></slot></p>
+      <p class="bx--accordion__title">
+        <slot name="title"></slot>
+      </p>
     </button>
     <div :id="uid" class="bx--accordion__content">
       <slot name="content"></slot>

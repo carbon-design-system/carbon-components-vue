@@ -12,9 +12,10 @@
           v-for="(size, index) in pageSizes"
           :key="index"
           :value="`${size.value ? size.value : size}`"
+          >{{
+            size.label ? size.label : size.value ? size.value : size
+          }}</cv-select-option
         >
-          {{ size.label ? size.label : size.value ? size.value : size }}
-        </cv-select-option>
       </cv-select>
 
       <span class="bx--pagination__text">
@@ -27,6 +28,7 @@
       <span class="bx--pagination__text">{{ pageOfPages }}</span>
 
       <button
+        type="button"
         class="bx--pagination__button bx--pagination__button--backward"
         data-page-backward
         :aria-label="backwardText"
@@ -64,6 +66,7 @@
       <span v-if="pages.length == 0">{{ pageValue }}</span>
 
       <button
+        type="button"
         class="bx--pagination__button bx--pagination__button--forward"
         data-page-forward
         :aria-label="forwardText"
@@ -87,11 +90,9 @@
 </template>
 
 <script>
-const notSupplied = Symbol('cv-pagination'); // a unique identifier
-
 const newPageValue = (page, lastPage) => {
   let result = 1;
-  if (page !== notSupplied) {
+  if (page && page > 0) {
     if (page <= lastPage) {
       result = page;
     } else {
@@ -138,7 +139,7 @@ export default {
     pageNumberLabel: { type: String, default: 'Page number:' },
     pageSizesLabel: { type: String, default: 'Number of items per page:' },
     numberOfItems: { type: Number, default: Infinity },
-    page: { type: [Number, Symbol], default: notSupplied },
+    page: Number,
     pageSizes: { type: Array, default: () => [10, 20, 30, 40, 50] },
   },
   data() {
@@ -151,9 +152,9 @@ export default {
     };
   },
   mounted() {
-    this.pageValue = newPageValue(this.page, this.pageCount);
     this.pageSizeValue = newPageSizeValue(this.pageSizes);
     this.pageCount = newPageCount(this.numberOfItems, this.pageSizeValue);
+    this.pageValue = newPageValue(this.page, this.pageCount);
     this.pages = newPagesArray(this.pageCount);
     this.firstItem = newFirstItem(this.pageValue, this.pageSizeValue);
   },
@@ -182,6 +183,7 @@ export default {
   },
   computed: {
     pageOfPages() {
+      // console.log(this.pageValue, this.pageCount);
       if (this.numberOfItems !== Infinity) {
         return `${this.pageValue} of ${this.pageCount}`;
       }
@@ -189,7 +191,10 @@ export default {
     },
     rangeText() {
       const start = this.firstItem;
-      const end = start + parseInt(this.pageSizeValue, 10) - 1;
+      const end = Math.min(
+        start + parseInt(this.pageSizeValue, 10) - 1,
+        this.numberOfItems
+      );
 
       if (this.numberOfItems !== Infinity) {
         return `${start}-${end} of ${this.numberOfItems}`;

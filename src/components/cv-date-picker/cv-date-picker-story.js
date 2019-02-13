@@ -9,7 +9,6 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 
 import CvDatePickerNotesMD from './cv-date-picker-notes.md';
 import CvDatePicker from './cv-date-picker';
-import CvIcon from '../cv-icon/cv-icon';
 
 const stories = storiesOf('CvDatePicker', module);
 stories.addDecorator(withKnobs);
@@ -62,17 +61,18 @@ const preKnobs = {
     config: ['calOptions', { dateFormat: 'm/d/Y' }], // consts.CONFIG],
     prop: { name: 'cal-options', type: Object },
   },
-  invalid: {
-    group: 'attr',
-    type: boolean,
-    config: ['is invalid', false], // consts.CONFIG],
-    prop: { name: 'invalid', type: Boolean },
-  },
-  invalidDateMessage: {
+  invalidMessage: {
     group: 'attr',
     type: text,
-    config: ['invalid-date-message', ''], // consts.CONTENT],
-    prop: { name: 'invalid-date-message', type: String },
+    config: ['invalid-message', ''], // consts.CONTENT],
+    prop: { name: 'invalid-message', type: String },
+  },
+  invalidMessageSlot: {
+    group: 'slot',
+    slot: {
+      name: 'invalid-message',
+      value: 'Invalid message slot overrides the invalid-message prop',
+    },
   },
   eventsSimple: {
     group: 'attr',
@@ -85,7 +85,14 @@ const preKnobs = {
 };
 
 const variants = [
-  { name: 'default', excludes: ['calOptions', 'events', 'dateEndLabel'] },
+  {
+    name: 'default',
+    excludes: ['calOptions', 'events', 'dateEndLabel', 'invalidMessageSlot'],
+  },
+  {
+    name: 'invalid message slot',
+    excludes: ['calOptions', 'events', 'dateEndLabel'],
+  },
   { name: 'minimal', includes: ['eventsSimple'] },
   {
     name: 'short',
@@ -125,7 +132,7 @@ for (const story of storySet) {
       // console.dir(settings.calOptions);
 
       const templateString = `
-  <cv-date-picker${settings.group.attr}>
+  <cv-date-picker${settings.group.attr}>${settings.group.slot}
   </cv-date-picker>
     `;
       // console.log(templateString);
@@ -142,7 +149,7 @@ for (const story of storySet) {
     `;
 
       return {
-        components: { CvDatePicker, CvIcon, SvTemplateView },
+        components: { CvDatePicker, SvTemplateView },
         props: settings.props,
         template: templateViewString,
         methods: {

@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
@@ -9,11 +9,12 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 
 import CvButtonNotesMD from './cv-button-notes.md';
 import CvButton from './cv-button';
-import CvIcon from '../cv-icon/cv-icon';
 
 const stories = storiesOf('CvButton', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
+
+const exampleIconPath = require('../../assets/images/example-icons.svg');
 
 const preKnobs = {
   small: {
@@ -42,15 +43,24 @@ const preKnobs = {
     group: 'slots',
     slot: {
       name: '',
-      value:
-        'I am a button <cv-icon href="cv(icon--add)" class="bx--btn__icon"></cv-icon>',
+      value: `I am a button`,
+    },
+  },
+  iconHref: {
+    group: 'attr',
+    type: boolean,
+    config: ['with icon', false],
+    prop: {
+      name: 'icon-href',
+      type: String,
+      value: val => (val ? `${exampleIconPath}#icon--add--solid` : ''),
     },
   },
 };
 
 const variants = [
   { name: 'default' },
-  { name: 'minimal', excludes: ['small', 'disabled'] },
+  { name: 'minimal', excludes: ['small', 'disabled', 'iconHref'] },
   {
     name: 'primary',
     extra: { kind: { group: 'attr', value: 'kind="primary"' } },
@@ -63,7 +73,10 @@ const variants = [
     name: 'tertiary',
     extra: { kind: { group: 'attr', value: 'kind="tertiary"' } },
   },
-  { name: 'ghost', extra: { kind: { group: 'attr', value: 'kind="ghost"' } } },
+  {
+    name: 'ghost',
+    extra: { kind: { group: 'attr', value: 'kind="ghost"' } },
+  },
   {
     name: 'danger',
     extra: { kind: { group: 'attr', value: 'kind="danger"' } },
@@ -83,8 +96,8 @@ for (const story of storySet) {
       const settings = story.knobs();
 
       const templateString = `
-<cv-button${settings.group.attr}>
-  ${settings.group.slots}
+<cv-button${settings.group.attr}
+>${settings.group.slots}
 </cv-button>
     `;
       // console.log(templateString);
@@ -100,7 +113,7 @@ for (const story of storySet) {
     `;
 
       return {
-        components: { CvButton, CvIcon, SvTemplateView },
+        components: { CvButton, SvTemplateView },
         methods: {
           actionClick: action('Cv Button - click'),
         },

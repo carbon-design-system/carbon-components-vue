@@ -48,6 +48,7 @@
 
       <div class="bx--modal-footer" v-if="hasFooter">
         <cv-button
+          type="button"
           :kind="secondaryKind"
           @click="onSecondaryClick"
           v-if="this.$slots['secondary-button']"
@@ -56,6 +57,7 @@
           <slot name="secondary-button">Secondary button</slot>
         </cv-button>
         <cv-button
+          type="button"
           :kind="primaryKind"
           @click="onPrimaryClick"
           v-if="this.$slots['primary-button']"
@@ -77,7 +79,7 @@
 
 <script>
 import CvButton from '../cv-button/cv-button';
-import CvIcon from '../cv-icon/cv-icon';
+import CvIcon from '../cv-icon/_cv-icon';
 import uidMixin from '../../mixins/uid-mixin';
 
 export default {

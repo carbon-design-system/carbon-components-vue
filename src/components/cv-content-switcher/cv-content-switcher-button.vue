@@ -12,6 +12,7 @@
 
 <template>
   <button
+    type="button"
     class="cv-content-switcher-button"
     :class="[
       'bx--content-switcher-btn',
@@ -34,7 +35,8 @@ export default {
   name: 'CvContentSwitcherButton',
   mixins: [uidMixin],
   props: {
-    contentSelector: { type: String, required: true },
+    contentSelector: { type: String, default: undefined },
+    ownerId: { type: String, default: undefined },
     selected: Boolean,
   },
   watch: {
@@ -52,7 +54,13 @@ export default {
     };
   },
   mounted() {
-    this.$_CvContnetSwitcherButton = true; // for use by parent with $children
+    this.$_CvContentSwitcherButton = true; // for use by parent with $children
+
+    if (this.contentSelector === '' && this.ownerId === '') {
+      console.error(
+        'CvContentSwitcherButton: ownerId or content-selector properties must not be empty strings.'
+      );
+    }
 
     this.dataSelected = this.selected;
     this.$parent.$emit('cv:mounted', this);
@@ -73,8 +81,8 @@ export default {
       this.dataSelected = false;
     },
     open() {
-      this.$parent.$emit('cv:open', this);
       this.dataSelected = true;
+      this.$parent.$emit('cv:open', this);
     },
   },
 };
