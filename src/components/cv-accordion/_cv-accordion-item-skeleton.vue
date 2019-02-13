@@ -1,7 +1,7 @@
-<template functional>
+<template>
   <li
     class="bx--accordion__item"
-    :class="{ 'bx--accordion__item--active': props.open }"
+    :class="{ 'bx--accordion__item--active': open }"
   >
     <button type="button" class="bx--accordion__heading">
       <svg
