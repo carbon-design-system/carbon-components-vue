@@ -4,7 +4,18 @@
       <h4 class="bx--data-table-v2-header" v-if="title">{{ title }}</h4>
 
       <section class="bx--table-toolbar">
-        <slot name="header" />
+        <div v-if="$listeners.search" class="bx--toolbar-search-container">
+          <cv-search
+            theme="light"
+            small
+            :form-item="false"
+            :placeholder="searchPlaceholder"
+            @input="$emit('search', $event)"
+          />
+        </div>
+        <div v-if="$slots.actions" class="bx--toolbar-content">
+          <slot name="actions" />
+        </div>
       </section>
 
       <table class="bx--data-table-v2" :class="modifierClasses">
@@ -57,6 +68,7 @@ export default {
       validator: val =>
         ['compact', 'short', 'standard', 'tall', ''].includes(val),
     },
+    searchPlaceholder: { type: String, default: 'filter' },
     sortable: Boolean,
     title: String,
     columns: { type: Array, required: true },
