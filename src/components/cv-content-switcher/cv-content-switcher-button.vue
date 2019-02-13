@@ -12,6 +12,7 @@
 
 <template>
   <button
+    type="button"
     class="cv-content-switcher-button"
     :class="[
       'bx--content-switcher-btn',
