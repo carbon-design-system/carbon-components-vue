@@ -93,6 +93,11 @@ Vue.use(window['carbon-vue'].default);
 
 ## Project State
 
+**1.0.0-beta.4**
+
+- Fix initially hidden expanding tile behaviour.
+- Add CvBreadCrumbSkeleton
+
 **1.0.0-beta.3**
 
 - Add header and footer slots for CvTable
