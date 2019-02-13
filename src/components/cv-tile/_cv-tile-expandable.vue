@@ -21,7 +21,11 @@
           <!-- Above the fold content here -->
         </slot>
       </span>
-      <span class="bx--tile-content__below-the-fold" ref="belowFold">
+      <span
+        class="bx--tile-content__below-the-fold"
+        ref="belowFold"
+        v-show="internalExpanded || initialized"
+      >
         <slot name="below">
           <!-- Rest of the content here -->
         </slot>
@@ -41,6 +45,7 @@ export default {
       styleObject: {
         maxHeight: 'initial',
       },
+      initialized: false,
       internalExpanded: this.expanded,
     };
   },
@@ -51,29 +56,29 @@ export default {
       }
     },
   },
-  mounted() {
-    let currentHeight = this.$el.getBoundingClientRect().height;
-    if (!this.expanded) {
-      currentHeight -= this.$refs.belowFold.getBoundingClientRect().height;
-    }
-    this.styleObject.maxHeight = `${currentHeight}px`;
-  },
   methods: {
     toggle(force) {
-      const forceType = typeof force;
-      this.internalExpanded =
-        forceType === 'boolean' ? force : !this.internalExpanded;
-
-      const belowFoldHeight = this.$refs.belowFold.getBoundingClientRect()
-        .height;
       let currentHeight = this.$el.getBoundingClientRect().height;
-
-      if (this.internalExpanded) {
-        currentHeight += belowFoldHeight;
-      } else {
-        currentHeight -= belowFoldHeight;
+      if (!this.initialized) {
+        this.styleObject.maxHeight = `${currentHeight}px`;
+        this.initialized = true;
       }
-      this.styleObject.maxHeight = `${currentHeight}px`;
+
+      this.$nextTick(() => {
+        const forceType = typeof force;
+        this.internalExpanded =
+          forceType === 'boolean' ? force : !this.internalExpanded;
+
+        const belowFoldHeight = this.$refs.belowFold.getBoundingClientRect()
+          .height;
+
+        if (this.internalExpanded) {
+          currentHeight += belowFoldHeight;
+        } else {
+          currentHeight -= belowFoldHeight;
+        }
+        this.styleObject.maxHeight = `${currentHeight}px`;
+      });
     },
   },
 };

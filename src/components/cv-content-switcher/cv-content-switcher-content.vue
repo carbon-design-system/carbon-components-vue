@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="cv-content-switcher-content"
-    :aria-hidden="!isVisible"
-    :hidden="!isVisible"
-  >
+  <div v-show="isVisible" class="cv-content-switcher-content">
     <slot></slot>
   </div>
 </template>
