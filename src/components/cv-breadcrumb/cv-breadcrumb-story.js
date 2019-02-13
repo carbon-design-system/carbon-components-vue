@@ -9,6 +9,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvBreadcrumbNotesMD from './cv-breadcrumb-notes.md';
 import CvBreadcrumb from './cv-breadcrumb';
 import CvBreadcrumbItem from './cv-breadcrumb-item';
+import CvBreadcrumbSkeleton from './cv-breadcrumb-skeleton';
 
 const stories = storiesOf('CvBreadcrumb', module);
 stories.addDecorator(withKnobs);
@@ -73,3 +74,23 @@ for (const story of storySet) {
     }
   );
 }
+
+const templateString = `<cv-breadcrumb-skeleton></cv-breadcrumb-skeleton>`;
+stories.add(
+  'skeleton',
+  () => ({
+    components: { SvTemplateView, CvBreadcrumbSkeleton },
+    template: `
+      <sv-template-view
+        sv-margin
+        sv-position="center"
+        sv-source='${templateString.trim()}'>
+        <template slot="component">${templateString}</template>
+      </sv-template-view>
+    `,
+    props: {},
+  }),
+  {
+    notes: { markdown: CvBreadcrumbNotesMD },
+  }
+);
