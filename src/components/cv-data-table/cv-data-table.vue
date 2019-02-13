@@ -82,8 +82,6 @@ export default {
     },
   },
   mounted() {
-    console.dir(this.dataColumns);
-
     console.warn('CvDataTable - Under construction, API will change.');
   },
   computed: {

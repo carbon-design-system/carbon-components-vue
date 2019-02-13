@@ -93,6 +93,12 @@ Vue.use(window['carbon-vue'].default);
 
 ## Project State
 
+**1.0.0-beta.3**
+
+- Add header and footer slots for CvTable
+- Set button type="button" for all buttons except CvButton. This prevents form submit if a component happens to be inside a form.
+- Added CvSkeletonText, CvAccordionSeketon and CvAccordionItemSekeleton.
+
 **v1.0.0-beta.2**
 
 - Removed Symbol use in prop types, fixing CvRadioButton, CvSlider and CvPagination use with the minified compiled modules.
