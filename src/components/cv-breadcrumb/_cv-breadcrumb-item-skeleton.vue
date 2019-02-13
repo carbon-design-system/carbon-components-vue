@@ -1,6 +1,6 @@
 <template>
   <div class="bx--breadcrumb-item">
-    <a href="/#" class="bx--link">
+    <a class="bx--link">
       &nbsp;
     </a>
   </div>

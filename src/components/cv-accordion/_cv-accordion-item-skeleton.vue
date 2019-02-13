@@ -3,7 +3,7 @@
     class="bx--accordion__item"
     :class="{ 'bx--accordion__item--active': open }"
   >
-    <button type="button" class="bx--accordion__heading">
+    <button disabled type="button" class="bx--accordion__heading">
       <svg
         class="bx--accordion__arrow"
         width="8"
