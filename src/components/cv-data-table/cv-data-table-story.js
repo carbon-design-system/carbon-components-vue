@@ -34,7 +34,7 @@ const preKnobs = {
         Default: '',
         Tall: 'tall',
       },
-      'compact',
+      '',
       // consts.CONFIG, // fails when used with number in storybook 4.1.4
     ],
     prop: {
@@ -231,6 +231,59 @@ const preKnobs = {
       `,
     },
   },
+  batchActions: {
+    group: 'slots',
+    slot: {
+      name: 'batch-actions',
+      value: `
+<cv-button small kind="ghost" @click="onBatchAction1">
+  Ghost
+  <svg
+    class="bx--btn__icon"
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M7 7H4v2h3v3h2V9h3V7H9V4H7v3zm1 9A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
+      fill-rule="evenodd"
+    ></path>
+  </svg>
+</cv-button>
+<cv-button small kind="ghost" @click="onBatchAction2">
+  Ghost
+  <svg
+    class="bx--btn__icon"
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M7 7H4v2h3v3h2V9h3V7H9V4H7v3zm1 9A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
+      fill-rule="evenodd"
+    ></path>
+  </svg>
+</cv-button>
+<cv-button small kind="ghost" @click="onBatchAction3">
+  Ghost
+  <svg
+    class="bx--btn__icon"
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M7 7H4v2h3v3h2V9h3V7H9V4H7v3zm1 9A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
+      fill-rule="evenodd"
+    ></path>
+  </svg>
+</cv-button>
+`,
+    },
+  },
   footer: {
     group: 'slots',
     slot: {
@@ -261,7 +314,7 @@ for (const story of storySet) {
       // ----------------------------------------------------------------
 
       const templateString = `
-<cv-data-table${settings.group.attr} :data="filteredData">${
+<cv-data-table${settings.group.attr} :data="filteredData" ref="table">${
         settings.group.slots
       }</cv-data-table>
   `;
@@ -340,6 +393,24 @@ for (const story of storySet) {
                 return 0;
               });
             }
+          },
+          batchAction1: action('batch action 1'),
+          onBatchAction1() {
+            this.batchAction1(
+              `selected items: [${this.$refs.table.selectedRows}]`
+            );
+          },
+          batchAction2: action('batch action 2'),
+          onBatchAction2() {
+            this.batchAction2(
+              `selected items: [${this.$refs.table.selectedRows}]`
+            );
+          },
+          batchAction3: action('batch action 3'),
+          onBatchAction3() {
+            this.batchAction3(
+              `selected items: [${this.$refs.table.selectedRows}]`
+            );
           },
           action1: action('action 1'),
           action2: action('action 2'),
