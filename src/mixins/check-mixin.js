@@ -68,23 +68,24 @@ export default {
     },
   },
   methods: {
-    onChange(ev) {
+    onChangeInner(checked) {
       if (this.isArrayModel) {
         let modelSet = new Set(this.modelValue);
 
-        if (!ev.target.checked) {
+        if (!checked) {
           modelSet.delete(this.value);
-          this.$emit('change', false);
         } else {
           modelSet.add(this.value);
-          this.$emit('change', true);
         }
         this.dataChecked = Array.from(modelSet);
       } else {
-        this.dataChecked = ev.target.checked;
-        this.$emit('change', ev.target.checked);
+        this.dataChecked = checked;
       }
       this.$emit('modelEvent', this.dataChecked);
+      this.$emit('change', checked);
+    },
+    onChange(ev) {
+      this.onChangeInner(ev.target.checked);
     },
   },
 };

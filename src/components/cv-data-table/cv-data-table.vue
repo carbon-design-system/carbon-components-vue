@@ -4,8 +4,29 @@
       <h4 class="bx--data-table-v2-header" v-if="title">{{ title }}</h4>
 
       <section class="bx--table-toolbar">
+        <div
+          v-if="hasBatchActions"
+          class="bx--batch-actions"
+          :class="{ 'bx--batch-actions--active': batchActive }"
+          aria-label="Table Action Bar"
+        >
+          <div class="bx--action-list">
+            <slot name="batch-actions" />
+          </div>
+          <div class="bx--batch-summary">
+            <p class="bx--batch-summary__para">
+              <span data-items-selected>{{ rowChecks.length }}</span> items
+              selected
+            </p>
+            <button class="bx--batch-summary__cancel" @click="deselect">
+              Cancel
+            </button>
+          </div>
+        </div>
+
         <div v-if="$listeners.search" class="bx--toolbar-search-container">
           <cv-search
+            :disabled="batchActive"
             theme="light"
             small
             :form-item="false"
@@ -13,7 +34,7 @@
             @input="$emit('search', $event)"
           />
         </div>
-        <div v-if="$slots.actions" class="bx--toolbar-content">
+        <div v-if="$slots.actions && !batchActive" class="bx--toolbar-content">
           <slot name="actions" />
         </div>
       </section>
@@ -21,6 +42,14 @@
       <table class="bx--data-table-v2" :class="modifierClasses">
         <thead>
           <tr>
+            <th v-if="hasBatchActions">
+              <cv-checkbox
+                :form-item="false"
+                value="headingCheck"
+                v-model="headingChecked"
+                @change="onHeadingCheckChange"
+              />
+            </th>
             <cv-data-table-headnig
               v-for="(column, index) in dataColumns"
               :key="`${index}:${column}`"
@@ -35,6 +64,15 @@
 
         <tbody>
           <tr v-for="(row, rowIndex) in rows" :key="`row:${rowIndex}`">
+            <td v-if="hasBatchActions">
+              <cv-checkbox
+                :form-item="false"
+                :value="`${rowIndex}`"
+                v-model="rowChecks"
+                @change="onRowCheckChange"
+                ref="rowChecks"
+              />
+            </td>
             <td
               v-for="(cell, colIndex) in row"
               :key="`cell:${colIndex}:${rowIndex}`"
@@ -83,6 +121,9 @@ export default {
             order: 'none',
           }))
         : this.columns,
+      batchActive: false,
+      headingChecked: false,
+      rowChecks: [],
     };
   },
   watch: {
@@ -97,6 +138,9 @@ export default {
     console.warn('CvDataTable - Under construction, API will change.');
   },
   computed: {
+    hasBatchActions() {
+      return this.$slots['batch-actions'];
+    },
     rows() {
       return this.data;
     },
@@ -119,8 +163,29 @@ export default {
     dataStyle() {
       return index => this.columns[index].dataStyle;
     },
+    selectedRows() {
+      return this.rowChecks.map(val => parseInt(val));
+    },
   },
   methods: {
+    onHeadingCheckChange() {
+      // check /uncheck all children
+      this.batchActive = this.headingChecked;
+      this.rowChecks = [];
+      if (this.headingChecked) {
+        for (const i in this.$refs.rowChecks) {
+          this.rowChecks.push(this.$refs.rowChecks[i].value);
+        }
+      }
+    },
+    deselect() {
+      this.headingChecked = false;
+      this.onHeadingCheckChange();
+    },
+    onRowCheckChange() {
+      this.headingChecked = this.rowChecks.length === this.data.length;
+      this.batchActive = this.rowChecks.length > 0;
+    },
     watchColumns() {
       this.dataColumns = this.sortable
         ? this.columns.map(item => ({
