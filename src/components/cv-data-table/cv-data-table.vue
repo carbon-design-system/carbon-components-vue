@@ -4,6 +4,7 @@
       <h4 class="bx--data-table-v2-header" v-if="title">{{ title }}</h4>
 
       <section class="bx--table-toolbar">
+        <div v-if="batchActive" style="min-height: 32px; max-width: 0;" />
         <div
           v-if="hasBatchActions"
           class="bx--batch-actions"
@@ -85,7 +86,17 @@
       </table>
     </div>
 
-    <slot name="footer" />
+    <cv-pagination
+      v-if="pagination"
+      :backward-text="pagination.backwardText"
+      :forward-text="pagination.forwardText"
+      :number-of-items="internalNumberOfItems"
+      :page="pagination.page"
+      :page-number-label="pagination.pageNumberLabel"
+      :page-sizes-label="pagination.pageSizesLabel"
+      :page-sizes="pagination.pageSizes"
+      @change="$emit('pagination', $event)"
+    ></cv-pagination>
   </div>
 </template>
 
@@ -100,6 +111,10 @@ export default {
   props: {
     autoWidth: Boolean,
     borderless: Boolean,
+    pagination: {
+      type: [Boolean, Object],
+      default: false,
+    },
     rowSize: {
       type: String,
       default: 'standard',
@@ -150,6 +165,29 @@ export default {
     },
     tableStyle() {
       return this.autoWidth ? { width: 'initial' } : { width: '100%' };
+    },
+    internalPangination() {
+      if (typeof this.pagination === 'object') {
+        return this.pagination;
+      } else {
+        if (this.pagination === true) {
+          return {};
+        }
+      }
+      return false;
+    },
+    internalNumberOfItems() {
+      if (
+        this.internalPagination &&
+        typeof this.internalPagination.numberOfItems === 'number'
+      ) {
+        return Math.min(
+          this.internalPagination.numberOfItems,
+          this.data.length
+        );
+      } else {
+        return this.data.length;
+      }
     },
     modifierClasses() {
       const prefix = 'bx--data-table-v2--';

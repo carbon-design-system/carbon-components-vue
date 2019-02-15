@@ -202,6 +202,11 @@ const preKnobs = {
     group: 'attr',
     value: '@search="onFilter"',
   },
+  pagination: {
+    group: 'attr',
+    value:
+      ':pagination="{ numberOfItems: internalData.length }" @pagination="actionOnPagination"',
+  },
   actions: {
     group: 'slots',
     slot: {
@@ -281,15 +286,6 @@ const preKnobs = {
     ></path>
   </svg>
 </cv-button>
-`,
-    },
-  },
-  footer: {
-    group: 'slots',
-    slot: {
-      name: 'footer',
-      value: `
-<cv-pagination :number-of-items="filteredData ? filteredData.length : 0"></cv-pagination>
 `,
     },
   },
@@ -418,6 +414,7 @@ for (const story of storySet) {
           action2: action('action 2'),
           action3: action('action 3'),
           actionNew: action('add new'),
+          actionOnPagination: action('pagination change'),
         },
       };
     },
