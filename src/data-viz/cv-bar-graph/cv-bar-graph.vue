@@ -323,7 +323,11 @@ export default {
   },
 
   mounted() {
-    console.warn(`CVBarGraph API under review`);
+    console.warn(
+      `${
+        this.$vnode.componentOptions.Ctor.extendOptions.name
+      } - Under review. This component isn't quite ready. Hopefully no features will get broken but this cannot be guarenteed.`
+    );
     this.updateGraph();
   },
 

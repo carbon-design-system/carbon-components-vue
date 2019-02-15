@@ -324,7 +324,9 @@ for (const story of storySet) {
       const templateViewString = `
     <sv-template-view
       sv-margin
-      sv-source='${templateString.trim()}'>
+      sv-source='${templateString.trim()}'
+      under-construction
+      >
       <template slot="component">${templateString}</template>
       <template slot="other">
         NOTE: Sorting and filtering are the responsibility of the component user. This component raises events to facilitate this.

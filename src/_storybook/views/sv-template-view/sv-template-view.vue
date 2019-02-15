@@ -11,6 +11,13 @@
     <section class="sv-template-view__component" :style="style">
       <slot name="component"></slot>
       <br />
+      <cv-inline-notification
+        v-if="underConstruction"
+        class="sv-under-construction"
+        title="Under review"
+        sub-title="This component isn't quite ready. Hopefully no features will get broken but this cannot be guarenteed"
+        kind="warning"
+      />
     </section>
     <section class="sv-template-view__other">
       <h2 class="sv-tempate-view__label">Sample interaction</h2>
@@ -56,6 +63,7 @@ export default {
     svSource: String,
     svAltBack: Boolean,
     svPosition: String, // flex position
+    underConstruction: Boolean,
   },
   data() {
     return {
@@ -196,5 +204,9 @@ $border: 1px solid #dfe3e6;
   .sv-tempate-view__label {
     margin: 0;
   }
+}
+
+.sv-under-construction .bx--inline-notification__close-button {
+  display: none;
 }
 </style>
