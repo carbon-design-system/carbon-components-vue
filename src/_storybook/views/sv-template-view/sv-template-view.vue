@@ -127,10 +127,10 @@ export default {
       const classList = document.body.classList;
       if (this.experimental) {
         classList.add('experimental');
-        classList.remove('carbon');
+        classList.remove('.carbon');
       } else {
         classList.remove('experimental');
-        classList.add('carbon');
+        classList.add('.carbon');
       }
       window.carbonExperimental = this.experimental;
     },
