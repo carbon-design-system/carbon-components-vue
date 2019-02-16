@@ -1,5 +1,6 @@
 <template>
-  <main
+  <component
+    :is="tagType"
     class="sv-template-view"
     :class="[
       {
@@ -51,26 +52,45 @@
         ref="clippy"
       ></textarea>
     </section>
-  </main>
+    <div class="sv-template-view--experimental">
+      <cv-checkbox
+        v-model="experimental"
+        @change="onExperimental"
+        value="experimental-on"
+        label="Experimental"
+      ></cv-checkbox>
+    </div>
+  </component>
 </template>
 
 <script>
 import Vue from 'vue';
+import SvViewMain from './sv-view-main.vue';
+import SvViewMainExperimental from './sv-view-main-experimental.vue';
+
 export default {
   name: 'SvTemplateView',
+  components: {
+    SvViewMain,
+    SvViewMainExperimental,
+  },
   props: {
     svMargin: { type: Boolean, default: true },
     svSource: String,
-    svAltBack: Boolean,
+    svAltBack: { type: Boolean, default: true },
     svPosition: String, // flex position
     underConstruction: Boolean,
   },
   data() {
     return {
       propsJSON: '',
+      experimental: false,
     };
   },
   computed: {
+    tagType() {
+      return this.experimental ? 'sv-view-main-experimental' : 'sv-view-main';
+    },
     style() {
       return {
         alignItems:
@@ -81,6 +101,16 @@ export default {
     },
   },
   mounted() {
+    this.experimental = window.carbonExperimental
+      ? window.carbonExperimental
+      : false;
+    this.onExperimental();
+    if (
+      !document.body.classList.contains('carbon') &&
+      !document.body.classList.contains('experimental')
+    ) {
+      document.body.classList.add('carbon');
+    }
     this.propsJSON = JSON.stringify(
       this.$vnode.context.$options.propsData,
       null,
@@ -95,6 +125,17 @@ export default {
     );
   },
   methods: {
+    onExperimental() {
+      const classList = document.body.classList;
+      if (this.experimental) {
+        classList.add('experimental');
+        classList.remove('.carbon');
+      } else {
+        classList.remove('experimental');
+        classList.add('.carbon');
+      }
+      window.carbonExperimental = this.experimental;
+    },
     sourceToClipboard() {
       this.$refs.copyButton.classList.remove('sv-template-view__copy--copied');
       this.$refs.clippy.value = this.svSource;
@@ -121,12 +162,15 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~carbon-components/scss/globals/scss/styles.scss';
 @import '~highlight.js/styles/default.css';
 
 $back-color: #f5f7fa;
 $alt-back-color: #fff;
 $border: 1px solid #dfe3e6;
+
+.sv-template-view {
+  border: 1px solid transparent;
+}
 
 .sv-template-view__component {
   display: flex;
@@ -208,5 +252,24 @@ $border: 1px solid #dfe3e6;
 
 .sv-under-construction .bx--inline-notification__close-button {
   display: none;
+}
+
+.sv-template-view--experimental {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-height: 30px;
+  padding: 5px;
+  // border-bottom-left-radius: 5px;
+  // background-color: $back-color;
+
+  // .bx--toggle__label {
+  //   margin: 0;
+  //   min-height: 24px;
+  // }
+}
+
+.sb-show-main {
+  margin: 0;
 }
 </style>
