@@ -1,6 +1,6 @@
 $feature-flags: (
   components-x: true,
-  ui-shell: false,
+  ui-shell: true,
 );
 
 $css--body: false; // we're providing our own body styles

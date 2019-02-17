@@ -1,6 +1,6 @@
 $feature-flags: (
   components-x: false,
-  ui-shell: false,
+  ui-shell: true,
 );
 
 $css--body: false; // we're providing our own body styles
@@ -16,6 +16,7 @@ $css--reset: false; // prevent thousands of resets being included...
   //reset
   color: $text-01;
   background-color: $ui-02;
+  // line-height: initial;
   box-sizing: border-box;
   margin: 0;
   padding: 0;

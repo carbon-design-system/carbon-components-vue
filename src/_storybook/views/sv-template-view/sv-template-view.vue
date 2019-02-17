@@ -2,12 +2,10 @@
   <component
     :is="tagType"
     class="sv-template-view"
-    :class="[
-      {
-        'sv-template-view--margin': svMargin,
-        'sv-template-view--alt-back': svAltBack,
-      },
-    ]"
+    :class="{
+      'sv-template-view--margin': svMargin,
+      'sv-template-view--alt-back': svAltBack,
+    }"
   >
     <section class="sv-template-view__component" :style="style">
       <slot name="component"></slot>
@@ -129,10 +127,10 @@ export default {
       const classList = document.body.classList;
       if (this.experimental) {
         classList.add('experimental');
-        classList.remove('.carbon');
+        classList.remove('carbon');
       } else {
         classList.remove('experimental');
-        classList.add('.carbon');
+        classList.add('carbon');
       }
       window.carbonExperimental = this.experimental;
     },
@@ -222,7 +220,7 @@ $border: 1px solid #dfe3e6;
 }
 .sv-template-view__copy {
   position: absolute;
-  top: 38px;
+  top: 50px;
   left: 0;
   &.sv-template-view__copy--copied::after {
     content: 'Copied!';
