@@ -64,24 +64,23 @@
         </thead>
 
         <tbody>
-          <tr v-for="(row, rowIndex) in rows" :key="`row:${rowIndex}`">
-            <td v-if="hasBatchActions">
-              <cv-checkbox
-                :form-item="false"
-                :value="`${rowIndex}`"
-                v-model="rowChecks"
-                @change="onRowCheckChange"
-                ref="rowChecks"
-              />
-            </td>
-            <td
-              v-for="(cell, colIndex) in row"
-              :key="`cell:${colIndex}:${rowIndex}`"
-              :style="dataStyle(colIndex)"
+          <slot name="rows">
+            <cv-data-table-row
+              v-for="(row, rowIndex) in rows"
+              :key="`row:${rowIndex}`"
+              v-model="rowChecks"
+              @change="onRowCheckChange"
+              :value="`${rowIndex}`"
+              ref="rowChecks"
             >
-              {{ cell }}
-            </td>
-          </tr>
+              <cv-data-table-cell
+                v-for="(cell, colIndex) in row"
+                :key="`cell:${colIndex}:${rowIndex}`"
+                :style="dataStyle(colIndex)"
+                >{{ cell }}</cv-data-table-cell
+              >
+            </cv-data-table-row>
+          </slot>
         </tbody>
       </table>
     </div>
@@ -102,11 +101,15 @@
 
 <script>
 import CvDataTableHeadnig from './_cv-data-table-heading';
+import CvDataTableRow from './cv-data-table-row';
+import CvDataTableCell from './cv-data-table-cell';
 
 export default {
   name: 'CvDataTable',
   components: {
     CvDataTableHeadnig,
+    CvDataTableRow,
+    CvDataTableCell,
   },
   props: {
     autoWidth: Boolean,

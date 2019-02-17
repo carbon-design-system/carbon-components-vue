@@ -293,11 +293,13 @@ const preKnobs = {
     group: 'attr',
     value: '@sort="onSort"',
   },
+  slotData: {},
 };
 
 const variants = [
   { name: 'default', excludes: ['columns2'] },
   { name: 'minimal', includes: ['columns', 'data'] },
+  { name: 'slot data', includes: ['columns', 'slottedData'] },
   { name: 'styled columns', includes: ['columns2', 'data'] },
 ];
 
