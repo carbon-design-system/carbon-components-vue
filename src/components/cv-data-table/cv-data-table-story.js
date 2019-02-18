@@ -309,12 +309,12 @@ const preKnobs = {
       name: 'data',
       value:
         '\n    <cv-data-table-row v-for="(row, rowIndex) in [`ibm`, `beta`, `local`, `custom`, `private`]" :key="`${rowIndex}`" :value="`${rowIndex}`">' +
-        '\n       <cv-data-table-cell><input type="text" :value="row" /></cv-data-table-cell>' +
-        '\n       <cv-data-table-cell><input type="number" :value="rowIndex * rowIndex" /></cv-data-table-cell>' +
-        '\n       <cv-data-table-cell><input type="password" value="ASecret" /></cv-data-table-cell>' +
+        '\n       <cv-data-table-cell><input type="text" :value="row" style="border: none; background: none; width: 100%;"/></cv-data-table-cell>' +
+        '\n       <cv-data-table-cell><input type="number" :value="rowIndex * rowIndex" style="border: none; background: none; width: 100%;" /></cv-data-table-cell>' +
+        '\n       <cv-data-table-cell><input type="password" value="ASecret" style="border: none; background: none; width: 100%;" /></cv-data-table-cell>' +
         '\n       <cv-data-table-cell><a href="https://vue.carbondesignsystem.com">Here</a></cv-data-table-cell>' +
         '\n       <cv-data-table-cell><cv-tag :kind="row" label="I am a tag" /></cv-data-table-cell>' +
-        '\n       <cv-data-table-cell><cv-button type="button" v-html="`Clicky ${row}`"></cv-button></cv-data-table-cell>' +
+        '\n       <cv-data-table-cell><cv-button type="button" v-html="`Clicky ${row}`" style="width: 100%;"></cv-button></cv-data-table-cell>' +
         '\n    </cv-data-table-row>\n',
     },
   },
