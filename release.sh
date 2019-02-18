@@ -37,15 +37,6 @@ then
 fi
 echo
 
-read  -n 1 -p "Has a tag for the new version been set and pushed upstream [yN]? " answer5
-[ -z "$answer5" ] && answer5="n"  # if 'no' have to be default choice
-
-if [ "$answer5" != "y" ] && [ "$answer5" != "Y" ]
-then
-  exit;
-fi
-echo
-
 read  -n 1 -p "Has 'yarn lint:es' been run [yN]? " answer6
 [ -z "$answer6" ] && answer6="n"  # if 'no' have to be default choice
 
@@ -77,6 +68,15 @@ read  -n 1 -p "Has 'yarn build' been run [yN]? " answer9
 [ -z "$answer9" ] && answer9="n"  # if 'no' have to be default choice
 
 if [ "$answer9" != "y" ] && [ "$answer9" != "Y" ]
+then
+  exit;
+fi
+echo
+
+read  -n 1 -p "Has a tag for the new version been set and pushed upstream [yN]? " answer5
+[ -z "$answer5" ] && answer5="n"  # if 'no' have to be default choice
+
+if [ "$answer5" != "y" ] && [ "$answer5" != "Y" ]
 then
   exit;
 fi

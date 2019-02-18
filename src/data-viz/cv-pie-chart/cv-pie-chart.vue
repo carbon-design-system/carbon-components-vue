@@ -19,7 +19,9 @@
   <div class="cv-pie-chart">
     <h2 class="bx--graph-header">{{ header }}</h2>
     <div class="cv-pie-chart__container">
-      <svg :width="width" :height="height"><g /></svg>
+      <svg :width="width" :height="height">
+        <g></g>
+      </svg>
       <div class="cv-pie-chart__tooltip">
         <p class="cv-pie-chart__amount"></p>
         <p class="cv-pie-chart__item"></p>
@@ -135,6 +137,12 @@ export default {
     },
   },
   mounted() {
+    console.warn(
+      `${
+        this.$vnode.componentOptions.Ctor.extendOptions.name
+      } - Under review. This component isn't quite ready. Hopefully no features will get broken but this cannot be guarenteed.`
+    );
+
     this.g = d3
       .select('g')
       .attr('transform', `translate(${this.width / 2}, ${this.height / 2})`);
