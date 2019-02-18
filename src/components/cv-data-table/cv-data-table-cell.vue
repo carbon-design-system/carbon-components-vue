@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'CvDataTableRow',
+  name: 'CvDataTableCell',
   props: {
     cellStyle: {},
   },

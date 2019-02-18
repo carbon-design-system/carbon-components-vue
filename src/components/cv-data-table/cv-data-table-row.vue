@@ -17,7 +17,7 @@
 export default {
   name: 'CvDataTableRow',
   props: {
-    checked: Array,
+    checked: Boolean,
     value: { type: String, requried: true },
   },
   watch: {
@@ -35,6 +35,9 @@ export default {
     };
   },
   computed: {
+    isCvDataTableRow() {
+      return true;
+    },
     hasBatchActions() {
       return this.$parent.hasBatchActions;
     },
@@ -44,7 +47,7 @@ export default {
   },
   methods: {
     onChange() {
-      this.$emit('change', this.dataChecked);
+      this.$parent.onRowCheckChange(this.value, this.dataChecked);
     },
   },
 };

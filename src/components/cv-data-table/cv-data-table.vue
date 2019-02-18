@@ -64,12 +64,10 @@
         </thead>
 
         <tbody>
-          <slot name="rows">
+          <slot name="data">
             <cv-data-table-row
-              v-for="(row, rowIndex) in rows"
+              v-for="(row, rowIndex) in data"
               :key="`row:${rowIndex}`"
-              v-model="rowChecks"
-              @change="onRowCheckChange"
               :value="`${rowIndex}`"
               ref="rowChecks"
             >
@@ -163,9 +161,6 @@ export default {
     hasBatchActions() {
       return this.$slots['batch-actions'];
     },
-    rows() {
-      return this.data;
-    },
     tableStyle() {
       return this.autoWidth ? { width: 'initial' } : { width: '100%' };
     },
@@ -217,9 +212,14 @@ export default {
       // check /uncheck all children
       this.batchActive = this.headingChecked;
       this.rowChecks = [];
-      if (this.headingChecked) {
-        for (const i in this.$refs.rowChecks) {
-          this.rowChecks.push(this.$refs.rowChecks[i].value);
+      for (const i in this.$children) {
+        let child = this.$children[i];
+        if (child.isCvDataTableRow) {
+          child.dataChecked = this.headingChecked;
+
+          if (this.headingChecked) {
+            this.rowChecks.push(child.value);
+          }
         }
       }
     },
@@ -227,7 +227,16 @@ export default {
       this.headingChecked = false;
       this.onHeadingCheckChange();
     },
-    onRowCheckChange() {
+    onRowCheckChange(value, checked) {
+      let modelSet = new Set(this.rowChecks);
+
+      if (!checked) {
+        modelSet.delete(value);
+      } else {
+        modelSet.add(value);
+      }
+      this.rowChecks = Array.from(modelSet);
+
       this.headingChecked = this.rowChecks.length === this.data.length;
       this.batchActive = this.rowChecks.length > 0;
     },
