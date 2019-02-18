@@ -293,11 +293,38 @@ const preKnobs = {
     group: 'attr',
     value: '@sort="onSort"',
   },
+  slottedData: {
+    group: 'slots',
+    slot: {
+      name: 'data',
+      value:
+        '\n    <cv-data-table-row v-for="(row, rowIndex) in internalData" :key="`${rowIndex}`" :value="`${rowIndex}`">' +
+        '\n       <cv-data-table-cell v-for="(cell, cellIndex) in row" :key="`${cellIndex}`" :value="`${cellIndex}`" v-html="cell"></cv-data-table-cell>' +
+        '\n    </cv-data-table-row>\n',
+    },
+  },
+  htmlData: {
+    group: 'slots',
+    slot: {
+      name: 'data',
+      value:
+        '\n    <cv-data-table-row v-for="(row, rowIndex) in [`ibm`, `beta`, `local`, `custom`, `private`]" :key="`${rowIndex}`" :value="`${rowIndex}`">' +
+        '\n       <cv-data-table-cell><input type="text" :value="row" style="border: none; background: none; width: 100%;"/></cv-data-table-cell>' +
+        '\n       <cv-data-table-cell><input type="number" :value="rowIndex * rowIndex" style="border: none; background: none; width: 100%;" /></cv-data-table-cell>' +
+        '\n       <cv-data-table-cell><input type="password" value="ASecret" style="border: none; background: none; width: 100%;" /></cv-data-table-cell>' +
+        '\n       <cv-data-table-cell><a href="https://vue.carbondesignsystem.com">Here</a></cv-data-table-cell>' +
+        '\n       <cv-data-table-cell><cv-tag :kind="row" label="I am a tag" /></cv-data-table-cell>' +
+        '\n       <cv-data-table-cell><cv-button type="button" v-html="`Clicky ${row}`" style="width: 100%;"></cv-button></cv-data-table-cell>' +
+        '\n    </cv-data-table-row>\n',
+    },
+  },
 };
 
 const variants = [
-  { name: 'default', excludes: ['columns2'] },
+  { name: 'default', excludes: ['columns2', 'slottedData', 'htmlData'] },
   { name: 'minimal', includes: ['columns', 'data'] },
+  { name: 'slotted data', includes: ['columns', 'slottedData', 'data'] },
+  { name: 'slotted HTML', includes: ['columns', 'htmlData'] },
   { name: 'styled columns', includes: ['columns2', 'data'] },
 ];
 
@@ -310,11 +337,12 @@ for (const story of storySet) {
       // ----------------------------------------------------------------
 
       const templateString = `
-<cv-data-table${settings.group.attr} :data="filteredData" ref="table">${
-        settings.group.slots
-      }</cv-data-table>
+<cv-data-table${settings.group.attr} ${
+        settings.group.slots.indexOf('slot="data"') < 0
+          ? ':data="filteredData"'
+          : ''
+      } ref="table">${settings.group.slots}</cv-data-table>
   `;
-
       // ----------------------------------------------------------------
 
       const templateViewString = `

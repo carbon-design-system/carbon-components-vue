@@ -64,24 +64,21 @@
         </thead>
 
         <tbody>
-          <tr v-for="(row, rowIndex) in rows" :key="`row:${rowIndex}`">
-            <td v-if="hasBatchActions">
-              <cv-checkbox
-                :form-item="false"
-                :value="`${rowIndex}`"
-                v-model="rowChecks"
-                @change="onRowCheckChange"
-                ref="rowChecks"
-              />
-            </td>
-            <td
-              v-for="(cell, colIndex) in row"
-              :key="`cell:${colIndex}:${rowIndex}`"
-              :style="dataStyle(colIndex)"
+          <slot name="data">
+            <cv-data-table-row
+              v-for="(row, rowIndex) in data"
+              :key="`row:${rowIndex}`"
+              :value="`${rowIndex}`"
+              ref="rowChecks"
             >
-              {{ cell }}
-            </td>
-          </tr>
+              <cv-data-table-cell
+                v-for="(cell, colIndex) in row"
+                :key="`cell:${colIndex}:${rowIndex}`"
+                :style="dataStyle(colIndex)"
+                >{{ cell }}</cv-data-table-cell
+              >
+            </cv-data-table-row>
+          </slot>
         </tbody>
       </table>
     </div>
@@ -102,11 +99,15 @@
 
 <script>
 import CvDataTableHeadnig from './_cv-data-table-heading';
+import CvDataTableRow from './cv-data-table-row';
+import CvDataTableCell from './cv-data-table-cell';
 
 export default {
   name: 'CvDataTable',
   components: {
     CvDataTableHeadnig,
+    CvDataTableRow,
+    CvDataTableCell,
   },
   props: {
     autoWidth: Boolean,
@@ -160,9 +161,6 @@ export default {
     hasBatchActions() {
       return this.$slots['batch-actions'];
     },
-    rows() {
-      return this.data;
-    },
     tableStyle() {
       return this.autoWidth ? { width: 'initial' } : { width: '100%' };
     },
@@ -214,9 +212,14 @@ export default {
       // check /uncheck all children
       this.batchActive = this.headingChecked;
       this.rowChecks = [];
-      if (this.headingChecked) {
-        for (const i in this.$refs.rowChecks) {
-          this.rowChecks.push(this.$refs.rowChecks[i].value);
+      for (const i in this.$children) {
+        let child = this.$children[i];
+        if (child.isCvDataTableRow) {
+          child.dataChecked = this.headingChecked;
+
+          if (this.headingChecked) {
+            this.rowChecks.push(child.value);
+          }
         }
       }
     },
@@ -224,7 +227,16 @@ export default {
       this.headingChecked = false;
       this.onHeadingCheckChange();
     },
-    onRowCheckChange() {
+    onRowCheckChange(value, checked) {
+      let modelSet = new Set(this.rowChecks);
+
+      if (!checked) {
+        modelSet.delete(value);
+      } else {
+        modelSet.add(value);
+      }
+      this.rowChecks = Array.from(modelSet);
+
       this.headingChecked = this.rowChecks.length === this.data.length;
       this.batchActive = this.rowChecks.length > 0;
     },
