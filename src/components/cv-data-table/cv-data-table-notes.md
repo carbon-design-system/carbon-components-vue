@@ -92,6 +92,7 @@ Like sorting and filtering it is the users responsibility to deal with edited da
 
 - batch-actions: Ghost style buttons shown when rows are selected. An array of selected row indexes is returend from the computed property CvDataTable.selectedRows.
 - actions
+- data: overrides passing data as a property, expects CvDataTableRow and CvDataTableCell. CvDataTableCell expects slotted content.
 
 ## Events
 
