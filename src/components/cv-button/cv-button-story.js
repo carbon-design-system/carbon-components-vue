@@ -17,7 +17,7 @@ stories.addDecorator(withNotes);
 
 const exampleIconPath = require('../../assets/images/example-icons.svg');
 
-const preKnobs = {
+let preKnobs = {
   small: {
     group: 'attr',
     type: boolean,
@@ -59,7 +59,7 @@ const preKnobs = {
   },
 };
 
-const variants = [
+let variants = [
   { name: 'default' },
   { name: 'minimal', excludes: ['small', 'disabled', 'iconHref'] },
   {
@@ -88,7 +88,7 @@ const variants = [
   },
 ];
 
-const storySet = knobsHelper.getStorySet(variants, preKnobs);
+let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
@@ -128,22 +128,52 @@ for (const story of storySet) {
   );
 }
 
-const templateString = `<cv-button-skeleton></cv-button-skeleton>`;
-stories.add(
-  'skeleton',
-  () => ({
-    components: { SvTemplateView, CvButtonSkeleton },
-    template: `
+// cv-button-skeleton
+
+preKnobs = {
+  small: {
+    group: 'attr',
+    type: boolean,
+    config: ['small', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      name: 'small',
+      type: Boolean,
+    },
+  },
+};
+
+variants = [{ name: 'skeleton' }];
+
+storySet = knobsHelper.getStorySet(variants, preKnobs);
+
+for (const story of storySet) {
+  stories.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
+
+      const templateString = `
+        <cv-button-skeleton${settings.group.attr}></cv-button-skeleton>
+      `;
+
+      // ----------------------------------------------------------------
+
+      const templateViewString = `
       <sv-template-view
         sv-margin
-        sv-position="center"
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>
       </sv-template-view>
-    `,
-    props: {},
-  }),
-  {
-    notes: { markdown: CvButtonNotesMD },
-  }
-);
+    `;
+
+      return {
+        components: { CvButtonSkeleton, SvTemplateView },
+        template: templateViewString,
+        props: settings.props,
+      };
+    },
+    {
+      notes: { markdown: CvButtonNotesMD },
+    }
+  );
+}

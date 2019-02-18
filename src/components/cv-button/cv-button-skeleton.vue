@@ -1,5 +1,6 @@
 <template>
   <button
+    disabled
     class="bx--btn bx--skeleton"
     :class="{ 'bx--btn--sm': small }"
     type="button"
