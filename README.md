@@ -93,6 +93,15 @@ Vue.use(window['carbon-vue'].default);
 
 ## Project State
 
+**1.0.0**
+
+- Add actions option to data table
+- Add batch actions option to data table
+- Updated table pagination
+- Add CvDataTableRow and CvDataTableCell to allow HTML use in tables
+- Add CvButtonSkeleton
+- Add overflow menu option to table.
+
 **1.0.0-beta.4**
 
 - Fix initially hidden expanding tile behaviour.
@@ -204,7 +213,7 @@ Current Version: 0.1
 | **CvCheckbox**           | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvCheckbox                       |
 | **CvCodeSnippet**        | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvCodeSnippet&selectedStory=All  |
 | **CvContentSwitcher**    | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvContentSwitcher                |
-| CvDataTable              | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/51          |
+| CvDataTable              | :white_check_mark: | https://github.com/carbon-design-system/carbon-components-vue/issues/51          |
 |                          |
 | CvDatePicker             | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvDatePicker&selectedStory=All   |
 | **CvDropdown**           | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvDropdown                       |
