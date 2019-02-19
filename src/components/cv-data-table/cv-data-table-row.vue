@@ -10,6 +10,22 @@
       />
     </td>
     <slot />
+    <td v-if="hasOverflowMenu">
+      <cv-overflow-menu flip-menu>
+        <cv-overflow-menu-item
+          v-for="(item, index) in overflowMenu"
+          :key="`${index}`"
+          @click="
+            onMenuItemClick({
+              rowValue: value,
+              menuIndex: index,
+              menuLabel: item,
+            })
+          "
+          >{{ item }}</cv-overflow-menu-item
+        >
+      </cv-overflow-menu>
+    </td>
   </tr>
 </template>
 
@@ -18,6 +34,7 @@ export default {
   name: 'CvDataTableRow',
   props: {
     checked: Boolean,
+    overflowMenu: Array,
     value: { type: String, requried: true },
   },
   watch: {
@@ -38,6 +55,12 @@ export default {
     isCvDataTableRow() {
       return true;
     },
+    hasOverflowMenu() {
+      return (
+        (this.overflowMenu && this.overflowMenu.length) ||
+        this.$slots['overflow-menu']
+      );
+    },
     hasBatchActions() {
       return this.$parent.hasBatchActions;
     },
@@ -48,6 +71,9 @@ export default {
   methods: {
     onChange() {
       this.$parent.onRowCheckChange(this.value, this.dataChecked);
+    },
+    onMenuItemClick(val) {
+      this.$parent.onMenuItemClick(val);
     },
   },
 };

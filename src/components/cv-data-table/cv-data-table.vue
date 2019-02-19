@@ -60,6 +60,7 @@
               @sort="val => onSort(index, val)"
               :style="headingStyle(index)"
             />
+            <th v-if="hasOverflowMenu"></th>
           </tr>
         </thead>
 
@@ -70,6 +71,7 @@
               :key="`row:${rowIndex}`"
               :value="`${rowIndex}`"
               ref="rowChecks"
+              :overflow-menu="overflowMenu"
             >
               <cv-data-table-cell
                 v-for="(cell, colIndex) in row"
@@ -112,6 +114,7 @@ export default {
   props: {
     autoWidth: Boolean,
     borderless: Boolean,
+    overflowMenu: { type: [Boolean, Array], default: () => [] },
     pagination: {
       type: [Boolean, Object],
       default: false,
@@ -160,6 +163,12 @@ export default {
   computed: {
     hasBatchActions() {
       return this.$slots['batch-actions'];
+    },
+    hasOverflowMenu() {
+      return (
+        this.overflowMenu === true ||
+        (this.overflowMenu && this.overflowMenu.length > 0)
+      );
     },
     tableStyle() {
       return this.autoWidth ? { width: 'initial' } : { width: '100%' };
@@ -239,6 +248,9 @@ export default {
 
       this.headingChecked = this.rowChecks.length === this.data.length;
       this.batchActive = this.rowChecks.length > 0;
+    },
+    onMenuItemClick(val) {
+      this.$emit('overflow-menu-click', val);
     },
     watchColumns() {
       this.dataColumns = this.sortable

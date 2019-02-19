@@ -79,14 +79,16 @@ Like sorting and filtering it is the users responsibility to deal with edited da
     - a dataStyle object to be applied to the data in the column.
 - data: Two dimensional array of strings.
 
-- auto-width: table will size use auto sizing
-- borderless: table will have no border
-- options: 'compact', 'small', 'standarad', '' or 'tall'
-- pagination: default: false, can be set to true or an object containing camel case props for a CvPagination component
-- sortable: can be sorted
-- row-size: optional - default: '',
+- auto-width: (optional) table will size use auto sizing
+- borderless: (optional) table will have no border
+- overflow-menu(optional) : An array of overflow menu labels. On click CvDataTable will raise an 'overflow-menu-click' event passing an object containing menuIndex, menuLabel and rowValue
+- pagination: (optional) default: false, can be set to true or an object containing camel case props for a CvPagination component
+- sortable: (optional) can be sorted
+- row-size: (optional) default: '',
   - 'compact', 'small', '', 'tall'
-- zebra: optional - default: false ; boolean is the table striped
+- zebra: (optional) default: false ; boolean is the table striped
+
+**Overflow menu** To provide customized overflow menus e.g. state dependant, specify explicitly using the slotted data/HTML table form. The CvDataTable will not raise an event.
 
 ## Slots
 

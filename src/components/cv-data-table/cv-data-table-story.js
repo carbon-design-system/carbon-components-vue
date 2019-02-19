@@ -315,8 +315,18 @@ const preKnobs = {
         '\n       <cv-data-table-cell><a href="https://vue.carbondesignsystem.com">Here</a></cv-data-table-cell>' +
         '\n       <cv-data-table-cell><cv-tag :kind="row" label="I am a tag" /></cv-data-table-cell>' +
         '\n       <cv-data-table-cell><cv-button type="button" v-html="`Clicky ${row}`" style="width: 100%;"></cv-button></cv-data-table-cell>' +
+        '\n       <cv-data-table-cell>' +
+        '\n           <cv-overflow-menu flip-menu style="margin: 0 auto;">' +
+        '\n               <cv-overflow-menu-item>Edit</cv-overflow-menu-item>' +
+        '\n               <cv-overflow-menu-item>Test</cv-overflow-menu-item>' +
+        '\n           </cv-overflow-menu>' +
+        '\n       </cv-data-table-cell>' +
         '\n    </cv-data-table-row>\n',
     },
+  },
+  overflowMenu: {
+    group: 'attr',
+    value: `:overflow-menu="sampleOverflowMenu"`,
   },
 };
 
@@ -341,6 +351,14 @@ for (const story of storySet) {
         settings.group.slots.indexOf('slot="data"') < 0
           ? ':data="filteredData"'
           : ''
+      } ${
+        settings.group.attr.indexOf(':overflow-menu=') < 0
+          ? ''
+          : '@overflow-menu-click="onOverflowMenuClick"'
+      } ${
+        settings.group.slots.indexOf('cv-overflow-menu') < 0
+          ? ''
+          : ':overflow-menu="true"'
       } ref="table">${settings.group.slots}</cv-data-table>
   `;
       // ----------------------------------------------------------------
@@ -372,6 +390,7 @@ for (const story of storySet) {
             internalData: this.data,
             filterValue: '',
             sortBy: null,
+            sampleOverflowMenu: ['Start', 'Stop', 'Delete 3'],
           };
         },
         watch: {
@@ -443,6 +462,7 @@ for (const story of storySet) {
           action3: action('action 3'),
           actionNew: action('add new'),
           actionOnPagination: action('pagination change'),
+          onOverflowMenuClick: action('overflow menu click'),
         },
       };
     },
