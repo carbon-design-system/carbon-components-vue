@@ -6,6 +6,10 @@
 > Vue implementation of the Carbon Design System
 > A collection of [Carbon Components](https://github.com/carbon-design-system/carbon-components) implemented using <img src="https://vuejs.org/images/logo.png" width="20" alt="Vue logo"> [Vue.js](https://vuejs.org/).
 
+<div style="text-align: center">
+  <img src="./docs/AtCarbonVue.png" alt="@carbon/vue" height="200px">
+</div>
+
 ## Usage
 
 ### General
@@ -26,7 +30,7 @@ View available Vue Components [here](http://vue.carbondesignsystem.com). Usage i
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/vue
+npm install @carbon/vue
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead:
