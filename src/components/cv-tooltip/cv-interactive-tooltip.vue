@@ -168,10 +168,10 @@ export default {
       this.dataVisible = true;
       this.positionListen(true);
 
-      setTimeout(() => {
+      this.$nextTick(() => {
         this.position();
         this.$refs.trigger.focus();
-      }, 1);
+      });
     },
     hide() {
       this.dataVisible = false;

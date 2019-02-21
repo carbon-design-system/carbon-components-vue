@@ -217,13 +217,13 @@ export default {
       this.pageCount = newPageCount(this.numberOfItems, this.pageSizeValue);
       this.pages = newPagesArray(this.pageCount);
       // what page is firstItem on
-      setTimeout(() => {
+      this.$nextTick(() => {
         // setting pageValue immediately seems to cause a problem - test set pageSize to 40, page to 3, set pageSize to 10
         // this previously resulted in 1 being set on Chrome (other browsers untested)
         this.pageValue = Math.ceil(this.firstItem / this.pageSizeValue);
         this.firstItem = newFirstItem(this.pageValue, this.pageSizeValue);
         this.$emit('change', this.internalValue);
-      }, 1);
+      });
     },
     onPrevPage() {
       if (this.pageValue > 1) {
