@@ -110,18 +110,18 @@ export default {
         ) {
           this.open = false;
           this.positionListen(false);
-          setTimeout(() => {
+          this.$nextTick(() => {
             this.doFocus();
-          }, 1);
+          });
         }
       }
     },
     menuItemclick() {
       this.open = false;
       this.positionListen(false);
-      setTimeout(() => {
+      this.$nextTick(() => {
         this.doFocus();
-      }, 1);
+      });
     },
     doClose() {
       this.open = false;
@@ -139,7 +139,7 @@ export default {
     positionMenu() {
       if (this.open) {
         const menuPosition = this.$el.getBoundingClientRect();
-        setTimeout(() => {
+        this.$nextTick(() => {
           if (this.flipMenu) {
             this.left =
               menuPosition.left +
@@ -155,7 +155,7 @@ export default {
             this.top =
               menuPosition.bottom + 2 + this.offsetTop + window.scrollY;
           }
-        }, 1);
+        });
       }
     },
     doFocus() {
@@ -184,16 +184,16 @@ export default {
       } else {
         focusOn = this.$el;
       }
-      setTimeout(() => {
-        focusOn.focus();
-      }, 1);
+      focusOn.focus();
     },
     doToggle() {
       this.open = !this.open;
 
       this.positionMenu();
       this.positionListen(this.open);
-      this.doFocus();
+      this.$nextTick(() => {
+        this.doFocus();
+      });
     },
     onOverflowMenuTab(ev) {
       if (!ev.shiftKey) {
