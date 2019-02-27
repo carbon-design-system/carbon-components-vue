@@ -7,14 +7,14 @@
 </template>
 
 <script>
-import TextSkeleton from '../cv-skeleton-text/cv-skeleton-text';
-import ButtonSkeleton from '../cv-button/cv-button';
+import CvSkeletonText from '../cv-skeleton-text/cv-skeleton-text';
+import CvButtonSkeleton from '../cv-button/cv-button-skeleton';
 
 export default {
   name: 'CvFileUploaderSkeleton',
   components: {
-    TextSkeleton,
-    ButtonSkeleton,
+    CvSkeletonText,
+    CvButtonSkeleton,
   },
 };
 </script>
