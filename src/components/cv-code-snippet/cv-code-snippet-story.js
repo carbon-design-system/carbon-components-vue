@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text } from '@storybook/addon-knobs';
+import { withKnobs, text, select } from '@storybook/addon-knobs';
 import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
@@ -8,12 +8,13 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 
 import CvCodeSnippetNotesMD from './cv-code-snippet-notes.md';
 import CvCodeSnippet from './cv-code-snippet';
+import CvCodeSnippetSkeleton from './cv-code-snippet-skeleton';
 
 const stories = storiesOf('CvCodeSnippet', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
-const preKnobs = {
+let preKnobs = {
   lessText: {
     group: 'attr',
     type: text,
@@ -63,7 +64,7 @@ $z-indexes: (
   },
 };
 
-const variants = [
+let variants = [
   {
     name: 'default',
     includes: ['content'],
@@ -89,7 +90,7 @@ const variants = [
   },
 ];
 
-const storySet = knobsHelper.getStorySet(variants, preKnobs);
+let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
@@ -118,6 +119,58 @@ for (const story of storySet) {
 
       return {
         components: { CvCodeSnippet, SvTemplateView },
+        template: templateViewString,
+        props: settings.props,
+      };
+    },
+    {
+      notes: { markdown: CvCodeSnippetNotesMD },
+    }
+  );
+}
+
+// cv-code-snippet-skeleton
+
+preKnobs = {
+  kind: {
+    group: 'attr',
+    type: select,
+    config: ['kind', { single: 'single', multi: 'multi' }, 'multi'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      name: 'kind',
+      type: String,
+    },
+  },
+};
+
+variants = [{ name: 'skeleton' }];
+
+storySet = knobsHelper.getStorySet(variants, preKnobs);
+
+for (const story of storySet) {
+  stories.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
+
+      const templateString = `
+        <cv-code-snippet-skeleton${
+          settings.group.attr
+        }></cv-code-snippet-skeleton>
+      `;
+
+      // ----------------------------------------------------------------
+
+      const templateViewString = `
+      <sv-template-view
+        sv-margin
+        sv-source='${templateString.trim()}'>
+        <template slot="component">${templateString}</template>
+      </sv-template-view>
+    `;
+
+      return {
+        components: { CvCodeSnippetSkeleton, SvTemplateView },
         template: templateViewString,
         props: settings.props,
       };
