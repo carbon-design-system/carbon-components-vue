@@ -9,12 +9,13 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 
 import CvDropdownNotesMD from './cv-dropdown-notes.md';
 import CvDropdown from './cv-dropdown';
+import CvDropdownSkeleton from './cv-dropdown-skeleton';
 
 const stories = storiesOf('CvDropdown', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
-const preKnobs = {
+let preKnobs = {
   theme: {
     group: 'attr',
     type: boolean,
@@ -74,14 +75,14 @@ const preKnobs = {
   },
 };
 
-const variants = [
+let variants = [
   { name: 'default', excludes: ['vModel', 'events'] },
   { name: 'minimal', includes: ['value'] },
   { name: 'events', includes: ['value', 'events'] },
   { name: 'vModel', includes: ['value', 'vModel'] },
 ];
 
-const storySet = knobsHelper.getStorySet(variants, preKnobs);
+let storySet = knobsHelper.getStorySet(variants, preKnobs);
 for (const story of storySet) {
   stories.add(
     story.name,
@@ -136,6 +137,56 @@ for (const story of storySet) {
           actionChange: action('CV Dropdown - change'),
         },
         template: templateViewString,
+      };
+    },
+    {
+      notes: { markdown: CvDropdownNotesMD },
+    }
+  );
+}
+
+// cv-dropdown-skeleton
+
+preKnobs = {
+  inline: {
+    group: 'attr',
+    type: boolean,
+    config: ['inline', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      name: 'inline',
+      type: Boolean,
+    },
+  },
+};
+
+variants = [{ name: 'skeleton' }];
+
+storySet = knobsHelper.getStorySet(variants, preKnobs);
+
+for (const story of storySet) {
+  stories.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
+
+      const templateString = `
+      <cv-dropdown-skeleton${settings.group.attr}></cv-dropdown-skeleton>
+      `;
+
+      // ----------------------------------------------------------------
+
+      const templateViewString = `
+      <sv-template-view
+        sv-margin
+        sv-source='${templateString.trim()}'>
+        <template slot="component"><div style="width: 300px">${templateString}</div></template>
+      </sv-template-view>
+    `;
+
+      return {
+        components: { CvDropdownSkeleton, SvTemplateView },
+        template: templateViewString,
+        props: settings.props,
       };
     },
     {
