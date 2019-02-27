@@ -9,12 +9,13 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 
 import CvCheckboxNotesMD from './cv-checkbox-notes.md';
 import CvCheckbox from './cv-checkbox';
+import CvCheckboxSkeleton from './cv-checkbox-skeleton';
 
 const stories = storiesOf('CvCheckbox', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
-const preKnobs = {
+let preKnobs = {
   label: {
     group: 'attr',
     type: text,
@@ -61,14 +62,14 @@ const preKnobs = {
   },
 };
 
-const variants = [
+let variants = [
   { name: 'default', excludes: ['vModel', 'events'] },
   { name: 'minimal', includes: ['label', 'value'] },
   { name: 'events', includes: ['label', 'value', 'events'] },
   { name: 'vModel', includes: ['label', 'value', 'vModel'] },
 ];
 
-const storySet = knobsHelper.getStorySet(variants, preKnobs);
+let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
@@ -193,3 +194,39 @@ stories.add(
     notes: { markdown: CvCheckboxNotesMD },
   }
 );
+
+preKnobs = {};
+variants = [{ name: 'skeleton' }];
+storySet = knobsHelper.getStorySet(variants, preKnobs);
+
+for (const story of storySet) {
+  stories.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
+
+      const templateString = `
+        <cv-checkbox-skeleton></cv-checkbox-skeleton>
+      `;
+
+      // ----------------------------------------------------------------
+
+      const templateViewString = `
+      <sv-template-view
+        sv-margin
+        sv-source='${templateString.trim()}'>
+        <template slot="component">${templateString}</template>
+      </sv-template-view>
+    `;
+
+      return {
+        components: { CvCheckboxSkeleton, SvTemplateView },
+        template: templateViewString,
+        props: settings.props,
+      };
+    },
+    {
+      notes: { markdown: CvCheckboxNotesMD },
+    }
+  );
+}
