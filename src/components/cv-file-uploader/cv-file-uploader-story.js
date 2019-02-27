@@ -9,12 +9,13 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 
 import CvFileUploaderNotesMD from './cv-file-uploader-notes.md';
 import CvFileUploader from './cv-file-uploader';
+import CvFileUploaderSkeleton from './cv-file-uploader-skeleton';
 
 const stories = storiesOf('CvFileUploader', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
-const preKnobs = {
+let preKnobs = {
   label: {
     group: 'attr',
     type: text,
@@ -73,14 +74,14 @@ const preKnobs = {
   },
 };
 
-const variants = [
+let variants = [
   { name: 'default', excludes: ['events', 'vModel'] },
   { name: 'minimal', includes: [] },
   { name: 'events', excludes: ['vModel'] },
   { name: 'vModel', excludes: ['events'] },
 ];
 
-const storySet = knobsHelper.getStorySet(variants, preKnobs);
+let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
@@ -148,6 +149,46 @@ for (const story of storySet) {
             this.storyFiles = [];
           },
         },
+      };
+    },
+    {
+      notes: { markdown: CvFileUploaderNotesMD },
+    }
+  );
+}
+
+// cv-file-uploader-skeleton
+
+preKnobs = {};
+
+variants = [{ name: 'skeleton' }];
+
+storySet = knobsHelper.getStorySet(variants, preKnobs);
+
+for (const story of storySet) {
+  stories.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
+
+      const templateString = `
+        <cv-file-uploader-skeleton></cv-file-uploader-skeleton>
+      `;
+
+      // ----------------------------------------------------------------
+
+      const templateViewString = `
+      <sv-template-view
+        sv-margin
+        sv-source='${templateString.trim()}'>
+        <template slot="component">${templateString}</template>
+      </sv-template-view>
+    `;
+
+      return {
+        components: { CvFileUploaderSkeleton, SvTemplateView },
+        template: templateViewString,
+        props: settings.props,
       };
     },
     {
