@@ -135,7 +135,11 @@ preKnobs = {
   kind: {
     group: 'attr',
     type: select,
-    config: ['kind', { single: 'single', multi: 'multi' }, 'multi'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    config: [
+      'kind',
+      { oneline: 'oneline', multiline: 'multiline' },
+      'multiline',
+    ], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
       name: 'kind',
       type: String,

@@ -13,14 +13,14 @@
 export default {
   name: 'CvCodeSnippetSkeleton',
   props: {
-    kind: { type: String, default: 'single' },
+    kind: { type: String, default: 'oneline' },
   },
   computed: {
     typeClass() {
-      return `bx--snippet--${this.kind}`;
+      return `bx--snippet--${this.multi ? 'multi' : 'single'}`;
     },
     multi() {
-      return this.kind === 'multi';
+      return this.kind === 'multiline';
     },
   },
 };
