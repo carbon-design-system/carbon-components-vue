@@ -4,7 +4,9 @@
     :class="{ 'bx--accordion__item--active': open }"
   >
     <button disabled type="button" class="bx--accordion__heading">
+      <ChevronRight16 v-if="componentsX" class="bx--accordion__arrow" />
       <svg
+        v-else
         class="bx--accordion__arrow"
         width="8"
         height="12"
@@ -23,14 +25,22 @@
 
 <script>
 import CvSkeletonText from '../cv-skeleton-text/cv-skeleton-text';
+import { componentsX } from '../../_internal/_feature-flags';
+import ChevronRight16 from '@carbon/icons-vue/lib/chevron--right/16';
 
 export default {
   name: 'CvAccordionItemSkeleton',
   components: {
+    ChevronRight16,
     CvSkeletonText,
   },
   props: {
     open: { type: Boolean, default: false },
+  },
+  data() {
+    return {
+      componentsX,
+    };
   },
 };
 </script>
