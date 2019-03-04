@@ -62,7 +62,6 @@ export default {
   data() {
     return {
       componentsX,
-      ChevronRight16,
       dataOpen: false,
     };
   },
