@@ -97,6 +97,15 @@ Vue.use(window['carbon-vue'].default);
 
 ## Project State
 
+**1.0.1**
+
+- Removed setTimeout use
+- Added Skeleton components for
+- CvFileUpload
+- CvDropdown
+- CvCodeSnippet
+- CvCheckbox
+
 **1.0.0**
 
 - Add actions option to data table
