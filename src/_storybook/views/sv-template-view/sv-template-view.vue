@@ -1,12 +1,11 @@
 <template>
-  <main
+  <component
+    :is="tagType"
     class="sv-template-view"
-    :class="[
-      {
-        'sv-template-view--margin': svMargin,
-        'sv-template-view--alt-back': svAltBack,
-      },
-    ]"
+    :class="{
+      'sv-template-view--margin': svMargin,
+      'sv-template-view--alt-back': svAltBack,
+    }"
   >
     <section class="sv-template-view__component" :style="style">
       <slot name="component"></slot>
@@ -51,17 +50,25 @@
         ref="clippy"
       ></textarea>
     </section>
-  </main>
+  </component>
 </template>
 
 <script>
 import Vue from 'vue';
+import { componentsX } from '../../../_internal/_feature-flags';
+import SvViewExperimental from './sv-view-experimental.vue'; //
+import SvView from './sv-view.vue';
+
 export default {
   name: 'SvTemplateView',
+  components: {
+    SvView,
+    SvViewExperimental,
+  },
   props: {
     svMargin: { type: Boolean, default: true },
     svSource: String,
-    svAltBack: Boolean,
+    svAltBack: { type: Boolean, default: true },
     svPosition: String, // flex position
     underConstruction: Boolean,
   },
@@ -71,6 +78,9 @@ export default {
     };
   },
   computed: {
+    tagType() {
+      return componentsX ? 'sv-view-experimental' : 'sv-view';
+    },
     style() {
       return {
         alignItems:
@@ -121,12 +131,15 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~carbon-components/scss/globals/scss/styles.scss';
 @import '~highlight.js/styles/default.css';
 
 $back-color: #f5f7fa;
 $alt-back-color: #fff;
 $border: 1px solid #dfe3e6;
+
+.sv-template-view {
+  border: 1px solid transparent;
+}
 
 .sv-template-view__component {
   display: flex;
@@ -178,7 +191,7 @@ $border: 1px solid #dfe3e6;
 }
 .sv-template-view__copy {
   position: absolute;
-  top: 38px;
+  top: 62px;
   left: 0;
   &.sv-template-view__copy--copied::after {
     content: 'Copied!';
@@ -208,5 +221,24 @@ $border: 1px solid #dfe3e6;
 
 .sv-under-construction .bx--inline-notification__close-button {
   display: none;
+}
+
+.sv-template-view--experimental {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-height: 30px;
+  padding: 5px;
+  // border-bottom-left-radius: 5px;
+  // background-color: $back-color;
+
+  // .bx--toggle__label {
+  //   margin: 0;
+  //   min-height: 24px;
+  // }
+}
+
+.sb-show-main {
+  margin: 0;
 }
 </style>
