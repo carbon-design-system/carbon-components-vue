@@ -135,7 +135,7 @@
   },
   "lint-staged": {
     "*.{scss,css,js,md,vue}": [
-      "echo skipped yarn format",
+      "yarn format:staged",
       "git add"
     ]
   },
