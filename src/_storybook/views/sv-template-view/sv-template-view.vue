@@ -50,27 +50,20 @@
         ref="clippy"
       ></textarea>
     </section>
-    <div class="sv-template-view--experimental">
-      <cv-checkbox
-        v-model="experimental"
-        @change="onExperimental"
-        value="experimental-on"
-        label="Experimental"
-      ></cv-checkbox>
-    </div>
   </component>
 </template>
 
 <script>
 import Vue from 'vue';
-import SvViewMain from './sv-view-main.vue';
-import SvViewMainExperimental from './sv-view-main-experimental.vue';
+import { componentsX } from '../../../_internal/_feature-flags';
+import SvViewExperimental from './sv-view-experimental.vue'; //
+import SvView from './sv-view.vue';
 
 export default {
   name: 'SvTemplateView',
   components: {
-    SvViewMain,
-    SvViewMainExperimental,
+    SvView,
+    SvViewExperimental,
   },
   props: {
     svMargin: { type: Boolean, default: true },
@@ -82,12 +75,11 @@ export default {
   data() {
     return {
       propsJSON: '',
-      experimental: false,
     };
   },
   computed: {
     tagType() {
-      return this.experimental ? 'sv-view-main-experimental' : 'sv-view-main';
+      return componentsX ? 'sv-view-experimental' : 'sv-view';
     },
     style() {
       return {
@@ -99,16 +91,6 @@ export default {
     },
   },
   mounted() {
-    this.experimental = window.carbonExperimental
-      ? window.carbonExperimental
-      : false;
-    this.onExperimental();
-    if (
-      !document.body.classList.contains('carbon') &&
-      !document.body.classList.contains('experimental')
-    ) {
-      document.body.classList.add('carbon');
-    }
     this.propsJSON = JSON.stringify(
       this.$vnode.context.$options.propsData,
       null,
@@ -123,17 +105,6 @@ export default {
     );
   },
   methods: {
-    onExperimental() {
-      const classList = document.body.classList;
-      if (this.experimental) {
-        classList.add('experimental');
-        classList.remove('carbon');
-      } else {
-        classList.remove('experimental');
-        classList.add('carbon');
-      }
-      window.carbonExperimental = this.experimental;
-    },
     sourceToClipboard() {
       this.$refs.copyButton.classList.remove('sv-template-view__copy--copied');
       this.$refs.clippy.value = this.svSource;
@@ -220,7 +191,7 @@ $border: 1px solid #dfe3e6;
 }
 .sv-template-view__copy {
   position: absolute;
-  top: 50px;
+  top: 62px;
   left: 0;
   &.sv-template-view__copy--copied::after {
     content: 'Copied!';

@@ -25,4 +25,4 @@ export const breakingChangesX = false;
 /**
  * Next gen of Carbon component design.
  */
-export const componentsX = false;
+export const componentsX = true;

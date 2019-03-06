@@ -16,6 +16,8 @@ stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
 const exampleIconPath = require('../../assets/images/example-icons.svg');
+import { componentsX } from '../../_internal/_feature-flags';
+import AddFilled16 from '@carbon/icons-vue/lib/add--filled/16';
 
 let preKnobs = {
   small: {
@@ -57,11 +59,43 @@ let preKnobs = {
       value: val => (val ? `${exampleIconPath}#icon--add--solid` : ''),
     },
   },
+  icon: {
+    group: 'attr',
+    type: boolean,
+    config: ['with icon', false],
+    prop: {
+      name: 'icon',
+      type: Object,
+      value: val => (val ? AddFilled16 : null),
+    },
+  },
 };
 
+let defaultVariants = [
+  {
+    name: 'default',
+    excludes: componentsX ? ['iconHref'] : ['icon'],
+  },
+];
+if (componentsX) {
+  defaultVariants.push({
+    name: 'icon as path',
+    excludes: ['small', 'disabled', 'icon', 'iconHref'],
+    extra: {
+      icon: {
+        group: 'attr',
+        value: `icon=${exampleIconPath}#icon--add--solid`,
+      },
+    },
+  });
+}
+
 let variants = [
-  { name: 'default' },
-  { name: 'minimal', excludes: ['small', 'disabled', 'iconHref'] },
+  ...defaultVariants,
+  {
+    name: 'minimal',
+    excludes: ['small', 'disabled', 'icon', 'iconHref', 'iconAlt'],
+  },
   {
     name: 'primary',
     extra: { kind: { group: 'attr', value: 'kind="primary"' } },
