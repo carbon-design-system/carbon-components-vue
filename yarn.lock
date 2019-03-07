@@ -673,15 +673,17 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@carbon/icon-helpers@^0.0.1-alpha.12":
-  version "0.0.1-alpha.12"
-  resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-0.0.1-alpha.12.tgz#27f1449ff8e503e42e478ca567dfa6a6b453debe"
-  integrity sha512-aWY4qjWLMPT01jP6owstwYoNn1QQhWdc4lNYNV7sMU0eRoRGV2IbpC4fsF4zHtvlpG3rH7glaTPXmSoTboVBSg==
+"@carbon/icon-helpers@0.0.1-beta.0":
+  version "0.0.1-beta.0"
+  resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-0.0.1-beta.0.tgz#58a71fbe64128ac606dad2fadcab53aa701cbcd8"
+  integrity sha512-O7wZ8drife1mYjxWQRzRhllePPLQWhLcXAxSAPSKRBTZZy5kaQCPOFYiNOsZ86fh+B6ycqEO/8suIeWoZsoWxA==
 
-"@carbon/icons-vue@^0.0.1-alpha.21":
-  version "0.0.1-alpha.21"
-  resolved "https://registry.yarnpkg.com/@carbon/icons-vue/-/icons-vue-0.0.1-alpha.21.tgz#b1eb3a20192ad5fec60a0416f1cfbcfc1f82321d"
-  integrity sha512-uzWykWPeQNIor+cbTkQJbNNx6qgBlgG7Z20J5+eolDWoHY7l3nzxSut5bAxGTO16Gf5Y1KFAOFpCmSKksZW8bg==
+"@carbon/icons-vue@0.0.1-beta.0":
+  version "0.0.1-beta.0"
+  resolved "https://registry.yarnpkg.com/@carbon/icons-vue/-/icons-vue-0.0.1-beta.0.tgz#1dacdbd1f35bbf2de8a7af0bd1bfa30dd23879db"
+  integrity sha512-7/FNi3jtRllqYk7t55EmF/mLWpimY1YIVoLVcX8ax1VmGICAzpnmDtbixA7H4IS2bd2UwuQMvUzqGGt0WWq1fQ==
+  dependencies:
+    "@carbon/icon-helpers" "0.0.1-beta.0"
 
 "@commitlint/cli@^7.2.1":
   version "7.5.0"
