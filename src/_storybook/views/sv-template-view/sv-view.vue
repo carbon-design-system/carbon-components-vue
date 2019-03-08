@@ -17,7 +17,7 @@ export default {
 <style lang="scss">
 $feature-flags: (
   components-x: false,
-  ui-shell: true,
+  ui-shell: false,
 );
 
 @import './sv-view.scss';

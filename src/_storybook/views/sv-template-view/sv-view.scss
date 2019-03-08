@@ -1,5 +1,6 @@
 $css--body: false; // we're providing our own body styles
 $css--reset: false; // prevent thousands of resets being included...
+$css--font-face: true;
 
 $container-class: 'carbon';
 @if map-get($feature-flags, 'components-x') {
@@ -28,9 +29,9 @@ $container-class: 'carbon';
   font-size: 100%;
   vertical-align: baseline;
 
-  & > *,
-  & > *:before,
-  & > *:after {
+  & *,
+  & *:before,
+  & *:after {
     box-sizing: inherit;
   }
 
