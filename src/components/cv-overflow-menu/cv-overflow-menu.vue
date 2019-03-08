@@ -136,10 +136,10 @@ export default {
         window.removeEventListener('resize', this.positionMenu);
       }
     },
-    positionMenu() {
+    async positionMenu() {
       if (this.open) {
         const menuPosition = this.$el.getBoundingClientRect();
-        this.$nextTick(() => {
+        return this.$nextTick(() => {
           if (this.flipMenu) {
             this.left =
               menuPosition.left +
@@ -186,10 +186,12 @@ export default {
       }
       focusOn.focus();
     },
-    doToggle() {
+    async doToggle() {
       this.open = !this.open;
 
-      this.positionMenu();
+      // await positionMenu otherwise it can race doFocus.
+      // On initial open the menu is positioned 0,0 causing a jump
+      await this.positionMenu();
       this.positionListen(this.open);
       this.$nextTick(() => {
         this.doFocus();
