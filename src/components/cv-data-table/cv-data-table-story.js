@@ -207,6 +207,10 @@ const preKnobs = {
     value:
       ':pagination="{ numberOfItems: internalData.length }" @pagination="actionOnPagination"',
   },
+  rowSelects: {
+    group: 'attr',
+    value: 'v-model="rowSelects" @row-select-change="actionRowSelectChange"',
+  },
   actions: {
     group: 'slots',
     slot: {
@@ -366,6 +370,7 @@ for (const story of storySet) {
       const templateViewString = `
     <sv-template-view
       sv-margin
+      :sv-alt-back="false"
       sv-source='${templateString.trim()}'
       under-construction
       >
@@ -389,6 +394,7 @@ for (const story of storySet) {
           return {
             internalData: this.data,
             filterValue: '',
+            rowSelects: [],
             sortBy: null,
             sampleOverflowMenu: ['Start', 'Stop', 'Delete 3'],
           };
@@ -444,18 +450,21 @@ for (const story of storySet) {
             this.batchAction1(
               `selected items: [${this.$refs.table.selectedRows}]`
             );
+            this.rowSelects = [];
           },
           batchAction2: action('batch action 2'),
           onBatchAction2() {
             this.batchAction2(
               `selected items: [${this.$refs.table.selectedRows}]`
             );
+            this.rowSelects = [];
           },
           batchAction3: action('batch action 3'),
           onBatchAction3() {
             this.batchAction3(
               `selected items: [${this.$refs.table.selectedRows}]`
             );
+            this.$refs.table.deselect();
           },
           action1: action('action 1'),
           action2: action('action 2'),
@@ -463,6 +472,7 @@ for (const story of storySet) {
           actionNew: action('add new'),
           actionOnPagination: action('pagination change'),
           onOverflowMenuClick: action('overflow menu click'),
+          actionRowSelectChange: action('row selected'),
         },
       };
     },
