@@ -16,8 +16,8 @@
           </div>
           <div class="bx--batch-summary">
             <p class="bx--batch-summary__para">
-              <span data-items-selected>{{ rowChecks.length }}</span> items
-              selected
+              <span data-items-selected>{{ dataRowsSelected.length }}</span>
+              items selected
             </p>
             <button class="bx--batch-summary__cancel" @click="deselect">
               Cancel
@@ -70,7 +70,7 @@
               v-for="(row, rowIndex) in data"
               :key="`row:${rowIndex}`"
               :value="`${rowIndex}`"
-              ref="rowChecks"
+              ref="dataRowsSelected"
               :overflow-menu="overflowMenu"
             >
               <cv-data-table-cell
@@ -104,6 +104,8 @@ import CvDataTableHeadnig from './_cv-data-table-heading';
 import CvDataTableRow from './cv-data-table-row';
 import CvDataTableCell from './cv-data-table-cell';
 
+const rows = children => children.filter(child => child.isCvDataTableRow);
+
 export default {
   name: 'CvDataTable',
   components: {
@@ -131,6 +133,11 @@ export default {
     columns: { type: Array, required: true },
     data: { type: Array, requried: true },
     zebra: Boolean,
+    rowsSelected: { type: Array, default: () => [] },
+  },
+  model: {
+    prop: 'rows-selected',
+    event: 'row-select-changes',
   },
   data() {
     return {
@@ -142,7 +149,7 @@ export default {
         : this.columns,
       batchActive: false,
       headingChecked: false,
-      rowChecks: [],
+      dataRowsSelected: this.rowsSelected,
     };
   },
   watch: {
@@ -152,6 +159,9 @@ export default {
     columns() {
       this.watchColumns();
     },
+    rowsSelected() {
+      this.updateRowsSelected();
+    },
   },
   mounted() {
     console.warn(
@@ -159,6 +169,7 @@ export default {
         this.$vnode.componentOptions.Ctor.extendOptions.name
       } - Under review. This component isn't quite ready. Hopefully no features will get broken but this cannot be guarenteed.`
     );
+    this.updateRowsSelected();
   },
   computed: {
     hasBatchActions() {
@@ -190,10 +201,10 @@ export default {
       ) {
         return Math.min(
           this.internalPagination.numberOfItems,
-          this.data.length
+          rows(this.$children).length
         );
       } else {
-        return this.data.length;
+        return rows(this.$children).length;
       }
     },
     modifierClasses() {
@@ -213,41 +224,66 @@ export default {
       return index => this.columns[index].dataStyle;
     },
     selectedRows() {
-      return this.rowChecks.map(val => parseInt(val));
+      return this.dataRowsSelected;
     },
   },
   methods: {
-    onHeadingCheckChange() {
-      // check /uncheck all children
-      this.batchActive = this.headingChecked;
-      this.rowChecks = [];
+    updateRowsSelected() {
+      this.dataRowsSelected = [];
       for (const i in this.$children) {
         let child = this.$children[i];
         if (child.isCvDataTableRow) {
-          child.dataChecked = this.headingChecked;
+          child.dataChecked = this.rowsSelected.includes(child.value);
 
-          if (this.headingChecked) {
-            this.rowChecks.push(child.value);
+          if (child.dataChecked) {
+            this.dataRowsSelected.push(child.value);
           }
         }
       }
+      this.headingChecked =
+        this.dataRowsSelected.length ===
+        this.$children.filter(item => item.isCvDataTableRow).length;
+      this.batchActive = this.dataRowsSelected.length > 0;
+    },
+    onHeadingCheckChange() {
+      // check /uncheck all children
+      this.batchActive = this.headingChecked;
+      this.dataRowsSelected = [];
+      for (const child of rows(this.$children)) {
+        if (this.headingChecked) {
+          this.dataRowsSelected.push(child.value);
+        }
+
+        if (child.dataChecked !== this.headingChecked) {
+          child.dataChecked = this.headingChecked;
+
+          this.$emit('row-select-change', {
+            value: child.value,
+            selected: child.dataChecked,
+          });
+        }
+      }
+      this.$emit('row-select-changes', this.dataRowsSelected);
     },
     deselect() {
       this.headingChecked = false;
       this.onHeadingCheckChange();
     },
     onRowCheckChange(value, checked) {
-      let modelSet = new Set(this.rowChecks);
+      let modelSet = new Set(this.dataRowsSelected);
 
       if (!checked) {
         modelSet.delete(value);
       } else {
         modelSet.add(value);
       }
-      this.rowChecks = Array.from(modelSet);
+      this.dataRowsSelected = Array.from(modelSet);
+      this.headingChecked =
+        this.dataRowsSelected.length === rows(this.$children).length;
+      this.batchActive = this.dataRowsSelected.length > 0;
 
-      this.headingChecked = this.rowChecks.length === this.data.length;
-      this.batchActive = this.rowChecks.length > 0;
+      this.$emit('row-select-change', { value, selected: checked });
+      this.$emit('row-select-changes', this.dataRowsSelected);
     },
     onMenuItemClick(val) {
       this.$emit('overflow-menu-click', val);

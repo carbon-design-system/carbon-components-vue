@@ -78,6 +78,7 @@ Like sorting and filtering it is the users responsibility to deal with edited da
     - a headingStyle object to be applied to the column headings.
     - a dataStyle object to be applied to the data in the column.
 - data: Two dimensional array of strings.
+- rows-selected: An array containing the selected row values. Supports v-model via the row-select-changes event.
 
 - auto-width: (optional) table will size use auto sizing
 - borderless: (optional) table will have no border
@@ -99,6 +100,8 @@ Like sorting and filtering it is the users responsibility to deal with edited da
 ## Events
 
 - pagination: re-raises CvPageination change event.
+- row-select-change: Supplies { value: rowValue, selected: rowSelected }. Raised on row select/deselect
+- row-select-changes: Supplies array of selected row values.
 - search: supplies the string being search for. NOTE: Only shown if search is listened for.
 - sort({ index, order: 'ascending' or 'descending' or 'none' or ''})
 
@@ -106,4 +109,4 @@ As per note sort and filter behviours are delegated to the component user.
 
 ### Additional
 
-N/A
+Rows are not automatically deselected after when a batch action is executed. The selected row checks can be cleared either by calling the method deselect which will deselect all or by use of v-model with the rows-selected property.

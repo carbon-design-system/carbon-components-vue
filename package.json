@@ -60,6 +60,7 @@
   "scripts": {
     "ci-check": "yarn format:diff",
     "format": "prettier --write \"**/*.{scss,css,js,md,vue}\"",
+    "format:staged": "prettier --write",
     "format:diff": "prettier --list-different \"**/*.{scss,css,js,md,vue}\"",
     "format:staged": "prettier --write",
     "lint:es": "eslint --ext .js,.vue src",
@@ -74,8 +75,8 @@
   },
   "peerDependencies": {},
   "dependencies": {
-    "@carbon/icon-helpers": "^0.0.1-alpha.12",
-    "@carbon/icons-vue": "^0.0.1-alpha.21",
+    "@carbon/icon-helpers": "0.0.1-beta.0",
+    "@carbon/icons-vue": "0.0.1-beta.0",
     "carbon-components": "^9.48.1",
     "d3": "^5.7.0",
     "flatpickr": "4.5.1",
