@@ -62,6 +62,7 @@
     "format": "prettier --write \"**/*.{scss,css,js,md,vue}\"",
     "format:staged": "prettier --write",
     "format:diff": "prettier --list-different \"**/*.{scss,css,js,md,vue}\"",
+    "format:staged": "prettier --write",
     "lint:es": "eslint --ext .js,.vue src",
     "lint:css": "stylelint 'src/**/*.vue'",
     "storybook": "start-storybook -p 9001 -c .storybook",

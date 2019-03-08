@@ -19,15 +19,15 @@
       />
     </section>
     <section class="sv-template-view__other">
-      <h2 class="sv-tempate-view__label">Sample interaction</h2>
+      <h2 class="sv-template-view__label">Sample interaction</h2>
       <slot name="other"></slot>
     </section>
     <section class="sv-template-view__code">
-      <h2 class="sv-tempate-view__label">Sample code</h2>
+      <h2 class="sv-template-view__label">Sample code</h2>
       <pre v-highlightjs="svSource">
         <code class="html"></code>
       </pre>
-      <h2 class="sv-tempate-view__label">Sample props</h2>
+      <h2 class="sv-template-view__label">Sample props</h2>
       <pre v-highlightjs="propsJSON">
         <code class="json"></code>
       </pre>
@@ -146,11 +146,11 @@ $border: 1px solid #dfe3e6;
   flex-direction: column;
   border: $border;
   background-color: $back-color;
+
   .sv-template-view--margin & {
     position: relative; // needed to keep modal components on top
     z-index: 999; // needed to keep modal components on top
     margin: 40px;
-    padding: 20px;
   }
 
   .sv-center {
@@ -158,6 +158,7 @@ $border: 1px solid #dfe3e6;
   .sv-template-view--alt-back & {
     background-color: $alt-back-color;
   }
+
   > .bx--form-item {
     // only for
     margin-bottom: 1.5rem;
@@ -165,7 +166,9 @@ $border: 1px solid #dfe3e6;
 }
 
 .sv-template-view__other {
-  margin: 5px 40px;
+  .sv-template-view--margin & {
+    margin: 40px;
+  }
 }
 
 .sv-template-view__code {
@@ -208,13 +211,13 @@ $border: 1px solid #dfe3e6;
   opacity: 0;
 }
 
-.sv-tempate-view__label {
-  font-size: 18px;
+.sv-template-view__label {
+  font-size: 24px;
   margin-bottom: 1em;
 }
 
 .sv-template-view__code {
-  .sv-tempate-view__label {
+  .sv-template-view__label {
     margin: 0;
   }
 }
