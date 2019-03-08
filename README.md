@@ -97,6 +97,13 @@ Vue.use(window['carbon-vue'].default);
 
 ## Project State
 
+**1.0.2**
+
+- Add row-select-change and row-select-changes events to table
+- Add rows-selected property to table
+- Add use rows-selected with v-model for table
+- Fix overflow menu issue #234
+
 **1.0.1**
 
 - Removed setTimeout use
