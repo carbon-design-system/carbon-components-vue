@@ -14,30 +14,30 @@ $container-class: 'carbon';
   // carbon body reset and styles
   @include typography;
   @include font-family;
+
   // reset
-  color: $text-01;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
   background-color: $ui-02;
+  color: $text-01;
+  font-size: 100%;
+  vertical-align: baseline;
 
   @if map-get($feature-flags, 'components-x') {
     line-height: 1;
   }
 
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  vertical-align: baseline;
-
-  & *,
-  & *:before,
-  & *:after {
+  *,
+  *::before,
+  *::after {
     box-sizing: inherit;
   }
 
   ul {
-    list-style: none;
     margin: 0;
     padding: 0;
+    list-style: none;
   }
 }

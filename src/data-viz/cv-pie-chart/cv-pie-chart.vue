@@ -155,8 +155,8 @@ export default {
 
 <style lang="scss">
 .bx--graph-header {
-  font-weight: 300;
   font-size: 24px;
+  font-weight: 300;
 }
 
 .cv-pie-chart__container {
@@ -165,30 +165,31 @@ export default {
 }
 
 .cv-pie-chart__tooltip {
+  display: flex;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
   flex-direction: column;
   justify-content: center;
-  pointer-events: none;
   width: 100%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
 
+  /* stylelint-disable-next-line selector-max-type */
   p {
     text-align: center;
   }
 
   .cv-pie-chart__amount {
     font-size: 29px;
-    line-height: 1;
     font-weight: 300;
+    line-height: 1;
   }
 
   .cv-pie-chart__item {
-    font-weight: 400;
-    font-size: 14px;
     color: #5a6872;
+    font-size: 14px;
+    font-weight: 400;
   }
 }
 </style>

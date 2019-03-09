@@ -51,7 +51,7 @@
         class="cv-interactive-tooltip__before-content"
         ref="beforeContent"
         tabindex="0"
-        style="position: absolute; height: 1px; width: 1px; left: -9999px"
+        style="position: absolute; height: 1px; width: 1px; left: -9999px;"
         @focus="focusBeforeContent"
       />
       <span class="bx--tooltip__caret"></span>
@@ -60,7 +60,7 @@
         class="cv-interactive-tooltip__after-content"
         ref="afterContent"
         tabindex="0"
-        style="position: absolute; height: 1px; width: 1px; left: -9999px"
+        style="position: absolute; height: 1px; width: 1px; left: -9999px;"
         @focus="focusAfterContent"
       />
     </div>

@@ -161,8 +161,8 @@ export default {
 
 <style lang="scss">
 .bx--graph-header {
-  font-weight: 300;
   font-size: 24px;
+  font-weight: 300;
 }
 
 .cv-gauge__container {

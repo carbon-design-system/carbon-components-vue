@@ -46,6 +46,15 @@ then
 fi
 echo
 
+read  -n 1 -p "Has 'yarn lint:css' been run [yN]? " answer6b
+[ -z "$answer6b" ] && answer6b="n"  # if 'no' have to be default choice
+
+if [ "$answer6b" != "y" ] && [ "$answer6b" != "Y" ]
+then
+  exit;
+fi
+echo
+
 read  -n 1 -p "Has 'yarn test:unit' been run [yN]? " answer7
 [ -z "$answer7" ] && answer7="n"  # if 'no' have to be default choice
 
