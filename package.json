@@ -62,9 +62,8 @@
     "format": "prettier --write \"**/*.{scss,css,js,md,vue}\"",
     "format:staged": "prettier --write",
     "format:diff": "prettier --list-different \"**/*.{scss,css,js,md,vue}\"",
-    "format:staged": "prettier --write",
     "lint:es": "eslint --ext .js,.vue src",
-    "lint:css": "stylelint 'src/**/*.vue'",
+    "lint:css": "stylelint 'src/**/*.{vue,scss}'",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "storybook-build": "build-storybook",
     "build": "npm run build:core && npm run build:data-viz",
@@ -83,6 +82,7 @@
     "vue": "^2.5.21"
   },
   "devDependencies": {
+    "@ascendancyy/vue-cli-plugin-stylelint": "^1.1.2",
     "@babel/core": "^7.2.2",
     "@commitlint/cli": "^7.2.1",
     "@commitlint/config-conventional": "^7.1.2",

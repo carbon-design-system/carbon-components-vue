@@ -2,6 +2,19 @@
 # yarn lockfile v1
 
 
+"@ascendancyy/vue-cli-plugin-stylelint@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@ascendancyy/vue-cli-plugin-stylelint/-/vue-cli-plugin-stylelint-1.1.2.tgz#29cdb2d5007093d89241d286185a48bc733d80e1"
+  integrity sha512-zcNWDbUvhosNPHWzEHQXvc9F0xXq89ADJWpqRNmbGi6x8sLc7ldYAQ6ASDjB4Wnuoxac4wCr7DuSxmlHrtykwg==
+  dependencies:
+    chalk "^2.4.2"
+    inquirer "^6.2.1"
+    javascript-stringify "^1.6.0"
+    micromatch "^3.1.10"
+    stylelint "^9.10.1"
+    stylelint-codeframe-formatter "^1.0.4"
+    stylelint-webpack-plugin "^0.10.5"
+
 "@babel/code-frame@7.0.0", "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.0.0-beta.35":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.0.0.tgz#06e2ab19bdb535385559aabb5ba59729482800f8"
@@ -7203,7 +7216,7 @@ inquirer@^3.0.6:
     strip-ansi "^4.0.0"
     through "^2.3.6"
 
-inquirer@^6.1.0, inquirer@^6.2.0:
+inquirer@^6.1.0, inquirer@^6.2.0, inquirer@^6.2.1:
   version "6.2.2"
   resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-6.2.2.tgz#46941176f65c9eb20804627149b743a218f25406"
   integrity sha512-Z2rREiXA6cHRR9KBOarR3WuLlFzlIfAEIiB45ll5SSadMg7WqOh1MKEjjndfuH5ewXdixWCxqnVfGOQzPeiztA==
@@ -7271,6 +7284,11 @@ ipaddr.js@^1.5.2:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-1.8.1.tgz#fa4b79fa47fd3def5e3b159825161c0a519c9427"
   integrity sha1-+kt5+kf9Pe9eOxWYJRYcClGclCc=
+
+irregular-plurals@^1.0.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/irregular-plurals/-/irregular-plurals-1.4.0.tgz#2ca9b033651111855412f16be5d77c62a458a766"
+  integrity sha1-LKmwM2UREYVUEvFr5dd8YqRYp2Y=
 
 is-absolute-url@^2.0.0:
   version "2.1.0"
@@ -9098,7 +9116,7 @@ log-symbols@^1.0.2:
   dependencies:
     chalk "^1.0.0"
 
-log-symbols@^2.0.0, log-symbols@^2.2.0:
+log-symbols@^2.0.0, log-symbols@^2.1.0, log-symbols@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/log-symbols/-/log-symbols-2.2.0.tgz#5740e1c5d6f0dfda4ad9323b5332107ef6b4c40a"
   integrity sha512-VeIAFslyIerEJLXHziedo2basKbMKtTw3vfn5IzG0XTjhAVEJyNHnL2p7vc+wBDSdQuUpNw3M2u6xb9QsAY5Eg==
@@ -10519,6 +10537,13 @@ please-upgrade-node@^3.0.2, please-upgrade-node@^3.1.1:
   dependencies:
     semver-compare "^1.0.0"
 
+plur@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/plur/-/plur-2.1.2.tgz#7482452c1a0f508e3e344eaec312c91c29dc655a"
+  integrity sha1-dIJFLBoPUI4+NE6uwxLJHCncZVo=
+  dependencies:
+    irregular-plurals "^1.0.0"
+
 pluralize@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-7.0.0.tgz#298b89df8b93b0221dbf421ad2b1b1ea23fc6777"
@@ -11250,6 +11275,11 @@ ramda@^0.21.0:
   version "0.21.0"
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.21.0.tgz#a001abedb3ff61077d4ff1d577d44de77e8d0a35"
   integrity sha1-oAGr7bP/YQd9T/HVd9RN536NCjU=
+
+ramda@^0.25.0:
+  version "0.25.0"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.25.0.tgz#8fdf68231cffa90bc2f9460390a0cb74a29b29a9"
+  integrity sha512-GXpfrYVPwx3K7RQ6aYT8KPS8XViSXUVJT1ONhoKPE9VAleW42YE+U+8VEyGWt41EnEQW7gwecYJriTI0pKoecQ==
 
 randomatic@^3.0.0:
   version "3.1.1"
@@ -12929,6 +12959,16 @@ stylehacks@^4.0.0:
     postcss "^7.0.0"
     postcss-selector-parser "^3.0.0"
 
+stylelint-codeframe-formatter@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/stylelint-codeframe-formatter/-/stylelint-codeframe-formatter-1.0.4.tgz#08580f995dab8ce6db100002fd813715abaefffc"
+  integrity sha512-OG9PqAEvu54JEIJf1a+TALkyEYwCmFPSvSRW+X3yuijqAO1TEAPLrxLrCRdEKj0xU5MMhXlvyRwuFgMfDW/x8Q==
+  dependencies:
+    babel-code-frame "^6.26.0"
+    chalk "^2.3.0"
+    log-symbols "^2.1.0"
+    plur "^2.1.2"
+
 stylelint-config-property-sort-order-smacss@^4.0.1:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/stylelint-config-property-sort-order-smacss/-/stylelint-config-property-sort-order-smacss-4.0.2.tgz#1f3093765829682c1bb135a08a2c8d2b598043b0"
@@ -12974,7 +13014,17 @@ stylelint-scss@^3.4.0:
     postcss-selector-parser "^5.0.0"
     postcss-value-parser "^3.3.1"
 
-stylelint@^9.9.0:
+stylelint-webpack-plugin@^0.10.5:
+  version "0.10.5"
+  resolved "https://registry.yarnpkg.com/stylelint-webpack-plugin/-/stylelint-webpack-plugin-0.10.5.tgz#0b6e0d373ff5e03baa8197ebe0f2625981bd266b"
+  integrity sha512-jtYx3aJ2qDMvBMswe5NRPTO7kJgAKafc6GilAkWDp/ewoAmnoxA6TsYMnIPtLECRLwXevaCPvlh2JEUMGZCoUQ==
+  dependencies:
+    arrify "^1.0.1"
+    micromatch "^3.1.8"
+    object-assign "^4.1.0"
+    ramda "^0.25.0"
+
+stylelint@^9.10.1, stylelint@^9.9.0:
   version "9.10.1"
   resolved "https://registry.yarnpkg.com/stylelint/-/stylelint-9.10.1.tgz#5f0ee3701461dff1d68284e1386efe8f0677a75d"
   integrity sha512-9UiHxZhOAHEgeQ7oLGwrwoDR8vclBKlSX7r4fH0iuu0SfPwFaLkb1c7Q2j1cqg9P7IDXeAV2TvQML/fRQzGBBQ==

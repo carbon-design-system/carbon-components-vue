@@ -20,5 +20,5 @@ $feature-flags: (
   ui-shell: false,
 );
 
-@import './sv-view.scss';
+@import './sv-view';
 </style>
