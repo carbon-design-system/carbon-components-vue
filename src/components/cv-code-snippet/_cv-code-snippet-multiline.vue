@@ -14,7 +14,9 @@
       aria-label="Copy code"
       @click="$emit('copy-code')"
     >
+      <Copy16 v-if="componentsX" class="bx--snippet__icon" />
       <svg
+        v-else
         class="bx--snippet__icon"
         xmlns="http://www.w3.org/2000/svg"
         width="16"
@@ -36,7 +38,9 @@
       @click="toggleExpand"
     >
       <span class="bx--snippet-btn--text">{{ expandButtonText }}</span>
+      <ChevronDown16 v-if="componentsX" class="bx--icon-chevron--down" />
       <svg
+        v-else
         class="bx--icon-chevron--down"
         width="12"
         height="7"
@@ -55,11 +59,16 @@
 
 <script>
 import CvFeedbackButton from './_cv-feedback-button';
+import { componentsX } from '../../_internal/_feature-flags';
+import Copy16 from '@carbon/icons-vue/lib/copy/16';
+import ChevronDown16 from '@carbon/icons-vue/lib/chevron--down/16';
 
 export default {
   name: 'CvCodeSnippetMultiline',
   components: {
     CvFeedbackButton,
+    Copy16,
+    ChevronDown16,
   },
   props: {
     lessText: { type: String, default: 'Show less' },
@@ -67,6 +76,7 @@ export default {
   },
   data() {
     return {
+      componentsX,
       expanded: false,
     };
   },
