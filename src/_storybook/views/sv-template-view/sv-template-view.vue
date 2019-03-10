@@ -136,21 +136,28 @@ export default {
 $back-color: #f5f7fa;
 $alt-back-color: #fff;
 $border: 1px solid #dfe3e6;
+$component-padding: 40px;
 
 .sv-template-view {
   border: 1px solid transparent;
 }
 
 .sv-template-view__component {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
+  min-width: 500px;
+  max-width: calc(100% - #{4 * $component-padding});
   border: $border;
-  background-color: $back-color;
+
+  .carbon & {
+    background-color: $back-color;
+  }
 
   .sv-template-view--margin & {
     position: relative; // needed to keep modal components on top
     z-index: 999; // needed to keep modal components on top
-    margin: 40px;
+    margin: $component-padding;
+    padding: $component-padding;
   }
 
   .sv-template-view--alt-back & {
@@ -197,8 +204,12 @@ $border: 1px solid #dfe3e6;
 
 .sv-template-view__copy {
   position: absolute;
-  top: 62px;
+  top: 37px;
   left: 0;
+
+  .experimental & {
+    top: 32px;
+  }
 
   &.sv-template-view__copy--copied::after {
     content: 'Copied!';
