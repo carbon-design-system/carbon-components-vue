@@ -52,9 +52,9 @@ let preKnobs = {
   iconHref: {
     group: 'attr',
     type: boolean,
-    config: ['with icon', false],
+    config: ['icon', false],
     prop: {
-      name: 'icon-href',
+      name: 'icon',
       type: String,
       value: val => (val ? `${exampleIconPath}#icon--add--solid` : ''),
     },
@@ -84,7 +84,7 @@ if (componentsX) {
     extra: {
       icon: {
         group: 'attr',
-        value: `icon=${exampleIconPath}#icon--add--solid`,
+        value: `icon="${exampleIconPath}#icon--add--solid"`,
       },
     },
   });
@@ -93,31 +93,47 @@ if (componentsX) {
 let variants = [
   ...defaultVariants,
   {
+    name: 'iconHref',
+    excludes: ['small', 'disabled', 'icon', 'iconHref'],
+    extra: {
+      iconHref: {
+        group: 'attr',
+        value: `iconHref="${exampleIconPath}#icon--add--solid"`,
+      },
+    },
+  },
+  {
     name: 'minimal',
-    excludes: ['small', 'disabled', 'icon', 'iconHref', 'iconAlt'],
+    excludes: ['small', 'disabled', 'icon', 'iconHref'],
   },
   {
     name: 'primary',
+    excludes: componentsX ? ['iconHref'] : ['icon'],
     extra: { kind: { group: 'attr', value: 'kind="primary"' } },
   },
   {
     name: 'secondary',
+    excludes: componentsX ? ['iconHref'] : ['icon'],
     extra: { kind: { group: 'attr', value: 'kind="secondary"' } },
   },
   {
     name: 'tertiary',
+    excludes: componentsX ? ['iconHref'] : ['icon'],
     extra: { kind: { group: 'attr', value: 'kind="tertiary"' } },
   },
   {
     name: 'ghost',
+    excludes: componentsX ? ['iconHref'] : ['icon'],
     extra: { kind: { group: 'attr', value: 'kind="ghost"' } },
   },
   {
     name: 'danger',
+    excludes: componentsX ? ['iconHref'] : ['icon'],
     extra: { kind: { group: 'attr', value: 'kind="danger"' } },
   },
   {
     name: 'danger-primary',
+    excludes: componentsX ? ['iconHref'] : ['icon'],
     extra: { kind: { group: 'attr', value: 'kind="danger--primary"' } },
   },
 ];

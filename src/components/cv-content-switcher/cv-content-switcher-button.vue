@@ -24,18 +24,42 @@
     :aria-selected="`${dataSelected}`"
     @click="open"
   >
+    <component
+      v-if="typeof icon === 'object'"
+      :is="icon"
+      class="bx--content-switcher__icon"
+    />
+    <svg
+      v-if="typeof icon === 'string'"
+      class="bx--content-switcher__icon"
+      height="16"
+      width="16"
+    >
+      <use :href="icon"></use>
+    </svg>
     <slot></slot>
   </button>
 </template>
 
 <script>
 import uidMixin from '../../mixins/uid-mixin';
+import { componentsX } from '../../_internal/_feature-flags';
 
 export default {
   name: 'CvContentSwitcherButton',
   mixins: [uidMixin],
   props: {
     contentSelector: { type: String, default: undefined },
+    icon: {
+      type: [String, Object],
+      default: null,
+      validator(val) {
+        if (!val || typeof val === 'string') {
+          return true;
+        }
+        return val.render !== null;
+      },
+    },
     ownerId: { type: String, default: undefined },
     selected: Boolean,
   },
@@ -50,6 +74,7 @@ export default {
   },
   data() {
     return {
+      componentsX,
       dataSelected: false,
     };
   },

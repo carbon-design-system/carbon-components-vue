@@ -65,7 +65,10 @@ http://www.carbondesignsystem.com/components/content-switcher/code
 ### CvContentSwitcherButton
 
 - ownerId : Used with CvContentSwitcherPanel
-- content-selector : DOM CSS selector used to manipulate the DOM directly. NOTE: Prefer ownerId
+- content-selector : DOM CSS selector used to manipulate the DOM directly.
+- icon: is optional. It takes an Vue Component expected to be an icon or a string path to an SVG icon.
+
+NOTE: Prefer ownerId
 
 NOTE:
 
