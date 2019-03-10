@@ -10,7 +10,9 @@
       aria-label="Copy code"
       @click="$emit('copy-code')"
     >
+      <Copy16 v-if="componentsX" class="bx--snippet__icon" />
       <svg
+        v-else
         class="bx--snippet__icon"
         xmlns="http://www.w3.org/2000/svg"
         width="16"
@@ -28,11 +30,19 @@
 
 <script>
 import CvFeedbackButton from './_cv-feedback-button';
+import { componentsX } from '../../_internal/_feature-flags';
+import Copy16 from '@carbon/icons-vue/lib/copy/16';
 
 export default {
   name: 'CvCodeSnippetOneline',
   components: {
     CvFeedbackButton,
+    Copy16,
+  },
+  data() {
+    return {
+      componentsX,
+    };
   },
 };
 </script>
