@@ -10,6 +10,7 @@
         },
       ]"
       :data-contained-checkbox-state="isChecked"
+      :data-contained-checkbox-disabled="$attrs.disabled"
     >
       <input
         ref="input"
