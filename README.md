@@ -99,6 +99,8 @@ Vue.use(window['carbon-vue'].default);
 
 **1.0.2**
 
+Built against Vue v2.6.3 and carbon-components v9.70.1
+
 - Add row-select-change and row-select-changes events to table
 - Add rows-selected property to table
 - Add use rows-selected with v-model for table
