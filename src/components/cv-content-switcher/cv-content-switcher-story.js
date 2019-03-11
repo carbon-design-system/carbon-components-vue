@@ -16,6 +16,9 @@ const stories = storiesOf('CvContentSwitcher', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
+const exampleIconPath = require('../../assets/images/example-icons.svg');
+import AddFilled16 from '@carbon/icons-vue/lib/add--filled/16';
+
 const preKnobs = {
   initialSelected: {
     group: 'other',
@@ -49,10 +52,33 @@ const preKnobs = {
     value: `@selected="actionSelected"`,
     inline: true,
   },
+  icon: {
+    group: 'icon',
+    type: boolean,
+    config: ['with icon', false],
+    prop: {
+      name: 'icon',
+      type: Object,
+      value: val => (val ? AddFilled16 : null),
+    },
+  },
 };
 
 const variants = [
-  { name: 'default', excludes: ['events'] },
+  {
+    name: 'default',
+    excludes: ['events'],
+  },
+  {
+    name: 'icon as path',
+    excludes: ['icon'],
+    extra: {
+      icon: {
+        group: 'icon',
+        value: `icon="${exampleIconPath}#icon--add--solid"`,
+      },
+    },
+  },
   { name: 'events' },
 ];
 
@@ -67,9 +93,15 @@ for (const story of storySet) {
 
       const templateString = `
   <cv-content-switcher${settings.group.attr}>
-    <cv-content-switcher-button owner-id="csb-1" :selected="isSelected(0)">Button Name 1</cv-content-switcher-button>
-    <cv-content-switcher-button owner-id="csb-2" :selected="isSelected(1)">Button Name 2</cv-content-switcher-button>
-    <cv-content-switcher-button owner-id="csb-3" :selected="isSelected(2)" v-if="toggle3">Button Name 3</cv-content-switcher-button>
+    <cv-content-switcher-button owner-id="csb-1" :selected="isSelected(0)" ${
+      settings.group.icon
+    }>Button Name 1</cv-content-switcher-button>
+    <cv-content-switcher-button owner-id="csb-2" :selected="isSelected(1)" ${
+      settings.group.icon
+    }>Button Name 2</cv-content-switcher-button>
+    <cv-content-switcher-button owner-id="csb-3" :selected="isSelected(2)" v-if="toggle3" ${
+      settings.group.icon
+    }>Button Name 3</cv-content-switcher-button>
   </cv-content-switcher>
 
   <section style="margin: 10px 0;">
@@ -142,9 +174,15 @@ for (const story of storySet) {
 
       const templateString = `
   <cv-content-switcher${settings.group.attr}>
-    <cv-content-switcher-button content-selector=".content-1" :selected="isSelected(0)">Button Name 1</cv-content-switcher-button>
-    <cv-content-switcher-button content-selector=".content-2" :selected="isSelected(1)">Button Name 2</cv-content-switcher-button>
-    <cv-content-switcher-button content-selector=".content-3" :selected="isSelected(2)" v-if="toggle3">Button Name 3</cv-content-switcher-button>
+    <cv-content-switcher-button content-selector=".content-1" :selected="isSelected(0)" ${
+      settings.group.icon
+    }>Button Name 1</cv-content-switcher-button>
+    <cv-content-switcher-button content-selector=".content-2" :selected="isSelected(1)" ${
+      settings.group.icon
+    }>Button Name 2</cv-content-switcher-button>
+    <cv-content-switcher-button content-selector=".content-3" :selected="isSelected(2)" v-if="toggle3" ${
+      settings.group.icon
+    }>Button Name 3</cv-content-switcher-button>
   </cv-content-switcher>
 
   <section style="margin: 10px 0;">
