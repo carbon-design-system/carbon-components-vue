@@ -39,6 +39,7 @@ import radioMixin from '../../mixins/radio-mixin';
 
 export default {
   name: 'CvStructuredListItemSelectable',
+  inheritAttrs: false,
   mixins: [uidMixin, radioMixin],
 };
 </script>
