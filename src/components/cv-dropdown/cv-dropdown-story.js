@@ -10,6 +10,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvDropdownNotesMD from './cv-dropdown-notes.md';
 import CvDropdown from './cv-dropdown';
 import CvDropdownSkeleton from './cv-dropdown-skeleton';
+import { componentsX } from '../../_internal/_feature-flags';
 
 const stories = storiesOf('CvDropdown', module);
 stories.addDecorator(withKnobs);
@@ -65,6 +66,16 @@ let preKnobs = {
       type: Boolean,
     },
   },
+  invalidMessage: {
+    group: 'attr',
+    type: text,
+    config: ['invalid message', ''],
+    prop: {
+      name: 'invalid-message',
+      type: String,
+      value: val => (val.length ? val : null),
+    },
+  },
   vModel: {
     group: 'attr',
     value: `v-model="modelValue"`,
@@ -75,8 +86,10 @@ let preKnobs = {
   },
 };
 
+let excludeComponentsX = componentsX ? [] : ['invalidMessage'];
+
 let variants = [
-  { name: 'default', excludes: ['vModel', 'events'] },
+  { name: 'default', excludes: ['vModel', 'events', ...excludeComponentsX] },
   { name: 'minimal', includes: ['value'] },
   { name: 'events', includes: ['value', 'events'] },
   { name: 'vModel', includes: ['value', 'vModel'] },
