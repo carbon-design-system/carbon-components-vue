@@ -116,10 +116,10 @@ for (const story of storySet) {
         props: settings.props,
         methods: {
           show() {
-            this.$children[0].$children[0].show();
+            this.$children[0].$children[0].$children[0].show();
           },
           hide() {
-            this.$children[0].$children[0].hide();
+            this.$children[0].$children[0].$children[0].hide();
           },
         },
       };
