@@ -189,12 +189,7 @@ stories.add(
       components: { CvToggle, SvTemplateView },
       data() {
         return {
-          checks: array(
-            'Initial cheks',
-            ['check-3', 'check-2'],
-            ','
-            // consts.CONFIG
-          ),
+          checks: ['check-3', 'check-2'],
         };
       },
       methods: {
