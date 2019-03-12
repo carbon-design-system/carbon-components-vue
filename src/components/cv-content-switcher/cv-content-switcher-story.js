@@ -124,6 +124,7 @@ for (const story of storySet) {
 
       const templateViewString = `
       <sv-template-view
+        sv-experimental-toggle
         sv-margin
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>
@@ -205,6 +206,7 @@ for (const story of storySet) {
 
       const templateViewString = `
       <sv-template-view
+        sv-experimental-toggle
         sv-margin
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>

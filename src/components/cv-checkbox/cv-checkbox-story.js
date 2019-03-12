@@ -88,6 +88,7 @@ for (const story of storySet) {
 
       const templateViewString = `
     <sv-template-view
+      sv-experimental-toggle
       sv-margin
       :sv-alt-back="this.$options.propsData.theme !== 'light'"
       sv-source='${templateString.trim()}'>
@@ -163,6 +164,7 @@ for (const story of storySet) {
       const templateViewString = `
     <sv-template-view
       sv-margin
+      sv-experimental-toggle
       sv-source='${templateString.trim()}'>
       <p>This story only demonstrates the array syntax for v-model</p>
       <template slot="component">${templateString}</template>
@@ -224,6 +226,7 @@ for (const story of storySet) {
 
       const templateViewString = `
       <sv-template-view
+        sv-experimental-toggle
         sv-margin
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>

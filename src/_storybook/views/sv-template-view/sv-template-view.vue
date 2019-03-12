@@ -50,22 +50,33 @@
         ref="clippy"
       ></textarea>
     </section>
+    <cv-checkbox
+      v-if="svExperimentalToggle"
+      class="sv-view__toggle-experimental"
+      label="experimental"
+      value="experimental"
+      v-model="experimental"
+      @change="onExperimental"
+    />
   </component>
 </template>
 
 <script>
 import Vue from 'vue';
-import { componentsX } from '../../../_internal/_feature-flags';
+import { override, reset } from '../../../_internal/_feature-flags';
 import SvViewExperimental from './sv-view-experimental.vue'; //
 import SvView from './sv-view.vue';
+import CvCheckbox from '../../../components/cv-checkbox/cv-checkbox';
 
 export default {
   name: 'SvTemplateView',
   components: {
     SvView,
     SvViewExperimental,
+    CvCheckbox,
   },
   props: {
+    svExperimentalToggle: Boolean,
     svMargin: { type: Boolean, default: true },
     svSource: String,
     svAltBack: { type: Boolean, default: true },
@@ -75,11 +86,12 @@ export default {
   data() {
     return {
       propsJSON: '',
+      experimental: false,
     };
   },
   computed: {
     tagType() {
-      return componentsX ? 'sv-view-experimental' : 'sv-view';
+      return this.experimental ? 'sv-view-experimental' : 'sv-view';
     },
     style() {
       return {
@@ -96,6 +108,8 @@ export default {
       null,
       2
     );
+    this.experimental = false;
+    reset();
   },
   updated() {
     this.propsJSON = JSON.stringify(
@@ -105,6 +119,13 @@ export default {
     );
   },
   methods: {
+    onExperimental() {
+      if (this.experimental) {
+        override({ componentsX: true, breakingChagnesX: true });
+      } else {
+        reset();
+      }
+    },
     sourceToClipboard() {
       this.$refs.copyButton.classList.remove('sv-template-view__copy--copied');
       this.$refs.clippy.value = this.svSource;
@@ -260,5 +281,11 @@ $component-padding: 40px;
 
 .sb-show-main {
   margin: 0;
+}
+
+.sv-view__toggle-experimental {
+  position: fixed;
+  top: 10px;
+  right: 10px;
 }
 </style>
