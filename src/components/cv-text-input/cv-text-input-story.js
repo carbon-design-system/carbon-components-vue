@@ -53,6 +53,25 @@ const preKnobs = {
       name: 'disabled',
     },
   },
+  inputType: {
+    group: 'attr',
+    type: boolean,
+    config: ['password type', false],
+    prop: {
+      name: 'type',
+      type: String,
+      value: val => (val ? 'password' : null),
+    },
+  },
+  passwordVisible: {
+    group: 'attr',
+    type: boolean,
+    config: ['password visible', false],
+    prop: {
+      type: Boolean,
+      name: 'password-visible',
+    },
+  },
   placeholder: {
     group: 'attr',
     value: 'placeholder="sample placeholder"',
