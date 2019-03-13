@@ -64,7 +64,7 @@
 <script>
 import Vue from 'vue';
 import { override, reset } from '../../../_internal/_feature-flags';
-import SvViewExperimental from './sv-view-experimental.vue'; //
+import SvViewExperimental from './sv-view-experimental.vue'; /* */
 import SvView from './sv-view.vue';
 import CvCheckbox from '../../../components/cv-checkbox/cv-checkbox';
 
@@ -80,7 +80,7 @@ export default {
     svMargin: { type: Boolean, default: true },
     svSource: String,
     svAltBack: { type: Boolean, default: true },
-    svPosition: String, // flex position
+    svPosition: String /* flex position */,
     underConstruction: Boolean,
   },
   data() {
@@ -138,7 +138,7 @@ export default {
     method(methodName) {
       const result = this.$slots.component[0].componentInstance[methodName];
       if (!result) {
-        // console.dir(this.$slots.component[0].componentInstance);
+        /* console.dir(this.$slots.component[0].componentInstance); */
         return () => {
           console.warn(
             `sv-template-view: Method ${methodName} does not exist.`
@@ -184,8 +184,8 @@ $component-padding: 40px;
   }
 
   .sv-template-view--margin & {
-    position: relative; // needed to keep modal components on top
-    z-index: 999; // needed to keep modal components on top
+    position: relative; /* needed to keep modal components on top */
+    z-index: 999; /* needed to keep modal components on top */
     margin: $component-padding;
     padding: $component-padding;
   }
@@ -195,7 +195,7 @@ $component-padding: 40px;
   }
 
   > .bx--form-item {
-    // only for
+    /* only for */
     margin-bottom: 1.5rem;
   }
 }
@@ -279,13 +279,13 @@ $component-padding: 40px;
   right: 0;
   min-height: 30px;
   padding: 5px;
-  // border-bottom-left-radius: 5px;
-  // background-color: $back-color;
+  /* border-bottom-left-radius: 5px; */
+  /* background-color: $back-color; */
 
-  // .bx--toggle__label {
-  //   margin: 0;
-  //   min-height: 24px;
-  // }
+  /* .bx--toggle__label { */
+  /*   margin: 0; */
+  /*   min-height: 24px; */
+  /* } */
 }
 
 .sb-show-main {
