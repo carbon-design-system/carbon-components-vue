@@ -155,12 +155,19 @@ export default {
 @import '~highlight.js/styles/default.css';
 
 $back-color: #f5f7fa;
+$back-color-exp: #f3f3f3;
 $alt-back-color: #fff;
 $border: 1px solid #dfe3e6;
 $component-padding: 40px;
 
 .sv-template-view {
   border: 1px solid transparent;
+
+  background-color: $back-color-exp;
+
+  .carbon {
+    background-color: $back-color;
+  }
 }
 
 .sv-template-view__component {
@@ -169,6 +176,8 @@ $component-padding: 40px;
   min-width: 500px;
   max-width: calc(100% - #{4 * $component-padding});
   border: $border;
+
+  background-color: $back-color-exp;
 
   .carbon & {
     background-color: $back-color;
