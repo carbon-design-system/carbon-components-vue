@@ -15,7 +15,9 @@ http://www.carbondesignsystem.com/components/text-input/code
 - helper-text: optional helper text
 - invalid-message: optional error message
 - label: the label text for the input
+- passwordVisible: Boolean makes password text visible
 - theme: optional 'light',
+- type: If 'password' adds password features
 - value: optional initial value of the text input,
 
 Other standard props e.g. disabled and placeholder
