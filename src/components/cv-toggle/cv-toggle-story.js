@@ -14,7 +14,7 @@ const stories = storiesOf('CvToggle', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(withNotes);
 
-const preKnobs = {
+let preKnobs = {
   checked: {
     group: 'attr',
     type: boolean,
@@ -75,14 +75,14 @@ const preKnobs = {
   },
 };
 
-const variants = [
+let variants = [
   { name: 'default', excludes: ['vModel', 'events'] },
   { name: 'minimal', includes: ['value'] },
   { name: 'events', includes: ['value', 'events'] },
   { name: 'vModel', includes: ['value', 'vModel'] },
 ];
 
-const storySet = knobsHelper.getStorySet(variants, preKnobs);
+let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   stories.add(
@@ -143,62 +143,82 @@ for (const story of storySet) {
   );
 }
 
-stories.add(
-  'Array v-model',
-  () => {
-    const templateString = `
-<cv-toggle v-model="checks" name="check-1" value="check-1" @change="actionChange"></cv-toggle>
-<cv-toggle v-model="checks" name="check-2" value="check-2" @change="actionChange"></cv-toggle>
-<cv-toggle v-model="checks" name="check-3" value="check-3" @change="actionChange"></cv-toggle>
-`;
-
-    // ----------------------------------------------------------------
-
-    const templateViewString = `
-  <sv-template-view
-    sv-margin
-    sv-source='${templateString.trim()}'>
-    <p>This story only demonstrates the array syntax for v-model</p>
-    <template slot="component">${templateString}</template>
-
-    <template slot="other">
-      <div>
-        <br>
-        <br>
-        <span>
-          V-model:
-        </span>
-        <label>Check 1:
-          <input type="checkbox" value="check-1" v-model="checks">
-        </label>
-        <label>Check 2:
-          <input type="checkbox" value="check-2" v-model="checks">
-        </label>
-        <label>Check 3:
-          <input type="checkbox" value="check-3" v-model="checks">
-        </label>
-        <br>
-        <br>
-        <span>Checks: {{ checks }}</span>
-      </div>
-    </template>
-  </sv-template-view>
-`;
-
-    return {
-      components: { CvToggle, SvTemplateView },
-      data() {
-        return {
-          checks: ['check-3', 'check-2'],
-        };
-      },
-      methods: {
-        actionChange: action('CV Toggle - change'),
-      },
-      template: templateViewString,
-    };
+preKnobs = {
+  vModel: {
+    group: 'attr',
+    value: `v-model="checks"`,
   },
-  {
-    notes: { markdown: CvToggleNotesMD },
-  }
-);
+};
+
+variants = [{ name: 'Array v-model', includes: ['vModel'] }];
+
+storySet = knobsHelper.getStorySet(variants, preKnobs);
+
+for (const story of storySet) {
+  stories.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
+
+      // ----------------------------------------------------------------
+
+      const templateString = `
+      <cv-toggle${
+        settings.group.attr
+      } name="check-1" value="check-1"></cv-toggle>
+      <cv-toggle${
+        settings.group.attr
+      } name="check-2" value="check-2"></cv-toggle>
+      <cv-toggle${
+        settings.group.attr
+      } name="check-3" value="check-3"></cv-toggle>
+      `;
+
+      // ----------------------------------------------------------------
+
+      const templateViewString = `
+      <sv-template-view
+        sv-margin
+        sv-source='${templateString.trim()}'>
+        <p>This story only demonstrates the array syntax for v-model</p>
+        <template slot="component">${templateString}</template>
+
+        <template slot="other">
+          <div>
+            <br>
+            <br>
+            <span>
+              V-model:
+            </span>
+            <label>Check 1:
+              <input type="checkbox" value="check-1" v-model="checks">
+            </label>
+            <label>Check 2:
+              <input type="checkbox" value="check-2" v-model="checks">
+            </label>
+            <label>Check 3:
+              <input type="checkbox" value="check-3" v-model="checks">
+            </label>
+            <br>
+            <br>
+            <span>Checks: {{ checks }}</span>
+          </div>
+        </template>
+      </sv-template-view>
+     `;
+
+      return {
+        components: { CvToggle, SvTemplateView },
+        data() {
+          return {
+            checks: ['check-3', 'check-2'],
+          };
+        },
+        template: templateViewString,
+      };
+    },
+    {
+      notes: { markdown: CvToggleNotesMD },
+    }
+  );
+}
