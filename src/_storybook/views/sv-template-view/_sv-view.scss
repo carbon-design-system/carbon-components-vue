@@ -114,10 +114,16 @@ $container-class: 'carbon';
     line-height: 1;
   }
 
-  *,
+  * {
+    box-sizing: inherit;
+  }
+
   *::before,
   *::after {
-    box-sizing: inherit;
+    .carbon & {
+      // causes problem with checkbox in carbon 10
+      box-sizing: inherit;
+    }
   }
 
   ul {
