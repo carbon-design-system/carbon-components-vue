@@ -5,7 +5,7 @@
     <div class="bx--file" data-file>
       <label
         :for="uid"
-        class="bx--file-btn bx--btn bx--btn--secondary"
+        class="bx--file-btn bx--btn bx--btn--primary"
         role="button"
         tabindex="0"
         >{{ buttonLabel }}</label
