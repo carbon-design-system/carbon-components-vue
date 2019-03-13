@@ -130,70 +130,81 @@ for (const story of storySet) {
   );
 }
 
-stories.add(
-  'Array v-model',
-  () => {
-    const templateString = `
-<cv-checkbox v-model="checks" label="Check 1" name="check-1" value="check-1" @change="actionChange"></cv-checkbox>
-<cv-checkbox v-model="checks" label="Check 2" name="check-2" value="check-2" @change="actionChange"></cv-checkbox>
-<cv-checkbox v-model="checks" label="Check 3" name="check-3" value="check-3" @change="actionChange"></cv-checkbox>
-`;
-
-    // ----------------------------------------------------------------
-
-    const templateViewString = `
-  <sv-template-view
-    sv-margin
-    sv-source='${templateString.trim()}'>
-    <p>This story only demonstrates the array syntax for v-model</p>
-    <template slot="component">${templateString}</template>
-
-    <template slot="other">
-      <div>
-        <br>
-        <br>
-        <span>
-          V-model:
-        </span>
-        <label>Check 1:
-          <input type="checkbox" value="check-1" v-model="checks">
-        </label>
-        <label>Check 2:
-          <input type="checkbox" value="check-2" v-model="checks">
-        </label>
-        <label>Check 3:
-          <input type="checkbox" value="check-3" v-model="checks">
-        </label>
-        <br>
-        <br>
-        <span>Checks: {{ checks }}</span>
-      </div>
-    </template>
-  </sv-template-view>
-`;
-
-    return {
-      components: { CvCheckbox, SvTemplateView },
-      data() {
-        return {
-          checks: array(
-            'Initial cheks',
-            ['check-3', 'check-2'],
-            ','
-            // consts.CONFIG
-          ),
-        };
-      },
-      methods: {
-        actionChange: action('CV Checkbox - change'),
-      },
-      template: templateViewString,
-    };
+preKnobs = {
+  vModel: {
+    group: 'attr',
+    value: `v-model="checks"`,
   },
-  {
-    notes: { markdown: CvCheckboxNotesMD },
-  }
-);
+};
+
+variants = [{ name: 'Array v-model', includes: ['vModel'] }];
+
+storySet = knobsHelper.getStorySet(variants, preKnobs);
+
+for (const story of storySet) {
+  stories.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
+
+      // ----------------------------------------------------------------
+
+      const templateString = `
+<cv-checkbox${settings.group.attr} value="check-1" label="check-1">
+</cv-checkbox>
+<cv-checkbox${settings.group.attr} value="check-2" label="check-2">
+</cv-checkbox>
+<cv-checkbox${settings.group.attr} value="check-3" label="check-3">
+</cv-checkbox>
+  `;
+
+      // ----------------------------------------------------------------
+
+      const templateViewString = `
+    <sv-template-view
+      sv-margin
+      sv-source='${templateString.trim()}'>
+      <p>This story only demonstrates the array syntax for v-model</p>
+      <template slot="component">${templateString}</template>
+      <template slot="other">
+        <div v-if="${templateString.indexOf('v-model') > 0}">
+          <br>
+          <br>
+          <span>
+            V-model:
+          </span>
+          <label>Check 1:
+            <input type="checkbox" value="check-1" v-model="checks">
+          </label>
+          <label>Check 2:
+            <input type="checkbox" value="check-2" v-model="checks">
+          </label>
+          <label>Check 3:
+            <input type="checkbox" value="check-3" v-model="checks">
+          </label>
+          <br>
+          <br>
+          <span>Checked: {{ checks }}</span>
+        </div>
+      </template>
+    </sv-template-view>
+  `;
+
+      return {
+        components: { CvCheckbox, SvTemplateView },
+        data() {
+          return {
+            checks: ['check-1', 'check-2'],
+          };
+        },
+        template: templateViewString,
+      };
+    },
+    {
+      notes: { markdown: CvCheckboxNotesMD },
+    }
+  );
+}
 
 preKnobs = {};
 variants = [{ name: 'skeleton' }];
