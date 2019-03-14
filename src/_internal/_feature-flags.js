@@ -20,9 +20,23 @@
 /**
  * Breaking changes for next release.
  */
-export const breakingChangesX = false;
+export let breakingChangesX;
 
 /**
  * Next gen of Carbon component design.
  */
-export const componentsX = false;
+export let componentsX;
+
+export const override = val => {
+  if (val) {
+    breakingChangesX = val.breakingChangesX === true;
+    componentsX = val.componentsX === true;
+  }
+};
+
+export const reset = () => {
+  componentsX = false;
+  breakingChangesX = false;
+};
+
+reset();

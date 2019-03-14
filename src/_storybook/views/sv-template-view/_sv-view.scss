@@ -3,6 +3,7 @@ $css--reset: false; // prevent thousands of resets being included...
 $css--font-face: true;
 
 $container-class: 'carbon';
+
 @if map-get($feature-flags, 'components-x') {
   $container-class: 'experimental';
 }
@@ -114,10 +115,16 @@ $container-class: 'carbon';
     line-height: 1;
   }
 
-  *,
+  * {
+    box-sizing: inherit;
+  }
+
   *::before,
   *::after {
-    box-sizing: inherit;
+    .carbon & {
+      // causes problem with checkbox in carbon 10
+      box-sizing: inherit;
+    }
   }
 
   ul {
