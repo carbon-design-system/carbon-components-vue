@@ -50,14 +50,6 @@
         ref="clippy"
       ></textarea>
     </section>
-    <cv-checkbox
-      v-if="svExperimentalToggle"
-      class="sv-view__toggle-experimental"
-      label="experimental"
-      value="experimental"
-      v-model="experimental"
-      @change="onExperimental"
-    />
   </component>
 </template>
 
@@ -76,7 +68,7 @@ export default {
     CvCheckbox,
   },
   props: {
-    svExperimentalToggle: Boolean,
+    svExperimental: Boolean,
     svMargin: { type: Boolean, default: true },
     svSource: String,
     svAltBack: { type: Boolean, default: true },
@@ -91,7 +83,7 @@ export default {
   },
   computed: {
     tagType() {
-      return this.experimental ? 'sv-view-experimental' : 'sv-view';
+      return this.svExperimental ? 'sv-view-experimental' : 'sv-view';
     },
     style() {
       return {

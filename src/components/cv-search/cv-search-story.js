@@ -1,7 +1,6 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import { text, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
-import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../../_storybook/utils/consts';
@@ -10,9 +9,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvSearchNotesMD from './cv-search-notes.md';
 import CvSearch from './cv-search';
 
-const stories = storiesOf('CvSearch', module);
-stories.addDecorator(withKnobs);
-stories.addDecorator(withNotes);
+const stories = storiesOf('Default/CvSearch', module);
 
 const preKnobs = {
   theme: {

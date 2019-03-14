@@ -1,6 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, object, boolean } from '@storybook/addon-knobs';
-import { withNotes } from '@storybook/addon-notes';
+import { object, boolean } from '@storybook/addon-knobs';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../../_storybook/utils/consts';
@@ -9,9 +8,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvOverflowMenuNotesMD from './cv-overflow-menu-notes.md';
 import CvOverflowMenu from './cv-overflow-menu';
 
-const stories = storiesOf('CvOverflowMenu', module);
-stories.addDecorator(withKnobs);
-stories.addDecorator(withNotes);
+const stories = storiesOf('Default/CvOverflowMenu', module);
 
 const preKnobs = {
   flipMenu: {

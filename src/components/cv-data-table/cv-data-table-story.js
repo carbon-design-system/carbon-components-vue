@@ -1,12 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import {
-  withKnobs,
-  object,
-  boolean,
-  select,
-  text,
-} from '@storybook/addon-knobs';
-import { withNotes } from '@storybook/addon-notes';
+import { object, boolean, select, text } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
@@ -18,9 +11,7 @@ import CvDataTable from './cv-data-table';
 import CvDataTableAction from './cv-data-table-action';
 import CvSearch from '../cv-search/cv-search';
 
-const stories = storiesOf('CvDataTable', module);
-stories.addDecorator(withKnobs);
-stories.addDecorator(withNotes);
+const stories = storiesOf('Default/CvDataTable', module);
 
 const preKnobs = {
   rowSize: {

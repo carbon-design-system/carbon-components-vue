@@ -1,6 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
-import { withNotes } from '@storybook/addon-notes';
+import { boolean } from '@storybook/addon-knobs';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../../_storybook/utils/consts';
@@ -9,9 +8,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvListNotesMD from './cv-list-notes.md';
 import CvList from './cv-list';
 
-const stories = storiesOf('CvList', module);
-stories.addDecorator(withKnobs);
-stories.addDecorator(withNotes);
+const stories = storiesOf('Default/CvList', module);
 
 const preKnobs = {
   ordered: {
