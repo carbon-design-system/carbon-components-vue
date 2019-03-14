@@ -1,7 +1,6 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean, array } from '@storybook/addon-knobs';
+import { text, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
-import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../../_storybook/utils/consts';
@@ -12,8 +11,6 @@ import CvCheckbox from './cv-checkbox';
 import CvCheckboxSkeleton from './cv-checkbox-skeleton';
 
 const stories = storiesOf('CvCheckbox', module);
-stories.addDecorator(withKnobs);
-stories.addDecorator(withNotes);
 
 let preKnobs = {
   label: {
@@ -88,7 +85,7 @@ for (const story of storySet) {
 
       const templateViewString = `
     <sv-template-view
-      sv-experimental-toggle
+      :sv-experimental="experimental"
       sv-margin
       :sv-alt-back="this.$options.propsData.theme !== 'light'"
       sv-source='${templateString.trim()}'>
@@ -164,7 +161,7 @@ for (const story of storySet) {
       const templateViewString = `
     <sv-template-view
       sv-margin
-      sv-experimental-toggle
+      :sv-experimental="experimental"
       sv-source='${templateString.trim()}'>
       <p>This story only demonstrates the array syntax for v-model</p>
       <template slot="component">${templateString}</template>
@@ -226,7 +223,7 @@ for (const story of storySet) {
 
       const templateViewString = `
       <sv-template-view
-        sv-experimental-toggle
+        :sv-experimental="experimental"
         sv-margin
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>

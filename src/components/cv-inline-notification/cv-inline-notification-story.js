@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text } from '@storybook/addon-knobs';
-import { withNotes } from '@storybook/addon-notes';
+import { text } from '@storybook/addon-knobs';
+
 import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
@@ -11,8 +11,6 @@ import CvInlineNotificationNotesMD from './cv-inline-notification-notes.md';
 import CvInlineNotification from './cv-inline-notification';
 
 const stories = storiesOf('CvInlineNotification', module);
-stories.addDecorator(withKnobs);
-stories.addDecorator(withNotes);
 
 const preKnobs = {
   title: {

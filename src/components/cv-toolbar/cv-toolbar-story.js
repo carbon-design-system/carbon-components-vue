@@ -1,6 +1,4 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs } from '@storybook/addon-knobs';
-import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../../_storybook/utils/consts';
@@ -17,8 +15,6 @@ import CvToolbarOption from './cv-toolbar-option';
 import CvToolbarTitle from './cv-toolbar-title';
 
 const stories = storiesOf('CvToolbar', module);
-stories.addDecorator(withKnobs);
-stories.addDecorator(withNotes);
 
 const preKnobs = {};
 

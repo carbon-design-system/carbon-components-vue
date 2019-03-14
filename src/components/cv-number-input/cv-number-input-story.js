@@ -1,7 +1,6 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
+import { text, boolean, number } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
-import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../../_storybook/utils/consts';
@@ -11,8 +10,6 @@ import CvNumberInputNotesMD from './cv-number-input-notes.md';
 import CvNumberInput from './cv-number-input';
 
 const stories = storiesOf('CvNumberInput', module);
-stories.addDecorator(withKnobs);
-stories.addDecorator(withNotes);
 
 const preKnobs = {
   theme: {

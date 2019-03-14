@@ -1,6 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, select } from '@storybook/addon-knobs';
-import { withNotes } from '@storybook/addon-notes';
+import { text, select } from '@storybook/addon-knobs';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../../_storybook/utils/consts';
@@ -11,8 +10,6 @@ import CvCodeSnippet from './cv-code-snippet';
 import CvCodeSnippetSkeleton from './cv-code-snippet-skeleton';
 
 const stories = storiesOf('CvCodeSnippet', module);
-stories.addDecorator(withKnobs);
-stories.addDecorator(withNotes);
 
 let preKnobs = {
   lessText: {
@@ -110,7 +107,7 @@ for (const story of storySet) {
 
       const templateViewString = `
     <sv-template-view ref="view"
-      sv-experimental-toggle
+      :sv-experimental="experimental"
       sv-margin
       :sv-alt-back="${settings.group.attr.indexOf('inline') > -1}"
       sv-source='${templateString.trim()}'>
@@ -168,7 +165,7 @@ for (const story of storySet) {
 
       const templateViewString = `
       <sv-template-view
-        sv-experimental-toggle
+        :sv-experimental="experimental"
         sv-margin
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>

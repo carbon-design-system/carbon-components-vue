@@ -1,7 +1,6 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
+import { boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
-import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../../_storybook/utils/consts';
@@ -11,12 +10,11 @@ import CvButtonNotesMD from './cv-button-notes.md';
 import CvButton from './cv-button';
 import CvButtonSkeleton from './cv-button-skeleton';
 
-const stories = storiesOf('CvButton', module);
-stories.addDecorator(withKnobs);
-stories.addDecorator(withNotes);
+const storiesStandard = storiesOf('CvButton', module);
+const storiesExperimental = storiesOf('Experimental/CvButton', module);
+import { componentsX, override, reset } from '../../_internal/_feature-flags';
 
 const exampleIconPath = require('../../assets/images/example-icons.svg');
-import { componentsX } from '../../_internal/_feature-flags';
 import AddFilled16 from '@carbon/icons-vue/lib/add--filled/16';
 
 let preKnobs = {
@@ -140,76 +138,84 @@ let variants = [
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const story of storySet) {
-  stories.add(
-    story.name,
-    () => {
-      const settings = story.knobs();
+for (const experimental of [false, true]) {
+  const stories = experimental ? storiesExperimental : storiesStandard;
+  experimental ? override({ componentsX: true }) : reset();
 
-      const templateString = `
+  for (const story of storySet) {
+    stories.add(
+      story.name,
+      () => {
+        const settings = story.knobs();
+
+        const templateString = `
 <cv-button${settings.group.attr}
 >${settings.group.slots}
 </cv-button>
     `;
-      // console.log(templateString);
+        // console.log(templateString);
 
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
       <sv-template-view
-        sv-experimental-toggle
+        :sv-experimental="experimental"
         sv-margin
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>
       </sv-template-view>
     `;
 
-      return {
-        components: { CvButton, SvTemplateView },
-        methods: {
-          actionClick: action('Cv Button - click'),
-        },
-        template: templateViewString,
-        props: settings.props,
-      };
+        return {
+          components: { CvButton, SvTemplateView },
+          methods: {
+            actionClick: action('Cv Button - click'),
+          },
+          template: templateViewString,
+          props: settings.props,
+        };
+      },
+      {
+        notes: { markdown: CvButtonNotesMD },
+      }
+    );
+  }
+
+  // cv-button-skeleton
+
+  preKnobs = {
+    small: {
+      group: 'attr',
+      type: boolean,
+      config: ['small', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+      prop: {
+        name: 'small',
+        type: Boolean,
+      },
     },
-    {
-      notes: { markdown: CvButtonNotesMD },
-    }
-  );
+  };
 }
-
-// cv-button-skeleton
-
-preKnobs = {
-  small: {
-    group: 'attr',
-    type: boolean,
-    config: ['small', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'small',
-      type: Boolean,
-    },
-  },
-};
-
 variants = [{ name: 'skeleton' }];
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const story of storySet) {
-  stories.add(
-    story.name,
-    () => {
-      const settings = story.knobs();
+for (const experimental of [false, true]) {
+  const stories = experimental ? storiesExperimental : storiesStandard;
+  experimental ? override({ componentsX: true }) : reset();
 
-      const templateString = `
+  for (const story of storySet) {
+    stories.add(
+      story.name,
+      () => {
+        const settings = story.knobs();
+
+        const templateString = `
         <cv-button-skeleton${settings.group.attr}></cv-button-skeleton>
       `;
 
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
       <sv-template-view
         sv-margin
         sv-source='${templateString.trim()}'>
@@ -217,14 +223,15 @@ for (const story of storySet) {
       </sv-template-view>
     `;
 
-      return {
-        components: { CvButtonSkeleton, SvTemplateView },
-        template: templateViewString,
-        props: settings.props,
-      };
-    },
-    {
-      notes: { markdown: CvButtonNotesMD },
-    }
-  );
+        return {
+          components: { CvButtonSkeleton, SvTemplateView },
+          template: templateViewString,
+          props: settings.props,
+        };
+      },
+      {
+        notes: { markdown: CvButtonNotesMD },
+      }
+    );
+  }
 }

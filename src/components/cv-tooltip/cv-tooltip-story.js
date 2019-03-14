@@ -1,6 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, select, boolean } from '@storybook/addon-knobs';
-import { withNotes } from '@storybook/addon-notes';
+import { text, select, boolean } from '@storybook/addon-knobs';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../../_storybook/utils/consts';
@@ -12,7 +11,6 @@ import CvTooltip from './cv-tooltip';
 import CvDefinitionTooltip from './cv-definition-tooltip';
 
 const stories = storiesOf('CvTooltip', module);
-stories.addDecorator(withKnobs).addDecorator(withNotes);
 
 let preKnobs = {
   direction: {

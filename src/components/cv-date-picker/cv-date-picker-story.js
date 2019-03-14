@@ -1,7 +1,6 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean, object } from '@storybook/addon-knobs';
+import { text, boolean, object } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
-import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../../_storybook/utils/consts';
@@ -11,8 +10,6 @@ import CvDatePickerNotesMD from './cv-date-picker-notes.md';
 import CvDatePicker from './cv-date-picker';
 
 const stories = storiesOf('CvDatePicker', module);
-stories.addDecorator(withKnobs);
-stories.addDecorator(withNotes);
 
 const preKnobs = {
   theme: {
@@ -141,7 +138,7 @@ for (const story of storySet) {
 
       const templateViewString = `
       <sv-template-view
-        sv-experimental-toggle
+        :sv-experimental="experimental"
         sv-margin
         :sv-alt-back="this.$options.propsData.theme !== 'light'"
         sv-source='${templateString.trim()}'>

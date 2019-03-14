@@ -1,6 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
-import { withNotes } from '@storybook/addon-notes';
+import { boolean } from '@storybook/addon-knobs';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../../_storybook/utils/consts';
@@ -12,8 +11,6 @@ import CvBreadcrumbItem from './cv-breadcrumb-item';
 import CvBreadcrumbSkeleton from './cv-breadcrumb-skeleton';
 
 const stories = storiesOf('CvBreadcrumb', module);
-stories.addDecorator(withKnobs);
-stories.addDecorator(withNotes);
 
 const preKnobs = {
   noTrailingSlash: {
@@ -57,7 +54,7 @@ for (const story of storySet) {
 
       const templateViewString = `
       <sv-template-view
-        sv-experimental-toggle
+        :sv-experimental="experimental"
         sv-margin
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>

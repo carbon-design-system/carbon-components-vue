@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
-import { withNotes } from '@storybook/addon-notes';
+import { boolean } from '@storybook/addon-knobs';
+
 import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
@@ -11,8 +11,6 @@ import CvLoadingNotesMD from './cv-loading-notes.md';
 import CvLoading from './cv-loading';
 
 const stories = storiesOf('CvLoading', module);
-stories.addDecorator(withKnobs);
-stories.addDecorator(withNotes);
 
 const preKnobs = {
   active: {

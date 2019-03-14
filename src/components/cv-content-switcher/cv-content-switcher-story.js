@@ -1,7 +1,6 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, select, boolean } from '@storybook/addon-knobs';
+import { select, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
-import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../../_storybook/utils/consts';
@@ -13,8 +12,6 @@ import CvContentSwitcherButton from './cv-content-switcher-button';
 import CvContentSwitcherContent from './cv-content-switcher-content';
 
 const stories = storiesOf('CvContentSwitcher', module);
-stories.addDecorator(withKnobs);
-stories.addDecorator(withNotes);
 
 const exampleIconPath = require('../../assets/images/example-icons.svg');
 import AddFilled16 from '@carbon/icons-vue/lib/add--filled/16';
@@ -124,7 +121,7 @@ for (const story of storySet) {
 
       const templateViewString = `
       <sv-template-view
-        sv-experimental-toggle
+        :sv-experimental="experimental"
         sv-margin
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>
@@ -206,7 +203,7 @@ for (const story of storySet) {
 
       const templateViewString = `
       <sv-template-view
-        sv-experimental-toggle
+        :sv-experimental="experimental"
         sv-margin
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>
