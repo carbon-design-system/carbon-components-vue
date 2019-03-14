@@ -162,7 +162,6 @@ $component-padding: 40px;
 
 .sv-template-view {
   border: 1px solid transparent;
-
   background-color: $back-color-exp;
 
   .carbon {
@@ -176,7 +175,6 @@ $component-padding: 40px;
   min-width: 500px;
   max-width: calc(100% - #{4 * $component-padding});
   border: $border;
-
   background-color: $back-color-exp;
 
   .carbon & {
@@ -222,6 +220,7 @@ $component-padding: 40px;
     background-color: $alt-back-color;
   }
 }
+
 @keyframes copied {
   from {
     opacity: 1;
