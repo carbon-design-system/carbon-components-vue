@@ -19,7 +19,7 @@ then
 fi
 echo
 
-read  -n 1 -p "Has Readme.md been updated including change log, Vue and Carbon versions [yN]? " answer3
+read  -n 1 -p "Have README.md and CHAGNELOG.MD been updated. [yN]? " answer3
 [ -z "$answer3" ] && answer3="n"  # if 'no' have to be default choice
 
 if [ "$answer3" != "y" ] && [ "$answer3" != "Y" ]
