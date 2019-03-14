@@ -3,6 +3,7 @@ $css--reset: false; // prevent thousands of resets being included...
 $css--font-face: true;
 
 $container-class: 'carbon';
+
 @if map-get($feature-flags, 'components-x') {
   $container-class: 'experimental';
 }
