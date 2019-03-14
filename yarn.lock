@@ -2614,12 +2614,7 @@ babel-plugin-syntax-jsx@^6.18.0:
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-jsx/-/babel-plugin-syntax-jsx-6.18.0.tgz#0af32a9a6e13ca7a3fd5069e62d7b0f58d0d8946"
   integrity sha1-CvMqmm4Tyno/1QaeYtew9Y0NiUY=
 
-babel-plugin-syntax-object-rest-spread@7.0.0-beta.3:
-  version "7.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/babel-plugin-syntax-object-rest-spread/-/babel-plugin-syntax-object-rest-spread-7.0.0-beta.3.tgz#7f781c180899dafd88f132f69472397549be48e5"
-  integrity sha512-21/MnmUFduLr4JzxrKMm/MeF+Jjyi5UdZo38IqzrP0sLhmPbal5ZAUJ4HgWH4339SdjnYgENacbY5wfk/zxTGg==
-
-babel-plugin-syntax-object-rest-spread@^6.13.0:
+babel-plugin-syntax-object-rest-spread@^6.13.0, babel-plugin-syntax-object-rest-spread@^6.8.0:
   version "6.13.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-object-rest-spread/-/babel-plugin-syntax-object-rest-spread-6.13.0.tgz#fd6536f2bce13836ffa3a5458c4903a597bb3bf5"
   integrity sha1-/WU28rzhODb/o6VFjEkDpZe7O/U=
@@ -2862,12 +2857,13 @@ babel-plugin-transform-object-from-destructuring@^1.0.3:
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-object-from-destructuring/-/babel-plugin-transform-object-from-destructuring-1.0.3.tgz#1420ac4f1490dfd7e4873ad94d5a98a75be627bf"
   integrity sha512-RElY1uX1NNxKZw8tD2IO3cQVn86lfZD0q85BFRsgLcWDDv2bfiLLwqA2wRuLVUGb1fOJloyAgRGv6s6q79x/Wg==
 
-babel-plugin-transform-object-rest-spread@7.0.0-beta.3:
-  version "7.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/babel-plugin-transform-object-rest-spread/-/babel-plugin-transform-object-rest-spread-7.0.0-beta.3.tgz#5c409f3cd70819dbb3382d2056971c5ebe01393a"
-  integrity sha512-NOlhrq1CmxyuI94vNsqMhRPMuL5VG2EKUOIJQ0bwNiXBiwWRLdPoWyPT+Irrx5g4g0PkFgA46tnRj7Dc4ZGsxg==
+babel-plugin-transform-object-rest-spread@^6.26.0:
+  version "6.26.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-transform-object-rest-spread/-/babel-plugin-transform-object-rest-spread-6.26.0.tgz#0f36692d50fef6b7e2d4b3ac1478137a963b7b06"
+  integrity sha1-DzZpLVD+9rfi1LOsFHgTepY7ewY=
   dependencies:
-    babel-plugin-syntax-object-rest-spread "7.0.0-beta.3"
+    babel-plugin-syntax-object-rest-spread "^6.8.0"
+    babel-runtime "^6.26.0"
 
 babel-plugin-transform-property-literals@^6.9.4:
   version "6.9.4"
