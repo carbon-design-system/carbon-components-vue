@@ -39,7 +39,7 @@ If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead
 yarn add @carbon/vue
 ```
 
-NOTE: https://www.npmjs.com/package/current-script-polyfill is required for older browsers (e.g. IE11)
+NOTE: (https://www.npmjs.com/package/current-script-polyfill) is required for older browsers (e.g. IE11)
 
 ### Using all at once
 
@@ -95,184 +95,15 @@ Vue.use(window['carbon-vue'].default);
 . . . <cv-button>Hello</cv-button>
 ```
 
-## Project State
+## Change log
 
-**1.0.2**
-
-Built against Vue v2.6.3 and carbon-components v9.70.1
-
-- Add row-select-change and row-select-changes events to table
-- Add rows-selected property to table
-- Add use rows-selected with v-model for table
-- Fix overflow menu issue #234
-
-**1.0.1**
-
-- Removed setTimeout use
-- Added Skeleton components for
-- CvFileUpload
-- CvDropdown
-- CvCodeSnippet
-- CvCheckbox
-
-**1.0.0**
-
-- Add actions option to data table
-- Add batch actions option to data table
-- Updated table pagination
-- Add CvDataTableRow and CvDataTableCell to allow HTML use in tables
-- Add CvButtonSkeleton
-- Add overflow menu option to table.
-
-**1.0.0-beta.4**
-
-- Fix initially hidden expanding tile behaviour.
-- Add CvBreadCrumbSkeleton
-
-**1.0.0-beta.3**
-
-- Add header and footer slots for CvTable
-- Set button type="button" for all buttons except CvButton. This prevents form submit if a component happens to be inside a form.
-- Added CvSkeletonText, CvAccordionSeketon and CvAccordionItemSekeleton.
-
-**v1.0.0-beta.2**
-
-- Removed Symbol use in prop types, fixing CvRadioButton, CvSlider and CvPagination use with the minified compiled modules.
-- Minor story fixes
-
-**v1.0.0-beta.1**
-
-- Fix typo in CvContentSwitcherContent component name
-
-**v1.0.0-beta.0**
-
-- Storybook: update views
-- CvFileUploader: added v-model and missing parts to
-- CvToolbar: added
-- CvDataTable: added minus the filter/toolbar
-- Tests - Added unit test suite and first tests (CvTag)
-- CvContentSwitcher - Added non-DOM direct content managment
-- Turned helper and invalidMessages into slops (slot-prop hybrid)
-- CvIcon - Downgraded to helper component to remove dependency on carbon-icons
-- Renamed UMD and CommonJS modules from carbon-components-vue... to carbon-vue...
-
-**v0.3.0**
-
-- Initial data-viz/bar-graph added
-- Story corrections
-- Change use of \$parent to prefer events
-- Chagne use of \$children to check child type
-- Fix overflow and interactive-tooltip position on scroll/resize
-
-**v0.2.9**
-
-- Add gauge component - story is Data-viz/CvGauge
-- Add pie chart component - story is Data-viz/CvPieChart
-- Add router-link version of CvLink
-
-**v0.2.8**
-Correct duff deploy
-
-**v0.2.7**
-
-- Fix click on modal dialog closing it
-
-**v0.2.6**
-
-- Fix tab out of modal
-- Remove unused vars
-
-**v0.2.5 - Minor fixes**
-
-- Make structured list native Vue
-- Simplify structured list components
-- Removed non-core CSS
-- Fix to paginator reactivity
-
-**v0.2.4 - Minor fixes**
-
-- Make tooltip native Vue
-- Tidy up a bit of unused code
-- Make tabs native Vue and use carbon react pattern (breaks previous tab use)
-
-**v0.2.3 - Minor fixes**
-
-- Fix modal hide on main body click and show visible in story.
-- Make cv-search native Vue.
-- Make cv-number-input native Vue.
-
-**v0.2.2 - Minor fixes**
-
-- Fixed expandable tile and made it native Vue
-- Made notification componentes native Vue
-- Tidied toggle stories.
-
-**v0.2.0 - Moved to Storybook 4**
-
-- Knobs now operate as Vue properties the template is no longer replaced each time (as per Knobs in storybook 3)
-- Story kinds array replaced by variants which define the settings used in each story.
-- NOTE: slots no longer editable
-
-**v0.1.0 - First draft of carbon-components-vue implementation**
-
-This initial set of components, based on v9 of carbon components, includes draft implementations of all non-data viz components found in the core carbon components library. Public parts of the component: properties, events, data, methods, computed values are at this point subject to review at this point.
+See [CHANGELOG.md](CHAGNELOG.md)
 
 ### Current Components
 
 View available Vue.js components [here](http://vue.carbondesignsystem.com). Usage information is available when you click the blue ? icon in the top right corner of the selected component.
 
-Current Version: 0.1
-:white_check_mark: Ready
-:warning: Under review
-:heavy_minus_sign: Not available
-
-| **Components**           | **State**          | **Link**                                                                         |
-| ------------------------ | ------------------ | -------------------------------------------------------------------------------- |
-| **CvAccordion**          | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvAccordion                      |
-| CvBarGraph               | :warning:          | http://vue.carbondesignsystem.com/?selectedKind=Data-Viz%2FCvBarGraph            |
-| **CvBreadcrumb**         | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvBreadcrumb                     |
-| **CvButton**             | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvButton                         |
-| **CvCheckbox**           | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvCheckbox                       |
-| **CvCodeSnippet**        | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvCodeSnippet&selectedStory=All  |
-| **CvContentSwitcher**    | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvContentSwitcher                |
-| CvDataTable              | :white_check_mark: | https://github.com/carbon-design-system/carbon-components-vue/issues/51          |
-|                          |
-| CvDatePicker             | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvDatePicker&selectedStory=All   |
-| **CvDropdown**           | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvDropdown                       |
-|                          |
-| **CvFileUploader**       | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvFileUploader&selectedStory=All |
-| **CvForm**               | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvForm                           |
-| **CvGauge**              | :warning:          | https://github.com/carbon-design-system/carbon-components-vue/issues/49          |
-|                          |
-| **CvInlineNotification** | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvInlineNotification             |
-| CvLineGraph              | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/53          |
-|                          |
-| **CvLink**               | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvLink                           |
-| **CvList**               | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvList                           |
-| **CvLoading**            | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvLoading                        |
-| **CvModal**              | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvModal                          |
-| **CvNumberInput**        | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvNumberInput                    |
-| **CvOverflowMenu**       | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvOverflowMenu                   |
-| **CvPagination**         | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvPagination&selectedStory=All   |
-| CvPieChart               | :warning:          | https://github.com/carbon-design-system/carbon-components-vue/issues/52          |
-|                          |
-| **CvProgress**           | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvProgress                       |
-| **CvRadioButton**        | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvRadioButton                    |
-| CvScatterPlot            | :heavy_minus_sign: | https://github.com/carbon-design-system/carbon-components-vue/issues/50          |
-|                          |
-| **CvSearch**             | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvSearch                         |
-| **CvSelect**             | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvSelect                         |
-| **CvSlider**             | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvSlider                         |
-| **CvStructuredList**     | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvStructuredList                 |
-| **CvTabs**               | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvTabs                           |
-| **CvTag**                | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvTag                            |
-| **CvTextArea**           | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvTextArea                       |
-| **CvTextInput**          | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvTextInput                      |
-| CvTimePicker             | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvTimePicker&selectedStory=All   |
-| **CvTile**               | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvTile                           |
-| **CvToastNotification**  | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvToastNotification              |
-| **CvToggle**             | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvToggle                         |
-| **CvTooltip**            | :white_check_mark: | http://vue.carbondesignsystem.com/?selectedKind=CvTooltip                        |
+See [component status pages](https://www.carbondesignsystem.com/component-status) for the status of each component.
 
 ## Development
 
