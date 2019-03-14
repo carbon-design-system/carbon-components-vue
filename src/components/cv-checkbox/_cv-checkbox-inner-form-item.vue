@@ -10,7 +10,7 @@
 import CvCheckboxInner from './_cv-checkbox-inner';
 
 export default {
-  name: 'CvSelectInnerFormItem',
+  name: 'CvCheckboxInnerFormItem',
   components: { CvCheckboxInner },
   inheritAttrs: false,
 };

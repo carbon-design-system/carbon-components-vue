@@ -37,7 +37,9 @@
     >
       <use :href="icon"></use>
     </svg>
-    <slot></slot>
+    <span>
+      <slot></slot>
+    </span>
   </button>
 </template>
 
