@@ -7,7 +7,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvSkeletonTextNotesMD from './cv-skeleton-text-notes.md';
 import CvSkeletonText from './cv-skeleton-text';
 
-const stories = storiesOf('CvSkeletonText', module);
+const stories = storiesOf('Default/CvSkeletonText', module);
 
 const preKnobs = {
   heading: {

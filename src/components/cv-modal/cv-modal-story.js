@@ -10,7 +10,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvModalNotesMD from './cv-modal-notes.md';
 import CvModal from './cv-modal';
 
-const stories = storiesOf('CvModal', module);
+const stories = storiesOf('Default/CvModal', module);
 
 const preKnobs = {
   label: {

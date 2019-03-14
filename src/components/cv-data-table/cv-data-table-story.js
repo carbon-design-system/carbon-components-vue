@@ -11,7 +11,7 @@ import CvDataTable from './cv-data-table';
 import CvDataTableAction from './cv-data-table-action';
 import CvSearch from '../cv-search/cv-search';
 
-const stories = storiesOf('CvDataTable', module);
+const stories = storiesOf('Default/CvDataTable', module);
 
 const preKnobs = {
   rowSize: {

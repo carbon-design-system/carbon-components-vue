@@ -7,7 +7,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvFormNotesMD from './cv-form-notes.md';
 import CvForm from './cv-form';
 
-const stories = storiesOf('CvForm', module);
+const stories = storiesOf('Default/CvForm', module);
 
 const preKnobs = {};
 

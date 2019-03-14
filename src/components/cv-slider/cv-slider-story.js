@@ -9,7 +9,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvSliderNotesMD from './cv-slider-notes.md';
 import CvSlider from './cv-slider';
 
-const stories = storiesOf('CvSlider', module);
+const stories = storiesOf('Default/CvSlider', module);
 
 const preKnobs = {
   theme: {

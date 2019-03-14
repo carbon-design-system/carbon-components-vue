@@ -14,7 +14,7 @@ import CvToolbarDivider from './cv-toolbar-divider';
 import CvToolbarOption from './cv-toolbar-option';
 import CvToolbarTitle from './cv-toolbar-title';
 
-const stories = storiesOf('CvToolbar', module);
+const stories = storiesOf('Default/CvToolbar', module);
 
 const preKnobs = {};
 

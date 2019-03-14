@@ -9,7 +9,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvToggleNotesMD from './cv-toggle-notes.md';
 import CvToggle from './cv-toggle';
 
-const stories = storiesOf('CvToggle', module);
+const stories = storiesOf('Default/CvToggle', module);
 
 let preKnobs = {
   checked: {

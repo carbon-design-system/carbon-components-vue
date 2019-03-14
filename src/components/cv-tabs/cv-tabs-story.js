@@ -10,7 +10,7 @@ import CvTabsNotesMD from './cv-tabs-notes.md';
 import CvTabs from './cv-tabs';
 import CvTab from './cv-tab';
 
-const stories = storiesOf('CvTabs', module);
+const stories = storiesOf('Default/CvTabs', module);
 
 const preKnobs = {
   selected: {

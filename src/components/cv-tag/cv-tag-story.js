@@ -8,7 +8,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvTagNotesMD from './cv-tag-notes.md';
 import CvTag from './cv-tag';
 
-const stories = storiesOf('CvTag', module);
+const stories = storiesOf('Default/CvTag', module);
 
 const preKnobs = {
   label: {

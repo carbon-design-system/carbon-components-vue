@@ -10,7 +10,7 @@ import CvFileUploaderNotesMD from './cv-file-uploader-notes.md';
 import CvFileUploader from './cv-file-uploader';
 import CvFileUploaderSkeleton from './cv-file-uploader-skeleton';
 
-const stories = storiesOf('CvFileUploader', module);
+const stories = storiesOf('Default/CvFileUploader', module);
 
 let preKnobs = {
   label: {

@@ -9,7 +9,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvStructuredListNotesMD from './cv-structured-list-notes.md';
 import CvStructuredList from './cv-structured-list';
 
-const stories = storiesOf('CvStructuredList', module);
+const stories = storiesOf('Default/CvStructuredList', module);
 
 const preKnobs = {
   border: {

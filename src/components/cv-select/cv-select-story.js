@@ -9,7 +9,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvSelectNotesMD from './cv-select-notes.md';
 import CvSelect from './cv-select';
 
-const stories = storiesOf('CvSelect', module);
+const stories = storiesOf('Default/CvSelect', module);
 
 const preKnobs = {
   theme: {

@@ -9,7 +9,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvNumberInputNotesMD from './cv-number-input-notes.md';
 import CvNumberInput from './cv-number-input';
 
-const stories = storiesOf('CvNumberInput', module);
+const stories = storiesOf('Default/CvNumberInput', module);
 
 const preKnobs = {
   theme: {

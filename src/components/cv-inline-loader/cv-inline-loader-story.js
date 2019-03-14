@@ -8,7 +8,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvInlineLoaderNotesMD from './cv-inline-loader-notes.md';
 import CvInlineLoader from './cv-inline-loader';
 
-const stories = storiesOf('CvInlineLoader', module);
+const stories = storiesOf('Default/CvInlineLoader', module);
 
 const preKnobs = {
   active: {

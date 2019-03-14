@@ -10,7 +10,9 @@ import CvCheckboxNotesMD from './cv-checkbox-notes.md';
 import CvCheckbox from './cv-checkbox';
 import CvCheckboxSkeleton from './cv-checkbox-skeleton';
 
-const stories = storiesOf('CvCheckbox', module);
+const storiesDefault = storiesOf('Default/CvCheckbox', module);
+const storiesExperimental = storiesOf('Experimental/CvCheckbox', module);
+import { override, reset } from '../../_internal/_feature-flags';
 
 let preKnobs = {
   label: {
@@ -68,22 +70,26 @@ let variants = [
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const story of storySet) {
-  stories.add(
-    story.name,
-    () => {
-      const settings = story.knobs();
+for (const experimental of [false, true]) {
+  const stories = experimental ? storiesExperimental : storiesDefault;
 
-      // ----------------------------------------------------------------
+  for (const story of storySet) {
+    stories.add(
+      story.name,
+      () => {
+        experimental ? override({ componentsX: true }) : reset();
+        const settings = story.knobs();
 
-      const templateString = `
+        // ----------------------------------------------------------------
+
+        const templateString = `
 <cv-checkbox${settings.group.attr}>
 </cv-checkbox>
   `;
 
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
     <sv-template-view
       :sv-experimental="experimental"
       sv-margin
@@ -108,26 +114,27 @@ for (const story of storySet) {
     </sv-template-view>
   `;
 
-      return {
-        components: { CvCheckbox, SvTemplateView },
-        props: settings.props,
-        data() {
-          return {
-            modelValue: this.$options.propsData.checked || false,
-          };
-        },
-        methods: {
-          actionChange: action('CV Checkbox - change'),
-        },
-        template: templateViewString,
-      };
-    },
-    {
-      notes: { markdown: CvCheckboxNotesMD },
-    }
-  );
+        return {
+          components: { CvCheckbox, SvTemplateView },
+          props: settings.props,
+          data() {
+            return {
+              experimental,
+              modelValue: this.$options.propsData.checked || false,
+            };
+          },
+          methods: {
+            actionChange: action('CV Checkbox - change'),
+          },
+          template: templateViewString,
+        };
+      },
+      {
+        notes: { markdown: CvCheckboxNotesMD },
+      }
+    );
+  }
 }
-
 preKnobs = {
   vModel: {
     group: 'attr',
@@ -139,15 +146,19 @@ variants = [{ name: 'Array v-model', includes: ['vModel'] }];
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const story of storySet) {
-  stories.add(
-    story.name,
-    () => {
-      const settings = story.knobs();
+for (const experimental of [false, true]) {
+  const stories = experimental ? storiesExperimental : storiesDefault;
 
-      // ----------------------------------------------------------------
+  for (const story of storySet) {
+    stories.add(
+      story.name,
+      () => {
+        experimental ? override({ componentsX: true }) : reset();
+        const settings = story.knobs();
 
-      const templateString = `
+        // ----------------------------------------------------------------
+
+        const templateString = `
 <cv-checkbox${settings.group.attr} value="check-1" label="check-1">
 </cv-checkbox>
 <cv-checkbox${settings.group.attr} value="check-2" label="check-2">
@@ -156,9 +167,9 @@ for (const story of storySet) {
 </cv-checkbox>
   `;
 
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
     <sv-template-view
       sv-margin
       :sv-experimental="experimental"
@@ -189,39 +200,44 @@ for (const story of storySet) {
     </sv-template-view>
   `;
 
-      return {
-        components: { CvCheckbox, SvTemplateView },
-        data() {
-          return {
-            checks: ['check-1', 'check-2'],
-          };
-        },
-        template: templateViewString,
-      };
-    },
-    {
-      notes: { markdown: CvCheckboxNotesMD },
-    }
-  );
+        return {
+          components: { CvCheckbox, SvTemplateView },
+          data() {
+            return {
+              experimental,
+              checks: ['check-1', 'check-2'],
+            };
+          },
+          template: templateViewString,
+        };
+      },
+      {
+        notes: { markdown: CvCheckboxNotesMD },
+      }
+    );
+  }
 }
 
 preKnobs = {};
 variants = [{ name: 'skeleton' }];
 storySet = knobsHelper.getStorySet(variants, preKnobs);
+for (const experimental of [false, true]) {
+  const stories = experimental ? storiesExperimental : storiesDefault;
 
-for (const story of storySet) {
-  stories.add(
-    story.name,
-    () => {
-      const settings = story.knobs();
+  for (const story of storySet) {
+    stories.add(
+      story.name,
+      () => {
+        experimental ? override({ componentsX: true }) : reset();
+        const settings = story.knobs();
 
-      const templateString = `
+        const templateString = `
         <cv-checkbox-skeleton></cv-checkbox-skeleton>
       `;
 
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
       <sv-template-view
         :sv-experimental="experimental"
         sv-margin
@@ -230,14 +246,16 @@ for (const story of storySet) {
       </sv-template-view>
     `;
 
-      return {
-        components: { CvCheckboxSkeleton, SvTemplateView },
-        template: templateViewString,
-        props: settings.props,
-      };
-    },
-    {
-      notes: { markdown: CvCheckboxNotesMD },
-    }
-  );
+        return {
+          components: { CvCheckboxSkeleton, SvTemplateView },
+          data: () => ({ experimental }),
+          template: templateViewString,
+          props: settings.props,
+        };
+      },
+      {
+        notes: { markdown: CvCheckboxNotesMD },
+      }
+    );
+  }
 }

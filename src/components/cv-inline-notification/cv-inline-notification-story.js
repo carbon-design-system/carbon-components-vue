@@ -10,7 +10,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvInlineNotificationNotesMD from './cv-inline-notification-notes.md';
 import CvInlineNotification from './cv-inline-notification';
 
-const stories = storiesOf('CvInlineNotification', module);
+const stories = storiesOf('Default/CvInlineNotification', module);
 
 const preKnobs = {
   title: {

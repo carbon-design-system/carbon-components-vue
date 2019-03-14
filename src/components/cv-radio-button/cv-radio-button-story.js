@@ -9,7 +9,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvRadioButtonNotesMD from './cv-radio-button-notes.md';
 import CvRadioButton from './cv-radio-button';
 
-const stories = storiesOf('CvRadioButton', module);
+const stories = storiesOf('Default/CvRadioButton', module);
 
 const preKnobs = {
   checked1: {

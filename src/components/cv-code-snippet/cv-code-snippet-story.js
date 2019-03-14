@@ -9,7 +9,9 @@ import CvCodeSnippetNotesMD from './cv-code-snippet-notes.md';
 import CvCodeSnippet from './cv-code-snippet';
 import CvCodeSnippetSkeleton from './cv-code-snippet-skeleton';
 
-const stories = storiesOf('CvCodeSnippet', module);
+const storiesDefault = storiesOf('Default/CvCodeSnippet', module);
+const storiesExperimental = storiesOf('Experimental/CvCodeSnippet', module);
+import { override, reset } from '../../_internal/_feature-flags';
 
 let preKnobs = {
   lessText: {
@@ -89,23 +91,27 @@ let variants = [
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const story of storySet) {
-  stories.add(
-    story.name,
-    () => {
-      const settings = story.knobs();
+for (const experimental of [false, true]) {
+  const stories = experimental ? storiesExperimental : storiesDefault;
 
-      // ----------------------------------------------------------------
-      // console.dir(settings);
-      const templateString = `
+  for (const story of storySet) {
+    stories.add(
+      story.name,
+      () => {
+        experimental ? override({ componentsX: true }) : reset();
+        const settings = story.knobs();
+
+        // ----------------------------------------------------------------
+        // console.dir(settings);
+        const templateString = `
 <cv-code-snippet${settings.group.attr}>
   ${settings.group['content']}
 </cv-code-snippet>
   `;
 
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
     <sv-template-view ref="view"
       :sv-experimental="experimental"
       sv-margin
@@ -115,18 +121,19 @@ for (const story of storySet) {
     </sv-template-view>
   `;
 
-      return {
-        components: { CvCodeSnippet, SvTemplateView },
-        template: templateViewString,
-        props: settings.props,
-      };
-    },
-    {
-      notes: { markdown: CvCodeSnippetNotesMD },
-    }
-  );
+        return {
+          components: { CvCodeSnippet, SvTemplateView },
+          data: () => ({ experimental }),
+          template: templateViewString,
+          props: settings.props,
+        };
+      },
+      {
+        notes: { markdown: CvCodeSnippetNotesMD },
+      }
+    );
+  }
 }
-
 // cv-code-snippet-skeleton
 
 preKnobs = {
@@ -149,21 +156,25 @@ variants = [{ name: 'skeleton' }];
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const story of storySet) {
-  stories.add(
-    story.name,
-    () => {
-      const settings = story.knobs();
+for (const experimental of [false, true]) {
+  const stories = experimental ? storiesExperimental : storiesDefault;
 
-      const templateString = `
+  for (const story of storySet) {
+    stories.add(
+      story.name,
+      () => {
+        experimental ? override({ componentsX: true }) : reset();
+        const settings = story.knobs();
+
+        const templateString = `
         <cv-code-snippet-skeleton${
           settings.group.attr
         }></cv-code-snippet-skeleton>
       `;
 
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
       <sv-template-view
         :sv-experimental="experimental"
         sv-margin
@@ -172,14 +183,16 @@ for (const story of storySet) {
       </sv-template-view>
     `;
 
-      return {
-        components: { CvCodeSnippetSkeleton, SvTemplateView },
-        template: templateViewString,
-        props: settings.props,
-      };
-    },
-    {
-      notes: { markdown: CvCodeSnippetNotesMD },
-    }
-  );
+        return {
+          components: { CvCodeSnippetSkeleton, SvTemplateView },
+          data: () => ({ experimental }),
+          template: templateViewString,
+          props: settings.props,
+        };
+      },
+      {
+        notes: { markdown: CvCodeSnippetNotesMD },
+      }
+    );
+  }
 }

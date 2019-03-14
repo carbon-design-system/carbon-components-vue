@@ -10,7 +10,7 @@ import CvButtonNotesMD from './cv-button-notes.md';
 import CvButton from './cv-button';
 import CvButtonSkeleton from './cv-button-skeleton';
 
-const storiesStandard = storiesOf('CvButton', module);
+const storiesDefault = storiesOf('Default/CvButton', module);
 const storiesExperimental = storiesOf('Experimental/CvButton', module);
 import { componentsX, override, reset } from '../../_internal/_feature-flags';
 
@@ -139,13 +139,13 @@ let variants = [
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const experimental of [false, true]) {
-  const stories = experimental ? storiesExperimental : storiesStandard;
-  experimental ? override({ componentsX: true }) : reset();
+  const stories = experimental ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
     stories.add(
       story.name,
       () => {
+        experimental ? override({ componentsX: true }) : reset();
         const settings = story.knobs();
 
         const templateString = `
@@ -168,6 +168,7 @@ for (const experimental of [false, true]) {
 
         return {
           components: { CvButton, SvTemplateView },
+          data: () => ({ experimental }),
           methods: {
             actionClick: action('Cv Button - click'),
           },
@@ -200,13 +201,13 @@ variants = [{ name: 'skeleton' }];
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const experimental of [false, true]) {
-  const stories = experimental ? storiesExperimental : storiesStandard;
-  experimental ? override({ componentsX: true }) : reset();
+  const stories = experimental ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
     stories.add(
       story.name,
       () => {
+        experimental ? override({ componentsX: true }) : reset();
         const settings = story.knobs();
 
         const templateString = `
@@ -225,6 +226,7 @@ for (const experimental of [false, true]) {
 
         return {
           components: { CvButtonSkeleton, SvTemplateView },
+          data: () => ({ experimental }),
           template: templateViewString,
           props: settings.props,
         };

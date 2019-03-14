@@ -8,7 +8,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvListNotesMD from './cv-list-notes.md';
 import CvList from './cv-list';
 
-const stories = storiesOf('CvList', module);
+const stories = storiesOf('Default/CvList', module);
 
 const preKnobs = {
   ordered: {

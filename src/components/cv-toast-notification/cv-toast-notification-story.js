@@ -10,7 +10,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvToastNotificationNotesMD from './cv-toast-notification-notes.md';
 import CvToastNotification from './cv-toast-notification';
 
-const stories = storiesOf('CvToastNotification', module);
+const stories = storiesOf('Default/CvToastNotification', module);
 
 const preKnobs = {
   title: {

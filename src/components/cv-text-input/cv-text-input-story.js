@@ -9,7 +9,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvTextInputNotesMD from './cv-text-input-notes.md';
 import CvTextInput from './cv-text-input';
 
-const stories = storiesOf('CvTextInput', module);
+const stories = storiesOf('Default/CvTextInput', module);
 
 const preKnobs = {
   theme: {

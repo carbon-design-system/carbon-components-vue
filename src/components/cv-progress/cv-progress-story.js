@@ -8,7 +8,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvProgressNotesMD from './cv-progress-notes.md';
 import CvProgress from './cv-progress';
 
-const stories = storiesOf('CvProgress', module);
+const stories = storiesOf('Default/CvProgress', module);
 
 const preKnobs = {
   initialStep: {

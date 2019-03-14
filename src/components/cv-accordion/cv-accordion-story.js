@@ -10,7 +10,7 @@ import CvAccordion from './cv-accordion';
 import CvAccordionItem from './cv-accordion-item';
 import CvAccordionSkeleton from './cv-accordion-skeleton';
 
-const storiesStandard = storiesOf('CvAccordion', module);
+const storiesDefault = storiesOf('Default/CvAccordion', module);
 const storiesExperimental = storiesOf('Experimental/CvAccordion', module);
 import { override, reset } from '../../_internal/_feature-flags';
 
@@ -62,13 +62,13 @@ const variants = [{ name: 'default' }, { name: 'minimal', includes: [] }];
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const experimental of [false, true]) {
-  const stories = experimental ? storiesExperimental : storiesStandard;
-  experimental ? override({ componentsX: true }) : reset();
+  const stories = experimental ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
     stories.add(
       story.name,
       () => {
+        experimental ? override({ componentsX: true }) : reset();
         const settings = story.knobs();
         // ----------------------------------------------------------------
 
@@ -114,9 +114,7 @@ for (const experimental of [false, true]) {
 
         return {
           components: { CvAccordion, CvAccordionItem, SvTemplateView },
-          data() {
-            return { experimental };
-          },
+          data: () => ({ experimental }),
           template: templateViewString,
           props: settings.props,
         };
@@ -130,14 +128,16 @@ for (const experimental of [false, true]) {
 
 const templateString = `<cv-accordion-skeleton></cv-accordion-skeleton>`;
 for (const experimental of [false, true]) {
-  const stories = experimental ? storiesExperimental : storiesStandard;
-  experimental ? override({ componentsX: true }) : reset();
+  const stories = experimental ? storiesExperimental : storiesDefault;
 
   stories.add(
     'skeleton',
-    () => ({
-      components: { SvTemplateView, CvAccordionSkeleton },
-      template: `
+    () => {
+      experimental ? override({ componentsX: true }) : reset();
+      return {
+        components: { SvTemplateView, CvAccordionSkeleton },
+        data: () => ({ experimental }),
+        template: `
       <sv-template-view
         sv-margin
         sv-position="center"
@@ -145,8 +145,9 @@ for (const experimental of [false, true]) {
         <template slot="component">${templateString}</template>
       </sv-template-view>
     `,
-      props: {},
-    }),
+        props: {},
+      };
+    },
     {
       notes: { markdown: CvAccordionNotesMD },
     }

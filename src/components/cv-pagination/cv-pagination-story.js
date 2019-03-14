@@ -10,7 +10,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvPaginationNotesMD from './cv-pagination-notes.md';
 import CvPagination from './cv-pagination';
 
-const stories = storiesOf('CvPagination', module);
+const stories = storiesOf('Default/CvPagination', module);
 
 const preKnobs = {
   backwardsText: {

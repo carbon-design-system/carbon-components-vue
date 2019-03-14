@@ -10,7 +10,7 @@ import CvInteractiveTooltip from './cv-interactive-tooltip';
 import CvTooltip from './cv-tooltip';
 import CvDefinitionTooltip from './cv-definition-tooltip';
 
-const stories = storiesOf('CvTooltip', module);
+const stories = storiesOf('Default/CvTooltip', module);
 
 let preKnobs = {
   direction: {

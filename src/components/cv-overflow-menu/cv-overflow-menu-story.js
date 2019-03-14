@@ -8,7 +8,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvOverflowMenuNotesMD from './cv-overflow-menu-notes.md';
 import CvOverflowMenu from './cv-overflow-menu';
 
-const stories = storiesOf('CvOverflowMenu', module);
+const stories = storiesOf('Default/CvOverflowMenu', module);
 
 const preKnobs = {
   flipMenu: {

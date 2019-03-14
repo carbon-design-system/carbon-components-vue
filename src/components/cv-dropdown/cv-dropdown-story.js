@@ -10,7 +10,8 @@ import CvDropdownNotesMD from './cv-dropdown-notes.md';
 import CvDropdown from './cv-dropdown';
 import CvDropdownSkeleton from './cv-dropdown-skeleton';
 
-const stories = storiesOf('CvDropdown', module);
+const storiesDefault = storiesOf('Default/CvDropdown', module);
+const storiesExperimental = storiesOf('Experimental/CvDropdown', module);
 
 let preKnobs = {
   theme: {
@@ -80,13 +81,17 @@ let variants = [
 ];
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
-for (const story of storySet) {
-  stories.add(
-    story.name,
-    () => {
-      const settings = story.knobs();
+for (const experimental of [false]) {
+  const stories = experimental ? storiesExperimental : storiesDefault;
 
-      const templateString = `
+  for (const story of storySet) {
+    stories.add(
+      story.name,
+      () => {
+        experimental ? override({ componentsX: true }) : reset();
+        const settings = story.knobs();
+
+        const templateString = `
   <cv-dropdown ${settings.group.attr}>
     <cv-dropdown-item value="10">Option with value 10</cv-dropdown-item>
     <cv-dropdown-item value="20">Option with value 20</cv-dropdown-item>
@@ -96,8 +101,8 @@ for (const story of storySet) {
   </cv-dropdown>
   `;
 
-      // ----------------------------------------------------------------
-      const templateViewString = `
+        // ----------------------------------------------------------------
+        const templateViewString = `
   <sv-template-view
     :sv-experimental="experimental"
     sv-margin
@@ -120,29 +125,27 @@ for (const story of storySet) {
   </sv-template-view>
   `;
 
-      return {
-        components: {
-          CvDropdown,
-          SvTemplateView,
-        },
-        props: settings.props,
-        data() {
-          return {
-            modelValue: this.value,
-          };
-        },
-        methods: {
-          actionChange: action('CV Dropdown - change'),
-        },
-        template: templateViewString,
-      };
-    },
-    {
-      notes: { markdown: CvDropdownNotesMD },
-    }
-  );
+        return {
+          components: {
+            CvDropdown,
+            SvTemplateView,
+          },
+          props: settings.props,
+          data() {
+            return { experimental, modelValue: this.value };
+          },
+          methods: {
+            actionChange: action('CV Dropdown - change'),
+          },
+          template: templateViewString,
+        };
+      },
+      {
+        notes: { markdown: CvDropdownNotesMD },
+      }
+    );
+  }
 }
-
 // cv-dropdown-skeleton
 
 preKnobs = {
@@ -160,20 +163,23 @@ preKnobs = {
 variants = [{ name: 'skeleton' }];
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
+for (const experimental of [false]) {
+  const stories = experimental ? storiesExperimental : storiesDefault;
 
-for (const story of storySet) {
-  stories.add(
-    story.name,
-    () => {
-      const settings = story.knobs();
+  for (const story of storySet) {
+    stories.add(
+      story.name,
+      () => {
+        experimental ? override({ componentsX: true }) : reset();
+        const settings = story.knobs();
 
-      const templateString = `
+        const templateString = `
       <cv-dropdown-skeleton${settings.group.attr}></cv-dropdown-skeleton>
       `;
 
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
       <sv-template-view
         :sv-experimental="experimental"
         sv-margin
@@ -182,14 +188,16 @@ for (const story of storySet) {
       </sv-template-view>
     `;
 
-      return {
-        components: { CvDropdownSkeleton, SvTemplateView },
-        template: templateViewString,
-        props: settings.props,
-      };
-    },
-    {
-      notes: { markdown: CvDropdownNotesMD },
-    }
-  );
+        return {
+          components: { CvDropdownSkeleton, SvTemplateView },
+          data: () => ({ experimental }),
+          template: templateViewString,
+          props: settings.props,
+        };
+      },
+      {
+        notes: { markdown: CvDropdownNotesMD },
+      }
+    );
+  }
 }

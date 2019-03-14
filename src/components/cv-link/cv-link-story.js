@@ -8,7 +8,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvLinkNotesMD from './cv-link-notes.md';
 import CvLink from './cv-link';
 
-const stories = storiesOf('CvLink', module);
+const stories = storiesOf('Default/CvLink', module);
 
 const preKnobs = {
   href: {

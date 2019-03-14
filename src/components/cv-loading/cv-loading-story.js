@@ -10,7 +10,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvLoadingNotesMD from './cv-loading-notes.md';
 import CvLoading from './cv-loading';
 
-const stories = storiesOf('CvLoading', module);
+const stories = storiesOf('Default/CvLoading', module);
 
 const preKnobs = {
   active: {

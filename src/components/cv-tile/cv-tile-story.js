@@ -8,7 +8,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvTileNotesMD from './cv-tile-notes.md';
 import CvTile from './cv-tile';
 
-const stories = storiesOf('CvTile', module);
+const stories = storiesOf('Default/CvTile', module);
 
 const preKnobs = {
   slotDefault: {

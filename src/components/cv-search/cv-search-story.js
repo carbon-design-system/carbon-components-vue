@@ -9,7 +9,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvSearchNotesMD from './cv-search-notes.md';
 import CvSearch from './cv-search';
 
-const stories = storiesOf('CvSearch', module);
+const stories = storiesOf('Default/CvSearch', module);
 
 const preKnobs = {
   theme: {
