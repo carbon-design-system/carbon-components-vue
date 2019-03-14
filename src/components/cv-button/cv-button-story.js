@@ -1,7 +1,6 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
+import { boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
-import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../../_storybook/utils/consts';
@@ -12,8 +11,6 @@ import CvButton from './cv-button';
 import CvButtonSkeleton from './cv-button-skeleton';
 
 const stories = storiesOf('CvButton', module);
-stories.addDecorator(withKnobs);
-stories.addDecorator(withNotes);
 
 const exampleIconPath = require('../../assets/images/example-icons.svg');
 import { componentsX } from '../../_internal/_feature-flags';

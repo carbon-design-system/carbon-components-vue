@@ -66,6 +66,7 @@ export default {
     SvViewExperimental,
   },
   props: {
+    svExperimental: Boolean,
     svMargin: { type: Boolean, default: true },
     svSource: String,
     svAltBack: { type: Boolean, default: true },
@@ -79,7 +80,7 @@ export default {
   },
   computed: {
     tagType() {
-      return componentsX ? 'sv-view-experimental' : 'sv-view';
+      return this.svExperimental ? 'sv-view-experimental' : 'sv-view';
     },
     style() {
       return {
