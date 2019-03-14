@@ -77,10 +77,12 @@
   "dependencies": {
     "@carbon/icon-helpers": "0.0.1-beta.0",
     "@carbon/icons-vue": "0.0.1-beta.0",
+    "autoprefixer": "^9.4.10",
     "carbon-components": "^9.48.1",
     "d3": "^5.7.0",
     "flatpickr": "4.5.1",
     "postcss-import": "^12.0.1",
+    "postcss-loader": "^3.0.0",
     "postcss-preset-env": "^6.6.0",
     "vue": "^2.5.21"
   },

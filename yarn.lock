@@ -2647,7 +2647,7 @@ autoprefixer@^9.0.0, autoprefixer@^9.4.7:
     postcss "^7.0.14"
     postcss-value-parser "^3.3.1"
 
-autoprefixer@^9.4.9:
+autoprefixer@^9.4.10, autoprefixer@^9.4.9:
   version "9.4.10"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-9.4.10.tgz#e1be61fc728bacac8f4252ed242711ec0dcc6a7b"
   integrity sha512-XR8XZ09tUrrSzgSlys4+hy5r2/z4Jp7Ag3pHm31U4g/CTccYPOVe19AkaJ4ey/vRd1sfj+5TtuD6I0PXtutjvQ==
