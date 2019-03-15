@@ -1,7 +1,6 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, select, boolean } from '@storybook/addon-knobs';
+import { select, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
-import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../../_storybook/utils/consts';
@@ -12,9 +11,9 @@ import CvContentSwitcher from './cv-content-switcher';
 import CvContentSwitcherButton from './cv-content-switcher-button';
 import CvContentSwitcherContent from './cv-content-switcher-content';
 
-const stories = storiesOf('CvContentSwitcher', module);
-stories.addDecorator(withKnobs);
-stories.addDecorator(withNotes);
+const storiesDefault = storiesOf('Default/CvContentSwitcher', module);
+const storiesExperimental = storiesOf('Experimental/CvContentSwitcher', module);
+import { componentsX, override, reset } from '../../_internal/_feature-flags';
 
 const exampleIconPath = require('../../assets/images/example-icons.svg');
 import AddFilled16 from '@carbon/icons-vue/lib/add--filled/16';
@@ -84,14 +83,18 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const story of storySet) {
-  stories.add(
-    story.name,
-    () => {
-      const settings = story.knobs();
-      // ----------------------------------------------------------------
+for (const experimental of [false, true]) {
+  const stories = experimental ? storiesExperimental : storiesDefault;
 
-      const templateString = `
+  for (const story of storySet) {
+    stories.add(
+      story.name,
+      () => {
+        experimental ? override({ componentsX: true }) : reset();
+        const settings = story.knobs();
+        // ----------------------------------------------------------------
+
+        const templateString = `
   <cv-content-switcher${settings.group.attr}>
     <cv-content-switcher-button owner-id="csb-1" :selected="isSelected(0)" ${
       settings.group.icon
@@ -120,60 +123,63 @@ for (const story of storySet) {
   </section>
     `;
 
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
       <sv-template-view
-        sv-experimental-toggle
+        :sv-experimental="experimental"
         sv-margin
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>
       </sv-template-view>
     `;
 
-      return {
-        components: {
-          CvContentSwitcher,
-          CvContentSwitcherButton,
-          CvContentSwitcherContent,
-          SvTemplateView,
-        },
-        data() {
-          return {
-            toggle: false,
-          };
-        },
-        mounted() {
-          setInterval(() => {
-            this.toggle = !this.toggle;
-          }, 5000);
-        },
-        props: settings.props,
-        computed: {
-          isSelected() {
-            return index => this.initialSelected === index;
+        return {
+          components: {
+            CvContentSwitcher,
+            CvContentSwitcherButton,
+            CvContentSwitcherContent,
+            SvTemplateView,
           },
-        },
-        methods: {
-          actionSelected: action('Cv Content Switcher - selected'),
-        },
-        template: templateViewString,
-      };
-    },
-    {
-      notes: { markdown: CvContentSwitcherNotesMD },
-    }
-  );
+          data() {
+            return { experimental, toggle: false };
+          },
+          mounted() {
+            setInterval(() => {
+              this.toggle = !this.toggle;
+            }, 5000);
+          },
+          props: settings.props,
+          computed: {
+            isSelected() {
+              return index => this.initialSelected === index;
+            },
+          },
+          methods: {
+            actionSelected: action('Cv Content Switcher - selected'),
+          },
+          template: templateViewString,
+        };
+      },
+      {
+        notes: { markdown: CvContentSwitcherNotesMD },
+      }
+    );
+  }
 }
 
-for (const story of storySet) {
-  stories.add(
-    `${story.name} - direct DOM usage`,
-    () => {
-      const settings = story.knobs();
-      // ----------------------------------------------------------------
+for (const experimental of [false]) {
+  const stories = experimental ? storiesExperimental : storiesDefault;
 
-      const templateString = `
+  for (const story of storySet) {
+    stories.add(
+      `${story.name} - direct DOM usage`,
+      () => {
+        experimental ? override({ componentsX: true }) : reset();
+        const settings = story.knobs();
+        // ----------------------------------------------------------------
+
+        const templateString = `
   <cv-content-switcher${settings.group.attr}>
     <cv-content-switcher-button content-selector=".content-1" :selected="isSelected(0)" ${
       settings.group.icon
@@ -202,37 +208,39 @@ for (const story of storySet) {
   </section>
     `;
 
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
       <sv-template-view
-        sv-experimental-toggle
+        :sv-experimental="experimental"
         sv-margin
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>
       </sv-template-view>
     `;
 
-      return {
-        components: {
-          CvContentSwitcher,
-          CvContentSwitcherButton,
-          SvTemplateView,
-        },
-        props: settings.props,
-        computed: {
-          isSelected() {
-            return index => this.initialSelected === index;
+        return {
+          components: {
+            CvContentSwitcher,
+            CvContentSwitcherButton,
+            SvTemplateView,
           },
-        },
-        methods: {
-          actionSelected: action('Cv Content Switcher - selected'),
-        },
-        template: templateViewString,
-      };
-    },
-    {
-      notes: { markdown: CvContentSwitcherNotesMD },
-    }
-  );
+          data: () => ({ experimental }),
+          props: settings.props,
+          computed: {
+            isSelected() {
+              return index => this.initialSelected === index;
+            },
+          },
+          methods: {
+            actionSelected: action('Cv Content Switcher - selected'),
+          },
+          template: templateViewString,
+        };
+      },
+      {
+        notes: { markdown: CvContentSwitcherNotesMD },
+      }
+    );
+  }
 }

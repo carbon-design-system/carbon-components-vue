@@ -1,7 +1,6 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import { text, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
-import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../../_storybook/utils/consts';
@@ -11,9 +10,7 @@ import CvFileUploaderNotesMD from './cv-file-uploader-notes.md';
 import CvFileUploader from './cv-file-uploader';
 import CvFileUploaderSkeleton from './cv-file-uploader-skeleton';
 
-const stories = storiesOf('CvFileUploader', module);
-stories.addDecorator(withKnobs);
-stories.addDecorator(withNotes);
+const stories = storiesOf('Default/CvFileUploader', module);
 
 let preKnobs = {
   label: {

@@ -11,6 +11,7 @@ import CarbonComponentsVue from '../src';
 addDecorator(
   withOptions({
     name: `carbon components vue`,
+    // sortStoriesByKind: true,
     url: 'https://github.com/carbon-design-system/carbon-components-vue',
     // hierarchyRootSeparator: /\|/,
   })

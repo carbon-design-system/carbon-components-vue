@@ -1,6 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text } from '@storybook/addon-knobs';
-import { withNotes } from '@storybook/addon-notes';
+import { text } from '@storybook/addon-knobs';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../../_storybook/utils/consts';
@@ -9,9 +8,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvLinkNotesMD from './cv-link-notes.md';
 import CvLink from './cv-link';
 
-const stories = storiesOf('CvLink', module);
-stories.addDecorator(withKnobs);
-stories.addDecorator(withNotes);
+const stories = storiesOf('Default/CvLink', module);
 
 const preKnobs = {
   href: {

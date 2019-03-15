@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text } from '@storybook/addon-knobs';
-import { withNotes } from '@storybook/addon-notes';
+import { text } from '@storybook/addon-knobs';
+
 import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
@@ -10,9 +10,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvToastNotificationNotesMD from './cv-toast-notification-notes.md';
 import CvToastNotification from './cv-toast-notification';
 
-const stories = storiesOf('CvToastNotification', module);
-stories.addDecorator(withKnobs);
-stories.addDecorator(withNotes);
+const stories = storiesOf('Default/CvToastNotification', module);
 
 const preKnobs = {
   title: {

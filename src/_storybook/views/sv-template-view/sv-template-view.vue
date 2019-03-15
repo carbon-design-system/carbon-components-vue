@@ -50,14 +50,6 @@
         ref="clippy"
       ></textarea>
     </section>
-    <cv-checkbox
-      v-if="svExperimentalToggle"
-      class="sv-view__toggle-experimental"
-      label="experimental"
-      value="experimental"
-      v-model="experimental"
-      @change="onExperimental"
-    />
   </component>
 </template>
 

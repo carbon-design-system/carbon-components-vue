@@ -1,6 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, array, number } from '@storybook/addon-knobs';
-import { withNotes } from '@storybook/addon-notes';
+import { array, number } from '@storybook/addon-knobs';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../../_storybook/utils/consts';
@@ -9,9 +8,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvProgressNotesMD from './cv-progress-notes.md';
 import CvProgress from './cv-progress';
 
-const stories = storiesOf('CvProgress', module);
-stories.addDecorator(withKnobs);
-stories.addDecorator(withNotes);
+const stories = storiesOf('Default/CvProgress', module);
 
 const preKnobs = {
   initialStep: {

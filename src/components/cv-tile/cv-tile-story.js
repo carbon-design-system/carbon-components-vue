@@ -1,6 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs';
-import { withNotes } from '@storybook/addon-notes';
+import { text, boolean } from '@storybook/addon-knobs';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../../_storybook/utils/consts';
@@ -9,9 +8,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvTileNotesMD from './cv-tile-notes.md';
 import CvTile from './cv-tile';
 
-const stories = storiesOf('CvTile', module);
-stories.addDecorator(withKnobs);
-stories.addDecorator(withNotes);
+const stories = storiesOf('Default/CvTile', module);
 
 const preKnobs = {
   slotDefault: {

@@ -1,6 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
-import { withNotes } from '@storybook/addon-notes';
+import { boolean } from '@storybook/addon-knobs';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../../_storybook/utils/consts';
@@ -11,8 +10,9 @@ import CvAccordion from './cv-accordion';
 import CvAccordionItem from './cv-accordion-item';
 import CvAccordionSkeleton from './cv-accordion-skeleton';
 
-const stories = storiesOf('CvAccordion', module);
-stories.addDecorator(withKnobs).addDecorator(withNotes);
+const storiesDefault = storiesOf('Default/CvAccordion', module);
+const storiesExperimental = storiesOf('Experimental/CvAccordion', module);
+import { override, reset } from '../../_internal/_feature-flags';
 
 const preKnobs = {
   open1: {
@@ -61,14 +61,18 @@ const variants = [{ name: 'default' }, { name: 'minimal', includes: [] }];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const story of storySet) {
-  stories.add(
-    story.name,
-    () => {
-      const settings = story.knobs();
-      // ----------------------------------------------------------------
+for (const experimental of [false, true]) {
+  const stories = experimental ? storiesExperimental : storiesDefault;
 
-      const templateString = `
+  for (const story of storySet) {
+    stories.add(
+      story.name,
+      () => {
+        experimental ? override({ componentsX: true }) : reset();
+        const settings = story.knobs();
+        // ----------------------------------------------------------------
+
+        const templateString = `
   <cv-accordion>
     <cv-accordion-item${settings.group.one}>
       <template slot="title">Section 1 title </template>
@@ -97,35 +101,43 @@ for (const story of storySet) {
   </cv-accordion>
   `;
 
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
     <sv-template-view
-      sv-experimental-toggle
+      :sv-experimental="experimental"
       sv-margin
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
     </sv-template-view>
   `;
 
-      return {
-        components: { CvAccordion, CvAccordionItem, SvTemplateView },
-        template: templateViewString,
-        props: settings.props,
-      };
-    },
-    {
-      notes: { markdown: CvAccordionNotesMD },
-    }
-  );
+        return {
+          components: { CvAccordion, CvAccordionItem, SvTemplateView },
+          data: () => ({ experimental }),
+          template: templateViewString,
+          props: settings.props,
+        };
+      },
+      {
+        notes: { markdown: CvAccordionNotesMD },
+      }
+    );
+  }
 }
 
 const templateString = `<cv-accordion-skeleton></cv-accordion-skeleton>`;
-stories.add(
-  'skeleton',
-  () => ({
-    components: { SvTemplateView, CvAccordionSkeleton },
-    template: `
+for (const experimental of [false, true]) {
+  const stories = experimental ? storiesExperimental : storiesDefault;
+
+  stories.add(
+    'skeleton',
+    () => {
+      experimental ? override({ componentsX: true }) : reset();
+      return {
+        components: { SvTemplateView, CvAccordionSkeleton },
+        data: () => ({ experimental }),
+        template: `
       <sv-template-view
         sv-margin
         sv-position="center"
@@ -133,9 +145,11 @@ stories.add(
         <template slot="component">${templateString}</template>
       </sv-template-view>
     `,
-    props: {},
-  }),
-  {
-    notes: { markdown: CvAccordionNotesMD },
-  }
-);
+        props: {},
+      };
+    },
+    {
+      notes: { markdown: CvAccordionNotesMD },
+    }
+  );
+}

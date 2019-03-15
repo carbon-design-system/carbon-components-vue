@@ -1,7 +1,6 @@
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
+import { boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
-import { withNotes } from '@storybook/addon-notes';
 
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../../_storybook/utils/consts';
@@ -10,9 +9,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvRadioButtonNotesMD from './cv-radio-button-notes.md';
 import CvRadioButton from './cv-radio-button';
 
-const stories = storiesOf('CvRadioButton', module);
-stories.addDecorator(withKnobs);
-stories.addDecorator(withNotes);
+const stories = storiesOf('Default/CvRadioButton', module);
 
 const preKnobs = {
   checked1: {
