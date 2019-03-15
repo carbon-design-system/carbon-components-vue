@@ -9,6 +9,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvDropdownNotesMD from './cv-dropdown-notes.md';
 import CvDropdown from './cv-dropdown';
 import CvDropdownSkeleton from './cv-dropdown-skeleton';
+import { componentsX, override, reset } from '../../_internal/_feature-flags';
 
 const storiesDefault = storiesOf('Default/CvDropdown', module);
 const storiesExperimental = storiesOf('Experimental/CvDropdown', module);
@@ -63,6 +64,16 @@ let preKnobs = {
       type: Boolean,
     },
   },
+  invalidMessage: {
+    group: 'attr',
+    type: text,
+    config: ['invalid message', ''],
+    prop: {
+      name: 'invalid-message',
+      type: String,
+      value: val => (val.length ? val : null),
+    },
+  },
   vModel: {
     group: 'attr',
     value: `v-model="modelValue"`,
@@ -73,15 +84,17 @@ let preKnobs = {
   },
 };
 
+let excludeComponentsX = componentsX ? [] : ['invalidMessage'];
+
 let variants = [
-  { name: 'default', excludes: ['vModel', 'events'] },
+  { name: 'default', excludes: ['vModel', 'events', ...excludeComponentsX] },
   { name: 'minimal', includes: ['value'] },
   { name: 'events', includes: ['value', 'events'] },
   { name: 'vModel', includes: ['value', 'vModel'] },
 ];
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
-for (const experimental of [false]) {
+for (const experimental of [false, true]) {
   const stories = experimental ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
@@ -138,6 +151,11 @@ for (const experimental of [false]) {
             actionChange: action('CV Dropdown - change'),
           },
           template: templateViewString,
+          watch: {
+            value() {
+              this.modelValue = this.value;
+            },
+          },
         };
       },
       {
@@ -163,7 +181,7 @@ preKnobs = {
 variants = [{ name: 'skeleton' }];
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
-for (const experimental of [false]) {
+for (const experimental of [false, true]) {
   const stories = experimental ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
