@@ -184,9 +184,9 @@ $component-padding: 40px;
     background-color: $alt-back-color;
   }
 
-  > .bx--form-item {
+  .bx--form-item {
     // only for
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
   }
 }
 

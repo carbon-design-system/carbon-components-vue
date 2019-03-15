@@ -1,8 +1,8 @@
 <template>
   <cv-form-item class="cv-file-uploader">
-    <strong :class="componentsX ? 'bx--label' : 'bx--file--label'">{{
-      label
-    }}</strong>
+    <strong :class="componentsX ? 'bx--label' : 'bx--file--label'">
+      {{ label }}
+    </strong>
     <p class="bx--label-description">{{ helperText }}</p>
     <div class="bx--file" data-file>
       <label
@@ -127,9 +127,7 @@
 import uidMixin from '../../mixins/uid-mixin';
 import CvFormItem from '../cv-form/cv-form-item';
 import { componentsX } from '../../_internal/_feature-flags';
-import CheckmarkFilled16 from '@carbon/icons-vue/lib/checkmark--filled/16';
-import Close16 from '@carbon/icons-vue/lib/close//16';
-import CvInlineUploader from '../cv-inline-loader/cv-inline-loader';
+import CvInlineLoader from '../cv-inline-loader/cv-inline-loader';
 
 const CONSTS = {
   STATES: {
@@ -141,7 +139,7 @@ const CONSTS = {
 
 export default {
   name: 'CvFileUploader',
-  components: { CvFormItem, CvInlineUploader, Close16, CheckmarkFilled16 },
+  components: { CvFormItem, CvInlineLoader },
   mixins: [uidMixin],
   inheritAttrs: false,
   props: {
