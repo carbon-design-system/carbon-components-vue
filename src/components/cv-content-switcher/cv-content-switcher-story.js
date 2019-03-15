@@ -13,7 +13,7 @@ import CvContentSwitcherContent from './cv-content-switcher-content';
 
 const storiesDefault = storiesOf('Default/CvContentSwitcher', module);
 const storiesExperimental = storiesOf('Experimental/CvContentSwitcher', module);
-import { componentsX, override, reset } from '../../_internal/_feature-flags';
+import { override, reset } from '../../_internal/_feature-flags';
 
 const exampleIconPath = require('../../assets/images/example-icons.svg');
 import AddFilled16 from '@carbon/icons-vue/lib/add--filled/16';

@@ -12,7 +12,7 @@ import CvFileUploaderSkeleton from './cv-file-uploader-skeleton';
 
 const storiesDefault = storiesOf('Default/CvFileUploader', module);
 const storiesExperimental = storiesOf('Experimental/CvFileUploader', module);
-import { componentsX, override, reset } from '../../_internal/_feature-flags';
+import { override, reset } from '../../_internal/_feature-flags';
 
 let preKnobs = {
   label: {

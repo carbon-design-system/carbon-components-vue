@@ -11,7 +11,7 @@ import CvDatePicker from './cv-date-picker';
 
 const storiesDefault = storiesOf('Default/CvDatePicker', module);
 const storiesExperimental = storiesOf('Experimental/CvDatePicker', module);
-import { componentsX, override, reset } from '../../_internal/_feature-flags';
+import { override, reset } from '../../_internal/_feature-flags';
 
 const preKnobs = {
   theme: {
