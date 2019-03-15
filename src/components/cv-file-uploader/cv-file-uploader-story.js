@@ -10,7 +10,9 @@ import CvFileUploaderNotesMD from './cv-file-uploader-notes.md';
 import CvFileUploader from './cv-file-uploader';
 import CvFileUploaderSkeleton from './cv-file-uploader-skeleton';
 
-const stories = storiesOf('Default/CvFileUploader', module);
+const storiesDefault = storiesOf('Default/CvFileUploader', module);
+const storiesExperimental = storiesOf('Experimental/CvFileUploader', module);
+import { componentsX, override, reset } from '../../_internal/_feature-flags';
 
 let preKnobs = {
   label: {
@@ -80,23 +82,28 @@ let variants = [
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const story of storySet) {
-  stories.add(
-    story.name,
-    () => {
-      const settings = story.knobs();
+for (const experimental of [false, true]) {
+  const stories = experimental ? storiesExperimental : storiesDefault;
 
-      // ----------------------------------------------------------------
+  for (const story of storySet) {
+    stories.add(
+      story.name,
+      () => {
+        experimental ? override({ componentsX: true }) : reset();
+        const settings = story.knobs();
 
-      const templateString = `
+        // ----------------------------------------------------------------
+
+        const templateString = `
 <cv-file-uploader${settings.group.attr}>
 </cv-file-uploader>
   `;
 
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
     <sv-template-view
+      :sv-experimental="experimental"
       sv-margin
       sv-alt-back
       sv-source='${templateString.trim()}'>
@@ -118,42 +125,43 @@ for (const story of storySet) {
     </sv-template-view>
   `;
 
-      return {
-        components: { CvFileUploader, SvTemplateView },
-        template: templateViewString,
-        props: settings.props,
-        data() {
-          return {
-            storyFiles: [],
-            vModelOrEvents:
-              settings.group.attr.indexOf('v-model') > 0 ||
-              settings.group.attr.indexOf('@change') > 0,
-          };
-        },
-        methods: {
-          actionChange: action('cv-file-uploader - change event'),
-          onChange(changedFiles) {
-            this.actionChange(changedFiles);
-            this.storyFiles = changedFiles;
+        return {
+          components: { CvFileUploader, SvTemplateView },
+          template: templateViewString,
+          props: settings.props,
+          data() {
+            return {
+              experimental,
+              storyFiles: [],
+              vModelOrEvents:
+                settings.group.attr.indexOf('v-model') > 0 ||
+                settings.group.attr.indexOf('@change') > 0,
+            };
           },
-          setState(index, state) {
-            this.storyFiles[index].state = state;
+          methods: {
+            actionChange: action('cv-file-uploader - change event'),
+            onChange(changedFiles) {
+              this.actionChange(changedFiles);
+              this.storyFiles = changedFiles;
+            },
+            setState(index, state) {
+              this.storyFiles[index].state = state;
+            },
+            remove(index) {
+              this.storyFiles.splice(index, 1);
+            },
+            clear() {
+              this.storyFiles = [];
+            },
           },
-          remove(index) {
-            this.storyFiles.splice(index, 1);
-          },
-          clear() {
-            this.storyFiles = [];
-          },
-        },
-      };
-    },
-    {
-      notes: { markdown: CvFileUploaderNotesMD },
-    }
-  );
+        };
+      },
+      {
+        notes: { markdown: CvFileUploaderNotesMD },
+      }
+    );
+  }
 }
-
 // cv-file-uploader-skeleton
 
 preKnobs = {};
@@ -162,34 +170,41 @@ variants = [{ name: 'skeleton' }];
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const story of storySet) {
-  stories.add(
-    story.name,
-    () => {
-      const settings = story.knobs();
+for (const experimental of [false, true]) {
+  const stories = experimental ? storiesExperimental : storiesDefault;
 
-      const templateString = `
+  for (const story of storySet) {
+    stories.add(
+      story.name,
+      () => {
+        experimental ? override({ componentsX: true }) : reset();
+        const settings = story.knobs();
+
+        const templateString = `
         <cv-file-uploader-skeleton></cv-file-uploader-skeleton>
       `;
 
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
       <sv-template-view
+        :sv-experimental="experimental"
         sv-margin
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>
       </sv-template-view>
     `;
 
-      return {
-        components: { CvFileUploaderSkeleton, SvTemplateView },
-        template: templateViewString,
-        props: settings.props,
-      };
-    },
-    {
-      notes: { markdown: CvFileUploaderNotesMD },
-    }
-  );
+        return {
+          components: { CvFileUploaderSkeleton, SvTemplateView },
+          data: () => ({ experimental }),
+          template: templateViewString,
+          props: settings.props,
+        };
+      },
+      {
+        notes: { markdown: CvFileUploaderNotesMD },
+      }
+    );
+  }
 }
