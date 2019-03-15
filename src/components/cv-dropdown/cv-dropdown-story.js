@@ -9,7 +9,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvDropdownNotesMD from './cv-dropdown-notes.md';
 import CvDropdown from './cv-dropdown';
 import CvDropdownSkeleton from './cv-dropdown-skeleton';
-import { componentsX } from '../../_internal/_feature-flags';
+import { componentsX, override, reset } from '../../_internal/_feature-flags';
 
 const storiesDefault = storiesOf('Default/CvDropdown', module);
 const storiesExperimental = storiesOf('Experimental/CvDropdown', module);
@@ -94,7 +94,7 @@ let variants = [
 ];
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
-for (const experimental of [false]) {
+for (const experimental of [false, true]) {
   const stories = experimental ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
@@ -151,6 +151,11 @@ for (const experimental of [false]) {
             actionChange: action('CV Dropdown - change'),
           },
           template: templateViewString,
+          watch: {
+            value() {
+              this.modelValue = this.value;
+            },
+          },
         };
       },
       {
@@ -176,7 +181,7 @@ preKnobs = {
 variants = [{ name: 'skeleton' }];
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
-for (const experimental of [false]) {
+for (const experimental of [false, true]) {
   const stories = experimental ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
