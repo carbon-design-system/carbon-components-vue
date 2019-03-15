@@ -1,13 +1,18 @@
 <template>
   <cv-form-item class="cv-file-uploader">
-    <strong class="bx--label">{{ label }}</strong>
+    <strong :class="componentsX ? 'bx--label' : 'bx--file--label'">{{
+      label
+    }}</strong>
     <p class="bx--label-description">{{ helperText }}</p>
     <div class="bx--file" data-file>
       <label
         :for="uid"
-        class="bx--file-btn bx--btn bx--btn--secondary"
+        class="bx--file--btn bx--btn bx--btn--primary bx--btn--sm"
         role="button"
         tabindex="0"
+        @keydown.enter.prevent="onShow()"
+        @keydown.space.prevent
+        @keyup.space.prevent="onShow()"
         >{{ buttonLabel }}</label
       >
       <input
@@ -18,6 +23,8 @@
         data-file-uploader
         data-target="[data-file-container]"
         v-on="inputListeners"
+        ref="file-input"
+        tabindex="-1"
       />
       <div data-file-container class="bx--file-container">
         <div
@@ -32,10 +39,18 @@
               :data-for="uid"
               class="bx--file__state-container"
               :data-test="file.state"
-              wibble="banana"
             >
+              <cv-inline-loader
+                v-if="
+                  componentsX &&
+                    (file.state === 'uploading' || file.state === 'complete')
+                "
+                :active="file.state === 'uploading'"
+                loading-text
+                loaded-text
+              />
               <div
-                v-if="file.state === 'uploading'"
+                v-if="!componentsX && file.state === 'uploading'"
                 class="bx--loading"
                 tabindex="0"
                 style="width: 1rem; height: 1rem;"
@@ -45,7 +60,7 @@
                 </svg>
               </div>
               <svg
-                v-if="file.state === 'complete'"
+                v-if="!componentsX && file.state === 'complete'"
                 class="bx--file-complete"
                 fill-rule="evenodd"
                 height="16"
@@ -61,13 +76,32 @@
                 ></path>
               </svg>
               <svg
-                v-if="removable"
+                v-if="componentsX && removable"
+                class="bx--file-close"
+                role="button"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                tabindex="0"
+                alt="Remove file"
+                arial-label="Remove file"
+                @click="remove(index)"
+                @keydown.enter.prevent="remove(index)"
+                @keydown.space.prevent
+                @keyup.space.prevent="remove(index)"
+              >
+                <path
+                  d="M12 4.7l-.7-.7L8 7.3 4.7 4l-.7.7L7.3 8 4 11.3l.7.7L8 8.7l3.3 3.3.7-.7L8.7 8z"
+                ></path>
+              </svg>
+              <svg
+                v-if="!componentsX && removable"
                 class="bx--file-close"
                 fill-rule="evenodd"
-                role="button"
                 height="16"
                 width="16"
                 viewBox="0 0 16 16"
+                role="button"
                 tabindex="0"
                 alt="Remove file"
                 arial-label="Remove file"
@@ -92,6 +126,10 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import CvFormItem from '../cv-form/cv-form-item';
+import { componentsX } from '../../_internal/_feature-flags';
+import CheckmarkFilled16 from '@carbon/icons-vue/lib/checkmark--filled/16';
+import Close16 from '@carbon/icons-vue/lib/close//16';
+import CvInlineUploader from '../cv-inline-loader/cv-inline-loader';
 
 const CONSTS = {
   STATES: {
@@ -103,7 +141,7 @@ const CONSTS = {
 
 export default {
   name: 'CvFileUploader',
-  components: { CvFormItem },
+  components: { CvFormItem, CvInlineUploader, Close16, CheckmarkFilled16 },
   mixins: [uidMixin],
   inheritAttrs: false,
   props: {
@@ -124,6 +162,7 @@ export default {
   },
   data() {
     return {
+      componentsX,
       internalFiles: [],
     };
   },
@@ -164,6 +203,9 @@ export default {
         });
       }
       this.$emit('change', this.internalFiles);
+    },
+    onShow() {
+      this.$refs['file-input'].click();
     },
   },
 };

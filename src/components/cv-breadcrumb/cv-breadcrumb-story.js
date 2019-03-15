@@ -93,6 +93,7 @@ for (const experimental of [false, true]) {
       data: () => ({ experimental }),
       template: `
       <sv-template-view
+        :sv-experimental="experimental"
         sv-margin
         sv-position="center"
         sv-source='${templateString.trim()}'>
