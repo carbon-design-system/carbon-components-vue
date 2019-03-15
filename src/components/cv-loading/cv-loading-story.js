@@ -10,7 +10,9 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvLoadingNotesMD from './cv-loading-notes.md';
 import CvLoading from './cv-loading';
 
-const stories = storiesOf('Default/CvLoading', module);
+const storiesDefault = storiesOf('Default/CvLoading', module);
+const storiesExperimental = storiesOf('Experimental/CvLoading', module);
+import { override, reset } from '../../_internal/_feature-flags';
 
 const preKnobs = {
   active: {
@@ -44,21 +46,26 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const story of storySet) {
-  stories.add(
-    story.name,
-    () => {
-      const settings = story.knobs();
+for (const experimental of [false, true]) {
+  const stories = experimental ? storiesExperimental : storiesDefault;
 
-      // ----------------------------------------------------------------
-      const templateString = `
+  for (const story of storySet) {
+    stories.add(
+      story.name,
+      () => {
+        experimental ? override({ componentsX: true }) : reset();
+        const settings = story.knobs();
+
+        // ----------------------------------------------------------------
+        const templateString = `
 <cv-loading${settings.group.attr}></cv-loading>
   `;
 
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
     <sv-template-view
+      :sv-experimental="experimental"
       sv-margin
       sv-source='${templateString.trim()}'>
       <template slot="component" ref="component">
@@ -67,17 +74,19 @@ for (const story of storySet) {
     </sv-template-view>
   `;
 
-      return {
-        components: { CvLoading, SvTemplateView },
-        template: templateViewString,
-        props: settings.props,
-        methods: {
-          actionEnd: action('CvLoading - loading-end'),
-        },
-      };
-    },
-    {
-      notes: { markdown: CvLoadingNotesMD },
-    }
-  );
+        return {
+          components: { CvLoading, SvTemplateView },
+          data: () => ({ experimental }),
+          template: templateViewString,
+          props: settings.props,
+          methods: {
+            actionEnd: action('CvLoading - loading-end'),
+          },
+        };
+      },
+      {
+        notes: { markdown: CvLoadingNotesMD },
+      }
+    );
+  }
 }

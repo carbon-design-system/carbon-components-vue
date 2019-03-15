@@ -8,7 +8,9 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvInlineLoaderNotesMD from './cv-inline-loader-notes.md';
 import CvInlineLoader from './cv-inline-loader';
 
-const stories = storiesOf('Default/CvInlineLoader', module);
+const storiesDefault = storiesOf('Default/CvInlineLoader', module);
+const storiesExperimental = storiesOf('Experimental/CvInlineLoader', module);
+import { override, reset } from '../../_internal/_feature-flags';
 
 const preKnobs = {
   active: {
@@ -38,21 +40,26 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const story of storySet) {
-  stories.add(
-    story.name,
-    () => {
-      const settings = story.knobs();
+for (const experimental of [false, true]) {
+  const stories = experimental ? storiesExperimental : storiesDefault;
 
-      // ----------------------------------------------------------------
-      const templateString = `
+  for (const story of storySet) {
+    stories.add(
+      story.name,
+      () => {
+        experimental ? override({ componentsX: true }) : reset();
+        const settings = story.knobs();
+
+        // ----------------------------------------------------------------
+        const templateString = `
 <cv-inline-loader${settings.group.attr}></cv-inline-loader>
   `;
 
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
     <sv-template-view
+      :sv-experimental="experimental"
       sv-margin
       sv-source='${templateString.trim()}'>
       <template slot="component" ref="component">
@@ -61,14 +68,16 @@ for (const story of storySet) {
     </sv-template-view>
   `;
 
-      return {
-        components: { CvInlineLoader, SvTemplateView },
-        template: templateViewString,
-        props: settings.props,
-      };
-    },
-    {
-      notes: { markdown: CvInlineLoaderNotesMD },
-    }
-  );
+        return {
+          components: { CvInlineLoader, SvTemplateView },
+          data: () => ({ experimental }),
+          template: templateViewString,
+          props: settings.props,
+        };
+      },
+      {
+        notes: { markdown: CvInlineLoaderNotesMD },
+      }
+    );
+  }
 }
