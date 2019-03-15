@@ -133,6 +133,7 @@ let variants = [
     name: 'danger-primary',
     excludes: componentsX ? ['iconHref'] : ['icon'],
     extra: { kind: { group: 'attr', value: 'kind="danger--primary"' } },
+    skip: { default: false, experimental: true },
   },
 ];
 
@@ -142,6 +143,13 @@ for (const experimental of [false, true]) {
   const stories = experimental ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
+    if (
+      story.skip &&
+      ((story.skip.default && !experimental) ||
+        (story.skip.experimental && experimental))
+    ) {
+      continue;
+    }
     stories.add(
       story.name,
       () => {
