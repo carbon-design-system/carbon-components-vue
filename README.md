@@ -97,7 +97,7 @@ Vue.use(window['carbon-vue'].default);
 
 ## Change log
 
-See [CHANGELOG.md](CHAGNELOG.md)
+See [CHANGELOG.md](CHANGELOG.md)
 
 ### Current Components
 
