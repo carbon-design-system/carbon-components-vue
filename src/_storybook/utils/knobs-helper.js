@@ -103,6 +103,7 @@ const getStorySet = (variants, preKnobs) => {
         variants[index].excludes,
         variants[index].extra
       ),
+      skip: variants[index].skip,
     });
   }
   return storySet;
