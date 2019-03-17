@@ -11,7 +11,9 @@ import CvDataTable from './cv-data-table';
 import CvDataTableAction from './cv-data-table-action';
 import CvSearch from '../cv-search/cv-search';
 
-const stories = storiesOf('Default/CvDataTable', module);
+const storiesDefault = storiesOf('Default/CvDataTable', module);
+const storiesExperimental = storiesOf('Experimental/CvDataTable', module);
+import { override, reset } from '../../_internal/_feature-flags';
 
 const preKnobs = {
   rowSize: {
@@ -334,141 +336,148 @@ const variants = [
 ];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
-for (const story of storySet) {
-  stories.add(
-    story.name,
-    () => {
-      const settings = story.knobs();
-      // ----------------------------------------------------------------
+for (const experimental of [false, true]) {
+  const stories = experimental ? storiesExperimental : storiesDefault;
 
-      const templateString = `
+  for (const story of storySet) {
+    stories.add(
+      story.name,
+      () => {
+        experimental ? override({ componentsX: true }) : reset();
+        const settings = story.knobs();
+        // ----------------------------------------------------------------
+
+        const templateString = `
 <cv-data-table${settings.group.attr} ${
-        settings.group.slots.indexOf('slot="data"') < 0
-          ? ':data="filteredData"'
-          : ''
-      } ${
-        settings.group.attr.indexOf(':overflow-menu=') < 0
-          ? ''
-          : '@overflow-menu-click="onOverflowMenuClick"'
-      } ${
-        settings.group.slots.indexOf('cv-overflow-menu') < 0
-          ? ''
-          : ':overflow-menu="true"'
-      } ref="table">${settings.group.slots}</cv-data-table>
+          settings.group.slots.indexOf('slot="data"') < 0
+            ? ':data="filteredData"'
+            : ''
+        } ${
+          settings.group.attr.indexOf(':overflow-menu=') < 0
+            ? ''
+            : '@overflow-menu-click="onOverflowMenuClick"'
+        } ${
+          settings.group.slots.indexOf('cv-overflow-menu') < 0
+            ? ''
+            : ':overflow-menu="true"'
+        } ref="table">${settings.group.slots}</cv-data-table>
   `;
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
     <sv-template-view
+      :sv-experimental="experimental"
       sv-margin
       :sv-alt-back="false"
       sv-source='${templateString.trim()}'
-      under-construction
       >
       <template slot="component">${templateString}</template>
       <template slot="other">
-        NOTE: Sorting and filtering are the responsibility of the component user. This component raises events to facilitate this.
+        <p>NOTE: Sorting and filtering are the responsibility of the component user. This component raises events to facilitate this.</p>
+        <p>NOTE 2: Selection supports v-model via the rowSelects property and row-select-changes.</p>
       </template>
     </sv-template-view>
   `;
 
-      return {
-        components: {
-          CvDataTable,
-          CvDataTableAction,
-          SvTemplateView,
-          CvSearch,
-        },
-        template: templateViewString,
-        props: settings.props,
-        data() {
-          return {
-            internalData: this.data,
-            filterValue: '',
-            rowSelects: [],
-            sortBy: null,
-            sampleOverflowMenu: ['Start', 'Stop', 'Delete 3'],
-          };
-        },
-        watch: {
+        return {
+          components: {
+            CvDataTable,
+            CvDataTableAction,
+            SvTemplateView,
+            CvSearch,
+          },
+          template: templateViewString,
+          props: settings.props,
           data() {
-            this.internalData = this.data;
+            return {
+              experimental,
+              internalData: this.data,
+              filterValue: '',
+              rowSelects: [],
+              sortBy: null,
+              sampleOverflowMenu: ['Start', 'Stop', 'Delete 3'],
+            };
           },
-        },
-        computed: {
-          filteredData() {
-            if (this.filterValue) {
-              return this.internalData.filter(item => {
-                return item.join('|').indexOf(this.filterValue) >= 0;
-              });
-            } else {
-              return this.internalData;
-            }
+          watch: {
+            data() {
+              this.internalData = this.data;
+            },
           },
-        },
-        methods: {
-          onFilter(val) {
-            this.filterValue = val;
+          computed: {
+            filteredData() {
+              if (this.filterValue) {
+                return this.internalData.filter(item => {
+                  return item.join('|').indexOf(this.filterValue) >= 0;
+                });
+              } else {
+                return this.internalData;
+              }
+            },
           },
-          onSort(sortBy) {
-            if (sortBy) {
-              this.internalData.sort((a, b) => {
-                const itemA = a[sortBy.index];
-                const itemB = b[sortBy.index];
+          methods: {
+            onFilter(val) {
+              this.filterValue = val;
+            },
+            onSort(sortBy) {
+              if (sortBy) {
+                this.internalData.sort((a, b) => {
+                  const itemA = a[sortBy.index];
+                  const itemB = b[sortBy.index];
 
-                if (sortBy.order === 'descending') {
-                  if (sortBy.index === 2) {
-                    // sort as number
-                    return parseFloat(itemA) - parseFloat(itemB);
-                  } else {
-                    return itemB.localeCompare(itemA);
+                  if (sortBy.order === 'descending') {
+                    if (sortBy.index === 2) {
+                      // sort as number
+                      return parseFloat(itemA) - parseFloat(itemB);
+                    } else {
+                      return itemB.localeCompare(itemA);
+                    }
                   }
-                }
-                if (sortBy.order === 'ascending') {
-                  if (sortBy.index === 2) {
-                    // sort as number
-                    return parseFloat(itemB) - parseFloat(itemA);
-                  } else {
-                    return itemA.localeCompare(itemB);
+                  if (sortBy.order === 'ascending') {
+                    if (sortBy.index === 2) {
+                      // sort as number
+                      return parseFloat(itemB) - parseFloat(itemA);
+                    } else {
+                      return itemA.localeCompare(itemB);
+                    }
                   }
-                }
-                return 0;
-              });
-            }
+                  return 0;
+                });
+              }
+            },
+            batchAction1: action('batch action 1'),
+            onBatchAction1() {
+              this.batchAction1(
+                `selected items: [${this.$refs.table.selectedRows}]`
+              );
+              this.rowSelects = [];
+            },
+            batchAction2: action('batch action 2'),
+            onBatchAction2() {
+              this.batchAction2(
+                `selected items: [${this.$refs.table.selectedRows}]`
+              );
+              this.rowSelects = [];
+            },
+            batchAction3: action('batch action 3'),
+            onBatchAction3() {
+              this.batchAction3(
+                `selected items: [${this.$refs.table.selectedRows}]`
+              );
+              this.$refs.table.deselect();
+            },
+            action1: action('action 1'),
+            action2: action('action 2'),
+            action3: action('action 3'),
+            actionNew: action('add new'),
+            actionOnPagination: action('pagination change'),
+            onOverflowMenuClick: action('overflow menu click'),
+            actionRowSelectChange: action('row selected'),
           },
-          batchAction1: action('batch action 1'),
-          onBatchAction1() {
-            this.batchAction1(
-              `selected items: [${this.$refs.table.selectedRows}]`
-            );
-            this.rowSelects = [];
-          },
-          batchAction2: action('batch action 2'),
-          onBatchAction2() {
-            this.batchAction2(
-              `selected items: [${this.$refs.table.selectedRows}]`
-            );
-            this.rowSelects = [];
-          },
-          batchAction3: action('batch action 3'),
-          onBatchAction3() {
-            this.batchAction3(
-              `selected items: [${this.$refs.table.selectedRows}]`
-            );
-            this.$refs.table.deselect();
-          },
-          action1: action('action 1'),
-          action2: action('action 2'),
-          action3: action('action 3'),
-          actionNew: action('add new'),
-          actionOnPagination: action('pagination change'),
-          onOverflowMenuClick: action('overflow menu click'),
-          actionRowSelectChange: action('row selected'),
-        },
-      };
-    },
-    {
-      notes: { markdown: CvDataTableNotesMD },
-    }
-  );
+        };
+      },
+      {
+        notes: { markdown: CvDataTableNotesMD },
+      }
+    );
+  }
 }
