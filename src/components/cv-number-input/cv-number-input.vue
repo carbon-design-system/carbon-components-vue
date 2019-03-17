@@ -15,7 +15,8 @@
           @click="doUp"
           type="button"
         >
-          <svg width="10" height="5" viewBox="0 0 10 5">
+          <CaretUpGlyph v-if="componentsX" />
+          <svg v-else width="10" height="5" viewBox="0 0 10 5">
             <path d="M0 5L5 .002 10 5z" fill-rule="evenodd"></path>
           </svg>
         </button>
@@ -24,7 +25,8 @@
           @click="doDown"
           type="button"
         >
-          <svg width="10" height="5" viewBox="0 0 10 5">
+          <CaretDownGlyph v-if="componentsX" />
+          <svg v-else width="10" height="5" viewBox="0 0 10 5">
             <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd"></path>
           </svg>
         </button>
@@ -50,10 +52,14 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
+import { componentsX } from '../../_internal/_feature-flags';
+import CaretDownGlyph from '@carbon/icons-vue/lib/caret--down/index';
+import CaretUpGlyph from '@carbon/icons-vue/lib/caret--up/index';
 
 export default {
   name: 'CvNumberInput',
   mixins: [uidMixin, themeMixin],
+  components: { CaretDownGlyph, CaretUpGlyph },
   inheritAttrs: false,
   props: {
     helperText: { type: String, default: null },
@@ -75,6 +81,7 @@ export default {
   },
   data() {
     return {
+      componentsX,
       internalValue: this.value,
     };
   },

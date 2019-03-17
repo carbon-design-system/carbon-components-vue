@@ -9,7 +9,9 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvNumberInputNotesMD from './cv-number-input-notes.md';
 import CvNumberInput from './cv-number-input';
 
-const stories = storiesOf('Default/CvNumberInput', module);
+const storiesDefault = storiesOf('Default/CvNumberInput', module);
+const storiesExperimental = storiesOf('Experimental/CvNumberInput', module);
+import { override, reset } from '../../_internal/_feature-flags';
 
 const preKnobs = {
   theme: {
@@ -111,26 +113,31 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const story of storySet) {
-  stories.add(
-    story.name,
-    () => {
-      const settings = story.knobs();
+for (const experimental of [false, true]) {
+  const stories = experimental ? storiesExperimental : storiesDefault;
 
-      // ----------------------------------------------------------------
+  for (const story of storySet) {
+    stories.add(
+      story.name,
+      () => {
+        experimental ? override({ componentsX: true }) : reset();
+        const settings = story.knobs();
 
-      const templateString = `
+        // ----------------------------------------------------------------
+
+        const templateString = `
 <cv-number-input${settings.group.attr}>${settings.group.content}
 </cv-number-input>
   `;
 
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
     <sv-template-view
-    sv-margin
-    :sv-alt-back="this.$options.propsData.theme !== 'light'"
-    sv-source='${templateString.trim()}'>
+      :sv-experimental="experimental"
+      sv-margin
+      :sv-alt-back="this.$options.propsData.theme !== 'light'"
+      sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">
         <div v-if="${templateString.indexOf('v-model') > 0}">
@@ -142,22 +149,24 @@ for (const story of storySet) {
     </sv-template-view>
   `;
 
-      return {
-        components: { CvNumberInput, SvTemplateView },
-        template: templateViewString,
-        props: settings.props,
-        data() {
-          return {
-            modelValue: '100',
-          };
-        },
-        methods: {
-          onInput: action('cv-number-input - input event'),
-        },
-      };
-    },
-    {
-      notes: { markdown: CvNumberInputNotesMD },
-    }
-  );
+        return {
+          components: { CvNumberInput, SvTemplateView },
+          template: templateViewString,
+          props: settings.props,
+          data() {
+            return {
+              experimental,
+              modelValue: '100',
+            };
+          },
+          methods: {
+            onInput: action('cv-number-input - input event'),
+          },
+        };
+      },
+      {
+        notes: { markdown: CvNumberInputNotesMD },
+      }
+    );
+  }
 }
