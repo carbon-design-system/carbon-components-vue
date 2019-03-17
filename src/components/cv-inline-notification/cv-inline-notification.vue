@@ -1,14 +1,20 @@
 <template>
   <div
-    data-inline-notification
+    data-notification
     class="cv-inline-notification bx--inline-notification"
     :class="`bx--inline-notification--${kind.toLowerCase()}`"
     v-on="$listeners"
-    :aria-role="isAlert ? 'alert' : false"
+    :role="isAlert ? 'alert' : false"
     :aria-live="!isAlert ? 'polite' : false"
   >
     <div class="bx--inline-notification__details">
+      <component
+        v-if="componentsX"
+        :is="icon"
+        class="bx--inline-notification__icon"
+      />
       <cv-icon
+        v-else
         :href="`cv(${icon})`"
         class="bx--inline-notification__icon"
         width="16"
@@ -25,7 +31,9 @@
       class="bx--inline-notification__close-button"
       @click="$emit('close')"
     >
+      <Close16 v-if="componentsX" class="bx--inline-notification__close-icon" />
       <svg
+        v-else
         class="bx--inline-notification__close-icon"
         aria-label="close"
         width="10"
@@ -45,10 +53,20 @@
 <script>
 import notificationMixin from '../../mixins/notification-mixin';
 import CvIcon from '../cv-icon/_cv-icon';
+import { componentsX } from '../../_internal/_feature-flags';
+import ErrorFilled16 from '@carbon/icons-vue/lib/error--filled/16';
+import CheckmarkFilled16 from '@carbon/icons-vue/lib/checkmark--filled/16';
+import WarningAltFilled16 from '@carbon/icons-vue/lib/warning--filled/16';
+import Close16 from '@carbon/icons-vue/lib/close/16';
 
 export default {
   name: 'CvInlineNotification',
-  components: { CvIcon },
+  components: { CvIcon, Close16 },
+  data() {
+    return {
+      componentsX,
+    };
+  },
   mixins: [notificationMixin],
   props: {
     kind: {
@@ -61,13 +79,13 @@ export default {
     icon() {
       switch (this.kind) {
         case 'error':
-          return 'icon--error--solid';
+          return componentsX ? ErrorFilled16 : 'icon--error--solid';
         case 'warning':
-          return 'icon--warning--solid';
+          return componentsX ? WarningAltFilled16 : 'icon--warning--solid';
         case 'success':
-          return 'icon--checkmark--solid';
+          return componentsX ? CheckmarkFilled16 : 'icon--checkmark--solid';
         default:
-          return 'icon--info--solid';
+          return componentsX ? null : 'icon--info--solid';
       }
     },
   },

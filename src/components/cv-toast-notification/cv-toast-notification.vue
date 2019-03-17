@@ -7,6 +7,11 @@
     :aria-role="isAlert ? 'alert' : false"
     :aria-live="!isAlert ? 'polite' : false"
   >
+    <component
+      v-if="componentsX"
+      :is="icon"
+      class="bx--toast-notification__icon"
+    />
     <div class="bx--toast-notification__details">
       <h3 class="bx--toast-notification__title">{{ title }}</h3>
       <p class="bx--toast-notification__subtitle">{{ subTitle }}</p>
@@ -18,7 +23,9 @@
       class="bx--toast-notification__close-button"
       @click="$emit('close')"
     >
+      <Close16 v-if="componentsX" class="bx--toast-notification__close-icon" />
       <svg
+        v-else
         class="bx--toast-notification-icon"
         aria-label="close"
         width="10"
@@ -37,9 +44,20 @@
 
 <script>
 import notificationMixin from '../../mixins/notification-mixin';
+import { componentsX } from '../../_internal/_feature-flags';
+import ErrorFilled16 from '@carbon/icons-vue/lib/error--filled/16';
+import CheckmarkFilled16 from '@carbon/icons-vue/lib/checkmark--filled/16';
+import WarningAltFilled16 from '@carbon/icons-vue/lib/warning--alt--filled/16';
+import Close16 from '@carbon/icons-vue/lib/close/16';
 
 export default {
   name: 'CvToastNotification',
+  components: { Close16 },
+  data() {
+    return {
+      componentsX,
+    };
+  },
   mixins: [notificationMixin],
   props: {
     caption: String,
@@ -47,6 +65,23 @@ export default {
       type: String,
       default: 'info',
       validator: val => ['error', 'info', 'warning', 'success'].includes(val),
+    },
+  },
+  computed: {
+    icon() {
+      if (this.componentsX) {
+        switch (this.kind) {
+          case 'error':
+            return ErrorFilled16;
+          case 'warning':
+            return WarningAltFilled16;
+          case 'success':
+            return CheckmarkFilled16;
+          default:
+            return null;
+        }
+      }
+      return null;
     },
   },
 };
