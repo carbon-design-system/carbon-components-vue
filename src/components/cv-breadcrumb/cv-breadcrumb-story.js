@@ -12,7 +12,7 @@ import CvBreadcrumbSkeleton from './cv-breadcrumb-skeleton';
 
 const storiesDefault = storiesOf('Default/CvBreadcrumb', module);
 const storiesExperimental = storiesOf('Experimental/CvBreadcrumb', module);
-import { override, reset } from '../../_internal/_feature-flags';
+import { versions, setVersion } from '../../_internal/_feature-flags';
 
 const preKnobs = {
   noTrailingSlash: {
@@ -30,9 +30,9 @@ const variants = [{ name: 'default' }];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const experimental of [false, true]) {
-  const stories = experimental ? storiesExperimental : storiesDefault;
-  experimental ? override({ componentsX: true }) : reset();
+for (const version of versions()) {
+  const stories = version.experimental ? storiesExperimental : storiesDefault;
+  setVersion(version);
 
   for (const story of storySet) {
     stories.add(
@@ -69,7 +69,7 @@ for (const experimental of [false, true]) {
 
         return {
           components: { CvBreadcrumb, CvBreadcrumbItem, SvTemplateView },
-          data: () => ({ experimental }),
+          data: () => ({ experimental: version.experimental }),
           template: templateViewString,
           props: settings.props,
         };
@@ -82,15 +82,15 @@ for (const experimental of [false, true]) {
 }
 
 const templateString = `<cv-breadcrumb-skeleton></cv-breadcrumb-skeleton>`;
-for (const experimental of [false, true]) {
-  const stories = experimental ? storiesExperimental : storiesDefault;
-  experimental ? override({ componentsX: true }) : reset();
+for (const version of versions()) {
+  const stories = version.experimental ? storiesExperimental : storiesDefault;
+  setVersion(version);
 
   stories.add(
     'skeleton',
     () => ({
       components: { SvTemplateView, CvBreadcrumbSkeleton },
-      data: () => ({ experimental }),
+      data: () => ({ experimental: version.experimental }),
       template: `
       <sv-template-view
         :sv-experimental="experimental"

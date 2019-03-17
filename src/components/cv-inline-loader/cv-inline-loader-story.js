@@ -10,7 +10,7 @@ import CvInlineLoader from './cv-inline-loader';
 
 const storiesDefault = storiesOf('Default/CvInlineLoader', module);
 const storiesExperimental = storiesOf('Experimental/CvInlineLoader', module);
-import { override, reset } from '../../_internal/_feature-flags';
+import { versions, setVersion } from '../../_internal/_feature-flags';
 
 const preKnobs = {
   active: {
@@ -40,14 +40,14 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const experimental of [false, true]) {
-  const stories = experimental ? storiesExperimental : storiesDefault;
+for (const version of versions()) {
+  const stories = version.experimental ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
     stories.add(
       story.name,
       () => {
-        experimental ? override({ componentsX: true }) : reset();
+        setVersion(version);
         const settings = story.knobs();
 
         // ----------------------------------------------------------------
@@ -70,7 +70,7 @@ for (const experimental of [false, true]) {
 
         return {
           components: { CvInlineLoader, SvTemplateView },
-          data: () => ({ experimental }),
+          data: () => ({ experimental: version.experimental }),
           template: templateViewString,
           props: settings.props,
         };

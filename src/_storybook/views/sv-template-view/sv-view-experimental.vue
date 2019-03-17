@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'SvViewExperimental',
+  name: 'SvExperimental',
   created() {
     document.body.classList.remove('carbon');
     document.body.classList.add('experimental');

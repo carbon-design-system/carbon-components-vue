@@ -13,7 +13,7 @@ import CvSearch from '../cv-search/cv-search';
 
 const storiesDefault = storiesOf('Default/CvDataTable', module);
 const storiesExperimental = storiesOf('Experimental/CvDataTable', module);
-import { override, reset } from '../../_internal/_feature-flags';
+import { versions, setVersion } from '../../_internal/_feature-flags';
 
 const preKnobs = {
   rowSize: {
@@ -336,14 +336,14 @@ const variants = [
 ];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
-for (const experimental of [false, true]) {
-  const stories = experimental ? storiesExperimental : storiesDefault;
+for (const version of versions()) {
+  const stories = version.experimental ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
     stories.add(
       story.name,
       () => {
-        experimental ? override({ componentsX: true }) : reset();
+        setVersion(version);
         const settings = story.knobs();
         // ----------------------------------------------------------------
 
@@ -390,7 +390,7 @@ for (const experimental of [false, true]) {
           props: settings.props,
           data() {
             return {
-              experimental,
+              experimental: version.experimental,
               internalData: this.data,
               filterValue: '',
               rowSelects: [],

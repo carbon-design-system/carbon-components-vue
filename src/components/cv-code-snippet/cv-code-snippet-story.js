@@ -11,7 +11,7 @@ import CvCodeSnippetSkeleton from './cv-code-snippet-skeleton';
 
 const storiesDefault = storiesOf('Default/CvCodeSnippet', module);
 const storiesExperimental = storiesOf('Experimental/CvCodeSnippet', module);
-import { override, reset } from '../../_internal/_feature-flags';
+import { versions, setVersion } from '../../_internal/_feature-flags';
 
 let preKnobs = {
   lessText: {
@@ -91,14 +91,14 @@ let variants = [
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const experimental of [false, true]) {
-  const stories = experimental ? storiesExperimental : storiesDefault;
+for (const version of versions()) {
+  const stories = version.experimental ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
     stories.add(
       story.name,
       () => {
-        experimental ? override({ componentsX: true }) : reset();
+        setVersion(version);
         const settings = story.knobs();
 
         // ----------------------------------------------------------------
@@ -123,7 +123,7 @@ for (const experimental of [false, true]) {
 
         return {
           components: { CvCodeSnippet, SvTemplateView },
-          data: () => ({ experimental }),
+          data: () => ({ experimental: version.experimental }),
           template: templateViewString,
           props: settings.props,
         };
@@ -156,14 +156,14 @@ variants = [{ name: 'skeleton' }];
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const experimental of [false, true]) {
-  const stories = experimental ? storiesExperimental : storiesDefault;
+for (const version of versions()) {
+  const stories = version.experimental ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
     stories.add(
       story.name,
       () => {
-        experimental ? override({ componentsX: true }) : reset();
+        setVersion(version);
         const settings = story.knobs();
 
         const templateString = `
@@ -185,7 +185,7 @@ for (const experimental of [false, true]) {
 
         return {
           components: { CvCodeSnippetSkeleton, SvTemplateView },
-          data: () => ({ experimental }),
+          data: () => ({ experimental: version.experimental }),
           template: templateViewString,
           props: settings.props,
         };
