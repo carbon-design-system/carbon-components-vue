@@ -9,7 +9,9 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvStructuredListNotesMD from './cv-structured-list-notes.md';
 import CvStructuredList from './cv-structured-list';
 
-const stories = storiesOf('Default/CvStructuredList', module);
+const storiesDefault = storiesOf('Default/CvStructuredList', module);
+const storiesExperimental = storiesOf('Experimental/CvStructuredList', module);
+import { versions, setVersion } from '../../_internal/_feature-flags';
 
 const preKnobs = {
   border: {
@@ -54,19 +56,26 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const story of storySet) {
-  stories.add(
-    story.name,
-    () => {
-      const settings = story.knobs();
+for (const version of versions(false)) {
+  const stories =
+    version.experimental && !version.default
+      ? storiesExperimental
+      : storiesDefault;
 
-      // ----------------------------------------------------------------
+  for (const story of storySet) {
+    stories.add(
+      story.name,
+      () => {
+        setVersion(version);
+        const settings = story.knobs();
 
-      let templateString = '';
-      let isVModel = story.name.indexOf('vModel') > -1;
-      let isSelectable = story.name.startsWith('selectable');
+        // ----------------------------------------------------------------
 
-      templateString = `
+        let templateString = '';
+        let isVModel = story.name.indexOf('vModel') > -1;
+        let isSelectable = story.name.startsWith('selectable');
+
+        templateString = `
   <cv-structured-list${isSelectable ? ' selectable' : ''}${settings.group.attr}>
     <template slot="headings">
       <cv-structured-list-heading>Heading 1</cv-structured-list-heading>
@@ -77,8 +86,10 @@ for (const story of storySet) {
       <cv-structured-list-item${
         isSelectable ? ' name="group-1" value="value-1" ' : ''
       }${
-        isVModel && isSelectable ? settings.group.checksSelectable : ' checked'
-      }>
+          isVModel && isSelectable
+            ? settings.group.checksSelectable
+            : ' checked'
+        }>
         <cv-structured-list-data>Item_1</cv-structured-list-data>
         <cv-structured-list-data>Item_1</cv-structured-list-data>
         <cv-structured-list-data${
@@ -107,10 +118,11 @@ for (const story of storySet) {
   </cv-structured-list>
   `;
 
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
     <sv-template-view
+      :sv-experimental="experimental"
       sv-margin
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
@@ -126,22 +138,24 @@ for (const story of storySet) {
     </sv-template-view>
   `;
 
-      return {
-        components: { CvStructuredList, SvTemplateView },
-        template: templateViewString,
-        props: settings.props,
-        data() {
-          return {
-            listVal: 'value-3',
-          };
-        },
-        methods: {
-          actionChange: action('Structured list - change'),
-        },
-      };
-    },
-    {
-      notes: { markdown: CvStructuredListNotesMD },
-    }
-  );
+        return {
+          components: { CvStructuredList, SvTemplateView },
+          template: templateViewString,
+          props: settings.props,
+          data() {
+            return {
+              experimental: version.experimental,
+              listVal: 'value-3',
+            };
+          },
+          methods: {
+            actionChange: action('Structured list - change'),
+          },
+        };
+      },
+      {
+        notes: { markdown: CvStructuredListNotesMD },
+      }
+    );
+  }
 }

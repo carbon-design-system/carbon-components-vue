@@ -10,7 +10,9 @@ import CvInteractiveTooltip from './cv-interactive-tooltip';
 import CvTooltip from './cv-tooltip';
 import CvDefinitionTooltip from './cv-definition-tooltip';
 
-const stories = storiesOf('Default/CvTooltip', module);
+const storiesDefault = storiesOf('Default/CvTooltip', module);
+const storiesExperimental = storiesOf('Experimental/CvTooltip', module);
+import { versions, setVersion } from '../../_internal/_feature-flags';
 
 let preKnobs = {
   direction: {
@@ -80,22 +82,30 @@ const variants = [
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const story of storySet) {
-  stories.add(
-    story.name + ' (Interactive tootlip)',
-    () => {
-      const settings = story.knobs();
+for (const version of versions(false)) {
+  const stories =
+    version.experimental && !version.default
+      ? storiesExperimental
+      : storiesDefault;
 
-      // ----------------------------------------------------------------
+  for (const story of storySet) {
+    stories.add(
+      story.name + ' (Interactive tootlip)',
+      () => {
+        setVersion(version);
+        const settings = story.knobs();
 
-      const templateString = `
+        // ----------------------------------------------------------------
+
+        const templateString = `
 <cv-interactive-tooltip${settings.group.attr}>${settings.group.content}
 </cv-interactive-tooltip>
   `;
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
     <sv-template-view
+      :sv-experimental="experimental"
       sv-margin
       sv-source='${templateString.trim()}'
       sv-position="center"
@@ -108,26 +118,27 @@ for (const story of storySet) {
     </sv-template-view>
   `;
 
-      return {
-        components: { CvInteractiveTooltip, SvTemplateView },
-        template: templateViewString,
-        props: settings.props,
-        methods: {
-          show() {
-            this.$children[0].$children[0].$children[0].show();
+        return {
+          components: { CvInteractiveTooltip, SvTemplateView },
+          data: () => ({ experimental: version.experimental }),
+          template: templateViewString,
+          props: settings.props,
+          methods: {
+            show() {
+              this.$children[0].$children[0].$children[0].show();
+            },
+            hide() {
+              this.$children[0].$children[0].$children[0].hide();
+            },
           },
-          hide() {
-            this.$children[0].$children[0].$children[0].hide();
-          },
-        },
-      };
-    },
-    {
-      notes: { markdown: CvTooltipNotesMD },
-    }
-  );
+        };
+      },
+      {
+        notes: { markdown: CvTooltipNotesMD },
+      }
+    );
+  }
 }
-
 // /* ----------------------------------------------------- */
 
 preKnobs = {
@@ -171,41 +182,50 @@ preKnobs = {
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const story of storySet) {
-  stories.add(
-    story.name + ' (Tootlip)',
-    () => {
-      const settings = story.knobs();
+for (const version of versions(false)) {
+  const stories =
+    version.experimental && !version.default
+      ? storiesExperimental
+      : storiesDefault;
 
-      // ----------------------------------------------------------------
+  for (const story of storySet) {
+    stories.add(
+      story.name + ' (Tootlip)',
+      () => {
+        setVersion(version);
+        const settings = story.knobs();
 
-      const templateString = `
+        // ----------------------------------------------------------------
+
+        const templateString = `
 <cv-tooltip${settings.group.attr}>${settings.group.content}
 </cv-tooltip>
   `;
 
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
     <sv-template-view
+      :sv-experimental="experimental"
       sv-margin
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
     </sv-template-view>
   `;
 
-      return {
-        components: { CvDefinitionTooltip, SvTemplateView },
-        template: templateViewString,
-        props: settings.props,
-      };
-    },
-    {
-      notes: { markdown: CvTooltipNotesMD },
-    }
-  );
+        return {
+          components: { CvDefinitionTooltip, SvTemplateView },
+          data: () => ({ experimental: version.experimental }),
+          template: templateViewString,
+          props: settings.props,
+        };
+      },
+      {
+        notes: { markdown: CvTooltipNotesMD },
+      }
+    );
+  }
 }
-
 // /* ----------------------------------------------------- */
 
 preKnobs = {
@@ -255,36 +275,46 @@ preKnobs = {
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const story of storySet) {
-  stories.add(
-    story.name + ' (Definition Tootlip)',
-    () => {
-      const settings = story.knobs(); // stories.add(
+for (const version of versions(false)) {
+  const stories =
+    version.experimental && !version.default
+      ? storiesExperimental
+      : storiesDefault;
 
-      // ----------------------------------------------------------------
+  for (const story of storySet) {
+    stories.add(
+      story.name + ' (Definition Tootlip)',
+      () => {
+        setVersion(version);
+        const settings = story.knobs(); // stories.add(
 
-      const templateString = `
+        // ----------------------------------------------------------------
+
+        const templateString = `
 <cv-definition-tooltip${settings.group.attr} />
   `;
 
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
     <sv-template-view
+      :sv-experimental="experimental"
       sv-margin
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
     </sv-template-view>
   `;
 
-      return {
-        components: { CvDefinitionTooltip, SvTemplateView },
-        template: templateViewString,
-        props: settings.props,
-      };
-    },
-    {
-      notes: { markdown: CvTooltipNotesMD },
-    }
-  );
+        return {
+          components: { CvDefinitionTooltip, SvTemplateView },
+          data: () => ({ experimental: version.experimental }),
+          template: templateViewString,
+          props: settings.props,
+        };
+      },
+      {
+        notes: { markdown: CvTooltipNotesMD },
+      }
+    );
+  }
 }

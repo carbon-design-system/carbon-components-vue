@@ -9,7 +9,9 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvSliderNotesMD from './cv-slider-notes.md';
 import CvSlider from './cv-slider';
 
-const stories = storiesOf('Default/CvSlider', module);
+const storiesDefault = storiesOf('Default/CvSlider', module);
+const storiesExperimental = storiesOf('Experimental/CvSlider', module);
+import { versions, setVersion } from '../../_internal/_feature-flags';
 
 const preKnobs = {
   theme: {
@@ -101,22 +103,30 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const story of storySet) {
-  stories.add(
-    story.name,
-    () => {
-      const settings = story.knobs();
+for (const version of versions(false)) {
+  const stories =
+    version.experimental && !version.default
+      ? storiesExperimental
+      : storiesDefault;
 
-      // ----------------------------------------------------------------
+  for (const story of storySet) {
+    stories.add(
+      story.name,
+      () => {
+        setVersion(version);
+        const settings = story.knobs();
 
-      const templateString = `
+        // ----------------------------------------------------------------
+
+        const templateString = `
 <cv-slider${settings.group.attr}></cv-slider>
   `;
 
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
     <sv-template-view
+      :sv-experimental="experimental"
       sv-margin
       :sv-alt-back="this.$options.propsData.theme !== 'light'"
       sv-source='${templateString.trim()}'>
@@ -132,22 +142,24 @@ for (const story of storySet) {
     </sv-template-view>
   `;
 
-      return {
-        data() {
-          return {
-            modelValue: '45',
-          };
-        },
-        components: { CvSlider, SvTemplateView },
-        template: templateViewString,
-        props: settings.props,
-        methods: {
-          onChange: action('cv-slider - change event'),
-        },
-      };
-    },
-    {
-      notes: { markdown: CvSliderNotesMD },
-    }
-  );
+        return {
+          data() {
+            return {
+              experimental: version.experimental,
+              modelValue: '45',
+            };
+          },
+          components: { CvSlider, SvTemplateView },
+          template: templateViewString,
+          props: settings.props,
+          methods: {
+            onChange: action('cv-slider - change event'),
+          },
+        };
+      },
+      {
+        notes: { markdown: CvSliderNotesMD },
+      }
+    );
+  }
 }

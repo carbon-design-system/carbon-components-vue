@@ -12,10 +12,9 @@
           v-for="(size, index) in pageSizes"
           :key="index"
           :value="`${size.value ? size.value : size}`"
-          >{{
-            size.label ? size.label : size.value ? size.value : size
-          }}</cv-select-option
         >
+          {{ size.label ? size.label : size.value ? size.value : size }}
+        </cv-select-option>
       </cv-select>
 
       <span class="bx--pagination__text">
@@ -24,7 +23,7 @@
       </span>
     </div>
 
-    <div class="bx--pagination__right bx--pagination--inline">
+    <div class="bx--pagination__right">
       <span class="bx--pagination__text">{{ pageOfPages }}</span>
 
       <button
@@ -34,7 +33,9 @@
         :aria-label="backwardText"
         @click="onPrevPage"
       >
+        <ChevronLeft16 v-if="componentsX" class="bx--pagination__button-icon" />
         <svg
+          v-else
           class="bx--pagination__button-icon"
           width="7"
           height="12"
@@ -73,7 +74,12 @@
         @click="onNextPage"
         :disabled="this.pageValue === this.pageCount"
       >
+        <ChevronRight16
+          v-if="componentsX"
+          class="bx--pagination__button-icon"
+        />
         <svg
+          v-else
           class="bx--pagination__button-icon"
           width="7"
           height="12"
@@ -90,6 +96,11 @@
 </template>
 
 <script>
+import CvSelect from '../cv-select/cv-select';
+import { componentsX } from '../../_internal/_feature-flags';
+import ChevronLeft16 from '@carbon/icons-vue/lib/chevron--left/16';
+import ChevronRight16 from '@carbon/icons-vue/lib/chevron--right/16';
+
 const newPageValue = (page, lastPage) => {
   let result = 1;
   if (page && page > 0) {
@@ -133,17 +144,19 @@ const newFirstItem = (pageValue, pageSizeValue) =>
 
 export default {
   name: 'CvPagination',
+  components: { CvSelect, ChevronLeft16, ChevronRight16 },
   props: {
     backwardText: { type: String, default: 'Prev page' },
     forwardText: { type: String, default: 'Next page' },
     pageNumberLabel: { type: String, default: 'Page number:' },
-    pageSizesLabel: { type: String, default: 'Number of items per page:' },
+    pageSizesLabel: { type: String, default: 'Items per page' },
     numberOfItems: { type: Number, default: Infinity },
     page: Number,
     pageSizes: { type: Array, default: () => [10, 20, 30, 40, 50] },
   },
   data() {
     return {
+      componentsX,
       firstItem: 1,
       pageValue: 1,
       pageSizeValue: 10,

@@ -8,7 +8,9 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvTileNotesMD from './cv-tile-notes.md';
 import CvTile from './cv-tile';
 
-const stories = storiesOf('Default/CvTile', module);
+const storiesDefault = storiesOf('Default/CvTile', module);
+const storiesExperimental = storiesOf('Experimental/CvTile', module);
+import { versions, setVersion } from '../../_internal/_feature-flags';
 
 const preKnobs = {
   slotDefault: {
@@ -91,41 +93,51 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const story of storySet) {
-  stories.add(
-    story.name,
-    () => {
-      const settings = story.knobs();
+for (const version of versions(false)) {
+  const stories =
+    version.experimental && !version.default
+      ? storiesExperimental
+      : storiesDefault;
 
-      if (settings.kind === 'selectable') {
-        settings.group.attr += `\n  value="value-1"`;
-      }
+  for (const story of storySet) {
+    stories.add(
+      story.name,
+      () => {
+        setVersion(version);
+        const settings = story.knobs();
 
-      // ----------------------------------------------------------------
+        if (settings.kind === 'selectable') {
+          settings.group.attr += `\n  value="value-1"`;
+        }
 
-      const templateString = `
+        // ----------------------------------------------------------------
+
+        const templateString = `
 <cv-tile${settings.group.attr}>${settings.group.slots}
 </cv-tile>
   `;
 
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
     <sv-template-view
+      :sv-experimental="experimental"
       sv-margin
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
     </sv-template-view>
   `;
 
-      return {
-        components: { CvTile, SvTemplateView },
-        template: templateViewString,
-        props: settings.props,
-      };
-    },
-    {
-      notes: { markdown: CvTileNotesMD },
-    }
-  );
+        return {
+          components: { CvTile, SvTemplateView },
+          data: () => ({ experimental: version.experimental }),
+          template: templateViewString,
+          props: settings.props,
+        };
+      },
+      {
+        notes: { markdown: CvTileNotesMD },
+      }
+    );
+  }
 }

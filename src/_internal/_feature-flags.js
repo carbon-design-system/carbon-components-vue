@@ -32,12 +32,15 @@ const defaults = {
   breakingChangesX: false,
 };
 
-export const versions = () => {
-  if (defaults.componentsX) {
-    return [{}];
-  } else {
-    return [{}, { experimental: true }];
+export const versions = (experimental = true) => {
+  const vers = [];
+  if (!defaults.componentsX) {
+    vers.push({ default: true });
   }
+  if (experimental) {
+    vers.push({ experimental: true, default: defaults.componentsX });
+  }
+  return vers;
 };
 
 export const setVersion = val => {

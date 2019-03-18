@@ -11,7 +11,7 @@ http://www.carbondesignsystem.com/components/pagination/code
   backwards-text="Previous page"
   forwards-text="Next page"
   page-number-label="Page number"
-  page-sizes-label="Number of items per page:"
+  page-sizes-label="Items per page"
   :number-of-items="103"
   :page-sizes="[10, { value: 20, selected: true }, 30, 40, 50]"
   @change="onChange"
@@ -26,7 +26,7 @@ Minimal
 - backwards-text: Aria label on page down arrow. Optional defaults to "Previous page"
 - forwards-text: Aria label on page up arrow. Optional defaults to "Next page"
 - page-number-label: Hidden label for page number select. Defaults to "Page number"
-- page-sizes-label: label for page size select. Defaults to "Number of items per page:"
+- page-sizes-label: label for page size select. Defaults to "Items per page:"
 - number-of-items: Number of items accross all pages, defaults to Infinity
 - page-sizes: Array of page size values.
   Defaults to [10, 20, 30, 40, 50]

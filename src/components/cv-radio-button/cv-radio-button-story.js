@@ -9,7 +9,9 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvRadioButtonNotesMD from './cv-radio-button-notes.md';
 import CvRadioButton from './cv-radio-button';
 
-const stories = storiesOf('Default/CvRadioButton', module);
+const storiesDefault = storiesOf('Default/CvRadioButton', module);
+const storiesExperimental = storiesOf('Experimental/CvRadioButton', module);
+import { versions, setVersion } from '../../_internal/_feature-flags';
 
 const preKnobs = {
   checked1: {
@@ -49,15 +51,22 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const story of storySet) {
-  stories.add(
-    story.name,
-    () => {
-      const settings = story.knobs();
+for (const version of versions(false)) {
+  const stories =
+    version.experimental && !version.default
+      ? storiesExperimental
+      : storiesDefault;
 
-      // ----------------------------------------------------------------
+  for (const story of storySet) {
+    stories.add(
+      story.name,
+      () => {
+        setVersion(version);
+        const settings = story.knobs();
 
-      const templateString = `
+        // ----------------------------------------------------------------
+
+        const templateString = `
   <cv-radio-group ${settings.group.attr}>
     <cv-radio-button name="group-1" label="radio-1" value="value-1" ${
       settings.group.attr1
@@ -71,10 +80,11 @@ for (const story of storySet) {
   </cv-radio-group>
   `;
 
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
     <sv-template-view
+      :sv-experimental="experimental"
       sv-margin
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
@@ -89,22 +99,24 @@ for (const story of storySet) {
     </sv-template-view>
   `;
 
-      return {
-        components: { CvRadioButton, SvTemplateView },
-        template: templateViewString,
-        props: settings.props,
-        data() {
-          return {
-            radioVal: 'value-2',
-          };
-        },
-        methods: {
-          actionChange: action('CV Radio Button - change'),
-        },
-      };
-    },
-    {
-      notes: { markdown: CvRadioButtonNotesMD },
-    }
-  );
+        return {
+          components: { CvRadioButton, SvTemplateView },
+          template: templateViewString,
+          props: settings.props,
+          data() {
+            return {
+              experimental: version.experimental,
+              radioVal: 'value-2',
+            };
+          },
+          methods: {
+            actionChange: action('CV Radio Button - change'),
+          },
+        };
+      },
+      {
+        notes: { markdown: CvRadioButtonNotesMD },
+      }
+    );
+  }
 }

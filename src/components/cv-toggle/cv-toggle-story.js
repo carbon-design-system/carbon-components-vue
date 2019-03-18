@@ -9,7 +9,9 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvToggleNotesMD from './cv-toggle-notes.md';
 import CvToggle from './cv-toggle';
 
-const stories = storiesOf('Default/CvToggle', module);
+const storiesDefault = storiesOf('Default/CvToggle', module);
+const storiesExperimental = storiesOf('Experimental/CvToggle', module);
+import { versions, setVersion } from '../../_internal/_feature-flags';
 
 let preKnobs = {
   checked: {
@@ -81,23 +83,31 @@ let variants = [
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const story of storySet) {
-  stories.add(
-    story.name,
-    () => {
-      const settings = story.knobs();
+for (const version of versions(false)) {
+  const stories =
+    version.experimental && !version.default
+      ? storiesExperimental
+      : storiesDefault;
 
-      // ----------------------------------------------------------------
+  for (const story of storySet) {
+    stories.add(
+      story.name,
+      () => {
+        setVersion(version);
+        const settings = story.knobs();
 
-      const templateString = `
+        // ----------------------------------------------------------------
+
+        const templateString = `
 <cv-toggle${settings.group.attr}>${settings.group.slots}
 </cv-toggle>
   `;
 
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
     <sv-template-view
+      :sv-experimental="experimental"
       sv-margin
       :sv-alt-back="this.$options.propsData.theme !== 'light'"
       sv-source='${templateString.trim()}'>
@@ -120,24 +130,26 @@ for (const story of storySet) {
     </sv-template-view>
   `;
 
-      return {
-        components: { CvToggle, SvTemplateView },
-        props: settings.props,
-        data() {
-          return {
-            modelValue: this.$options.propsData.checked || false,
-          };
-        },
-        methods: {
-          actionChange: action('CV Toggle - change'),
-        },
-        template: templateViewString,
-      };
-    },
-    {
-      notes: { markdown: CvToggleNotesMD },
-    }
-  );
+        return {
+          components: { CvToggle, SvTemplateView },
+          props: settings.props,
+          data() {
+            return {
+              experimental: version.experimental,
+              modelValue: this.$options.propsData.checked || false,
+            };
+          },
+          methods: {
+            actionChange: action('CV Toggle - change'),
+          },
+          template: templateViewString,
+        };
+      },
+      {
+        notes: { markdown: CvToggleNotesMD },
+      }
+    );
+  }
 }
 
 preKnobs = {
@@ -151,15 +163,22 @@ variants = [{ name: 'Array v-model', includes: ['vModel'] }];
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const story of storySet) {
-  stories.add(
-    story.name,
-    () => {
-      const settings = story.knobs();
+for (const version of versions(false)) {
+  const stories =
+    version.experimental && !version.default
+      ? storiesExperimental
+      : storiesDefault;
 
-      // ----------------------------------------------------------------
+  for (const story of storySet) {
+    stories.add(
+      story.name,
+      () => {
+        setVersion(version);
+        const settings = story.knobs();
 
-      const templateString = `
+        // ----------------------------------------------------------------
+
+        const templateString = `
       <cv-toggle${
         settings.group.attr
       } name="check-1" value="check-1"></cv-toggle>
@@ -171,10 +190,11 @@ for (const story of storySet) {
       } name="check-3" value="check-3"></cv-toggle>
       `;
 
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
       <sv-template-view
+        :sv-experimental="experimental"
         sv-margin
         sv-source='${templateString.trim()}'>
         <p>This story only demonstrates the array syntax for v-model</p>
@@ -204,18 +224,20 @@ for (const story of storySet) {
       </sv-template-view>
      `;
 
-      return {
-        components: { CvToggle, SvTemplateView },
-        data() {
-          return {
-            checks: ['check-3', 'check-2'],
-          };
-        },
-        template: templateViewString,
-      };
-    },
-    {
-      notes: { markdown: CvToggleNotesMD },
-    }
-  );
+        return {
+          components: { CvToggle, SvTemplateView },
+          data() {
+            return {
+              experimental: version.experimental,
+              checks: ['check-3', 'check-2'],
+            };
+          },
+          template: templateViewString,
+        };
+      },
+      {
+        notes: { markdown: CvToggleNotesMD },
+      }
+    );
+  }
 }

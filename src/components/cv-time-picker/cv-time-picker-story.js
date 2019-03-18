@@ -9,7 +9,9 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvTimePickerNotesMD from './cv-time-picker-notes.md';
 import CvTimePicker from './cv-time-picker';
 
-const stories = storiesOf('Default/CvTimePicker', module);
+const storiesDefault = storiesOf('Default/CvTimePicker', module);
+const storiesExperimental = storiesOf('Experimental/CvTimePicker', module);
+import { versions, setVersion } from '../../_internal/_feature-flags';
 
 const ampmConfig = [
   'ampm',
@@ -175,22 +177,30 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const story of storySet) {
-  stories.add(
-    story.name,
-    () => {
-      const settings = story.knobs();
+for (const version of versions(false)) {
+  const stories =
+    version.experimental && !version.default
+      ? storiesExperimental
+      : storiesDefault;
 
-      // ----------------------------------------------------------------
-      const templateString = `
+  for (const story of storySet) {
+    stories.add(
+      story.name,
+      () => {
+        setVersion(version);
+        const settings = story.knobs();
+
+        // ----------------------------------------------------------------
+        const templateString = `
   <cv-time-picker${settings.group.attr} :form-item="true">${settings.group.slot}
   </cv-time-picker>
     `;
 
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
     <sv-template-view
+      :sv-experimental="experimental"
       sv-margin
       :sv-alt-back="this.$options.propsData.theme !== 'light'"
       sv-source='${templateString.trim()}'>
@@ -217,22 +227,24 @@ for (const story of storySet) {
     </sv-template-view>
   `;
 
-      return {
-        components: { CvTimePicker, SvTemplateView },
-        template: templateViewString,
-        props: settings.props,
-        methods: {
-          onUpdateTime: action('cv-time-picker - update:time event'),
-          onUpdateAmpm: action('cv-time-picker - update:ampm event'),
-          onUpdateTimezone: action('cv-time-picker - update:timezone event'),
-        },
-        mounted() {
-          // console.dir(this);
-        },
-      };
-    },
-    {
-      notes: { markdown: CvTimePickerNotesMD },
-    }
-  );
+        return {
+          components: { CvTimePicker, SvTemplateView },
+          data: () => ({ experimental: version.experimental }),
+          template: templateViewString,
+          props: settings.props,
+          methods: {
+            onUpdateTime: action('cv-time-picker - update:time event'),
+            onUpdateAmpm: action('cv-time-picker - update:ampm event'),
+            onUpdateTimezone: action('cv-time-picker - update:timezone event'),
+          },
+          mounted() {
+            // console.dir(this);
+          },
+        };
+      },
+      {
+        notes: { markdown: CvTimePickerNotesMD },
+      }
+    );
+  }
 }

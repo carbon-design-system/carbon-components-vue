@@ -9,7 +9,9 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvTextAreaNotesMD from './cv-text-area-notes.md';
 import CvTextArea from './cv-text-area';
 
-const stories = storiesOf('Default/CvTextArea', module);
+const storiesDefault = storiesOf('Default/CvTextArea', module);
+const storiesExperimental = storiesOf('Experimental/CvTextArea', module);
+import { versions, setVersion } from '../../_internal/_feature-flags';
 
 const preKnobs = {
   theme: {
@@ -111,23 +113,31 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const story of storySet) {
-  stories.add(
-    story.name,
-    () => {
-      const settings = story.knobs();
+for (const version of versions(false)) {
+  const stories =
+    version.experimental && !version.default
+      ? storiesExperimental
+      : storiesDefault;
 
-      // ----------------------------------------------------------------
+  for (const story of storySet) {
+    stories.add(
+      story.name,
+      () => {
+        setVersion(version);
+        const settings = story.knobs();
 
-      const templateString = `
+        // ----------------------------------------------------------------
+
+        const templateString = `
 <cv-text-area${settings.group.attr}>${settings.group.slots}
 </cv-text-area>
   `;
 
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
     <sv-template-view
+      :sv-experimental="experimental"
       sv-margin
       :sv-alt-back="this.$options.propsData.theme !== 'light'"
       sv-source='${templateString.trim()}'>
@@ -142,22 +152,24 @@ for (const story of storySet) {
       </sv-template-view>
   `;
 
-      return {
-        data() {
-          return {
-            modelValue: 'initial value',
-          };
-        },
-        components: { CvTextArea, SvTemplateView },
-        template: templateViewString,
-        props: settings.props,
-        methods: {
-          onInput: action('cv-text-area - input event'),
-        },
-      };
-    },
-    {
-      notes: { markdown: CvTextAreaNotesMD },
-    }
-  );
+        return {
+          data() {
+            return {
+              experimental: version.experimental,
+              modelValue: 'initial value',
+            };
+          },
+          components: { CvTextArea, SvTemplateView },
+          template: templateViewString,
+          props: settings.props,
+          methods: {
+            onInput: action('cv-text-area - input event'),
+          },
+        };
+      },
+      {
+        notes: { markdown: CvTextAreaNotesMD },
+      }
+    );
+  }
 }
