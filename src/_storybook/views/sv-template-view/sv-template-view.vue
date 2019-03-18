@@ -153,7 +153,7 @@ $component-padding: 40px;
 .sv-template-view__component {
   display: inline-flex;
   flex-direction: column;
-  min-width: 500px;
+  width: 1000px;
   max-width: calc(100% - #{4 * $component-padding});
   border: $border;
   background-color: $back-color-exp;

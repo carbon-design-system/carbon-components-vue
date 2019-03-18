@@ -24,7 +24,9 @@
       @click="toggleActive(true)"
       @focusout="checkFocus"
     >
+      <Search16 v-if="componentsX" class="bx--search-magnifier" />
       <svg
+        v-else
         class="bx--search-magnifier"
         width="16"
         height="16"
@@ -36,8 +38,9 @@
         ></path>
       </svg>
     </button>
+    <Search16 v-if="componentsX" class="bx--search-magnifier" />
     <svg
-      v-else
+      v-if="!componentsX && !isToolbarKind"
       class="bx--search-magnifier"
       width="16"
       height="16"
@@ -57,7 +60,9 @@
       aria-label="Clear search input"
       @click="onClearClick"
     >
+      <Close16 v-if="componentsX" />
       <svg
+        v-else
         width="16"
         height="16"
         viewBox="0 0 16 16"
@@ -75,10 +80,14 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
+import { componentsX } from '../../_internal/_feature-flags';
+import Search16 from '@carbon/icons-vue/lib/search/16';
+import Close16 from '@carbon/icons-vue/lib/close/16';
 
 export default {
   name: 'CvSearchInner',
   mixins: [uidMixin, themeMixin],
+  components: { Close16, Search16 },
   inheritAttrs: false,
   props: {
     kind: { type: String, default: null },
@@ -89,6 +98,7 @@ export default {
   },
   data() {
     return {
+      componentsX,
       clearVisible: this.value ? this.value.length : false,
       internalValue: this.value,
       toolbarActive: false,

@@ -59,6 +59,7 @@ export default {
   components: { CvDropdown, CvDropdownItem },
   data() {
     return {
+      componentsX,
       tabs: [],
       selectedIndex: 0,
     };
