@@ -18,8 +18,8 @@
           :key="`drop-${index}`"
           :value="`${index}`"
           >{{ tab.label }}</cv-dropdown-item
-        > </cv-dropdown
-      >>>>>>>> master
+        >
+      </cv-dropdown>
       <ul class="bx--tabs__nav bx--tabs__nav--hidden" role="tablist">
         <li
           v-for="(tab, index) in tabs"
@@ -110,7 +110,6 @@ export default {
   components: { CvDropdown, CvDropdownItem },
   data() {
     return {
-      componentsX,
       tabs: [],
       selectedIndex: 0,
     };

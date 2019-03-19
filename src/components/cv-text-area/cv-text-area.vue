@@ -14,7 +14,24 @@
     <div class="bx--form__helper-text" v-if="isHelper">
       <slot name="helper-text">{{ helperText }}</slot>
     </div>
+    <div
+      v-if="componentsX"
+      class="bx--text-area__wrapper"
+      :data-invalid="isInvalid"
+    >
+      <WarningFilled16 v-if="isInvalid" class="bx--text-area__invalid-icon" />
+      <textarea
+        :id="uid"
+        class="bx--text-area"
+        :class="{ 'bx--text-area--light': theme === 'light' }"
+        v-bind="$attrs"
+        :value="value"
+        v-on="inputListeners"
+        :data-invalid="isInvalid"
+      ></textarea>
+    </div>
     <textarea
+      v-else
       :id="uid"
       class="bx--text-area"
       :class="{ 'bx--text-area--light': theme === 'light' }"
@@ -32,11 +49,19 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
+import { componentsX } from '../../_internal/_feature-flags';
+import WarningFilled16 from '@carbon/icons-vue/lib/warning--filled/16';
 
 export default {
   name: 'CvTextArea',
   mixins: [uidMixin, themeMixin],
   inheritAttrs: false,
+  components: { WarningFilled16 },
+  data() {
+    return {
+      componentsX,
+    };
+  },
   props: {
     helperText: { type: String, default: null },
     invalidMessage: { type: String, default: null },
