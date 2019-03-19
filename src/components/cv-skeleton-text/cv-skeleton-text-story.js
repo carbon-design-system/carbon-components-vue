@@ -37,18 +37,12 @@ const preKnobs = {
   width: {
     group: 'attr',
     type: text,
-    config: [
-      'Width (in px or %) of single line of text or max-width of paragraph lines (width)',
-      '100%',
-    ], // consts.CONFIG
+    config: ['Width (in px or %) of single line of text or max-width of paragraph lines (width)', '100%'], // consts.CONFIG
     prop: { name: 'width', type: String },
   },
 };
 
-const variants = [
-  { name: 'default' },
-  { name: 'minimal', excludes: ['heading', 'width', 'paragraph', 'lineCount'] },
-];
+const variants = [{ name: 'default' }, { name: 'minimal', excludes: ['heading', 'width', 'paragraph', 'lineCount'] }];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 

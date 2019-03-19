@@ -41,9 +41,7 @@ https://www.carbondesignsystem.com/data-visualization/bar-graph/code
   ]"
 >
   <template slot="emptyContent"
-    ><span style="color:red"
-      >There is currently no data for the selected parameters</span
-    ></template
+    ><span style="color:red">There is currently no data for the selected parameters</span></template
   >
 </cv-bar-graph>
 ```

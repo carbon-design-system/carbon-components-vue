@@ -52,10 +52,7 @@ const preKnobs = {
   pageSizes: {
     group: 'attr',
     type: object,
-    config: [
-      'Page sizes',
-      { list: [10, { value: 20, selected: true }, 30, 40, 50] },
-    ],
+    config: ['Page sizes', { list: [10, { value: 20, selected: true }, 30, 40, 50] }],
     prop: { name: 'page-sizes', type: Array, value: val => val.list },
   },
   events: {

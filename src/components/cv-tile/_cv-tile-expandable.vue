@@ -12,20 +12,12 @@
       </svg>
     </button>
     <div class="bx--tile-content">
-      <span
-        data-tile-atf
-        class="bx--tile-content__above-the-fold"
-        ref="aboveFold"
-      >
+      <span data-tile-atf class="bx--tile-content__above-the-fold" ref="aboveFold">
         <slot>
           <!-- Above the fold content here -->
         </slot>
       </span>
-      <span
-        class="bx--tile-content__below-the-fold"
-        ref="belowFold"
-        v-show="internalExpanded || initialized"
-      >
+      <span class="bx--tile-content__below-the-fold" ref="belowFold" v-show="internalExpanded || initialized">
         <slot name="below">
           <!-- Rest of the content here -->
         </slot>
@@ -66,11 +58,9 @@ export default {
 
       this.$nextTick(() => {
         const forceType = typeof force;
-        this.internalExpanded =
-          forceType === 'boolean' ? force : !this.internalExpanded;
+        this.internalExpanded = forceType === 'boolean' ? force : !this.internalExpanded;
 
-        const belowFoldHeight = this.$refs.belowFold.getBoundingClientRect()
-          .height;
+        const belowFoldHeight = this.$refs.belowFold.getBoundingClientRect().height;
 
         if (this.internalExpanded) {
           currentHeight += belowFoldHeight;

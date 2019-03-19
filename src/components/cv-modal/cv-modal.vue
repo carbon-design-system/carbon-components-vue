@@ -28,22 +28,15 @@
         </h2>
         <button class="bx--modal-close" type="button" @click="hide" ref="close">
           <Close16 v-if="componentsX" class="bx--modal-close__icon" />
-          <cv-icon
-            v-else
-            class="bx--modal-close__icon"
-            href="cv(icon--close)"
-            height="10px"
-            width="10px"
-          ></cv-icon>
+          <cv-icon v-else class="bx--modal-close__icon" href="cv(icon--close)" height="10px" width="10px"></cv-icon>
         </button>
       </div>
 
       <div class="bx--modal-content" ref="content">
         <slot name="content">
           <p>
-            Passive modal notifications should only appear if there is an action
-            the user needs to address immediately. Passive modal notifications
-            are persistent on the screen.
+            Passive modal notifications should only appear if there is an action the user needs to address immediately.
+            Passive modal notifications are persistent on the screen.
           </p>
         </slot>
       </div>
@@ -155,9 +148,7 @@ export default {
       this.$refs.close.focus();
     },
     onShown() {
-      const focusEl = this.$refs.content.querySelector(
-        '[data-modal-primary-focus]'
-      );
+      const focusEl = this.$refs.content.querySelector('[data-modal-primary-focus]');
       if (focusEl) {
         focusEl.focus();
       } else if (this.$slots['primary-button']) {

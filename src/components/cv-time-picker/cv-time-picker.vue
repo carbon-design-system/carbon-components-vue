@@ -1,9 +1,6 @@
 <template>
   <div class="cv-time-picker bx--form-item">
-    <div
-      class="bx--time-picker"
-      :class="{ 'bx--time-picker--light': theme === 'light' }"
-    >
+    <div class="bx--time-picker" :class="{ 'bx--time-picker--light': theme === 'light' }">
       <div class="bx--time-picker__input">
         <input
           :id="uid"
@@ -33,12 +30,8 @@
         :value="ampm"
         :disabled="disabled"
       >
-        <cv-select-option class="bx--select-option" value="AM"
-          >AM</cv-select-option
-        >
-        <cv-select-option class="bx--select-option" value="PM"
-          >PM</cv-select-option
-        >
+        <cv-select-option class="bx--select-option" value="AM">AM</cv-select-option>
+        <cv-select-option class="bx--select-option" value="PM">PM</cv-select-option>
       </cv-select>
 
       <cv-select
@@ -52,13 +45,9 @@
         @input="$emit('update:timezone', $event)"
         :disabled="disabled"
       >
-        <cv-select-option
-          class="bx--select-option"
-          v-for="item in timezones"
-          :key="item.value"
-          :value="item.value"
-          >{{ item.label }}</cv-select-option
-        >
+        <cv-select-option class="bx--select-option" v-for="item in timezones" :key="item.value" :value="item.value">{{
+          item.label
+        }}</cv-select-option>
       </cv-select>
     </div>
   </div>
@@ -90,19 +79,12 @@ export default {
   },
   computed: {
     isInvalid() {
-      return (
-        this.$slots['invalid-message'] ||
-        (this.invalidMessage && this.invalidMessage.length > 0)
-      );
+      return this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length > 0);
     },
     validAmpm() {
       let result = this.ampm;
       if (!['AM', 'PM'].includes(this.ampm)) {
-        console.error(
-          `CvTimePicker: invalid value '${
-            this.ampm
-          }' supplied for prop ampm. Default applied.`
-        );
+        console.error(`CvTimePicker: invalid value '${this.ampm}' supplied for prop ampm. Default applied.`);
         // set to valid value
         result = this.ampm[0].value;
         this.$emit('update:ampm', result);
@@ -114,11 +96,7 @@ export default {
       let result = this.timezone;
       if (this.timezones && this.timezones.length) {
         if (!this.timezones.find(item => item.value === this.timezone)) {
-          console.error(
-            `CvTimePicker: invalid value '${
-              this.timezone
-            }' supplied for prop timezone. Default applied.`
-          );
+          console.error(`CvTimePicker: invalid value '${this.timezone}' supplied for prop timezone. Default applied.`);
           // set to first valid value
           result = this.timezones[0].value;
           this.$emit('update:timezone', result);

@@ -12,15 +12,8 @@
     </svg>
     <div class="cv-bar-graph__key" v-if="keyLabels" ref="key">
       <span class="cv-bar-graph__key-title">Key</span>
-      <div
-        class="cv-bar-graph__key-entry"
-        v-for="(keyLabel, i) in keyLabels"
-        :key="keyLabel"
-      >
-        <div
-          class="cv-bar-graph__key-entry-swatch"
-          :style="{ background: colors(i) }"
-        ></div>
+      <div class="cv-bar-graph__key-entry" v-for="(keyLabel, i) in keyLabels" :key="keyLabel">
+        <div class="cv-bar-graph__key-entry-swatch" :style="{ background: colors(i) }"></div>
         {{ keyLabel }}
       </div>
     </div>
@@ -102,9 +95,7 @@ export default {
         .axisBottom()
         .scale(this.xScale)
         .tickSize(0)
-        .tickFormat(
-          this.xAxisTimeFormat ? d3.timeFormat(this.xAxisTimeFormat) : null
-        );
+        .tickFormat(this.xAxisTimeFormat ? d3.timeFormat(this.xAxisTimeFormat) : null);
     },
     yAxisGenerator() {
       return d3
@@ -180,14 +171,10 @@ export default {
       //  plot area) to take the top and left margins into account.
       svg.attr('width', this.width).attr('height', this.height);
 
-      root.attr(
-        'transform',
-        `translate(${this.margins.left}, ${this.margins.top})`
-      );
+      root.attr('transform', `translate(${this.margins.left}, ${this.margins.top})`);
 
       // (Re)draw the axes.
-      const xAxisYPos =
-        this.yScaleMin >= 0 ? this.plotArea.height : this.plotArea.height + 5;
+      const xAxisYPos = this.yScaleMin >= 0 ? this.plotArea.height : this.plotArea.height + 5;
       xAxis
         .attr('transform', `translate(0, ${xAxisYPos})`)
         .transition()
@@ -204,9 +191,7 @@ export default {
         .attr('x', -axisOffset);
 
       // Make the y-axis gridline for zero solid, rather than dashed.
-      const yScaleZeroTickIndex = this.yScale
-        .ticks(numYAxisTicksHint)
-        .indexOf(0);
+      const yScaleZeroTickIndex = this.yScale.ticks(numYAxisTicksHint).indexOf(0);
       yAxis
         .selectAll('.tick line')
         .attr('visibility', this.yAxisGridLines ? 'visible' : 'hidden')
@@ -217,23 +202,14 @@ export default {
       // Set up the axis labels.
       xAxisLabel
         .text(this.xAxisLabel)
-        .attr(
-          'transform',
-          `translate(${this.plotArea.width / 2}, ${this.xAxisLabelOffset})`
-        );
+        .attr('transform', `translate(${this.plotArea.width / 2}, ${this.xAxisLabelOffset})`);
 
       yAxisLabel
         .text(this.yAxisLabel)
-        .attr(
-          'transform',
-          `translate(${-this.yAxisLabelOffset}, ${this.plotArea.height /
-            2}) rotate(-90)`
-        );
+        .attr('transform', `translate(${-this.yAxisLabelOffset}, ${this.plotArea.height / 2}) rotate(-90)`);
 
       // (Re)draw the bar groups.
-      let barGroups = root
-        .selectAll('g.cv-bar-graph__bar-group')
-        .data(this.groupedData, d => d.x);
+      let barGroups = root.selectAll('g.cv-bar-graph__bar-group').data(this.groupedData, d => d.x);
 
       barGroups.exit().remove();
 
@@ -251,9 +227,7 @@ export default {
         .attr('transform', d => `translate(${this.xScale(d.x)}, 0)`);
 
       // (Re)draw the bars within the bar groups.
-      let bars = barGroups
-        .selectAll('rect')
-        .data(d => d.y.map((y, i) => ({ x: i, y: y })));
+      let bars = barGroups.selectAll('rect').data(d => d.y.map((y, i) => ({ x: i, y: y })));
 
       bars.exit().remove();
 
@@ -268,12 +242,8 @@ export default {
         .attr('width', this.xSubScale.bandwidth())
         .merge(bars)
         .on('mouseover', (d, index, nodes) => {
-          d3.select(nodes[index]).attr('fill', d =>
-            d3.color(this.colors(d.x)).darker()
-          );
-          const format = this.yAxisFormat
-            ? this.yAxisGenerator.tickFormat()
-            : this.yScale.tickFormat();
+          d3.select(nodes[index]).attr('fill', d => d3.color(this.colors(d.x)).darker());
+          const format = this.yAxisFormat ? this.yAxisGenerator.tickFormat() : this.yScale.tickFormat();
           const xPos =
             this.margins.left +
             this.xScale(nodes[index].parentNode.getAttribute('data-group')) +
@@ -301,8 +271,7 @@ export default {
       // visible).
       key.attr(
         'style',
-        `top:${this.margins.top}px; width:${this.margins.right -
-          20}px; height:${this.plotArea.height}px;`
+        `top:${this.margins.top}px; width:${this.margins.right - 20}px; height:${this.plotArea.height}px;`
       );
 
       // Set the visibility of the empty content overlay and make

@@ -35,25 +35,13 @@ Like sorting and filtering it is the users responsibility to deal with edited da
       :value="`${rowIndex}`"
     >
       <cv-data-table-cell>
-        <input
-          type="text"
-          :value="row"
-          style="border: none; background: none; width: 100%;"
-        />
+        <input type="text" :value="row" style="border: none; background: none; width: 100%;" />
       </cv-data-table-cell>
       <cv-data-table-cell>
-        <input
-          type="number"
-          :value="rowIndex * rowIndex"
-          style="border: none; background: none; width: 100%;"
-        />
+        <input type="number" :value="rowIndex * rowIndex" style="border: none; background: none; width: 100%;" />
       </cv-data-table-cell>
       <cv-data-table-cell>
-        <input
-          type="password"
-          value="ASecret"
-          style="border: none; background: none; width: 100%;"
-        />
+        <input type="password" value="ASecret" style="border: none; background: none; width: 100%;" />
       </cv-data-table-cell>
       <cv-data-table-cell>
         <a href="https://vue.carbondesignsystem.com">Here</a>
@@ -62,8 +50,7 @@ Like sorting and filtering it is the users responsibility to deal with edited da
         <cv-tag :kind="row" label="I am a tag" />
       </cv-data-table-cell>
       <cv-data-table-cell>
-        <cv-button type="button" v-html="`Clicky ${row}`" style="width: 100%;">
-        </cv-button>
+        <cv-button type="button" v-html="`Clicky ${row}`" style="width: 100%;"> </cv-button>
       </cv-data-table-cell>
     </cv-data-table-row>
   </template>

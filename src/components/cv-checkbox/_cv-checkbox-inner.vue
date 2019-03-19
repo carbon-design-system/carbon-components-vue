@@ -4,8 +4,7 @@
       :class="[
         'bx--checkbox-label',
         {
-          'bx--label--disabled':
-            $attrs.disabled !== undefined && $attrs.disabled,
+          'bx--label--disabled': $attrs.disabled !== undefined && $attrs.disabled,
           'bx--checkbox-label__focus': hasFocus,
         },
       ]"

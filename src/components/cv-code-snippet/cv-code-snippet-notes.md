@@ -21,10 +21,9 @@ http://www.carbondesignsystem.com/components/code-snippet/code
   >
   <template slot="content"
     ><p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, seed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, seed do eiusmod tempor incididunt ut labore et dolore
+      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat.
     </p></template
   >
   <template slot="secondary-button"

@@ -85,10 +85,7 @@ const preKnobs = {
     config: [
       'timezones',
       {
-        list: [
-          { label: 'Timezone-1', value: 'timezone1' },
-          { label: 'Timezone-2', value: 'timezone2' },
-        ],
+        list: [{ label: 'Timezone-1', value: 'timezone1' }, { label: 'Timezone-2', value: 'timezone2' }],
       },
       // consts.CONFIG,
     ],
@@ -152,14 +149,7 @@ const preKnobs = {
 const variants = [
   {
     name: 'default',
-    excludes: [
-      'vModel',
-      'events',
-      'timeSync',
-      'ampmSync',
-      'timezoneSync',
-      'invalidMessageSlot',
-    ],
+    excludes: ['vModel', 'events', 'timeSync', 'ampmSync', 'timezoneSync', 'invalidMessageSlot'],
   },
   {
     name: 'invalid slot',

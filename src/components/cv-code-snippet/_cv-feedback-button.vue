@@ -27,9 +27,7 @@ export default {
   },
   computed: {
     buttonClasses() {
-      return this.inline
-        ? 'bx--snippet bx--snippet--inline bx--btn--copy'
-        : 'bx--snippet-button';
+      return this.inline ? 'bx--snippet bx--snippet--inline bx--btn--copy' : 'bx--snippet-button';
     },
   },
   data() {

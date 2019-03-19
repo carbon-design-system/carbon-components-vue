@@ -9,11 +9,7 @@
         <slot></slot>
       </pre>
     </div>
-    <cv-feedback-button
-      feedback="Copied!"
-      aria-label="Copy code"
-      @click="$emit('copy-code')"
-    >
+    <cv-feedback-button feedback="Copied!" aria-label="Copy code" @click="$emit('copy-code')">
       <Copy16 v-if="componentsX" class="bx--snippet__icon" />
       <svg
         v-else
@@ -30,28 +26,12 @@
       </svg>
     </cv-feedback-button>
 
-    <cv-button
-      type="button"
-      kind="ghost"
-      small
-      class="bx--snippet-btn--expand"
-      @click="toggleExpand"
-    >
+    <cv-button type="button" kind="ghost" small class="bx--snippet-btn--expand" @click="toggleExpand">
       <span class="bx--snippet-btn--text">{{ expandButtonText }}</span>
       <ChevronDown16 v-if="componentsX" class="bx--icon-chevron--down" />
-      <svg
-        v-else
-        class="bx--icon-chevron--down"
-        width="12"
-        height="7"
-        viewBox="0 0 12 7"
-        aria-label="Show more icon"
-      >
+      <svg v-else class="bx--icon-chevron--down" width="12" height="7" viewBox="0 0 12 7" aria-label="Show more icon">
         <title>Show more icon</title>
-        <path
-          fill-rule="nonzero"
-          d="M6.002 5.55L11.27 0l.726.685L6.003 7 0 .685.726 0z"
-        ></path>
+        <path fill-rule="nonzero" d="M6.002 5.55L11.27 0l.726.685L6.003 7 0 .685.726 0z"></path>
       </svg>
     </cv-button>
   </div>

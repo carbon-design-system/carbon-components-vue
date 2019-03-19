@@ -42,24 +42,18 @@ const parsePreKnobs = (preKnobs, includes, excludes, variantExtra) => {
               value = val => (val === null ? 0 : val);
             }
           } else {
-            value = preKnob[thingType].value
-              ? preKnob[thingType].value
-              : val => val;
+            value = preKnob[thingType].value ? preKnob[thingType].value : val => val;
           }
         }
         switch (thingType) {
           case 'sync':
-            knobs.group[preKnob.group] += `${prefix}:${
-              preKnob.sync.name
-            }.sync="${key}"`;
+            knobs.group[preKnob.group] += `${prefix}:${preKnob.sync.name}.sync="${key}"`;
 
             knobs.data[key] = value(preKnob.type(...preKnob.config));
             break;
           case 'prop':
             if (preKnob.group) {
-              knobs.group[preKnob.group] += `${prefix}:${
-                preKnob.prop.name
-              }="${key}"`;
+              knobs.group[preKnob.group] += `${prefix}:${preKnob.prop.name}="${key}"`;
             }
             knobs.props[key] = {
               type: preKnob.prop.type,
@@ -68,9 +62,9 @@ const parsePreKnobs = (preKnobs, includes, excludes, variantExtra) => {
             break;
           case 'slot':
             if (preKnob.slot.name && preKnob.slot.name.length) {
-              knobs.group[preKnob.group] += `${prefix}<template slot="${
-                preKnob.slot.name
-              }">${preKnob.slot.value}</template>`;
+              knobs.group[preKnob.group] += `${prefix}<template slot="${preKnob.slot.name}">${
+                preKnob.slot.value
+              }</template>`;
             } else {
               knobs.group[preKnob.group] += `${prefix}${preKnob.slot.value}`;
             }
@@ -97,12 +91,7 @@ const getStorySet = (variants, preKnobs) => {
   for (let index in variants) {
     storySet.push({
       name: variants[index].name,
-      knobs: parsePreKnobs(
-        preKnobs,
-        variants[index].includes,
-        variants[index].excludes,
-        variants[index].extra
-      ),
+      knobs: parsePreKnobs(preKnobs, variants[index].includes, variants[index].excludes, variants[index].extra),
       skip: variants[index].skip,
     });
   }

@@ -28,10 +28,7 @@ const preKnobs = {
   },
 };
 
-const variants = [
-  { name: 'dafault' },
-  { name: 'minimal', excludes: ['events', 'selected'] },
-];
+const variants = [{ name: 'dafault' }, { name: 'minimal', excludes: ['events', 'selected'] }];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 

@@ -59,15 +59,9 @@ for (const story of storySet) {
 
       const templateString = `
   <cv-radio-group ${settings.group.attr}>
-    <cv-radio-button name="group-1" label="radio-1" value="value-1" ${
-      settings.group.attr1
-    }${settings.group.each} />
-    <cv-radio-button name="group-1" label="radio-2" value="value-2" ${
-      settings.group.attr2
-    }${settings.group.each} />
-    <cv-radio-button name="group-1" label="radio-3" value="value-3"${
-      settings.group.each
-    }/>
+    <cv-radio-button name="group-1" label="radio-1" value="value-1" ${settings.group.attr1}${settings.group.each} />
+    <cv-radio-button name="group-1" label="radio-2" value="value-2" ${settings.group.attr2}${settings.group.each} />
+    <cv-radio-button name="group-1" label="radio-3" value="value-3"${settings.group.each}/>
   </cv-radio-group>
   `;
 

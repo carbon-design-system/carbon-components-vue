@@ -73,10 +73,7 @@ let preKnobs = {
   },
 };
 
-const variants = [
-  { name: 'default' },
-  { name: 'minimal', includes: ['content', 'definition', 'term', 'tip'] },
-];
+const variants = [{ name: 'default' }, { name: 'minimal', includes: ['content', 'definition', 'term', 'tip'] }];
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
 

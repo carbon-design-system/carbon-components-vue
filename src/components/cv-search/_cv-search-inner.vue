@@ -24,25 +24,14 @@
       @click="toggleActive(true)"
       @focusout="checkFocus"
     >
-      <svg
-        class="bx--search-magnifier"
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-      >
+      <svg class="bx--search-magnifier" width="16" height="16" viewBox="0 0 16 16">
         <path
           d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zm4.936-1.27l4.563 4.557-.707.708-4.563-4.558a6.5 6.5 0 1 1 .707-.707z"
           fill-rule="nonzero"
         ></path>
       </svg>
     </button>
-    <svg
-      v-else
-      class="bx--search-magnifier"
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-    >
+    <svg v-else class="bx--search-magnifier" width="16" height="16" viewBox="0 0 16 16">
       <path
         d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zm4.936-1.27l4.563 4.557-.707.708-4.563-4.558a6.5 6.5 0 1 1 .707-.707z"
         fill-rule="nonzero"
@@ -57,12 +46,7 @@
       aria-label="Clear search input"
       @click="onClearClick"
     >
-      <svg
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+      <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M8 6.586L5.879 4.464 4.464 5.88 6.586 8l-2.122 2.121 1.415 1.415L8 9.414l2.121 2.122 1.415-1.415L9.414 8l2.122-2.121-1.415-1.415L8 6.586zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
           fill-rule="evenodd"
@@ -115,9 +99,7 @@ export default {
       const sizeClass = `bx--search--${this.large ? 'lg' : 'sm'}`;
       let toolbarClasses = '';
       if (this.isToolbarKind) {
-        toolbarClasses = this.toolbarActive
-          ? 'bx--toolbar-search bx--toolbar-search--active'
-          : 'bx--toolbar-search';
+        toolbarClasses = this.toolbarActive ? 'bx--toolbar-search bx--toolbar-search--active' : 'bx--toolbar-search';
       }
       return `${themeClass} ${sizeClass} ${toolbarClasses}`;
     },

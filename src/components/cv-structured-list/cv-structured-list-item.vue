@@ -32,9 +32,7 @@ export default {
   },
   computed: {
     tagType() {
-      return this.selectable
-        ? 'cv-structured-list-item-selectable'
-        : 'cv-structured-list-item-standard';
+      return this.selectable ? 'cv-structured-list-item-selectable' : 'cv-structured-list-item-standard';
     },
     selectable() {
       return this.$parent.selectable;

@@ -1,10 +1,5 @@
 <template>
-  <component
-    :is="tagType"
-    v-bind="$attrs"
-    v-on="$listeners"
-    class="cv-checkbox"
-  >
+  <component :is="tagType" v-bind="$attrs" v-on="$listeners" class="cv-checkbox">
     <slot></slot>
   </component>
 </template>
@@ -22,9 +17,7 @@ export default {
   },
   computed: {
     tagType() {
-      return this.formItem
-        ? 'cv-checkbox-inner-form-item'
-        : 'cv-checkbox-inner';
+      return this.formItem ? 'cv-checkbox-inner-form-item' : 'cv-checkbox-inner';
     },
     value() {
       return this.$attrs.value;

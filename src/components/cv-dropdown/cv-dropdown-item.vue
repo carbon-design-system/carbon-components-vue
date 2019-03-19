@@ -10,11 +10,7 @@
 -->
 
 <template>
-  <li
-    data-option
-    :data-value="value"
-    class="cv-dropdown-item bx--dropdown-item"
-  >
+  <li data-option :data-value="value" class="cv-dropdown-item bx--dropdown-item">
     <a
       class="bx--dropdown-link"
       :class="{ 'bx--dropdown--selected': internalSelected }"
@@ -52,9 +48,7 @@ export default {
   computed: {
     internalSelected: {
       get() {
-        return this.dataSelected === undefined
-          ? this.selected
-          : this.dataSelected === true;
+        return this.dataSelected === undefined ? this.selected : this.dataSelected === true;
       },
       set(val) {
         this.dataSelected = val;

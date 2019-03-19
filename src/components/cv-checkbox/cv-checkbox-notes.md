@@ -21,8 +21,7 @@ http://www.carbondesignsystem.com/components/checkbox/code
 ### With v-model
 
 ```html
-<cv-checkbox label="checkbox" v-model="checked" @change="actionChange">
-</cv-checkbox>
+<cv-checkbox label="checkbox" v-model="checked" @change="actionChange"> </cv-checkbox>
 ```
 
 ```javascript

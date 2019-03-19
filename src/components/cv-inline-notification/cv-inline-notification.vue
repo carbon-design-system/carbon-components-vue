@@ -8,29 +8,14 @@
     :aria-live="!isAlert ? 'polite' : false"
   >
     <div class="bx--inline-notification__details">
-      <component
-        v-if="componentsX"
-        :is="icon"
-        class="bx--inline-notification__icon"
-      />
-      <cv-icon
-        v-else
-        :href="`cv(${icon})`"
-        class="bx--inline-notification__icon"
-        width="16"
-        height="16"
-      ></cv-icon>
+      <component v-if="componentsX" :is="icon" class="bx--inline-notification__icon" />
+      <cv-icon v-else :href="`cv(${icon})`" class="bx--inline-notification__icon" width="16" height="16"></cv-icon>
       <div class="bx--inline-notification__text-wrapper">
         <p class="bx--inline-notification__title">{{ title }}</p>
         <p class="bx--inline-notification__subtitle">{{ subTitle }}.</p>
       </div>
     </div>
-    <button
-      type="button"
-      data-notification-btn
-      class="bx--inline-notification__close-button"
-      @click="$emit('close')"
-    >
+    <button type="button" data-notification-btn class="bx--inline-notification__close-button" @click="$emit('close')">
       <Close16 v-if="componentsX" class="bx--inline-notification__close-icon" />
       <svg
         v-else

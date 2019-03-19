@@ -1,10 +1,5 @@
 <template>
-  <div
-    data-inline-loading
-    class="bx--inline-loading"
-    role="alert"
-    aria-live="assertive"
-  >
+  <div data-inline-loading class="bx--inline-loading" role="alert" aria-live="assertive">
     <div class="bx--inline-loading__animation">
       <cv-loading :hidden="!active" small />
       <svg
@@ -14,10 +9,7 @@
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 10 10"
       >
-        <polyline
-          class="bx--inline-loading__checkmark"
-          points="0.74 3.4 3.67 6.34 9.24 0.74"
-        ></polyline>
+        <polyline class="bx--inline-loading__checkmark" points="0.74 3.4 3.67 6.34 9.24 0.74"></polyline>
       </svg>
     </div>
     <p

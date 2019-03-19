@@ -30,10 +30,7 @@ const preKnobs = {
   },
 };
 
-const variants = [
-  { name: 'default', excludes: ['nested'] },
-  { name: 'nested' },
-];
+const variants = [{ name: 'default', excludes: ['nested'] }, { name: 'nested' }];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 

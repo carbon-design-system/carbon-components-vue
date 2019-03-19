@@ -5,11 +5,7 @@
         <slot></slot>
       </pre>
     </div>
-    <cv-feedback-button
-      feedback="Copied!"
-      aria-label="Copy code"
-      @click="$emit('copy-code')"
-    >
+    <cv-feedback-button feedback="Copied!" aria-label="Copy code" @click="$emit('copy-code')">
       <Copy16 v-if="componentsX" class="bx--snippet__icon" />
       <svg
         v-else

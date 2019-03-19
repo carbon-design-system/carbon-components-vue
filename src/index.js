@@ -1,8 +1,4 @@
-const ctx = require.context(
-  './components/',
-  true,
-  /^(?!.*(?:\/_|-story\.vue|-test\.vue)).*\.vue$/
-);
+const ctx = require.context('./components/', true, /^(?!.*(?:\/_|-story\.vue|-test\.vue)).*\.vue$/);
 const components = ctx.keys().map(ctx);
 
 export default {

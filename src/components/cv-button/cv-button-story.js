@@ -143,11 +143,7 @@ for (const experimental of [false, true]) {
   const stories = experimental ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
-    if (
-      story.skip &&
-      ((story.skip.default && !experimental) ||
-        (story.skip.experimental && experimental))
-    ) {
+    if (story.skip && ((story.skip.default && !experimental) || (story.skip.experimental && experimental))) {
       continue;
     }
     stories.add(

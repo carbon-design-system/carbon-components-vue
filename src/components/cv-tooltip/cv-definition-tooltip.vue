@@ -20,9 +20,7 @@ export default {
         const validValues = ['top', 'bottom'];
         const valid = validValues.includes(val);
         if (!valid) {
-          console.warn(
-            `CVDefinitionTooltip.direction must be one of the following: ${validValues}`
-          );
+          console.warn(`CVDefinitionTooltip.direction must be one of the following: ${validValues}`);
         }
         return valid;
       },

@@ -148,9 +148,7 @@ export default {
       .select('svg')
       .attr('width', boxSize)
       .attr('height', boxSize);
-    this.g = svg
-      .append('g')
-      .attr('transform', `translate(${boxSize / 2}, ${boxSize / 2})`);
+    this.g = svg.append('g').attr('transform', `translate(${boxSize / 2}, ${boxSize / 2})`);
 
     this.amountText = d3.select('.cv-gauge__amount');
     this.totalText = d3.select('.cv-gauge__total');

@@ -33,10 +33,7 @@ const preKnobs = {
   },
 };
 
-const variants = [
-  { name: 'a', includes: ['href'] },
-  { name: 'router-link', includes: ['to'] },
-];
+const variants = [{ name: 'a', includes: ['href'] }, { name: 'router-link', includes: ['to'] }];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 

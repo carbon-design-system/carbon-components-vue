@@ -11,11 +11,7 @@
       :aria-checked="`${isChecked}`"
       :value="value"
     />
-    <label
-      class="bx--toggle__label"
-      :for="uid"
-      :data-contained-checkbox-state="isChecked"
-    >
+    <label class="bx--toggle__label" :for="uid" :data-contained-checkbox-state="isChecked">
       <div class="bx--toggle__text--left" v-if="!small">
         <slot name="text-left">Off</slot>
       </div>

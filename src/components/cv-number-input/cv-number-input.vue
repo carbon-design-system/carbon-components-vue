@@ -10,34 +10,20 @@
       :data-invalid="isInvalid"
     >
       <div class="bx--number__controls">
-        <button
-          class="bx--number__control-btn up-icon"
-          @click="doUp"
-          type="button"
-        >
+        <button class="bx--number__control-btn up-icon" @click="doUp" type="button">
           <CaretUpGlyph v-if="componentsX" />
           <svg v-else width="10" height="5" viewBox="0 0 10 5">
             <path d="M0 5L5 .002 10 5z" fill-rule="evenodd"></path>
           </svg>
         </button>
-        <button
-          class="bx--number__control-btn down-icon"
-          @click="doDown"
-          type="button"
-        >
+        <button class="bx--number__control-btn down-icon" @click="doDown" type="button">
           <CaretDownGlyph v-if="componentsX" />
           <svg v-else width="10" height="5" viewBox="0 0 10 5">
             <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd"></path>
           </svg>
         </button>
       </div>
-      <input
-        :id="uid"
-        type="number"
-        v-model="internalValue"
-        v-bind="$attrs"
-        v-on="inputListeners"
-      />
+      <input :id="uid" type="number" v-model="internalValue" v-bind="$attrs" v-on="inputListeners" />
       <label :for="uid" class="bx--label">{{ label }}</label>
       <div class="bx--form-requirement" v-if="isInvalid">
         <slot name="invalid-message">{{ invalidMessage }}</slot>
@@ -71,9 +57,7 @@ export default {
       default: undefined,
       validator(val) {
         if (val !== undefined) {
-          console.warn(
-            'CvNumberInput: invalid prop deprecated in favour of invalidMessage'
-          );
+          console.warn('CvNumberInput: invalid prop deprecated in favour of invalidMessage');
         }
         return true;
       },
@@ -108,16 +92,10 @@ export default {
       return intVal;
     },
     isInvalid() {
-      return (
-        this.$slots['invalid-message'] ||
-        (this.invalidMessage && this.invalidMessage.length)
-      );
+      return this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length);
     },
     isHelper() {
-      return (
-        this.$slots['helper-text'] ||
-        (this.helperText && this.helperText.length)
-      );
+      return this.$slots['helper-text'] || (this.helperText && this.helperText.length);
     },
   },
   methods: {

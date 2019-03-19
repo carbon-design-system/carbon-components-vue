@@ -5,12 +5,7 @@ A utility component that used as a progressive loading state while the user wait
 ## Usage
 
 ```html
-<cv-skeleton-text
-  :heading="true"
-  :width="90%"
-  :paragraph="true"
-  :lineCount="3"
-></cv-skeleton-text>
+<cv-skeleton-text :heading="true" :width="90%" :paragraph="true" :lineCount="3"></cv-skeleton-text>
 ```
 
 ## Attributes

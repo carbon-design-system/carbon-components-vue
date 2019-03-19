@@ -7,22 +7,13 @@
     :aria-role="isAlert ? 'alert' : false"
     :aria-live="!isAlert ? 'polite' : false"
   >
-    <component
-      v-if="componentsX"
-      :is="icon"
-      class="bx--toast-notification__icon"
-    />
+    <component v-if="componentsX" :is="icon" class="bx--toast-notification__icon" />
     <div class="bx--toast-notification__details">
       <h3 class="bx--toast-notification__title">{{ title }}</h3>
       <p class="bx--toast-notification__subtitle">{{ subTitle }}</p>
       <p class="bx--toast-notification__caption">{{ caption }}</p>
     </div>
-    <button
-      type="button"
-      data-notification-btn
-      class="bx--toast-notification__close-button"
-      @click="$emit('close')"
-    >
+    <button type="button" data-notification-btn class="bx--toast-notification__close-button" @click="$emit('close')">
       <Close16 v-if="componentsX" class="bx--toast-notification__close-icon" />
       <svg
         v-else

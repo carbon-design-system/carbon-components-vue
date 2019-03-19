@@ -27,9 +27,7 @@
             fill-rule="nonzero"
           ></path>
         </svg>
-        <label :for="`${uid}-input-1`" class="bx--label">{{
-          getDateLabel
-        }}</label>
+        <label :for="`${uid}-input-1`" class="bx--label">{{ getDateLabel }}</label>
         <input
           :data-invalid="isInvalid"
           type="text"
@@ -42,18 +40,11 @@
           ref="date"
         />
         <div class="bx--form-requirement" v-if="isInvalid">
-          <slot name="invalid-message">{{
-            invalidMessage || invalidDateMessage
-          }}</slot>
+          <slot name="invalid-message">{{ invalidMessage || invalidDateMessage }}</slot>
         </div>
       </div>
-      <div
-        :class="{ 'bx--date-picker-container': kind === 'range' }"
-        v-if="kind === 'range'"
-      >
-        <label :for="`${uid}-input-2`" class="bx--label">{{
-          getDateEndLabel
-        }}</label>
+      <div :class="{ 'bx--date-picker-container': kind === 'range' }" v-if="kind === 'range'">
+        <label :for="`${uid}-input-2`" class="bx--label">{{ getDateEndLabel }}</label>
         <input
           type="text"
           :id="`${uid}-input-2`"
@@ -126,9 +117,7 @@ export default {
       default: undefined,
       validator(val) {
         if (val !== undefined) {
-          console.warn(
-            'CvDatePicker: invalid prop deprecated in favour of invalidMessage'
-          );
+          console.warn('CvDatePicker: invalid prop deprecated in favour of invalidMessage');
         }
         return true;
       },
@@ -138,9 +127,7 @@ export default {
       default: null,
       validator(val) {
         if (val !== null) {
-          console.warn(
-            'CvDatePicker: invalidDateMessage deprecated in favour of invalidMessage'
-          );
+          console.warn('CvDatePicker: invalidDateMessage deprecated in favour of invalidMessage');
         }
         return true;
       },

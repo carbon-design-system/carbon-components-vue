@@ -20,30 +20,27 @@ http://www.carbondesignsystem.com/components/structured-list/code
       <cv-structured-list-data>Item_1</cv-structured-list-data>
       <cv-structured-list-data>Item_1</cv-structured-list-data>
       <cv-structured-list-data
-        >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
-        magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem
-        vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate
-        nisl a porttitor interdum.</cv-structured-list-data
+        >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet
+        bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a
+        porttitor interdum.</cv-structured-list-data
       >
     </cv-structured-list-item>
     <cv-structured-list-item>
       <cv-structured-list-data>Item_2</cv-structured-list-data>
       <cv-structured-list-data>Item_2</cv-structured-list-data>
       <cv-structured-list-data
-        >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
-        magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem
-        vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate
-        nisl a porttitor interdum.</cv-structured-list-data
+        >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet
+        bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a
+        porttitor interdum.</cv-structured-list-data
       >
     </cv-structured-list-item>
     <cv-structured-list-item>
       <cv-structured-list-data>Item_3</cv-structured-list-data>
       <cv-structured-list-data>Item_3</cv-structured-list-data>
       <cv-structured-list-data
-        >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
-        magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem
-        vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate
-        nisl a porttitor interdum.</cv-structured-list-data
+        >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet
+        bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a
+        porttitor interdum.</cv-structured-list-data
       >
     </cv-structured-list-item>
   </template>
@@ -64,30 +61,27 @@ http://www.carbondesignsystem.com/components/structured-list/code
       <cv-structured-list-data>Item_1</cv-structured-list-data>
       <cv-structured-list-data>Item_1</cv-structured-list-data>
       <cv-structured-list-data
-        >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
-        magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem
-        vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate
-        nisl a porttitor interdum.</cv-structured-list-data
+        >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet
+        bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a
+        porttitor interdum.</cv-structured-list-data
       >
     </cv-structured-list-item>
     <cv-structured-list-item name="group-1" value="value-2">
       <cv-structured-list-data>Item_2</cv-structured-list-data>
       <cv-structured-list-data>Item_2</cv-structured-list-data>
       <cv-structured-list-data
-        >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
-        magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem
-        vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate
-        nisl a porttitor interdum.</cv-structured-list-data
+        >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet
+        bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a
+        porttitor interdum.</cv-structured-list-data
       >
     </cv-structured-list-item>
     <cv-structured-list-item name="group-1" value="value-3">
       <cv-structured-list-data>Item_3</cv-structured-list-data>
       <cv-structured-list-data>Item_3</cv-structured-list-data>
       <cv-structured-list-data
-        >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
-        magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem
-        vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate
-        nisl a porttitor interdum.</cv-structured-list-data
+        >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet
+        bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a
+        porttitor interdum.</cv-structured-list-data
       >
     </cv-structured-list-item>
   </template>
@@ -108,30 +102,27 @@ http://www.carbondesignsystem.com/components/structured-list/code
       <cv-structured-list-data>Item_1</cv-structured-list-data>
       <cv-structured-list-data>Item_1</cv-structured-list-data>
       <cv-structured-list-data
-        >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
-        magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem
-        vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate
-        nisl a porttitor interdum.</cv-structured-list-data
+        >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet
+        bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a
+        porttitor interdum.</cv-structured-list-data
       >
     </cv-structured-list-item>
     <cv-structured-list-item name="group-1" value="value-2" v-model="listVal">
       <cv-structured-list-data>Item_2</cv-structured-list-data>
       <cv-structured-list-data>Item_2</cv-structured-list-data>
       <cv-structured-list-data
-        >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
-        magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem
-        vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate
-        nisl a porttitor interdum.</cv-structured-list-data
+        >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet
+        bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a
+        porttitor interdum.</cv-structured-list-data
       >
     </cv-structured-list-item>
     <cv-structured-list-item name="group-1" value="value-3" v-model="listVal">
       <cv-structured-list-data>Item_3</cv-structured-list-data>
       <cv-structured-list-data>Item_3</cv-structured-list-data>
       <cv-structured-list-data
-        >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
-        magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem
-        vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate
-        nisl a porttitor interdum.</cv-structured-list-data
+        >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet
+        bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a
+        porttitor interdum.</cv-structured-list-data
       >
     </cv-structured-list-item>
   </template>

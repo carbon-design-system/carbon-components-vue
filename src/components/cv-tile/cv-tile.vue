@@ -38,10 +38,7 @@ export default {
     kind: {
       type: String,
       default: '',
-      validator: value =>
-        ['clickable', 'expandable', 'selectable', 'standard', ''].includes(
-          value
-        ),
+      validator: value => ['clickable', 'expandable', 'selectable', 'standard', ''].includes(value),
     },
   },
   computed: {

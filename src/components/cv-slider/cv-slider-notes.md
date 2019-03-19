@@ -13,8 +13,7 @@ http://www.carbondesignsystem.com/components/slider/code
 ### v-model
 
 ```html
-<cv-slider label="Slider input label" min="0" max="100" v-model="modelValue">
-</cv-slider>
+<cv-slider label="Slider input label" min="0" max="100" v-model="modelValue"> </cv-slider>
 ```
 
 ```javascript

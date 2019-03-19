@@ -5,8 +5,7 @@
       :class="[
         'bx--label',
         {
-          'bx--label--disabled':
-            $attrs.disabled !== undefined && $attrs.disabled,
+          'bx--label--disabled': $attrs.disabled !== undefined && $attrs.disabled,
         },
       ]"
       >{{ label }}</label
@@ -54,16 +53,10 @@ export default {
       };
     },
     isInvalid() {
-      return (
-        this.$slots['invalid-message'] ||
-        (this.invalidMessage && this.invalidMessage.length)
-      );
+      return this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length);
     },
     isHelper() {
-      return (
-        this.$slots['helper-text'] ||
-        (this.helperText && this.helperText.length)
-      );
+      return this.$slots['helper-text'] || (this.helperText && this.helperText.length);
     },
   },
 };

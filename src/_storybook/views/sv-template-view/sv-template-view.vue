@@ -31,24 +31,13 @@
       <pre v-highlightjs="propsJSON">
         <code class="json"></code>
       </pre>
-      <button
-        @click="sourceToClipboard"
-        title="Copy to clipboard"
-        class="sv-template-view__copy"
-        ref="copyButton"
-      >
+      <button @click="sourceToClipboard" title="Copy to clipboard" class="sv-template-view__copy" ref="copyButton">
         <svg width="18" height="24" viewBox="0 0 18 24" fill-rule="evenodd">
-          <path
-            d="M13 5V0H0v19h5v5h13V5h-5zM2 17V2h9v3H5v12H2zm14 5H7V7h9v15z"
-          ></path>
+          <path d="M13 5V0H0v19h5v5h13V5h-5zM2 17V2h9v3H5v12H2zm14 5H7V7h9v15z"></path>
           <path d="M9 9h5v2H9zM9 12h5v2H9zM9 15h3v2H9z"></path>
         </svg>
       </button>
-      <textarea
-        class="sv-template-view__clippy"
-        aria-hidden="true"
-        ref="clippy"
-      ></textarea>
+      <textarea class="sv-template-view__clippy" aria-hidden="true" ref="clippy"></textarea>
     </section>
   </component>
 </template>
@@ -87,28 +76,17 @@ export default {
     },
     style() {
       return {
-        alignItems:
-          this.svPosition && this.svPosition.length
-            ? this.svPosition
-            : 'flex-start',
+        alignItems: this.svPosition && this.svPosition.length ? this.svPosition : 'flex-start',
       };
     },
   },
   mounted() {
-    this.propsJSON = JSON.stringify(
-      this.$vnode.context.$options.propsData,
-      null,
-      2
-    );
+    this.propsJSON = JSON.stringify(this.$vnode.context.$options.propsData, null, 2);
     this.experimental = false;
     reset();
   },
   updated() {
-    this.propsJSON = JSON.stringify(
-      this.$vnode.context.$options.propsData,
-      null,
-      2
-    );
+    this.propsJSON = JSON.stringify(this.$vnode.context.$options.propsData, null, 2);
   },
   methods: {
     onExperimental() {
@@ -123,18 +101,14 @@ export default {
       this.$refs.clippy.value = this.svSource;
       this.$refs.clippy.select();
       document.execCommand('copy');
-      Vue.nextTick(
-        this.$refs.copyButton.classList.add('sv-template-view__copy--copied')
-      );
+      Vue.nextTick(this.$refs.copyButton.classList.add('sv-template-view__copy--copied'));
     },
     method(methodName) {
       const result = this.$slots.component[0].componentInstance[methodName];
       if (!result) {
         // console.dir(this.$slots.component[0].componentInstance);
         return () => {
-          console.warn(
-            `sv-template-view: Method ${methodName} does not exist.`
-          );
+          console.warn(`sv-template-view: Method ${methodName} does not exist.`);
         };
       }
       return result;

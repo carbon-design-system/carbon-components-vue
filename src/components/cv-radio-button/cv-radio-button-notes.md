@@ -20,25 +20,9 @@ http://www.carbondesignsystem.com/components/radio-button/code
 
 ```html
 <cv-radio-group @change="actionChange">
-  <cv-radio-button
-    name="group-1"
-    label="radio-1"
-    value="value-1"
-    v-model="radioVal"
-  />
-  <cv-radio-button
-    name="group-1"
-    label="radio-2"
-    value="value-2"
-    v-model="radioVal"
-  />
-  <cv-radio-button
-    name="group-1"
-    label="radio-3"
-    value="value-3"
-    v-model="radioVal"
-    disabled
-  />
+  <cv-radio-button name="group-1" label="radio-1" value="value-1" v-model="radioVal" />
+  <cv-radio-button name="group-1" label="radio-2" value="value-2" v-model="radioVal" />
+  <cv-radio-button name="group-1" label="radio-3" value="value-3" v-model="radioVal" disabled />
 </cv-radio-group>
 ```
 

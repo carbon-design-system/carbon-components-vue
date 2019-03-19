@@ -10,15 +10,9 @@ http://www.carbondesignsystem.com/components/content-switcher/code
 
 ```html
 <cv-content-switcher @selected="actionSelected">
-  <cv-content-switcher-button owner-id="csb-1" :selected="isSelected(0)"
-    >Button Name 1</cv-content-switcher-button
-  >
-  <cv-content-switcher-button owner-id="csb-2" :selected="isSelected(1)"
-    >Button Name 2</cv-content-switcher-button
-  >
-  <cv-content-switcher-button owner-id="csb-3" :selected="isSelected(2)"
-    >Button Name 3</cv-content-switcher-button
-  >
+  <cv-content-switcher-button owner-id="csb-1" :selected="isSelected(0)">Button Name 1</cv-content-switcher-button>
+  <cv-content-switcher-button owner-id="csb-2" :selected="isSelected(1)">Button Name 2</cv-content-switcher-button>
+  <cv-content-switcher-button owner-id="csb-3" :selected="isSelected(2)">Button Name 3</cv-content-switcher-button>
 </cv-content-switcher>
 
 <section style="margin: 10px 0;">
@@ -41,15 +35,9 @@ http://www.carbondesignsystem.com/components/content-switcher/code
 
 ```html
 <cv-content-switcher>
-  <cv-content-switcher-button content-selector=".content-1" selected
-    >Button Name 1</cv-content-switcher-button
-  >
-  <cv-content-switcher-button content-selector=".content-2"
-    >Button Name 2</cv-content-switcher-button
-  >
-  <cv-content-switcher-button content-selector=".content-3"
-    >Button Name 3</cv-content-switcher-button
-  >
+  <cv-content-switcher-button content-selector=".content-1" selected>Button Name 1</cv-content-switcher-button>
+  <cv-content-switcher-button content-selector=".content-2">Button Name 2</cv-content-switcher-button>
+  <cv-content-switcher-button content-selector=".content-3">Button Name 3</cv-content-switcher-button>
 </cv-content-switcher>
 
 <section>

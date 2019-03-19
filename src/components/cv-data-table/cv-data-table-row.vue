@@ -1,13 +1,7 @@
 <template>
   <tr>
     <td v-if="hasBatchActions">
-      <cv-checkbox
-        :form-item="false"
-        :value="value"
-        v-model="dataChecked"
-        @change="onChange"
-        ref="rowChecked"
-      />
+      <cv-checkbox :form-item="false" :value="value" v-model="dataChecked" @change="onChange" ref="rowChecked" />
     </td>
     <slot />
     <td v-if="hasOverflowMenu">
@@ -56,10 +50,7 @@ export default {
       return true;
     },
     hasOverflowMenu() {
-      return (
-        (this.overflowMenu && this.overflowMenu.length) ||
-        this.$slots['overflow-menu']
-      );
+      return (this.overflowMenu && this.overflowMenu.length) || this.$slots['overflow-menu'];
     },
     hasBatchActions() {
       return this.$parent.hasBatchActions;

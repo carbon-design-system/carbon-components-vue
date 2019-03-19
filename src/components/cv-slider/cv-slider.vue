@@ -10,10 +10,7 @@
         data-slider-input-box="#slider-input-box"
       >
         <div class="bx--slider__track" @click="onTrackClick" ref="track"></div>
-        <div
-          class="bx--slider__filled-track"
-          :style="`width: ${percentage};`"
-        ></div>
+        <div class="bx--slider__filled-track" :style="`width: ${percentage};`"></div>
         <div
           class="bx--slider__thumb"
           :class="{
@@ -26,15 +23,7 @@
           @keydown.down.left.prevent="onDown"
           @mousedown="onStartDrag"
         ></div>
-        <input
-          :id="uid"
-          class="bx--slider__input"
-          type="range"
-          :step="step"
-          :min="min"
-          :max="max"
-          ref="range"
-        />
+        <input :id="uid" class="bx--slider__input" type="range" :step="step" :min="min" :max="max" ref="range" />
       </div>
       <span class="bx--slider__range-label">{{ internalMaxLabel }}</span>
       <input
@@ -115,8 +104,7 @@ export default {
   mounted() {
     this.$refs.range.value = this.value;
     this.internalValue = this.$refs.range.value;
-    this.percentage = `${((this.internalValue - this.getMin()) * 100) /
-      (this.getMax() - this.getMin())}%`;
+    this.percentage = `${((this.internalValue - this.getMin()) * 100) / (this.getMax() - this.getMin())}%`;
   },
   watch: {
     value(val) {
@@ -176,16 +164,13 @@ export default {
       this.$refs.range.value = newValue;
       this.internalValue = this.$refs.range.value;
 
-      this.percentage = `${((this.internalValue - this.getMin()) * 100) /
-        (this.getMax() - this.getMin())}%`;
+      this.percentage = `${((this.internalValue - this.getMin()) * 100) / (this.getMax() - this.getMin())}%`;
 
       this.$emit('modelEvent', this.$refs.range.value);
       this.$emit('change', this.$refs.range.value);
     },
     onChange() {
-      let newValue = this.internalValue.length
-        ? parseFloat(this.internalValue)
-        : this.getMin();
+      let newValue = this.internalValue.length ? parseFloat(this.internalValue) : this.getMin();
       this.setValue(newValue);
     },
     onStartDrag(ev) {
@@ -199,11 +184,9 @@ export default {
     onDrag(ev) {
       if (this.isDragging) {
         // percentage change
-        let newValue =
-          (ev.clientX - this.dragStartX) / this.$refs.track.offsetWidth;
+        let newValue = (ev.clientX - this.dragStartX) / this.$refs.track.offsetWidth;
         // uncapped new value
-        newValue =
-          this.dragStartValue + (this.getMax() - this.getMin()) * newValue;
+        newValue = this.dragStartValue + (this.getMax() - this.getMin()) * newValue;
 
         this.setValue(newValue, ev);
       }
@@ -229,27 +212,13 @@ export default {
       this.setValue(newValue, ev);
     },
     onUp(ev) {
-      let curValue =
-        ev.target.type === 'number'
-          ? parseFloat(ev.target.value)
-          : this.getValue();
-      let newValue =
-        curValue +
-        (ev.shiftKey
-          ? this.internalMultiplier * this.getStep()
-          : this.getStep());
+      let curValue = ev.target.type === 'number' ? parseFloat(ev.target.value) : this.getValue();
+      let newValue = curValue + (ev.shiftKey ? this.internalMultiplier * this.getStep() : this.getStep());
       this.setValue(newValue, ev);
     },
     onDown(ev) {
-      let curValue =
-        ev.target.type === 'number'
-          ? parseFloat(ev.target.value)
-          : this.getValue();
-      let newValue =
-        curValue -
-        (ev.shiftKey
-          ? this.internalMultiplier * this.getStep()
-          : this.getStep());
+      let curValue = ev.target.type === 'number' ? parseFloat(ev.target.value) : this.getValue();
+      let newValue = curValue - (ev.shiftKey ? this.internalMultiplier * this.getStep() : this.getStep());
       this.setValue(newValue, ev);
     },
   },

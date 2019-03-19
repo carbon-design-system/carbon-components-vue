@@ -34,13 +34,7 @@
     @click="onClick"
   >
     <li class="bx--dropdown-text" ref="valueContent">{{ placeholder }}</li>
-    <svg
-      class="bx--dropdown__arrow"
-      width="10"
-      height="5"
-      viewBox="0 0 10 5"
-      fill-rule="evenodd"
-    >
+    <svg class="bx--dropdown__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
       <path d="M10 0L5 5 0 0z"></path>
     </svg>
     <li>
@@ -75,9 +69,7 @@ export default {
   created() {
     // add these on created otherwise cv:mounted is too late.
     this.$on('cv:mounted', srcComponent => this.onCvMount(srcComponent));
-    this.$on('cv:beforeDestroy', srcComponent =>
-      this.onCvBeforeDestroy(srcComponent)
-    );
+    this.$on('cv:beforeDestroy', srcComponent => this.onCvBeforeDestroy(srcComponent));
   },
   mounted() {
     this.$el.addEventListener('focusout', ev => {
@@ -152,15 +144,11 @@ export default {
       let nextFocusIndex;
 
       if (currentFocusEl) {
-        currentFocusValue = currentFocusEl.parentNode.getAttribute(
-          'data-value'
-        );
+        currentFocusValue = currentFocusEl.parentNode.getAttribute('data-value');
       }
 
       if (currentFocusValue !== undefined) {
-        currentFocusIndex = childItems.findIndex(
-          child => child.value === currentFocusValue
-        );
+        currentFocusIndex = childItems.findIndex(child => child.value === currentFocusValue);
       }
 
       if (up) {

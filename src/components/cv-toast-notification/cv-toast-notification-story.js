@@ -11,10 +11,7 @@ import CvToastNotificationNotesMD from './cv-toast-notification-notes.md';
 import CvToastNotification from './cv-toast-notification';
 
 const storiesDefault = storiesOf('Default/CvToastNotification', module);
-const storiesExperimental = storiesOf(
-  'Experimental/CvToastNotification',
-  module
-);
+const storiesExperimental = storiesOf('Experimental/CvToastNotification', module);
 import { override, reset } from '../../_internal/_feature-flags';
 
 const preKnobs = {
@@ -80,9 +77,7 @@ for (const experimental of [false, true]) {
         // ----------------------------------------------------------------
 
         const templateString = `
-<cv-toast-notification v-if="visible" ${
-          settings.group.attr
-        }></cv-toast-notification>
+<cv-toast-notification v-if="visible" ${settings.group.attr}></cv-toast-notification>
   `;
 
         // ----------------------------------------------------------------

@@ -124,8 +124,7 @@ export default {
     rowSize: {
       type: String,
       default: 'standard',
-      validator: val =>
-        ['compact', 'short', 'standard', 'tall', ''].includes(val),
+      validator: val => ['compact', 'short', 'standard', 'tall', ''].includes(val),
     },
     searchPlaceholder: { type: String, default: 'filter' },
     sortable: Boolean,
@@ -176,10 +175,7 @@ export default {
       return this.$slots['batch-actions'];
     },
     hasOverflowMenu() {
-      return (
-        this.overflowMenu === true ||
-        (this.overflowMenu && this.overflowMenu.length > 0)
-      );
+      return this.overflowMenu === true || (this.overflowMenu && this.overflowMenu.length > 0);
     },
     tableStyle() {
       return this.autoWidth ? { width: 'initial' } : { width: '100%' };
@@ -195,24 +191,15 @@ export default {
       return false;
     },
     internalNumberOfItems() {
-      if (
-        this.internalPagination &&
-        typeof this.internalPagination.numberOfItems === 'number'
-      ) {
-        return Math.min(
-          this.internalPagination.numberOfItems,
-          rows(this.$children).length
-        );
+      if (this.internalPagination && typeof this.internalPagination.numberOfItems === 'number') {
+        return Math.min(this.internalPagination.numberOfItems, rows(this.$children).length);
       } else {
         return rows(this.$children).length;
       }
     },
     modifierClasses() {
       const prefix = 'bx--data-table-v2--';
-      const sizeClass =
-        this.rowSize.length === 0 || this.rowSize === 'standard'
-          ? ''
-          : `${prefix}${this.rowSize} `;
+      const sizeClass = this.rowSize.length === 0 || this.rowSize === 'standard' ? '' : `${prefix}${this.rowSize} `;
       const zebraClass = this.zebra ? `${prefix}zebra ` : '';
       const borderlessClass = this.borderless ? `${prefix}no-border ` : '';
       return `${sizeClass}${zebraClass}${borderlessClass}`.trimRight();
@@ -241,8 +228,7 @@ export default {
         }
       }
       this.headingChecked =
-        this.dataRowsSelected.length ===
-        this.$children.filter(item => item.isCvDataTableRow).length;
+        this.dataRowsSelected.length === this.$children.filter(item => item.isCvDataTableRow).length;
       this.batchActive = this.dataRowsSelected.length > 0;
     },
     onHeadingCheckChange() {
@@ -278,8 +264,7 @@ export default {
         modelSet.add(value);
       }
       this.dataRowsSelected = Array.from(modelSet);
-      this.headingChecked =
-        this.dataRowsSelected.length === rows(this.$children).length;
+      this.headingChecked = this.dataRowsSelected.length === rows(this.$children).length;
       this.batchActive = this.dataRowsSelected.length > 0;
 
       this.$emit('row-select-change', { value, selected: checked });

@@ -160,15 +160,9 @@ for (const story of storySet) {
       // ----------------------------------------------------------------
 
       const templateString = `
-      <cv-toggle${
-        settings.group.attr
-      } name="check-1" value="check-1"></cv-toggle>
-      <cv-toggle${
-        settings.group.attr
-      } name="check-2" value="check-2"></cv-toggle>
-      <cv-toggle${
-        settings.group.attr
-      } name="check-3" value="check-3"></cv-toggle>
+      <cv-toggle${settings.group.attr} name="check-1" value="check-1"></cv-toggle>
+      <cv-toggle${settings.group.attr} name="check-2" value="check-2"></cv-toggle>
+      <cv-toggle${settings.group.attr} name="check-3" value="check-3"></cv-toggle>
       `;
 
       // ----------------------------------------------------------------

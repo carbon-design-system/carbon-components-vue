@@ -24,17 +24,8 @@
     :aria-selected="`${dataSelected}`"
     @click="open"
   >
-    <component
-      v-if="typeof icon === 'object'"
-      :is="icon"
-      class="bx--content-switcher__icon"
-    />
-    <svg
-      v-if="typeof icon === 'string'"
-      class="bx--content-switcher__icon"
-      height="16"
-      width="16"
-    >
+    <component v-if="typeof icon === 'object'" :is="icon" class="bx--content-switcher__icon" />
+    <svg v-if="typeof icon === 'string'" class="bx--content-switcher__icon" height="16" width="16">
       <use :href="icon"></use>
     </svg>
     <span>
@@ -84,9 +75,7 @@ export default {
     this.$_CvContentSwitcherButton = true; // for use by parent with $children
 
     if (this.contentSelector === '' && this.ownerId === '') {
-      console.error(
-        'CvContentSwitcherButton: ownerId or content-selector properties must not be empty strings.'
-      );
+      console.error('CvContentSwitcherButton: ownerId or content-selector properties must not be empty strings.');
     }
 
     this.dataSelected = this.selected;

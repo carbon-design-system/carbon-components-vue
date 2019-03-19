@@ -11,13 +11,7 @@
     >
       <svg class="bx--loading__svg" viewBox="-75 -75 150 150">
         <title>Loading</title>
-        <circle
-          v-if="componentsX && small"
-          class="bx--loading__background"
-          cx="0"
-          cy="0"
-          r="37.5"
-        ></circle>
+        <circle v-if="componentsX && small" class="bx--loading__background" cx="0" cy="0" r="37.5"></circle>
         <circle
           :class="{
             'bx--loading__stroke': componentsX,
@@ -45,9 +39,7 @@ export default {
     overlayClasses() {
       if (!this.overlay) return '';
 
-      return `bx--loading-overlay ${
-        this.stopped ? 'bx--loading-overlay--stop' : ''
-      }`;
+      return `bx--loading-overlay ${this.stopped ? 'bx--loading-overlay--stop' : ''}`;
     },
   },
   data() {

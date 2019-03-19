@@ -12,24 +12,15 @@ http://www.carbondesignsystem.com/components/select/code
 <cv-select label="test-label" @change="actionChange">
   <cv-select-option disabled selected hidden>Choose an option</cv-select-option>
   <cv-select-option value="solong"
-    >A much longer cv-select-option that is worth having around to check how
-    text flows</cv-select-option
+    >A much longer cv-select-option that is worth having around to check how text flows</cv-select-option
   >
   <cv-select-optgroup label="Category 1">
-    <cv-select-option value="cv-select-option1"
-      >cv-select-option 1</cv-select-option
-    >
-    <cv-select-option value="cv-select-option2"
-      >cv-select-option 2</cv-select-option
-    >
+    <cv-select-option value="cv-select-option1">cv-select-option 1</cv-select-option>
+    <cv-select-option value="cv-select-option2">cv-select-option 2</cv-select-option>
   </cv-select-optgroup>
   <cv-select-optgroup label="Category 2">
-    <cv-select-option value="cv-select-option3"
-      >cv-select-option 3</cv-select-option
-    >
-    <cv-select-option value="cv-select-option4"
-      >cv-select-option 4</cv-select-option
-    >
+    <cv-select-option value="cv-select-option3">cv-select-option 3</cv-select-option>
+    <cv-select-option value="cv-select-option4">cv-select-option 4</cv-select-option>
   </cv-select-optgroup>
 </cv-select>
 ```
@@ -40,24 +31,15 @@ http://www.carbondesignsystem.com/components/select/code
 <cv-select label="test-label" @change="actionChange" v-model="selectValue">
   <cv-select-option disabled hidden>Choose an option</cv-select-option>
   <cv-select-option value="solong"
-    >A much longer cv-select-option that is worth having around to check how
-    text flows</cv-select-option
+    >A much longer cv-select-option that is worth having around to check how text flows</cv-select-option
   >
   <cv-select-optgroup label="Category 1">
-    <cv-select-option value="cv-select-option1"
-      >cv-select-option 1</cv-select-option
-    >
-    <cv-select-option value="cv-select-option2"
-      >cv-select-option 2</cv-select-option
-    >
+    <cv-select-option value="cv-select-option1">cv-select-option 1</cv-select-option>
+    <cv-select-option value="cv-select-option2">cv-select-option 2</cv-select-option>
   </cv-select-optgroup>
   <cv-select-optgroup label="Category 2">
-    <cv-select-option value="cv-select-option3"
-      >cv-select-option 3</cv-select-option
-    >
-    <cv-select-option value="cv-select-option4"
-      >cv-select-option 4</cv-select-option
-    >
+    <cv-select-option value="cv-select-option3">cv-select-option 3</cv-select-option>
+    <cv-select-option value="cv-select-option4">cv-select-option 4</cv-select-option>
   </cv-select-optgroup>
 </cv-select>
 ```

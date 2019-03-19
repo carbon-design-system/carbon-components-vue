@@ -12,9 +12,7 @@
           v-for="(size, index) in pageSizes"
           :key="index"
           :value="`${size.value ? size.value : size}`"
-          >{{
-            size.label ? size.label : size.value ? size.value : size
-          }}</cv-select-option
+          >{{ size.label ? size.label : size.value ? size.value : size }}</cv-select-option
         >
       </cv-select>
 
@@ -34,16 +32,8 @@
         :aria-label="backwardText"
         @click="onPrevPage"
       >
-        <svg
-          class="bx--pagination__button-icon"
-          width="7"
-          height="12"
-          viewBox="0 0 7 12"
-        >
-          <path
-            fill-rule="nonzero"
-            d="M1.45 6.002L7 11.27l-.685.726L0 6.003 6.315 0 7 .726z"
-          ></path>
+        <svg class="bx--pagination__button-icon" width="7" height="12" viewBox="0 0 7 12">
+          <path fill-rule="nonzero" d="M1.45 6.002L7 11.27l-.685.726L0 6.003 6.315 0 7 .726z"></path>
         </svg>
       </button>
 
@@ -56,12 +46,9 @@
         @input="onPageChange"
         :value="`${pageValue}`"
       >
-        <cv-select-option
-          v-for="pageNumber in pages"
-          :key="pageNumber"
-          :value="`${pageNumber}`"
-          >{{ pageNumber }}</cv-select-option
-        >
+        <cv-select-option v-for="pageNumber in pages" :key="pageNumber" :value="`${pageNumber}`">{{
+          pageNumber
+        }}</cv-select-option>
       </cv-select>
       <span v-if="pages.length == 0">{{ pageValue }}</span>
 
@@ -73,16 +60,8 @@
         @click="onNextPage"
         :disabled="this.pageValue === this.pageCount"
       >
-        <svg
-          class="bx--pagination__button-icon"
-          width="7"
-          height="12"
-          viewBox="0 0 7 12"
-        >
-          <path
-            fill-rule="nonzero"
-            d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"
-          ></path>
+        <svg class="bx--pagination__button-icon" width="7" height="12" viewBox="0 0 7 12">
+          <path fill-rule="nonzero" d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"></path>
         </svg>
       </button>
     </div>
@@ -128,8 +107,7 @@ const newPagesArray = pageCount => {
   return Array.from({ length: pageCount }, (val, key) => key + 1);
 };
 
-const newFirstItem = (pageValue, pageSizeValue) =>
-  1 + (pageValue - 1) * pageSizeValue;
+const newFirstItem = (pageValue, pageSizeValue) => 1 + (pageValue - 1) * pageSizeValue;
 
 export default {
   name: 'CvPagination',
@@ -162,10 +140,7 @@ export default {
     numberOfItems() {
       this.pageCount = newPageCount(this.numberOfItems, this.pageSizeValue);
       this.pages = newPagesArray(this.pageCount);
-      this.pageValue = Math.min(
-        this.pageCount,
-        Math.ceil(this.firstItem / this.pageSizeValue)
-      );
+      this.pageValue = Math.min(this.pageCount, Math.ceil(this.firstItem / this.pageSizeValue));
       this.firstItem = 1 + (this.pageValue - 1) * this.pageSizeValue;
     },
     page() {
@@ -191,10 +166,7 @@ export default {
     },
     rangeText() {
       const start = this.firstItem;
-      const end = Math.min(
-        start + parseInt(this.pageSizeValue, 10) - 1,
-        this.numberOfItems
-      );
+      const end = Math.min(start + parseInt(this.pageSizeValue, 10) - 1, this.numberOfItems);
 
       if (this.numberOfItems !== Infinity) {
         return `${start}-${end} of ${this.numberOfItems}`;

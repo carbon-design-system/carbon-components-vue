@@ -64,10 +64,7 @@ const preKnobs = {
   barColors: {
     group: 'attr',
     type: object,
-    config: [
-      'bar-colors',
-      ['#00a78f', '#3b1a40', '#473793', '#3c6df0', '#56d2bb'],
-    ],
+    config: ['bar-colors', ['#00a78f', '#3b1a40', '#473793', '#3c6df0', '#56d2bb']],
     prop: { name: 'bar-colors', type: Array },
   },
   xAxisLabelOffset: {
@@ -99,16 +96,7 @@ const preKnobs = {
   keyLabels: {
     group: 'attr',
     type: object,
-    config: [
-      'key-labels',
-      [
-        'Data set #1',
-        'Data set #2',
-        'Data set #3',
-        'Data set #4',
-        'Data set #5',
-      ],
-    ],
+    config: ['key-labels', ['Data set #1', 'Data set #2', 'Data set #3', 'Data set #4', 'Data set #5']],
     prop: { name: 'key-labels', type: Array },
   },
   emptyText: {
@@ -127,15 +115,7 @@ const preKnobs = {
   data: {
     group: 'attr',
     type: object,
-    config: [
-      'data',
-      [
-        { x: 'Apples', y: 10 },
-        { x: 'Oranges', y: 40 },
-        { x: 'Pears', y: 20 },
-        { x: 'Bananas', y: 60 },
-      ],
-    ],
+    config: ['data', [{ x: 'Apples', y: 10 }, { x: 'Oranges', y: 40 }, { x: 'Pears', y: 20 }, { x: 'Bananas', y: 60 }]],
     prop: { name: 'data', type: Array },
   },
   groupedData: {
@@ -154,10 +134,7 @@ const preKnobs = {
   },
 };
 
-const variants = [
-  { name: 'default', excludes: ['data'] },
-  { name: 'minimal', includes: ['data'] },
-];
+const variants = [{ name: 'default', excludes: ['data'] }, { name: 'minimal', includes: ['data'] }];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 

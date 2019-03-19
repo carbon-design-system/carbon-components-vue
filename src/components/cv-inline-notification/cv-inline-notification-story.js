@@ -11,10 +11,7 @@ import CvInlineNotificationNotesMD from './cv-inline-notification-notes.md';
 import CvInlineNotification from './cv-inline-notification';
 
 const storiesDefault = storiesOf('Default/CvInlineNotification', module);
-const storiesExperimental = storiesOf(
-  'Experimental/CvInlineNotification',
-  module
-);
+const storiesExperimental = storiesOf('Experimental/CvInlineNotification', module);
 import { override, reset } from '../../_internal/_feature-flags';
 
 const preKnobs = {

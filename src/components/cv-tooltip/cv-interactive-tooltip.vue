@@ -18,12 +18,7 @@
         @focusout="checkFocusOut"
       >
         <slot name="trigger">
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
             <g fill-rule="evenodd">
               <path
                 d="M8 14.5a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
@@ -81,9 +76,7 @@ export default {
         const validValues = ['top', 'bottom', 'right', 'left'];
         const valid = validValues.includes(val);
         if (!valid) {
-          console.warn(
-            `CVInteractiveTooltip.direction must be one of the following: ${validValues}`
-          );
+          console.warn(`CVInteractiveTooltip.direction must be one of the following: ${validValues}`);
         }
         return valid;
       },
@@ -139,26 +132,15 @@ export default {
         if (this.direction === 'bottom') {
           this.top = menuPosition.bottom + 10 + window.scrollY;
         } else {
-          this.top =
-            menuPosition.top -
-            15 -
-            this.$refs.popup.offsetHeight +
-            window.scrollY;
+          this.top = menuPosition.top - 15 - this.$refs.popup.offsetHeight + window.scrollY;
         }
       } else {
         this.top =
           menuPosition.top +
-          (this.$refs.trigger.offsetHeight -
-            0.5 -
-            this.$refs.popup.offsetHeight) /
-            2 +
+          (this.$refs.trigger.offsetHeight - 0.5 - this.$refs.popup.offsetHeight) / 2 +
           window.scrollY;
         if (this.direction === 'left') {
-          this.left =
-            menuPosition.left -
-            10 -
-            this.$refs.popup.offsetWidth +
-            window.scrollX;
+          this.left = menuPosition.left - 10 - this.$refs.popup.offsetWidth + window.scrollX;
         } else {
           this.left = menuPosition.right + 15 + window.scrollX;
         }
@@ -198,9 +180,7 @@ export default {
       }
     },
     checkFocusOut(ev) {
-      this.dataVisible =
-        ev.relatedTarget === this.$refs.trigger ||
-        this.$refs.popup.contains(ev.relatedTarget);
+      this.dataVisible = ev.relatedTarget === this.$refs.trigger || this.$refs.popup.contains(ev.relatedTarget);
     },
     focusBeforeContent(ev) {
       if (this.contentAfter) {

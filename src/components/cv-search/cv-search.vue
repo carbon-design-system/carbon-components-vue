@@ -1,11 +1,5 @@
 <template>
-  <component
-    :is="tagType"
-    v-bind="$attrs"
-    v-on="$listeners"
-    :value="value"
-    class="cv-search"
-  >
+  <component :is="tagType" v-bind="$attrs" v-on="$listeners" :value="value" class="cv-search">
     <slot></slot>
   </component>
 </template>

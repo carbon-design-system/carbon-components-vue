@@ -55,13 +55,7 @@ export default {
   props: {
     dataArray: {
       type: Array,
-      default: () => [
-        ['Gryffindor', 23],
-        ['Slytherin', 12],
-        ['Ravenclaw', 19],
-        ['Hufflepuff', 15],
-        ['Teachers', 5],
-      ],
+      default: () => [['Gryffindor', 23], ['Slytherin', 12], ['Ravenclaw', 19], ['Hufflepuff', 15], ['Teachers', 5]],
     },
     colors: {
       type: Array,
@@ -143,9 +137,7 @@ export default {
       } - Under review. This component isn't quite ready. Hopefully no features will get broken but this cannot be guarenteed.`
     );
 
-    this.g = d3
-      .select('g')
-      .attr('transform', `translate(${this.width / 2}, ${this.height / 2})`);
+    this.g = d3.select('g').attr('transform', `translate(${this.width / 2}, ${this.height / 2})`);
 
     this.scaledColors = d3.scaleOrdinal(this.colors);
     this.visualizePieChart();

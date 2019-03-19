@@ -19,14 +19,7 @@
       @click="toggle"
     >
       <ChevronRight16 v-if="componentsX" class="bx--accordion__arrow" />
-      <svg
-        v-else
-        class="bx--accordion__arrow"
-        width="8"
-        height="12"
-        viewBox="0 0 8 12"
-        fill-rule="evenodd"
-      >
+      <svg v-else class="bx--accordion__arrow" width="8" height="12" viewBox="0 0 8 12" fill-rule="evenodd">
         <path d="M0 10.6L4.7 6 0 1.4 1.4 0l6.1 6-6.1 6z"></path>
       </svg>
       <p class="bx--accordion__title">

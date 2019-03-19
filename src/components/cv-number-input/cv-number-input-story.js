@@ -64,8 +64,7 @@ const preKnobs = {
     group: 'content',
     slot: {
       name: 'helper-text',
-      value:
-        'This is a helpful slot overrides the property helper-textThis is some helpful text',
+      value: 'This is a helpful slot overrides the property helper-textThis is some helpful text',
     },
   },
   disabled: {

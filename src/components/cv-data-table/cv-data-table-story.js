@@ -86,14 +86,7 @@ const preKnobs = {
     config: [
       'columns',
       {
-        columns: [
-          'Name',
-          'Protocol',
-          'Port',
-          'Rule',
-          'Attached Groups',
-          'Status',
-        ],
+        columns: ['Name', 'Protocol', 'Port', 'Rule', 'Attached Groups', 'Status'],
       },
     ],
     prop: {
@@ -142,46 +135,11 @@ const preKnobs = {
       'data',
       {
         data: [
-          [
-            'Load Balancer 11',
-            'HTTP',
-            '80',
-            'Round Robin',
-            'Maureen’s VM Groups',
-            'Active',
-          ],
-          [
-            'Load Balancer 4',
-            'HTTP',
-            '81',
-            'Round Robin',
-            'Maureen’s VM Groups',
-            'Active',
-          ],
-          [
-            'Load Balancer 2',
-            'HTTP',
-            '82',
-            'Round Robin',
-            'Maureen’s VM Groups',
-            'Active',
-          ],
-          [
-            'Load Balancer 3',
-            'HTTP',
-            '8080',
-            'Round Robin',
-            'Maureen’s VM Groups',
-            'Active',
-          ],
-          [
-            'Load Balancer 5',
-            'HTTP',
-            '8001',
-            'Round Robin',
-            'Maureen’s VM Groups',
-            'Active',
-          ],
+          ['Load Balancer 11', 'HTTP', '80', 'Round Robin', 'Maureen’s VM Groups', 'Active'],
+          ['Load Balancer 4', 'HTTP', '81', 'Round Robin', 'Maureen’s VM Groups', 'Active'],
+          ['Load Balancer 2', 'HTTP', '82', 'Round Robin', 'Maureen’s VM Groups', 'Active'],
+          ['Load Balancer 3', 'HTTP', '8080', 'Round Robin', 'Maureen’s VM Groups', 'Active'],
+          ['Load Balancer 5', 'HTTP', '8001', 'Round Robin', 'Maureen’s VM Groups', 'Active'],
         ],
       },
     ],
@@ -197,8 +155,7 @@ const preKnobs = {
   },
   pagination: {
     group: 'attr',
-    value:
-      ':pagination="{ numberOfItems: internalData.length }" @pagination="actionOnPagination"',
+    value: ':pagination="{ numberOfItems: internalData.length }" @pagination="actionOnPagination"',
   },
   rowSelects: {
     group: 'attr',
@@ -348,19 +305,11 @@ for (const experimental of [false, true]) {
         // ----------------------------------------------------------------
 
         const templateString = `
-<cv-data-table${settings.group.attr} ${
-          settings.group.slots.indexOf('slot="data"') < 0
-            ? ':data="filteredData"'
-            : ''
-        } ${
-          settings.group.attr.indexOf(':overflow-menu=') < 0
-            ? ''
-            : '@overflow-menu-click="onOverflowMenuClick"'
-        } ${
-          settings.group.slots.indexOf('cv-overflow-menu') < 0
-            ? ''
-            : ':overflow-menu="true"'
-        } ref="table">${settings.group.slots}</cv-data-table>
+<cv-data-table${settings.group.attr} ${settings.group.slots.indexOf('slot="data"') < 0 ? ':data="filteredData"' : ''} ${
+          settings.group.attr.indexOf(':overflow-menu=') < 0 ? '' : '@overflow-menu-click="onOverflowMenuClick"'
+        } ${settings.group.slots.indexOf('cv-overflow-menu') < 0 ? '' : ':overflow-menu="true"'} ref="table">${
+          settings.group.slots
+        }</cv-data-table>
   `;
         // ----------------------------------------------------------------
 
@@ -446,23 +395,17 @@ for (const experimental of [false, true]) {
             },
             batchAction1: action('batch action 1'),
             onBatchAction1() {
-              this.batchAction1(
-                `selected items: [${this.$refs.table.selectedRows}]`
-              );
+              this.batchAction1(`selected items: [${this.$refs.table.selectedRows}]`);
               this.rowSelects = [];
             },
             batchAction2: action('batch action 2'),
             onBatchAction2() {
-              this.batchAction2(
-                `selected items: [${this.$refs.table.selectedRows}]`
-              );
+              this.batchAction2(`selected items: [${this.$refs.table.selectedRows}]`);
               this.rowSelects = [];
             },
             batchAction3: action('batch action 3'),
             onBatchAction3() {
-              this.batchAction3(
-                `selected items: [${this.$refs.table.selectedRows}]`
-              );
+              this.batchAction3(`selected items: [${this.$refs.table.selectedRows}]`);
               this.$refs.table.deselect();
             },
             action1: action('action 1'),

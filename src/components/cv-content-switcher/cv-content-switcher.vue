@@ -27,9 +27,7 @@ export default {
     // add these on created otherwise cv:mounted is too late.
     this.$on('cv:open', srcComponent => this.onCvOpen(srcComponent));
     this.$on('cv:mounted', srcComponent => this.onCvMount(srcComponent));
-    this.$on('cv:beforeDestroy', srcComponent =>
-      this.onCvBeforeDestroy(srcComponent)
-    );
+    this.$on('cv:beforeDestroy', srcComponent => this.onCvBeforeDestroy(srcComponent));
   },
   data() {
     return {
@@ -92,12 +90,7 @@ export default {
       }
     },
     onCvOpen(srcComponent) {
-      this.$emit(
-        'selected',
-        srcComponent.ownerId
-          ? srcComponent.ownerId
-          : srcComponent.contentSelector
-      );
+      this.$emit('selected', srcComponent.ownerId ? srcComponent.ownerId : srcComponent.contentSelector);
       this.processState(srcComponent, true);
     },
   },

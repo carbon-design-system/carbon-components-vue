@@ -133,9 +133,7 @@ for (const experimental of [false, true]) {
             return {
               experimental,
               storyFiles: [],
-              vModelOrEvents:
-                settings.group.attr.indexOf('v-model') > 0 ||
-                settings.group.attr.indexOf('@change') > 0,
+              vModelOrEvents: settings.group.attr.indexOf('v-model') > 0 || settings.group.attr.indexOf('@change') > 0,
             };
           },
           methods: {

@@ -1,11 +1,5 @@
 <template>
-  <component
-    :is="tagType"
-    v-bind="$attrs"
-    v-on="$listeners"
-    :value="value"
-    class="cv-dropdown"
-  >
+  <component :is="tagType" v-bind="$attrs" v-on="$listeners" :value="value" class="cv-dropdown">
     <slot></slot>
   </component>
 </template>
@@ -25,9 +19,7 @@ export default {
   },
   computed: {
     tagType() {
-      return this.formItem
-        ? 'cv-dropdown-inner-form-item'
-        : 'cv-dropdown-inner';
+      return this.formItem ? 'cv-dropdown-inner-form-item' : 'cv-dropdown-inner';
     },
   },
   model: {

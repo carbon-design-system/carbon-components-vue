@@ -74,9 +74,7 @@ for (const story of storySet) {
       <cv-structured-list-heading>Heading 3</cv-structured-list-heading>
     </template>
     <template slot="items">
-      <cv-structured-list-item${
-        isSelectable ? ' name="group-1" value="value-1" ' : ''
-      }${
+      <cv-structured-list-item${isSelectable ? ' name="group-1" value="value-1" ' : ''}${
         isVModel && isSelectable ? settings.group.checksSelectable : ' checked'
       }>
         <cv-structured-list-data>Item_1</cv-structured-list-data>
@@ -85,18 +83,18 @@ for (const story of storySet) {
           settings.group.data
         }>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.</cv-structured-list-data>
       </cv-structured-list-item>
-      <cv-structured-list-item${
-        isSelectable ? ' name="group-1" value="value-2" ' : ''
-      }${settings.group.checksSelectable}>
+      <cv-structured-list-item${isSelectable ? ' name="group-1" value="value-2" ' : ''}${
+        settings.group.checksSelectable
+      }>
         <cv-structured-list-data>Item_2</cv-structured-list-data>
         <cv-structured-list-data>Item_2</cv-structured-list-data>
         <cv-structured-list-data${
           settings.group.data
         }>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.</cv-structured-list-data>
       </cv-structured-list-item>
-      <cv-structured-list-item${
-        isSelectable ? ' name="group-1" value="value-3" ' : ''
-      }${settings.group.checksSelectable}>
+      <cv-structured-list-item${isSelectable ? ' name="group-1" value="value-3" ' : ''}${
+        settings.group.checksSelectable
+      }>
       <cv-structured-list-data>Item_3</cv-structured-list-data>
         <cv-structured-list-data>Item_3</cv-structured-list-data>
         <cv-structured-list-data${

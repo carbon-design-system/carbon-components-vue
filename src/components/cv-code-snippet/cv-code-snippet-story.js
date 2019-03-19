@@ -140,11 +140,7 @@ preKnobs = {
   kind: {
     group: 'attr',
     type: select,
-    config: [
-      'kind',
-      { oneline: 'oneline', multiline: 'multiline' },
-      'multiline',
-    ], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    config: ['kind', { oneline: 'oneline', multiline: 'multiline' }, 'multiline'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
       name: 'kind',
       type: String,
@@ -167,9 +163,7 @@ for (const experimental of [false, true]) {
         const settings = story.knobs();
 
         const templateString = `
-        <cv-code-snippet-skeleton${
-          settings.group.attr
-        }></cv-code-snippet-skeleton>
+        <cv-code-snippet-skeleton${settings.group.attr}></cv-code-snippet-skeleton>
       `;
 
         // ----------------------------------------------------------------

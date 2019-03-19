@@ -13,10 +13,7 @@ const preKnobs = {
   dataArray: {
     group: 'attr',
     type: object,
-    config: [
-      'dataArray',
-      [['Gryffindor', 23], ['Slytherin', 12], ['Ravenclaw', 19]],
-    ],
+    config: ['dataArray', [['Gryffindor', 23], ['Slytherin', 12], ['Ravenclaw', 19]]],
     prop: { name: 'dataArray', type: Array },
   },
   colors: {

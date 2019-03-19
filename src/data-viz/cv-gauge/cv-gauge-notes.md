@@ -7,8 +7,7 @@ https://www.carbondesignsystem.com/data-visualization/gauge/code
 ## Usage
 
 ```html
-<cv-gauge :amount="10" :total="100" suffix="GB" header="Example Gauge">
-</cv-gauge>
+<cv-gauge :amount="10" :total="100" suffix="GB" header="Example Gauge"> </cv-gauge>
 ```
 
 ## Attributes

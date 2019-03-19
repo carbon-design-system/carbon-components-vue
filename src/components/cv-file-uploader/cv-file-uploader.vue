@@ -27,24 +27,12 @@
         tabindex="-1"
       />
       <div data-file-container class="bx--file-container">
-        <div
-          data-file-container
-          class="bx--file-container"
-          v-for="(file, index) in internalFiles"
-          :key="index"
-        >
+        <div data-file-container class="bx--file-container" v-for="(file, index) in internalFiles" :key="index">
           <span class="bx--file__selected-file">
             <p class="bx--file-filename">{{ file.file.name }}</p>
-            <span
-              :data-for="uid"
-              class="bx--file__state-container"
-              :data-test="file.state"
-            >
+            <span :data-for="uid" class="bx--file__state-container" :data-test="file.state">
               <cv-inline-loader
-                v-if="
-                  componentsX &&
-                    (file.state === 'uploading' || file.state === 'complete')
-                "
+                v-if="componentsX && (file.state === 'uploading' || file.state === 'complete')"
                 :active="file.state === 'uploading'"
                 loading-text
                 loaded-text
@@ -90,9 +78,7 @@
                 @keydown.space.prevent
                 @keyup.space.prevent="remove(index)"
               >
-                <path
-                  d="M12 4.7l-.7-.7L8 7.3 4.7 4l-.7.7L7.3 8 4 11.3l.7.7L8 8.7l3.3 3.3.7-.7L8.7 8z"
-                ></path>
+                <path d="M12 4.7l-.7-.7L8 7.3 4.7 4l-.7.7L7.3 8 4 11.3l.7.7L8 8.7l3.3 3.3.7-.7L8.7 8z"></path>
               </svg>
               <svg
                 v-if="!componentsX && removable"
@@ -194,9 +180,7 @@ export default {
       }
       for (const file of ev.target.files) {
         this.internalFiles.push({
-          state: this.initialStateUploading
-            ? CONSTS.STATES.UPLOADING
-            : CONSTS.STATES.NONE,
+          state: this.initialStateUploading ? CONSTS.STATES.UPLOADING : CONSTS.STATES.NONE,
           file,
         });
       }

@@ -13,12 +13,7 @@
     :class="{ 'bx--overflow-menu--open': open }"
   >
     <slot name="trigger">
-      <svg
-        class="bx--overflow-menu__icon"
-        width="3"
-        height="15"
-        viewBox="0 0 3 15"
-      >
+      <svg class="bx--overflow-menu__icon" width="3" height="15" viewBox="0 0 3 15">
         <g fill-rule="evenodd">
           <circle cx="1.5" cy="1.5" r="1.5"></circle>
           <circle cx="1.5" cy="7.5" r="1.5"></circle>
@@ -103,10 +98,7 @@ export default {
       if (this.open) {
         if (
           ev.relatedTarget === null ||
-          !(
-            this.$el === ev.relatedTarget ||
-            this.$refs.popup.contains(ev.relatedTarget)
-          )
+          !(this.$el === ev.relatedTarget || this.$refs.popup.contains(ev.relatedTarget))
         ) {
           this.open = false;
           this.positionListen(false);
@@ -141,19 +133,11 @@ export default {
         const menuPosition = this.$el.getBoundingClientRect();
         return this.$nextTick(() => {
           if (this.flipMenu) {
-            this.left =
-              menuPosition.left +
-              20 +
-              this.offsetLeft -
-              this.$refs.popup.offsetWidth +
-              this.$el.offsetWidth;
-            this.top =
-              menuPosition.bottom + 2 + this.offsetTop + window.scrollY;
+            this.left = menuPosition.left + 20 + this.offsetLeft - this.$refs.popup.offsetWidth + this.$el.offsetWidth;
+            this.top = menuPosition.bottom + 2 + this.offsetTop + window.scrollY;
           } else {
-            this.left =
-              menuPosition.left - 20 + this.offsetLeft + window.scrollX;
-            this.top =
-              menuPosition.bottom + 2 + this.offsetTop + window.scrollY;
+            this.left = menuPosition.left - 20 + this.offsetLeft + window.scrollX;
+            this.top = menuPosition.bottom + 2 + this.offsetTop + window.scrollY;
           }
         });
       }

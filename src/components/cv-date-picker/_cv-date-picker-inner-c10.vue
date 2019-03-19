@@ -13,9 +13,7 @@
         }"
         @change="onSimpleChange"
       >
-        <label :for="`${uid}-input-1`" class="bx--label">{{
-          getDateLabel
-        }}</label>
+        <label :for="`${uid}-input-1`" class="bx--label">{{ getDateLabel }}</label>
         <div class="bx--date-picker-input__wrapper">
           <input
             :data-invalid="isInvalid"
@@ -36,18 +34,11 @@
           />
         </div>
         <div class="bx--form-requirement" v-if="isInvalid">
-          <slot name="invalid-message">{{
-            invalidMessage || invalidDateMessage
-          }}</slot>
+          <slot name="invalid-message">{{ invalidMessage || invalidDateMessage }}</slot>
         </div>
       </div>
-      <div
-        :class="{ 'bx--date-picker-container': kind === 'range' }"
-        v-if="kind === 'range'"
-      >
-        <label :for="`${uid}-input-2`" class="bx--label">{{
-          getDateEndLabel
-        }}</label>
+      <div :class="{ 'bx--date-picker-container': kind === 'range' }" v-if="kind === 'range'">
+        <label :for="`${uid}-input-2`" class="bx--label">{{ getDateEndLabel }}</label>
         <div class="bx--date-picker-input__wrapper">
           <input
             type="text"
@@ -59,11 +50,7 @@
             :data-date-picker-input-to="kind === 'range'"
             ref="todate"
           />
-          <Calendar16
-            class="bx--date-picker__icon"
-            data-date-picker-icon
-            @click="cal.open()"
-          />
+          <Calendar16 class="bx--date-picker__icon" data-date-picker-icon @click="cal.open()" />
         </div>
       </div>
     </div>
@@ -115,9 +102,7 @@ export default {
       default: undefined,
       validator(val) {
         if (val !== undefined) {
-          console.warn(
-            'CvDatePicker: invalid prop deprecated in favour of invalidMessage'
-          );
+          console.warn('CvDatePicker: invalid prop deprecated in favour of invalidMessage');
         }
         return true;
       },
@@ -127,9 +112,7 @@ export default {
       default: null,
       validator(val) {
         if (val !== null) {
-          console.warn(
-            'CvDatePicker: invalidDateMessage deprecated in favour of invalidMessage'
-          );
+          console.warn('CvDatePicker: invalidDateMessage deprecated in favour of invalidMessage');
         }
         return true;
       },
