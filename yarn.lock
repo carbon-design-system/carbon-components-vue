@@ -3567,9 +3567,9 @@ capture-exit@^1.2.0:
     rsvp "^3.3.3"
 
 carbon-components@^9.48.1:
-  version "9.83.22"
-  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-9.83.22.tgz#e3dff420f2df0b98bd866fa9257d3548b948e051"
-  integrity sha512-LjCfScMNUkdRari99t7tWMjrMBkcUgx9TG9pVy3mGNlk2SlqnD4Ww2pifwr2GL62WaYbZxii/Bek0yqVL0RWyg==
+  version "9.84.21"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-9.84.21.tgz#01e00adae06aecb082f23c3504ce9cafbeab37a8"
+  integrity sha512-SV1IeDLk2ILVf6RsZNQ7IJgkcoYx1rQcHscKT5UpX8QMk9nllfiBW82szQwFMbmtr3aVuZfkhzV8InaDEDSnlw==
   dependencies:
     carbon-icons "^7.0.7"
     flatpickr "4.5.7"

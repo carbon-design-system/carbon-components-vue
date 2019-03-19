@@ -14,7 +14,26 @@
     <div class="bx--form__helper-text" v-if="isHelper">
       <slot name="helper-text">{{ helperText }}</slot>
     </div>
+    <div
+      v-if="componentsX"
+      class="bx--text-input__field-wrapper"
+      :data-invalid="isInvalid"
+    >
+      <WarningFilled16 v-if="isInvalid" class="bx--text-input__invalid-icon" />
+      <input
+        :id="uid"
+        class="bx--text-input"
+        :class="{ 'bx--text-input--light': theme === 'light' }"
+        v-bind="$attrs"
+        :value="value"
+        v-on="inputListeners"
+        :data-toggle-password-visibility="isPassword"
+        :type="dataType"
+        ref="input"
+      />
+    </div>
     <input
+      v-else
       :id="uid"
       class="bx--text-input"
       :class="{ 'bx--text-input--light': theme === 'light' }"
@@ -67,9 +86,12 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
+import { componentsX } from '../../_internal/_feature-flags';
+import WarningFilled16 from '@carbon/icons-vue/lib/warning--filled/16';
 
 export default {
   name: 'CvTextInput',
+  components: { WarningFilled16 },
   mixins: [uidMixin, themeMixin],
   inheritAttrs: false,
   props: {
@@ -83,6 +105,7 @@ export default {
   },
   data() {
     return {
+      componentsX,
       dataPasswordVisible: this.isPassword && this.passwordVisible,
       dataType: this.type,
     };
@@ -109,7 +132,7 @@ export default {
     },
     isInvalid() {
       return (
-        this.$slots['invalid-message'] ||
+        this.$slots['invalid-message'] !== undefined ||
         (this.invalidMessage && this.invalidMessage.length)
       );
     },

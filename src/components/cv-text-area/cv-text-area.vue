@@ -27,7 +27,6 @@
         v-bind="$attrs"
         :value="value"
         v-on="inputListeners"
-        :data-invalid="isInvalid"
       ></textarea>
     </div>
     <textarea
@@ -80,7 +79,7 @@ export default {
     },
     isInvalid() {
       return (
-        this.$slots['invalid-message'] ||
+        this.$slots['invalid-message'] !== undefined ||
         (this.invalidMessage && this.invalidMessage.length)
       );
     },
