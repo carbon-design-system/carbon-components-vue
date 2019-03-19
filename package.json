@@ -73,7 +73,6 @@
     "storybook-build": "build-storybook",
     "test:unit": "vue-cli-service test:unit"
   },
-  "peerDependencies": {},
   "dependencies": {
     "@carbon/icon-helpers": "0.0.1-beta.0",
     "@carbon/icons-vue": "0.0.1-beta.0",
@@ -114,6 +113,7 @@
     "jest-runtime": "^24.1.0",
     "jest-serializer-vue": "^2.0.2",
     "jest-transform-stub": "^2.0.0",
+    "lerna": "^3.13.1",
     "lint-staged": "^8.1.0",
     "node-sass": "^4.11.0",
     "prettier": "^1.15.3",
