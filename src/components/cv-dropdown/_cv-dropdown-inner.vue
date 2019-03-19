@@ -69,8 +69,15 @@ export default {
   data() {
     return {
       open: false,
-      dataValue: this.value,
+      dataValue: null,
     };
+  },
+  created() {
+    // add these on created otherwise cv:mounted is too late.
+    this.$on('cv:mounted', srcComponent => this.onCvMount(srcComponent));
+    this.$on('cv:beforeDestroy', srcComponent =>
+      this.onCvBeforeDestroy(srcComponent)
+    );
   },
   mounted() {
     this.$el.addEventListener('focusout', ev => {
@@ -78,7 +85,9 @@ export default {
         this.open = false;
       }
     });
-    this.internalValue = this.internalValue; // forces update of value
+    if (this.value) {
+      this.internalValue = this.value; // forces update of value
+    }
   },
   model: {
     prop: 'value',
@@ -99,6 +108,7 @@ export default {
         for (let index in childItems) {
           let child = childItems[index];
           let selected = child.value === val;
+
           child.internalSelected = selected;
 
           if (selected) {
@@ -114,6 +124,21 @@ export default {
     },
   },
   methods: {
+    onCvMount(srcComponent) {
+      if (srcComponent.internalSelected) {
+        this.internalValue = srcComponent.value;
+      } else {
+        if (this.internalValue === srcComponent.value) {
+          srcComponent.internalSelected = true;
+          this.internalValue = srcComponent.value;
+        }
+      }
+    },
+    onCvBeforeDestroy(srcComponent) {
+      if (srcComponent.value === this.internalValue) {
+        this.internalValue = null;
+      }
+    },
     dropdownItems() {
       return this.$children.filter(item => item.$_CvDropdownItem);
     },

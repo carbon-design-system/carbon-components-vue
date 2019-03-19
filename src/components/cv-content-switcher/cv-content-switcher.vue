@@ -24,7 +24,7 @@ const toggleContent = (selector, on) => {
 export default {
   name: 'CvContentSwitcher',
   created() {
-    // add these on created otherwise cv:mounted is too early.
+    // add these on created otherwise cv:mounted is too late.
     this.$on('cv:open', srcComponent => this.onCvOpen(srcComponent));
     this.$on('cv:mounted', srcComponent => this.onCvMount(srcComponent));
     this.$on('cv:beforeDestroy', srcComponent =>
