@@ -8,16 +8,18 @@
       @keydown.right.prevent="moveRight"
       @keydown.left.prevent="moveLeft"
     >
-      <div class="bx--tabs-trigger" tabindex="0">
-        <a
-          href="javascript:void(0)"
-          class="bx--tabs-trigger-text"
-          tabindex="-1"
-        ></a>
-        <svg width="10" height="5" viewBox="0 0 10 5">
-          <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd"></path>
-        </svg>
-      </div>
+      <cv-dropdown
+        class="bx--tabs-trigger"
+        :value="`${selectedIndex}`"
+        @change="onDropChange"
+      >
+        <cv-dropdown-item
+          v-for="(tab, index) in tabs"
+          :key="`drop-${index}`"
+          :value="`${index}`"
+          >{{ tab.label }}</cv-dropdown-item
+        >
+      </cv-dropdown>
       <ul class="bx--tabs__nav bx--tabs__nav--hidden" role="tablist">
         <li
           v-for="(tab, index) in tabs"
@@ -42,13 +44,19 @@
         </li>
       </ul>
     </nav>
-    <div class="cv-tabs__panels"><slot></slot></div>
+    <div class="cv-tabs__panels">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
 <script>
+import CvDropdown from '../cv-dropdown/cv-dropdown';
+import CvDropdownItem from '../cv-dropdown/cv-dropdown-item';
+
 export default {
   name: 'CvTabs',
+  components: { CvDropdown, CvDropdownItem },
   data() {
     return {
       tabs: [],
@@ -63,7 +71,13 @@ export default {
     );
     this.$on('cv:selected', srcComponent => this.onCvSelected(srcComponent));
   },
+  mounted() {
+    console.log(this.selectedIndex, typeof this.selectedIndex);
+  },
   methods: {
+    onDropChange(val) {
+      this.selectedIndex = parseInt(val);
+    },
     onCvMount(srcComponent) {
       this.tabs.push(srcComponent);
       this.checkSelected();
