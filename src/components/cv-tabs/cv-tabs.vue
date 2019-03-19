@@ -18,6 +18,57 @@
           :key="`drop-${index}`"
           :value="`${index}`"
           >{{ tab.label }}</cv-dropdown-item
+        > </cv-dropdown
+      >>>>>>>> master
+      <ul class="bx--tabs__nav bx--tabs__nav--hidden" role="tablist">
+        <li
+          v-for="(tab, index) in tabs"
+          :key="index"
+          class="cv-tabs-button bx--tabs__nav-item"
+          :class="{
+            'bx--tabs__nav-item--selected': selectedIndex == index,
+          }"
+          role="presentation"
+        >
+          <a
+            class="bx--tabs__nav-link"
+            href="javascript:void(0)"
+            role="tab"
+            :aria-controls="tab.id"
+            :id="`${tab.id}-link`"
+            aria-selected="false"
+            @click="onTabClick(index)"
+            ref="link"
+            >{{ tab.label }}</a
+          >
+        </li>
+      </ul>
+    </nav>
+    <div class="cv-tabs__panels">
+      <slot></slot>
+    </div>
+  </div>
+</template>
+<template>
+  <div class="cv-tabs">
+    <nav
+      data-tabs
+      class="cv-tab bx--tabs"
+      role="navigation"
+      v-on="$listeners"
+      @keydown.right.prevent="moveRight"
+      @keydown.left.prevent="moveLeft"
+    >
+      <cv-dropdown
+        class="bx--tabs-trigger"
+        :value="`${selectedIndex}`"
+        @change="onDropChange"
+      >
+        <cv-dropdown-item
+          v-for="(tab, index) in tabs"
+          :key="`drop-${index}`"
+          :value="`${index}`"
+          >{{ tab.label }}</cv-dropdown-item
         >
       </cv-dropdown>
       <ul class="bx--tabs__nav bx--tabs__nav--hidden" role="tablist">
