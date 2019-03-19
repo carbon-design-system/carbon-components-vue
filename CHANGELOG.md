@@ -1,3 +1,28 @@
+## 1.1.1 (March 19, 2019)
+
+### Features
+
+- A number of experimental additions for carbon x
+- Change node requirements to > 10 in package.json
+
+### Bug Fixes
+
+- Fix tabs on narrow screens (#273)
+- Fix dorpdown-items v-for (#273)
+
+### Dependency versions
+
+Versions reflect those version was built using.
+
+| Dependency           | Version      | Notes                    |
+| -------------------- | ------------ | ------------------------ |
+| @carbon/icon-helpers | 0.0.1-beta.0 | experimental only        |
+| @carbon/icons-vue    | 0.0.1-beta.0 | experimental only        |
+| carbon-components    | 9.70.1       |                          |
+| d3                   | 5.8.2        | Only needed for data-viz |
+| flatpickr            | 4.5.2        |                          |
+| vue                  | 2.6.3        |                          |
+
 ## 1.1.0 (March 14, 2019)
 
 ### Features
