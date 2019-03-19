@@ -30,12 +30,6 @@ export default {
         : 'cv-dropdown-inner';
     },
   },
-  watch: {
-    value() {},
-  },
-  updated() {
-    console.log('val:', this.value);
-  },
   model: {
     prop: 'value',
     event: 'change',

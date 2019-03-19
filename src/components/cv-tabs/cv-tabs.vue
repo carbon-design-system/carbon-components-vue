@@ -71,12 +71,9 @@ export default {
     );
     this.$on('cv:selected', srcComponent => this.onCvSelected(srcComponent));
   },
-  mounted() {
-    console.log(this.selectedIndex, typeof this.selectedIndex);
-  },
   methods: {
     onDropChange(val) {
-      this.selectedIndex = parseInt(val);
+      this.onTabClick(parseInt(val));
     },
     onCvMount(srcComponent) {
       this.tabs.push(srcComponent);

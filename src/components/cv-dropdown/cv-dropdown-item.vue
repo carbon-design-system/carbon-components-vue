@@ -44,6 +44,10 @@ export default {
   },
   mounted() {
     this.$_CvDropdownItem = true; // for use by parent with $children
+    this.$parent.$emit('cv:mounted', this);
+  },
+  beforeDestroy() {
+    this.$parent.$emit('cv:beforeDestory', this);
   },
   computed: {
     internalSelected: {
