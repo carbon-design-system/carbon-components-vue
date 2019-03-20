@@ -7,6 +7,12 @@
       'bx--select--light': theme === 'light',
     }"
   >
+    <label
+      :for="uid"
+      class="bx--label"
+      :class="{ 'bx--visually-hidden': hideLabel }"
+      >{{ label }}</label
+    >
     <select
       v-bind="$attrs"
       :id="uid"
@@ -20,12 +26,6 @@
     <svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5">
       <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd"></path>
     </svg>
-    <label
-      :for="uid"
-      class="bx--label"
-      :class="{ 'bx--visually-hidden': hideLabel }"
-      >{{ label }}</label
-    >
   </div>
 </template>
 

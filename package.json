@@ -77,7 +77,7 @@
   "dependencies": {
     "@carbon/icon-helpers": "0.0.1-beta.0",
     "@carbon/icons-vue": "0.0.1-beta.0",
-    "carbon-components": "^9.48.1",
+    "carbon-components": "^9.85.0",
     "d3": "^5.7.0",
     "flatpickr": "4.5.1",
     "vue": "^2.5.21"

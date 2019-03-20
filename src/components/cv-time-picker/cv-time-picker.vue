@@ -3,8 +3,10 @@
     <div
       class="bx--time-picker"
       :class="{ 'bx--time-picker--light': theme === 'light' }"
+      :data-invalid="isInvalid && componentsX"
     >
       <div class="bx--time-picker__input">
+        <label :for="uid" class="bx--label">{{ label }}</label>
         <input
           :id="uid"
           type="text"
@@ -13,19 +15,18 @@
           v-bind="$attrs"
           :placeholder="placeholder"
           :maxlength="placeholder.length"
-          :data-invalid="isInvalid"
+          :data-invalid="isInvalid && !componentsX"
           :value="time"
           :disabled="disabled"
           @input="$emit('update:time', $event.target.value)"
         />
-        <div class="bx--form-requirement" v-if="isInvalid">
+        <div class="bx--form-requirement" v-if="isInvalid && !componentsX">
           <slot name="invalid-message">{{ invalidMessage }}</slot>
         </div>
-        <label :for="uid" class="bx--label">{{ label }}</label>
       </div>
       <cv-select
         class="bx--time-picker__select"
-        inline
+        :inline="!componentsX"
         :form-item="false"
         hide-label
         :label="ampmSelectLabel"
@@ -43,7 +44,7 @@
 
       <cv-select
         class="bx--time-picker__select"
-        inline
+        :inline="!componentsX"
         :form-item="false"
         hide-label
         :label="timezonesSelectLabel"
@@ -61,12 +62,16 @@
         >
       </cv-select>
     </div>
+    <div class="bx--form-requirement" v-if="isInvalid && componentsX">
+      <slot name="invalid-message">{{ invalidMessage }}</slot>
+    </div>
   </div>
 </template>
 
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
+import { componentsX } from '../../_internal/_feature-flags';
 
 export default {
   name: 'CvTimePicker',
@@ -88,10 +93,14 @@ export default {
     timezones: { type: Array, default: () => [] },
     timezonesSelectLabel: { type: String, default: 'Select time zone' },
   },
+  data() {
+    return { componentsX };
+  },
   computed: {
     isInvalid() {
       return (
-        this.$slots['invalid-message'] ||
+        (this.$slots['invalid-message'] &&
+          this.$slots['invalid-message'].length) ||
         (this.invalidMessage && this.invalidMessage.length > 0)
       );
     },
