@@ -16,6 +16,7 @@
       :checked="isChecked"
       class="bx--tile-input"
       v-bind="$attrs"
+      v-on="inputListeners"
     />
     <div class="bx--tile__checkmark">
       <svg width="16" height="16" viewBox="0 0 16 16" fill-rule="evenodd">
@@ -25,7 +26,9 @@
       </svg>
     </div>
     <div class="bx--tile-content">
-      <slot> <!-- Tile content here --> </slot>
+      <slot>
+        <!-- Tile content here -->
+      </slot>
     </div>
   </label>
 </template>
