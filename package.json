@@ -1,11 +1,7 @@
 {
-  "name": "@carbon/vue",
+  "name": "carbon-components-vue",
   "description": "A collection of components for the Carbon Design System built using Vue.js",
   "version": "1.1.1",
-  "license": "Apache-2.0",
-  "engines": {
-    "node": ">=10.x"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/carbon-design-system/carbon-components-vue.git"
@@ -14,66 +10,22 @@
     "url": "https://github.com/carbon-design-system/carbon-components-vue/issues/new"
   },
   "homepage": "https://github.com/carbon-design-system/carbon-components-vue#readme",
-  "main": "dist/carbon-vue.umd.min.js",
-  "directories": {
-    "doc": "docs"
-  },
-  "keywords": [
-    "carbon",
-    "vue",
-    "components"
-  ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "contributors": [
-    {
-      "name": "Lee Chase",
-      "email": "lee.chase@uk.ibm.com"
-    },
-    {
-      "name": "Simon Moore",
-      "email": "moores@uk.ibm.com"
-    },
-    {
-      "name": "Mariia Zrianina",
-      "email": "mzrianin@de.ibm.com"
-    },
-    {
-      "name": "Dave Clark",
-      "email": "dave.clark@uk.ibm.com"
-    },
-    {
-      "name": "Oleksandr Sabov",
-      "email": "sabov@de.ibm.com"
-    },
-    {
-      "name": "Conrad Schmidt",
-      "email": "conrad.schmidt@de.ibm.com"
-    }
-  ],
-  "files": [
-    "/dist",
-    "/src"
-  ],
   "sideEffects": true,
   "scripts": {
-    "build": "npm run build:core && npm run build:data-viz",
+    "build": "lerna exec yarn build --parallel",
     "lint": "vue-cli-service lint ./src/index.js",
-    "build:core": "vue-cli-service build --target lib --name carbon-vue ./src/index.js --no-clean",
-    "build:data-viz": "vue-cli-service build --target lib --name carbon-data-viz-vue ./src/index-data-viz.js --no-clean",
     "ci-check": "yarn format:diff",
     "format": "prettier --write \"**/*.{scss,css,js,md,vue}\"",
     "format:diff": "prettier --list-different \"**/*.{scss,css,js,md,vue}\"",
     "format:staged": "prettier --write",
-    "lint:css": "stylelint 'src/**/*.{vue,scss}'",
-    "lint:es": "eslint --ext .js,.vue src",
+    "lint:css": "stylelint '{packages,storybook}/**/*.{vue,scss}'",
+    "lint:es": "eslint {packages,storybook}/**/*.{js,vue}",
     "lint:style": "vue-cli-service lint:style",
-    "storybook": "start-storybook -p 9001 -c .storybook",
-    "storybook-build": "build-storybook",
+    "prepare": "lerna bootstrap",
+    "start": "lerna exec yarn start --scope storybook",
     "test:unit": "vue-cli-service test:unit"
   },
-  "dependencies": {
+  "old-dependencies": {
     "@carbon/icon-helpers": "0.0.1-beta.0",
     "@carbon/icons-vue": "0.0.1-beta.0",
     "carbon-components": "^9.48.1",
@@ -81,7 +33,7 @@
     "flatpickr": "4.5.1",
     "vue": "^2.5.21"
   },
-  "devDependencies": {
+  "old-devDependencies": {
     "@ascendancyy/vue-cli-plugin-stylelint": "^1.1.2",
     "@babel/core": "^7.2.2",
     "@commitlint/cli": "^7.2.1",
@@ -125,6 +77,34 @@
     "vue-jest": "^3.0.2",
     "vue-loader": "^15.4.2",
     "vue-template-compiler": "^2.5.21"
+  },
+  "devDependencies": {
+    "@ascendancyy/vue-cli-plugin-stylelint": "^1.1.2",
+    "@commitlint/cli": "^7.2.1",
+    "@commitlint/config-conventional": "^7.1.2",
+    "@vue/cli-plugin-eslint": "^3.4.0",
+    "@vue/cli-plugin-unit-jest": "^3.4.0",
+    "@vue/cli-service": "^3.4.0",
+    "@vue/eslint-config-prettier": "^4.0.1",
+    "@vue/test-utils": "^1.0.0-beta.20",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.10.0",
+    "eslint-plugin-vue": "^5.0.0-0",
+    "husky": "^1.3.0",
+    "jest": "^24.1.0",
+    "jest-config": "^24.1.0",
+    "jest-runtime": "^24.1.0",
+    "jest-serializer-vue": "^2.0.2",
+    "jest-transform-stub": "^2.0.0",
+    "lerna": "^3.13.1",
+    "lint-staged": "^8.1.0",
+    "node-sass": "^4.11.0",
+    "prettier": "^1.15.3",
+    "sass-loader": "^7.1.0",
+    "stylelint": "^9.9.0",
+    "stylelint-config-property-sort-order-smacss": "^4.0.1",
+    "stylelint-config-sass-guidelines": "^5.3.0",
+    "vue-jest": "^3.0.2"
   },
   "husky": {
     "hooks": {

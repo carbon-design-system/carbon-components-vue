@@ -18,9 +18,21 @@
     "url": "git+https://github.com/dcwarwick/carbon-components-vue.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "build": "vue-cli-service build --target lib --name carbon-data-viz-vue ./src/index.js --no-clean"
   },
   "bugs": {
     "url": "https://github.com/dcwarwick/carbon-components-vue/issues"
+  },
+  "dependencies": {
+    "@carbon/icon-helpers": "0.0.1-beta.0",
+    "@carbon/icons-vue": "0.0.1-beta.0",
+    "carbon-components": "^9.48.1",
+    "flatpickr": "4.5.1",
+    "d3": "^5.7.0",
+    "vue": "^2.5.21"
+  },
+  "devDependencies": {
+    "@vue/cli-service": "^3.4.0",
+    "vue-template-compiler": "^2.5.21"
   }
 }
