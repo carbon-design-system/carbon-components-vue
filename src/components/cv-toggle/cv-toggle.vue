@@ -16,11 +16,11 @@
       :for="uid"
       :data-contained-checkbox-state="isChecked"
     >
-      <div class="bx--toggle__text--left" v-if="!small">
+      <div class="bx--toggle__text--left">
         <slot name="text-left">Off</slot>
       </div>
       <span class="bx--toggle__appearance"></span>
-      <div class="bx--toggle__text--right" v-if="!small">
+      <div class="bx--toggle__text--right">
         <slot name="text-right">On</slot>
       </div>
     </label>

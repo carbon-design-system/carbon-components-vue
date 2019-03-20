@@ -83,7 +83,7 @@ let variants = [
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(false)) {
+for (const version of versions()) {
   const stories =
     version.experimental && !version.default
       ? storiesExperimental
@@ -163,7 +163,7 @@ variants = [{ name: 'Array v-model', includes: ['vModel'] }];
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(false)) {
+for (const version of versions()) {
   const stories =
     version.experimental && !version.default
       ? storiesExperimental
