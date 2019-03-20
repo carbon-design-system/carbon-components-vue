@@ -12,7 +12,12 @@ import CvDefinitionTooltip from './cv-definition-tooltip';
 
 const storiesDefault = storiesOf('Default/CvTooltip', module);
 const storiesExperimental = storiesOf('Experimental/CvTooltip', module);
-import { versions, setVersion } from '../../_internal/_feature-flags';
+import {
+  componentsX,
+  versions,
+  setVersion,
+} from '../../_internal/_feature-flags';
+import Filter16 from '@carbon/icons-vue/lib/filter/16';
 
 let preKnobs = {
   direction: {
@@ -48,7 +53,8 @@ let preKnobs = {
     group: 'content',
     slot: {
       name: 'trigger',
-      value: `<svg width="16" height="12" viewBox="0 0 16 12">
+      value: `<Filter16 v-if="componentsX" class="bx--overflow-menu__icon bx--toolbar-filter-icon" />
+      <svg v-else width="16" height="12" viewBox="0 0 16 12">
       <path d="M8.05 2a2.5 2.5 0 0 1 4.9 0H16v1h-3.05a2.5 2.5 0 0 1-4.9 0H0V2h8.05zm2.45 2a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM3.05 9a2.5 2.5 0 0 1 4.9 0H16v1H7.95a2.5 2.5 0 0 1-4.9 0H0V9h3.05zm2.45 2a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
     </svg>
   `,
@@ -82,7 +88,7 @@ const variants = [
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(false)) {
+for (const version of versions()) {
   const stories =
     version.experimental && !version.default
       ? storiesExperimental
@@ -119,8 +125,8 @@ for (const version of versions(false)) {
   `;
 
         return {
-          components: { CvInteractiveTooltip, SvTemplateView },
-          data: () => ({ experimental: version.experimental }),
+          components: { CvInteractiveTooltip, SvTemplateView, Filter16 },
+          data: () => ({ experimental: version.experimental, componentsX }),
           template: templateViewString,
           props: settings.props,
           methods: {
@@ -182,7 +188,7 @@ preKnobs = {
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(false)) {
+for (const version of versions()) {
   const stories =
     version.experimental && !version.default
       ? storiesExperimental
@@ -214,8 +220,8 @@ for (const version of versions(false)) {
   `;
 
         return {
-          components: { CvDefinitionTooltip, SvTemplateView },
-          data: () => ({ experimental: version.experimental }),
+          components: { CvDefinitionTooltip, SvTemplateView, Filter16 },
+          data: () => ({ experimental: version.experimental, componentsX }),
           template: templateViewString,
           props: settings.props,
         };
@@ -275,7 +281,7 @@ preKnobs = {
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(false)) {
+for (const version of versions()) {
   const stories =
     version.experimental && !version.default
       ? storiesExperimental

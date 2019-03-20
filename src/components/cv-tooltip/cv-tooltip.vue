@@ -7,7 +7,9 @@
       :aria-label="tip"
     >
       <slot>
+        <Information16 v-if="componentsX" />
         <svg
+          v-else
           width="16"
           height="16"
           viewBox="0 0 16 16"
@@ -28,8 +30,15 @@
 </template>
 
 <script>
+import { componentsX } from '../../_internal/_feature-flags';
+import Information16 from '@carbon/icons-vue/lib/information/16';
+
 export default {
   name: 'CvTooltip',
+  components: { Information16 },
+  data() {
+    return { componentsX };
+  },
   props: {
     direction: {
       type: String,

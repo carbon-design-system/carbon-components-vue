@@ -16,7 +16,12 @@ import CvToolbarTitle from './cv-toolbar-title';
 
 const storiesDefault = storiesOf('Default/CvToolbar', module);
 const storiesExperimental = storiesOf('Experimental/CvToolbar', module);
-import { versions, setVersion } from '../../_internal/_feature-flags';
+import {
+  componentsX,
+  versions,
+  setVersion,
+} from '../../_internal/_feature-flags';
+import Filter16 from '@carbon/icons-vue/lib/filter/16';
 
 const preKnobs = {};
 
@@ -24,7 +29,7 @@ const variants = [{ name: 'default' }];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(false)) {
+for (const version of versions()) {
   const stories =
     version.experimental && !version.default
       ? storiesExperimental
@@ -44,7 +49,8 @@ for (const version of versions(false)) {
 
   <cv-overflow-menu>
     <template slot="trigger">
-      <svg class="bx--overflow-menu__icon bx--toolbar-filter-icon" width="16" height="12" viewBox="0 0 16 12">
+      <Filter16 v-if="componentsX" class="bx--overflow-menu__icon bx--toolbar-filter-icon" />
+      <svg v-else class="bx--overflow-menu__icon bx--toolbar-filter-icon" width="16" height="12" viewBox="0 0 16 12">
         <g fill-rule="nonzero">
           <path d="M8.05 2a2.5 2.5 0 0 1 4.9 0H16v1h-3.05a2.5 2.5 0 0 1-4.9 0H0V2h8.05zm2.45 2a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM3.05 9a2.5 2.5 0 0 1 4.9 0H16v1H7.95a2.5 2.5 0 0 1-4.9 0H0V9h3.05zm2.45 2a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
         </g>
@@ -99,11 +105,13 @@ for (const version of versions(false)) {
             CvToolbarDivider,
             CvToolbarOption,
             CvToolbarTitle,
+            Filter16,
           },
           template: templateViewString,
           props: settings.props,
           data() {
             return {
+              componentsX,
               experimental: version.experimental,
               searchInput: '',
             };

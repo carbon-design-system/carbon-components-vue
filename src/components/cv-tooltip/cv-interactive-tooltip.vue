@@ -18,7 +18,9 @@
         @focusout="checkFocusOut"
       >
         <slot name="trigger">
+          <Information16 v-if="componentsX" class="banana" />
           <svg
+            v-else
             width="16"
             height="16"
             viewBox="0 0 16 16"
@@ -69,10 +71,13 @@
 
 <script>
 import uidMixin from '../../mixins/uid-mixin';
+import { componentsX } from '../../_internal/_feature-flags';
+import Information16 from '@carbon/icons-vue/lib/information/16';
 
 export default {
   name: 'CvInteractiveTooltip',
   mixins: [uidMixin],
+  components: { Information16 },
   props: {
     direction: {
       type: String,
@@ -92,6 +97,7 @@ export default {
   },
   data() {
     return {
+      componentsX,
       dataVisible: false,
       left: -9999, // offscreen
       top: 0,
