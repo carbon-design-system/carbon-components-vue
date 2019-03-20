@@ -93,7 +93,7 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(false)) {
+for (const version of versions()) {
   const stories =
     version.experimental && !version.default
       ? storiesExperimental
