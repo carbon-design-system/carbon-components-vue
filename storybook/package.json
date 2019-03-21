@@ -13,6 +13,8 @@
     "vue": "^2.6.10"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
     "@carbon/data-viz-vue": "^0.0.1",
     "@carbon/vue": "^1.1.1",
     "@storybook/addon-actions": "^5.0.3",
@@ -23,7 +25,6 @@
     "@storybook/vue": "^5.0.3",
     "babel-loader": "^8.0.5",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
     "vue-highlightjs": "^1.3.3",
     "vue-loader": "^15.7.0",
     "vue-template-compiler": "^2.6.10"
