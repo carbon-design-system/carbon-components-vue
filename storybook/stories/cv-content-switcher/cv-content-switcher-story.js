@@ -13,7 +13,7 @@ import CvContentSwitcherContent from '@carbon/vue/src/components/cv-content-swit
 
 const storiesDefault = storiesOf('Default/CvContentSwitcher', module);
 const storiesExperimental = storiesOf('Experimental/CvContentSwitcher', module);
-import { override, reset } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
 
 const exampleIconPath = require('@carbon/vue/src/assets/images/example-icons.svg');
 import AddFilled16 from '@carbon/icons-vue/lib/add--filled/16';
@@ -83,14 +83,14 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const experimental of [false, true]) {
-  const stories = experimental ? storiesExperimental : storiesDefault;
+for (const version of versions()) {
+  const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
     stories.add(
       story.name,
       () => {
-        experimental ? override({ componentsX: true }) : reset();
+        setVersion(version);
         const settings = story.knobs();
         // ----------------------------------------------------------------
 
@@ -142,7 +142,7 @@ for (const experimental of [false, true]) {
             SvTemplateView,
           },
           data() {
-            return { experimental, toggle: false };
+            return { experimental: version.experimental, toggle: false };
           },
           mounted() {
             setInterval(() => {
@@ -168,14 +168,14 @@ for (const experimental of [false, true]) {
   }
 }
 
-for (const experimental of [false]) {
-  const stories = experimental ? storiesExperimental : storiesDefault;
+for (const version of versions()) {
+  const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
     stories.add(
       `${story.name} - direct DOM usage`,
       () => {
-        experimental ? override({ componentsX: true }) : reset();
+        setVersion(version);
         const settings = story.knobs();
         // ----------------------------------------------------------------
 
@@ -225,7 +225,7 @@ for (const experimental of [false]) {
             CvContentSwitcherButton,
             SvTemplateView,
           },
-          data: () => ({ experimental }),
+          data: () => ({ experimental: version.experimental }),
           props: settings.props,
           computed: {
             isSelected() {

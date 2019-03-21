@@ -12,7 +12,7 @@ import CvButtonSkeleton from '@carbon/vue/src/components/cv-button/cv-button-ske
 
 const storiesDefault = storiesOf('Default/CvButton', module);
 const storiesExperimental = storiesOf('Experimental/CvButton', module);
-import { componentsX, override, reset } from '@carbon/vue/src/_internal/_feature-flags';
+import { componentsX, versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
 
 const exampleIconPath = require('@carbon/vue/src/assets/images/example-icons.svg');
 import AddFilled16 from '@carbon/icons-vue/lib/add--filled/16';
@@ -139,17 +139,20 @@ let variants = [
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const experimental of [false, true]) {
-  const stories = experimental ? storiesExperimental : storiesDefault;
+for (const version of versions()) {
+  const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
-    if (story.skip && ((story.skip.default && !experimental) || (story.skip.experimental && experimental))) {
+    if (
+      story.skip &&
+      ((story.skip.default && !version.experimental) || (story.skip.experimental && version.experimental))
+    ) {
       continue;
     }
     stories.add(
       story.name,
       () => {
-        experimental ? override({ componentsX: true }) : reset();
+        setVersion(version);
         const settings = story.knobs();
 
         const templateString = `
@@ -172,7 +175,7 @@ for (const experimental of [false, true]) {
 
         return {
           components: { CvButton, SvTemplateView },
-          data: () => ({ experimental }),
+          data: () => ({ experimental: version.experimental }),
           methods: {
             actionClick: action('Cv Button - click'),
           },
@@ -204,14 +207,14 @@ variants = [{ name: 'skeleton' }];
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const experimental of [false, true]) {
-  const stories = experimental ? storiesExperimental : storiesDefault;
+for (const version of versions()) {
+  const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
     stories.add(
       story.name,
       () => {
-        experimental ? override({ componentsX: true }) : reset();
+        setVersion(version);
         const settings = story.knobs();
 
         const templateString = `
@@ -231,7 +234,7 @@ for (const experimental of [false, true]) {
 
         return {
           components: { CvButtonSkeleton, SvTemplateView },
-          data: () => ({ experimental }),
+          data: () => ({ experimental: version.experimental }),
           template: templateViewString,
           props: settings.props,
         };

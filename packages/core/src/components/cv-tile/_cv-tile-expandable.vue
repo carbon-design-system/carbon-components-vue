@@ -7,7 +7,8 @@
     :style="styleObject"
   >
     <button type="button" class="bx--tile__chevron" @click="toggle">
-      <svg width="12" height="8" viewBox="0 0 12 8" fill-rule="evenodd">
+      <ChevronDown16 v-if="componentsX" />
+      <svg v-else width="12" height="8" viewBox="0 0 12 8" fill-rule="evenodd">
         <path d="M10.6 0L6 4.7 1.4 0 0 1.4l6 6.1 6-6.1z"></path>
       </svg>
     </button>
@@ -27,13 +28,18 @@
 </template>
 
 <script>
+import { componentsX } from '../../_internal/_feature-flags';
+import ChevronDown16 from '@carbon/icons-vue/lib/chevron--down/16';
+
 export default {
   name: 'CvTileExpandable',
   props: {
     expanded: Boolean,
   },
+  components: { ChevronDown16 },
   data() {
     return {
+      componentsX,
       styleObject: {
         maxHeight: 'initial',
       },

@@ -27,16 +27,30 @@ export let breakingChangesX;
  */
 export let componentsX;
 
-export const override = val => {
-  if (val) {
-    breakingChangesX = val.breakingChangesX === true;
-    componentsX = val.componentsX === true;
+const defaults = {
+  componentsX: false,
+  breakingChangesX: false,
+};
+
+export const versions = (experimental = true) => {
+  const vers = [];
+  if (!defaults.componentsX) {
+    vers.push({ default: true });
+  }
+  if (experimental) {
+    vers.push({ experimental: true, default: defaults.componentsX });
+  }
+  return vers;
+};
+
+export const setVersion = val => {
+  if (val && val.experimental) {
+    breakingChangesX = true;
+    componentsX = true;
+  } else {
+    componentsX = defaults.componentsX;
+    breakingChangesX = defaults.breakingChangesX;
   }
 };
 
-export const reset = () => {
-  componentsX = false;
-  breakingChangesX = false;
-};
-
-reset();
+setVersion();

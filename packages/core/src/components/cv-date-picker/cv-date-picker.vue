@@ -1,6 +1,8 @@
 <template>
   <component :is="tagType" v-bind="$attrs" v-on="$listeners" class="cv-data-picker">
-    <slot></slot>
+    <template slot="invalid-message">
+      <slot name="invalid-message"></slot>
+    </template>
   </component>
 </template>
 

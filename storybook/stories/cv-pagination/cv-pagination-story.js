@@ -10,20 +10,22 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvPaginationNotesMD from '@carbon/vue/src/components/cv-pagination/cv-pagination-notes.md';
 import CvPagination from '@carbon/vue/src/components/cv-pagination/cv-pagination';
 
-const stories = storiesOf('Default/CvPagination', module);
+const storiesDefault = storiesOf('Default/CvPagination', module);
+const storiesExperimental = storiesOf('Experimental/CvPagination', module);
+import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
 
 const preKnobs = {
   backwardsText: {
     group: 'attr',
     type: text,
     config: ['backwards button text', 'Previous page'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: { name: 'backwards-text', type: String },
+    prop: { name: 'backward-text', type: String },
   },
   forwardsText: {
     group: 'attr',
     type: text,
     config: ['forwards button text', 'Next page'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: { name: 'forwards-text', type: String },
+    prop: { name: 'forward-text', type: String },
   },
   pageNumberLabel: {
     group: 'attr',
@@ -34,7 +36,7 @@ const preKnobs = {
   pageSizesLabel: {
     group: 'attr',
     type: text,
-    config: ['page sizes label', 'Number of items per page:'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    config: ['page sizes label', 'Items per page'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: { name: 'page-sizes-label', type: String },
   },
   numberOfItems: {
@@ -69,39 +71,46 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const story of storySet) {
-  stories.add(
-    story.name,
-    () => {
-      const settings = story.knobs();
+for (const version of versions()) {
+  const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
-      // ----------------------------------------------------------------
+  for (const story of storySet) {
+    stories.add(
+      story.name,
+      () => {
+        setVersion(version);
+        const settings = story.knobs();
 
-      const templateString = `
+        // ----------------------------------------------------------------
+
+        const templateString = `
 <cv-pagination${settings.group.attr}></cv-pagination>
   `;
 
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
     <sv-template-view
+      :sv-experimental="experimental"
       sv-margin
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
     </sv-template-view>
   `;
 
-      return {
-        components: { CvPagination, SvTemplateView },
-        template: templateViewString,
-        props: settings.props,
-        methods: {
-          onChange: action('cv-paginationr - change event'),
-        },
-      };
-    },
-    {
-      notes: { markdown: CvPaginationNotesMD },
-    }
-  );
+        return {
+          components: { CvPagination, SvTemplateView },
+          data: () => ({ experimental: version.experimental }),
+          template: templateViewString,
+          props: settings.props,
+          methods: {
+            onChange: action('cv-paginationr - change event'),
+          },
+        };
+      },
+      {
+        notes: { markdown: CvPaginationNotesMD },
+      }
+    );
+  }
 }

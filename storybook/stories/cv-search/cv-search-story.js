@@ -9,7 +9,9 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvSearchNotesMD from '@carbon/vue/src/components/cv-search/cv-search-notes.md';
 import CvSearch from '@carbon/vue/src/components/cv-search/cv-search';
 
-const stories = storiesOf('Default/CvSearch', module);
+const storiesDefault = storiesOf('Default/CvSearch', module);
+const storiesExperimental = storiesOf('Experimental/CvSearch', module);
+import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
 
 const preKnobs = {
   theme: {
@@ -71,22 +73,27 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const story of storySet) {
-  stories.add(
-    story.name,
-    () => {
-      const settings = story.knobs();
+for (const version of versions(false)) {
+  const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
-      // ----------------------------------------------------------------
+  for (const story of storySet) {
+    stories.add(
+      story.name,
+      () => {
+        setVersion(version);
+        const settings = story.knobs();
 
-      const templateString = `
+        // ----------------------------------------------------------------
+
+        const templateString = `
 <cv-search${settings.group.attr}>
 </cv-search>
   `;
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
     <sv-template-view
+      :sv-experimental="experimental"
       sv-margin
       :sv-alt-back="this.$options.propsData.theme !== 'light'"
       sv-source='${templateString.trim()}'>
@@ -101,22 +108,24 @@ for (const story of storySet) {
     </sv-template-view>
   `;
 
-      return {
-        components: { CvSearch, SvTemplateView },
-        template: templateViewString,
-        props: settings.props,
-        data() {
-          return {
-            modelValue: '',
-          };
-        },
-        methods: {
-          onInput: action('cv-search - input event'),
-        },
-      };
-    },
-    {
-      notes: { markdown: CvSearchNotesMD },
-    }
-  );
+        return {
+          components: { CvSearch, SvTemplateView },
+          template: templateViewString,
+          props: settings.props,
+          data() {
+            return {
+              experimental: version.experimental,
+              modelValue: '',
+            };
+          },
+          methods: {
+            onInput: action('cv-search - input event'),
+          },
+        };
+      },
+      {
+        notes: { markdown: CvSearchNotesMD },
+      }
+    );
+  }
 }

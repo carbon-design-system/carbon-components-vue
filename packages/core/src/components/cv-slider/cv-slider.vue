@@ -1,6 +1,6 @@
 <template>
   <div class="cv-slider bx--form-item">
-    <label :for="uid" class="bx--label">{{ label }}</label>
+    <label :for="uid" class="bx--label" :class="{ 'bx--label--disabled': componentsX && disabled }">{{ label }}</label>
     <div class="bx--slider-container">
       <span class="bx--slider__range-label">{{ internalMinLabel }}</span>
       <div
@@ -45,6 +45,7 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
+import { componentsX } from '../../_internal/_feature-flags';
 
 export default {
   name: 'CvSlider',
@@ -80,6 +81,7 @@ export default {
   },
   data() {
     return {
+      componentsX,
       internalValue: '',
       animateClick: false,
       isDragging: false,

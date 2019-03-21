@@ -8,12 +8,9 @@
         @input="onPageSizeChange"
         :value="`${pageSizeValue}`"
       >
-        <cv-select-option
-          v-for="(size, index) in pageSizes"
-          :key="index"
-          :value="`${size.value ? size.value : size}`"
-          >{{ size.label ? size.label : size.value ? size.value : size }}</cv-select-option
-        >
+        <cv-select-option v-for="(size, index) in pageSizes" :key="index" :value="`${size.value ? size.value : size}`">
+          {{ size.label ? size.label : size.value ? size.value : size }}
+        </cv-select-option>
       </cv-select>
 
       <span class="bx--pagination__text">
@@ -22,7 +19,7 @@
       </span>
     </div>
 
-    <div class="bx--pagination__right bx--pagination--inline">
+    <div class="bx--pagination__right">
       <span class="bx--pagination__text">{{ pageOfPages }}</span>
 
       <button
@@ -32,7 +29,8 @@
         :aria-label="backwardText"
         @click="onPrevPage"
       >
-        <svg class="bx--pagination__button-icon" width="7" height="12" viewBox="0 0 7 12">
+        <ChevronLeft16 v-if="componentsX" class="bx--pagination__button-icon" />
+        <svg v-else class="bx--pagination__button-icon" width="7" height="12" viewBox="0 0 7 12">
           <path fill-rule="nonzero" d="M1.45 6.002L7 11.27l-.685.726L0 6.003 6.315 0 7 .726z"></path>
         </svg>
       </button>
@@ -46,9 +44,9 @@
         @input="onPageChange"
         :value="`${pageValue}`"
       >
-        <cv-select-option v-for="pageNumber in pages" :key="pageNumber" :value="`${pageNumber}`">
-          {{ pageNumber }}
-        </cv-select-option>
+        <cv-select-option v-for="pageNumber in pages" :key="pageNumber" :value="`${pageNumber}`">{{
+          pageNumber
+        }}</cv-select-option>
       </cv-select>
       <span v-if="pages.length == 0">{{ pageValue }}</span>
 
@@ -60,7 +58,8 @@
         @click="onNextPage"
         :disabled="this.pageValue === this.pageCount"
       >
-        <svg class="bx--pagination__button-icon" width="7" height="12" viewBox="0 0 7 12">
+        <ChevronRight16 v-if="componentsX" class="bx--pagination__button-icon" />
+        <svg v-else class="bx--pagination__button-icon" width="7" height="12" viewBox="0 0 7 12">
           <path fill-rule="nonzero" d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"></path>
         </svg>
       </button>
@@ -70,7 +69,9 @@
 
 <script>
 import CvSelect from '../cv-select/cv-select';
-import CvSelectOption from '../cv-select/cv-select-option';
+import { componentsX } from '../../_internal/_feature-flags';
+import ChevronLeft16 from '@carbon/icons-vue/lib/chevron--left/16';
+import ChevronRight16 from '@carbon/icons-vue/lib/chevron--right/16';
 
 const newPageValue = (page, lastPage) => {
   let result = 1;
@@ -114,18 +115,19 @@ const newFirstItem = (pageValue, pageSizeValue) => 1 + (pageValue - 1) * pageSiz
 
 export default {
   name: 'CvPagination',
-  components: { CvSelect, CvSelectOption },
+  components: { CvSelect, ChevronLeft16, ChevronRight16 },
   props: {
     backwardText: { type: String, default: 'Prev page' },
     forwardText: { type: String, default: 'Next page' },
     pageNumberLabel: { type: String, default: 'Page number:' },
-    pageSizesLabel: { type: String, default: 'Number of items per page:' },
+    pageSizesLabel: { type: String, default: 'Items per page' },
     numberOfItems: { type: Number, default: Infinity },
     page: Number,
     pageSizes: { type: Array, default: () => [10, 20, 30, 40, 50] },
   },
   data() {
     return {
+      componentsX,
       firstItem: 1,
       pageValue: 1,
       pageSizeValue: 10,

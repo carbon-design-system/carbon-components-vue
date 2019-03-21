@@ -44,17 +44,14 @@
 
 <script>
 import Vue from 'vue';
-import { override, reset } from '@carbon/vue/src/_internal/_feature-flags';
 import SvViewExperimental from './sv-view-experimental.vue'; //
 import SvView from './sv-view.vue';
-import CvCheckbox from '@carbon/vue/src/components/cv-checkbox/cv-checkbox';
 
 export default {
   name: 'SvTemplateView',
   components: {
     SvView,
     SvViewExperimental,
-    CvCheckbox,
   },
   props: {
     svExperimental: Boolean,
@@ -67,7 +64,6 @@ export default {
   data() {
     return {
       propsJSON: '',
-      experimental: false,
     };
   },
   computed: {
@@ -82,20 +78,11 @@ export default {
   },
   mounted() {
     this.propsJSON = JSON.stringify(this.$vnode.context.$options.propsData, null, 2);
-    this.experimental = false;
-    reset();
   },
   updated() {
     this.propsJSON = JSON.stringify(this.$vnode.context.$options.propsData, null, 2);
   },
   methods: {
-    onExperimental() {
-      if (this.experimental) {
-        override({ componentsX: true, breakingChagnesX: true });
-      } else {
-        reset();
-      }
-    },
     sourceToClipboard() {
       this.$refs.copyButton.classList.remove('sv-template-view__copy--copied');
       this.$refs.clippy.value = this.svSource;
@@ -138,7 +125,7 @@ $component-padding: 40px;
 .sv-template-view__component {
   display: inline-flex;
   flex-direction: column;
-  min-width: 500px;
+  width: 1000px;
   max-width: calc(100% - #{4 * $component-padding});
   border: $border;
   background-color: $back-color-exp;
@@ -202,7 +189,7 @@ $component-padding: 40px;
   top: 37px;
   left: 0;
 
-  .experimental & {
+  .components-x & {
     top: 32px;
   }
 
@@ -238,7 +225,7 @@ $component-padding: 40px;
   display: none;
 }
 
-.sv-template-view--experimental {
+.sv-template-view--components-x {
   position: absolute;
   top: 0;
   right: 0;
@@ -257,7 +244,7 @@ $component-padding: 40px;
   margin: 0;
 }
 
-.sv-view__toggle-experimental {
+.sv-view__toggle-components-x {
   position: fixed;
   top: 10px;
   right: 10px;
