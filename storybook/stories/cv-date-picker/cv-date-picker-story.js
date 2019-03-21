@@ -11,7 +11,7 @@ import CvDatePicker from '@carbon/vue/src/components/cv-date-picker/cv-date-pick
 
 const storiesDefault = storiesOf('Default/CvDatePicker', module);
 const storiesExperimental = storiesOf('Experimental/CvDatePicker', module);
-import { override, reset } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
 
 const preKnobs = {
   theme: {
@@ -120,14 +120,14 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const experimental of [false, true]) {
-  const stories = experimental ? storiesExperimental : storiesDefault;
+for (const version of versions()) {
+  const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
     stories.add(
       story.name,
       () => {
-        experimental ? override({ componentsX: true }) : reset();
+        setVersion(version);
         const settings = story.knobs();
 
         // ----------------------------------------------------------------
@@ -154,7 +154,7 @@ for (const experimental of [false, true]) {
 
         return {
           components: { CvDatePicker, SvTemplateView },
-          data: () => ({ experimental }),
+          data: () => ({ experimental: version.experimental }),
           props: settings.props,
           template: templateViewString,
           methods: {

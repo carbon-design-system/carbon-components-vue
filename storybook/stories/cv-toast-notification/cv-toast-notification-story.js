@@ -12,7 +12,7 @@ import CvToastNotification from '@carbon/vue/src/components/cv-toast-notificatio
 
 const storiesDefault = storiesOf('Default/CvToastNotification', module);
 const storiesExperimental = storiesOf('Experimental/CvToastNotification', module);
-import { override, reset } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
 
 const preKnobs = {
   title: {
@@ -64,14 +64,14 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const experimental of [false, true]) {
-  const stories = experimental ? storiesExperimental : storiesDefault;
+for (const version of versions()) {
+  const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
     stories.add(
       story.name,
       () => {
-        experimental ? override({ componentsX: true }) : reset();
+        setVersion(version);
         const settings = story.knobs();
 
         // ----------------------------------------------------------------
@@ -98,7 +98,7 @@ for (const experimental of [false, true]) {
           props: settings.props,
           data() {
             return {
-              experimental,
+              experimental: version.experimental,
               visible: true,
             };
           },

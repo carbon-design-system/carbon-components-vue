@@ -12,7 +12,7 @@ import CvLoading from '@carbon/vue/src/components/cv-loading/cv-loading';
 
 const storiesDefault = storiesOf('Default/CvLoading', module);
 const storiesExperimental = storiesOf('Experimental/CvLoading', module);
-import { override, reset } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
 
 const preKnobs = {
   active: {
@@ -43,14 +43,14 @@ const variants = [{ name: 'default', excludes: ['events'] }, { name: 'events' }]
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const experimental of [false, true]) {
-  const stories = experimental ? storiesExperimental : storiesDefault;
+for (const version of versions()) {
+  const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
     stories.add(
       story.name,
       () => {
-        experimental ? override({ componentsX: true }) : reset();
+        setVersion(version);
         const settings = story.knobs();
 
         // ----------------------------------------------------------------
@@ -73,7 +73,7 @@ for (const experimental of [false, true]) {
 
         return {
           components: { CvLoading, SvTemplateView },
-          data: () => ({ experimental }),
+          data: () => ({ experimental: version.experimental }),
           template: templateViewString,
           props: settings.props,
           methods: {

@@ -2,7 +2,8 @@
   <div class="cv-tooltip bx--tooltip--icon">
     <div tabindex="0" class="bx--tooltip__trigger" :class="`bx--tooltip--icon__${direction}`" :aria-label="tip">
       <slot>
-        <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+        <Information16 v-if="componentsX" />
+        <svg v-else width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
           <g fill-rule="evenodd">
             <path
               d="M8 14.5a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
@@ -18,8 +19,15 @@
 </template>
 
 <script>
+import { componentsX } from '../../_internal/_feature-flags';
+import Information16 from '@carbon/icons-vue/lib/information/16';
+
 export default {
   name: 'CvTooltip',
+  components: { Information16 },
+  data() {
+    return { componentsX };
+  },
   props: {
     direction: {
       type: String,

@@ -9,7 +9,9 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvSelectNotesMD from '@carbon/vue/src/components/cv-select/cv-select-notes.md';
 import CvSelect from '@carbon/vue/src/components/cv-select/cv-select';
 
-const stories = storiesOf('Default/CvSelect', module);
+const storiesDefault = storiesOf('Default/CvSelect', module);
+const storiesExperimental = storiesOf('Experimental/CvSelect', module);
+import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
 
 const preKnobs = {
   theme: {
@@ -77,15 +79,19 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const story of storySet) {
-  stories.add(
-    story.name,
-    () => {
-      const settings = story.knobs();
+for (const version of versions(false)) {
+  const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
-      // ----------------------------------------------------------------
+  for (const story of storySet) {
+    stories.add(
+      story.name,
+      () => {
+        setVersion(version);
+        const settings = story.knobs();
 
-      const templateString = `
+        // ----------------------------------------------------------------
+
+        const templateString = `
   <cv-select${settings.group.attr}>
     <cv-select-option disabled selected hidden>Choose an option</cv-select-option>
     <cv-select-option value="solong">A much longer cv-select-option that is worth having around to check how text flows</cv-select-option>
@@ -100,10 +106,11 @@ for (const story of storySet) {
   </cv-select>
 `;
 
-      // ----------------------------------------------------------------
+        // ----------------------------------------------------------------
 
-      const templateViewString = `
+        const templateViewString = `
     <sv-template-view
+      :sv-experimental="experimental"
       sv-margin
       :sv-alt-back="this.$options.propsData.theme !== 'light'"
       sv-source='${templateString.trim()}'>
@@ -124,22 +131,24 @@ for (const story of storySet) {
     </sv-template-view>
   `;
 
-      return {
-        components: { CvSelect, SvTemplateView },
-        props: settings.props,
-        data() {
-          return {
-            selectValue: 'cv-select-option3',
-          };
-        },
-        methods: {
-          actionChange: action('CV Select - change'),
-        },
-        template: templateViewString,
-      };
-    },
-    {
-      notes: { markdown: CvSelectNotesMD },
-    }
-  );
+        return {
+          components: { CvSelect, SvTemplateView },
+          props: settings.props,
+          data() {
+            return {
+              experimental: version.experimental,
+              selectValue: 'cv-select-option3',
+            };
+          },
+          methods: {
+            actionChange: action('CV Select - change'),
+          },
+          template: templateViewString,
+        };
+      },
+      {
+        notes: { markdown: CvSelectNotesMD },
+      }
+    );
+  }
 }
