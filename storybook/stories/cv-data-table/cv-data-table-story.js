@@ -9,7 +9,11 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvDataTableNotesMD from '@carbon/vue/src/components/cv-data-table/cv-data-table-notes.md';
 import CvDataTable from '@carbon/vue/src/components/cv-data-table/cv-data-table';
 import CvDataTableAction from '@carbon/vue/src/components/cv-data-table/cv-data-table-action';
-import CvSearch from '@carbon/vue/src/components/cv-search/cv-search';
+import CvDataTableRow from '@carbon/vue/src/components/cv-data-table/cv-data-table-row';
+import CvDataTableCell from '@carbon/vue/src/components/cv-data-table/cv-data-table-cell';
+import CvButton from '@carbon/vue/src/components/cv-button/cv-button';
+import CvOverflowMenu from '@carbon/vue/src/components/cv-overflow-menu/cv-overflow-menu';
+import CvOverflowMenuItem from '@carbon/vue/src/components/cv-overflow-menu/cv-overflow-menu-item';
 
 const storiesDefault = storiesOf('Default/CvDataTable', module);
 const storiesExperimental = storiesOf('Experimental/CvDataTable', module);
@@ -332,8 +336,12 @@ for (const experimental of [false, true]) {
           components: {
             CvDataTable,
             CvDataTableAction,
+            CvDataTableRow,
+            CvDataTableCell,
+            CvButton,
+            CvOverflowMenu,
+            CvOverflowMenuItem,
             SvTemplateView,
-            CvSearch,
           },
           template: templateViewString,
           props: settings.props,
