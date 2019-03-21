@@ -5,8 +5,8 @@ import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-
 // import consts from '../../_storybook/utils/consts';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvTileNotesMD from './cv-tile-notes.md';
-import CvTile from './cv-tile';
+import CvTileNotesMD from '@carbon/vue/src/components/cv-tile/cv-tile-notes.md';
+import CvTile from '@carbon/vue/src/components/cv-tile/cv-tile';
 
 const stories = storiesOf('Default/CvTile', module);
 

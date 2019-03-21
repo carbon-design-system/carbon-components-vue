@@ -5,13 +5,13 @@ import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-
 // import consts from '../../_storybook/utils/consts';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvCodeSnippetNotesMD from './cv-code-snippet-notes.md';
-import CvCodeSnippet from './cv-code-snippet';
-import CvCodeSnippetSkeleton from './cv-code-snippet-skeleton';
+import CvCodeSnippetNotesMD from '@carbon/vue/src/components/cv-code-snippet/cv-code-snippet-notes.md';
+import CvCodeSnippet from '@carbon/vue/src/components/cv-code-snippet/cv-code-snippet';
+import CvCodeSnippetSkeleton from '@carbon/vue/src/components/cv-code-snippet/cv-code-snippet-skeleton';
 
 const storiesDefault = storiesOf('Default/CvCodeSnippet', module);
 const storiesExperimental = storiesOf('Experimental/CvCodeSnippet', module);
-import { override, reset } from '../../_internal/_feature-flags';
+import { override, reset } from '@carbon/vue/src/_internal/_feature-flags';
 
 let preKnobs = {
   lessText: {

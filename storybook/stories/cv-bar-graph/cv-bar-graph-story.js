@@ -5,8 +5,8 @@ import { text, object, number, boolean } from '@storybook/addon-knobs';
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvBarGraphNotesMD from './cv-bar-graph-notes.md';
-import CvBarGraph from './cv-bar-graph';
+import CvBarGraphNotesMD from '@carbon/data-viz-vue/src/data-viz/cv-bar-graph/cv-bar-graph-notes.md';
+import CvBarGraph from '@carbon/data-viz-vue/src/data-viz/cv-bar-graph/cv-bar-graph';
 
 const stories = storiesOf('Data-Viz/CvBarGraph', module);
 

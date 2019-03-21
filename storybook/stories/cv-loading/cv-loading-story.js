@@ -7,12 +7,12 @@ import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-
 // import consts from '../../_storybook/utils/consts';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvLoadingNotesMD from './cv-loading-notes.md';
-import CvLoading from './cv-loading';
+import CvLoadingNotesMD from '@carbon/vue/src/components/cv-loading/cv-loading-notes.md';
+import CvLoading from '@carbon/vue/src/components/cv-loading/cv-loading';
 
 const storiesDefault = storiesOf('Default/CvLoading', module);
 const storiesExperimental = storiesOf('Experimental/CvLoading', module);
-import { override, reset } from '../../_internal/_feature-flags';
+import { override, reset } from '@carbon/vue/src/_internal/_feature-flags';
 
 const preKnobs = {
   active: {

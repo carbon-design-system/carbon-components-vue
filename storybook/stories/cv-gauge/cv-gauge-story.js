@@ -4,8 +4,8 @@ import { text, number } from '@storybook/addon-knobs/vue';
 import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvGaugeNotesMD from './cv-gauge-notes.md';
-import CvGauge from './cv-gauge';
+import CvGaugeNotesMD from '@carbon/data-viz-vue/src/data-viz/cv-gauge/cv-gauge-notes.md';
+import CvGauge from '@carbon/data-viz-vue/src/data-viz/cv-gauge/cv-gauge';
 
 const stories = storiesOf('Data-Viz/CvGauge', module);
 

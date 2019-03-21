@@ -6,8 +6,8 @@ import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-
 // import consts from '../../_storybook/utils/consts';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvStructuredListNotesMD from './cv-structured-list-notes.md';
-import CvStructuredList from './cv-structured-list';
+import CvStructuredListNotesMD from '@carbon/vue/src/components/cv-structured-list/cv-structured-list-notes.md';
+import CvStructuredList from '@carbon/vue/src/components/cv-structured-list/cv-structured-list';
 
 const stories = storiesOf('Default/CvStructuredList', module);
 

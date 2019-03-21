@@ -6,8 +6,8 @@ import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-
 // import consts from '../../_storybook/utils/consts';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvTimePickerNotesMD from './cv-time-picker-notes.md';
-import CvTimePicker from './cv-time-picker';
+import CvTimePickerNotesMD from '@carbon/vue/src/components/cv-time-picker/cv-time-picker-notes.md';
+import CvTimePicker from '@carbon/vue/src/components/cv-time-picker/cv-time-picker';
 
 const stories = storiesOf('Default/CvTimePicker', module);
 

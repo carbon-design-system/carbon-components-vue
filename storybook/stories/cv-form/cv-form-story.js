@@ -4,15 +4,15 @@ import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-
 // import consts from '../../_storybook/utils/consts';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvFormNotesMD from './cv-form-notes.md';
-import CvForm from './cv-form';
-import CvTextInput from '../cv-text-input/cv-text-input';
-import CvTextArea from '../cv-text-area/cv-text-area';
-import CvSelect from '../cv-select/cv-select';
+import CvFormNotesMD from '@carbon/vue/src/components/cv-form/cv-form-notes.md';
+import CvForm from '@carbon/vue/src/components/cv-form/cv-form';
+import CvTextInput from '@carbon/vue/src/components/cv-text-input/cv-text-input';
+import CvTextArea from '@carbon/vue/src/components/cv-text-area/cv-text-area';
+import CvSelect from '@carbon/vue/src/components/cv-select/cv-select';
 
 const storiesDefault = storiesOf('Default/CvForm', module);
 const storiesExperimental = storiesOf('Experimental/CvForm', module);
-import { override, reset } from '../../_internal/_feature-flags';
+import { override, reset } from '@carbon/vue/src/_internal/_feature-flags';
 
 const preKnobs = {};
 

@@ -5,8 +5,8 @@ import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-
 // import consts from '../../_storybook/utils/consts';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvOverflowMenuNotesMD from './cv-overflow-menu-notes.md';
-import CvOverflowMenu from './cv-overflow-menu';
+import CvOverflowMenuNotesMD from '@carbon/vue/src/components/cv-overflow-menu/cv-overflow-menu-notes.md';
+import CvOverflowMenu from '@carbon/vue/src/components/cv-overflow-menu/cv-overflow-menu';
 
 const stories = storiesOf('Default/CvOverflowMenu', module);
 

@@ -6,13 +6,13 @@ import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-
 // import consts from '../../_storybook/utils/consts';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvFileUploaderNotesMD from './cv-file-uploader-notes.md';
-import CvFileUploader from './cv-file-uploader';
-import CvFileUploaderSkeleton from './cv-file-uploader-skeleton';
+import CvFileUploaderNotesMD from '@carbon/vue/src/components/cv-file-uploader/cv-file-uploader-notes.md';
+import CvFileUploader from '@carbon/vue/src/components/cv-file-uploader/cv-file-uploader';
+import CvFileUploaderSkeleton from '@carbon/vue/src/components/cv-file-uploader/cv-file-uploader-skeleton';
 
 const storiesDefault = storiesOf('Default/CvFileUploader', module);
 const storiesExperimental = storiesOf('Experimental/CvFileUploader', module);
-import { override, reset } from '../../_internal/_feature-flags';
+import { override, reset } from '@carbon/vue/src/_internal/_feature-flags';
 
 let preKnobs = {
   label: {

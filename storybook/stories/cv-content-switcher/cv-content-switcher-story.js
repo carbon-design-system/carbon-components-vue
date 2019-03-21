@@ -6,16 +6,16 @@ import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-
 // import consts from '../../_storybook/utils/consts';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvContentSwitcherNotesMD from './cv-content-switcher-notes.md';
-import CvContentSwitcher from './cv-content-switcher';
-import CvContentSwitcherButton from './cv-content-switcher-button';
-import CvContentSwitcherContent from './cv-content-switcher-content';
+import CvContentSwitcherNotesMD from '@carbon/vue/src/components/cv-content-switcher/cv-content-switcher-notes.md';
+import CvContentSwitcher from '@carbon/vue/src/components/cv-content-switcher/cv-content-switcher';
+import CvContentSwitcherButton from '@carbon/vue/src/components/cv-content-switcher/cv-content-switcher-button';
+import CvContentSwitcherContent from '@carbon/vue/src/components/cv-content-switcher/cv-content-switcher-content';
 
 const storiesDefault = storiesOf('Default/CvContentSwitcher', module);
 const storiesExperimental = storiesOf('Experimental/CvContentSwitcher', module);
-import { override, reset } from '../../_internal/_feature-flags';
+import { override, reset } from '@carbon/vue/src/_internal/_feature-flags';
 
-const exampleIconPath = require('../../assets/images/example-icons.svg');
+const exampleIconPath = require('@carbon/vue/src/assets/images/example-icons.svg');
 import AddFilled16 from '@carbon/icons-vue/lib/add--filled/16';
 
 const preKnobs = {

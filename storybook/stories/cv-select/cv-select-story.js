@@ -6,8 +6,8 @@ import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-
 // import consts from '../../_storybook/utils/consts';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvSelectNotesMD from './cv-select-notes.md';
-import CvSelect from './cv-select';
+import CvSelectNotesMD from '@carbon/vue/src/components/cv-select/cv-select-notes.md';
+import CvSelect from '@carbon/vue/src/components/cv-select/cv-select';
 
 const stories = storiesOf('Default/CvSelect', module);
 

@@ -5,12 +5,12 @@ import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-
 // import consts from '../../_storybook/utils/consts';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvInlineLoaderNotesMD from './cv-inline-loader-notes.md';
-import CvInlineLoader from './cv-inline-loader';
+import CvInlineLoaderNotesMD from '@carbon/vue/src/components/cv-inline-loader/cv-inline-loader-notes.md';
+import CvInlineLoader from '@carbon/vue/src/components/cv-inline-loader/cv-inline-loader';
 
 const storiesDefault = storiesOf('Default/CvInlineLoader', module);
 const storiesExperimental = storiesOf('Experimental/CvInlineLoader', module);
-import { override, reset } from '../../_internal/_feature-flags';
+import { override, reset } from '@carbon/vue/src/_internal/_feature-flags';
 
 const preKnobs = {
   active: {

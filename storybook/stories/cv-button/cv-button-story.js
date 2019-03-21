@@ -6,15 +6,15 @@ import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-
 // import consts from '../../_storybook/utils/consts';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvButtonNotesMD from './cv-button-notes.md';
-import CvButton from './cv-button';
-import CvButtonSkeleton from './cv-button-skeleton';
+import CvButtonNotesMD from '@carbon/vue/src/components/cv-button/cv-button-notes.md';
+import CvButton from '@carbon/vue/src/components/cv-button/cv-button';
+import CvButtonSkeleton from '@carbon/vue/src/components/cv-button/cv-button-skeleton';
 
 const storiesDefault = storiesOf('Default/CvButton', module);
 const storiesExperimental = storiesOf('Experimental/CvButton', module);
-import { componentsX, override, reset } from '../../_internal/_feature-flags';
+import { componentsX, override, reset } from '@carbon/vue/src/_internal/_feature-flags';
 
-const exampleIconPath = require('../../assets/images/example-icons.svg');
+const exampleIconPath = require('@carbon/vue/src/assets/images/example-icons.svg');
 import AddFilled16 from '@carbon/icons-vue/lib/add--filled/16';
 
 let preKnobs = {

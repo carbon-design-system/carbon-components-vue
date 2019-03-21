@@ -6,13 +6,13 @@ import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-
 // import consts from '../../_storybook/utils/consts';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvCheckboxNotesMD from './cv-checkbox-notes.md';
-import CvCheckbox from './cv-checkbox';
-import CvCheckboxSkeleton from './cv-checkbox-skeleton';
+import CvCheckboxNotesMD from '@carbon/vue/src/components/cv-checkbox/cv-checkbox-notes.md';
+import CvCheckbox from '@carbon/vue/src/components/cv-checkbox/cv-checkbox';
+import CvCheckboxSkeleton from '@carbon/vue/src/components/cv-checkbox/cv-checkbox-skeleton';
 
 const storiesDefault = storiesOf('Default/CvCheckbox', module);
 const storiesExperimental = storiesOf('Experimental/CvCheckbox', module);
-import { override, reset } from '../../_internal/_feature-flags';
+import { override, reset } from '@carbon/vue/src/_internal/_feature-flags';
 
 let preKnobs = {
   label: {

@@ -5,10 +5,10 @@ import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-
 // import consts from '../../_storybook/utils/consts';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvTooltipNotesMD from './cv-tooltip-notes.md';
-import CvInteractiveTooltip from './cv-interactive-tooltip';
-import CvTooltip from './cv-tooltip';
-import CvDefinitionTooltip from './cv-definition-tooltip';
+import CvTooltipNotesMD from '@carbon/vue/src/components/cv-tooltip/cv-tooltip-notes.md';
+import CvInteractiveTooltip from '@carbon/vue/src/components/cv-tooltip/cv-interactive-tooltip';
+import CvTooltip from '@carbon/vue/src/components/cv-tooltip/cv-tooltip';
+import CvDefinitionTooltip from '@carbon/vue/src/components/cv-tooltip/cv-definition-tooltip';
 
 const stories = storiesOf('Default/CvTooltip', module);
 

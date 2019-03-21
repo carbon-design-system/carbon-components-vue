@@ -6,8 +6,8 @@ import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-
 // import consts from '../../_storybook/utils/consts';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvTextAreaNotesMD from './cv-text-area-notes.md';
-import CvTextArea from './cv-text-area';
+import CvTextAreaNotesMD from '@carbon/vue/src/components/cv-text-area/cv-text-area-notes.md';
+import CvTextArea from '@carbon/vue/src/components/cv-text-area/cv-text-area';
 
 const stories = storiesOf('Default/CvTextArea', module);
 

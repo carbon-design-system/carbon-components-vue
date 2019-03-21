@@ -5,14 +5,14 @@ import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-
 // import consts from '../../_storybook/utils/consts';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvBreadcrumbNotesMD from './cv-breadcrumb-notes.md';
-import CvBreadcrumb from './cv-breadcrumb';
-import CvBreadcrumbItem from './cv-breadcrumb-item';
-import CvBreadcrumbSkeleton from './cv-breadcrumb-skeleton';
+import CvBreadcrumbNotesMD from '@carbon/vue/src/components/cv-breadcrumb/cv-breadcrumb-notes.md';
+import CvBreadcrumb from '@carbon/vue/src/components/cv-breadcrumb/cv-breadcrumb';
+import CvBreadcrumbItem from '@carbon/vue/src/components/cv-breadcrumb/cv-breadcrumb-item';
+import CvBreadcrumbSkeleton from '@carbon/vue/src/components/cv-breadcrumb/cv-breadcrumb-skeleton';
 
 const storiesDefault = storiesOf('Default/CvBreadcrumb', module);
 const storiesExperimental = storiesOf('Experimental/CvBreadcrumb', module);
-import { override, reset } from '../../_internal/_feature-flags';
+import { override, reset } from '@carbon/vue/src/_internal/_feature-flags';
 
 const preKnobs = {
   noTrailingSlash: {

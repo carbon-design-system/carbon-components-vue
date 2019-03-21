@@ -5,14 +5,14 @@ import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-
 // import consts from '../../_storybook/utils/consts';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvAccordionNotesMD from './cv-accordion-notes.md';
-import CvAccordion from './cv-accordion';
-import CvAccordionItem from './cv-accordion-item';
-import CvAccordionSkeleton from './cv-accordion-skeleton';
+import CvAccordionNotesMD from '@carbon/vue/src/components/cv-accordion/cv-accordion-notes.md';
+import CvAccordion from '@carbon/vue/src/components/cv-accordion/cv-accordion';
+import CvAccordionItem from '@carbon/vue/src/components/cv-accordion/cv-accordion-item';
+import CvAccordionSkeleton from '@carbon/vue/src/components/cv-accordion/cv-accordion-skeleton';
 
 const storiesDefault = storiesOf('Default/CvAccordion', module);
 const storiesExperimental = storiesOf('Experimental/CvAccordion', module);
-import { override, reset } from '../../_internal/_feature-flags';
+import { override, reset } from '@carbon/vue/src/_internal/_feature-flags';
 
 const preKnobs = {
   open1: {

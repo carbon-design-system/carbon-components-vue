@@ -44,10 +44,10 @@
 
 <script>
 import Vue from 'vue';
-import { override, reset } from '../../../_internal/_feature-flags';
+import { override, reset } from '@carbon/vue/src/_internal/_feature-flags';
 import SvViewExperimental from './sv-view-experimental.vue'; //
 import SvView from './sv-view.vue';
-import CvCheckbox from '../../../components/cv-checkbox/cv-checkbox';
+import CvCheckbox from '@carbon/vue/src/components/cv-checkbox/cv-checkbox';
 
 export default {
   name: 'SvTemplateView',

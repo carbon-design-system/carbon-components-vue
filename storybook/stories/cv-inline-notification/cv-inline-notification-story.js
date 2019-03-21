@@ -7,12 +7,12 @@ import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-
 // import consts from '../../_storybook/utils/consts';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvInlineNotificationNotesMD from './cv-inline-notification-notes.md';
-import CvInlineNotification from './cv-inline-notification';
+import CvInlineNotificationNotesMD from '@carbon/vue/src/components/cv-inline-notification/cv-inline-notification-notes.md';
+import CvInlineNotification from '@carbon/vue/src/components/cv-inline-notification/cv-inline-notification';
 
 const storiesDefault = storiesOf('Default/CvInlineNotification', module);
 const storiesExperimental = storiesOf('Experimental/CvInlineNotification', module);
-import { override, reset } from '../../_internal/_feature-flags';
+import { override, reset } from '@carbon/vue/src/_internal/_feature-flags';
 
 const preKnobs = {
   title: {

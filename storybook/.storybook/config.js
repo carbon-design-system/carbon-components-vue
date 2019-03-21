@@ -6,7 +6,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 import Vue from 'vue';
 import VueHighlightJS from 'vue-highlightjs';
 
-import CarbonComponentsVue from '../src';
+import CarbonComponentsVue from '@carbon/vue';
 
 addDecorator(
   withOptions({
@@ -24,15 +24,8 @@ Vue.use(CarbonComponentsVue);
 Vue.use(VueHighlightJS);
 
 function loadStories() {
-  const req = require.context('../src/components', true, /\-story\.js$/);
+  const req = require.context('../stories', true, /\-story\.js$/);
   req.keys().forEach(filename => req(filename));
 }
 
 configure(loadStories, module);
-
-function loadDataVizStories() {
-  const req = require.context('../src/data-viz', true, /\-story\.js$/);
-  req.keys().forEach(filename => req(filename));
-}
-
-configure(loadDataVizStories, module);

@@ -7,12 +7,12 @@ import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-
 // import consts from '../../_storybook/utils/consts';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvToastNotificationNotesMD from './cv-toast-notification-notes.md';
-import CvToastNotification from './cv-toast-notification';
+import CvToastNotificationNotesMD from '@carbon/vue/src/components/cv-toast-notification/cv-toast-notification-notes.md';
+import CvToastNotification from '@carbon/vue/src/components/cv-toast-notification/cv-toast-notification';
 
 const storiesDefault = storiesOf('Default/CvToastNotification', module);
 const storiesExperimental = storiesOf('Experimental/CvToastNotification', module);
-import { override, reset } from '../../_internal/_feature-flags';
+import { override, reset } from '@carbon/vue/src/_internal/_feature-flags';
 
 const preKnobs = {
   title: {

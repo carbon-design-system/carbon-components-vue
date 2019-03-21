@@ -4,15 +4,15 @@ import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-
 // import consts from '../../_storybook/utils/consts';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvToolbarNotesMD from './cv-toolbar-notes.md';
-import CvToolbar from './cv-toolbar';
-import CvOverflowMenu from '../cv-overflow-menu/cv-overflow-menu';
-import CvOverflowMenuItem from '../cv-overflow-menu/cv-overflow-menu-item';
-import CvRadioButton from '../cv-radio-button/cv-radio-button';
-import CvCheckbox from '../cv-checkbox/cv-checkbox';
-import CvToolbarDivider from './cv-toolbar-divider';
-import CvToolbarOption from './cv-toolbar-option';
-import CvToolbarTitle from './cv-toolbar-title';
+import CvToolbarNotesMD from '@carbon/vue/src/components/cv-toolbar/cv-toolbar-notes.md';
+import CvToolbar from '@carbon/vue/src/components/cv-toolbar/cv-toolbar';
+import CvOverflowMenu from '@carbon/vue/src/components/cv-overflow-menu/cv-overflow-menu';
+import CvOverflowMenuItem from '@carbon/vue/src/components/cv-overflow-menu/cv-overflow-menu-item';
+import CvRadioButton from '@carbon/vue/src/components/cv-radio-button/cv-radio-button';
+import CvCheckbox from '@carbon/vue/src/components/cv-checkbox/cv-checkbox';
+import CvToolbarDivider from '@carbon/vue/src/components/cv-toolbar/cv-toolbar-divider';
+import CvToolbarOption from '@carbon/vue/src/components/cv-toolbar/cv-toolbar-option';
+import CvToolbarTitle from '@carbon/vue/src/components/cv-toolbar/cv-toolbar-title';
 
 const stories = storiesOf('Default/CvToolbar', module);
 

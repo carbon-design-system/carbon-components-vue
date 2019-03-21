@@ -6,10 +6,10 @@ import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-
 // import consts from '../../_storybook/utils/consts';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvDropdownNotesMD from './cv-dropdown-notes.md';
-import CvDropdown from './cv-dropdown';
-import CvDropdownSkeleton from './cv-dropdown-skeleton';
-import { componentsX, override, reset } from '../../_internal/_feature-flags';
+import CvDropdownNotesMD from '@carbon/vue/src/components/cv-dropdown/cv-dropdown-notes.md';
+import CvDropdown from '@carbon/vue/src/components/cv-dropdown/cv-dropdown';
+import CvDropdownSkeleton from '@carbon/vue/src/components/cv-dropdown/cv-dropdown-skeleton';
+import { componentsX, override, reset } from '@carbon/vue/src/_internal/_feature-flags';
 
 const storiesDefault = storiesOf('Default/CvDropdown', module);
 const storiesExperimental = storiesOf('Experimental/CvDropdown', module);

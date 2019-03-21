@@ -7,12 +7,12 @@ import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-
 // import consts from '../../_storybook/utils/consts';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvModalNotesMD from './cv-modal-notes.md';
-import CvModal from './cv-modal';
+import CvModalNotesMD from '@carbon/vue/src/components/cv-modal/cv-modal-notes.md';
+import CvModal from '@carbon/vue/src/components/cv-modal/cv-modal';
 
 const storiesDefault = storiesOf('Default/CvModal', module);
 const storiesExperimental = storiesOf('Experimental/CvModal', module);
-import { componentsX, override, reset } from '../../_internal/_feature-flags';
+import { componentsX, override, reset } from '@carbon/vue/src/_internal/_feature-flags';
 
 const preKnobs = {
   label: {

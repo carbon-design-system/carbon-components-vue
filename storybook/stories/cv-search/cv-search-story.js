@@ -6,8 +6,8 @@ import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-
 // import consts from '../../_storybook/utils/consts';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvSearchNotesMD from './cv-search-notes.md';
-import CvSearch from './cv-search';
+import CvSearchNotesMD from '@carbon/vue/src/components/cv-search/cv-search-notes.md';
+import CvSearch from '@carbon/vue/src/components/cv-search/cv-search';
 
 const stories = storiesOf('Default/CvSearch', module);
 

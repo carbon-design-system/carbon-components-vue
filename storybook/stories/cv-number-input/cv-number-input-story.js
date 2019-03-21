@@ -6,12 +6,12 @@ import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-
 // import consts from '../../_storybook/utils/consts';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvNumberInputNotesMD from './cv-number-input-notes.md';
-import CvNumberInput from './cv-number-input';
+import CvNumberInputNotesMD from '@carbon/vue/src/components/cv-number-input/cv-number-input-notes.md';
+import CvNumberInput from '@carbon/vue/src/components/cv-number-input/cv-number-input';
 
 const storiesDefault = storiesOf('Default/CvNumberInput', module);
 const storiesExperimental = storiesOf('Experimental/CvNumberInput', module);
-import { override, reset } from '../../_internal/_feature-flags';
+import { override, reset } from '@carbon/vue/src/_internal/_feature-flags';
 
 const preKnobs = {
   theme: {

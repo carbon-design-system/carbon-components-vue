@@ -5,8 +5,8 @@ import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-
 // import consts from '../../_storybook/utils/consts';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvProgressNotesMD from './cv-progress-notes.md';
-import CvProgress from './cv-progress';
+import CvProgressNotesMD from '@carbon/vue/src/components/cv-progress/cv-progress-notes.md';
+import CvProgress from '@carbon/vue/src/components/cv-progress/cv-progress';
 
 const stories = storiesOf('Default/CvProgress', module);
 

@@ -5,12 +5,12 @@ import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-
 // import consts from '../../_storybook/utils/consts';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvLinkNotesMD from './cv-link-notes.md';
-import CvLink from './cv-link';
+import CvLinkNotesMD from '@carbon/vue/src/components/cv-link/cv-link-notes.md';
+import CvLink from '@carbon/vue/src/components/cv-link/cv-link';
 
 const storiesDefault = storiesOf('Default/CvLink', module);
 const storiesExperimental = storiesOf('Experimental/CvLink', module);
-import { override, reset } from '../../_internal/_feature-flags';
+import { override, reset } from '@carbon/vue/src/_internal/_feature-flags';
 
 const preKnobs = {
   href: {

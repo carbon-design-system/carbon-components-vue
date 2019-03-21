@@ -6,14 +6,14 @@ import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-
 // import consts from '../../_storybook/utils/consts';
 import knobsHelper from '../../_storybook/utils/knobs-helper';
 
-import CvDataTableNotesMD from './cv-data-table-notes.md';
-import CvDataTable from './cv-data-table';
-import CvDataTableAction from './cv-data-table-action';
-import CvSearch from '../cv-search/cv-search';
+import CvDataTableNotesMD from '@carbon/vue/src/components/cv-data-table/cv-data-table-notes.md';
+import CvDataTable from '@carbon/vue/src/components/cv-data-table/cv-data-table';
+import CvDataTableAction from '@carbon/vue/src/components/cv-data-table/cv-data-table-action';
+import CvSearch from '@carbon/vue/src/components/cv-search/cv-search';
 
 const storiesDefault = storiesOf('Default/CvDataTable', module);
 const storiesExperimental = storiesOf('Experimental/CvDataTable', module);
-import { override, reset } from '../../_internal/_feature-flags';
+import { override, reset } from '@carbon/vue/src/_internal/_feature-flags';
 
 const preKnobs = {
   rowSize: {

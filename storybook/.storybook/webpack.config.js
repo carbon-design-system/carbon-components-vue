@@ -17,7 +17,7 @@ module.exports = (storybookBaseConfig, configType, defaultConfig) => {
   defaultConfig.module.rules.push({
     test: /\.(s){0,1}css$/,
     loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
-    include: path.resolve(__dirname, '../'),
+    include: path.resolve(__dirname, '../../'),
   });
 
   // auto prefix anything in a vue file
