@@ -12,6 +12,7 @@ import CvRadioButton from '@carbon/vue/src/components/cv-radio-button/cv-radio-b
 import CvCheckbox from '@carbon/vue/src/components/cv-checkbox/cv-checkbox';
 import CvToolbarDivider from '@carbon/vue/src/components/cv-toolbar/cv-toolbar-divider';
 import CvToolbarOption from '@carbon/vue/src/components/cv-toolbar/cv-toolbar-option';
+import CvToolbarSearch from '@carbon/vue/src/components/cv-toolbar/cv-toolbar-search';
 import CvToolbarTitle from '@carbon/vue/src/components/cv-toolbar/cv-toolbar-title';
 
 const stories = storiesOf('Default/CvToolbar', module);
@@ -88,6 +89,7 @@ for (const story of storySet) {
           CvRadioButton,
           CvToolbarDivider,
           CvToolbarOption,
+          CvToolbarSearch,
           CvToolbarTitle,
         },
         template: templateViewString,
