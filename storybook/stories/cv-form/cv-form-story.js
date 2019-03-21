@@ -9,6 +9,8 @@ import CvForm from '@carbon/vue/src/components/cv-form/cv-form';
 import CvTextInput from '@carbon/vue/src/components/cv-text-input/cv-text-input';
 import CvTextArea from '@carbon/vue/src/components/cv-text-area/cv-text-area';
 import CvSelect from '@carbon/vue/src/components/cv-select/cv-select';
+import CvSelectOption from '@carbon/vue/src/components/cv-select/cv-select-option';
+import CvSelectOptgroup from '@carbon/vue/src/components/cv-select/cv-select-optgroup';
 
 const storiesDefault = storiesOf('Default/CvForm', module);
 const storiesExperimental = storiesOf('Experimental/CvForm', module);
@@ -76,6 +78,8 @@ for (const experimental of [false, true]) {
             CvTextInput,
             CvTextArea,
             CvSelect,
+            CvSelectOption,
+            CvSelectOptgroup,
             SvTemplateView,
           },
           data: () => ({ experimental }),

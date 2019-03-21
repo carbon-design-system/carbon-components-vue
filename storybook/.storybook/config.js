@@ -6,8 +6,6 @@ import { withKnobs } from '@storybook/addon-knobs';
 import Vue from 'vue';
 import VueHighlightJS from 'vue-highlightjs';
 
-import CarbonComponentsVue from '@carbon/vue';
-
 addDecorator(
   withOptions({
     name: `carbon components vue`,
@@ -20,7 +18,6 @@ addDecorator(
 addDecorator(withKnobs);
 addDecorator(withNotes);
 
-Vue.use(CarbonComponentsVue);
 Vue.use(VueHighlightJS);
 
 function loadStories() {

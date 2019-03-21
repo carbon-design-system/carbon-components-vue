@@ -24,8 +24,13 @@
 </template>
 
 <script>
+import CvCheckbox from '../cv-checkbox/cv-checkbox';
+import CvOverflowMenu from '../cv-overflow-menu/cv-overflow-menu';
+import CvOverflowMenuItem from '../cv-overflow-menu/cv-overflow-menu-item';
+
 export default {
   name: 'CvDataTableRow',
+  components: { CvCheckbox, CvOverflowMenu, CvOverflowMenuItem },
   props: {
     checked: Boolean,
     overflowMenu: Array,

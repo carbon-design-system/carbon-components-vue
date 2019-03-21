@@ -46,9 +46,9 @@
         @input="onPageChange"
         :value="`${pageValue}`"
       >
-        <cv-select-option v-for="pageNumber in pages" :key="pageNumber" :value="`${pageNumber}`">{{
-          pageNumber
-        }}</cv-select-option>
+        <cv-select-option v-for="pageNumber in pages" :key="pageNumber" :value="`${pageNumber}`">
+          {{ pageNumber }}
+        </cv-select-option>
       </cv-select>
       <span v-if="pages.length == 0">{{ pageValue }}</span>
 
@@ -69,6 +69,9 @@
 </template>
 
 <script>
+import CvSelect from '../cv-select/cv-select';
+import CvSelectOption from '../cv-select/cv-select-option';
+
 const newPageValue = (page, lastPage) => {
   let result = 1;
   if (page && page > 0) {
@@ -111,6 +114,7 @@ const newFirstItem = (pageValue, pageSizeValue) => 1 + (pageValue - 1) * pageSiz
 
 export default {
   name: 'CvPagination',
+  components: { CvSelect, CvSelectOption },
   props: {
     backwardText: { type: String, default: 'Prev page' },
     forwardText: { type: String, default: 'Next page' },

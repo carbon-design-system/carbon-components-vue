@@ -23,8 +23,11 @@
 </template>
 
 <script>
+import CvLoading from '../cv-loading/cv-loading';
+
 export default {
   name: 'CvInlineLoader',
+  components: { CvLoading },
   props: {
     active: Boolean,
     loadingText: { type: String, default: 'Loading data...' },
