@@ -9,7 +9,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 import CvDropdownNotesMD from '@carbon/vue/src/components/cv-dropdown/cv-dropdown-notes.md';
 import CvDropdown from '@carbon/vue/src/components/cv-dropdown/cv-dropdown';
 import CvDropdownSkeleton from '@carbon/vue/src/components/cv-dropdown/cv-dropdown-skeleton';
-import { componentsX } from '@carbon/vue/src/_internal/_feature-flags';
+import { componentsX, versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
 
 const storiesDefault = storiesOf('Default/CvDropdown', module);
 const storiesExperimental = storiesOf('Experimental/CvDropdown', module);

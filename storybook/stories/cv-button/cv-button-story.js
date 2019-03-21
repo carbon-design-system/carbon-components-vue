@@ -14,7 +14,7 @@ const storiesDefault = storiesOf('Default/CvButton', module);
 const storiesExperimental = storiesOf('Experimental/CvButton', module);
 import { componentsX, versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
 
-const exampleIconPath = require('@carbon/vue/src/images/example-icons.svg');
+const exampleIconPath = require('@carbon/vue/src/assets/images/example-icons.svg');
 import AddFilled16 from '@carbon/icons-vue/lib/add--filled/16';
 
 let preKnobs = {
