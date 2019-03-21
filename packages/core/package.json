@@ -1,0 +1,75 @@
+{
+  "name": "@carbon/vue",
+  "description": "A collection of components for the Carbon Design System built using Vue.js",
+  "version": "1.1.1",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carbon-design-system/carbon-components-vue.git"
+  },
+  "bugs": {
+    "url": "https://github.com/carbon-design-system/carbon-components-vue/issues/new"
+  },
+  "homepage": "https://github.com/carbon-design-system/carbon-components-vue/tree/master/packages/core#readme",
+  "main": "dist/carbon-vue.umd.min.js",
+  "keywords": [
+    "carbon",
+    "vue",
+    "components"
+  ],
+  "directories": {
+    "src": "src",
+    "test": "__tests__"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "contributors": [
+    {
+      "name": "Lee Chase",
+      "email": "lee.chase@uk.ibm.com"
+    },
+    {
+      "name": "Simon Moore",
+      "email": "moores@uk.ibm.com"
+    },
+    {
+      "name": "Mariia Zrianina",
+      "email": "mzrianin@de.ibm.com"
+    },
+    {
+      "name": "Dave Clark",
+      "email": "dave.clark@uk.ibm.com"
+    },
+    {
+      "name": "Oleksandr Sabov",
+      "email": "sabov@de.ibm.com"
+    },
+    {
+      "name": "Conrad Schmidt",
+      "email": "conrad.schmidt@de.ibm.com"
+    }
+  ],
+  "files": [
+    "/dist",
+    "/src"
+  ],
+  "scripts": {
+    "build": "vue-cli-service build --target lib --name carbon-vue ./src/index.js --no-clean"
+  },
+  "engines": {
+    "node": ">=10.x"
+  },
+  "sideEffects": true,
+  "dependencies": {
+    "@carbon/icon-helpers": "0.0.1-beta.0",
+    "@carbon/icons-vue": "0.0.1-beta.0",
+    "carbon-components": "^9.48.1",
+    "flatpickr": "4.5.1",
+    "vue": "^2.5.21"
+  },
+  "devDependencies": {
+    "@vue/cli-service": "^3.4.0",
+    "vue-template-compiler": "^2.5.21"
+  }
+}
