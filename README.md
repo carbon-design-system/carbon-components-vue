@@ -9,3 +9,18 @@
 <div style="text-align: center">
   <img src="./docs/AtCarbonVue.png" alt="@carbon/vue" height="200px">
 </div>
+
+## Building and publishing
+
+This is a monorepo using `lerna`.
+The following steps will build and publish the packages:
+
+- clone or download the repo;
+- run `yarn` to install dependencies and bootstrap the packages;
+- run `yarn build` to build all the packages including the storybook;
+
+If you just want to build an individual package you can limit the scope:
+`yarn build --scope @carbon/vue`
+`yarn build --scope storybook`
+
+To start the storybook in a local server use `yarn start`.

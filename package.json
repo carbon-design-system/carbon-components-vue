@@ -13,7 +13,7 @@
   "sideEffects": true,
   "scripts": {
     "build": "lerna exec yarn build --no-prefix --concurrency 1",
-    "lint": "vue-cli-service lint ./src/index.js",
+    "lint": "vue-cli-service lint",
     "ci-check": "yarn format:diff",
     "format": "prettier --write \"**/*.{scss,css,js,md,vue}\"",
     "format:diff": "prettier --list-different \"**/*.{scss,css,js,md,vue}\"",
