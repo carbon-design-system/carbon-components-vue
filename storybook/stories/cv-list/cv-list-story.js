@@ -7,6 +7,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 
 import CvListNotesMD from '@carbon/vue/src/components/cv-list/cv-list-notes.md';
 import CvList from '@carbon/vue/src/components/cv-list/cv-list';
+import CvListItem from '@carbon/vue/src/components/cv-list/cv-list-item';
 
 const storiesDefault = storiesOf('Default/CvList', module);
 const storiesExperimental = storiesOf('Experimental/CvList', module);
@@ -66,7 +67,7 @@ for (const version of versions()) {
   `;
 
         return {
-          components: { CvList, SvTemplateView },
+          components: { CvList, CvListItem, SvTemplateView },
           data: () => ({ experimental: version.experimental }),
           template: templateViewString,
           props: settings.props,
