@@ -189,7 +189,7 @@ $component-padding: 40px;
   top: 37px;
   left: 0;
 
-  .components-x & {
+  .experimental & {
     top: 32px;
   }
 
@@ -225,28 +225,7 @@ $component-padding: 40px;
   display: none;
 }
 
-.sv-template-view--components-x {
-  position: absolute;
-  top: 0;
-  right: 0;
-  min-height: 30px;
-  padding: 5px;
-  // border-bottom-left-radius: 5px;
-  // background-color: $back-color;
-
-  // .bx--toggle__label {
-  //   margin: 0;
-  //   min-height: 24px;
-  // }
-}
-
 .sb-show-main {
   margin: 0;
-}
-
-.sv-view__toggle-components-x {
-  position: fixed;
-  top: 10px;
-  right: 10px;
 }
 </style>
