@@ -5,7 +5,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: [/-story\.js$/],
+        test: [/\-story\.js$/],
         loaders: [require.resolve('@storybook/addon-storysource/loader')],
         include: [path.resolve(__dirname, '../src')],
         enforce: 'pre',
