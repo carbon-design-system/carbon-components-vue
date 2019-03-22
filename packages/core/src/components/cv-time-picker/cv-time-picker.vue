@@ -49,9 +49,9 @@
         @input="$emit('update:timezone', $event)"
         :disabled="disabled"
       >
-        <cv-select-option class="bx--select-option" v-for="item in timezones" :key="item.value" :value="item.value">{{
-          item.label
-        }}</cv-select-option>
+        <cv-select-option class="bx--select-option" v-for="item in timezones" :key="item.value" :value="item.value">
+          {{ item.label }}
+        </cv-select-option>
       </cv-select>
     </div>
     <div class="bx--form-requirement" v-if="isInvalid && componentsX">
@@ -64,9 +64,15 @@
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
 import { componentsX } from '../../_internal/_feature-flags';
+import CvSelect from '../cv-select/cv-select';
+import CvSelectOption from '../cv-select/cv-select-option';
 
 export default {
   name: 'CvTimePicker',
+  components: {
+    CvSelect,
+    CvSelectOption,
+  },
   mixins: [uidMixin, themeMixin],
   inheritAttrs: false,
   props: {

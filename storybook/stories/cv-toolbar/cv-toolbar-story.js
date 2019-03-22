@@ -99,6 +99,7 @@ for (const version of versions()) {
             CvToolbarDivider,
             CvToolbarOption,
             CvToolbarTitle,
+            CvToolbarSearch,
             Filter16,
           },
           template: templateViewString,
