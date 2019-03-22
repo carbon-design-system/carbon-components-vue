@@ -337,7 +337,6 @@ for (const version of versions()) {
             CvDataTable,
             CvDataTableAction,
             SvTemplateView,
-            CvSearch,
           },
           template: templateViewString,
           props: settings.props,
