@@ -8,6 +8,8 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 
 import CvSelectNotesMD from '@carbon/vue/src/components/cv-select/cv-select-notes.md';
 import CvSelect from '@carbon/vue/src/components/cv-select/cv-select';
+import CvSelectOption from '@carbon/vue/src/components/cv-select/cv-select-option';
+import CvSelectOptgroup from '@carbon/vue/src/components/cv-select/cv-select-optgroup';
 
 const storiesDefault = storiesOf('Default/CvSelect', module);
 const storiesExperimental = storiesOf('Experimental/CvSelect', module);
@@ -132,7 +134,7 @@ for (const version of versions(false)) {
   `;
 
         return {
-          components: { CvSelect, SvTemplateView },
+          components: { CvSelect, CvSelectOption, CvSelectOptgroup, SvTemplateView },
           props: settings.props,
           data() {
             return {
