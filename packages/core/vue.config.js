@@ -10,4 +10,8 @@ module.exports = {
     lintStyleOnBuild: true,
     stylelint: {},
   },
+
+  css: {
+    extract: false,
+  },
 };

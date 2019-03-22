@@ -8,7 +8,7 @@
       @keydown.right.prevent="moveRight"
       @keydown.left.prevent="moveLeft"
     >
-      <cv-dropdown class="bx--tabs-trigger" :value="`${selectedIndex}`" @change="onDropChange">
+      <cv-dropdown class="bx--tabs-trigger" :value="`${selectedIndex}`" @change="onDropChange" :form-item="false">
         <cv-dropdown-item v-for="(tab, index) in tabs" :key="`drop-${index}`" :value="`${index}`">
           {{ tab.label }}
         </cv-dropdown-item>
@@ -128,4 +128,18 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+@media screen and (max-width: 767px) {
+  .carbon .bx--dropdown.bx--tabs-trigger {
+    display: block;
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 41.95rem) {
+  .experimental .bx--dropdown.bx--tabs-trigger {
+    display: block;
+    padding: 0;
+  }
+}
+</style>
