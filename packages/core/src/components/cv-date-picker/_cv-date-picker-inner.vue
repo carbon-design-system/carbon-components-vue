@@ -178,7 +178,7 @@ export default {
     },
     isInvalid() {
       return (
-        this.$slots['invalid-message'] !== null ||
+        this.$slots['invalid-message'] !== undefined ||
         (this.invalidMessage && this.invalidMessage.length) ||
         (this.invalidDateMessage && this.invalidDateMessage.length)
       );
