@@ -8,6 +8,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 
 import CvDropdownNotesMD from '@carbon/vue/src/components/cv-dropdown/cv-dropdown-notes.md';
 import CvDropdown from '@carbon/vue/src/components/cv-dropdown/cv-dropdown';
+import CvDropdownItem from '@carbon/vue/src/components/cv-dropdown/cv-dropdown-item';
 import CvDropdownSkeleton from '@carbon/vue/src/components/cv-dropdown/cv-dropdown-skeleton';
 import { componentsX, versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
 
@@ -141,6 +142,7 @@ for (const version of versions()) {
         return {
           components: {
             CvDropdown,
+            CvDropdownItem,
             SvTemplateView,
           },
           props: settings.props,

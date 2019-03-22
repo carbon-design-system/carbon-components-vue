@@ -8,6 +8,9 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 
 import CvStructuredListNotesMD from '@carbon/vue/src/components/cv-structured-list/cv-structured-list-notes.md';
 import CvStructuredList from '@carbon/vue/src/components/cv-structured-list/cv-structured-list';
+import CvStructuredListItem from '@carbon/vue/src/components/cv-structured-list/cv-structured-list-item';
+import CvStructuredListHeading from '@carbon/vue/src/components/cv-structured-list/cv-structured-list-heading';
+import CvStructuredListData from '@carbon/vue/src/components/cv-structured-list/cv-structured-list-data';
 
 const storiesDefault = storiesOf('Default/CvStructuredList', module);
 const storiesExperimental = storiesOf('Experimental/CvStructuredList', module);
@@ -132,7 +135,13 @@ for (const version of versions(false)) {
   `;
 
         return {
-          components: { CvStructuredList, SvTemplateView },
+          components: {
+            CvStructuredList,
+            CvStructuredListItem,
+            CvStructuredListHeading,
+            CvStructuredListData,
+            SvTemplateView,
+          },
           template: templateViewString,
           props: settings.props,
           data() {

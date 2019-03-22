@@ -78,6 +78,8 @@ for (const version of versions()) {
             CvTextInput,
             CvTextArea,
             CvSelect,
+            CvSelectOptgroup,
+            CvSelectOption,
             SvTemplateView,
           },
           data: () => ({ experimental: version.experimental }),

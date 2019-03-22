@@ -8,9 +8,12 @@
         @input="onPageSizeChange"
         :value="`${pageSizeValue}`"
       >
-        <cv-select-option v-for="(size, index) in pageSizes" :key="index" :value="`${size.value ? size.value : size}`">
-          {{ size.label ? size.label : size.value ? size.value : size }}
-        </cv-select-option>
+        <cv-select-option
+          v-for="(size, index) in pageSizes"
+          :key="index"
+          :value="`${size.value ? size.value : size}`"
+          >{{ size.label ? size.label : size.value ? size.value : size }}</cv-select-option
+        >
       </cv-select>
 
       <span class="bx--pagination__text">
@@ -44,9 +47,9 @@
         @input="onPageChange"
         :value="`${pageValue}`"
       >
-        <cv-select-option v-for="pageNumber in pages" :key="pageNumber" :value="`${pageNumber}`">{{
-          pageNumber
-        }}</cv-select-option>
+        <cv-select-option v-for="pageNumber in pages" :key="pageNumber" :value="`${pageNumber}`">
+          {{ pageNumber }}
+        </cv-select-option>
       </cv-select>
       <span v-if="pages.length == 0">{{ pageValue }}</span>
 
@@ -69,6 +72,7 @@
 
 <script>
 import CvSelect from '../cv-select/cv-select';
+import CvSelectOption from '../cv-select/cv-select-option';
 import { componentsX } from '../../_internal/_feature-flags';
 import ChevronLeft16 from '@carbon/icons-vue/lib/chevron--left/16';
 import ChevronRight16 from '@carbon/icons-vue/lib/chevron--right/16';
@@ -115,7 +119,7 @@ const newFirstItem = (pageValue, pageSizeValue) => 1 + (pageValue - 1) * pageSiz
 
 export default {
   name: 'CvPagination',
-  components: { CvSelect, ChevronLeft16, ChevronRight16 },
+  components: { CvSelect, CvSelectOption, ChevronLeft16, ChevronRight16 },
   props: {
     backwardText: { type: String, default: 'Prev page' },
     forwardText: { type: String, default: 'Next page' },

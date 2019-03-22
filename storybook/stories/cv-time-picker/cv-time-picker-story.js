@@ -8,7 +8,6 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 
 import CvTimePickerNotesMD from '@carbon/vue/src/components/cv-time-picker/cv-time-picker-notes.md';
 import CvTimePicker from '@carbon/vue/src/components/cv-time-picker/cv-time-picker';
-
 const storiesDefault = storiesOf('Default/CvTimePicker', module);
 const storiesExperimental = storiesOf('Experimental/CvTimePicker', module);
 import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';

@@ -10,8 +10,13 @@
 </template>
 
 <script>
+import CvSearch from '../cv-search/cv-search';
+
 export default {
   name: 'CvToolbarSearch',
+  components: {
+    CvSearch,
+  },
   inheritAttrs: false,
   props: {
     value: String,

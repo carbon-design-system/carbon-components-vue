@@ -19,9 +19,7 @@
               <span data-items-selected>{{ dataRowsSelected.length }}</span>
               items selected
             </p>
-            <button class="bx--batch-summary__cancel" @click="deselect">
-              Cancel
-            </button>
+            <button class="bx--batch-summary__cancel" @click="deselect">Cancel</button>
           </div>
         </div>
 
@@ -103,6 +101,9 @@
 import CvDataTableHeadnig from './_cv-data-table-heading';
 import CvDataTableRow from './cv-data-table-row';
 import CvDataTableCell from './cv-data-table-cell';
+import CvSearch from '../cv-search/cv-search';
+import CvCheckbox from '../cv-checkbox/cv-checkbox';
+import CvPagination from '../cv-pagination/cv-pagination';
 
 const rows = children => children.filter(child => child.isCvDataTableRow);
 
@@ -112,6 +113,9 @@ export default {
     CvDataTableHeadnig,
     CvDataTableRow,
     CvDataTableCell,
+    CvSearch,
+    CvCheckbox,
+    CvPagination,
   },
   props: {
     autoWidth: Boolean,

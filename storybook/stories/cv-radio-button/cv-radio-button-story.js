@@ -8,6 +8,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 
 import CvRadioButtonNotesMD from '@carbon/vue/src/components/cv-radio-button/cv-radio-button-notes.md';
 import CvRadioButton from '@carbon/vue/src/components/cv-radio-button/cv-radio-button';
+import CvRadioGroup from '@carbon/vue/src/components/cv-radio-button/cv-radio-group';
 
 const storiesDefault = storiesOf('Default/CvRadioButton', module);
 const storiesExperimental = storiesOf('Experimental/CvRadioButton', module);
@@ -91,7 +92,7 @@ for (const version of versions()) {
   `;
 
         return {
-          components: { CvRadioButton, SvTemplateView },
+          components: { CvRadioButton, CvRadioGroup, SvTemplateView },
           template: templateViewString,
           props: settings.props,
           data() {
