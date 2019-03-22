@@ -7,6 +7,7 @@ import knobsHelper from '../../_storybook/utils/knobs-helper';
 
 import CvOverflowMenuNotesMD from '@carbon/vue/src/components/cv-overflow-menu/cv-overflow-menu-notes.md';
 import CvOverflowMenu from '@carbon/vue/src/components/cv-overflow-menu/cv-overflow-menu';
+import CvOverflowMenuItem from '@carbon/vue/src/components/cv-overflow-menu/cv-overflow-menu-item';
 
 const storiesDefault = storiesOf('Default/CvOverflowMenu', module);
 const storiesExperimental = storiesOf('Experimental/CvOverflowMenu', module);
@@ -65,7 +66,7 @@ for (const version of versions()) {
   `;
 
         return {
-          components: { CvOverflowMenu, SvTemplateView },
+          components: { CvOverflowMenu, CvOverflowMenuItem, SvTemplateView },
           data: () => ({ experimental: version.experimental }),
           template: templateViewString,
           props: settings.props,
