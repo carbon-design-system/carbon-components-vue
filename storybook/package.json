@@ -9,23 +9,30 @@
   },
   "dependencies": {
     "@carbon/icons-vue": "0.0.1-beta.0",
-    "carbon-components": "^9.48.1",
-    "vue": "^2.5.21"
+    "carbon-components": "^9.87.2",
+    "vue": "^2.6.10"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.0",
     "@carbon/data-viz-vue": "^0.0.1",
     "@carbon/vue": "^1.1.1",
-    "@storybook/addon-actions": "^4.1.11",
-    "@storybook/addon-knobs": "^4.1.11",
-    "@storybook/addon-notes": "^4.1.11",
-    "@storybook/addon-options": "^4.1.11",
-    "@storybook/addon-storysource": "^4.1.11",
-    "@storybook/vue": "^4.1.11",
+    "@storybook/addon-actions": "^5.0.3",
+    "@storybook/addon-knobs": "^5.0.3",
+    "@storybook/addon-notes": "^5.0.3",
+    "@storybook/addon-options": "^5.0.3",
+    "@storybook/addon-storysource": "^5.0.3",
+    "@storybook/vue": "^5.0.3",
+    "autoprefixer": "^9.4.10",
     "babel-loader": "^7.0.0",
+    "babel-plugin-transform-object-from-destructuring": "^1.0.3",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
+    "babel-preset-vue": "^2.0.2",
+    "postcss-import": "^12.0.1",
+    "postcss-loader": "^3.0.0",
+    "postcss-preset-env": "^6.6.0",
     "vue-highlightjs": "^1.3.3",
-    "vue-loader": "^15.4.2",
-    "vue-template-compiler": "^2.5.21"
+    "vue-loader": "^15.7.0",
+    "vue-template-compiler": "^2.6.10"
   }
 }
