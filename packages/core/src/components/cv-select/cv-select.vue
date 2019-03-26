@@ -1,24 +1,67 @@
 <template>
-  <component :is="tagType" v-bind="$attrs" v-on="$listeners" :value="value" class="cv-select">
-    <slot></slot>
-  </component>
+  <cv-select-from-item :form-item="formItem">
+    <div
+      class="bx--select"
+      :class="{
+        'bx--select--inline': inline,
+        'bx--select--light': theme === 'light',
+      }"
+    >
+      <label :for="uid" class="bx--label" :class="{ 'bx--visually-hidden': hideLabel }">{{ label }}</label>
+      <select v-bind="$attrs" :id="uid" class="bx--select-input" v-on="inputListeners" ref="select" :value="value">
+        <slot></slot>
+      </select>
+      <svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5">
+        <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd"></path>
+      </svg>
+    </div>
+  </cv-select-from-item>
 </template>
 
 <script>
-import CvSelectInnerFormItem from './_cv-select-inner-form-item';
-import CvSelectInner from './_cv-select-inner';
+import uidMixin from '../../mixins/uid-mixin';
+import themeMixin from '../../mixins/theme-mixin';
+import CvSelectFromItem from './_cv-select-from-item';
 
 export default {
   name: 'CvSelect',
-  components: { CvSelectInnerFormItem, CvSelectInner },
   inheritAttrs: false,
+  components: { CvSelectFromItem },
+  mixins: [uidMixin, themeMixin],
   props: {
-    value: String,
+    inline: Boolean,
     formItem: { type: Boolean, default: true },
+    hideLabel: Boolean,
+    label: { type: String, required: true },
+    // *********************
+    // declare here to prevent the following from being added to the select
+    // *********************
+    // multiple does not work with styling from carbon-components 9.20
+    multiple: {
+      type: String,
+      validator: () => {
+        console.warn('property multiple not supported in CvSelect');
+        return false;
+      },
+    },
+    value: { type: String },
+  },
+  beforeCreate() {
+    // *********************
+    // delete here to prevent the following from being added to the select
+    // *********************
+    // multiple does not work with styling from carbon-components 9.20
+    delete this.$attrs.multiple;
   },
   computed: {
-    tagType() {
-      return this.formItem ? 'cv-select-inner-form-item' : 'cv-select-inner';
+    // Bind listeners at the component level to the embedded input element and
+    // add our own input listener to service the v-model. See:
+    // https://vuejs.org/v2/guide/components-custom-events.html#Customizing-Component-v-model
+    inputListeners() {
+      return {
+        ...this.$listeners,
+        input: event => this.$emit('input', event.target.value),
+      };
     },
   },
 };
