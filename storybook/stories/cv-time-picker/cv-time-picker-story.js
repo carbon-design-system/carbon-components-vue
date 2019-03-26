@@ -38,7 +38,7 @@ const preKnobs = {
   label: {
     group: 'attr',
     type: text,
-    config: ['label', 'Text input label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    config: ['label', 'Select time'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: {
       type: String,
       name: 'label',
@@ -130,7 +130,7 @@ const preKnobs = {
     group: 'slot',
     slot: {
       name: 'invalid-message',
-      value: 'Invalid message slot overrides the prop invalid-message',
+      value: 'Invalid time.',
     },
   },
   disabled: {
