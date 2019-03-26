@@ -1,8 +1,9 @@
 <template>
-  <cv-select-from-item :form-item="formItem">
+  <cv-wrapper class="cv-select bx--form-item" :tag-type="formItem ? 'div' : ''">
     <div
       class="bx--select"
       :class="{
+        'cv-select': !formItem,
         'bx--select--inline': inline,
         'bx--select--light': theme === 'light',
       }"
@@ -15,22 +16,22 @@
         <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd"></path>
       </svg>
     </div>
-  </cv-select-from-item>
+  </cv-wrapper>
 </template>
 
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
-import CvSelectFromItem from './_cv-select-from-item';
+import CvWrapper from '../cv-wrapper/_cv-wrapper';
 
 export default {
   name: 'CvSelect',
   inheritAttrs: false,
-  components: { CvSelectFromItem },
+  components: { CvWrapper },
   mixins: [uidMixin, themeMixin],
   props: {
     inline: Boolean,
-    formItem: { type: Boolean, default: true },
+    formItem: { type: Boolean, default: false },
     hideLabel: Boolean,
     label: { type: String, required: true },
     // *********************
@@ -62,6 +63,11 @@ export default {
         ...this.$listeners,
         input: event => this.$emit('input', event.target.value),
       };
+    },
+  },
+  methods: {
+    test() {
+      alert('hi');
     },
   },
 };
