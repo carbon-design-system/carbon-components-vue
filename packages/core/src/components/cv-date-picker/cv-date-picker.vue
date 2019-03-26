@@ -12,7 +12,7 @@ import CvDatePickerInner from './_cv-date-picker-inner';
 import { componentsX } from '../../_internal/_feature-flags';
 
 export default {
-  name: 'CvdataPicker',
+  name: 'CvDatePicker',
   components: { CvDatePickerInnerC10, CvDatePickerInner },
   inheritAttrs: false,
   props: {
