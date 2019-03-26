@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@carbon/icons-vue": "0.0.1-beta.0",
-    "carbon-components": "^9.87.2",
+    "carbon-components": "^9.90.1",
     "vue": "^2.6.10"
   },
   "devDependencies": {

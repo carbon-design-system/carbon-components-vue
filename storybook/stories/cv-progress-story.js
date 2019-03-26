@@ -1,9 +1,9 @@
 import { storiesOf } from '@storybook/vue';
 import { array, number } from '@storybook/addon-knobs';
 
-import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
-// import consts from '../../_storybook/utils/consts';
-import knobsHelper from '../../_storybook/utils/knobs-helper';
+import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
+// import consts from '../_storybook/utils/consts';
+import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvProgressNotesMD from '@carbon/vue/src/components/cv-progress/cv-progress-notes.md';
 import CvProgress from '@carbon/vue/src/components/cv-progress/cv-progress';

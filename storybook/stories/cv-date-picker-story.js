@@ -2,9 +2,9 @@ import { storiesOf } from '@storybook/vue';
 import { text, boolean, object } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
-import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
-// import consts from '../../_storybook/utils/consts';
-import knobsHelper from '../../_storybook/utils/knobs-helper';
+import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
+// import consts from '../_storybook/utils/consts';
+import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvDatePickerNotesMD from '@carbon/vue/src/components/cv-date-picker/cv-date-picker-notes.md';
 import CvDatePicker from '@carbon/vue/src/components/cv-date-picker/cv-date-picker';

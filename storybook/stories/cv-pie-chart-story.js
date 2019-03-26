@@ -1,8 +1,8 @@
 import { storiesOf } from '@storybook/vue';
 import { text, array, object } from '@storybook/addon-knobs/vue';
 
-import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
-import knobsHelper from '../../_storybook/utils/knobs-helper';
+import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
+import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvPieChartNotesMD from '@carbon/data-viz-vue/src/data-viz/cv-pie-chart/cv-pie-chart-notes.md';
 import CvPieChart from '@carbon/data-viz-vue/src/data-viz/cv-pie-chart/cv-pie-chart';

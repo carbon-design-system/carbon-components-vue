@@ -1,8 +1,8 @@
 import { storiesOf } from '@storybook/vue';
 import { text, number } from '@storybook/addon-knobs/vue';
 
-import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
-import knobsHelper from '../../_storybook/utils/knobs-helper';
+import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
+import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvGaugeNotesMD from '@carbon/data-viz-vue/src/data-viz/cv-gauge/cv-gauge-notes.md';
 import CvGauge from '@carbon/data-viz-vue/src/data-viz/cv-gauge/cv-gauge';

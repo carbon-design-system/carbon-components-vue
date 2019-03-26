@@ -3,9 +3,9 @@ import { text, object, number } from '@storybook/addon-knobs';
 
 import { action } from '@storybook/addon-actions';
 
-import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
-// import consts from '../../_storybook/utils/consts';
-import knobsHelper from '../../_storybook/utils/knobs-helper';
+import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
+// import consts from '../_storybook/utils/consts';
+import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvPaginationNotesMD from '@carbon/vue/src/components/cv-pagination/cv-pagination-notes.md';
 import CvPagination from '@carbon/vue/src/components/cv-pagination/cv-pagination';

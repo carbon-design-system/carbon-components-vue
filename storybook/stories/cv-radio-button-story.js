@@ -2,9 +2,9 @@ import { storiesOf } from '@storybook/vue';
 import { boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
-import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
-// import consts from '../../_storybook/utils/consts';
-import knobsHelper from '../../_storybook/utils/knobs-helper';
+import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
+// import consts from '../_storybook/utils/consts';
+import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvRadioButtonNotesMD from '@carbon/vue/src/components/cv-radio-button/cv-radio-button-notes.md';
 import CvRadioButton from '@carbon/vue/src/components/cv-radio-button/cv-radio-button';

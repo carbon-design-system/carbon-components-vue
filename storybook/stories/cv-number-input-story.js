@@ -2,9 +2,9 @@ import { storiesOf } from '@storybook/vue';
 import { text, boolean, number } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
-import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
-// import consts from '../../_storybook/utils/consts';
-import knobsHelper from '../../_storybook/utils/knobs-helper';
+import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
+// import consts from '../_storybook/utils/consts';
+import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvNumberInputNotesMD from '@carbon/vue/src/components/cv-number-input/cv-number-input-notes.md';
 import CvNumberInput from '@carbon/vue/src/components/cv-number-input/cv-number-input';
@@ -47,7 +47,7 @@ const preKnobs = {
     group: 'content',
     slot: {
       name: 'invalid-message',
-      value: 'Invalid message slot overrides the invalid-message property',
+      value: 'Invalid message text',
     },
   },
   helperText: {
@@ -64,7 +64,7 @@ const preKnobs = {
     group: 'content',
     slot: {
       name: 'helper-text',
-      value: 'This is a helpful slot overrides the property helper-textThis is some helpful text',
+      value: 'Some helpful textThis is some helpful text',
     },
   },
   disabled: {

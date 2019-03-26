@@ -1,8 +1,8 @@
 import { storiesOf } from '@storybook/vue';
 import { boolean, text, number } from '@storybook/addon-knobs';
 
-import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
-import knobsHelper from '../../_storybook/utils/knobs-helper';
+import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
+import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvSkeletonTextNotesMD from '@carbon/vue/src/components/cv-skeleton-text/cv-skeleton-text-notes.md';
 import CvSkeletonText from '@carbon/vue/src/components/cv-skeleton-text/cv-skeleton-text';

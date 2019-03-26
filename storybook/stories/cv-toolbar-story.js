@@ -1,8 +1,8 @@
 import { storiesOf } from '@storybook/vue';
 
-import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
-// import consts from '../../_storybook/utils/consts';
-import knobsHelper from '../../_storybook/utils/knobs-helper';
+import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
+// import consts from '../_storybook/utils/consts';
+import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvToolbarNotesMD from '@carbon/vue/src/components/cv-toolbar/cv-toolbar-notes.md';
 import CvToolbar from '@carbon/vue/src/components/cv-toolbar/cv-toolbar';

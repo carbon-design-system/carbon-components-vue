@@ -1,9 +1,9 @@
 import { storiesOf } from '@storybook/vue';
 import { boolean } from '@storybook/addon-knobs';
 
-import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
-// import consts from '../../_storybook/utils/consts';
-import knobsHelper from '../../_storybook/utils/knobs-helper';
+import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
+// import consts from '../_storybook/utils/consts';
+import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvAccordionNotesMD from '@carbon/vue/src/components/cv-accordion/cv-accordion-notes.md';
 import CvAccordion from '@carbon/vue/src/components/cv-accordion/cv-accordion';

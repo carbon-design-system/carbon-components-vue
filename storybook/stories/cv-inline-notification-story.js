@@ -3,9 +3,9 @@ import { text } from '@storybook/addon-knobs';
 
 import { action } from '@storybook/addon-actions';
 
-import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
-// import consts from '../../_storybook/utils/consts';
-import knobsHelper from '../../_storybook/utils/knobs-helper';
+import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
+// import consts from '../_storybook/utils/consts';
+import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvInlineNotificationNotesMD from '@carbon/vue/src/components/cv-inline-notification/cv-inline-notification-notes.md';
 import CvInlineNotification from '@carbon/vue/src/components/cv-inline-notification/cv-inline-notification';

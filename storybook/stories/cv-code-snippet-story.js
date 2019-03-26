@@ -1,9 +1,9 @@
 import { storiesOf } from '@storybook/vue';
 import { text, select } from '@storybook/addon-knobs';
 
-import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
-// import consts from '../../_storybook/utils/consts';
-import knobsHelper from '../../_storybook/utils/knobs-helper';
+import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
+// import consts from '../_storybook/utils/consts';
+import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvCodeSnippetNotesMD from '@carbon/vue/src/components/cv-code-snippet/cv-code-snippet-notes.md';
 import CvCodeSnippet from '@carbon/vue/src/components/cv-code-snippet/cv-code-snippet';

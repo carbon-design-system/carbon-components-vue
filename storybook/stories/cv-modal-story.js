@@ -3,9 +3,9 @@ import { boolean } from '@storybook/addon-knobs';
 
 import { action } from '@storybook/addon-actions';
 
-import SvTemplateView from '../../_storybook/views/sv-template-view/sv-template-view';
-// import consts from '../../_storybook/utils/consts';
-import knobsHelper from '../../_storybook/utils/knobs-helper';
+import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
+// import consts from '../_storybook/utils/consts';
+import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvModalNotesMD from '@carbon/vue/src/components/cv-modal/cv-modal-notes.md';
 import CvModal from '@carbon/vue/src/components/cv-modal/cv-modal';
