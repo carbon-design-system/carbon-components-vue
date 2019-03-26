@@ -5,7 +5,7 @@
  *
  *  Unwrapped slots do not recieve class, style or attributes attached to the wrapper
  *
- * NOTE: render functions cannot return a multi root node, so unwrapped the default slot can have only one root node.
+ * NOTE: If used at the top level of a component in the unwrapped case your component still needs to have a single root node.
  *
  */
 export default {

@@ -70,10 +70,58 @@ const preKnobs = {
     group: 'attr',
     value: `@change="actionChange"`,
   },
+  helperText: {
+    group: 'attr',
+    type: text,
+    config: ['helper text', ''],
+    prop: {
+      name: 'helper-text',
+      type: String,
+      value: val => (val.length ? val : null),
+    },
+  },
+  helperTextSlot: {
+    group: 'slots',
+    slot: {
+      name: 'helper-text',
+      value: 'Some helpful text',
+    },
+  },
+  invalidMessage: {
+    group: 'attr',
+    type: text,
+    config: ['invalid message', ''],
+    prop: {
+      name: 'invalid-message',
+      type: String,
+      value: val => (val.length ? val : null),
+    },
+  },
+  invalidMessageSlot: {
+    group: 'slots',
+    slot: {
+      name: 'invalid-message',
+      value: 'Invalid message text',
+    },
+  },
 };
 
 const variants = [
-  { name: 'default', excludes: ['vModel', 'events'] },
+  {
+    name: 'default',
+    excludes: ['vModel', 'events', 'helperText', 'invalidMessage', 'helperTextSlot', 'invalidMessageSlot'],
+    skip: { default: false, experimental: true },
+  },
+  {
+    name: 'default',
+    excludes: ['vModel', 'events', 'helperTextSlot', 'invalidMessageSlot'],
+    skip: { default: true, experimental: false },
+  },
+  {
+    name: 'slots',
+    excludes: ['vModel', 'events', 'helperText', 'invalidMessage'],
+    skip: { default: true, experimental: false },
+  },
   { name: 'minimal', includes: ['label'] },
   { name: 'events', includes: ['label', 'events'] },
   { name: 'vModel', includes: ['label', 'vModel'] },
@@ -81,10 +129,13 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(false)) {
+for (const version of versions()) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
+    if (story.skip && ((story.skip.default && version.default) || (story.skip.experimental && version.experimental))) {
+      continue;
+    }
     stories.add(
       story.name,
       () => {
@@ -94,7 +145,7 @@ for (const version of versions(false)) {
         // ----------------------------------------------------------------
 
         const templateString = `
-  <cv-select${settings.group.attr}>
+  <cv-select${settings.group.attr}>${settings.group.slots}
     <cv-select-option disabled selected hidden>Choose an option</cv-select-option>
     <cv-select-option value="solong">A much longer cv-select-option that is worth having around to check how text flows</cv-select-option>
     <cv-select-optgroup label="Category 1">
