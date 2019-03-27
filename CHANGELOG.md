@@ -1,3 +1,24 @@
+## 2.0.0-alpha.0 (March 28, 2019)
+
+### Features
+
+- Update to carbon X
+- Move data viz to @carbon/charts-vue
+
+### Bug Fixes
+
+### Dependency versions
+
+Versions reflect those version was built using.
+
+| Dependency           | Version      | Notes             |
+| -------------------- | ------------ | ----------------- |
+| @carbon/icon-helpers | 0.0.1-beta.0 | experimental only |
+| @carbon/icons-vue    | 0.0.1-beta.0 | experimental only |
+| carbon-components    | 9.90.2       |                   |
+| flatpickr            | 4.5.2        |                   |
+| vue                  | 2.6.10       |                   |
+
 ## 1.1.1 (March 19, 2019)
 
 ### Features
@@ -30,7 +51,7 @@ Versions reflect those version was built using.
 - Experimental CvCodeSnippet behind feature flag (#244).
 - Experimental CvContentSwitcher behind feature flag (#246)
 - Experimental CvDatePicker behind feature flag (#251)
-- Added CvInlineLoader (#253)
+- Added CvInlineLoading (#253)
 - Added password behviour for CvTextInput (#254)
 - Experimental toggle added for supporting components (#257)
 
