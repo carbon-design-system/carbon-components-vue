@@ -1,25 +1,3 @@
-## 2.0.0-alpha.0
-
-First attempt at a Carbon 10 publish.
-
-### Features
-
-- Update to carbon x
-
-### Bug Fixes
-
-### Dependency versions
-
-Versions reflect those version was built using.
-
-| Dependency           | Version      | Notes             |
-| -------------------- | ------------ | ----------------- |
-| @carbon/icon-helpers | 0.0.1-beta.0 | experimental only |
-| @carbon/icons-vue    | 0.0.1-beta.0 | experimental only |
-| carbon-components    | 9.87.2       |                   |
-| flatpickr            | 4.5.2        |                   |
-| vue                  | 2.6.10       |                   |
-
 ## 1.1.1 (March 19, 2019)
 
 ### Features
