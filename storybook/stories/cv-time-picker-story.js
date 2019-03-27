@@ -10,7 +10,7 @@ import CvTimePickerNotesMD from '@carbon/vue/src/components/cv-time-picker/cv-ti
 import CvTimePicker from '@carbon/vue/src/components/cv-time-picker/cv-time-picker';
 const storiesDefault = storiesOf('Default/CvTimePicker', module);
 const storiesExperimental = storiesOf('Experimental/CvTimePicker', module);
-import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const ampmConfig = [
   'ampm',

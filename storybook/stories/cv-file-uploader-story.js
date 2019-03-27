@@ -12,7 +12,7 @@ import CvFileUploaderSkeleton from '@carbon/vue/src/components/cv-file-uploader/
 
 const storiesDefault = storiesOf('Default/CvFileUploader', module);
 const storiesExperimental = storiesOf('Experimental/CvFileUploader', module);
-import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 let preKnobs = {
   label: {

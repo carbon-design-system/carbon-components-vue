@@ -12,7 +12,7 @@ import CvModal from '@carbon/vue/src/components/cv-modal/cv-modal';
 
 const storiesDefault = storiesOf('Default/CvModal', module);
 const storiesExperimental = storiesOf('Experimental/CvModal', module);
-import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   label: {

@@ -38,7 +38,7 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import checkMixin from '../../mixins/check-mixin';
-import { componentsX } from '../../_internal/_feature-flags';
+import { componentsX } from '../../internal/feature-flags';
 import CheckmarkFilled16 from '@carbon/icons-vue/lib/checkmark--filled/16';
 
 export default {

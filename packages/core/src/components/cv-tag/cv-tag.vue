@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { componentsX } from '../../_internal/_feature-flags';
+import { componentsX } from '../../internal/feature-flags';
 
 const components9Tags = [
   'ibm',

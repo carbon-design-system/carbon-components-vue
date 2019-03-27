@@ -39,7 +39,7 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
-import { componentsX } from '../../_internal/_feature-flags';
+import { componentsX } from '../../internal/feature-flags';
 import CaretDownGlyph from '@carbon/icons-vue/lib/caret--down/index';
 import CaretUpGlyph from '@carbon/icons-vue/lib/caret--up/index';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';

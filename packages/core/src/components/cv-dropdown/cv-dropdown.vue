@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { componentsX } from '../../_internal/_feature-flags';
+import { componentsX } from '../../internal/feature-flags';
 import CvDropdownInnerC10 from './_cv-dropdown-inner-c10';
 import CvDropdownInner from './_cv-dropdown-inner';
 

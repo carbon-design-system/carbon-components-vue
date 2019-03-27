@@ -11,7 +11,7 @@ import CvTextInput from '@carbon/vue/src/components/cv-text-input/cv-text-input'
 
 const storiesDefault = storiesOf('Default/CvTextInput', module);
 const storiesExperimental = storiesOf('Experimental/CvTextInput', module);
-import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   theme: {

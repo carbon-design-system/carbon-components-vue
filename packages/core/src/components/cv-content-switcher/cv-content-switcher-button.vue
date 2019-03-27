@@ -36,7 +36,7 @@
 
 <script>
 import uidMixin from '../../mixins/uid-mixin';
-import { componentsX } from '../../_internal/_feature-flags';
+import { componentsX } from '../../internal/feature-flags';
 
 export default {
   name: 'CvContentSwitcherButton',

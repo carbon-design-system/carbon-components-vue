@@ -9,7 +9,7 @@ import CvSkeletonText from '@carbon/vue/src/components/cv-skeleton-text/cv-skele
 
 const storiesDefault = storiesOf('Default/CvSkeletonText', module);
 const storiesExperimental = storiesOf('Experimental/CvSkeletonText', module);
-import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   heading: {

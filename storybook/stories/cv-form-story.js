@@ -14,7 +14,7 @@ import CvSelectOptgroup from '@carbon/vue/src/components/cv-select/cv-select-opt
 
 const storiesDefault = storiesOf('Default/CvForm', module);
 const storiesExperimental = storiesOf('Experimental/CvForm', module);
-import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {};
 

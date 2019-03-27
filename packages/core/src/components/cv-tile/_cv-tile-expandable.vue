@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { componentsX } from '../../_internal/_feature-flags';
+import { componentsX } from '../../internal/feature-flags';
 import ChevronDown16 from '@carbon/icons-vue/lib/chevron--down/16';
 
 export default {

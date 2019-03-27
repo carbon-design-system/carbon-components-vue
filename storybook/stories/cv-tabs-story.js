@@ -12,7 +12,7 @@ import CvTab from '@carbon/vue/src/components/cv-tabs/cv-tab';
 
 const storiesDefault = storiesOf('Default/CvTabs', module);
 const storiesExperimental = storiesOf('Experimental/CvTabs', module);
-import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   selected: {

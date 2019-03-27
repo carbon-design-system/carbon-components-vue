@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { componentsX } from '../../_internal/_feature-flags';
+import { componentsX } from '../../internal/feature-flags';
 import Information16 from '@carbon/icons-vue/lib/information/16';
 
 export default {

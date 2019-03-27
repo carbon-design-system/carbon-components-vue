@@ -12,7 +12,7 @@ import CvButtonSkeleton from '@carbon/vue/src/components/cv-button/cv-button-ske
 
 const storiesDefault = storiesOf('Default/CvButton', module);
 const storiesExperimental = storiesOf('Experimental/CvButton', module);
-import { componentsX, versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { componentsX, versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const exampleIconPath = require('@carbon/vue/src/assets/images/example-icons.svg');
 import AddFilled16 from '@carbon/icons-vue/lib/add--filled/16';

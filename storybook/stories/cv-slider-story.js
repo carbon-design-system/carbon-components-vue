@@ -11,7 +11,7 @@ import CvSlider from '@carbon/vue/src/components/cv-slider/cv-slider';
 
 const storiesDefault = storiesOf('Default/CvSlider', module);
 const storiesExperimental = storiesOf('Experimental/CvSlider', module);
-import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   theme: {
