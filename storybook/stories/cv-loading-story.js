@@ -12,7 +12,7 @@ import CvLoading from '@carbon/vue/src/components/cv-loading/cv-loading';
 
 const storiesDefault = storiesOf('Default/CvLoading', module);
 const storiesExperimental = storiesOf('Experimental/CvLoading', module);
-import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   active: {

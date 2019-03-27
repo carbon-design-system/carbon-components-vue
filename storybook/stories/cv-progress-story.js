@@ -10,7 +10,7 @@ import CvProgress from '@carbon/vue/src/components/cv-progress/cv-progress';
 
 const storiesDefault = storiesOf('Default/CvProgress', module);
 const storiesExperimental = storiesOf('Experimental/CvProgress', module);
-import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   initialStep: {

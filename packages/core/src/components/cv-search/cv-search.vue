@@ -70,7 +70,7 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
-import { componentsX } from '../../_internal/_feature-flags';
+import { componentsX } from '../../internal/feature-flags';
 import Search16 from '@carbon/icons-vue/lib/search/16';
 import Close16 from '@carbon/icons-vue/lib/close/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';

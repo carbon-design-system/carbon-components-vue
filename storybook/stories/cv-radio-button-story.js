@@ -12,7 +12,7 @@ import CvRadioGroup from '@carbon/vue/src/components/cv-radio-button/cv-radio-gr
 
 const storiesDefault = storiesOf('Default/CvRadioButton', module);
 const storiesExperimental = storiesOf('Experimental/CvRadioButton', module);
-import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   checked1: {

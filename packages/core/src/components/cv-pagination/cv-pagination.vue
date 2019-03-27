@@ -73,7 +73,7 @@
 <script>
 import CvSelect from '../cv-select/cv-select';
 import CvSelectOption from '../cv-select/cv-select-option';
-import { componentsX } from '../../_internal/_feature-flags';
+import { componentsX } from '../../internal/feature-flags';
 import ChevronLeft16 from '@carbon/icons-vue/lib/chevron--left/16';
 import ChevronRight16 from '@carbon/icons-vue/lib/chevron--right/16';
 

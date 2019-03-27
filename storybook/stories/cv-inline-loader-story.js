@@ -10,7 +10,7 @@ import CvInlineLoader from '@carbon/vue/src/components/cv-inline-loader/cv-inlin
 
 const storiesDefault = storiesOf('Default/CvInlineLoader', module);
 const storiesExperimental = storiesOf('Experimental/CvInlineLoader', module);
-import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   active: {

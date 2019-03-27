@@ -11,7 +11,7 @@ import CvNumberInput from '@carbon/vue/src/components/cv-number-input/cv-number-
 
 const storiesDefault = storiesOf('Default/CvNumberInput', module);
 const storiesExperimental = storiesOf('Experimental/CvNumberInput', module);
-import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   theme: {

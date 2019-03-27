@@ -92,7 +92,7 @@ import RangePlugin from 'flatpickr/dist/plugins/rangePlugin';
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
 import Calendar16 from '@carbon/icons-vue/lib/calendar/16';
-import { componentsX } from '../../_internal/_feature-flags';
+import { componentsX } from '../../internal/feature-flags';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
 
 // Weekdays shorthand for english locale

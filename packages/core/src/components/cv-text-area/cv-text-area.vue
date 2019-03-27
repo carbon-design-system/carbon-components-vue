@@ -43,7 +43,7 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
-import { componentsX } from '../../_internal/_feature-flags';
+import { componentsX } from '../../internal/feature-flags';
 import WarningFilled16 from '@carbon/icons-vue/lib/warning--filled/16';
 
 export default {

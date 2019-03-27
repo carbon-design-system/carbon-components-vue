@@ -11,7 +11,7 @@ import CvOverflowMenuItem from '@carbon/vue/src/components/cv-overflow-menu/cv-o
 
 const storiesDefault = storiesOf('Default/CvOverflowMenu', module);
 const storiesExperimental = storiesOf('Experimental/CvOverflowMenu', module);
-import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   flipMenu: {

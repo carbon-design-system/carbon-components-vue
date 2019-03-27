@@ -11,7 +11,7 @@ import CvCodeSnippetSkeleton from '@carbon/vue/src/components/cv-code-snippet/cv
 
 const storiesDefault = storiesOf('Default/CvCodeSnippet', module);
 const storiesExperimental = storiesOf('Experimental/CvCodeSnippet', module);
-import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 let preKnobs = {
   lessText: {

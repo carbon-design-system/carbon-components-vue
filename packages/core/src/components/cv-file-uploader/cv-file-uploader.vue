@@ -112,7 +112,7 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import CvFormItem from '../cv-form/cv-form-item';
-import { componentsX } from '../../_internal/_feature-flags';
+import { componentsX } from '../../internal/feature-flags';
 import CvInlineLoader from '../cv-inline-loader/cv-inline-loader';
 
 const CONSTS = {
