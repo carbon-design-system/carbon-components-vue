@@ -1,11 +1,12 @@
 <template>
-  <div class="cv-number-input bx--form-item">
+  <cv-wrapper :tag-type="formItem ? 'div' : ''" class="cv-number-input bx--form-item">
     <div
       data-numberinput
       class="bx--number"
       :class="{
         'bx--number--light': theme === 'light',
         'bx--number--helpertext': isHelper,
+        'cv-number-input': !formItem,
       }"
       :data-invalid="isInvalid"
     >
@@ -32,7 +33,7 @@
         <slot name="helper-text">{{ helperText }}</slot>
       </div>
     </div>
-  </div>
+  </cv-wrapper>
 </template>
 
 <script>
@@ -41,13 +42,15 @@ import themeMixin from '../../mixins/theme-mixin';
 import { componentsX } from '../../_internal/_feature-flags';
 import CaretDownGlyph from '@carbon/icons-vue/lib/caret--down/index';
 import CaretUpGlyph from '@carbon/icons-vue/lib/caret--up/index';
+import CvWrapper from '../cv-wrapper/_cv-wrapper';
 
 export default {
   name: 'CvNumberInput',
   mixins: [uidMixin, themeMixin],
-  components: { CaretDownGlyph, CaretUpGlyph },
+  components: { CaretDownGlyph, CaretUpGlyph, CvWrapper },
   inheritAttrs: false,
   props: {
+    formItem: { type: Boolean, default: true },
     helperText: { type: String, default: null },
     invalidMessage: { type: String, default: null },
     label: String,

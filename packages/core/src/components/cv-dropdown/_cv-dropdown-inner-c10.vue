@@ -16,53 +16,84 @@
 -->
 
 <template>
-  <div>
-    <ul
-      data-dropdown
-      :data-value="internalValue"
-      class="bx--dropdown"
-      tabindex="0"
-      :class="{
-        'bx--dropdown--light': theme === 'light',
-        'bx--dropdown--up': up,
-        'bx--dropdown--open': open,
-        'bx--dropdown--invalid': isInvalid,
-      }"
-      v-bind="$attrs"
-      @keydown.down.prevent="onDown"
-      @keydown.up.prevent="onUp"
-      @keydown.enter.prevent="onClick"
-      @keydown.esc.prevent="onEsc"
-      @click="onClick"
-    >
-      <WarningFilled16 v-if="isInvalid" class="bx--dropdown__invalid" />
-      <li class="bx--dropdown-text" ref="valueContent">{{ placeholder }}</li>
-      <svg class="bx--dropdown__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
-        <path d="M10 0L5 5 0 0z"></path>
-      </svg>
-      <li>
-        <ul class="bx--dropdown-list">
-          <slot></slot>
-        </ul>
-      </li>
-    </ul>
-    <div v-if="isInvalid" class="bx--form-requirement">
-      {{ invalidMessage }}
+  <cv-wrapper :tag-type="formItem ? 'div' : ''" class="cv-dropdown bx--form-item">
+    <div class="bx--dropdown__wrapper" :class="{ 'bx--dropdown__wrapper--inline': inline, 'cv-dropdown': !formItem }">
+      <label :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">{{ label }}</label>
+
+      <div
+        v-if="!inline && isHelper"
+        class="bx--form__helper-text"
+        :class="{ 'bx--form__helper-text--disabled': $attrs.disabled }"
+      >
+        <slot name="helper-text">{{ helperText }}</slot>
+      </div>
+
+      <ul
+        data-dropdown
+        :data-value="internalValue"
+        :data-invalid="isInvalid"
+        class="bx--dropdown"
+        tabindex="0"
+        :class="{
+          'bx--dropdown--light': theme === 'light',
+          'bx--dropdown--up': up,
+          'bx--dropdown--open': open,
+          'bx--dropdown--invalid': isInvalid,
+          'bx--dropdown--disabled': $attrs.disabled,
+        }"
+        v-bind="$attrs"
+        @keydown.down.prevent="onDown"
+        @keydown.up.prevent="onUp"
+        @keydown.enter.prevent="onClick"
+        @keydown.esc.prevent="onEsc"
+        @click="onClick"
+      >
+        <WarningFilled16 v-if="isInvalid" class="bx--dropdown__invalid-icon" />
+        <li v-if="inline" class="bx--dropdown-text" ref="valueContent">
+          <span class="bx--dropdown-text__inner">{{ placeholder }}</span>
+          <chevron-down-16 class="bx--dropdown__arrow" />
+        </li>
+        <template v-else>
+          <li class="bx--dropdown-text" ref="valueContent">{{ placeholder }}</li>
+          <li class="bx--dropdown__arrow-container">
+            <chevron-down-16 class="bx--dropdown__arrow" />
+          </li>
+        </template>
+
+        <li>
+          <ul class="bx--dropdown-list">
+            <slot></slot>
+          </ul>
+        </li>
+      </ul>
+      <div v-if="isInvalid" class="bx--form-requirement">
+        <slot name="invalid-message">{{ invalidMessage }}</slot>
+      </div>
     </div>
-  </div>
+    <div v-if="isInvalid" class="bx--form-requirement">
+      <slot name="invalid-message">{{ invalidMessage }}</slot>
+    </div>
+  </cv-wrapper>
 </template>
 
 <script>
+import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
 import WarningFilled16 from '@carbon/icons-vue/lib/warning--filled/16';
+import ChevronDown16 from '@carbon/icons-vue/lib/chevron--down/16';
+import CvWrapper from '../cv-wrapper/_cv-wrapper';
 
 export default {
   name: 'CvDropdownInner',
   inheritAttrs: false,
-  mixins: [themeMixin],
-  components: { WarningFilled16 },
+  mixins: [uidMixin, themeMixin],
+  components: { WarningFilled16, ChevronDown16, CvWrapper },
   props: {
-    invalidMessage: String,
+    formItem: { type: Boolean, default: true },
+    inline: Boolean,
+    invalidMessage: { type: String, default: null },
+    helperText: { type: String, default: null },
+    label: String,
     placeholder: {
       type: String,
       default: 'Choose an option',
@@ -77,6 +108,7 @@ export default {
     };
   },
   mounted() {
+    console.dir(this.$attrs);
     this.$el.addEventListener('focusout', ev => {
       if (ev.relatedTarget === null || !this.$el.contains(ev.relatedTarget)) {
         this.open = false;
@@ -95,7 +127,10 @@ export default {
   },
   computed: {
     isInvalid() {
-      return this.invalidMessage && this.invalidMessage.length > 0;
+      return this.$slots['invalid-message'] !== undefined || (this.invalidMessage && this.invalidMessage.length);
+    },
+    isHelper() {
+      return this.$slots['helper-text'] !== undefined || (this.helperText && this.helperText.length);
     },
     internalValue: {
       get() {

@@ -1,34 +1,57 @@
 <template>
-  <component :is="tagType" v-bind="$attrs" v-on="$listeners" class="cv-checkbox">
-    <slot></slot>
-  </component>
+  <div class="cv-checkbox bx--form-item bx--checkbox-wrapper">
+    <label
+      :class="[
+        'bx--checkbox-label',
+        {
+          'bx--label--disabled': $attrs.disabled !== undefined && $attrs.disabled,
+          'bx--checkbox-label__focus': hasFocus,
+        },
+      ]"
+      :data-contained-checkbox-state="isChecked"
+      :data-contained-checkbox-disabled="$attrs.disabled"
+    >
+      <input
+        ref="input"
+        v-bind="$attrs"
+        v-on="inputListeners"
+        class="bx--checkbox"
+        type="checkbox"
+        :checked="isChecked === true"
+        :aria-checked="`${isChecked}`"
+        @focus="onFocus"
+        @blur="onBlur"
+        :value="value"
+      />
+      {{ label }}
+    </label>
+  </div>
 </template>
 
 <script>
-import CvCheckboxInnerFormItem from './_cv-checkbox-inner-form-item';
-import CvCheckboxInner from './_cv-checkbox-inner';
+import checkMixin from '../../mixins/check-mixin';
 
 export default {
   name: 'CvCheckbox',
-  components: { CvCheckboxInnerFormItem, CvCheckboxInner },
+  mixins: [checkMixin],
   inheritAttrs: false,
   props: {
-    formItem: { type: Boolean, default: true },
+    label: String,
+    mixed: Boolean,
   },
-  computed: {
-    tagType() {
-      return this.formItem ? 'cv-checkbox-inner-form-item' : 'cv-checkbox-inner';
-    },
-    value() {
-      return this.$attrs.value;
-    },
-    isChecked() {
-      return this.$children[0].isChecked;
-    },
+  data() {
+    return {
+      dataMixed: this.mixed,
+      hasFocus: false,
+    };
   },
-  model: {
-    prop: 'modelValue',
-    event: 'modelEvent',
+  methods: {
+    onFocus() {
+      this.hasFocus = true;
+    },
+    onBlur() {
+      this.hasFocus = false;
+    },
   },
 };
 </script>
