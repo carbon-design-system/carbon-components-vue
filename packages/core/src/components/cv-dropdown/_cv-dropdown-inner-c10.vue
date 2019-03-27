@@ -53,12 +53,12 @@
           <span class="bx--dropdown-text__inner">{{ placeholder }}</span>
           <chevron-down-16 class="bx--dropdown__arrow" />
         </li>
-        <cv-wrapper v-else tag-type>
+        <template v-else>
           <li class="bx--dropdown-text" ref="valueContent">{{ placeholder }}</li>
           <li class="bx--dropdown__arrow-container">
             <chevron-down-16 class="bx--dropdown__arrow" />
           </li>
-        </cv-wrapper>
+        </template>
 
         <li>
           <ul class="bx--dropdown-list">
