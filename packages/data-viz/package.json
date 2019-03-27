@@ -1,6 +1,6 @@
 {
   "name": "@carbon/data-viz-vue",
-  "version": "0.0.1",
+  "version": "2.0.0-alpha.0",
   "description": "> TODO: description",
   "author": "Dave Clark <dave.clark@uk.ibm.com>",
   "homepage": "https://github.com/carbon-design-system/carbon-components-vue/tree/master/packages/dataviz#readme",
@@ -27,12 +27,13 @@
     "@carbon/icon-helpers": "0.0.1-beta.0",
     "@carbon/icons-vue": "0.0.1-beta.0",
     "carbon-components": "^9.87.2",
-    "flatpickr": "4.5.7",
     "d3": "^5.9.2",
+    "flatpickr": "4.5.7",
     "vue": "^2.6.10"
   },
   "devDependencies": {
     "@vue/cli-service": "^3.5.1",
     "vue-template-compiler": "^2.6.10"
-  }
+  },
+  "private": true
 }

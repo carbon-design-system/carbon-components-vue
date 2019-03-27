@@ -1,6 +1,6 @@
 {
   "name": "storybook",
-  "version": "0.0.0",
+  "version": "2.0.0-alpha.0",
   "private": true,
   "description": "> TODO: description",
   "scripts": {
@@ -14,8 +14,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
-    "@carbon/data-viz-vue": "^0.0.1",
-    "@carbon/vue": "^1.1.1",
+    "@carbon/data-viz-vue": "^2.0.0-alpha.0",
+    "@carbon/vue": "^2.0.0-alpha.0",
     "@storybook/addon-actions": "^5.0.3",
     "@storybook/addon-knobs": "^5.0.3",
     "@storybook/addon-notes": "^5.0.3",
