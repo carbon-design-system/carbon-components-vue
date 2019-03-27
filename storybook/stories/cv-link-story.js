@@ -10,7 +10,7 @@ import CvLink from '@carbon/vue/src/components/cv-link/cv-link';
 
 const storiesDefault = storiesOf('Default/CvLink', module);
 const storiesExperimental = storiesOf('Experimental/CvLink', module);
-import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   href: {

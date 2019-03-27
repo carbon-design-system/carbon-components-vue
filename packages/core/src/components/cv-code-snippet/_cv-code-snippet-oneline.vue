@@ -26,7 +26,7 @@
 
 <script>
 import CvFeedbackButton from './_cv-feedback-button';
-import { componentsX } from '../../_internal/_feature-flags';
+import { componentsX } from '../../internal/feature-flags';
 import Copy16 from '@carbon/icons-vue/lib/copy/16';
 
 export default {

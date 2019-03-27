@@ -14,7 +14,7 @@ import CvStructuredListData from '@carbon/vue/src/components/cv-structured-list/
 
 const storiesDefault = storiesOf('Default/CvStructuredList', module);
 const storiesExperimental = storiesOf('Experimental/CvStructuredList', module);
-import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   border: {

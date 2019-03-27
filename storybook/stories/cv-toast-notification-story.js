@@ -12,7 +12,7 @@ import CvToastNotification from '@carbon/vue/src/components/cv-toast-notificatio
 
 const storiesDefault = storiesOf('Default/CvToastNotification', module);
 const storiesExperimental = storiesOf('Experimental/CvToastNotification', module);
-import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   title: {

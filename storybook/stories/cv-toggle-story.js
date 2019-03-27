@@ -11,7 +11,7 @@ import CvToggle from '@carbon/vue/src/components/cv-toggle/cv-toggle';
 
 const storiesDefault = storiesOf('Default/CvToggle', module);
 const storiesExperimental = storiesOf('Experimental/CvToggle', module);
-import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 let preKnobs = {
   checked: {

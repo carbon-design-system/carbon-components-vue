@@ -11,7 +11,7 @@ import CvSearch from '@carbon/vue/src/components/cv-search/cv-search';
 
 const storiesDefault = storiesOf('Default/CvSearch', module);
 const storiesExperimental = storiesOf('Experimental/CvSearch', module);
-import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   theme: {

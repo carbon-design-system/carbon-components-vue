@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { componentsX } from '../../_internal/_feature-flags';
+import { componentsX } from '../../internal/feature-flags';
 import ChevronRight16 from '@carbon/icons-vue/lib/chevron--right/16';
 import uidMixin from '../../mixins/uid-mixin';
 

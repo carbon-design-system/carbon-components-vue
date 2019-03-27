@@ -10,7 +10,7 @@ import CvTile from '@carbon/vue/src/components/cv-tile/cv-tile';
 
 const storiesDefault = storiesOf('Default/CvTile', module);
 const storiesExperimental = storiesOf('Experimental/CvTile', module);
-import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   slotDefault: {

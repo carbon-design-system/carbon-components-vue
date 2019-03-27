@@ -10,7 +10,7 @@ import CvDropdownNotesMD from '@carbon/vue/src/components/cv-dropdown/cv-dropdow
 import CvDropdown from '@carbon/vue/src/components/cv-dropdown/cv-dropdown';
 import CvDropdownItem from '@carbon/vue/src/components/cv-dropdown/cv-dropdown-item';
 import CvDropdownSkeleton from '@carbon/vue/src/components/cv-dropdown/cv-dropdown-skeleton';
-import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const storiesDefault = storiesOf('Default/CvDropdown', module);
 const storiesExperimental = storiesOf('Experimental/CvDropdown', module);

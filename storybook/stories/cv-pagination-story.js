@@ -12,7 +12,7 @@ import CvPagination from '@carbon/vue/src/components/cv-pagination/cv-pagination
 
 const storiesDefault = storiesOf('Default/CvPagination', module);
 const storiesExperimental = storiesOf('Experimental/CvPagination', module);
-import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   backwardsText: {

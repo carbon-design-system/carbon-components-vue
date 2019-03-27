@@ -11,7 +11,7 @@ import CvTextArea from '@carbon/vue/src/components/cv-text-area/cv-text-area';
 
 const storiesDefault = storiesOf('Default/CvTextArea', module);
 const storiesExperimental = storiesOf('Experimental/CvTextArea', module);
-import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   theme: {

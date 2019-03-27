@@ -12,7 +12,7 @@ import CvAccordionSkeleton from '@carbon/vue/src/components/cv-accordion/cv-acco
 
 const storiesDefault = storiesOf('Default/CvAccordion', module);
 const storiesExperimental = storiesOf('Experimental/CvAccordion', module);
-import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   open1: {

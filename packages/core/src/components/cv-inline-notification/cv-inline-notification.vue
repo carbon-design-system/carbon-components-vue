@@ -38,7 +38,7 @@
 <script>
 import notificationMixin from '../../mixins/notification-mixin';
 import CvIcon from '../cv-icon/_cv-icon';
-import { componentsX } from '../../_internal/_feature-flags';
+import { componentsX } from '../../internal/feature-flags';
 import ErrorFilled16 from '@carbon/icons-vue/lib/error--filled/16';
 import CheckmarkFilled16 from '@carbon/icons-vue/lib/checkmark--filled/16';
 import WarningAltFilled16 from '@carbon/icons-vue/lib/warning--filled/16';

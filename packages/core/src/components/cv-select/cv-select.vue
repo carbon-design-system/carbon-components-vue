@@ -62,7 +62,7 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
-import { componentsX } from '../../_internal/_feature-flags';
+import { componentsX } from '../../internal/feature-flags';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
 import ChevronDownGlyph from '@carbon/icons-vue/lib/chevron--down/index';
 import WarningFilled16 from '@carbon/icons-vue/lib/warning--filled/16';

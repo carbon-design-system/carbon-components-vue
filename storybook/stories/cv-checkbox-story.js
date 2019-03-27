@@ -12,7 +12,7 @@ import CvCheckboxSkeleton from '@carbon/vue/src/components/cv-checkbox/cv-checkb
 
 const storiesDefault = storiesOf('Default/CvCheckbox', module);
 const storiesExperimental = storiesOf('Experimental/CvCheckbox', module);
-import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 let preKnobs = {
   label: {

@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { componentsX } from '../../_internal/_feature-flags';
+import { componentsX } from '../../internal/feature-flags';
 
 export default {
   name: 'CvLoading',

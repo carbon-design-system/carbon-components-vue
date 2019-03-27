@@ -11,7 +11,7 @@ import CvListItem from '@carbon/vue/src/components/cv-list/cv-list-item';
 
 const storiesDefault = storiesOf('Default/CvList', module);
 const storiesExperimental = storiesOf('Experimental/CvList', module);
-import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   ordered: {
