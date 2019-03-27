@@ -76,7 +76,7 @@ export default {
     inline: Boolean,
     invalidMessage: { type: String, default: null },
     helperText: { type: String, default: null },
-    formItem: { type: Boolean, default: false },
+    formItem: { type: Boolean, default: true },
     hideLabel: Boolean,
     label: { type: String, required: true },
     // *********************

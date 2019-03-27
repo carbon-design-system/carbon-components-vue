@@ -1,10 +1,10 @@
 <template>
-  <div class="cv-date-picker bx--form-item">
+  <cv-wrapper :tag-type="formItem ? 'div' : ''" class="cv-date-picker bx--form-item">
     <div
       :data-date-picker="['single', 'range'].includes(kind)"
       :data-date-picker-type="kind"
       class="bx--date-picker"
-      :class="[kindClasses, { 'bx--date-picker--light': theme === 'light' }]"
+      :class="[kindClasses, { 'bx--date-picker--light': theme === 'light', 'cv-date-pciker': !formItem }]"
       ref="date-picker"
     >
       <div
@@ -14,7 +14,7 @@
         @change="onSimpleChange"
       >
         <svg
-          v-if="kind === 'single'"
+          v-if="!componentsX && kind === 'single'"
           data-date-picker-icon
           class="bx--date-picker__icon"
           width="14"
@@ -28,36 +28,47 @@
           ></path>
         </svg>
         <label :for="`${uid}-input-1`" class="bx--label">{{ getDateLabel }}</label>
-        <input
-          :data-invalid="isInvalid"
-          type="text"
-          :id="`${uid}-input-1`"
-          class="bx--date-picker__input"
-          :pattern="pattern"
-          :placeholder="placeholder"
-          data-date-picker-input
-          :data-date-picker-input-from="kind === 'range'"
-          ref="date"
-        />
+        <cv-wrapper :tag-type="componentsX ? 'div' : ''" class="bx--date-picker-input__wrapper">
+          <input
+            :data-invalid="isInvalid"
+            type="text"
+            :id="`${uid}-input-1`"
+            class="bx--date-picker__input"
+            :pattern="pattern"
+            :placeholder="placeholder"
+            data-date-picker-input
+            :data-date-picker-input-from="kind === 'range'"
+            ref="date"
+          />
+          <Calendar16
+            v-if="componentsX && ['single', 'range'].includes(kind)"
+            class="bx--date-picker__icon"
+            data-date-picker-icon
+            @click="cal.open()"
+          />
+        </cv-wrapper>
         <div class="bx--form-requirement" v-if="isInvalid">
           <slot name="invalid-message">{{ invalidMessage || invalidDateMessage }}</slot>
         </div>
       </div>
       <div :class="{ 'bx--date-picker-container': kind === 'range' }" v-if="kind === 'range'">
         <label :for="`${uid}-input-2`" class="bx--label">{{ getDateEndLabel }}</label>
-        <input
-          type="text"
-          :id="`${uid}-input-2`"
-          class="bx--date-picker__input"
-          :pattern="pattern"
-          :placeholder="placeholder"
-          data-date-picker-input
-          :data-date-picker-input-to="kind === 'range'"
-          ref="todate"
-        />
+        <cv-wrapper :tag-type="componentsX ? 'div' : ''" class="bx--date-picker-input__wrapper">
+          <input
+            type="text"
+            :id="`${uid}-input-2`"
+            class="bx--date-picker__input"
+            :pattern="pattern"
+            :placeholder="placeholder"
+            data-date-picker-input
+            :data-date-picker-input-to="kind === 'range'"
+            ref="todate"
+          />
+          <Calendar16 v-if="componentsX" class="bx--date-picker__icon" data-date-picker-icon @click="cal.open()" />
+        </cv-wrapper>
       </div>
       <svg
-        v-if="kind === 'range'"
+        v-if="!componentsX && kind === 'range'"
         data-date-picker-icon
         class="bx--date-picker__icon"
         width="14"
@@ -71,7 +82,7 @@
         ></path>
       </svg>
     </div>
-  </div>
+  </cv-wrapper>
 </template>
 
 <script>
@@ -80,6 +91,9 @@ import l10n from 'flatpickr/dist/l10n/index';
 import RangePlugin from 'flatpickr/dist/plugins/rangePlugin';
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
+import Calendar16 from '@carbon/icons-vue/lib/calendar/16';
+import { componentsX } from '../../_internal/_feature-flags';
+import CvWrapper from '../cv-wrapper/_cv-wrapper';
 
 // Weekdays shorthand for english locale
 l10n.en.weekdays.shorthand.forEach((day, index) => {
@@ -94,6 +108,10 @@ l10n.en.weekdays.shorthand.forEach((day, index) => {
 export default {
   name: 'CvDatePickerInner',
   mixins: [uidMixin, themeMixin],
+  components: { Calendar16, CvWrapper },
+  data() {
+    return { componentsX: componentsX };
+  },
   props: {
     dateLabel: String,
     dateEndLabel: String,
