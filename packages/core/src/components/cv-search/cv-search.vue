@@ -1,7 +1,7 @@
 <template>
   <cv-wrapper :tag-type="formItem ? 'div' : ''" class="cv-search bx--form-item">
     <div class="bx--search" :class="[searchClasses, { 'cv-search': !formItem }]" role="search" ref="search">
-      <label :id="uid" class="bx--label" for="search__input-1">{{ label }}</label>
+      <label :for="uid" class="bx--label">{{ label }}</label>
 
       <input
         :id="uid"

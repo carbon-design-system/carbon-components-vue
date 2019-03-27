@@ -24,7 +24,7 @@
           <warning-filled-16 v-if="componentsX && isInvalid" class="bx--select__invalid-icon" />
         </div>
 
-        <div v-if="isInvalid && componentsX && isInvalid" class="bx--form-requirement">
+        <div v-if="componentsX && isInvalid" class="bx--form-requirement">
           <slot name="invalid-message">{{ invalidMessage }}</slot>
         </div>
         <!-- cv-wrapper div bx--select-input--inline__wrapper -->

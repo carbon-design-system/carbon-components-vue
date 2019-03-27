@@ -10,7 +10,7 @@ import CvDropdownNotesMD from '@carbon/vue/src/components/cv-dropdown/cv-dropdow
 import CvDropdown from '@carbon/vue/src/components/cv-dropdown/cv-dropdown';
 import CvDropdownItem from '@carbon/vue/src/components/cv-dropdown/cv-dropdown-item';
 import CvDropdownSkeleton from '@carbon/vue/src/components/cv-dropdown/cv-dropdown-skeleton';
-import { componentsX, versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/_internal/_feature-flags';
 
 const storiesDefault = storiesOf('Default/CvDropdown', module);
 const storiesExperimental = storiesOf('Experimental/CvDropdown', module);
@@ -65,6 +65,40 @@ let preKnobs = {
       type: Boolean,
     },
   },
+  vModel: {
+    group: 'attr',
+    value: `v-model="modelValue"`,
+  },
+  events: {
+    group: 'attr',
+    value: `@change="actionChange"`,
+  },
+  inline: {
+    group: 'attr',
+    type: boolean,
+    config: ['inline', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: Boolean,
+      name: 'inline',
+    },
+  },
+  helperText: {
+    group: 'attr',
+    type: text,
+    config: ['helper text', ''],
+    prop: {
+      name: 'helper-text',
+      type: String,
+      value: val => (val.length ? val : null),
+    },
+  },
+  helperTextSlot: {
+    group: 'slots',
+    slot: {
+      name: 'helper-text',
+      value: 'Some helpful text',
+    },
+  },
   invalidMessage: {
     group: 'attr',
     type: text,
@@ -75,20 +109,59 @@ let preKnobs = {
       value: val => (val.length ? val : null),
     },
   },
-  vModel: {
-    group: 'attr',
-    value: `v-model="modelValue"`,
+  invalidMessageSlot: {
+    group: 'slots',
+    slot: {
+      name: 'invalid-message',
+      value: 'Invalid message text',
+    },
   },
-  events: {
+  label: {
     group: 'attr',
-    value: `@change="actionChange"`,
+    type: text,
+    config: ['label', 'Select label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: String,
+      name: 'label',
+    },
+  },
+  disabled: {
+    group: 'attr',
+    type: boolean,
+    config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: Boolean,
+      name: 'disabled',
+    },
   },
 };
 
-let excludeComponentsX = componentsX ? [] : ['invalidMessage'];
-
 let variants = [
-  { name: 'default', excludes: ['vModel', 'events', ...excludeComponentsX] },
+  {
+    name: 'default',
+    excludes: [
+      'vModel',
+      'events',
+      'helperTextSlot',
+      'invalidMessageSlot',
+      'invalidMessage',
+      'helperText',
+      'inline',
+      'label',
+      'disabled',
+    ],
+    skip: { default: false, experimental: true },
+  },
+  {
+    name: 'default',
+    excludes: ['vModel', 'events', 'helperTextSlot', 'invalidMessageSlot'],
+    skip: { default: true, experimental: false },
+  },
+  {
+    name: 'slots',
+    excludes: ['vModel', 'events', 'helperText', 'invalidMessage'],
+    skip: { default: true, experimental: false },
+  },
   { name: 'minimal', includes: ['value'] },
   { name: 'events', includes: ['value', 'events'] },
   { name: 'vModel', includes: ['value', 'vModel'] },
@@ -99,6 +172,9 @@ for (const version of versions()) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
+    if (story.skip && ((story.skip.default && version.default) || (story.skip.experimental && version.experimental))) {
+      continue;
+    }
     stories.add(
       story.name,
       () => {
@@ -106,7 +182,7 @@ for (const version of versions()) {
         const settings = story.knobs();
 
         const templateString = `
-  <cv-dropdown ${settings.group.attr}>
+  <cv-dropdown ${settings.group.attr}>${settings.group.slots}
     <cv-dropdown-item value="10">Option with value 10</cv-dropdown-item>
     <cv-dropdown-item value="20">Option with value 20</cv-dropdown-item>
     <cv-dropdown-item value="30">Option with value 30</cv-dropdown-item>
