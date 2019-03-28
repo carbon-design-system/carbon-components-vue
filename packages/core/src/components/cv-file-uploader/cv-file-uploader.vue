@@ -1,8 +1,6 @@
 <template>
   <cv-form-item class="cv-file-uploader">
-    <strong :class="componentsX ? 'bx--label' : 'bx--file--label'">
-      {{ label }}
-    </strong>
+    <strong :class="componentsX ? 'bx--label' : 'bx--file--label'">{{ label }}</strong>
     <p class="bx--label-description">{{ helperText }}</p>
     <div class="bx--file" data-file>
       <label
@@ -31,7 +29,7 @@
           <span class="bx--file__selected-file">
             <p class="bx--file-filename">{{ file.file.name }}</p>
             <span :data-for="uid" class="bx--file__state-container" :data-test="file.state">
-              <cv-inline-loader
+              <cv-inline-loading
                 v-if="componentsX && (file.state === 'uploading' || file.state === 'complete')"
                 :active="file.state === 'uploading'"
                 loading-text
@@ -113,7 +111,7 @@
 import uidMixin from '../../mixins/uid-mixin';
 import CvFormItem from '../cv-form/cv-form-item';
 import { componentsX } from '../../internal/feature-flags';
-import CvInlineLoader from '../cv-inline-loader/cv-inline-loader';
+import CvInlineLoading from '../cv-inline-loading/cv-inline-loading';
 
 const CONSTS = {
   STATES: {
@@ -125,7 +123,7 @@ const CONSTS = {
 
 export default {
   name: 'CvFileUploader',
-  components: { CvFormItem, CvInlineLoader },
+  components: { CvFormItem, CvInlineLoading },
   mixins: [uidMixin],
   inheritAttrs: false,
   props: {

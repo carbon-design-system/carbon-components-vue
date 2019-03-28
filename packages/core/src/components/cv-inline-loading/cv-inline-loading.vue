@@ -26,7 +26,7 @@
 import CvLoading from '../cv-loading/cv-loading';
 
 export default {
-  name: 'CvInlineLoader',
+  name: 'CvInlineLoading',
   components: { CvLoading },
   props: {
     active: Boolean,
