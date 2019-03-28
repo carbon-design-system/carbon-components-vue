@@ -7,7 +7,7 @@
 > A collection of [Carbon Components](https://github.com/carbon-design-system/carbon-components) implemented using <img src="https://vuejs.org/images/logo.png" width="20" alt="Vue logo"> [Vue.js](https://vuejs.org/).
 
 <div style="text-align: center">
-  <img src="./docs/AtCarbonVue.png" alt="@carbon/vue" height="200px">
+  <img src="../../docs/AtCarbonVue.png" alt="@carbon/vue" height="200px">
 </div>
 
 ## Usage
@@ -39,35 +39,35 @@ If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead
 yarn add @carbon/vue
 ```
 
-NOTE: (https://www.npmjs.com/package/current-script-polyfill) is required for older browsers (e.g. IE11)
+NOTE: [current-script-polyfill](https://www.npmjs.com/package/current-script-polyfill) is required for older browsers (_e.g._ IE11)
 
-### Using all at once
+### Using the component library
 
-In your main js file (where you include Vue)
+In your main js file (where you include Vue):
 
 ```javascript
-// No need for Babel
 import CarbonComponentsVue from '@carbon/vue';
+Vue.use(CarbonComponentsVue);
 ```
 
-alternatively if wanting to specify babel presets
+The above lines will register all the core components. You can register only the components you need if you prefer:
+
+```
+Vue.use(CarbonComponentsVue, ['CvButton', 'CvTag']);
+```
+
+### Using the components directly or individually
+
+You can import the component source either for all core components or for the individual components you need.
+
+To import all the core components:
 
 ```javascript
-// need babel
 import CarbonComponentsVue from '@carbon/vue/src/index';
 Vue.use(CarbonComponentsVue);
 ```
 
-### Using one at a time
-
-In your main js file (where you include Vue)
-
-```javascript
-// No need for Babel
-import { CvButton } from '@carbon/vue';
-```
-
-In a component file
+To import individual components:
 
 ```javascript
 <script>
@@ -81,7 +81,17 @@ components: {
 </script>
 ```
 
-### From unkpg
+Note: to import the component source you will need to ensure that Babel can process the source. We recommend the Babel preset `@vue/app`. If @carbon/vue is installed as a dependency in a `node_modules` folder or similar, you may need to enable Babel to process the source files, for example with the following lines, or similar, inside the `webpack.config.js` file:
+
+```javascript
+{
+  test: /\.js$/,
+  loader: 'babel-loader',
+  include: [path.resolve(__dirname, 'node_modules/@carbon'), path.resolve(__dirname, 'src')]
+}
+```
+
+### Using the components from unkpg
 
 In your html file, no need to babel.
 
