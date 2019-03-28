@@ -117,7 +117,7 @@ See [component status pages](https://www.carbondesignsystem.com/component-status
 
 ## Development
 
-Please refer to the [Contribution Guidelines](./.github/CONTRIBUTING.md) before starting any work.
+Please refer to the [Contribution Guidelines](../../.github/CONTRIBUTING.md) before starting any work.
 
 ### Contributing
 
