@@ -5,11 +5,11 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvInlineLoaderNotesMD from '@carbon/vue/src/components/cv-inline-loader/cv-inline-loader-notes.md';
-import CvInlineLoader from '@carbon/vue/src/components/cv-inline-loader/cv-inline-loader';
+import CvInlineLoadingNotesMD from '@carbon/vue/src/components/cv-inline-loading/cv-inline-loading-notes.md';
+import CvInlineLoading from '@carbon/vue/src/components/cv-inline-loading/cv-inline-loading';
 
-const storiesDefault = storiesOf('Default/CvInlineLoader', module);
-const storiesExperimental = storiesOf('Experimental/CvInlineLoader', module);
+const storiesDefault = storiesOf('Default/CvInlineLoading', module);
+const storiesExperimental = storiesOf('Experimental/CvInlineLoading', module);
 import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
@@ -49,7 +49,7 @@ for (const version of versions()) {
 
         // ----------------------------------------------------------------
         const templateString = `
-<cv-inline-loader${settings.group.attr}></cv-inline-loader>
+<cv-inline-loading${settings.group.attr}></cv-inline-loading>
   `;
 
         // ----------------------------------------------------------------
@@ -66,14 +66,14 @@ for (const version of versions()) {
   `;
 
         return {
-          components: { CvInlineLoader, SvTemplateView },
+          components: { CvInlineLoading, SvTemplateView },
           data: () => ({ experimental: version.experimental }),
           template: templateViewString,
           props: settings.props,
         };
       },
       {
-        notes: { markdown: CvInlineLoaderNotesMD },
+        notes: { markdown: CvInlineLoadingNotesMD },
       }
     );
   }
