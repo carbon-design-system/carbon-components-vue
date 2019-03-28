@@ -222,7 +222,6 @@ export default {
     },
   },
   mounted() {
-    console.log(this.componentsX);
     if (['single', 'range'].includes(this.kind)) {
       this.cal = new Flatpickr(this.$refs.date, this.getOptions);
     }

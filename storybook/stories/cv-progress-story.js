@@ -7,6 +7,7 @@ import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvProgressNotesMD from '@carbon/vue/src/components/cv-progress/cv-progress-notes.md';
 import CvProgress from '@carbon/vue/src/components/cv-progress/cv-progress';
+import CvProgressStep from '@carbon/vue/src/components/cv-progress/cv-progress-step';
 
 const storiesDefault = storiesOf('Default/CvProgress', module);
 const storiesExperimental = storiesOf('Experimental/CvProgress', module);
@@ -36,16 +37,38 @@ const preKnobs = {
       type: Array,
     },
   },
+  slotted: {
+    group: 'slots',
+    slot: {
+      name: '',
+      value: `
+        <cv-progress-step label="Step 1" complete additional-info="Optional info" />
+        <cv-progress-step label="Step 2 is a bit longer" complete />
+        <cv-progress-step label="Step 3" />
+        <cv-progress-step label="Step 4" invalid />
+        <cv-progress-step label="Step 4" disabled />
+      `,
+    },
+  },
 };
 
-const variants = [{ name: 'default' }];
+const variants = [
+  { name: 'default', excludes: ['slotted'] },
+  { name: 'slotted', excludes: ['steps', 'initialStep'], skip: { default: true } },
+];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(false)) {
+for (const version of versions()) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
+    if (
+      story.skip &&
+      ((story.skip.default && !version.experimental) || (story.skip.experimental && version.experimental))
+    ) {
+      continue;
+    }
     stories.add(
       story.name,
       () => {
@@ -55,7 +78,7 @@ for (const version of versions(false)) {
         // ----------------------------------------------------------------
 
         const templateString = `
-<cv-progress${settings.group.attr}></cv-progress>
+<cv-progress${settings.group.attr}>${settings.group.slots}</cv-progress>
   `;
 
         // ----------------------------------------------------------------
@@ -69,7 +92,7 @@ for (const version of versions(false)) {
   `;
 
         return {
-          components: { CvProgress, SvTemplateView },
+          components: { CvProgress, CvProgressStep, SvTemplateView },
           data: () => ({ experimental: version.experimental }),
           template: templateViewString,
           props: settings.props,
