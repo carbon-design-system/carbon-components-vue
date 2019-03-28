@@ -8,7 +8,7 @@
 
 ## Packages
 
-### [@carbon/vue](./tree/master/packages/core)
+### [@carbon/vue](./packages/core)
 
 A library of the Carbon core components
 
@@ -16,7 +16,7 @@ A library of the Carbon core components
   <img src="./docs/AtCarbonVue.png" alt="@carbon/vue" height="200px">
 </div>
 
-[read more](./tree/master/packages/core)
+[read more](./packages/core)
 
 ## Building and publishing
 
