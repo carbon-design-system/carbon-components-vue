@@ -128,15 +128,9 @@ Or npm
 $ npm serve
 ```
 
-_Note: This isn't the only way to bootstrap a_ `carbon-components-vue` _application, but the combination of_ `Vue CLI` _and the_ `carbon-components` _scss is our recommended setup._
-
 ### List of available components
 
 View available Vue Components [here](http://vue.carbondesignsystem.com). Usage information is available in the notes provided with each story.
-
-## Troubleshooting
-
-If you experience any issues while getting set up with Carbon Components Vue, please head over to the [GitHub repo](https://github.com/carbon-design-system/carbon-components-vue) for more guidelines and support. Please [create an issue](https://github.com/carbon-design-system/carbon-components-vue/issues) if your issue does not already exist.
 
 ## Building and publishing
 
