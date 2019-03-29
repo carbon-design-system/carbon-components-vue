@@ -23,17 +23,19 @@
     "lint:style": "vue-cli-service lint:style",
     "prepare": "lerna bootstrap",
     "start": "lerna exec yarn start --scope storybook",
-    "test:unit": "vue-cli-service test:unit"
+    "test": "vue-cli-service test:unit"
   },
   "devDependencies": {
     "@ascendancyy/vue-cli-plugin-stylelint": "^1.1.2",
     "@commitlint/cli": "^7.2.1",
     "@commitlint/config-conventional": "^7.1.2",
+    "@vue/cli-plugin-babel": "^3.5.3",
     "@vue/cli-plugin-eslint": "^3.4.0",
     "@vue/cli-plugin-unit-jest": "^3.4.0",
     "@vue/cli-service": "^3.4.0",
     "@vue/eslint-config-prettier": "^4.0.1",
     "@vue/test-utils": "^1.0.0-beta.20",
+    "babel-core": "^7.0.0-0",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.10.0",
     "eslint-plugin-vue": "^5.0.0-0",
@@ -51,7 +53,9 @@
     "stylelint": "^9.9.0",
     "stylelint-config-property-sort-order-smacss": "^4.0.1",
     "stylelint-config-sass-guidelines": "^5.3.0",
-    "vue-jest": "^3.0.2"
+    "vue": "^2.6.10",
+    "vue-jest": "^3.0.2",
+    "vue-template-compiler": "^2.6.10"
   },
   "husky": {
     "hooks": {
@@ -132,7 +136,7 @@
       "^.+\\.jsx?$": "babel-jest"
     },
     "moduleNameMapper": {
-      "^@/(.*)$": "<rootDir>/src/$1"
+      "^@/(.*)$": "<rootDir>/packages/core/src/$1"
     },
     "snapshotSerializers": [
       "jest-serializer-vue"
