@@ -1,24 +1,13 @@
 import { shallowMount } from '@vue/test-utils';
+import { testComponent, testInstance } from './_helpers';
 import CvTag from '@/components/cv-tag/cv-tag.vue';
 
-describe('CvTag.vue', () => {
-  it('renders props.label when passed', () => {
-    const label = 'new label';
-    const wrapper = shallowMount(CvTag, {
-      propsData: { label },
-    });
+describe('CvTag', () => {
+  testComponent.propsAreRequired(CvTag, ['label']);
+  testComponent.propsHaveDefault(CvTag, ['kind']);
+  testComponent.propsAreString(CvTag, ['label', 'kind']);
 
-    expect(wrapper.props('label')).toBe(label);
-    expect(wrapper.text()).toMatch(label);
-  });
-
-  it('checks props.label is required', () => {
-    expect(CvTag.props.label.required).toBe(true);
-  });
-
-  it('checks props.kind has default', () => {
-    expect(CvTag.props.kind.default).toBeDefined();
-  });
+  testInstance.propStringIsRendered(CvTag, 'label', 'span');
 
   it('matches snapshot', () => {
     const label = 'I am a tag';
