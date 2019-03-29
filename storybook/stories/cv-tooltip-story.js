@@ -207,7 +207,7 @@ for (const version of versions()) {
   `;
 
         return {
-          components: { CvDefinitionTooltip, SvTemplateView, Filter16 },
+          components: { CvTooltip, SvTemplateView, Filter16 },
           data: () => ({ experimental: version.experimental, componentsX }),
           template: templateViewString,
           props: settings.props,
