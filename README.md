@@ -17,7 +17,7 @@ A library of the Carbon core components
 </div>
 
 ## Gettting started
-Getting started instructinos for @carbon/vue can be found [here](./packages/core/README.md)
+Usage and getting started instructinos for @carbon/vue can be found [here](./packages/core/README.md)
 
 ## Building and publishing
 
