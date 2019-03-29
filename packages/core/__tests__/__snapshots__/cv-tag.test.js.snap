@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CvTag matches snapshot 1`] = `<span class="cv-tag bx--tag bx--tag--beta">I am a tag</span>`;

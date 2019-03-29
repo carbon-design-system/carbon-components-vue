@@ -22,7 +22,7 @@ http://www.carbondesignsystem.com/components/tag/code
 ## Attributes
 
 - kind
-  'ibm',
+  'ibm' (default),
   'beta',
   'third-party',
   'local',
@@ -32,5 +32,5 @@ http://www.carbondesignsystem.com/components/tag/code
   'community',
   'private',
   'deprecated'
-- label
+- label (required)
   string content value
