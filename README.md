@@ -16,7 +16,8 @@ A library of the Carbon core components
   <img src="./docs/AtCarbonVue.png" alt="@carbon/vue" height="200px">
 </div>
 
-[read more](./packages/core)
+## Gettting started
+Getting started instructinos for @carbon/vue can be found [here](./packages/core/README.md)
 
 ## Building and publishing
 
