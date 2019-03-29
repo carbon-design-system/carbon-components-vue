@@ -1,8 +1,5 @@
 <template>
-  <li
-    class="cv-progress-step bx--progress-step"
-    :class="[stateClass, { 'bx--progress-step--disabled': $attrs.disabled }]"
-  >
+  <li class="cv-progress-step bx--progress-step" :class="stateClass" :aria-disabled="disabled">
     <cv-wrapper v-if="componentsX">
       <svg v-if="isCurrent">
         <path d="M 7, 7 m -7, 0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0"></path>
@@ -52,6 +49,7 @@ export default {
   },
   props: {
     additionalInfo: String,
+    disabled: Boolean,
     invalid: Boolean,
     label: String,
     complete: Boolean,
@@ -90,7 +88,9 @@ export default {
       return this.state === 0;
     },
     stateClass() {
-      return `bx--progress-step--${states[this.state + 1]}`;
+      const disabledClass = this.disabled ? ' bx--progress-step--disabled' : '';
+      const invalidClass = this.invalid ? ' bx--progress-step--invalid' : '';
+      return `bx--progress-step--${states[this.state + 1]}${disabledClass}${invalidClass}`;
     },
   },
 };
