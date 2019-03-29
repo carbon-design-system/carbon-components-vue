@@ -10,7 +10,7 @@ addDecorator(
   withOptions({
     name: `carbon components vue`,
     // sortStoriesByKind: true,
-    url: 'https://github.com/carbon-design-system/carbon-components-vue',
+    url: 'https://github.com/carbon-design-system/carbon-components-vue/blob/master/packages/core/README.md',
     // hierarchyRootSeparator: /\|/,
   })
 );
