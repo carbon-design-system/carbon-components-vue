@@ -1,3 +1,26 @@
+## 2.0.0-alpha.1 (April 1, 2019)
+
+### Features
+
+- Renamed CvInlineLoader to match core cv-inline-loading
+- Fixed tooltip story
+- Added carbon 10 progress
+- Added carbon 10 structured list
+
+### Bug Fixes
+
+### Dependency versions
+
+Versions reflect those version was built using.
+
+| Dependency           | Version      | Notes             |
+| -------------------- | ------------ | ----------------- |
+| @carbon/icon-helpers | 0.0.1-beta.0 | experimental only |
+| @carbon/icons-vue    | 0.0.1-beta.0 | experimental only |
+| carbon-components    | 9.91.0       |                   |
+| flatpickr            | 4.5.2        |                   |
+| vue                  | 2.6.10       |                   |
+
 ## 2.0.0-alpha.0 (March 28, 2019)
 
 ### Features

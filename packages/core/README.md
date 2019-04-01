@@ -10,9 +10,27 @@
   <img src="../../docs/AtCarbonVue.png" alt="@carbon/vue" height="200px">
 </div>
 
-## Usage
+# Change log
 
-### General
+See [CHANGELOG.md](CHANGELOG.md)
+
+## Current Components
+
+View available Vue.js components [here](http://vue.carbondesignsystem.com). Usage information is available when you click the blue ? icon in the top right corner of the selected component.
+
+See [component status pages](https://www.carbondesignsystem.com/component-status) for the status of each component.
+
+# Development
+
+Please refer to the [Contribution Guidelines](../../.github/CONTRIBUTING.md) before starting any work.
+
+## Contributing
+
+Fork, create branch, submit PR. The PR will be used as part of a review process.
+
+# Usage
+
+## General
 
 The components do not import any of the carbon styles themselves. Use the SCSS or CSS from carbon-components to provide the styling.
 
@@ -21,11 +39,119 @@ The components do not import any of the carbon styles themselves. Use the SCSS o
 - If you prefer to build the SCSS, in the `<style>` tag of your top-level component you can include the styles wholesale: `@import "~carbon-components/scss/globals/scss/styles.scss";`
 - Check out the [Carbon Design System developers](https://www.carbondesignsystem.com/getting-started/developers/vanilla) page for information on including individual component styles into your project.
 
-### List of Available Components
+## List of Available Components
 
 View available Vue Components [here](http://vue.carbondesignsystem.com). Usage information is in the notes tab.
 
-### Getting Started
+# Getting Started
+
+## Quick Start (Vue CLI)
+
+Assuming we're starting with a new Vue CLI project:
+
+```sh
+$ vue create my-project
+Vue CLI v3.5.2
+? Please pick a preset: default (babel, eslint)
+$ cd my-project
+```
+
+Using Yarn
+
+```sh
+$ yarn add @carbon/vue
+```
+
+Or npm
+
+```sh
+$ npm install @carbon/vue
+```
+
+In src/main.js add the following to include the carbon styles and components.
+
+```js
+import 'carbon-components/css/carbon-components.css';
+import CarbonComponentsVue from '@carbon/vue/src/index';
+Vue.use(CarbonComponentsVue);
+```
+
+Replace the contents of src/components/HelloWorld.vue with the following
+
+```html
+<template>
+  <div class="sample">
+    <h1>Example use of @carbon/vue</h1>
+    <cv-text-input label="Who are you?" v-model="yourName" placeholder="your name" />
+    <cv-button @click="onClick">Hello {{yourName}}</cv-button>
+    <cv-modal :visible="visible" @modal-hidden="modalClosed">
+      <template slot="title"
+        >Welcome to @carbon/vue {{yourName}}</template
+      >
+      <template slot="content">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, seed do eiusmod tempor incididunt ut labore et
+          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+          commodo consequat.
+        </p>
+      </template>
+    </cv-modal>
+  </div>
+</template>
+
+<script>
+  export default {
+    name: 'HelloWorld',
+    data() {
+      return {
+        yourName: '',
+        visible: false,
+      };
+    },
+    methods: {
+      onClick() {
+        this.visible = true;
+      },
+      modalClosed() {
+        this.visible = false;
+      },
+    },
+  };
+</script>
+
+<style>
+  .sample {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 600px;
+    margin: 5% auto;
+  }
+
+  .cv-text-input {
+    margin: 30px 0;
+  }
+</style>
+```
+
+That's it! Now start the server and start building.
+
+Using Yarn
+
+```sh
+$ yarn serve
+```
+
+Or npm
+
+```sh
+$ npm serve
+```
+
+## Longer start
+
+### Install
 
 Run the following command using [npm](https://www.npmjs.com/):
 
@@ -103,28 +229,4 @@ Vue.use(window['carbon-vue'].default);
 <script>
 
 . . . <cv-button>Hello</cv-button>
-```
-
-## Change log
-
-See [CHANGELOG.md](CHANGELOG.md)
-
-### Current Components
-
-View available Vue.js components [here](http://vue.carbondesignsystem.com). Usage information is available when you click the blue ? icon in the top right corner of the selected component.
-
-See [component status pages](https://www.carbondesignsystem.com/component-status) for the status of each component.
-
-## Development
-
-Please refer to the [Contribution Guidelines](../../.github/CONTRIBUTING.md) before starting any work.
-
-### Contributing
-
-Fork, create branch, submit PR. The PR will be used as part of a review process.
-
-### Publishing this library on gh-pages
-
-```bash
-sh deploy-gh-pages.sh
 ```
