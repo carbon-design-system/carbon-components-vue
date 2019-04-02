@@ -270,7 +270,7 @@ const preKnobs = {
         '\n       <cv-data-table-cell><input type="text" :value="row" style="border: none; background: none; width: 100%;"/></cv-data-table-cell>' +
         '\n       <cv-data-table-cell><input type="number" :value="rowIndex * rowIndex" style="border: none; background: none; width: 100%;" /></cv-data-table-cell>' +
         '\n       <cv-data-table-cell><input type="password" value="ASecret" style="border: none; background: none; width: 100%;" /></cv-data-table-cell>' +
-        '\n       <cv-data-table-cell><a href="https://vue.carbondesignsystem.com">Here</a></cv-data-table-cell>' +
+        '\n       <cv-data-table-cell><a href="http://vue.carbondesignsystem.com">Here</a></cv-data-table-cell>' +
         '\n       <cv-data-table-cell><cv-tag :kind="row" label="I am a tag" /></cv-data-table-cell>' +
         '\n       <cv-data-table-cell><cv-button type="button" v-html="`Clicky ${row}`" style="width: 100%;"></cv-button></cv-data-table-cell>' +
         '\n       <cv-data-table-cell>' +

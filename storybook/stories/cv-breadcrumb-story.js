@@ -9,6 +9,7 @@ import CvBreadcrumbNotesMD from '@carbon/vue/src/components/cv-breadcrumb/cv-bre
 import CvBreadcrumb from '@carbon/vue/src/components/cv-breadcrumb/cv-breadcrumb';
 import CvBreadcrumbItem from '@carbon/vue/src/components/cv-breadcrumb/cv-breadcrumb-item';
 import CvBreadcrumbSkeleton from '@carbon/vue/src/components/cv-breadcrumb/cv-breadcrumb-skeleton';
+import CvLink from '@carbon/vue/src/components/cv-link/cv-link';
 
 const storiesDefault = storiesOf('Default/CvBreadcrumb', module);
 const storiesExperimental = storiesOf('Experimental/CvBreadcrumb', module);
@@ -45,10 +46,13 @@ for (const version of versions()) {
         const templateString = `
   <cv-breadcrumb${settings.group.attr}>
     <cv-breadcrumb-item>
-      Some text
+      <cv-link href="#somewhere">Some text</cv-link>
     </cv-breadcrumb-item>
     <cv-breadcrumb-item>
       <cv-link href="parent">parent-link</cv-link>
+    </cv-breadcrumb-item>
+    <cv-breadcrumb-item>
+      <cv-link href="#" aria-current="page">here</cv-link>
     </cv-breadcrumb-item>
     <cv-breadcrumb-item>
       <input type="text" value="name of thing"></input>
@@ -68,7 +72,7 @@ for (const version of versions()) {
     `;
 
         return {
-          components: { CvBreadcrumb, CvBreadcrumbItem, SvTemplateView },
+          components: { CvBreadcrumb, CvBreadcrumbItem, CvLink, SvTemplateView },
           data: () => ({ experimental: version.experimental }),
           template: templateViewString,
           props: settings.props,
