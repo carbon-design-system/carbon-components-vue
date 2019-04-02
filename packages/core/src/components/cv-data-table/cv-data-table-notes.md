@@ -44,7 +44,7 @@ Like sorting and filtering it is the users responsibility to deal with edited da
         <input type="password" value="ASecret" style="border: none; background: none; width: 100%;" />
       </cv-data-table-cell>
       <cv-data-table-cell>
-        <a href="https://vue.carbondesignsystem.com">Here</a>
+        <a href="http://vue.carbondesignsystem.com">Here</a>
       </cv-data-table-cell>
       <cv-data-table-cell>
         <cv-tag :kind="row" label="I am a tag" />
