@@ -2,17 +2,17 @@
 # yarn lockfile v1
 
 
-"@carbon/icon-helpers@0.0.1-beta.0":
-  version "0.0.1-beta.0"
-  resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-0.0.1-beta.0.tgz#58a71fbe64128ac606dad2fadcab53aa701cbcd8"
-  integrity sha512-O7wZ8drife1mYjxWQRzRhllePPLQWhLcXAxSAPSKRBTZZy5kaQCPOFYiNOsZ86fh+B6ycqEO/8suIeWoZsoWxA==
+"@carbon/icon-helpers@10.0.0":
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-10.0.0.tgz#08d21b2ef79c0a074cc64f0d74fdfd43baa8ba44"
+  integrity sha512-mEsapmm5E8E+tR6BZheKmJCnn0eYmgWTG/rWo7vZkg9STmXFGAEZV0/qNtiZhYIT7KurwqF53qVVRF6ZsqjYtw==
 
-"@carbon/icons-vue@0.0.1-beta.0":
-  version "0.0.1-beta.0"
-  resolved "https://registry.yarnpkg.com/@carbon/icons-vue/-/icons-vue-0.0.1-beta.0.tgz#1dacdbd1f35bbf2de8a7af0bd1bfa30dd23879db"
-  integrity sha512-7/FNi3jtRllqYk7t55EmF/mLWpimY1YIVoLVcX8ax1VmGICAzpnmDtbixA7H4IS2bd2UwuQMvUzqGGt0WWq1fQ==
+"@carbon/icons-vue@^10.0.0":
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/@carbon/icons-vue/-/icons-vue-10.0.0.tgz#f3f1c729e1d227fef31d6bdbdcb39ef1be41cbac"
+  integrity sha512-tDz8BfHzTtA9cnhm6fnCt6qgT9CD+huFBU4Z6gNZdLPmDNsXeR/it/5XnpUoJsl4aZbYg1FNBD/dOejCmyJeDA==
   dependencies:
-    "@carbon/icon-helpers" "0.0.1-beta.0"
+    "@carbon/icon-helpers" "10.0.0"
 
 "@intervolga/optimize-cssnano-plugin@^1.0.5":
   version "1.0.6"
@@ -966,10 +966,10 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000947, caniuse-lite@^1.0.30000951:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000955.tgz#360fdb9a1e41d6dd996130411334e44a39e4446d"
   integrity sha512-6AwmIKgqCYfDWWadRkAuZSHMQP4Mmy96xAXEdRBlN/luQhlRYOKgwOlZ9plpCOsVbBuqbTmGqDK3JUM/nlr8CA==
 
-carbon-components@^9.91.0:
-  version "9.91.0"
-  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-9.91.0.tgz#8e0485b96aeda642812d137ebdfd970296474a36"
-  integrity sha512-F/69jbMt49cXg19WmFOdzWzd6zcoI3divBl7nh+S6ZShjM72s/Qmjsf7HqKOYMqjXQz4AkleVzYYv2Faqh/p6Q==
+carbon-components@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.0.0.tgz#d9e5da8619c7bd74c31ebabb759f23790460f2d6"
+  integrity sha512-SFTUy7C+pIucsWnuOsRFYcChXPhqYnutqwsyuQ4Tr3h+5SlytRo3R3dyHQeka4j+DEUagCRfIBu8NCBnipERyw==
   dependencies:
     carbon-icons "^7.0.7"
     flatpickr "4.5.7"

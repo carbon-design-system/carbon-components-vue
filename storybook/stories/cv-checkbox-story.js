@@ -10,7 +10,7 @@ import CvCheckboxNotesMD from '@carbon/vue/src/components/cv-checkbox/cv-checkbo
 import CvCheckbox from '@carbon/vue/src/components/cv-checkbox/cv-checkbox';
 import CvCheckboxSkeleton from '@carbon/vue/src/components/cv-checkbox/cv-checkbox-skeleton';
 
-const storiesDefault = storiesOf('Default/CvCheckbox', module);
+const storiesDefault = storiesOf('Components/CvCheckbox', module);
 const storiesExperimental = storiesOf('Experimental/CvCheckbox', module);
 import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
@@ -70,7 +70,7 @@ let variants = [
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions()) {
+for (const version of versions(true)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
@@ -146,7 +146,7 @@ variants = [{ name: 'Array v-model', includes: ['vModel'] }];
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions()) {
+for (const version of versions(true)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
@@ -221,7 +221,7 @@ for (const version of versions()) {
 preKnobs = {};
 variants = [{ name: 'skeleton' }];
 storySet = knobsHelper.getStorySet(variants, preKnobs);
-for (const version of versions()) {
+for (const version of versions(true)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {

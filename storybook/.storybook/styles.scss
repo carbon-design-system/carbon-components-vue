@@ -1,0 +1,14 @@
+$css--font-face: true;
+$css--helpers: true;
+$css--use-layer: true;
+$css--body: true;
+$css--reset: true;
+$css--typography: true;
+$css--plex: true;
+
+$feature-flags: (
+  components-x: true,
+  ui-shell: false,
+);
+
+@import '~carbon-components/scss/globals/scss/styles.scss';

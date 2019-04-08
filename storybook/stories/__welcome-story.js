@@ -1,17 +1,15 @@
 import { storiesOf } from '@storybook/vue';
+import SvWelcome from '../_storybook/views/sv-template-view/sv-welcome';
+// import { setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const stories = storiesOf('Welcome', module);
 
 stories.add('default', () => {
   // ----------------------------------------------------------------
-  const templateViewString = `
-  <main>
-      <h1>Ooops.</h1>
-      <p>Applogies we appear to have broken storybook in a number of ways. Currently remedying this.</p>
-  </main
-  `;
+  const templateViewString = `<sv-welcome></sv-welcome>`;
 
   return {
+    components: { SvWelcome },
     template: templateViewString,
   };
 });

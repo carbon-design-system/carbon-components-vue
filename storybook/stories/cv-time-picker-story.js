@@ -8,7 +8,7 @@ import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvTimePickerNotesMD from '@carbon/vue/src/components/cv-time-picker/cv-time-picker-notes.md';
 import CvTimePicker from '@carbon/vue/src/components/cv-time-picker/cv-time-picker';
-const storiesDefault = storiesOf('Default/CvTimePicker', module);
+const storiesDefault = storiesOf('Components/CvTimePicker', module);
 const storiesExperimental = storiesOf('Experimental/CvTimePicker', module);
 import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
@@ -166,7 +166,7 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions()) {
+for (const version of versions(true)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {

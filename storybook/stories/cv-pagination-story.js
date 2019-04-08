@@ -10,7 +10,7 @@ import knobsHelper from '../_storybook/utils/knobs-helper';
 import CvPaginationNotesMD from '@carbon/vue/src/components/cv-pagination/cv-pagination-notes.md';
 import CvPagination from '@carbon/vue/src/components/cv-pagination/cv-pagination';
 
-const storiesDefault = storiesOf('Default/CvPagination', module);
+const storiesDefault = storiesOf('Components/CvPagination', module);
 const storiesExperimental = storiesOf('Experimental/CvPagination', module);
 import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
@@ -71,7 +71,7 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions()) {
+for (const version of versions(true)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {

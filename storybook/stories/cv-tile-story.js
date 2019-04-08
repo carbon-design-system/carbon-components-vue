@@ -8,7 +8,7 @@ import knobsHelper from '../_storybook/utils/knobs-helper';
 import CvTileNotesMD from '@carbon/vue/src/components/cv-tile/cv-tile-notes.md';
 import CvTile from '@carbon/vue/src/components/cv-tile/cv-tile';
 
-const storiesDefault = storiesOf('Default/CvTile', module);
+const storiesDefault = storiesOf('Components/CvTile', module);
 const storiesExperimental = storiesOf('Experimental/CvTile', module);
 import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
@@ -93,7 +93,7 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions()) {
+for (const version of versions(true)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {

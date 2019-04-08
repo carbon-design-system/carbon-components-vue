@@ -10,7 +10,7 @@ import CvInteractiveTooltip from '@carbon/vue/src/components/cv-tooltip/cv-inter
 import CvTooltip from '@carbon/vue/src/components/cv-tooltip/cv-tooltip';
 import CvDefinitionTooltip from '@carbon/vue/src/components/cv-tooltip/cv-definition-tooltip';
 
-const storiesDefault = storiesOf('Default/CvTooltip', module);
+const storiesDefault = storiesOf('Components/CvTooltip', module);
 const storiesExperimental = storiesOf('Experimental/CvTooltip', module);
 import { componentsX, versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 import Filter16 from '@carbon/icons-vue/lib/filter/16';
@@ -81,7 +81,7 @@ const variants = [{ name: 'default' }, { name: 'minimal', includes: ['content', 
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions()) {
+for (const version of versions(true)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
@@ -178,7 +178,7 @@ preKnobs = {
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions()) {
+for (const version of versions(true)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
@@ -268,7 +268,7 @@ preKnobs = {
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions()) {
+for (const version of versions(true)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {

@@ -10,7 +10,7 @@ import knobsHelper from '../_storybook/utils/knobs-helper';
 import CvLoadingNotesMD from '@carbon/vue/src/components/cv-loading/cv-loading-notes.md';
 import CvLoading from '@carbon/vue/src/components/cv-loading/cv-loading';
 
-const storiesDefault = storiesOf('Default/CvLoading', module);
+const storiesDefault = storiesOf('Components/CvLoading', module);
 const storiesExperimental = storiesOf('Experimental/CvLoading', module);
 import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
@@ -43,7 +43,7 @@ const variants = [{ name: 'default', excludes: ['events'] }, { name: 'events' }]
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions()) {
+for (const version of versions(true)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {

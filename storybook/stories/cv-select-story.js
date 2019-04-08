@@ -11,7 +11,7 @@ import CvSelect from '@carbon/vue/src/components/cv-select/cv-select';
 import CvSelectOption from '@carbon/vue/src/components/cv-select/cv-select-option';
 import CvSelectOptgroup from '@carbon/vue/src/components/cv-select/cv-select-optgroup';
 
-const storiesDefault = storiesOf('Default/CvSelect', module);
+const storiesDefault = storiesOf('Components/CvSelect', module);
 const storiesExperimental = storiesOf('Experimental/CvSelect', module);
 import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
@@ -129,7 +129,7 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions()) {
+for (const version of versions(true)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
