@@ -11,7 +11,7 @@ import CvContentSwitcher from '@carbon/vue/src/components/cv-content-switcher/cv
 import CvContentSwitcherButton from '@carbon/vue/src/components/cv-content-switcher/cv-content-switcher-button';
 import CvContentSwitcherContent from '@carbon/vue/src/components/cv-content-switcher/cv-content-switcher-content';
 
-const storiesDefault = storiesOf('Default/CvContentSwitcher', module);
+const storiesDefault = storiesOf('Current/CvContentSwitcher', module);
 const storiesExperimental = storiesOf('Experimental/CvContentSwitcher', module);
 import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
@@ -83,7 +83,7 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions()) {
+for (const version of versions(false)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
@@ -168,7 +168,7 @@ for (const version of versions()) {
   }
 }
 
-for (const version of versions()) {
+for (const version of versions(false)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {

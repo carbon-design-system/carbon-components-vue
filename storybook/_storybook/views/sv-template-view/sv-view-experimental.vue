@@ -15,10 +15,10 @@ export default {
 </script>
 
 <style lang="scss">
-$feature-flags: (
-  components-x: true,
-  ui-shell: false,
-);
+// $feature-flags: (
+//   components-x: true,
+//   ui-shell: false,
+// );
 
-@import './sv-view';
+// @import './sv-view';
 </style>

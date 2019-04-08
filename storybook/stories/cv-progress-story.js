@@ -9,7 +9,7 @@ import CvProgressNotesMD from '@carbon/vue/src/components/cv-progress/cv-progres
 import CvProgress from '@carbon/vue/src/components/cv-progress/cv-progress';
 import CvProgressStep from '@carbon/vue/src/components/cv-progress/cv-progress-step';
 
-const storiesDefault = storiesOf('Default/CvProgress', module);
+const storiesDefault = storiesOf('Current/CvProgress', module);
 const storiesExperimental = storiesOf('Experimental/CvProgress', module);
 import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
@@ -59,7 +59,7 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions()) {
+for (const version of versions(false)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {

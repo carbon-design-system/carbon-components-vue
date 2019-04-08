@@ -12,7 +12,7 @@ import CvDropdownItem from '@carbon/vue/src/components/cv-dropdown/cv-dropdown-i
 import CvDropdownSkeleton from '@carbon/vue/src/components/cv-dropdown/cv-dropdown-skeleton';
 import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
-const storiesDefault = storiesOf('Default/CvDropdown', module);
+const storiesDefault = storiesOf('Current/CvDropdown', module);
 const storiesExperimental = storiesOf('Experimental/CvDropdown', module);
 
 let preKnobs = {
@@ -168,7 +168,7 @@ let variants = [
 ];
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
-for (const version of versions()) {
+for (const version of versions(false)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
@@ -262,7 +262,7 @@ preKnobs = {
 variants = [{ name: 'skeleton' }];
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
-for (const version of versions()) {
+for (const version of versions(false)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {

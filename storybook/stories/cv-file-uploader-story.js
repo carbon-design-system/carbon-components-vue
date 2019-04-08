@@ -10,7 +10,7 @@ import CvFileUploaderNotesMD from '@carbon/vue/src/components/cv-file-uploader/c
 import CvFileUploader from '@carbon/vue/src/components/cv-file-uploader/cv-file-uploader';
 import CvFileUploaderSkeleton from '@carbon/vue/src/components/cv-file-uploader/cv-file-uploader-skeleton';
 
-const storiesDefault = storiesOf('Default/CvFileUploader', module);
+const storiesDefault = storiesOf('Current/CvFileUploader', module);
 const storiesExperimental = storiesOf('Experimental/CvFileUploader', module);
 import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
@@ -82,7 +82,7 @@ let variants = [
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions()) {
+for (const version of versions(false)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
@@ -168,7 +168,7 @@ variants = [{ name: 'skeleton' }];
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions()) {
+for (const version of versions(false)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
