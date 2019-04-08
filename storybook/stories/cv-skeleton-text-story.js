@@ -7,7 +7,7 @@ import knobsHelper from '../_storybook/utils/knobs-helper';
 import CvSkeletonTextNotesMD from '@carbon/vue/src/components/cv-skeleton-text/cv-skeleton-text-notes.md';
 import CvSkeletonText from '@carbon/vue/src/components/cv-skeleton-text/cv-skeleton-text';
 
-const storiesDefault = storiesOf('Current/CvSkeletonText', module);
+const storiesDefault = storiesOf('Components/CvSkeletonText', module);
 const storiesExperimental = storiesOf('Experimental/CvSkeletonText', module);
 import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
@@ -48,7 +48,7 @@ const variants = [{ name: 'default' }, { name: 'minimal', excludes: ['heading', 
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(false)) {
+for (const version of versions(true)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {

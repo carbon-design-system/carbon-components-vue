@@ -15,7 +15,7 @@ import CvToolbarOption from '@carbon/vue/src/components/cv-toolbar/cv-toolbar-op
 import CvToolbarSearch from '@carbon/vue/src/components/cv-toolbar/cv-toolbar-search';
 import CvToolbarTitle from '@carbon/vue/src/components/cv-toolbar/cv-toolbar-title';
 
-const storiesDefault = storiesOf('Current/CvToolbar', module);
+const storiesDefault = storiesOf('Components/CvToolbar', module);
 const storiesExperimental = storiesOf('Experimental/CvToolbar', module);
 import { componentsX, versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 import Filter16 from '@carbon/icons-vue/lib/filter/16';
@@ -26,7 +26,7 @@ const variants = [{ name: 'default' }];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(false)) {
+for (const version of versions(true)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {

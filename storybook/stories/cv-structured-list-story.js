@@ -12,7 +12,7 @@ import CvStructuredListItem from '@carbon/vue/src/components/cv-structured-list/
 import CvStructuredListHeading from '@carbon/vue/src/components/cv-structured-list/cv-structured-list-heading';
 import CvStructuredListData from '@carbon/vue/src/components/cv-structured-list/cv-structured-list-data';
 
-const storiesDefault = storiesOf('Current/CvStructuredList', module);
+const storiesDefault = storiesOf('Components/CvStructuredList', module);
 const storiesExperimental = storiesOf('Experimental/CvStructuredList', module);
 import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
@@ -59,7 +59,7 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(false)) {
+for (const version of versions(true)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {

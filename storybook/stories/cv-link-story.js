@@ -8,7 +8,7 @@ import knobsHelper from '../_storybook/utils/knobs-helper';
 import CvLinkNotesMD from '@carbon/vue/src/components/cv-link/cv-link-notes.md';
 import CvLink from '@carbon/vue/src/components/cv-link/cv-link';
 
-const storiesDefault = storiesOf('Current/CvLink', module);
+const storiesDefault = storiesOf('Components/CvLink', module);
 const storiesExperimental = storiesOf('Experimental/CvLink', module);
 import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
@@ -37,7 +37,7 @@ const variants = [{ name: 'a', includes: ['href'] }, { name: 'router-link', incl
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(false)) {
+for (const version of versions(true)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {

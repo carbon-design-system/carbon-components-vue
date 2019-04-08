@@ -1,9 +1,6 @@
 <template>
   <main class="welcome">
-    <div class="welcome__background">
-      <img src="../../../../docs/AtCarbonVue.png" class="welcome__background-image" />
-      <!-- <sv-welcome-background class="welcome__background-image"/> -->
-    </div>
+    <div class="welcome__background"></div>
     <div class="welcome__info">
       <h1 class="welcome__heading">
         <span class="highlight">Carbon</span> Design system in
@@ -43,13 +40,15 @@ $css--plex: true;
 }
 
 .welcome__background {
-  display: flex;
   position: absolute;
   top: 0;
   left: 0;
-  justify-content: center;
   width: 100%;
   height: 100%;
+  background-image: url('../../../../docs/AtCarbonVue.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
 .welcome__background-image {

@@ -9,7 +9,7 @@ import CvOverflowMenuNotesMD from '@carbon/vue/src/components/cv-overflow-menu/c
 import CvOverflowMenu from '@carbon/vue/src/components/cv-overflow-menu/cv-overflow-menu';
 import CvOverflowMenuItem from '@carbon/vue/src/components/cv-overflow-menu/cv-overflow-menu-item';
 
-const storiesDefault = storiesOf('Current/CvOverflowMenu', module);
+const storiesDefault = storiesOf('Components/CvOverflowMenu', module);
 const storiesExperimental = storiesOf('Experimental/CvOverflowMenu', module);
 import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
@@ -32,7 +32,7 @@ const variants = [{ name: 'default' }];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(false)) {
+for (const version of versions(true)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {

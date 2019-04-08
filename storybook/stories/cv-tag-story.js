@@ -8,7 +8,7 @@ import knobsHelper from '../_storybook/utils/knobs-helper';
 import CvTagNotesMD from '@carbon/vue/src/components/cv-tag/cv-tag-notes.md';
 import CvTag from '@carbon/vue/src/components/cv-tag/cv-tag';
 
-const storiesDefault = storiesOf('Current/CvTag', module);
+const storiesDefault = storiesOf('Components/CvTag', module);
 const storiesExperimental = storiesOf('Experimental/CvTag', module);
 import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
@@ -127,7 +127,7 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(false)) {
+for (const version of versions(true)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {

@@ -11,7 +11,7 @@ import CvBreadcrumbItem from '@carbon/vue/src/components/cv-breadcrumb/cv-breadc
 import CvBreadcrumbSkeleton from '@carbon/vue/src/components/cv-breadcrumb/cv-breadcrumb-skeleton';
 import CvLink from '@carbon/vue/src/components/cv-link/cv-link';
 
-const storiesDefault = storiesOf('Current/CvBreadcrumb', module);
+const storiesDefault = storiesOf('Components/CvBreadcrumb', module);
 const storiesExperimental = storiesOf('Experimental/CvBreadcrumb', module);
 import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
@@ -31,7 +31,7 @@ const variants = [{ name: 'default' }];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(false)) {
+for (const version of versions(true)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
   setVersion(version);
 
@@ -86,7 +86,7 @@ for (const version of versions(false)) {
 }
 
 const templateString = `<cv-breadcrumb-skeleton></cv-breadcrumb-skeleton>`;
-for (const version of versions(false)) {
+for (const version of versions(true)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
   setVersion(version);
 

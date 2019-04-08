@@ -9,7 +9,7 @@ import knobsHelper from '../_storybook/utils/knobs-helper';
 import CvToggleNotesMD from '@carbon/vue/src/components/cv-toggle/cv-toggle-notes.md';
 import CvToggle from '@carbon/vue/src/components/cv-toggle/cv-toggle';
 
-const storiesDefault = storiesOf('Current/CvToggle', module);
+const storiesDefault = storiesOf('Components/CvToggle', module);
 const storiesExperimental = storiesOf('Experimental/CvToggle', module);
 import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
@@ -83,7 +83,7 @@ let variants = [
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(false)) {
+for (const version of versions(true)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
@@ -160,7 +160,7 @@ variants = [{ name: 'Array v-model', includes: ['vModel'] }];
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(false)) {
+for (const version of versions(true)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {

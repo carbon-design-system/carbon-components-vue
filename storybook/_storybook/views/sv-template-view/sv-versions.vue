@@ -1,17 +1,16 @@
 <template>
   <main class="versions">
-    <div class="versions__background">
-      <img src="../../../../docs/AtCarbonVue.png" class="versions__background-image" />
-      <!-- <sv-versions-background class="versions__background-image"/> -->
-    </div>
+    <div class="versions__background"></div>
     <div class="versions__info">
       <h1 class="versions__heading">
         Versions of
         <span class="highlight">Carbon</span> Design system in
         <span class="highlight">VueJs</span>
       </h1>
-      <p class="versions__text">V1: (this version) built using Carbon Components V9</p>
-      <a class="versions__text" href="http://vue.carbondesignsystem.com">Current version</a>
+      <p class="versions__text">V2: (this version) built using Carbon Components V10.</p>
+      <a class="versions__text" href="http://v1.vue.carbondesignsystem.com"
+        >V1: (previous version) built using Carbon Components 9.</a
+      >
     </div>
   </main>
 </template>
@@ -50,13 +49,15 @@ $css--plex: true;
 }
 
 .versions__background {
-  display: flex;
   position: absolute;
   top: 0;
   left: 0;
-  justify-content: center;
   width: 100%;
   height: 100%;
+  background-image: url('../../../../docs/AtCarbonVue.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
 .versions__background-image {
