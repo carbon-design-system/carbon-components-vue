@@ -6,7 +6,10 @@
         <span class="highlight">Carbon</span> Design system in
         <span class="highlight">VueJs</span>
       </h1>
-      <a class="welcome__text" href="/?path=/story/components-cvaccordion--default">Browse the components</a>
+      <a
+        class="welcome__text"
+        href="/?path=/story/components-cvaccordion--default"
+      >Browse the components</a>
       <a class="welcome__text" href="/?path=/story/versions--default">versions</a>
     </div>
   </main>
