@@ -10,17 +10,14 @@
         <span class="highlight">VueJs</span>
       </h1>
       <a class="welcome__text" href="/?path=/story/current-cvaccordion--default">Browse the components</a>
-      <a class="welcome__text" href="/?path=/story/versions">Other versions</a>
+      <a class="welcome__text" href="/?path=/story/versions--default">versions</a>
     </div>
   </main>
 </template>
 
 <script>
-import SvWelcomeBackground from './sv-welcome-background';
-
 export default {
   name: 'SvWelcome',
-  components: { SvWelcomeBackground },
 };
 </script>
 
@@ -61,7 +58,12 @@ $css--plex: true;
 }
 
 .welcome__info {
+  display: flex;
   z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 38%;
   color: #fff;
   text-transform: uppercase;
 
@@ -72,6 +74,7 @@ $css--plex: true;
   }
 
   .welcome__text {
+    color: #fff;
     font-size: 2.275rem;
     font-weight: 300;
     letter-spacing: 1px;

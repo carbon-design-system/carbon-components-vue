@@ -10,20 +10,21 @@
         <span class="highlight">Carbon</span> Design system in
         <span class="highlight">VueJs</span>
       </h1>
-      <a class="versions__text" href="http://v1.vue.carbondesignsystem.com"
-        >This version, V1, built using Carbon Components V9</a
-      >
+      <p class="versions__text">V1: (this version) built using Carbon Components V9</p>
       <a class="versions__text" href="http://vue.carbondesignsystem.com">Current version</a>
     </div>
   </main>
 </template>
 
 <script>
-import SvVersionsBackground from './sv-versions-background';
-
 export default {
   name: 'SvVersions',
-  components: { SvVersionsBackground },
+};
+</script>
+
+<script>
+export default {
+  name: 'SvVersions',
 };
 </script>
 
@@ -64,7 +65,12 @@ $css--plex: true;
 }
 
 .versions__info {
+  display: flex;
   z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 38%;
   color: #fff;
   text-transform: uppercase;
 
