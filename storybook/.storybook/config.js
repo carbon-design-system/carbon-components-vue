@@ -5,6 +5,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 
 import Vue from 'vue';
 import VueHighlightJS from 'vue-highlightjs';
+import '!style-loader!css-loader!postcss-loader!sass-loader!./styles.scss';
 
 addDecorator(
   withOptions({

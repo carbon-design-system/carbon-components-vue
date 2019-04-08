@@ -10,7 +10,7 @@ import CvTabsNotesMD from '@carbon/vue/src/components/cv-tabs/cv-tabs-notes.md';
 import CvTabs from '@carbon/vue/src/components/cv-tabs/cv-tabs';
 import CvTab from '@carbon/vue/src/components/cv-tabs/cv-tab';
 
-const storiesDefault = storiesOf('Default/CvTabs', module);
+const storiesDefault = storiesOf('Current/CvTabs', module);
 const storiesExperimental = storiesOf('Experimental/CvTabs', module);
 import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
@@ -34,7 +34,7 @@ const variants = [{ name: 'dafault' }, { name: 'minimal', excludes: ['events', '
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions()) {
+for (const version of versions(false)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {

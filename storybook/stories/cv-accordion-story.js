@@ -10,7 +10,7 @@ import CvAccordion from '@carbon/vue/src/components/cv-accordion/cv-accordion';
 import CvAccordionItem from '@carbon/vue/src/components/cv-accordion/cv-accordion-item';
 import CvAccordionSkeleton from '@carbon/vue/src/components/cv-accordion/cv-accordion-skeleton';
 
-const storiesDefault = storiesOf('Default/CvAccordion', module);
+const storiesDefault = storiesOf('Current/CvAccordion', module);
 const storiesExperimental = storiesOf('Experimental/CvAccordion', module);
 import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
@@ -61,7 +61,7 @@ const variants = [{ name: 'default' }, { name: 'minimal', includes: [] }];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions()) {
+for (const version of versions(false)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
@@ -127,7 +127,7 @@ for (const version of versions()) {
 }
 
 const templateString = `<cv-accordion-skeleton></cv-accordion-skeleton>`;
-for (const version of versions()) {
+for (const version of versions(false)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   stories.add(

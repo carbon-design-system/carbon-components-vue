@@ -15,7 +15,7 @@ import CvButton from '@carbon/vue/src/components/cv-button/cv-button';
 import CvOverflowMenu from '@carbon/vue/src/components/cv-overflow-menu/cv-overflow-menu';
 import CvOverflowMenuItem from '@carbon/vue/src/components/cv-overflow-menu/cv-overflow-menu-item';
 
-const storiesDefault = storiesOf('Default/CvDataTable', module);
+const storiesDefault = storiesOf('Current/CvDataTable', module);
 const storiesExperimental = storiesOf('Experimental/CvDataTable', module);
 import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
@@ -297,7 +297,7 @@ const variants = [
 ];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
-for (const version of versions()) {
+for (const version of versions(false)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {

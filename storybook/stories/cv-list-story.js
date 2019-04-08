@@ -9,7 +9,7 @@ import CvListNotesMD from '@carbon/vue/src/components/cv-list/cv-list-notes.md';
 import CvList from '@carbon/vue/src/components/cv-list/cv-list';
 import CvListItem from '@carbon/vue/src/components/cv-list/cv-list-item';
 
-const storiesDefault = storiesOf('Default/CvList', module);
+const storiesDefault = storiesOf('Current/CvList', module);
 const storiesExperimental = storiesOf('Experimental/CvList', module);
 import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
@@ -35,7 +35,7 @@ const variants = [{ name: 'default', excludes: ['nested'] }, { name: 'nested' }]
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions()) {
+for (const version of versions(false)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {

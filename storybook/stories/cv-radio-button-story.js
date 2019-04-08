@@ -10,7 +10,7 @@ import CvRadioButtonNotesMD from '@carbon/vue/src/components/cv-radio-button/cv-
 import CvRadioButton from '@carbon/vue/src/components/cv-radio-button/cv-radio-button';
 import CvRadioGroup from '@carbon/vue/src/components/cv-radio-button/cv-radio-group';
 
-const storiesDefault = storiesOf('Default/CvRadioButton', module);
+const storiesDefault = storiesOf('Current/CvRadioButton', module);
 const storiesExperimental = storiesOf('Experimental/CvRadioButton', module);
 import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
@@ -52,7 +52,7 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions()) {
+for (const version of versions(false)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {

@@ -9,7 +9,7 @@ import knobsHelper from '../_storybook/utils/knobs-helper';
 import CvTextInputNotesMD from '@carbon/vue/src/components/cv-text-input/cv-text-input-notes.md';
 import CvTextInput from '@carbon/vue/src/components/cv-text-input/cv-text-input';
 
-const storiesDefault = storiesOf('Default/CvTextInput', module);
+const storiesDefault = storiesOf('Current/CvTextInput', module);
 const storiesExperimental = storiesOf('Experimental/CvTextInput', module);
 import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
@@ -132,7 +132,7 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions()) {
+for (const version of versions(false)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {

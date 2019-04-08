@@ -10,7 +10,7 @@ import CvButtonNotesMD from '@carbon/vue/src/components/cv-button/cv-button-note
 import CvButton from '@carbon/vue/src/components/cv-button/cv-button';
 import CvButtonSkeleton from '@carbon/vue/src/components/cv-button/cv-button-skeleton';
 
-const storiesDefault = storiesOf('Default/CvButton', module);
+const storiesDefault = storiesOf('Current/CvButton', module);
 const storiesExperimental = storiesOf('Experimental/CvButton', module);
 import { componentsX, versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
@@ -139,7 +139,7 @@ let variants = [
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions()) {
+for (const version of versions(false)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
@@ -207,7 +207,7 @@ variants = [{ name: 'skeleton' }];
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions()) {
+for (const version of versions(false)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {

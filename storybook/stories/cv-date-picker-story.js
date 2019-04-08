@@ -9,7 +9,7 @@ import knobsHelper from '../_storybook/utils/knobs-helper';
 import CvDatePickerNotesMD from '@carbon/vue/src/components/cv-date-picker/cv-date-picker-notes.md';
 import CvDatePicker from '@carbon/vue/src/components/cv-date-picker/cv-date-picker';
 
-const storiesDefault = storiesOf('Default/CvDatePicker', module);
+const storiesDefault = storiesOf('Current/CvDatePicker', module);
 const storiesExperimental = storiesOf('Experimental/CvDatePicker', module);
 import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
@@ -120,7 +120,7 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions()) {
+for (const version of versions(false)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
