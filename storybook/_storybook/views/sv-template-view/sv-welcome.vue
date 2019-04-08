@@ -10,7 +10,7 @@
         <span class="highlight">VueJs</span>
       </h1>
       <a class="welcome__text" href="/?path=/story/current-cvaccordion--default">Browse the components</a>
-      <a class="welcome__text" href="//?path=/story/versions--default">versions</a>
+      <a class="welcome__text" href="/?path=/story/versions--default">versions</a>
     </div>
   </main>
 </template>
