@@ -15,7 +15,7 @@ jobs:
       - deploy:
           name: deploy to IBM Cloud
           command: |
-            if [ "${CIRCLE_BRANCH}" == "v1" ]; then
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
               # Install `ibmcloud` CLI
               curl -fsSL https://clis.ng.bluemix.net/install/linux | sh
 
