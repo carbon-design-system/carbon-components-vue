@@ -4,5 +4,5 @@ applications:
   memory: 64M
   buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
   routes:
-  - route: vue.carbondesignsystem.com
+  - route: next-vue.carbondesignsystem.com
   - route: carbon-vue-storybook.mybluemix.net
