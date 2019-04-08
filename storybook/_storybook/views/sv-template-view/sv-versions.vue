@@ -28,13 +28,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$feature-flags: (
-  components-x: false,
-  ui-shell: false,
-);
-$css--plex: true;
-@import 'sv-view';
-
 .versions {
   display: flex;
   position: relative;

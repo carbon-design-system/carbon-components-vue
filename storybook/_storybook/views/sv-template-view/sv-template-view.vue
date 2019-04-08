@@ -1,6 +1,5 @@
 <template>
-  <component
-    :is="tagType"
+  <sv-view
     class="sv-template-view"
     :class="{
       'sv-template-view--margin': svMargin,
@@ -39,22 +38,19 @@
       </button>
       <textarea class="sv-template-view__clippy" aria-hidden="true" ref="clippy"></textarea>
     </section>
-  </component>
+  </sv-view>
 </template>
 
 <script>
 import Vue from 'vue';
-import SvViewExperimental from './sv-view-experimental.vue'; //
 import SvView from './sv-view.vue';
 
 export default {
   name: 'SvTemplateView',
   components: {
     SvView,
-    SvViewExperimental,
   },
   props: {
-    svExperimental: Boolean,
     svMargin: { type: Boolean, default: true },
     svSource: String,
     svAltBack: { type: Boolean, default: true },
@@ -67,9 +63,6 @@ export default {
     };
   },
   computed: {
-    tagType() {
-      return this.svExperimental ? 'sv-view-experimental' : 'sv-view';
-    },
     style() {
       return {
         alignItems: this.svPosition && this.svPosition.length ? this.svPosition : 'flex-start',

@@ -3,7 +3,7 @@ import { text, object, number, boolean } from '@storybook/addon-knobs';
 // import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
-import knobsHelper from '../_storybook/utils/knobs-helper';
+import knobsHelper from '../../../storybook/_storybook/utils/knobs-helper';
 
 import CvBarGraphNotesMD from '@carbon/data-viz-vue/src/data-viz/cv-bar-graph/cv-bar-graph-notes.md';
 import CvBarGraph from '@carbon/data-viz-vue/src/data-viz/cv-bar-graph/cv-bar-graph';

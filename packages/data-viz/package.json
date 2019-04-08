@@ -24,9 +24,8 @@
     "url": "https://github.com/dcwarwick/carbon-components-vue/issues"
   },
   "dependencies": {
-    "@carbon/icon-helpers": "0.0.1-beta.0",
-    "@carbon/icons-vue": "0.0.1-beta.0",
-    "carbon-components": "^9.87.2",
+    "@carbon/icons-vue": "^10.0.0",
+    "carbon-components": "^10.0.0",
     "d3": "^5.9.2",
     "flatpickr": "4.5.7",
     "vue": "^2.6.10"

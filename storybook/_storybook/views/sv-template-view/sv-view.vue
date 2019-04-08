@@ -13,12 +13,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-// $feature-flags: (
-//   components-x: false,
-//   ui-shell: false,
-// );
-
-// @import './sv-view';
-</style>
