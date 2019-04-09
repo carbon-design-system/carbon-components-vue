@@ -8,7 +8,9 @@
         <span class="highlight">VueJs</span>
       </h1>
       <p class="versions__text">V2: (this version) built using Carbon Components V10.</p>
-      <a class="versions__text" href="http://v1.vue.carbondesignsystem.com"
+      <a
+        class="versions__text"
+        href="https://carbon-design-system.github.io/carbon-components-vue/?path=/story/welcome--default"
         >V1: (previous version) built using Carbon Components 9.</a
       >
     </div>
