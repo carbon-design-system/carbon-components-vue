@@ -48,7 +48,7 @@ const variants = [{ name: 'default' }, { name: 'minimal', excludes: ['heading', 
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
+for (const version of versions(false)) {
   const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {

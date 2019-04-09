@@ -28,7 +28,7 @@ export let breakingChangesX;
 export let componentsX;
 
 const defaults = {
-  componentsX: true,
+  componentsX: false,
   breakingChangesX: false,
 };
 
