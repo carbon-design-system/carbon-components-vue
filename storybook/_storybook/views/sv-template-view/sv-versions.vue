@@ -8,7 +8,7 @@
         <span class="highlight">VueJs</span>
       </h1>
       <p class="versions__text">V1: (this version) built using Carbon Components V9</p>
-      <a class="versions__text" href="http://v1.vue.carbondesignsystem.com">Current version</a>
+      <a class="versions__text" href="http://vue.carbondesignsystem.com">Current version</a>
     </div>
   </main>
 </template>

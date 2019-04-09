@@ -8,9 +8,14 @@
       </h1>
       <a
         class="welcome__text"
-        href="/?path=/story/components-cvaccordion--default"
-      >Browse the components</a>
-      <a class="welcome__text" href="/?path=/story/versions--default">versions</a>
+        href="https://carbon-design-system.github.io/carbon-components-vue/?path=/story/components-cvaccordion--default"
+        >Browse the components</a
+      >
+      <a
+        class="welcome__text"
+        href="https://carbon-design-system.github.io/carbon-components-vue/?path=/story/versions--default"
+        >versions</a
+      >
     </div>
   </main>
 </template>
