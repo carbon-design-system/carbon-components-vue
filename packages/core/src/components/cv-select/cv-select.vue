@@ -1,6 +1,7 @@
 <template>
   <cv-wrapper :tag-type="formItem ? 'div' : ''" class="cv-select bx--form-item">
     <div
+      :data-test="value"
       class="bx--select"
       :class="{
         'cv-select': !formItem,

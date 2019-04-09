@@ -36,7 +36,7 @@ const preKnobs = {
   pageSizesLabel: {
     group: 'attr',
     type: text,
-    config: ['page sizes label', 'Items per page'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    config: ['page sizes label', 'Items per page:'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: { name: 'page-sizes-label', type: String },
   },
   numberOfItems: {
