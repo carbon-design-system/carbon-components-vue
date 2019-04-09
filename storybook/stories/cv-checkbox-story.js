@@ -42,6 +42,15 @@ let preKnobs = {
       name: 'value',
     },
   },
+  mixed: {
+    group: 'attr',
+    type: boolean,
+    config: ['mixed', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: Boolean,
+      name: 'mixed',
+    },
+  },
   disabled: {
     group: 'attr',
     type: boolean,
@@ -62,8 +71,9 @@ let preKnobs = {
 };
 
 let variants = [
-  { name: 'default', excludes: ['vModel', 'events'] },
+  { name: 'default', excludes: ['vModel', 'events', 'mixed'] },
   { name: 'minimal', includes: ['label', 'value'] },
+  { name: 'mixed', includes: ['label', 'value', 'mixed'] },
   { name: 'events', includes: ['label', 'value', 'events'] },
   { name: 'vModel', includes: ['label', 'value', 'vModel'] },
 ];
