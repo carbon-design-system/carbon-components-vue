@@ -1,18 +1,9 @@
 <template>
   <th :aria-sort="sortOrder">
-    <button
-      type="button"
-      v-if="sortable"
-      class="bx--table-sort-v2"
-      :class="{
-        'bx--table-sort-v2--active': sortOrder !== 'none',
-        'bx--table-sort-v2--ascending': sortOrder === 'ascending',
-      }"
-      @click="onSortClick"
-    >
+    <button type="button" v-if="sortable" class="bx--table-sort-v2" :class="orderClass" @click="onSortClick">
       <span class="bx--table-header-label">{{ heading }}</span>
       <svg
-        class="bx--table-sort-v2__icon"
+        :class="{ 'bx--table-sort-v2__icon': !componentsX, 'bx--table-sort__icon': componentsX }"
         width="10"
         height="5"
         viewBox="0 0 10 5"
@@ -28,6 +19,8 @@
 </template>
 
 <script>
+import { componentsX } from '../../internal/feature-flags';
+
 const nextSortOrder = {
   ascending: 'descending',
   descending: 'none',
@@ -54,6 +47,24 @@ export default {
         ? 'Sort rows by this header in descending order'
         : 'Sort rows by this header in ascending order';
     },
+    orderClass() {
+      let result = '';
+      if (this.componentsX) {
+        if (sordOrder === 'none') {
+          result = 'bx--table-sort--active';
+        } else if (sortOrder === 'active') {
+          result = 'bx--table-sort--ascending';
+        }
+      } else {
+        if (sordOrder === 'none') {
+          result = 'bx--table-sort-v2--active';
+        } else if (sortOrder === 'active') {
+          result = 'bx--table-sort-v2--ascending';
+        }
+      }
+      return result;
+    },
+    data: () => ({ componentsX }),
   },
   model: {
     event: 'sort',

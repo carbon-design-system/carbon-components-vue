@@ -1,5 +1,5 @@
 <template>
-  <div disabled class="bx--list-box bx--dropdown-v2 bx--skeleton" :class="{ 'bx--list-box--inline': inline }"></div>
+  <div disabled class="bx--list-box bx--dropdown bx--skeleton" :class="{ 'bx--list-box--inline': inline }"></div>
 </template>
 
 <script>
