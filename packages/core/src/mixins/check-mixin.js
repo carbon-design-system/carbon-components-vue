@@ -13,10 +13,18 @@ export default {
     prop: 'modelValue',
     event: 'modelEvent',
   },
+  mounted() {
+    if (this.$options.propsData.modelValue === undefined) {
+      this.isChecked = this.checked;
+    }
+  },
   watch: {
     checked(val) {
       if (this.$options.propsData.modelValue === undefined) {
-        this.dataChecked = val;
+        this.isChecked = val;
+        if (!val && this.mixed) {
+          this.dataMixed = true;
+        }
       }
     },
   },
@@ -29,34 +37,52 @@ export default {
     isArrayModel() {
       return Array.isArray(this.modelValue);
     },
-    isChecked() {
-      if (this.$props.modelValue !== undefined) {
-        // model value always comes first
-        if (this.isArrayModel) {
-          if (this.modelValue.includes(this.value)) {
-            return true;
+    isChecked: {
+      get() {
+        if (this.$props.modelValue !== undefined) {
+          // model value always comes first
+          if (this.isArrayModel) {
+            if (this.modelValue.includes(this.value)) {
+              return true;
+            } else {
+              return false;
+            }
           } else {
-            return false;
+            return this.modelValue;
           }
         } else {
-          return this.modelValue;
+          if (this.dataChecked !== undefined) {
+            return this.dataChecked;
+          } else {
+            // if checked defined
+            if (this.dataChecked !== undefined) {
+              return this.dataChecked;
+            }
+            if (this.dataMixed) {
+              return 'mixed';
+            }
+          }
+
+          return false;
         }
-      } else {
-        if (this.dataChecked !== undefined) {
-          return this.dataChecked;
+      },
+      set(checked) {
+        if (this.isArrayModel) {
+          let modelSet = new Set(this.modelValue);
+
+          if (!checked) {
+            modelSet.delete(this.value);
+          } else {
+            modelSet.add(this.value);
+          }
+          this.dataChecked = Array.from(modelSet);
         } else {
-          // if checked defined
-          if (this.checked !== undefined) {
-            return this.checked;
-          }
-
-          if (this.mixed) {
-            return 'mixed';
+          this.dataChecked = checked ? true : undefined; //
+          if (this.dataChecked !== undefined) {
+            this.dataMixed = false;
           }
         }
-
-        return false;
-      }
+      },
     },
     // Bind listeners at the component level to the embedded input element and
     // add our own input listener to service the v-model. See:
@@ -69,18 +95,7 @@ export default {
   },
   methods: {
     onChangeInner(checked) {
-      if (this.isArrayModel) {
-        let modelSet = new Set(this.modelValue);
-
-        if (!checked) {
-          modelSet.delete(this.value);
-        } else {
-          modelSet.add(this.value);
-        }
-        this.dataChecked = Array.from(modelSet);
-      } else {
-        this.dataChecked = checked;
-      }
+      this.isChecked = checked;
       this.$emit('modelEvent', this.dataChecked);
       this.$emit('change', checked);
     },

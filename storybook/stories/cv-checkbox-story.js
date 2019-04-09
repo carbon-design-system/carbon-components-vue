@@ -42,6 +42,15 @@ let preKnobs = {
       name: 'value',
     },
   },
+  mixed: {
+    group: 'attr',
+    type: boolean,
+    config: ['mixed', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: Boolean,
+      name: 'mixed',
+    },
+  },
   disabled: {
     group: 'attr',
     type: boolean,

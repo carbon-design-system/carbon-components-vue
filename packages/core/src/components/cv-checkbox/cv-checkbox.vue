@@ -39,10 +39,18 @@ export default {
     label: String,
     mixed: Boolean,
   },
+  watch: {
+    mixed() {
+      this.dataMixed = this.mixed;
+      if (this.dataMixed && this.checked !== true) {
+        this.isChecked = false; // reset check state so mixed takes
+      }
+    },
+  },
   data() {
     return {
-      dataMixed: this.mixed,
       hasFocus: false,
+      dataMixed: this.mixed,
     };
   },
   methods: {
