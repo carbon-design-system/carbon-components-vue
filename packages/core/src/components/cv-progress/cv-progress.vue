@@ -73,7 +73,6 @@ export default {
       this.processState();
     },
     onCvCompleted() {
-      console.log('completed');
       this.processState();
     },
     processState() {

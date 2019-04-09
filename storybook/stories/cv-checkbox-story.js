@@ -71,9 +71,8 @@ let preKnobs = {
 };
 
 let variants = [
-  { name: 'default', excludes: ['vModel', 'events', 'mixed'] },
+  { name: 'default', excludes: ['vModel', 'events'] },
   { name: 'minimal', includes: ['label', 'value'] },
-  { name: 'mixed', includes: ['label', 'value', 'mixed'] },
   { name: 'events', includes: ['label', 'value', 'events'] },
   { name: 'vModel', includes: ['label', 'value', 'vModel'] },
 ];

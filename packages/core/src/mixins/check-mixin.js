@@ -13,10 +13,18 @@ export default {
     prop: 'modelValue',
     event: 'modelEvent',
   },
+  mounted() {
+    if (this.$options.propsData.modelValue === undefined) {
+      this.isChecked = this.checked;
+    }
+  },
   watch: {
     checked(val) {
       if (this.$options.propsData.modelValue === undefined) {
-        this.dataChecked = val;
+        this.isChecked = val;
+        if (!val && this.mixed) {
+          this.dataMixed = true;
+        }
       }
     },
   },
@@ -47,10 +55,10 @@ export default {
             return this.dataChecked;
           } else {
             // if checked defined
-            if (this.checked !== undefined) {
-              return this.checked;
+            if (this.dataChecked !== undefined) {
+              return this.dataChecked;
             }
-            if (this.mixed) {
+            if (this.dataMixed) {
               return 'mixed';
             }
           }
@@ -69,7 +77,10 @@ export default {
           }
           this.dataChecked = Array.from(modelSet);
         } else {
-          this.dataChecked = checked;
+          this.dataChecked = checked ? true : undefined; //
+          if (this.dataChecked !== undefined) {
+            this.dataMixed = false;
+          }
         }
       },
     },

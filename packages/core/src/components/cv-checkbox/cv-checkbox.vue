@@ -41,16 +41,16 @@ export default {
   },
   watch: {
     mixed() {
-      if (this.mixed) {
-        if (this.isChecked !== false) {
-          this.isChecked = undefined; // reset check state so mixed takes
-        }
+      this.dataMixed = this.mixed;
+      if (this.dataMixed && this.checked !== true) {
+        this.isChecked = false; // reset check state so mixed takes
       }
     },
   },
   data() {
     return {
       hasFocus: false,
+      dataMixed: this.mixed,
     };
   },
   methods: {
