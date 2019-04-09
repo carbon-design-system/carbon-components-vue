@@ -1,7 +1,9 @@
 <template>
   <div :style="tableStyle">
-    <div class="bx--data-table-v2-container">
-      <h4 class="bx--data-table-v2-header" v-if="title">{{ title }}</h4>
+    <div :class="{ 'bx--data-table-v2-container': !componentsX, 'bx--data-table-container': componentsX }">
+      <h4 :class="{ 'bx--data-table-v2-header': !componentsX, 'bx--data-table-header': componentsX }" v-if="title">
+        {{ title }}
+      </h4>
 
       <section class="bx--table-toolbar">
         <div v-if="batchActive" style="min-height: 32px; max-width: 0;" />
@@ -38,7 +40,7 @@
         </div>
       </section>
 
-      <table class="bx--data-table-v2" :class="modifierClasses">
+      <table :class="[{ 'bx--data-table-v2': !componentsX, 'bx--data-table': componentsX }, modifierClasses]">
         <thead>
           <tr>
             <th v-if="hasBatchActions">
@@ -104,6 +106,7 @@ import CvDataTableCell from './cv-data-table-cell';
 import CvSearch from '../cv-search/cv-search';
 import CvCheckbox from '../cv-checkbox/cv-checkbox';
 import CvPagination from '../cv-pagination/cv-pagination';
+import { componentsX } from '../../internal/feature-flags';
 
 const rows = children => children.filter(child => child.isCvDataTableRow);
 
@@ -144,6 +147,7 @@ export default {
   },
   data() {
     return {
+      componentsX,
       dataColumns: this.sortable
         ? this.columns.map(item => ({
             label: item,
@@ -202,7 +206,7 @@ export default {
       }
     },
     modifierClasses() {
-      const prefix = 'bx--data-table-v2--';
+      const prefix = this.componentsX ? 'bx--data-table-v2--' : 'bx--data-table--';
       const sizeClass = this.rowSize.length === 0 || this.rowSize === 'standard' ? '' : `${prefix}${this.rowSize} `;
       const zebraClass = this.zebra ? `${prefix}zebra ` : '';
       const borderlessClass = this.borderless ? `${prefix}no-border ` : '';
