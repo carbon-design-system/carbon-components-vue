@@ -144,11 +144,10 @@ export default {
               this.offsetLeft -
               this.$refs.popup.offsetWidth +
               this.$el.offsetWidth;
-            this.top = menuPosition.bottom + 2 + this.offsetTop + window.scrollY;
           } else {
             this.left = menuPosition.left - (this.componentsX ? 0 : 20) + this.offsetLeft + window.scrollX;
-            this.top = menuPosition.bottom + 2 + this.offsetTop + window.scrollY;
           }
+          this.top = menuPosition.bottom + (this.componentsX ? 0 : 2) + this.offsetTop + window.scrollY;
         });
       }
     },
