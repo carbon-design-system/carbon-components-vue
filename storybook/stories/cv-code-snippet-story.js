@@ -34,6 +34,13 @@ let preKnobs = {
       type: String,
     },
   },
+  inlineContent: {
+    group: 'content',
+    slot: {
+      name: '',
+      value: 'printf("A short bit of code.");',
+    },
+  },
   content: {
     group: 'content',
     slot: {
@@ -70,7 +77,7 @@ let variants = [
   },
   {
     name: 'inline',
-    includes: ['content'],
+    includes: ['inlineContent'],
     extra: { kind: { group: 'attr', value: 'kind="inline"', inline: true } },
   },
   {
