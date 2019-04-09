@@ -104,7 +104,7 @@ $back-color: #f5f7fa;
 $back-color-exp: #f3f3f3;
 $alt-back-color: #fff;
 $border: 1px solid #dfe3e6;
-$component-padding: 40px;
+$component-padding: 20px;
 
 .sv-template-view {
   border: 1px solid transparent;
@@ -116,10 +116,8 @@ $component-padding: 40px;
 }
 
 .sv-template-view__component {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
-  width: 1000px;
-  max-width: calc(100% - #{4 * $component-padding});
   border: $border;
   background-color: $back-color-exp;
 
@@ -131,7 +129,7 @@ $component-padding: 40px;
     position: relative; // needed to keep modal components on top
     z-index: 999; // needed to keep modal components on top
     margin: $component-padding;
-    padding: $component-padding;
+    padding: $component-padding * 2;
   }
 
   .sv-template-view--alt-back & {
@@ -146,7 +144,7 @@ $component-padding: 40px;
 
 .sv-template-view__other {
   .sv-template-view--margin & {
-    margin: 40px;
+    margin: $component-padding;
   }
 }
 
@@ -154,11 +152,11 @@ $component-padding: 40px;
   position: relative;
 
   .sv-template-view--margin & {
-    margin: 40px;
+    margin: $component-padding;
   }
 
   .html {
-    padding: 40px;
+    padding: $component-padding * 2;
   }
 
   .hljs {
@@ -191,7 +189,7 @@ $component-padding: 40px;
     display: block;
     position: absolute;
     top: 8px;
-    left: 40px;
+    left: $component-padding * 2;
     animation: copied 1s linear;
     opacity: 0;
   }

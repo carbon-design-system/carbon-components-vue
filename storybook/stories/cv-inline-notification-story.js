@@ -24,7 +24,10 @@ const preKnobs = {
   subtitle: {
     group: 'attr',
     type: text,
-    config: ['subtitle', 'a subtitle'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    config: [
+      'subtitle',
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit, seed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    ], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: { name: 'sub-title', type: String },
   },
   events: {
