@@ -7,13 +7,13 @@ http://www.carbondesignsystem.com/components/text-input/code
 ## Usage
 
 ```html
-<cv-search large v-model="modelValue" label="Search label"> </cv-search>
+<cv-search small v-model="modelValue" label="Search label"> </cv-search>
 ```
 
 ## Attributes
 
 - label: the label text for the search box
-- large: is the search the large version
+- small: makes hte search box smaller
 - value: initial value
 
 ## slots
