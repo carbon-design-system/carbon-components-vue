@@ -84,7 +84,19 @@ export default {
     formItem: { type: Boolean, default: true },
     kind: { type: String, default: null },
     label: String,
-    large: Boolean,
+    small: Boolean,
+    large: {
+      type: Boolean,
+      default: null,
+      validator(val) {
+        if (process.env.NODE_ENV === 'development') {
+          if (val !== null) {
+            console.warn('The larger search input is now the default.');
+          }
+        }
+        return true;
+      },
+    },
     value: String,
     placeholder: { type: String, default: 'Search' },
   },
@@ -114,7 +126,9 @@ export default {
     },
     searchClasses() {
       const themeClass = this.theme.length ? `bx--search--${this.theme}` : '';
-      const sizeClass = `bx--search--${this.large ? 'lg' : 'sm'}`;
+      const sizeClass = componentsX
+        ? `bx--search--${this.small ? 'sm' : 'xl'}`
+        : `bx--search--${this.large ? 'lg' : 'sm'}`;
       let toolbarClasses = '';
       if (this.isToolbarKind) {
         toolbarClasses = this.toolbarActive ? 'bx--toolbar-search bx--toolbar-search--active' : 'bx--toolbar-search';
