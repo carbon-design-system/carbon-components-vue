@@ -29,7 +29,7 @@
             :id="uid"
             class="bx--select-input"
             v-on="inputListeners"
-            ref="fish"
+            ref="select"
             :value="internalValue"
           >
             <slot></slot>

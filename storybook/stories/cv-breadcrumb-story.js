@@ -32,7 +32,7 @@ const variants = [{ name: 'default' }];
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
+  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
   setVersion(version);
 
   for (const story of storySet) {
@@ -87,7 +87,7 @@ for (const version of versions(true)) {
 
 const templateString = `<cv-breadcrumb-skeleton></cv-breadcrumb-skeleton>`;
 for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
+  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
   setVersion(version);
 
   stories.add(
