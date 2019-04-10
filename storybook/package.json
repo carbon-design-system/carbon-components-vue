@@ -9,12 +9,11 @@
   },
   "dependencies": {
     "@carbon/icons-vue": "^10.0.0",
-    "carbon-components": "^10.0.0",
+    "carbon-components": "^10.1.0",
     "vue": "^2.6.10"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
-    "@carbon/data-viz-vue": "^2.0.0-alpha.1",
     "@carbon/vue": "^2.0.0-alpha.1",
     "@storybook/addon-actions": "^5.0.3",
     "@storybook/addon-knobs": "^5.0.3",

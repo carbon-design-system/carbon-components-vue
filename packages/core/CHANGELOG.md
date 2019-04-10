@@ -1,3 +1,30 @@
+## 2.0.0-alpha.2 (March 19, 2019)
+
+### Features
+
+- Carbon 10 data table
+
+### Bug Fixes
+
+- Correct breadcrumb story
+- Checkbox mixed updates
+- Multiline code snippet layout
+- Inline code snippet example made smaller
+- Fixed number input layout
+- Fixed overflow menu layout
+- Fixed pagination layout
+
+### Dependency versions
+
+Versions reflect those version was built using.
+
+| Dependency        | Version | Notes |
+| ----------------- | ------- | ----- |
+| @carbon/icons-vue | 10.0.0  |       |
+| carbon-components | 10.1.0  |       |
+| flatpickr         | 4.5.2   |       |
+| vue               | 2.6.10  |       |
+
 ## 1.1.1 (March 19, 2019)
 
 ### Features
