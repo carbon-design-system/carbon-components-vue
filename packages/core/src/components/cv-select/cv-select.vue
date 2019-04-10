@@ -8,9 +8,15 @@
         'bx--select--inline': inline,
         'bx--select--light': theme === 'light',
         'bx--select--invalid': isInvalid,
+        'bx--select--disabled': $attrs.disabled,
       }"
     >
-      <label :for="uid" class="bx--label" :class="{ 'bx--visually-hidden': hideLabel }">{{ label }}</label>
+      <label
+        :for="uid"
+        class="bx--label"
+        :class="{ 'bx--visually-hidden': hideLabel, 'bx--label--disabled': $attrs.disabled }"
+        >{{ label }}</label
+      >
 
       <div v-if="!inline && isHelper" class="bx--form__helper-text">
         <slot name="helper-text">{{ helperText }}</slot>
@@ -18,7 +24,14 @@
 
       <cv-wrapper :tag-type="inline && componentsX ? 'div' : ''" class="bx--select-input--inline__wrapper">
         <div v-if="componentsX" class="bx--select-input__wrapper" :data-invalid="isInvalid">
-          <select v-bind="$attrs" :id="uid" class="bx--select-input" v-on="inputListeners" ref="select" :value="value">
+          <select
+            v-bind="$attrs"
+            :id="uid"
+            class="bx--select-input"
+            v-on="inputListeners"
+            ref="fish"
+            :value="internalValue"
+          >
             <slot></slot>
           </select>
           <chevron-down-glyph v-if="componentsX" class="bx--select__arrow" />
@@ -91,7 +104,7 @@ export default {
         return false;
       },
     },
-    value: { type: String },
+    value: { type: String, default: null },
   },
   beforeCreate() {
     // *********************
@@ -101,7 +114,31 @@ export default {
     delete this.$attrs.multiple;
   },
   data() {
-    return { componentsX };
+    return { componentsX, dataValue: null };
+  },
+  mounted() {
+    // this is needed to ensure selected for an option when no value is supplied
+    if (this.value === null) {
+      let options = this.$el.querySelectorAll('option');
+      for (let i = 0; i < options.length; i++) {
+        if (options[i].attributes.selected) {
+          this.dataValue = options[i].value;
+        }
+      }
+    }
+  },
+  watch: {
+    value() {
+      // this is needed to ensure selected for an option when no value is supplied
+      if (this.value === null) {
+        let options = this.$el.querySelectorAll('option');
+        for (let i = 0; i < options.length; i++) {
+          if (options[i].attributes.selected) {
+            this.dataValue = options[i].value;
+          }
+        }
+      }
+    },
   },
   computed: {
     // Bind listeners at the component level to the embedded input element and
@@ -119,10 +156,8 @@ export default {
     isHelper() {
       return this.$slots['helper-text'] !== undefined || (this.helperText && this.helperText.length);
     },
-  },
-  methods: {
-    test() {
-      alert('hi');
+    internalValue() {
+      return this.dataValue ? this.dataValue : this.value;
     },
   },
 };
