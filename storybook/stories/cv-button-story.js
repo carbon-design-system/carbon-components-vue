@@ -140,7 +140,7 @@ let variants = [
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
+  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
 
   for (const story of storySet) {
     if (
@@ -208,7 +208,7 @@ variants = [{ name: 'skeleton' }];
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
+  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
 
   for (const story of storySet) {
     stories.add(

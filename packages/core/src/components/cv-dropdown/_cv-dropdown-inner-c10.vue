@@ -108,7 +108,6 @@ export default {
     };
   },
   mounted() {
-    console.dir(this.$attrs);
     this.$el.addEventListener('focusout', ev => {
       if (ev.relatedTarget === null || !this.$el.contains(ev.relatedTarget)) {
         this.open = false;

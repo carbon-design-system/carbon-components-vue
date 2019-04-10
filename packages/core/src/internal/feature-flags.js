@@ -36,9 +36,12 @@ export const versions = (experimental = true) => {
   const vers = [];
   if (!defaults.componentsX) {
     vers.push({ default: true });
-  }
-  if (experimental) {
-    vers.push({ experimental: true, default: defaults.componentsX });
+
+    if (experimental) {
+      vers.push({ experimental: true });
+    }
+  } else {
+    vers.push({ experimental: true });
   }
   return vers;
 };
