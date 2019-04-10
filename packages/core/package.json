@@ -63,7 +63,7 @@
   "sideEffects": true,
   "dependencies": {
     "@carbon/icons-vue": "^10.0.0",
-    "carbon-components": "^10.0.0",
+    "carbon-components": "^10.1.0",
     "flatpickr": "4.5.7",
     "vue": "^2.6.10"
   },
