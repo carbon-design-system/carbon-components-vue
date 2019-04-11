@@ -69,7 +69,7 @@ const preKnobs = {
   title: {
     group: 'attr',
     type: text,
-    config: ['Title', ''],
+    config: ['Title', 'Table title'],
     prop: {
       type: String,
       name: 'title',
@@ -286,10 +286,28 @@ const preKnobs = {
     group: 'attr',
     value: `:overflow-menu="sampleOverflowMenu"`,
   },
+  helperText: {
+    group: 'attr',
+    type: text,
+    config: ['helper text', 'This is some helpful text'],
+    prop: {
+      name: 'helper-text',
+      type: String,
+      value: val => (val.length ? val : null),
+    },
+  },
+  helperTextSlot: {
+    group: 'slots',
+    slot: {
+      name: 'helper-text',
+      value: 'Some slotted helpful text',
+    },
+  },
 };
 
 const variants = [
-  { name: 'default', excludes: ['columns2', 'slottedData', 'htmlData'] },
+  { name: 'default', excludes: ['columns2', 'slottedData', 'htmlData', 'helperTextSlot'] },
+  { name: 'slottedHelper', includes: ['columns', 'data', 'title', 'helperTextSlot'] },
   { name: 'minimal', includes: ['columns', 'data'] },
   { name: 'slotted data', includes: ['columns', 'slottedData', 'data'] },
   { name: 'slotted HTML', includes: ['columns', 'htmlData'] },
@@ -322,6 +340,7 @@ for (const version of versions(true)) {
       :sv-experimental="experimental"
       sv-margin
       :sv-alt-back="false"
+      under-construction="Some Carbon 9 features are still under review in Carbon 10, features may change as a result."
       sv-source='${templateString.trim()}'
       >
       <template slot="component">${templateString}</template>
@@ -363,8 +382,9 @@ for (const version of versions(true)) {
           computed: {
             filteredData() {
               if (this.filterValue) {
+                const regex = new RegExp(this.filterValue, 'i');
                 return this.internalData.filter(item => {
-                  return item.join('|').indexOf(this.filterValue) >= 0;
+                  return item.join('|').search(regex) >= 0;
                 });
               } else {
                 return this.internalData;
