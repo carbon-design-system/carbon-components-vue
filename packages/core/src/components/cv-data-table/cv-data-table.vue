@@ -1,19 +1,28 @@
 <template>
   <div :style="tableStyle">
     <div :class="{ 'bx--data-table-v2-container': !componentsX, 'bx--data-table-container': componentsX }">
-      <h4 :class="{ 'bx--data-table-v2-header': !componentsX, 'bx--data-table-header': componentsX }" v-if="title">
-        {{ title }}
-      </h4>
+      <cv-wrapper :tag-type="componentsX ? 'div' : ''" class="bx--data-table-header">
+        <h4
+          :class="{ 'bx--data-table-v2-header': !componentsX, 'bx--data-table-header__title': componentsX }"
+          v-if="title"
+        >
+          {{ title }}
+        </h4>
+        <p v-if="componentsX && isHelper" class="bx--data-table-header__description">
+          <slot name="helper-text">{{ helperText }}</slot>
+        </p>
+      </cv-wrapper>
 
       <section class="bx--table-toolbar">
         <div v-if="batchActive" style="min-height: 32px; max-width: 0;" />
+
         <div
           v-if="hasBatchActions"
           class="bx--batch-actions"
           :class="{ 'bx--batch-actions--active': batchActive }"
           aria-label="Table Action Bar"
         >
-          <div class="bx--action-list">
+          <div :class="componentsX ? 'bx--batch-actions' : 'bx--action-list'">
             <slot name="batch-actions" />
           </div>
           <div class="bx--batch-summary">
@@ -21,7 +30,7 @@
               <span data-items-selected>{{ dataRowsSelected.length }}</span>
               items selected
             </p>
-            <button class="bx--batch-summary__cancel" @click="deselect">Cancel</button>
+            <cv-button class="bx--batch-summary__cancel" small @click="deselect">Cancel</cv-button>
           </div>
         </div>
 
@@ -43,7 +52,7 @@
       <table :class="[{ 'bx--data-table-v2': !componentsX, 'bx--data-table': componentsX }, modifierClasses]">
         <thead>
           <tr>
-            <th v-if="hasBatchActions">
+            <th v-if="hasBatchActions" class="bx--table-column-checkbox">
               <cv-checkbox
                 :form-item="false"
                 value="headingCheck"
@@ -104,21 +113,25 @@ import CvDataTableHeadnig from './_cv-data-table-heading';
 import CvDataTableRow from './cv-data-table-row';
 import CvDataTableCell from './cv-data-table-cell';
 import CvSearch from '../cv-search/cv-search';
+import CvButton from '../cv-button/cv-button';
 import CvCheckbox from '../cv-checkbox/cv-checkbox';
 import CvPagination from '../cv-pagination/cv-pagination';
 import { componentsX } from '../../internal/feature-flags';
+import CvWrapper from '../cv-wrapper/_cv-wrapper';
 
 const rows = children => children.filter(child => child.isCvDataTableRow);
 
 export default {
   name: 'CvDataTable',
   components: {
+    CvButton,
     CvDataTableHeadnig,
     CvDataTableRow,
     CvDataTableCell,
     CvSearch,
     CvCheckbox,
     CvPagination,
+    CvWrapper,
   },
   props: {
     autoWidth: Boolean,
@@ -140,6 +153,7 @@ export default {
     data: { type: Array, requried: true },
     zebra: Boolean,
     rowsSelected: { type: Array, default: () => [] },
+    helperText: { type: String, default: null },
   },
   model: {
     prop: 'rows-selected',
@@ -160,6 +174,9 @@ export default {
     };
   },
   watch: {
+    data() {
+      this.internalPagination.numberOfItems = this.data.length;
+    },
     sortable() {
       this.watchColumns();
     },
@@ -188,7 +205,7 @@ export default {
     tableStyle() {
       return this.autoWidth ? { width: 'initial' } : { width: '100%' };
     },
-    internalPangination() {
+    internalPagination() {
       if (typeof this.pagination === 'object') {
         return this.pagination;
       } else {
@@ -200,7 +217,7 @@ export default {
     },
     internalNumberOfItems() {
       if (this.internalPagination && typeof this.internalPagination.numberOfItems === 'number') {
-        return Math.min(this.internalPagination.numberOfItems, rows(this.$children).length);
+        return this.internalPagination.numberOfItems;
       } else {
         return rows(this.$children).length;
       }
@@ -220,6 +237,9 @@ export default {
     },
     selectedRows() {
       return this.dataRowsSelected;
+    },
+    isHelper() {
+      return this.$slots['helper-text'] !== undefined || (this.helperText && this.helperText.length);
     },
   },
   methods: {
