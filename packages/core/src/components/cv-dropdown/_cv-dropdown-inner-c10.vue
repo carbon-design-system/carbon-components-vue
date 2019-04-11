@@ -40,6 +40,7 @@
           'bx--dropdown--open': open,
           'bx--dropdown--invalid': isInvalid,
           'bx--dropdown--disabled': $attrs.disabled,
+          'bx--dropdown--inline': inline,
         }"
         v-bind="$attrs"
         @keydown.down.prevent="onDown"
@@ -66,11 +67,11 @@
           </ul>
         </li>
       </ul>
-      <div v-if="isInvalid" class="bx--form-requirement">
+      <div v-if="isInvalid && inline" class="bx--form-requirement">
         <slot name="invalid-message">{{ invalidMessage }}</slot>
       </div>
     </div>
-    <div v-if="isInvalid" class="bx--form-requirement">
+    <div v-if="isInvalid && !inline" class="bx--form-requirement">
       <slot name="invalid-message">{{ invalidMessage }}</slot>
     </div>
   </cv-wrapper>
