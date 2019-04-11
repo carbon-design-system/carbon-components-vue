@@ -7,15 +7,20 @@
     }"
   >
     <section class="sv-template-view__component" :style="style">
-      <slot name="component"></slot>
-      <br />
       <cv-inline-notification
         v-if="underConstruction"
         class="sv-under-construction"
         title="Under review"
-        sub-title="This component isn't quite ready. Hopefully no features will get broken but this cannot be guarenteed"
+        :sub-title="
+          `This component isn't quite ready. ${
+            underConstruction !== true
+              ? underConstruction
+              : 'Hopefully no features will get broken but this cannot be guarenteed'
+          }`
+        "
         kind="warning"
       />
+      <slot name="component"></slot>
     </section>
     <section class="sv-template-view__other">
       <h2 class="sv-template-view__label">Sample interaction</h2>
@@ -44,18 +49,20 @@
 <script>
 import Vue from 'vue';
 import SvView from './sv-view.vue';
+import CvInlineNotification from '../../../../packages/core/src/components/cv-inline-notification/cv-inline-notification';
 
 export default {
   name: 'SvTemplateView',
   components: {
     SvView,
+    CvInlineNotification,
   },
   props: {
     svMargin: { type: Boolean, default: true },
     svSource: String,
     svAltBack: { type: Boolean, default: true },
     svPosition: String, // flex position
-    underConstruction: Boolean,
+    underConstruction: { type: [Boolean, String], default: false },
   },
   data() {
     return {
