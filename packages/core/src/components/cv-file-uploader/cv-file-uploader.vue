@@ -1,11 +1,12 @@
 <template>
   <cv-form-item class="cv-file-uploader">
-    <strong :class="componentsX ? 'bx--label' : 'bx--file--label'">{{ label }}</strong>
+    <strong :class="componentsX ? 'bx--file--label' : 'bx--label'">{{ label }}</strong>
     <p class="bx--label-description">{{ helperText }}</p>
     <div class="bx--file" data-file>
       <label
         :for="uid"
-        class="bx--file--btn bx--btn bx--btn--primary bx--btn--sm"
+        class="bx--file--btn bx--btn bx--btn--primary"
+        :class="{ 'bx--btn--sm': !componentsX }"
         role="button"
         tabindex="0"
         @keydown.enter.prevent="onShow()"
@@ -25,16 +26,21 @@
         tabindex="-1"
       />
       <div data-file-container class="bx--file-container">
-        <div data-file-container class="bx--file-container" v-for="(file, index) in internalFiles" :key="index">
-          <span class="bx--file__selected-file">
+        <div
+          v-for="(file, index) in internalFiles"
+          :key="index"
+          :class="isInvalid(index) ? 'bx--file__selected-file--invalid__wrapper' : 'bx--file__selected-file'"
+        >
+          <cv-wrapper
+            :tag-type="componentsX && isInvalid(index) ? 'div' : ''"
+            class="bx--file__selected-file bx--file__selected-file--invalid"
+          >
             <p class="bx--file-filename">{{ file.file.name }}</p>
             <span :data-for="uid" class="bx--file__state-container" :data-test="file.state">
-              <cv-inline-loading
-                v-if="componentsX && (file.state === 'uploading' || file.state === 'complete')"
-                :active="file.state === 'uploading'"
-                loading-text
-                loaded-text
-              />
+              <div v-if="componentsX && file.state === 'uploading'" class="bx--inline-loading__animation">
+                <cv-inline-loading v-if="componentsX && file.state === 'uploading'" active loading-text loaded-text />
+              </div>
+              <CheckmarkFilled16 v-if="componentsX && file.state === 'complete'" class="bx--file-complete" />
               <div
                 v-if="!componentsX && file.state === 'uploading'"
                 class="bx--loading"
@@ -61,13 +67,11 @@
                   d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zm3.293-11.332L6.75 9.21 4.707 7.168 3.293 8.582 6.75 12.04l5.957-5.957-1.414-1.414z"
                 ></path>
               </svg>
-              <svg
+              <WarningFilled16 v-if="componentsX && isInvalid(index)" class="bx--file--invalid" />
+              <Close16
                 v-if="componentsX && removable"
                 class="bx--file-close"
                 role="button"
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
                 tabindex="0"
                 alt="Remove file"
                 arial-label="Remove file"
@@ -75,9 +79,7 @@
                 @keydown.enter.prevent="remove(index)"
                 @keydown.space.prevent
                 @keyup.space.prevent="remove(index)"
-              >
-                <path d="M12 4.7l-.7-.7L8 7.3 4.7 4l-.7.7L7.3 8 4 11.3l.7.7L8 8.7l3.3 3.3.7-.7L8.7 8z"></path>
-              </svg>
+              />
               <svg
                 v-if="!componentsX && removable"
                 class="bx--file-close"
@@ -100,7 +102,8 @@
                 ></path>
               </svg>
             </span>
-          </span>
+          </cv-wrapper>
+          <div v-if="isInvalid" class="bx--form-requirement">{{ file.invalidMessage }}</div>
         </div>
       </div>
     </div>
@@ -112,6 +115,10 @@ import uidMixin from '../../mixins/uid-mixin';
 import CvFormItem from '../cv-form/cv-form-item';
 import { componentsX } from '../../internal/feature-flags';
 import CvInlineLoading from '../cv-inline-loading/cv-inline-loading';
+import CheckmarkFilled16 from '@carbon/icons-vue/lib/checkmark--filled/16';
+import WarningFilled16 from '@carbon/icons-vue/lib/warning--filled/16';
+import Close16 from '@carbon/icons-vue/lib/close/16';
+import CvWrapper from '../cv-wrapper/_cv-wrapper';
 
 const CONSTS = {
   STATES: {
@@ -123,7 +130,7 @@ const CONSTS = {
 
 export default {
   name: 'CvFileUploader',
-  components: { CvFormItem, CvInlineLoading },
+  components: { CvFormItem, CvInlineLoading, CheckmarkFilled16, WarningFilled16, Close16, CvWrapper },
   mixins: [uidMixin],
   inheritAttrs: false,
   props: {
@@ -166,6 +173,12 @@ export default {
         change: event => this.onChange(event),
       };
     },
+    isInvalid() {
+      return index => {
+        const result = this.internalFiles[index].invalidMessage && this.internalFiles[index].invalidMessage.length;
+        return result;
+      };
+    },
   },
   methods: {
     remove(index) {
@@ -180,12 +193,25 @@ export default {
         this.internalFiles.push({
           state: this.initialStateUploading ? CONSTS.STATES.UPLOADING : CONSTS.STATES.NONE,
           file,
+          invalidMessage: '',
         });
       }
       this.$emit('change', this.internalFiles);
     },
     onShow() {
       this.$refs['file-input'].click();
+    },
+    setState(index, state) {
+      if (['uploading', 'complete', ''].includes(state)) {
+        this.internalFiles[index].state = state;
+      }
+    },
+    clear() {
+      this.internalFiles = [];
+      this.$emit('change', this.internalFiles);
+    },
+    setInvalidMessage(index, message) {
+      this.internalFiles[index].invalidMessage = message;
     },
   },
 };

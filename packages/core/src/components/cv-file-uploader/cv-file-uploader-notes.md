@@ -30,8 +30,30 @@ label - text label for the input
 
 ## Events
 
-change
+- change(files)
+
+The files object returned can be stored and manipulated to set clear the file uploader or for individual files: set state, remove or set an invalid message.
+
+## Methods
+
+- setState(index, state)
+  state can be an empty string, 'complete' or 'uploading'
+
+- remove(index)
+  Removes an individual file
+
+- clear()
+  Clears all files
+
+- setInvalidMessage(index, message);
+
+Sets the invalid state and message.
+Setting to empty string clears the invalid state and message.
 
 ## slots
 
 none
+
+## Usage
+
+Uploading files can be interacted with via the methods, alternatively you can manipulate the file list provided by the change event.

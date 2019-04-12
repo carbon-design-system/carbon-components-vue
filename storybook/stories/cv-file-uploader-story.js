@@ -95,7 +95,7 @@ for (const version of versions(true)) {
         // ----------------------------------------------------------------
 
         const templateString = `
-<cv-file-uploader${settings.group.attr}>
+<cv-file-uploader${settings.group.attr} ref="fileUploader">
 </cv-file-uploader>
   `;
 
@@ -116,6 +116,7 @@ for (const version of versions(true)) {
               <button @click="setState(index, '')">No state</button>
               <button @click="setState(index, 'uploading')">uploading</button>
               <button @click="setState(index, 'complete')">complete</button>
+              <button @click="toggleInvalidState(index)">toggle invalid</button>
               <button @click="remove(index)">remove</button>
             </li>
           </ul>
@@ -143,13 +144,29 @@ for (const version of versions(true)) {
               this.storyFiles = changedFiles;
             },
             setState(index, state) {
-              this.storyFiles[index].state = state;
+              this.$refs.fileUploader.setState(index, state);
+              // alternative
+              // this.storyFiles[index].state = state;
             },
             remove(index) {
-              this.storyFiles.splice(index, 1);
+              this.$refs.fileUploader.remove(index);
+              // alternative
+              // this.storyFiles.splice(index, 1);
             },
             clear() {
-              this.storyFiles = [];
+              this.$refs.fileUploader.clear();
+              // alternative
+              // this.storyFiles = [];
+            },
+            toggleInvalidState(index) {
+              this.$refs.fileUploader.setInvalidMessage(
+                index,
+                this.storyFiles[index].invalidMessage ? '' : 'Something went wrong.'
+              );
+              // Alternative
+              // this.storyFiles[index].invalidMessage = this.storyFiles[index].invalidMessage
+              //   ? ''
+              //   : 'Something went wrong.';
             },
           },
         };
