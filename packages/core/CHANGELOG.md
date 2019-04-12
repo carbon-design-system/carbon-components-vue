@@ -1,4 +1,30 @@
-## 2.0.0-alpha.2 (March 19, 2019)
+## 2.0.0-beta.0 (April 12, 2019)
+
+### Features
+
+- Carbon 10 data table
+
+### Bug Fixes
+
+- Search review fixes
+- Select review fixes
+- Select initial selected enhancment
+- Added missing experimental stories
+- A number of data table fixes (still not ready)
+- Dropdown review fixes
+
+### Dependency versions
+
+Versions reflect those version was built using.
+
+| Dependency        | Version | Notes |
+| ----------------- | ------- | ----- |
+| @carbon/icons-vue | 10.0.0  |       |
+| carbon-components | 10.1.0  |       |
+| flatpickr         | 4.5.7   |       |
+| vue               | 2.6.10  |       |
+
+## 2.0.0-alpha.2 (April 10, 2019)
 
 ### Features
 
