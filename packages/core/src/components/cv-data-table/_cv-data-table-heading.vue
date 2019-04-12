@@ -1,9 +1,16 @@
 <template>
   <th :aria-sort="sortOrder">
-    <button type="button" v-if="sortable" class="bx--table-sort-v2" :class="orderClass" @click="onSortClick">
+    <button
+      type="button"
+      v-if="sortable"
+      :class="[componentsX ? 'bx--table-sort' : 'bx--table-sort-v2', orderClass]"
+      @click="onSortClick"
+    >
       <span class="bx--table-header-label">{{ heading }}</span>
+      <ArrowDown16 v-if="componentsX" class="bx--table-sort__icon" />
       <svg
-        :class="{ 'bx--table-sort-v2__icon': !componentsX, 'bx--table-sort__icon': componentsX }"
+        v-else
+        class="bx--table-sort-v2__icon"
         width="10"
         height="5"
         viewBox="0 0 10 5"
@@ -13,6 +20,7 @@
         <title>{{ sortText }}</title>
         <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd"></path>
       </svg>
+      <Arrows16 v-if="componentsX" class="bx--table-sort__icon-unsorted" />
     </button>
     <span v-else class="bx--table-header-label">{{ heading }}</span>
   </th>
@@ -20,6 +28,8 @@
 
 <script>
 import { componentsX } from '../../internal/feature-flags';
+import ArrowDown16 from '@carbon/icons-vue/lib/arrow--down/16';
+import Arrows16 from '@carbon/icons-vue/lib/arrows/16';
 
 const nextSortOrder = {
   ascending: 'descending',
@@ -29,6 +39,7 @@ const nextSortOrder = {
 
 export default {
   name: 'CvDataTableHeading',
+  components: { ArrowDown16, Arrows16 },
   props: {
     heading: { type: String, required: true },
     sortable: Boolean,
@@ -49,23 +60,24 @@ export default {
     },
     orderClass() {
       let result = '';
+      console.log('this.sortOrder', this.sortOrder);
       if (this.componentsX) {
-        if (sordOrder === 'none') {
+        if (this.sortOrder === 'descending') {
           result = 'bx--table-sort--active';
-        } else if (sortOrder === 'active') {
-          result = 'bx--table-sort--ascending';
+        } else if (this.sortOrder === 'ascending') {
+          result = 'bx--table-sort--active bx--table-sort--ascending';
         }
       } else {
-        if (sordOrder === 'none') {
+        if (this.sortOrder === 'none') {
           result = 'bx--table-sort-v2--active';
-        } else if (sortOrder === 'active') {
+        } else if (this.sortOrder === 'active') {
           result = 'bx--table-sort-v2--ascending';
         }
       }
       return result;
     },
-    data: () => ({ componentsX }),
   },
+  data: () => ({ componentsX }),
   model: {
     event: 'sort',
     prop: 'order',
