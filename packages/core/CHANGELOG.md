@@ -1,3 +1,7 @@
+## 2.0.0-beta.1 (April 12, 2019)
+
+As per beta 0 fresh build
+
 ## 2.0.0-beta.0 (April 12, 2019)
 
 ### Features
