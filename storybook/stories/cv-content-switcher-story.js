@@ -46,6 +46,15 @@ const preKnobs = {
       name: 'toggle3',
     },
   },
+  disabled3: {
+    group: 'attr3t',
+    type: boolean,
+    config: ['disabled 3', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      name: 'disabled',
+      type: Boolean,
+    },
+  },
   events: {
     group: 'attr',
     value: `@selected="actionSelected"`,
@@ -102,9 +111,9 @@ for (const version of versions(true)) {
     <cv-content-switcher-button owner-id="csb-2" :selected="isSelected(1)" ${
       settings.group.icon
     }>Button Name 2</cv-content-switcher-button>
-    <cv-content-switcher-button owner-id="csb-3" :selected="isSelected(2)" v-if="toggle3" ${
-      settings.group.icon
-    }>Button Name 3</cv-content-switcher-button>
+    <cv-content-switcher-button owner-id="csb-3" :selected="isSelected(2)" v-if="toggle3" ${settings.group.attr3t} ${
+          settings.group.icon
+        }>Button Name 3</cv-content-switcher-button>
   </cv-content-switcher>
 
   <section style="margin: 10px 0;">
