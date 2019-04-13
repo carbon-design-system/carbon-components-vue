@@ -108,7 +108,7 @@ const variants = [
   },
   {
     name: 'single',
-    includes: ['events', 'calOptions'],
+    includes: ['events', 'calOptions', 'invalidMessage'],
     extra: { kind: { group: 'attr', value: 'kind="single"' } },
   },
   {
