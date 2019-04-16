@@ -66,6 +66,7 @@ export default {
   props: {
     label: String,
     flipMenu: Boolean,
+    up: Boolean,
     offset: {
       type: Object,
       validator(value) {
@@ -143,11 +144,16 @@ export default {
               (this.componentsX ? 0 : 20) +
               this.offsetLeft -
               this.$refs.popup.offsetWidth +
-              this.$el.offsetWidth;
+              this.$el.offsetWidth +
+              window.scrollX;
           } else {
             this.left = menuPosition.left - (this.componentsX ? 0 : 20) + this.offsetLeft + window.scrollX;
           }
-          this.top = menuPosition.bottom + (this.componentsX ? 0 : 2) + this.offsetTop + window.scrollY;
+          if (this.up) {
+            this.top = menuPosition.top + this.offsetTop - this.$refs.popup.offsetHeight + window.scrollY;
+          } else {
+            this.top = menuPosition.bottom + (this.componentsX ? 0 : 2) + this.offsetTop + window.scrollY;
+          }
         });
       }
     },
