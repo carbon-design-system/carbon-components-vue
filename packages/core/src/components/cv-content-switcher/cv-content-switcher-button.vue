@@ -28,7 +28,7 @@
     <svg v-if="typeof icon === 'string'" class="bx--content-switcher__icon" height="16" width="16">
       <use :href="icon"></use>
     </svg>
-    <span>
+    <span class="bx--content-switcher__label">
       <slot></slot>
     </span>
   </button>
