@@ -1,3 +1,25 @@
+## 2.0.0-beta.2 (April 16, 2019)
+
+### Features
+
+- Add up overflow menu
+- Some story updates
+
+### Bug Fixes
+
+- Remove linter warnings from structured list
+
+### Dependency versions
+
+Versions reflect those version was built using.
+
+| Dependency        | Version | Notes |
+| ----------------- | ------- | ----- |
+| @carbon/icons-vue | 10.0.0  |       |
+| carbon-components | 10.1.0  |       |
+| flatpickr         | 4.5.7   |       |
+| vue               | 2.6.10  |       |
+
 ## 2.0.0-beta.1 (April 12, 2019)
 
 As per beta 0 fresh build
