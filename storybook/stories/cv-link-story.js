@@ -31,9 +31,17 @@ const preKnobs = {
       type: String,
     },
   },
+  disabled: {
+    group: 'attr',
+    value: 'aria-disabled="true"',
+  },
 };
 
-const variants = [{ name: 'a', includes: ['href'] }, { name: 'router-link', includes: ['to'] }];
+const variants = [
+  { name: 'a', includes: ['href'] },
+  { name: 'a disabled', includes: ['disabled'] },
+  { name: 'router-link', includes: ['to'] },
+];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
