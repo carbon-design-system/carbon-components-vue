@@ -62,13 +62,13 @@
   },
   "sideEffects": true,
   "dependencies": {
-    "@carbon/icons-vue": "^10.0.0",
+    "@carbon/icons-vue": "^10.1.1",
     "carbon-components": "^10.1.0",
     "flatpickr": "4.5.7",
     "vue": "^2.6.10"
   },
   "devDependencies": {
-    "@vue/cli-service": "^3.5.1",
+    "@vue/cli-service": "^3.6.0",
     "vue-template-compiler": "^2.6.10"
   }
 }
