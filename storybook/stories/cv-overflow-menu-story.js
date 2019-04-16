@@ -20,6 +20,12 @@ const preKnobs = {
     config: ['flip menu', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: { type: Boolean, name: 'flip-menu' },
   },
+  up: {
+    group: 'attr',
+    type: boolean,
+    config: ['up', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: { type: Boolean, name: 'up' },
+  },
   offset: {
     group: 'attr',
     type: object,
@@ -60,6 +66,7 @@ for (const version of versions(true)) {
       sv-margin
       sv-source='${templateString.trim()}'
       sv-position="center"
+      sv-padding="150px 0 50px 0"
       >
       <template slot="component">${templateString}</template>
     </sv-template-view>

@@ -62,6 +62,7 @@ export default {
     svSource: String,
     svAltBack: { type: Boolean, default: true },
     svPosition: String, // flex position
+    svPadding: String,
     underConstruction: { type: [Boolean, String], default: false },
   },
   data() {
@@ -72,6 +73,7 @@ export default {
   computed: {
     style() {
       return {
+        padding: this.svPadding,
         alignItems: this.svPosition && this.svPosition.length ? this.svPosition : 'flex-start',
       };
     },
