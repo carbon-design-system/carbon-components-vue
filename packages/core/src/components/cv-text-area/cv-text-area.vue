@@ -10,7 +10,7 @@
       ]"
       >{{ label }}</label
     >
-    <div class="bx--form__helper-text" v-if="isHelper">
+    <div v-if="isHelper" class="bx--form__helper-text" :class="{ 'bx--form__helper-text--disabled': $attrs.disabled }">
       <slot name="helper-text">{{ helperText }}</slot>
     </div>
     <div v-if="componentsX" class="bx--text-area__wrapper" :data-invalid="isInvalid">
@@ -18,7 +18,7 @@
       <textarea
         :id="uid"
         class="bx--text-area"
-        :class="{ 'bx--text-area--light': theme === 'light' }"
+        :class="{ 'bx--text-area--light': theme === 'light', 'bx--text-area--invalid': isInvalid }"
         v-bind="$attrs"
         :value="value"
         v-on="inputListeners"
