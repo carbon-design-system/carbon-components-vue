@@ -223,7 +223,7 @@ export default {
       }
     },
     modifierClasses() {
-      const prefix = this.componentsX ? 'bx--data-table-v2--' : 'bx--data-table--';
+      const prefix = this.componentsX ? 'bx--data-table--' : 'bx--data-table-v2--';
       const sizeClass = this.rowSize.length === 0 || this.rowSize === 'standard' ? '' : `${prefix}${this.rowSize} `;
       const zebraClass = this.zebra ? `${prefix}zebra ` : '';
       const borderlessClass = this.borderless ? `${prefix}no-border ` : '';
