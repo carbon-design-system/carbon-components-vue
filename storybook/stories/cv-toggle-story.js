@@ -23,6 +23,15 @@ let preKnobs = {
       name: 'checked',
     },
   },
+  label: {
+    group: 'attr',
+    type: text,
+    config: ['label', 'Toggle label'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: String,
+      name: 'label',
+    },
+  },
   value: {
     group: 'attr',
     type: text,
