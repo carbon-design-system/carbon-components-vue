@@ -17,6 +17,7 @@ export default {
   props: {
     id: { type: String, required: true },
     selected: Boolean,
+    disabled: Boolean,
     label: { type: String, required: true },
   },
   data() {
@@ -28,6 +29,13 @@ export default {
     selected() {
       if (this.selected && 1) {
         this.$parent.$emit('cv:selected', this);
+      }
+    },
+    disabled() {
+      if (this.disabled) {
+        this.$parent.$emit('cv:disabled', this);
+      } else {
+        this.$parent.$emit('cv:enabled', this);
       }
     },
   },

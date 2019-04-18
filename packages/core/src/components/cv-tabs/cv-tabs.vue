@@ -20,6 +20,7 @@
           class="cv-tabs-button bx--tabs__nav-item"
           :class="{
             'bx--tabs__nav-item--selected': selectedIndex == index,
+            'bx--tabs__nav-item--disabled': disabledTabs.indexOf(index) !== -1,
           }"
           role="presentation"
         >
@@ -54,6 +55,7 @@ export default {
     return {
       tabs: [],
       selectedIndex: 0,
+      disabledTabs: [],
     };
   },
   created() {
@@ -61,6 +63,8 @@ export default {
     this.$on('cv:mounted', srcComponent => this.onCvMount(srcComponent));
     this.$on('cv:beforeDestory', srcComponent => this.onCvBeforeDestroy(srcComponent));
     this.$on('cv:selected', srcComponent => this.onCvSelected(srcComponent));
+    this.$on('cv:disabled', srcComponent => this.onCvDisabled(srcComponent));
+    this.$on('cv:enabled', srcComponent => this.onCvEnabled(srcComponent));
   },
   methods: {
     onDropChange(val) {
@@ -78,17 +82,28 @@ export default {
       this.checkSelected();
     },
     onTabClick(index) {
-      for (let i = 0; i < this.tabs.length; i++) {
-        this.tabs[i].internalSelected = i === index;
-      }
-      if (this.selectedIndex !== index) {
+      if (this.selectedIndex !== index && this.disabledTabs.indexOf(index) === -1) {
         this.selectedIndex = index;
+        for (let i = 0; i < this.tabs.length; i++) {
+          this.tabs[i].internalSelected = i === index;
+        }
         this.$emit('tab-selected', index); // only needed if changed.
       }
     },
     onCvSelected(srcComponent) {
       const tabIndex = this.tabs.findIndex(item => item.id === srcComponent.id);
       this.onTabClick(tabIndex);
+    },
+    onCvDisabled(srcComponent) {
+      const tabIndex = this.tabs.findIndex(item => item.id === srcComponent.id);
+      this.disabledTabs.push(tabIndex);
+    },
+    onCvEnabled(srcComponent) {
+      const tabIndex = this.tabs.findIndex(item => item.id === srcComponent.id);
+      let arrIdx = this.disabledTabs.indexOf(tabIndex);
+      if (arrIdx !== -1) {
+        this.disabledTabs.splice(arrIdx, 1);
+      }
     },
     checkSelected() {
       const childTabs = this.$children.filter(child => child.$_CvTab);
@@ -104,22 +119,45 @@ export default {
         this.onTabClick(0);
       }
     },
+    isAllTabsDisabled() {
+      return this.disabledTabs.length === this.tabs.length;
+    },
     moveLeft() {
+      if (this.isAllTabsDisabled()) {
+        return;
+      }
       let newIndex;
       if (this.selectedIndex > 0) {
         newIndex = this.selectedIndex - 1;
       } else {
         newIndex = this.tabs.length - 1;
       }
+      while (this.disabledTabs.indexOf(newIndex) !== -1) {
+        if (newIndex > 0) {
+          newIndex--;
+        } else {
+          newIndex = this.tabs.length - 1;
+        }
+      }
       this.onTabClick(newIndex);
       this.$refs.link[newIndex].focus();
     },
     moveRight() {
+      if (this.isAllTabsDisabled()) {
+        return;
+      }
       let newIndex;
       if (this.selectedIndex < this.tabs.length - 1) {
         newIndex = this.selectedIndex + 1;
       } else {
         newIndex = 0;
+      }
+      while (this.disabledTabs.indexOf(newIndex) !== -1) {
+        if (newIndex < this.tabs.length - 1) {
+          newIndex = newIndex + 1;
+        } else {
+          newIndex = 0;
+        }
       }
       this.onTabClick(newIndex);
       this.$refs.link[newIndex].focus();
