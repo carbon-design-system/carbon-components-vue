@@ -14,7 +14,7 @@
         ref="input"
         :placeholder="placeholder"
         :aria-labelledby="uid"
-        @focusout="checkFocus"
+        @blur="checkFocus"
       />
 
       <button
@@ -23,7 +23,7 @@
         class="bx--toolbar-search__btn"
         aria-label="Toolbar search"
         @click="toggleActive(true)"
-        @focusout="checkFocus"
+        @blur="checkFocus"
       >
         <Search16 v-if="componentsX" class="bx--search-magnifier" />
         <svg v-else class="bx--search-magnifier" width="16" height="16" viewBox="0 0 16 16">
@@ -33,9 +33,9 @@
           ></path>
         </svg>
       </button>
-      <Search16 v-if="componentsX" class="bx--search-magnifier" />
+      <Search16 v-if="!isToolbarKind && componentsX" class="bx--search-magnifier" />
       <svg
-        v-if="!componentsX && !isToolbarKind"
+        v-if="!isToolbarKind && !componentsX"
         class="bx--search-magnifier"
         width="16"
         height="16"
@@ -46,7 +46,6 @@
           fill-rule="nonzero"
         ></path>
       </svg>
-
       <button
         type="button"
         class="bx--search-close"
@@ -172,3 +171,10 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+.cv-search {
+  .bx--search-magnifier {
+    pointer-events: none;
+  }
+}
+</style>
