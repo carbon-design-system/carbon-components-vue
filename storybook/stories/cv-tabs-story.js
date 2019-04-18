@@ -24,13 +24,22 @@ const preKnobs = {
       type: Boolean,
     },
   },
+  disabled: {
+    group: 'tab4',
+    type: boolean,
+    config: ['4-disabled', false],
+    prop: {
+      name: 'disabled',
+      type: Boolean,
+    },
+  },
   events: {
     group: 'attr',
     value: `@tab-selected="actionSelected"`,
   },
 };
 
-const variants = [{ name: 'dafault' }, { name: 'minimal', excludes: ['events', 'selected'] }];
+const variants = [{ name: 'default' }, { name: 'minimal', excludes: ['events', 'selected', 'disabled'] }];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
@@ -57,7 +66,7 @@ for (const version of versions(true)) {
   <cv-tab id="tabs-3" label="Tab link 3">
     Sample tab panel content 3
   </cv-tab>
-  <cv-tab id="tabs-4" label="Tab link 4">
+  <cv-tab id="tabs-4" label="Tab link 4" ${settings.group.tab4}>
     Sample tab panel content 4
   </cv-tab>
   <cv-tab id="tabs-5" label="Tab link 5">
