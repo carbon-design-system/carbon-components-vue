@@ -9,5 +9,3 @@ export default {
   name: 'CvStructuredListItemStandard',
 };
 </script>
-
-<style lang="scss"></style>

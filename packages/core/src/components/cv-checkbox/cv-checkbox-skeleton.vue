@@ -9,5 +9,3 @@ export default {
   name: 'CvCheckboxSkeleton',
 };
 </script>
-
-<style lang="scss"></style>

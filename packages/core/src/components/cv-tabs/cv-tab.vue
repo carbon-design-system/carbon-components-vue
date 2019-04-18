@@ -7,7 +7,9 @@
     :aria-hidden="!dataSelected"
     :hidden="!dataSelected"
   >
-    <slot> <!-- Content for first tab goes here. --> </slot>
+    <slot>
+      <!-- Content for first tab goes here. -->
+    </slot>
   </div>
 </template>
 
@@ -51,5 +53,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss"></style>
