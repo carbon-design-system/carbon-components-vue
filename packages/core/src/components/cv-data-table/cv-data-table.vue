@@ -1,5 +1,5 @@
 <template>
-  <div :style="tableStyle">
+  <div :style="tableStyle" class="cv-data-table">
     <div :class="{ 'bx--data-table-v2-container': !componentsX, 'bx--data-table-container': componentsX }">
       <cv-wrapper :tag-type="componentsX ? 'div' : ''" class="bx--data-table-header">
         <h4
@@ -14,7 +14,7 @@
       </cv-wrapper>
 
       <section class="bx--table-toolbar">
-        <div v-if="batchActive" style="min-height: 32px; max-width: 0;" />
+        <div v-if="batchActive" :style="{ minHeight: componentsX ? '48px' : '32px', maxWidth: '0' }" />
 
         <div
           v-if="hasBatchActions"
@@ -22,29 +22,66 @@
           :class="{ 'bx--batch-actions--active': batchActive }"
           aria-label="Table Action Bar"
         >
-          <div :class="componentsX ? 'bx--batch-actions' : 'bx--action-list'">
+          <div class="bx--action-list">
             <slot name="batch-actions" />
+            <cv-button class="bx--batch-summary__cancel" small @click="deselect">Cancel</cv-button>
           </div>
           <div class="bx--batch-summary">
             <p class="bx--batch-summary__para">
               <span data-items-selected>{{ dataRowsSelected.length }}</span>
               items selected
             </p>
-            <cv-button class="bx--batch-summary__cancel" small @click="deselect">Cancel</cv-button>
           </div>
         </div>
 
-        <div v-if="$listeners.search" class="bx--toolbar-search-container">
-          <cv-search
-            :disabled="batchActive"
-            theme="light"
-            small
-            :form-item="false"
-            :placeholder="searchPlaceholder"
-            @input="$emit('search', $event)"
-          />
-        </div>
         <div v-if="$slots.actions && !batchActive" class="bx--toolbar-content">
+          <div
+            v-if="$listeners.search"
+            :class="{
+              'bx--toolbar-search-container-active': searchActive,
+              'bx--toolbar-search-container-persistent': !expandingSearch,
+              'bx--toolbar-search-container-expandable': expandingSearch,
+            }"
+            ref="searchContainer"
+          >
+            <div data-search class="bx--search bx--search--sm" role="search">
+              <div
+                class="bx--search-magnifier"
+                tabindex="0"
+                @click="checkSearchExpand(true)"
+                @keydown.enter.prevent="checkSearchExpand(true)"
+                @keydown.space.prevent
+                @keyup.space.prevent="checkSearchExpand(true)"
+                @blur="checkSearchFocus"
+                ref="magnifier"
+              >
+                <Search16 class="bx--toolbar-action__icon" />
+              </div>
+              <label :for="uid" class="bx--label">Search</label>
+              <input
+                class="bx--search-input"
+                type="text"
+                :id="uid"
+                role="search"
+                placeholder="Search"
+                :aria-labelledby="uid"
+                ref="search"
+                v-model="searchValue"
+                @input="onSearch"
+                @blur="checkSearchFocus"
+                @keydown.esc.prevent="checkSearchExpand(false)"
+              />
+              <button
+                class="bx--search-close"
+                :class="{ 'bx--search-close--hidden': !clearSearchVisible }"
+                title="Clear search input"
+                aria-label="Clear search input"
+                @click="onClearClick"
+              >
+                <Close16 />
+              </button>
+            </div>
+          </div>
           <slot name="actions" />
         </div>
       </section>
@@ -112,12 +149,14 @@
 import CvDataTableHeadnig from './_cv-data-table-heading';
 import CvDataTableRow from './cv-data-table-row';
 import CvDataTableCell from './cv-data-table-cell';
-import CvSearch from '../cv-search/cv-search';
 import CvButton from '../cv-button/cv-button';
 import CvCheckbox from '../cv-checkbox/cv-checkbox';
 import CvPagination from '../cv-pagination/cv-pagination';
 import { componentsX } from '../../internal/feature-flags';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
+import uidMixin from '../../mixins/uid-mixin';
+import Search16 from '@carbon/icons-vue/lib/search/16';
+import Close16 from '@carbon/icons-vue/lib/close/16';
 
 const rows = children => children.filter(child => child.isCvDataTableRow);
 
@@ -128,11 +167,13 @@ export default {
     CvDataTableHeadnig,
     CvDataTableRow,
     CvDataTableCell,
-    CvSearch,
     CvCheckbox,
     CvPagination,
     CvWrapper,
+    Search16,
+    Close16,
   },
+  mixins: [uidMixin],
   props: {
     autoWidth: Boolean,
     borderless: Boolean,
@@ -154,6 +195,7 @@ export default {
     zebra: Boolean,
     rowsSelected: { type: Array, default: () => [] },
     helperText: { type: String, default: null },
+    expandingSearch: { type: Boolean, default: true },
   },
   model: {
     prop: 'rows-selected',
@@ -171,6 +213,9 @@ export default {
       batchActive: false,
       headingChecked: false,
       dataRowsSelected: this.rowsSelected,
+      searchValue: '',
+      clearSearchVisible: false,
+      searchActive: false,
     };
   },
   watch: {
@@ -243,6 +288,27 @@ export default {
     },
   },
   methods: {
+    checkSearchFocus(ev) {
+      if (!this.$refs.searchContainer.contains(ev.relatedTarget)) {
+        this.searchActive = false;
+      }
+    },
+    checkSearchExpand(force) {
+      if (typeof force === 'boolean') {
+        this.searchActive = force;
+      } else {
+        this.searchActive = !this.searchActive;
+      }
+      if (this.searchActive) {
+        this.$nextTick(() => {
+          this.$refs.search.focus();
+        });
+      } else {
+        this.$nextTick(() => {
+          this.$refs.magnifier.focus();
+        });
+      }
+    },
     updateRowsSelected() {
       this.dataRowsSelected = [];
       for (const i in this.$children) {
@@ -258,6 +324,14 @@ export default {
       this.headingChecked =
         this.dataRowsSelected.length === this.$children.filter(item => item.isCvDataTableRow).length;
       this.batchActive = this.dataRowsSelected.length > 0;
+    },
+    onClearClick() {
+      this.searchValue = '';
+      this.clearSearchVisible = false;
+      this.$emit('search', this.searchValue);
+      this.$nextTick(() => {
+        this.$refs.search.focus();
+      });
     },
     onHeadingCheckChange() {
       // check /uncheck all children
@@ -309,6 +383,10 @@ export default {
           }))
         : this.columns;
     },
+    onSearch() {
+      this.clearSearchVisible = this.searchValue.length > 0;
+      this.$emit('search', this.searchValue);
+    },
     onSort(index, val) {
       for (let column of this.dataColumns) {
         column.order = 'none';
@@ -319,3 +397,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.cv-data-table .bx--table-column-checkbox .bx--checkbox-wrapper {
+  margin: 0;
+}
+</style>
