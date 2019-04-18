@@ -49,9 +49,9 @@
         @input="$emit('update:timezone', $event)"
         :disabled="disabled"
       >
-        <cv-select-option class="bx--select-option" v-for="item in timezones" :key="item.value" :value="item.value">
-          {{ item.label }}
-        </cv-select-option>
+        <cv-select-option class="bx--select-option" v-for="item in timezones" :key="item.value" :value="item.value">{{
+          item.label
+        }}</cv-select-option>
       </cv-select>
     </div>
     <div class="bx--form-requirement" v-if="isInvalid && componentsX">
@@ -127,5 +127,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss"></style>

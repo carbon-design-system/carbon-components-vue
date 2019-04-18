@@ -1,5 +1,7 @@
 <template>
-  <option class="cv-select-option bx--select-option"> <slot></slot> </option>
+  <option class="cv-select-option bx--select-option">
+    <slot></slot>
+  </option>
 </template>
 
 <script>
@@ -8,5 +10,3 @@ export default {
   // HTML props disabled selected hidden
 };
 </script>
-
-<style lang="scss"></style>

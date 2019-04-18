@@ -28,5 +28,3 @@ export default {
   mixins: [uidMixin, radioMixin],
 };
 </script>
-
-<style lang="scss"></style>
