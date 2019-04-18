@@ -10,5 +10,3 @@ export default {
   // html props: label
 };
 </script>
-
-<style lang="scss"></style>

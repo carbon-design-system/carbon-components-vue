@@ -1,8 +1,6 @@
 <template>
   <div class="bx--breadcrumb-item">
-    <a class="bx--link">
-      &nbsp;
-    </a>
+    <a class="bx--link">&nbsp;</a>
   </div>
 </template>
 
@@ -11,5 +9,3 @@ export default {
   name: 'CvBreadcrumbItemSkeleton',
 };
 </script>
-
-<style lang="scss"></style>

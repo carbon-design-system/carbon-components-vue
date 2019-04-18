@@ -5,8 +5,12 @@
     tabindex="0"
     :class="[{ 'bx--tile--is-expanded': internalExpanded }]"
     :style="styleObject"
+    @click="toggle"
+    @keydown.enter.prevent="toggle"
+    @keydown.space.prevent
+    @keyup.space.prevent="toggle"
   >
-    <button type="button" class="bx--tile__chevron" @click="toggle">
+    <button type="button" class="bx--tile__chevron">
       <ChevronDown16 v-if="componentsX" />
       <svg v-else width="12" height="8" viewBox="0 0 12 8" fill-rule="evenodd">
         <path d="M10.6 0L6 4.7 1.4 0 0 1.4l6 6.1 6-6.1z"></path>
@@ -79,5 +83,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss"></style>

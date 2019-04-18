@@ -14,6 +14,9 @@ import CvDataTableCell from '@carbon/vue/src/components/cv-data-table/cv-data-ta
 import CvButton from '@carbon/vue/src/components/cv-button/cv-button';
 import CvOverflowMenu from '@carbon/vue/src/components/cv-overflow-menu/cv-overflow-menu';
 import CvOverflowMenuItem from '@carbon/vue/src/components/cv-overflow-menu/cv-overflow-menu-item';
+import TrashCan16 from '@carbon/icons-vue/lib/trash-can/16';
+import Save16 from '@carbon/icons-vue/lib/save/16';
+import Download16 from '@carbon/icons-vue/lib/download/16';
 
 const storiesDefault = storiesOf('Components/CvDataTable', module);
 const storiesExperimental = storiesOf('Experimental/CvDataTable', module);
@@ -199,50 +202,17 @@ const preKnobs = {
     slot: {
       name: 'batch-actions',
       value: `
-<cv-button small kind="ghost" @click="onBatchAction1">
-  Ghost
-  <svg
-    class="bx--btn__icon"
-    width="16"
-    height="16"
-    viewBox="0 0 16 16"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M7 7H4v2h3v3h2V9h3V7H9V4H7v3zm1 9A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
-      fill-rule="evenodd"
-    ></path>
-  </svg>
+<cv-button @click="onBatchAction1">
+  Delete
+  <TrashCan16 class="bx--btn__icon"/>
 </cv-button>
-<cv-button small kind="ghost" @click="onBatchAction2">
-  Ghost
-  <svg
-    class="bx--btn__icon"
-    width="16"
-    height="16"
-    viewBox="0 0 16 16"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M7 7H4v2h3v3h2V9h3V7H9V4H7v3zm1 9A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
-      fill-rule="evenodd"
-    ></path>
-  </svg>
+<cv-button @click="onBatchAction2">
+  Save
+  <Save16 class="bx--btn__icon"/>
 </cv-button>
-<cv-button small kind="ghost" @click="onBatchAction3">
-  Ghost
-  <svg
-    class="bx--btn__icon"
-    width="16"
-    height="16"
-    viewBox="0 0 16 16"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M7 7H4v2h3v3h2V9h3V7H9V4H7v3zm1 9A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
-      fill-rule="evenodd"
-    ></path>
-  </svg>
+<cv-button @click="onBatchAction3">
+  Download
+  <Download16 class="bx--btn__icon"/>
 </cv-button>
 `,
     },
@@ -361,6 +331,9 @@ for (const version of versions(true)) {
             CvButton,
             CvOverflowMenu,
             CvOverflowMenuItem,
+            Download16,
+            TrashCan16,
+            Save16,
           },
           template: templateViewString,
           props: settings.props,

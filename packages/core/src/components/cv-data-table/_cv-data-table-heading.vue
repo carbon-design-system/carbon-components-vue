@@ -60,7 +60,6 @@ export default {
     },
     orderClass() {
       let result = '';
-      console.log('this.sortOrder', this.sortOrder);
       if (this.componentsX) {
         if (this.sortOrder === 'descending') {
           result = 'bx--table-sort--active';

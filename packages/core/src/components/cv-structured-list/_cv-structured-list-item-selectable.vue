@@ -6,8 +6,8 @@
     :class="{ ' bx--structured-list-row--selected': isChecked }"
     tabindex="0"
   >
+    <slot v-if="componentsX"></slot>
     <input
-      v-if="!componentsX"
       v-bind="$attrs"
       v-on="inputListeners"
       tabindex="-1"
@@ -26,18 +26,7 @@
         ></path>
       </svg>
     </div>
-    <slot></slot>
-    <input
-      v-if="componentsX"
-      v-bind="$attrs"
-      v-on="inputListeners"
-      tabindex="-1"
-      :id="uid"
-      class="bx--structured-list-input"
-      :checked="isChecked"
-      :value="value"
-      type="radio"
-    />
+    <slot v-if="!componentsX"></slot>
   </label>
 </template>
 
@@ -55,5 +44,3 @@ export default {
   data: () => ({ componentsX }),
 };
 </script>
-
-<style lang="scss"></style>

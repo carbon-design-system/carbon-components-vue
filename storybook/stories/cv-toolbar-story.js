@@ -14,6 +14,7 @@ import CvToolbarDivider from '@carbon/vue/src/components/cv-toolbar/cv-toolbar-d
 import CvToolbarOption from '@carbon/vue/src/components/cv-toolbar/cv-toolbar-option';
 import CvToolbarSearch from '@carbon/vue/src/components/cv-toolbar/cv-toolbar-search';
 import CvToolbarTitle from '@carbon/vue/src/components/cv-toolbar/cv-toolbar-title';
+import CvButton from '@carbon/vue/src/components/cv-button/cv-button';
 
 const storiesDefault = storiesOf('Components/CvToolbar', module);
 const storiesExperimental = storiesOf('Experimental/CvToolbar', module);
@@ -41,7 +42,7 @@ for (const version of versions(true)) {
 <cv-toolbar>
   <cv-toolbar-search v-model="searchInput"/>
 
-  <cv-overflow-menu>
+  <cv-overflow-menu class="bx--toolbar-action">
     <template slot="trigger">
       <Filter16 v-if="componentsX" class="bx--overflow-menu__icon bx--toolbar-filter-icon" />
       <svg v-else class="bx--overflow-menu__icon bx--toolbar-filter-icon" width="16" height="12" viewBox="0 0 16 12">
@@ -62,7 +63,7 @@ for (const version of versions(true)) {
     </cv-toolbar-option>
   </cv-overflow-menu>
 
-  <cv-overflow-menu>
+  <cv-overflow-menu class="bx--toolbar-action">
     <cv-overflow-menu-item primary-focus>Refresh table</cv-overflow-menu-item>
     <cv-toolbar-divider></cv-toolbar-divider>
     <cv-toolbar-title title="ROW HEIGHT" />
@@ -73,6 +74,8 @@ for (const version of versions(true)) {
       <cv-radio-button name="row-height" label="Tall" value="tall" />
     </cv-toolbar-option>
   </cv-overflow-menu>
+
+  <cv-button small>Test</cv-button>
 </cv-toolbar>
   `;
 
@@ -92,6 +95,7 @@ for (const version of versions(true)) {
           components: {
             CvToolbar,
             SvTemplateView,
+            CvButton,
             CvCheckbox,
             CvOverflowMenu,
             CvOverflowMenuItem,
