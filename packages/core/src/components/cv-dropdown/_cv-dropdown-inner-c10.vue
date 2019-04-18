@@ -16,66 +16,64 @@
 -->
 
 <template>
-  <div>
-    <cv-wrapper :tag-type="formItem ? 'div' : ''" class="cv-dropdown bx--form-item">
-      <div class="bx--dropdown__wrapper" :class="{ 'bx--dropdown__wrapper--inline': inline, 'cv-dropdown': !formItem }">
-        <label :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">{{ label }}</label>
+  <div class="cv-dropdown" :class="{ 'bx--form-item': formItem }">
+    <div class="bx--dropdown__wrapper" :class="{ 'bx--dropdown__wrapper--inline': inline, 'cv-dropdown': !formItem }">
+      <label :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">{{ label }}</label>
 
-        <div
-          v-if="!inline && isHelper"
-          class="bx--form__helper-text"
-          :class="{ 'bx--form__helper-text--disabled': $attrs.disabled }"
-        >
-          <slot name="helper-text">{{ helperText }}</slot>
-        </div>
+      <div
+        v-if="!inline && isHelper"
+        class="bx--form__helper-text"
+        :class="{ 'bx--form__helper-text--disabled': $attrs.disabled }"
+      >
+        <slot name="helper-text">{{ helperText }}</slot>
+      </div>
 
-        <ul
-          data-dropdown
-          :data-value="internalValue"
-          :data-invalid="isInvalid"
-          class="bx--dropdown"
-          tabindex="0"
-          :class="{
-            'bx--dropdown--light': theme === 'light',
-            'bx--dropdown--up': up,
-            'bx--dropdown--open': open,
-            'bx--dropdown--invalid': isInvalid,
-            'bx--dropdown--disabled': $attrs.disabled,
-            'bx--dropdown--inline': inline,
-          }"
-          v-bind="$attrs"
-          @keydown.down.prevent="onDown"
-          @keydown.up.prevent="onUp"
-          @keydown.enter.prevent="onClick"
-          @keydown.esc.prevent="onEsc"
-          @click="onClick"
-        >
-          <WarningFilled16 v-if="isInvalid" class="bx--dropdown__invalid-icon" />
-          <li v-if="inline" class="bx--dropdown-text" ref="valueContent">
-            <span class="bx--dropdown-text__inner">{{ placeholder }}</span>
+      <ul
+        data-dropdown
+        :data-value="internalValue"
+        :data-invalid="isInvalid"
+        class="bx--dropdown"
+        tabindex="0"
+        :class="{
+          'bx--dropdown--light': theme === 'light',
+          'bx--dropdown--up': up,
+          'bx--dropdown--open': open,
+          'bx--dropdown--invalid': isInvalid,
+          'bx--dropdown--disabled': $attrs.disabled,
+          'bx--dropdown--inline': inline,
+        }"
+        v-bind="$attrs"
+        @keydown.down.prevent="onDown"
+        @keydown.up.prevent="onUp"
+        @keydown.enter.prevent="onClick"
+        @keydown.esc.prevent="onEsc"
+        @click="onClick"
+      >
+        <WarningFilled16 v-if="isInvalid" class="bx--dropdown__invalid-icon" />
+        <li v-if="inline" class="bx--dropdown-text" ref="valueContent">
+          <span class="bx--dropdown-text__inner">{{ placeholder }}</span>
+          <chevron-down-16 class="bx--dropdown__arrow" />
+        </li>
+        <template v-else>
+          <li class="bx--dropdown-text" ref="valueContent">{{ placeholder }}</li>
+          <li class="bx--dropdown__arrow-container">
             <chevron-down-16 class="bx--dropdown__arrow" />
           </li>
-          <template v-else>
-            <li class="bx--dropdown-text" ref="valueContent">{{ placeholder }}</li>
-            <li class="bx--dropdown__arrow-container">
-              <chevron-down-16 class="bx--dropdown__arrow" />
-            </li>
-          </template>
+        </template>
 
-          <li>
-            <ul class="bx--dropdown-list">
-              <slot></slot>
-            </ul>
-          </li>
-        </ul>
-        <div v-if="isInvalid && inline" class="bx--form-requirement">
-          <slot name="invalid-message">{{ invalidMessage }}</slot>
-        </div>
-      </div>
-      <div v-if="isInvalid && !inline" class="bx--form-requirement">
+        <li>
+          <ul class="bx--dropdown-list">
+            <slot></slot>
+          </ul>
+        </li>
+      </ul>
+      <div v-if="isInvalid && inline" class="bx--form-requirement">
         <slot name="invalid-message">{{ invalidMessage }}</slot>
       </div>
-    </cv-wrapper>
+    </div>
+    <div v-if="isInvalid && !inline" class="bx--form-requirement">
+      <slot name="invalid-message">{{ invalidMessage }}</slot>
+    </div>
   </div>
 </template>
 
@@ -84,13 +82,12 @@ import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
 import WarningFilled16 from '@carbon/icons-vue/lib/warning--filled/16';
 import ChevronDown16 from '@carbon/icons-vue/lib/chevron--down/16';
-import CvWrapper from '../cv-wrapper/_cv-wrapper';
 
 export default {
   name: 'CvDropdownInner',
   inheritAttrs: false,
   mixins: [uidMixin, themeMixin],
-  components: { WarningFilled16, ChevronDown16, CvWrapper },
+  components: { WarningFilled16, ChevronDown16 },
   props: {
     formItem: { type: Boolean, default: true },
     inline: Boolean,
