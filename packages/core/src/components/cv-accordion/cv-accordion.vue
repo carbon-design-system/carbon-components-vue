@@ -9,5 +9,3 @@ export default {
   name: 'CvAccordion',
 };
 </script>
-
-<style lang="scss"></style>

@@ -44,5 +44,3 @@ export default {
   data: () => ({ componentsX }),
 };
 </script>
-
-<style lang="scss"></style>

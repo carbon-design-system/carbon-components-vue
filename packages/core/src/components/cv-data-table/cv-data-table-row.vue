@@ -1,10 +1,10 @@
 <template>
-  <tr>
-    <td v-if="hasBatchActions">
+  <tr class="cv-data-table-row">
+    <td v-if="hasBatchActions" class="bx--table-column-checkbox">
       <cv-checkbox :form-item="false" :value="value" v-model="dataChecked" @change="onChange" ref="rowChecked" />
     </td>
     <slot />
-    <td v-if="hasOverflowMenu">
+    <td v-if="hasOverflowMenu" class="bx--table-column-menu">
       <cv-overflow-menu flip-menu>
         <cv-overflow-menu-item
           v-for="(item, index) in overflowMenu"
@@ -74,3 +74,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.cv-data-table-row .cv-checkbox.bx--checkbox-wrapper {
+  margin: 0;
+}
+</style>

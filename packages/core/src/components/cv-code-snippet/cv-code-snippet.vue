@@ -1,6 +1,8 @@
 <template>
   <component class="cv-code-snippet" :is="theComponent" v-bind="$attrs" @copy-code="onCopyCode">
-    <code ref="code"> <slot></slot> </code>
+    <code ref="code">
+      <slot></slot>
+    </code>
     <!-- textarea cannot be fully hidden for clipboard to work -->
     <textarea
       class="cv-code-snippet__clippy"
@@ -53,5 +55,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss"></style>

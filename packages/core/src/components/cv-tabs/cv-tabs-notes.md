@@ -33,3 +33,4 @@ http://www.carbondesignsystem.com/components/tabs/code
 - id: required
 - selected: optional
 - label: required label for tab link
+- disabled: optional

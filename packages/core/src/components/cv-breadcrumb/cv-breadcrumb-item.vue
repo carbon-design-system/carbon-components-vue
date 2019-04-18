@@ -9,5 +9,3 @@ export default {
   name: 'CvBreadcrumbItem',
 };
 </script>
-
-<style lang="scss"></style>

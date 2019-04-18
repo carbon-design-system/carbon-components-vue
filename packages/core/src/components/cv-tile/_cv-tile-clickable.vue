@@ -9,5 +9,3 @@ export default {
   name: 'CvTileClickable',
 };
 </script>
-
-<style lang="scss"></style>
