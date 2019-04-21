@@ -16,7 +16,7 @@
 -->
 
 <template>
-  <cv-wrapper :tag-type="formItem ? 'div' : ''" class="cv-dropdown bx--form-item">
+  <div class="cv-dropdown" :class="{ 'bx--form-item': formItem }">
     <div class="bx--dropdown__wrapper" :class="{ 'bx--dropdown__wrapper--inline': inline, 'cv-dropdown': !formItem }">
       <label :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">{{ label }}</label>
 
@@ -74,7 +74,7 @@
     <div v-if="isInvalid && !inline" class="bx--form-requirement">
       <slot name="invalid-message">{{ invalidMessage }}</slot>
     </div>
-  </cv-wrapper>
+  </div>
 </template>
 
 <script>
@@ -82,13 +82,12 @@ import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
 import WarningFilled16 from '@carbon/icons-vue/lib/warning--filled/16';
 import ChevronDown16 from '@carbon/icons-vue/lib/chevron--down/16';
-import CvWrapper from '../cv-wrapper/_cv-wrapper';
 
 export default {
   name: 'CvDropdownInner',
   inheritAttrs: false,
   mixins: [uidMixin, themeMixin],
-  components: { WarningFilled16, ChevronDown16, CvWrapper },
+  components: { WarningFilled16, ChevronDown16 },
   props: {
     formItem: { type: Boolean, default: true },
     inline: Boolean,
