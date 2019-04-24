@@ -14,8 +14,6 @@
         >V1: (previous version) built using Carbon Components 9.</a
       >
     </div>
-
-    <div class="versions__dots" />
   </main>
 </template>
 
