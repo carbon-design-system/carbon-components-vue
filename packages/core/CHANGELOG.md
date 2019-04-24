@@ -1,3 +1,10 @@
+## 2.0.1/2 (April 24, 2019)
+
+### Bug fixes
+
+- Correct tabs narrow styling
+- Correct dropdown initial value
+
 ## 2.0.0 (April 24, 2019)
 
 ### Features
