@@ -1,3 +1,9 @@
+## 2.0.3 (April 24, 2019)
+
+### Bug fixes
+
+- Correct cv-tab name
+
 ## 2.0.1/2 (April 24, 2019)
 
 ### Bug fixes
