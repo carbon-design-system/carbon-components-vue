@@ -21,7 +21,7 @@ The [library](http://vue.carbondesignsystem.com/) provides front-end developers 
 
 A library of the Carbon core components
 
-<img src="./docs/AtCarbonVue2.png" alt="@carbon/vue" height="400px"></div>
+<img src="./docs/AtCarbonVue2.png" alt="@carbon/vue"></div>
 
 ### List of available components
 
