@@ -1,5 +1,6 @@
 import { storiesOf } from '@storybook/vue';
 import { text } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../_storybook/utils/consts';
@@ -72,6 +73,11 @@ const variants = [
     name: 'deprecated',
     extra: { kind: { group: 'attr', value: 'kind="deprecated"' } },
     skip: { default: false, experimental: true },
+  },
+  {
+    name: 'filter',
+    extra: { kind: { group: 'attr', value: 'kind="filter" @click="onClick"' } },
+    skip: { default: true, experimental: false },
   },
   {
     name: 'red',
@@ -166,6 +172,9 @@ for (const version of versions(true)) {
           data: () => ({ experimental: version.experimental }),
           template: templateViewString,
           props: settings.props,
+          methods: {
+            onClick: action('Filter close click'),
+          },
         };
       },
       {
