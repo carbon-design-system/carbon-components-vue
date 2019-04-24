@@ -1,6 +1,6 @@
 <template>
   <div
-    class="cv-tabs-panel"
+    class="cv-tab"
     :id="id"
     role="tabpanel"
     :aria-labelledby="`${id}-link`"
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: 'CvTabsPanel',
+  name: 'CvTab',
   props: {
     id: { type: String, required: true },
     selected: Boolean,
