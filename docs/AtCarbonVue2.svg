@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1212px" height="415px" version="1.1" viewBox="0 0 1212 415">
+    <g id="Page-1" fill="none" fill-rule="evenodd" stroke="none" stroke-width="1" style="color:#ffffff">
+        <g id="CarbonVue2" transform="translate(-24.000000, -67.000000)">
+            <text id="2" fill="currentColor" font-family="IBMPlexSans, IBM Plex Sans" font-size="200" font-weight="700" letter-spacing="56.2999992">
+                <tspan x="1129" y="458">2</tspan>
+            </text>
+            <text id="/" fill="currentColor" font-family="IBMPlexSans, IBM Plex Sans" font-size="390" font-weight="normal" letter-spacing="56.3133202">
+                <tspan x="650" y="400">/</tspan>
+            </text>
+            <text id="@" fill="currentColor" font-family="IBMPlexSans, IBM Plex Sans" font-size="384" font-weight="normal" letter-spacing="56.2999992">
+                <tspan x="0" y="398">@</tspan>
+            </text>
+            <polyline id="Line" stroke="currentColor" stroke-linecap="square" stroke-width="25" points="475.852539 117.421875 536.832031 82.1933594 667.509766 157.515625 667.509766 230.613281"/>
+            <text id="⬡" fill="currentColor" font-family="STIXGeneral-Regular, STIXGeneral" font-size="384" font-weight="normal" letter-spacing="56.2999992">
+                <tspan x="313" y="413">⬡</tspan>
+            </text>
+            <g id="white-on-dark-logo" fill="currentColor" transform="translate(797.000000, 111.000000)">
+                <polygon id="Path" points="199 206.395953 85.5028985 10.3169997 79.5310717 0 0 0 5.97055976 10.3209676 199 344 398 0 318.408109 0"/>
+                <polygon id="Path" points="198.994932 58.4293186 164.916847 4.04448609e-14 153.05743 4.04448609e-14 0 4.04448609e-14 5.96011715 10.2623535 159.035204 10.2623535 198.994932 79 238.971031 10.2623535 392.029747 10.2623535 398 0 244.932433 1.57085716e-14 233.079542 4.04448609e-14"/>
+            </g>
+        </g>
+    </g>
+</svg>
