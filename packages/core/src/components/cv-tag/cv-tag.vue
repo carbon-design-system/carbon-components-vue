@@ -1,9 +1,13 @@
 <template>
-  <span class="cv-tag bx--tag" :class="`bx--tag--${kind}`">{{ label }}</span>
+  <span class="cv-tag bx--tag" :class="[`bx--tag--${kind}`, { 'bx--tag--filter': isFilter }]" :title="title">
+    {{ label }}
+    <Close16 v-if="isFilter" aria-label="Clear filter" @click="$emit('click')" />
+  </span>
 </template>
 
 <script>
 import { componentsX } from '../../internal/feature-flags';
+import Close16 from '@carbon/icons-vue/lib/close/16';
 
 const components9Tags = [
   'ibm',
@@ -17,10 +21,23 @@ const components9Tags = [
   'private',
   'deprecated',
 ];
-const componentsXTags = ['red', 'magenta', 'purple', 'blue', 'cyan', 'teal', 'green', 'gray', 'cool-gray', 'warm-gray'];
+const componentsXTags = [
+  'filter',
+  'red',
+  'magenta',
+  'purple',
+  'blue',
+  'cyan',
+  'teal',
+  'green',
+  'gray',
+  'cool-gray',
+  'warm-gray',
+];
 
 export default {
   name: 'CvTag',
+  components: { Close16 },
   data: () => ({ componentsX }),
   props: {
     label: { type: String, required: true },
@@ -34,6 +51,14 @@ export default {
           return components9Tags.includes(val);
         }
       },
+    },
+  },
+  computed: {
+    isFilter() {
+      return this.kind === 'filter';
+    },
+    title() {
+      return this.isFilter ? 'Close filter' : null;
     },
   },
 };
