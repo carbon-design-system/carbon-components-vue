@@ -1,11 +1,11 @@
 ## 2.0.0 (April 24, 2019)
 
- ### Features
+### Features
 
 - Added filter tag
 - Added disabled state for tab component
 
- ### Bug Fixes
+### Bug Fixes
 
 - Fixed multiple roots in dropdown.
 - Fixes to table layout
