@@ -16,9 +16,11 @@
 -->
 
 <template>
-  <div class="cv-dropdown" :class="{ 'bx--form-item': formItem }">
+  <div :class="{ 'bx--form-item': formItem }">
     <div class="bx--dropdown__wrapper" :class="{ 'bx--dropdown__wrapper--inline': inline, 'cv-dropdown': !formItem }">
-      <label :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">{{ label }}</label>
+      <label v-if="label" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">{{
+        label
+      }}</label>
 
       <div
         v-if="!inline && isHelper"
@@ -107,6 +109,11 @@ export default {
       dataValue: this.value,
     };
   },
+  created() {
+    // add these on created otherwise cv:mounted is too late.
+    this.$on('cv:mounted', srcComponent => this.onCvMount(srcComponent));
+    this.$on('cv:beforeDestroy', srcComponent => this.onCvBeforeDestroy(srcComponent));
+  },
   mounted() {
     this.$el.addEventListener('focusout', ev => {
       if (ev.relatedTarget === null || !this.$el.contains(ev.relatedTarget)) {
@@ -155,6 +162,21 @@ export default {
     },
   },
   methods: {
+    onCvMount(srcComponent) {
+      if (srcComponent.internalSelected) {
+        this.internalValue = srcComponent.value;
+      } else {
+        if (this.internalValue === srcComponent.value) {
+          srcComponent.internalSelected = true;
+          this.internalValue = srcComponent.value;
+        }
+      }
+    },
+    onCvBeforeDestroy(srcComponent) {
+      if (srcComponent.value === this.internalValue) {
+        this.internalValue = null;
+      }
+    },
     dropdownItems() {
       return this.$children.filter(item => item.$_CvDropdownItem);
     },
