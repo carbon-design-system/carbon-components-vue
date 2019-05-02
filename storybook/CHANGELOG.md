@@ -1,3 +1,30 @@
+## 2.0.0 (April 24, 2019)
+
+### Features
+
+- Added filter tag
+- Added disabled state for tab component
+- Add up overflow menu
+
+### Bug Fixes
+
+- Fixed multiple roots in dropdown.
+- Fixes to table layout
+- Fixes to search
+- Other styling fixes for: structured list, switcher, overflow menu, select
+
+### Dependency versions
+
+Versions reflect those version was built using.
+
+| Dependency           | Version      | Notes             |
+| -------------------- | ------------ | ----------------- |
+| @carbon/icon-helpers | 0.0.1-beta.0 | experimental only |
+| @carbon/icons-vue    | 0.0.1-beta.0 | experimental only |
+| carbon-components    | 9.91.0       |                   |
+| flatpickr            | 4.5.2        |                   |
+| vue                  | 2.6.10       |                   |
+
 ## 2.0.0-alpha.1 (April 1, 2019)
 
 ### Features

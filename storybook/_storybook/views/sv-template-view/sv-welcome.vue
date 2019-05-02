@@ -1,6 +1,6 @@
 <template>
   <main class="welcome">
-    <div class="welcome__background"></div>
+    <img class="welcome__background-image" src="../../../..//docs/AtCarbonVue2.svg" alt="@carbon/vue" />
     <div class="welcome__info">
       <h1 class="welcome__heading">
         <span class="highlight">Carbon</span> Design system in
@@ -29,24 +29,11 @@ export default {
   height: 100vh;
   overflow: hidden;
   transition: background-size 0.6s ease;
-  background: linear-gradient(90deg, #2e3f8f, #3057d5, #3057d5, #3c6df0, #3057d5, #3057d5, #2e3f8f);
-}
-
-.welcome__background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('../../../../docs/AtCarbonVue.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
+  background-color: #000;
 }
 
 .welcome__background-image {
-  width: auto;
-  height: 100%;
+  height: 300px;
 }
 
 .welcome__info {
