@@ -220,9 +220,6 @@ export default {
     };
   },
   watch: {
-    data() {
-      this.internalPagination.numberOfItems = this.data.length;
-    },
     sortable() {
       this.watchColumns();
     },
@@ -267,7 +264,7 @@ export default {
       return false;
     },
     internalNumberOfItems() {
-      if (this.internalPagination && typeof this.internalPagination.numberOfItems === 'number') {
+      if (this.internalPagination.numberOfItems !== undefined) {
         return this.internalPagination.numberOfItems;
       } else {
         return this.registeredRows.length;
