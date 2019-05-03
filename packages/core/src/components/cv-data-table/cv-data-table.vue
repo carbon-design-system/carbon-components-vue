@@ -267,9 +267,11 @@ export default {
       return false;
     },
     internalNumberOfItems() {
-      if (this.internalPagination && typeof this.internalPagination.numberOfItems === 'number') {
+      if (this.internalPagination.numberOfItems !== undefined) {
+        console.log('numberOfItems');
         return this.internalPagination.numberOfItems;
       } else {
+        console.log('registeredRow.length');
         return this.registeredRows.length;
       }
     },
