@@ -87,7 +87,7 @@
       v-if="pagination"
       :backward-text="pagination.backwardText"
       :forward-text="pagination.forwardText"
-      :number-of-items="this.registeredRows.length"
+      :number-of-items="internalNumberOfItems"
       :page="pagination.page"
       :page-number-label="pagination.pageNumberLabel"
       :page-sizes-label="pagination.pageSizesLabel"
@@ -199,6 +199,13 @@ export default {
         }
       }
       return false;
+    },
+    internalNumberOfItems() {
+      if (this.internalPagination && typeof this.internalPagination.numberOfItems === 'number') {
+        return this.internalPagination.numberOfItems;
+      } else {
+        return this.registeredRows.length;
+      }
     },
     modifierClasses() {
       const prefix = 'bx--data-table-v2--';
