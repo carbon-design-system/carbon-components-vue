@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import componentsX from '../../internal/feature-flags';
+import { componentsX } from '../../internal/feature-flags';
 
 export default {
   name: 'CvStructuredList',

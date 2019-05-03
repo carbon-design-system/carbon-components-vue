@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { text, boolean } from '@storybook/addon-knobs';
+import { text, boolean, select } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
@@ -102,6 +102,25 @@ const preKnobs = {
     slot: {
       name: 'invalid-message',
       value: 'Invalid message text',
+    },
+  },
+  value: {
+    group: 'attr',
+    type: select,
+    config: [
+      'initial value',
+      {
+        none: '',
+        option1: 'cv-select-option1',
+        option2: 'cv-select-option2',
+        option3: 'cv-select-option3',
+        option4: 'cv-select-option4',
+      },
+      '',
+    ], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      name: 'value',
+      type: String,
     },
   },
 };

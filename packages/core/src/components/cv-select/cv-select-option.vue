@@ -1,5 +1,7 @@
 <template>
-  <option class="cv-select-option bx--select-option"> <slot></slot> </option>
+  <option class="cv-select-option bx--select-option">
+    <slot></slot>
+  </option>
 </template>
 
 <script>
