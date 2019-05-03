@@ -116,7 +116,7 @@
               v-for="(row, rowIndex) in data"
               :key="`row:${rowIndex}`"
               :value="`${rowIndex}`"
-              ref="dataRowsSelected"
+              ref="dataRows"
               :overflow-menu="overflowMenu"
             >
               <cv-data-table-cell
@@ -216,6 +216,7 @@ export default {
       searchValue: '',
       clearSearchVisible: false,
       searchActive: false,
+      registeredRows: [],
     };
   },
   watch: {
@@ -231,6 +232,11 @@ export default {
     rowsSelected() {
       this.updateRowsSelected();
     },
+  },
+  created() {
+    // add these on created otherwise cv:mounted is too late.
+    this.$on('cv:mounted', srcComponent => this.onCvMount(srcComponent));
+    this.$on('cv:beforeDestroy', srcComponent => this.onCvBeforeDestroy(srcComponent));
   },
   mounted() {
     console.warn(
@@ -264,7 +270,7 @@ export default {
       if (this.internalPagination && typeof this.internalPagination.numberOfItems === 'number') {
         return this.internalPagination.numberOfItems;
       } else {
-        return rows(this.$children).length;
+        return this.registeredRows.length;
       }
     },
     modifierClasses() {
@@ -288,6 +294,13 @@ export default {
     },
   },
   methods: {
+    onCvMount(row) {
+      this.registeredRows.push(row);
+    },
+    onCvBeforeDestroy(row) {
+      const index = this.registeredRows.findIndex(item => row.uid === item.uid);
+      this.registeredRows.slice(index, 1);
+    },
     checkSearchFocus(ev) {
       if (!this.$refs.searchContainer.contains(ev.relatedTarget)) {
         this.searchActive = false;
