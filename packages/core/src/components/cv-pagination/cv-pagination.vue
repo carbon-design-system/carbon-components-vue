@@ -2,6 +2,7 @@
   <div class="cv-pagination bx--pagination" data-pagination>
     <div class="bx--pagination__left">
       <cv-select
+        class="bx--select__item-count"
         :label="`${pageSizesLabel}`"
         inline
         ref="pageSizeSelect"
@@ -17,28 +18,29 @@
       </cv-select>
 
       <span class="bx--pagination__text">
-        <span>|&nbsp;</span>
+        <span v-if="!componentsX">|&nbsp;</span>
         <span data-displayed-item-range>{{ rangeText }}</span>
       </span>
     </div>
 
     <div class="bx--pagination__right">
-      <span class="bx--pagination__text">{{ pageOfPages }}</span>
+      <span v-if="!componentsX" class="bx--pagination__text">{{ pageOfPages }}</span>
 
       <button
+        v-if="!componentsX"
         type="button"
         class="bx--pagination__button bx--pagination__button--backward"
         data-page-backward
         :aria-label="backwardText"
         @click="onPrevPage"
       >
-        <ChevronLeft16 v-if="componentsX" class="bx--pagination__button-icon" />
-        <svg v-else class="bx--pagination__button-icon" width="7" height="12" viewBox="0 0 7 12">
+        <svg class="bx--pagination__button-icon" width="7" height="12" viewBox="0 0 7 12">
           <path fill-rule="nonzero" d="M1.45 6.002L7 11.27l-.685.726L0 6.003 6.315 0 7 .726z"></path>
         </svg>
       </button>
 
       <cv-select
+        class="bx--select__page-number"
         :label="`${pageNumberLabel}:`"
         inline
         hideLabel
@@ -47,11 +49,30 @@
         @input="onPageChange"
         :value="`${pageValue}`"
       >
-        <cv-select-option v-for="pageNumber in pages" :key="pageNumber" :value="`${pageNumber}`">
-          {{ pageNumber }}
-        </cv-select-option>
+        <cv-select-option
+          v-for="pageNumber in pages"
+          :key="pageNumber"
+          :value="`${pageNumber}`"
+          :selected="pageValue === pageNumber"
+          >{{ pageNumber }}</cv-select-option
+        >
       </cv-select>
+      <span v-if="componentsX" class="bx--pagination__text">{{ pageOfPages }}</span>
+
       <span v-if="pages.length == 0">{{ pageValue }}</span>
+
+      <button
+        v-if="componentsX"
+        type="button"
+        class="bx--pagination__button bx--pagination__button--backward"
+        data-page-backward
+        :aria-label="backwardText"
+        @click="onPrevPage"
+        :disabled="noWayBack"
+        :class="{ 'bx--pagination__button--no-index': noWayBack }"
+      >
+        <CaretLeft16 class="bx--pagination__button-icon" />
+      </button>
 
       <button
         type="button"
@@ -59,9 +80,10 @@
         data-page-forward
         :aria-label="forwardText"
         @click="onNextPage"
-        :disabled="this.pageValue === this.pageCount"
+        :disabled="noWayForward"
+        :class="{ 'bx--pagination__button--no-index': noWayForward }"
       >
-        <ChevronRight16 v-if="componentsX" class="bx--pagination__button-icon" />
+        <CaretRight16 v-if="componentsX" class="bx--pagination__button-icon" />
         <svg v-else class="bx--pagination__button-icon" width="7" height="12" viewBox="0 0 7 12">
           <path fill-rule="nonzero" d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"></path>
         </svg>
@@ -74,8 +96,8 @@
 import CvSelect from '../cv-select/cv-select';
 import CvSelectOption from '../cv-select/cv-select-option';
 import { componentsX } from '../../internal/feature-flags';
-import ChevronLeft16 from '@carbon/icons-vue/lib/chevron--left/16';
-import ChevronRight16 from '@carbon/icons-vue/lib/chevron--right/16';
+import CaretLeft16 from '@carbon/icons-vue/lib/caret--left/16';
+import CaretRight16 from '@carbon/icons-vue/lib/caret--right/16';
 
 const newPageValue = (page, lastPage) => {
   let result = 1;
@@ -119,12 +141,12 @@ const newFirstItem = (pageValue, pageSizeValue) => 1 + (pageValue - 1) * pageSiz
 
 export default {
   name: 'CvPagination',
-  components: { CvSelect, CvSelectOption, ChevronLeft16, ChevronRight16 },
+  components: { CvSelect, CvSelectOption, CaretLeft16, CaretRight16 },
   props: {
     backwardText: { type: String, default: 'Prev page' },
     forwardText: { type: String, default: 'Next page' },
     pageNumberLabel: { type: String, default: 'Page number:' },
-    pageSizesLabel: { type: String, default: 'Items per page' },
+    pageSizesLabel: { type: String, default: 'Items per page:' },
     numberOfItems: { type: Number, default: Infinity },
     page: Number,
     pageSizes: { type: Array, default: () => [10, 20, 30, 40, 50] },
@@ -145,13 +167,14 @@ export default {
     this.pageValue = newPageValue(this.page, this.pageCount);
     this.pages = newPagesArray(this.pageCount);
     this.firstItem = newFirstItem(this.pageValue, this.pageSizeValue);
+    // console.log(this.pageValue);
   },
   watch: {
     numberOfItems() {
       this.pageCount = newPageCount(this.numberOfItems, this.pageSizeValue);
       this.pages = newPagesArray(this.pageCount);
-      this.pageValue = Math.min(this.pageCount, Math.ceil(this.firstItem / this.pageSizeValue));
-      this.firstItem = 1 + (this.pageValue - 1) * this.pageSizeValue;
+      this.pageValue = Math.max(this.pageCount, Math.ceil(this.firstItem / this.pageSizeValue));
+      this.firstItem = Math.max(0, 1 + (this.pageValue - 1) * this.pageSizeValue);
     },
     page() {
       this.pageValue = newPageValue(this.page, this.pageCount);
@@ -167,10 +190,20 @@ export default {
     },
   },
   computed: {
+    noWayBack() {
+      return this.pageValue === 1;
+    },
+    noWayForward() {
+      return this.pageValue === this.pageCount;
+    },
     pageOfPages() {
       // console.log(this.pageValue, this.pageCount);
       if (this.numberOfItems !== Infinity) {
-        return `${this.pageValue} of ${this.pageCount}`;
+        if (this.componentsX) {
+          return `of ${this.pageCount} pages`;
+        } else {
+          return `${this.pageValue} of ${this.pageCount}`;
+        }
       }
       return '';
     },
@@ -179,7 +212,7 @@ export default {
       const end = Math.min(start + parseInt(this.pageSizeValue, 10) - 1, this.numberOfItems);
 
       if (this.numberOfItems !== Infinity) {
-        return `${start}-${end} of ${this.numberOfItems}`;
+        return `${start}-${end} of ${this.numberOfItems} items`;
       } else {
         return `${start}-${end}`;
       }
@@ -225,4 +258,8 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.bx--pagination .bx--select .bx--select-input ~ .bx--select__arrow {
+  position: absolute;
+}
+</style>
