@@ -1,3 +1,9 @@
+## 2.0.4 (May 3, 2019)
+
+### Bug fixes
+
+- Fix table pagination
+
 ## 2.0.0 (April 24, 2019)
 
 ### Features
