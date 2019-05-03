@@ -157,6 +157,15 @@ const preKnobs = {
     group: 'attr',
     value: '@search="onFilter"',
   },
+  basicPagination: {
+    group: 'attr',
+    type: boolean,
+    config: ['basic pagination', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: Boolean,
+      name: 'pagination',
+    },
+  },
   pagination: {
     group: 'attr',
     value: ':pagination="{ numberOfItems: internalData.length }" @pagination="actionOnPagination"',
@@ -289,10 +298,10 @@ const preKnobs = {
 };
 
 const variants = [
-  { name: 'default', excludes: ['columns2', 'slottedData', 'htmlData'] },
+  { name: 'default', excludes: ['columns2', 'slottedData', 'htmlData', 'basicPagination'] },
   { name: 'minimal', includes: ['columns', 'data'] },
-  { name: 'slotted data', includes: ['columns', 'slottedData', 'data'] },
-  { name: 'slotted HTML', includes: ['columns', 'htmlData'] },
+  { name: 'slotted data', includes: ['columns', 'slottedData', 'data', 'basicPagination'] },
+  { name: 'slotted HTML', includes: ['columns', 'htmlData', 'basicPagination'] },
   { name: 'styled columns', includes: ['columns2', 'data'] },
 ];
 

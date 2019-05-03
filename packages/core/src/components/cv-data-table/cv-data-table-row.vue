@@ -27,10 +27,12 @@
 import CvCheckbox from '../cv-checkbox/cv-checkbox';
 import CvOverflowMenu from '../cv-overflow-menu/cv-overflow-menu';
 import CvOverflowMenuItem from '../cv-overflow-menu/cv-overflow-menu-item';
+import uidMixin from '../../mixins/uid-mixin';
 
 export default {
   name: 'CvDataTableRow',
   components: { CvCheckbox, CvOverflowMenu, CvOverflowMenuItem },
+  mixins: [uidMixin],
   props: {
     checked: Boolean,
     overflowMenu: Array,
@@ -49,6 +51,12 @@ export default {
     return {
       dataChecked: this.checked,
     };
+  },
+  mounted() {
+    this.$parent.$emit('cv:mounted', this);
+  },
+  beforeDestroy() {
+    this.$parent.$emit('cv:beforeDestroy', this);
   },
   computed: {
     isCvDataTableRow() {

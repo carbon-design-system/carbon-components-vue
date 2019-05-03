@@ -8,7 +8,7 @@ $css--plex: true;
 
 $feature-flags: (
   components-x: false,
-  ui-shell: false
+  ui-shell: false,
 );
 
 @import '~carbon-components/scss/globals/scss/styles.scss';

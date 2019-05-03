@@ -68,7 +68,7 @@
               v-for="(row, rowIndex) in data"
               :key="`row:${rowIndex}`"
               :value="`${rowIndex}`"
-              ref="dataRowsSelected"
+              ref="dataRows"
               :overflow-menu="overflowMenu"
             >
               <cv-data-table-cell
@@ -87,7 +87,7 @@
       v-if="pagination"
       :backward-text="pagination.backwardText"
       :forward-text="pagination.forwardText"
-      :number-of-items="internalNumberOfItems"
+      :number-of-items="this.registeredRows.length"
       :page="pagination.page"
       :page-number-label="pagination.pageNumberLabel"
       :page-sizes-label="pagination.pageSizesLabel"
@@ -153,6 +153,7 @@ export default {
       batchActive: false,
       headingChecked: false,
       dataRowsSelected: this.rowsSelected,
+      registeredRows: [],
     };
   },
   watch: {
@@ -165,6 +166,11 @@ export default {
     rowsSelected() {
       this.updateRowsSelected();
     },
+  },
+  created() {
+    // add these on created otherwise cv:mounted is too late.
+    this.$on('cv:mounted', srcComponent => this.onCvMount(srcComponent));
+    this.$on('cv:beforeDestroy', srcComponent => this.onCvBeforeDestroy(srcComponent));
   },
   mounted() {
     console.warn(
@@ -184,7 +190,7 @@ export default {
     tableStyle() {
       return this.autoWidth ? { width: 'initial' } : { width: '100%' };
     },
-    internalPangination() {
+    internalPagination() {
       if (typeof this.pagination === 'object') {
         return this.pagination;
       } else {
@@ -193,13 +199,6 @@ export default {
         }
       }
       return false;
-    },
-    internalNumberOfItems() {
-      if (this.internalPagination && typeof this.internalPagination.numberOfItems === 'number') {
-        return Math.min(this.internalPagination.numberOfItems, rows(this.$children).length);
-      } else {
-        return rows(this.$children).length;
-      }
     },
     modifierClasses() {
       const prefix = 'bx--data-table-v2--';
@@ -219,6 +218,13 @@ export default {
     },
   },
   methods: {
+    onCvMount(row) {
+      this.registeredRows.push(row);
+    },
+    onCvBeforeDestroy(row) {
+      const index = this.registeredRows.findIndex(item => row.uid === item.uid);
+      this.registeredRows.slice(index, 1);
+    },
     updateRowsSelected() {
       this.dataRowsSelected = [];
       for (const i in this.$children) {
