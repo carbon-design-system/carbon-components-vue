@@ -206,7 +206,7 @@ export default {
       componentsX,
       dataColumns: this.sortable
         ? this.columns.map(item => ({
-            label: item,
+            label: item.label ? item.label : item,
             order: 'none',
           }))
         : this.columns,
