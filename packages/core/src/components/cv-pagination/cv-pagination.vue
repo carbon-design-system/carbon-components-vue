@@ -137,7 +137,7 @@ const newPagesArray = pageCount => {
   return Array.from({ length: pageCount }, (val, key) => key + 1);
 };
 
-const newFirstItem = (pageValue, pageSizeValue) => Math.max(0, 1 + (pageValue - 1) * pageSizeValue);
+const newFirstItem = (pageValue, pageSizeValue) => 1 + (pageValue - 1) * pageSizeValue;
 
 export default {
   name: 'CvPagination',
