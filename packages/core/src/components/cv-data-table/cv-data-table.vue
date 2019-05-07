@@ -164,7 +164,7 @@ export default {
   name: 'CvDataTable',
   components: {
     CvButton,
-    CvDataTableHeadnig,
+    CvDataTableHeading,
     CvDataTableRow,
     CvDataTableCell,
     CvCheckbox,
