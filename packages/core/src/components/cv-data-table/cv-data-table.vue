@@ -97,7 +97,7 @@
                 @change="onHeadingCheckChange"
               />
             </th>
-            <cv-data-table-headnig
+            <cv-data-table-heading
               v-for="(column, index) in dataColumns"
               :key="`${index}:${column}`"
               :heading="column.label ? column.label : column"
@@ -146,7 +146,7 @@
 </template>
 
 <script>
-import CvDataTableHeadnig from './_cv-data-table-heading';
+import CvDataTableHeading from './_cv-data-table-heading';
 import CvDataTableRow from './cv-data-table-row';
 import CvDataTableCell from './cv-data-table-cell';
 import CvButton from '../cv-button/cv-button';
@@ -206,7 +206,7 @@ export default {
       componentsX,
       dataColumns: this.sortable
         ? this.columns.map(item => ({
-            label: item,
+            label: item.label ? item.label : item,
             order: 'none',
           }))
         : this.columns,
