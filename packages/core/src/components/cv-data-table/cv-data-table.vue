@@ -200,6 +200,13 @@ export default {
       }
       return false;
     },
+    internalNumberOfItems() {
+      if (this.internalPagination && typeof this.internalPagination.numberOfItems === 'number') {
+        return this.internalPagination.numberOfItems;
+      } else {
+        return this.registeredRows.length;
+      }
+    },
     modifierClasses() {
       const prefix = 'bx--data-table-v2--';
       const sizeClass = this.rowSize.length === 0 || this.rowSize === 'standard' ? '' : `${prefix}${this.rowSize} `;

@@ -168,7 +168,7 @@ const preKnobs = {
   },
   pagination: {
     group: 'attr',
-    value: ':pagination="{ numberOfItems: internalData.length }" @pagination="actionOnPagination"',
+    value: ':pagination="{ numberOfItems: 23, pageSizes: [5, 10, 15, 20, 25] }" @pagination="actionOnPagination"',
   },
   rowSelects: {
     group: 'attr',

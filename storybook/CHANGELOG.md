@@ -42,6 +42,27 @@ Versions reflect those version was built using.
 | flatpickr            | 4.5.2        |                   |
 | vue                  | 2.6.10       |                   |
 
+## 1.1.2 (May 3, 2019)
+
+### Features
+
+### Bug Fixes
+
+- Fix table pagination
+
+### Dependency versions
+
+Versions reflect those version was built using.
+
+| Dependency           | Version      | Notes                    |
+| -------------------- | ------------ | ------------------------ |
+| @carbon/icon-helpers | 0.0.1-beta.0 | experimental only        |
+| @carbon/icons-vue    | 0.0.1-beta.0 | experimental only        |
+| carbon-components    | 9.70.1       |                          |
+| d3                   | 5.8.2        | Only needed for data-viz |
+| flatpickr            | 4.5.2        |                          |
+| vue                  | 2.6.3        |                          |
+
 ## 1.1.1 (March 19, 2019)
 
 ### Features
