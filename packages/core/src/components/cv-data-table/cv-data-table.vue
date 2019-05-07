@@ -34,7 +34,7 @@
           </div>
         </div>
 
-        <div v-if="$slots.actions && !batchActive" class="bx--toolbar-content">
+        <div v-if="($slots.actions || $listeners.search) && !batchActive" class="bx--toolbar-content">
           <div
             v-if="$listeners.search"
             :class="{
