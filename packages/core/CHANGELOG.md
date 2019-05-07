@@ -1,3 +1,10 @@
+## 2.0.7 (May 7, 2019)
+
+### Bug fixes
+
+- Various table pagination fixes
+- Ensure search is available when @search event is listented to.
+
 ## 2.0.3 (April 24, 2019)
 
 ### Bug fixes
