@@ -1,7 +1,15 @@
 <template>
   <span class="cv-tag bx--tag" :class="[`bx--tag--${kind}`, { 'bx--tag--filter': isFilter }]" :title="title">
     {{ label }}
-    <Close16 v-if="isFilter" aria-label="Clear filter" @click="$emit('click')" />
+    <Close16
+      v-if="isFilter"
+      aria-label="Clear filter"
+      @click="$emit('remove')"
+      tabindex="0"
+      @keydown.enter.prevent="$emit('remove')"
+      @keydown.space.prevent
+      @keyup.space.prevent="$emit('remove')"
+    />
   </span>
 </template>
 

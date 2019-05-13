@@ -76,7 +76,7 @@ const variants = [
   },
   {
     name: 'filter',
-    extra: { kind: { group: 'attr', value: 'kind="filter" @click="onClick"' } },
+    extra: { kind: { group: 'attr', value: 'kind="filter" @remove="onRemove"' } },
     skip: { default: true, experimental: false },
   },
   {
@@ -173,7 +173,7 @@ for (const version of versions(true)) {
           template: templateViewString,
           props: settings.props,
           methods: {
-            onClick: action('Filter close click'),
+            onRemove: action('Filter remove event'),
           },
         };
       },

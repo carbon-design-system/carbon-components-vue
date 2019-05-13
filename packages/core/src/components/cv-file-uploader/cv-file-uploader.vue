@@ -71,8 +71,8 @@
               <Close16
                 v-if="componentsX && removable"
                 class="bx--file-close"
+                :tabindex="'1'"
                 role="button"
-                tabindex="0"
                 alt="Remove file"
                 arial-label="Remove file"
                 @click="remove(index)"
