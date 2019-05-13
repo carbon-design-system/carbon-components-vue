@@ -1,5 +1,5 @@
 <template>
-  <tr class="cv-data-table-row" :class="{ 'bx--parent-row': expandingRow, 'bx--expandable-row': dataExpanded }">
+  <tr class="cv-data-table-row-inner" :class="{ 'bx--parent-row': expandingRow, 'bx--expandable-row': dataExpanded }">
     <td
       v-if="someExpandingRows"
       class="bx--table-expand"
@@ -104,7 +104,7 @@ export default {
 </script>
 
 <style lang="scss">
-.cv-data-table-row .cv-checkbox.bx--checkbox-wrapper {
+.cv-data-table-row-inner .cv-checkbox.bx--checkbox-wrapper {
   margin: 0;
 }
 </style>

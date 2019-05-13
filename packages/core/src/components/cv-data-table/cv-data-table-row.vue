@@ -1,5 +1,5 @@
 <template>
-  <tbody v-if="someExpandingRows" class="cv-data-table-row--expandable">
+  <tbody v-if="someExpandingRows" class="cv-data-table-row cv-data-table-row--expandable">
     <cv-data-table-row-inner
       ref="row"
       v-bind="$attrs"
@@ -17,13 +17,13 @@
       </td>
     </tr>
   </tbody>
-  <cv-data-table-row-inner v-else ref="row" v-bind="$attrs" v-on="$listeners">
+  <cv-data-table-row-inner v-else ref="row" v-bind="$attrs" v-on="$listeners" class="cv-data-table-row">
     <slot />
   </cv-data-table-row-inner>
 </template>
 
 <script>
-import CvDataTableRowInner from './cv-data-table-row-inner';
+import CvDataTableRowInner from './_cv-data-table-row-inner';
 
 export default {
   name: 'CvDataTableRow',
@@ -73,9 +73,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.cv-data-table-row--expandable {
-  display: content;
-}
-</style>
