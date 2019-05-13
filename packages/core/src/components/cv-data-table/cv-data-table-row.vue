@@ -1,90 +1,75 @@
 <template>
-  <tr class="cv-data-table-row">
-    <td v-if="hasBatchActions" class="bx--table-column-checkbox">
-      <cv-checkbox :form-item="false" :value="value" v-model="dataChecked" @change="onChange" ref="rowChecked" />
-    </td>
+  <tbody v-if="someExpandingRows" class="cv-data-table-row cv-data-table-row--expandable">
+    <cv-data-table-row-inner
+      ref="row"
+      v-bind="$attrs"
+      v-on="$listeners"
+      :expanding-row="dataExpandable"
+      some-expanding-rows
+    >
+      <slot />
+    </cv-data-table-row-inner>
+    <tr v-if="dataExpandable" class="bx--expandable-row bx--expandable-row--hidden" data-child-row>
+      <td colspan="9999">
+        <div class="bx--child-row-inner-container">
+          <slot name="expandedContent" />
+        </div>
+      </td>
+    </tr>
+  </tbody>
+  <cv-data-table-row-inner v-else ref="row" v-bind="$attrs" v-on="$listeners" class="cv-data-table-row">
     <slot />
-    <td v-if="hasOverflowMenu" class="bx--table-column-menu">
-      <cv-overflow-menu flip-menu>
-        <cv-overflow-menu-item
-          v-for="(item, index) in overflowMenu"
-          :key="`${index}`"
-          @click="
-            onMenuItemClick({
-              rowValue: value,
-              menuIndex: index,
-              menuLabel: item,
-            })
-          "
-          >{{ item }}</cv-overflow-menu-item
-        >
-      </cv-overflow-menu>
-    </td>
-  </tr>
+  </cv-data-table-row-inner>
 </template>
 
 <script>
-import CvCheckbox from '../cv-checkbox/cv-checkbox';
-import CvOverflowMenu from '../cv-overflow-menu/cv-overflow-menu';
-import CvOverflowMenuItem from '../cv-overflow-menu/cv-overflow-menu-item';
-import uidMixin from '../../mixins/uid-mixin';
+import CvDataTableRowInner from './_cv-data-table-row-inner';
 
 export default {
   name: 'CvDataTableRow',
-  components: { CvCheckbox, CvOverflowMenu, CvOverflowMenuItem },
-  mixins: [uidMixin],
-  props: {
-    checked: Boolean,
-    overflowMenu: Array,
-    value: { type: String, requried: true },
-  },
-  watch: {
-    checked() {
-      this.dataChecked = this.checked;
-    },
-  },
-  model: {
-    event: 'change',
-    prop: 'checked',
-  },
+  components: { CvDataTableRowInner },
   data() {
     return {
-      dataChecked: this.checked,
+      dataExpandable: this.$slots.expandedContent !== undefined,
+      dataSomeExpandingRows: false,
     };
   },
   mounted() {
     this.$parent.$emit('cv:mounted', this);
   },
+  updated() {
+    this.dataExpandable = this.$slots.expandedContent !== undefined;
+  },
   beforeDestroy() {
     this.$parent.$emit('cv:beforeDestroy', this);
   },
   computed: {
+    expandable() {
+      return this.dataExpandable;
+    },
     isCvDataTableRow() {
       return true;
     },
-    hasOverflowMenu() {
-      return (this.overflowMenu && this.overflowMenu.length) || this.$slots['overflow-menu'];
+    isChecked: {
+      get() {
+        return this.$refs.row.dataChecked;
+      },
+      set(val) {
+        this.$refs.row.dataChecked = val;
+      },
     },
-    hasBatchActions() {
-      return this.$parent.hasBatchActions;
+    someExpandingRows: {
+      get() {
+        return this.dataSomeExpandingRows;
+      },
+      set(val) {
+        this.dataSomeExpandingRows = val;
+        this.$refs.row.someExpandingRows = val;
+      },
     },
-    isChecked() {
-      return this.dataChecked;
-    },
-  },
-  methods: {
-    onChange() {
-      this.$parent.onRowCheckChange(this.value, this.dataChecked);
-    },
-    onMenuItemClick(val) {
-      this.$parent.onMenuItemClick(val);
+    value() {
+      return this.$refs.row.value;
     },
   },
 };
 </script>
-
-<style lang="scss">
-.cv-data-table-row .cv-checkbox.bx--checkbox-wrapper {
-  margin: 0;
-}
-</style>

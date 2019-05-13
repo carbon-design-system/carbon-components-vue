@@ -22,7 +22,7 @@ See Attributes, Slots and Events to see how to add additional features to the ta
 
 Instead of supply data as two dimensional array the user can supply slotted content using the CvDataTableRow and CvDataTableCell components.
 
-The CvDataTableCell component can also take slotted contnet which allowing the freedom to create an editable table.
+The CvDataTableCell component can also take slotted content which allowing the freedom to create an editable table.
 
 Like sorting and filtering it is the users responsibility to deal with edited data. The data table component does not listen to slotted cell components.
 

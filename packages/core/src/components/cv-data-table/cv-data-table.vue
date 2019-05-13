@@ -89,6 +89,7 @@
       <table :class="[{ 'bx--data-table-v2': !componentsX, 'bx--data-table': componentsX }, modifierClasses]">
         <thead>
           <tr>
+            <th v-if="hasExpandables" class="bx--table-expand" />
             <th v-if="hasBatchActions" class="bx--table-column-checkbox">
               <cv-checkbox
                 :form-item="false"
@@ -110,7 +111,7 @@
           </tr>
         </thead>
 
-        <tbody>
+        <cv-wrapper :tag-type="hasExpandables ? '' : 'tbody'">
           <slot name="data">
             <cv-data-table-row
               v-for="(row, rowIndex) in data"
@@ -127,7 +128,7 @@
               >
             </cv-data-table-row>
           </slot>
-        </tbody>
+        </cv-wrapper>
       </table>
     </div>
 
@@ -247,6 +248,9 @@ export default {
     hasBatchActions() {
       return this.$slots['batch-actions'];
     },
+    hasExpandables() {
+      return this.registeredRows.some(item => item.expandable);
+    },
     hasOverflowMenu() {
       return this.overflowMenu === true || (this.overflowMenu && this.overflowMenu.length > 0);
     },
@@ -293,10 +297,12 @@ export default {
   methods: {
     onCvMount(row) {
       this.registeredRows.push(row);
+      this.updateSomeExpandingRows();
     },
     onCvBeforeDestroy(row) {
       const index = this.registeredRows.findIndex(item => row.uid === item.uid);
       this.registeredRows.slice(index, 1);
+      this.updateSomeExpandingRows();
     },
     checkSearchFocus(ev) {
       if (!this.$refs.searchContainer.contains(ev.relatedTarget)) {
@@ -324,9 +330,9 @@ export default {
       for (const i in this.$children) {
         let child = this.$children[i];
         if (child.isCvDataTableRow) {
-          child.dataChecked = this.rowsSelected.includes(child.value);
+          child.isChecked = this.rowsSelected.includes(child.value);
 
-          if (child.dataChecked) {
+          if (child.isChecked) {
             this.dataRowsSelected.push(child.value);
           }
         }
@@ -352,12 +358,12 @@ export default {
           this.dataRowsSelected.push(child.value);
         }
 
-        if (child.dataChecked !== this.headingChecked) {
-          child.dataChecked = this.headingChecked;
+        if (child.isChecked !== this.headingChecked) {
+          child.isChecked = this.headingChecked;
 
           this.$emit('row-select-change', {
             value: child.value,
-            selected: child.dataChecked,
+            selected: child.isChecked,
           });
         }
       }
@@ -403,6 +409,11 @@ export default {
       }
       this.dataColumns[index].order = val;
       this.$emit('sort', { index, order: val });
+    },
+    updateSomeExpandingRows() {
+      for (const child of rows(this.$children)) {
+        child.someExpandingRows = this.hasExpandables;
+      }
     },
   },
 };
