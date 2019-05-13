@@ -297,11 +297,9 @@ export default {
   methods: {
     onCvMount(row) {
       this.registeredRows.push(row);
-      console.log('cv:mount');
       this.updateSomeExpandingRows();
     },
     onCvBeforeDestroy(row) {
-      console.log('cv:b4destroy');
       const index = this.registeredRows.findIndex(item => row.uid === item.uid);
       this.registeredRows.slice(index, 1);
       this.updateSomeExpandingRows();
@@ -414,7 +412,6 @@ export default {
     },
     updateSomeExpandingRows() {
       for (const child of rows(this.$children)) {
-        console.log('updateSomeExpandingRows');
         child.someExpandingRows = this.hasExpandables;
       }
     },

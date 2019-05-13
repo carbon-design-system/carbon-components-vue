@@ -35,11 +35,9 @@ export default {
     };
   },
   mounted() {
-    console.log('mounted', this.dataSomeExpandingRows);
     this.$parent.$emit('cv:mounted', this);
   },
   updated() {
-    console.log('updated', this.dataSomeExpandingRows);
     this.dataExpandable = this.$slots.expandedContent !== undefined;
   },
   beforeDestroy() {
@@ -65,7 +63,6 @@ export default {
         return this.dataSomeExpandingRows;
       },
       set(val) {
-        console.log('someExpandingRows', val);
         this.dataSomeExpandingRows = val;
         this.$refs.row.someExpandingRows = val;
       },
