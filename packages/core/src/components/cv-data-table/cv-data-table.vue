@@ -34,7 +34,7 @@
           </div>
         </div>
 
-        <div v-if="$slots.actions && !batchActive" class="bx--toolbar-content">
+        <div v-if="($slots.actions || $listeners.search) && !batchActive" class="bx--toolbar-content">
           <div
             v-if="$listeners.search"
             :class="{
@@ -97,7 +97,7 @@
                 @change="onHeadingCheckChange"
               />
             </th>
-            <cv-data-table-headnig
+            <cv-data-table-heading
               v-for="(column, index) in dataColumns"
               :key="`${index}:${column}`"
               :heading="column.label ? column.label : column"
@@ -116,7 +116,7 @@
               v-for="(row, rowIndex) in data"
               :key="`row:${rowIndex}`"
               :value="`${rowIndex}`"
-              ref="dataRowsSelected"
+              ref="dataRows"
               :overflow-menu="overflowMenu"
             >
               <cv-data-table-cell
@@ -146,7 +146,7 @@
 </template>
 
 <script>
-import CvDataTableHeadnig from './_cv-data-table-heading';
+import CvDataTableHeading from './_cv-data-table-heading';
 import CvDataTableRow from './cv-data-table-row';
 import CvDataTableCell from './cv-data-table-cell';
 import CvButton from '../cv-button/cv-button';
@@ -164,7 +164,7 @@ export default {
   name: 'CvDataTable',
   components: {
     CvButton,
-    CvDataTableHeadnig,
+    CvDataTableHeading,
     CvDataTableRow,
     CvDataTableCell,
     CvCheckbox,
@@ -206,7 +206,7 @@ export default {
       componentsX,
       dataColumns: this.sortable
         ? this.columns.map(item => ({
-            label: item,
+            label: item.label ? item.label : item,
             order: 'none',
           }))
         : this.columns,
@@ -216,12 +216,10 @@ export default {
       searchValue: '',
       clearSearchVisible: false,
       searchActive: false,
+      registeredRows: [],
     };
   },
   watch: {
-    data() {
-      this.internalPagination.numberOfItems = this.data.length;
-    },
     sortable() {
       this.watchColumns();
     },
@@ -231,6 +229,11 @@ export default {
     rowsSelected() {
       this.updateRowsSelected();
     },
+  },
+  created() {
+    // add these on created otherwise cv:mounted is too late.
+    this.$on('cv:mounted', srcComponent => this.onCvMount(srcComponent));
+    this.$on('cv:beforeDestroy', srcComponent => this.onCvBeforeDestroy(srcComponent));
   },
   mounted() {
     console.warn(
@@ -261,10 +264,10 @@ export default {
       return false;
     },
     internalNumberOfItems() {
-      if (this.internalPagination && typeof this.internalPagination.numberOfItems === 'number') {
+      if (this.internalPagination.numberOfItems !== undefined) {
         return this.internalPagination.numberOfItems;
       } else {
-        return rows(this.$children).length;
+        return this.registeredRows.length;
       }
     },
     modifierClasses() {
@@ -288,6 +291,13 @@ export default {
     },
   },
   methods: {
+    onCvMount(row) {
+      this.registeredRows.push(row);
+    },
+    onCvBeforeDestroy(row) {
+      const index = this.registeredRows.findIndex(item => row.uid === item.uid);
+      this.registeredRows.slice(index, 1);
+    },
     checkSearchFocus(ev) {
       if (!this.$refs.searchContainer.contains(ev.relatedTarget)) {
         this.searchActive = false;

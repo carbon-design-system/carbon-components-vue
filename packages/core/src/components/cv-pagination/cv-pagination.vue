@@ -173,8 +173,8 @@ export default {
     numberOfItems() {
       this.pageCount = newPageCount(this.numberOfItems, this.pageSizeValue);
       this.pages = newPagesArray(this.pageCount);
-      this.pageValue = Math.max(this.pageCount, Math.ceil(this.firstItem / this.pageSizeValue));
-      this.firstItem = Math.max(0, 1 + (this.pageValue - 1) * this.pageSizeValue);
+      this.pageValue = Math.min(this.pageCount, Math.ceil(this.firstItem / this.pageSizeValue));
+      this.firstItem = newFirstItem(this.pageValue, this.pageSizeValue);
     },
     page() {
       this.pageValue = newPageValue(this.page, this.pageCount);
