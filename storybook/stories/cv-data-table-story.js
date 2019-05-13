@@ -231,6 +231,15 @@ const preKnobs = {
     group: 'attr',
     value: '@sort="onSort"',
   },
+  hasExpandingRows: {
+    group: '',
+    type: boolean,
+    config: ['Has expanding rows', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      name: 'hasExpandingRows',
+      value: val => val,
+    },
+  },
   slottedData: {
     group: 'slots',
     slot: {
@@ -238,7 +247,18 @@ const preKnobs = {
       value:
         '\n    <cv-data-table-row v-for="(row, rowIndex) in internalData" :key="`${rowIndex}`" :value="`${rowIndex}`">' +
         '\n       <cv-data-table-cell v-for="(cell, cellIndex) in row" :key="`${cellIndex}`" :value="`${cellIndex}`" v-html="cell"></cv-data-table-cell>' +
-        '\n       <template v-if="rowIndex % 2 === 0" slot="expandedContent">A variety of content types can live here. Be sure to follow Carbon design guidelines for spacing and alignment.</template>' +
+        '\n       <template v-if="hasExpandingRows && rowIndex % 2 === 0" slot="expandedContent">A variety of content types can live here. Be sure to follow Carbon design guidelines for spacing and alignment.</template>' +
+        '\n    </cv-data-table-row>\n',
+    },
+  },
+  expandingSlottedData: {
+    group: 'slots',
+    slot: {
+      name: 'data',
+      value:
+        '\n    <cv-data-table-row v-for="(row, rowIndex) in internalData" :key="`${rowIndex}`" :value="`${rowIndex}`">' +
+        '\n       <cv-data-table-cell v-for="(cell, cellIndex) in row" :key="`${cellIndex}`" :value="`${cellIndex}`" v-html="cell"></cv-data-table-cell>' +
+        '\n       <template slot="expandedContent">A variety of content types can live here. Be sure to follow Carbon design guidelines for spacing and alignment.</template>' +
         '\n    </cv-data-table-row>\n',
     },
   },
@@ -287,10 +307,22 @@ const preKnobs = {
 };
 
 const variants = [
-  { name: 'default', excludes: ['columns2', 'slottedData', 'htmlData', 'helperTextSlot', 'basicPagination'] },
+  {
+    name: 'default',
+    excludes: [
+      'columns2',
+      'slottedData',
+      'htmlData',
+      'helperTextSlot',
+      'basicPagination',
+      'hasExpandingRows',
+      'expandingSlottedData',
+    ],
+  },
   { name: 'slottedHelper', includes: ['columns', 'data', 'title', 'helperTextSlot'] },
   { name: 'minimal', includes: ['columns', 'data'] },
-  { name: 'slotted data', includes: ['columns', 'slottedData', 'data', 'basicPagination'] },
+  { name: 'slotted data', includes: ['columns', 'slottedData', 'data', 'basicPagination', 'hasExpandingRows'] },
+  { name: 'slotted expanding data', includes: ['columns', 'expandingSlottedData', 'data', 'basicPagination'] },
   { name: 'slotted HTML', includes: ['columns', 'htmlData', 'basicPagination'] },
   { name: 'styled columns', includes: ['columns2', 'data'] },
 ];

@@ -1,7 +1,7 @@
 <template>
   <tr class="cv-data-table-row-inner" :class="{ 'bx--parent-row': expandingRow, 'bx--expandable-row': dataExpanded }">
     <td
-      v-if="someExpandingRows"
+      v-if="dataSomeExpandingRows"
       class="bx--table-expand"
       :data-previous-value="dataExpanded ? 'collapsed' : 'expanded'"
     >
@@ -51,14 +51,6 @@ export default {
     someExpandingRows: Boolean,
     value: { type: String, requried: true },
   },
-  watch: {
-    checked() {
-      this.dataChecked = this.checked;
-    },
-    expanded() {
-      this.dataExpanded = this.expanded;
-    },
-  },
   model: {
     event: 'change',
     prop: 'checked',
@@ -67,7 +59,19 @@ export default {
     return {
       dataChecked: this.checked,
       dataExpanded: this.expanded,
+      dataSomeExpandingRows: this.someExpandingRows,
     };
+  },
+  watch: {
+    checked() {
+      this.dataChecked = this.checked;
+    },
+    expanded() {
+      this.dataExpanded = this.expanded;
+    },
+    someExpandingRows() {
+      this.dataSomeExpandingRows = this.someExpandingRows;
+    },
   },
   mounted() {
     this.$parent.$emit('cv:mounted', this);

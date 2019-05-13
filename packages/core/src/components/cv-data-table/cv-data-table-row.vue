@@ -64,7 +64,10 @@ export default {
       },
       set(val) {
         this.dataSomeExpandingRows = val;
-        this.$refs.row.someExpandingRows = val;
+
+        if (this.$refs.row) {
+          this.$refs.row.dataSomeExpandingRows = val;
+        }
       },
     },
     value() {
