@@ -17,6 +17,7 @@ import CvOverflowMenuItem from '@carbon/vue/src/components/cv-overflow-menu/cv-o
 import TrashCan16 from '@carbon/icons-vue/lib/trash-can/16';
 import Save16 from '@carbon/icons-vue/lib/save/16';
 import Download16 from '@carbon/icons-vue/lib/download/16';
+import CvTag from '@carbon/vue/src/components/cv-tag/cv-tag';
 
 const storiesDefault = storiesOf('Components/CvDataTable', module);
 const storiesExperimental = storiesOf('Experimental/CvDataTable', module);
@@ -237,6 +238,7 @@ const preKnobs = {
       value:
         '\n    <cv-data-table-row v-for="(row, rowIndex) in internalData" :key="`${rowIndex}`" :value="`${rowIndex}`">' +
         '\n       <cv-data-table-cell v-for="(cell, cellIndex) in row" :key="`${cellIndex}`" :value="`${cellIndex}`" v-html="cell"></cv-data-table-cell>' +
+        '\n       <template v-if="rowIndex % 2 === 0" slot="expandedContent">A variety of content types can live here. Be sure to follow Carbon design guidelines for spacing and alignment.</template>' +
         '\n    </cv-data-table-row>\n',
     },
   },
@@ -250,7 +252,7 @@ const preKnobs = {
         '\n       <cv-data-table-cell><input type="number" :value="rowIndex * rowIndex" style="border: none; background: none; width: 100%;" /></cv-data-table-cell>' +
         '\n       <cv-data-table-cell><input type="password" value="ASecret" style="border: none; background: none; width: 100%;" /></cv-data-table-cell>' +
         '\n       <cv-data-table-cell><a href="http://vue.carbondesignsystem.com">Here</a></cv-data-table-cell>' +
-        '\n       <cv-data-table-cell><cv-tag :kind="row" label="I am a tag" /></cv-data-table-cell>' +
+        '\n       <cv-data-table-cell><cv-tag kind="red" label="I am a tag" /></cv-data-table-cell>' +
         '\n       <cv-data-table-cell><cv-button type="button" v-html="`Clicky ${row}`" style="width: 100%;"></cv-button></cv-data-table-cell>' +
         '\n       <cv-data-table-cell>' +
         '\n           <cv-overflow-menu flip-menu style="margin: 0 auto;">' +
@@ -343,6 +345,7 @@ for (const version of versions(true)) {
             Download16,
             TrashCan16,
             Save16,
+            CvTag,
           },
           template: templateViewString,
           props: settings.props,
