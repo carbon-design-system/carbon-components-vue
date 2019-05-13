@@ -52,6 +52,11 @@ Like sorting and filtering it is the users responsibility to deal with edited da
       <cv-data-table-cell>
         <cv-button type="button" v-html="`Clicky ${row}`" style="width: 100%;"> </cv-button>
       </cv-data-table-cell>
+
+      <template slot="expandedContent"
+        >A variety of content types can live here. Be sure to follow Carbon design guidelines for spacing and
+        alignment.</template
+      >
     </cv-data-table-row>
   </template>
 </cv-data-table>
@@ -83,6 +88,7 @@ Like sorting and filtering it is the users responsibility to deal with edited da
 - batch-actions: Ghost style buttons shown when rows are selected. An array of selected row indexes is returend from the computed property CvDataTable.selectedRows.
 - actions
 - data: overrides passing data as a property, expects CvDataTableRow and CvDataTableCell. CvDataTableCell expects slotted content.
+- expandedContent: (part of cv-data-table-row) additional content displayed when row is expanded
 
 ## Events
 
