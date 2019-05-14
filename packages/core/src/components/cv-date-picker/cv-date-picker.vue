@@ -187,6 +187,8 @@ export default {
 
       // add events update based on parameters
       _options.onChange = this.onChange;
+      _options.onOpen = this.onOpen;
+      _options.onReady = this.onCalReady;
       // _options.onValueUpdate = this.onChange;
 
       if (this.kind === 'range') {
@@ -218,6 +220,39 @@ export default {
     onSimpleChange(ev) {
       if (!['single', 'range'].includes(this.kind)) {
         this.$emit('simpleChange', ev.target.value);
+      }
+    },
+    onCalReady(selectedDates, dateString, instance) {
+      const calendarContainer = instance.calendarContainer;
+      const options = {
+        classCalendarContainer: `bx--date-picker__calendar`,
+        classMonth: `bx--date-picker__month`,
+        classWeekdays: `bx--date-picker__weekdays`,
+        classDays: `bx--date-picker__days`,
+        classWeekday: `bx--date-picker__weekday`,
+        classDay: `bx--date-picker__day`,
+        classFocused: `bx--focused`,
+        classVisuallyHidden: `bx--visually-hidden`,
+      };
+
+      if (calendarContainer) {
+        calendarContainer.classList.add(options.classCalendarContainer);
+        calendarContainer.querySelector('.flatpickr-month').classList.add(options.classMonth);
+        calendarContainer.querySelector('.flatpickr-weekdays').classList.add(options.classWeekdays);
+        calendarContainer.querySelector('.flatpickr-days').classList.add(options.classDays);
+        for (const item of calendarContainer.querySelectorAll('.flatpickr-weekday')) {
+          const currentItem = item;
+          currentItem.innerHTML = currentItem.innerHTML.replace(/\s+/g, '');
+          currentItem.classList.add(options.classWeekday);
+        }
+        for (const item of calendarContainer.querySelectorAll('.flatpickr-day')) {
+          item.classList.add(options.classDay);
+          if (item.classList.contains('today') && selectedDates.length > 0) {
+            item.classList.add('no-border');
+          } else if (item.classList.contains('today') && selectedDates.length === 0) {
+            item.classList.remove('no-border');
+          }
+        }
       }
     },
   },
