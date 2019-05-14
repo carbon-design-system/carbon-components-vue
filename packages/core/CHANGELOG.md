@@ -1,9 +1,21 @@
+## 2.0.8 (May 14, 2019)
+
+### Features
+
+- Add expanding content feature to table
+
 ## 2.0.7 (May 7, 2019)
 
 ### Bug fixes
 
 - Various table pagination fixes
 - Ensure search is available when @search event is listented to.
+
+## 2.0.4/5/6 (May 3, 2019)
+
+### Bug fixes
+
+- Table pagination fixes
 
 ## 2.0.3 (April 24, 2019)
 
