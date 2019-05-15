@@ -13,7 +13,7 @@ import CvDefinitionTooltip from '@carbon/vue/src/components/cv-tooltip/cv-defini
 const storiesDefault = storiesOf('Components/CvTooltip', module);
 const storiesExperimental = storiesOf('Experimental/CvTooltip', module);
 import { componentsX, versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
-import Filter16 from '@carbon/icons-vue/lib/filter/16';
+import Filter16 from '@carbon/icons-vue/es/filter/16';
 
 let preKnobs = {
   direction: {

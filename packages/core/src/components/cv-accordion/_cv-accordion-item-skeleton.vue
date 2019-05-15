@@ -16,7 +16,7 @@
 <script>
 import CvSkeletonText from '../cv-skeleton-text/cv-skeleton-text';
 import { componentsX } from '../../internal/feature-flags';
-import ChevronRight16 from '@carbon/icons-vue/lib/chevron--right/16';
+import ChevronRight16 from '@carbon/icons-vue/es/chevron--right/16';
 
 export default {
   name: 'CvAccordionItemSkeleton',

@@ -76,7 +76,7 @@
 import CvButton from '../cv-button/cv-button';
 import CvIcon from '../cv-icon/_cv-icon';
 import uidMixin from '../../mixins/uid-mixin';
-import Close16 from '@carbon/icons-vue/lib/close/16';
+import Close16 from '@carbon/icons-vue/es/close/16';
 import { componentsX } from '../../internal/feature-flags';
 
 export default {

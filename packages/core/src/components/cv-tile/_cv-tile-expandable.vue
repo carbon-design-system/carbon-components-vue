@@ -33,7 +33,7 @@
 
 <script>
 import { componentsX } from '../../internal/feature-flags';
-import ChevronDown16 from '@carbon/icons-vue/lib/chevron--down/16';
+import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16';
 
 export default {
   name: 'CvTileExpandable',

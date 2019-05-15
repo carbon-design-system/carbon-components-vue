@@ -46,9 +46,9 @@
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
 import { componentsX } from '../../internal/feature-flags';
-import CaretDownGlyph from '@carbon/icons-vue/lib/caret--down/index';
-import CaretUpGlyph from '@carbon/icons-vue/lib/caret--up/index';
-import WarningFilled16 from '@carbon/icons-vue/lib/warning--filled/16';
+import CaretDownGlyph from '@carbon/icons-vue/es/caret--down/index';
+import CaretUpGlyph from '@carbon/icons-vue/es/caret--up/index';
+import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
 
 export default {
