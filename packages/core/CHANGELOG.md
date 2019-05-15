@@ -1,3 +1,9 @@
+## 2.2.1 (May 15, 2019)
+
+### Fixes
+
+- Change @carbon/icons-vue/lib to @carbon/icons/vue/es
+
 ## 2.1.0 (May 14, 2019)
 
 ### Features
