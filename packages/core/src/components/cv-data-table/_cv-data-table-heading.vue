@@ -28,8 +28,8 @@
 
 <script>
 import { componentsX } from '../../internal/feature-flags';
-import ArrowDown16 from '@carbon/icons-vue/lib/arrow--down/16';
-import Arrows16 from '@carbon/icons-vue/lib/arrows/16';
+import ArrowDown16 from '@carbon/icons-vue/es/arrow--down/16';
+import Arrows16 from '@carbon/icons-vue/es/arrows/16';
 
 const nextSortOrder = {
   ascending: 'descending',

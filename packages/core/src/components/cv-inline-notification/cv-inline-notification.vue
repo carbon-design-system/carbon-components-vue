@@ -39,10 +39,10 @@
 import notificationMixin from '../../mixins/notification-mixin';
 import CvIcon from '../cv-icon/_cv-icon';
 import { componentsX } from '../../internal/feature-flags';
-import ErrorFilled16 from '@carbon/icons-vue/lib/error--filled/16';
-import CheckmarkFilled16 from '@carbon/icons-vue/lib/checkmark--filled/16';
-import WarningAltFilled16 from '@carbon/icons-vue/lib/warning--filled/16';
-import Close16 from '@carbon/icons-vue/lib/close/16';
+import ErrorFilled16 from '@carbon/icons-vue/es/error--filled/16';
+import CheckmarkFilled16 from '@carbon/icons-vue/es/checkmark--filled/16';
+import WarningAltFilled16 from '@carbon/icons-vue/es/warning--filled/16';
+import Close16 from '@carbon/icons-vue/es/close/16';
 
 export default {
   name: 'CvInlineNotification',

@@ -66,7 +66,7 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import { componentsX } from '../../internal/feature-flags';
-import Information16 from '@carbon/icons-vue/lib/information/16';
+import Information16 from '@carbon/icons-vue/es/information/16';
 
 export default {
   name: 'CvInteractiveTooltip',

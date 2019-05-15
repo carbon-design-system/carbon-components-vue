@@ -34,7 +34,7 @@
 import uidMixin from '../../mixins/uid-mixin';
 import radioMixin from '../../mixins/radio-mixin';
 import { componentsX } from '../../internal/feature-flags';
-import CheckmarkFilled16 from '@carbon/icons-vue/lib/checkmark--filled/16';
+import CheckmarkFilled16 from '@carbon/icons-vue/es/checkmark--filled/16';
 
 export default {
   name: 'CvStructuredListItemSelectable',

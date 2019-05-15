@@ -56,7 +56,7 @@
 
 <script>
 import { componentsX } from '../../internal/feature-flags';
-import OverflowMenuVertical16 from '@carbon/icons-vue/lib/overflow-menu--vertical/16';
+import OverflowMenuVertical16 from '@carbon/icons-vue/es/overflow-menu--vertical/16';
 import uidMixin from '../../mixins/uid-mixin';
 
 export default {

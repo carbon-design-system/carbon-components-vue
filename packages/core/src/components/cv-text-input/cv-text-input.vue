@@ -70,7 +70,7 @@
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
 import { componentsX } from '../../internal/feature-flags';
-import WarningFilled16 from '@carbon/icons-vue/lib/warning--filled/16';
+import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 
 export default {
   name: 'CvTextInput',

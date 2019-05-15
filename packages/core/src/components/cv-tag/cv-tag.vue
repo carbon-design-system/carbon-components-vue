@@ -15,7 +15,7 @@
 
 <script>
 import { componentsX } from '../../internal/feature-flags';
-import Close16 from '@carbon/icons-vue/lib/close/16';
+import Close16 from '@carbon/icons-vue/es/close/16';
 
 const components9Tags = [
   'ibm',

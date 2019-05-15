@@ -19,7 +19,7 @@ import CvButton from '@carbon/vue/src/components/cv-button/cv-button';
 const storiesDefault = storiesOf('Components/CvToolbar', module);
 const storiesExperimental = storiesOf('Experimental/CvToolbar', module);
 import { componentsX, versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
-import Filter16 from '@carbon/icons-vue/lib/filter/16';
+import Filter16 from '@carbon/icons-vue/es/filter/16';
 
 const preKnobs = {};
 

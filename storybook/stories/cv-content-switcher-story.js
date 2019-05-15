@@ -16,7 +16,7 @@ const storiesExperimental = storiesOf('Experimental/CvContentSwitcher', module);
 import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const exampleIconPath = require('@carbon/vue/src/assets/images/example-icons.svg');
-import AddFilled16 from '@carbon/icons-vue/lib/add--filled/16';
+import AddFilled16 from '@carbon/icons-vue/es/add--filled/16';
 
 const preKnobs = {
   initialSelected: {

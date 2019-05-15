@@ -14,9 +14,9 @@ import CvDataTableCell from '@carbon/vue/src/components/cv-data-table/cv-data-ta
 import CvButton from '@carbon/vue/src/components/cv-button/cv-button';
 import CvOverflowMenu from '@carbon/vue/src/components/cv-overflow-menu/cv-overflow-menu';
 import CvOverflowMenuItem from '@carbon/vue/src/components/cv-overflow-menu/cv-overflow-menu-item';
-import TrashCan16 from '@carbon/icons-vue/lib/trash-can/16';
-import Save16 from '@carbon/icons-vue/lib/save/16';
-import Download16 from '@carbon/icons-vue/lib/download/16';
+import TrashCan16 from '@carbon/icons-vue/es/trash-can/16';
+import Save16 from '@carbon/icons-vue/es/save/16';
+import Download16 from '@carbon/icons-vue/es/download/16';
 import CvTag from '@carbon/vue/src/components/cv-tag/cv-tag';
 
 const storiesDefault = storiesOf('Components/CvDataTable', module);

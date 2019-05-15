@@ -32,8 +32,8 @@ import CvProgressStepIncomplete from './_cv-progress-step-incomplete';
 import { componentsX } from '../../internal/feature-flags';
 import CvTooltip from '../cv-tooltip/cv-tooltip';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
-import CheckmarkOutline16 from '@carbon/icons-vue/lib/checkmark--outline/16';
-import Warning16 from '@carbon/icons-vue/lib/warning/16';
+import CheckmarkOutline16 from '@carbon/icons-vue/es/checkmark--outline/16';
+import Warning16 from '@carbon/icons-vue/es/warning/16';
 
 const states = ['incomplete', 'current', 'complete'];
 
