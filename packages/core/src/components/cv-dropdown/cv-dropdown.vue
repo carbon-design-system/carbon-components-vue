@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import { componentsX } from '../../internal/feature-flags';
 import CvDropdownInnerC10 from './_cv-dropdown-inner-c10';
 import CvDropdownInner from './_cv-dropdown-inner';
 
@@ -19,15 +18,12 @@ export default {
   name: 'CvDropdown',
   components: { CvDropdownInnerC10, CvDropdownInner },
   inheritAttrs: false,
-  data() {
-    return { componentsX };
-  },
   props: {
     value: String,
   },
   computed: {
     tagType() {
-      return this.componentsX ? 'cv-dropdown-inner-c10' : 'cv-dropdown-inner';
+      return 'cv-dropdown-inner-c10';
     },
   },
   model: {

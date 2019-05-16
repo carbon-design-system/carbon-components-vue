@@ -13,22 +13,8 @@
         }"
         @change="onSimpleChange"
       >
-        <svg
-          v-if="!componentsX && kind === 'single'"
-          data-date-picker-icon
-          class="bx--date-picker__icon"
-          width="14"
-          height="16"
-          viewBox="0 0 14 16"
-          @click="cal.open()"
-        >
-          <path
-            d="M0 5h14v1H0V5zm3-5h1v4H3V0zm7 0h1v4h-1V0zM0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v12a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 0 14.5v-12zm1 0v12a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5v-12a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5z"
-            fill-rule="nonzero"
-          ></path>
-        </svg>
         <label :for="`${uid}-input-1`" class="bx--label">{{ getDateLabel }}</label>
-        <cv-wrapper :tag-type="componentsX ? 'div' : ''" class="bx--date-picker-input__wrapper">
+        <div class="bx--date-picker-input__wrapper">
           <input
             :data-invalid="isInvalid"
             type="text"
@@ -41,19 +27,19 @@
             ref="date"
           />
           <Calendar16
-            v-if="componentsX && ['single', 'range'].includes(kind)"
+            v-if="['single', 'range'].includes(kind)"
             class="bx--date-picker__icon"
             data-date-picker-icon
             @click="cal.open()"
           />
-        </cv-wrapper>
+        </div>
         <div class="bx--form-requirement" v-if="isInvalid">
           <slot name="invalid-message">{{ invalidMessage || invalidDateMessage }}</slot>
         </div>
       </div>
       <div :class="{ 'bx--date-picker-container': kind === 'range' }" v-if="kind === 'range'">
         <label :for="`${uid}-input-2`" class="bx--label">{{ getDateEndLabel }}</label>
-        <cv-wrapper :tag-type="componentsX ? 'div' : ''" class="bx--date-picker-input__wrapper">
+        <div class="bx--date-picker-input__wrapper">
           <input
             type="text"
             :id="`${uid}-input-2`"
@@ -64,23 +50,9 @@
             :data-date-picker-input-to="kind === 'range'"
             ref="todate"
           />
-          <Calendar16 v-if="componentsX" class="bx--date-picker__icon" data-date-picker-icon @click="cal.open()" />
-        </cv-wrapper>
+          <Calendar16 class="bx--date-picker__icon" data-date-picker-icon @click="cal.open()" />
+        </div>
       </div>
-      <svg
-        v-if="!componentsX && kind === 'range'"
-        data-date-picker-icon
-        class="bx--date-picker__icon"
-        width="14"
-        height="16"
-        viewBox="0 0 14 16"
-        @click="cal.open()"
-      >
-        <path
-          d="M0 5h14v1H0V5zm3-5h1v4H3V0zm7 0h1v4h-1V0zM0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v12a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 0 14.5v-12zm1 0v12a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5v-12a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5z"
-          fill-rule="nonzero"
-        ></path>
-      </svg>
     </div>
   </cv-wrapper>
 </template>
@@ -92,7 +64,6 @@ import RangePlugin from 'flatpickr/dist/plugins/rangePlugin';
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
 import Calendar16 from '@carbon/icons-vue/es/calendar/16';
-import { componentsX } from '../../internal/feature-flags';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
 
 // Weekdays shorthand for english locale
@@ -149,9 +120,6 @@ export default {
       },
     },
     invalidMessage: { type: String, default: null },
-  },
-  data() {
-    return { componentsX };
   },
   computed: {
     kindClasses() {

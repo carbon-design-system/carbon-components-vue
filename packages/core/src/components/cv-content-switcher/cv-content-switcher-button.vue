@@ -36,7 +36,6 @@
 
 <script>
 import uidMixin from '../../mixins/uid-mixin';
-import { componentsX } from '../../internal/feature-flags';
 
 export default {
   name: 'CvContentSwitcherButton',
@@ -67,7 +66,6 @@ export default {
   },
   data() {
     return {
-      componentsX,
       dataSelected: false,
     };
   },
