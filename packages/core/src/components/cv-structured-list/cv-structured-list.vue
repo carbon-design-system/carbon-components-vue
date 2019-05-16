@@ -3,7 +3,6 @@
     class="cv-structured-list bx--structured-list"
     :class="{
       'bx--structured-list--selection': selectable,
-      'bx--structured-list--border': border,
       'bx--structured-list--condensed': condensed,
     }"
     :data-structured-list="selectable"
@@ -28,7 +27,6 @@ export default {
   name: 'CvStructuredList',
   props: {
     selectable: Boolean,
-    border: Boolean,
     condensed: Boolean,
   },
   data() {
