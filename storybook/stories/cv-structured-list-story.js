@@ -17,13 +17,6 @@ const storiesExperimental = storiesOf('Experimental/CvStructuredList', module);
 import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
-  border: {
-    group: 'attr',
-    type: boolean,
-    inline: true,
-    config: ['border', false], // consts.CONFIG],
-    prop: { name: 'border', type: Boolean },
-  },
   condensed: {
     group: 'attr',
     type: boolean,
@@ -59,8 +52,8 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const version of versions(false)) {
+  const stories = version.experimental && !version.default ? storiesExperimental : storiesDefault;
 
   for (const story of storySet) {
     stories.add(

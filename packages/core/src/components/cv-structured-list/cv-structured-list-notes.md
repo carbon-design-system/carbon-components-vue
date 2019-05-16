@@ -132,7 +132,6 @@ http://www.carbondesignsystem.com/components/structured-list/code
 ## Attributes
 
 - selectable - makes cv-structured-list-item selectable
-- border
 - condensed
 
 ## Events
