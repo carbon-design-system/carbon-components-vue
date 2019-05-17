@@ -18,27 +18,11 @@
       </cv-select>
 
       <span class="bx--pagination__text">
-        <span v-if="!componentsX">|&nbsp;</span>
         <span data-displayed-item-range>{{ rangeText }}</span>
       </span>
     </div>
 
     <div class="bx--pagination__right">
-      <span v-if="!componentsX" class="bx--pagination__text">{{ pageOfPages }}</span>
-
-      <button
-        v-if="!componentsX"
-        type="button"
-        class="bx--pagination__button bx--pagination__button--backward"
-        data-page-backward
-        :aria-label="backwardText"
-        @click="onPrevPage"
-      >
-        <svg class="bx--pagination__button-icon" width="7" height="12" viewBox="0 0 7 12">
-          <path fill-rule="nonzero" d="M1.45 6.002L7 11.27l-.685.726L0 6.003 6.315 0 7 .726z"></path>
-        </svg>
-      </button>
-
       <cv-select
         class="bx--select__page-number"
         :label="`${pageNumberLabel}:`"
@@ -57,12 +41,11 @@
           >{{ pageNumber }}</cv-select-option
         >
       </cv-select>
-      <span v-if="componentsX" class="bx--pagination__text">{{ pageOfPages }}</span>
+      <span class="bx--pagination__text">{{ pageOfPages }}</span>
 
       <span v-if="pages.length == 0">{{ pageValue }}</span>
 
       <button
-        v-if="componentsX"
         type="button"
         class="bx--pagination__button bx--pagination__button--backward"
         data-page-backward
@@ -83,10 +66,7 @@
         :disabled="noWayForward"
         :class="{ 'bx--pagination__button--no-index': noWayForward }"
       >
-        <CaretRight16 v-if="componentsX" class="bx--pagination__button-icon" />
-        <svg v-else class="bx--pagination__button-icon" width="7" height="12" viewBox="0 0 7 12">
-          <path fill-rule="nonzero" d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"></path>
-        </svg>
+        <CaretRight16 class="bx--pagination__button-icon" />
       </button>
     </div>
   </div>
@@ -95,7 +75,6 @@
 <script>
 import CvSelect from '../cv-select/cv-select';
 import CvSelectOption from '../cv-select/cv-select-option';
-import { componentsX } from '../../internal/feature-flags';
 import CaretLeft16 from '@carbon/icons-vue/es/caret--left/16';
 import CaretRight16 from '@carbon/icons-vue/es/caret--right/16';
 
@@ -153,7 +132,6 @@ export default {
   },
   data() {
     return {
-      componentsX,
       firstItem: 1,
       pageValue: 1,
       pageSizeValue: 10,
@@ -199,11 +177,7 @@ export default {
     pageOfPages() {
       // console.log(this.pageValue, this.pageCount);
       if (this.numberOfItems !== Infinity) {
-        if (this.componentsX) {
-          return `of ${this.pageCount} pages`;
-        } else {
-          return `${this.pageValue} of ${this.pageCount}`;
-        }
+        return `of ${this.pageCount} pages`;
       }
       return '';
     },

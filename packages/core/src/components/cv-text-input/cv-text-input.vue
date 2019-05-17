@@ -13,7 +13,7 @@
     <div v-if="isHelper" class="bx--form__helper-text" :class="{ 'bx--form__helper-text--disabled': $attrs.disabled }">
       <slot name="helper-text">{{ helperText }}</slot>
     </div>
-    <div v-if="componentsX" class="bx--text-input__field-wrapper" :data-invalid="isInvalid">
+    <div class="bx--text-input__field-wrapper" :data-invalid="isInvalid">
       <WarningFilled16 v-if="isInvalid" class="bx--text-input__invalid-icon" />
       <input
         :id="uid"
@@ -27,19 +27,6 @@
         ref="input"
       />
     </div>
-    <input
-      v-else
-      :id="uid"
-      class="bx--text-input"
-      :class="{ 'bx--text-input--light': theme === 'light' }"
-      v-bind="$attrs"
-      :value="value"
-      v-on="inputListeners"
-      :data-invalid="isInvalid"
-      :data-toggle-password-visibility="isPassword"
-      :type="dataType"
-      ref="input"
-    />
     <button
       v-if="isPassword"
       class="bx--text-input--password__visibility bx--tooltip__trigger bx--tooltip--icon__bottom"
@@ -69,7 +56,6 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
-import { componentsX } from '../../internal/feature-flags';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 
 export default {
@@ -88,7 +74,6 @@ export default {
   },
   data() {
     return {
-      componentsX,
       dataPasswordVisible: this.isPassword && this.passwordVisible,
       dataType: this.type,
     };

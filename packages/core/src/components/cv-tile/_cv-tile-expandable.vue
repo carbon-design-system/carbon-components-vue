@@ -11,10 +11,7 @@
     @keyup.space.prevent="toggle"
   >
     <button type="button" class="bx--tile__chevron">
-      <ChevronDown16 v-if="componentsX" />
-      <svg v-else width="12" height="8" viewBox="0 0 12 8" fill-rule="evenodd">
-        <path d="M10.6 0L6 4.7 1.4 0 0 1.4l6 6.1 6-6.1z"></path>
-      </svg>
+      <ChevronDown16 />
     </button>
     <div class="bx--tile-content">
       <span data-tile-atf class="bx--tile-content__above-the-fold" ref="aboveFold">
@@ -32,7 +29,6 @@
 </template>
 
 <script>
-import { componentsX } from '../../internal/feature-flags';
 import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16';
 
 export default {
@@ -43,7 +39,6 @@ export default {
   components: { ChevronDown16 },
   data() {
     return {
-      componentsX,
       styleObject: {
         maxHeight: 'initial',
       },

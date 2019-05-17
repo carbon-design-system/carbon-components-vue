@@ -1,27 +1,21 @@
 <template>
   <li class="cv-progress-step bx--progress-step" :class="stateClass" :aria-disabled="disabled">
-    <cv-wrapper v-if="componentsX">
-      <svg v-if="isCurrent">
-        <path d="M 7, 7 m -7, 0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0"></path>
-      </svg>
-      <Warning16 v-else-if="!isComplete && invalid" class="bx--progress__warning" />
-      <svg v-else-if="!isComplete">
-        <path
-          d="M8 1C4.1 1 1 4.1 1 8s3.1 7 7 7 7-3.1 7-7-3.1-7-7-7zm0 13c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z"
-        ></path>
-      </svg>
-      <CheckmarkOutline16 v-else-if="isComplete" />
-    </cv-wrapper>
-    <cv-wrapper v-else>
-      <cv-progress-step-complete v-if="isComplete" />
-      <cv-progress-step-incomplete v-if="!isComplete" :is-current="isCurrent" />
-    </cv-wrapper>
-    <cv-tooltip v-show="componentsX" direction="bottom" :tip="label">
+    <svg v-if="isCurrent">
+      <path d="M 7, 7 m -7, 0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0"></path>
+    </svg>
+    <Warning16 v-else-if="!isComplete && invalid" class="bx--progress__warning" />
+    <svg v-else-if="!isComplete">
+      <path
+        d="M8 1C4.1 1 1 4.1 1 8s3.1 7 7 7 7-3.1 7-7-3.1-7-7-7zm0 13c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z"
+      ></path>
+    </svg>
+    <CheckmarkOutline16 v-else-if="isComplete" />
+
+    <cv-tooltip direction="bottom" :tip="label">
       <p class="bx--progress-label">{{ label }}</p>
     </cv-tooltip>
-    <p v-if="!componentsX" class="bx--progress-label">{{ label }}</p>
 
-    <p class="bx--progress-optional" v-if="componentsX && additionalInfo">{{ additionalInfo }}</p>
+    <p class="bx--progress-optional" v-if="additionalInfo">{{ additionalInfo }}</p>
     <span class="bx--progress-line"></span>
   </li>
 </template>
@@ -29,7 +23,6 @@
 <script>
 import CvProgressStepComplete from './_cv-progress-step-complete';
 import CvProgressStepIncomplete from './_cv-progress-step-incomplete';
-import { componentsX } from '../../internal/feature-flags';
 import CvTooltip from '../cv-tooltip/cv-tooltip';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
 import CheckmarkOutline16 from '@carbon/icons-vue/es/checkmark--outline/16';
@@ -56,7 +49,6 @@ export default {
   },
   data() {
     return {
-      componentsX,
       state: -1,
     };
   },

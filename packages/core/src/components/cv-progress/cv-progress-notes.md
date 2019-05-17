@@ -24,7 +24,7 @@ NOTE: The current step is deemed to be the first incomplete step.
 
 ### Attributes - cv-progress
 
-Ignored if slotted content is provided.
+- steps: Ignored if slotted content is provided.
 
 ### Attributes - cv-progress-step
 

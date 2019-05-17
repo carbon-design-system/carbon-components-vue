@@ -20,12 +20,7 @@
       v-on="inputListeners"
     />
     <div class="bx--tile__checkmark">
-      <CheckmarkFilled16 v-if="componentsX" />
-      <svg v-else width="16" height="16" viewBox="0 0 16 16" fill-rule="evenodd">
-        <path
-          d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zM6.7 11.5L3.4 8.1l1.4-1.4 1.9 1.9 4.1-4.1 1.4 1.4-5.5 5.6z"
-        ></path>
-      </svg>
+      <CheckmarkFilled16 />
     </div>
     <div class="bx--tile-content">
       <slot>
@@ -38,7 +33,6 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import checkMixin from '../../mixins/check-mixin';
-import { componentsX } from '../../internal/feature-flags';
 import CheckmarkFilled16 from '@carbon/icons-vue/es/checkmark--filled/16';
 
 export default {
@@ -46,8 +40,5 @@ export default {
   mixins: [uidMixin, checkMixin],
   components: { CheckmarkFilled16 },
   inheritAttrs: false,
-  data() {
-    return { componentsX };
-  },
 };
 </script>

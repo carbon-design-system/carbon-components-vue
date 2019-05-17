@@ -1,10 +1,6 @@
 <template>
   <div class="cv-time-picker bx--form-item">
-    <div
-      class="bx--time-picker"
-      :class="{ 'bx--time-picker--light': theme === 'light' }"
-      :data-invalid="isInvalid && componentsX"
-    >
+    <div class="bx--time-picker" :class="{ 'bx--time-picker--light': theme === 'light' }" :data-invalid="isInvalid">
       <div class="bx--time-picker__input">
         <label :for="uid" class="bx--label">{{ label }}</label>
         <input
@@ -15,18 +11,13 @@
           v-bind="$attrs"
           :placeholder="placeholder"
           :maxlength="placeholder.length"
-          :data-invalid="isInvalid && !componentsX"
           :value="time"
           :disabled="disabled"
           @input="$emit('update:time', $event.target.value)"
         />
-        <div class="bx--form-requirement" v-if="isInvalid && !componentsX">
-          <slot name="invalid-message">{{ invalidMessage }}</slot>
-        </div>
       </div>
       <cv-select
         class="bx--time-picker__select"
-        :inline="!componentsX"
         :form-item="false"
         hide-label
         :label="ampmSelectLabel"
@@ -40,7 +31,6 @@
 
       <cv-select
         class="bx--time-picker__select"
-        :inline="!componentsX"
         :form-item="false"
         hide-label
         :label="timezonesSelectLabel"
@@ -49,12 +39,12 @@
         @input="$emit('update:timezone', $event)"
         :disabled="disabled"
       >
-        <cv-select-option class="bx--select-option" v-for="item in timezones" :key="item.value" :value="item.value">{{
-          item.label
-        }}</cv-select-option>
+        <cv-select-option class="bx--select-option" v-for="item in timezones" :key="item.value" :value="item.value">
+          {{ item.label }}
+        </cv-select-option>
       </cv-select>
     </div>
-    <div class="bx--form-requirement" v-if="isInvalid && componentsX">
+    <div class="bx--form-requirement" v-if="isInvalid">
       <slot name="invalid-message">{{ invalidMessage }}</slot>
     </div>
   </div>
@@ -63,7 +53,6 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
-import { componentsX } from '../../internal/feature-flags';
 import CvSelect from '../cv-select/cv-select';
 import CvSelectOption from '../cv-select/cv-select-option';
 
@@ -90,9 +79,6 @@ export default {
     timezone: String,
     timezones: { type: Array, default: () => [] },
     timezonesSelectLabel: { type: String, default: 'Select time zone' },
-  },
-  data() {
-    return { componentsX };
   },
   computed: {
     isInvalid() {
