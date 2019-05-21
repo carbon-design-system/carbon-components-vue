@@ -30,9 +30,6 @@ export default {
     this.$on('cv:mounted', srcComponent => this.onCvMount(srcComponent));
     this.$on('cv:beforeDestroy', srcComponent => this.onCvBeforeDestroy(srcComponent));
   },
-  mounted() {
-    this.currentStep = this.initialStep;
-  },
   computed: {
     state() {
       return step => {
@@ -53,16 +50,15 @@ export default {
     },
     processState() {
       const steps = this.$children.filter(child => child.$_CvProgressStep);
-      let newCurrentStep = -1;
+      let newStep = -1;
       for (let i = 0; i < steps.length; i++) {
-        if (!steps[i].complete && newCurrentStep < 0) {
-          newCurrentStep = i;
+        if (!steps[i].complete && newStep < 0) {
+          newStep = i;
           steps[i].internalState = 0;
         } else {
-          steps[i].internalState = newCurrentStep < 0 ? 1 : -1;
+          steps[i].internalState = newStep < 0 ? 1 : -1;
         }
       }
-      this.currentStep = newCurrentStep;
     },
     getCurrent() {
       console.warn('CvProgress: method deprecated');
