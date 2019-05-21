@@ -9,9 +9,8 @@
   >
     <div class="bx--structured-list-thead">
       <div class="bx--structured-list-row bx--structured-list-row--header-row">
-        <div v-if="selectable && !componentsX" class="bx--structured-list-th"></div>
         <slot name="headings"></slot>
-        <div v-if="selectable && componentsX" class="bx--structured-list-th"></div>
+        <div v-if="selectable" class="bx--structured-list-th"></div>
       </div>
     </div>
     <div class="bx--structured-list-tbody">
@@ -21,16 +20,11 @@
 </template>
 
 <script>
-import { componentsX } from '../../internal/feature-flags';
-
 export default {
   name: 'CvStructuredList',
   props: {
     selectable: Boolean,
     condensed: Boolean,
-  },
-  data() {
-    return { componentsX };
   },
   mounted() {
     // pass on cv-structured-list-item change events

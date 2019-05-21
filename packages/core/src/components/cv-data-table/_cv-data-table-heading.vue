@@ -1,33 +1,15 @@
 <template>
   <th :aria-sort="sortOrder">
-    <button
-      type="button"
-      v-if="sortable"
-      :class="[componentsX ? 'bx--table-sort' : 'bx--table-sort-v2', orderClass]"
-      @click="onSortClick"
-    >
+    <button type="button" v-if="sortable" :class="['bx--table-sort', orderClass]" @click="onSortClick">
       <span class="bx--table-header-label">{{ heading }}</span>
-      <ArrowDown16 v-if="componentsX" class="bx--table-sort__icon" />
-      <svg
-        v-else
-        class="bx--table-sort-v2__icon"
-        width="10"
-        height="5"
-        viewBox="0 0 10 5"
-        :aria-label="sortText"
-        :alt="sortText"
-      >
-        <title>{{ sortText }}</title>
-        <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd"></path>
-      </svg>
-      <Arrows16 v-if="componentsX" class="bx--table-sort__icon-unsorted" />
+      <ArrowDown16 class="bx--table-sort__icon" />
+      <Arrows16 class="bx--table-sort__icon-unsorted" />
     </button>
     <span v-else class="bx--table-header-label">{{ heading }}</span>
   </th>
 </template>
 
 <script>
-import { componentsX } from '../../internal/feature-flags';
 import ArrowDown16 from '@carbon/icons-vue/es/arrow--down/16';
 import Arrows16 from '@carbon/icons-vue/es/arrows/16';
 
@@ -60,23 +42,14 @@ export default {
     },
     orderClass() {
       let result = '';
-      if (this.componentsX) {
-        if (this.sortOrder === 'descending') {
-          result = 'bx--table-sort--active';
-        } else if (this.sortOrder === 'ascending') {
-          result = 'bx--table-sort--active bx--table-sort--ascending';
-        }
-      } else {
-        if (this.sortOrder === 'none') {
-          result = 'bx--table-sort-v2--active';
-        } else if (this.sortOrder === 'active') {
-          result = 'bx--table-sort-v2--ascending';
-        }
+      if (this.sortOrder === 'descending') {
+        result = 'bx--table-sort--active';
+      } else if (this.sortOrder === 'ascending') {
+        result = 'bx--table-sort--active bx--table-sort--ascending';
       }
       return result;
     },
   },
-  data: () => ({ componentsX }),
   model: {
     event: 'sort',
     prop: 'order',

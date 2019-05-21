@@ -14,22 +14,9 @@
 </template>
 
 <script>
-import { componentsX } from '../../internal/feature-flags';
 import Close16 from '@carbon/icons-vue/es/close/16';
 
-const components9Tags = [
-  'ibm',
-  'beta',
-  'third-party',
-  'local',
-  'dedicated',
-  'custom',
-  'experimental',
-  'community',
-  'private',
-  'deprecated',
-];
-const componentsXTags = [
+const componentsTags = [
   'filter',
   'red',
   'magenta',
@@ -46,18 +33,13 @@ const componentsXTags = [
 export default {
   name: 'CvTag',
   components: { Close16 },
-  data: () => ({ componentsX }),
   props: {
     label: { type: String, required: true },
     kind: {
       type: String,
-      default: componentsX ? componentsXTags[0] : components9Tags[0],
+      default: componentsTags[0],
       validator(val) {
-        if (componentsX) {
-          return componentsXTags.includes(val);
-        } else {
-          return components9Tags.includes(val);
-        }
+        return componentsTags.includes(val);
       },
     },
   },

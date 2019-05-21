@@ -33,6 +33,12 @@ export default {
     },
     selected: Boolean,
   },
+  watch: {
+    selected() {
+      this.dataSelected = this.selected;
+      this.$parent.$emit('cv:selected', this);
+    },
+  },
   data() {
     return {
       dataSelected: undefined,

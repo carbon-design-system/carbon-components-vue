@@ -52,15 +52,6 @@ const preKnobs = {
       name: 'auto-width',
     },
   },
-  borderless: {
-    group: 'attr',
-    type: boolean,
-    config: ['borderless', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: Boolean,
-      name: 'borderless',
-    },
-  },
   sortable: {
     group: 'attr',
     type: boolean,

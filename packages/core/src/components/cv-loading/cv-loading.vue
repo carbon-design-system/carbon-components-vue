@@ -11,23 +11,14 @@
     >
       <svg class="bx--loading__svg" viewBox="-75 -75 150 150">
         <title>Loading</title>
-        <circle v-if="componentsX && small" class="bx--loading__background" cx="0" cy="0" r="37.5"></circle>
-        <circle
-          :class="{
-            'bx--loading__stroke': componentsX,
-          }"
-          cx="0"
-          cy="0"
-          r="37.5"
-        ></circle>
+        <circle v-if="small" class="bx--loading__background" cx="0" cy="0" r="37.5"></circle>
+        <circle class="bx--loading__stroke" cx="0" cy="0" r="37.5"></circle>
       </svg>
     </div>
   </div>
 </template>
 
 <script>
-import { componentsX } from '../../internal/feature-flags';
-
 export default {
   name: 'CvLoading',
   props: {
@@ -44,7 +35,6 @@ export default {
   },
   data() {
     return {
-      componentsX,
       stopped: false,
     };
   },

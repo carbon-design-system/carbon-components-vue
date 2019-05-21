@@ -1,20 +1,15 @@
 <template>
   <div :style="tableStyle" class="cv-data-table">
-    <div :class="{ 'bx--data-table-v2-container': !componentsX, 'bx--data-table-container': componentsX }">
-      <cv-wrapper :tag-type="componentsX ? 'div' : ''" class="bx--data-table-header">
-        <h4
-          :class="{ 'bx--data-table-v2-header': !componentsX, 'bx--data-table-header__title': componentsX }"
-          v-if="title"
-        >
-          {{ title }}
-        </h4>
-        <p v-if="componentsX && isHelper" class="bx--data-table-header__description">
+    <div class="bx--data-table-container">
+      <div class="bx--data-table-header">
+        <h4 class="bx--data-table-header__title" v-if="title">{{ title }}</h4>
+        <p v-if="isHelper" class="bx--data-table-header__description">
           <slot name="helper-text">{{ helperText }}</slot>
         </p>
-      </cv-wrapper>
+      </div>
 
       <section class="bx--table-toolbar">
-        <div v-if="batchActive" :style="{ minHeight: componentsX ? '48px' : '32px', maxWidth: '0' }" />
+        <div v-if="batchActive" :style="{ minHeight: '48px', maxWidth: '0' }" />
 
         <div
           v-if="hasBatchActions"
@@ -86,7 +81,7 @@
         </div>
       </section>
 
-      <table :class="[{ 'bx--data-table-v2': !componentsX, 'bx--data-table': componentsX }, modifierClasses]">
+      <table class="bx--data-table" :class="modifierClasses">
         <thead>
           <tr>
             <th v-if="hasExpandables" class="bx--table-expand" />
@@ -153,7 +148,6 @@ import CvDataTableCell from './cv-data-table-cell';
 import CvButton from '../cv-button/cv-button';
 import CvCheckbox from '../cv-checkbox/cv-checkbox';
 import CvPagination from '../cv-pagination/cv-pagination';
-import { componentsX } from '../../internal/feature-flags';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
 import uidMixin from '../../mixins/uid-mixin';
 import Search16 from '@carbon/icons-vue/es/search/16';
@@ -204,7 +198,6 @@ export default {
   },
   data() {
     return {
-      componentsX,
       dataColumns: this.sortable
         ? this.columns.map(item => ({
             label: item.label ? item.label : item,
@@ -275,7 +268,7 @@ export default {
       }
     },
     modifierClasses() {
-      const prefix = this.componentsX ? 'bx--data-table--' : 'bx--data-table-v2--';
+      const prefix = 'bx--data-table--';
       const sizeClass = this.rowSize.length === 0 || this.rowSize === 'standard' ? '' : `${prefix}${this.rowSize} `;
       const zebraClass = this.zebra ? `${prefix}zebra ` : '';
       const borderlessClass = this.borderless ? `${prefix}no-border ` : '';

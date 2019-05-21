@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { array, number } from '@storybook/addon-knobs';
+import { array, number, boolean } from '@storybook/addon-knobs';
 
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../_storybook/utils/consts';
@@ -39,21 +39,17 @@ const preKnobs = {
   },
   slotted: {
     group: 'slots',
-    slot: {
-      name: '',
-      value: `
-        <cv-progress-step label="Step 1" complete additional-info="Optional info" />
-        <cv-progress-step label="Step 2 is a bit longer" complete />
-        <cv-progress-step label="Step 3" />
-        <cv-progress-step label="Step 4" invalid />
-        <cv-progress-step label="Step 4" disabled />
-      `,
-    },
+    value: `  <cv-progress-step label="Step 1" additional-info="Optional info" :complete="complete[0]"/>
+  <cv-progress-step label="Step 2 is a bit longer" :complete="complete[1]"/>
+  <cv-progress-step label="Step 3" :complete="complete[2]"/>
+  <cv-progress-step label="Step 4" :complete="complete[3]" invalid />
+  <cv-progress-step label="Step 4" :complete="complete[4]" disabled />
+`,
   },
 };
 
 const variants = [
-  { name: 'default', excludes: ['slotted'] },
+  { name: 'default', includes: ['initialStep', 'steps'] },
   { name: 'slotted', excludes: ['steps', 'initialStep'], skip: { default: true } },
 ];
 
@@ -77,10 +73,8 @@ for (const version of versions(true)) {
 
         // ----------------------------------------------------------------
 
-        const templateString = `
-<cv-progress${settings.group.attr}>${settings.group.slots}</cv-progress>
-  `;
-
+        let templateString = `<cv-progress${settings.group.attr}>${settings.group.slots}</cv-progress>`;
+        // console.log(templateString);
         // ----------------------------------------------------------------
         const templateViewString = `
     <sv-template-view
@@ -88,12 +82,18 @@ for (const version of versions(true)) {
       sv-margin
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
+      <template slot="other" v-if="${story.name === 'slotted'}">
+        <label v-for="(state, index) in complete">{{(index + 1) + ' complete'}}
+          <input type="checkbox" v-model="complete[index]" />
+          <br>
+        </label>
+      </template>
     </sv-template-view>
   `;
 
         return {
           components: { CvProgress, CvProgressStep, SvTemplateView },
-          data: () => ({ experimental: version.experimental }),
+          data: () => ({ experimental: version.experimental, complete: [true, false, false, false, false] }),
           template: templateViewString,
           props: settings.props,
         };

@@ -24,44 +24,17 @@ export default {
     initialStep: { type: Number, default: 0 },
     steps: Array,
   },
-  data() {
-    return {
-      // TODO: Manage current step or leave this to user?
-      // NOTE: Decision impacts on whether or not methods are useful
-      currentStep: -1,
-    };
-  },
   created() {
     // add these on created otherwise cv:mounted is too late.
     this.$on('cv:completed', srcComponent => this.onCvCompleted(srcComponent));
     this.$on('cv:mounted', srcComponent => this.onCvMount(srcComponent));
     this.$on('cv:beforeDestroy', srcComponent => this.onCvBeforeDestroy(srcComponent));
   },
-  mounted() {
-    this.currentStep = this.initialStep;
-  },
-  watch: {
-    // initialStep() {
-    //   if (!this.$slots.default) {
-    //     // only works if no slot passed
-    //     // this.currentStep = this.initialStep;
-    //     this.processState();
-    //   }
-    // },
-  },
   computed: {
     state() {
       return step => {
-        if (this.componentsX) {
-          console.warn('CvProgress: method deprecated');
-          return;
-        }
-
-        if (step > this.currentStep) {
-          return 'incomplete';
-        } else {
-          return step < this.currentStep ? 'complete' : 'current';
-        }
+        console.warn('CvProgress: method deprecated');
+        return;
       };
     },
   },
@@ -77,50 +50,24 @@ export default {
     },
     processState() {
       const steps = this.$children.filter(child => child.$_CvProgressStep);
-      let newCurrentStep = -1;
+      let newStep = -1;
       for (let i = 0; i < steps.length; i++) {
-        if (!steps[i].complete && newCurrentStep < 0) {
-          newCurrentStep = i;
+        if (!steps[i].complete && newStep < 0) {
+          newStep = i;
           steps[i].internalState = 0;
         } else {
-          steps[i].internalState = newCurrentStep < 0 ? 1 : -1;
+          steps[i].internalState = newStep < 0 ? 1 : -1;
         }
       }
-      this.currentStep = newCurrentStep;
     },
     getCurrent() {
-      if (this.componentsX) {
-        console.warn('CvProgress: method deprecated');
-        return;
-      }
-
-      return { order: current + 1, component: this.$refs.steps[current] };
+      console.warn('CvProgress: method deprecated');
     },
     getSteps() {
-      if (this.componentsX) {
-        console.warn('CvProgress: method deprecated');
-        return;
-      }
-
-      let index = 1;
-      const steps = [];
-      for (let step of this.$refs.steps) {
-        steps.push({ order: index, component: step });
-        index++;
-      }
-      return steps;
+      console.warn('CvProgress: method deprecated');
     },
     setCurrent(step) {
-      if (this.componentsX) {
-        console.warn('CvProgress: method deprecated');
-        return;
-      }
-
-      if (step > this.steps.length) {
-        this.currentStep = this.steps.length - 1;
-      } else {
-        this.currentStep = Math.max(0, step);
-      }
+      console.warn('CvProgress: method deprecated');
     },
   },
 };

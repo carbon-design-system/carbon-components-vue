@@ -25,27 +25,9 @@
         @click="toggleActive(true)"
         @blur="checkFocus"
       >
-        <Search16 v-if="componentsX" class="bx--search-magnifier" />
-        <svg v-else class="bx--search-magnifier" width="16" height="16" viewBox="0 0 16 16">
-          <path
-            d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zm4.936-1.27l4.563 4.557-.707.708-4.563-4.558a6.5 6.5 0 1 1 .707-.707z"
-            fill-rule="nonzero"
-          ></path>
-        </svg>
+        <Search16 class="bx--search-magnifier" />
       </button>
-      <Search16 v-if="!isToolbarKind && componentsX" class="bx--search-magnifier" />
-      <svg
-        v-if="!isToolbarKind && !componentsX"
-        class="bx--search-magnifier"
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-      >
-        <path
-          d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zm4.936-1.27l4.563 4.557-.707.708-4.563-4.558a6.5 6.5 0 1 1 .707-.707z"
-          fill-rule="nonzero"
-        ></path>
-      </svg>
+      <Search16 v-if="!isToolbarKind" class="bx--search-magnifier" />
       <button
         type="button"
         class="bx--search-close"
@@ -54,13 +36,7 @@
         aria-label="Clear search input"
         @click="onClearClick"
       >
-        <Close16 v-if="componentsX" />
-        <svg v-else width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M8 6.586L5.879 4.464 4.464 5.88 6.586 8l-2.122 2.121 1.415 1.415L8 9.414l2.121 2.122 1.415-1.415L9.414 8l2.122-2.121-1.415-1.415L8 6.586zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
-            fill-rule="evenodd"
-          ></path>
-        </svg>
+        <Close16 />
       </button>
     </div>
   </cv-wrapper>
@@ -69,7 +45,6 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
-import { componentsX } from '../../internal/feature-flags';
 import Search16 from '@carbon/icons-vue/es/search/16';
 import Close16 from '@carbon/icons-vue/es/close/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
@@ -101,7 +76,6 @@ export default {
   },
   data() {
     return {
-      componentsX,
       clearVisible: this.value ? this.value.length : false,
       internalValue: this.value,
       toolbarActive: false,
@@ -125,9 +99,7 @@ export default {
     },
     searchClasses() {
       const themeClass = this.theme.length ? `bx--search--${this.theme}` : '';
-      const sizeClass = componentsX
-        ? `bx--search--${this.small ? 'sm' : 'xl'}`
-        : `bx--search--${this.large ? 'lg' : 'sm'}`;
+      const sizeClass = `bx--search--${this.small ? 'sm' : 'xl'}`;
       let toolbarClasses = '';
       if (this.isToolbarKind) {
         toolbarClasses = this.toolbarActive ? 'bx--toolbar-search bx--toolbar-search--active' : 'bx--toolbar-search';

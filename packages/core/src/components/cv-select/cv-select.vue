@@ -22,8 +22,8 @@
         <slot name="helper-text">{{ helperText }}</slot>
       </div>
 
-      <cv-wrapper :tag-type="inline && componentsX ? 'div' : ''" class="bx--select-input--inline__wrapper">
-        <div v-if="componentsX" class="bx--select-input__wrapper" :data-invalid="isInvalid">
+      <cv-wrapper :tag-type="inline ? 'div' : ''" class="bx--select-input--inline__wrapper">
+        <div class="bx--select-input__wrapper" :data-invalid="isInvalid">
           <select
             v-bind="$attrs"
             :id="uid"
@@ -34,39 +34,18 @@
           >
             <slot></slot>
           </select>
-          <chevron-down-glyph v-if="componentsX" class="bx--select__arrow" />
-          <warning-filled-16 v-if="componentsX && isInvalid" class="bx--select__invalid-icon" />
+          <chevron-down-glyph class="bx--select__arrow" />
+          <warning-filled-16 v-if="isInvalid" class="bx--select__invalid-icon" />
         </div>
 
-        <div v-if="componentsX && isInvalid" class="bx--form-requirement">
+        <div v-if="isInvalid" class="bx--form-requirement">
           <slot name="invalid-message">{{ invalidMessage }}</slot>
         </div>
         <!-- cv-wrapper div bx--select-input--inline__wrapper -->
       </cv-wrapper>
 
-      <!-- NOTE componentsX -->
-      <select
-        v-if="!componentsX"
-        v-bind="$attrs"
-        :id="uid"
-        class="bx--select-input"
-        v-on="inputListeners"
-        ref="select"
-        :value="value"
-        :data-invalid="isInvalid"
-      >
-        <slot></slot>
-      </select>
-      <svg v-if="!componentsX" class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5">
-        <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd"></path>
-      </svg>
-
       <div v-if="inline && isHelper" class="bx--form__helper-text">
         <slot name="helper-text">{{ helperText }}</slot>
-      </div>
-
-      <div v-if="!componentsX && isInvalid" class="bx--form-requirement">
-        <slot name="invalid-message">{{ invalidMessage }}</slot>
       </div>
     </div>
     <!-- cv-wrapper div bx--form-item -->
@@ -76,7 +55,6 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
-import { componentsX } from '../../internal/feature-flags';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
 import ChevronDownGlyph from '@carbon/icons-vue/es/chevron--down/index';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
@@ -114,7 +92,7 @@ export default {
     delete this.$attrs.multiple;
   },
   data() {
-    return { componentsX, dataValue: null };
+    return { dataValue: null };
   },
   mounted() {
     // this is needed to ensure selected for an option when no value is supplied

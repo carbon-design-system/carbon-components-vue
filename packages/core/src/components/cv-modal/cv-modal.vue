@@ -27,8 +27,7 @@
           <slot name="title">Modal Title</slot>
         </h2>
         <button class="bx--modal-close" type="button" @click="hide" ref="close">
-          <Close16 v-if="componentsX" class="bx--modal-close__icon" />
-          <cv-icon v-else class="bx--modal-close__icon" href="cv(icon--close)" height="10px" width="10px"></cv-icon>
+          <Close16 class="bx--modal-close__icon" />
         </button>
       </div>
 
@@ -74,17 +73,14 @@
 
 <script>
 import CvButton from '../cv-button/cv-button';
-import CvIcon from '../cv-icon/_cv-icon';
 import uidMixin from '../../mixins/uid-mixin';
 import Close16 from '@carbon/icons-vue/es/close/16';
-import { componentsX } from '../../internal/feature-flags';
 
 export default {
   name: 'CvModal',
   mixins: [uidMixin],
   components: {
     CvButton,
-    CvIcon,
     Close16,
   },
   props: {
@@ -97,7 +93,6 @@ export default {
   },
   data() {
     return {
-      componentsX,
       dataVisible: false,
     };
   },
@@ -118,17 +113,13 @@ export default {
   computed: {
     primaryKind() {
       if (this.kind === 'danger') {
-        return componentsX ? 'danger' : 'danger--primary';
+        return 'danger';
       } else {
         return 'primary';
       }
     },
     secondaryKind() {
-      if (this.kind === 'danger') {
-        return componentsX ? 'secondary' : 'tertiary';
-      } else {
-        return 'secondary';
-      }
+      return 'secondary';
     },
     hasFooter() {
       return this.$slots['primary-button'] || this.$slots['secondary-button'];

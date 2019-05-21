@@ -13,14 +13,7 @@
     :class="{ 'bx--overflow-menu--open': open }"
   >
     <slot name="trigger">
-      <OverflowMenuVertical16 v-if="componentsX" class="bx--overflow-menu__icon" />
-      <svg v-else class="bx--overflow-menu__icon" width="3" height="15" viewBox="0 0 3 15">
-        <g fill-rule="evenodd">
-          <circle cx="1.5" cy="1.5" r="1.5"></circle>
-          <circle cx="1.5" cy="7.5" r="1.5"></circle>
-          <circle cx="1.5" cy="13.5" r="1.5"></circle>
-        </g>
-      </svg>
+      <OverflowMenuVertical16 class="bx--overflow-menu__icon" />
     </slot>
     <ul
       class="bx--overflow-menu-options"
@@ -55,7 +48,6 @@
 </template>
 
 <script>
-import { componentsX } from '../../internal/feature-flags';
 import OverflowMenuVertical16 from '@carbon/icons-vue/es/overflow-menu--vertical/16';
 import uidMixin from '../../mixins/uid-mixin';
 
@@ -81,7 +73,6 @@ export default {
   },
   data() {
     return {
-      componentsX,
       open: false,
       left: -9999, // offscreen,
       top: 0,
@@ -141,18 +132,17 @@ export default {
           if (this.flipMenu) {
             this.left =
               menuPosition.left +
-              (this.componentsX ? 0 : 20) +
               this.offsetLeft -
               this.$refs.popup.offsetWidth +
               this.$el.offsetWidth +
               window.scrollX;
           } else {
-            this.left = menuPosition.left - (this.componentsX ? 0 : 20) + this.offsetLeft + window.scrollX;
+            this.left = menuPosition.left + this.offsetLeft + window.scrollX;
           }
           if (this.up) {
             this.top = menuPosition.top + this.offsetTop - this.$refs.popup.offsetHeight + window.scrollY;
           } else {
-            this.top = menuPosition.bottom + (this.componentsX ? 0 : 2) + this.offsetTop + window.scrollY;
+            this.top = menuPosition.bottom + this.offsetTop + window.scrollY;
           }
         });
       }

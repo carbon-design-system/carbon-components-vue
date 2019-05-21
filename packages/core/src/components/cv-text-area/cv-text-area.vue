@@ -13,7 +13,7 @@
     <div v-if="isHelper" class="bx--form__helper-text" :class="{ 'bx--form__helper-text--disabled': $attrs.disabled }">
       <slot name="helper-text">{{ helperText }}</slot>
     </div>
-    <div v-if="componentsX" class="bx--text-area__wrapper" :data-invalid="isInvalid">
+    <div class="bx--text-area__wrapper" :data-invalid="isInvalid">
       <WarningFilled16 v-if="isInvalid" class="bx--text-area__invalid-icon" />
       <textarea
         :id="uid"
@@ -24,16 +24,6 @@
         v-on="inputListeners"
       ></textarea>
     </div>
-    <textarea
-      v-else
-      :id="uid"
-      class="bx--text-area"
-      :class="{ 'bx--text-area--light': theme === 'light' }"
-      v-bind="$attrs"
-      :value="value"
-      v-on="inputListeners"
-      :data-invalid="isInvalid"
-    ></textarea>
     <div class="bx--form-requirement" v-if="isInvalid">
       <slot name="invalid-message">{{ invalidMessage }}</slot>
     </div>
@@ -43,7 +33,6 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
-import { componentsX } from '../../internal/feature-flags';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 
 export default {
@@ -51,11 +40,6 @@ export default {
   mixins: [uidMixin, themeMixin],
   inheritAttrs: false,
   components: { WarningFilled16 },
-  data() {
-    return {
-      componentsX,
-    };
-  },
   props: {
     helperText: { type: String, default: null },
     invalidMessage: { type: String, default: null },
