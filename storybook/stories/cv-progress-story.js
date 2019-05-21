@@ -91,8 +91,6 @@ for (const version of versions(true)) {
     </sv-template-view>
   `;
 
-        console.log(templateViewString);
-
         return {
           components: { CvProgress, CvProgressStep, SvTemplateView },
           data: () => ({ experimental: version.experimental, complete: [true, false, false, false, false] }),
