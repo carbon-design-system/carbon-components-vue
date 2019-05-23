@@ -50,10 +50,13 @@ View available Vue Components [here](http://vue.carbondesignsystem.com). Usage i
 Assuming we're starting with a new Vue CLI project:
 
 ```sh
-$ vue create my-project
-Vue CLI v3.5.2
-? Please pick a preset: default (babel, eslint)
-$ cd my-project
+Vue CLI v3.7.0
+? Please pick a preset: Manually select features
+? Check the features needed for your project: Babel, CSS Pre-processors
+? Pick a CSS pre-processor (PostCSS, Autoprefixer and CSS Modules are supported by default): Sass/SCSS (with node-
+sass)
+? Where do you prefer placing config for Babel, PostCSS, ESLint, etc.? In package.json
+? Save this as a preset for future projects? No
 ```
 
 Using Yarn
