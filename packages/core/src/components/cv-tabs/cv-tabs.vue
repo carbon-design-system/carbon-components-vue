@@ -10,9 +10,9 @@
       @keydown.left.prevent="moveLeft"
     >
       <cv-dropdown class="bx--tabs-trigger" :value="`${selectedIndex}`" @change="onDropChange" :form-item="false">
-        <cv-dropdown-item v-for="(tab, index) in tabs" :key="`drop-${index}`" :value="`${index}`">{{
-          tab.label
-        }}</cv-dropdown-item>
+        <cv-dropdown-item v-for="(tab, index) in tabs" :key="`drop-${index}`" :value="`${index}`">
+          {{ tab.label }}
+        </cv-dropdown-item>
       </cv-dropdown>
       <ul class="bx--tabs__nav bx--tabs__nav--hidden" role="tablist">
         <li
@@ -74,6 +74,7 @@ export default {
     onCvMount(srcComponent) {
       this.tabs.push(srcComponent);
       this.checkSelected();
+      this.checkDisabled(srcComponent);
     },
     onCvBeforeDestroy(srcComponent) {
       const tabIndex = this.tabs.findIndex(item => item.id === srcComponent.id);
@@ -81,6 +82,7 @@ export default {
         this.tabs.splice(tabIndex, 1);
       }
       this.checkSelected();
+      this.checkDisabled(srcComponent);
     },
     onTabClick(index) {
       if (this.selectedIndex !== index && this.disabledTabs.indexOf(index) === -1) {
@@ -105,6 +107,13 @@ export default {
       let arrIdx = this.disabledTabs.indexOf(tabIndex);
       if (arrIdx !== -1) {
         this.disabledTabs.splice(arrIdx, 1);
+      }
+    },
+    checkDisabled(srcComponent) {
+      if (srcComponent.internalDisabled) {
+        this.onCvDisabled(srcComponent);
+      } else {
+        this.onCvEnabled(srcComponent);
       }
     },
     checkSelected() {
