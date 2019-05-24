@@ -50,6 +50,9 @@ export default {
         this.dataSelected = val;
       },
     },
+    internalDisabled() {
+      return this.disabled;
+    },
   },
   mounted() {
     this.$_CvTab = true; // for use by parent with $children

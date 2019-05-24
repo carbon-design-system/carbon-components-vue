@@ -1,11 +1,17 @@
 ## 2.2.0 (May 24, 2019)
 
+### Fixes
+
+- Ensure tab disabled when created with disabled attribute
+
+## 2.2.0 (May 24, 2019)
+
 ### General
 
 - Some code tidying, removing v9 code.
 - Dependency updates to potential issue See #441
 
-### Fixes
+### Features
 
 - Add \$attrs to nav element of cv-tabs, this allows aria-label to be specified on the nav.
 
