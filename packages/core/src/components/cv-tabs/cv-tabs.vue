@@ -5,13 +5,14 @@
       class="cv-tab bx--tabs"
       role="navigation"
       v-on="$listeners"
+      v-bind="$attrs"
       @keydown.right.prevent="moveRight"
       @keydown.left.prevent="moveLeft"
     >
       <cv-dropdown class="bx--tabs-trigger" :value="`${selectedIndex}`" @change="onDropChange" :form-item="false">
-        <cv-dropdown-item v-for="(tab, index) in tabs" :key="`drop-${index}`" :value="`${index}`">
-          {{ tab.label }}
-        </cv-dropdown-item>
+        <cv-dropdown-item v-for="(tab, index) in tabs" :key="`drop-${index}`" :value="`${index}`">{{
+          tab.label
+        }}</cv-dropdown-item>
       </cv-dropdown>
       <ul class="bx--tabs__nav bx--tabs__nav--hidden" role="tablist">
         <li

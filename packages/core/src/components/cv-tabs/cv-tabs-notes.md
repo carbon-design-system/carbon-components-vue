@@ -18,6 +18,8 @@ http://www.carbondesignsystem.com/components/tabs/code
 
 ## CvTabs
 
+NOTE: \$attrs are assigned to the nav tab (cv-tabs).
+
 ### Events
 
 - tab-selected

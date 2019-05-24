@@ -56,7 +56,7 @@ for (const version of versions(true)) {
         // ----------------------------------------------------------------
 
         const templateString = `
-<cv-tabs${settings.group.attr}>
+<cv-tabs${settings.group.attr} aria-label="navigation tab label">
   <cv-tab id="tabs-1" label="Tab link 1">
     Sample tab panel content 1
   </cv-tab>
