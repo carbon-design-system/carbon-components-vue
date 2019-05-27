@@ -10,7 +10,6 @@ import CvTile from '@carbon/vue/src/components/cv-tile/cv-tile';
 
 const storiesDefault = storiesOf('Components/CvTile', module);
 const storiesExperimental = storiesOf('Experimental/CvTile', module);
-import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   slotDefault: {
@@ -93,30 +92,26 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
+      if (settings.kind === 'selectable') {
+        settings.group.attr += `\n  value="value-1"`;
+      }
 
-        if (settings.kind === 'selectable') {
-          settings.group.attr += `\n  value="value-1"`;
-        }
+      // ----------------------------------------------------------------
 
-        // ----------------------------------------------------------------
-
-        const templateString = `
+      const templateString = `
 <cv-tile${settings.group.attr}>${settings.group.slots}
 </cv-tile>
   `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
     <sv-template-view
       sv-margin
       sv-source='${templateString.trim()}'>
@@ -124,15 +119,14 @@ for (const version of versions(true)) {
     </sv-template-view>
   `;
 
-        return {
-          components: { CvTile, SvTemplateView },
-          template: templateViewString,
-          props: settings.props,
-        };
-      },
-      {
-        notes: { markdown: CvTileNotesMD },
-      }
-    );
-  }
+      return {
+        components: { CvTile, SvTemplateView },
+        template: templateViewString,
+        props: settings.props,
+      };
+    },
+    {
+      notes: { markdown: CvTileNotesMD },
+    }
+  );
 }

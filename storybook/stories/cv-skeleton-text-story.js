@@ -9,7 +9,6 @@ import CvSkeletonText from '@carbon/vue/src/components/cv-skeleton-text/cv-skele
 
 const storiesDefault = storiesOf('Components/CvSkeletonText', module);
 const storiesExperimental = storiesOf('Experimental/CvSkeletonText', module);
-import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   heading: {
@@ -48,25 +47,21 @@ const variants = [{ name: 'default' }, { name: 'minimal', excludes: ['heading', 
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
+      // ----------------------------------------------------------------
 
-        // ----------------------------------------------------------------
-
-        const templateString = `
+      const templateString = `
         <cv-skeleton-text${settings.group.attr}></cv-skeleton-text>
       `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
         <sv-template-view
           sv-margin
           sv-source='${templateString.trim()}'>
@@ -74,15 +69,14 @@ for (const version of versions(true)) {
         </sv-template-view>
       `;
 
-        return {
-          components: { CvSkeletonText, SvTemplateView },
-          template: templateViewString,
-          props: settings.props,
-        };
-      },
-      {
-        notes: { markdown: CvSkeletonTextNotesMD },
-      }
-    );
-  }
+      return {
+        components: { CvSkeletonText, SvTemplateView },
+        template: templateViewString,
+        props: settings.props,
+      };
+    },
+    {
+      notes: { markdown: CvSkeletonTextNotesMD },
+    }
+  );
 }

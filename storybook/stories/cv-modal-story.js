@@ -12,7 +12,6 @@ import CvModal from '@carbon/vue/src/components/cv-modal/cv-modal';
 
 const storiesDefault = storiesOf('Components/CvModal', module);
 const storiesExperimental = storiesOf('Experimental/CvModal', module);
-import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   label: {
@@ -100,26 +99,22 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
-
-        // ----------------------------------------------------------------
-        const templateString = `
+      // ----------------------------------------------------------------
+      const templateString = `
 <cv-modal${settings.group.attr}>${settings.group.content}
 </cv-modal>
   `;
-        // console.log(templateString);
+      // console.log(templateString);
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
     <sv-template-view ref="view"
       sv-margin
       sv-source='${templateString.trim()}'>
@@ -128,28 +123,27 @@ for (const version of versions(true)) {
     </sv-template-view>
   `;
 
-        return {
-          components: { CvModal, SvTemplateView },
+      return {
+        components: { CvModal, SvTemplateView },
 
-          props: settings.props,
-          methods: {
-            doSave() {
-              this.$refs.view.method('hide')();
-            },
-            show() {
-              this.$refs.view.method('show')();
-            },
-            actionShown: action('CV Modal - modal-shown'),
-            actionHidden: action('CV Modal - modal-hidden'),
-            actionPrimary: action('CV Modal - primary-click'),
-            actionSecondary: action('CV Modal - secondary-click'),
+        props: settings.props,
+        methods: {
+          doSave() {
+            this.$refs.view.method('hide')();
           },
-          template: templateViewString,
-        };
-      },
-      {
-        notes: { markdown: CvModalNotesMD },
-      }
-    );
-  }
+          show() {
+            this.$refs.view.method('show')();
+          },
+          actionShown: action('CV Modal - modal-shown'),
+          actionHidden: action('CV Modal - modal-hidden'),
+          actionPrimary: action('CV Modal - primary-click'),
+          actionSecondary: action('CV Modal - secondary-click'),
+        },
+        template: templateViewString,
+      };
+    },
+    {
+      notes: { markdown: CvModalNotesMD },
+    }
+  );
 }

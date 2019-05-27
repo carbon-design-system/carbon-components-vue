@@ -13,7 +13,6 @@ import CvSelectOptgroup from '@carbon/vue/src/components/cv-select/cv-select-opt
 
 const storiesDefault = storiesOf('Components/CvSelect', module);
 const storiesExperimental = storiesOf('Experimental/CvSelect', module);
-import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   theme: {
@@ -122,22 +121,15 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    if (story.skip && ((story.skip.default && version.default) || (story.skip.experimental && version.experimental))) {
-      continue;
-    }
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
+      // ----------------------------------------------------------------
 
-        // ----------------------------------------------------------------
-
-        const templateString = `
+      const templateString = `
   <cv-select${settings.group.attr}>${settings.group.slots}
     <cv-select-option disabled selected hidden>Choose an option</cv-select-option>
     <cv-select-option value="solong">A much longer cv-select-option that is worth having around to check how text flows</cv-select-option>
@@ -152,9 +144,9 @@ for (const version of versions(true)) {
   </cv-select>
 `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
     <sv-template-view
       sv-margin
       :sv-alt-back="this.$options.propsData.theme !== 'light'"
@@ -176,23 +168,22 @@ for (const version of versions(true)) {
     </sv-template-view>
   `;
 
-        return {
-          components: { CvSelect, CvSelectOption, CvSelectOptgroup, SvTemplateView },
-          props: settings.props,
-          data() {
-            return {
-              selectValue: 'cv-select-option3',
-            };
-          },
-          methods: {
-            actionChange: action('CV Select - change'),
-          },
-          template: templateViewString,
-        };
-      },
-      {
-        notes: { markdown: CvSelectNotesMD },
-      }
-    );
-  }
+      return {
+        components: { CvSelect, CvSelectOption, CvSelectOptgroup, SvTemplateView },
+        props: settings.props,
+        data() {
+          return {
+            selectValue: 'cv-select-option3',
+          };
+        },
+        methods: {
+          actionChange: action('CV Select - change'),
+        },
+        template: templateViewString,
+      };
+    },
+    {
+      notes: { markdown: CvSelectNotesMD },
+    }
+  );
 }

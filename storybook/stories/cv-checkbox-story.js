@@ -12,7 +12,6 @@ import CvCheckboxSkeleton from '@carbon/vue/src/components/cv-checkbox/cv-checkb
 
 const storiesDefault = storiesOf('Components/CvCheckbox', module);
 const storiesExperimental = storiesOf('Experimental/CvCheckbox', module);
-import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 let preKnobs = {
   label: {
@@ -79,26 +78,22 @@ let variants = [
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
+      // ----------------------------------------------------------------
 
-        // ----------------------------------------------------------------
-
-        const templateString = `
+      const templateString = `
 <cv-checkbox${settings.group.attr}>
 </cv-checkbox>
   `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
     <sv-template-view
       sv-margin
       :sv-alt-back="this.$options.propsData.theme !== 'light'"
@@ -122,26 +117,26 @@ for (const version of versions(true)) {
     </sv-template-view>
   `;
 
-        return {
-          components: { CvCheckbox, SvTemplateView },
-          props: settings.props,
-          data() {
-            return {
-              modelValue: this.$options.propsData.checked || false,
-            };
-          },
-          methods: {
-            actionChange: action('CV Checkbox - change'),
-          },
-          template: templateViewString,
-        };
-      },
-      {
-        notes: { markdown: CvCheckboxNotesMD },
-      }
-    );
-  }
+      return {
+        components: { CvCheckbox, SvTemplateView },
+        props: settings.props,
+        data() {
+          return {
+            modelValue: this.$options.propsData.checked || false,
+          };
+        },
+        methods: {
+          actionChange: action('CV Checkbox - change'),
+        },
+        template: templateViewString,
+      };
+    },
+    {
+      notes: { markdown: CvCheckboxNotesMD },
+    }
+  );
 }
+
 preKnobs = {
   vModel: {
     group: 'attr',
@@ -153,19 +148,15 @@ variants = [{ name: 'Array v-model', includes: ['vModel'] }];
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
+      // ----------------------------------------------------------------
 
-        // ----------------------------------------------------------------
-
-        const templateString = `
+      const templateString = `
 <cv-checkbox${settings.group.attr} value="check-1" label="check-1">
 </cv-checkbox>
 <cv-checkbox${settings.group.attr} value="check-2" label="check-2">
@@ -174,9 +165,9 @@ for (const version of versions(true)) {
 </cv-checkbox>
   `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
     <sv-template-view
       sv-margin
       sv-source='${templateString.trim()}'>
@@ -206,43 +197,39 @@ for (const version of versions(true)) {
     </sv-template-view>
   `;
 
-        return {
-          components: { CvCheckbox, SvTemplateView },
-          data() {
-            return {
-              checks: ['check-1', 'check-2'],
-            };
-          },
-          template: templateViewString,
-        };
-      },
-      {
-        notes: { markdown: CvCheckboxNotesMD },
-      }
-    );
-  }
+      return {
+        components: { CvCheckbox, SvTemplateView },
+        data() {
+          return {
+            checks: ['check-1', 'check-2'],
+          };
+        },
+        template: templateViewString,
+      };
+    },
+    {
+      notes: { markdown: CvCheckboxNotesMD },
+    }
+  );
 }
 
 preKnobs = {};
 variants = [{ name: 'skeleton' }];
 storySet = knobsHelper.getStorySet(variants, preKnobs);
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-        const templateString = `
+      const templateString = `
         <cv-checkbox-skeleton></cv-checkbox-skeleton>
       `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
       <sv-template-view
         sv-margin
         sv-source='${templateString.trim()}'>
@@ -250,16 +237,15 @@ for (const version of versions(true)) {
       </sv-template-view>
     `;
 
-        return {
-          components: { CvCheckboxSkeleton, SvTemplateView },
+      return {
+        components: { CvCheckboxSkeleton, SvTemplateView },
 
-          template: templateViewString,
-          props: settings.props,
-        };
-      },
-      {
-        notes: { markdown: CvCheckboxNotesMD },
-      }
-    );
-  }
+        template: templateViewString,
+        props: settings.props,
+      };
+    },
+    {
+      notes: { markdown: CvCheckboxNotesMD },
+    }
+  );
 }

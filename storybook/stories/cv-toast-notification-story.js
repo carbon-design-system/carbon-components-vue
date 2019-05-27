@@ -12,7 +12,6 @@ import CvToastNotification from '@carbon/vue/src/components/cv-toast-notificatio
 
 const storiesDefault = storiesOf('Components/CvToastNotification', module);
 const storiesExperimental = storiesOf('Experimental/CvToastNotification', module);
-import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   title: {
@@ -64,25 +63,21 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
+      // ----------------------------------------------------------------
 
-        // ----------------------------------------------------------------
-
-        const templateString = `
+      const templateString = `
 <cv-toast-notification v-if="visible" ${settings.group.attr}></cv-toast-notification>
   `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
     <sv-template-view
       sv-margin
       sv-source='${templateString.trim()}'>
@@ -91,27 +86,26 @@ for (const version of versions(true)) {
     </sv-template-view>
   `;
 
-        return {
-          components: { CvToastNotification, SvTemplateView },
-          template: templateViewString,
-          props: settings.props,
-          data() {
-            return {
-              visible: true,
-            };
+      return {
+        components: { CvToastNotification, SvTemplateView },
+        template: templateViewString,
+        props: settings.props,
+        data() {
+          return {
+            visible: true,
+          };
+        },
+        methods: {
+          actionClose: action('CV ToastNotification - close'),
+          doClose(ev) {
+            this.visible = false;
+            this.actionClose(ev);
           },
-          methods: {
-            actionClose: action('CV ToastNotification - close'),
-            doClose(ev) {
-              this.visible = false;
-              this.actionClose(ev);
-            },
-          },
-        };
-      },
-      {
-        notes: { markdown: CvToastNotificationNotesMD },
-      }
-    );
-  }
+        },
+      };
+    },
+    {
+      notes: { markdown: CvToastNotificationNotesMD },
+    }
+  );
 }

@@ -11,7 +11,6 @@ import CvDatePicker from '@carbon/vue/src/components/cv-date-picker/cv-date-pick
 
 const storiesDefault = storiesOf('Components/CvDatePicker', module);
 const storiesExperimental = storiesOf('Experimental/CvDatePicker', module);
-import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   theme: {
@@ -120,29 +119,25 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
+      // ----------------------------------------------------------------
+      // console.dir(settings);
+      // console.dir(settings.calOptions);
 
-        // ----------------------------------------------------------------
-        // console.dir(settings);
-        // console.dir(settings.calOptions);
-
-        const templateString = `
+      const templateString = `
   <cv-date-picker${settings.group.attr}>${settings.group.slot}
   </cv-date-picker>
     `;
-        // console.log(templateString);
+      // console.log(templateString);
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
       <sv-template-view
         sv-margin
         :sv-alt-back="this.$options.propsData.theme !== 'light'"
@@ -151,20 +146,19 @@ for (const version of versions(true)) {
       </sv-template-view>
     `;
 
-        return {
-          components: { CvDatePicker, SvTemplateView },
+      return {
+        components: { CvDatePicker, SvTemplateView },
 
-          props: settings.props,
-          template: templateViewString,
-          methods: {
-            actionChange: action('Cv Date Picker - change'),
-            actionSimpleChange: action('Cv Date Picker - simple change'),
-          },
-        };
-      },
-      {
-        notes: { markdown: CvDatePickerNotesMD },
-      }
-    );
-  }
+        props: settings.props,
+        template: templateViewString,
+        methods: {
+          actionChange: action('Cv Date Picker - change'),
+          actionSimpleChange: action('Cv Date Picker - simple change'),
+        },
+      };
+    },
+    {
+      notes: { markdown: CvDatePickerNotesMD },
+    }
+  );
 }

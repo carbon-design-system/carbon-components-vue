@@ -21,7 +21,6 @@ import CvTag from '@carbon/vue/src/components/cv-tag/cv-tag';
 
 const storiesDefault = storiesOf('Components/CvDataTable', module);
 const storiesExperimental = storiesOf('Experimental/CvDataTable', module);
-import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   rowSize: {
@@ -319,27 +318,23 @@ const variants = [
 ];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
+      // ----------------------------------------------------------------
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
-        // ----------------------------------------------------------------
-
-        const templateString = `
+      const templateString = `
 <cv-data-table${settings.group.attr} ${settings.group.slots.indexOf('slot="data"') < 0 ? ':data="filteredData"' : ''} ${
-          settings.group.attr.indexOf(':overflow-menu=') < 0 ? '' : '@overflow-menu-click="onOverflowMenuClick"'
-        } ${settings.group.slots.indexOf('cv-overflow-menu') < 0 ? '' : ':overflow-menu="true"'} ref="table">${
-          settings.group.slots
-        }</cv-data-table>
+        settings.group.attr.indexOf(':overflow-menu=') < 0 ? '' : '@overflow-menu-click="onOverflowMenuClick"'
+      } ${settings.group.slots.indexOf('cv-overflow-menu') < 0 ? '' : ':overflow-menu="true"'} ref="table">${
+        settings.group.slots
+      }</cv-data-table>
   `;
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
     <sv-template-view
       sv-margin
       :sv-alt-back="false"
@@ -354,107 +349,106 @@ for (const version of versions(true)) {
     </sv-template-view>
   `;
 
-        return {
-          components: {
-            CvDataTable,
-            CvDataTableAction,
-            SvTemplateView,
-            CvDataTableRow,
-            CvDataTableCell,
-            CvButton,
-            CvOverflowMenu,
-            CvOverflowMenuItem,
-            Download16,
-            TrashCan16,
-            Save16,
-            CvTag,
-          },
-          template: templateViewString,
-          props: settings.props,
+      return {
+        components: {
+          CvDataTable,
+          CvDataTableAction,
+          SvTemplateView,
+          CvDataTableRow,
+          CvDataTableCell,
+          CvButton,
+          CvOverflowMenu,
+          CvOverflowMenuItem,
+          Download16,
+          TrashCan16,
+          Save16,
+          CvTag,
+        },
+        template: templateViewString,
+        props: settings.props,
+        data() {
+          return {
+            internalData: this.data,
+            filterValue: '',
+            rowSelects: [],
+            sortBy: null,
+            sampleOverflowMenu: ['Start', 'Stop', 'Delete 3'],
+          };
+        },
+        watch: {
           data() {
-            return {
-              internalData: this.data,
-              filterValue: '',
-              rowSelects: [],
-              sortBy: null,
-              sampleOverflowMenu: ['Start', 'Stop', 'Delete 3'],
-            };
+            this.internalData = this.data;
           },
-          watch: {
-            data() {
-              this.internalData = this.data;
-            },
+        },
+        computed: {
+          filteredData() {
+            if (this.filterValue) {
+              const regex = new RegExp(this.filterValue, 'i');
+              return this.internalData.filter(item => {
+                return item.join('|').search(regex) >= 0;
+              });
+            } else {
+              return this.internalData;
+            }
           },
-          computed: {
-            filteredData() {
-              if (this.filterValue) {
-                const regex = new RegExp(this.filterValue, 'i');
-                return this.internalData.filter(item => {
-                  return item.join('|').search(regex) >= 0;
-                });
-              } else {
-                return this.internalData;
-              }
-            },
+        },
+        methods: {
+          onFilter(val) {
+            this.filterValue = val;
           },
-          methods: {
-            onFilter(val) {
-              this.filterValue = val;
-            },
-            onSort(sortBy) {
-              if (sortBy) {
-                this.internalData.sort((a, b) => {
-                  const itemA = a[sortBy.index];
-                  const itemB = b[sortBy.index];
+          onSort(sortBy) {
+            if (sortBy) {
+              this.internalData.sort((a, b) => {
+                const itemA = a[sortBy.index];
+                const itemB = b[sortBy.index];
 
-                  if (sortBy.order === 'descending') {
-                    if (sortBy.index === 2) {
-                      // sort as number
-                      return parseFloat(itemA) - parseFloat(itemB);
-                    } else {
-                      return itemB.localeCompare(itemA);
-                    }
+                if (sortBy.order === 'descending') {
+                  if (sortBy.index === 2) {
+                    // sort as number
+                    return parseFloat(itemA) - parseFloat(itemB);
+                  } else {
+                    return itemB.localeCompare(itemA);
                   }
-                  if (sortBy.order === 'ascending') {
-                    if (sortBy.index === 2) {
-                      // sort as number
-                      return parseFloat(itemB) - parseFloat(itemA);
-                    } else {
-                      return itemA.localeCompare(itemB);
-                    }
+                }
+                if (sortBy.order === 'ascending') {
+                  if (sortBy.index === 2) {
+                    // sort as number
+                    return parseFloat(itemB) - parseFloat(itemA);
+                  } else {
+                    return itemA.localeCompare(itemB);
                   }
-                  return 0;
-                });
-              }
-            },
-            batchAction1: action('batch action 1'),
-            onBatchAction1() {
-              this.batchAction1(`selected items: [${this.$refs.table.selectedRows}]`);
-              this.rowSelects = [];
-            },
-            batchAction2: action('batch action 2'),
-            onBatchAction2() {
-              this.batchAction2(`selected items: [${this.$refs.table.selectedRows}]`);
-              this.rowSelects = [];
-            },
-            batchAction3: action('batch action 3'),
-            onBatchAction3() {
-              this.batchAction3(`selected items: [${this.$refs.table.selectedRows}]`);
-              this.$refs.table.deselect();
-            },
-            action1: action('action 1'),
-            action2: action('action 2'),
-            action3: action('action 3'),
-            actionNew: action('add new'),
-            actionOnPagination: action('pagination change'),
-            onOverflowMenuClick: action('overflow menu click'),
-            actionRowSelectChange: action('row selected'),
+                }
+                return 0;
+              });
+            }
           },
-        };
-      },
-      {
-        notes: { markdown: CvDataTableNotesMD },
-      }
-    );
-  }
+          batchAction1: action('batch action 1'),
+          onBatchAction1() {
+            this.batchAction1(`selected items: [${this.$refs.table.selectedRows}]`);
+            this.rowSelects = [];
+          },
+          batchAction2: action('batch action 2'),
+          onBatchAction2() {
+            this.batchAction2(`selected items: [${this.$refs.table.selectedRows}]`);
+            this.rowSelects = [];
+          },
+          batchAction3: action('batch action 3'),
+          onBatchAction3() {
+            this.batchAction3(`selected items: [${this.$refs.table.selectedRows}]`);
+            this.$refs.table.deselect();
+          },
+          action1: action('action 1'),
+          action2: action('action 2'),
+          action3: action('action 3'),
+          actionNew: action('add new'),
+          actionOnPagination: action('pagination change'),
+          onOverflowMenuClick: action('overflow menu click'),
+          actionRowSelectChange: action('row selected'),
+        },
+      };
+    },
+    {
+      notes: { markdown: CvDataTableNotesMD },
+    }
+  );
 }

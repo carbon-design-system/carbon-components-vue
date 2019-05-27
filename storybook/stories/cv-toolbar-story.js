@@ -18,7 +18,7 @@ import CvButton from '@carbon/vue/src/components/cv-button/cv-button';
 
 const storiesDefault = storiesOf('Components/CvToolbar', module);
 const storiesExperimental = storiesOf('Experimental/CvToolbar', module);
-import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
+
 import Filter16 from '@carbon/icons-vue/es/filter/16';
 
 const preKnobs = {};
@@ -27,18 +27,14 @@ const variants = [{ name: 'default' }];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
+      // ----------------------------------------------------------------
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
-        // ----------------------------------------------------------------
-
-        const templateString = `
+      const templateString = `
 <cv-toolbar>
   <cv-toolbar-search v-model="searchInput"/>
 
@@ -74,9 +70,9 @@ for (const version of versions(true)) {
 </cv-toolbar>
   `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
     <sv-template-view
       sv-margin
       sv-source='${templateString.trim()}'>
@@ -85,33 +81,32 @@ for (const version of versions(true)) {
     </sv-template-view>
   `;
 
-        return {
-          components: {
-            CvToolbar,
-            SvTemplateView,
-            CvButton,
-            CvCheckbox,
-            CvOverflowMenu,
-            CvOverflowMenuItem,
-            CvRadioButton,
-            CvToolbarDivider,
-            CvToolbarOption,
-            CvToolbarTitle,
-            CvToolbarSearch,
-            Filter16,
-          },
-          template: templateViewString,
-          props: settings.props,
-          data() {
-            return {
-              searchInput: '',
-            };
-          },
-        };
-      },
-      {
-        notes: { markdown: CvToolbarNotesMD },
-      }
-    );
-  }
+      return {
+        components: {
+          CvToolbar,
+          SvTemplateView,
+          CvButton,
+          CvCheckbox,
+          CvOverflowMenu,
+          CvOverflowMenuItem,
+          CvRadioButton,
+          CvToolbarDivider,
+          CvToolbarOption,
+          CvToolbarTitle,
+          CvToolbarSearch,
+          Filter16,
+        },
+        template: templateViewString,
+        props: settings.props,
+        data() {
+          return {
+            searchInput: '',
+          };
+        },
+      };
+    },
+    {
+      notes: { markdown: CvToolbarNotesMD },
+    }
+  );
 }

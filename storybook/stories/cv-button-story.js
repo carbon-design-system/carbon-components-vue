@@ -12,7 +12,6 @@ import CvButtonSkeleton from '@carbon/vue/src/components/cv-button/cv-button-ske
 
 const storiesDefault = storiesOf('Components/CvButton', module);
 const storiesExperimental = storiesOf('Experimental/CvButton', module);
-import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const exampleIconPath = require('@carbon/vue/src/assets/images/example-icons.svg');
 import AddFilled16 from '@carbon/icons-vue/es/add--filled/16';
@@ -101,32 +100,22 @@ let variants = [
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    if (
-      story.skip &&
-      ((story.skip.default && !version.experimental) || (story.skip.experimental && version.experimental))
-    ) {
-      continue;
-    }
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
-
-        const templateString = `
+      const templateString = `
 <cv-button${settings.group.attr}
 >${settings.group.slots}
 </cv-button>
     `;
-        // console.log(templateString);
+      // console.log(templateString);
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
       <sv-template-view
         sv-margin
         sv-source='${templateString.trim()}'>
@@ -134,57 +123,53 @@ for (const version of versions(true)) {
       </sv-template-view>
     `;
 
-        return {
-          components: { CvButton, SvTemplateView },
+      return {
+        components: { CvButton, SvTemplateView },
 
-          methods: {
-            actionClick: action('Cv Button - click'),
-          },
-          template: templateViewString,
-          props: settings.props,
-        };
-      },
-      {
-        notes: { markdown: CvButtonNotesMD },
-      }
-    );
-  }
-
-  // cv-button-skeleton
-
-  preKnobs = {
-    small: {
-      group: 'attr',
-      type: boolean,
-      config: ['small', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-      prop: {
-        name: 'small',
-        type: Boolean,
-      },
+        methods: {
+          actionClick: action('Cv Button - click'),
+        },
+        template: templateViewString,
+        props: settings.props,
+      };
     },
-  };
+    {
+      notes: { markdown: CvButtonNotesMD },
+    }
+  );
 }
+
+// cv-button-skeleton
+
+preKnobs = {
+  small: {
+    group: 'attr',
+    type: boolean,
+    config: ['small', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      name: 'small',
+      type: Boolean,
+    },
+  },
+};
+
 variants = [{ name: 'skeleton' }];
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
-
-        const templateString = `
+      const templateString = `
         <cv-button-skeleton${settings.group.attr}></cv-button-skeleton>
       `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
       <sv-template-view
         sv-margin
         sv-source='${templateString.trim()}'>
@@ -192,16 +177,15 @@ for (const version of versions(true)) {
       </sv-template-view>
     `;
 
-        return {
-          components: { CvButtonSkeleton, SvTemplateView },
+      return {
+        components: { CvButtonSkeleton, SvTemplateView },
 
-          template: templateViewString,
-          props: settings.props,
-        };
-      },
-      {
-        notes: { markdown: CvButtonNotesMD },
-      }
-    );
-  }
+        template: templateViewString,
+        props: settings.props,
+      };
+    },
+    {
+      notes: { markdown: CvButtonNotesMD },
+    }
+  );
 }

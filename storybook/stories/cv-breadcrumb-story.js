@@ -13,7 +13,6 @@ import CvLink from '@carbon/vue/src/components/cv-link/cv-link';
 
 const storiesDefault = storiesOf('Components/CvBreadcrumb', module);
 const storiesExperimental = storiesOf('Experimental/CvBreadcrumb', module);
-import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   noTrailingSlash: {
@@ -31,19 +30,15 @@ const variants = [{ name: 'default' }];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
-  setVersion(version);
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        const settings = story.knobs();
+      // ----------------------------------------------------------------
 
-        // ----------------------------------------------------------------
-
-        const templateString = `
+      const templateString = `
   <cv-breadcrumb${settings.group.attr}>
     <cv-breadcrumb-item>
       <cv-link href="#somewhere">Some text</cv-link>
@@ -60,9 +55,9 @@ for (const version of versions(true)) {
   </cv-breadcrumb>
 `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
       <sv-template-view
         sv-margin
         sv-source='${templateString.trim()}'>
@@ -70,30 +65,25 @@ for (const version of versions(true)) {
       </sv-template-view>
     `;
 
-        return {
-          components: { CvBreadcrumb, CvBreadcrumbItem, CvLink, SvTemplateView },
+      return {
+        components: { CvBreadcrumb, CvBreadcrumbItem, CvLink, SvTemplateView },
 
-          template: templateViewString,
-          props: settings.props,
-        };
-      },
-      {
-        notes: { markdown: CvBreadcrumbNotesMD },
-      }
-    );
-  }
+        template: templateViewString,
+        props: settings.props,
+      };
+    },
+    {
+      notes: { markdown: CvBreadcrumbNotesMD },
+    }
+  );
 }
 
 const templateString = `<cv-breadcrumb-skeleton></cv-breadcrumb-skeleton>`;
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
-  setVersion(version);
-
-  stories.add(
-    'skeleton',
-    () => ({
-      components: { SvTemplateView, CvBreadcrumbSkeleton },
-      template: `
+storiesDefault.add(
+  'skeleton',
+  () => ({
+    components: { SvTemplateView, CvBreadcrumbSkeleton },
+    template: `
       <sv-template-view
         sv-margin
         sv-position="center"
@@ -101,10 +91,9 @@ for (const version of versions(true)) {
         <template slot="component">${templateString}</template>
       </sv-template-view>
     `,
-      props: {},
-    }),
-    {
-      notes: { markdown: CvBreadcrumbNotesMD },
-    }
-  );
-}
+    props: {},
+  }),
+  {
+    notes: { markdown: CvBreadcrumbNotesMD },
+  }
+);

@@ -12,7 +12,6 @@ import CvRadioGroup from '@carbon/vue/src/components/cv-radio-button/cv-radio-gr
 
 const storiesDefault = storiesOf('Components/CvRadioButton', module);
 const storiesExperimental = storiesOf('Experimental/CvRadioButton', module);
-import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   checked1: {
@@ -52,19 +51,15 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
+      // ----------------------------------------------------------------
 
-        // ----------------------------------------------------------------
-
-        const templateString = `
+      const templateString = `
   <cv-radio-group ${settings.group.attr}>
     <cv-radio-button name="group-1" label="radio-1" value="value-1" ${settings.group.attr1}${settings.group.each} />
     <cv-radio-button name="group-1" label="radio-2" value="value-2" ${settings.group.attr2}${settings.group.each} />
@@ -72,9 +67,9 @@ for (const version of versions(true)) {
   </cv-radio-group>
   `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
     <sv-template-view
       sv-margin
       sv-source='${templateString.trim()}'>
@@ -90,23 +85,22 @@ for (const version of versions(true)) {
     </sv-template-view>
   `;
 
-        return {
-          components: { CvRadioButton, CvRadioGroup, SvTemplateView },
-          template: templateViewString,
-          props: settings.props,
-          data() {
-            return {
-              radioVal: 'value-2',
-            };
-          },
-          methods: {
-            actionChange: action('CV Radio Button - change'),
-          },
-        };
-      },
-      {
-        notes: { markdown: CvRadioButtonNotesMD },
-      }
-    );
-  }
+      return {
+        components: { CvRadioButton, CvRadioGroup, SvTemplateView },
+        template: templateViewString,
+        props: settings.props,
+        data() {
+          return {
+            radioVal: 'value-2',
+          };
+        },
+        methods: {
+          actionChange: action('CV Radio Button - change'),
+        },
+      };
+    },
+    {
+      notes: { markdown: CvRadioButtonNotesMD },
+    }
+  );
 }

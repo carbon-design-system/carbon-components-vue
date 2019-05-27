@@ -12,7 +12,7 @@ import CvDefinitionTooltip from '@carbon/vue/src/components/cv-tooltip/cv-defini
 
 const storiesDefault = storiesOf('Components/CvTooltip', module);
 const storiesExperimental = storiesOf('Experimental/CvTooltip', module);
-import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
+
 import Filter16 from '@carbon/icons-vue/es/filter/16';
 
 let preKnobs = {
@@ -78,25 +78,21 @@ const variants = [{ name: 'default' }, { name: 'minimal', includes: ['content', 
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name + ' (Interactive tootlip)',
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    stories.add(
-      story.name + ' (Interactive tootlip)',
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
+      // ----------------------------------------------------------------
 
-        // ----------------------------------------------------------------
-
-        const templateString = `
+      const templateString = `
 <cv-interactive-tooltip${settings.group.attr}>${settings.group.content}
 </cv-interactive-tooltip>
   `;
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
     <sv-template-view
       sv-margin
       sv-source='${templateString.trim()}'
@@ -110,25 +106,24 @@ for (const version of versions(true)) {
     </sv-template-view>
   `;
 
-        return {
-          components: { CvInteractiveTooltip, SvTemplateView, Filter16 },
-          template: templateViewString,
-          props: settings.props,
-          methods: {
-            show() {
-              this.$children[0].$children[0].$children[0].show();
-            },
-            hide() {
-              this.$children[0].$children[0].$children[0].hide();
-            },
+      return {
+        components: { CvInteractiveTooltip, SvTemplateView, Filter16 },
+        template: templateViewString,
+        props: settings.props,
+        methods: {
+          show() {
+            this.$children[0].$children[0].$children[0].show();
           },
-        };
-      },
-      {
-        notes: { markdown: CvTooltipNotesMD },
-      }
-    );
-  }
+          hide() {
+            this.$children[0].$children[0].$children[0].hide();
+          },
+        },
+      };
+    },
+    {
+      notes: { markdown: CvTooltipNotesMD },
+    }
+  );
 }
 // /* ----------------------------------------------------- */
 
@@ -173,26 +168,22 @@ preKnobs = {
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name + ' (Tootlip)',
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    stories.add(
-      story.name + ' (Tootlip)',
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
+      // ----------------------------------------------------------------
 
-        // ----------------------------------------------------------------
-
-        const templateString = `
+      const templateString = `
 <cv-tooltip${settings.group.attr}>${settings.group.content}
 </cv-tooltip>
   `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
     <sv-template-view
       sv-margin
       sv-source='${templateString.trim()}'>
@@ -200,18 +191,18 @@ for (const version of versions(true)) {
     </sv-template-view>
   `;
 
-        return {
-          components: { CvTooltip, SvTemplateView, Filter16 },
-          template: templateViewString,
-          props: settings.props,
-        };
-      },
-      {
-        notes: { markdown: CvTooltipNotesMD },
-      }
-    );
-  }
+      return {
+        components: { CvTooltip, SvTemplateView, Filter16 },
+        template: templateViewString,
+        props: settings.props,
+      };
+    },
+    {
+      notes: { markdown: CvTooltipNotesMD },
+    }
+  );
 }
+
 // /* ----------------------------------------------------- */
 
 preKnobs = {
@@ -261,25 +252,21 @@ preKnobs = {
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name + ' (Definition Tootlip)',
+    () => {
+      const settings = story.knobs(); // storiesDefault.add(
 
-  for (const story of storySet) {
-    stories.add(
-      story.name + ' (Definition Tootlip)',
-      () => {
-        setVersion(version);
-        const settings = story.knobs(); // stories.add(
+      // ----------------------------------------------------------------
 
-        // ----------------------------------------------------------------
-
-        const templateString = `
+      const templateString = `
 <cv-definition-tooltip${settings.group.attr} />
   `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
     <sv-template-view
       sv-margin
       sv-source='${templateString.trim()}'>
@@ -287,15 +274,14 @@ for (const version of versions(true)) {
     </sv-template-view>
   `;
 
-        return {
-          components: { CvDefinitionTooltip, SvTemplateView },
-          template: templateViewString,
-          props: settings.props,
-        };
-      },
-      {
-        notes: { markdown: CvTooltipNotesMD },
-      }
-    );
-  }
+      return {
+        components: { CvDefinitionTooltip, SvTemplateView },
+        template: templateViewString,
+        props: settings.props,
+      };
+    },
+    {
+      notes: { markdown: CvTooltipNotesMD },
+    }
+  );
 }

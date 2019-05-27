@@ -11,7 +11,6 @@ import CvTag from '@carbon/vue/src/components/cv-tag/cv-tag';
 
 const storiesDefault = storiesOf('Components/CvTag', module);
 const storiesExperimental = storiesOf('Experimental/CvTag', module);
-import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   label: {
@@ -67,32 +66,21 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    if (
-      story.skip &&
-      ((story.skip.default && !version.experimental) || (story.skip.experimental && version.experimental))
-    ) {
-      continue;
-    }
+      // ----------------------------------------------------------------
 
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
-
-        // ----------------------------------------------------------------
-
-        const templateString = `
+      const templateString = `
 <cv-tag${settings.group.attr}></cv-tag>
   `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
     <sv-template-view
       sv-margin
       sv-source='${templateString.trim()}'>
@@ -100,18 +88,17 @@ for (const version of versions(true)) {
     </sv-template-view>
   `;
 
-        return {
-          components: { CvTag, SvTemplateView },
-          template: templateViewString,
-          props: settings.props,
-          methods: {
-            onRemove: action('Filter remove event'),
-          },
-        };
-      },
-      {
-        notes: { markdown: CvTagNotesMD },
-      }
-    );
-  }
+      return {
+        components: { CvTag, SvTemplateView },
+        template: templateViewString,
+        props: settings.props,
+        methods: {
+          onRemove: action('Filter remove event'),
+        },
+      };
+    },
+    {
+      notes: { markdown: CvTagNotesMD },
+    }
+  );
 }

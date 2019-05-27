@@ -12,7 +12,6 @@ import CvInlineNotification from '@carbon/vue/src/components/cv-inline-notificat
 
 const storiesDefault = storiesOf('Components/CvInlineNotification', module);
 const storiesExperimental = storiesOf('Experimental/CvInlineNotification', module);
-import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   title: {
@@ -52,26 +51,22 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
+      // ----------------------------------------------------------------
 
-        // ----------------------------------------------------------------
-
-        const templateString = `
+      const templateString = `
 <cv-inline-notification v-if="visible"${settings.group.attr}>
 </cv-inline-notification>
   `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
     <sv-template-view
       sv-margin
       sv-source='${templateString.trim()}'>
@@ -80,27 +75,26 @@ for (const version of versions(true)) {
     </sv-template-view>
   `;
 
-        return {
-          components: { CvInlineNotification, SvTemplateView },
-          template: templateViewString,
-          props: settings.props,
-          data() {
-            return {
-              visible: true,
-            };
+      return {
+        components: { CvInlineNotification, SvTemplateView },
+        template: templateViewString,
+        props: settings.props,
+        data() {
+          return {
+            visible: true,
+          };
+        },
+        methods: {
+          actionClose: action('CV InlineNotification - close'),
+          doClose(ev) {
+            this.visible = false;
+            this.actionClose(ev);
           },
-          methods: {
-            actionClose: action('CV InlineNotification - close'),
-            doClose(ev) {
-              this.visible = false;
-              this.actionClose(ev);
-            },
-          },
-        };
-      },
-      {
-        notes: { markdown: CvInlineNotificationNotesMD },
-      }
-    );
-  }
+        },
+      };
+    },
+    {
+      notes: { markdown: CvInlineNotificationNotesMD },
+    }
+  );
 }

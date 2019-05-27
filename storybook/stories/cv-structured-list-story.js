@@ -14,7 +14,6 @@ import CvStructuredListData from '@carbon/vue/src/components/cv-structured-list/
 
 const storiesDefault = storiesOf('Components/CvStructuredList', module);
 const storiesExperimental = storiesOf('Experimental/CvStructuredList', module);
-import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   condensed: {
@@ -52,23 +51,19 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
+      // ----------------------------------------------------------------
 
-        // ----------------------------------------------------------------
+      let templateString = '';
+      let isVModel = story.name.indexOf('vModel') > -1;
+      let isSelectable = story.name.startsWith('selectable');
 
-        let templateString = '';
-        let isVModel = story.name.indexOf('vModel') > -1;
-        let isSelectable = story.name.startsWith('selectable');
-
-        templateString = `
+      templateString = `
   <cv-structured-list${isSelectable ? ' selectable' : ''}${settings.group.attr}>
     <template slot="headings">
       <cv-structured-list-heading>Heading 1</cv-structured-list-heading>
@@ -77,8 +72,8 @@ for (const version of versions(true)) {
     </template>
     <template slot="items">
       <cv-structured-list-item${isSelectable ? ' name="group-1" value="value-1" ' : ''}${
-          isVModel && isSelectable ? settings.group.checksSelectable : ' checked'
-        }>
+        isVModel && isSelectable ? settings.group.checksSelectable : ' checked'
+      }>
         <cv-structured-list-data>Item_1</cv-structured-list-data>
         <cv-structured-list-data>Item_1</cv-structured-list-data>
         <cv-structured-list-data${
@@ -86,8 +81,8 @@ for (const version of versions(true)) {
         }>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.</cv-structured-list-data>
       </cv-structured-list-item>
       <cv-structured-list-item${isSelectable ? ' name="group-1" value="value-2" ' : ''}${
-          settings.group.checksSelectable
-        }>
+        settings.group.checksSelectable
+      }>
         <cv-structured-list-data>Item_2</cv-structured-list-data>
         <cv-structured-list-data>Item_2</cv-structured-list-data>
         <cv-structured-list-data${
@@ -95,8 +90,8 @@ for (const version of versions(true)) {
         }>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.</cv-structured-list-data>
       </cv-structured-list-item>
       <cv-structured-list-item${isSelectable ? ' name="group-1" value="value-3" ' : ''}${
-          settings.group.checksSelectable
-        }>
+        settings.group.checksSelectable
+      }>
       <cv-structured-list-data>Item_3</cv-structured-list-data>
         <cv-structured-list-data>Item_3</cv-structured-list-data>
         <cv-structured-list-data${
@@ -107,9 +102,9 @@ for (const version of versions(true)) {
   </cv-structured-list>
   `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
     <sv-template-view
       sv-margin
       sv-source='${templateString.trim()}'>
@@ -126,29 +121,28 @@ for (const version of versions(true)) {
     </sv-template-view>
   `;
 
-        return {
-          components: {
-            CvStructuredList,
-            CvStructuredListItem,
-            CvStructuredListHeading,
-            CvStructuredListData,
-            SvTemplateView,
-          },
-          template: templateViewString,
-          props: settings.props,
-          data() {
-            return {
-              listVal: 'value-3',
-            };
-          },
-          methods: {
-            actionChange: action('Structured list - change'),
-          },
-        };
-      },
-      {
-        notes: { markdown: CvStructuredListNotesMD },
-      }
-    );
-  }
+      return {
+        components: {
+          CvStructuredList,
+          CvStructuredListItem,
+          CvStructuredListHeading,
+          CvStructuredListData,
+          SvTemplateView,
+        },
+        template: templateViewString,
+        props: settings.props,
+        data() {
+          return {
+            listVal: 'value-3',
+          };
+        },
+        methods: {
+          actionChange: action('Structured list - change'),
+        },
+      };
+    },
+    {
+      notes: { markdown: CvStructuredListNotesMD },
+    }
+  );
 }
