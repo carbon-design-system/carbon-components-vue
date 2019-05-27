@@ -12,7 +12,7 @@ import CvDefinitionTooltip from '@carbon/vue/src/components/cv-tooltip/cv-defini
 
 const storiesDefault = storiesOf('Components/CvTooltip', module);
 const storiesExperimental = storiesOf('Experimental/CvTooltip', module);
-import { componentsX, versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 import Filter16 from '@carbon/icons-vue/es/filter/16';
 
 let preKnobs = {
@@ -49,10 +49,7 @@ let preKnobs = {
     group: 'content',
     slot: {
       name: 'trigger',
-      value: `<Filter16 v-if="componentsX" class="bx--overflow-menu__icon bx--toolbar-filter-icon" />
-      <svg v-else width="16" height="12" viewBox="0 0 16 12">
-      <path d="M8.05 2a2.5 2.5 0 0 1 4.9 0H16v1h-3.05a2.5 2.5 0 0 1-4.9 0H0V2h8.05zm2.45 2a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM3.05 9a2.5 2.5 0 0 1 4.9 0H16v1H7.95a2.5 2.5 0 0 1-4.9 0H0V9h3.05zm2.45 2a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
-    </svg>
+      value: `<Filter16 class="bx--overflow-menu__icon bx--toolbar-filter-icon" />
   `,
     },
   },
@@ -116,7 +113,7 @@ for (const version of versions(true)) {
 
         return {
           components: { CvInteractiveTooltip, SvTemplateView, Filter16 },
-          data: () => ({ experimental: version.experimental, componentsX }),
+          data: () => ({ experimental: version.experimental }),
           template: templateViewString,
           props: settings.props,
           methods: {
@@ -208,7 +205,7 @@ for (const version of versions(true)) {
 
         return {
           components: { CvTooltip, SvTemplateView, Filter16 },
-          data: () => ({ experimental: version.experimental, componentsX }),
+          data: () => ({ experimental: version.experimental }),
           template: templateViewString,
           props: settings.props,
         };

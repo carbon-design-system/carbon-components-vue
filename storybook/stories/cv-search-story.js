@@ -11,7 +11,7 @@ import CvSearch from '@carbon/vue/src/components/cv-search/cv-search';
 
 const storiesDefault = storiesOf('Components/CvSearch', module);
 const storiesExperimental = storiesOf('Experimental/CvSearch', module);
-import { versions, setVersion, componentsX } from '@carbon/vue/src/internal/feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   theme: {
@@ -48,12 +48,6 @@ const preKnobs = {
       name: 'disabled',
     },
   },
-  large: {
-    group: 'attr',
-    type: boolean,
-    config: ['large', false], // consts.CONFIG],
-    prop: { name: 'large', type: Boolean },
-  },
   small: {
     group: 'attr',
     type: boolean,
@@ -71,7 +65,7 @@ const preKnobs = {
 };
 
 const variants = [
-  { name: 'default', excludes: ['vModel', 'events', componentsX ? 'large' : 'small'] },
+  { name: 'default', excludes: ['vModel', 'events'] },
   { name: 'minimal', includes: ['label'] },
   { name: 'events', includes: ['label', 'events'] },
   { name: 'vModel', includes: ['label', 'vModel'] },

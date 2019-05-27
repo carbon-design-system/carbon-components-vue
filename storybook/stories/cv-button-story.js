@@ -12,7 +12,7 @@ import CvButtonSkeleton from '@carbon/vue/src/components/cv-button/cv-button-ske
 
 const storiesDefault = storiesOf('Components/CvButton', module);
 const storiesExperimental = storiesOf('Experimental/CvButton', module);
-import { componentsX, versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const exampleIconPath = require('@carbon/vue/src/assets/images/example-icons.svg');
 import AddFilled16 from '@carbon/icons-vue/es/add--filled/16';
@@ -47,16 +47,6 @@ let preKnobs = {
       value: `I am a button`,
     },
   },
-  iconHref: {
-    group: 'attr',
-    type: boolean,
-    config: ['icon', false],
-    prop: {
-      name: 'icon',
-      type: String,
-      value: val => (val ? `${exampleIconPath}#icon--add--solid` : ''),
-    },
-  },
   icon: {
     group: 'attr',
     type: boolean,
@@ -69,14 +59,11 @@ let preKnobs = {
   },
 };
 
-let defaultVariants = [
+let variants = [
   {
     name: 'default',
-    excludes: componentsX ? ['iconHref'] : ['icon'],
   },
-];
-if (componentsX) {
-  defaultVariants.push({
+  {
     name: 'icon as path',
     excludes: ['small', 'disabled', 'icon', 'iconHref'],
     extra: {
@@ -85,55 +72,30 @@ if (componentsX) {
         value: `icon="${exampleIconPath}#icon--add--solid"`,
       },
     },
-  });
-}
-
-let variants = [
-  ...defaultVariants,
-  {
-    name: 'iconHref',
-    excludes: ['small', 'disabled', 'icon', 'iconHref'],
-    extra: {
-      iconHref: {
-        group: 'attr',
-        value: `iconHref="${exampleIconPath}#icon--add--solid"`,
-      },
-    },
   },
   {
     name: 'minimal',
-    excludes: ['small', 'disabled', 'icon', 'iconHref'],
+    excludes: ['small', 'disabled', 'icon'],
   },
   {
     name: 'primary',
-    excludes: componentsX ? ['iconHref'] : ['icon'],
     extra: { kind: { group: 'attr', value: 'kind="primary"' } },
   },
   {
     name: 'secondary',
-    excludes: componentsX ? ['iconHref'] : ['icon'],
     extra: { kind: { group: 'attr', value: 'kind="secondary"' } },
   },
   {
     name: 'tertiary',
-    excludes: componentsX ? ['iconHref'] : ['icon'],
     extra: { kind: { group: 'attr', value: 'kind="tertiary"' } },
   },
   {
     name: 'ghost',
-    excludes: componentsX ? ['iconHref'] : ['icon'],
     extra: { kind: { group: 'attr', value: 'kind="ghost"' } },
   },
   {
     name: 'danger',
-    excludes: componentsX ? ['iconHref'] : ['icon'],
     extra: { kind: { group: 'attr', value: 'kind="danger"' } },
-  },
-  {
-    name: 'danger-primary',
-    excludes: componentsX ? ['iconHref'] : ['icon'],
-    extra: { kind: { group: 'attr', value: 'kind="danger--primary"' } },
-    skip: { default: false, experimental: true },
   },
 ];
 

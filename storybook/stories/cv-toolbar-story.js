@@ -18,7 +18,7 @@ import CvButton from '@carbon/vue/src/components/cv-button/cv-button';
 
 const storiesDefault = storiesOf('Components/CvToolbar', module);
 const storiesExperimental = storiesOf('Experimental/CvToolbar', module);
-import { componentsX, versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
+import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 import Filter16 from '@carbon/icons-vue/es/filter/16';
 
 const preKnobs = {};
@@ -44,12 +44,7 @@ for (const version of versions(true)) {
 
   <cv-overflow-menu class="bx--toolbar-action">
     <template slot="trigger">
-      <Filter16 v-if="componentsX" class="bx--overflow-menu__icon bx--toolbar-filter-icon" />
-      <svg v-else class="bx--overflow-menu__icon bx--toolbar-filter-icon" width="16" height="12" viewBox="0 0 16 12">
-        <g fill-rule="nonzero">
-          <path d="M8.05 2a2.5 2.5 0 0 1 4.9 0H16v1h-3.05a2.5 2.5 0 0 1-4.9 0H0V2h8.05zm2.45 2a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM3.05 9a2.5 2.5 0 0 1 4.9 0H16v1H7.95a2.5 2.5 0 0 1-4.9 0H0V9h3.05zm2.45 2a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-        </g>
-      </svg>
+      <Filter16 class="bx--overflow-menu__icon bx--toolbar-filter-icon" />
     </template>
     <cv-toolbar-title title="Filter by" />
     <cv-toolbar-option>
@@ -110,7 +105,6 @@ for (const version of versions(true)) {
           props: settings.props,
           data() {
             return {
-              componentsX,
               experimental: version.experimental,
               searchInput: '',
             };
