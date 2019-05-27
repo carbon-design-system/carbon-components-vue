@@ -154,7 +154,7 @@ for (const version of versions(true)) {
 
         return {
           components: { CvDatePicker, SvTemplateView },
-          data: () => ({ experimental: version.experimental }),
+
           props: settings.props,
           template: templateViewString,
           methods: {

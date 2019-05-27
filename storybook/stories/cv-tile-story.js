@@ -127,7 +127,6 @@ for (const version of versions(true)) {
 
         return {
           components: { CvTile, SvTemplateView },
-          data: () => ({ experimental: version.experimental }),
           template: templateViewString,
           props: settings.props,
         };

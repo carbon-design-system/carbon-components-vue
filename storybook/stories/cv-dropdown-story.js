@@ -139,28 +139,11 @@ let preKnobs = {
 let variants = [
   {
     name: 'default',
-    excludes: [
-      'vModel',
-      'events',
-      'helperTextSlot',
-      'invalidMessageSlot',
-      'invalidMessage',
-      'helperText',
-      'inline',
-      'label',
-      'disabled',
-    ],
-    skip: { default: false, experimental: true },
-  },
-  {
-    name: 'default',
     excludes: ['vModel', 'events', 'helperTextSlot', 'invalidMessageSlot'],
-    skip: { default: true, experimental: false },
   },
   {
     name: 'slots',
     excludes: ['vModel', 'events', 'helperText', 'invalidMessage'],
-    skip: { default: true, experimental: false },
   },
   { name: 'minimal', includes: ['value'] },
   { name: 'events', includes: ['value', 'events'] },
@@ -224,7 +207,6 @@ for (const version of versions(true)) {
           props: settings.props,
           data() {
             return {
-              experimental: version.experimental,
               modelValue: this.value,
             };
           },
@@ -289,7 +271,7 @@ for (const version of versions(true)) {
 
         return {
           components: { CvDropdownSkeleton, SvTemplateView },
-          data: () => ({ experimental: version.experimental }),
+
           template: templateViewString,
           props: settings.props,
         };

@@ -113,7 +113,6 @@ for (const version of versions(true)) {
 
         return {
           components: { CvInteractiveTooltip, SvTemplateView, Filter16 },
-          data: () => ({ experimental: version.experimental }),
           template: templateViewString,
           props: settings.props,
           methods: {
@@ -205,7 +204,6 @@ for (const version of versions(true)) {
 
         return {
           components: { CvTooltip, SvTemplateView, Filter16 },
-          data: () => ({ experimental: version.experimental }),
           template: templateViewString,
           props: settings.props,
         };
@@ -294,7 +292,6 @@ for (const version of versions(true)) {
 
         return {
           components: { CvDefinitionTooltip, SvTemplateView },
-          data: () => ({ experimental: version.experimental }),
           template: templateViewString,
           props: settings.props,
         };

@@ -132,7 +132,6 @@ for (const version of versions(true)) {
           props: settings.props,
           data() {
             return {
-              experimental: version.experimental,
               storyFiles: [],
               vModelOrEvents: settings.group.attr.indexOf('v-model') > 0 || settings.group.attr.indexOf('@change') > 0,
             };
@@ -212,7 +211,7 @@ for (const version of versions(true)) {
 
         return {
           components: { CvFileUploaderSkeleton, SvTemplateView },
-          data: () => ({ experimental: version.experimental }),
+
           template: templateViewString,
           props: settings.props,
         };

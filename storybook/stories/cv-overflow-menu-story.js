@@ -74,7 +74,7 @@ for (const version of versions(true)) {
 
         return {
           components: { CvOverflowMenu, CvOverflowMenuItem, SvTemplateView },
-          data: () => ({ experimental: version.experimental }),
+
           template: templateViewString,
           props: settings.props,
         };

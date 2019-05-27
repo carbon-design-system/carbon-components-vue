@@ -109,18 +109,11 @@ const preKnobs = {
 const variants = [
   {
     name: 'default',
-    excludes: ['vModel', 'events', 'helperText', 'invalidMessage', 'helperTextSlot', 'invalidMessageSlot'],
-    skip: { default: false, experimental: true },
-  },
-  {
-    name: 'default',
     excludes: ['vModel', 'events', 'helperTextSlot', 'invalidMessageSlot'],
-    skip: { default: true, experimental: false },
   },
   {
     name: 'slots',
     excludes: ['vModel', 'events', 'helperText', 'invalidMessage'],
-    skip: { default: true, experimental: false },
   },
   { name: 'minimal', includes: ['label'] },
   { name: 'events', includes: ['label', 'events'] },
@@ -189,7 +182,6 @@ for (const version of versions(true)) {
           props: settings.props,
           data() {
             return {
-              experimental: version.experimental,
               selectValue: 'cv-select-option3',
             };
           },

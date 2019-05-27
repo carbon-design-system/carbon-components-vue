@@ -137,7 +137,7 @@ for (const version of versions(true)) {
 
         return {
           components: { CvButton, SvTemplateView },
-          data: () => ({ experimental: version.experimental }),
+
           methods: {
             actionClick: action('Cv Button - click'),
           },
@@ -196,7 +196,7 @@ for (const version of versions(true)) {
 
         return {
           components: { CvButtonSkeleton, SvTemplateView },
-          data: () => ({ experimental: version.experimental }),
+
           template: templateViewString,
           props: settings.props,
         };

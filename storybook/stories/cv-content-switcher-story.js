@@ -151,7 +151,7 @@ for (const version of versions(true)) {
             SvTemplateView,
           },
           data() {
-            return { experimental: version.experimental, toggle: false };
+            return { toggle: false };
           },
           mounted() {
             setInterval(() => {
@@ -234,7 +234,7 @@ for (const version of versions(true)) {
             CvContentSwitcherButton,
             SvTemplateView,
           },
-          data: () => ({ experimental: version.experimental }),
+
           props: settings.props,
           computed: {
             isSelected() {

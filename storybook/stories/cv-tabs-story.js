@@ -88,7 +88,6 @@ for (const version of versions(true)) {
 
         return {
           components: { CvTabs, CvTab, SvTemplateView },
-          data: () => ({ experimental: version.experimental }),
           methods: {
             actionSelected: action('Cv Tabs - tab-selected'),
             actionBeingSelected: action('Cv Tabs - tab-beingselected'),

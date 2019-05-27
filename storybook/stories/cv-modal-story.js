@@ -131,7 +131,7 @@ for (const version of versions(true)) {
 
         return {
           components: { CvModal, SvTemplateView },
-          data: () => ({ experimental: version.experimental }),
+
           props: settings.props,
           methods: {
             doSave() {

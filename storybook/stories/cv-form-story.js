@@ -84,7 +84,7 @@ for (const version of versions(true)) {
             CvSelectOption,
             SvTemplateView,
           },
-          data: () => ({ experimental: version.experimental }),
+
           template: templateViewString,
           props: settings.props,
         };

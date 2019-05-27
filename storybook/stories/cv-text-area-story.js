@@ -152,7 +152,6 @@ for (const version of versions(true)) {
         return {
           data() {
             return {
-              experimental: version.experimental,
               modelValue: 'initial value',
             };
           },

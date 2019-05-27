@@ -105,7 +105,6 @@ for (const version of versions(true)) {
           props: settings.props,
           data() {
             return {
-              experimental: version.experimental,
               searchInput: '',
             };
           },

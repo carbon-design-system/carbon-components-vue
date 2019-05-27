@@ -93,7 +93,7 @@ for (const version of versions(true)) {
 
         return {
           components: { CvProgress, CvProgressStep, SvTemplateView },
-          data: () => ({ experimental: version.experimental, complete: [true, false, false, false, false] }),
+          data: () => ({ complete: [true, false, false, false, false] }),
           template: templateViewString,
           props: settings.props,
         };

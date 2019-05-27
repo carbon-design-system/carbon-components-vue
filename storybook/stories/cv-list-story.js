@@ -68,7 +68,7 @@ for (const version of versions(true)) {
 
         return {
           components: { CvList, CvListItem, SvTemplateView },
-          data: () => ({ experimental: version.experimental }),
+
           template: templateViewString,
           props: settings.props,
         };

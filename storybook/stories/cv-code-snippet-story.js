@@ -130,7 +130,7 @@ for (const version of versions(true)) {
 
         return {
           components: { CvCodeSnippet, SvTemplateView },
-          data: () => ({ experimental: version.experimental }),
+
           template: templateViewString,
           props: settings.props,
         };
@@ -186,7 +186,7 @@ for (const version of versions(true)) {
 
         return {
           components: { CvCodeSnippetSkeleton, SvTemplateView },
-          data: () => ({ experimental: version.experimental }),
+
           template: templateViewString,
           props: settings.props,
         };

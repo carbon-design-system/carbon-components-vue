@@ -141,7 +141,6 @@ for (const version of versions(true)) {
           props: settings.props,
           data() {
             return {
-              experimental: version.experimental,
               modelValue: this.$options.propsData.checked || false,
             };
           },
@@ -225,7 +224,6 @@ for (const version of versions(true)) {
           components: { CvToggle, SvTemplateView },
           data() {
             return {
-              experimental: version.experimental,
               checks: ['check-3', 'check-2'],
             };
           },

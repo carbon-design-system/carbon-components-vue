@@ -23,111 +23,45 @@ const preKnobs = {
 };
 
 const variants = [
-  { name: 'default', skip: { default: false, experimental: true } },
-  {
-    name: 'IBM',
-    extra: { kind: { group: 'attr', value: 'kind="ibm"' } },
-    skip: { default: false, experimental: true },
-  },
-  {
-    name: 'beta',
-    extra: { kind: { group: 'attr', value: 'kind="beta"' } },
-    skip: { default: false, experimental: true },
-  },
-  {
-    name: 'third party',
-    extra: { kind: { group: 'attr', value: 'kind="third-party"' } },
-    skip: { default: false, experimental: true },
-  },
-  {
-    name: 'local',
-    extra: { kind: { group: 'attr', value: 'kind="local"' } },
-    skip: { default: false, experimental: true },
-  },
-  {
-    name: 'dedicated',
-    extra: { kind: { group: 'attr', value: 'kind="dedicated"' } },
-    skip: { default: false, experimental: true },
-  },
-  {
-    name: 'custom',
-    extra: { kind: { group: 'attr', value: 'kind="custom"' } },
-    skip: { default: false, experimental: true },
-  },
-  {
-    name: 'experimental',
-    extra: { kind: { group: 'attr', value: 'kind="experimental"' } },
-    skip: { default: false, experimental: true },
-  },
-  {
-    name: 'community',
-    extra: { kind: { group: 'attr', value: 'kind="community"' } },
-    skip: { default: false, experimental: true },
-  },
-  {
-    name: 'private',
-    extra: { kind: { group: 'attr', value: 'kind="private"' } },
-    skip: { default: false, experimental: true },
-  },
-  {
-    name: 'deprecated',
-    extra: { kind: { group: 'attr', value: 'kind="deprecated"' } },
-    skip: { default: false, experimental: true },
-  },
-  {
-    name: 'filter',
-    extra: { kind: { group: 'attr', value: 'kind="filter" @remove="onRemove"' } },
-    skip: { default: true, experimental: false },
-  },
   {
     name: 'red',
     extra: { kind: { group: 'attr', value: 'kind="red"' } },
-    skip: { default: true, experimental: false },
   },
   {
     name: 'magenta',
     extra: { kind: { group: 'attr', value: 'kind="magenta"' } },
-    skip: { default: true, experimental: false },
   },
   {
     name: 'purple',
     extra: { kind: { group: 'attr', value: 'kind="purple"' } },
-    skip: { default: true, experimental: false },
   },
   {
     name: 'blue',
     extra: { kind: { group: 'attr', value: 'kind="blue"' } },
-    skip: { default: true, experimental: false },
   },
   {
     name: 'cyan',
     extra: { kind: { group: 'attr', value: 'kind="cyan"' } },
-    skip: { default: true, experimental: false },
   },
   {
     name: 'teal',
     extra: { kind: { group: 'attr', value: 'kind="teal"' } },
-    skip: { default: true, experimental: false },
   },
   {
     name: 'green',
     extra: { kind: { group: 'attr', value: 'kind="green"' } },
-    skip: { default: true, experimental: false },
   },
   {
     name: 'gray',
     extra: { kind: { group: 'attr', value: 'kind="gray"' } },
-    skip: { default: true, experimental: false },
   },
   {
     name: 'cool-gray',
     extra: { kind: { group: 'attr', value: 'kind="cool-gray"' } },
-    skip: { default: true, experimental: false },
   },
   {
     name: 'warm-gray',
     extra: { kind: { group: 'attr', value: 'kind="warm-gray"' } },
-    skip: { default: true, experimental: false },
   },
 ];
 
@@ -169,7 +103,6 @@ for (const version of versions(true)) {
 
         return {
           components: { CvTag, SvTemplateView },
-          data: () => ({ experimental: version.experimental }),
           template: templateViewString,
           props: settings.props,
           methods: {

@@ -128,7 +128,6 @@ for (const version of versions(true)) {
           props: settings.props,
           data() {
             return {
-              experimental: version.experimental,
               modelValue: this.$options.propsData.checked || false,
             };
           },
@@ -213,7 +212,6 @@ for (const version of versions(true)) {
           components: { CvCheckbox, SvTemplateView },
           data() {
             return {
-              experimental: version.experimental,
               checks: ['check-1', 'check-2'],
             };
           },
@@ -257,7 +255,7 @@ for (const version of versions(true)) {
 
         return {
           components: { CvCheckboxSkeleton, SvTemplateView },
-          data: () => ({ experimental: version.experimental }),
+
           template: templateViewString,
           props: settings.props,
         };

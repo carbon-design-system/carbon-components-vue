@@ -73,7 +73,7 @@ for (const version of versions(true)) {
 
         return {
           components: { CvBreadcrumb, CvBreadcrumbItem, CvLink, SvTemplateView },
-          data: () => ({ experimental: version.experimental }),
+
           template: templateViewString,
           props: settings.props,
         };
@@ -94,7 +94,6 @@ for (const version of versions(true)) {
     'skeleton',
     () => ({
       components: { SvTemplateView, CvBreadcrumbSkeleton },
-      data: () => ({ experimental: version.experimental }),
       template: `
       <sv-template-view
         :sv-experimental="experimental"
