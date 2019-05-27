@@ -120,7 +120,6 @@ for (const version of versions(true)) {
 
         const templateViewString = `
     <sv-template-view ref="view"
-      :sv-experimental="experimental"
       sv-margin
       :sv-alt-back="${settings.group.attr.indexOf('inline') > -1}"
       sv-source='${templateString.trim()}'>
@@ -177,7 +176,6 @@ for (const version of versions(true)) {
 
         const templateViewString = `
       <sv-template-view
-        :sv-experimental="experimental"
         sv-margin
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>

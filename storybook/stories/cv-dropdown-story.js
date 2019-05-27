@@ -177,7 +177,6 @@ for (const version of versions(true)) {
         // ----------------------------------------------------------------
         const templateViewString = `
   <sv-template-view
-    :sv-experimental="experimental"
     sv-margin
     :sv-alt-back="this.$options.propsData.theme !== 'light'"
     sv-source='${templateString.trim()}'>
@@ -262,7 +261,6 @@ for (const version of versions(true)) {
 
         const templateViewString = `
       <sv-template-view
-        :sv-experimental="experimental"
         sv-margin
         sv-source='${templateString.trim()}'>
         <template slot="component"><div style="width: 300px">${templateString}</div></template>

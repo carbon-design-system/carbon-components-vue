@@ -156,7 +156,6 @@ for (const version of versions(true)) {
 
         const templateViewString = `
     <sv-template-view
-      :sv-experimental="experimental"
       sv-margin
       :sv-alt-back="this.$options.propsData.theme !== 'light'"
       sv-source='${templateString.trim()}'>

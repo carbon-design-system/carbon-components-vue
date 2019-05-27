@@ -341,7 +341,6 @@ for (const version of versions(true)) {
 
         const templateViewString = `
     <sv-template-view
-      :sv-experimental="experimental"
       sv-margin
       :sv-alt-back="false"
       under-construction="Some Carbon 9 features are still under review in Carbon 10, features may change as a result."

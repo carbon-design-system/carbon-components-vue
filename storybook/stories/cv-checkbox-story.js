@@ -100,7 +100,6 @@ for (const version of versions(true)) {
 
         const templateViewString = `
     <sv-template-view
-      :sv-experimental="experimental"
       sv-margin
       :sv-alt-back="this.$options.propsData.theme !== 'light'"
       sv-source='${templateString.trim()}'>
@@ -180,7 +179,6 @@ for (const version of versions(true)) {
         const templateViewString = `
     <sv-template-view
       sv-margin
-      :sv-experimental="experimental"
       sv-source='${templateString.trim()}'>
       <p>This story only demonstrates the array syntax for v-model</p>
       <template slot="component">${templateString}</template>
@@ -246,7 +244,6 @@ for (const version of versions(true)) {
 
         const templateViewString = `
       <sv-template-view
-        :sv-experimental="experimental"
         sv-margin
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>

@@ -64,7 +64,6 @@ for (const version of versions(true)) {
 
         const templateViewString = `
       <sv-template-view
-        :sv-experimental="experimental"
         sv-margin
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>
@@ -96,7 +95,6 @@ for (const version of versions(true)) {
       components: { SvTemplateView, CvBreadcrumbSkeleton },
       template: `
       <sv-template-view
-        :sv-experimental="experimental"
         sv-margin
         sv-position="center"
         sv-source='${templateString.trim()}'>
