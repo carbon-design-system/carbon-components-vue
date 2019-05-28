@@ -15,7 +15,6 @@ import CvSelectOptgroup from '@carbon/vue/src/components/cv-select/cv-select-opt
 
 const storiesDefault = storiesOf('Components/CvForm', module);
 const storiesExperimental = storiesOf('Experimental/CvForm', module);
-import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {};
 
@@ -23,19 +22,15 @@ const variants = [{ name: 'default' }];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
+      // ----------------------------------------------------------------
 
-        // ----------------------------------------------------------------
-
-        const templateString = `
+      const templateString = `
   <cv-form>
     <cv-text-input
       label="Example text label"
@@ -62,36 +57,34 @@ for (const version of versions(true)) {
   </cv-form>
     `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
       <sv-template-view
-        :sv-experimental="experimental"
         sv-margin
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>
       </sv-template-view>
     `;
 
-        return {
-          components: {
-            CvForm,
-            CvButton,
-            CvTextInput,
-            CvTextArea,
-            CvSelect,
-            CvSelectOptgroup,
-            CvSelectOption,
-            SvTemplateView,
-          },
-          data: () => ({ experimental: version.experimental }),
-          template: templateViewString,
-          props: settings.props,
-        };
-      },
-      {
-        notes: { markdown: CvFormNotesMD },
-      }
-    );
-  }
+      return {
+        components: {
+          CvForm,
+          CvButton,
+          CvTextInput,
+          CvTextArea,
+          CvSelect,
+          CvSelectOptgroup,
+          CvSelectOption,
+          SvTemplateView,
+        },
+
+        template: templateViewString,
+        props: settings.props,
+      };
+    },
+    {
+      notes: { markdown: CvFormNotesMD },
+    }
+  );
 }

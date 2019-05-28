@@ -12,7 +12,6 @@ import CvFileUploaderSkeleton from '@carbon/vue/src/components/cv-file-uploader/
 
 const storiesDefault = storiesOf('Components/CvFileUploader', module);
 const storiesExperimental = storiesOf('Experimental/CvFileUploader', module);
-import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 let preKnobs = {
   label: {
@@ -82,28 +81,23 @@ let variants = [
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
+      // ----------------------------------------------------------------
 
-        // ----------------------------------------------------------------
-
-        const templateString = `
+      const templateString = `
 <cv-file-uploader${settings.group.attr} ref="fileUploader">
 </cv-file-uploader>
   `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
     <sv-template-view
-      :sv-experimental="experimental"
       sv-margin
       sv-alt-back
       sv-source='${templateString.trim()}'>
@@ -126,57 +120,56 @@ for (const version of versions(true)) {
     </sv-template-view>
   `;
 
-        return {
-          components: { CvFileUploader, SvTemplateView },
-          template: templateViewString,
-          props: settings.props,
-          data() {
-            return {
-              experimental: version.experimental,
-              storyFiles: [],
-              vModelOrEvents: settings.group.attr.indexOf('v-model') > 0 || settings.group.attr.indexOf('@change') > 0,
-            };
+      return {
+        components: { CvFileUploader, SvTemplateView },
+        template: templateViewString,
+        props: settings.props,
+        data() {
+          return {
+            storyFiles: [],
+            vModelOrEvents: settings.group.attr.indexOf('v-model') > 0 || settings.group.attr.indexOf('@change') > 0,
+          };
+        },
+        methods: {
+          actionChange: action('cv-file-uploader - change event'),
+          onChange(changedFiles) {
+            this.actionChange(changedFiles);
+            this.storyFiles = changedFiles;
           },
-          methods: {
-            actionChange: action('cv-file-uploader - change event'),
-            onChange(changedFiles) {
-              this.actionChange(changedFiles);
-              this.storyFiles = changedFiles;
-            },
-            setState(index, state) {
-              this.$refs.fileUploader.setState(index, state);
-              // alternative
-              // this.storyFiles[index].state = state;
-            },
-            remove(index) {
-              this.$refs.fileUploader.remove(index);
-              // alternative
-              // this.storyFiles.splice(index, 1);
-            },
-            clear() {
-              this.$refs.fileUploader.clear();
-              // alternative
-              // this.storyFiles = [];
-            },
-            toggleInvalidState(index) {
-              this.$refs.fileUploader.setInvalidMessage(
-                index,
-                this.storyFiles[index].invalidMessage ? '' : 'Something went wrong.'
-              );
-              // Alternative
-              // this.storyFiles[index].invalidMessage = this.storyFiles[index].invalidMessage
-              //   ? ''
-              //   : 'Something went wrong.';
-            },
+          setState(index, state) {
+            this.$refs.fileUploader.setState(index, state);
+            // alternative
+            // this.storyFiles[index].state = state;
           },
-        };
-      },
-      {
-        notes: { markdown: CvFileUploaderNotesMD },
-      }
-    );
-  }
+          remove(index) {
+            this.$refs.fileUploader.remove(index);
+            // alternative
+            // this.storyFiles.splice(index, 1);
+          },
+          clear() {
+            this.$refs.fileUploader.clear();
+            // alternative
+            // this.storyFiles = [];
+          },
+          toggleInvalidState(index) {
+            this.$refs.fileUploader.setInvalidMessage(
+              index,
+              this.storyFiles[index].invalidMessage ? '' : 'Something went wrong.'
+            );
+            // Alternative
+            // this.storyFiles[index].invalidMessage = this.storyFiles[index].invalidMessage
+            //   ? ''
+            //   : 'Something went wrong.';
+          },
+        },
+      };
+    },
+    {
+      notes: { markdown: CvFileUploaderNotesMD },
+    }
+  );
 }
+
 // cv-file-uploader-skeleton
 
 preKnobs = {};
@@ -185,41 +178,35 @@ variants = [{ name: 'skeleton' }];
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
-
-        const templateString = `
+      const templateString = `
         <cv-file-uploader-skeleton></cv-file-uploader-skeleton>
       `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
       <sv-template-view
-        :sv-experimental="experimental"
         sv-margin
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>
       </sv-template-view>
     `;
 
-        return {
-          components: { CvFileUploaderSkeleton, SvTemplateView },
-          data: () => ({ experimental: version.experimental }),
-          template: templateViewString,
-          props: settings.props,
-        };
-      },
-      {
-        notes: { markdown: CvFileUploaderNotesMD },
-      }
-    );
-  }
+      return {
+        components: { CvFileUploaderSkeleton, SvTemplateView },
+
+        template: templateViewString,
+        props: settings.props,
+      };
+    },
+    {
+      notes: { markdown: CvFileUploaderNotesMD },
+    }
+  );
 }

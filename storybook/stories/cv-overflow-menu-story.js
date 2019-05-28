@@ -11,7 +11,6 @@ import CvOverflowMenuItem from '@carbon/vue/src/components/cv-overflow-menu/cv-o
 
 const storiesDefault = storiesOf('Components/CvOverflowMenu', module);
 const storiesExperimental = storiesOf('Experimental/CvOverflowMenu', module);
-import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   flipMenu: {
@@ -38,19 +37,15 @@ const variants = [{ name: 'default' }];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
+      // ----------------------------------------------------------------
 
-        // ----------------------------------------------------------------
-
-        const templateString = `
+      const templateString = `
 <cv-overflow-menu${settings.group.attr}>
   <cv-overflow-menu-item primary-focus>list item 1</cv-overflow-menu-item>
   <cv-overflow-menu-item disabled>list item 2</cv-overflow-menu-item>
@@ -58,11 +53,10 @@ for (const version of versions(true)) {
 </cv-overflow-menu>
   `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
     <sv-template-view
-      :sv-experimental="experimental"
       sv-margin
       sv-source='${templateString.trim()}'
       sv-position="center"
@@ -72,16 +66,15 @@ for (const version of versions(true)) {
     </sv-template-view>
   `;
 
-        return {
-          components: { CvOverflowMenu, CvOverflowMenuItem, SvTemplateView },
-          data: () => ({ experimental: version.experimental }),
-          template: templateViewString,
-          props: settings.props,
-        };
-      },
-      {
-        notes: { markdown: CvOverflowMenuNotesMD },
-      }
-    );
-  }
+      return {
+        components: { CvOverflowMenu, CvOverflowMenuItem, SvTemplateView },
+
+        template: templateViewString,
+        props: settings.props,
+      };
+    },
+    {
+      notes: { markdown: CvOverflowMenuNotesMD },
+    }
+  );
 }

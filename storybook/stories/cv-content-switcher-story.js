@@ -13,7 +13,6 @@ import CvContentSwitcherContent from '@carbon/vue/src/components/cv-content-swit
 
 const storiesDefault = storiesOf('Components/CvContentSwitcher', module);
 const storiesExperimental = storiesOf('Experimental/CvContentSwitcher', module);
-import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const exampleIconPath = require('@carbon/vue/src/assets/images/example-icons.svg');
 import AddFilled16 from '@carbon/icons-vue/es/add--filled/16';
@@ -92,18 +91,14 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
+      // ----------------------------------------------------------------
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
-        // ----------------------------------------------------------------
-
-        const templateString = `
+      const templateString = `
   <cv-content-switcher${settings.group.attr}>
     <cv-content-switcher-button owner-id="csb-1" :selected="isSelected(0)" ${
       settings.group.icon
@@ -112,8 +107,8 @@ for (const version of versions(true)) {
       settings.group.icon
     }>Button Name 2</cv-content-switcher-button>
     <cv-content-switcher-button owner-id="csb-3" :selected="isSelected(2)" v-if="toggle3" ${settings.group.attr3t} ${
-          settings.group.icon
-        }>Button Name 3</cv-content-switcher-button>
+        settings.group.icon
+      }>Button Name 3</cv-content-switcher-button>
   </cv-content-switcher>
 
   <section style="margin: 10px 0;">
@@ -132,63 +127,57 @@ for (const version of versions(true)) {
   </section>
     `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
       <sv-template-view
-        :sv-experimental="experimental"
         sv-margin
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>
       </sv-template-view>
     `;
 
-        return {
-          components: {
-            CvContentSwitcher,
-            CvContentSwitcherButton,
-            CvContentSwitcherContent,
-            SvTemplateView,
+      return {
+        components: {
+          CvContentSwitcher,
+          CvContentSwitcherButton,
+          CvContentSwitcherContent,
+          SvTemplateView,
+        },
+        data() {
+          return { toggle: false };
+        },
+        mounted() {
+          setInterval(() => {
+            this.toggle = !this.toggle;
+          }, 5000);
+        },
+        props: settings.props,
+        computed: {
+          isSelected() {
+            return index => this.initialSelected === index;
           },
-          data() {
-            return { experimental: version.experimental, toggle: false };
-          },
-          mounted() {
-            setInterval(() => {
-              this.toggle = !this.toggle;
-            }, 5000);
-          },
-          props: settings.props,
-          computed: {
-            isSelected() {
-              return index => this.initialSelected === index;
-            },
-          },
-          methods: {
-            actionSelected: action('Cv Content Switcher - selected'),
-          },
-          template: templateViewString,
-        };
-      },
-      {
-        notes: { markdown: CvContentSwitcherNotesMD },
-      }
-    );
-  }
+        },
+        methods: {
+          actionSelected: action('Cv Content Switcher - selected'),
+        },
+        template: templateViewString,
+      };
+    },
+    {
+      notes: { markdown: CvContentSwitcherNotesMD },
+    }
+  );
 }
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    `${story.name} - direct DOM usage`,
+    () => {
+      const settings = story.knobs();
+      // ----------------------------------------------------------------
 
-  for (const story of storySet) {
-    stories.add(
-      `${story.name} - direct DOM usage`,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
-        // ----------------------------------------------------------------
-
-        const templateString = `
+      const templateString = `
   <cv-content-switcher${settings.group.attr}>
     <cv-content-switcher-button content-selector=".content-1" :selected="isSelected(0)" ${
       settings.group.icon
@@ -217,39 +206,37 @@ for (const version of versions(true)) {
   </section>
     `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
       <sv-template-view
-        :sv-experimental="experimental"
         sv-margin
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>
       </sv-template-view>
     `;
 
-        return {
-          components: {
-            CvContentSwitcher,
-            CvContentSwitcherButton,
-            SvTemplateView,
+      return {
+        components: {
+          CvContentSwitcher,
+          CvContentSwitcherButton,
+          SvTemplateView,
+        },
+
+        props: settings.props,
+        computed: {
+          isSelected() {
+            return index => this.initialSelected === index;
           },
-          data: () => ({ experimental: version.experimental }),
-          props: settings.props,
-          computed: {
-            isSelected() {
-              return index => this.initialSelected === index;
-            },
-          },
-          methods: {
-            actionSelected: action('Cv Content Switcher - selected'),
-          },
-          template: templateViewString,
-        };
-      },
-      {
-        notes: { markdown: CvContentSwitcherNotesMD },
-      }
-    );
-  }
+        },
+        methods: {
+          actionSelected: action('Cv Content Switcher - selected'),
+        },
+        template: templateViewString,
+      };
+    },
+    {
+      notes: { markdown: CvContentSwitcherNotesMD },
+    }
+  );
 }

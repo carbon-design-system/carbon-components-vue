@@ -12,7 +12,6 @@ import CvAccordionSkeleton from '@carbon/vue/src/components/cv-accordion/cv-acco
 
 const storiesDefault = storiesOf('Components/CvAccordion', module);
 const storiesExperimental = storiesOf('Experimental/CvAccordion', module);
-import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   open1: {
@@ -61,18 +60,14 @@ const variants = [{ name: 'default' }, { name: 'minimal', includes: [] }];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
+      // ----------------------------------------------------------------
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
-        // ----------------------------------------------------------------
-
-        const templateString = `
+      const templateString = `
   <cv-accordion>
     <cv-accordion-item${settings.group.one}>
       <template slot="title">Section 1 title </template>
@@ -101,52 +96,20 @@ for (const version of versions(true)) {
   </cv-accordion>
   `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
     <sv-template-view
-      :sv-experimental="experimental"
       sv-margin
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
     </sv-template-view>
   `;
 
-        return {
-          components: { CvAccordion, CvAccordionItem, SvTemplateView },
-          data: () => ({ experimental: version.experimental }),
-          template: templateViewString,
-          props: settings.props,
-        };
-      },
-      {
-        notes: { markdown: CvAccordionNotesMD },
-      }
-    );
-  }
-}
-
-const templateString = `<cv-accordion-skeleton></cv-accordion-skeleton>`;
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
-
-  stories.add(
-    'skeleton',
-    () => {
-      setVersion(version);
       return {
-        components: { SvTemplateView, CvAccordionSkeleton },
-        data: () => ({ experimental: version.experimental }),
-        template: `
-      <sv-template-view
-        :sv-experimental="experimental"
-        sv-margin
-        sv-position="center"
-        sv-source='${templateString.trim()}'>
-        <template slot="component">${templateString}</template>
-      </sv-template-view>
-    `,
-        props: {},
+        components: { CvAccordion, CvAccordionItem, SvTemplateView },
+        template: templateViewString,
+        props: settings.props,
       };
     },
     {
@@ -154,3 +117,26 @@ for (const version of versions(true)) {
     }
   );
 }
+
+const templateString = `<cv-accordion-skeleton></cv-accordion-skeleton>`;
+
+storiesDefault.add(
+  'skeleton',
+  () => {
+    return {
+      components: { SvTemplateView, CvAccordionSkeleton },
+      template: `
+      <sv-template-view
+        sv-margin
+        sv-position="center"
+        sv-source='${templateString.trim()}'>
+        <template slot="component">${templateString}</template>
+      </sv-template-view>
+    `,
+      props: {},
+    };
+  },
+  {
+    notes: { markdown: CvAccordionNotesMD },
+  }
+);

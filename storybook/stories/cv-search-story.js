@@ -11,7 +11,6 @@ import CvSearch from '@carbon/vue/src/components/cv-search/cv-search';
 
 const storiesDefault = storiesOf('Components/CvSearch', module);
 const storiesExperimental = storiesOf('Experimental/CvSearch', module);
-import { versions, setVersion, componentsX } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   theme: {
@@ -48,12 +47,6 @@ const preKnobs = {
       name: 'disabled',
     },
   },
-  large: {
-    group: 'attr',
-    type: boolean,
-    config: ['large', false], // consts.CONFIG],
-    prop: { name: 'large', type: Boolean },
-  },
   small: {
     group: 'attr',
     type: boolean,
@@ -71,7 +64,7 @@ const preKnobs = {
 };
 
 const variants = [
-  { name: 'default', excludes: ['vModel', 'events', componentsX ? 'large' : 'small'] },
+  { name: 'default', excludes: ['vModel', 'events'] },
   { name: 'minimal', includes: ['label'] },
   { name: 'events', includes: ['label', 'events'] },
   { name: 'vModel', includes: ['label', 'vModel'] },
@@ -79,27 +72,22 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
+      // ----------------------------------------------------------------
 
-        // ----------------------------------------------------------------
-
-        const templateString = `
+      const templateString = `
 <cv-search${settings.group.attr}>
 </cv-search>
   `;
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
     <sv-template-view
-      :sv-experimental="experimental"
       sv-margin
       :sv-alt-back="this.$options.propsData.theme !== 'light'"
       sv-source='${templateString.trim()}'>
@@ -114,24 +102,22 @@ for (const version of versions(true)) {
     </sv-template-view>
   `;
 
-        return {
-          components: { CvSearch, SvTemplateView },
-          template: templateViewString,
-          props: settings.props,
-          data() {
-            return {
-              experimental: version.experimental,
-              modelValue: '',
-            };
-          },
-          methods: {
-            onInput: action('cv-search - input event'),
-          },
-        };
-      },
-      {
-        notes: { markdown: CvSearchNotesMD },
-      }
-    );
-  }
+      return {
+        components: { CvSearch, SvTemplateView },
+        template: templateViewString,
+        props: settings.props,
+        data() {
+          return {
+            modelValue: '',
+          };
+        },
+        methods: {
+          onInput: action('cv-search - input event'),
+        },
+      };
+    },
+    {
+      notes: { markdown: CvSearchNotesMD },
+    }
+  );
 }

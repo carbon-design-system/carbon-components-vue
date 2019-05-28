@@ -12,7 +12,6 @@ import CvButtonSkeleton from '@carbon/vue/src/components/cv-button/cv-button-ske
 
 const storiesDefault = storiesOf('Components/CvButton', module);
 const storiesExperimental = storiesOf('Experimental/CvButton', module);
-import { componentsX, versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const exampleIconPath = require('@carbon/vue/src/assets/images/example-icons.svg');
 import AddFilled16 from '@carbon/icons-vue/es/add--filled/16';
@@ -47,16 +46,6 @@ let preKnobs = {
       value: `I am a button`,
     },
   },
-  iconHref: {
-    group: 'attr',
-    type: boolean,
-    config: ['icon', false],
-    prop: {
-      name: 'icon',
-      type: String,
-      value: val => (val ? `${exampleIconPath}#icon--add--solid` : ''),
-    },
-  },
   icon: {
     group: 'attr',
     type: boolean,
@@ -69,14 +58,11 @@ let preKnobs = {
   },
 };
 
-let defaultVariants = [
+let variants = [
   {
     name: 'default',
-    excludes: componentsX ? ['iconHref'] : ['icon'],
   },
-];
-if (componentsX) {
-  defaultVariants.push({
+  {
     name: 'icon as path',
     excludes: ['small', 'disabled', 'icon', 'iconHref'],
     extra: {
@@ -85,163 +71,121 @@ if (componentsX) {
         value: `icon="${exampleIconPath}#icon--add--solid"`,
       },
     },
-  });
-}
-
-let variants = [
-  ...defaultVariants,
-  {
-    name: 'iconHref',
-    excludes: ['small', 'disabled', 'icon', 'iconHref'],
-    extra: {
-      iconHref: {
-        group: 'attr',
-        value: `iconHref="${exampleIconPath}#icon--add--solid"`,
-      },
-    },
   },
   {
     name: 'minimal',
-    excludes: ['small', 'disabled', 'icon', 'iconHref'],
+    excludes: ['small', 'disabled', 'icon'],
   },
   {
     name: 'primary',
-    excludes: componentsX ? ['iconHref'] : ['icon'],
     extra: { kind: { group: 'attr', value: 'kind="primary"' } },
   },
   {
     name: 'secondary',
-    excludes: componentsX ? ['iconHref'] : ['icon'],
     extra: { kind: { group: 'attr', value: 'kind="secondary"' } },
   },
   {
     name: 'tertiary',
-    excludes: componentsX ? ['iconHref'] : ['icon'],
     extra: { kind: { group: 'attr', value: 'kind="tertiary"' } },
   },
   {
     name: 'ghost',
-    excludes: componentsX ? ['iconHref'] : ['icon'],
     extra: { kind: { group: 'attr', value: 'kind="ghost"' } },
   },
   {
     name: 'danger',
-    excludes: componentsX ? ['iconHref'] : ['icon'],
     extra: { kind: { group: 'attr', value: 'kind="danger"' } },
-  },
-  {
-    name: 'danger-primary',
-    excludes: componentsX ? ['iconHref'] : ['icon'],
-    extra: { kind: { group: 'attr', value: 'kind="danger--primary"' } },
-    skip: { default: false, experimental: true },
   },
 ];
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    if (
-      story.skip &&
-      ((story.skip.default && !version.experimental) || (story.skip.experimental && version.experimental))
-    ) {
-      continue;
-    }
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
-
-        const templateString = `
+      const templateString = `
 <cv-button${settings.group.attr}
 >${settings.group.slots}
 </cv-button>
     `;
-        // console.log(templateString);
+      // console.log(templateString);
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
       <sv-template-view
-        :sv-experimental="experimental"
         sv-margin
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>
       </sv-template-view>
     `;
 
-        return {
-          components: { CvButton, SvTemplateView },
-          data: () => ({ experimental: version.experimental }),
-          methods: {
-            actionClick: action('Cv Button - click'),
-          },
-          template: templateViewString,
-          props: settings.props,
-        };
-      },
-      {
-        notes: { markdown: CvButtonNotesMD },
-      }
-    );
-  }
+      return {
+        components: { CvButton, SvTemplateView },
 
-  // cv-button-skeleton
-
-  preKnobs = {
-    small: {
-      group: 'attr',
-      type: boolean,
-      config: ['small', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-      prop: {
-        name: 'small',
-        type: Boolean,
-      },
+        methods: {
+          actionClick: action('Cv Button - click'),
+        },
+        template: templateViewString,
+        props: settings.props,
+      };
     },
-  };
+    {
+      notes: { markdown: CvButtonNotesMD },
+    }
+  );
 }
+
+// cv-button-skeleton
+
+preKnobs = {
+  small: {
+    group: 'attr',
+    type: boolean,
+    config: ['small', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      name: 'small',
+      type: Boolean,
+    },
+  },
+};
+
 variants = [{ name: 'skeleton' }];
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
-
-        const templateString = `
+      const templateString = `
         <cv-button-skeleton${settings.group.attr}></cv-button-skeleton>
       `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
       <sv-template-view
-        :sv-experimental="experimental"
         sv-margin
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>
       </sv-template-view>
     `;
 
-        return {
-          components: { CvButtonSkeleton, SvTemplateView },
-          data: () => ({ experimental: version.experimental }),
-          template: templateViewString,
-          props: settings.props,
-        };
-      },
-      {
-        notes: { markdown: CvButtonNotesMD },
-      }
-    );
-  }
+      return {
+        components: { CvButtonSkeleton, SvTemplateView },
+
+        template: templateViewString,
+        props: settings.props,
+      };
+    },
+    {
+      notes: { markdown: CvButtonNotesMD },
+    }
+  );
 }

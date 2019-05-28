@@ -12,7 +12,6 @@ import CvTab from '@carbon/vue/src/components/cv-tabs/cv-tab';
 
 const storiesDefault = storiesOf('Components/CvTabs', module);
 const storiesExperimental = storiesOf('Experimental/CvTabs', module);
-import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   selected: {
@@ -43,19 +42,15 @@ const variants = [{ name: 'default' }, { name: 'minimal', excludes: ['events', '
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
+      // ----------------------------------------------------------------
 
-        // ----------------------------------------------------------------
-
-        const templateString = `
+      const templateString = `
 <cv-tabs${settings.group.attr} aria-label="navigation tab label">
   <cv-tab id="tabs-1" label="Tab link 1">
     Sample tab panel content 1
@@ -75,31 +70,28 @@ for (const version of versions(true)) {
 </cv-tabs>
   `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
     <sv-template-view
-      :sv-experimental="experimental"
       sv-margin
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
     </sv-template-view>
   `;
 
-        return {
-          components: { CvTabs, CvTab, SvTemplateView },
-          data: () => ({ experimental: version.experimental }),
-          methods: {
-            actionSelected: action('Cv Tabs - tab-selected'),
-            actionBeingSelected: action('Cv Tabs - tab-beingselected'),
-          },
-          template: templateViewString,
-          props: settings.props,
-        };
-      },
-      {
-        notes: { markdown: CvTabsNotesMD },
-      }
-    );
-  }
+      return {
+        components: { CvTabs, CvTab, SvTemplateView },
+        methods: {
+          actionSelected: action('Cv Tabs - tab-selected'),
+          actionBeingSelected: action('Cv Tabs - tab-beingselected'),
+        },
+        template: templateViewString,
+        props: settings.props,
+      };
+    },
+    {
+      notes: { markdown: CvTabsNotesMD },
+    }
+  );
 }

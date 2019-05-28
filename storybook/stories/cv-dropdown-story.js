@@ -10,7 +10,6 @@ import CvDropdownNotesMD from '@carbon/vue/src/components/cv-dropdown/cv-dropdow
 import CvDropdown from '@carbon/vue/src/components/cv-dropdown/cv-dropdown';
 import CvDropdownItem from '@carbon/vue/src/components/cv-dropdown/cv-dropdown-item';
 import CvDropdownSkeleton from '@carbon/vue/src/components/cv-dropdown/cv-dropdown-skeleton';
-import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const storiesDefault = storiesOf('Components/CvDropdown', module);
 const storiesExperimental = storiesOf('Experimental/CvDropdown', module);
@@ -139,28 +138,11 @@ let preKnobs = {
 let variants = [
   {
     name: 'default',
-    excludes: [
-      'vModel',
-      'events',
-      'helperTextSlot',
-      'invalidMessageSlot',
-      'invalidMessage',
-      'helperText',
-      'inline',
-      'label',
-      'disabled',
-    ],
-    skip: { default: false, experimental: true },
-  },
-  {
-    name: 'default',
     excludes: ['vModel', 'events', 'helperTextSlot', 'invalidMessageSlot'],
-    skip: { default: true, experimental: false },
   },
   {
     name: 'slots',
     excludes: ['vModel', 'events', 'helperText', 'invalidMessage'],
-    skip: { default: true, experimental: false },
   },
   { name: 'minimal', includes: ['value'] },
   { name: 'events', includes: ['value', 'events'] },
@@ -168,20 +150,14 @@ let variants = [
 ];
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
 
-  for (const story of storySet) {
-    if (story.skip && ((story.skip.default && version.default) || (story.skip.experimental && version.experimental))) {
-      continue;
-    }
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-        const templateString = `
+      const templateString = `
   <cv-dropdown ${settings.group.attr}>${settings.group.slots}
     <cv-dropdown-item value="10">Option with value 10</cv-dropdown-item>
     <cv-dropdown-item value="20">Option with value 20</cv-dropdown-item>
@@ -191,10 +167,9 @@ for (const version of versions(true)) {
   </cv-dropdown>
   `;
 
-        // ----------------------------------------------------------------
-        const templateViewString = `
+      // ----------------------------------------------------------------
+      const templateViewString = `
   <sv-template-view
-    :sv-experimental="experimental"
     sv-margin
     :sv-alt-back="this.$options.propsData.theme !== 'light'"
     sv-source='${templateString.trim()}'>
@@ -215,36 +190,35 @@ for (const version of versions(true)) {
   </sv-template-view>
   `;
 
-        return {
-          components: {
-            CvDropdown,
-            CvDropdownItem,
-            SvTemplateView,
+      return {
+        components: {
+          CvDropdown,
+          CvDropdownItem,
+          SvTemplateView,
+        },
+        props: settings.props,
+        data() {
+          return {
+            modelValue: this.value,
+          };
+        },
+        methods: {
+          actionChange: action('CV Dropdown - change'),
+        },
+        template: templateViewString,
+        watch: {
+          value() {
+            this.modelValue = this.value;
           },
-          props: settings.props,
-          data() {
-            return {
-              experimental: version.experimental,
-              modelValue: this.value,
-            };
-          },
-          methods: {
-            actionChange: action('CV Dropdown - change'),
-          },
-          template: templateViewString,
-          watch: {
-            value() {
-              this.modelValue = this.value;
-            },
-          },
-        };
-      },
-      {
-        notes: { markdown: CvDropdownNotesMD },
-      }
-    );
-  }
+        },
+      };
+    },
+    {
+      notes: { markdown: CvDropdownNotesMD },
+    }
+  );
 }
+
 // cv-dropdown-skeleton
 
 preKnobs = {
@@ -262,41 +236,35 @@ preKnobs = {
 variants = [{ name: 'skeleton' }];
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
-
-        const templateString = `
+      const templateString = `
       <cv-dropdown-skeleton${settings.group.attr}></cv-dropdown-skeleton>
       `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
       <sv-template-view
-        :sv-experimental="experimental"
         sv-margin
         sv-source='${templateString.trim()}'>
         <template slot="component"><div style="width: 300px">${templateString}</div></template>
       </sv-template-view>
     `;
 
-        return {
-          components: { CvDropdownSkeleton, SvTemplateView },
-          data: () => ({ experimental: version.experimental }),
-          template: templateViewString,
-          props: settings.props,
-        };
-      },
-      {
-        notes: { markdown: CvDropdownNotesMD },
-      }
-    );
-  }
+      return {
+        components: { CvDropdownSkeleton, SvTemplateView },
+
+        template: templateViewString,
+        props: settings.props,
+      };
+    },
+    {
+      notes: { markdown: CvDropdownNotesMD },
+    }
+  );
 }

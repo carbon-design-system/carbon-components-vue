@@ -11,7 +11,6 @@ import CvProgressStep from '@carbon/vue/src/components/cv-progress/cv-progress-s
 
 const storiesDefault = storiesOf('Components/CvProgress', module);
 const storiesExperimental = storiesOf('Experimental/CvProgress', module);
-import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   initialStep: {
@@ -55,30 +54,19 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    if (
-      story.skip &&
-      ((story.skip.default && !version.experimental) || (story.skip.experimental && version.experimental))
-    ) {
-      continue;
-    }
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
+      // ----------------------------------------------------------------
 
-        // ----------------------------------------------------------------
-
-        let templateString = `<cv-progress${settings.group.attr}>${settings.group.slots}</cv-progress>`;
-        // console.log(templateString);
-        // ----------------------------------------------------------------
-        const templateViewString = `
+      let templateString = `<cv-progress${settings.group.attr}>${settings.group.slots}</cv-progress>`;
+      // console.log(templateString);
+      // ----------------------------------------------------------------
+      const templateViewString = `
     <sv-template-view
-      :sv-experimental="experimental"
       sv-margin
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
@@ -91,16 +79,15 @@ for (const version of versions(true)) {
     </sv-template-view>
   `;
 
-        return {
-          components: { CvProgress, CvProgressStep, SvTemplateView },
-          data: () => ({ experimental: version.experimental, complete: [true, false, false, false, false] }),
-          template: templateViewString,
-          props: settings.props,
-        };
-      },
-      {
-        notes: { markdown: CvProgressNotesMD },
-      }
-    );
-  }
+      return {
+        components: { CvProgress, CvProgressStep, SvTemplateView },
+        data: () => ({ complete: [true, false, false, false, false] }),
+        template: templateViewString,
+        props: settings.props,
+      };
+    },
+    {
+      notes: { markdown: CvProgressNotesMD },
+    }
+  );
 }

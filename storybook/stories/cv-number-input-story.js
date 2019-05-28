@@ -11,7 +11,6 @@ import CvNumberInput from '@carbon/vue/src/components/cv-number-input/cv-number-
 
 const storiesDefault = storiesOf('Components/CvNumberInput', module);
 const storiesExperimental = storiesOf('Experimental/CvNumberInput', module);
-import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   theme: {
@@ -112,28 +111,23 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
+      // ----------------------------------------------------------------
 
-        // ----------------------------------------------------------------
-
-        const templateString = `
+      const templateString = `
 <cv-number-input${settings.group.attr}>${settings.group.content}
 </cv-number-input>
   `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
     <sv-template-view
-      :sv-experimental="experimental"
       sv-margin
       :sv-alt-back="this.$options.propsData.theme !== 'light'"
       sv-source='${templateString.trim()}'>
@@ -148,24 +142,22 @@ for (const version of versions(true)) {
     </sv-template-view>
   `;
 
-        return {
-          components: { CvNumberInput, SvTemplateView },
-          template: templateViewString,
-          props: settings.props,
-          data() {
-            return {
-              experimental: version.experimental,
-              modelValue: '100',
-            };
-          },
-          methods: {
-            onInput: action('cv-number-input - input event'),
-          },
-        };
-      },
-      {
-        notes: { markdown: CvNumberInputNotesMD },
-      }
-    );
-  }
+      return {
+        components: { CvNumberInput, SvTemplateView },
+        template: templateViewString,
+        props: settings.props,
+        data() {
+          return {
+            modelValue: '100',
+          };
+        },
+        methods: {
+          onInput: action('cv-number-input - input event'),
+        },
+      };
+    },
+    {
+      notes: { markdown: CvNumberInputNotesMD },
+    }
+  );
 }

@@ -11,7 +11,6 @@ import CvToggle from '@carbon/vue/src/components/cv-toggle/cv-toggle';
 
 const storiesDefault = storiesOf('Components/CvToggle', module);
 const storiesExperimental = storiesOf('Experimental/CvToggle', module);
-import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 let preKnobs = {
   checked: {
@@ -92,28 +91,23 @@ let variants = [
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
+      // ----------------------------------------------------------------
 
-        // ----------------------------------------------------------------
-
-        const templateString = `
+      const templateString = `
 <cv-toggle${settings.group.attr}>${settings.group.slots}
 </cv-toggle>
   `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
     <sv-template-view
-      :sv-experimental="experimental"
       sv-margin
       :sv-alt-back="this.$options.propsData.theme !== 'light'"
       sv-source='${templateString.trim()}'>
@@ -136,26 +130,24 @@ for (const version of versions(true)) {
     </sv-template-view>
   `;
 
-        return {
-          components: { CvToggle, SvTemplateView },
-          props: settings.props,
-          data() {
-            return {
-              experimental: version.experimental,
-              modelValue: this.$options.propsData.checked || false,
-            };
-          },
-          methods: {
-            actionChange: action('CV Toggle - change'),
-          },
-          template: templateViewString,
-        };
-      },
-      {
-        notes: { markdown: CvToggleNotesMD },
-      }
-    );
-  }
+      return {
+        components: { CvToggle, SvTemplateView },
+        props: settings.props,
+        data() {
+          return {
+            modelValue: this.$options.propsData.checked || false,
+          };
+        },
+        methods: {
+          actionChange: action('CV Toggle - change'),
+        },
+        template: templateViewString,
+      };
+    },
+    {
+      notes: { markdown: CvToggleNotesMD },
+    }
+  );
 }
 
 preKnobs = {
@@ -169,29 +161,24 @@ variants = [{ name: 'Array v-model', includes: ['vModel'] }];
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
+      // ----------------------------------------------------------------
 
-        // ----------------------------------------------------------------
-
-        const templateString = `
+      const templateString = `
       <cv-toggle${settings.group.attr} name="check-1" value="check-1"></cv-toggle>
       <cv-toggle${settings.group.attr} name="check-2" value="check-2"></cv-toggle>
       <cv-toggle${settings.group.attr} name="check-3" value="check-3"></cv-toggle>
       `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
       <sv-template-view
-        :sv-experimental="experimental"
         sv-margin
         sv-source='${templateString.trim()}'>
         <p>This story only demonstrates the array syntax for v-model</p>
@@ -221,20 +208,18 @@ for (const version of versions(true)) {
       </sv-template-view>
      `;
 
-        return {
-          components: { CvToggle, SvTemplateView },
-          data() {
-            return {
-              experimental: version.experimental,
-              checks: ['check-3', 'check-2'],
-            };
-          },
-          template: templateViewString,
-        };
-      },
-      {
-        notes: { markdown: CvToggleNotesMD },
-      }
-    );
-  }
+      return {
+        components: { CvToggle, SvTemplateView },
+        data() {
+          return {
+            checks: ['check-3', 'check-2'],
+          };
+        },
+        template: templateViewString,
+      };
+    },
+    {
+      notes: { markdown: CvToggleNotesMD },
+    }
+  );
 }

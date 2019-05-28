@@ -1,6 +1,5 @@
 import { storiesOf } from '@storybook/vue';
 import SvVersions from '../_storybook/views/sv-template-view/sv-versions';
-// import { setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const stories = storiesOf('Versions', module);
 

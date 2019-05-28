@@ -11,7 +11,6 @@ import CvListItem from '@carbon/vue/src/components/cv-list/cv-list-item';
 
 const storiesDefault = storiesOf('Components/CvList', module);
 const storiesExperimental = storiesOf('Experimental/CvList', module);
-import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   ordered: {
@@ -35,19 +34,15 @@ const variants = [{ name: 'default', excludes: ['nested'] }, { name: 'nested' }]
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
+      // ----------------------------------------------------------------
 
-        // ----------------------------------------------------------------
-
-        const templateString = `
+      const templateString = `
 <cv-list${settings.group.attr}>
   <cv-list-item>list item 1${settings.group.nested}</cv-list-item>
   <cv-list-item>list item 2</cv-list-item>
@@ -55,27 +50,25 @@ for (const version of versions(true)) {
 </cv-list>
   `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
     <sv-template-view
-      :sv-experimental="experimental"
       sv-margin
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
     </sv-template-view>
   `;
 
-        return {
-          components: { CvList, CvListItem, SvTemplateView },
-          data: () => ({ experimental: version.experimental }),
-          template: templateViewString,
-          props: settings.props,
-        };
-      },
-      {
-        notes: { markdown: CvListNotesMD },
-      }
-    );
-  }
+      return {
+        components: { CvList, CvListItem, SvTemplateView },
+
+        template: templateViewString,
+        props: settings.props,
+      };
+    },
+    {
+      notes: { markdown: CvListNotesMD },
+    }
+  );
 }

@@ -12,7 +12,6 @@ import CvPagination from '@carbon/vue/src/components/cv-pagination/cv-pagination
 
 const storiesDefault = storiesOf('Components/CvPagination', module);
 const storiesExperimental = storiesOf('Experimental/CvPagination', module);
-import { versions, setVersion } from '@carbon/vue/src/internal/feature-flags';
 
 const preKnobs = {
   backwardsText: {
@@ -71,46 +70,40 @@ const variants = [
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
-for (const version of versions(true)) {
-  const stories = version.experimental && !version.default ? storiesDefault : storiesExperimental;
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
 
-  for (const story of storySet) {
-    stories.add(
-      story.name,
-      () => {
-        setVersion(version);
-        const settings = story.knobs();
+      // ----------------------------------------------------------------
 
-        // ----------------------------------------------------------------
-
-        const templateString = `
+      const templateString = `
 <cv-pagination${settings.group.attr}></cv-pagination>
   `;
 
-        // ----------------------------------------------------------------
+      // ----------------------------------------------------------------
 
-        const templateViewString = `
+      const templateViewString = `
     <sv-template-view
-      :sv-experimental="experimental"
       sv-margin
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
     </sv-template-view>
   `;
 
-        return {
-          components: { CvPagination, SvTemplateView },
-          data: () => ({ experimental: version.experimental }),
-          template: templateViewString,
-          props: settings.props,
-          methods: {
-            onChange: action('cv-paginationr - change event'),
-          },
-        };
-      },
-      {
-        notes: { markdown: CvPaginationNotesMD },
-      }
-    );
-  }
+      return {
+        components: { CvPagination, SvTemplateView },
+
+        template: templateViewString,
+        props: settings.props,
+        methods: {
+          onChange: action('cv-paginationr - change event'),
+        },
+      };
+    },
+    {
+      notes: { markdown: CvPaginationNotesMD },
+    }
+  );
 }

@@ -17,43 +17,6 @@
  * data() { return { aFeatureFlag } }
  */
 
-/**
- * Breaking changes for next release.
- */
-export let breakingChangesX;
-
-/**
- * Next gen of Carbon component design.
- */
-export let componentsX;
-
-const defaults = {
-  componentsX: true,
-  breakingChangesX: false,
+export default {
+  aFeatureFlag: false,
 };
-
-export const versions = (experimental = true) => {
-  const vers = [];
-  if (!defaults.componentsX) {
-    vers.push({ default: true });
-
-    if (experimental) {
-      vers.push({ experimental: true });
-    }
-  } else {
-    vers.push({ experimental: true });
-  }
-  return vers;
-};
-
-export const setVersion = val => {
-  if (val && val.experimental) {
-    breakingChangesX = true;
-    componentsX = true;
-  } else {
-    componentsX = defaults.componentsX;
-    breakingChangesX = defaults.breakingChangesX;
-  }
-};
-
-setVersion();
