@@ -118,10 +118,6 @@ $component-padding: 20px;
 .sv-template-view {
   border: 1px solid transparent;
   background-color: $back-color-exp;
-
-  .carbon {
-    background-color: $back-color;
-  }
 }
 
 .sv-template-view__component {
@@ -186,12 +182,8 @@ $component-padding: 20px;
 
 .sv-template-view__copy {
   position: absolute;
-  top: 37px;
+  top: 39px;
   left: 0;
-
-  .experimental & {
-    top: 32px;
-  }
 
   &.sv-template-view__copy--copied::after {
     content: 'Copied!';
