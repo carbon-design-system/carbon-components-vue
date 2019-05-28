@@ -211,6 +211,9 @@ for (const story of storySet) {
         components: { CvTimePicker, SvTemplateView },
         template: templateViewString,
         props: settings.props,
+        data() {
+          return { ...settings.data };
+        },
         methods: {
           onUpdateTime: action('cv-time-picker - update:time event'),
           onUpdateAmpm: action('cv-time-picker - update:ampm event'),
