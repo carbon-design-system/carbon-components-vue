@@ -5,14 +5,11 @@
 </template>
 
 <script>
+import linkMixin from '../../mixins/link-mixin';
+
 export default {
   name: 'CvLink',
   inheritAttrs: false,
-  computed: {
-    tagType() {
-      // if to is used and not href then user wanted a router-link
-      return this.$attrs.to && !this.$attrs.href ? 'router-link' : 'a';
-    },
-  },
+  mixins: [linkMixin],
 };
 </script>
