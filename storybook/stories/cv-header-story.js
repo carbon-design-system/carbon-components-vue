@@ -75,12 +75,28 @@ const preKnobs = {
   </cv-header-menu>
 </cv-header-nav>`,
   },
+  headerActions: {
+    group: 'headerActions',
+    value: `<template slot="header-global">
+    <cv-header-global-action aria-label="Notifications" @click="actionNotifications">
+      <Notification20 />
+    </cv-header-global-action>
+    <cv-header-global-action aria-label="User avatar" @click="actionUserAvatar">
+      <UserAvatar20 />
+    </cv-header-global-action>
+    <cv-header-global-action aria-label="App switcher" @click="actionAppSwitcher">
+      <AppSwitcher20 />
+    </cv-header-global-action>
+  </template>`,
+  },
 };
 
 const variants = [
   { name: 'default' },
   { name: 'Header Base', includes: ['headerName'] },
   { name: 'Header Base with Navigation', includes: ['headerName', 'headerNav'] },
+  { name: 'Header Base with Actions', includes: ['headerName', 'headerActions'] },
+  { name: 'Header Base with Navigation and Actions', includes: ['headerName', 'headerActions', 'headerActions'] },
 ];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
@@ -93,18 +109,9 @@ for (const story of storySet) {
 
       // ----------------------------------------------------------------
       const templateString = `
-<cv-header aria-label="Carbon header">${settings.group.headerName}${settings.group.headerNav}
-  <template slot="header-global">
-    <cv-header-global-action aria-label="Notifications" @click="actionNotifications">
-      <Notification20 />
-    </cv-header-global-action>
-    <cv-header-global-action aria-label="User avatar" @click="actionUserAvatar">
-      <UserAvatar20 />
-    </cv-header-global-action>
-    <cv-header-global-action aria-label="App switcher" @click="actionAppSwitcher">
-      <AppSwitcher20 />
-    </cv-header-global-action>
-  </template>
+<cv-header aria-label="Carbon header">${settings.group.headerName}${settings.group.headerNav}${
+        settings.group.headerActions
+      }
 </cv-header>
   `;
 
