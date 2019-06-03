@@ -82,26 +82,32 @@ const preKnobs = {
   headerActions: {
     group: 'headerActions',
     value: `<template slot="header-global">
-    <cv-header-global-action aria-label="Notifications" :active="notificationsExpanded" @click="actionNotifications" >
+    <cv-header-global-action
+      aria-label="Notifications"
+      aria-controls="notifications-panel"
+      @click="actionNotifications" >
       <Notification20 />
     </cv-header-global-action>
-    <cv-header-global-action aria-label="User avatar" @click="actionUserAvatar">
+    <cv-header-global-action aria-label="User avatar" @click="actionUserAvatar" aria-controls="">
       <UserAvatar20 />
     </cv-header-global-action>
-    <cv-header-global-action aria-label="App switcher" @click="actionAppSwitcher">
+    <cv-header-global-action
+      aria-label="App switcher"
+      aria-controls="switcher-panel"
+      @click="actionAppSwitcher">
       <AppSwitcher20 />
     </cv-header-global-action>
   </template>`,
   },
   notificationsPanel: {
     group: 'rightPanels',
-    value: `<cv-header-panel :expanded="notificationsExpanded">
+    value: `<cv-header-panel  id="notifications-panel">
       An empty panel
     </cv-header-panel>`,
   },
   switcherPanel: {
     group: 'rightPanels',
-    value: `<cv-header-panel :expanded="switcherExpanded">
+    value: `<cv-header-panel id="switcher-panel">
       <cv-switcher>
         <cv-switcher-item>
           <cv-switcher-item-link href="javascript:void(0)" selected>
@@ -204,12 +210,6 @@ for (const story of storySet) {
         },
         template: templateViewString,
         props: settings.props,
-        data() {
-          return {
-            notificationsExpanded: false,
-            switcherExpanded: false,
-          };
-        },
         mounted() {
           this.doActionNotification = () => action('Notifications - click');
           this.doActionSwitcher = () => action('Notifications - click');
@@ -221,12 +221,10 @@ for (const story of storySet) {
         },
         methods: {
           actionNotifications() {
-            this.notificationsExpanded = !this.notificationsExpanded;
             this.doActionNotification();
           },
           actionUserAvatar: action('User avatar - click'),
           actionAppSwitcher() {
-            this.switcherExpanded = !this.switcherExpanded;
             this.doActionSwitcher();
           },
         },

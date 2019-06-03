@@ -1,5 +1,9 @@
 <template>
-  <div class="cv-header-panel bx--header-panel" :class="{ 'bx--header-panel--expanded': expanded }">
+  <div
+    class="cv-header-panel bx--header-panel"
+    :class="{ 'bx--header-panel--expanded': internalExpanded }"
+    :hidden="!internalExpanded"
+  >
     <slot></slot>
   </div>
 </template>
@@ -9,6 +13,35 @@ export default {
   name: 'CvHeaderPanel',
   props: {
     expanded: Boolean,
+    id: { type: String, required: true },
+  },
+  mounted() {
+    this.$parent.$emit('cv:panel-mounted', this);
+  },
+  beforeDestroy() {
+    this.$parent.$emit('cv:panel-beforeDestroy', this);
+  },
+  data() {
+    return {
+      dataExpanded: this.expanded,
+    };
+  },
+  watch: {
+    expanded() {
+      this.dataExpanded = this.expanded;
+      this.$parent.$emit('cv:panel-resize', this);
+    },
+  },
+  computed: {
+    internalExpanded: {
+      get() {
+        return this.dataExpanded;
+      },
+      set(val) {
+        // Do not emit cv:panel-resize
+        this.dataExpanded = val;
+      },
+    },
   },
 };
 </script>
