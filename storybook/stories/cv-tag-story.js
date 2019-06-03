@@ -24,6 +24,11 @@ let preKnobs = {
 
 let variants = [
   {
+    name: 'filter',
+    extra: { kind: { group: 'attr', value: 'kind="filter" @remove="onRemove"' } },
+    skip: { default: true, experimental: false },
+  },
+  {
     name: 'red',
     extra: { kind: { group: 'attr', value: 'kind="red"' } },
   },
