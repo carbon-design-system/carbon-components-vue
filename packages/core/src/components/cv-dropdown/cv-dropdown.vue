@@ -18,9 +18,9 @@
 <template>
   <div :class="{ 'bx--form-item': formItem }">
     <div class="bx--dropdown__wrapper" :class="{ 'bx--dropdown__wrapper--inline': inline, 'cv-dropdown': !formItem }">
-      <label v-if="label" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">{{
-        label
-      }}</label>
+      <label v-if="label" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">
+        {{ label }}
+      </label>
 
       <div
         v-if="!inline && isHelper"
@@ -54,12 +54,12 @@
         <WarningFilled16 v-if="isInvalid" class="bx--dropdown__invalid-icon" />
         <li v-if="inline" class="bx--dropdown-text" ref="valueContent">
           <span class="bx--dropdown-text__inner">{{ placeholder }}</span>
-          <chevron-down-16 class="bx--dropdown__arrow" />
+          <chevron-down-16 class="cv-dropdown__arrow bx--dropdown__arrow" />
         </li>
         <template v-else>
           <li class="bx--dropdown-text" ref="valueContent">{{ placeholder }}</li>
           <li class="bx--dropdown__arrow-container">
-            <chevron-down-16 class="bx--dropdown__arrow" />
+            <chevron-down-16 class="cv-dropdown__arrow bx--dropdown__arrow" />
           </li>
         </template>
 

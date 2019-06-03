@@ -10,9 +10,9 @@
       @keydown.left.prevent="moveLeft"
     >
       <cv-dropdown class="bx--tabs-trigger" :value="`${selectedIndex}`" @change="onDropChange" :form-item="false">
-        <cv-dropdown-item v-for="(tab, index) in tabs" :key="`drop-${index}`" :value="`${index}`">
-          {{ tab.label }}
-        </cv-dropdown-item>
+        <cv-dropdown-item v-for="(tab, index) in tabs" :key="`drop-${index}`" :value="`${index}`">{{
+          tab.label
+        }}</cv-dropdown-item>
       </cv-dropdown>
       <ul class="bx--tabs__nav bx--tabs__nav--hidden" role="tablist">
         <li
@@ -55,7 +55,7 @@ export default {
   data() {
     return {
       tabs: [],
-      selectedIndex: 0,
+      selectedIndex: -1,
       disabledTabs: [],
     };
   },
@@ -179,9 +179,15 @@ export default {
 
 <style lang="scss">
 @media screen and (max-width: 41.95rem) {
-  .cv-tabs .cv-dropdown.bx--tabs-trigger {
+  .cv-tabs .bx--tabs-trigger {
     display: block;
     padding: 0;
+
+    .cv-dropdown__arrow {
+      // Carbon uses a different chevron for the tabs dropdown, undo size difference.
+      width: initial;
+      height: initial;
+    }
   }
 }
 </style>
