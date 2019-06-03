@@ -1,3 +1,36 @@
+## 2.3.0 (June 3, 2019)
+
+### Features
+
+- Added an example project
+- Marked CvDataTable as ready
+- Added initial CvHeader component and some parts
+- Added cv-tag skeleton
+- Added cv-slider skeleton
+- Added tag disabled feature
+
+### Bug Fixes
+
+- Time picker story fix
+- Tab usage of dropdown when narrow
+- Restored tag fileter story
+
+### Chores
+
+- Removed Carbon 9 / X switches
+- Updated Carbon dependencies
+
+### Dependency versions
+
+Versions reflect those version was built using.
+
+| Dependency        | Version | Notes |
+| ----------------- | ------- | ----- |
+| @carbon/icons-vue | 10.2.0  |       |
+| carbon-components | 10.2.0  |       |
+| flatpickr         | 4.5.7   |       |
+| vue               | 2.6.10  |       |
+
 ## 2.2.1 (May 24, 2019)
 
 ### Fixes
