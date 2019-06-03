@@ -4,6 +4,7 @@
     <div v-if="$slots['header-global']" class="bx--header__global">
       <slot name="header-global" />
     </div>
+    <slot name="right-panels" />
   </header>
 </template>
 
