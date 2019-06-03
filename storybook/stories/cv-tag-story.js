@@ -8,11 +8,12 @@ import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvTagNotesMD from '@carbon/vue/src/components/cv-tag/cv-tag-notes.md';
 import CvTag from '@carbon/vue/src/components/cv-tag/cv-tag';
+import CvTagSkeleton from '@carbon/vue/src/components/cv-tag/cv-tag-skeleton';
 
 const storiesDefault = storiesOf('Components/CvTag', module);
-const storiesExperimental = storiesOf('Experimental/CvTag', module);
+// const storiesExperimental = storiesOf('Experimental/CvTag', module);
 
-const preKnobs = {
+let preKnobs = {
   label: {
     group: 'attr',
     type: text,
@@ -21,7 +22,7 @@ const preKnobs = {
   },
 };
 
-const variants = [
+let variants = [
   {
     name: 'red',
     extra: { kind: { group: 'attr', value: 'kind="red"' } },
@@ -64,7 +65,7 @@ const variants = [
   },
 ];
 
-const storySet = knobsHelper.getStorySet(variants, preKnobs);
+let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   storiesDefault.add(
@@ -95,6 +96,44 @@ for (const story of storySet) {
         methods: {
           onRemove: action('Filter remove event'),
         },
+      };
+    },
+    {
+      notes: { markdown: CvTagNotesMD },
+    }
+  );
+}
+
+preKnobs = {};
+variants = [{ name: 'skeleton' }];
+storySet = knobsHelper.getStorySet(variants, preKnobs);
+
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
+
+      // ----------------------------------------------------------------
+
+      const templateString = `
+<cv-tag-skeleton></cv-tag-skeleton>
+  `;
+
+      // ----------------------------------------------------------------
+
+      const templateViewString = `
+    <sv-template-view
+      sv-margin
+      sv-source='${templateString.trim()}'>
+      <template slot="component">${templateString}</template>
+    </sv-template-view>
+  `;
+
+      return {
+        components: { CvTagSkeleton, SvTemplateView },
+        template: templateViewString,
+        props: settings.props,
       };
     },
     {
