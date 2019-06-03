@@ -8,11 +8,12 @@ import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvSliderNotesMD from '@carbon/vue/src/components/cv-slider/cv-slider-notes.md';
 import CvSlider from '@carbon/vue/src/components/cv-slider/cv-slider';
+import CvSliderSkeleton from '@carbon/vue/src/components/cv-slider/cv-slider-skeleton';
 
 const storiesDefault = storiesOf('Components/CvSlider', module);
 const storiesExperimental = storiesOf('Experimental/CvSlider', module);
 
-const preKnobs = {
+let preKnobs = {
   theme: {
     group: 'attr',
     type: boolean,
@@ -93,14 +94,14 @@ const preKnobs = {
   },
 };
 
-const variants = [
+let variants = [
   { name: 'default', excludes: ['vModel', 'events'] },
   { name: 'minimal', includes: ['label'] },
   { name: 'events', includes: ['label', 'events'] },
   { name: 'vModel', includes: ['label', 'vModel'] },
 ];
 
-const storySet = knobsHelper.getStorySet(variants, preKnobs);
+let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   storiesDefault.add(
@@ -145,6 +146,43 @@ for (const story of storySet) {
         methods: {
           onChange: action('cv-slider - change event'),
         },
+      };
+    },
+    {
+      notes: { markdown: CvSliderNotesMD },
+    }
+  );
+}
+
+preKnobs = {};
+variants = [{ name: 'skeleton' }];
+storySet = knobsHelper.getStorySet(variants, preKnobs);
+
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
+
+      const templateString = `
+        <cv-slider-skeleton></cv-slider-skeleton>
+      `;
+
+      // ----------------------------------------------------------------
+
+      const templateViewString = `
+      <sv-template-view
+        sv-margin
+        sv-source='${templateString.trim()}'>
+        <template slot="component">${templateString}</template>
+      </sv-template-view>
+    `;
+
+      return {
+        components: { CvSliderSkeleton, SvTemplateView },
+
+        template: templateViewString,
+        props: settings.props,
       };
     },
     {
