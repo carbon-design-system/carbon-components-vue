@@ -3,6 +3,9 @@
     class="cv-header-panel bx--header-panel"
     :class="{ 'bx--header-panel--expanded': internalExpanded }"
     :hidden="!internalExpanded"
+    @focusout="onFocusout"
+    @mousedown="onMouseDown"
+    tabindex="-1"
   >
     <slot></slot>
   </div>
@@ -41,6 +44,16 @@ export default {
         // Do not emit cv:panel-resize
         this.dataExpanded = val;
       },
+    },
+  },
+  methods: {
+    onFocusout(ev) {
+      this.$parent.$emit('cv:panel-focusout', this, ev);
+    },
+    onMouseDown(ev) {
+      if (this.$el.contains(ev.target)) {
+        ev.preventDefault();
+      }
     },
   },
 };

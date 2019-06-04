@@ -13,13 +13,13 @@ export default {
   name: 'CvHeader',
   created() {
     // add these on created otherwise cv:mounted is too late.
-    this.$on('cv:global-action-mounted', srcComponent => this.onCvGAMounted(srcComponent));
-    this.$on('cv:global-action-beforeDestroy', srcComponent => this.onCvGABeforeDestroy(srcComponent));
-    this.$on('cv:global-action-toggle', srcComponent => this.onCvGAToggle(srcComponent));
-    this.$on('cv:global-action-blur', srcComponent => this.onCvGABlur(srcComponent));
-    this.$on('cv:panel-mounted', srcComponent => this.onCvPanelMounted(srcComponent));
-    this.$on('cv:panel-beforeDestroy', srcComponent => this.onCvPanelBeforeDestroy(srcComponent));
-    this.$on('cv:panel-blur', srcComponent => this.onCvPanelBlur(srcComponent));
+    this.$on('cv:panel-control-mounted', this.onCvPanelControlMounted);
+    this.$on('cv:panel-control-beforeDestroy', this.onCvPanelControlBeforeDestroy);
+    this.$on('cv:panel-control-toggle', this.onCvPanelControlToggle);
+    this.$on('cv:panel-control-focusout', this.onCvPanelControlFocusout);
+    this.$on('cv:panel-mounted', this.onCvPanelMounted);
+    this.$on('cv:panel-beforeDestroy', this.onCvPanelBeforeDestroy);
+    this.$on('cv:panel-focusout', this.onCvPanelFocusout);
   },
   mounted() {
     console.warn(
@@ -35,19 +35,19 @@ export default {
     };
   },
   methods: {
-    onCvGAMounted(srcComponent) {
+    onCvPanelControlMounted(srcComponent) {
       this.panelControllers.push(srcComponent);
     },
-    onCvGABeforeDestroy(srcComponent) {
+    onCvPanelControlBeforeDestroy(srcComponent) {
       const index = this.panelControllers.findIndex(item => item.id === srcComponent.id);
       if (index > -1) {
         this.panelControllers.splice(index, 1);
       }
     },
-    onCvGAToggle(srcComponent) {
+    onCvPanelControlToggle(srcComponent, force) {
       const foundIndex = this.panels.findIndex(item => item.id === srcComponent.ariaControls);
       if (foundIndex > -1) {
-        const newValue = !srcComponent.internalActive;
+        const newValue = force !== undefined ? force : !srcComponent.internalActive;
 
         for (let index in this.panels) {
           this.panels[index].internalExpanded = false;
@@ -60,8 +60,13 @@ export default {
         this.panels[foundIndex].internalExpanded = newValue;
       }
     },
-    onCvGABlur(srcComponent) {
-      console.dir(srcComponent);
+    onCvPanelControlFocusout(srcComponent, srcEvent) {
+      const found = this.panels.find(item => item.id === srcComponent.ariaControls);
+
+      console.dir(srcEvent);
+      if (found && found.$el !== srcEvent.relatedTarget && !found.$el.contains(srcEvent.relatedTarget)) {
+        this.onCvPanelControlToggle(srcComponent, false);
+      }
     },
     onCvPanelMounted(srcComponent) {
       this.panels.push(srcComponent);
@@ -72,8 +77,16 @@ export default {
         this.panels.splice(index, 1);
       }
     },
-    onCvPanelBlur(srcComponent) {
-      console.dir(srcComponent);
+    onCvPanelFocusout(srcComponent, srcEvent) {
+      const found = this.panelControllers.find(item => item.ariaControls === srcComponent.id);
+      if (
+        srcComponent.$el !== srcEvent.relatedTarget &&
+        !srcComponent.$el.contains(srcEvent.relatedTarget) &&
+        found &&
+        found.$el !== srcEvent.relatedTarget
+      ) {
+        this.onCvPanelControlToggle(found, false);
+      }
     },
   },
 };

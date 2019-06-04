@@ -8,7 +8,7 @@
     :aria-controls="ariaControls"
     :aria-expanded="active"
     @click="gaToggle"
-    @blur="gaBlur"
+    @focusout="gaFocusout"
   >
     <slot />
   </button>
@@ -25,10 +25,10 @@ export default {
     ariaControls: { type: String, required: true },
   },
   mounted() {
-    this.$parent.$emit('cv:global-action-mounted', this);
+    this.$parent.$emit('cv:panel-control-mounted', this);
   },
   beforeDestroy() {
-    this.$parent.$emit('cv:global-action-beforeDestroy', this);
+    this.$parent.$emit('cv:panel-control-beforeDestroy', this);
   },
   data() {
     return {
@@ -48,17 +48,18 @@ export default {
         return this.dataActive;
       },
       set(val) {
-        // do not emit 'cv:global-action-toggle'
+        // do not emit 'cv:panel-control-toggle'
         this.dataActive = val;
       },
     },
   },
   methods: {
     gaToggle() {
-      this.$parent.$emit('cv:global-action-toggle', this);
+      this.$el.focus();
+      this.$parent.$emit('cv:panel-control-toggle', this);
     },
-    gaBlur() {
-      this.$parent.$emit('cv:global-action-blur', this);
+    gaFocusout(ev) {
+      this.$parent.$emit('cv:panel-control-focusout', this, ev);
     },
   },
 };
