@@ -1,3 +1,7 @@
+## 2.4.0 (June 4, 2019)
+
+- Add disabled tag
+
 ## 2.3.0 (June 3, 2019)
 
 ### Features
