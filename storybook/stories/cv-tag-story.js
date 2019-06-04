@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { text } from '@storybook/addon-knobs';
+import { text, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
@@ -20,13 +20,21 @@ let preKnobs = {
     config: ['Tag label', 'I am a tag'], // consts.CONTENT],
     prop: { name: 'label', type: String },
   },
+  disabled: {
+    group: 'attr',
+    type: boolean,
+    config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: Boolean,
+      name: 'disabled',
+    },
+  },
 };
 
 let variants = [
   {
     name: 'filter',
     extra: { kind: { group: 'attr', value: 'kind="filter" @remove="onRemove"' } },
-    skip: { default: true, experimental: false },
   },
   {
     name: 'red',

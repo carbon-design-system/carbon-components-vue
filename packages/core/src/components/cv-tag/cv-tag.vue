@@ -1,5 +1,15 @@
 <template>
-  <span class="cv-tag bx--tag" :class="[`bx--tag--${kind}`, { 'bx--tag--filter': isFilter }]" :title="title">
+  <span
+    class="cv-tag bx--tag"
+    :class="[
+      `bx--tag--${kind}`,
+      {
+        'bx--tag--filter': isFilter,
+        'bx--tag--disabled': disabled,
+      },
+    ]"
+    :title="title"
+  >
     {{ label }}
     <Close16
       v-if="isFilter"
@@ -34,6 +44,7 @@ export default {
   name: 'CvTag',
   components: { Close16 },
   props: {
+    disabled: Boolean,
     label: { type: String, required: true },
     kind: {
       type: String,
