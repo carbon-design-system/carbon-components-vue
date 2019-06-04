@@ -7,10 +7,10 @@
   resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-10.2.0.tgz#f58ab1d14b8b63d485d31e7d785d25057eac5409"
   integrity sha512-PAxu8KMuSrifF4VCW7N7bgu/QKG/Q4T9ojWUEqI0zKjTCkJnzEZTYgK1FrWAdE1uAdAwLlbPIjzIS/QzP15Uvw==
 
-"@carbon/icons-vue@^10.2.0":
-  version "10.2.0"
-  resolved "https://registry.yarnpkg.com/@carbon/icons-vue/-/icons-vue-10.2.0.tgz#0623cabd8d99a80f3c76af35da039742fcdbf3e2"
-  integrity sha512-haNbmbmA5hejZpaIhxRKojfW9fX56s4Mk6q5h6ZBk0PIvvYw7hxcaKI3+XnKHGLAM/yL+Y083Al8fWPxkBpFKw==
+"@carbon/icons-vue@10.3.0-rc.2":
+  version "10.3.0-rc.2"
+  resolved "https://registry.yarnpkg.com/@carbon/icons-vue/-/icons-vue-10.3.0-rc.2.tgz#1d0fb8afbfc3c0019960c0ec199257680dac33e9"
+  integrity sha512-6fWtsyNLc+uC4/IcucO/CvxvPf6ES/QmxbG7QkprdIg9/Oe4GDTjcv1Pj1KTSbnJGLJ25q0LXlKs7TOLtNoINA==
   dependencies:
     "@carbon/icon-helpers" "10.2.0"
 
@@ -1043,10 +1043,10 @@ caniuse-lite@^1.0.30000955, caniuse-lite@^1.0.30000957:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000960.tgz#ec48297037e5607f582f246ae7b12bee66a78999"
   integrity sha512-7nK5qs17icQaX6V3/RYrJkOsZyRNnroA4+ZwxaKJzIKy+crIy0Mz5CBlLySd2SNV+4nbUZeqeNfiaEieUBu3aA==
 
-carbon-components@^10.2.0:
-  version "10.2.0"
-  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.2.0.tgz#a7c3631d31cdbb3e9efe6601f02303e0c704fe45"
-  integrity sha512-LAtwYD5LvH60kx+Y7VyWAAL66kzrANrclThKMzv+fwLLO3xNZ6mLmEdvuEbPdjnTiRSUdlHajgA+evVu672F1w==
+carbon-components@10.3.0-rc.2:
+  version "10.3.0-rc.2"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.3.0-rc.2.tgz#b3a10eb5fa3b62ef0e2350f32247667e315c41ca"
+  integrity sha512-8hwIk8ffFKUFr4eTiibgq8CV3H9sV2hKxP2WEcu3Kw2LZmcoC3uA5X57oLnNf39OQYV5RPZzCzc5Lhb3FsKIfQ==
   dependencies:
     carbon-icons "^7.0.7"
     flatpickr "4.5.7"
