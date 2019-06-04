@@ -6,15 +6,19 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvHeaderNotesMD from '@carbon/vue/src/components/cv-header/cv-header-notes.md';
+import CvHeaderNotesMD from '@carbon/vue/src/components/cv-ui-shell/cv-header-notes.md';
 
-import CvHeader from '@carbon/vue/src/components/cv-header/cv-header';
-import CvHeaderNav from '@carbon/vue/src/components/cv-header/cv-header-nav';
-import CvHeaderName from '@carbon/vue/src/components/cv-header/cv-header-name';
-import CvHeaderMenu from '@carbon/vue/src/components/cv-header/cv-header-menu';
-import CvHeaderMenuItem from '@carbon/vue/src/components/cv-header/cv-header-menu-item';
-import CvHeaderGlobalAction from '@carbon/vue/src/components/cv-header/cv-header-global-action';
-import CvSkipToContent from '@carbon/vue/src/components/cv-header/cv-skip-to-content';
+import CvHeader from '@carbon/vue/src/components/cv-ui-shell/cv-header';
+import CvHeaderPanel from '@carbon/vue/src/components/cv-ui-shell/cv-header-panel';
+import CvHeaderNav from '@carbon/vue/src/components/cv-ui-shell/cv-header-nav';
+import CvHeaderName from '@carbon/vue/src/components/cv-ui-shell/cv-header-name';
+import CvHeaderMenu from '@carbon/vue/src/components/cv-ui-shell/cv-header-menu';
+import CvHeaderMenuItem from '@carbon/vue/src/components/cv-ui-shell/cv-header-menu-item';
+import CvHeaderGlobalAction from '@carbon/vue/src/components/cv-ui-shell/cv-header-global-action';
+import CvSkipToContent from '@carbon/vue/src/components/cv-ui-shell/cv-skip-to-content';
+import CvSwitcher from '@carbon/vue/src/components/cv-ui-shell/cv-switcher';
+import CvSwitcherItem from '@carbon/vue/src/components/cv-ui-shell/cv-switcher-item';
+import CvSwitcherItemLink from '@carbon/vue/src/components/cv-ui-shell/cv-switcher-item-link';
 import Notification20 from '@carbon/icons-vue/es/notification/20';
 import UserAvatar20 from '@carbon/icons-vue/es/user--avatar/20';
 import AppSwitcher20 from '@carbon/icons-vue/es/app-switcher/20';
@@ -46,30 +50,30 @@ const preKnobs = {
     value: `<cv-skip-to-content href="#main-content">
     Skip to content
   </cv-skip-to-content>
-  <cv-header-name href="/" prefix="IBM">
+  <cv-header-name href="javascript:void(0)" prefix="IBM">
     ${'&nbsp;'}[Platform]
   </cv-header-name>`,
   },
   headerNav: {
     group: 'headerNav',
     value: `<cv-header-nav aria-label="Carbon nav">
-  <cv-header-menu-item href="/link1">
+  <cv-header-menu-item href="javascript:void(0)">
     Link 1
   </cv-header-menu-item>
-  <cv-header-menu-item href="/link2">
+  <cv-header-menu-item href="javascript:void(0)">
     Link 2
   </cv-header-menu-item>
-  <cv-header-menu-item href="/link3">
+  <cv-header-menu-item href="javascript:void(0)">
     Link 3
   </cv-header-menu-item>
   <cv-header-menu aria-label="Link 4">
-    <cv-header-menu-item href="/submenu-link1">
+    <cv-header-menu-item href="javascript:void(0)">
       Submenu Link 1
     </cv-header-menu-item>
-    <cv-header-menu-item href="/submenu-link2">
+    <cv-header-menu-item href="javascript:void(0)">
       Submenu Link 2
     </cv-header-menu-item>
-    <cv-header-menu-item href="/submenu-link3">
+    <cv-header-menu-item href="javascript:void(0)">
       Submenu Link 3
     </cv-header-menu-item>
   </cv-header-menu>
@@ -78,16 +82,65 @@ const preKnobs = {
   headerActions: {
     group: 'headerActions',
     value: `<template slot="header-global">
-    <cv-header-global-action aria-label="Notifications" @click="actionNotifications">
+    <cv-header-global-action
+      aria-label="Notifications"
+      aria-controls="notifications-panel"
+      @click="actionNotifications" >
       <Notification20 />
     </cv-header-global-action>
-    <cv-header-global-action aria-label="User avatar" @click="actionUserAvatar">
+    <cv-header-global-action aria-label="User avatar" @click="actionUserAvatar" aria-controls="">
       <UserAvatar20 />
     </cv-header-global-action>
-    <cv-header-global-action aria-label="App switcher" @click="actionAppSwitcher">
+    <cv-header-global-action
+      aria-label="App switcher"
+      aria-controls="switcher-panel"
+      @click="actionAppSwitcher">
       <AppSwitcher20 />
     </cv-header-global-action>
   </template>`,
+  },
+  notificationsPanel: {
+    group: 'rightPanels',
+    value: `<cv-header-panel  id="notifications-panel">
+      An empty panel
+    </cv-header-panel>`,
+  },
+  switcherPanel: {
+    group: 'rightPanels',
+    value: `<cv-header-panel id="switcher-panel">
+      <cv-switcher>
+        <cv-switcher-item>
+          <cv-switcher-item-link href="javascript:void(0)" selected>
+            Selected app
+          </cv-switcher-item-link>
+        </cv-switcher-item>
+        <cv-switcher-item>
+          <cv-switcher-item-link href="javascript:void(0)">
+            Other app
+          </cv-switcher-item-link>
+        </cv-switcher-item>
+        <cv-switcher-item>
+          <cv-switcher-item-link href="javascript:void(0)">
+            Other app
+          </cv-switcher-item-link>
+        </cv-switcher-item>
+        <cv-switcher-item>
+          <cv-switcher-item-link href="javascript:void(0)">
+            Other app
+          </cv-switcher-item-link>
+        </cv-switcher-item>
+        <cv-switcher-item>
+          <cv-switcher-item-link href="javascript:void(0)">
+            Other app
+          </cv-switcher-item-link>
+        </cv-switcher-item>
+        <cv-switcher-item>
+          <cv-switcher-item-link href="javascript:void(0)">
+            Other app
+          </cv-switcher-item-link>
+        </cv-switcher-item>
+      </cv-switcher>
+    </cv-header-panel>`,
   },
 };
 
@@ -97,6 +150,12 @@ const variants = [
   { name: 'Header Base with Navigation', includes: ['headerName', 'headerNav'] },
   { name: 'Header Base with Actions', includes: ['headerName', 'headerActions'] },
   { name: 'Header Base with Navigation and Actions', includes: ['headerName', 'headerActions', 'headerActions'] },
+  { name: 'Header Base with Actions and right panel', includes: ['headerName', 'headerActions', 'notificationsPanel'] },
+  { name: 'Header Base with Actions and switcher panel', includes: ['headerName', 'headerActions', 'switcherPanel'] },
+  {
+    name: 'Header Base with Actions and right panels',
+    includes: ['headerName', 'headerActions', 'notificationsPanel', 'switcherPanel'],
+  },
 ];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
@@ -108,12 +167,14 @@ for (const story of storySet) {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
-      const templateString = `
-<cv-header aria-label="Carbon header">${settings.group.headerName}${settings.group.headerNav}${
-        settings.group.headerActions
-      }
+      const templateString = `<cv-header aria-label="Carbon header">${settings.group.headerName}${
+        settings.group.headerNav
+      }${settings.group.headerActions}
+  <template slot="right-panels" v-if="areRightPanels">
+    ${settings.group.rightPanels}
+  </template>
 </cv-header>
-  `;
+          `;
 
       // ----------------------------------------------------------------
 
@@ -133,24 +194,40 @@ for (const story of storySet) {
         components: {
           SvTemplateView,
           CvHeader,
+          CvHeaderPanel,
           CvHeaderName,
           CvHeaderNav,
           CvHeaderGlobalAction,
           CvHeaderMenu,
           CvHeaderMenuItem,
           CvSkipToContent,
+          CvSwitcher,
+          CvSwitcherItem,
+          CvSwitcherItemLink,
           Notification20,
           UserAvatar20,
           AppSwitcher20,
         },
-        methods: {
-          actionNotifications: action('Notifications - click'),
-          actionUserAvatar: action('User avatar - click'),
-          actionAppSwitcher: action('App switcher - click'),
-        },
-
         template: templateViewString,
         props: settings.props,
+        mounted() {
+          this.doActionNotification = () => action('Notifications - click');
+          this.doActionSwitcher = () => action('Notifications - click');
+        },
+        computed: {
+          areRightPanels() {
+            return settings.group.rightPanels.length > 0;
+          },
+        },
+        methods: {
+          actionNotifications() {
+            this.doActionNotification();
+          },
+          actionUserAvatar: action('User avatar - click'),
+          actionAppSwitcher() {
+            this.doActionSwitcher();
+          },
+        },
       };
     },
     {

@@ -1,6 +1,6 @@
 {
   "name": "storybook",
-  "version": "2.3.0",
+  "version": "2.5.0-rc.0",
   "private": true,
   "description": "> TODO: description",
   "scripts": {
@@ -8,13 +8,13 @@
     "build": "build-storybook"
   },
   "dependencies": {
-    "@carbon/icons-vue": "^10.0.0",
-    "carbon-components": "^10.2.0",
+    "@carbon/icons-vue": "10.3.0-rc.2",
+    "carbon-components": "10.3.0-rc.2",
     "vue": "^2.6.10"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
-    "@carbon/vue": "^2.3.0",
+    "@carbon/vue": "^2.5.0-rc.0",
     "@storybook/addon-actions": "^5.0.3",
     "@storybook/addon-knobs": "^5.0.3",
     "@storybook/addon-notes": "^5.0.3",
