@@ -63,7 +63,6 @@ export default {
     onCvPanelControlFocusout(srcComponent, srcEvent) {
       const found = this.panels.find(item => item.id === srcComponent.ariaControls);
 
-      console.dir(srcEvent);
       if (found && found.$el !== srcEvent.relatedTarget && !found.$el.contains(srcEvent.relatedTarget)) {
         this.onCvPanelControlToggle(srcComponent, false);
       }

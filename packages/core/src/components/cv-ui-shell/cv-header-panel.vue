@@ -5,7 +5,6 @@
     :hidden="!internalExpanded"
     @focusout="onFocusout"
     @mousedown="onMouseDown"
-    tabindex="-1"
   >
     <slot></slot>
   </div>
