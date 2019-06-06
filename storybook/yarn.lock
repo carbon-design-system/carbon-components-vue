@@ -648,6 +648,16 @@
   dependencies:
     "@carbon/icon-helpers" "10.2.0"
 
+"@carbon/vue@^2.5.0-rc.0":
+  version "2.5.0-rc.0"
+  resolved "https://registry.yarnpkg.com/@carbon/vue/-/vue-2.5.0-rc.0.tgz#21117b5b8589e7d8ea48a855584c0fe0cf0d31f6"
+  integrity sha512-X9RI+pOh7iNlVEgkRFvIt3tRtdxshx4/l5IKrVGSMgC6sH4FY3179EYYMwIAZIpz8IYJGKIk8mfoZYoMmqS4vw==
+  dependencies:
+    "@carbon/icons-vue" "10.3.0-rc.2"
+    carbon-components "10.3.0-rc.2"
+    flatpickr "4.5.7"
+    vue "^2.6.10"
+
 "@csstools/convert-colors@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
@@ -4882,9 +4892,9 @@ js-tokens@^3.0.2:
   integrity sha1-mGbfOVECEw449/mWvOtlRDIJwls=
 
 js-yaml@^3.13.0, js-yaml@^3.9.0:
-  version "3.13.0"
-  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.13.0.tgz#38ee7178ac0eea2c97ff6d96fff4b18c7d8cf98e"
-  integrity sha512-pZZoSxcCYco+DIKBTimr67J6Hy+EYGZDY/HCWC+iAEA9h1ByhMXAIVUXMcMFpOCxQ/xjXmPI2MkDL5HRm5eFrQ==
+  version "3.13.1"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.13.1.tgz#aff151b30bfdfa8e49e05da22e7415e9dfa37847"
+  integrity sha512-YfbcO7jXDdyj0DGxYVSlSeQNHbD7XPWvrVWeVUujrQEoZzWJIRrCPoyk6kL6IAjAG2IolMK4T0hNUe0HOUs5Jw==
   dependencies:
     argparse "^1.0.7"
     esprima "^4.0.0"
