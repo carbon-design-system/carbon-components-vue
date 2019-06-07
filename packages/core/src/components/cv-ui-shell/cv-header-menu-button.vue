@@ -1,7 +1,7 @@
 <template>
   <button
     v-on="$listeners"
-    class="cv-button-menu bx--header__action"
+    class="cv-header-menu-button bx--header__action bx--header__menu-trigger bx--header__menu-toggle"
     :class="dataActive ? 'bx--header__action--active' : ''"
     type="button"
     aria-haspopup="true"
@@ -10,16 +10,20 @@
     @click="gaToggle"
     @focusout="gaFocusout"
   >
-    <slot />
+    <Close20 v-if="active" />
+    <Menu20 v-if="!active" />
   </button>
 </template>
 
 <script>
 import uidMixin from '../../mixins/uid-mixin';
+import Close20 from '@carbon/icons-vue/es/close/20';
+import Menu20 from '@carbon/icons-vue/es/menu/20';
 
 export default {
-  name: 'CvButtonMenu',
+  name: 'CvHeaderMenuButton',
   mixins: [uidMixin],
+  components: { Close20, Menu20 },
   props: {
     active: Boolean,
     ariaControls: { type: String, required: true },
@@ -34,6 +38,9 @@ export default {
     return {
       dataActive: this.active,
     };
+  },
+  mounted() {
+    // watch width transition and
   },
   watch: {
     expanded() {

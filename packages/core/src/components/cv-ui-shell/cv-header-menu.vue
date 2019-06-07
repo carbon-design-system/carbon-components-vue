@@ -1,7 +1,7 @@
 <template>
   <li class="cv-header-menu bx--header__submenu">
     <a
-      aria-haspopup="menu"
+      aria-haspopup="true"
       :aria-expanded="expanded ? 'true' : 'false'"
       class="bx--header__menu-item bx--header__menu-title"
       href="javascript:void(0)"
