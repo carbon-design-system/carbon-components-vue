@@ -167,9 +167,7 @@ for (const story of storySet) {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
-      const templateString = `<cv-header aria-label="Carbon header">${settings.group.headerName}${
-        settings.group.headerNav
-      }${settings.group.headerActions}
+      const templateString = `<cv-header aria-label="Carbon header">${settings.group.headerName}${settings.group.headerNav}${settings.group.headerActions}
   <template slot="right-panels" v-if="areRightPanels">
     ${settings.group.rightPanels}
   </template>

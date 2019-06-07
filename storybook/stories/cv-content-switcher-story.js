@@ -100,15 +100,9 @@ for (const story of storySet) {
 
       const templateString = `
   <cv-content-switcher${settings.group.attr}>
-    <cv-content-switcher-button owner-id="csb-1" :selected="isSelected(0)" ${
-      settings.group.icon
-    }>Button Name 1</cv-content-switcher-button>
-    <cv-content-switcher-button owner-id="csb-2" :selected="isSelected(1)" ${
-      settings.group.icon
-    }>Button Name 2</cv-content-switcher-button>
-    <cv-content-switcher-button owner-id="csb-3" :selected="isSelected(2)" v-if="toggle3" ${settings.group.attr3t} ${
-        settings.group.icon
-      }>Button Name 3</cv-content-switcher-button>
+    <cv-content-switcher-button owner-id="csb-1" :selected="isSelected(0)" ${settings.group.icon}>Button Name 1</cv-content-switcher-button>
+    <cv-content-switcher-button owner-id="csb-2" :selected="isSelected(1)" ${settings.group.icon}>Button Name 2</cv-content-switcher-button>
+    <cv-content-switcher-button owner-id="csb-3" :selected="isSelected(2)" v-if="toggle3" ${settings.group.attr3t} ${settings.group.icon}>Button Name 3</cv-content-switcher-button>
   </cv-content-switcher>
 
   <section style="margin: 10px 0;">
@@ -179,15 +173,9 @@ for (const story of storySet) {
 
       const templateString = `
   <cv-content-switcher${settings.group.attr}>
-    <cv-content-switcher-button content-selector=".content-1" :selected="isSelected(0)" ${
-      settings.group.icon
-    }>Button Name 1</cv-content-switcher-button>
-    <cv-content-switcher-button content-selector=".content-2" :selected="isSelected(1)" ${
-      settings.group.icon
-    }>Button Name 2</cv-content-switcher-button>
-    <cv-content-switcher-button content-selector=".content-3" :selected="isSelected(2)" v-if="toggle3" ${
-      settings.group.icon
-    }>Button Name 3</cv-content-switcher-button>
+    <cv-content-switcher-button content-selector=".content-1" :selected="isSelected(0)" ${settings.group.icon}>Button Name 1</cv-content-switcher-button>
+    <cv-content-switcher-button content-selector=".content-2" :selected="isSelected(1)" ${settings.group.icon}>Button Name 2</cv-content-switcher-button>
+    <cv-content-switcher-button content-selector=".content-3" :selected="isSelected(2)" v-if="toggle3" ${settings.group.icon}>Button Name 3</cv-content-switcher-button>
   </cv-content-switcher>
 
   <section style="margin: 10px 0;">
