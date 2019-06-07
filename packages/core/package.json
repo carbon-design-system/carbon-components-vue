@@ -62,9 +62,9 @@
   },
   "sideEffects": true,
   "dependencies": {
-    "@carbon/icons-vue": "10.3.0-rc.2",
-    "carbon-components": "10.3.0-rc.2",
-    "flatpickr": "4.5.7",
+    "@carbon/icons-vue": "10.3.0",
+    "carbon-components": "10.3.0",
+    "flatpickr": "4.6.1",
     "vue": "^2.6.10"
   },
   "devDependencies": {
