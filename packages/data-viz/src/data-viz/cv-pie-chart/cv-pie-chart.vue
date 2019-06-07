@@ -132,9 +132,7 @@ export default {
   },
   mounted() {
     console.warn(
-      `${
-        this.$vnode.componentOptions.Ctor.extendOptions.name
-      } - Under review. This component isn't quite ready. Hopefully no features will get broken but this cannot be guarenteed.`
+      `${this.$vnode.componentOptions.Ctor.extendOptions.name} - Under review. This component isn't quite ready. Hopefully no features will get broken but this cannot be guarenteed.`
     );
 
     this.g = d3.select('g').attr('transform', `translate(${this.width / 2}, ${this.height / 2})`);
