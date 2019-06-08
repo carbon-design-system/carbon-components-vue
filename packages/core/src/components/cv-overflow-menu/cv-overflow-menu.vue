@@ -8,7 +8,7 @@
     @keydown.enter.prevent="doToggle"
     @keydown.tab="onOverflowMenuTab"
     :aria-label="label"
-    aria-role="button"
+    role="button"
     class="cv-overflow-menu bx--overflow-menu"
     :class="{ 'bx--overflow-menu--open': open }"
   >
