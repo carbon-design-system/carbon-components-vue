@@ -1,3 +1,31 @@
+## 2.5.0 (June 4, 2019)
+
+### Features
+
+- Add UI Shell
+  - Added Header
+  - Added right panels with global actions
+  - Added left nav
+
+### Fixes
+
+- Aria label on overflow menu and toast nofification
+
+### Chores
+
+- Removed data-viz
+
+### Dependency versions
+
+Versions reflect those version was built using.
+
+| Dependency        | Version | Notes |
+| ----------------- | ------- | ----- |
+| @carbon/icons-vue | 10.3.0  |       |
+| carbon-components | 10.3.0  |       |
+| flatpickr         | 4.6.1   |       |
+| vue               | 2.6.10  |       |
+
 ## 2.4.0 (June 4, 2019)
 
 - Add disabled tag
