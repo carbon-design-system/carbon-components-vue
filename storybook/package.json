@@ -34,5 +34,10 @@
     "vue-highlightjs": "^1.3.3",
     "vue-loader": "^15.7.0",
     "vue-template-compiler": "^2.6.10"
-  }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "ie >= 10"
+  ]
 }
