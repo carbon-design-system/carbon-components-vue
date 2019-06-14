@@ -1,22 +1,19 @@
 <template>
-  <component
-    :is="tagType"
-    class="cv-switcher-item-link bx--switcher__item-link"
+  <cv-link-inner
     v-on="$listeners"
-    v-bind="$attrs"
+    class="cv-switcher-item-link bx--switcher__item-link"
     :class="{ 'bx--switcher__item-link--selected': selected }"
   >
     <slot />
-  </component>
+  </cv-link-inner>
 </template>
 
 <script>
-import linkMixin from '../../mixins/link-mixin';
+import CvLinkInner from '../cv-link/_cv-link-inner';
 
 export default {
   name: 'CvSwitcherItemLink',
-  inheritAttrs: false,
-  mixins: [linkMixin],
+  components: { CvLinkInner },
   props: {
     selected: Boolean,
   },

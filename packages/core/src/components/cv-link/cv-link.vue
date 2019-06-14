@@ -1,15 +1,14 @@
 <template>
-  <component :is="tagType" class="cv-link bx--link" v-on="$listeners" v-bind="$attrs">
+  <cv-link-inner class="cv-link bx--link" v-on="$listeners">
     <slot></slot>
-  </component>
+  </cv-link-inner>
 </template>
 
 <script>
-import linkMixin from '../../mixins/link-mixin';
+import CvLinkInner from './_cv-link-inner';
 
 export default {
   name: 'CvLink',
-  inheritAttrs: false,
-  mixins: [linkMixin],
+  components: { CvLinkInner },
 };
 </script>
