@@ -2,7 +2,7 @@
   <div
     class="cv-header-panel bx--header-panel"
     :class="{ 'bx--header-panel--expanded': internalExpanded }"
-    :hidden="!internalExpanded"
+    :aria-hidden="!internalExpanded"
     @focusout="onFocusout"
     @mousedown="onMouseDown"
   >

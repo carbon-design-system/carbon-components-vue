@@ -62,9 +62,9 @@ const parsePreKnobs = (preKnobs, includes, excludes, variantExtra) => {
             break;
           case 'slot':
             if (preKnob.slot.name && preKnob.slot.name.length) {
-              knobs.group[preKnob.group] += `${prefix}<template slot="${preKnob.slot.name}">${
-                preKnob.slot.value
-              }</template>`;
+              knobs.group[
+                preKnob.group
+              ] += `${prefix}<template slot="${preKnob.slot.name}">${preKnob.slot.value}</template>`;
             } else {
               knobs.group[preKnob.group] += `${prefix}${preKnob.slot.value}`;
             }
