@@ -4,7 +4,7 @@
     class="cv-notifiation bx--toast-notification"
     :class="`bx--toast-notification--${kind}`"
     v-on="$listeners"
-    :aria-role="isAlert ? 'alert' : false"
+    :role="isAlert ? 'alert' : undefined"
     :aria-live="!isAlert ? 'polite' : false"
   >
     <component :is="icon" class="bx--toast-notification__icon" />
@@ -13,7 +13,13 @@
       <p class="bx--toast-notification__subtitle">{{ subTitle }}</p>
       <p class="bx--toast-notification__caption">{{ caption }}</p>
     </div>
-    <button type="button" data-notification-btn class="bx--toast-notification__close-button" @click="$emit('close')">
+    <button
+      aria-label="Close"
+      type="button"
+      data-notification-btn
+      class="bx--toast-notification__close-button"
+      @click="$emit('close')"
+    >
       <Close16 class="bx--toast-notification__close-icon" />
     </button>
   </div>

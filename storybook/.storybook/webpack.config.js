@@ -1,5 +1,5 @@
 const path = require('path');
-const autoprefixer = require('autoprefixer')({ browsers: ['last 2 versions'] });
+const autoprefixer = require('autoprefixer')({ overrideBrowserslist: ['last 2 versions', 'ie >= 10'] });
 
 module.exports = async ({ config, mode }) => {
   // `mode` has a value of 'DEVELOPMENT' or 'PRODUCTION'

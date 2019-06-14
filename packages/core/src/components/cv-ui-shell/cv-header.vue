@@ -4,6 +4,7 @@
     <div v-if="$slots['header-global']" class="bx--header__global">
       <slot name="header-global" />
     </div>
+    <slot name="left-panels" />
     <slot name="right-panels" />
   </header>
 </template>
@@ -23,9 +24,7 @@ export default {
   },
   mounted() {
     console.warn(
-      `${
-        this.$vnode.componentOptions.Ctor.extendOptions.name
-      } - Under review. This component isn't quite ready. Hopefully no features will get broken but this cannot be guarenteed.`
+      `${this.$vnode.componentOptions.Ctor.extendOptions.name} - Under review. This component isn't quite ready. Hopefully no features will get broken but this cannot be guarenteed.`
     );
   },
   data() {
@@ -33,6 +32,11 @@ export default {
       panelControllers: [],
       panels: [],
     };
+  },
+  computed: {
+    isCvHeader() {
+      return true;
+    },
   },
   methods: {
     onCvPanelControlMounted(srcComponent) {

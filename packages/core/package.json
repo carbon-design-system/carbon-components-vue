@@ -1,7 +1,7 @@
 {
   "name": "@carbon/vue",
   "description": "A collection of components for the Carbon Design System built using Vue.js",
-  "version": "2.5.0-rc.0",
+  "version": "2.5.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -62,9 +62,9 @@
   },
   "sideEffects": true,
   "dependencies": {
-    "@carbon/icons-vue": "10.3.0-rc.2",
-    "carbon-components": "10.3.0-rc.2",
-    "flatpickr": "4.5.7",
+    "@carbon/icons-vue": "10.3.0",
+    "carbon-components": "10.3.0",
+    "flatpickr": "4.6.1",
     "vue": "^2.6.10"
   },
   "devDependencies": {

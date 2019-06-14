@@ -22,11 +22,11 @@
       />
       <slot name="component"></slot>
     </section>
-    <section class="sv-template-view__other">
+    <section class="sv-template-view__other" :style="otherStyle">
       <h2 class="sv-template-view__label">Sample interaction</h2>
       <slot name="other"></slot>
     </section>
-    <section class="sv-template-view__code">
+    <section class="sv-template-view__code" :style="otherStyle">
       <h2 class="sv-template-view__label">Sample code</h2>
       <pre v-highlightjs="svSource">
         <code class="html"></code>
@@ -62,6 +62,7 @@ export default {
     svSource: String,
     svAltBack: { type: Boolean, default: true },
     svPosition: String, // flex position
+    svExtraMargin: { type: String, default: '20px' },
     svPadding: String,
     underConstruction: { type: [Boolean, String], default: false },
   },
@@ -71,10 +72,16 @@ export default {
     };
   },
   computed: {
+    otherStyle() {
+      return {
+        marginLeft: this.svExtraMargin,
+      };
+    },
     style() {
       return {
         padding: this.svPadding,
         alignItems: this.svPosition && this.svPosition.length ? this.svPosition : 'flex-start',
+        marginLeft: this.svExtraMargin,
       };
     },
   },
