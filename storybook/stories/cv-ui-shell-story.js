@@ -6,7 +6,7 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvHeaderNotesMD from '@carbon/vue/src/components/cv-ui-shell/cv-header-notes.md';
+import CvHeaderNotesMD from '@carbon/vue/src/components/cv-ui-shell/cv-ui-shell-notes.md';
 
 import CvHeader from '@carbon/vue/src/components/cv-ui-shell/cv-header';
 import CvHeaderPanel from '@carbon/vue/src/components/cv-ui-shell/cv-header-panel';
@@ -19,6 +19,7 @@ import CvHeaderMenuButton from '@carbon/vue/src/components/cv-ui-shell/cv-header
 import CvSideNav from '@carbon/vue/src/components/cv-ui-shell/cv-side-nav';
 import CvSideNavLink from '@carbon/vue/src/components/cv-ui-shell/cv-side-nav-link';
 import CvSideNavMenu from '@carbon/vue/src/components/cv-ui-shell/cv-side-nav-menu';
+
 import CvSideNavItems from '@carbon/vue/src/components/cv-ui-shell/cv-side-nav-items';
 import CvSideNavMenuItem from '@carbon/vue/src/components/cv-ui-shell/cv-side-nav-menu-item';
 import CvSkipToContent from '@carbon/vue/src/components/cv-ui-shell/cv-skip-to-content';
@@ -301,10 +302,48 @@ const preKnobs = {
       </cv-side-nav-items>
     </cv-side-nav>`,
   },
+  sideNavWithIcons2: {
+    group: 'leftPanels2',
+    value: `<cv-side-nav id="side-nav">
+      <cv-side-nav-items>
+        <cv-side-nav-menu title="L1 menu">
+          <template slot="nav-icon"><Fade16 /></template>
+          <cv-side-nav-menu-item href="javascript:void(0)" active>
+            L2 menu item
+          </cv-side-nav-menu-item>
+          <cv-side-nav-menu-item href="javascript:void(0)">
+            L2 menu item
+          </cv-side-nav-menu-item>
+          <cv-side-nav-menu-item href="javascript:void(0)">
+            L2 menu item
+          </cv-side-nav-menu-item>
+        </cv-side-nav-menu>
+        <cv-side-nav-menu title="L1 menu">
+          <template slot="nav-icon"><Fade16 /></template>
+          <cv-side-nav-menu-item href="javascript:void(0)">
+            L2 menu item
+          </cv-side-nav-menu-item>
+          <cv-side-nav-menu-item href="javascript:void(0)" aria-current="page">
+            L2 menu item
+          </cv-side-nav-menu-item>
+          <cv-side-nav-menu-item href="javascript:void(0)">
+            L2 menu item
+          </cv-side-nav-menu-item>
+        </cv-side-nav-menu>
+        <cv-side-nav-link href="javascript:void(0)">
+          <template slot="nav-icon"><Fade16 /></template>
+          L1 link
+        </cv-side-nav-link>
+        <cv-side-nav-link href="javascript:void(0)">
+          <template slot="nav-icon"><Fade16 /></template>
+          L1 link
+        </cv-side-nav-link>
+      </cv-side-nav-items>
+    </cv-side-nav>`,
+  },
 };
 
 const variants = [
-  { name: 'default' },
   { name: 'Header Base', includes: ['headerName'] },
   { name: 'Header Base with Navigation', includes: ['headerName', 'headerNav'] },
   { name: 'Header Base with Actions', includes: ['headerName', 'headerActions'] },
@@ -330,6 +369,10 @@ const variants = [
   {
     name: 'Header Base with Side Nav and icons',
     includes: ['headerName', 'headerMenuButton', 'sideNavWithIcons'],
+  },
+  {
+    name: 'Header Base with seperate Side Nav and icons',
+    includes: ['headerName', 'headerMenuButton', 'sideNavWithIcons2'],
   },
 ];
 
