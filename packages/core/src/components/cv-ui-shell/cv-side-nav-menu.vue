@@ -27,7 +27,7 @@
         <ChevronDown20 />
       </cv-side-nav-icon>
     </button>
-    <ul class="bx--side-nav__menu" role="menu" @focusout="onFocusout">
+    <ul class="bx--side-nav__menu" role="menu" ref="menu" @focusout="onFocusout">
       <slot></slot>
     </ul>
   </li>
@@ -48,9 +48,6 @@ export default {
     return {
       expanded: false,
     };
-  },
-  mounted() {
-    console.dir(this.$slots);
   },
   computed: {
     hasIcon() {
