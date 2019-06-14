@@ -1,6 +1,6 @@
 <template>
   <cv-link-inner v-on="$listeners" class="cv-header-name bx--header__name">
-    <span v-if="prefix" class="bx--header__name--prefix">{{ prefix }}</span>
+    <span v-if="prefix" class="bx--header__name--prefix">{{ prefix }}&nbsp;</span>
     <slot />
   </cv-link-inner>
 </template>
