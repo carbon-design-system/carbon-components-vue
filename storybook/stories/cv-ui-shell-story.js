@@ -302,6 +302,41 @@ const preKnobs = {
       </cv-side-nav-items>
     </cv-side-nav>`,
   },
+  sideNav2: {
+    group: 'leftPanels2',
+    value: `<cv-side-nav id="side-nav">
+      <cv-side-nav-items>
+        <cv-side-nav-menu title="L1 menu">
+          <cv-side-nav-menu-item href="javascript:void(0)" active>
+            L2 menu item
+          </cv-side-nav-menu-item>
+          <cv-side-nav-menu-item href="javascript:void(0)">
+            L2 menu item
+          </cv-side-nav-menu-item>
+          <cv-side-nav-menu-item href="javascript:void(0)">
+            L2 menu item
+          </cv-side-nav-menu-item>
+        </cv-side-nav-menu>
+        <cv-side-nav-menu title="L1 menu">
+          <cv-side-nav-menu-item href="javascript:void(0)">
+            L2 menu item
+          </cv-side-nav-menu-item>
+          <cv-side-nav-menu-item href="javascript:void(0)" aria-current="page">
+            L2 menu item
+          </cv-side-nav-menu-item>
+          <cv-side-nav-menu-item href="javascript:void(0)">
+            L2 menu item
+          </cv-side-nav-menu-item>
+        </cv-side-nav-menu>
+        <cv-side-nav-link href="javascript:void(0)">
+          L1 link
+        </cv-side-nav-link>
+        <cv-side-nav-link href="javascript:void(0)">
+          L1 link
+        </cv-side-nav-link>
+      </cv-side-nav-items>
+    </cv-side-nav>`,
+  },
   sideNavWithIcons2: {
     group: 'leftPanels2',
     value: `<cv-side-nav id="side-nav">
@@ -371,8 +406,12 @@ const variants = [
     includes: ['headerName', 'headerMenuButton', 'sideNavWithIcons'],
   },
   {
+    name: 'Header Base with seperate Side Nav',
+    includes: ['headerName', 'sideNav2'],
+  },
+  {
     name: 'Header Base with seperate Side Nav and icons',
-    includes: ['headerName', 'headerMenuButton', 'sideNavWithIcons2'],
+    includes: ['headerName', 'sideNavWithIcons2'],
   },
 ];
 
