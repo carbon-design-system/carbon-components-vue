@@ -50,7 +50,8 @@ export default {
       this.$parent.$emit('cv:panel-focusout', this, ev);
     },
     onMouseDown(ev) {
-      if (this.$el.contains(ev.target)) {
+      if (this.$el === ev.target) {
+        // ignore mousedown on panel can cause focus event
         ev.preventDefault();
       }
     },
