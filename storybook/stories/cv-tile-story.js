@@ -7,6 +7,7 @@ import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvTileNotesMD from '@carbon/vue/src/components/cv-tile/cv-tile-notes.md';
 import CvTile from '@carbon/vue/src/components/cv-tile/cv-tile';
+import { action } from '@storybook/addon-actions';
 
 const storiesDefault = storiesOf('Components/CvTile', module);
 const storiesExperimental = storiesOf('Experimental/CvTile', module);
@@ -86,7 +87,7 @@ const variants = [
   {
     name: 'clickable',
     includes: ['slotDefault', 'href'],
-    extra: { kind: { group: 'attr', value: 'kind="clickable"' } },
+    extra: { kind: { group: 'attr', value: 'kind="clickable" @click="actionClick"' } },
   },
 ];
 
@@ -123,6 +124,9 @@ for (const story of storySet) {
         components: { CvTile, SvTemplateView },
         template: templateViewString,
         props: settings.props,
+        methods: {
+          actionClick: action('click'),
+        },
       };
     },
     {

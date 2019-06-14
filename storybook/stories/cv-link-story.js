@@ -7,6 +7,7 @@ import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvLinkNotesMD from '@carbon/vue/src/components/cv-link/cv-link-notes.md';
 import CvLink from '@carbon/vue/src/components/cv-link/cv-link';
+import { action } from '@storybook/addon-actions';
 
 const storiesDefault = storiesOf('Components/CvLink', module);
 const storiesExperimental = storiesOf('Experimental/CvLink', module);
@@ -15,7 +16,7 @@ const preKnobs = {
   href: {
     group: 'attr',
     type: text,
-    config: ['href', '#'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    config: ['href', 'javascript:void(0)'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
       name: 'href',
       type: String,
@@ -24,11 +25,15 @@ const preKnobs = {
   to: {
     group: 'attr',
     type: text,
-    config: ['to', '#'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    config: ['to', 'javascript:void(0)'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
       name: 'to',
       type: String,
     },
+  },
+  events: {
+    group: 'attr',
+    value: `@click="actionClick"`,
   },
   disabled: {
     group: 'attr',
@@ -37,9 +42,9 @@ const preKnobs = {
 };
 
 const variants = [
-  { name: 'a', includes: ['href'] },
-  { name: 'a disabled', includes: ['disabled'] },
-  { name: 'router-link', includes: ['to'] },
+  { name: 'a', includes: ['href', 'events'] },
+  { name: 'a disabled', includes: ['disabled', 'events'] },
+  { name: 'router-link', includes: ['to', 'events'] },
 ];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
@@ -73,6 +78,9 @@ for (const story of storySet) {
 
         template: templateViewString,
         props: settings.props,
+        methods: {
+          actionClick: action('Click event'),
+        },
       };
     },
     {
