@@ -10,4 +10,12 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.cv-side-nav-items {
+  pointer-events: none;
+
+  * {
+    pointer-events: initial;
+  }
+}
+</style>
