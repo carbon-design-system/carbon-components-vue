@@ -11,7 +11,12 @@
     @mousedown="onMouseDown"
   >
     <slot></slot>
-    <cv-side-nav-footer v-if="!fixed" :expanded="internalExpanded" :assistiveText="assistiveToggleText" />
+    <cv-side-nav-footer
+      v-if="!fixed"
+      :expanded="internalExpanded"
+      :assistiveText="assistiveToggleText"
+      @toggle-expand="toggleExpand"
+    />
   </nav>
 </template>
 
@@ -66,6 +71,9 @@ export default {
       if (this.$el.contains(ev.target)) {
         ev.preventDefault();
       }
+    },
+    toggleExpand() {
+      this.dataExpanded = !this.dataExpanded;
     },
   },
 };

@@ -1,6 +1,12 @@
 <template>
   <footer class="cv-side-nav-footer bx--side-nav__footer">
-    <button class="bx--side-nav__toggle" type="button" v-bind="$attrs" v-on="$listeners" :title="assistiveText">
+    <button
+      class="bx--side-nav__toggle"
+      type="button"
+      v-bind="$attrs"
+      @click="$emit('toggle-expand')"
+      :title="assistiveText"
+    >
       <div class="bx--side-nav__icon">
         <Close20 v-if="expanded" class="bx--side-nav__icon--collapse bx--side-nave-collapse-icon" />
         <ChevronRight20 v-if="!expanded" class="bx--side-nav__icon--expand bx--side-nave-expand-icon" />
