@@ -63,12 +63,12 @@
   "sideEffects": true,
   "dependencies": {
     "@carbon/icons-vue": "10.3.0",
-    "carbon-components": "10.3.0",
+    "carbon-components": "10.3.1",
     "flatpickr": "4.6.1",
     "vue": "^2.6.10"
   },
   "devDependencies": {
-    "@vue/cli-service": "^3.8.0",
+    "@vue/cli-service": "^3.8.4",
     "vue-template-compiler": "^2.6.10"
   }
 }
