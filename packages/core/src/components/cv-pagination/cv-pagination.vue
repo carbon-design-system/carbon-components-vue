@@ -192,7 +192,7 @@ export default {
       }
     },
     internalValue() {
-      return { start: this.firstItem, length: parseInt(this.pageSizeValue) };
+      return { start: this.firstItem, page: this.pageValue, length: parseInt(this.pageSizeValue) };
     },
   },
   methods: {
