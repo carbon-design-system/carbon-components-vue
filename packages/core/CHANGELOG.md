@@ -1,3 +1,19 @@
+## 2.6.0 (June 19, 2019)
+
+### Features
+
+- Wire up hide/show to footer link in ui shell side nav
+- Add Space in header between name and prefix
+
+### Fixes
+
+- Focus on side nav and header panel links
+
+### Chores
+
+- Added UI shell notes
+- Make link logic (anchor or router-link) common
+
 ## 2.5.0 (June 4, 2019)
 
 ### Features
