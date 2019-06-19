@@ -19,7 +19,7 @@
 - Where an id is required use `uidMixin` which will generate an ID if none is supplied.
 - Log all raised events as actions in the story.
 
-## Add a complete compoennt
+## Add a complete component
 
 Components consist of a folder with the following
 
