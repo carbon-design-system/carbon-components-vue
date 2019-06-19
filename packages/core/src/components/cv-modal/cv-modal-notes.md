@@ -35,14 +35,27 @@ http://www.carbondesignsystem.com/components/modal/code
 </cv-modal>
 ```
 
+### Initial focus
+
+When the modal dialog is shown focus is set to the first interactive element found in the following list:
+
+1. To the first element with a 'data-modal-primary-focus' attribute.
+2. To the primary button if shown
+3. To the secondary button if shown
+4. To the close button
+
+This is done after the modal transitions into its visible state, which is triggered by either changing the visible property to true or mounting with the visible property set to true.
+
 ## Attributes
+
+- kind: 'danger' other wise default modal.
+- visible: visibility of modal dialog
 
 ## slots
 
 - label: optional
 - title:
 - content:
-- kind: 'danger' other wise default modal.
 - primary-button: optional, no primary button if not specified
 - secondary-button: optional, no secondary button if not specified
 
