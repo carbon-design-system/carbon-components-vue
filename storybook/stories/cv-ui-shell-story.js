@@ -59,7 +59,7 @@ const preKnobs = {
     Skip to content
   </cv-skip-to-content>
   <cv-header-name href="javascript:void(0)" prefix="IBM">
-    ${'&nbsp;'}[Platform]
+    [Platform]
   </cv-header-name>`,
   },
   headerNav: {
