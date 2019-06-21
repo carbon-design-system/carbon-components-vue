@@ -1,3 +1,14 @@
+## 2.6.1 (June 21, 2019)
+
+### Fixes
+
+- Add page to pagination change event
+- Fix text input password layout.
+
+### Chores
+
+- Update dependencies
+
 ## 2.6.0 (June 19, 2019)
 
 ### Features
