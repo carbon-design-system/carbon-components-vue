@@ -13,7 +13,6 @@
       @keydown.space.prevent
       @keyup.space.prevent="doToggle"
       @keydown.enter.prevent="doToggle"
-      @focusout="onFocusout"
     >
       <cv-side-nav-icon v-if="hasIcon">
         <slot name="nav-icon" />
@@ -24,10 +23,10 @@
         small
         :aria-label="expanded ? 'collapse nav menu' : 'expand nav menu'"
       >
-        <ChevronDown20 />
+        <ChevronDown20 class="cv-side-nav-menu__chevron-svg" />
       </cv-side-nav-icon>
     </button>
-    <ul class="bx--side-nav__menu" role="menu" ref="menu" @focusout="onFocusout">
+    <ul class="bx--side-nav__menu" role="menu" ref="menu">
       <slot></slot>
     </ul>
   </li>
@@ -58,13 +57,13 @@ export default {
     doToggle() {
       this.expanded = !this.expanded;
     },
-    onFocusout(ev) {
-      if (!(this.$el.contains(ev.relatedTarget) || this.$refs.menu.contains(ev.relatedTarget))) {
-        this.expanded = false;
-      }
-    },
   },
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.cv-side-nav-menu .cv-side-nav-menu__chevron-svg {
+  // prevent safari issue
+  will-change: initial !important;
+}
+</style>
