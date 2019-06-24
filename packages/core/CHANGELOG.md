@@ -1,3 +1,12 @@
+## 2.6.2 (June 24, 2019)
+
+### Fixes
+
+- Removed side nav sub menu close on focusout
+- Removed spurious \ in header menu button
+- Fixed active menu button status
+- Temp CSS fix for Safari not moving following side nav chevrons on expand.
+
 ## 2.6.1 (June 21, 2019)
 
 ### Fixes
