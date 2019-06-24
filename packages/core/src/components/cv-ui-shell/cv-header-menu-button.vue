@@ -10,8 +10,8 @@
     @click="gaToggle"
     @focusout="gaFocusout"
   >
-    <Close20 v-if="active" />
-    <Menu20 v-if="!active" />
+    <Close20 v-if="dataActive" />\
+    <Menu20 v-if="!dataActive" />
   </button>
 </template>
 
@@ -43,7 +43,7 @@ export default {
     // watch width transition and
   },
   watch: {
-    expanded() {
+    active() {
       if (this.active !== this.dataActive) {
         this.gaToggle();
       }
