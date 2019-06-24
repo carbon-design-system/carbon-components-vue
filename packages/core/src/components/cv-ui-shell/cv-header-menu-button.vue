@@ -10,7 +10,7 @@
     @click="gaToggle"
     @focusout="gaFocusout"
   >
-    <Close20 v-if="dataActive" />\
+    <Close20 v-if="dataActive" />
     <Menu20 v-if="!dataActive" />
   </button>
 </template>
