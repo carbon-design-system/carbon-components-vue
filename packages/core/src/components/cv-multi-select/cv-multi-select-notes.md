@@ -80,3 +80,7 @@ Other standard props e.g. disabled and placeholder
 
 - helper-text: optional and overrides the helper-text attribute
 - invalid-message: optional and overrides the invalid-message attribute
+
+## Keyboard interaction
+
+Use cursor keys to move up and down list and space to check/uncheck an option.
