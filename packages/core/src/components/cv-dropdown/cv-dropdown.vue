@@ -18,9 +18,7 @@
 <template>
   <div :class="{ 'bx--form-item': formItem }">
     <div class="bx--dropdown__wrapper" :class="{ 'bx--dropdown__wrapper--inline': inline, 'cv-dropdown': !formItem }">
-      <label v-if="label" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">
-        {{ label }}
-      </label>
+      <label v-if="label" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">{{ label }}</label>
 
       <div
         v-if="!inline && isHelper"
@@ -80,7 +78,6 @@
 </template>
 
 <script>
-import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16';
@@ -88,7 +85,7 @@ import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16';
 export default {
   name: 'CvDropdownInner',
   inheritAttrs: false,
-  mixins: [uidMixin, themeMixin],
+  mixins: [themeMixin],
   components: { WarningFilled16, ChevronDown16 },
   props: {
     formItem: { type: Boolean, default: true },
