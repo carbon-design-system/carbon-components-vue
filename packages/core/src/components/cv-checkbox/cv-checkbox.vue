@@ -1,5 +1,5 @@
 <template>
-  <div class="cv-checkbox bx--form-item bx--checkbox-wrapper">
+  <div class="cv-checkbox bx--checkbox-wrapper" :class="{ 'bx--form-item': formItem }">
     <label
       :class="[
         'bx--checkbox-label',
@@ -38,6 +38,7 @@ export default {
   props: {
     label: String,
     mixed: Boolean,
+    formItem: { type: Boolean, default: true },
   },
   watch: {
     mixed() {

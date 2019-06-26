@@ -14,9 +14,9 @@
     <Close16
       v-if="isFilter"
       aria-label="Clear filter"
-      @click="$emit('remove')"
+      @click.stop.prevent="$emit('remove')"
       tabindex="0"
-      @keydown.enter.prevent="$emit('remove')"
+      @keydown.enter.stop.prevent="$emit('remove')"
       @keydown.space.prevent
       @keyup.space.prevent="$emit('remove')"
     />
