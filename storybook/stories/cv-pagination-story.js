@@ -69,7 +69,7 @@ const preKnobs = {
 };
 
 const variants = [
-  { name: 'default', excludes: ['events', 'slotsRange'] },
+  { name: 'default', excludes: ['events', 'slots'] },
   { name: 'slottedFields', excludes: ['events'] },
   { name: 'minimal', includes: [] },
   { name: 'events', includes: ['events'] },
