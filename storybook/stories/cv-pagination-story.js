@@ -60,10 +60,17 @@ const preKnobs = {
     group: 'attr',
     value: `@change="onChange"`,
   },
+  slots: {
+    group: 'slots',
+    value: `<template v-slot:range-text="{scope}">From {{scope.start}} to {{scope.end}} out of {{scope.items}}</template>
+  <template v-slot:of-n-pages="{scope}">out of {{scope.pages}} pages</template>
+  `,
+  },
 };
 
 const variants = [
-  { name: 'default', excludes: ['events'] },
+  { name: 'default', excludes: ['events', 'slotsRange'] },
+  { name: 'slottedFields', excludes: ['events'] },
   { name: 'minimal', includes: [] },
   { name: 'events', includes: ['events'] },
 ];
@@ -79,7 +86,7 @@ for (const story of storySet) {
       // ----------------------------------------------------------------
 
       const templateString = `
-<cv-pagination${settings.group.attr}></cv-pagination>
+<cv-pagination${settings.group.attr}>${settings.group.slots}</cv-pagination>
   `;
 
       // ----------------------------------------------------------------
