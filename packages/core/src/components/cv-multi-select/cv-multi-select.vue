@@ -7,9 +7,9 @@
     }"
     @focusout="onFocusOut"
   >
-    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">{{
-      title
-    }}</label>
+    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">
+      {{ title }}
+    </label>
 
     <div
       v-if="!inline && isHelper"
@@ -84,6 +84,7 @@
               v-model="dataValue"
               :value="item.value"
               :name="item.name"
+              :data-test="item.name"
               :label="item.label"
               style="pointer-events: none;"
             />
@@ -104,6 +105,11 @@ import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16';
 import uidMixin from '../../mixins/uid-mixin';
 import CvCheckbox from '../cv-checkbox/cv-checkbox';
 import CvTag from '../cv-tag/cv-tag';
+
+const TOP_AFTER_REOPEN = 0;
+const TOP = 1;
+const FIXED = 2;
+const selectionFeedbackOptions = ['top-after-reopen', 'top', 'fixed'];
 
 export default {
   name: 'CvMultiSelect',
@@ -136,11 +142,22 @@ export default {
         return result;
       },
     },
+    selectionFeedback: {
+      type: String,
+      default: selectionFeedbackOptions[TOP_AFTER_REOPEN],
+      validator(val) {
+        if (!selectionFeedbackOptions.includes(val)) {
+          console.warn(`CvMultiSelect: invalid value "${val}", use one of ${selectionFeedbackOptions}`);
+          return false;
+        }
+        return true;
+      },
+    },
   },
   data() {
     return {
       open: false,
-      dataOptions: this.options,
+      dataOptions: null,
       dataValue: this.value,
       highlighted: '',
     };
@@ -151,15 +168,17 @@ export default {
   },
   watch: {
     value() {
-      console.log('hi');
       this.dataValue = this.value;
     },
     options() {
-      this.dataOptions = this.options;
-      if (this.open) {
-        this.sortOptions();
-      }
+      this.sortOptions();
     },
+    selectionFeedback() {
+      this.sortOptions();
+    },
+  },
+  created() {
+    this.sortOptions();
   },
   computed: {
     isInvalid() {
@@ -197,9 +216,25 @@ export default {
         this.$refs.option[newHiglight].scrollIntoView();
       }
     },
+    sortOptions() {
+      this.dataOptions = this.options.slice(0);
+
+      if (!this.sorting && this.selectionFeedback !== selectionFeedbackOptions[FIXED]) {
+        // if included in data value move to top
+        this.dataOptions.sort(
+          (a, b) => (this.dataValue.includes(a.value) ? -1 : 1) - (this.dataValue.includes(b.value) ? -1 : 1)
+        );
+      }
+    },
+    doOpen(newVal) {
+      if (newVal && this.selectionFeedback === selectionFeedbackOptions[TOP_AFTER_REOPEN]) {
+        this.sortOptions();
+      }
+      this.open = newVal;
+    },
     onDown() {
       if (!this.open) {
-        this.open = true;
+        this.doOpen(true);
       } else {
         this.doMove(false);
       }
@@ -210,14 +245,14 @@ export default {
       }
     },
     onEsc() {
-      this.open = false;
+      this.doOpen(false);
       this.$el.focus();
     },
     onSpace() {
       this.onItemClick(this.highlighted);
     },
     onClick(ev) {
-      this.open = !this.open;
+      this.doOpen(!this.open);
       if (!this.open) {
         this.$refs.button.focus();
       }
@@ -229,8 +264,7 @@ export default {
     },
     onFocusOut(ev) {
       if (!this.$el.contains(ev.relatedTarget) && !this.$refs.tag.$el.contains(ev.target)) {
-        console.dir(ev);
-        this.open = false;
+        this.doOpen(false);
       }
     },
     onMousemove(val) {
@@ -242,6 +276,9 @@ export default {
         this.dataValue.splice(index, 1);
       } else {
         this.dataValue.push(val);
+      }
+      if (this.selectionFeedback === selectionFeedbackOptions[TOP]) {
+        this.sortOptions();
       }
       this.$refs.button.focus();
       this.$emit('change', this.dataValue);
