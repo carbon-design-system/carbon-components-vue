@@ -294,11 +294,29 @@ const preKnobs = {
       value: 'Some slotted helpful text',
     },
   },
+  scopedSlots: {
+    group: 'slots',
+    value: `<template v-slot:items-selected="{scope}">You picked {{scope.count}} rows.</template>
+  `,
+  },
 };
 
 const variants = [
   {
     name: 'default',
+    excludes: [
+      'columns2',
+      'slottedData',
+      'htmlData',
+      'helperTextSlot',
+      'basicPagination',
+      'hasExpandingRows',
+      'expandingSlottedData',
+      'scopedSlots',
+    ],
+  },
+  {
+    name: 'scoped slots',
     excludes: [
       'columns2',
       'slottedData',

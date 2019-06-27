@@ -23,8 +23,11 @@
           </div>
           <div class="bx--batch-summary">
             <p class="bx--batch-summary__para">
-              <span data-items-selected>{{ dataRowsSelected.length }}</span>
-              items selected
+              <span data-items-selected>
+                <slot name="items-selected" v-bind:scope="{ count: dataRowsSelected.length }"
+                  >{{ dataRowsSelected.length }} items selected</slot
+                >
+              </span>
             </p>
           </div>
         </div>
