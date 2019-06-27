@@ -36,3 +36,8 @@ Minimal
 ## Events
 
 Change - Contains value - { start, length }
+
+## Scoped slots
+
+- range-text(scope.start, scope.end, scope.items): by default shows `${scope.start}-${scope.end} of ${scope.items}` or `${scope.start}-${scrop.end}` if items are infinite.
+- of-n-pages(scope.pages, scope.items): by default shows `of ${scope.pages} pages` if items not infinite.
