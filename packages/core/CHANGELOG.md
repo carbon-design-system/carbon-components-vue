@@ -1,3 +1,10 @@
+## 2.7.0 (June 27, 2019)
+
+### Feat
+
+- Add multi select dropdown (without filter)
+- Added scoped slots to pagination for constructed strings.
+
 ## 2.6.2 (June 24, 2019)
 
 ### Fixes
