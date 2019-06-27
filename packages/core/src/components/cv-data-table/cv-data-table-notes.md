@@ -81,6 +81,10 @@ Like sorting and filtering it is the users responsibility to deal with edited da
   - 'compact', 'small', '', 'tall'
 - zebra: (optional) default: false ; boolean is the table striped
 
+## Scoped slots
+
+- rows-selected(scope.count): by default shows `${scope.count} items selected`
+
 **Overflow menu** To provide customized overflow menus e.g. state dependant, specify explicitly using the slotted data/HTML table form. The CvDataTable will not raise an event.
 
 ## Slots
