@@ -18,7 +18,9 @@
       </cv-select>
 
       <span class="bx--pagination__text">
-        <span data-displayed-item-range>{{ rangeText }}</span>
+        <span data-displayed-item-range>
+          <slot name="range-text" v-bind:scope="rangeProps">{{ rangeText }}</slot>
+        </span>
       </span>
     </div>
 
@@ -41,7 +43,9 @@
           >{{ pageNumber }}</cv-select-option
         >
       </cv-select>
-      <span class="bx--pagination__text">{{ pageOfPages }}</span>
+      <span class="bx--pagination__text">
+        <slot name="of-n-pages" v-bind:scope="ofNPagesProps">{{ pageOfPages }}</slot>
+      </span>
 
       <span v-if="pages.length == 0">{{ pageValue }}</span>
 
@@ -174,19 +178,32 @@ export default {
     noWayForward() {
       return this.pageValue === this.pageCount;
     },
+    ofNPagesProps() {
+      return {
+        pages: this.pageCount,
+        items: this.numberOfItems,
+      };
+    },
     pageOfPages() {
+      const { pages, items } = this.ofNPagesProps;
       // console.log(this.pageValue, this.pageCount);
-      if (this.numberOfItems !== Infinity) {
-        return `of ${this.pageCount} pages`;
+      if (items !== Infinity) {
+        return `of ${pages} pages`;
       }
       return '';
     },
+    rangeProps() {
+      return {
+        start: this.firstItem,
+        end: Math.min(this.firstItem + parseInt(this.pageSizeValue, 10) - 1, this.numberOfItems),
+        items: this.numberOfItems,
+      };
+    },
     rangeText() {
-      const start = this.firstItem;
-      const end = Math.min(start + parseInt(this.pageSizeValue, 10) - 1, this.numberOfItems);
+      const { start, end, items } = this.rangeProps;
 
-      if (this.numberOfItems !== Infinity) {
-        return `${start}-${end} of ${this.numberOfItems} items`;
+      if (items !== Infinity) {
+        return `${start}-${end} of ${items} items`;
       } else {
         return `${start}-${end}`;
       }
