@@ -101,6 +101,23 @@ let preKnobs = {
       name: 'disabled',
     },
   },
+  selectionFeedback: {
+    group: 'attr',
+    type: select,
+    config: [
+      'Selection feedback',
+      {
+        'top-after-reopen': 'top-after-reopen',
+        top: 'top',
+        fixed: 'fixed',
+      },
+      'top-after-reopen',
+    ],
+    prop: {
+      name: 'selection-feedback',
+      type: String,
+    },
+  },
 };
 
 let variants = [
@@ -148,7 +165,7 @@ for (const story of storySet) {
         <input type="checkbox" value="10s" v-model="checks">
       </label>
       <label>Check 20s:
-        <input type="checkbox" value="202" v-model="checks">
+        <input type="checkbox" value="20s" v-model="checks">
       </label>
       <label>Check 30s:
         <input type="checkbox" value="30s" v-model="checks">
@@ -163,6 +180,15 @@ for (const story of storySet) {
       <br>
       <span>Checked: {{ checks }}</span>
     </div>
+    <pre v-else>
+    options: [
+      { value: '10s', label: 'Tens', name: 'tens' },
+      { value: '20s', label: 'Twenties', name: 'twenties' },
+      { value: '30s', label: 'Thirties', name: 'thirties' },
+      { value: '40s', label: 'Fourties', name: 'fourties' },
+      { value: '50s', label: 'Fifties', name: 'fifties' },
+    ]
+    </pre>
   </template>  </sv-template-view>
   `;
 
@@ -178,28 +204,28 @@ for (const story of storySet) {
             options: [
               {
                 value: '10s',
-                label: '10s',
-                name: 'Tens',
+                label: 'Tens',
+                name: 'tens',
               },
               {
                 value: '20s',
-                label: '20s',
-                name: 'Twenties',
+                label: 'Twenties',
+                name: 'twenties',
               },
               {
                 value: '30s',
-                label: '30s',
-                name: 'Thirties',
+                label: 'Thirties',
+                name: 'thirties',
               },
               {
                 value: '40s',
-                label: '40s',
-                name: 'Fourties',
+                label: 'Fourties',
+                name: 'fourties',
               },
               {
                 value: '50s',
-                label: '50s',
-                name: 'Fifties',
+                label: 'Fifties',
+                name: 'fifties',
               },
             ],
           };
