@@ -1,3 +1,9 @@
+## 2.8.0 (June 27, 2019)
+
+### Feat
+
+- Added scoped slots to table for constructed string.
+
 ## 2.7.0 (June 27, 2019)
 
 ### Feat
