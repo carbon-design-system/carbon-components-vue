@@ -118,6 +118,15 @@ let preKnobs = {
       type: String,
     },
   },
+  filterable: {
+    group: 'attr',
+    type: boolean,
+    config: ['filterable', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: Boolean,
+      name: 'filterable',
+    },
+  },
 };
 
 let variants = [

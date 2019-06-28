@@ -18,7 +18,8 @@ https://www.carbondesignsystem.com/components/multi-select/code
   :options="options"
   @change="actionChange"
   v-model="checks"
-  selection-feedback="selectionFeedback
+  selection-feedback="selectionFeedback"
+  filterable="filterable"
 >
 </cv-multi-select>
 ```
@@ -62,7 +63,9 @@ The data
                 name: 'Fifties',
               },
             ]
-}
+},
+selectionFeedback: 'top-after-reopen',
+filterable: false
 ```
 
 ## Attributes
@@ -78,6 +81,7 @@ The data
   - 'top-after-reopen': joins other selected options at the top after the dropdown is reopened
   - 'top': joins other selected options at the top immediately
   - 'fixed': stays where it is in the list.
+    -filterable: If true the multi select list can be filtered.
 
 Other standard props e.g. disabled and placeholder
 

@@ -4,12 +4,13 @@
     :class="{
       'bx--multi-select__wrapper--inline bx--list-box__wrapper--inline': inline,
       'bx--multi-select__wrapper--inline--invalid bx--list-box__wrapper--inline--invalid': inline && isInvalid,
+      'bx--multi-select--filterable': filterable,
     }"
     @focusout="onFocusOut"
   >
-    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">
-      {{ title }}
-    </label>
+    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">{{
+      title
+    }}</label>
 
     <div
       v-if="!inline && isHelper"
@@ -29,6 +30,8 @@
         'bx--multi-select--invalid': isInvalid,
         'bx--multi-select--disabled bx--list-box--disabled': $attrs.disabled,
         'bx--multi-select--inline bx--list-box--inline': inline,
+        'bx--multi-select--selected': dataValue.length > 0,
+        'bx--combo-box': filterable,
       }"
       :data-invalid="isInvalid"
       v-bind="$attrs"
@@ -54,13 +57,41 @@
         ref="button"
       >
         <cv-tag
+          :class="{ 'bx--list-box__selection--multi': filterable && dataValue.length > 0 }"
           v-show="dataValue.length > 0"
           kind="filter"
           :label="`${dataValue.length}`"
           @remove="clearValues"
           ref="tag"
         />
-        <span class="bx--list-box__label">{{ label }}</span>
+        <span v-if="!filterable" class="bx--list-box__label">{{ label }}</span>
+        <template v-else>
+          <input
+            ref="input"
+            class="bx--text-input"
+            :aria-controls="uid"
+            aria-autocomplete="list"
+            role="combobox"
+            :aria-expanded="open"
+            autocomplete="off"
+            placeholder="Filter"
+            v-model="filter"
+            @input="sortOptions"
+          />
+          <div
+            v-if="filter.length > 0"
+            role="button"
+            class="bx--tag--filter bx--list-box__selection"
+            tabindex="0"
+            title="Clear selected item"
+            @click.stop="clearFilter"
+            @keydown.enter.stop.prevent="clearFilter"
+            @keydown.space.stop.prevent
+            @keyup.space.stop.prevent="clearFilter"
+          >
+            <Close16 />
+          </div>
+        </template>
         <div class="bx--list-box__menu-icon" :class="{ 'bx--list-box__menu-icon--open': open }" role="button">
           <chevron-down-16 :aria-label="open ? 'Close menu' : 'Open menu'" />
         </div>
@@ -102,6 +133,7 @@
 import themeMixin from '../../mixins/theme-mixin';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16';
+import Close16 from '@carbon/icons-vue/es/close/16';
 import uidMixin from '../../mixins/uid-mixin';
 import CvCheckbox from '../cv-checkbox/cv-checkbox';
 import CvTag from '../cv-tag/cv-tag';
@@ -115,7 +147,7 @@ export default {
   name: 'CvMultiSelect',
   inheritAttrs: false,
   mixins: [themeMixin, uidMixin],
-  components: { WarningFilled16, ChevronDown16, CvCheckbox, CvTag },
+  components: { WarningFilled16, ChevronDown16, CvCheckbox, CvTag, Close16 },
   props: {
     inline: Boolean,
     invalidMessage: { type: String, default: null },
@@ -153,6 +185,7 @@ export default {
         return true;
       },
     },
+    filterable: Boolean,
   },
   data() {
     return {
@@ -160,6 +193,7 @@ export default {
       dataOptions: null,
       dataValue: this.value,
       highlighted: '',
+      filter: '',
     };
   },
   model: {
@@ -189,35 +223,45 @@ export default {
     },
   },
   methods: {
-    doMove(up) {
-      // requery could have changed
-      const currentHighlight = this.dataOptions.findIndex(item => item.value === this.highlighted);
-      let newHiglight;
-
-      if (up) {
-        if (currentHighlight <= 0) {
-          newHiglight = this.dataOptions.length - 1;
-        } else {
-          newHiglight = currentHighlight - 1;
-        }
-      } else {
-        if (currentHighlight >= this.dataOptions.length - 1) {
-          newHiglight = 0;
-        } else {
-          newHiglight = currentHighlight + 1;
-        }
+    clearFilter() {
+      this.filter = '';
+      this.$refs.input.focus();
+      if (this.open) {
+        this.sortOptions();
       }
-      this.highlighted = this.dataOptions[newHiglight].value;
-      if (
-        this.$refs.list.scrollTop > this.$refs.option[newHiglight].offsetTop ||
-        this.$refs.list.scrollTop + this.$refs.list.clientHeight <
-          this.$refs.option[newHiglight].offsetTop + this.$refs.option[newHiglight].offsetHeight
-      ) {
-        this.$refs.option[newHiglight].scrollIntoView();
+    },
+    doMove(up) {
+      if (this.dataOptions.length > 0) {
+        // requery could have changed
+        const currentHighlight = this.dataOptions.findIndex(item => item.value === this.highlighted);
+        let newHiglight;
+
+        if (up) {
+          if (currentHighlight <= 0) {
+            newHiglight = this.dataOptions.length - 1;
+          } else {
+            newHiglight = currentHighlight - 1;
+          }
+        } else {
+          if (currentHighlight >= this.dataOptions.length - 1) {
+            newHiglight = 0;
+          } else {
+            newHiglight = currentHighlight + 1;
+          }
+        }
+        this.highlighted = this.dataOptions[newHiglight].value;
+        if (
+          this.$refs.list.scrollTop > this.$refs.option[newHiglight].offsetTop ||
+          this.$refs.list.scrollTop + this.$refs.list.clientHeight <
+            this.$refs.option[newHiglight].offsetTop + this.$refs.option[newHiglight].offsetHeight
+        ) {
+          this.$refs.option[newHiglight].scrollIntoView();
+        }
       }
     },
     sortOptions() {
-      this.dataOptions = this.options.slice(0);
+      const pat = new RegExp(this.filter, 'i');
+      this.dataOptions = this.options.filter(opt => pat.test(opt.label)).slice(0);
 
       if (!this.sorting && this.selectionFeedback !== selectionFeedbackOptions[FIXED]) {
         // if included in data value move to top
@@ -229,6 +273,9 @@ export default {
     doOpen(newVal) {
       if (newVal && this.selectionFeedback === selectionFeedbackOptions[TOP_AFTER_REOPEN]) {
         this.sortOptions();
+      }
+      if (!newVal) {
+        this.filter = '';
       }
       this.open = newVal;
     },
@@ -259,7 +306,11 @@ export default {
     },
     clearValues() {
       this.dataValue = [];
-      this.$refs.button.focus();
+      if (this.filterable) {
+        this.$refs.input.focus();
+      } else {
+        this.$refs.button.focus();
+      }
       this.$emit('change', this.dataValue);
     },
     onFocusOut(ev) {
@@ -287,4 +338,8 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.cv-multi-select.bx--multi-select--filterable .bx--list-box__selection--multi {
+  margin: 0;
+}
+</style>
