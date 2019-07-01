@@ -36,6 +36,7 @@ The data
   title: "Multiselect title",
   disabled: false,
   checks: [],
+  initialValue: ['20s', '40s'],
   options: [
               {
                 value: '10s',
@@ -77,6 +78,7 @@ filterable: false
 - inline: optional boolean, if true changes layout and hides helper text
 - disabled: enable disables the component
 - options: array objects containing value, label and name for checkboxes.
+- value: initial selected values
 - selection-feedback: after checking an option it is sorted based on the following values
   - 'top-after-reopen': joins other selected options at the top after the dropdown is reopened
   - 'top': joins other selected options at the top immediately
