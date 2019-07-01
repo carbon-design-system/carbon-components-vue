@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { text, boolean, select } from '@storybook/addon-knobs';
+import { text, boolean, select, array } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
@@ -118,20 +118,41 @@ let preKnobs = {
       type: String,
     },
   },
+  filterable: {
+    group: 'attr',
+    type: boolean,
+    config: ['filterable', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: Boolean,
+      name: 'filterable',
+    },
+  },
+  initialValue: {
+    group: 'attr',
+    type: array,
+    config: ['initial-value', ['20s', '40s'], ','],
+    prop: {
+      type: Array,
+      name: 'value',
+    },
+  },
 };
 
 let variants = [
   {
     name: 'default',
-    excludes: ['vModel', 'events', 'helperTextSlot', 'invalidMessageSlot'],
+    excludes: ['vModel', 'events', 'helperTextSlot', 'invalidMessageSlot', 'initialValue'],
+  },
+  {
+    name: 'with initial values',
+    includes: ['initialValue'],
   },
   {
     name: 'slots',
     excludes: ['vModel', 'events', 'helperText', 'invalidMessage'],
   },
-  { name: 'minimal', includes: ['value'] },
-  { name: 'events', includes: ['value', 'events'] },
-  { name: 'vModel', includes: ['value', 'vModel'] },
+  { name: 'events', includes: ['events'] },
+  { name: 'vModel', includes: ['vModel'] },
 ];
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);

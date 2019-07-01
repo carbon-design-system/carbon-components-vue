@@ -18,7 +18,8 @@ https://www.carbondesignsystem.com/components/multi-select/code
   :options="options"
   @change="actionChange"
   v-model="checks"
-  selection-feedback="selectionFeedback
+  selection-feedback="selectionFeedback"
+  filterable="filterable"
 >
 </cv-multi-select>
 ```
@@ -35,6 +36,7 @@ The data
   title: "Multiselect title",
   disabled: false,
   checks: [],
+  initialValue: ['20s', '40s'],
   options: [
               {
                 value: '10s',
@@ -62,7 +64,9 @@ The data
                 name: 'Fifties',
               },
             ]
-}
+},
+selectionFeedback: 'top-after-reopen',
+filterable: false
 ```
 
 ## Attributes
@@ -74,10 +78,12 @@ The data
 - inline: optional boolean, if true changes layout and hides helper text
 - disabled: enable disables the component
 - options: array objects containing value, label and name for checkboxes.
+- value: initial selected values
 - selection-feedback: after checking an option it is sorted based on the following values
   - 'top-after-reopen': joins other selected options at the top after the dropdown is reopened
   - 'top': joins other selected options at the top immediately
   - 'fixed': stays where it is in the list.
+    -filterable: If true the multi select list can be filtered.
 
 Other standard props e.g. disabled and placeholder
 
