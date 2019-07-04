@@ -8,9 +8,9 @@
     }"
     @focusout="onFocusOut"
   >
-    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">{{
-      title
-    }}</label>
+    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">
+      {{ title }}
+    </label>
 
     <div
       v-if="!inline && isHelper"
@@ -71,19 +71,20 @@
             class="bx--text-input"
             :aria-controls="uid"
             aria-autocomplete="list"
-            role="combobox"
+            role="combo-box"
             :aria-expanded="open"
             autocomplete="off"
             placeholder="Filter"
             v-model="filter"
             @input="sortOptions"
+            @click.stop.prevent="inputClick"
           />
           <div
             v-if="filter.length > 0"
             role="button"
             class="bx--tag--filter bx--list-box__selection"
             tabindex="0"
-            title="Clear selected item"
+            title="Clear filter"
             @click.stop="clearFilter"
             @keydown.enter.stop.prevent="clearFilter"
             @keydown.space.stop.prevent
@@ -179,7 +180,7 @@ export default {
       default: selectionFeedbackOptions[TOP_AFTER_REOPEN],
       validator(val) {
         if (!selectionFeedbackOptions.includes(val)) {
-          console.warn(`CvMultiSelect: invalid value "${val}", use one of ${selectionFeedbackOptions}`);
+          console.warn(`CvMultiSelect: invalid selectionFeedback "${val}", use one of ${selectionFeedbackOptions}`);
           return false;
         }
         return true;
@@ -230,6 +231,19 @@ export default {
         this.sortOptions();
       }
     },
+    checkHighlightPosition(newHiglight) {
+      if (this.$refs.list.scrollTop > this.$refs.option[newHiglight].offsetTop) {
+        this.$refs.list.scrollTop = this.$refs.option[newHiglight].offsetTop;
+      } else if (
+        this.$refs.list.scrollTop + this.$refs.list.clientHeight <
+        this.$refs.option[newHiglight].offsetTop + this.$refs.option[newHiglight].offsetHeight
+      ) {
+        this.$refs.list.scrollTop =
+          this.$refs.option[newHiglight].offsetTop +
+          this.$refs.option[newHiglight].offsetHeight -
+          this.$refs.list.clientHeight;
+      }
+    },
     doMove(up) {
       if (this.dataOptions.length > 0) {
         // requery could have changed
@@ -250,6 +264,7 @@ export default {
           }
         }
         this.highlighted = this.dataOptions[newHiglight].value;
+        this.checkHighlightPosition(newHiglight);
         if (
           this.$refs.list.scrollTop > this.$refs.option[newHiglight].offsetTop ||
           this.$refs.list.scrollTop + this.$refs.list.clientHeight <
@@ -333,6 +348,11 @@ export default {
       }
       this.$refs.button.focus();
       this.$emit('change', this.dataValue);
+    },
+    inputClick() {
+      if (!this.open) {
+        this.open = true;
+      }
     },
   },
 };
