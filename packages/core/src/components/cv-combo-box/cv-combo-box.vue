@@ -1,8 +1,8 @@
 <template>
   <div class="cv-combo-box bx--list-box__wrapper" @focusout="onFocusOut">
-    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">{{
-      title
-    }}</label>
+    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">
+      {{ title }}
+    </label>
 
     <div v-if="isHelper" class="bx--form__helper-text" :class="{ 'bx--form__helper-text--disabled': $attrs.disabled }">
       <slot name="helper-text">{{ helperText }}</slot>
@@ -204,7 +204,7 @@ export default {
     clearFilter() {
       this.filter = '';
       this.$refs.input.focus();
-      this.open = true;
+      this.doOpen(true);
       this.updateOptions();
     },
     checkHighlightPosition(newHiglight) {
@@ -270,7 +270,7 @@ export default {
       }
     },
     onInput(ev) {
-      this.open = true;
+      this.doOpen(true);
 
       // this.$emit('filter', this.filter);
       this.updateOptions();
@@ -333,15 +333,16 @@ export default {
         this.filter = filterOption.label;
       }
       this.$refs.input.focus();
+      this.open = false; // close after user makes a selection
       this.$emit('change', this.dataValue);
     },
     inputClick() {
       if (!this.open) {
-        this.open = true;
+        this.doOpen(true);
       }
     },
     inputFocus() {
-      this.open = true;
+      this.doOpen(true);
     },
   },
 };

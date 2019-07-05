@@ -8,9 +8,9 @@
     }"
     @focusout="onFocusOut"
   >
-    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">
-      {{ title }}
-    </label>
+    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">{{
+      title
+    }}</label>
 
     <div
       v-if="!inline && isHelper"
@@ -71,12 +71,13 @@
             class="bx--text-input"
             :aria-controls="uid"
             aria-autocomplete="list"
-            role="combo-box"
+            role="combobox"
             :aria-expanded="open"
             autocomplete="off"
             placeholder="Filter"
             v-model="filter"
-            @input="sortOptions"
+            @input="onInput"
+            @focus="inputFocus"
             @click.stop.prevent="inputClick"
           />
           <div
@@ -150,6 +151,8 @@ export default {
   mixins: [themeMixin, uidMixin],
   components: { WarningFilled16, ChevronDown16, CvCheckbox, CvTag, Close16 },
   props: {
+    autoFilter: Boolean,
+    autoHighlight: Boolean,
     inline: Boolean,
     invalidMessage: { type: String, default: null },
     helperText: { type: String, default: null },
@@ -158,6 +161,7 @@ export default {
       type: String,
       default: 'Choose options',
     },
+    highlight: String,
     value: { type: Array, default: () => [] },
     // initial value of the multi-select,
     // options in the form
@@ -192,9 +196,9 @@ export default {
     return {
       open: false,
       dataOptions: null,
-      dataValue: this.value,
-      highlighted: '',
-      filter: '',
+      dataValue: '',
+      dataHighlighted: null,
+      dataFilter: '',
     };
   },
   model: {
@@ -202,18 +206,25 @@ export default {
     event: 'change',
   },
   watch: {
+    highlight() {
+      this.highlighted = this.highlight;
+    },
     value() {
-      this.dataValue = this.value;
+      this.dataValue = this.value.filter(item => this.dataOptions.some(opt => opt.value === item.trim()));
     },
     options() {
-      this.sortOptions();
+      this.updateOptions();
     },
     selectionFeedback() {
-      this.sortOptions();
+      this.updateOptions();
     },
   },
   created() {
-    this.sortOptions();
+    this.updateOptions();
+    this.dataValue = this.value.filter(item => this.dataOptions.some(opt => opt.value === item.trim()));
+  },
+  mounted() {
+    this.highlighted = this.value ? this.value : this.highlight; // override highlight with value if provided
   },
   computed: {
     isInvalid() {
@@ -222,26 +233,53 @@ export default {
     isHelper() {
       return this.$slots['helper-text'] !== undefined || (this.helperText && this.helperText.length);
     },
+    highlighted: {
+      get() {
+        return this.dataHighlighted;
+      },
+      set(val) {
+        let firstMatchIndex = this.dataOptions.findIndex(item => item.value === val);
+        if (firstMatchIndex < 0) {
+          firstMatchIndex = this.dataOptions.length ? 0 : -1;
+          this.dataHighlighted = firstMatchIndex >= 0 ? this.dataOptions[0].value : '';
+        } else {
+          this.dataHighlighted = val;
+        }
+        if (firstMatchIndex >= 0) {
+          this.checkHighlightPosition(firstMatchIndex);
+        }
+      },
+    },
+    filter: {
+      get() {
+        return this.dataFilter;
+      },
+      set(val) {
+        this.dataFilter = val ? val : '';
+        this.$emit('filter', val);
+      },
+    },
   },
   methods: {
     clearFilter() {
       this.filter = '';
       this.$refs.input.focus();
-      if (this.open) {
-        this.sortOptions();
-      }
+      this.doOpen(true);
+      this.updateOptions();
     },
     checkHighlightPosition(newHiglight) {
-      if (this.$refs.list.scrollTop > this.$refs.option[newHiglight].offsetTop) {
-        this.$refs.list.scrollTop = this.$refs.option[newHiglight].offsetTop;
-      } else if (
-        this.$refs.list.scrollTop + this.$refs.list.clientHeight <
-        this.$refs.option[newHiglight].offsetTop + this.$refs.option[newHiglight].offsetHeight
-      ) {
-        this.$refs.list.scrollTop =
-          this.$refs.option[newHiglight].offsetTop +
-          this.$refs.option[newHiglight].offsetHeight -
-          this.$refs.list.clientHeight;
+      if (this.$refs.list && this.$refs.option) {
+        if (this.$refs.list.scrollTop > this.$refs.option[newHiglight].offsetTop) {
+          this.$refs.list.scrollTop = this.$refs.option[newHiglight].offsetTop;
+        } else if (
+          this.$refs.list.scrollTop + this.$refs.list.clientHeight <
+          this.$refs.option[newHiglight].offsetTop + this.$refs.option[newHiglight].offsetHeight
+        ) {
+          this.$refs.list.scrollTop =
+            this.$refs.option[newHiglight].offsetTop +
+            this.$refs.option[newHiglight].offsetHeight -
+            this.$refs.list.clientHeight;
+        }
       }
     },
     doMove(up) {
@@ -264,20 +302,21 @@ export default {
           }
         }
         this.highlighted = this.dataOptions[newHiglight].value;
-        this.checkHighlightPosition(newHiglight);
-        if (
-          this.$refs.list.scrollTop > this.$refs.option[newHiglight].offsetTop ||
-          this.$refs.list.scrollTop + this.$refs.list.clientHeight <
-            this.$refs.option[newHiglight].offsetTop + this.$refs.option[newHiglight].offsetHeight
-        ) {
-          this.$refs.option[newHiglight].scrollIntoView();
-        }
+        // this.checkHighlightPosition(newHiglight);
       }
     },
-    sortOptions() {
-      const pat = new RegExp(this.filter, 'i');
-      this.dataOptions = this.options.filter(opt => pat.test(opt.label)).slice(0);
+    updateOptions() {
+      if (this.autoFilter) {
+        const pat = new RegExp(this.filter, 'iu');
+        this.dataOptions = this.options.filter(opt => pat.test(opt.label)).slice(0);
+      } else {
+        this.dataOptions = this.options.slice(0);
+      }
+      if (this.highlight !== this.highlighted) {
+        this.highlighted = this.highlight;
+      }
 
+      // multi select unique part
       if (!this.sorting && this.selectionFeedback !== selectionFeedbackOptions[FIXED]) {
         // if included in data value move to top
         this.dataOptions.sort(
@@ -285,12 +324,29 @@ export default {
         );
       }
     },
-    doOpen(newVal) {
-      if (newVal && this.selectionFeedback === selectionFeedbackOptions[TOP_AFTER_REOPEN]) {
-        this.sortOptions();
+    updateHighlight() {
+      let firstMatchIndex;
+      if (this.autoHighlight && this.dataOptions.length > 0) {
+        // then highlight first match
+        const filterRegex = new RegExp(this.filter, 'iu');
+        firstMatchIndex = this.dataOptions.findIndex(item => filterRegex.test(item.label));
+        if (firstMatchIndex < 0) {
+          firstMatchIndex = 0;
+        }
+        this.highlighted = this.dataOptions[firstMatchIndex].value;
+        // this.checkHighlightPosition(firstMatchIndex);
       }
-      if (!newVal) {
-        this.filter = '';
+    },
+    onInput(ev) {
+      this.doOpen(true);
+
+      // this.$emit('filter', this.filter);
+      this.updateOptions();
+      this.updateHighlight();
+    },
+    doOpen(newVal) {
+      if (newVal && !this.open && this.selectionFeedback === selectionFeedbackOptions[TOP_AFTER_REOPEN]) {
+        this.updateOptions();
       }
       this.open = newVal;
     },
@@ -306,26 +362,27 @@ export default {
         this.doMove(true);
       }
     },
+    inputOrButtonFocus() {
+      if (this.filterable) {
+        this.$refs.input.focus();
+      } else {
+        this.$refs.button.focus();
+      }
+    },
     onEsc() {
       this.doOpen(false);
-      this.$el.focus();
+      this.inputOrButtonFocus();
     },
     onSpace() {
       this.onItemClick(this.highlighted);
     },
     onClick(ev) {
       this.doOpen(!this.open);
-      if (!this.open) {
-        this.$refs.button.focus();
-      }
+      this.inputOrButtonFocus();
     },
     clearValues() {
       this.dataValue = [];
-      if (this.filterable) {
-        this.$refs.input.focus();
-      } else {
-        this.$refs.button.focus();
-      }
+      this.inputOrButtonFocus();
       this.$emit('change', this.dataValue);
     },
     onFocusOut(ev) {
@@ -344,15 +401,18 @@ export default {
         this.dataValue.push(val);
       }
       if (this.selectionFeedback === selectionFeedbackOptions[TOP]) {
-        this.sortOptions();
+        this.updateOptions();
       }
       this.$refs.button.focus();
       this.$emit('change', this.dataValue);
     },
     inputClick() {
       if (!this.open) {
-        this.open = true;
+        this.doOpen(true);
       }
+    },
+    inputFocus() {
+      this.doOpen(true);
     },
   },
 };

@@ -12,6 +12,34 @@ import CvMultiSelect from '@carbon/vue/src/components/cv-multi-select/cv-multi-s
 const storiesDefault = storiesOf('Components/CvMultiSelect', module);
 const storiesExperimental = storiesOf('Experimental/CvMultiSelect', module);
 
+const fruits = [
+  'Apple',
+  'Banana',
+  'Cherry',
+  'Date',
+  'Elderberry',
+  'Fig',
+  'Grape',
+  'Kiwi Fruit',
+  'Lemon',
+  'Lime',
+  'Mango',
+  'Orange',
+  'Passion Fruit',
+  'Raisin',
+  'Satsuma',
+  'Tangerine',
+  'Ugli Fruit',
+  'Watermelon',
+].map(item => {
+  const nameVal = item.replace(/\W/, '_').toLowerCase();
+  return {
+    name: nameVal,
+    label: item,
+    value: nameVal,
+  };
+});
+
 let preKnobs = {
   theme: {
     group: 'attr',
@@ -38,7 +66,7 @@ let preKnobs = {
   },
   events: {
     group: 'attr',
-    value: `@change="actionChange"`,
+    value: `@change="actionChange" @filter="actionFilter"`,
   },
   inline: {
     group: 'attr',
@@ -127,6 +155,46 @@ let preKnobs = {
       name: 'filterable',
     },
   },
+  autoFilter: {
+    group: 'attr',
+    type: boolean,
+    config: ['auto filter', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: Boolean,
+      name: 'auto-filter',
+    },
+  },
+  userFilter: {
+    group: 'misc',
+    type: boolean,
+    config: ['user filter', false],
+    prop: {
+      type: Boolean,
+      name: 'userFilter',
+    },
+  },
+  userHighlight: {
+    group: 'misc',
+    type: boolean,
+    config: ['user highlight', false],
+    prop: {
+      name: 'userHighlight',
+      type: Boolean,
+    },
+  },
+  userFilterOrHighlight: {
+    group: 'attr',
+    value: `@filter="onFilter" :highlight="highlight"`,
+  },
+  autoHighlight: {
+    group: 'attr',
+    type: boolean,
+    config: ['auto hihglight', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: Boolean,
+      name: 'auto-highlight',
+    },
+  },
   initialValue: {
     group: 'attr',
     type: array,
@@ -141,24 +209,40 @@ let preKnobs = {
 let variants = [
   {
     name: 'default',
-    excludes: ['vModel', 'events', 'helperTextSlot', 'invalidMessageSlot', 'initialValue'],
+    excludes: [
+      'vModel',
+      'events',
+      'helperTextSlot',
+      'invalidMessageSlot',
+      'userFilter',
+      'userHighlight',
+      'userFilterOrHighlight',
+    ],
   },
   {
-    name: 'with initial values',
-    includes: ['initialValue'],
+    name: 'user Filter and/or Highlight',
+    includes: ['filterable', 'userFilterOrHighlight', 'userFilter', 'userHighlight'],
   },
   {
     name: 'slots',
-    excludes: ['vModel', 'events', 'helperText', 'invalidMessage'],
+    excludes: [
+      'vModel',
+      'events',
+      'helperText',
+      'invalidMessage',
+      'userFilter',
+      'userHighlight',
+      'userFilterOrHighlight',
+    ],
   },
-  { name: 'events', includes: ['events'] },
+  { name: 'events', includes: ['filterable', 'events'] },
   { name: 'vModel', includes: ['vModel'] },
 ];
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
-  storiesDefault.add(
+  storiesExperimental.add(
     story.name,
     () => {
       const settings = story.knobs();
@@ -182,33 +266,17 @@ for (const story of storySet) {
       <span>
         V-model:
       </span>
-      <label>Check 10s:
-        <input type="checkbox" value="10s" v-model="checks">
-      </label>
-      <label>Check 20s:
-        <input type="checkbox" value="20s" v-model="checks">
-      </label>
-      <label>Check 30s:
-        <input type="checkbox" value="30s" v-model="checks">
-      </label>
-      <label>Check 40s:
-        <input type="checkbox" value="40s" v-model="checks">
-      </label>
-      <label>Check 50s:
-        <input type="checkbox" value="50s" v-model="checks">
-      </label>
+      <span v-for="fruit in options">
+        <label :style="{whiteSpace: 'nowrap'}">{{fruit.label}}:
+          <input type="checkbox" :value="fruit.value" v-model="checks">
+        </label>,
+      </span>
       <br>
       <br>
       <span>Checked: {{ checks }}</span>
     </div>
     <pre v-else>
-    options: [
-      { value: '10s', label: 'Tens', name: 'tens' },
-      { value: '20s', label: 'Twenties', name: 'twenties' },
-      { value: '30s', label: 'Thirties', name: 'thirties' },
-      { value: '40s', label: 'Fourties', name: 'fourties' },
-      { value: '50s', label: 'Fifties', name: 'fifties' },
-    ]
+    :options: fruits
     </pre>
   </template>  </sv-template-view>
   `;
@@ -222,37 +290,27 @@ for (const story of storySet) {
         data() {
           return {
             checks: [],
-            options: [
-              {
-                value: '10s',
-                label: 'Tens',
-                name: 'tens',
-              },
-              {
-                value: '20s',
-                label: 'Twenties',
-                name: 'twenties',
-              },
-              {
-                value: '30s',
-                label: 'Thirties',
-                name: 'thirties',
-              },
-              {
-                value: '40s',
-                label: 'Fourties',
-                name: 'fourties',
-              },
-              {
-                value: '50s',
-                label: 'Fifties',
-                name: 'fifties',
-              },
-            ],
+            options: fruits,
+            highlight: '',
           };
         },
         methods: {
           actionChange: action('CV MultiSelect - change'),
+          actionFilter: action('Cv MultiSelect - filter'),
+          onFilter(filter) {
+            let pat = new RegExp(`^${filter}`, 'ui');
+            if (this.userFilter) {
+              this.options = fruits.filter(opt => pat.test(opt.label)).slice(0);
+            }
+            if (this.userHighlight && this.options.length > 0) {
+              let found = this.options.find(opt => pat.test(opt.label));
+              if (found) {
+                this.highlight = found.value;
+              } else {
+                this.highlight = '';
+              }
+            }
+          },
         },
         template: templateViewString,
       };

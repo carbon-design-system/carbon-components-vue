@@ -418,7 +418,7 @@ const variants = [
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
-  storiesExperimental.add(
+  storiesDefault.add(
     story.name,
     () => {
       const settings = story.knobs();

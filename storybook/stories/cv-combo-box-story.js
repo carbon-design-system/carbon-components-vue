@@ -71,7 +71,7 @@ let preKnobs = {
   },
   events: {
     group: 'attr',
-    value: `@change="actionChange"`,
+    value: `@change="actionChange" @filter="actionFilter"`,
   },
   helperText: {
     group: 'attr',
@@ -203,7 +203,15 @@ let variants = [
   },
   {
     name: 'slots',
-    excludes: ['vModel', 'events', 'helperText', 'invalidMessage'],
+    excludes: [
+      'vModel',
+      'events',
+      'helperText',
+      'invalidMessage',
+      'userFilterOrHighlight',
+      'userFilter',
+      'userHighlight',
+    ],
   },
   { name: 'events', includes: ['events'] },
   { name: 'vModel', includes: ['vModel'] },
@@ -212,7 +220,7 @@ let variants = [
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
-  storiesDefault.add(
+  storiesExperimental.add(
     story.name,
     () => {
       const settings = story.knobs();
@@ -276,6 +284,7 @@ for (const story of storySet) {
         },
         methods: {
           actionChange: action('CV ComboBox - change'),
+          actionFilter: action('Cv ComboBox - filter'),
           onFilter(filter) {
             let pat = new RegExp(`^${filter}`, 'ui');
             if (this.userFilter) {

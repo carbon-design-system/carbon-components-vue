@@ -8,18 +8,20 @@ https://www.carbondesignsystem.com/components/multi-select/code
 
 ```html
 <cv-multi-select
-  :theme="theme"
-  :label="label"
-  :inline="inline"
-  :helper-text="helperText"
-  :invalid-message="invalidMessage"
-  :title="title"
+  :auto-filter="autoFilter"
+  :auto-highlight="autoHighlight"
   :disabled="disabled"
+  filterable="filterable"
+  :helper-text="helperText"
+  :inline="inline"
+  :invalid-message="invalidMessage"
+  :label="label"
   :options="options"
+  selection-feedback="selectionFeedback"
+  :theme="theme"
+  :title="title"
   @change="actionChange"
   v-model="checks"
-  selection-feedback="selectionFeedback"
-  filterable="filterable"
 >
 </cv-multi-select>
 ```
@@ -66,11 +68,15 @@ The data
             ]
 },
 selectionFeedback: 'top-after-reopen',
-filterable: false
+filterable: false,
+autofilter: false,
+autohighlight: false
 ```
 
 ## Attributes
 
+- auto-filter: optional if true the combo box is filtered based on matching any string in the options
+- auto-highlight: optional if true the combo box item highlighted is the first match of any string in the options
 - helper-text: optional helper text
 - invalid-message: optional error message
 - title: the title text for the input
@@ -91,6 +97,32 @@ Other standard props e.g. disabled and placeholder
 
 - helper-text: optional and overrides the helper-text attribute
 - invalid-message: optional and overrides the invalid-message attribute
+
+## Events
+
+- change - passes the value of the selected option
+- filter - passes up the value of the current filter
+
+  - When not using auto-filter and/or auto-highlight the user can intercept the filter event to update the options and highlight properties.
+    e.g.
+
+  ```js
+      onFilter(filter) {
+      let pat = new RegExp(`^${filter}`, 'ui');
+      // filter the options
+      this.options = fruits.filter(opt => pat.test(opt.label)).slice(0);
+
+      // highlihgt an option
+      if (this.options.length > 0) {
+        let found = this.options.find(opt => pat.test(opt.label));
+        if (found) {
+          this.highlight = found.value;
+        } else {
+          this.highlight = '';
+        }
+      }
+    },
+  ```
 
 ## Keyboard interaction
 
