@@ -8,18 +8,20 @@ https://www.carbondesignsystem.com/components/multi-select/code
 
 ```html
 <cv-multi-select
-  :theme="theme"
-  :label="label"
-  :inline="inline"
-  :helper-text="helperText"
-  :invalid-message="invalidMessage"
-  :title="title"
+  :auto-filter="autoFilter"
+  :auto-highlight="autoHighlight"
   :disabled="disabled"
+  filterable="filterable"
+  :helper-text="helperText"
+  :inline="inline"
+  :invalid-message="invalidMessage"
+  :label="label"
   :options="options"
+  selection-feedback="selectionFeedback"
+  :theme="theme"
+  :title="title"
   @change="actionChange"
   v-model="checks"
-  selection-feedback="selectionFeedback"
-  filterable="filterable"
 >
 </cv-multi-select>
 ```
@@ -66,7 +68,9 @@ The data
             ]
 },
 selectionFeedback: 'top-after-reopen',
-filterable: false
+filterable: false,
+autofilter: false,
+autohighlight: false
 ```
 
 ## Attributes

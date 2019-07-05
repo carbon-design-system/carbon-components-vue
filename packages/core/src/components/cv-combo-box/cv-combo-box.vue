@@ -1,43 +1,27 @@
 <template>
-  <div
-    class="cv-multi-select bx--multi-select__wrapper bx--list-box__wrapper"
-    :class="{
-      'bx--multi-select__wrapper--inline bx--list-box__wrapper--inline': inline,
-      'bx--multi-select__wrapper--inline--invalid bx--list-box__wrapper--inline--invalid': inline && isInvalid,
-      'bx--multi-select--filterable': filterable,
-    }"
-    @focusout="onFocusOut"
-  >
-    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">{{
-      title
-    }}</label>
+  <div class="cv-combo-box bx--list-box__wrapper" @focusout="onFocusOut">
+    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">
+      {{ title }}
+    </label>
 
-    <div
-      v-if="!inline && isHelper"
-      class="bx--form__helper-text"
-      :class="{ 'bx--form__helper-text--disabled': $attrs.disabled }"
-    >
+    <div v-if="isHelper" class="bx--form__helper-text" :class="{ 'bx--form__helper-text--disabled': $attrs.disabled }">
       <slot name="helper-text">{{ helperText }}</slot>
     </div>
 
     <div
       role="listbox"
       tabindex="-1"
-      class="bx--multi-select bx--list-box"
+      class="bx--combo-box bx--list-box"
       :class="{
         'bx--list-box--light': theme === 'light',
-        'bx--multi-select--expanded': open,
-        'bx--multi-select--invalid': isInvalid,
-        'bx--multi-select--disabled bx--list-box--disabled': $attrs.disabled,
-        'bx--multi-select--inline bx--list-box--inline': inline,
-        'bx--multi-select--selected': dataValue.length > 0,
-        'bx--combo-box': filterable,
+        'bx--combo-box--expanded': open,
+        'bx--combo-box--disabled bx--list-box--disabled': $attrs.disabled,
       }"
       :data-invalid="isInvalid"
       v-bind="$attrs"
       @keydown.down.prevent="onDown"
       @keydown.up.prevent="onUp"
-      @keydown.enter.prevent="onClick"
+      @keydown.enter.prevent="onEnter"
       @keydown.space.prevent="onSpace"
       @keydown.esc.prevent="onEsc"
       @click="onClick"
@@ -50,50 +34,40 @@
         :aria-owns="uid"
         :aria-controls="uid"
         class="bx--list-box__field"
-        tabindex="0"
+        tabindex="-1"
         type="button"
         :aria-label="open ? 'close menu' : 'open menu'"
         data-toggle="true"
         ref="button"
       >
-        <cv-tag
-          :class="{ 'bx--list-box__selection--multi': filterable && dataValue.length > 0 }"
-          v-show="dataValue.length > 0"
-          kind="filter"
-          :label="`${dataValue.length}`"
-          @remove="clearValues"
-          ref="tag"
+        <input
+          ref="input"
+          class="bx--text-input"
+          :aria-controls="uid"
+          aria-autocomplete="list"
+          role="combobox"
+          :aria-expanded="open"
+          autocomplete="off"
+          placeholder="Filter"
+          v-model="filter"
+          @input="onInput"
+          @focus="inputFocus"
+          @click.stop.prevent="inputClick"
         />
-        <span v-if="!filterable" class="bx--list-box__label">{{ label }}</span>
-        <template v-else>
-          <input
-            ref="input"
-            class="bx--text-input"
-            :aria-controls="uid"
-            aria-autocomplete="list"
-            role="combobox"
-            :aria-expanded="open"
-            autocomplete="off"
-            placeholder="Filter"
-            v-model="filter"
-            @input="onInput"
-            @focus="inputFocus"
-            @click.stop.prevent="inputClick"
-          />
-          <div
-            v-if="filter.length > 0"
-            role="button"
-            class="bx--tag--filter bx--list-box__selection"
-            tabindex="0"
-            title="Clear filter"
-            @click.stop="clearFilter"
-            @keydown.enter.stop.prevent="clearFilter"
-            @keydown.space.stop.prevent
-            @keyup.space.stop.prevent="clearFilter"
-          >
-            <Close16 />
-          </div>
-        </template>
+        <div
+          v-if="filter"
+          role="button"
+          class="bx--tag--filter bx--list-box__selection"
+          tabindex="0"
+          title="Clear filter"
+          @click.stop="clearFilter"
+          @keydown.enter.stop.prevent="clearFilter"
+          @keydown.space.stop.prevent
+          @keyup.space.stop.prevent="clearFilter"
+        >
+          <Close16 />
+        </div>
+
         <div class="bx--list-box__menu-icon" :class="{ 'bx--list-box__menu-icon--open': open }" role="button">
           <chevron-down-16 :aria-label="open ? 'Close menu' : 'Open menu'" />
         </div>
@@ -102,7 +76,7 @@
       <div v-show="open" :id="uid" class="bx--list-box__menu" role="listbox" ref="list">
         <div
           v-for="(item, index) in dataOptions"
-          :key="`multi-select-${index}`"
+          :key="`combo-box-${index}`"
           class="bx--list-box__menu-item"
           :class="{ 'bx--list-box__menu-item--highlighted': highlighted === item.value }"
           ref="option"
@@ -110,22 +84,11 @@
           @mousemove="onMousemove(item.value)"
           @mousedown.prevent
         >
-          <div class="bx--list-box__menu-item__option">
-            <cv-checkbox
-              tabindex="-1"
-              :form-item="false"
-              v-model="dataValue"
-              :value="item.value"
-              :name="item.name"
-              :data-test="item.name"
-              :label="item.label"
-              style="pointer-events: none;"
-            />
-          </div>
+          <div class="bx--list-box__menu-item__option">{{ item.label }}</div>
         </div>
       </div>
     </div>
-    <div v-if="isInvalid && !inline" class="bx--form-requirement">
+    <div v-if="isInvalid" class="bx--form-requirement">
       <slot name="invalid-message">{{ invalidMessage }}</slot>
     </div>
   </div>
@@ -137,23 +100,15 @@ import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16';
 import Close16 from '@carbon/icons-vue/es/close/16';
 import uidMixin from '../../mixins/uid-mixin';
-import CvCheckbox from '../cv-checkbox/cv-checkbox';
-import CvTag from '../cv-tag/cv-tag';
-
-const TOP_AFTER_REOPEN = 0;
-const TOP = 1;
-const FIXED = 2;
-const selectionFeedbackOptions = ['top-after-reopen', 'top', 'fixed'];
 
 export default {
-  name: 'CvMultiSelect',
+  name: 'CvComboBox',
   inheritAttrs: false,
   mixins: [themeMixin, uidMixin],
-  components: { WarningFilled16, ChevronDown16, CvCheckbox, CvTag, Close16 },
+  components: { WarningFilled16, ChevronDown16, Close16 },
   props: {
     autoFilter: Boolean,
     autoHighlight: Boolean,
-    inline: Boolean,
     invalidMessage: { type: String, default: null },
     helperText: { type: String, default: null },
     title: String,
@@ -162,10 +117,7 @@ export default {
       default: 'Choose options',
     },
     highlight: String,
-    value: { type: Array, default: () => [] },
-    // initial value of the multi-select,
-    // options in the form
-    // [{ label: '', value: '', name: ''}]
+    value: String,
     options: {
       type: Array,
       required: true,
@@ -174,31 +126,20 @@ export default {
           item => typeof item.name === 'string' && typeof item.label === 'string' && typeof item.value === 'string'
         );
         if (!result) {
-          console.warn('CvMultiSelect - all options must have name, label and value');
+          console.warn('CvComboBox - all options must have name, label and value');
         }
         return result;
       },
     },
-    selectionFeedback: {
-      type: String,
-      default: selectionFeedbackOptions[TOP_AFTER_REOPEN],
-      validator(val) {
-        if (!selectionFeedbackOptions.includes(val)) {
-          console.warn(`CvMultiSelect: invalid selectionFeedback "${val}", use one of ${selectionFeedbackOptions}`);
-          return false;
-        }
-        return true;
-      },
-    },
-    filterable: Boolean,
   },
   data() {
+    console.log('test: ', this.value);
     return {
       open: false,
       dataOptions: null,
-      dataValue: '',
+      dataValue: this.value,
       dataHighlighted: null,
-      dataFilter: '',
+      dataFilter: null,
     };
   },
   model: {
@@ -210,20 +151,19 @@ export default {
       this.highlighted = this.highlight;
     },
     value() {
-      this.dataValue = this.value.filter(item => this.dataOptions.some(opt => opt.value === item.trim()));
+      this.dataValue = this.value;
+      this.highlighted = this.value;
+      this.filter = this.value;
     },
     options() {
-      this.updateOptions();
-    },
-    selectionFeedback() {
       this.updateOptions();
     },
   },
   created() {
     this.updateOptions();
-    this.dataValue = this.value.filter(item => this.dataOptions.some(opt => opt.value === item.trim()));
   },
   mounted() {
+    this.filter = this.value;
     this.highlighted = this.value ? this.value : this.highlight; // override highlight with value if provided
   },
   computed: {
@@ -315,14 +255,6 @@ export default {
       if (this.highlight !== this.highlighted) {
         this.highlighted = this.highlight;
       }
-
-      // multi select unique part
-      if (!this.sorting && this.selectionFeedback !== selectionFeedbackOptions[FIXED]) {
-        // if included in data value move to top
-        this.dataOptions.sort(
-          (a, b) => (this.dataValue.includes(a.value) ? -1 : 1) - (this.dataValue.includes(b.value) ? -1 : 1)
-        );
-      }
     },
     updateHighlight() {
       let firstMatchIndex;
@@ -345,9 +277,6 @@ export default {
       this.updateHighlight();
     },
     doOpen(newVal) {
-      if (newVal && !this.open && this.selectionFeedback === selectionFeedbackOptions[TOP_AFTER_REOPEN]) {
-        this.updateOptions();
-      }
       this.open = newVal;
     },
     onDown() {
@@ -362,31 +291,35 @@ export default {
         this.doMove(true);
       }
     },
-    inputOrButtonFocus() {
-      if (this.filterable) {
+    onEsc() {
+      this.doOpen(false);
+      this.$el.focus();
+    },
+    onSpace() {
+      this.onItemClick(this.highlighted);
+    },
+    onEnter() {
+      this.doOpen(!this.open);
+      if (!this.open) {
+        this.onItemClick(this.highlighted);
+        this.$refs.input.focus();
+      }
+    },
+    onClick(ev) {
+      this.doOpen(!this.open);
+      if (this.open) {
         this.$refs.input.focus();
       } else {
         this.$refs.button.focus();
       }
     },
-    onEsc() {
-      this.doOpen(false);
-      this.inputOrButtonFocus();
-    },
-    onSpace() {
-      this.onItemClick(this.highlighted);
-    },
-    onClick(ev) {
-      this.doOpen(!this.open);
-      this.inputOrButtonFocus();
-    },
     clearValues() {
       this.dataValue = [];
-      this.inputOrButtonFocus();
+      this.$refs.input.focus();
       this.$emit('change', this.dataValue);
     },
     onFocusOut(ev) {
-      if (!this.$el.contains(ev.relatedTarget) && !this.$refs.tag.$el.contains(ev.target)) {
+      if (!this.$el.contains(ev.relatedTarget)) {
         this.doOpen(false);
       }
     },
@@ -394,16 +327,13 @@ export default {
       this.highlighted = val;
     },
     onItemClick(val) {
-      const index = this.dataValue.findIndex(item => val === item);
-      if (index > -1) {
-        this.dataValue.splice(index, 1);
-      } else {
-        this.dataValue.push(val);
+      this.dataValue = val;
+      const filterOption = this.dataOptions.find(item => item.value === val);
+      if (filterOption) {
+        this.filter = filterOption.label;
       }
-      if (this.selectionFeedback === selectionFeedbackOptions[TOP]) {
-        this.updateOptions();
-      }
-      this.$refs.button.focus();
+      this.$refs.input.focus();
+      this.open = false; // close after user makes a selection
       this.$emit('change', this.dataValue);
     },
     inputClick() {
@@ -419,7 +349,7 @@ export default {
 </script>
 
 <style lang="scss">
-.cv-multi-select.bx--multi-select--filterable .bx--list-box__selection--multi {
-  margin: 0;
-}
+// .cv-combo-box.bx--combo-box--filterable .bx--list-box__selection--multi {
+//   margin: 0;
+// }
 </style>

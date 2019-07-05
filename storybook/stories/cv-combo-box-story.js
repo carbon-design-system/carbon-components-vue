@@ -6,11 +6,11 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvMultiSelectNotesMD from '@carbon/vue/src/components/cv-multi-select/cv-multi-select-notes.md';
-import CvMultiSelect from '@carbon/vue/src/components/cv-multi-select/cv-multi-select';
+import CvComboBoxNotesMD from '@carbon/vue/src/components/cv-combo-box/cv-combo-box-notes.md';
+import CvComboBox from '@carbon/vue/src/components/cv-combo-box/cv-combo-box';
 
-const storiesDefault = storiesOf('Components/CvMultiSelect', module);
-const storiesExperimental = storiesOf('Experimental/CvMultiSelect', module);
+const storiesDefault = storiesOf('Components/CvComboBox', module);
+const storiesExperimental = storiesOf('Experimental/CvComboBox', module);
 
 const fruits = [
   'Apple',
@@ -40,6 +40,11 @@ const fruits = [
   };
 });
 
+const selectFruits = {};
+fruits.forEach(item => {
+  selectFruits[item.name] = item.label;
+});
+
 let preKnobs = {
   theme: {
     group: 'attr',
@@ -62,20 +67,11 @@ let preKnobs = {
   },
   vModel: {
     group: 'attr',
-    value: `v-model="checks"`,
+    value: `v-model="value"`,
   },
   events: {
     group: 'attr',
     value: `@change="actionChange" @filter="actionFilter"`,
-  },
-  inline: {
-    group: 'attr',
-    type: boolean,
-    config: ['inline', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: Boolean,
-      name: 'inline',
-    },
   },
   helperText: {
     group: 'attr',
@@ -114,7 +110,7 @@ let preKnobs = {
   title: {
     group: 'attr',
     type: text,
-    config: ['title', 'Multiselect title'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    config: ['title', 'ComboBox title'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: {
       type: String,
       name: 'title',
@@ -127,32 +123,6 @@ let preKnobs = {
     prop: {
       type: Boolean,
       name: 'disabled',
-    },
-  },
-  selectionFeedback: {
-    group: 'attr',
-    type: select,
-    config: [
-      'Selection feedback',
-      {
-        'top-after-reopen': 'top-after-reopen',
-        top: 'top',
-        fixed: 'fixed',
-      },
-      'top-after-reopen',
-    ],
-    prop: {
-      name: 'selection-feedback',
-      type: String,
-    },
-  },
-  filterable: {
-    group: 'attr',
-    type: boolean,
-    config: ['filterable', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: Boolean,
-      name: 'filterable',
     },
   },
   autoFilter: {
@@ -197,11 +167,19 @@ let preKnobs = {
   },
   initialValue: {
     group: 'attr',
-    type: array,
-    config: ['initial-value', ['20s', '40s'], ','],
+    type: select,
+    config: [
+      'value',
+      {
+        default: '',
+        ...selectFruits,
+      },
+      '',
+      // consts.CONTENT, // fails when used with number in storybook 4.1.4
+    ],
     prop: {
-      type: Array,
       name: 'value',
+      type: String,
     },
   },
 };
@@ -221,7 +199,7 @@ let variants = [
   },
   {
     name: 'user Filter and/or Highlight',
-    includes: ['filterable', 'userFilterOrHighlight', 'userFilter', 'userHighlight'],
+    includes: ['userFilterOrHighlight', 'userFilter', 'userHighlight'],
   },
   {
     name: 'slots',
@@ -230,12 +208,12 @@ let variants = [
       'events',
       'helperText',
       'invalidMessage',
+      'userFilterOrHighlight',
       'userFilter',
       'userHighlight',
-      'userFilterOrHighlight',
     ],
   },
-  { name: 'events', includes: ['filterable', 'events'] },
+  { name: 'events', includes: ['events'] },
   { name: 'vModel', includes: ['vModel'] },
 ];
 
@@ -247,9 +225,9 @@ for (const story of storySet) {
     () => {
       const settings = story.knobs();
 
-      const templateString = `<cv-multi-select ${settings.group.attr}
+      const templateString = `<cv-combo-box ${settings.group.attr}
   :options="options">${settings.group.slots}
-</cv-multi-select>
+</cv-combo-box>
   `;
 
       // ----------------------------------------------------------------
@@ -266,24 +244,34 @@ for (const story of storySet) {
       <span>
         V-model:
       </span>
-      <span v-for="fruit in options">
-        <label :style="{whiteSpace: 'nowrap'}">{{fruit.label}}:
-          <input type="checkbox" :value="fruit.value" v-model="checks">
-        </label>,
-      </span>
+      <label>Check 10s:
+        <input type="checkbox" value="10s" v-model="checks">
+      </label>
+      <label>Check 20s:
+        <input type="checkbox" value="20s" v-model="checks">
+      </label>
+      <label>Check 30s:
+        <input type="checkbox" value="30s" v-model="checks">
+      </label>
+      <label>Check 40s:
+        <input type="checkbox" value="40s" v-model="checks">
+      </label>
+      <label>Check 50s:
+        <input type="checkbox" value="50s" v-model="checks">
+      </label>
       <br>
       <br>
       <span>Checked: {{ checks }}</span>
     </div>
     <pre v-else>
-    :options: fruits
+    :options: options
     </pre>
   </template>  </sv-template-view>
   `;
 
       return {
         components: {
-          CvMultiSelect,
+          CvComboBox,
           SvTemplateView,
         },
         props: settings.props,
@@ -295,8 +283,8 @@ for (const story of storySet) {
           };
         },
         methods: {
-          actionChange: action('CV MultiSelect - change'),
-          actionFilter: action('Cv MultiSelect - filter'),
+          actionChange: action('CV ComboBox - change'),
+          actionFilter: action('Cv ComboBox - filter'),
           onFilter(filter) {
             let pat = new RegExp(`^${filter}`, 'ui');
             if (this.userFilter) {
@@ -316,7 +304,7 @@ for (const story of storySet) {
       };
     },
     {
-      notes: { markdown: CvMultiSelectNotesMD },
+      notes: { markdown: CvComboBoxNotesMD },
     }
   );
 }
