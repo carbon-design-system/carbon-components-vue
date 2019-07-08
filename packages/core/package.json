@@ -11,7 +11,8 @@
     "url": "https://github.com/carbon-design-system/carbon-components-vue/issues/new"
   },
   "homepage": "https://github.com/carbon-design-system/carbon-components-vue/tree/master/packages/core#readme",
-  "main": "dist/carbon-vue.umd.min.js",
+  "main": "dist/carbon-vue.common.min.js",
+  "module": "dist/carbon-vue.umd.min.js",
   "keywords": [
     "carbon",
     "vue",

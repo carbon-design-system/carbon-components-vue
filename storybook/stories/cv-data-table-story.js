@@ -7,17 +7,19 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvDataTableNotesMD from '@carbon/vue/src/components/cv-data-table/cv-data-table-notes.md';
-import CvDataTable from '@carbon/vue/src/components/cv-data-table/cv-data-table';
-import CvDataTableAction from '@carbon/vue/src/components/cv-data-table/cv-data-table-action';
-import CvDataTableRow from '@carbon/vue/src/components/cv-data-table/cv-data-table-row';
-import CvDataTableCell from '@carbon/vue/src/components/cv-data-table/cv-data-table-cell';
-import CvButton from '@carbon/vue/src/components/cv-button/cv-button';
-import CvOverflowMenu from '@carbon/vue/src/components/cv-overflow-menu/cv-overflow-menu';
-import CvOverflowMenuItem from '@carbon/vue/src/components/cv-overflow-menu/cv-overflow-menu-item';
+import {
+  CvDataTable,
+  CvDataTableAction,
+  CvDataTableRow,
+  CvDataTableCell,
+  CvButton,
+  CvOverflowMenu,
+  CvOverflowMenuItem,
+  CvTag,
+} from '@carbon/vue/src';
 import TrashCan16 from '@carbon/icons-vue/es/trash-can/16';
 import Save16 from '@carbon/icons-vue/es/save/16';
 import Download16 from '@carbon/icons-vue/es/download/16';
-import CvTag from '@carbon/vue/src/components/cv-tag/cv-tag';
 
 const storiesDefault = storiesOf('Components/CvDataTable', module);
 const storiesExperimental = storiesOf('Experimental/CvDataTable', module);

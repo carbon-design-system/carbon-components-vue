@@ -7,8 +7,7 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvButtonNotesMD from '@carbon/vue/src/components/cv-button/cv-button-notes.md';
-import CvButton from '@carbon/vue/src/components/cv-button/cv-button';
-import CvButtonSkeleton from '@carbon/vue/src/components/cv-button/cv-button-skeleton';
+import { CvButton, CvButtonSkeleton } from '@carbon/vue/src';
 
 const storiesDefault = storiesOf('Components/CvButton', module);
 const storiesExperimental = storiesOf('Experimental/CvButton', module);

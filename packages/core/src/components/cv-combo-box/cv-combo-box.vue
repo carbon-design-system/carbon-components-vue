@@ -1,8 +1,8 @@
 <template>
   <div class="cv-combo-box bx--list-box__wrapper" @focusout="onFocusOut">
-    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">
-      {{ title }}
-    </label>
+    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">{{
+      title
+    }}</label>
 
     <div v-if="isHelper" class="bx--form__helper-text" :class="{ 'bx--form__helper-text--disabled': $attrs.disabled }">
       <slot name="helper-text">{{ helperText }}</slot>
@@ -165,6 +165,9 @@ export default {
   mounted() {
     this.filter = this.value;
     this.highlighted = this.value ? this.value : this.highlight; // override highlight with value if provided
+    console.warn(
+      `${this.$vnode.componentOptions.Ctor.extendOptions.name} - Under review. This component isn't quite ready. Hopefully no features will get broken but this cannot be guarenteed.`
+    );
   },
   computed: {
     isInvalid() {

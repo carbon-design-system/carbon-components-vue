@@ -7,8 +7,7 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvTabsNotesMD from '@carbon/vue/src/components/cv-tabs/cv-tabs-notes.md';
-import CvTabs from '@carbon/vue/src/components/cv-tabs/cv-tabs';
-import CvTab from '@carbon/vue/src/components/cv-tabs/cv-tab';
+import { CvTab, CvTabs } from '@carbon/vue/src';
 
 const storiesDefault = storiesOf('Components/CvTabs', module);
 const storiesExperimental = storiesOf('Experimental/CvTabs', module);

@@ -8,7 +8,7 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvToastNotificationNotesMD from '@carbon/vue/src/components/cv-toast-notification/cv-toast-notification-notes.md';
-import CvToastNotification from '@carbon/vue/src/components/cv-toast-notification/cv-toast-notification';
+import { CvToastNotification } from '@carbon/vue/src';
 
 const storiesDefault = storiesOf('Components/CvToastNotification', module);
 const storiesExperimental = storiesOf('Experimental/CvToastNotification', module);

@@ -7,9 +7,7 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvSelectNotesMD from '@carbon/vue/src/components/cv-select/cv-select-notes.md';
-import CvSelect from '@carbon/vue/src/components/cv-select/cv-select';
-import CvSelectOption from '@carbon/vue/src/components/cv-select/cv-select-option';
-import CvSelectOptgroup from '@carbon/vue/src/components/cv-select/cv-select-optgroup';
+import { CvSelect, CvSelectOptgroup, CvSelectOption } from '@carbon/vue/src';
 
 const storiesDefault = storiesOf('Components/CvSelect', module);
 const storiesExperimental = storiesOf('Experimental/CvSelect', module);

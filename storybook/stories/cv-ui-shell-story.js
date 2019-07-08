@@ -8,24 +8,26 @@ import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvHeaderNotesMD from '@carbon/vue/src/components/cv-ui-shell/cv-ui-shell-notes.md';
 
-import CvHeader from '@carbon/vue/src/components/cv-ui-shell/cv-header';
-import CvHeaderPanel from '@carbon/vue/src/components/cv-ui-shell/cv-header-panel';
-import CvHeaderNav from '@carbon/vue/src/components/cv-ui-shell/cv-header-nav';
-import CvHeaderName from '@carbon/vue/src/components/cv-ui-shell/cv-header-name';
-import CvHeaderMenu from '@carbon/vue/src/components/cv-ui-shell/cv-header-menu';
-import CvHeaderMenuItem from '@carbon/vue/src/components/cv-ui-shell/cv-header-menu-item';
-import CvHeaderGlobalAction from '@carbon/vue/src/components/cv-ui-shell/cv-header-global-action';
-import CvHeaderMenuButton from '@carbon/vue/src/components/cv-ui-shell/cv-header-menu-button';
-import CvSideNav from '@carbon/vue/src/components/cv-ui-shell/cv-side-nav';
-import CvSideNavLink from '@carbon/vue/src/components/cv-ui-shell/cv-side-nav-link';
-import CvSideNavMenu from '@carbon/vue/src/components/cv-ui-shell/cv-side-nav-menu';
+import {
+  CvHeader,
+  CvHeaderGlobalAction,
+  CvHeaderMenu,
+  CvHeaderMenuButton,
+  CvHeaderMenuItem,
+  CvHeaderName,
+  CvHeaderNav,
+  CvHeaderPanel,
+  CvSideNav,
+  CvSideNavItems,
+  CvSideNavLink,
+  CvSideNavMenu,
+  CvSideNavMenuItem,
+  CvSkipToContent,
+  CvSwitcher,
+  CvSwitcherItem,
+  CvSwitcherItemLink,
+} from '@carbon/vue/src';
 
-import CvSideNavItems from '@carbon/vue/src/components/cv-ui-shell/cv-side-nav-items';
-import CvSideNavMenuItem from '@carbon/vue/src/components/cv-ui-shell/cv-side-nav-menu-item';
-import CvSkipToContent from '@carbon/vue/src/components/cv-ui-shell/cv-skip-to-content';
-import CvSwitcher from '@carbon/vue/src/components/cv-ui-shell/cv-switcher';
-import CvSwitcherItem from '@carbon/vue/src/components/cv-ui-shell/cv-switcher-item';
-import CvSwitcherItemLink from '@carbon/vue/src/components/cv-ui-shell/cv-switcher-item-link';
 import Fade16 from '@carbon/icons-vue/es/fade/16';
 import Notification20 from '@carbon/icons-vue/es/notification/20';
 import UserAvatar20 from '@carbon/icons-vue/es/user--avatar/20';
@@ -440,7 +442,6 @@ ${settings.group.leftPanels2}
       const templateViewString = `
     <sv-template-view
       sv-margin
-      under-construction
       sv-source='${templateString.trim()}'
       sv-position="center"
       sv-padding="150px 0 50px 0"

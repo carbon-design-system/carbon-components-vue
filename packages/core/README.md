@@ -201,6 +201,48 @@ To import individual components:
 ```javascript
 <script>
 ...
+import { CvButton } from '@carbon/vue';
+...
+components: {
+  CvButton,
+},
+...
+</script>
+```
+
+Alternataively from source:
+
+```javascript
+<script>
+...
+import { CvButton } from '@carbon/vue/src';
+...
+components: {
+  CvButton,
+},
+...
+</script>
+```
+
+or
+
+```javascript
+<script>
+...
+import { CvButton } from '@carbon/vue/src/components/cv-button';
+...
+components: {
+  CvButton,
+},
+...
+</script>
+```
+
+or
+
+```javascript
+<script>
+...
 import CvButton from '@carbon/vue/src/components/cv-button/cv-button';
 ...
 components: {

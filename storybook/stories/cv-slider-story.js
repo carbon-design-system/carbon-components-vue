@@ -7,8 +7,7 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvSliderNotesMD from '@carbon/vue/src/components/cv-slider/cv-slider-notes.md';
-import CvSlider from '@carbon/vue/src/components/cv-slider/cv-slider';
-import CvSliderSkeleton from '@carbon/vue/src/components/cv-slider/cv-slider-skeleton';
+import { CvSlider, CvSliderSkeleton } from '@carbon/vue/src';
 
 const storiesDefault = storiesOf('Components/CvSlider', module);
 const storiesExperimental = storiesOf('Experimental/CvSlider', module);

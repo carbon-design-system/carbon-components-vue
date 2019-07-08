@@ -6,8 +6,7 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvListNotesMD from '@carbon/vue/src/components/cv-list/cv-list-notes.md';
-import CvList from '@carbon/vue/src/components/cv-list/cv-list';
-import CvListItem from '@carbon/vue/src/components/cv-list/cv-list-item';
+import { CvList, CvListItem } from '@carbon/vue/src';
 
 const storiesDefault = storiesOf('Components/CvList', module);
 const storiesExperimental = storiesOf('Experimental/CvList', module);

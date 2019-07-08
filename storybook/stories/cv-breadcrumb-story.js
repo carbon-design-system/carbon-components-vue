@@ -6,10 +6,7 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvBreadcrumbNotesMD from '@carbon/vue/src/components/cv-breadcrumb/cv-breadcrumb-notes.md';
-import CvBreadcrumb from '@carbon/vue/src/components/cv-breadcrumb/cv-breadcrumb';
-import CvBreadcrumbItem from '@carbon/vue/src/components/cv-breadcrumb/cv-breadcrumb-item';
-import CvBreadcrumbSkeleton from '@carbon/vue/src/components/cv-breadcrumb/cv-breadcrumb-skeleton';
-import CvLink from '@carbon/vue/src/components/cv-link/cv-link';
+import { CvBreadcrumb, CvBreadcrumbItem, CvBreadcrumbSkeleton, CvLink } from '@carbon/vue/src';
 
 const storiesDefault = storiesOf('Components/CvBreadcrumb', module);
 const storiesExperimental = storiesOf('Experimental/CvBreadcrumb', module);

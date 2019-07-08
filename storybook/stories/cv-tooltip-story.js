@@ -6,9 +6,7 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvTooltipNotesMD from '@carbon/vue/src/components/cv-tooltip/cv-tooltip-notes.md';
-import CvInteractiveTooltip from '@carbon/vue/src/components/cv-tooltip/cv-interactive-tooltip';
-import CvTooltip from '@carbon/vue/src/components/cv-tooltip/cv-tooltip';
-import CvDefinitionTooltip from '@carbon/vue/src/components/cv-tooltip/cv-definition-tooltip';
+import { CvInteractiveTooltip, CvTooltip, CvDefinitionTooltip } from '@carbon/vue/src';
 
 const storiesDefault = storiesOf('Components/CvTooltip', module);
 const storiesExperimental = storiesOf('Experimental/CvTooltip', module);

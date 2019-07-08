@@ -7,8 +7,7 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvFileUploaderNotesMD from '@carbon/vue/src/components/cv-file-uploader/cv-file-uploader-notes.md';
-import CvFileUploader from '@carbon/vue/src/components/cv-file-uploader/cv-file-uploader';
-import CvFileUploaderSkeleton from '@carbon/vue/src/components/cv-file-uploader/cv-file-uploader-skeleton';
+import { CvFileUploader, CvFileUploaderSkeleton } from '@carbon/vue/src';
 
 const storiesDefault = storiesOf('Components/CvFileUploader', module);
 const storiesExperimental = storiesOf('Experimental/CvFileUploader', module);

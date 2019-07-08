@@ -7,9 +7,7 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvContentSwitcherNotesMD from '@carbon/vue/src/components/cv-content-switcher/cv-content-switcher-notes.md';
-import CvContentSwitcher from '@carbon/vue/src/components/cv-content-switcher/cv-content-switcher';
-import CvContentSwitcherButton from '@carbon/vue/src/components/cv-content-switcher/cv-content-switcher-button';
-import CvContentSwitcherContent from '@carbon/vue/src/components/cv-content-switcher/cv-content-switcher-content';
+import { CvContentSwitcher, CvContentSwitcherButton, CvContentSwitcherContent } from '@carbon/vue/src';
 
 const storiesDefault = storiesOf('Components/CvContentSwitcher', module);
 const storiesExperimental = storiesOf('Experimental/CvContentSwitcher', module);
