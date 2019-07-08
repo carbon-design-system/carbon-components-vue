@@ -8,9 +8,9 @@
     }"
     @focusout="onFocusOut"
   >
-    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">{{
-      title
-    }}</label>
+    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">
+      {{ title }}
+    </label>
 
     <div
       v-if="!inline && isHelper"
@@ -225,6 +225,9 @@ export default {
   },
   mounted() {
     this.highlighted = this.value ? this.value : this.highlight; // override highlight with value if provided
+    console.warn(
+      `${this.$vnode.componentOptions.Ctor.extendOptions.name} - Under review. This component isn't quite ready. Hopefully no features will get broken but this cannot be guarenteed.`
+    );
   },
   computed: {
     isInvalid() {

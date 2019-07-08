@@ -5,7 +5,7 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvSkeletonTextNotesMD from '@carbon/vue/src/components/cv-skeleton-text/cv-skeleton-text-notes.md';
-import CvSkeletonText from '@carbon/vue/src/components/cv-skeleton-text/cv-skeleton-text';
+import { CvSkeletonText } from '@carbon/vue/src';
 
 const storiesDefault = storiesOf('Components/CvSkeletonText', module);
 const storiesExperimental = storiesOf('Experimental/CvSkeletonText', module);

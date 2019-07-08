@@ -37,8 +37,8 @@
       </pre>
       <button @click="sourceToClipboard" title="Copy to clipboard" class="sv-template-view__copy" ref="copyButton">
         <svg width="18" height="24" viewBox="0 0 18 24" fill-rule="evenodd">
-          <path d="M13 5V0H0v19h5v5h13V5h-5zM2 17V2h9v3H5v12H2zm14 5H7V7h9v15z"></path>
-          <path d="M9 9h5v2H9zM9 12h5v2H9zM9 15h3v2H9z"></path>
+          <path d="M13 5V0H0v19h5v5h13V5h-5zM2 17V2h9v3H5v12H2zm14 5H7V7h9v15z" />
+          <path d="M9 9h5v2H9zM9 12h5v2H9zM9 15h3v2H9z" />
         </svg>
       </button>
       <textarea class="sv-template-view__clippy" aria-hidden="true" ref="clippy"></textarea>
@@ -49,7 +49,7 @@
 <script>
 import Vue from 'vue';
 import SvView from './sv-view.vue';
-import CvInlineNotification from '../../../../packages/core/src/components/cv-inline-notification/cv-inline-notification';
+import { CvInlineNotification } from '@carbon/vue/src';
 
 export default {
   name: 'SvTemplateView',

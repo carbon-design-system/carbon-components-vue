@@ -6,7 +6,7 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvInlineLoadingNotesMD from '@carbon/vue/src/components/cv-inline-loading/cv-inline-loading-notes.md';
-import CvInlineLoading from '@carbon/vue/src/components/cv-inline-loading/cv-inline-loading';
+import { CvInlineLoading } from '@carbon/vue/src';
 
 const storiesDefault = storiesOf('Components/CvInlineLoading', module);
 const storiesExperimental = storiesOf('Experimental/CvInlineLoading', module);

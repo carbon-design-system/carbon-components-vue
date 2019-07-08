@@ -9,7 +9,7 @@
 
     <component v-if="typeof icon === 'object'" :is="icon" class="bx--btn__icon" />
     <svg v-if="typeof icon === 'string' || iconHref" class="bx--btn__icon">
-      <use :href="icon || iconHref"></use>
+      <use :href="icon || iconHref" />
     </svg>
   </button>
 </template>

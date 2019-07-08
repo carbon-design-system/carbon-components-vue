@@ -7,8 +7,7 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvTagNotesMD from '@carbon/vue/src/components/cv-tag/cv-tag-notes.md';
-import CvTag from '@carbon/vue/src/components/cv-tag/cv-tag';
-import CvTagSkeleton from '@carbon/vue/src/components/cv-tag/cv-tag-skeleton';
+import { CvTag, CvTagSkeleton } from '@carbon/vue/src';
 
 const storiesDefault = storiesOf('Components/CvTag', module);
 // const storiesExperimental = storiesOf('Experimental/CvTag', module);

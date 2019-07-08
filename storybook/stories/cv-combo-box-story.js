@@ -7,7 +7,7 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvComboBoxNotesMD from '@carbon/vue/src/components/cv-combo-box/cv-combo-box-notes.md';
-import CvComboBox from '@carbon/vue/src/components/cv-combo-box/cv-combo-box';
+import { CvComboBox } from '@carbon/vue/src';
 
 const storiesDefault = storiesOf('Components/CvComboBox', module);
 const storiesExperimental = storiesOf('Experimental/CvComboBox', module);
@@ -233,7 +233,8 @@ for (const story of storySet) {
       // ----------------------------------------------------------------
       const templateViewString = `
   <sv-template-view
-    sv-margin
+  under-construction
+  sv-margin
     :sv-alt-back="this.$options.propsData.theme !== 'light'"
     sv-source='${templateString.trim()}'>
     <template slot="component">${templateString}</template>

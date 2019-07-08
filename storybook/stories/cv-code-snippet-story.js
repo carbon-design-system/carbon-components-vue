@@ -6,8 +6,7 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvCodeSnippetNotesMD from '@carbon/vue/src/components/cv-code-snippet/cv-code-snippet-notes.md';
-import CvCodeSnippet from '@carbon/vue/src/components/cv-code-snippet/cv-code-snippet';
-import CvCodeSnippetSkeleton from '@carbon/vue/src/components/cv-code-snippet/cv-code-snippet-skeleton';
+import { CvCodeSnippet, CvCodeSnippetSkeleton } from '@carbon/vue/src';
 
 const storiesDefault = storiesOf('Components/CvCodeSnippet', module);
 const storiesExperimental = storiesOf('Experimental/CvCodeSnippet', module);

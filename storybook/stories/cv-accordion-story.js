@@ -6,9 +6,7 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvAccordionNotesMD from '@carbon/vue/src/components/cv-accordion/cv-accordion-notes.md';
-import CvAccordion from '@carbon/vue/src/components/cv-accordion/cv-accordion';
-import CvAccordionItem from '@carbon/vue/src/components/cv-accordion/cv-accordion-item';
-import CvAccordionSkeleton from '@carbon/vue/src/components/cv-accordion/cv-accordion-skeleton';
+import { CvAccordion, CvAccordionItem, CvAccordionSkeleton } from '@carbon/vue/src';
 
 const storiesDefault = storiesOf('Components/CvAccordion', module);
 const storiesExperimental = storiesOf('Experimental/CvAccordion', module);

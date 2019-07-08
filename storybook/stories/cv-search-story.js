@@ -7,7 +7,7 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvSearchNotesMD from '@carbon/vue/src/components/cv-search/cv-search-notes.md';
-import CvSearch from '@carbon/vue/src/components/cv-search/cv-search';
+import { CvSearch } from '@carbon/vue/src';
 
 const storiesDefault = storiesOf('Components/CvSearch', module);
 const storiesExperimental = storiesOf('Experimental/CvSearch', module);

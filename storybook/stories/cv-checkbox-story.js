@@ -7,8 +7,7 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvCheckboxNotesMD from '@carbon/vue/src/components/cv-checkbox/cv-checkbox-notes.md';
-import CvCheckbox from '@carbon/vue/src/components/cv-checkbox/cv-checkbox';
-import CvCheckboxSkeleton from '@carbon/vue/src/components/cv-checkbox/cv-checkbox-skeleton';
+import { CvCheckbox, CvCheckboxSkeleton } from '@carbon/vue/src';
 
 const storiesDefault = storiesOf('Components/CvCheckbox', module);
 const storiesExperimental = storiesOf('Experimental/CvCheckbox', module);
