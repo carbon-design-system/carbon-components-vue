@@ -16,8 +16,10 @@ import CvSkipToContent from './cv-skip-to-content';
 import CvSwitcherItemLink from './cv-switcher-item-link';
 import CvSwitcherItem from './cv-switcher-item';
 import CvSwitcher from './cv-switcher';
+import CvContent from './cv-content';
 
 export {
+  CvContent,
   CvHeaderGlobalAction,
   CvHeaderMenuButton,
   CvHeaderMenuItem,

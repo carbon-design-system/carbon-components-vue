@@ -71,6 +71,7 @@ import { CvToggle } from './components/cv-toggle';
 import { CvToolbar, CvToolbarTitle, CvToolbarSearch, CvToolbarOption, CvToolbarDivider } from './components/cv-toolbar';
 import { CvTooltip, CvInteractiveTooltip, CvDefinitionTooltip } from './components/cv-tooltip';
 import {
+  CvContent,
   CvHeaderGlobalAction,
   CvHeaderMenuButton,
   CvHeaderMenuItem,
@@ -132,6 +133,7 @@ export { CvToggle };
 export { CvToolbar, CvToolbarTitle, CvToolbarSearch, CvToolbarOption, CvToolbarDivider };
 export { CvTooltip, CvInteractiveTooltip, CvDefinitionTooltip };
 export {
+  CvContent,
   CvHeaderGlobalAction,
   CvHeaderMenuButton,
   CvHeaderMenuItem,
