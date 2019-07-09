@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.10.0-next.0 (July 9, 2019)
+
+### Feat
+
+- Add CvContent to UI shell
+
 ## 2.9.0 (July 9, 2019)
 
 ### Feat
