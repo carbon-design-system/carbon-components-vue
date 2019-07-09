@@ -1,14 +1,22 @@
 <template>
-  <cv-link-inner v-on="$listeners" data-tile="clickable" class="cv-tile-clickable bx--tile--clickable" tabindex="0">
+  <component
+    :is="tagType"
+    v-on="$listeners"
+    :to="to"
+    :href="href"
+    data-tile="clickable"
+    class="cv-tile-clickable bx--tile--clickable"
+    tabindex="0"
+  >
     <slot></slot>
-  </cv-link-inner>
+  </component>
 </template>
 
 <script>
-import CvLinkInner from '../cv-link/_cv-link-inner';
+import LinkMixin from '../../mixins/link-mixin';
 
 export default {
   name: 'CvTileClickable',
-  components: { CvLinkInner },
+  mixins: [LinkMixin],
 };
 </script>

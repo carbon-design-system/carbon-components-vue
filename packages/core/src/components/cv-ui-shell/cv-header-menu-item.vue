@@ -1,19 +1,27 @@
 <template>
   <li class="cv-header-menu-item" :role="role">
-    <cv-link-inner v-on="$listeners" v-bind="$attrs" class="bx--header__menu-item" role="menuitem">
+    <component
+      :is="tagType"
+      v-on="$listeners"
+      :to="to"
+      :href="href"
+      v-bind="$attrs"
+      class="bx--header__menu-item"
+      role="menuitem"
+    >
       <span class="bx--text-truncate--end">
         <slot />
       </span>
-    </cv-link-inner>
+    </component>
   </li>
 </template>
 
 <script>
-import CvLinkInner from '../cv-link/_cv-link-inner';
+import LinkMixin from '../../mixins/link-mixin';
 
 export default {
   name: 'CvHeaderMenuItem',
-  components: { CvLinkInner },
+  mixins: [LinkMixin],
   inheritAttrs: false,
   props: {
     role: String,

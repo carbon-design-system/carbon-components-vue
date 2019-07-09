@@ -1,8 +1,11 @@
 <template>
   <li class="bx--side-nav__menu-item">
-    <cv-link-inner
-      class="bx--side-nav__link"
+    <component
+      :is="tagType"
       v-on="$listeners"
+      :to="to"
+      :href="href"
+      class="bx--side-nav__link"
       v-bind="$attrs"
       :class="{ 'bx--side-nav__link--current': active }"
       role="menuitem"
@@ -10,18 +13,19 @@
       <cv-side-nav-link-text>
         <slot />
       </cv-side-nav-link-text>
-    </cv-link-inner>
+    </component>
   </li>
 </template>
 
 <script>
-import CvLinkInner from '../cv-link/_cv-link-inner';
+import LinkMixin from '../../mixins/link-mixin';
 import CvSideNavLinkText from './_cv-side-nav-link-text';
 
 export default {
   name: 'CvSideNavMenuItem',
   inheritAttrs: false,
-  components: { CvLinkInner, CvSideNavLinkText },
+  mixins: [LinkMixin],
+  components: { CvSideNavLinkText },
   props: {
     active: Boolean,
   },

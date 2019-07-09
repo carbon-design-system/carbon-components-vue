@@ -1,17 +1,17 @@
 <template>
-  <cv-link-inner v-on="$listeners" class="cv-header-name bx--header__name">
+  <component :is="tagType" v-on="$listeners" :to="to" :href="href" class="cv-header-name bx--header__name">
     <span v-if="prefix" class="bx--header__name--prefix">{{ prefix }}</span>
     &nbsp;
     <slot />
-  </cv-link-inner>
+  </component>
 </template>
 
 <script>
-import CvLinkInner from '../cv-link/_cv-link-inner';
+import LinkMixin from '../../mixins/link-mixin';
 
 export default {
   name: 'CvHeaderName',
-  components: { CvLinkInner },
+  mixins: [LinkMixin],
   props: {
     prefix: String,
   },
