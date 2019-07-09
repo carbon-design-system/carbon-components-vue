@@ -1,7 +1,7 @@
 {
   "name": "@carbon/vue",
   "description": "A collection of components for the Carbon Design System built using Vue.js",
-  "version": "2.9.0",
+  "version": "2.9.1-rc.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
