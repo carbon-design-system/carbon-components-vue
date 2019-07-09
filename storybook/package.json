@@ -1,6 +1,6 @@
 {
   "name": "storybook",
-  "version": "2.9.0-rc.0",
+  "version": "2.9.0-rc.1",
   "private": true,
   "description": "> TODO: description",
   "scripts": {
@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
-    "@carbon/vue": "^2.9.0-rc.0",
+    "@carbon/vue": "^2.9.0-rc.1",
     "@storybook/addon-actions": "^5.1.8",
     "@storybook/addon-knobs": "^5.1.8",
     "@storybook/addon-notes": "^5.1.8",

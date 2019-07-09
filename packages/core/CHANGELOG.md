@@ -1,3 +1,14 @@
+# Changelog
+
+## 2.9.0 (July 9, 2019)
+
+### Feat
+
+- Move multi-select to experimental
+- Updates to multi select API
+- Add combo box
+- Update export to surface individual components
+
 ## 2.8.0 (June 27, 2019)
 
 ### Feat
