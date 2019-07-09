@@ -1,14 +1,14 @@
 <template>
-  <cv-link-inner v-on="$listeners" class="cv-skip-to-content bx--skip-to-content">
+  <component :is="tagType" v-on="$listeners" :to="to" :href="href" class="cv-skip-to-content bx--skip-to-content">
     <slot>Skip to main content</slot>
-  </cv-link-inner>
+  </component>
 </template>
 
 <script>
-import CvLinkInner from '../cv-link/_cv-link-inner';
+import LinkMixin from '../../mixins/link-mixin';
 
 export default {
   name: 'CvSkipToContent',
-  components: { CvLinkInner },
+  mixins: [LinkMixin],
 };
 </script>
