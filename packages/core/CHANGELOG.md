@@ -1,10 +1,11 @@
 # Changelog
 
-## 2.10.0-next.0 (July 9, 2019)
+## 2.10.00 (July 10, 2019)
 
 ### Feat
 
 - Add CvContent to UI shell
+- Correct switch between 'router-link' and 'a' tag based on use of 'href' or 'to' in links
 
 ## 2.9.0 (July 9, 2019)
 
