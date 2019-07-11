@@ -779,6 +779,16 @@
   dependencies:
     "@carbon/icon-helpers" "10.2.0"
 
+"@carbon/vue@^2.10.0-rc.2":
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/@carbon/vue/-/vue-2.10.0.tgz#8520cef1a01ca5d06ed0e66ff930768b115da701"
+  integrity sha512-WxfznQwg8trmoPu1qiGwO8cREbEyH6m1Uv1xC5t4krig6lN4eXr4OCyGv9Tev9lEaxzP43lcXJ2YPpv/6Z5Iyg==
+  dependencies:
+    "@carbon/icons-vue" "10.3.0"
+    carbon-components "10.3.1"
+    flatpickr "4.6.1"
+    vue "^2.6.10"
+
 "@csstools/convert-colors@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
@@ -5167,9 +5177,9 @@ locate-path@^5.0.0:
     p-locate "^4.1.0"
 
 lodash-es@^4.17.11:
-  version "4.17.11"
-  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.11.tgz#145ab4a7ac5c5e52a3531fb4f310255a152b4be0"
-  integrity sha512-DHb1ub+rMjjrxqlB3H56/6MXtm1lSksDp2rA2cNWjG8mlDUYFhUj3Di2Zn5IwSU87xLv8tNIQ7sSwE/YOX/D/Q==
+  version "4.17.14"
+  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.14.tgz#12a95a963cc5955683cee3b74e85458954f37ecc"
+  integrity sha512-7zchRrGa8UZXjD/4ivUWP1867jDkhzTG2c/uj739utSd7O/pFFdxspCemIFKEEjErbcqRzn8nKnGsi7mvTgRPA==
 
 lodash._reinterpolate@~3.0.0:
   version "3.0.0"
