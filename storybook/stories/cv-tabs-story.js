@@ -48,22 +48,28 @@ for (const story of storySet) {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
+      let withId;
+      if (story.name === 'minimal') {
+        withId = () => '';
+      } else {
+        withId = id => `id="${id}"`;
+      }
 
       const templateString = `
 <cv-tabs${settings.group.attr} aria-label="navigation tab label">
-  <cv-tab id="tabs-1" label="Tab link 1">
+  <cv-tab ${withId(1)}label="Tab link 1">
     Sample tab panel content 1
   </cv-tab>
-  <cv-tab id="tabs-2" label="Tab link 2" ${settings.group.tab2}>
+  <cv-tab ${withId(1)}label="Tab link 2" ${settings.group.tab2}>
     Sample tab panel content 2
   </cv-tab>
-  <cv-tab id="tabs-3" label="Tab link 3">
+  <cv-tab ${withId(1)}label="Tab link 3">
     Sample tab panel content 3
   </cv-tab>
-  <cv-tab id="tabs-4" label="Tab link 4" ${settings.group.tab4}>
+  <cv-tab ${withId(1)}label="Tab link 4" ${settings.group.tab4}>
     Sample tab panel content 4
   </cv-tab>
-  <cv-tab id="tabs-5" label="Tab link 5">
+  <cv-tab ${withId(1)}label="Tab link 5">
     Sample tab panel content 5
   </cv-tab>
 </cv-tabs>
