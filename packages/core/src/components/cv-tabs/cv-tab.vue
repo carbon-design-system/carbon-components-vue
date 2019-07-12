@@ -1,9 +1,9 @@
 <template>
   <div
     class="cv-tab"
-    :id="id"
+    :id="uid"
     role="tabpanel"
-    :aria-labelledby="`${id}-link`"
+    :aria-labelledby="`${uid}-link`"
     :aria-hidden="!dataSelected"
     :hidden="!dataSelected"
   >
@@ -14,10 +14,12 @@
 </template>
 
 <script>
+import uidMixin from '../../mixins/uid-mixin';
+
 export default {
   name: 'CvTab',
+  mixins: [uidMixin],
   props: {
-    id: { type: String, required: true },
     selected: Boolean,
     disabled: Boolean,
     label: { type: String, required: true },

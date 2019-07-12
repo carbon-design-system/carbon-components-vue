@@ -22,7 +22,7 @@ export default {
   mixins: [uidMixin],
   props: {
     active: Boolean,
-    ariaControls: { type: String, required: true },
+    ariaControls: String,
   },
   mounted() {
     this.$parent.$emit('cv:panel-control-mounted', this);

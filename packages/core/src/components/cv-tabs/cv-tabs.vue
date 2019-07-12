@@ -10,9 +10,9 @@
       @keydown.left.prevent="moveLeft"
     >
       <cv-dropdown class="bx--tabs-trigger" :value="`${selectedIndex}`" @change="onDropChange" :form-item="false">
-        <cv-dropdown-item v-for="(tab, index) in tabs" :key="`drop-${index}`" :value="`${index}`">{{
-          tab.label
-        }}</cv-dropdown-item>
+        <cv-dropdown-item v-for="(tab, index) in tabs" :key="`drop-${index}`" :value="`${index}`">
+          {{ tab.label }}
+        </cv-dropdown-item>
       </cv-dropdown>
       <ul class="bx--tabs__nav bx--tabs__nav--hidden" role="tablist">
         <li
@@ -29,8 +29,8 @@
             class="bx--tabs__nav-link"
             href="javascript:void(0)"
             role="tab"
-            :aria-controls="tab.id"
-            :id="`${tab.id}-link`"
+            :aria-controls="tab.uid"
+            :id="`${tab.uid}-link`"
             aria-selected="false"
             @click="onTabClick(index)"
             ref="link"
@@ -77,7 +77,7 @@ export default {
       this.checkDisabled(srcComponent);
     },
     onCvBeforeDestroy(srcComponent) {
-      const tabIndex = this.tabs.findIndex(item => item.id === srcComponent.id);
+      const tabIndex = this.tabs.findIndex(item => item.uid === srcComponent.uid);
       if (tabIndex > -1) {
         this.tabs.splice(tabIndex, 1);
       }
@@ -95,15 +95,15 @@ export default {
       }
     },
     onCvSelected(srcComponent) {
-      const tabIndex = this.tabs.findIndex(item => item.id === srcComponent.id);
+      const tabIndex = this.tabs.findIndex(item => item.uid === srcComponent.uid);
       this.onTabClick(tabIndex);
     },
     onCvDisabled(srcComponent) {
-      const tabIndex = this.tabs.findIndex(item => item.id === srcComponent.id);
+      const tabIndex = this.tabs.findIndex(item => item.uid === srcComponent.uid);
       this.disabledTabs.push(tabIndex);
     },
     onCvEnabled(srcComponent) {
-      const tabIndex = this.tabs.findIndex(item => item.id === srcComponent.id);
+      const tabIndex = this.tabs.findIndex(item => item.uid === srcComponent.uid);
       let arrIdx = this.disabledTabs.indexOf(tabIndex);
       if (arrIdx !== -1) {
         this.disabledTabs.splice(arrIdx, 1);

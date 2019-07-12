@@ -8,7 +8,7 @@
         </p>
       </div>
 
-      <section class="bx--table-toolbar">
+      <section v-if="hasToolbar" class="bx--table-toolbar">
         <div v-if="batchActive" :style="{ minHeight: '48px', maxWidth: '0' }" />
 
         <div
@@ -238,6 +238,9 @@ export default {
   computed: {
     hasBatchActions() {
       return this.$slots['batch-actions'];
+    },
+    hasToolbar() {
+      return this.$slots.actions || this.$listeners.search || this.$slots['batch-actions'];
     },
     hasExpandables() {
       return this.registeredRows.some(item => item.expandable);
