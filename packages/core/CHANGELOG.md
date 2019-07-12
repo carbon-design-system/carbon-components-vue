@@ -1,6 +1,17 @@
 # Changelog
 
-## 2.10.00 (July 10, 2019)
+## 2.11.0-rc.0 (July 12, 2019)
+
+### Fixes
+
+- add default tab id
+- move non-breaking space in header name due to rendering differences
+- make aria-controls optional in header-global-action
+- hide data table toolbar when empty
+
+# Changelog
+
+## 2.10.0 (July 10, 2019)
 
 ### Feat
 
