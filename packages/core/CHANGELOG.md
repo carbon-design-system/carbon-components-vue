@@ -2,6 +2,15 @@
 
 ## 2.11.0-rc.0 (July 12, 2019)
 
+### Features
+
+- Add vertical options to radio button group
+- Add left-label option to radio button
+
+# Changelog
+
+## 2.10.1-rc.0 (July 12, 2019)
+
 ### Fixes
 
 - add default tab id
