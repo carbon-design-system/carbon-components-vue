@@ -31,6 +31,24 @@ const preKnobs = {
       type: Boolean,
     },
   },
+  vertical: {
+    group: 'attr',
+    type: boolean,
+    config: ['vertical', false], // consts.CONFIG],
+    prop: {
+      name: 'vertical',
+      type: Boolean,
+    },
+  },
+  labelLeft: {
+    group: 'each',
+    type: boolean,
+    config: ['label left', false], // consts.CONFIG],
+    prop: {
+      name: 'label-left',
+      type: Boolean,
+    },
+  },
   vModel: {
     group: 'each',
     value: `v-model="radioVal"`,

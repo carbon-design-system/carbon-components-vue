@@ -1,5 +1,5 @@
 <template>
-  <div class="cv-radio-button">
+  <div class="cv-radio-button bx--radio-button-wrapper" :class="{ 'bx--radio-button-wrapper--label-left': labelLeft }">
     <input
       v-bind="$attrs"
       v-on="inputListeners"
@@ -26,5 +26,8 @@ export default {
   name: 'CvRadioButton',
   inheritAttrs: false,
   mixins: [uidMixin, radioMixin],
+  props: {
+    labelLeft: Boolean,
+  },
 };
 </script>
