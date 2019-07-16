@@ -1,13 +1,11 @@
 <template>
   <th :aria-sort="sortOrder">
     <button type="button" v-if="sortable" :class="['bx--table-sort', orderClass]" @click="onSortClick">
-      <cv-wrapper :tag-type="skeleton ? 'span' : ''" class="bx--table-header-label">{{ heading }}</cv-wrapper>
+      <cv-wrapper :tag-type="headingLabelTag" class="bx--table-header-label">{{ heading }}</cv-wrapper>
       <ArrowDown16 class="bx--table-sort__icon" />
       <Arrows16 class="bx--table-sort__icon-unsorted" />
     </button>
-    <cv-wrapper v-else :tag-type="skeleton && heading.length < 1 ? 'span' : ''" class="bx--table-header-label">{{
-      heading
-    }}</cv-wrapper>
+    <cv-wrapper v-else :tag-type="headingLabelTag" class="bx--table-header-label">{{ heading }}</cv-wrapper>
   </th>
 </template>
 
@@ -52,6 +50,9 @@ export default {
         result = 'bx--table-sort--active bx--table-sort--ascending';
       }
       return result;
+    },
+    headingLabelTag() {
+      return this.heading.length === 0 || !this.skeleton ? 'span' : '';
     },
   },
   model: {
