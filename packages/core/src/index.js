@@ -33,7 +33,13 @@ import { CvCheckbox, CvCheckboxSkeleton } from './components/cv-checkbox';
 import { CvCodeSnippet, CvCodeSnippetSkeleton } from './components/cv-code-snippet';
 import { CvComboBox } from './components/cv-combo-box';
 import { CvContentSwitcher, CvContentSwitcherButton, CvContentSwitcherContent } from './components/cv-content-switcher';
-import { CvDataTable, CvDataTableRow, CvDataTableCell, CvDataTableAction } from './components/cv-data-table';
+import {
+  CvDataTable,
+  CvDataTableRow,
+  CvDataTableCell,
+  CvDataTableAction,
+  CvDataTableSkeleton,
+} from './components/cv-data-table';
 import { CvDatePicker } from './components/cv-date-picker';
 import { CvDropdown, CvDropdownItem, CvDropdownSkeleton } from './components/cv-dropdown';
 import { CvFileUploader, CvFileUploaderSkeleton } from './components/cv-file-uploader';
@@ -100,7 +106,7 @@ export { CvCheckbox, CvCheckboxSkeleton };
 export { CvCodeSnippet, CvCodeSnippetSkeleton };
 export { CvComboBox };
 export { CvContentSwitcher, CvContentSwitcherButton, CvContentSwitcherContent };
-export { CvDataTable, CvDataTableRow, CvDataTableCell, CvDataTableAction };
+export { CvDataTable, CvDataTableRow, CvDataTableCell, CvDataTableAction, CvDataTableSkeleton };
 export { CvDatePicker };
 export { CvDropdown, CvDropdownItem, CvDropdownSkeleton };
 export { CvFileUploader, CvFileUploaderSkeleton };

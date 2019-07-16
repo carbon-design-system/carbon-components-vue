@@ -1,17 +1,20 @@
 <template>
   <th :aria-sort="sortOrder">
     <button type="button" v-if="sortable" :class="['bx--table-sort', orderClass]" @click="onSortClick">
-      <span class="bx--table-header-label">{{ heading }}</span>
+      <cv-wrapper :tag-type="skeleton ? 'span' : ''" class="bx--table-header-label">{{ heading }}</cv-wrapper>
       <ArrowDown16 class="bx--table-sort__icon" />
       <Arrows16 class="bx--table-sort__icon-unsorted" />
     </button>
-    <span v-else class="bx--table-header-label">{{ heading }}</span>
+    <cv-wrapper v-else :tag-type="skeleton && heading.length < 1 ? 'span' : ''" class="bx--table-header-label">{{
+      heading
+    }}</cv-wrapper>
   </th>
 </template>
 
 <script>
 import ArrowDown16 from '@carbon/icons-vue/es/arrow--down/16';
 import Arrows16 from '@carbon/icons-vue/es/arrows/16';
+import CvWrapper from '../cv-wrapper/_cv-wrapper';
 
 const nextSortOrder = {
   ascending: 'descending',
@@ -21,11 +24,12 @@ const nextSortOrder = {
 
 export default {
   name: 'CvDataTableHeading',
-  components: { ArrowDown16, Arrows16 },
+  components: { ArrowDown16, Arrows16, CvWrapper },
   props: {
     heading: { type: String, required: true },
     sortable: Boolean,
     order: { type: String, default: 'none' },
+    skeleton: Boolean,
   },
   computed: {
     sortOrder() {
