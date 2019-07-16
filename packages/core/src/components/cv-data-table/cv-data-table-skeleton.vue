@@ -23,7 +23,7 @@ const DEFAULTS = {
 };
 
 export default {
-  name: 'CvDataTableSkeleoton',
+  name: 'CvDataTableSkeleton',
   components: {
     CvDataTable,
   },
