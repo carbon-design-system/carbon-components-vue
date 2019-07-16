@@ -150,6 +150,8 @@ export default {
     this.pages = newPagesArray(this.pageCount);
     this.firstItem = newFirstItem(this.pageValue, this.pageSizeValue);
     // console.log(this.pageValue);
+    // always emit on mount
+    this.$emit('change', this.internalValue);
   },
   watch: {
     numberOfItems() {
@@ -209,7 +211,11 @@ export default {
       }
     },
     internalValue() {
-      return { start: this.firstItem, page: this.pageValue, length: parseInt(this.pageSizeValue) };
+      return {
+        start: this.firstItem,
+        page: this.pageValue,
+        length: parseInt(this.pageSizeValue),
+      };
     },
   },
   methods: {
