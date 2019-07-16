@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.12.0-rc.x (July 16, 2019)
+
+### Features
+
+- Add table skeleton
+- Add initial change vent to pagination
+
+# Changelog
+
 ## 2.11.0 (July 16, 2019)
 
 ### Features
