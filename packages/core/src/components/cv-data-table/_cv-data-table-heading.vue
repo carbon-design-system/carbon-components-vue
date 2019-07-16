@@ -5,9 +5,7 @@
       <ArrowDown16 class="bx--table-sort__icon" />
       <Arrows16 class="bx--table-sort__icon-unsorted" />
     </button>
-    <cv-wrapper v-else :tag-type="headingLabelTag" class="bx--table-header-label">
-      {{ heading }}
-    </cv-wrapper>
+    <cv-wrapper v-else :tag-type="headingLabelTag" class="bx--table-header-label">{{ heading }}</cv-wrapper>
   </th>
 </template>
 
@@ -25,9 +23,6 @@ const nextSortOrder = {
 export default {
   name: 'CvDataTableHeading',
   components: { ArrowDown16, Arrows16, CvWrapper },
-  mounted() {
-    console.log('CvDataTableHeading.mounted', this.skeleton, this.heading, this.heading.length);
-  },
   props: {
     heading: { type: String, required: true },
     sortable: Boolean,
