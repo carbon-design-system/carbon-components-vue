@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { object, boolean, select, text } from '@storybook/addon-knobs';
+import { object, boolean, select, text, number } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
@@ -16,6 +16,7 @@ import {
   CvOverflowMenu,
   CvOverflowMenuItem,
   CvTag,
+  CvDataTableSkeleton,
 } from '@carbon/vue/src';
 import TrashCan16 from '@carbon/icons-vue/es/trash-can/16';
 import Save16 from '@carbon/icons-vue/es/save/16';
@@ -24,7 +25,7 @@ import Download16 from '@carbon/icons-vue/es/download/16';
 const storiesDefault = storiesOf('Components/CvDataTable', module);
 const storiesExperimental = storiesOf('Experimental/CvDataTable', module);
 
-const preKnobs = {
+let preKnobs = {
   rowSize: {
     group: 'attr',
     type: select,
@@ -303,7 +304,7 @@ const preKnobs = {
   },
 };
 
-const variants = [
+let variants = [
   {
     name: 'default',
     excludes: [
@@ -337,7 +338,7 @@ const variants = [
   { name: 'styled columns', includes: ['columns2', 'data'] },
 ];
 
-const storySet = knobsHelper.getStorySet(variants, preKnobs);
+let storySet = knobsHelper.getStorySet(variants, preKnobs);
 for (const story of storySet) {
   storiesDefault.add(
     story.name,
@@ -463,6 +464,87 @@ for (const story of storySet) {
           actionOnPagination: action('pagination change'),
           onOverflowMenuClick: action('overflow menu click'),
           actionRowSelectChange: action('row selected'),
+        },
+      };
+    },
+    {
+      notes: { markdown: CvDataTableNotesMD },
+    }
+  );
+}
+
+preKnobs = {
+  columns2: {
+    group: 'attr',
+    type: object,
+    config: [
+      'columns',
+      {
+        columns: ['Name', 'Protocol', 'Port', 'Rule', 'Attached Groups', 'Status'],
+      },
+    ],
+    prop: {
+      type: Array,
+      name: 'columns',
+      value: val => val.columns,
+    },
+  },
+  skeletonCols: {
+    group: 'attr',
+    type: number,
+    config: ['number of columns', 5], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: Number,
+      name: 'columns',
+    },
+  },
+  skeletonRows: {
+    group: 'attr',
+    type: number,
+    config: ['number of rows', 5], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: Number,
+      name: 'rows',
+    },
+  },
+  skeletonOther: {
+    group: 'attr',
+    value: `title="Table title"
+  helper-text="Data has been requested fetched"`,
+  },
+};
+
+variants = [
+  { name: 'skeleton', includes: ['columns2', 'skeletonRows', 'skeletonOther'] },
+  { name: 'skeleton-no-headings', includes: ['skeletonCols', 'skeletonRows', 'skeletonOther'] },
+  { name: 'skeleton-minimal', includes: [] },
+];
+
+storySet = knobsHelper.getStorySet(variants, preKnobs);
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
+      // ----------------------------------------------------------------
+
+      const templateString = `<cv-data-table-skeleton${settings.group.attr}></cv-data-table-skeleton>`;
+
+      return {
+        components: { SvTemplateView, CvDataTableSkeleton },
+        template: `
+        <sv-template-view
+          sv-margin
+          sv-position="center"
+          sv-source='${templateString.trim()}'>
+          <template slot="component">${templateString}</template>
+        </sv-template-view>
+      `,
+        props: settings.props,
+        data() {
+          return {
+            columns: ['Name', 'Protocol', 'Port', 'Rule', 'Attached Groups', 'Status'],
+          };
         },
       };
     },

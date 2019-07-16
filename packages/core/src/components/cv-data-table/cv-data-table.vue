@@ -1,7 +1,7 @@
 <template>
   <div :style="tableStyle" class="cv-data-table">
     <div class="bx--data-table-container">
-      <div class="bx--data-table-header">
+      <div v-if="hasTableHeader" class="bx--data-table-header">
         <h4 class="bx--data-table-header__title" v-if="title">{{ title }}</h4>
         <p v-if="isHelper" class="bx--data-table-header__description">
           <slot name="helper-text">{{ helperText }}</slot>
@@ -104,6 +104,7 @@
               :order="column.order"
               @sort="val => onSort(index, val)"
               :style="headingStyle(index)"
+              :skeleton="skeleton"
             />
             <th v-if="hasOverflowMenu"></th>
           </tr>
@@ -122,8 +123,9 @@
                 v-for="(cell, colIndex) in row"
                 :key="`cell:${colIndex}:${rowIndex}`"
                 :style="dataStyle(colIndex)"
-                >{{ cell }}</cv-data-table-cell
               >
+                <cv-wrapper :tag-type="skeleton && rowIndex < 1 ? 'span' : ''">{{ cell }}</cv-wrapper>
+              </cv-data-table-cell>
             </cv-data-table-row>
           </slot>
         </cv-wrapper>
@@ -194,6 +196,7 @@ export default {
     rowsSelected: { type: Array, default: () => [] },
     helperText: { type: String, default: null },
     expandingSearch: { type: Boolean, default: true },
+    skeleton: Boolean,
   },
   model: {
     prop: 'rows-selected',
@@ -239,6 +242,9 @@ export default {
     hasBatchActions() {
       return this.$slots['batch-actions'];
     },
+    hasTableHeader() {
+      return this.title || this.isHelper;
+    },
     hasToolbar() {
       return this.$slots.actions || this.$listeners.search || this.$slots['batch-actions'];
     },
@@ -273,13 +279,14 @@ export default {
       const sizeClass = this.rowSize.length === 0 || this.rowSize === 'standard' ? '' : `${prefix}${this.rowSize} `;
       const zebraClass = this.zebra ? `${prefix}zebra ` : '';
       const borderlessClass = this.borderless ? `${prefix}no-border ` : '';
-      return `${sizeClass}${zebraClass}${borderlessClass}`.trimRight();
+      const skeletonClass = this.skeleton ? `bx--skeleton` : '';
+      return `${sizeClass}${zebraClass}${borderlessClass}${skeletonClass}`.trimRight();
     },
     headingStyle() {
-      return index => this.columns[index].headingStyle;
+      return index => this.dataColumns[index].headingStyle;
     },
     dataStyle() {
-      return index => this.columns[index].dataStyle;
+      return index => this.dataColumns[index].dataStyle;
     },
     selectedRows() {
       return this.dataRowsSelected;
@@ -414,7 +421,7 @@ export default {
 </script>
 
 <style lang="scss">
-.cv-data-table .bx--table-column-checkbox .bx--checkbox-wrapper {
-  margin: 0;
-}
+// .cv-data-table .bx--table-column-checkbox .bx--checkbox-wrapper {
+//   margin: 0;
+// }
 </style>
