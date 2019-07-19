@@ -134,15 +134,18 @@
 
     <cv-pagination
       v-if="pagination"
-      :backward-text="pagination.backwardText"
-      :forward-text="pagination.forwardText"
+      v-bind="pagination"
       :number-of-items="internalNumberOfItems"
-      :page="pagination.page"
-      :page-number-label="pagination.pageNumberLabel"
-      :page-sizes-label="pagination.pageSizesLabel"
-      :page-sizes="pagination.pageSizes"
       @change="$emit('pagination', $event)"
-    ></cv-pagination>
+    >
+      <template v-slot:range-text="{ scope }">
+        <slot name="range-text" v-bind:scope="scope" v-if="$scopedSlots['range-text']" />
+      </template>
+
+      <template v-slot:of-n-pages="{ scope }">
+        <slot name="of-n-pages" v-bind:scope="scope" v-if="$scopedSlots['of-n-pages']"></slot>
+      </template>
+    </cv-pagination>
   </div>
 </template>
 
