@@ -1,11 +1,16 @@
 # Changelog
 
-## 2.12.0-rc.x (July 16, 2019)
+## 2.12.0-rc.x (July 19, 2019)
 
 ### Features
 
+- Add table pagination scoped slot pass through.
 - Add table skeleton
 - Add initial change vent to pagination
+
+### Fix
+
+- CvHeaderNav aria-label usage
 
 # Changelog
 
