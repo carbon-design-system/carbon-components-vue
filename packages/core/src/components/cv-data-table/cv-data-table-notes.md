@@ -84,6 +84,7 @@ Like sorting and filtering it is the users responsibility to deal with edited da
 ## Scoped slots
 
 - rows-selected(scope.count): by default shows `${scope.count} items selected`
+- pagination scoped slots are passed through to the pagination component these are 'of-n-pages' and 'range-text'. See pagination component for more details.
 
 **Overflow menu** To provide customized overflow menus e.g. state dependant, specify explicitly using the slotted data/HTML table form. The CvDataTable will not raise an event.
 
