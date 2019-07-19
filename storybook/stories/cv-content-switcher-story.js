@@ -6,14 +6,14 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvContentSwitcherNotesMD from '@carbon/vue/src/components/cv-content-switcher/cv-content-switcher-notes.md';
-import { CvContentSwitcher, CvContentSwitcherButton, CvContentSwitcherContent } from '@carbon/vue/src';
+import CvContentSwitcherNotesMD from '@rocketsoftware/vue/src/components/cv-content-switcher/cv-content-switcher-notes.md';
+import { CvContentSwitcher, CvContentSwitcherButton, CvContentSwitcherContent } from '@rocketsoftware/vue/src';
 
 const storiesDefault = storiesOf('Components/CvContentSwitcher', module);
 const storiesExperimental = storiesOf('Experimental/CvContentSwitcher', module);
 
-const exampleIconPath = require('@carbon/vue/src/assets/images/example-icons.svg');
-import AddFilled16 from '@carbon/icons-vue/es/add--filled/16';
+const exampleIconPath = require('@rocketsoftware/vue/src/assets/images/example-icons.svg');
+import AddFilled16 from '@rocketsoftware/icons-vue/es/add--filled/16';
 
 const preKnobs = {
   initialSelected: {

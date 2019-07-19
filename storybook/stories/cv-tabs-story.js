@@ -6,8 +6,8 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvTabsNotesMD from '@carbon/vue/src/components/cv-tabs/cv-tabs-notes.md';
-import { CvTab, CvTabs } from '@carbon/vue/src';
+import CvTabsNotesMD from '@rocketsoftware/vue/src/components/cv-tabs/cv-tabs-notes.md';
+import { CvTab, CvTabs } from '@rocketsoftware/vue/src';
 
 const storiesDefault = storiesOf('Components/CvTabs', module);
 const storiesExperimental = storiesOf('Experimental/CvTabs', module);

@@ -6,7 +6,7 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvDataTableNotesMD from '@carbon/vue/src/components/cv-data-table/cv-data-table-notes.md';
+import CvDataTableNotesMD from '@rocketsoftware/vue/src/components/cv-data-table/cv-data-table-notes.md';
 import {
   CvDataTable,
   CvDataTableAction,
@@ -17,10 +17,10 @@ import {
   CvOverflowMenuItem,
   CvTag,
   CvDataTableSkeleton,
-} from '@carbon/vue/src';
-import TrashCan16 from '@carbon/icons-vue/es/trash-can/16';
-import Save16 from '@carbon/icons-vue/es/save/16';
-import Download16 from '@carbon/icons-vue/es/download/16';
+} from '@rocketsoftware/vue/src';
+import TrashCan16 from '@rocketsoftware/icons-vue/es/trash-can/16';
+import Save16 from '@rocketsoftware/icons-vue/es/save/16';
+import Download16 from '@rocketsoftware/icons-vue/es/download/16';
 
 const storiesDefault = storiesOf('Components/CvDataTable', module);
 const storiesExperimental = storiesOf('Experimental/CvDataTable', module);

@@ -6,8 +6,13 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvStructuredListNotesMD from '@carbon/vue/src/components/cv-structured-list/cv-structured-list-notes.md';
-import { CvStructuredList, CvStructuredListData, CvStructuredListHeading, CvStructuredListItem } from '@carbon/vue/src';
+import CvStructuredListNotesMD from '@rocketsoftware/vue/src/components/cv-structured-list/cv-structured-list-notes.md';
+import {
+  CvStructuredList,
+  CvStructuredListData,
+  CvStructuredListHeading,
+  CvStructuredListItem,
+} from '@rocketsoftware/vue/src';
 
 const storiesDefault = storiesOf('Components/CvStructuredList', module);
 const storiesExperimental = storiesOf('Experimental/CvStructuredList', module);

@@ -7,8 +7,8 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvInlineNotificationNotesMD from '@carbon/vue/src/components/cv-inline-notification/cv-inline-notification-notes.md';
-import { CvInlineNotification } from '@carbon/vue/src';
+import CvInlineNotificationNotesMD from '@rocketsoftware/vue/src/components/cv-inline-notification/cv-inline-notification-notes.md';
+import { CvInlineNotification } from '@rocketsoftware/vue/src';
 
 const storiesDefault = storiesOf('Components/CvInlineNotification', module);
 const storiesExperimental = storiesOf('Experimental/CvInlineNotification', module);

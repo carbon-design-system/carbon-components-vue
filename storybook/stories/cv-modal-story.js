@@ -7,8 +7,8 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvModalNotesMD from '@carbon/vue/src/components/cv-modal/cv-modal-notes.md';
-import { CvModal } from '@carbon/vue/src';
+import CvModalNotesMD from '@rocketsoftware/vue/src/components/cv-modal/cv-modal-notes.md';
+import { CvModal } from '@rocketsoftware/vue/src';
 
 const storiesDefault = storiesOf('Components/CvModal', module);
 const storiesExperimental = storiesOf('Experimental/CvModal', module);

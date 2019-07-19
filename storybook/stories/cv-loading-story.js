@@ -7,8 +7,8 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvLoadingNotesMD from '@carbon/vue/src/components/cv-loading/cv-loading-notes.md';
-import { CvLoading } from '@carbon/vue/src';
+import CvLoadingNotesMD from '@rocketsoftware/vue/src/components/cv-loading/cv-loading-notes.md';
+import { CvLoading } from '@rocketsoftware/vue/src';
 
 const storiesDefault = storiesOf('Components/CvLoading', module);
 const storiesExperimental = storiesOf('Experimental/CvLoading', module);

@@ -8,13 +8,13 @@
     "build": "build-storybook"
   },
   "dependencies": {
-    "@carbon/icons-vue": "10.3.0",
-    "carbon-components": "10.3.1",
+    "@rocketsoftware/icons-vue": "0.0.1",
+    "@rocketsoftware/carbon-components": "0.0.2",
     "vue": "^2.6.10"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
-    "@carbon/vue": "^2.12.0-rc.3",
+    "@rocketsoftware/vue": "^0.0.1",
     "@storybook/addon-actions": "^5.1.8",
     "@storybook/addon-knobs": "^5.1.8",
     "@storybook/addon-notes": "^5.1.8",

@@ -6,7 +6,7 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvHeaderNotesMD from '@carbon/vue/src/components/cv-ui-shell/cv-ui-shell-notes.md';
+import CvHeaderNotesMD from '@rocketsoftware/vue/src/components/cv-ui-shell/cv-ui-shell-notes.md';
 
 import {
   CvHeader,
@@ -26,12 +26,12 @@ import {
   CvSwitcher,
   CvSwitcherItem,
   CvSwitcherItemLink,
-} from '@carbon/vue/src';
+} from '@rocketsoftware/vue/src';
 
-import Fade16 from '@carbon/icons-vue/es/fade/16';
-import Notification20 from '@carbon/icons-vue/es/notification/20';
-import UserAvatar20 from '@carbon/icons-vue/es/user--avatar/20';
-import AppSwitcher20 from '@carbon/icons-vue/es/app-switcher/20';
+import Fade16 from '@rocketsoftware/icons-vue/es/fade/16';
+import Notification20 from '@rocketsoftware/icons-vue/es/notification/20';
+import UserAvatar20 from '@rocketsoftware/icons-vue/es/user--avatar/20';
+import AppSwitcher20 from '@rocketsoftware/icons-vue/es/app-switcher/20';
 
 const storiesDefault = storiesOf('Components/CvUIShell - header', module);
 const storiesExperimental = storiesOf('Experimental/CvUIShell - header', module);

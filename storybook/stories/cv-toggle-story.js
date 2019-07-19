@@ -6,8 +6,8 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvToggleNotesMD from '@carbon/vue/src/components/cv-toggle/cv-toggle-notes.md';
-import { CvToggle } from '@carbon/vue/src';
+import CvToggleNotesMD from '@rocketsoftware/vue/src/components/cv-toggle/cv-toggle-notes.md';
+import { CvToggle } from '@rocketsoftware/vue/src';
 
 const storiesDefault = storiesOf('Components/CvToggle', module);
 const storiesExperimental = storiesOf('Experimental/CvToggle', module);

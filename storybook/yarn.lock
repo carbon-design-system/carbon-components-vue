@@ -767,28 +767,6 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@carbon/icon-helpers@10.2.0":
-  version "10.2.0"
-  resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-10.2.0.tgz#f58ab1d14b8b63d485d31e7d785d25057eac5409"
-  integrity sha512-PAxu8KMuSrifF4VCW7N7bgu/QKG/Q4T9ojWUEqI0zKjTCkJnzEZTYgK1FrWAdE1uAdAwLlbPIjzIS/QzP15Uvw==
-
-"@carbon/icons-vue@10.3.0":
-  version "10.3.0"
-  resolved "https://registry.yarnpkg.com/@carbon/icons-vue/-/icons-vue-10.3.0.tgz#537e707c679bd69f8b61ce97691b742d6dfaa643"
-  integrity sha512-tZJ2ZsgGi6jfX65F6LDjha3ttkrGp7UJdqapGuPuHY+kooDPr9HVlabp3BoAJXA2w8t2XK3zqSdk1lJu/txg/A==
-  dependencies:
-    "@carbon/icon-helpers" "10.2.0"
-
-"@carbon/vue@^2.12.0-rc.3":
-  version "2.12.0-rc.3"
-  resolved "https://registry.yarnpkg.com/@carbon/vue/-/vue-2.12.0-rc.3.tgz#e6ce8459269ebd4fa461bd590b584cda8882ef13"
-  integrity sha512-p4CcZRZGM3OvQcL77ymA/sFq7LpTkPXjgq2lKhMQFvAmO3H1KPt3EHm7QLDvt3z4/8Nar0ddGjKoFmz3787k2w==
-  dependencies:
-    "@carbon/icons-vue" "10.3.0"
-    carbon-components "10.3.1"
-    flatpickr "4.6.1"
-    vue "^2.6.10"
-
 "@csstools/convert-colors@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
@@ -970,6 +948,28 @@
     prop-types "^15.6.1"
     react-lifecycles-compat "^3.0.4"
     warning "^3.0.0"
+
+"@rocketsoftware/carbon-components@0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@rocketsoftware/carbon-components/-/carbon-components-0.0.2.tgz#bc440ec90efa3278f4f5eca13cff668ddb6a1245"
+  integrity sha512-YGgzXeI/VFbII7dADLKrNL9KkTfJbASWGjW/ZuamZx6dWdb1QJ7/GYgTURVqc80obWXhai3NAh7DAYCyWl70rA==
+  dependencies:
+    carbon-icons "^7.0.7"
+    flatpickr "4.6.1"
+    lodash.debounce "^4.0.8"
+    warning "^3.0.0"
+
+"@rocketsoftware/icon-helpers@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@rocketsoftware/icon-helpers/-/icon-helpers-0.0.2.tgz#a625cc719d013371787b98bd3e317651ac24a512"
+  integrity sha512-Yt3+yX+TZIijZpcsLKsRJxa9cDm0FpNQbq99ExbnPXeEAbNsUmzq/0xTaz3L0EtMVYAtjeBpgSIRuvppL7cwrA==
+
+"@rocketsoftware/icons-vue@0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@rocketsoftware/icons-vue/-/icons-vue-0.0.1.tgz#a34d856177e3d10352406647eb55c49d8e294243"
+  integrity sha512-klXkcCGz6KqJrnCfpqoKtKck88vxbJhr6w9u4B7bsqo/36Ts1ufnOldYIcjJ9Hle2VWyXQzaGAp/mvekmlzPAw==
+  dependencies:
+    "@rocketsoftware/icon-helpers" "^0.0.2"
 
 "@storybook/addon-actions@^5.1.8":
   version "5.1.8"
@@ -2877,16 +2877,6 @@ caniuse-lite@^1.0.30000955, caniuse-lite@^1.0.30000971:
   version "1.0.30000974"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000974.tgz#b7afe14ee004e97ce6dc73e3f878290a12928ad8"
   integrity sha512-xc3rkNS/Zc3CmpMKuczWEdY2sZgx09BkAxfvkxlAEBTqcMHeL8QnPqhKse+5sRTi3nrw2pJwToD2WvKn1Uhvww==
-
-carbon-components@10.3.1:
-  version "10.3.1"
-  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.3.1.tgz#c150dff410c9ada83d44bfda1a23b6a5f2ced0b1"
-  integrity sha512-DsQXnSYFRTouFoDXDtbRvOhxKEWurM4uPGds62WFoS6ZpelfWUlS8mX6NkyIEktnkgUseLdvRNRx93j6AcJwTg==
-  dependencies:
-    carbon-icons "^7.0.7"
-    flatpickr "4.6.1"
-    lodash.debounce "^4.0.8"
-    warning "^3.0.0"
 
 carbon-icons@^7.0.7:
   version "7.0.7"
