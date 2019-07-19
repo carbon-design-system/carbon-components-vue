@@ -56,8 +56,8 @@
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
-import ChevronDownGlyph from '@carbon/icons-vue/es/chevron--down/index';
-import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
+import ChevronDownGlyph from '@rocketsoftware/icons-vue/es/chevron--down/index';
+import WarningFilled16 from '@rocketsoftware/icons-vue/es/warning--filled/16';
 
 export default {
   name: 'CvSelect',

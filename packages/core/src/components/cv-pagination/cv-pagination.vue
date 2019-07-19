@@ -79,8 +79,8 @@
 <script>
 import CvSelect from '../cv-select/cv-select';
 import CvSelectOption from '../cv-select/cv-select-option';
-import CaretLeft16 from '@carbon/icons-vue/es/caret--left/16';
-import CaretRight16 from '@carbon/icons-vue/es/caret--right/16';
+import CaretLeft16 from '@rocketsoftware/icons-vue/es/caret--left/16';
+import CaretRight16 from '@rocketsoftware/icons-vue/es/caret--right/16';
 
 const newPageValue = (page, lastPage) => {
   let result = 1;

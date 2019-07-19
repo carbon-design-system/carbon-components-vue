@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import ArrowDown16 from '@carbon/icons-vue/es/arrow--down/16';
-import Arrows16 from '@carbon/icons-vue/es/arrows/16';
+import ArrowDown16 from '@rocketsoftware/icons-vue/es/arrow--down/16';
+import Arrows16 from '@rocketsoftware/icons-vue/es/arrows/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
 
 const nextSortOrder = {

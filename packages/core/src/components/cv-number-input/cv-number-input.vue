@@ -36,9 +36,9 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
-import CaretDownGlyph from '@carbon/icons-vue/es/caret--down/index';
-import CaretUpGlyph from '@carbon/icons-vue/es/caret--up/index';
-import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
+import CaretDownGlyph from '@rocketsoftware/icons-vue/es/caret--down/index';
+import CaretUpGlyph from '@rocketsoftware/icons-vue/es/caret--up/index';
+import WarningFilled16 from '@rocketsoftware/icons-vue/es/warning--filled/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
 
 export default {

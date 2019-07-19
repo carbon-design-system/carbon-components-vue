@@ -14,7 +14,7 @@
 <script>
 import CvFeedbackButton from './_cv-feedback-button';
 
-import Copy16 from '@carbon/icons-vue/es/copy/16';
+import Copy16 from '@rocketsoftware/icons-vue/es/copy/16';
 
 export default {
   name: 'CvCodeSnippetOneline',

@@ -63,7 +63,7 @@ import l10n from 'flatpickr/dist/l10n/index';
 import RangePlugin from 'flatpickr/dist/plugins/rangePlugin';
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
-import Calendar16 from '@carbon/icons-vue/es/calendar/16';
+import Calendar16 from '@rocketsoftware/icons-vue/es/calendar/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
 
 // Weekdays shorthand for english locale

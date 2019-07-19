@@ -1,16 +1,16 @@
 {
-  "name": "@carbon/vue",
+  "name": "@rocketsoftware/vue",
   "description": "A collection of components for the Carbon Design System built using Vue.js",
-  "version": "2.12.0-rc.3",
+  "version": "0.0.1",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/carbon-design-system/carbon-components-vue.git"
+    "url": "git+https://github.com/RocketSoftware/carbon-components-vue.git"
   },
   "bugs": {
-    "url": "https://github.com/carbon-design-system/carbon-components-vue/issues/new"
+    "url": "https://github.com/RocketSoftware/carbon-components-vue/issues/new"
   },
-  "homepage": "https://github.com/carbon-design-system/carbon-components-vue/tree/master/packages/core#readme",
+  "homepage": "https://github.com/RocketSoftware/carbon-components-vue/tree/master/packages/core#readme",
   "main": "dist/carbon-vue.umd.min.js",
   "keywords": [
     "carbon",
@@ -62,8 +62,8 @@
   },
   "sideEffects": true,
   "dependencies": {
-    "@carbon/icons-vue": "10.3.0",
-    "carbon-components": "10.3.1",
+    "@rocketsoftware/icons-vue": "0.0.1",
+    "@rocketsoftware/carbon-components": "0.0.2",
     "flatpickr": "4.6.1",
     "vue": "^2.6.10"
   },

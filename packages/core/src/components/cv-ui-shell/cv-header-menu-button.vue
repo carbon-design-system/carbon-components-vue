@@ -17,8 +17,8 @@
 
 <script>
 import uidMixin from '../../mixins/uid-mixin';
-import Close20 from '@carbon/icons-vue/es/close/20';
-import Menu20 from '@carbon/icons-vue/es/menu/20';
+import Close20 from '@rocketsoftware/icons-vue/es/close/20';
+import Menu20 from '@rocketsoftware/icons-vue/es/menu/20';
 
 export default {
   name: 'CvHeaderMenuButton',

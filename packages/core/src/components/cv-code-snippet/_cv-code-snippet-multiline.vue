@@ -24,8 +24,8 @@
 import CvFeedbackButton from './_cv-feedback-button';
 import CvButton from '../cv-button/cv-button';
 
-import Copy16 from '@carbon/icons-vue/es/copy/16';
-import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16';
+import Copy16 from '@rocketsoftware/icons-vue/es/copy/16';
+import ChevronDown16 from '@rocketsoftware/icons-vue/es/chevron--down/16';
 
 export default {
   name: 'CvCodeSnippetMultiline',

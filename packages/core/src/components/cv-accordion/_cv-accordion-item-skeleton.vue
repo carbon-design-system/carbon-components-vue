@@ -12,7 +12,7 @@
 
 <script>
 import CvSkeletonText from '../cv-skeleton-text/cv-skeleton-text';
-import ChevronRight16 from '@carbon/icons-vue/es/chevron--right/16';
+import ChevronRight16 from '@rocketsoftware/icons-vue/es/chevron--right/16';
 
 export default {
   name: 'CvAccordionItemSkeleton',

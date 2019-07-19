@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import ChevronRight16 from '@carbon/icons-vue/es/chevron--right/16';
+import ChevronRight16 from '@rocketsoftware/icons-vue/es/chevron--right/16';
 import uidMixin from '../../mixins/uid-mixin';
 
 export default {

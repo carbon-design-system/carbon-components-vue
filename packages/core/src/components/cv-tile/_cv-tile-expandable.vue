@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16';
+import ChevronDown16 from '@rocketsoftware/icons-vue/es/chevron--down/16';
 
 export default {
   name: 'CvTileExpandable',

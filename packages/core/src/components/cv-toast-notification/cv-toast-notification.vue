@@ -27,10 +27,10 @@
 
 <script>
 import notificationMixin from '../../mixins/notification-mixin';
-import ErrorFilled16 from '@carbon/icons-vue/es/error--filled/16';
-import CheckmarkFilled16 from '@carbon/icons-vue/es/checkmark--filled/16';
-import WarningAltFilled16 from '@carbon/icons-vue/es/warning--alt--filled/16';
-import Close16 from '@carbon/icons-vue/es/close/16';
+import ErrorFilled16 from '@rocketsoftware/icons-vue/es/error--filled/16';
+import CheckmarkFilled16 from '@rocketsoftware/icons-vue/es/checkmark--filled/16';
+import WarningAltFilled16 from '@rocketsoftware/icons-vue/es/warning--alt--filled/16';
+import Close16 from '@rocketsoftware/icons-vue/es/close/16';
 
 export default {
   name: 'CvToastNotification',

@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import ChevronDown20 from '@carbon/icons-vue/es/chevron--down/20';
+import ChevronDown20 from '@rocketsoftware/icons-vue/es/chevron--down/20';
 import CvSideNavIcon from './cv-side-nav-icon';
 
 export default {

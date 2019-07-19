@@ -74,7 +74,7 @@
 <script>
 import CvButton from '../cv-button/cv-button';
 import uidMixin from '../../mixins/uid-mixin';
-import Close16 from '@carbon/icons-vue/es/close/16';
+import Close16 from '@rocketsoftware/icons-vue/es/close/16';
 
 export default {
   name: 'CvModal',

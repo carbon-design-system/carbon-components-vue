@@ -158,8 +158,8 @@ import CvCheckbox from '../cv-checkbox/cv-checkbox';
 import CvPagination from '../cv-pagination/cv-pagination';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
 import uidMixin from '../../mixins/uid-mixin';
-import Search16 from '@carbon/icons-vue/es/search/16';
-import Close16 from '@carbon/icons-vue/es/close/16';
+import Search16 from '@rocketsoftware/icons-vue/es/search/16';
+import Close16 from '@rocketsoftware/icons-vue/es/close/16';
 
 const rows = children => children.filter(child => child.isCvDataTableRow);
 

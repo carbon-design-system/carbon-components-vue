@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import Close20 from '@carbon/icons-vue/es/close/20';
-import ChevronRight20 from '@carbon/icons-vue/es/chevron--right/20';
+import Close20 from '@rocketsoftware/icons-vue/es/close/20';
+import ChevronRight20 from '@rocketsoftware/icons-vue/es/chevron--right/20';
 
 export default {
   name: 'CvSideNavFooter',

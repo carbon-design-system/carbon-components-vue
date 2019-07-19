@@ -45,9 +45,9 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
-import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
-import View16 from '@carbon/icons-vue/es/view/16';
-import ViewOff16 from '@carbon/icons-vue/es/view--off/16';
+import WarningFilled16 from '@rocketsoftware/icons-vue/es/warning--filled/16';
+import View16 from '@rocketsoftware/icons-vue/es/view/16';
+import ViewOff16 from '@rocketsoftware/icons-vue/es/view--off/16';
 
 export default {
   name: 'CvTextInput',

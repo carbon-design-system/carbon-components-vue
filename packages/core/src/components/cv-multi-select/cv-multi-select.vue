@@ -133,9 +133,9 @@
 
 <script>
 import themeMixin from '../../mixins/theme-mixin';
-import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
-import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16';
-import Close16 from '@carbon/icons-vue/es/close/16';
+import WarningFilled16 from '@rocketsoftware/icons-vue/es/warning--filled/16';
+import ChevronDown16 from '@rocketsoftware/icons-vue/es/chevron--down/16';
+import Close16 from '@rocketsoftware/icons-vue/es/close/16';
 import uidMixin from '../../mixins/uid-mixin';
 import CvCheckbox from '../cv-checkbox/cv-checkbox';
 import CvTag from '../cv-tag/cv-tag';
