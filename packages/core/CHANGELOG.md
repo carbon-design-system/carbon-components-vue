@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.12.0-rc.x (July 19, 2019)
+## 2.12.0 (July 22, 2019)
 
 ### Features
 
@@ -11,6 +11,7 @@
 ### Fix
 
 - CvHeaderNav aria-label usage
+- Update lodash based on security alert
 
 # Changelog
 
