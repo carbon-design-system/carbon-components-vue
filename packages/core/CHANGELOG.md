@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.12.1 (July 25, 2019)
+
+### Fix
+
+- CvDropdown component was incorrectly named CvDropdownInner
+
 ## 2.12.0 (July 22, 2019)
 
 ### Features
@@ -12,8 +18,6 @@
 
 - CvHeaderNav aria-label usage
 - Update lodash based on security alert
-
-# Changelog
 
 ## 2.11.0 (July 16, 2019)
 
@@ -28,8 +32,6 @@
 - move non-breaking space in header name due to rendering differences
 - make aria-controls optional in header-global-action
 - hide data table toolbar when empty
-
-# Changelog
 
 ## 2.10.0 (July 10, 2019)
 
