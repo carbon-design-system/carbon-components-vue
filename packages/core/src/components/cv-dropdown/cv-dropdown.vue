@@ -83,7 +83,7 @@ import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16';
 
 export default {
-  name: 'CvDropdownInner',
+  name: 'CvDropdown',
   inheritAttrs: false,
   mixins: [themeMixin],
   components: { WarningFilled16, ChevronDown16 },
