@@ -20,10 +20,10 @@ describe('CvTag', () => {
   });
 
   it('should support extra class names', () => {
-    const propsData = { kind: 'red', label: 'test', class: 'extra-class or-two' };
+    const propsData = { kind: 'red', label: 'test', class: 'extra-class or-two-x' };
     const tag = shallow(CvTag, { propsData });
     expect(tag.classes('extra-class')).toEqual(true);
-    expect(tag.classes('or-two')).toEqual(true);
+    expect(tag.classes('or-two-x')).toEqual(true);
   });
 
   it('click on close icon emits remove', () => {
