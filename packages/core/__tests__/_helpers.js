@@ -7,9 +7,9 @@ export const testComponent = {
     });
   },
 
-  propsAreString: (component, props) => {
-    test.each(props)('has a prop of String type: %s', prop => {
-      expect(component.props[prop].type).toBe(String);
+  propsAreType: (component, props, type) => {
+    test.each(props)(`has a prop ${type.name} type: %s`, prop => {
+      expect(component.props[prop].type).toBe(type);
     });
   },
 
