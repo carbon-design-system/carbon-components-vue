@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.12.2 (July 30, 2019)
+
+### Fix
+
+- CvPagination case when number of items is zero.
+
+# Changelog
+
 ## 2.12.1 (July 25, 2019)
 
 ### Fix
