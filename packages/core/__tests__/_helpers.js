@@ -7,9 +7,20 @@ export const testComponent = {
     });
   },
 
-  propsAreType: (component, props, type) => {
-    test.each(props)(`has a prop ${type.name} type: %s`, prop => {
-      expect(component.props[prop].type).toBe(type);
+  propsAreType: (component, props, types) => {
+    let typeName;
+    if (types.map) {
+      const typeNames = types.map(type => type.name);
+      typeName = `(${typeNames.join('|')})`;
+    } else {
+      typeName = types.name;
+    }
+    test.each(props)(`has a prop of ${typeName} type: %s`, prop => {
+      if (types.map) {
+        expect(component.props[prop].type).toEqual(expect.arrayContaining(types));
+      } else {
+        expect(component.props[prop].type).toBe(types);
+      }
     });
   },
 
