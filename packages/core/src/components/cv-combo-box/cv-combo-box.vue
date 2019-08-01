@@ -1,8 +1,8 @@
 <template>
   <div class="cv-combo-box bx--list-box__wrapper" @focusout="onFocusOut">
-    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">{{
-      title
-    }}</label>
+    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">
+      {{ title }}
+    </label>
 
     <div v-if="isHelper" class="bx--form__helper-text" :class="{ 'bx--form__helper-text--disabled': $attrs.disabled }">
       <slot name="helper-text">{{ helperText }}</slot>
@@ -22,7 +22,6 @@
       @keydown.down.prevent="onDown"
       @keydown.up.prevent="onUp"
       @keydown.enter.prevent="onEnter"
-      @keydown.space.prevent="onSpace"
       @keydown.esc.prevent="onEsc"
       @click="onClick"
     >
@@ -189,7 +188,10 @@ export default {
           this.dataHighlighted = val;
         }
         if (firstMatchIndex >= 0) {
-          this.checkHighlightPosition(firstMatchIndex);
+          this.$nextTick(() => {
+            // $nextTick to prevent highlight check ahead of list update on filter
+            this.checkHighlightPosition(firstMatchIndex);
+          });
         }
       },
     },
@@ -250,7 +252,8 @@ export default {
     },
     updateOptions() {
       if (this.autoFilter) {
-        const pat = new RegExp(this.filter, 'iu');
+        const escFilter = this.filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const pat = new RegExp(escFilter, 'iu');
         this.dataOptions = this.options.filter(opt => pat.test(opt.label)).slice(0);
       } else {
         this.dataOptions = this.options.slice(0);
@@ -275,7 +278,6 @@ export default {
     onInput(ev) {
       this.doOpen(true);
 
-      // this.$emit('filter', this.filter);
       this.updateOptions();
       this.updateHighlight();
     },
@@ -297,9 +299,6 @@ export default {
     onEsc() {
       this.doOpen(false);
       this.$el.focus();
-    },
-    onSpace() {
-      this.onItemClick(this.highlighted);
     },
     onEnter() {
       this.doOpen(!this.open);

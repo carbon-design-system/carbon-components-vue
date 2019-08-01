@@ -198,7 +198,7 @@ let preKnobs = {
   initialValue: {
     group: 'attr',
     type: array,
-    config: ['initial-value', ['20s', '40s'], ','],
+    config: ['initial-value', ['banana', 'ugli_fruit'], ','],
     prop: {
       type: Array,
       name: 'value',
