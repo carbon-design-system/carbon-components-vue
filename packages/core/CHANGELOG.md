@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.12.3 (August 1, 2019)
+
+### Fix
+
+The following is true for combobox and multi-select
+
+- Removed space auto-completion to allow spaces in filter.
+- Enter now used for auto-completion
+- Escapes regex special characters
+
 ## 2.12.2 (July 30, 2019)
 
 ### Fix
