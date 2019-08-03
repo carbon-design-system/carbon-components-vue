@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.12.4 (August 3, 2019)
+
+### Fix
+
+- Correct clear button color for combobox and multiselect
+- Fix value/v-model updates for combobox
+
 ## 2.12.3 (August 1, 2019)
 
 ### Fix
