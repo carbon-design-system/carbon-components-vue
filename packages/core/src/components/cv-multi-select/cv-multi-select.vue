@@ -8,9 +8,9 @@
     }"
     @focusout="onFocusOut"
   >
-    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">{{
-      title
-    }}</label>
+    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">
+      {{ title }}
+    </label>
 
     <div
       v-if="!inline && isHelper"
@@ -82,7 +82,7 @@
           <div
             v-if="filter.length > 0"
             role="button"
-            class="bx--tag--filter bx--list-box__selection"
+            class="bx--list-box__selection"
             tabindex="0"
             title="Clear filter"
             @click.stop="clearFilter"
