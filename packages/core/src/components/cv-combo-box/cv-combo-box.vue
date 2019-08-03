@@ -56,7 +56,7 @@
         <div
           v-if="filter"
           role="button"
-          class="bx--tag--filter bx--list-box__selection"
+          class="bx--list-box__selection"
           tabindex="0"
           title="Clear filter"
           @click.stop="clearFilter"
@@ -152,7 +152,7 @@ export default {
     value() {
       this.dataValue = this.value;
       this.highlighted = this.value;
-      this.filter = this.value;
+      this.internalUpdateValue(this.value);
     },
     options() {
       this.updateOptions();
@@ -316,7 +316,7 @@ export default {
       }
     },
     clearValues() {
-      this.dataValue = [];
+      this.dataValue = '';
       this.$refs.input.focus();
       this.$emit('change', this.dataValue);
     },
@@ -328,12 +328,15 @@ export default {
     onMousemove(val) {
       this.highlighted = val;
     },
-    onItemClick(val) {
+    internalUpdateValue(val) {
       this.dataValue = val;
       const filterOption = this.dataOptions.find(item => item.value === val);
       if (filterOption) {
         this.filter = filterOption.label;
       }
+    },
+    onItemClick(val) {
+      this.internalUpdateValue(val);
       this.$refs.input.focus();
       this.open = false; // close after user makes a selection
       this.$emit('change', this.dataValue);
