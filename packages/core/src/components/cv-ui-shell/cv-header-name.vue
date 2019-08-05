@@ -1,5 +1,5 @@
 <template>
-  <component :is="tagType" v-on="$listeners" :to="to" :href="href" class="cv-header-name bx--header__name">
+  <component :is="tagType" v-on="$listeners" v-bind="linkProps" class="cv-header-name bx--header__name">
     <span v-if="prefix" class="bx--header__name--prefix">{{ prefix }}&nbsp;</span>
     <slot />
   </component>

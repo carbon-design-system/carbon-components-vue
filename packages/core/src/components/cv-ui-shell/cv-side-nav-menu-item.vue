@@ -3,10 +3,8 @@
     <component
       :is="tagType"
       v-on="$listeners"
-      :to="to"
-      :href="href"
       class="bx--side-nav__link"
-      v-bind="$attrs"
+      v-bind="{ ...$attrs, ...linkProps }"
       :class="{ 'bx--side-nav__link--current': active }"
       role="menuitem"
     >

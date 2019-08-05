@@ -3,9 +3,7 @@
     <component
       :is="tagType"
       v-on="$listeners"
-      :to="to"
-      :href="href"
-      v-bind="$attrs"
+      v-bind="{ ...$attrs, ...linkProps }"
       class="bx--header__menu-item"
       role="menuitem"
     >
