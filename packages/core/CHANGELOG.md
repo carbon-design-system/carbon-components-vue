@@ -1,10 +1,10 @@
 # Changelog
 
-## 2.12.5 (August 5, 2019)
+## 2.12.5-rc.0 (August 5, 2019)
 
 ### Fix
 
-- Change how cv-link and other
+- Change how cv-link and other link-mixin usage
 
 ## 2.12.4 (August 3, 2019)
 
