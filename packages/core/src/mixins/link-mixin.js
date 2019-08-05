@@ -8,5 +8,11 @@ export default {
       // if to is used and not href then user wanted a router-link
       return this.to && !this.href ? 'router-link' : 'a';
     },
+    linkProps() {
+      if (this.to && !this.href) {
+        return { to: this.to };
+      }
+      return { href: this.href };
+    },
   },
 };
