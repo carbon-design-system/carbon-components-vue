@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.12.5 (August 6, 2019)
+
+See changes below.
+
 ## 2.12.5-rc.0 (August 5, 2019)
 
 ### Fix
