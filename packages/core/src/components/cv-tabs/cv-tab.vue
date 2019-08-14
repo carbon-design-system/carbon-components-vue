@@ -31,7 +31,7 @@ export default {
   },
   watch: {
     selected() {
-      if (this.selected && 1) {
+      if (this.selected) {
         this.$parent.$emit('cv:selected', this);
       }
     },
