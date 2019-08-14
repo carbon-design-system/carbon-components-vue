@@ -76,7 +76,7 @@ const preKnobs = {
   <cv-header-menu-item href="javascript:void(0)">
     Link 3
   </cv-header-menu-item>
-  <cv-header-menu aria-label="Link 4">
+  <cv-header-menu aria-label="Link 4" title="Link 4">
     <cv-header-menu-item href="javascript:void(0)">
       Submenu Link 1
     </cv-header-menu-item>
