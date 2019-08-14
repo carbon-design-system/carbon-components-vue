@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.12.6 (August 14, 2019)
+
+### Fix
+
+- Add missing title to CvHeaderMenu.
+
 ## 2.12.5 (August 6, 2019)
 
 See changes below.
