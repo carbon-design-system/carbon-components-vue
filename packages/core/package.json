@@ -62,13 +62,14 @@
   },
   "sideEffects": true,
   "dependencies": {
-    "@rocketsoftware/icons-vue": "0.0.1",
-    "@rocketsoftware/carbon-components": "0.0.2",
+    "@rocketsoftware/icons-vue": "0.0.5",
+    "@rocketsoftware/carbon-components": "0.0.5",
     "flatpickr": "4.6.1",
     "vue": "^2.6.10"
   },
   "devDependencies": {
     "@vue/cli-service": "^3.8.4",
+    "babel-preset-env": "1.7.0",
     "vue-template-compiler": "^2.6.10"
   }
 }

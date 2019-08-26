@@ -1,3 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CvTag matches snapshot 1`] = `<span class="cv-tag bx--tag bx--tag--beta">I am a tag</span>`;
+exports[`CvTag matches tag filter snapshot 1`] = `
+<span title="Close filter" class="cv-tag bx--tag bx--tag--filter bx--tag--filter">
+  I am a filter tag
+  <close16-stub aria-label="Clear filter" tabindex="0"></close16-stub></span>
+`;
+
+exports[`CvTag matches tag snapshot 1`] = `
+<span class="cv-tag bx--tag bx--tag--red">
+  I am a tag
+  <!----></span>
+`;

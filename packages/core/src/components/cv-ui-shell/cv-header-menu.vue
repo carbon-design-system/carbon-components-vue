@@ -14,6 +14,7 @@
       @keydown.enter.prevent="doToggle"
       @focusout="onFocusout"
     >
+      {{ title }}
       <chevron-down-glyph class="bx--header__menu-arrow" :aria-label="$attrs.ariaLabel" />
     </a>
     <ul
@@ -35,6 +36,9 @@ import ChevronDownGlyph from '@rocketsoftware/icons-vue/es/chevron--down';
 export default {
   name: 'CvHeaderMenu',
   components: { ChevronDownGlyph },
+  props: {
+    title: String,
+  },
   data() {
     return {
       expanded: false,

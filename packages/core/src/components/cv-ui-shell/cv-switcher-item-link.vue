@@ -2,8 +2,7 @@
   <component
     :is="tagType"
     v-on="$listeners"
-    :to="to"
-    :href="href"
+    v-bind="linkProps"
     class="cv-switcher-item-link bx--switcher__item-link"
     :class="{ 'bx--switcher__item-link--selected': selected }"
   >
