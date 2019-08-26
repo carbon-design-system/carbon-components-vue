@@ -7,9 +7,20 @@ export const testComponent = {
     });
   },
 
-  propsAreString: (component, props) => {
-    test.each(props)('has a prop of String type: %s', prop => {
-      expect(component.props[prop].type).toBe(String);
+  propsAreType: (component, props, types) => {
+    let typeName;
+    if (types.map) {
+      const typeNames = types.map(type => type.name);
+      typeName = `(${typeNames.join('|')})`;
+    } else {
+      typeName = types.name;
+    }
+    test.each(props)(`has a prop of ${typeName} type: %s`, prop => {
+      if (types.map) {
+        expect(component.props[prop].type).toEqual(expect.arrayContaining(types));
+      } else {
+        expect(component.props[prop].type).toBe(types);
+      }
     });
   },
 

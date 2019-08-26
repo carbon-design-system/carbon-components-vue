@@ -31,7 +31,6 @@
         inline
         hideLabel
         ref="pageSelect"
-        v-if="pages.length > 0"
         @input="onPageChange"
         :value="`${pageValue}`"
       >
@@ -46,8 +45,6 @@
       <span class="bx--pagination__text">
         <slot name="of-n-pages" v-bind:scope="ofNPagesProps">{{ pageOfPages }}</slot>
       </span>
-
-      <span v-if="pages.length == 0">{{ pageValue }}</span>
 
       <button
         type="button"
@@ -110,7 +107,7 @@ const newPageCount = (numberOfItems, pageSizeValue) => {
   if (numberOfItems === Infinity) {
     return Infinity;
   }
-  return Math.ceil(numberOfItems / pageSizeValue);
+  return Math.max(1, Math.ceil(numberOfItems / pageSizeValue));
 };
 
 const newPagesArray = pageCount => {
@@ -196,7 +193,7 @@ export default {
     },
     rangeProps() {
       return {
-        start: this.firstItem,
+        start: Math.min(this.firstItem, this.numberOfItems),
         end: Math.min(this.firstItem + parseInt(this.pageSizeValue, 10) - 1, this.numberOfItems),
         items: this.numberOfItems,
       };

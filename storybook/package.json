@@ -1,6 +1,6 @@
 {
   "name": "storybook",
-  "version": "2.12.0-rc.3",
+  "version": "2.12.6",
   "private": true,
   "description": "> TODO: description",
   "scripts": {

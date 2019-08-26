@@ -3,10 +3,8 @@
     <component
       :is="tagType"
       v-on="$listeners"
-      :to="to"
-      :href="href"
       class="cv-side-nav-item-link bx--side-nav__link"
-      v-bind="$attrs"
+      v-bind="{ ...$attrs, ...linkProps }"
       :class="{ 'bx--side-nav__link--current': active }"
     >
       <cv-side-nav-icon v-if="$slots['nav-icon'] !== undefined" small>

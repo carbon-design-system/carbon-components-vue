@@ -1,6 +1,53 @@
 # Changelog
 
-## 2.12.0-rc.x (July 19, 2019)
+## 2.12.6 (August 14, 2019)
+
+### Fix
+
+- Add missing title to CvHeaderMenu.
+
+## 2.12.5 (August 6, 2019)
+
+See changes below.
+
+## 2.12.5-rc.0 (August 5, 2019)
+
+### Fix
+
+- Change how cv-link and other link-mixin usage
+
+## 2.12.4 (August 3, 2019)
+
+### Fix
+
+- Correct clear button color for combobox and multiselect
+- Fix value/v-model updates for combobox
+
+## 2.12.3 (August 1, 2019)
+
+### Fix
+
+The following is true for combobox and multi-select
+
+- Removed space auto-completion to allow spaces in filter.
+- Enter now used for auto-completion
+- Escapes regex special characters
+
+## 2.12.2 (July 30, 2019)
+
+### Fix
+
+- CvPagination case when number of items is zero.
+
+# Changelog
+
+## 2.12.1 (July 25, 2019)
+
+### Fix
+
+- CvDropdown component was incorrectly named CvDropdownInner
+
+## 2.12.0 (July 22, 2019)
 
 ### Features
 
@@ -11,8 +58,7 @@
 ### Fix
 
 - CvHeaderNav aria-label usage
-
-# Changelog
+- Update lodash based on security alert
 
 ## 2.11.0 (July 16, 2019)
 
@@ -27,8 +73,6 @@
 - move non-breaking space in header name due to rendering differences
 - make aria-controls optional in header-global-action
 - hide data table toolbar when empty
-
-# Changelog
 
 ## 2.10.0 (July 10, 2019)
 

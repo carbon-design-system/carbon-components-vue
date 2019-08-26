@@ -52,7 +52,7 @@ for (const story of storySet) {
       if (story.name === 'minimal') {
         withId = () => '';
       } else {
-        withId = id => `id="${id}"`;
+        withId = id => `id="tab-${id}"`;
       }
 
       const templateString = `
@@ -60,16 +60,16 @@ for (const story of storySet) {
   <cv-tab ${withId(1)}label="Tab link 1">
     Sample tab panel content 1
   </cv-tab>
-  <cv-tab ${withId(1)}label="Tab link 2" ${settings.group.tab2}>
+  <cv-tab ${withId(2)}label="Tab link 2" ${settings.group.tab2}>
     Sample tab panel content 2
   </cv-tab>
-  <cv-tab ${withId(1)}label="Tab link 3">
+  <cv-tab ${withId(3)}label="Tab link 3">
     Sample tab panel content 3
   </cv-tab>
-  <cv-tab ${withId(1)}label="Tab link 4" ${settings.group.tab4}>
+  <cv-tab ${withId(4)}label="Tab link 4" ${settings.group.tab4}>
     Sample tab panel content 4
   </cv-tab>
-  <cv-tab ${withId(1)}label="Tab link 5">
+  <cv-tab ${withId(5)}label="Tab link 5">
     Sample tab panel content 5
   </cv-tab>
 </cv-tabs>

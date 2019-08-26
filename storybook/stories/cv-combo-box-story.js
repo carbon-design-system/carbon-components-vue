@@ -36,7 +36,7 @@ const fruits = [
   return {
     name: nameVal,
     label: item,
-    value: nameVal,
+    value: `val-${nameVal}`,
   };
 });
 
@@ -245,29 +245,18 @@ for (const story of storySet) {
       <span>
         V-model:
       </span>
-      <label>Check 10s:
-        <input type="checkbox" value="10s" v-model="checks">
-      </label>
-      <label>Check 20s:
-        <input type="checkbox" value="20s" v-model="checks">
-      </label>
-      <label>Check 30s:
-        <input type="checkbox" value="30s" v-model="checks">
-      </label>
-      <label>Check 40s:
-        <input type="checkbox" value="40s" v-model="checks">
-      </label>
-      <label>Check 50s:
-        <input type="checkbox" value="50s" v-model="checks">
-      </label>
+      <select v-model="value" >
+        <option v-for="opt in options" :value="opt.value">{{opt.label}}</option>
+      </select>
       <br>
       <br>
-      <span>Checked: {{ checks }}</span>
+      <span>Value: {{value}}</span>
     </div>
     <pre v-else>
     :options: options
     </pre>
-  </template>  </sv-template-view>
+  </template>
+</sv-template-view>
   `;
 
       return {
@@ -278,7 +267,7 @@ for (const story of storySet) {
         props: settings.props,
         data() {
           return {
-            checks: [],
+            value: '',
             options: fruits,
             highlight: '',
           };

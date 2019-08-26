@@ -2,8 +2,7 @@
   <component
     :is="tagType"
     v-on="$listeners"
-    :to="to"
-    :href="href"
+    v-bind="linkProps"
     data-tile="clickable"
     class="cv-tile-clickable bx--tile--clickable"
     tabindex="0"

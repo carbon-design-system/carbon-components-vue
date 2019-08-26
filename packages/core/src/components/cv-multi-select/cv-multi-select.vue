@@ -37,8 +37,7 @@
       v-bind="$attrs"
       @keydown.down.prevent="onDown"
       @keydown.up.prevent="onUp"
-      @keydown.enter.prevent="onClick"
-      @keydown.space.prevent="onSpace"
+      @keydown.enter.prevent="onEnter"
       @keydown.esc.prevent="onEsc"
       @click="onClick"
     >
@@ -83,7 +82,7 @@
           <div
             v-if="filter.length > 0"
             role="button"
-            class="bx--tag--filter bx--list-box__selection"
+            class="bx--list-box__selection"
             tabindex="0"
             title="Clear filter"
             @click.stop="clearFilter"
@@ -249,7 +248,10 @@ export default {
           this.dataHighlighted = val;
         }
         if (firstMatchIndex >= 0) {
-          this.checkHighlightPosition(firstMatchIndex);
+          this.$nextTick(() => {
+            // $nextTick to prevent highlight check ahead of list update on filter
+            this.checkHighlightPosition(firstMatchIndex);
+          });
         }
       },
     },
@@ -310,7 +312,8 @@ export default {
     },
     updateOptions() {
       if (this.autoFilter) {
-        const pat = new RegExp(this.filter, 'iu');
+        const escFilter = this.filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const pat = new RegExp(escFilter, 'iu');
         this.dataOptions = this.options.filter(opt => pat.test(opt.label)).slice(0);
       } else {
         this.dataOptions = this.options.slice(0);
@@ -343,7 +346,6 @@ export default {
     onInput(ev) {
       this.doOpen(true);
 
-      // this.$emit('filter', this.filter);
       this.updateOptions();
       this.updateHighlight();
     },
@@ -376,8 +378,17 @@ export default {
       this.doOpen(false);
       this.inputOrButtonFocus();
     },
-    onSpace() {
-      this.onItemClick(this.highlighted);
+    onEnter() {
+      if (this.open) {
+        this.onItemClick(this.highlighted);
+        this.$refs.input.focus();
+        this.filter = '';
+
+        this.doOpen(false);
+        this.updateOptions();
+      } else {
+        this.doOpen(true);
+      }
     },
     onClick(ev) {
       this.doOpen(!this.open);
