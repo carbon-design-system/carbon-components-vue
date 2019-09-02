@@ -48,7 +48,7 @@ export default {
   methods: {
     onCopyCode() {
       // copy to clipboard
-      this.$refs.clippy.value = this.$refs.code.innerHTML;
+      this.$refs.clippy.value = this.$refs.code.innerText;
       this.$refs.clippy.select();
       document.execCommand('copy');
     },
