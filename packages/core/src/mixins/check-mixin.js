@@ -96,7 +96,7 @@ export default {
   methods: {
     onChangeInner(checked) {
       this.isChecked = checked;
-      this.$emit('modelEvent', this.dataChecked);
+      this.$emit('modelEvent', checked);
       this.$emit('change', checked);
     },
     onChange(ev) {
