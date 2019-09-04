@@ -2,18 +2,18 @@
   <nav
     class="cv-side-nav bx--side-nav bx--side-nav__navigation"
     :class="{
-      'bx--side-nav--expanded': internalExpanded,
-      'bx--side-nav--collapsed': !internalExpanded && fixed,
+      'bx--side-nav--expanded': panelExpanded,
+      'bx--side-nav--collapsed': !panelExpanded && fixed,
       'bx--side-nav--ux': isChildOfHeader,
     }"
-    :aria-hidden="!internalExpanded && !fixed"
+    :aria-hidden="!panelExpanded && !fixed"
     @focusout="onFocusout"
     @mousedown="onMouseDown"
   >
     <slot></slot>
     <cv-side-nav-footer
       v-if="!fixed"
-      :expanded="internalExpanded"
+      :expanded="panelExpanded"
       :assistiveText="assistiveToggleText"
       @toggle-expand="toggleExpand"
     />
@@ -45,21 +45,20 @@ export default {
   },
   watch: {
     expanded() {
-      this.dataExpanded = this.expanded;
-      this.$parent.$emit('cv:panel-resize', this);
+      this.panelExpanded = this.expanded;
     },
   },
   computed: {
     isChildOfHeader() {
       return this.$parent.isCvHeader;
     },
-    internalExpanded: {
+    panelExpanded: {
       get() {
         return this.dataExpanded;
       },
       set(val) {
-        // Do not emit cv:panel-resize
         this.dataExpanded = val;
+        this.$parent.$emit('cv:panel-resize', this);
       },
     },
   },
@@ -74,7 +73,7 @@ export default {
       }
     },
     toggleExpand() {
-      this.dataExpanded = !this.dataExpanded;
+      this.panelExpanded = !this.dataExpanded;
     },
   },
 };
