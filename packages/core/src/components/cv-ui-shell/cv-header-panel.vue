@@ -1,8 +1,8 @@
 <template>
   <div
     class="cv-header-panel bx--header-panel"
-    :class="{ 'bx--header-panel--expanded': internalExpanded }"
-    :aria-hidden="!internalExpanded"
+    :class="{ 'bx--header-panel--expanded': panelExpanded }"
+    :aria-hidden="!panelExpanded"
     @focusout="onFocusout"
     @mousedown="onMouseDown"
   >
@@ -30,18 +30,17 @@ export default {
   },
   watch: {
     expanded() {
-      this.dataExpanded = this.expanded;
-      this.$parent.$emit('cv:panel-resize', this);
+      this.panelExpanded = this.expanded;
     },
   },
   computed: {
-    internalExpanded: {
+    panelExpanded: {
       get() {
         return this.dataExpanded;
       },
       set(val) {
-        // Do not emit cv:panel-resize
         this.dataExpanded = val;
+        this.$parent.$emit('cv:panel-resize', this);
       },
     },
   },

@@ -49,14 +49,14 @@ export default {
         const newValue = force !== undefined ? force : !srcComponent.internalActive;
 
         for (let index in this.panels) {
-          this.panels[index].internalExpanded = false;
+          this.panels[index].panelExpanded = false;
         }
         for (let index in this.panelControllers) {
           this.panelControllers[index].internalActive = false;
         }
 
         srcComponent.internalActive = newValue;
-        this.panels[foundIndex].internalExpanded = newValue;
+        this.panels[foundIndex].panelExpanded = newValue;
       }
     },
     onCvPanelControlFocusout(srcComponent, srcEvent) {
