@@ -43,9 +43,11 @@ export default {
         return this.dataExpanded;
       },
       set(val) {
-        this.dataExpanded = val;
-        this.$emit('panel-resize', this);
-        this.$emit('modelEvent', val);
+        if (this.dataExpanded !== val) {
+          this.dataExpanded = val;
+          this.$emit('modelEvent', val);
+          this.$emit('panel-resize', this);
+        }
       },
     },
   },
