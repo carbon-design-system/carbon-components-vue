@@ -28,6 +28,10 @@ export default {
       dataExpanded: this.expanded,
     };
   },
+  model: {
+    event: 'modelEvent',
+    prop: 'expanded',
+  },
   watch: {
     expanded() {
       this.panelExpanded = this.expanded;
@@ -40,7 +44,8 @@ export default {
       },
       set(val) {
         this.dataExpanded = val;
-        this.$parent.$emit('cv:panel-resize', this);
+        this.$emit('panel-resize', this);
+        this.$emit('modelEvent', val);
       },
     },
   },

@@ -58,7 +58,8 @@ export default {
       },
       set(val) {
         this.dataExpanded = val;
-        this.$parent.$emit('cv:panel-resize', this);
+        this.$emit('panel-resize', this);
+        this.$emit('modelEvent', val);
       },
     },
   },
@@ -75,6 +76,10 @@ export default {
     toggleExpand() {
       this.panelExpanded = !this.dataExpanded;
     },
+  },
+  model: {
+    event: 'modelEvent',
+    prop: 'expanded',
   },
 };
 </script>
