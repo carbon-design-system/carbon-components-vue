@@ -1,5 +1,10 @@
 <template>
-  <ul data-progress data-progress-current class="cv-progress bx--progress">
+  <ul
+    data-progress
+    data-progress-current
+    class="cv-progress bx--progress"
+    :class="{ 'bx--progress--vertical': vertical }"
+  >
     <slot>
       <cv-progress-step
         v-for="(step, index) in steps"
@@ -23,6 +28,7 @@ export default {
   props: {
     initialStep: { type: Number, default: 0 },
     steps: Array,
+    vertical: Boolean,
   },
   created() {
     // add these on created otherwise cv:mounted is too late.
