@@ -779,16 +779,6 @@
   dependencies:
     "@carbon/icon-helpers" "10.2.0"
 
-"@carbon/vue@^2.12.6":
-  version "2.12.6"
-  resolved "https://registry.yarnpkg.com/@carbon/vue/-/vue-2.12.6.tgz#ec1c994099d3f44d9979b987973bbc31d7c9a459"
-  integrity sha512-jhfMxU0Sm+HMAY03nE3p/cicGEoljW1jkP6y4du3dj58GpK/t5a3XPYiyPqDRNQp1KmKITmHETY541hR0PFdUA==
-  dependencies:
-    "@carbon/icons-vue" "10.3.0"
-    carbon-components "10.3.1"
-    flatpickr "4.6.1"
-    vue "^2.6.10"
-
 "@csstools/convert-colors@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
