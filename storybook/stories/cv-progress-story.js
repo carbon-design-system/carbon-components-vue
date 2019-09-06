@@ -26,7 +26,7 @@ const preKnobs = {
     type: array,
     config: [
       'Steps',
-      ['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5'],
+      ['Step 1', 'Step 2 overflows and shows a tip', 'Step 3', 'Step 4', 'Step 5'],
       ',',
       // 'consts.CONFIG', // , - does not seem to work in storybook 4
     ],
@@ -35,21 +35,27 @@ const preKnobs = {
       type: Array,
     },
   },
+  vertical: {
+    group: 'attr',
+    type: boolean,
+    config: ['vertical', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      name: 'vertical',
+      type: Boolean,
+    },
+  },
   slotted: {
     group: 'slots',
-    value: `  <cv-progress-step label="Step 1" additional-info="Optional info" :complete="complete[0]"/>
+    value: `<cv-progress-step label="Step 1" additional-info="Optional info" :complete="complete[0]"/>
   <cv-progress-step label="Step 2 is a bit longer" :complete="complete[1]"/>
-  <cv-progress-step label="Step 3" :complete="complete[2]"/>
+  <cv-progress-step label="Step 3" :complete="complete[2]" tip-text="Step 3 has hard coded tip"/>
   <cv-progress-step label="Step 4" :complete="complete[3]" invalid />
   <cv-progress-step label="Step 4" :complete="complete[4]" disabled />
 `,
   },
 };
 
-const variants = [
-  { name: 'default', includes: ['initialStep', 'steps'] },
-  { name: 'slotted', excludes: ['steps', 'initialStep'], skip: { default: true } },
-];
+const variants = [{ name: 'default', excludes: ['slotted'] }, { name: 'slotted', excludes: ['steps', 'initialStep'] }];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
