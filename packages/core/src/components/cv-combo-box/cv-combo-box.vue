@@ -1,8 +1,8 @@
 <template>
   <div class="cv-combo-box bx--list-box__wrapper" @focusout="onFocusOut">
-    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">
-      {{ title }}
-    </label>
+    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">{{
+      title
+    }}</label>
 
     <div v-if="isHelper" class="bx--form__helper-text" :class="{ 'bx--form__helper-text--disabled': $attrs.disabled }">
       <slot name="helper-text">{{ helperText }}</slot>
@@ -357,4 +357,8 @@ export default {
 // .cv-combo-box.bx--combo-box--filterable .bx--list-box__selection--multi {
 //   margin: 0;
 // }
+.bx--list-box__field .bx--text-input {
+  // temporary fix for issue https://github.com/carbon-design-system/carbon/issues/3290
+  padding-right: 4.5rem;
+}
 </style>
