@@ -75,6 +75,7 @@
                 title="Clear search input"
                 aria-label="Clear search input"
                 @click="onClearClick"
+                type="button"
               >
                 <Close16 />
               </button>
