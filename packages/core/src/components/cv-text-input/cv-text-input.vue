@@ -31,6 +31,7 @@
         class="bx--text-input--password__visibility"
         :aria-label="isPasswordVisible ? 'Hide password' : 'Show password'"
         @click="togglePasswordVisibility"
+        type="button"
       >
         <ViewOff16 v-if="isPasswordVisible" class="bx--icon-visibility-off" />
         <View16 v-else class="bx--icon-visibility-off" />
