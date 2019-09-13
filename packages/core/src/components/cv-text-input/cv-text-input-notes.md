@@ -15,6 +15,8 @@ http://www.carbondesignsystem.com/components/text-input/code
 - helper-text: optional helper text
 - invalid-message: optional error message
 - label: the label text for the input
+- passwordHideLabel: aria-label for the password button if visible, default: 'Hide password',
+- passwordShowLabel: aria-label for the password button if not visible, default: 'Show password',
 - passwordVisible: Boolean makes password text visible
 - theme: optional 'light',
 - type: If 'password' adds password features

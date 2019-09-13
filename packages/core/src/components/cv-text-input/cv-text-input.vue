@@ -29,7 +29,7 @@
       <button
         v-if="isPassword"
         class="bx--text-input--password__visibility"
-        :aria-label="isPasswordVisible ? 'Hide password' : 'Show password'"
+        :aria-label="passwordHideShowLabel"
         @click="togglePasswordVisibility"
         type="button"
       >
@@ -59,6 +59,8 @@ export default {
     helperText: { type: String, default: null },
     invalidMessage: { type: String, default: null },
     label: String,
+    passwordHideLabel: { type: String, default: 'Hide password' },
+    passwordShowLabel: { type: String, default: 'Show password' },
     passwordVisible: Boolean,
     theme: String,
     type: String,
@@ -101,6 +103,9 @@ export default {
     },
     isPasswordVisible() {
       return this.isPassword && this.dataPasswordVisible;
+    },
+    passwordHideShowLabel() {
+      return this.isPasswordVisible ? this.passwordHideLabel : this.passwordShowLabel;
     },
   },
   methods: {
