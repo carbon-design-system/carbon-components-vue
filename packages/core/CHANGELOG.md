@@ -1,8 +1,24 @@
 # Changelog
 
-## 2.12.7 (Sept 11, 2019)
+## 2.12.7 (Sept 13, 2019)
+
+### Feat
+
+- Add vertical progress bar
 
 ### Fix
+
+- Code snippet no longer copies encoded html
+- Correct tab story
+- Fix checkbox v-model unefined
+- Fix panel expansion event
+- Add v-model for header panels
+- Re-order header panel events
+- Update lock file
+- Fix combobox input spilling into controls
+- Fix non-cv-button types (cv-data-table, cv-text-input password button)
+- Password input button labels
+- Update data table to have attributes for cancel button and search labels.
 
 ## 2.12.6 (August 14, 2019)
 
