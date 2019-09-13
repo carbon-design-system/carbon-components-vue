@@ -72,6 +72,15 @@ let preKnobs = {
       name: 'title',
     },
   },
+  batchCancelLabel: {
+    group: 'attr',
+    type: text,
+    config: ['batch-cancel-label', 'Cancel'],
+    prop: {
+      type: String,
+      name: 'batch-cancel-label',
+    },
+  },
   zebra: {
     group: 'attr',
     type: boolean,
