@@ -154,6 +154,10 @@ let preKnobs = {
     group: 'attr',
     value: '@search="onFilter"',
   },
+  search2: {
+    group: 'attr',
+    value: '@search="onFilter" searchLabel="Filter" searchPlaceholder="Filter" searchClearLabel="Clear filter"',
+  },
   basicPagination: {
     group: 'attr',
     type: boolean,
@@ -308,6 +312,21 @@ let variants = [
   {
     name: 'default',
     excludes: [
+      'search2',
+      'columns2',
+      'slottedData',
+      'htmlData',
+      'helperTextSlot',
+      'basicPagination',
+      'hasExpandingRows',
+      'expandingSlottedData',
+      'scopedSlots',
+    ],
+  },
+  {
+    name: 'search labels',
+    excludes: [
+      'search',
       'columns2',
       'slottedData',
       'htmlData',
