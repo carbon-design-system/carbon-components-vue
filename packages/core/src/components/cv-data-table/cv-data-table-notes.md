@@ -80,6 +80,9 @@ Like sorting and filtering it is the users responsibility to deal with edited da
 - row-size: (optional) default: '',
   - 'compact', 'small', '', 'tall'
 - zebra: (optional) default: false ; boolean is the table striped
+- searchLabel: (optional) { type: String, default: 'Search' },
+- searchPlaceholder: (optional) { type: String, default: 'Search' },
+- searchClearLabel: (optional) { type: String, default: 'Clear search' },
 
 ## Scoped slots
 
