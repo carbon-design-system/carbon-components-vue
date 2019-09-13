@@ -83,6 +83,7 @@ Like sorting and filtering it is the users responsibility to deal with edited da
 - searchLabel: (optional) { type: String, default: 'Search' },
 - searchPlaceholder: (optional) { type: String, default: 'Search' },
 - searchClearLabel: (optional) { type: String, default: 'Clear search' },
+- batchCancelLabel: (optional) { type: String, default: 'Cancel' },
 
 ## Scoped slots
 

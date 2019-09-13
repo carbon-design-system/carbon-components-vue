@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.12.7 (Sept 11, 2019)
+
+### Fix
+
 ## 2.12.6 (August 14, 2019)
 
 ### Fix

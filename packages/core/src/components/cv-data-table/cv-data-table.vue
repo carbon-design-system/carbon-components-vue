@@ -19,7 +19,7 @@
         >
           <div class="bx--action-list">
             <slot name="batch-actions" />
-            <cv-button class="bx--batch-summary__cancel" small @click="deselect">Cancel</cv-button>
+            <cv-button class="bx--batch-summary__cancel" small @click="deselect">{{ batchCancelLabel }}</cv-button>
           </div>
           <div class="bx--batch-summary">
             <p class="bx--batch-summary__para">
@@ -180,6 +180,7 @@ export default {
   mixins: [uidMixin],
   props: {
     autoWidth: Boolean,
+    batchCancelLabel: { type: String, default: 'cancel' },
     borderless: Boolean,
     overflowMenu: { type: [Boolean, Array], default: () => [] },
     pagination: {
