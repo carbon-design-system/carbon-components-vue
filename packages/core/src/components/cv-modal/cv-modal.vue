@@ -164,7 +164,7 @@ export default {
       }
     },
     onEsc(ev) {
-      this._maybeHide(ev, 'Esc-press');
+      this._maybeHide(ev, 'escape-press');
     },
     onClose(ev) {
       this._maybeHide(ev, 'close-click');
@@ -200,3 +200,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.cv-modal .bx--modal-close__icon {
+  pointer-events: none;
+}
+</style>
