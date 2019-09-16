@@ -8,8 +8,8 @@
       'bx--modal--danger': kind === 'danger',
     }"
     tabindex="-1"
-    @keydown.esc.prevent="hide"
-    @click.self="onClick"
+    @keydown.esc.prevent="onEsc"
+    @click.self="onExternalClick"
   >
     <div class="bx--modal-container" ref="modalDialog">
       <div
@@ -26,7 +26,7 @@
         <h2 class="bx--modal-header__heading">
           <slot name="title">Modal Title</slot>
         </h2>
-        <button class="bx--modal-close" type="button" @click="hide" ref="close">
+        <button class="bx--modal-close" type="button" @click="onClose" ref="close">
           <Close16 class="bx--modal-close__icon" />
         </button>
       </div>
@@ -89,6 +89,7 @@ export default {
       default: '',
       validator: val => ['', 'danger'].includes(val),
     },
+    autoHideOff: Boolean,
     visible: Boolean,
   },
   data() {
@@ -125,6 +126,10 @@ export default {
       return this.$slots['primary-button'] || this.$slots['secondary-button'];
     },
   },
+  model: {
+    event: 'modelEvent',
+    prop: 'visible',
+  },
   methods: {
     focusBeforeContent() {
       if (this.$slots['primary-button']) {
@@ -153,29 +158,43 @@ export default {
 
       this.$el.removeEventListener('transitionend', this.onShown);
     },
-    onClick(ev) {
+    onExternalClick(ev) {
       if (ev.target === this.$el) {
-        this.hide();
+        this._maybeHide(ev, 'external-click');
       }
+    },
+    onEsc(ev) {
+      this._maybeHide(ev, 'Esc-press');
+    },
+    onClose(ev) {
+      this._maybeHide(ev, 'close-click');
     },
     show() {
       this.$el.addEventListener('transitionend', this.onShown);
       this.dataVisible = true;
     },
+    _maybeHide(event, reason) {
+      if (!this.autoHideOff) {
+        this.hide();
+      } else {
+        event['cv:reason'] = reason;
+        this.$emit('modal-hide-request', event);
+      }
+    },
     hide() {
       this.dataVisible = false;
       this.$emit('modal-hidden');
     },
-    onPrimaryClick() {
+    onPrimaryClick(ev) {
       this.$emit('primary-click');
       if (!this.$listeners['primary-click']) {
-        this.hide();
+        this._maybeHide(ev, 'primary-click');
       }
     },
-    onSecondaryClick() {
+    onSecondaryClick(ev) {
       this.$emit('secondary-click');
       if (!this.$listeners['secondary-click']) {
-        this.hide();
+        this._maybeHide(ev, 'secondary-click');
       }
     },
   },
