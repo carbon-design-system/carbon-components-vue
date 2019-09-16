@@ -73,20 +73,40 @@ const preKnobs = {
   events: {
     group: 'attr',
     value: `@modal-shown="actionShown"
-  @modal-hidden="actionHidden"`,
+  @modal-hidden="actionHidden"
+  @modal-hide-request="actionHideRequest"`,
+  },
+  primarySecondaryEvents: {
+    group: 'attr',
+    value: `
+    @primary-click="actionPrimary"
+    @secondary-click="actionSecondary"`,
+  },
+  autoHideOff: {
+    group: 'attr',
+    type: boolean,
+    config: ['auto-hide-off', false],
+    prop: {
+      name: 'auto-hide-off',
+      type: Boolean,
+    },
   },
 };
 
 const variants = [
-  { name: 'default', includes: ['content', 'visible', 'events'] },
+  { name: 'default', includes: ['content', 'visible', 'events', 'autoHideOff'] },
   {
     name: 'buttons',
-    includes: ['content', 'primaryButton', 'secondaryButton', 'events'],
+    includes: ['content', 'primaryButton', 'secondaryButton', 'events', 'autoHideOff'],
   },
-  { name: 'primary-only', includes: ['content', 'primaryButton', 'events'] },
+  {
+    name: 'buttons with listeners',
+    includes: ['content', 'primaryButton', 'secondaryButton', 'events', 'primarySecondaryEvents', 'autoHideOff'],
+  },
+  { name: 'primary-only', includes: ['content', 'primaryButton', 'events', 'autoHideOff'] },
   {
     name: 'secondary-only',
-    includes: ['content', 'secondaryButton', 'events'],
+    includes: ['content', 'secondaryButton', 'events', 'autoHideOff'],
   },
   { name: 'minimal', includes: ['content'] },
   { name: 'with input', excludes: ['content'] },
@@ -125,7 +145,6 @@ for (const story of storySet) {
 
       return {
         components: { CvModal, SvTemplateView },
-
         props: settings.props,
         methods: {
           doSave() {
@@ -138,6 +157,7 @@ for (const story of storySet) {
           actionHidden: action('CV Modal - modal-hidden'),
           actionPrimary: action('CV Modal - primary-click'),
           actionSecondary: action('CV Modal - secondary-click'),
+          actionHideRequest: action('Cv Modal - modal-hide-request'),
         },
         template: templateViewString,
       };
