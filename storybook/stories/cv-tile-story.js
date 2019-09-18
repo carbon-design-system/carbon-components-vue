@@ -182,7 +182,7 @@ preKnobs = {
   },
 };
 
-variants = [{ name: 'Selectable-Array v-model', includes: ['vModel'] }];
+variants = [{ name: 'selectable-Array v-model', includes: ['vModel'] }];
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
