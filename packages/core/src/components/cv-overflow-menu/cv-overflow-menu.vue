@@ -156,12 +156,10 @@ export default {
         );
         for (let tryOn of focusOnList) {
           if (
-            !// don't focus on before after or something that can't be tabbed to
-            (
-              tryOn.classList.contains('cv-overflow-menu__before-content') ||
-              tryOn.classList.contains('cv-overflow-menu__after-content') ||
-              tryOn.tabindex < 0
-            )
+            // don't focus on before after or something that can't be tabbed to
+            tryOn.classList.contains('cv-overflow-menu__before-content') ||
+            tryOn.classList.contains('cv-overflow-menu__after-content') ||
+            tryOn.tabindex < 0
           ) {
             focusOn = tryOn;
             break;
@@ -182,9 +180,13 @@ export default {
       // On initial open the menu is positioned 0,0 causing a jump
       await this.positionMenu();
       this.positionListen(this.open);
-      this.$nextTick(() => {
-        this.doFocus();
-      });
+
+      if (this.open) {
+        // only focus on open
+        this.$nextTick(() => {
+          this.doFocus();
+        });
+      }
     },
     onOverflowMenuTab(ev) {
       if (!ev.shiftKey) {
