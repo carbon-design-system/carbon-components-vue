@@ -14,7 +14,7 @@
       <p class="bx--toast-notification__caption">{{ caption }}</p>
     </div>
     <button
-      aria-label="Close"
+      :aria-label="closeAriaLabel"
       type="button"
       data-notification-btn
       class="bx--toast-notification__close-button"
@@ -38,6 +38,7 @@ export default {
   mixins: [notificationMixin],
   props: {
     caption: String,
+    closeAriaLabel: { type: String, default: 'Close' },
     kind: {
       type: String,
       default: 'info',

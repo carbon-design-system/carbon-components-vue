@@ -14,7 +14,13 @@
         <p class="bx--inline-notification__subtitle">{{ subTitle }}.</p>
       </div>
     </div>
-    <button type="button" data-notification-btn class="bx--inline-notification__close-button" @click="$emit('close')">
+    <button
+      type="button"
+      :aria-label="closeAriaLabel"
+      data-notification-btn
+      class="bx--inline-notification__close-button"
+      @click="$emit('close')"
+    >
       <Close16 class="bx--inline-notification__close-icon" />
     </button>
   </div>
@@ -32,6 +38,7 @@ export default {
   components: { Close16 },
   mixins: [notificationMixin],
   props: {
+    closeAriaLabel: { type: String, default: 'Clear filter' },
     kind: {
       type: String,
       default: 'info',

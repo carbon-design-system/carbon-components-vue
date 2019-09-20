@@ -12,9 +12,14 @@ http://www.carbondesignsystem.com/components/text-input/code
 
 ## Attributes
 
+- clearAriaLabel: { type: String, default: 'Clear search input' },
 - label: the label text for the search box
 - small: makes hte search box smaller
 - value: initial value
+
+### Toolbar kind only
+
+- toolbarAriaLabel: { type: String, default: 'Toolbar search' },
 
 ## slots
 

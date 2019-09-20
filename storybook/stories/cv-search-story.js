@@ -61,6 +61,15 @@ const preKnobs = {
     group: 'attr',
     value: `@input="onInput"`,
   },
+  clearArialabel: {
+    group: 'attr',
+    type: text,
+    config: ['clear-aria-label', 'Custom search aria label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: String,
+      name: 'clear-aria-label',
+    },
+  },
 };
 
 const variants = [

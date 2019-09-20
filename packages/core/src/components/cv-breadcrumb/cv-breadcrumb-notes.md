@@ -32,4 +32,5 @@ Often used with breadcrumbs or other controls
 
 ## Attributes
 
+aria-label: changes the breadcrumb aria label
 no-trailing-slash: if true no trailing slash follows the last breadcrumb item

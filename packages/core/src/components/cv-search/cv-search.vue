@@ -21,7 +21,7 @@
         type="button"
         v-if="isToolbarKind"
         class="bx--toolbar-search__btn"
-        aria-label="Toolbar search"
+        :aria-label="toolbarAriaLabel"
         @click="toggleActive(true)"
         @blur="checkFocus"
       >
@@ -32,8 +32,8 @@
         type="button"
         class="bx--search-close"
         :class="{ 'bx--search-close--hidden': !clearVisible }"
-        title="Clear search input"
-        aria-label="Clear search input"
+        :title="clearAriaLabel"
+        :aria-label="clearAriaLabel"
         @click="onClearClick"
       >
         <Close16 />
@@ -55,6 +55,7 @@ export default {
   components: { Close16, Search16, CvWrapper },
   inheritAttrs: false,
   props: {
+    clearAriaLabel: { type: String, default: 'Clear search input' },
     formItem: { type: Boolean, default: true },
     kind: { type: String, default: null },
     label: String,
@@ -73,6 +74,7 @@ export default {
     },
     value: String,
     placeholder: { type: String, default: 'Search' },
+    toolbarAriaLabel: { type: String, default: 'Toolbar search' },
   },
   data() {
     return {

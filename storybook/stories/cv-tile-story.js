@@ -86,7 +86,10 @@ let variants = [
   {
     name: 'selectable',
     includes: ['slotDefault', 'selected', 'value'],
-    extra: { kind: { group: 'attr', value: 'kind="selectable"' } },
+    extra: {
+      kind: { group: 'attr', value: 'kind="selectable"' },
+      ariaLabel: { group: 'attr', value: 'aria-label="custom aria label"' },
+    },
   },
   {
     name: 'selectable-event',

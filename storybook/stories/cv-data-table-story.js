@@ -72,6 +72,15 @@ let preKnobs = {
       name: 'title',
     },
   },
+  actionBarAriaLabel: {
+    group: 'attr',
+    type: text,
+    config: ['action-bar-aria-label', 'Custom action bar aria label'],
+    prop: {
+      type: String,
+      name: 'action-bar-aria-label',
+    },
+  },
   batchCancelLabel: {
     group: 'attr',
     type: text,
