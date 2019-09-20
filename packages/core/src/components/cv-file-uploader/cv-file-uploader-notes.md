@@ -27,6 +27,7 @@ initial-state-uploading - set the uploading state when a file is selected
 multiple - standard input attribute for file type
 removable - show remove button
 label - text label for the input
+removeAriaLabel: { type: String, default: 'Remove file' },
 
 ## Events
 

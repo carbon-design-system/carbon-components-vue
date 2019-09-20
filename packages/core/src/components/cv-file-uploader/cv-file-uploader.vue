@@ -47,7 +47,7 @@
                 :tabindex="'1'"
                 role="button"
                 alt="Remove file"
-                arial-label="Remove file"
+                :arial-label="removeAriaLabel"
                 @click="remove(index)"
                 @keydown.enter.prevent="remove(index)"
                 @keydown.space.prevent
@@ -92,6 +92,7 @@ export default {
     initialStateUploading: Boolean,
     removable: Boolean,
     buttonLabel: { type: String, default: 'Select file' },
+    removeAriaLabel: { type: String, default: 'Remove file' },
   },
   model: {
     prop: 'files',

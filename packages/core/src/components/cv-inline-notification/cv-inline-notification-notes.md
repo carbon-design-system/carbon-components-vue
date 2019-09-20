@@ -20,6 +20,7 @@ http://www.carbondesignsystem.com/components/notification/code
 - kind: 'error', 'info', 'success', 'warning'
 - title: 'title'
 - sub-title: 'subtitle'
+- closeAriaLabel: { type: String, default: 'Clear filter' },
 
 ## Events
 
