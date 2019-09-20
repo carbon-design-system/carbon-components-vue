@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.13.0 (Sept 20, 2019)
+
+### Feat
+
+- code snippet now has
+  - light theme
+  - customisable copy feedback and aria label
+- Modal
+  - Add 'auto-hide-off' property which causes 'modal-hide-request' events to be raised instead of auto closing
+
+### Fix
+
+- Stop overflow menu grabbing focus on close
+- v-model for selectable tile
+
 ## 2.12.7 (Sept 13, 2019)
 
 ### Feat
