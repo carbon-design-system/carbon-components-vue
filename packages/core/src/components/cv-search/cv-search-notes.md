@@ -12,7 +12,7 @@ http://www.carbondesignsystem.com/components/text-input/code
 
 ## Attributes
 
-- clearLabel: { type: String, default: 'Clear search input' },
+- clearAriaLabel: { type: String, default: 'Clear search input' },
 - label: the label text for the search box
 - small: makes hte search box smaller
 - value: initial value
