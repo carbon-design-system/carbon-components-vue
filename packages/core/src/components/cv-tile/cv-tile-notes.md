@@ -50,6 +50,10 @@ The clickable type is intended as a navigation link. Users should supply href or
 
 ### Selectable type is based on an input. Users should supply name and value if needed.
 
+Has the following unique attribute
+
+- ariaLabel: { type: String, default: 'tile' },
+
 ## slots
 
 - default: Content of tile (above fold in expandable)

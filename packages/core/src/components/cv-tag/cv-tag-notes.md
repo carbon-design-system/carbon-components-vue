@@ -32,6 +32,8 @@ http://www.carbondesignsystem.com/components/tag/code
 
 A special kind which includes a clickable x which raieses a 'remove' event'
 
+- clearAriaLabel: { type: String, default: 'Clear filter' },
+
 ## Events
 
 - remove: 'filter' kind only

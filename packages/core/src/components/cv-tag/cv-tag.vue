@@ -8,18 +8,14 @@
         'bx--tag--disabled': disabled,
       },
     ]"
+    tabindex="0"
     :title="title"
+    @keydown.enter.stop.prevent="$emit('remove')"
+    @keydown.space.prevent
+    @keyup.space.prevent="$emit('remove')"
   >
     {{ label }}
-    <Close16
-      v-if="isFilter"
-      aria-label="Clear filter"
-      @click.stop.prevent="$emit('remove')"
-      tabindex="0"
-      @keydown.enter.stop.prevent="$emit('remove')"
-      @keydown.space.prevent
-      @keyup.space.prevent="$emit('remove')"
-    />
+    <Close16 v-if="isFilter" :aria-label="clearAriaLabel" role="button" @click.stop.prevent="$emit('remove')" />
   </span>
 </template>
 
@@ -44,6 +40,7 @@ export default {
   name: 'CvTag',
   components: { Close16 },
   props: {
+    clearAriaLabel: { type: String, default: 'Clear filter' },
     disabled: Boolean,
     label: { type: String, required: true },
     kind: {
