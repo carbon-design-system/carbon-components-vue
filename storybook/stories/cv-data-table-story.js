@@ -72,7 +72,7 @@ let preKnobs = {
       name: 'title',
     },
   },
-  acationBarAriaLabel: {
+  actionBarAriaLabel: {
     group: 'attr',
     type: text,
     config: ['action-bar-aria-label', 'Custom action bar aria label'],

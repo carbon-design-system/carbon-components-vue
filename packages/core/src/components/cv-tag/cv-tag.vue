@@ -56,7 +56,7 @@ export default {
       return this.kind === 'filter';
     },
     title() {
-      return this.isFilter ? 'Close filter' : null;
+      return this.isFilter ? this.clearAriaLabel : null;
     },
   },
 };

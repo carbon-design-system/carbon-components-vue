@@ -46,7 +46,7 @@
                 class="bx--file-close"
                 :tabindex="'1'"
                 role="button"
-                alt="Remove file"
+                :alt="removeAriaLabel"
                 :arial-label="removeAriaLabel"
                 @click="remove(index)"
                 @keydown.enter.prevent="remove(index)"

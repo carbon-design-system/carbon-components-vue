@@ -15,7 +15,7 @@
           v-if="hasBatchActions"
           class="bx--batch-actions"
           :class="{ 'bx--batch-actions--active': batchActive }"
-          :aria-label="acationBarAriaLabel"
+          :aria-label="actionBarAriaLabel"
         >
           <div class="bx--action-list">
             <slot name="batch-actions" />
@@ -179,7 +179,7 @@ export default {
   },
   mixins: [uidMixin],
   props: {
-    acationBarAriaLabel: { type: String, default: 'Table Action Bar' },
+    actionBarAriaLabel: { type: String, default: 'Table Action Bar' },
     autoWidth: Boolean,
     batchCancelLabel: { type: String, default: 'cancel' },
     borderless: Boolean,
