@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.14.0-canary.x (Sept 20, 2019)
+
+### Feat
+
+- Add optional customisable labels/text where they previously were fixed.
+
 ## 2.13.0 (Sept 20, 2019)
 
 ### Feat
