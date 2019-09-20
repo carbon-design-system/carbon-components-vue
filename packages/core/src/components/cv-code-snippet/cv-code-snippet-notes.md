@@ -35,6 +35,12 @@ $z-indexes: (
 </cv-code-snippet>
 ```
 
+## attributes
+
+- feedback-aria-label: aria label for the feedback button. Default: 'Copy code'
+- copyFeedback: string of tip shown after copy performed. Default: 'Copied!'
+- thme: inline only allows 'light' version
+
 ## slots
 
 - default: slotted code content

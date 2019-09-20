@@ -1,5 +1,12 @@
 <template>
-  <component class="cv-code-snippet" :is="theComponent" v-bind="$attrs" @copy-code="onCopyCode">
+  <component
+    class="cv-code-snippet"
+    :is="theComponent"
+    v-bind="$attrs"
+    @copy-code="onCopyCode"
+    :copy-feedback="copyFeedback"
+    :feedback-aria-label="feedbackAriaLabel"
+  >
     <code ref="code">
       <slot></slot>
     </code>
@@ -27,6 +34,8 @@ export default {
     CvCodeSnippetOneline,
   },
   props: {
+    feedbackAriaLabel: { type: String, default: 'Copy code' },
+    copyFeedback: { type: String, default: 'Copied!' },
     kind: {
       type: String,
       default: 'oneline',
