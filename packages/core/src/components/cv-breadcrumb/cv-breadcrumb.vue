@@ -2,7 +2,7 @@
   <nav
     class="cv-breadcrumb bx--breadcrumb"
     :class="{ 'bx--breadcrumb--no-trailing-slash': noTrailingSlash }"
-    aria-label="breadcrumb"
+    :aria-label="ariaLabel"
   >
     <slot></slot>
   </nav>
@@ -12,6 +12,7 @@
 export default {
   name: 'CvBreadcrumb',
   props: {
+    ariaLabel: { type: String, default: 'breadcrumb' },
     noTrailingSlash: Boolean,
   },
 };
