@@ -51,6 +51,7 @@
           <slot name="secondary-button">Secondary button</slot>
         </cv-button>
         <cv-button
+          :disabled="primaryButtonDisabled"
           type="button"
           :kind="primaryKind"
           @click="onPrimaryClick"
@@ -91,6 +92,7 @@ export default {
     },
     autoHideOff: Boolean,
     visible: Boolean,
+    primaryButtonDisabled: Boolean,
   },
   data() {
     return {
