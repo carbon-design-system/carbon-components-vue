@@ -61,6 +61,15 @@ const preKnobs = {
       value: 'primary',
     },
   },
+  primaryButtonDisabled: {
+    group: 'attr',
+    type: boolean,
+    config: ['primary button disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: Boolean,
+      name: 'primary-button-disabled',
+    },
+  },
   visible: {
     group: 'attr',
     type: boolean,
@@ -97,13 +106,21 @@ const variants = [
   { name: 'default', includes: ['content', 'visible', 'events', 'autoHideOff'] },
   {
     name: 'buttons',
-    includes: ['content', 'primaryButton', 'secondaryButton', 'events', 'autoHideOff'],
+    includes: ['content', 'primaryButton', 'primaryButtonDisabled', 'secondaryButton', 'events', 'autoHideOff'],
   },
   {
     name: 'buttons with listeners',
-    includes: ['content', 'primaryButton', 'secondaryButton', 'events', 'primarySecondaryEvents', 'autoHideOff'],
+    includes: [
+      'content',
+      'primaryButton',
+      'primaryButtonDisabled',
+      'secondaryButton',
+      'events',
+      'primarySecondaryEvents',
+      'autoHideOff',
+    ],
   },
-  { name: 'primary-only', includes: ['content', 'primaryButton', 'events', 'autoHideOff'] },
+  { name: 'primary-only', includes: ['content', 'primaryButton', 'primaryButtonDisabled', 'events', 'autoHideOff'] },
   {
     name: 'secondary-only',
     includes: ['content', 'secondaryButton', 'events', 'autoHideOff'],
