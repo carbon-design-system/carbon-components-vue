@@ -2,7 +2,7 @@
   <label
     :data-wibble="`${isChecked}`"
     :for="uid"
-    aria-label="tile"
+    :aria-label="ariaLabel"
     class="cv-tile-selectable bx--tile--selectable"
     :class="{ 'bx--tile--is-selected': isChecked }"
     data-tile="selectable"
@@ -40,5 +40,8 @@ export default {
   mixins: [uidMixin, checkMixin],
   components: { CheckmarkFilled16 },
   inheritAttrs: false,
+  props: {
+    ariaLabel: { type: String, default: 'tile' },
+  },
 };
 </script>

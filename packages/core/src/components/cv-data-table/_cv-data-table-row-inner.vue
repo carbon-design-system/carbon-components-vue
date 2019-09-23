@@ -5,7 +5,7 @@
       class="bx--table-expand"
       :data-previous-value="dataExpanded ? 'collapsed' : 'expanded'"
     >
-      <button v-if="expandingRow" class="bx--table-expand__button" @click="toggleExpand">
+      <button v-if="expandingRow" class="bx--table-expand__button" @click="toggleExpand" type="button">
         <ChevronRight16 class="bx--table-expand__svg" />
       </button>
     </td>

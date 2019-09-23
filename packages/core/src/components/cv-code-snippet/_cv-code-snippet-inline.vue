@@ -1,9 +1,10 @@
 <template>
   <cv-feedback-button
     class="cv-code-snippet-inline"
-    feedback="Copied!"
+    :class="{ 'bx--snippet--light': theme === 'light' }"
+    :feedback="copyFeedback"
     inline
-    aria-label="Copy code"
+    :aria-label="feedbackAriaLabel"
     @click="$emit('copy-code')"
   >
     <slot></slot>
@@ -12,11 +13,17 @@
 
 <script>
 import CvFeedbackButton from './_cv-feedback-button';
+import themeMixin from '../../mixins/theme-mixin';
 
 export default {
   name: 'CvCodeSnippetInline',
+  mixins: [themeMixin],
   components: {
     CvFeedbackButton,
+  },
+  props: {
+    copyFeedback: String,
+    feedbackAriaLabel: String,
   },
 };
 </script>

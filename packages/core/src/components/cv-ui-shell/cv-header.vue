@@ -46,17 +46,17 @@ export default {
     onCvPanelControlToggle(srcComponent, force) {
       const foundIndex = this.panels.findIndex(item => item.id === srcComponent.ariaControls);
       if (foundIndex > -1) {
-        const newValue = force !== undefined ? force : !srcComponent.internalActive;
+        const newValue = force !== undefined ? force : !srcComponent.panelExpanded;
 
         for (let index in this.panels) {
-          this.panels[index].internalExpanded = false;
+          this.panels[index].panelExpanded = false;
         }
         for (let index in this.panelControllers) {
-          this.panelControllers[index].internalActive = false;
+          this.panelControllers[index].panelExpanded = false;
         }
 
-        srcComponent.internalActive = newValue;
-        this.panels[foundIndex].internalExpanded = newValue;
+        srcComponent.panelExpanded = newValue;
+        this.panels[foundIndex].panelExpanded = newValue;
       }
     },
     onCvPanelControlFocusout(srcComponent, srcEvent) {

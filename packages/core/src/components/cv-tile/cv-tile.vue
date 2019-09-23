@@ -26,6 +26,11 @@ import CvTileStandard from './_cv-tile-standard';
 export default {
   name: 'CvTile',
   inheritAttrs: false,
+  model: {
+    // required for selectable kind
+    prop: 'modelValue',
+    event: 'modelEvent',
+  },
   components: {
     CvTileClickable,
     CvTileExpandable,

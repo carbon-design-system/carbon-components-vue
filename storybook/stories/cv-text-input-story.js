@@ -70,9 +70,32 @@ const preKnobs = {
       name: 'password-visible',
     },
   },
+  passwordHideLabel: {
+    group: 'attr',
+    type: text,
+    config: ['password hide label', 'Hide password'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: String,
+      name: 'password-hide-label',
+    },
+  },
+  passwordShowLabel: {
+    group: 'attr',
+    type: text,
+    config: ['password-show-label', 'Show password'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: String,
+      name: 'password-show-label',
+    },
+  },
   placeholder: {
     group: 'attr',
-    value: 'placeholder="sample placeholder"',
+    type: text,
+    config: ['placeholder', 'Sample placeholder'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: String,
+      name: 'placeholder',
+    },
   },
   vModel: {
     group: 'attr',

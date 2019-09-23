@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { boolean } from '@storybook/addon-knobs';
+import { boolean, text } from '@storybook/addon-knobs';
 
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../_storybook/utils/consts';
@@ -12,6 +12,15 @@ const storiesDefault = storiesOf('Components/CvBreadcrumb', module);
 const storiesExperimental = storiesOf('Experimental/CvBreadcrumb', module);
 
 const preKnobs = {
+  ariaLabel: {
+    group: 'attr',
+    type: text,
+    config: ['aria label', 'breadcrumb aria label'],
+    prop: {
+      type: String,
+      name: 'aria-label',
+    },
+  },
   noTrailingSlash: {
     group: 'attr',
     type: boolean,

@@ -33,10 +33,16 @@ const preKnobs = {
     group: 'attr',
     value: `@close="doClose"`,
   },
+  closeAriaLabel: {
+    group: 'attr',
+    type: text,
+    config: ['close-arial-label', 'Custom close aria label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    prop: { name: 'close-aria-label', type: String },
+  },
 };
 
 const variants = [
-  { name: 'default' },
+  { name: 'default', excludes: ['closeAriaLabel'] },
   { name: 'error', extra: { kind: { group: 'attr', value: 'kind="error"' } } },
   { name: 'info', extra: { kind: { group: 'attr', value: 'kind="info"' } } },
   {

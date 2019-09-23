@@ -99,9 +99,13 @@ export default {
         ) {
           this.open = false;
           this.positionListen(false);
-          this.$nextTick(() => {
-            this.doFocus();
-          });
+
+          // DO NOT FOCUS if relatedTarget is not null, as focus is going somewhere
+          if (!ev.relatedTarget) {
+            this.$nextTick(() => {
+              this.doFocus();
+            });
+          }
         }
       }
     },
@@ -211,10 +215,14 @@ export default {
     this.$el.addEventListener('focusout', this.checkFocusOut);
 
     // move popup out to body to ensure it appears above other elements
-    document.body.appendChild(this.$refs.popup);
+    this.popupEl = document.body.appendChild(this.$refs.popup);
   },
   beforeDestroy() {
     this.positionListen(false);
+    if (this.popupEl) {
+      // move back to where it came from
+      this.$el.appendChild(this.popupEl);
+    }
   },
 };
 </script>

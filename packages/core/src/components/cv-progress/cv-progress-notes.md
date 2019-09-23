@@ -24,7 +24,9 @@ NOTE: The current step is deemed to be the first incomplete step.
 
 ### Attributes - cv-progress
 
-- steps: Ignored if slotted content is provided.
+- initialStep: index of initial step defaults to 0
+- steps: Ignored if slotted content is provided
+- vertical: if true progress is displayed in a vertical orientation
 
 ### Attributes - cv-progress-step
 
@@ -32,6 +34,7 @@ NOTE: The current step is deemed to be the first incomplete step.
 - invalid: Boolean
 - disabled: Boolean
 - additional-info: optional additional info for step.
+- tip-text: Hard coded tip text always displayed
 
 ## Carbon 9
 

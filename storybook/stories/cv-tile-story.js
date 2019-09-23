@@ -12,7 +12,7 @@ import { action } from '@storybook/addon-actions';
 const storiesDefault = storiesOf('Components/CvTile', module);
 const storiesExperimental = storiesOf('Experimental/CvTile', module);
 
-const preKnobs = {
+let preKnobs = {
   slotDefault: {
     group: 'slots',
     slot: {
@@ -60,13 +60,22 @@ const preKnobs = {
       type: String,
     },
   },
+  vModel: {
+    group: 'attr',
+    value: `v-model="modelValue"`,
+  },
   value: {
     group: 'attr',
-    value: 'value="selected-1"',
+    type: text,
+    config: ['value', 'check-1'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: String,
+      name: 'value',
+    },
   },
 };
 
-const variants = [
+let variants = [
   { name: 'default', includes: ['slotDefault'] },
   {
     name: 'standard',
@@ -76,7 +85,20 @@ const variants = [
   },
   {
     name: 'selectable',
-    includes: ['slotDefault', 'value'],
+    includes: ['slotDefault', 'selected', 'value'],
+    extra: {
+      kind: { group: 'attr', value: 'kind="selectable"' },
+      ariaLabel: { group: 'attr', value: 'aria-label="custom aria label"' },
+    },
+  },
+  {
+    name: 'selectable-event',
+    includes: ['slotDefault', 'events', 'value'],
+    extra: { kind: { group: 'attr', value: 'kind="selectable" @change="actionChange"' } },
+  },
+  {
+    name: 'selectable-v-model',
+    includes: ['slotDefault', 'vModel', 'value'],
     extra: { kind: { group: 'attr', value: 'kind="selectable"' } },
   },
   {
@@ -91,7 +113,7 @@ const variants = [
   },
 ];
 
-const storySet = knobsHelper.getStorySet(variants, preKnobs);
+let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   storiesDefault.add(
@@ -117,6 +139,21 @@ for (const story of storySet) {
       sv-margin
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
+      <template slot="other">
+        <div v-if="${templateString.indexOf('v-model') > 0}">
+          <br>
+          <br>
+          <span>
+            V-model:
+          </span>
+          <label>Check 1:
+            <input type="checkbox" value="check-1" v-model="modelValue">
+          </label>
+          <br>
+          <br>
+          <span>Checked: {{ modelValue }}</span>
+        </div>
+      </template>
     </sv-template-view>
   `;
 
@@ -126,7 +163,89 @@ for (const story of storySet) {
         props: settings.props,
         methods: {
           actionClick: action('click'),
+          actionChange: action('change'),
         },
+        data() {
+          return {
+            modelValue: this.$options.propsData.selected || false,
+          };
+        },
+      };
+    },
+    {
+      notes: { markdown: CvTileNotesMD },
+    }
+  );
+}
+
+preKnobs = {
+  vModel: {
+    group: 'attr',
+    value: `v-model="selectedTiles"`,
+  },
+};
+
+variants = [{ name: 'selectable-Array v-model', includes: ['vModel'] }];
+
+storySet = knobsHelper.getStorySet(variants, preKnobs);
+
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
+
+      // ----------------------------------------------------------------
+
+      const templateString = `
+<cv-tile kind="selectable"${settings.group.attr} value="tile-1"><h1>tile-1"</h1>
+</cv-tile>
+<cv-tile kind="selectable"${settings.group.attr} value="tile-2"><h1>tile-2"</h1>
+</cv-tile>
+<cv-tile kind="selectable"${settings.group.attr} value="tile-3"><h1>tile-3"</h1>
+</cv-tile>
+  `;
+
+      // ----------------------------------------------------------------
+
+      const templateViewString = `
+    <sv-template-view
+      sv-margin
+      sv-source='${templateString.trim()}'>
+      <p>This story only demonstrates the array syntax for v-model</p>
+      <template slot="component">${templateString}</template>
+      <template slot="other">
+        <div v-if="${templateString.indexOf('v-model') > 0}">
+          <br>
+          <br>
+          <span>
+            V-model:
+          </span>
+          <label>Check 1:
+            <input type="checkbox" value="tile-1" v-model="selectedTiles">
+          </label>
+          <label>Check 2:
+            <input type="checkbox" value="tile-2" v-model="selectedTiles">
+          </label>
+          <label>Check 3:
+            <input type="checkbox" value="tile-3" v-model="selectedTiles">
+          </label>
+          <br>
+          <br>
+          <span>Checked: {{ selectedTiles }}</span>
+        </div>
+      </template>
+    </sv-template-view>
+  `;
+
+      return {
+        components: { CvTile, SvTemplateView },
+        data() {
+          return {
+            selectedTiles: ['tile-1', 'tile-2'],
+          };
+        },
+        template: templateViewString,
       };
     },
     {

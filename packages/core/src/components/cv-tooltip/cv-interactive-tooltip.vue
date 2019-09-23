@@ -201,7 +201,7 @@ export default {
   },
   mounted() {
     // move popup out to body to ensure it appears above other elements
-    document.body.appendChild(this.$refs.popup);
+    this.popupEl = document.body.appendChild(this.$refs.popup);
 
     if (this.visible) {
       this.show();
@@ -211,6 +211,10 @@ export default {
   },
   beforeDestroy() {
     this.positionListen(false);
+    if (this.popupEl) {
+      // move back to where it came from
+      this.$el.appendChild(this.popupEl);
+    }
   },
 };
 </script>

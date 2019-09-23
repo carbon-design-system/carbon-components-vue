@@ -4,12 +4,12 @@
     :class="{ 'bx--snippet--expand': expanded }"
     data-code-snippet
   >
-    <div class="bx--snippet-container" aria-label="Code Snippet Text">
+    <div class="bx--snippet-container">
       <pre>
         <slot></slot>
       </pre>
     </div>
-    <cv-feedback-button feedback="Copied!" aria-label="Copy code" @click="$emit('copy-code')">
+    <cv-feedback-button :feedback="copyFeedback" :aria-label="feedbackAriaLabel" @click="$emit('copy-code')">
       <Copy16 class="bx--snippet__icon" />
     </cv-feedback-button>
 
@@ -38,6 +38,8 @@ export default {
   props: {
     lessText: { type: String, default: 'Show less' },
     moreText: { type: String, default: 'Show more' },
+    feedbackAriaLabel: String,
+    copyFeedback: String,
   },
   data() {
     return {

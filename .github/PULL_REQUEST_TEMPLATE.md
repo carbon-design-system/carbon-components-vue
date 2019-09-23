@@ -4,14 +4,4 @@ Closes #
 
 #### Changelog
 
-**New**
-
-- {{new thing}}
-
-**Changed**
-
-- {{change thing}}
-
-**Removed**
-
-- {{removed thing}}
+{{run "git diff --name-status master" and paste result here}}

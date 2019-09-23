@@ -69,6 +69,12 @@ let preKnobs = {
     group: 'attr',
     value: `v-model="storyFiles"`,
   },
+  removeAriaLabel: {
+    group: 'attr',
+    type: text,
+    config: ['remove-arial-label', 'Custom remove aria label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    prop: { name: 'remove-aria-label', type: String },
+  },
 };
 
 let variants = [

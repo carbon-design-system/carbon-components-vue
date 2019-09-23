@@ -1,11 +1,11 @@
 <template>
   <div class="cv-code-snippet-oneline bx--snippet bx--snippet--single">
-    <div class="bx--snippet-container" aria-label="Code Snippet Text">
+    <div class="bx--snippet-container">
       <pre>
         <slot></slot>
       </pre>
     </div>
-    <cv-feedback-button feedback="Copied!" aria-label="Copy code" @click="$emit('copy-code')">
+    <cv-feedback-button :feedback="copyFeedback" :aria-label="feedbackAriaLabel" @click="$emit('copy-code')">
       <Copy16 class="bx--snippet__icon" />
     </cv-feedback-button>
   </div>
@@ -21,6 +21,10 @@ export default {
   components: {
     CvFeedbackButton,
     Copy16,
+  },
+  props: {
+    copyFeedback: String,
+    feedbackAriaLabel: String,
   },
 };
 </script>

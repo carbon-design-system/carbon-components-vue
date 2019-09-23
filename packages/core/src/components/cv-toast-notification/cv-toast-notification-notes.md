@@ -22,6 +22,7 @@ http://www.carbondesignsystem.com/components/notification/code
 - title: 'title'
 - subtitle: 'subtitle'
 - caption: 'caption'
+- closeAriaLabel: { type: String, default: 'Clear filter' },
 
 ## Events
 

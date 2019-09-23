@@ -15,11 +15,11 @@
           v-if="hasBatchActions"
           class="bx--batch-actions"
           :class="{ 'bx--batch-actions--active': batchActive }"
-          aria-label="Table Action Bar"
+          :aria-label="actionBarAriaLabel"
         >
           <div class="bx--action-list">
             <slot name="batch-actions" />
-            <cv-button class="bx--batch-summary__cancel" small @click="deselect">Cancel</cv-button>
+            <cv-button class="bx--batch-summary__cancel" small @click="deselect">{{ batchCancelLabel }}</cv-button>
           </div>
           <div class="bx--batch-summary">
             <p class="bx--batch-summary__para">
@@ -55,13 +55,13 @@
               >
                 <Search16 class="bx--toolbar-action__icon" />
               </div>
-              <label :for="uid" class="bx--label">Search</label>
+              <label :for="uid" class="bx--label">{{ searchLabel }}</label>
               <input
                 class="bx--search-input"
                 type="text"
                 :id="uid"
                 role="search"
-                placeholder="Search"
+                :placeholder="searchPlaceholder"
                 :aria-labelledby="uid"
                 ref="search"
                 v-model="searchValue"
@@ -72,9 +72,10 @@
               <button
                 class="bx--search-close"
                 :class="{ 'bx--search-close--hidden': !clearSearchVisible }"
-                title="Clear search input"
-                aria-label="Clear search input"
+                :title="searchClearLabel"
+                :aria-label="searchClearLabel"
                 @click="onClearClick"
+                type="button"
               >
                 <Close16 />
               </button>
@@ -178,7 +179,9 @@ export default {
   },
   mixins: [uidMixin],
   props: {
+    actionBarAriaLabel: { type: String, default: 'Table Action Bar' },
     autoWidth: Boolean,
+    batchCancelLabel: { type: String, default: 'cancel' },
     borderless: Boolean,
     overflowMenu: { type: [Boolean, Array], default: () => [] },
     pagination: {
@@ -190,7 +193,9 @@ export default {
       default: 'standard',
       validator: val => ['compact', 'short', 'standard', 'tall', ''].includes(val),
     },
-    searchPlaceholder: { type: String, default: 'filter' },
+    searchLabel: { type: String, default: 'Search' },
+    searchPlaceholder: { type: String, default: 'Search' },
+    searchClearLabel: { type: String, default: 'Clear search' },
     sortable: Boolean,
     title: String,
     columns: { type: Array, required: true },

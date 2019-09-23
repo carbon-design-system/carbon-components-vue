@@ -72,6 +72,24 @@ let preKnobs = {
       name: 'title',
     },
   },
+  actionBarAriaLabel: {
+    group: 'attr',
+    type: text,
+    config: ['action-bar-aria-label', 'Custom action bar aria label'],
+    prop: {
+      type: String,
+      name: 'action-bar-aria-label',
+    },
+  },
+  batchCancelLabel: {
+    group: 'attr',
+    type: text,
+    config: ['batch-cancel-label', 'Cancel'],
+    prop: {
+      type: String,
+      name: 'batch-cancel-label',
+    },
+  },
   zebra: {
     group: 'attr',
     type: boolean,
@@ -153,6 +171,10 @@ let preKnobs = {
   search: {
     group: 'attr',
     value: '@search="onFilter"',
+  },
+  search2: {
+    group: 'attr',
+    value: '@search="onFilter" searchLabel="Filter" searchPlaceholder="Filter" searchClearLabel="Clear filter"',
   },
   basicPagination: {
     group: 'attr',
@@ -308,6 +330,21 @@ let variants = [
   {
     name: 'default',
     excludes: [
+      'search2',
+      'columns2',
+      'slottedData',
+      'htmlData',
+      'helperTextSlot',
+      'basicPagination',
+      'hasExpandingRows',
+      'expandingSlottedData',
+      'scopedSlots',
+    ],
+  },
+  {
+    name: 'search labels',
+    excludes: [
+      'search',
       'columns2',
       'slottedData',
       'htmlData',

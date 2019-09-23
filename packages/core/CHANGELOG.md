@@ -1,5 +1,46 @@
 # Changelog
 
+## 2.14.0-canary.x (Sept 20, 2019)
+
+### Feat
+
+- Add optional customisable labels/text where they previously were fixed.
+
+## 2.13.0 (Sept 20, 2019)
+
+### Feat
+
+- code snippet now has
+  - light theme
+  - customisable copy feedback and aria label
+- Modal
+  - Add 'auto-hide-off' property which causes 'modal-hide-request' events to be raised instead of auto closing
+
+### Fix
+
+- Stop overflow menu grabbing focus on close
+- v-model for selectable tile
+
+## 2.12.7 (Sept 13, 2019)
+
+### Feat
+
+- Add vertical progress bar
+
+### Fix
+
+- Code snippet no longer copies encoded html
+- Correct tab story
+- Fix checkbox v-model unefined
+- Fix panel expansion event
+- Add v-model for header panels
+- Re-order header panel events
+- Update lock file
+- Fix combobox input spilling into controls
+- Fix non-cv-button types (cv-data-table, cv-text-input password button)
+- Password input button labels
+- Update data table to have attributes for cancel button and search labels.
+
 ## 2.12.6 (August 14, 2019)
 
 ### Fix

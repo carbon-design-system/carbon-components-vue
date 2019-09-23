@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { text, select } from '@storybook/addon-knobs';
+import { text, select, boolean } from '@storybook/addon-knobs';
 
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../_storybook/utils/consts';
@@ -12,6 +12,24 @@ const storiesDefault = storiesOf('Components/CvCodeSnippet', module);
 const storiesExperimental = storiesOf('Experimental/CvCodeSnippet', module);
 
 let preKnobs = {
+  copyFeedback: {
+    group: 'attr',
+    type: text,
+    config: ['copy feedback', 'Content copied!'],
+    prop: {
+      type: String,
+      name: 'copy-feedback',
+    },
+  },
+  feedbackAriaLabel: {
+    group: 'attr',
+    type: text,
+    config: ['feedback aria label', 'feedback aria label'],
+    prop: {
+      type: String,
+      name: 'feedback-aria-label',
+    },
+  },
   lessText: {
     group: 'attr',
     type: text,
@@ -37,6 +55,16 @@ let preKnobs = {
     slot: {
       name: '',
       value: 'printf("A short bit of code.");',
+    },
+  },
+  theme: {
+    group: 'attr',
+    type: boolean,
+    config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: String,
+      name: 'theme',
+      value: val => (val ? 'light' : ''),
     },
   },
   content: {
@@ -75,6 +103,11 @@ let variants = [
   },
   {
     name: 'inline',
+    includes: ['inlineContent', 'theme', 'copyFeedback', 'feedbackAriaLabel'],
+    extra: { kind: { group: 'attr', value: 'kind="inline"', inline: true } },
+  },
+  {
+    name: 'inline (minimal)',
     includes: ['inlineContent'],
     extra: { kind: { group: 'attr', value: 'kind="inline"', inline: true } },
   },
@@ -89,6 +122,11 @@ let variants = [
   },
   {
     name: 'oneline',
+    includes: ['content', 'copyFeedback', 'feedbackAriaLabel'],
+    extra: { kind: { group: 'attr', value: 'kind="oneline"', inline: true } },
+  },
+  {
+    name: 'oneline (minimal)',
     includes: ['content'],
     extra: { kind: { group: 'attr', value: 'kind="oneline"', inline: true } },
   },
@@ -115,7 +153,7 @@ for (const story of storySet) {
       const templateViewString = `
     <sv-template-view ref="view"
       sv-margin
-      :sv-alt-back="${settings.group.attr.indexOf('inline') > -1}"
+      :sv-alt-back="this.$options.propsData.theme !== 'light'"
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
     </sv-template-view>

@@ -28,51 +28,72 @@ let preKnobs = {
       name: 'disabled',
     },
   },
+  clearAriaLabel: {
+    group: 'attr',
+    type: text,
+    config: ['Clear aria label', 'Custom clear filter'], // consts.CONTENT],
+    prop: { name: 'clear-aria-label', type: String },
+  },
 };
 
 let variants = [
   {
     name: 'filter',
+    excludes: ['clearAriaLabel'],
+    extra: { kind: { group: 'attr', value: 'kind="filter" @remove="onRemove"' } },
+  },
+  {
+    name: 'filter clear aria label',
     extra: { kind: { group: 'attr', value: 'kind="filter" @remove="onRemove"' } },
   },
   {
     name: 'red',
+    excludes: ['clearAriaLabel'],
     extra: { kind: { group: 'attr', value: 'kind="red"' } },
   },
   {
     name: 'magenta',
+    excludes: ['clearAriaLabel'],
     extra: { kind: { group: 'attr', value: 'kind="magenta"' } },
   },
   {
     name: 'purple',
+    excludes: ['clearAriaLabel'],
     extra: { kind: { group: 'attr', value: 'kind="purple"' } },
   },
   {
     name: 'blue',
+    excludes: ['clearAriaLabel'],
     extra: { kind: { group: 'attr', value: 'kind="blue"' } },
   },
   {
     name: 'cyan',
+    excludes: ['clearAriaLabel'],
     extra: { kind: { group: 'attr', value: 'kind="cyan"' } },
   },
   {
     name: 'teal',
+    excludes: ['clearAriaLabel'],
     extra: { kind: { group: 'attr', value: 'kind="teal"' } },
   },
   {
     name: 'green',
+    excludes: ['clearAriaLabel'],
     extra: { kind: { group: 'attr', value: 'kind="green"' } },
   },
   {
     name: 'gray',
+    excludes: ['clearAriaLabel'],
     extra: { kind: { group: 'attr', value: 'kind="gray"' } },
   },
   {
     name: 'cool-gray',
+    excludes: ['clearAriaLabel'],
     extra: { kind: { group: 'attr', value: 'kind="cool-gray"' } },
   },
   {
     name: 'warm-gray',
+    excludes: ['clearAriaLabel'],
     extra: { kind: { group: 'attr', value: 'kind="warm-gray"' } },
   },
 ];

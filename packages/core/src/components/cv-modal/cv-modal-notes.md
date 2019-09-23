@@ -7,12 +7,7 @@ http://www.carbondesignsystem.com/components/modal/code
 ## Usage
 
 ```html
-<cv-modal
-  @modal-beingshown="actionBeforeShown"
-  @modal-shown="actionShown"
-  @modal-beinghidden="actionBeforeHidden"
-  @modal-hidden="actionHidden"
->
+<cv-modal @modal-shown="actionShown" @modal-hidden="actionHidden">
   <template slot="label"
     >label</template
   >
@@ -48,8 +43,10 @@ This is done after the modal transitions into its visible state, which is trigge
 
 ## Attributes
 
+- auto-hide-off: boolean value if true the component user is expected to close the modal via visible property or hide method.
 - kind: 'danger' other wise default modal.
 - visible: visibility of modal dialog
+- primaryButtonDisabled: boolean value used to enable/disable the primary button
 
 ## slots
 
@@ -71,9 +68,8 @@ This is done after the modal transitions into its visible state, which is trigge
 
 ## events
 
-- modal-beingshown
 - modal-shown
-- modal-beinghidden
 - modal-hidden
+- modal-hide-request - emitted when 'auto-hide-off' is set to true. Raw event with the additional attribute 'cv:reason' set to 'primary-click', 'secondary-click', 'escape-press', 'external-click' or 'close-click'
 - primary-click
 - secondary-click

@@ -43,7 +43,7 @@ export default {
     },
   },
   computed: {
-    internalActive: {
+    panelExpanded: {
       get() {
         return this.dataActive;
       },

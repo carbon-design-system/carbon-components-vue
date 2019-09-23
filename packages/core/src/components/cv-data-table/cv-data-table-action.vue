@@ -1,5 +1,5 @@
 <template>
-  <button class="bx--overflow-menu bx--toolbar-action" v-on="$listeners">
+  <button class="bx--overflow-menu bx--toolbar-action" v-on="$listeners" type="button">
     <slot></slot>
   </button>
 </template>
