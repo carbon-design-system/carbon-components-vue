@@ -50,7 +50,7 @@
             :data-date-picker-input-to="kind === 'range'"
             ref="todate"
           />
-          <Calendar16 class="bx--date-picker__icon" data-date-picker-icon @click="cal.open()" />
+          <Calendar16 class="bx--date-picker__icon" data-date-picker-icon @click="openTodateCal()" />
         </div>
       </div>
     </div>
@@ -160,7 +160,7 @@ export default {
       // _options.onValueUpdate = this.onChange;
 
       if (this.kind === 'range') {
-        _options.plugins = [new RangePlugin({ input: this.$refs.todate })];
+        _options.plugins = [new RangePlugin({ input: this.$refs.todate, position: 'left' })];
       }
 
       return _options;
@@ -222,6 +222,9 @@ export default {
           }
         }
       }
+    },
+    openTodateCal() {
+      this.$refs.todate.click();
     },
   },
   mounted() {
