@@ -1,5 +1,6 @@
 export default {
   props: {
+    disabled: Boolean,
     to: String,
     href: String,
   },
@@ -9,7 +10,11 @@ export default {
       return this.to && !this.href ? 'router-link' : 'a';
     },
     linkProps() {
-      if (this.to && !this.href) {
+      if (this.disabled) {
+        return {
+          'aria-disabled': true,
+        };
+      } else if (this.to && !this.href) {
         return { to: this.to };
       }
       return { href: this.href };

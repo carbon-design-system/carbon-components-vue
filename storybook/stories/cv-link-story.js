@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { text } from '@storybook/addon-knobs';
+import { text, boolean } from '@storybook/addon-knobs';
 
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../_storybook/utils/consts';
@@ -37,15 +37,16 @@ const preKnobs = {
   },
   disabled: {
     group: 'attr',
-    value: 'aria-disabled="true"',
+    type: boolean,
+    config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: {
+      type: Boolean,
+      name: 'disabled',
+    },
   },
 };
 
-const variants = [
-  { name: 'a', includes: ['href', 'events'] },
-  { name: 'a disabled', includes: ['disabled', 'events'] },
-  { name: 'router-link', includes: ['to', 'events'] },
-];
+const variants = [{ name: 'a', excludes: ['to'] }, { name: 'router-link', excludes: ['href'] }];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
