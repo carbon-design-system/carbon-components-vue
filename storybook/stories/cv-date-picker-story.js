@@ -80,6 +80,40 @@ const preKnobs = {
     group: 'attr',
     value: `@change="actionChange"`,
   },
+  value: {
+    group: 'attr',
+    type: text,
+    config: ['value', '01/01/2020'],
+    prop: {
+      name: 'value',
+      type: String,
+    },
+  },
+  dateValue: {
+    group: 'attr',
+    value: `:value="new Date()"`,
+  },
+  valueRange: {
+    group: 'attr',
+    type: object,
+    config: ['value', { startDate: '01/01/2020', endDate: '10/01/2020' }],
+    prop: {
+      name: 'value',
+      type: Object,
+    },
+  },
+  vModel: {
+    group: 'attr',
+    value: `v-model="modelValue"`,
+  },
+  dateValueRange: {
+    group: 'attr',
+    value: `:value="{startDate: new Date(), endDate: new Date(2040,11,8)}"`,
+  },
+  vModelRange: {
+    group: 'attr',
+    value: `v-model="modelValue2"`,
+  },
 };
 
 const variants = [
@@ -107,12 +141,32 @@ const variants = [
   },
   {
     name: 'single',
-    includes: ['events', 'calOptions', 'invalidMessage'],
+    includes: ['events', 'calOptions', 'invalidMessage', 'value'],
+    extra: { kind: { group: 'attr', value: 'kind="single"' } },
+  },
+  {
+    name: 'single vModel',
+    includes: ['events', 'calOptions', 'vModel'],
+    extra: { kind: { group: 'attr', value: 'kind="single"' } },
+  },
+  {
+    name: 'single using Date',
+    includes: ['events', 'calOptions', 'invalidMessage', 'dateValue'],
     extra: { kind: { group: 'attr', value: 'kind="single"' } },
   },
   {
     name: 'range',
-    includes: ['events', 'calOptions', 'dateEndLabel'],
+    includes: ['events', 'calOptions', 'dateEndLabel', 'valueRange'],
+    extra: { kind: { group: 'attr', value: 'kind="range"' } },
+  },
+  {
+    name: 'range using Date',
+    includes: ['events', 'calOptions', 'dateEndLabel', 'dateValueRange'],
+    extra: { kind: { group: 'attr', value: 'kind="range"' } },
+  },
+  {
+    name: 'range vModel',
+    includes: ['events', 'calOptions', 'vModelRange'],
     extra: { kind: { group: 'attr', value: 'kind="range"' } },
   },
 ];
@@ -143,6 +197,21 @@ for (const story of storySet) {
         :sv-alt-back="this.$options.propsData.theme !== 'light'"
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>
+        <template slot="other">
+          <div v-if="${templateString.indexOf('v-model') >= 0 && templateString.indexOf('range') < 0}">
+            <label>Date:
+              <input type="text" v-model="modelValue" />
+            </label>
+          </div>
+          <div v-if="${templateString.indexOf('v-model') >= 0 && templateString.indexOf('range') > 0}">
+            startDate: {{modelValue2.startDate}}
+            <br>
+            endDate: {{modelValue2.endDate}}
+            <br>
+            <button @click="addDay('startDate')" class="start">Start + 1 day</button>
+            <button @click="addDay('endDate')">End + 1 day</button>
+          </div>
+        </template>
       </sv-template-view>
     `;
 
@@ -154,6 +223,22 @@ for (const story of storySet) {
         methods: {
           actionChange: action('Cv Date Picker - change'),
           actionSimpleChange: action('Cv Date Picker - simple change'),
+          addDay(which) {
+            let splitDate = this.modelValue2[which].split('/');
+            let newValue = { ...this.modelValue2 };
+            splitDate[1] = 1 + parseInt(splitDate[1]);
+            if (splitDate[1] < 10) {
+              splitDate[1] = '0' + splitDate[1];
+            }
+            newValue[which] = splitDate.join('/');
+            this.modelValue2 = newValue;
+          },
+        },
+        data() {
+          return {
+            modelValue: '01/01/2021',
+            modelValue2: { startDate: '01/03/2021', endDate: '01/10/2021' },
+          };
         },
       };
     },
