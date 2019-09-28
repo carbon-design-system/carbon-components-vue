@@ -36,7 +36,7 @@
           <div
             v-if="$listeners.search"
             :class="{
-              'bx--toolbar-search-container-active': searchActive,
+              'bx--toolbar-search-container-active': searchActive || searchValue.length > 0,
               'bx--toolbar-search-container-persistent': !expandingSearch,
               'bx--toolbar-search-container-expandable': expandingSearch,
             }"
