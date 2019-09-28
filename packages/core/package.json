@@ -64,12 +64,13 @@
   "dependencies": {
     "@carbon/icons-vue": "10.3.0",
     "carbon-components": "10.3.1",
-    "flatpickr": "4.6.1",
+    "flatpickr": "4.6.2",
     "vue": "^2.6.10"
   },
   "devDependencies": {
     "@vue/cli-service": "^3.8.4",
     "babel-preset-env": "1.7.0",
+    "eslint-plugin-prettier": "^3.1.1",
     "vue-template-compiler": "^2.6.10"
   }
 }
