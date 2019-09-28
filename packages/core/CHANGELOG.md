@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.15.0-canary.x (Sept 28, 2019)
+
+- Add v-model for date picker
+
 ## 2.14.0 (Sept 25, 2019)
 
 ### Feat
