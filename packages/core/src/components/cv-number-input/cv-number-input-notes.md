@@ -29,6 +29,8 @@ http://www.carbondesignsystem.com/components/number-input/code
 - label: the label text for the input
 - theme: optional 'light',
 - value: optional initial value of the input,
+- ariaLabelForDownButton: optional defaults to 'Decrease number input'
+- ariaLabelForUpButton: optional defaults to 'Increase number input'
 
 Other standard props e.g. disabled
 
