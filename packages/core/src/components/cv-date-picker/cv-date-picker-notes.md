@@ -72,6 +72,11 @@ http://www.carbondesignsystem.com/components/date-picker/code
 - placeholder: Shown when date picker is empty,
 - invalidMessage: Message displayed if invalid is true
 
+- value: can be
+  - Javascript Date
+  - String with a date matching the format based on the calendar options
+  - Object (kind === 'range' only): { startDate: val, endDate: val2 } where val and val2 are a javascript date or date string as per format option
+
 ## Slots
 
 invalid-message: Overrides the invalid message property
@@ -81,4 +86,4 @@ invalid-message: Overrides the invalid message property
 ## Events
 
 - change raised when single or ranged date picker value changes.
-- simpleChange raised when the simple or short text input fields are changed.
+- simpleChange[DEPRECATED] use change event instead
