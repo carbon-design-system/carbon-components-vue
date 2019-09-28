@@ -18,10 +18,20 @@
         <input :id="uid" type="number" v-model="internalValue" v-bind="$attrs" v-on="inputListeners" />
         <WarningFilled16 v-if="isInvalid" class="bx--number__invalid" />
         <div class="bx--number__controls">
-          <button class="bx--number__control-btn up-icon" @click="doUp" type="button">
+          <button
+            class="bx--number__control-btn up-icon"
+            @click="doUp"
+            type="button"
+            :aria-label="ariaLabelForUpButton"
+          >
             <CaretUpGlyph />
           </button>
-          <button class="bx--number__control-btn down-icon" @click="doDown" type="button">
+          <button
+            class="bx--number__control-btn down-icon"
+            @click="doDown"
+            type="button"
+            :aria-label="ariaLabelForDownButton"
+          >
             <CaretDownGlyph />
           </button>
         </div>
@@ -62,6 +72,8 @@ export default {
         return true;
       },
     },
+    ariaLabelForUpButton: { type: String, default: 'Increase number input' },
+    ariaLabelForDownButton: { type: String, default: 'Decrease number input' },
   },
   data() {
     return {
