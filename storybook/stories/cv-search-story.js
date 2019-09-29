@@ -18,7 +18,6 @@ const preKnobs = {
     type: boolean,
     config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: String,
       name: 'theme',
       value: val => (val ? 'light' : ''),
     },
@@ -28,7 +27,6 @@ const preKnobs = {
     type: text,
     config: ['label', 'Search input label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: {
-      type: String,
       name: 'label',
     },
   },
@@ -36,14 +34,13 @@ const preKnobs = {
     group: 'attr',
     type: text,
     config: ['placeholder', 'Search placeholder'], // consts.CONFIG],
-    prop: { name: 'placeholder', type: String },
+    prop: { name: 'placeholder' },
   },
   disabled: {
     group: 'attr',
     type: boolean,
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: Boolean,
       name: 'disabled',
     },
   },
@@ -51,7 +48,7 @@ const preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['small', false], // consts.CONFIG],
-    prop: { name: 'small', type: Boolean },
+    prop: { name: 'small' },
   },
   vModel: {
     group: 'attr',
@@ -66,7 +63,6 @@ const preKnobs = {
     type: text,
     config: ['clear-aria-label', 'Custom search aria label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: {
-      type: String,
       name: 'clear-aria-label',
     },
   },

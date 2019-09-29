@@ -19,7 +19,6 @@ const preKnobs = {
     config: ['2-selected', false], // consts.CONFIG],
     prop: {
       name: 'selected',
-      type: Boolean,
     },
   },
   disabled: {
@@ -28,7 +27,6 @@ const preKnobs = {
     config: ['4-disabled', false],
     prop: {
       name: 'disabled',
-      type: Boolean,
     },
   },
   events: {

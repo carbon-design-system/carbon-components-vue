@@ -17,7 +17,6 @@ let preKnobs = {
     type: text,
     config: ['copy feedback', 'Content copied!'],
     prop: {
-      type: String,
       name: 'copy-feedback',
     },
   },
@@ -26,7 +25,6 @@ let preKnobs = {
     type: text,
     config: ['feedback aria label', 'feedback aria label'],
     prop: {
-      type: String,
       name: 'feedback-aria-label',
     },
   },
@@ -62,7 +60,6 @@ let preKnobs = {
     type: boolean,
     config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: String,
       name: 'theme',
       value: val => (val ? 'light' : ''),
     },
@@ -181,7 +178,6 @@ preKnobs = {
     config: ['kind', { oneline: 'oneline', multiline: 'multiline' }, 'multiline'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
       name: 'kind',
-      type: String,
     },
   },
 };

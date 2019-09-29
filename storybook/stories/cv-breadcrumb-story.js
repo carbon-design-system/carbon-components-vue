@@ -17,7 +17,6 @@ const preKnobs = {
     type: text,
     config: ['aria label', 'breadcrumb aria label'],
     prop: {
-      type: String,
       name: 'aria-label',
     },
   },
@@ -26,7 +25,6 @@ const preKnobs = {
     type: boolean,
     config: ['No trailing slash', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: Boolean,
       name: 'no-trailing-slash',
     },
   },

@@ -19,7 +19,6 @@ const preKnobs = {
     config: ['href', 'javascript:void(0)'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
       name: 'href',
-      type: String,
     },
   },
   to: {
@@ -28,7 +27,6 @@ const preKnobs = {
     config: ['to', 'javascript:void(0)'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
       name: 'to',
-      type: String,
     },
   },
   events: {
@@ -40,7 +38,6 @@ const preKnobs = {
     type: boolean,
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: Boolean,
       name: 'disabled',
     },
   },

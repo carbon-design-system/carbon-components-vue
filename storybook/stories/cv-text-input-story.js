@@ -18,7 +18,6 @@ const preKnobs = {
     type: boolean,
     config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: String,
       name: 'theme',
       value: val => (val ? 'light' : ''),
     },
@@ -28,7 +27,6 @@ const preKnobs = {
     type: text,
     config: ['label', 'Text input label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: {
-      type: String,
       name: 'label',
     },
   },
@@ -37,7 +35,6 @@ const preKnobs = {
     type: text,
     config: ['value', ''], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: {
-      type: String,
       name: 'value',
       value: val => (val.length ? val : null),
     },
@@ -47,7 +44,6 @@ const preKnobs = {
     type: boolean,
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: Boolean,
       name: 'disabled',
     },
   },
@@ -57,7 +53,7 @@ const preKnobs = {
     config: ['password type', false],
     prop: {
       name: 'type',
-      type: String,
+
       value: val => (val ? 'password' : null),
     },
   },
@@ -66,7 +62,6 @@ const preKnobs = {
     type: boolean,
     config: ['password visible', false],
     prop: {
-      type: Boolean,
       name: 'password-visible',
     },
   },
@@ -75,7 +70,6 @@ const preKnobs = {
     type: text,
     config: ['password hide label', 'Hide password'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: {
-      type: String,
       name: 'password-hide-label',
     },
   },
@@ -84,7 +78,6 @@ const preKnobs = {
     type: text,
     config: ['password-show-label', 'Show password'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: {
-      type: String,
       name: 'password-show-label',
     },
   },
@@ -93,7 +86,6 @@ const preKnobs = {
     type: text,
     config: ['placeholder', 'Sample placeholder'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: {
-      type: String,
       name: 'placeholder',
     },
   },
@@ -111,7 +103,7 @@ const preKnobs = {
     config: ['helper text', ''],
     prop: {
       name: 'helper-text',
-      type: String,
+
       value: val => (val.length ? val : null),
     },
   },
@@ -128,7 +120,7 @@ const preKnobs = {
     config: ['invalid message', ''],
     prop: {
       name: 'invalid-message',
-      type: String,
+
       value: val => (val.length ? val : null),
     },
   },

@@ -19,7 +19,6 @@ const preKnobs = {
     config: ['radio-1:checked', true], // consts.CONFIG],
     prop: {
       name: 'checked',
-      type: Boolean,
     },
   },
   disabled2: {
@@ -28,7 +27,6 @@ const preKnobs = {
     config: ['radio-2:disabled', true], // consts.CONFIG],
     prop: {
       name: 'disabled',
-      type: Boolean,
     },
   },
   vertical: {
@@ -37,7 +35,6 @@ const preKnobs = {
     config: ['vertical', false], // consts.CONFIG],
     prop: {
       name: 'vertical',
-      type: Boolean,
     },
   },
   labelLeft: {
@@ -46,7 +43,6 @@ const preKnobs = {
     config: ['label left', false], // consts.CONFIG],
     prop: {
       name: 'label-left',
-      type: Boolean,
     },
   },
   vModel: {

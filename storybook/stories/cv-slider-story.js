@@ -18,7 +18,6 @@ let preKnobs = {
     type: boolean,
     config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: String,
       name: 'theme',
       value: val => (val ? 'light' : ''),
     },
@@ -28,7 +27,6 @@ let preKnobs = {
     type: text,
     config: ['label', 'Slider label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: {
-      type: String,
       name: 'label',
     },
   },
@@ -37,7 +35,6 @@ let preKnobs = {
     type: boolean,
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: Boolean,
       name: 'disabled',
     },
   },
@@ -45,43 +42,43 @@ let preKnobs = {
     group: 'attr',
     type: text,
     config: ['min', '-50'], // consts.CONFIG],
-    prop: { name: 'min', type: String },
+    prop: { name: 'min' },
   },
   max: {
     group: 'attr',
     type: text,
     config: ['max', '150'], // consts.CONFIG],
-    prop: { name: 'max', type: String },
+    prop: { name: 'max' },
   },
   value: {
     group: 'attr',
     type: text,
     config: ['value', '50'], // consts.CONFIG],
-    prop: { name: 'value', type: String },
+    prop: { name: 'value' },
   },
   step: {
     group: 'attr',
     type: text,
     config: ['step', '1'], // consts.CONFIG],
-    prop: { name: 'step', type: String },
+    prop: { name: 'step' },
   },
   stepMultiplier: {
     group: 'attr',
     type: text,
     config: ['step-multiplier', '10'], // consts.CONFIG],
-    prop: { name: 'step-multiplier', type: String },
+    prop: { name: 'step-multiplier' },
   },
   minLabel: {
     group: 'attr',
     type: text,
     config: ['min-label', 'Min'], // consts.CONFIG],
-    prop: { name: 'min-label', type: String },
+    prop: { name: 'min-label' },
   },
   maxLabel: {
     group: 'attr',
     type: text,
     config: ['max-label', 'Max'], // consts.CONFIG],
-    prop: { name: 'max-label', type: String },
+    prop: { name: 'max-label' },
   },
   vModel: {
     group: 'attr',

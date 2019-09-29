@@ -22,7 +22,6 @@ let preKnobs = {
     config: ['small', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
       name: 'small',
-      type: Boolean,
     },
   },
   disabled: {
@@ -31,7 +30,6 @@ let preKnobs = {
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
       name: 'disabled',
-      type: Boolean,
     },
   },
   events: {
@@ -51,7 +49,7 @@ let preKnobs = {
     config: ['with icon', false],
     prop: {
       name: 'icon',
-      type: Object,
+
       value: val => (val ? AddFilled16 : null),
     },
   },
@@ -147,7 +145,6 @@ preKnobs = {
     config: ['small', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
       name: 'small',
-      type: Boolean,
     },
   },
 };

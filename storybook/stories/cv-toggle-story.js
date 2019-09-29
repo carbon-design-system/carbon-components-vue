@@ -18,7 +18,6 @@ let preKnobs = {
     type: boolean,
     config: ['checked', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: Boolean,
       name: 'checked',
     },
   },
@@ -27,7 +26,6 @@ let preKnobs = {
     type: text,
     config: ['label', 'Toggle label'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: String,
       name: 'label',
     },
   },
@@ -36,7 +34,6 @@ let preKnobs = {
     type: text,
     config: ['value', 'check-1'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: String,
       name: 'value',
     },
   },
@@ -45,7 +42,6 @@ let preKnobs = {
     type: boolean,
     config: ['small', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: Boolean,
       name: 'small',
     },
   },
@@ -54,7 +50,6 @@ let preKnobs = {
     type: boolean,
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: Boolean,
       name: 'disabled',
     },
   },

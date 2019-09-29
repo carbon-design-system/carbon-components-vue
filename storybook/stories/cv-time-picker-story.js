@@ -29,7 +29,6 @@ const preKnobs = {
     type: boolean,
     config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: String,
       name: 'theme',
       value: val => (val ? 'xlight' : ''),
     },
@@ -39,7 +38,6 @@ const preKnobs = {
     type: text,
     config: ['label', 'Select time'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: {
-      type: String,
       name: 'label',
     },
   },
@@ -47,37 +45,37 @@ const preKnobs = {
     group: 'attr',
     type: text,
     config: timeConfig,
-    prop: { name: 'time', type: String },
+    prop: { name: 'time' },
   },
   ampm: {
     group: 'attr',
     type: select,
     config: ampmConfig,
-    prop: { name: 'ampm', type: String },
+    prop: { name: 'ampm' },
   },
   timezone: {
     group: 'attr',
     type: text,
     config: timezoneConfig,
-    prop: { name: 'timezone', type: String },
+    prop: { name: 'timezone' },
   },
   timeSync: {
     group: 'attr',
     type: text,
     config: timeConfig,
-    sync: { name: 'time', type: String },
+    sync: { name: 'time' },
   },
   ampmSync: {
     group: 'attr',
     type: select,
     config: ampmConfig,
-    sync: { name: 'ampm', type: String },
+    sync: { name: 'ampm' },
   },
   timezoneSync: {
     group: 'attr',
     type: text,
     config: timezoneConfig,
-    sync: { name: 'timezone', type: String },
+    sync: { name: 'timezone' },
   },
   timezones: {
     group: 'attr',
@@ -89,31 +87,31 @@ const preKnobs = {
       },
       // consts.CONFIG,
     ],
-    prop: { name: 'timezones', type: Array, value: val => val.list },
+    prop: { name: 'timezones', value: val => val.list },
   },
   pattern: {
     group: 'attr',
     type: text,
     config: ['pattern', '(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)'], // consts.CONFIG],
-    prop: { name: 'pattern', type: String },
+    prop: { name: 'pattern' },
   },
   placeholder: {
     group: 'attr',
     type: text,
     config: ['placeholder', 'hh:mm'], // consts.CONTENT],
-    prop: { name: 'placeholder', type: String },
+    prop: { name: 'placeholder' },
   },
   timezonesSelectLabel: {
     group: 'attr',
     type: text,
     config: ['timzones-select-label', 'Timezone label'], // consts.CONTENT],
-    prop: { name: 'timzones-select-label', type: String },
+    prop: { name: 'timzones-select-label' },
   },
   ampmSelectLabel: {
     group: 'attr',
     type: text,
     config: ['ampm-select-label', 'AM/PM'], // consts.CONTENT],
-    prop: { name: 'ampm-select-label', type: String },
+    prop: { name: 'ampm-select-label' },
   },
   invalidMessage: {
     group: 'attr',
@@ -121,7 +119,7 @@ const preKnobs = {
     config: ['invalid-message', ''], // consts.CONTENT],
     prop: {
       name: 'invalid-message',
-      type: String,
+
       value: val => (val.length ? val : null),
     },
   },
@@ -136,7 +134,7 @@ const preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: { name: 'disabled', type: Boolean },
+    prop: { name: 'disabled' },
   },
   events: {
     group: 'attr',

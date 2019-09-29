@@ -37,7 +37,7 @@ let preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['expanded', false],
-    prop: { name: 'expanded', type: Boolean },
+    prop: { name: 'expanded' },
   },
   selected: {
     group: 'attr',
@@ -45,7 +45,6 @@ let preKnobs = {
     config: ['selected', false], // consts.CONFIG],
     prop: {
       name: 'selected',
-      type: Boolean,
     },
   },
   href: {
@@ -57,7 +56,6 @@ let preKnobs = {
     ],
     prop: {
       name: 'href',
-      type: String,
     },
   },
   vModel: {
@@ -69,7 +67,6 @@ let preKnobs = {
     type: text,
     config: ['value', 'check-1'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: String,
       name: 'value',
     },
   },

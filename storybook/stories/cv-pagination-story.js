@@ -18,43 +18,43 @@ const preKnobs = {
     group: 'attr',
     type: text,
     config: ['backwards button text', 'Previous page'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: { name: 'backward-text', type: String },
+    prop: { name: 'backward-text' },
   },
   forwardsText: {
     group: 'attr',
     type: text,
     config: ['forwards button text', 'Next page'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: { name: 'forward-text', type: String },
+    prop: { name: 'forward-text' },
   },
   pageNumberLabel: {
     group: 'attr',
     type: text,
     config: ['page number label', 'Page number'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: { name: 'page-number-label', type: String },
+    prop: { name: 'page-number-label' },
   },
   pageSizesLabel: {
     group: 'attr',
     type: text,
     config: ['page sizes label', 'Items per page:'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: { name: 'page-sizes-label', type: String },
+    prop: { name: 'page-sizes-label' },
   },
   numberOfItems: {
     group: 'attr',
     type: number,
     config: ['Number of items', 103],
-    prop: { name: 'number-of-items', type: Number },
+    prop: { name: 'number-of-items' },
   },
   page: {
     group: 'attr',
     type: number,
     config: ['initial page', 2],
-    prop: { name: 'page', type: Number },
+    prop: { name: 'page' },
   },
   pageSizes: {
     group: 'attr',
     type: object,
     config: ['Page sizes', { list: [10, { value: 20, selected: true }, 30, 40, 50] }],
-    prop: { name: 'page-sizes', type: Array, value: val => val.list },
+    prop: { name: 'page-sizes', value: val => val.list },
   },
   events: {
     group: 'attr',

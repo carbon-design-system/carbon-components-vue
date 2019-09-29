@@ -46,7 +46,6 @@ let preKnobs = {
     type: boolean,
     config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: String,
       name: 'theme',
       value: val => (val ? 'light' : ''),
     },
@@ -56,7 +55,6 @@ let preKnobs = {
     type: text,
     config: ['label', 'Choose an option'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: {
-      type: String,
       name: 'label',
     },
   },
@@ -73,7 +71,6 @@ let preKnobs = {
     type: boolean,
     config: ['inline', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: Boolean,
       name: 'inline',
     },
   },
@@ -116,7 +113,6 @@ let preKnobs = {
     type: text,
     config: ['title', 'Multiselect title'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: {
-      type: String,
       name: 'title',
     },
   },
@@ -125,7 +121,6 @@ let preKnobs = {
     type: boolean,
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: Boolean,
       name: 'disabled',
     },
   },
@@ -151,7 +146,6 @@ let preKnobs = {
     type: boolean,
     config: ['filterable', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: Boolean,
       name: 'filterable',
     },
   },
@@ -160,7 +154,6 @@ let preKnobs = {
     type: boolean,
     config: ['auto filter', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: Boolean,
       name: 'auto-filter',
     },
   },
@@ -169,7 +162,6 @@ let preKnobs = {
     type: boolean,
     config: ['user filter', false],
     prop: {
-      type: Boolean,
       name: 'userFilter',
     },
   },
@@ -179,7 +171,6 @@ let preKnobs = {
     config: ['user highlight', false],
     prop: {
       name: 'userHighlight',
-      type: Boolean,
     },
   },
   userFilterOrHighlight: {
@@ -191,7 +182,6 @@ let preKnobs = {
     type: boolean,
     config: ['auto hihglight', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: Boolean,
       name: 'auto-highlight',
     },
   },
@@ -200,7 +190,6 @@ let preKnobs = {
     type: array,
     config: ['initial-value', ['banana', 'ugli_fruit'], ','],
     prop: {
-      type: Array,
       name: 'value',
     },
   },

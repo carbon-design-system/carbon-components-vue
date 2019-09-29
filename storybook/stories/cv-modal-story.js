@@ -66,7 +66,6 @@ const preKnobs = {
     type: boolean,
     config: ['primary button disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: Boolean,
       name: 'primary-button-disabled',
     },
   },
@@ -76,7 +75,6 @@ const preKnobs = {
     config: ['visible', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
       name: 'visible',
-      type: Boolean,
     },
   },
   events: {

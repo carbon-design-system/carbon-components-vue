@@ -18,7 +18,6 @@ const preKnobs = {
     type: boolean,
     config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: String,
       name: 'theme',
       value: val => (val ? 'light' : ''),
     },
@@ -28,7 +27,6 @@ const preKnobs = {
     type: text,
     config: ['date-label', 'Date label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: {
-      type: String,
       name: 'date-label',
     },
   },
@@ -37,7 +35,6 @@ const preKnobs = {
     type: text,
     config: ['date-end-label', 'Date end label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: {
-      type: String,
       name: 'date-end-label',
     },
   },
@@ -45,13 +42,13 @@ const preKnobs = {
     group: 'attr',
     type: text,
     config: ['pattern', '\\d{12}/\\d{12}/\\d{4}'], // consts.CONFIG],
-    prop: { name: 'pattern', type: String },
+    prop: { name: 'pattern' },
   },
   placeholder: {
     group: 'attr',
     type: text,
     config: ['placeholder', 'mm/dd/yyyy'], // consts.CONFIG],
-    prop: { name: 'placeholder', type: String },
+    prop: { name: 'placeholder' },
   },
   calOptions: {
     group: 'attr',
@@ -86,7 +83,6 @@ const preKnobs = {
     config: ['value', '01/01/2020'],
     prop: {
       name: 'value',
-      type: String,
     },
   },
   dateValue: {
@@ -99,7 +95,6 @@ const preKnobs = {
     config: ['value', { startDate: '01/01/2020', endDate: '10/01/2020' }],
     prop: {
       name: 'value',
-      type: Object,
     },
   },
   vModel: {

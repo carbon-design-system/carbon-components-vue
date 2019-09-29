@@ -30,7 +30,6 @@ let preKnobs = {
     ],
     inline: true,
     prop: {
-      type: String,
       name: 'direction',
     },
   },
@@ -67,7 +66,6 @@ let preKnobs = {
     config: ['visible', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
       name: 'visible',
-      type: Boolean,
     },
   },
 };
@@ -218,7 +216,6 @@ preKnobs = {
     ],
     inline: true,
     prop: {
-      type: String,
       name: 'direction',
     },
   },
@@ -232,7 +229,6 @@ preKnobs = {
     ],
     inline: true,
     prop: {
-      type: String,
       name: 'definition',
     },
   },

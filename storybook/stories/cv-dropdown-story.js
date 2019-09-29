@@ -18,7 +18,6 @@ let preKnobs = {
     type: boolean,
     config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: String,
       name: 'theme',
       value: val => (val ? 'light' : ''),
     },
@@ -28,7 +27,6 @@ let preKnobs = {
     type: text,
     config: ['placeholder', 'Choose an option'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: {
-      type: String,
       name: 'placeholder',
     },
   },
@@ -50,7 +48,6 @@ let preKnobs = {
     ],
     prop: {
       name: 'value',
-      type: String,
     },
   },
   up: {
@@ -59,7 +56,6 @@ let preKnobs = {
     config: ['up', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
       name: 'up',
-      type: Boolean,
     },
   },
   vModel: {
@@ -75,7 +71,6 @@ let preKnobs = {
     type: boolean,
     config: ['inline', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: Boolean,
       name: 'inline',
     },
   },
@@ -118,7 +113,6 @@ let preKnobs = {
     type: text,
     config: ['label', 'Select label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: {
-      type: String,
       name: 'label',
     },
   },
@@ -127,7 +121,6 @@ let preKnobs = {
     type: boolean,
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: Boolean,
       name: 'disabled',
     },
   },
@@ -226,7 +219,6 @@ preKnobs = {
     config: ['inline', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
       name: 'inline',
-      type: Boolean,
     },
   },
 };

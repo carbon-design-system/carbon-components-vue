@@ -17,25 +17,25 @@ let preKnobs = {
     group: 'attr',
     type: text,
     config: ['label', 'Choose files to upload'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: { name: 'label', type: String },
+    prop: { name: 'label' },
   },
   helperText: {
     group: 'attr',
     type: text,
     config: ['helper text', 'Select the files you want to upload'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: { name: 'helperText', type: String },
+    prop: { name: 'helperText' },
   },
   buttonLabel: {
     group: 'attr',
     type: text,
     config: ['button label', 'Add file'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: { name: 'buttonLabel', type: String },
+    prop: { name: 'buttonLabel' },
   },
   accept: {
     group: 'attr',
     type: text,
     config: ['accept', '.jpg,.png'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: { name: 'accept', type: String },
+    prop: { name: 'accept' },
   },
   clearOnReselect: {
     group: 'attr',
@@ -53,13 +53,13 @@ let preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['multiple', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: { name: 'multiple', type: Boolean },
+    prop: { name: 'multiple' },
   },
   removable: {
     group: 'attr',
     type: boolean,
     config: ['removable', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: { name: 'removable', type: Boolean },
+    prop: { name: 'removable' },
   },
   events: {
     group: 'attr',

@@ -31,7 +31,6 @@ const preKnobs = {
     ],
     prop: {
       name: 'selected',
-      type: Number,
     },
   },
   toggle3: {
@@ -39,7 +38,6 @@ const preKnobs = {
     type: boolean,
     config: ['toggle switcher 3', true],
     prop: {
-      type: Boolean,
       name: 'toggle3',
     },
   },
@@ -49,7 +47,6 @@ const preKnobs = {
     config: ['disabled 3', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
       name: 'disabled',
-      type: Boolean,
     },
   },
   events: {
@@ -63,7 +60,7 @@ const preKnobs = {
     config: ['with icon', false],
     prop: {
       name: 'icon',
-      type: Object,
+
       value: val => (val ? AddFilled16 : null),
     },
   },

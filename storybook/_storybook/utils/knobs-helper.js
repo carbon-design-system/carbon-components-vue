@@ -47,7 +47,6 @@ const parsePreKnobs = (variant, preKnobs) => {
             knobs.group[preKnob.group] += `${prefix}:${preKnob.prop.name}="${key}"`;
           }
           knobs.props[key] = {
-            type: preKnob.prop.type,
             default: value(preKnob.type(...preKnob.config)),
           };
         } else if (preKnob.slot) {

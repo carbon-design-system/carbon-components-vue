@@ -50,7 +50,6 @@ let preKnobs = {
     type: boolean,
     config: ['auto table width', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: Boolean,
       name: 'auto-width',
     },
   },
@@ -59,7 +58,6 @@ let preKnobs = {
     type: boolean,
     config: ['sortable', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: Boolean,
       name: 'sortable',
     },
   },
@@ -68,7 +66,6 @@ let preKnobs = {
     type: text,
     config: ['Title', 'Table title'],
     prop: {
-      type: String,
       name: 'title',
     },
   },
@@ -77,7 +74,6 @@ let preKnobs = {
     type: text,
     config: ['action-bar-aria-label', 'Custom action bar aria label'],
     prop: {
-      type: String,
       name: 'action-bar-aria-label',
     },
   },
@@ -86,7 +82,6 @@ let preKnobs = {
     type: text,
     config: ['batch-cancel-label', 'Cancel'],
     prop: {
-      type: String,
       name: 'batch-cancel-label',
     },
   },
@@ -95,7 +90,6 @@ let preKnobs = {
     type: boolean,
     config: ['zebra', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: Boolean,
       name: 'zebra',
     },
   },
@@ -109,7 +103,6 @@ let preKnobs = {
       },
     ],
     prop: {
-      type: Array,
       name: 'columns',
       value: val => val.columns,
     },
@@ -142,7 +135,6 @@ let preKnobs = {
       },
     ],
     prop: {
-      type: Array,
       name: 'columns',
       value: val => val.columns,
     },
@@ -163,7 +155,6 @@ let preKnobs = {
       },
     ],
     prop: {
-      type: Array,
       name: 'data',
       value: val => val.data,
     },
@@ -181,7 +172,6 @@ let preKnobs = {
     type: boolean,
     config: ['basic pagination', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: Boolean,
       name: 'pagination',
     },
   },
@@ -521,7 +511,6 @@ preKnobs = {
       },
     ],
     prop: {
-      type: Array,
       name: 'columns',
       value: val => val.columns,
     },
@@ -531,7 +520,6 @@ preKnobs = {
     type: number,
     config: ['number of columns', 5], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: Number,
       name: 'columns',
     },
   },
@@ -540,7 +528,6 @@ preKnobs = {
     type: number,
     config: ['number of rows', 5], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: Number,
       name: 'rows',
     },
   },

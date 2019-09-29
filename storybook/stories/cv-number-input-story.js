@@ -18,7 +18,6 @@ const preKnobs = {
     type: boolean,
     config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: String,
       name: 'theme',
       value: val => (val ? 'light' : ''),
     },
@@ -28,7 +27,6 @@ const preKnobs = {
     type: text,
     config: ['label', 'Text input label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: {
-      type: String,
       name: 'label',
     },
   },
@@ -71,7 +69,6 @@ const preKnobs = {
     type: boolean,
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
-      type: Boolean,
       name: 'disabled',
     },
   },
@@ -81,7 +78,6 @@ const preKnobs = {
     config: ['value', 0], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: {
       name: 'value',
-      type: String,
       value: val => `${val}`,
     },
   },

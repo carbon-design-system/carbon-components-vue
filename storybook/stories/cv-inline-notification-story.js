@@ -18,7 +18,7 @@ const preKnobs = {
     group: 'attr',
     type: text,
     config: ['title', 'notification title'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: { name: 'title', type: String },
+    prop: { name: 'title' },
   },
   subtitle: {
     group: 'attr',

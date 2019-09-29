@@ -17,7 +17,6 @@ const preKnobs = {
     config: ['Skeleton text at a larger size (heading)', false], // consts.CONFIG
     prop: {
       name: 'heading',
-      type: Boolean,
     },
   },
   paragraph: {
@@ -26,20 +25,19 @@ const preKnobs = {
     config: ['Use multiple lines of text (paragraph)', false], // consts.CONFIG
     prop: {
       name: 'paragraph',
-      type: Boolean,
     },
   },
   lineCount: {
     group: 'attr',
     type: number,
     config: ['The number of lines in a paragraph (lineCount)', 3],
-    prop: { name: 'line-count', type: Number },
+    prop: { name: 'line-count' },
   },
   width: {
     group: 'attr',
     type: text,
     config: ['Width (in px or %) of single line of text or max-width of paragraph lines (width)', '100%'], // consts.CONFIG
-    prop: { name: 'width', type: String },
+    prop: { name: 'width' },
   },
 };
 
