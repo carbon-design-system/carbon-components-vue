@@ -17,60 +17,49 @@ const preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: String,
-      name: 'theme',
-      value: val => (val ? 'light' : ''),
-    },
+    prop: 'theme',
+    value: val => (val ? 'light' : ''),
   },
   dateLabel: {
     group: 'attr',
     type: text,
     config: ['date-label', 'Date label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: String,
-      name: 'date-label',
-    },
+    prop: 'date-label',
   },
   dateEndLabel: {
     group: 'attr',
     type: text,
     config: ['date-end-label', 'Date end label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: String,
-      name: 'date-end-label',
-    },
+    prop: 'date-end-label',
   },
   pattern: {
     group: 'attr',
     type: text,
     config: ['pattern', '\\d{12}/\\d{12}/\\d{4}'], // consts.CONFIG],
-    prop: { name: 'pattern', type: String },
+    prop: 'pattern',
   },
   placeholder: {
     group: 'attr',
     type: text,
     config: ['placeholder', 'mm/dd/yyyy'], // consts.CONFIG],
-    prop: { name: 'placeholder', type: String },
+    prop: 'placeholder',
   },
   calOptions: {
     group: 'attr',
     type: object,
     config: ['calOptions', { dateFormat: 'm/d/Y' }], // consts.CONFIG],
-    prop: { name: 'cal-options', type: Object },
+    prop: 'cal-options',
   },
   invalidMessage: {
     group: 'attr',
     type: text,
     config: ['invalid-message', ''], // consts.CONTENT],
-    prop: { name: 'invalid-message', type: String },
+    prop: 'invalid-message',
   },
   invalidMessageSlot: {
     group: 'slot',
-    slot: {
-      name: 'invalid-message',
-      value: 'Invalid message slot overrides the invalid-message prop',
-    },
+    slot: 'invalid-message',
+    value: 'Invalid message slot overrides the invalid-message prop',
   },
   eventsSimple: {
     group: 'attr',
@@ -84,10 +73,7 @@ const preKnobs = {
     group: 'attr',
     type: text,
     config: ['value', '01/01/2020'],
-    prop: {
-      name: 'value',
-      type: String,
-    },
+    prop: 'value',
   },
   dateValue: {
     group: 'attr',
@@ -97,10 +83,7 @@ const preKnobs = {
     group: 'attr',
     type: object,
     config: ['value', { startDate: '01/01/2020', endDate: '10/01/2020' }],
-    prop: {
-      name: 'value',
-      type: Object,
-    },
+    prop: 'value',
   },
   vModel: {
     group: 'attr',

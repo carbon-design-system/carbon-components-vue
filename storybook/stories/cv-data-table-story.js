@@ -40,64 +40,43 @@ let preKnobs = {
       '',
       // consts.CONFIG, // fails when used with number in storybook 4.1.4
     ],
-    prop: {
-      name: 'row-size',
-      type: String,
-    },
+    prop: 'row-size',
   },
   autoWidth: {
     group: 'attr',
     type: boolean,
     config: ['auto table width', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: Boolean,
-      name: 'auto-width',
-    },
+    prop: 'auto-width',
   },
   sortable: {
     group: 'attr',
     type: boolean,
     config: ['sortable', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: Boolean,
-      name: 'sortable',
-    },
+    prop: 'sortable',
   },
   title: {
     group: 'attr',
     type: text,
     config: ['Title', 'Table title'],
-    prop: {
-      type: String,
-      name: 'title',
-    },
+    prop: 'title',
   },
   actionBarAriaLabel: {
     group: 'attr',
     type: text,
     config: ['action-bar-aria-label', 'Custom action bar aria label'],
-    prop: {
-      type: String,
-      name: 'action-bar-aria-label',
-    },
+    prop: 'action-bar-aria-label',
   },
   batchCancelLabel: {
     group: 'attr',
     type: text,
     config: ['batch-cancel-label', 'Cancel'],
-    prop: {
-      type: String,
-      name: 'batch-cancel-label',
-    },
+    prop: 'batch-cancel-label',
   },
   zebra: {
     group: 'attr',
     type: boolean,
     config: ['zebra', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: Boolean,
-      name: 'zebra',
-    },
+    prop: 'zebra',
   },
   columns: {
     group: 'attr',
@@ -108,11 +87,8 @@ let preKnobs = {
         columns: ['Name', 'Protocol', 'Port', 'Rule', 'Attached Groups', 'Status'],
       },
     ],
-    prop: {
-      type: Array,
-      name: 'columns',
-      value: val => val.columns,
-    },
+    prop: 'columns',
+    value: val => val.columns,
   },
   columns2: {
     group: 'attr',
@@ -141,11 +117,8 @@ let preKnobs = {
         ],
       },
     ],
-    prop: {
-      type: Array,
-      name: 'columns',
-      value: val => val.columns,
-    },
+    prop: 'columns',
+    value: val => val.columns,
   },
   data: {
     group: '',
@@ -162,11 +135,8 @@ let preKnobs = {
         ],
       },
     ],
-    prop: {
-      type: Array,
-      name: 'data',
-      value: val => val.data,
-    },
+    prop: 'data',
+    value: val => val.data,
   },
   search: {
     group: 'attr',
@@ -180,10 +150,7 @@ let preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['basic pagination', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: Boolean,
-      name: 'pagination',
-    },
+    prop: 'pagination',
   },
   pagination: {
     group: 'attr',
@@ -195,9 +162,8 @@ let preKnobs = {
   },
   actions: {
     group: 'slots',
-    slot: {
-      name: 'actions',
-      value: `
+    slot: 'actions',
+    value: `
 <cv-data-table-action @click="action1">
   <svg fill-rule="evenodd" height="16" name="download" role="img" viewBox="0 0 14 16" width="14" aria-label="Download" alt="Download">
     <title>Download</title>
@@ -220,13 +186,11 @@ let preKnobs = {
 </cv-data-table-action>
 <cv-button small @click="actionNew">Add new</cv-button>
       `,
-    },
   },
   batchActions: {
     group: 'slots',
-    slot: {
-      name: 'batch-actions',
-      value: `
+    slot: 'batch-actions',
+    value: `
 <cv-button @click="onBatchAction1">
   Delete
   <TrashCan16 class="bx--btn__icon"/>
@@ -240,7 +204,6 @@ let preKnobs = {
   <Download16 class="bx--btn__icon"/>
 </cv-button>
 `,
-    },
   },
   sort: {
     group: 'attr',
@@ -250,53 +213,45 @@ let preKnobs = {
     group: '',
     type: boolean,
     config: ['Has expanding rows', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'hasExpandingRows',
-      value: val => val,
-    },
+    prop: 'hasExpandingRows',
+    value: val => val,
   },
   slottedData: {
     group: 'slots',
-    slot: {
-      name: 'data',
-      value:
-        '\n    <cv-data-table-row v-for="(row, rowIndex) in internalData" :key="`${rowIndex}`" :value="`${rowIndex}`">' +
-        '\n       <cv-data-table-cell v-for="(cell, cellIndex) in row" :key="`${cellIndex}`" :value="`${cellIndex}`" v-html="cell"></cv-data-table-cell>' +
-        '\n       <template v-if="hasExpandingRows && rowIndex % 2 === 0" slot="expandedContent">A variety of content types can live here. Be sure to follow Carbon design guidelines for spacing and alignment.</template>' +
-        '\n    </cv-data-table-row>\n',
-    },
+    slot: 'data',
+    value:
+      '\n    <cv-data-table-row v-for="(row, rowIndex) in internalData" :key="`${rowIndex}`" :value="`${rowIndex}`">' +
+      '\n       <cv-data-table-cell v-for="(cell, cellIndex) in row" :key="`${cellIndex}`" :value="`${cellIndex}`" v-html="cell"></cv-data-table-cell>' +
+      '\n       <template v-if="hasExpandingRows && rowIndex % 2 === 0" slot="expandedContent">A variety of content types can live here. Be sure to follow Carbon design guidelines for spacing and alignment.</template>' +
+      '\n    </cv-data-table-row>\n',
   },
   expandingSlottedData: {
     group: 'slots',
-    slot: {
-      name: 'data',
-      value:
-        '\n    <cv-data-table-row v-for="(row, rowIndex) in internalData" :key="`${rowIndex}`" :value="`${rowIndex}`">' +
-        '\n       <cv-data-table-cell v-for="(cell, cellIndex) in row" :key="`${cellIndex}`" :value="`${cellIndex}`" v-html="cell"></cv-data-table-cell>' +
-        '\n       <template slot="expandedContent">A variety of content types can live here. Be sure to follow Carbon design guidelines for spacing and alignment.</template>' +
-        '\n    </cv-data-table-row>\n',
-    },
+    slot: 'data',
+    value:
+      '\n    <cv-data-table-row v-for="(row, rowIndex) in internalData" :key="`${rowIndex}`" :value="`${rowIndex}`">' +
+      '\n       <cv-data-table-cell v-for="(cell, cellIndex) in row" :key="`${cellIndex}`" :value="`${cellIndex}`" v-html="cell"></cv-data-table-cell>' +
+      '\n       <template slot="expandedContent">A variety of content types can live here. Be sure to follow Carbon design guidelines for spacing and alignment.</template>' +
+      '\n    </cv-data-table-row>\n',
   },
   htmlData: {
     group: 'slots',
-    slot: {
-      name: 'data',
-      value:
-        '\n    <cv-data-table-row v-for="(row, rowIndex) in [`ibm`, `beta`, `local`, `custom`, `private`]" :key="`${rowIndex}`" :value="`${rowIndex}`">' +
-        '\n       <cv-data-table-cell><input type="text" :value="row" style="border: none; background: none; width: 100%;"/></cv-data-table-cell>' +
-        '\n       <cv-data-table-cell><input type="number" :value="rowIndex * rowIndex" style="border: none; background: none; width: 100%;" /></cv-data-table-cell>' +
-        '\n       <cv-data-table-cell><input type="password" value="ASecret" style="border: none; background: none; width: 100%;" /></cv-data-table-cell>' +
-        '\n       <cv-data-table-cell><a href="http://vue.carbondesignsystem.com">Here</a></cv-data-table-cell>' +
-        '\n       <cv-data-table-cell><cv-tag kind="red" label="I am a tag" /></cv-data-table-cell>' +
-        '\n       <cv-data-table-cell><cv-button type="button" v-html="`Clicky ${row}`" style="width: 100%;"></cv-button></cv-data-table-cell>' +
-        '\n       <cv-data-table-cell>' +
-        '\n           <cv-overflow-menu flip-menu style="margin: 0 auto;">' +
-        '\n               <cv-overflow-menu-item>Edit</cv-overflow-menu-item>' +
-        '\n               <cv-overflow-menu-item>Test</cv-overflow-menu-item>' +
-        '\n           </cv-overflow-menu>' +
-        '\n       </cv-data-table-cell>' +
-        '\n    </cv-data-table-row>\n',
-    },
+    slot: 'data',
+    value:
+      '\n    <cv-data-table-row v-for="(row, rowIndex) in [`ibm`, `beta`, `local`, `custom`, `private`]" :key="`${rowIndex}`" :value="`${rowIndex}`">' +
+      '\n       <cv-data-table-cell><input type="text" :value="row" style="border: none; background: none; width: 100%;"/></cv-data-table-cell>' +
+      '\n       <cv-data-table-cell><input type="number" :value="rowIndex * rowIndex" style="border: none; background: none; width: 100%;" /></cv-data-table-cell>' +
+      '\n       <cv-data-table-cell><input type="password" value="ASecret" style="border: none; background: none; width: 100%;" /></cv-data-table-cell>' +
+      '\n       <cv-data-table-cell><a href="http://vue.carbondesignsystem.com">Here</a></cv-data-table-cell>' +
+      '\n       <cv-data-table-cell><cv-tag kind="red" label="I am a tag" /></cv-data-table-cell>' +
+      '\n       <cv-data-table-cell><cv-button type="button" v-html="`Clicky ${row}`" style="width: 100%;"></cv-button></cv-data-table-cell>' +
+      '\n       <cv-data-table-cell>' +
+      '\n           <cv-overflow-menu flip-menu style="margin: 0 auto;">' +
+      '\n               <cv-overflow-menu-item>Edit</cv-overflow-menu-item>' +
+      '\n               <cv-overflow-menu-item>Test</cv-overflow-menu-item>' +
+      '\n           </cv-overflow-menu>' +
+      '\n       </cv-data-table-cell>' +
+      '\n    </cv-data-table-row>\n',
   },
   overflowMenu: {
     group: 'attr',
@@ -306,18 +261,13 @@ let preKnobs = {
     group: 'attr',
     type: text,
     config: ['helper text', 'This is some helpful text'],
-    prop: {
-      name: 'helper-text',
-      type: String,
-      value: val => (val.length ? val : null),
-    },
+    prop: 'helper-text',
+    value: val => (val.length ? val : null),
   },
   helperTextSlot: {
     group: 'slots',
-    slot: {
-      name: 'helper-text',
-      value: 'Some slotted helpful text',
-    },
+    slot: 'helper-text',
+    value: 'Some slotted helpful text',
   },
   scopedSlots: {
     group: 'slots',
@@ -520,29 +470,20 @@ preKnobs = {
         columns: ['Name', 'Protocol', 'Port', 'Rule', 'Attached Groups', 'Status'],
       },
     ],
-    prop: {
-      type: Array,
-      name: 'columns',
-      value: val => val.columns,
-    },
+    prop: 'columns',
+    value: val => val.columns,
   },
   skeletonCols: {
     group: 'attr',
     type: number,
     config: ['number of columns', 5], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: Number,
-      name: 'columns',
-    },
+    prop: 'columns',
   },
   skeletonRows: {
     group: 'attr',
     type: number,
     config: ['number of rows', 5], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: Number,
-      name: 'rows',
-    },
+    prop: 'rows',
   },
   skeletonOther: {
     group: 'attr',

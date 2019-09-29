@@ -16,19 +16,19 @@ const preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['flip menu', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: { type: Boolean, name: 'flip-menu' },
+    prop: 'flip-menu',
   },
   up: {
     group: 'attr',
     type: boolean,
     config: ['up', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: { type: Boolean, name: 'up' },
+    prop: 'up',
   },
   offset: {
     group: 'attr',
     type: object,
     config: ['offset example', { left: 0, top: 0 }], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: { type: Object, name: 'offset' },
+    prop: 'offset',
   },
 };
 

@@ -17,46 +17,31 @@ let preKnobs = {
     group: 'attr',
     type: text,
     config: ['label', 'checkbox'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: String,
-      name: 'label',
-    },
+    prop: 'label',
   },
   checked: {
     group: 'attr',
     type: boolean,
     config: ['checked', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: Boolean,
-      name: 'checked',
-    },
+    prop: 'checked',
   },
   value: {
     group: 'attr',
     type: text,
     config: ['value', 'check-1'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: String,
-      name: 'value',
-    },
+    prop: 'value',
   },
   mixed: {
     group: 'attr',
     type: boolean,
     config: ['mixed', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: Boolean,
-      name: 'mixed',
-    },
+    prop: 'mixed',
   },
   disabled: {
     group: 'attr',
     type: boolean,
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: Boolean,
-      name: 'disabled',
-    },
+    prop: 'disabled',
   },
   vModel: {
     group: 'attr',

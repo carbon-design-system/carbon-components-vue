@@ -16,10 +16,7 @@ const preKnobs = {
     group: 'attr',
     type: number,
     config: ['Initial step index', 2], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'initial-step',
-      type: Number,
-    },
+    prop: 'initial-step',
   },
   steps: {
     group: 'attr',
@@ -30,19 +27,13 @@ const preKnobs = {
       ',',
       // 'consts.CONFIG', // , - does not seem to work in storybook 4
     ],
-    prop: {
-      name: 'steps',
-      type: Array,
-    },
+    prop: 'steps',
   },
   vertical: {
     group: 'attr',
     type: boolean,
     config: ['vertical', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'vertical',
-      type: Boolean,
-    },
+    prop: 'vertical',
   },
   slotted: {
     group: 'slots',

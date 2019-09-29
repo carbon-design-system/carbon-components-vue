@@ -16,19 +16,19 @@ const preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['active', true], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: { name: 'active', type: Boolean },
+    prop: 'active',
   },
   loadingText: {
     group: 'attr',
     type: text,
     config: ['loading text', 'Loading data...'],
-    prop: { name: 'loading-text', type: String },
+    prop: 'loading-text',
   },
   loadedText: {
     group: 'attr',
     type: text,
     config: ['loaded text', 'Data loaded.'],
-    prop: { name: 'loaded-text', type: String },
+    prop: 'loaded-text',
   },
 };
 

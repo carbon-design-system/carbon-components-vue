@@ -17,47 +17,32 @@ const preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: String,
-      name: 'theme',
-      value: val => (val ? 'light' : ''),
-    },
+    prop: 'theme',
+    value: val => (val ? 'light' : ''),
   },
   label: {
     group: 'attr',
     type: text,
     config: ['label', 'Select label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: String,
-      name: 'label',
-    },
+    prop: 'label',
   },
   hideLabel: {
     group: 'attr',
     type: boolean,
     config: ['hide-label', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: Boolean,
-      name: 'hide-label',
-    },
+    prop: 'hide-label',
   },
   inline: {
     group: 'attr',
     type: boolean,
     config: ['inline', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: Boolean,
-      name: 'inline',
-    },
+    prop: 'inline',
   },
   disabled: {
     group: 'attr',
     type: boolean,
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: Boolean,
-      name: 'disabled',
-    },
+    prop: 'disabled',
   },
   vModel: {
     group: 'attr',
@@ -71,35 +56,25 @@ const preKnobs = {
     group: 'attr',
     type: text,
     config: ['helper text', ''],
-    prop: {
-      name: 'helper-text',
-      type: String,
-      value: val => (val.length ? val : null),
-    },
+    prop: 'helper-text',
+    value: val => (val.length ? val : null),
   },
   helperTextSlot: {
     group: 'slots',
-    slot: {
-      name: 'helper-text',
-      value: 'Some helpful text',
-    },
+    slot: 'helper-text',
+    value: 'Some helpful text',
   },
   invalidMessage: {
     group: 'attr',
     type: text,
     config: ['invalid message', ''],
-    prop: {
-      name: 'invalid-message',
-      type: String,
-      value: val => (val.length ? val : null),
-    },
+    prop: 'invalid-message',
+    value: val => (val.length ? val : null),
   },
   invalidMessageSlot: {
     group: 'slots',
-    slot: {
-      name: 'invalid-message',
-      value: 'Invalid message text',
-    },
+    slot: 'invalid-message',
+    value: 'Invalid message text',
   },
 };
 

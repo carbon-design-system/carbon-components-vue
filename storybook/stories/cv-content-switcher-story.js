@@ -29,28 +29,18 @@ const preKnobs = {
       0,
       // consts.CONFIG, // fails when used with number in storybook 4.1.4
     ],
-    prop: {
-      name: 'selected',
-      type: Number,
-    },
+    prop: 'selected',
   },
   toggle3: {
     group: 'attr3',
     type: boolean,
     config: ['toggle switcher 3', true],
-    prop: {
-      type: Boolean,
-      name: 'toggle3',
-    },
   },
   disabled3: {
     group: 'attr3t',
     type: boolean,
     config: ['disabled 3', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'disabled',
-      type: Boolean,
-    },
+    prop: 'disabled',
   },
   events: {
     group: 'attr',
@@ -61,11 +51,8 @@ const preKnobs = {
     group: 'icon',
     type: boolean,
     config: ['with icon', false],
-    prop: {
-      name: 'icon',
-      type: Object,
-      value: val => (val ? AddFilled16 : null),
-    },
+    prop: 'icon',
+    value: val => (val ? AddFilled16 : null),
   },
 };
 

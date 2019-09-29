@@ -17,46 +17,31 @@ let preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['checked', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: Boolean,
-      name: 'checked',
-    },
+    prop: 'checked',
   },
   label: {
     group: 'attr',
     type: text,
     config: ['label', 'Toggle label'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: String,
-      name: 'label',
-    },
+    prop: 'label',
   },
   value: {
     group: 'attr',
     type: text,
     config: ['value', 'check-1'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: String,
-      name: 'value',
-    },
+    prop: 'value',
   },
   small: {
     group: 'attr',
     type: boolean,
     config: ['small', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: Boolean,
-      name: 'small',
-    },
+    prop: 'small',
   },
   disabled: {
     group: 'attr',
     type: boolean,
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: Boolean,
-      name: 'disabled',
-    },
+    prop: 'disabled',
   },
   vModel: {
     group: 'attr',
@@ -68,17 +53,13 @@ let preKnobs = {
   },
   textLeft: {
     group: 'slots',
-    slot: {
-      name: 'text-left',
-      value: '0',
-    },
+    slot: 'text-left',
+    value: '0',
   },
   textRight: {
     group: 'slots',
-    slot: {
-      name: 'text-right',
-      value: '1',
-    },
+    slot: 'text-right',
+    value: '1',
   },
 };
 

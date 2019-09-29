@@ -18,28 +18,19 @@ const preKnobs = {
     group: 'attr',
     type: text,
     config: ['title', 'notification title'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: String,
-      name: 'title',
-    },
+    prop: 'title',
   },
   subTitle: {
     group: 'attr',
     type: text,
     config: ['subtitle', 'a subtitle'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: String,
-      name: 'sub-title',
-    },
+    prop: 'sub-title',
   },
   caption: {
     group: 'attr',
     type: text,
     config: ['caption', 'Time stamp [00:00:00]'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: String,
-      name: 'caption',
-    },
+    prop: 'caption',
   },
   events: {
     group: 'attr',
@@ -49,7 +40,7 @@ const preKnobs = {
     group: 'attr',
     type: text,
     config: ['close-arial-label', 'Custom close aria label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: { name: 'close-aria-label', type: String },
+    prop: 'close-aria-label',
   },
 };
 

@@ -17,22 +17,19 @@ let preKnobs = {
     group: 'attr',
     type: text,
     config: ['Tag label', 'I am a tag'], // consts.CONTENT],
-    prop: { name: 'label', type: String },
+    prop: 'label',
   },
   disabled: {
     group: 'attr',
     type: boolean,
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: Boolean,
-      name: 'disabled',
-    },
+    prop: 'disabled',
   },
   clearAriaLabel: {
     group: 'attr',
     type: text,
     config: ['Clear aria label', 'Custom clear filter'], // consts.CONTENT],
-    prop: { name: 'clear-aria-label', type: String },
+    prop: 'clear-aria-label',
   },
 };
 

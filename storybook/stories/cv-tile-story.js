@@ -15,38 +15,31 @@ const storiesExperimental = storiesOf('Experimental/CvTile', module);
 let preKnobs = {
   slotDefault: {
     group: 'slots',
-    slot: {
-      name: '',
-      value: '<h1>Hello</h1><p>This is some tile content</p>',
-    },
+    slot: 'default',
+    value: '<h1>Hello</h1><p>This is some tile content</p>',
   },
   slotBelow: {
     group: 'slots',
-    slot: {
-      name: 'below',
-      value: `<h2>More</h2>
+    slot: 'below',
+    value: `<h2>More</h2>
         <ul>
           <li>This</li>
           <li>is some</li>
           <li>more</li>
           <li>content</li>
         </ul>`,
-    },
   },
   expanded: {
     group: 'attr',
     type: boolean,
     config: ['expanded', false],
-    prop: { name: 'expanded', type: Boolean },
+    prop: 'expanded',
   },
   selected: {
     group: 'attr',
     type: boolean,
     config: ['selected', false], // consts.CONFIG],
-    prop: {
-      name: 'selected',
-      type: Boolean,
-    },
+    prop: 'selected',
   },
   href: {
     group: 'attr',
@@ -55,10 +48,7 @@ let preKnobs = {
       'where to go when clicked',
       'https://github.com/carbon-design-system/carbon-components-vue/blob/master/README.md',
     ],
-    prop: {
-      name: 'href',
-      type: String,
-    },
+    prop: 'href',
   },
   vModel: {
     group: 'attr',
@@ -68,10 +58,7 @@ let preKnobs = {
     group: 'attr',
     type: text,
     config: ['value', 'check-1'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      type: String,
-      name: 'value',
-    },
+    prop: 'value',
   },
 };
 

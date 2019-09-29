@@ -18,14 +18,14 @@ const preKnobs = {
     type: boolean,
     inline: true,
     config: ['condensed', false], // consts.CONFIG],
-    prop: { name: 'condensed', type: Boolean },
+    prop: 'condensed',
   },
   noWrap: {
     group: 'data',
     type: boolean,
     inline: true,
     config: ['Prevent wrapping', false], // consts.CONFIG],
-    prop: { name: 'no-wrap', type: Boolean },
+    prop: 'no-wrap',
   },
   vModel: {
     group: 'checksSelectable',

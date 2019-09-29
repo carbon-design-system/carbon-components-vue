@@ -17,19 +17,13 @@ const preKnobs = {
     group: 'tab2',
     type: boolean,
     config: ['2-selected', false], // consts.CONFIG],
-    prop: {
-      name: 'selected',
-      type: Boolean,
-    },
+    prop: 'selected',
   },
   disabled: {
     group: 'tab4',
     type: boolean,
     config: ['4-disabled', false],
-    prop: {
-      name: 'disabled',
-      type: Boolean,
-    },
+    prop: 'disabled',
   },
   events: {
     group: 'attr',

@@ -20,19 +20,13 @@ let preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['small', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'small',
-      type: Boolean,
-    },
+    prop: 'small',
   },
   disabled: {
     group: 'attr',
     type: boolean,
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'disabled',
-      type: Boolean,
-    },
+    prop: 'disabled',
   },
   events: {
     group: 'attr',
@@ -40,20 +34,15 @@ let preKnobs = {
   },
   content: {
     group: 'slots',
-    slot: {
-      name: '',
-      value: `I am a button`,
-    },
+    slot: 'default',
+    value: `I am a button`,
   },
   icon: {
     group: 'attr',
     type: boolean,
     config: ['with icon', false],
-    prop: {
-      name: 'icon',
-      type: Object,
-      value: val => (val ? AddFilled16 : null),
-    },
+    prop: 'icon',
+    value: val => (val ? AddFilled16 : null),
   },
 };
 
@@ -145,10 +134,7 @@ preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['small', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'small',
-      type: Boolean,
-    },
+    prop: 'small',
   },
 };
 
