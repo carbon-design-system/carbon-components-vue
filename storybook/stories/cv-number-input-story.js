@@ -17,69 +17,51 @@ const preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'theme',
-      value: val => (val ? 'light' : ''),
-    },
+    prop: 'theme',
+    value: val => (val ? 'light' : ''),
   },
   label: {
     group: 'attr',
     type: text,
     config: ['label', 'Text input label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'label',
-    },
+    prop: 'label',
   },
   invalidMessage: {
     group: 'attr',
     type: text,
     config: ['invalid message', ''],
-    prop: {
-      name: 'invalid-message',
-      type: String,
-      value: val => (val.length ? val : null),
-    },
+    prop: 'invalid-message',
+    value: val => (val.length ? val : null),
   },
   invalidMessageSlot: {
     group: 'content',
-    slot: {
-      name: 'invalid-message',
-      value: 'Invalid message text',
-    },
+    slot: 'invalid-message',
+    value: 'Invalid message text',
   },
   helperText: {
     group: 'attr',
     type: text,
     config: ['helper text', ''],
-    prop: {
-      name: 'helper-text',
-      type: String,
-      value: val => (val.length ? val : null),
-    },
+    prop: 'helper-text',
+    value: val => (val.length ? val : null),
   },
   helperTextSlot: {
     group: 'content',
-    slot: {
-      name: 'helper-text',
-      value: 'Some helpful textThis is some helpful text',
-    },
+    slot: 'helper-text',
+    value: 'Some helpful textThis is some helpful text',
   },
   disabled: {
     group: 'attr',
     type: boolean,
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'disabled',
-    },
+    prop: 'disabled',
   },
   value: {
     group: 'attr',
     type: number,
     config: ['value', 0], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'value',
-      value: val => `${val}`,
-    },
+    prop: 'value',
+    value: val => `${val}`,
   },
   vModel: {
     group: 'attr',

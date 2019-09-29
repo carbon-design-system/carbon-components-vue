@@ -41,19 +41,19 @@ const preKnobs = {
   //   group: 'attr',
   //   type: boolean,
   //   config: ['flip menu', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-  //   prop: {  name: 'flip-menu' },
+  //   prop: 'flip-menu'
   // },
   // up: {
   //   group: 'attr',
   //   type: boolean,
   //   config: ['up', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-  //   prop: {  name: 'up' },
+  //   prop: 'up'
   // },
   // offset: {
   //   group: 'attr',
   //   type: object,
   //   config: ['offset example', { left: 0, top: 0 }], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-  //   prop: {  name: 'offset' },
+  //   prop: 'offset'
   // },
   headerName: {
     group: 'headerName',

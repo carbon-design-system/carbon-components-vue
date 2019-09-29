@@ -18,19 +18,19 @@ const preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['active', true], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: { name: 'active' },
+    prop: 'active',
   },
   overlay: {
     group: 'attr',
     type: boolean,
     config: ['overlay', true], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: { name: 'overlay' },
+    prop: 'overlay',
   },
   small: {
     group: 'attr',
     type: boolean,
     config: ['small', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: { name: 'small' },
+    prop: 'small',
   },
   events: {
     group: 'attr',

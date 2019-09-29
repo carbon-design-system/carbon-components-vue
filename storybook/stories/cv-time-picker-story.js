@@ -28,54 +28,50 @@ const preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'theme',
-      value: val => (val ? 'xlight' : ''),
-    },
+    prop: 'theme',
+    value: val => (val ? 'xlight' : ''),
   },
   label: {
     group: 'attr',
     type: text,
     config: ['label', 'Select time'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'label',
-    },
+    prop: 'label',
   },
   time: {
     group: 'attr',
     type: text,
     config: timeConfig,
-    prop: { name: 'time' },
+    prop: 'time',
   },
   ampm: {
     group: 'attr',
     type: select,
     config: ampmConfig,
-    prop: { name: 'ampm' },
+    prop: 'ampm',
   },
   timezone: {
     group: 'attr',
     type: text,
     config: timezoneConfig,
-    prop: { name: 'timezone' },
+    prop: 'timezone',
   },
   timeSync: {
     group: 'attr',
     type: text,
     config: timeConfig,
-    sync: { name: 'time' },
+    sync: 'time',
   },
   ampmSync: {
     group: 'attr',
     type: select,
     config: ampmConfig,
-    sync: { name: 'ampm' },
+    sync: 'ampm',
   },
   timezoneSync: {
     group: 'attr',
     type: text,
     config: timezoneConfig,
-    sync: { name: 'timezone' },
+    sync: 'timezone',
   },
   timezones: {
     group: 'attr',
@@ -87,54 +83,50 @@ const preKnobs = {
       },
       // consts.CONFIG,
     ],
-    prop: { name: 'timezones', value: val => val.list },
+    prop: 'timezones',
+    value: val => val.list,
   },
   pattern: {
     group: 'attr',
     type: text,
     config: ['pattern', '(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)'], // consts.CONFIG],
-    prop: { name: 'pattern' },
+    prop: 'pattern',
   },
   placeholder: {
     group: 'attr',
     type: text,
     config: ['placeholder', 'hh:mm'], // consts.CONTENT],
-    prop: { name: 'placeholder' },
+    prop: 'placeholder',
   },
   timezonesSelectLabel: {
     group: 'attr',
     type: text,
     config: ['timzones-select-label', 'Timezone label'], // consts.CONTENT],
-    prop: { name: 'timzones-select-label' },
+    prop: 'timzones-select-label',
   },
   ampmSelectLabel: {
     group: 'attr',
     type: text,
     config: ['ampm-select-label', 'AM/PM'], // consts.CONTENT],
-    prop: { name: 'ampm-select-label' },
+    prop: 'ampm-select-label',
   },
   invalidMessage: {
     group: 'attr',
     type: text,
     config: ['invalid-message', ''], // consts.CONTENT],
-    prop: {
-      name: 'invalid-message',
-
-      value: val => (val.length ? val : null),
-    },
+    prop: 'invalid-message',
+    value: val => (val.length ? val : null),
   },
   invalidMessageSlot: {
     group: 'slot',
-    slot: {
-      name: 'invalid-message',
-      value: 'Invalid time.',
-    },
+    slot: 'invalid-message',
+    value: 'Invalid time.',
   },
   disabled: {
     group: 'attr',
     type: boolean,
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: { name: 'disabled' },
+    prop: 'disabled',
   },
   events: {
     group: 'attr',

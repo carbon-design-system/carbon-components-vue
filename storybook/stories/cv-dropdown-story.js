@@ -17,18 +17,14 @@ let preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'theme',
-      value: val => (val ? 'light' : ''),
-    },
+    prop: 'theme',
+    value: val => (val ? 'light' : ''),
   },
   placeholder: {
     group: 'attr',
     type: text,
     config: ['placeholder', 'Choose an option'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'placeholder',
-    },
+    prop: 'placeholder',
   },
   value: {
     group: 'attr',
@@ -46,17 +42,13 @@ let preKnobs = {
       '',
       // consts.CONTENT, // fails when used with number in storybook 4.1.4
     ],
-    prop: {
-      name: 'value',
-    },
+    prop: 'value',
   },
   up: {
     group: 'attr',
     type: boolean,
     config: ['up', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'up',
-    },
+    prop: 'up',
   },
   vModel: {
     group: 'attr',
@@ -70,59 +62,43 @@ let preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['inline', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'inline',
-    },
+    prop: 'inline',
   },
   helperText: {
     group: 'attr',
     type: text,
     config: ['helper text', ''],
-    prop: {
-      name: 'helper-text',
-      type: String,
-      value: val => (val.length ? val : null),
-    },
+    prop: 'helper-text',
+    value: val => (val.length ? val : null),
   },
   helperTextSlot: {
     group: 'slots',
-    slot: {
-      name: 'helper-text',
-      value: 'Some helpful text',
-    },
+    slot: 'helper-text',
+    value: 'Some helpful text',
   },
   invalidMessage: {
     group: 'attr',
     type: text,
     config: ['invalid message', ''],
-    prop: {
-      name: 'invalid-message',
-      type: String,
-      value: val => (val.length ? val : null),
-    },
+    prop: 'invalid-message',
+    value: val => (val.length ? val : null),
   },
   invalidMessageSlot: {
     group: 'slots',
-    slot: {
-      name: 'invalid-message',
-      value: 'Invalid message text',
-    },
+    slot: 'invalid-message',
+    value: 'Invalid message text',
   },
   label: {
     group: 'attr',
     type: text,
     config: ['label', 'Select label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'label',
-    },
+    prop: 'label',
   },
   disabled: {
     group: 'attr',
     type: boolean,
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'disabled',
-    },
+    prop: 'disabled',
   },
 };
 
@@ -217,9 +193,7 @@ preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['inline', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'inline',
-    },
+    prop: 'inline',
   },
 };
 

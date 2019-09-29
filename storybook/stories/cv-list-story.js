@@ -16,7 +16,7 @@ const preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['ordered', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: { name: 'ordered' },
+    prop: 'ordered',
   },
   nested: {
     group: 'nested',

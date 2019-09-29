@@ -17,49 +17,49 @@ let preKnobs = {
     group: 'attr',
     type: text,
     config: ['label', 'Choose files to upload'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: { name: 'label' },
+    prop: 'label',
   },
   helperText: {
     group: 'attr',
     type: text,
     config: ['helper text', 'Select the files you want to upload'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: { name: 'helperText' },
+    prop: 'helperText',
   },
   buttonLabel: {
     group: 'attr',
     type: text,
     config: ['button label', 'Add file'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: { name: 'buttonLabel' },
+    prop: 'buttonLabel',
   },
   accept: {
     group: 'attr',
     type: text,
     config: ['accept', '.jpg,.png'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: { name: 'accept' },
+    prop: 'accept',
   },
   clearOnReselect: {
     group: 'attr',
     type: boolean,
     config: ['Clear on reselect', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: { name: 'clear-on-reselect', type: Boolean },
+    prop: 'clear-on-reselect',
   },
   initialStateUploading: {
     group: 'attr',
     type: boolean,
     config: ['Initial state uploading', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: { name: 'initial-state-uploading', type: Boolean },
+    prop: 'initial-state-uploading',
   },
   multiple: {
     group: 'attr',
     type: boolean,
     config: ['multiple', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: { name: 'multiple' },
+    prop: 'multiple',
   },
   removable: {
     group: 'attr',
     type: boolean,
     config: ['removable', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: { name: 'removable' },
+    prop: 'removable',
   },
   events: {
     group: 'attr',
@@ -73,7 +73,7 @@ let preKnobs = {
     group: 'attr',
     type: text,
     config: ['remove-arial-label', 'Custom remove aria label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: { name: 'remove-aria-label', type: String },
+    prop: 'remove-aria-label',
   },
 };
 

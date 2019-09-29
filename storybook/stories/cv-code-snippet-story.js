@@ -16,59 +16,44 @@ let preKnobs = {
     group: 'attr',
     type: text,
     config: ['copy feedback', 'Content copied!'],
-    prop: {
-      name: 'copy-feedback',
-    },
+    prop: 'copy-feedback',
   },
   feedbackAriaLabel: {
     group: 'attr',
     type: text,
     config: ['feedback aria label', 'feedback aria label'],
-    prop: {
-      name: 'feedback-aria-label',
-    },
+    prop: 'feedback-aria-label',
   },
   lessText: {
     group: 'attr',
     type: text,
     config: ['Less text', 'Show less'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     inline: true,
-    prop: {
-      name: 'less-text',
-      type: String,
-    },
+    prop: 'less-text',
   },
   moreText: {
     group: 'attr',
     type: text,
     config: ['More text', 'Show more'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     inline: true,
-    prop: {
-      name: 'more-text',
-      type: String,
-    },
+    prop: 'more-text',
   },
   inlineContent: {
     group: 'content',
-    slot: {
-      name: '',
-      value: 'printf("A short bit of code.");',
-    },
+    slot: 'default',
+    value: 'printf("A short bit of code.");',
   },
   theme: {
     group: 'attr',
     type: boolean,
     config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'theme',
-      value: val => (val ? 'light' : ''),
-    },
+    prop: 'theme',
+    value: val => (val ? 'light' : ''),
   },
   content: {
     group: 'content',
-    slot: {
-      name: '',
-      value: `@mixin grid-container {
+    slot: 'default',
+    value: `@mixin grid-container {
   width: 100%;
   padding-right: padding(mobile);
   padding-left: padding(mobile);
@@ -89,7 +74,6 @@ $z-indexes: (
   overflowHidden: - 1,
   floating: 10000
 );`,
-    },
   },
 };
 
@@ -176,9 +160,7 @@ preKnobs = {
     group: 'attr',
     type: select,
     config: ['kind', { oneline: 'oneline', multiline: 'multiline' }, 'multiline'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'kind',
-    },
+    prop: 'kind',
   },
 };
 

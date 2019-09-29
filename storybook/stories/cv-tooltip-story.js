@@ -29,44 +29,34 @@ let preKnobs = {
       // consts.CONFIG,// fails when used with number in storybook 4.1.4
     ],
     inline: true,
-    prop: {
-      name: 'direction',
-    },
+    prop: 'direction',
   },
   label: {
     group: 'content',
-    slot: {
-      name: 'label',
-      value: `
+    slot: 'label',
+    value: `
     Tooltip label
   `,
-    },
   },
   trigger: {
     group: 'content',
-    slot: {
-      name: 'trigger',
-      value: `<Filter16 class="bx--overflow-menu__icon bx--toolbar-filter-icon" />
+    slot: 'trigger',
+    value: `<Filter16 class="bx--overflow-menu__icon bx--toolbar-filter-icon" />
   `,
-    },
   },
   content: {
     group: 'content',
-    slot: {
-      name: 'content',
-      value: `
+    slot: 'content',
+    value: `
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, seed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
     <button class="bx--button">Clicky one</button>
   `,
-    },
   },
   visible: {
     group: 'attr',
     type: boolean,
     config: ['visible', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'visible',
-    },
+    prop: 'visible',
   },
 };
 
@@ -137,28 +127,21 @@ preKnobs = {
       // consts.CONFIG,// fails when used with number in storybook 4.1.4
     ],
     inline: true,
-    prop: {
-      component: CvTooltip,
-      name: 'direction',
-    },
+    prop: 'direction',
   },
   tip: {
     group: 'attr',
     type: text,
     config: ['tip', 'This is your tip!'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     inline: true,
-    prop: {
-      component: CvTooltip,
-      name: 'tip',
-    },
+    prop: 'tip',
   },
   trigger: {
     group: 'content',
-    slot: {
-      value: `<svg width="16" height="12" viewBox="0 0 16 12">
+    slot: 'default',
+    value: `<svg width="16" height="12" viewBox="0 0 16 12">
   <path d="M8.05 2a2.5 2.5 0 0 1 4.9 0H16v1h-3.05a2.5 2.5 0 0 1-4.9 0H0V2h8.05zm2.45 2a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM3.05 9a2.5 2.5 0 0 1 4.9 0H16v1H7.95a2.5 2.5 0 0 1-4.9 0H0V9h3.05zm2.45 2a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
 </svg>`,
-    },
   },
 };
 
@@ -215,9 +198,7 @@ preKnobs = {
       // consts.CONFIG,// fails when used with number in storybook 4.1.4
     ],
     inline: true,
-    prop: {
-      name: 'direction',
-    },
+    prop: 'direction',
   },
   definition: {
     group: 'attr',
@@ -228,19 +209,14 @@ preKnobs = {
       // consts.CONTENT,// fails when used with number in storybook 4.1.4
     ],
     inline: true,
-    prop: {
-      name: 'definition',
-    },
+    prop: 'definition',
   },
   term: {
     group: 'attr',
     type: text,
     config: ['term', 'A term needeing definition'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     inline: true,
-    prop: {
-      component: CvDefinitionTooltip,
-      name: 'term',
-    },
+    prop: 'term',
   },
 };
 

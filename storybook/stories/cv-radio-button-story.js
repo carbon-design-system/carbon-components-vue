@@ -17,33 +17,25 @@ const preKnobs = {
     group: 'attr1',
     type: boolean,
     config: ['radio-1:checked', true], // consts.CONFIG],
-    prop: {
-      name: 'checked',
-    },
+    prop: 'checked',
   },
   disabled2: {
     group: 'attr2',
     type: boolean,
     config: ['radio-2:disabled', true], // consts.CONFIG],
-    prop: {
-      name: 'disabled',
-    },
+    prop: 'disabled',
   },
   vertical: {
     group: 'attr',
     type: boolean,
     config: ['vertical', false], // consts.CONFIG],
-    prop: {
-      name: 'vertical',
-    },
+    prop: 'vertical',
   },
   labelLeft: {
     group: 'each',
     type: boolean,
     config: ['label left', false], // consts.CONFIG],
-    prop: {
-      name: 'label-left',
-    },
+    prop: 'label-left',
   },
   vModel: {
     group: 'each',

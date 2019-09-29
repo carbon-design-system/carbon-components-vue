@@ -18,7 +18,7 @@ const preKnobs = {
     group: 'attr',
     type: text,
     config: ['title', 'notification title'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: { name: 'title' },
+    prop: 'title',
   },
   subtitle: {
     group: 'attr',
@@ -27,7 +27,7 @@ const preKnobs = {
       'subtitle',
       'Lorem ipsum dolor sit amet, consectetur adipisicing elit, seed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     ], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: { name: 'sub-title', type: String },
+    prop: 'sub-title',
   },
   events: {
     group: 'attr',
@@ -37,7 +37,7 @@ const preKnobs = {
     group: 'attr',
     type: text,
     config: ['close-arial-label', 'Custom close aria label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: { name: 'close-aria-label', type: String },
+    prop: 'close-aria-label',
   },
 };
 

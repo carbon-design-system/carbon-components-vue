@@ -16,66 +16,50 @@ const storiesExperimental = storiesOf('Experimental/CvModal', module);
 const preKnobs = {
   label: {
     group: 'content',
-    slot: {
-      name: 'label',
-      value: 'Label of modal',
-    },
+    slot: 'label',
+    value: 'Label of modal',
   },
   title: {
     group: 'content',
-    slot: {
-      name: 'title',
-      value: 'Title of modal',
-    },
+    slot: 'title',
+    value: 'Title of modal',
   },
   content: {
     group: 'content',
-    slot: {
-      name: 'content',
-      value: `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, seed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>`,
-    },
+    slot: 'content',
+    value: `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, seed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>`,
   },
   contentWithInput: {
     group: 'content',
-    slot: {
-      name: 'content',
-      value: `
+    slot: 'content',
+    value: `
       <div class="bx--form-item">
         <label for="text-input-3h9mddk235a" class="bx--label">Text Input label</label>
         <input id="text-input-3h9mddk235a" type="text" class="bx--text-input" placeholder="Optional placeholder text" data-modal-primary-focus>
       </div>
       `,
-    },
   },
   secondaryButton: {
     group: 'content',
-    slot: {
-      name: 'secondary-button',
-      value: 'secondary',
-    },
+    slot: 'secondary-button',
+    value: 'secondary',
   },
   primaryButton: {
     group: 'content',
-    slot: {
-      name: 'primary-button',
-      value: 'primary',
-    },
+    slot: 'primary-button',
+    value: 'primary',
   },
   primaryButtonDisabled: {
     group: 'attr',
     type: boolean,
     config: ['primary button disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'primary-button-disabled',
-    },
+    prop: 'primary-button-disabled',
   },
   visible: {
     group: 'attr',
     type: boolean,
     config: ['visible', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'visible',
-    },
+    prop: 'visible',
   },
   events: {
     group: 'attr',
@@ -93,10 +77,7 @@ const preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['auto-hide-off', false],
-    prop: {
-      name: 'auto-hide-off',
-      type: Boolean,
-    },
+    prop: 'auto-hide-off',
   },
 };
 

@@ -17,77 +17,58 @@ const preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'theme',
-      value: val => (val ? 'light' : ''),
-    },
+    prop: 'theme',
+    value: val => (val ? 'light' : ''),
   },
   label: {
     group: 'attr',
     type: text,
     config: ['label', 'Text input label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'label',
-    },
+    prop: 'label',
   },
   value: {
     group: 'attr',
     type: text,
     config: ['value', ''], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'value',
-      value: val => (val.length ? val : null),
-    },
+    prop: 'value',
+    value: val => (val.length ? val : null),
   },
   disabled: {
     group: 'attr',
     type: boolean,
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'disabled',
-    },
+    prop: 'disabled',
   },
   inputType: {
     group: 'attr',
     type: boolean,
     config: ['password type', false],
-    prop: {
-      name: 'type',
-
-      value: val => (val ? 'password' : null),
-    },
+    prop: 'type',
+    value: val => (val ? 'password' : null),
   },
   passwordVisible: {
     group: 'attr',
     type: boolean,
     config: ['password visible', false],
-    prop: {
-      name: 'password-visible',
-    },
+    prop: 'password-visible',
   },
   passwordHideLabel: {
     group: 'attr',
     type: text,
     config: ['password hide label', 'Hide password'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'password-hide-label',
-    },
+    prop: 'password-hide-label',
   },
   passwordShowLabel: {
     group: 'attr',
     type: text,
     config: ['password-show-label', 'Show password'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'password-show-label',
-    },
+    prop: 'password-show-label',
   },
   placeholder: {
     group: 'attr',
     type: text,
     config: ['placeholder', 'Sample placeholder'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'placeholder',
-    },
+    prop: 'placeholder',
   },
   vModel: {
     group: 'attr',
@@ -101,35 +82,25 @@ const preKnobs = {
     group: 'attr',
     type: text,
     config: ['helper text', ''],
-    prop: {
-      name: 'helper-text',
-
-      value: val => (val.length ? val : null),
-    },
+    prop: 'helper-text',
+    value: val => (val.length ? val : null),
   },
   helperTextSlot: {
     group: 'slots',
-    slot: {
-      name: 'helper-text',
-      value: 'Some helpful text',
-    },
+    slot: 'helper-text',
+    value: 'Some helpful text',
   },
   invalidMessage: {
     group: 'attr',
     type: text,
     config: ['invalid message', ''],
-    prop: {
-      name: 'invalid-message',
-
-      value: val => (val.length ? val : null),
-    },
+    prop: 'invalid-message',
+    value: val => (val.length ? val : null),
   },
   invalidMessageSlot: {
     group: 'slots',
-    slot: {
-      name: 'invalid-message',
-      value: 'Invalid message text',
-    },
+    slot: 'invalid-message',
+    value: 'Invalid message text',
   },
 };
 

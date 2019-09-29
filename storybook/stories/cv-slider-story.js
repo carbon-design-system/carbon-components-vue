@@ -17,68 +17,62 @@ let preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'theme',
-      value: val => (val ? 'light' : ''),
-    },
+    prop: 'theme',
+    value: val => (val ? 'light' : ''),
   },
   label: {
     group: 'attr',
     type: text,
     config: ['label', 'Slider label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'label',
-    },
+    prop: 'label',
   },
   disabled: {
     group: 'attr',
     type: boolean,
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'disabled',
-    },
+    prop: 'disabled',
   },
   min: {
     group: 'attr',
     type: text,
     config: ['min', '-50'], // consts.CONFIG],
-    prop: { name: 'min' },
+    prop: 'min',
   },
   max: {
     group: 'attr',
     type: text,
     config: ['max', '150'], // consts.CONFIG],
-    prop: { name: 'max' },
+    prop: 'max',
   },
   value: {
     group: 'attr',
     type: text,
     config: ['value', '50'], // consts.CONFIG],
-    prop: { name: 'value' },
+    prop: 'value',
   },
   step: {
     group: 'attr',
     type: text,
     config: ['step', '1'], // consts.CONFIG],
-    prop: { name: 'step' },
+    prop: 'step',
   },
   stepMultiplier: {
     group: 'attr',
     type: text,
     config: ['step-multiplier', '10'], // consts.CONFIG],
-    prop: { name: 'step-multiplier' },
+    prop: 'step-multiplier',
   },
   minLabel: {
     group: 'attr',
     type: text,
     config: ['min-label', 'Min'], // consts.CONFIG],
-    prop: { name: 'min-label' },
+    prop: 'min-label',
   },
   maxLabel: {
     group: 'attr',
     type: text,
     config: ['max-label', 'Max'], // consts.CONFIG],
-    prop: { name: 'max-label' },
+    prop: 'max-label',
   },
   vModel: {
     group: 'attr',

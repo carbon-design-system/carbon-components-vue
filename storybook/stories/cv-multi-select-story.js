@@ -45,18 +45,14 @@ let preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'theme',
-      value: val => (val ? 'light' : ''),
-    },
+    prop: 'theme',
+    value: val => (val ? 'light' : ''),
   },
   label: {
     group: 'attr',
     type: text,
     config: ['label', 'Choose an option'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'label',
-    },
+    prop: 'label',
   },
   vModel: {
     group: 'attr',
@@ -70,59 +66,43 @@ let preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['inline', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'inline',
-    },
+    prop: 'inline',
   },
   helperText: {
     group: 'attr',
     type: text,
     config: ['helper text', ''],
-    prop: {
-      name: 'helper-text',
-      type: String,
-      value: val => (val.length ? val : null),
-    },
+    prop: 'helper-text',
+    value: val => (val.length ? val : null),
   },
   helperTextSlot: {
     group: 'slots',
-    slot: {
-      name: 'helper-text',
-      value: 'Some helpful text',
-    },
+    slot: 'helper-text',
+    value: 'Some helpful text',
   },
   invalidMessage: {
     group: 'attr',
     type: text,
     config: ['invalid message', ''],
-    prop: {
-      name: 'invalid-message',
-      type: String,
-      value: val => (val.length ? val : null),
-    },
+    prop: 'invalid-message',
+    value: val => (val.length ? val : null),
   },
   invalidMessageSlot: {
     group: 'slots',
-    slot: {
-      name: 'invalid-message',
-      value: 'Invalid message text',
-    },
+    slot: 'invalid-message',
+    value: 'Invalid message text',
   },
   title: {
     group: 'attr',
     type: text,
     config: ['title', 'Multiselect title'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'title',
-    },
+    prop: 'title',
   },
   disabled: {
     group: 'attr',
     type: boolean,
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'disabled',
-    },
+    prop: 'disabled',
   },
   selectionFeedback: {
     group: 'attr',
@@ -136,42 +116,31 @@ let preKnobs = {
       },
       'top-after-reopen',
     ],
-    prop: {
-      name: 'selection-feedback',
-      type: String,
-    },
+    prop: 'selection-feedback',
   },
   filterable: {
     group: 'attr',
     type: boolean,
     config: ['filterable', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'filterable',
-    },
+    prop: 'filterable',
   },
   autoFilter: {
     group: 'attr',
     type: boolean,
     config: ['auto filter', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'auto-filter',
-    },
+    prop: 'auto-filter',
   },
   userFilter: {
     group: 'misc',
     type: boolean,
     config: ['user filter', false],
-    prop: {
-      name: 'userFilter',
-    },
+    prop: 'userFilter',
   },
   userHighlight: {
     group: 'misc',
     type: boolean,
     config: ['user highlight', false],
-    prop: {
-      name: 'userHighlight',
-    },
+    prop: 'userHighlight',
   },
   userFilterOrHighlight: {
     group: 'attr',
@@ -181,17 +150,13 @@ let preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['auto hihglight', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'auto-highlight',
-    },
+    prop: 'auto-highlight',
   },
   initialValue: {
     group: 'attr',
     type: array,
     config: ['initial-value', ['banana', 'ugli_fruit'], ','],
-    prop: {
-      name: 'value',
-    },
+    prop: 'value',
   },
 };
 

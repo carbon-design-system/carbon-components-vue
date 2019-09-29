@@ -17,36 +17,28 @@ const preKnobs = {
     type: boolean,
     config: ['open for item 1', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     inline: true,
-    prop: {
-      name: 'open',
-    },
+    prop: 'open',
   },
   open2: {
     group: 'two',
     type: boolean,
     config: ['open for item 2', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     inline: true,
-    prop: {
-      name: 'open',
-    },
+    prop: 'open',
   },
   open3: {
     group: 'three',
     type: boolean,
     config: ['open for item 3', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     inline: true,
-    prop: {
-      name: 'open',
-    },
+    prop: 'open',
   },
   open4: {
     group: 'four',
     type: boolean,
     config: ['open for item 4', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     inline: true,
-    prop: {
-      name: 'open',
-    },
+    prop: 'open',
   },
 };
 

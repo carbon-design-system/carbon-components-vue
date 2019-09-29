@@ -17,17 +17,13 @@ const preKnobs = {
     group: 'attr',
     type: text,
     config: ['href', 'javascript:void(0)'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'href',
-    },
+    prop: 'href',
   },
   to: {
     group: 'attr',
     type: text,
     config: ['to', 'javascript:void(0)'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'to',
-    },
+    prop: 'to',
   },
   events: {
     group: 'attr',
@@ -37,9 +33,7 @@ const preKnobs = {
     group: 'attr',
     type: boolean,
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: {
-      name: 'disabled',
-    },
+    prop: 'disabled',
   },
 };
 
