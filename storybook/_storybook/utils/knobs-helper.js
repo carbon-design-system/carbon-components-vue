@@ -1,7 +1,20 @@
-const parsePreKnobs = (preKnobs, includes, excludes, variantExtra) => {
+const parsePreKnobs = (variant, preKnobs) => {
   return () => {
-    const knobs = { group: [], data: {}, props: {} };
-    const parsePreKnobs = (thePreNobs, override) => {
+    const knobs = { group: [], props: {} };
+
+    const getValueFunc = preKnob => {
+      if (preKnob.value) {
+        return preKnob.value;
+      } else {
+        if (preKnob.type === Number) {
+          // use 0 if number is set to null
+          return val => (val === null ? 0 : val);
+        } else {
+          return val => val;
+        }
+      }
+    };
+    const parsePreKnobsInner = (thePreNobs, includes, excludes) => {
       for (let key in thePreNobs) {
         const preKnob = thePreNobs[key];
 
@@ -9,84 +22,54 @@ const parsePreKnobs = (preKnobs, includes, excludes, variantExtra) => {
           knobs.group[preKnob.group] = '';
         }
 
-        if (!override) {
-          // do after creating blank group
-          if (excludes && excludes.includes(key)) {
-            continue; // skip this item
-          }
-
-          if (includes && !includes.includes(key)) {
-            continue; // skip this item
-          }
+        // do after creating blank group
+        if (excludes && excludes.includes(key)) {
+          continue; // skip this item
         }
 
-        let thingType; // What type of thing is it.
-        if (preKnob.prop) {
-          thingType = 'prop';
-        }
-        if (preKnob.sync) {
-          thingType = 'sync';
-        }
-        if (!thingType && preKnob.slot) {
-          thingType = 'slot';
-        }
-        if (!thingType && preKnob.data) {
-          thingType = 'data';
+        if (includes && !includes.includes(key)) {
+          continue; // skip this item
         }
 
-        // if (!(preKnob.component[thingType].default !== undefined && minimal)) {
         let prefix = preKnob.inline ? ' ' : '\n  ';
         let value;
-        if (thingType && thingType !== 'slot') {
-          if (preKnob[thingType].type === Number) {
-            if (preKnob[thingType].value) {
-              value = preKnob[thingType].value;
-            } else {
-              value = val => (val === null ? 0 : val);
-            }
-          } else {
-            value = preKnob[thingType].value ? preKnob[thingType].value : val => val;
-          }
+        if (preKnob.sync || preKnob.prop) {
+          value = getValueFunc(preKnob.sync || preKnob.prop);
         }
-
-        switch (thingType) {
-          case 'sync':
-            knobs.group[preKnob.group] += `${prefix}:${preKnob.sync.name}.sync="${key}"`;
-
-            knobs.data[key] = value(preKnob.type(...preKnob.config));
-            break;
-          case 'data':
-            knobs.data[key] = value(preKnob.type(...preKnob.config));
-            break;
-          case 'prop':
-            if (preKnob.group) {
-              knobs.group[preKnob.group] += `${prefix}:${preKnob.prop.name}="${key}"`;
-            }
-            knobs.props[key] = {
-              type: preKnob.prop.type,
-              default: value(preKnob.type(...preKnob.config)),
-            };
-            break;
-          case 'slot':
-            if (preKnob.slot.name && preKnob.slot.name.length) {
-              knobs.group[
-                preKnob.group
-              ] += `${prefix}<template slot="${preKnob.slot.name}">${preKnob.slot.value}</template>`;
-            } else {
-              knobs.group[preKnob.group] += `${prefix}${preKnob.slot.value}`;
-            }
-            break;
-          default:
-            knobs.group[preKnob.group] += `${prefix}${preKnob.value}`;
-            break;
+        if (preKnob.sync) {
+          // sync - like prop but with preKnob.sync.name
+          knobs.group[preKnob.group] += `${prefix}:${preKnob.sync.name}.sync="${key}"`;
+          knobs.data[key] = value(preKnob.type(...preKnob.config));
+        } else if (preKnob.prop) {
+          // prop
+          if (preKnob.group) {
+            // only prop with group are added to template
+            knobs.group[preKnob.group] += `${prefix}:${preKnob.prop.name}="${key}"`;
+          }
+          knobs.props[key] = {
+            type: preKnob.prop.type,
+            default: value(preKnob.type(...preKnob.config)),
+          };
+        } else if (preKnob.slot) {
+          // slot
+          if (preKnob.slot.name && preKnob.slot.name.length) {
+            knobs.group[
+              preKnob.group
+            ] += `${prefix}<template slot="${preKnob.slot.name}">${preKnob.slot.value}</template>`;
+          } else {
+            knobs.group[preKnob.group] += `${prefix}${preKnob.slot.value}`;
+          }
+        } else {
+          // default
+          knobs.group[preKnob.group] += `${prefix}${preKnob.value}`;
         }
       }
     };
 
-    if (variantExtra) {
-      parsePreKnobs(variantExtra, true);
+    if (variant.extra) {
+      parsePreKnobsInner(variant.extra);
     }
-    parsePreKnobs(preKnobs);
+    parsePreKnobsInner(preKnobs, variant.includes, variant.excludes);
 
     return knobs;
   };
@@ -98,7 +81,7 @@ const getStorySet = (variants, preKnobs) => {
   for (let index in variants) {
     storySet.push({
       name: variants[index].name,
-      knobs: parsePreKnobs(preKnobs, variants[index].includes, variants[index].excludes, variants[index].extra),
+      knobs: parsePreKnobs(variants[index], preKnobs),
       skip: variants[index].skip,
     });
   }
