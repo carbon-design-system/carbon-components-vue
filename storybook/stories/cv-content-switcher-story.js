@@ -35,9 +35,10 @@ const preKnobs = {
     group: 'attr3',
     type: boolean,
     config: ['toggle switcher 3', true],
+    prop: 'toggle3',
   },
   disabled3: {
-    group: 'attr3t',
+    group: 'attr3',
     type: boolean,
     config: ['disabled 3', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: 'disabled',
@@ -52,7 +53,7 @@ const preKnobs = {
     type: boolean,
     config: ['with icon', false],
     prop: 'icon',
-    value: val => (val ? AddFilled16 : null),
+    value: val => (val ? AddFilled16 : undefined),
   },
 };
 
@@ -87,7 +88,7 @@ for (const story of storySet) {
   <cv-content-switcher${settings.group.attr}>
     <cv-content-switcher-button owner-id="csb-1" :selected="isSelected(0)" ${settings.group.icon}>Button Name 1</cv-content-switcher-button>
     <cv-content-switcher-button owner-id="csb-2" :selected="isSelected(1)" ${settings.group.icon}>Button Name 2</cv-content-switcher-button>
-    <cv-content-switcher-button owner-id="csb-3" :selected="isSelected(2)" v-if="toggle3" ${settings.group.attr3t} ${settings.group.icon}>Button Name 3</cv-content-switcher-button>
+    <cv-content-switcher-button owner-id="csb-3" :selected="isSelected(2)" v-if="toggle3" ${settings.group.attr3} ${settings.group.icon}>Button Name 3</cv-content-switcher-button>
   </cv-content-switcher>
 
   <section style="margin: 10px 0;">

@@ -57,7 +57,7 @@ const preKnobs = {
     type: text,
     config: ['helper text', ''],
     prop: 'helper-text',
-    value: val => (val.length ? val : null),
+    value: val => (val.length ? val : undefined),
   },
   helperTextSlot: {
     group: 'slots',
@@ -69,7 +69,7 @@ const preKnobs = {
     type: text,
     config: ['invalid message', ''],
     prop: 'invalid-message',
-    value: val => (val.length ? val : null),
+    value: val => (val.length ? val : undefined),
   },
   invalidMessageSlot: {
     group: 'slots',

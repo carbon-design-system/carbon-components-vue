@@ -153,8 +153,8 @@ export default {
     autoFilter: Boolean,
     autoHighlight: Boolean,
     inline: Boolean,
-    invalidMessage: { type: String, default: null },
-    helperText: { type: String, default: null },
+    invalidMessage: { type: String, default: undefined },
+    helperText: { type: String, default: undefined },
     title: String,
     label: {
       type: String,

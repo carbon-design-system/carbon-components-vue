@@ -31,7 +31,7 @@ const preKnobs = {
     type: text,
     config: ['value', ''], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: 'value',
-    value: val => (val.length ? val : null),
+    value: val => (val.length ? val : undefined),
   },
   disabled: {
     group: 'attr',
@@ -56,7 +56,7 @@ const preKnobs = {
     type: text,
     config: ['helper text', ''],
     prop: 'helper-text',
-    value: val => (val.length ? val : null),
+    value: val => (val.length ? val : undefined),
   },
   helperTextSlot: {
     group: 'slots',
@@ -68,7 +68,7 @@ const preKnobs = {
     type: text,
     config: ['invalid message', ''],
     prop: 'invalid-message',
-    value: val => (val.length ? val : null),
+    value: val => (val.length ? val : undefined),
   },
   invalidMessageSlot: {
     group: 'slots',

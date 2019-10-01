@@ -41,8 +41,8 @@ export default {
   inheritAttrs: false,
   components: { WarningFilled16 },
   props: {
-    helperText: { type: String, default: null },
-    invalidMessage: { type: String, default: null },
+    helperText: { type: String, default: undefined },
+    invalidMessage: { type: String, default: undefined },
     label: String,
     value: String,
   },

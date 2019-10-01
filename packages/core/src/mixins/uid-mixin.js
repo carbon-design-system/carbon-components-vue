@@ -13,7 +13,7 @@ const idGen = {
 // define a mixin object
 export default {
   props: {
-    id: { type: String, default: null },
+    id: { type: String, default: undefined },
   },
   computed: {
     uid() {

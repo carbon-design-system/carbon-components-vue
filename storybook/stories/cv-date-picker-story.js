@@ -102,11 +102,11 @@ const preKnobs = {
 const variants = [
   {
     name: 'default',
-    excludes: ['calOptions', 'events', 'dateEndLabel', 'invalidMessageSlot'],
+    includes: ['theme', 'dateLabel', 'pattern', 'placeholder', 'invalidMessage'],
   },
   {
     name: 'invalid message slot',
-    excludes: ['calOptions', 'events', 'dateEndLabel'],
+    includes: ['theme', 'dateLabel', 'pattern', 'placeholder', 'invalidMessageSlot'],
   },
   { name: 'minimal', includes: ['eventsSimple'] },
   {

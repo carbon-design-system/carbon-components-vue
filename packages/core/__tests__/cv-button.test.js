@@ -1,7 +1,8 @@
-import { shallowMount as shallow, mount } from '@vue/test-utils';
+import { shallowMount as shallow } from '@vue/test-utils';
 import { testComponent, testInstance } from './_helpers';
-import CvButton from '@/components/cv-button/cv-button.vue';
+import { CvButton } from '@/components/cv-button';
 import { settings } from 'carbon-components';
+import AddFilled16 from '@carbon/icons-vue/es/add--filled/16';
 
 const { prefix } = settings;
 
@@ -10,14 +11,12 @@ describe('CvButton', () => {
   testComponent.propsAreType(CvButton, ['iconHref', 'kind'], String);
   testComponent.propsAreType(CvButton, ['icon'], [String, Object]);
 
-  // testInstance.propStringIsRendered(CvButton, 'label', 'span');
-
-  // it('should render with the appropriate kind', () => {
-  //   const propsData = { kind: 'red', label: 'test' };
-  //   const tag = shallow(CvButton, { propsData });
-  //   expect(tag.classes(`${prefix}--tag`)).toEqual(true);
-  //   expect(tag.classes(`${prefix}--tag--red`)).toEqual(true);
-  // });
+  it('should render with the appropriate kind', () => {
+    const propsData = { kind: 'primary', icon: AddFilled16 };
+    const component = shallow(CvButton, propsData);
+    expect(component.classes(`${prefix}--btn`)).toEqual(true);
+    expect(component.classes(`${prefix}--btn--primary`)).toEqual(true);
+  });
 
   // it('should support extra class names', () => {
   //   const propsData = { kind: 'red', label: 'test', class: 'extra-class or-two-x' };

@@ -1,7 +1,7 @@
 <template>
   <svg class="cv-icon">
     <title v-if="title">{{ title }}</title>
-    <use v-bind:xlink:href="iconHref"></use>
+    <use v-bind:xlink:href="iconHref" />
   </svg>
 </template>
 
@@ -15,7 +15,7 @@ export default {
       type: String,
       required: true,
     },
-    title: { type: String, default: null },
+    title: { type: String, default: undefined },
   },
   computed: {
     iconHref() {

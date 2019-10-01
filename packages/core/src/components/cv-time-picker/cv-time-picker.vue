@@ -39,9 +39,9 @@
         @input="$emit('update:timezone', $event)"
         :disabled="disabled"
       >
-        <cv-select-option class="bx--select-option" v-for="item in timezones" :key="item.value" :value="item.value">
-          {{ item.label }}
-        </cv-select-option>
+        <cv-select-option class="bx--select-option" v-for="item in timezones" :key="item.value" :value="item.value">{{
+          item.label
+        }}</cv-select-option>
       </cv-select>
     </div>
     <div class="bx--form-requirement" v-if="isInvalid">
@@ -71,7 +71,7 @@ export default {
     },
     ampmSelectLabel: { type: String, default: 'Select AM/PM' },
     disabled: Boolean,
-    invalidMessage: { type: String, default: null },
+    invalidMessage: { type: String, default: undefined },
     label: { type: String, default: 'Select a time' },
     pattern: { type: String, default: '([01][0-9]:[0-6][0-9])' },
     placeholder: { type: String, default: 'hh:mm' },

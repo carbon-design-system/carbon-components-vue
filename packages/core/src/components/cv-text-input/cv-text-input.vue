@@ -56,8 +56,8 @@ export default {
   mixins: [uidMixin, themeMixin],
   inheritAttrs: false,
   props: {
-    helperText: { type: String, default: null },
-    invalidMessage: { type: String, default: null },
+    helperText: { type: String, default: undefined },
+    invalidMessage: { type: String, default: undefined },
     label: String,
     passwordHideLabel: { type: String, default: 'Hide password' },
     passwordShowLabel: { type: String, default: 'Show password' },

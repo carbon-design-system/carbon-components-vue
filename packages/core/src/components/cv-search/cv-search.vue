@@ -57,12 +57,12 @@ export default {
   props: {
     clearAriaLabel: { type: String, default: 'Clear search input' },
     formItem: { type: Boolean, default: true },
-    kind: { type: String, default: null },
+    kind: { type: String, default: undefined },
     label: String,
     small: Boolean,
     large: {
       type: Boolean,
-      default: null,
+      default: undefined,
       validator(val) {
         if (process.env.NODE_ENV === 'development') {
           if (val !== null) {
