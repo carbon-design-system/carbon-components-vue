@@ -12,7 +12,7 @@ export default {
   name: 'CvWrapper',
   functional: true,
   props: {
-    tagType: { type: String, default: null },
+    tagType: { type: String, default: undefined },
   },
   render(createElement, context) {
     if (context.props.tagType) {

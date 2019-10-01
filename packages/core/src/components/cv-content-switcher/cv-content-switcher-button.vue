@@ -44,7 +44,7 @@ export default {
     contentSelector: { type: String, default: undefined },
     icon: {
       type: [String, Object],
-      default: null,
+      default: undefined,
       validator(val) {
         if (!val || typeof val === 'string') {
           return true;

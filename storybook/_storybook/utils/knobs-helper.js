@@ -9,8 +9,8 @@ const parsePreKnobs = (variant, preKnobs) => {
         return preKnob.value;
       } else {
         if (preKnob.type === number) {
-          // use 0 if number is set to null
-          return val => (val === null ? 0 : val);
+          // use 0 if number is falsy
+          return val => (val ? val : 0);
         } else {
           return val => val;
         }

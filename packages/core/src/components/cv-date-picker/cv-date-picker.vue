@@ -111,7 +111,7 @@ export default {
     },
     invalidDateMessage: /* deprecate */ {
       type: String,
-      default: null,
+      default: undefined,
       validator(val) {
         if (val !== null) {
           console.warn('CvDatePicker: invalidDateMessage deprecated in favour of invalidMessage');
@@ -119,7 +119,7 @@ export default {
         return true;
       },
     },
-    invalidMessage: { type: String, default: null },
+    invalidMessage: { type: String, default: undefined },
     value: [String, Object, Array],
   },
   model: {

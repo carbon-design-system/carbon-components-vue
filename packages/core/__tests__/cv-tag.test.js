@@ -1,6 +1,6 @@
 import { shallowMount as shallow, mount } from '@vue/test-utils';
 import { testComponent, testInstance } from './_helpers';
-import CvTag from '@/components/cv-tag/cv-tag.vue';
+import { CvTag, CvTagSkeleton } from '@/components/cv-tag';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
@@ -52,5 +52,16 @@ describe('CvTag', () => {
     });
 
     expect(wrapper.html()).toMatchSnapshot();
+  });
+});
+
+describe('CvTagSkeleton', () => {
+  describe('Renders as expected', () => {
+    const wrapper = shallow(CvTagSkeleton);
+
+    it('Has the expected classes', () => {
+      expect(wrapper.classes(`${prefix}--skeleton`)).toEqual(true);
+      expect(wrapper.classes(`${prefix}--tag`)).toEqual(true);
+    });
   });
 });

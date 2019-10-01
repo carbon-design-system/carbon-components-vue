@@ -171,7 +171,7 @@ export default {
             break;
           }
         }
-        if (focusOn === null) {
+        if (!focusOn) {
           focusOn = this.$el;
         }
       } else {

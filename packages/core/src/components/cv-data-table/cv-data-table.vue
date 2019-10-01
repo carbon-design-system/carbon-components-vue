@@ -202,7 +202,7 @@ export default {
     data: { type: Array, requried: true },
     zebra: Boolean,
     rowsSelected: { type: Array, default: () => [] },
-    helperText: { type: String, default: null },
+    helperText: { type: String, default: undefined },
     expandingSearch: { type: Boolean, default: true },
     skeleton: Boolean,
   },

@@ -90,8 +90,8 @@ export default {
   props: {
     formItem: { type: Boolean, default: true },
     inline: Boolean,
-    invalidMessage: { type: String, default: null },
-    helperText: { type: String, default: null },
+    invalidMessage: { type: String, default: undefined },
+    helperText: { type: String, default: undefined },
     label: String,
     placeholder: {
       type: String,

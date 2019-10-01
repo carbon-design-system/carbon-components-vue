@@ -42,7 +42,7 @@ let preKnobs = {
     type: boolean,
     config: ['with icon', false],
     prop: 'icon',
-    value: val => (val ? AddFilled16 : null),
+    value: val => (val ? AddFilled16 : undefined),
   },
 };
 

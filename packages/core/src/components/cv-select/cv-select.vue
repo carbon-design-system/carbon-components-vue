@@ -66,8 +66,8 @@ export default {
   mixins: [uidMixin, themeMixin],
   props: {
     inline: Boolean,
-    invalidMessage: { type: String, default: null },
-    helperText: { type: String, default: null },
+    invalidMessage: { type: String, default: undefined },
+    helperText: { type: String, default: undefined },
     formItem: { type: Boolean, default: true },
     hideLabel: Boolean,
     label: { type: String, required: true },
@@ -82,7 +82,7 @@ export default {
         return false;
       },
     },
-    value: { type: String, default: null },
+    value: { type: String, default: undefined },
   },
   beforeCreate() {
     // *********************
@@ -92,11 +92,11 @@ export default {
     delete this.$attrs.multiple;
   },
   data() {
-    return { dataValue: null };
+    return { dataValue: undefined };
   },
   mounted() {
     // this is needed to ensure selected for an option when no value is supplied
-    if (this.value === null) {
+    if (this.value === undefined) {
       let options = this.$el.querySelectorAll('option');
       for (let i = 0; i < options.length; i++) {
         if (options[i].attributes.selected) {
@@ -108,7 +108,7 @@ export default {
   watch: {
     value() {
       // this is needed to ensure selected for an option when no value is supplied
-      if (this.value === null) {
+      if (this.value === undefined) {
         let options = this.$el.querySelectorAll('option');
         for (let i = 0; i < options.length; i++) {
           if (options[i].attributes.selected) {

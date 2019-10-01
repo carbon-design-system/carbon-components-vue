@@ -20,7 +20,7 @@ export default {
   props: {
     icon: {
       type: [String, Object],
-      default: null,
+      default: undefined,
       validator(val) {
         if (!val || typeof val === 'string') {
           return true;
@@ -30,10 +30,10 @@ export default {
     },
     iconHref: {
       type: String,
-      default: null,
+      default: undefined,
       validator(val) {
         if (process.env.NODE_ENV === 'development') {
-          if (val !== null) {
+          if (val !== undefined) {
             console.warn('CvButton: iconHref deprecated in favour of icon to be removed in future versions.');
           }
         }

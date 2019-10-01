@@ -115,7 +115,7 @@ const preKnobs = {
     type: text,
     config: ['invalid-message', ''], // consts.CONTENT],
     prop: 'invalid-message',
-    value: val => (val.length ? val : null),
+    value: val => (val.length ? val : undefined),
   },
   invalidMessageSlot: {
     group: 'slot',

@@ -262,7 +262,7 @@ let preKnobs = {
     type: text,
     config: ['helper text', 'This is some helpful text'],
     prop: 'helper-text',
-    value: val => (val.length ? val : null),
+    value: val => (val.length ? val : undefined),
   },
   helperTextSlot: {
     group: 'slots',
@@ -378,7 +378,7 @@ for (const story of storySet) {
             internalData: this.data,
             filterValue: '',
             rowSelects: [],
-            sortBy: null,
+            sortBy: undefined,
             sampleOverflowMenu: ['Start', 'Stop', 'Delete 3'],
           };
         },
