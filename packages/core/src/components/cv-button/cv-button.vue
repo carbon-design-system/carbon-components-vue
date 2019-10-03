@@ -4,6 +4,7 @@
     :class="['bx--btn', 'bx--btn--' + kind.toLowerCase(), { 'bx--btn--sm': small }]"
     v-on="$listeners"
     role="button"
+    @click="$emit('click', $event)"
   >
     <slot></slot>
 
