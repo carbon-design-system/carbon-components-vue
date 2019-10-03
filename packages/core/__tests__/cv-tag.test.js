@@ -14,16 +14,9 @@ describe('CvTag', () => {
 
   it('should render with the appropriate kind', () => {
     const propsData = { kind: 'red', label: 'test' };
-    const tag = shallow(CvTag, { propsData });
-    expect(tag.classes(`${prefix}--tag`)).toEqual(true);
-    expect(tag.classes(`${prefix}--tag--red`)).toEqual(true);
-  });
-
-  it('should support extra class names', () => {
-    const propsData = { kind: 'red', label: 'test', class: 'extra-class or-two-x' };
-    const tag = shallow(CvTag, { propsData });
-    expect(tag.classes('extra-class')).toEqual(true);
-    expect(tag.classes('or-two-x')).toEqual(true);
+    const wrapper = shallow(CvTag, { propsData });
+    expect(wrapper.classes(`${prefix}--tag`)).toEqual(true);
+    expect(wrapper.classes(`${prefix}--tag--red`)).toEqual(true);
   });
 
   it('click on close icon emits remove', () => {
