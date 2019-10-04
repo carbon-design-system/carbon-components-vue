@@ -1,7 +1,15 @@
 <template>
   <button
     class="cv-button"
-    :class="['bx--btn', 'bx--btn--' + kind.toLowerCase(), { 'bx--btn--sm': small }]"
+    :class="[
+      'bx--btn',
+      'bx--btn--' + kind.toLowerCase(),
+      {
+        'bx--btn--sm': size === 'small' || (size === undefined && small),
+        'bx--btn--field': size === 'field',
+        'bx--btn--icon-only': iconOnly,
+      },
+    ]"
     v-on="$listeners"
     role="button"
     @click="$emit('click', $event)"
@@ -16,6 +24,8 @@
 </template>
 
 <script>
+// class="{{@root.prefix}}--btn {{@root.prefix}}--btn--{{variant}} {{@root.prefix}}--btn--icon-only {{@root.prefix}}--btn--icon-only--bottom {{#if small}} {{@root.prefix}}--btn--sm{{/if}}{{#if field}} {{@root.prefix}}--btn--field{{/if}}"
+// aria-label="Add">
 export default {
   name: 'CvButton',
   props: {
@@ -46,7 +56,24 @@ export default {
       default: 'primary',
       validator: val => ['primary', 'secondary', 'tertiary', 'ghost', 'danger', 'danger--primary'].includes(val),
     },
-    small: { type: Boolean, default: false },
+    small: {
+      type: Boolean,
+      default: false,
+      validator(val) {
+        if (process.env.NODE_ENV === 'development') {
+          if (val !== undefined) {
+            console.warn('CvButton: small deprecated in favour of size.');
+          }
+        }
+        return true;
+      },
+    },
+    size: { type: String, default: undefined, validator: val => ['', 'field', 'small'] },
+  },
+  computed: {
+    iconOnly() {
+      return this.$slots.default === undefined;
+    },
   },
 };
 </script>

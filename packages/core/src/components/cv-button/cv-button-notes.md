@@ -15,6 +15,7 @@ http://www.carbondesignsystem.com/components/button/code
 ## Attributes
 
 - kind: 'primary' (default), 'secondary', ghost, or 'danger'. Optional.
-- small: If true smaller version of button.
+- small: (deprecated prefer size) If true smaller version of button.
+- size: optional value 'field' or 'small'
 - icon: is optional. It takes an Vue Component expected to be an icon or a string path to an SVG icon.
 - icon-href: deprecated in favour of icon attribute. Expects tring path to SVG icon..

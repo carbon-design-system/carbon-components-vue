@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { boolean } from '@storybook/addon-knobs';
+import { boolean, select } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
@@ -11,16 +11,40 @@ import { CvButton, CvButtonSkeleton } from '@carbon/vue/src';
 
 const storiesDefault = storiesOf('Components/CvButton', module);
 const storiesExperimental = storiesOf('Experimental/CvButton', module);
-
 const exampleIconPath = require('@carbon/vue/src/assets/images/example-icons.svg');
 import AddFilled16 from '@carbon/icons-vue/es/add--filled/16';
 
 let preKnobs = {
-  small: {
+  kind: {
     group: 'attr',
-    type: boolean,
-    config: ['small', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: 'small',
+    type: select,
+    config: [
+      'kind',
+      {
+        default: '',
+        primary: 'primary',
+        secondary: 'secondary',
+        tertiary: 'tertiary',
+        ghost: 'ghost',
+        danger: 'danger',
+      },
+      'primary',
+    ], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'kind',
+  },
+  size: {
+    group: 'attr',
+    type: select,
+    config: [
+      'size',
+      {
+        default: '',
+        field: 'field',
+        small: 'small',
+      },
+      '',
+    ], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'size',
   },
   disabled: {
     group: 'attr',
@@ -44,15 +68,21 @@ let preKnobs = {
     prop: 'icon',
     value: val => (val ? AddFilled16 : undefined),
   },
+  iconAlways: {
+    group: 'attr',
+    prop: 'icon',
+    value: () => AddFilled16,
+  },
 };
 
 let variants = [
   {
     name: 'default',
+    excludes: ['iconAlways'],
   },
   {
     name: 'icon as path',
-    excludes: ['small', 'disabled', 'icon', 'iconHref'],
+    excludes: ['size', 'disabled', 'icon', 'iconHref', 'iconAlways'],
     extra: {
       icon: {
         group: 'attr',
@@ -62,27 +92,11 @@ let variants = [
   },
   {
     name: 'minimal',
-    excludes: ['small', 'disabled', 'icon'],
+    excludes: ['size', 'disabled', 'icon', 'iconAlways'],
   },
   {
-    name: 'primary',
-    extra: { kind: { group: 'attr', value: 'kind="primary"' } },
-  },
-  {
-    name: 'secondary',
-    extra: { kind: { group: 'attr', value: 'kind="secondary"' } },
-  },
-  {
-    name: 'tertiary',
-    extra: { kind: { group: 'attr', value: 'kind="tertiary"' } },
-  },
-  {
-    name: 'ghost',
-    extra: { kind: { group: 'attr', value: 'kind="ghost"' } },
-  },
-  {
-    name: 'danger',
-    extra: { kind: { group: 'attr', value: 'kind="danger"' } },
+    name: 'icon only',
+    includes: ['kind', 'iconAlways', 'size'],
   },
 ];
 
@@ -130,11 +144,19 @@ for (const story of storySet) {
 // cv-button-skeleton
 
 preKnobs = {
-  small: {
+  size: {
     group: 'attr',
-    type: boolean,
-    config: ['small', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: 'small',
+    type: select,
+    config: [
+      'size',
+      {
+        default: '',
+        field: 'field',
+        small: 'small',
+      },
+      '',
+    ], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'size',
   },
 };
 

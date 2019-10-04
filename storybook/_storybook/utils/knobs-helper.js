@@ -49,9 +49,16 @@ const parsePreKnobs = (variant, preKnobs) => {
             // only prop with group are added to template
             knobs.group[preKnob.group] += `${prefix}:${preKnob.prop}="${key}"`;
           }
-          knobs.props[key] = {
-            default: value(preKnob.type(...preKnob.config)),
-          };
+          if (preKnob.type && preKnob.config) {
+            knobs.props[key] = {
+              default: value(preKnob.type(...preKnob.config)),
+            };
+          } else {
+            // not a switched prop
+            knobs.props[key] = {
+              default: value(),
+            };
+          }
         } else if (preKnob.slot) {
           // slot
           if (preKnob.slot !== 'default') {
