@@ -2,7 +2,18 @@
 
 ## 2.15.0-canary.x (Sept 28, 2019)
 
+### Feat
+
 - Add v-model for date picker
+- Add up down aria labels for number input
+- Update to Carbon 10.6
+
+### Fix
+
+### Chore
+
+- Tidy up knobs
+- Work on tests
 
 ## 2.14.0 (Sept 25, 2019)
 
