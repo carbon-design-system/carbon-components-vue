@@ -6,6 +6,8 @@
       v-on="$listeners"
       :expanding-row="dataExpandable"
       some-expanding-rows
+      @expanded-change="onExpandedChange"
+      :expanded="dataExpanded"
     >
       <slot />
     </cv-data-table-row-inner>
@@ -24,15 +26,28 @@
 
 <script>
 import CvDataTableRowInner from './_cv-data-table-row-inner';
+import uidMixin from '../../mixins/uid-mixin';
 
 export default {
   name: 'CvDataTableRow',
+  mixins: [uidMixin],
   components: { CvDataTableRowInner },
+  props: {
+    expanded: Boolean,
+  },
   data() {
     return {
       dataExpandable: this.$slots.expandedContent !== undefined,
       dataSomeExpandingRows: false,
+      dataExpanded: this.expanded,
     };
+  },
+  watch: {
+    expanded() {
+      if (this.dataExpanded !== this.expaned) {
+        this.dataExpanded = this.expanded;
+      }
+    },
   },
   mounted() {
     this.$parent.$emit('cv:mounted', this);
@@ -58,6 +73,14 @@ export default {
         this.$refs.row.dataChecked = val;
       },
     },
+    isExpanded: {
+      get() {
+        return this.dataExpanded;
+      },
+      set(val) {
+        this.dataExpanded = val;
+      },
+    },
     someExpandingRows: {
       get() {
         return this.dataSomeExpandingRows;
@@ -72,6 +95,12 @@ export default {
     },
     value() {
       return this.$refs.row.value;
+    },
+  },
+  methods: {
+    onExpandedChange(val) {
+      this.dataExpanded = val;
+      this.$emit('cv:expanded-change', this);
     },
   },
 };
