@@ -7,6 +7,7 @@
 - Add v-model for date picker
 - Add up down aria labels for number input
 - Update to Carbon 10.6
+- Add expand all to data table
 
 ### Fix
 
