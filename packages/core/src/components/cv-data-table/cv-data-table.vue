@@ -88,7 +88,21 @@
       <table class="bx--data-table" :class="modifierClasses">
         <thead>
           <tr>
-            <th v-if="hasExpandables" class="bx--table-expand" />
+            <th
+              v-if="hasExpandables"
+              class="bx--table-expand"
+              :data-previous-value="dataExpandAll ? 'collapsed' : 'expanded'"
+            >
+              <button
+                v-if="hasExpandAll"
+                class="bx--table-expand__button"
+                @click="toggleExpandAll"
+                type="button"
+                :aria-label="dataExpandAll ? collapseAllAriaLabel : expandAllAriaLabel"
+              >
+                <ChevronRight16 class="bx--table-expand__svg" />
+              </button>
+            </th>
             <th v-if="hasBatchActions" class="bx--table-column-checkbox">
               <cv-checkbox
                 :form-item="false"
@@ -161,8 +175,7 @@ import CvWrapper from '../cv-wrapper/_cv-wrapper';
 import uidMixin from '../../mixins/uid-mixin';
 import Search16 from '@carbon/icons-vue/es/search/16';
 import Close16 from '@carbon/icons-vue/es/close/16';
-
-const rows = children => children.filter(child => child.isCvDataTableRow);
+import ChevronRight16 from '@carbon/icons-vue/es/chevron--right/16';
 
 export default {
   name: 'CvDataTable',
@@ -176,10 +189,13 @@ export default {
     CvWrapper,
     Search16,
     Close16,
+    ChevronRight16,
   },
   mixins: [uidMixin],
   props: {
     actionBarAriaLabel: { type: String, default: 'Table Action Bar' },
+    collapseAllAriaLabel: { type: String, default: 'Collapse all rows' },
+    expandAllAriaLabel: { type: String, default: 'Expand all rows' },
     autoWidth: Boolean,
     batchCancelLabel: { type: String, default: 'cancel' },
     borderless: Boolean,
@@ -205,6 +221,7 @@ export default {
     helperText: { type: String, default: undefined },
     expandingSearch: { type: Boolean, default: true },
     skeleton: Boolean,
+    hasExpandAll: Boolean,
   },
   model: {
     prop: 'rows-selected',
@@ -225,6 +242,7 @@ export default {
       clearSearchVisible: false,
       searchActive: false,
       registeredRows: [],
+      dataExpandAll: false,
     };
   },
   watch: {
@@ -306,11 +324,12 @@ export default {
   methods: {
     onCvMount(row) {
       this.registeredRows.push(row);
+      row.$on('cv:expanded-change', this.onCvExpandedChange);
       this.updateSomeExpandingRows();
     },
     onCvBeforeDestroy(row) {
       const index = this.registeredRows.findIndex(item => row.uid === item.uid);
-      this.registeredRows.slice(index, 1);
+      this.registeredRows.splice(index, 1);
       this.updateSomeExpandingRows();
     },
     checkSearchFocus(ev) {
@@ -336,8 +355,8 @@ export default {
     },
     updateRowsSelected() {
       this.dataRowsSelected = [];
-      for (const i in this.$children) {
-        let child = this.$children[i];
+      for (const i in this.registeredRows) {
+        let child = this.registeredRows[i];
         if (child.isCvDataTableRow) {
           child.isChecked = this.rowsSelected.includes(child.value);
 
@@ -347,7 +366,7 @@ export default {
         }
       }
       this.headingChecked =
-        this.dataRowsSelected.length === this.$children.filter(item => item.isCvDataTableRow).length;
+        this.dataRowsSelected.length === this.registeredRows.filter(item => item.isCvDataTableRow).length;
       this.batchActive = this.dataRowsSelected.length > 0;
     },
     onClearClick() {
@@ -362,7 +381,7 @@ export default {
       // check /uncheck all children
       this.batchActive = this.headingChecked;
       this.dataRowsSelected = [];
-      for (const child of rows(this.$children)) {
+      for (const child of this.registeredRows) {
         if (this.headingChecked) {
           this.dataRowsSelected.push(child.value);
         }
@@ -391,7 +410,7 @@ export default {
         modelSet.add(value);
       }
       this.dataRowsSelected = Array.from(modelSet);
-      this.headingChecked = this.dataRowsSelected.length === rows(this.$children).length;
+      this.headingChecked = this.dataRowsSelected.length === this.registeredRows.length;
       this.batchActive = this.dataRowsSelected.length > 0;
 
       this.$emit('row-select-change', { value, selected: checked });
@@ -420,8 +439,22 @@ export default {
       this.$emit('sort', { index, order: val });
     },
     updateSomeExpandingRows() {
-      for (const child of rows(this.$children)) {
+      for (const child of this.registeredRows) {
         child.someExpandingRows = this.hasExpandables;
+      }
+    },
+    toggleExpandAll() {
+      this.dataExpandAll = !this.dataExpandAll;
+      for (const row of this.registeredRows) {
+        row.isExpanded = this.dataExpandAll;
+      }
+    },
+    onCvExpandedChange(row) {
+      if (row.isExpanded) {
+        // are all rows expanded
+        this.dataExpandAll = this.registeredRows.every(item => item.isExpanded);
+      } else {
+        this.dataExpandAll = false;
       }
     },
   },

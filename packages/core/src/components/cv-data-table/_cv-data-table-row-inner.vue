@@ -36,13 +36,11 @@
 import CvCheckbox from '../cv-checkbox/cv-checkbox';
 import CvOverflowMenu from '../cv-overflow-menu/cv-overflow-menu';
 import CvOverflowMenuItem from '../cv-overflow-menu/cv-overflow-menu-item';
-import uidMixin from '../../mixins/uid-mixin';
 import ChevronRight16 from '@carbon/icons-vue/es/chevron--right/16';
 
 export default {
   name: 'CvDataTableRowInner',
   components: { CvCheckbox, CvOverflowMenu, CvOverflowMenuItem, ChevronRight16 },
-  mixins: [uidMixin],
   props: {
     checked: Boolean,
     expanded: Boolean,
@@ -73,12 +71,6 @@ export default {
       this.dataSomeExpandingRows = this.someExpandingRows;
     },
   },
-  mounted() {
-    this.$parent.$emit('cv:mounted', this);
-  },
-  beforeDestroy() {
-    this.$parent.$emit('cv:beforeDestroy', this);
-  },
   computed: {
     isCvDataTableRow() {
       return true;
@@ -102,6 +94,7 @@ export default {
     },
     toggleExpand() {
       this.dataExpanded = !this.dataExpanded;
+      this.$emit('expanded-change', this.dataExpanded);
     },
   },
 };

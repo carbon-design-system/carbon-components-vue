@@ -274,6 +274,12 @@ let preKnobs = {
     value: `<template v-slot:items-selected="{scope}">You picked {{scope.count}} rows.</template>
   `,
   },
+  hasExpandAll: {
+    group: 'attr',
+    type: boolean,
+    config: ['has-expand-all', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'has-expand-all',
+  },
 };
 
 let variants = [
@@ -289,6 +295,7 @@ let variants = [
       'hasExpandingRows',
       'expandingSlottedData',
       'scopedSlots',
+      'hasExpandAll',
     ],
   },
   {
@@ -303,6 +310,7 @@ let variants = [
       'hasExpandingRows',
       'expandingSlottedData',
       'scopedSlots',
+      'hasExpandAll',
     ],
   },
   {
@@ -315,12 +323,16 @@ let variants = [
       'basicPagination',
       'hasExpandingRows',
       'expandingSlottedData',
+      'hasExpandAll',
     ],
   },
   { name: 'slottedHelper', includes: ['columns', 'data', 'title', 'helperTextSlot'] },
   { name: 'minimal', includes: ['columns', 'data'] },
   { name: 'slotted data', includes: ['columns', 'slottedData', 'data', 'basicPagination', 'hasExpandingRows'] },
-  { name: 'slotted expanding data', includes: ['columns', 'expandingSlottedData', 'data', 'basicPagination'] },
+  {
+    name: 'slotted expanding data',
+    includes: ['columns', 'expandingSlottedData', 'data', 'basicPagination', 'hasExpandAll'],
+  },
   { name: 'slotted HTML', includes: ['columns', 'htmlData', 'basicPagination'] },
   { name: 'styled columns', includes: ['columns2', 'data'] },
 ];
