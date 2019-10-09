@@ -50,8 +50,8 @@
         @click="onClick"
       >
         <WarningFilled16 v-if="isInvalid" class="bx--dropdown__invalid-icon" />
-        <li v-if="inline" class="bx--dropdown-text" ref="valueContent">
-          <span class="bx--dropdown-text__inner">{{ placeholder }}</span>
+        <li v-if="inline" class="bx--dropdown-text">
+          <span class="bx--dropdown-text__inner" ref="valueContent">{{ placeholder }}</span>
           <chevron-down-16 class="cv-dropdown__arrow bx--dropdown__arrow" />
         </li>
         <template v-else>
