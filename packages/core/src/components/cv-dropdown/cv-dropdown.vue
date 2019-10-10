@@ -18,17 +18,20 @@
 <template>
   <div :class="{ 'bx--form-item': formItem }">
     <div class="bx--dropdown__wrapper" :class="{ 'bx--dropdown__wrapper--inline': inline, 'cv-dropdown': !formItem }">
-      <label v-if="label" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">{{ label }}</label>
+      <span v-if="label" :id="`${uid}-label`" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">{{
+        label
+      }}</span>
 
       <div
         v-if="!inline && isHelper"
         class="bx--form__helper-text"
         :class="{ 'bx--form__helper-text--disabled': $attrs.disabled }"
+        :aria-disabled="$attrs.disabled"
       >
         <slot name="helper-text">{{ helperText }}</slot>
       </div>
 
-      <ul
+      <div
         data-dropdown
         :data-value="internalValue"
         :data-invalid="isInvalid"
@@ -49,11 +52,21 @@
         @keydown.esc.prevent="onEsc"
         @click="onClick"
       >
-        <WarningFilled16 v-if="isInvalid" class="bx--dropdown__invalid-icon" />
-        <li v-if="inline" class="bx--dropdown-text" ref="valueContent">
-          <span class="bx--dropdown-text__inner">{{ placeholder }}</span>
-          <chevron-down-16 class="cv-dropdown__arrow bx--dropdown__arrow" />
-        </li>
+        <button
+          v-if="inline"
+          class="bx--dropdown-text"
+          aria-haspopup="true"
+          :aria-expanded="open"
+          :aria-controls="`${uid}-menu`"
+          :aria-labelledby="`${uid}-label ${uid}-value`"
+          type="button"
+        >
+          <WarningFilled16 v-if="isInvalid" class="bx--dropdown__invalid-icon" />
+          <span class="bx--dropdown-text__inner" :id="`${uid}-value`" ref="valueContent">{{ placeholder }}</span>
+          <span class="bx--dropdown__arrow-container">
+            <chevron-down-16 class="cv-dropdown__arrow bx--dropdown__arrow" />
+          </span>
+        </button>
         <template v-else>
           <li class="bx--dropdown-text" ref="valueContent">{{ placeholder }}</li>
           <li class="bx--dropdown__arrow-container">
@@ -62,11 +75,18 @@
         </template>
 
         <li>
-          <ul class="bx--dropdown-list">
+          <ul
+            class="bx--dropdown-list"
+            :id="`${uid}-menu`"
+            role="menu"
+            :aria-hidden="!open"
+            wh-menu-anchor="left"
+            :aria-labelledby="`${uid}-label`"
+          >
             <slot></slot>
           </ul>
         </li>
-      </ul>
+      </div>
       <div v-if="isInvalid && inline" class="bx--form-requirement">
         <slot name="invalid-message">{{ invalidMessage }}</slot>
       </div>
@@ -79,13 +99,14 @@
 
 <script>
 import themeMixin from '../../mixins/theme-mixin';
+import uidMixin from '../../mixins/uid-mixin';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16';
 
 export default {
   name: 'CvDropdown',
   inheritAttrs: false,
-  mixins: [themeMixin],
+  mixins: [themeMixin, uidMixin],
   components: { WarningFilled16, ChevronDown16 },
   props: {
     formItem: { type: Boolean, default: true },
