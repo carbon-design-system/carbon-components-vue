@@ -5,25 +5,35 @@
     <div class="bx--file" data-file>
       <label
         :for="uid"
-        class="bx--file--btn bx--btn bx--btn--primary"
+        class="bx--file-browse-btn"
         role="button"
         tabindex="0"
         @keydown.enter.prevent="onShow()"
         @keydown.space.prevent
         @keyup.space.prevent="onShow()"
-        >{{ buttonLabel }}</label
       >
-      <input
-        v-bind="$attrs"
-        type="file"
-        class="bx--file-input"
-        :id="uid"
-        data-file-uploader
-        data-target="[data-file-container]"
-        v-on="inputListeners"
-        ref="file-input"
-        tabindex="-1"
-      />
+        <div
+          data-file-drop-container
+          class="bx--file__drop-container"
+          :class="{ 'bx--file__drop-container--drag-over': allowDrop }"
+          @dragover="onDragEvent"
+          @dragleave="onDragEvent"
+          @drop="onDragEvent"
+        >
+          <slot name="drop-target">{{ internalDropTargetLabel }}</slot>
+          <input
+            v-bind="$attrs"
+            type="file"
+            class="bx--file-input"
+            :id="uid"
+            data-file-uploader
+            data-target="[data-file-container]"
+            v-on="inputListeners"
+            ref="file-input"
+          />
+        </div>
+      </label>
+
       <div data-file-container class="bx--file-container">
         <div
           v-for="(file, index) in internalFiles"
@@ -54,8 +64,11 @@
                 @keyup.space.prevent="remove(index)"
               />
             </span>
+            <div v-if="isInvalid(index)" class="bx--form-requirement">
+              <div class="bx--form-requirement__title">{{ file.invalidMessageTitle || 'Invalid file' }}</div>
+              <p class="bx--form-requirement__supplement">{{ file.invalidMessage }}</p>
+            </div>
           </cv-wrapper>
-          <div v-if="isInvalid" class="bx--form-requirement">{{ file.invalidMessage }}</div>
         </div>
       </div>
     </div>
@@ -91,8 +104,18 @@ export default {
     helperText: String,
     initialStateUploading: Boolean,
     removable: Boolean,
-    buttonLabel: { type: String, default: 'Select file' },
-    removeAriaLabel: { type: String, default: 'Remove file' },
+    buttonLabel: {
+      type: String,
+      default: undefined,
+      validator: val => {
+        if (val !== undefined && process.env.NODE_ENV === 'development') {
+          console.warn('CvFileUploader: button-label prop deprecated in favour of drop-target-label');
+        }
+        return true;
+      },
+    },
+    dropTargetLabel: { type: String, default: undefined },
+    removeAriaLabel: { type: String, default: 'Remove selected file' },
   },
   model: {
     prop: 'files',
@@ -104,6 +127,7 @@ export default {
   data() {
     return {
       internalFiles: [],
+      allowDrop: false,
     };
   },
   mounted() {
@@ -130,24 +154,31 @@ export default {
         return result;
       };
     },
+    internalDropTargetLabel() {
+      return this.dropTargetLabel || this.buttonLabel || 'Drag and drop files here or upload';
+    },
   },
   methods: {
     remove(index) {
       this.internalFiles.splice(index, 1);
       this.$emit('change', this.internalFiles);
     },
-    onChange(ev) {
-      if (ev.target.files.length !== 0 && this.clearOnReselect) {
-        this.internalFiles = [];
-      }
-      for (const file of ev.target.files) {
+    addFiles(files) {
+      for (const file of files) {
         this.internalFiles.push({
           state: this.initialStateUploading ? CONSTS.STATES.UPLOADING : CONSTS.STATES.NONE,
           file,
+          invalidMessageTitle: '',
           invalidMessage: '',
         });
       }
       this.$emit('change', this.internalFiles);
+    },
+    onChange(ev) {
+      if (ev.target.files.length !== 0 && this.clearOnReselect) {
+        this.internalFiles = [];
+      }
+      this.addFiles(ev.target.files);
     },
     onShow() {
       this.$refs['file-input'].click();
@@ -164,6 +195,71 @@ export default {
     setInvalidMessage(index, message) {
       this.internalFiles[index].invalidMessage = message;
     },
+    onDragEvent(evt) {
+      // NOTE: Validation of dragged files is not currently done.
+      // It may be possible to do this here or defer to the caller.
+      // It is certainly possible for the user to remove files after they are dropped.
+
+      if (Array.prototype.indexOf.call(evt.dataTransfer.types, 'Files') >= 0) {
+        if (evt.type === 'dragover') {
+          evt.preventDefault();
+          const dropEffect = 'copy';
+          if (Array.isArray(evt.dataTransfer.types)) {
+            try {
+              // IE11 throws a "permission denied" error accessing `.effectAllowed`
+              evt.dataTransfer.effectAllowed = dropEffect;
+            } catch (e) {
+              // ignore
+            }
+          }
+          evt.dataTransfer.dropEffect = dropEffect;
+          this.allowDrop = true;
+        }
+        if (evt.type === 'dragleave') {
+          this.allowDrop = false;
+        }
+        if (evt.type === 'drop') {
+          evt.preventDefault();
+          this.addFiles(evt.dataTransfer.files);
+          this.allowDrop = false;
+        }
+      }
+    },
   },
 };
 </script>
+
+<style lang="scss">
+.cv-file-uploader {
+  .bx--file__state-container {
+    align-items: center;
+  }
+
+  .cv-loading {
+    position: absolute;
+    height: 1rem;
+    width: 1rem;
+    margin: -0.25rem;
+  }
+
+  .bx--inline-loading__animation {
+    margin-right: 0;
+    height: 1rem;
+    width: 1rem;
+  }
+
+  .bx--file__drop-container {
+    position: relative;
+  }
+
+  // .bx--file-input {
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 100%;
+  //   opacity: 0;
+  //   clip: initial;
+  // }
+}
+</style>
