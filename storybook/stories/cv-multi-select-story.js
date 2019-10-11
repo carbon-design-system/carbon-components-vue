@@ -196,7 +196,7 @@ let variants = [
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
-  storiesExperimental.add(
+  storiesDefault.add(
     story.name,
     () => {
       const settings = story.knobs();
@@ -209,7 +209,6 @@ for (const story of storySet) {
       // ----------------------------------------------------------------
       const templateViewString = `
   <sv-template-view
-  under-construction
   sv-margin
     :sv-alt-back="this.$options.propsData.theme !== 'light'"
     sv-source='${templateString.trim()}'>

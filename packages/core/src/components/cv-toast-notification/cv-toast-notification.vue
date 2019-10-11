@@ -2,7 +2,7 @@
   <div
     data-notification
     class="cv-notifiation bx--toast-notification"
-    :class="`bx--toast-notification--${kind}`"
+    :class="[`bx--toast-notification--${kind.toLowerCase()}`, { 'bx--toast-notification--low-contrast': lowContrast }]"
     v-on="$listeners"
     :role="isAlert ? 'alert' : undefined"
     :aria-live="!isAlert ? 'polite' : false"
@@ -38,12 +38,13 @@ export default {
   mixins: [notificationMixin],
   props: {
     caption: String,
-    closeAriaLabel: { type: String, default: 'Close' },
+    closeAriaLabel: { type: String, default: 'Dismiss notification' },
     kind: {
       type: String,
       default: 'info',
       validator: val => ['error', 'info', 'warning', 'success'].includes(val),
     },
+    lowContrast: Boolean,
   },
   computed: {
     icon() {

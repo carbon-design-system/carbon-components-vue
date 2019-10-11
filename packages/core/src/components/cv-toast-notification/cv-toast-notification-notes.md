@@ -23,6 +23,7 @@ http://www.carbondesignsystem.com/components/notification/code
 - subtitle: 'subtitle'
 - caption: 'caption'
 - closeAriaLabel: { type: String, default: 'Clear filter' },
+- lowContrast: Boolean to use a lower contrast version of the notification
 
 ## Events
 
