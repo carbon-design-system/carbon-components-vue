@@ -103,7 +103,7 @@ export default {
       type: Boolean,
       default: undefined,
       validator(val) {
-        if (val !== undefined) {
+        if (val !== undefined && process.env.NODE_ENV === 'development') {
           console.warn('CvDatePicker: invalid prop deprecated in favour of invalidMessage');
         }
         return true;
@@ -113,7 +113,7 @@ export default {
       type: String,
       default: undefined,
       validator(val) {
-        if (val !== null) {
+        if (val !== undefined && process.env.NODE_ENV === 'development') {
           console.warn('CvDatePicker: invalidDateMessage deprecated in favour of invalidMessage');
         }
         return true;
@@ -254,7 +254,7 @@ export default {
         if (firstDate !== this.$refs.date.value) {
           this.$emit('change', this.$refs.date.value);
 
-          if (this.$listeners['simpleChange']) {
+          if (this.$listeners['simpleChange'] && process.env.NODE_ENV === 'development') {
             console.warn('CvDatePicker: simple change event deprecated in favour of change.');
             this.$emit('simpleChange', this.$refs.date.value);
           }

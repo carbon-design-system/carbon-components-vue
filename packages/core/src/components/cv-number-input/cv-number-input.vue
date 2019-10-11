@@ -66,7 +66,7 @@ export default {
       type: Boolean,
       default: undefined,
       validator(val) {
-        if (val !== undefined) {
+        if (val !== undefined && process.env.NODE_ENV === 'development') {
           console.warn('CvNumberInput: invalid prop deprecated in favour of invalidMessage');
         }
         return true;
