@@ -1,5 +1,15 @@
 <template>
-  <component :is="tagType.tag" class="cv-list" :class="tagType.selector">
+  <component
+    :is="tagType"
+    class="cv-list"
+    :class="{
+      'bx--list--nested': nested,
+      'bx--list--ordered': internalOrdered,
+      'bx--list--unordered': !internalOrdered,
+    }"
+    :data-uid="_uid"
+    :data-nested="nested"
+  >
     <slot></slot>
   </component>
 </template>
@@ -8,25 +18,24 @@
 export default {
   name: 'CvList',
   props: {
-    ordered: Boolean,
+    ordered: { type: Boolean, default: undefined },
     nested: Boolean,
   },
   computed: {
-    tagType() {
-      let _tagType;
-
-      if (this.ordered) {
-        _tagType = { tag: 'ol', selector: 'bx--list--ordered' };
-      } else {
-        _tagType = { tag: 'ul', selector: 'bx--list--unordered' };
+    internalOrdered() {
+      if (this.nested && this.ordered === undefined) {
+        if (this.$parent && this.$parent.$parent && this.$parent.$parent.$_CvList) {
+          return this.$parent.$parent.internalOrdered;
+        }
       }
-
-      if (this.nested) {
-        _tagType.selector = 'bx--list--nested';
-      }
-
-      return _tagType;
+      return this.ordered;
     },
+    tagType() {
+      return this.internalOrdered ? 'ol' : 'ul';
+    },
+  },
+  created() {
+    this.$_CvList = true;
   },
 };
 </script>
