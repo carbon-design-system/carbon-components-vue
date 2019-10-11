@@ -35,6 +35,12 @@ const preKnobs = {
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: 'disabled',
   },
+  inline: {
+    group: 'attr',
+    type: boolean,
+    config: ['inline', false],
+    prop: 'inline',
+  },
 };
 
 const variants = [{ name: 'a', excludes: ['to'] }, { name: 'router-link', excludes: ['href'] }];
@@ -61,7 +67,13 @@ for (const story of storySet) {
     <sv-template-view
       sv-margin
       sv-source='${templateString.trim()}'>
-      <template slot="component">${templateString}</template>
+      <template slot="component">
+        <div>
+        Lorem ipsum dolor sit amet.
+        ${templateString}
+        Consectetur adipiscing elit.
+        </div>
+      </template>
     </sv-template-view>
   `;
 
