@@ -107,12 +107,15 @@ export default {
     buttonLabel: {
       type: String,
       default: undefined,
-      validator: () => {
+      validator: val => {
+        if (val !== undefined && process.env.NODE_ENV === 'development') {
+          console.warn('CvFileUploader: button-label prop deprecated in favour of drop-target-label');
+        }
         return true;
       },
     },
     dropTargetLabel: { type: String, default: undefined },
-    removeAriaLabel: { type: String, default: 'Drag and drop files here or upload' },
+    removeAriaLabel: { type: String, default: 'Remove selected file' },
   },
   model: {
     prop: 'files',
