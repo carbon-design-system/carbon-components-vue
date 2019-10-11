@@ -12,4 +12,7 @@ http://www.carbondesignsystem.com/components/inline-loading/code
 
 ## Attributes
 
-- active: Boolean
+- loadingText: Text shown in loading state
+- loadedText: Text shown in complete state
+- errorText: Text shown in error state
+- state: String containing 'loading', 'loaded' or 'error'
