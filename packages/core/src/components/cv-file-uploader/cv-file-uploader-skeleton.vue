@@ -1,7 +1,7 @@
 <template>
   <div class="bx--form-item">
     <cv-skeleton-text heading width="100px" />
-    <cv-skeleton-text width="225px" class="bx--label-descriptio" />
+    <cv-skeleton-text width="225px" class="bx--label-description" />
     <cv-button-skeleton />
   </div>
 </template>

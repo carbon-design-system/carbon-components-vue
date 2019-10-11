@@ -23,10 +23,11 @@ http://www.carbondesignsystem.com/components/file-uploader/code
 
 accept - standard input attribute for file type
 clear-on-reselect - selecting files a second time clears the first selection
+dropTargetLabel: { type: String, default: 'Drag and drop files here or upload' },
 initial-state-uploading - set the uploading state when a file is selected
+label - text label for the input
 multiple - standard input attribute for file type
 removable - show remove button
-label - text label for the input
 removeAriaLabel: { type: String, default: 'Remove file' },
 
 ## Events
@@ -53,7 +54,7 @@ Setting to empty string clears the invalid state and message.
 
 ## slots
 
-none
+- drop-target: Overrides the drop-target-label with slotted content.
 
 ## Usage
 

@@ -8,6 +8,7 @@ import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvFileUploaderNotesMD from '@carbon/vue/src/components/cv-file-uploader/cv-file-uploader-notes.md';
 import { CvFileUploader, CvFileUploaderSkeleton } from '@carbon/vue/src';
+import AddFilled16 from '@carbon/icons-vue/es/add--filled/16';
 
 const storiesDefault = storiesOf('Components/CvFileUploader', module);
 const storiesExperimental = storiesOf('Experimental/CvFileUploader', module);
@@ -25,11 +26,16 @@ let preKnobs = {
     config: ['helper text', 'Select the files you want to upload'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: 'helperText',
   },
-  buttonLabel: {
+  dropTargetLabel: {
     group: 'attr',
     type: text,
-    config: ['button label', 'Add file'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
-    prop: 'buttonLabel',
+    config: ['drop target label', ''], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    prop: 'drop-target-label',
+  },
+  dropTargetSlot: {
+    group: 'slots',
+    slot: 'drop-target',
+    value: '<AddFilled16 /><strong>File Drop</strong><AddFilled16 />',
   },
   accept: {
     group: 'attr',
@@ -78,8 +84,9 @@ let preKnobs = {
 };
 
 let variants = [
-  { name: 'default', excludes: ['events', 'vModel'] },
+  { name: 'default', excludes: ['events', 'vModel', 'dropTargetSlot'] },
   { name: 'minimal', includes: [] },
+  { name: 'slot', excludes: ['events', 'vModel', 'dropTargetLabel'] },
   { name: 'events', excludes: ['vModel'] },
   { name: 'vModel', excludes: ['events'] },
 ];
@@ -95,7 +102,7 @@ for (const story of storySet) {
       // ----------------------------------------------------------------
 
       const templateString = `
-<cv-file-uploader${settings.group.attr} ref="fileUploader">
+<cv-file-uploader${settings.group.attr} ref="fileUploader">${settings.group.slots}
 </cv-file-uploader>
   `;
 
@@ -126,7 +133,7 @@ for (const story of storySet) {
   `;
 
       return {
-        components: { CvFileUploader, SvTemplateView },
+        components: { CvFileUploader, SvTemplateView, AddFilled16 },
         template: templateViewString,
         props: settings.props,
         data() {
