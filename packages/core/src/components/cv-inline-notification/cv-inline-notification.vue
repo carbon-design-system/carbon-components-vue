@@ -2,7 +2,12 @@
   <div
     data-notification
     class="cv-inline-notification bx--inline-notification"
-    :class="`bx--inline-notification--${kind.toLowerCase()}`"
+    :class="[
+      `bx--inline-notification--${kind.toLowerCase()}`,
+      {
+        'bx--inline-notification--low-contrast': lowContrast,
+      },
+    ]"
     v-on="$listeners"
     :role="isAlert ? 'alert' : false"
     :aria-live="!isAlert ? 'polite' : false"
@@ -38,12 +43,13 @@ export default {
   components: { Close16 },
   mixins: [notificationMixin],
   props: {
-    closeAriaLabel: { type: String, default: 'Clear filter' },
+    closeAriaLabel: { type: String, default: 'Dismiss notification' },
     kind: {
       type: String,
       default: 'info',
       validator: val => ['error', 'info', 'warning', 'success'].includes(val),
     },
+    lowContrast: Boolean,
   },
   computed: {
     icon() {

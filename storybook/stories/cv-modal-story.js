@@ -39,6 +39,48 @@ const preKnobs = {
       </div>
       `,
   },
+  scrollingContent: {
+    group: 'content',
+    slot: 'content',
+    value: `
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id accumsan augue. Phasellus consequat augue
+    vitae
+    tellus tincidunt posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum risus. Nulla
+    facilisi.
+    Etiam venenatis molestie tellus. Quisque consectetur non risus eu rutrum. </p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id accumsan augue. Phasellus consequat augue
+    vitae
+    tellus tincidunt posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum risus. Nulla
+    facilisi.
+    Etiam venenatis molestie tellus. Quisque consectetur non risus eu rutrum. </p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id accumsan augue. Phasellus consequat augue
+    vitae
+    tellus tincidunt posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum risus. Nulla
+    facilisi.
+    Etiam venenatis molestie tellus. Quisque consectetur non risus eu rutrum. </p>
+    <h3>Lorem ipsum</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id accumsan augue. Phasellus consequat augue
+    vitae
+    tellus tincidunt posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum risus. Nulla
+    facilisi.
+    Etiam venenatis molestie tellus. Quisque consectetur non risus eu rutrum. </p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id accumsan augue. Phasellus consequat augue
+    vitae
+    tellus tincidunt posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum risus. Nulla
+    facilisi.
+    Etiam venenatis molestie tellus. Quisque consectetur non risus eu rutrum. </p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id accumsan augue. Phasellus consequat augue
+    vitae
+    tellus tincidunt posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum risus. Nulla
+    facilisi.
+    Etiam venenatis molestie tellus. Quisque consectetur non risus eu rutrum. </p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id accumsan augue. Phasellus consequat augue
+    vitae
+    tellus tincidunt posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum risus. Nulla
+    facilisi.
+    Etiam venenatis molestie tellus. Quisque consectetur non risus eu rutrum. </p>
+    `,
+  },
   secondaryButton: {
     group: 'content',
     slot: 'secondary-button',
@@ -105,12 +147,13 @@ const variants = [
     includes: ['content', 'secondaryButton', 'events', 'autoHideOff'],
   },
   { name: 'minimal', includes: ['content'] },
-  { name: 'with input', excludes: ['content'] },
+  { name: 'with input', excludes: ['content', 'scrollingContent'] },
   {
     name: 'danger',
     excludes: ['contentWithInput'],
     extra: { kind: { group: 'attr', value: 'kind="danger"' } },
   },
+  { name: 'scrolling-contnet', includes: ['primaryButton', 'secondaryButton', 'scrollingContent'] },
 ];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
