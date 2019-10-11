@@ -1,38 +1,44 @@
 import { storiesOf } from '@storybook/vue';
-import { boolean, text } from '@storybook/addon-knobs';
+import { boolean, text, select } from '@storybook/addon-knobs';
 
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvInlineLoadingNotesMD from '@carbon/vue/src/components/cv-inline-loading/cv-inline-loading-notes.md';
-import { CvInlineLoading } from '@carbon/vue/src';
+import { CvInlineLoading, STATES } from '@carbon/vue/src/components/cv-inline-loading';
 
 const storiesDefault = storiesOf('Components/CvInlineLoading', module);
 const storiesExperimental = storiesOf('Experimental/CvInlineLoading', module);
 
 const preKnobs = {
-  active: {
+  errorText: {
     group: 'attr',
-    type: boolean,
-    config: ['active', true], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: 'active',
+    type: text,
+    config: ['error text', 'Error.'],
+    prop: 'error-text',
   },
   loadingText: {
     group: 'attr',
     type: text,
-    config: ['loading text', 'Loading data...'],
+    config: ['loading text', 'Loading...'],
     prop: 'loading-text',
   },
   loadedText: {
     group: 'attr',
     type: text,
-    config: ['loaded text', 'Data loaded.'],
+    config: ['loaded text', 'Complete.'],
     prop: 'loaded-text',
+  },
+  state: {
+    group: 'attr',
+    type: select,
+    config: ['Loading state', STATES, STATES.LOADING],
+    prop: 'state',
   },
 };
 
-const variants = [{ name: 'default' }, { name: 'minimal', includes: ['active'] }];
+const variants = [{ name: 'default' }, { name: 'minimal', includes: ['state'] }];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
