@@ -196,7 +196,6 @@ for (const story of storySet) {
       // ----------------------------------------------------------------
       const templateViewString = `
   <sv-template-view
-  under-construction
   sv-margin
     :sv-alt-back="this.$options.propsData.theme !== 'light'"
     sv-source='${templateString.trim()}'>
