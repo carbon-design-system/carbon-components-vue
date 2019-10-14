@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { text } from '@storybook/addon-knobs';
+import { text, boolean } from '@storybook/addon-knobs';
 
 import { action } from '@storybook/addon-actions';
 
@@ -38,6 +38,12 @@ const preKnobs = {
     type: text,
     config: ['close-arial-label', 'Custom close aria label'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: 'close-aria-label',
+  },
+  lowContrast: {
+    group: 'attr',
+    type: boolean,
+    config: ['Low contrast', false],
+    prop: 'low-contrast',
   },
 };
 

@@ -20,16 +20,26 @@ const preKnobs = {
   },
   nested: {
     group: 'nested',
-    value: `<cv-list nested>
+    value: `  <cv-list nested :ordered="orderedInNest">
       <cv-list-item>nested item 1</cv-list-item>
       <cv-list-item>nested item 2</cv-list-item>
       <cv-list-item>nested item 3</cv-list-item>
     </cv-list>
-    `,
+    <cv-list nested>
+      <cv-list-item>nested item 1</cv-list-item>
+      <cv-list-item>nested item 2</cv-list-item>
+      <cv-list-item>nested item 3</cv-list-item>
+    </cv-list>`,
+  },
+  orderedInNest: {
+    group: '',
+    type: boolean,
+    config: ['ordered-nest', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'ordered-nest',
   },
 };
 
-const variants = [{ name: 'default', excludes: ['nested'] }, { name: 'nested' }];
+const variants = [{ name: 'default', excludes: ['nested', 'orderedInNest'] }, { name: 'nested' }];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
@@ -43,7 +53,8 @@ for (const story of storySet) {
 
       const templateString = `
 <cv-list${settings.group.attr}>
-  <cv-list-item>list item 1${settings.group.nested}</cv-list-item>
+  <cv-list-item>list item 1${settings.group.nested}
+  </cv-list-item>
   <cv-list-item>list item 2</cv-list-item>
   <cv-list-item>list item 3</cv-list-item>
 </cv-list>

@@ -32,9 +32,16 @@ Lists can be nested inside of each other.
 
 ```html
 <cv-list>
-  <cv-list-item
-    >list item 1
+  <cv-list-item>
+    list item 1
+    <cv-list nested ordered>
+      <!-- order based on own setting -->
+      <cv-list-item>nested item 1</cv-list-item>
+      <cv-list-item>nested item 2</cv-list-item>
+      <cv-list-item>nested item 3</cv-list-item>
+    </cv-list>
     <cv-list nested>
+      <!-- ordered setting based on parent setting -->
       <cv-list-item>nested item 1</cv-list-item>
       <cv-list-item>nested item 2</cv-list-item>
       <cv-list-item>nested item 3</cv-list-item>
@@ -47,5 +54,5 @@ Lists can be nested inside of each other.
 
 ## Attributes
 
-ordered - if set non-nested list is numbered
+ordered - if set list is numbered, if ommitted and nested the parent list setting is used.
 nested - if set list uses nested form

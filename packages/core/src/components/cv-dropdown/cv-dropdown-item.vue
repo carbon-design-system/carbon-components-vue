@@ -10,12 +10,18 @@
 -->
 
 <template>
-  <li data-option :data-value="value" class="cv-dropdown-item bx--dropdown-item">
+  <li
+    data-option
+    :data-value="value"
+    class="cv-dropdown-item bx--dropdown-item"
+    :class="{ ' bx--list-box__menu-item--active bx--list-box__menu-item--highlighted': internalSelected }"
+  >
     <a
+      :aria-checked="internalSelected"
       class="bx--dropdown-link"
-      :class="{ 'bx--dropdown--selected': internalSelected }"
       href="javascript:void(0)"
       ref="link"
+      role="menuitemradio"
       tabindex="-1"
     >
       <slot></slot>
@@ -49,7 +55,7 @@ export default {
     this.$parent.$emit('cv:mounted', this);
   },
   beforeDestroy() {
-    this.$parent.$emit('cv:beforeDestory', this);
+    this.$parent.$emit('cv:beforeDestroy', this);
   },
   computed: {
     internalSelected: {
@@ -71,3 +77,10 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+// carbon fix
+.cv-dropdown-item.bx--list-box__menu-item--highlighted + .bx--dropdown-item .bx--dropdown-link {
+  border-top-color: transparent;
+}
+</style>
