@@ -109,7 +109,7 @@ for (const story of storySet) {
 
       const templateString = `
 <cv-tabs${settings.group.attr} aria-label="navigation tab label">
-  <cv-tab :key="tab.name" :label="tab.label" v-for="tab in activeSet" v-html="tab.label" :data-test="tab.content">
+  <cv-tab :key="tab.name" :label="tab.label" v-for="tab in activeSet" v-html="tab.content" :data-test="tab.content">
   </cv-tab>
 </cv-tabs>
   `;
