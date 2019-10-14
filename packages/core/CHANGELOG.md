@@ -10,10 +10,12 @@
 - Add expand all to data table
 - Add inline link
 - Add nested list ordering
+- Add CvTabsSkeleton component
 
 ### Fix
 
 - Uploader skeleton typo
+- CvTabs behaviour when switching tab set (beforeDestory event name typo)
 
 ### Chore
 
