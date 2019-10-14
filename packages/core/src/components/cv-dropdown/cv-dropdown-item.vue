@@ -55,7 +55,7 @@ export default {
     this.$parent.$emit('cv:mounted', this);
   },
   beforeDestroy() {
-    this.$parent.$emit('cv:beforeDestory', this);
+    this.$parent.$emit('cv:beforeDestroy', this);
   },
   computed: {
     internalSelected: {
