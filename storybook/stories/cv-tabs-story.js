@@ -7,12 +7,12 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvTabsNotesMD from '@carbon/vue/src/components/cv-tabs/cv-tabs-notes.md';
-import { CvTab, CvTabs } from '@carbon/vue/src';
+import { CvTab, CvTabs, CvTabsSkeleton } from '@carbon/vue/src';
 
 const storiesDefault = storiesOf('Components/CvTabs', module);
 const storiesExperimental = storiesOf('Experimental/CvTabs', module);
 
-const preKnobs = {
+let preKnobs = {
   selected: {
     group: 'tab2',
     type: boolean,
@@ -31,9 +31,9 @@ const preKnobs = {
   },
 };
 
-const variants = [{ name: 'default' }, { name: 'minimal', excludes: ['events', 'selected', 'disabled'] }];
+let variants = [{ name: 'default' }, { name: 'minimal', excludes: ['events', 'selected', 'disabled'] }];
 
-const storySet = knobsHelper.getStorySet(variants, preKnobs);
+let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   storiesDefault.add(
@@ -85,6 +85,46 @@ for (const story of storySet) {
           actionSelected: action('Cv Tabs - tab-selected'),
           actionBeingSelected: action('Cv Tabs - tab-beingselected'),
         },
+        template: templateViewString,
+        props: settings.props,
+      };
+    },
+    {
+      notes: { markdown: CvTabsNotesMD },
+    }
+  );
+}
+
+// cv-tabs-skeleton
+
+preKnobs = {};
+
+variants = [{ name: 'skeleton' }];
+
+storySet = knobsHelper.getStorySet(variants, preKnobs);
+
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
+
+      const templateString = `
+      <cv-tabs-skeleton></cv-tabs-skeleton>
+      `;
+
+      // ----------------------------------------------------------------
+
+      const templateViewString = `
+      <sv-template-view
+      sv-margin
+      sv-source='${templateString.trim()}'>
+      <template slot="component">${templateString}</template>
+    </sv-template-view>
+    `;
+
+      return {
+        components: { CvTabsSkeleton, SvTemplateView },
         template: templateViewString,
         props: settings.props,
       };
