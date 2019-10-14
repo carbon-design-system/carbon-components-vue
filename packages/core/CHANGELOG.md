@@ -6,10 +6,14 @@
 
 - Add v-model for date picker
 - Add up down aria labels for number input
-- Update to Carbon 10.6
+- Update to Carbon 10.7
 - Add expand all to data table
+- Add inline link
+- Add nested list ordering
 
 ### Fix
+
+- Uploader skeleton typo
 
 ### Chore
 
