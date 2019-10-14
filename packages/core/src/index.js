@@ -66,7 +66,7 @@ import {
   CvStructuredListItem,
   CvStructuredList,
 } from './components/cv-structured-list';
-import { CvTabs, CvTab } from './components/cv-tabs';
+import { CvTabs, CvTab, CvTabsSkeleton } from './components/cv-tabs';
 import { CvTag, CvTagSkeleton } from './components/cv-tag';
 import { CvTextArea } from './components/cv-text-area';
 import { CvTextInput } from './components/cv-text-input';
@@ -128,7 +128,7 @@ export { CvSelect, CvSelectOption, CvSelectOptgroup };
 export { CvSkeletonText };
 export { CvSlider, CvSliderSkeleton };
 export { CvStructuredList, CvStructuredListItem, CvStructuredListHeading, CvStructuredListData };
-export { CvTab, CvTabs };
+export { CvTab, CvTabs, CvTabsSkeleton };
 export { CvTag, CvTagSkeleton };
 export { CvTextArea };
 export { CvTextInput };
