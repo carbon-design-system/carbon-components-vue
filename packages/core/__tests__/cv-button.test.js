@@ -67,22 +67,9 @@ describe('CvButton', () => {
     expect(wrapper.classes(`${prefix}--btn--danger--primary`)).toEqual(true);
   });
 
-  // it('Raises click event when clicked', () => {
-  //   const wrapper = shallow(CvButton, {
-  //     listeners: {
-  //       click: () => {},
-  //     },
-  //   });
-  //   wrapper.find('button').trigger('click');
-  //   console.dir(wrapper.emitted());
-  //   expect(wrapper.emitted().click).toBeTruthy();
-
-  //   // const button = wrapper.find('button');
-  //   // console.dir(button);
-  //   // console.log(wrapper.emitted());
-  //   // button.trigger('click');
-  //   // console.log(wrapper.emitted());
-  //   // // expect(button.emitted().click).toBeTruthy();
-  //   // expect(wrapper.emitted().click).toBeTruthy();
-  // });
+  it('Raises click event when clicked', () => {
+    const wrapper = shallow(CvButton);
+    wrapper.find('button').trigger('click');
+    expect(wrapper.emitted().click).toBeTruthy();
+  });
 });

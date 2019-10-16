@@ -1,4 +1,21 @@
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, mount } from '@vue/test-utils';
+
+const getComponentProp = (component, prop) => {
+  let componentProp;
+  if (component.props) {
+    componentProp = component.props[prop];
+  }
+
+  if (!componentProp && component.mixins) {
+    for (let index in component.mixins) {
+      // NOTE: Last mixin with a prop wins.
+      if (component.mixins[index].props && component.mixins[index].props[prop]) {
+        componentProp = component.mixins[index].props[prop];
+      }
+    }
+  }
+  return componentProp;
+};
 
 export const testComponent = {
   propsAreRequired: (component, props) => {
@@ -15,18 +32,20 @@ export const testComponent = {
     } else {
       typeName = types.name;
     }
+
     test.each(props)(`has a prop of ${typeName} type: %s`, prop => {
+      let componentProp = getComponentProp(component, prop);
       if (types.map) {
-        expect(component.props[prop].type).toEqual(expect.arrayContaining(types));
+        expect(componentProp.type).toEqual(expect.arrayContaining(types));
       } else {
-        expect(component.props[prop].type).toBe(types);
+        expect(componentProp.type).toBe(types);
       }
     });
   },
 
   propsHaveDefault: (component, props) => {
     test.each(props)('has a prop with a default: %s', prop => {
-      expect(component.props[prop].default).toBeDefined();
+      expect(getComponentProp(component, prop).default).toBeDefined();
     });
   },
 };
