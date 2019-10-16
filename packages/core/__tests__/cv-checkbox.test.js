@@ -31,7 +31,7 @@ describe('CvCheckbox', () => {
     expect(wrapper.find('input').element.checked).toEqual(false);
   });
 
-  it('should be unchecked when mixed is true and checked is true', () => {
+  it('should be checked when mixed is true and checked is true', () => {
     const propsData = { formItem: true, value: 'check-1', mixed: true, checked: true };
     const wrapper = shallow(CvCheckbox, { propsData });
     expect(wrapper.find('input').element.checked).toEqual(true);
