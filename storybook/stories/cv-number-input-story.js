@@ -7,12 +7,12 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvNumberInputNotesMD from '@carbon/vue/src/components/cv-number-input/cv-number-input-notes.md';
-import { CvNumberInput } from '@carbon/vue/src';
+import { CvNumberInput, CvNumberInputSkeleton } from '@carbon/vue/src';
 
 const storiesDefault = storiesOf('Components/CvNumberInput', module);
 const storiesExperimental = storiesOf('Experimental/CvNumberInput', module);
 
-const preKnobs = {
+let preKnobs = {
   theme: {
     group: 'attr',
     type: boolean,
@@ -73,7 +73,7 @@ const preKnobs = {
   },
 };
 
-const variants = [
+let variants = [
   {
     name: 'default',
     excludes: ['vModel', 'events', 'invalidMessageSlot', 'helperTextSlot'],
@@ -87,7 +87,7 @@ const variants = [
   { name: 'vModel', includes: ['label', 'vModel'] },
 ];
 
-const storySet = knobsHelper.getStorySet(variants, preKnobs);
+let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   storiesDefault.add(
@@ -132,6 +132,44 @@ for (const story of storySet) {
         methods: {
           onInput: action('cv-number-input - input event'),
         },
+      };
+    },
+    {
+      notes: { markdown: CvNumberInputNotesMD },
+    }
+  );
+}
+
+preKnobs = {};
+variants = [{ name: 'skeleton' }];
+storySet = knobsHelper.getStorySet(variants, preKnobs);
+
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
+
+      // ----------------------------------------------------------------
+
+      const templateString = `
+<cv-number-input-skeleton></cv-number-input-skeleton>
+  `;
+
+      // ----------------------------------------------------------------
+
+      const templateViewString = `
+    <sv-template-view
+      sv-margin
+      sv-source='${templateString.trim()}'>
+      <template slot="component">${templateString}</template>
+    </sv-template-view>
+  `;
+
+      return {
+        components: { CvNumberInputSkeleton, SvTemplateView },
+        template: templateViewString,
+        props: settings.props,
       };
     },
     {
