@@ -1,2 +1,3 @@
 import CvNumberInput from './cv-number-input';
-export { CvNumberInput };
+import CvNumberInputSkeleton from './cv-number-input-skeleton';
+export { CvNumberInput, CvNumberInputSkeleton };
