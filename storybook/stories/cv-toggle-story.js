@@ -7,7 +7,7 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvToggleNotesMD from '@carbon/vue/src/components/cv-toggle/cv-toggle-notes.md';
-import { CvToggle } from '@carbon/vue/src';
+import { CvToggle, CvToggleSkeleton } from '@carbon/vue/src';
 
 const storiesDefault = storiesOf('Components/CvToggle', module);
 const storiesExperimental = storiesOf('Experimental/CvToggle', module);
@@ -197,6 +197,46 @@ for (const story of storySet) {
           };
         },
         template: templateViewString,
+      };
+    },
+    {
+      notes: { markdown: CvToggleNotesMD },
+    }
+  );
+}
+
+// cv-toggle-skeleton
+
+preKnobs = {};
+
+variants = [{ name: 'skeleton' }];
+
+storySet = knobsHelper.getStorySet(variants, preKnobs);
+
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
+
+      const templateString = `
+      <cv-toggle-skeleton></cv-toggle-skeleton>
+      `;
+
+      // ----------------------------------------------------------------
+
+      const templateViewString = `
+      <sv-template-view
+      sv-margin
+      sv-source='${templateString.trim()}'>
+      <template slot="component">${templateString}</template>
+    </sv-template-view>
+    `;
+
+      return {
+        components: { CvToggleSkeleton, SvTemplateView },
+        template: templateViewString,
+        props: settings.props,
       };
     },
     {
