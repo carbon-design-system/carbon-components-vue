@@ -132,22 +132,22 @@ describe('CvCheckbox', () => {
     wrapper.find('input').trigger('click');
     expect(wrapper.emitted().modelEvent).toBeTruthy();
   });
-});
 
-// Clicking updates the value isChecked (wrapper.vm.isChecked)
-it('clicking updates the value isChecked from false to true', () => {
-  const propsData = { formItem: true, value: 'check-1', checked: false };
-  const wrapper = shallow(CvCheckbox, { propsData });
-  wrapper.find('input').trigger('click');
-  expect(wrapper.vm.isChecked).toEqual(true);
-});
+  // Clicking updates the value isChecked (wrapper.vm.isChecked)
+  it('clicking updates the value isChecked from false to true', () => {
+    const propsData = { formItem: true, value: 'check-1', checked: false };
+    const wrapper = shallow(CvCheckbox, { propsData });
+    wrapper.find('input').trigger('click');
+    expect(wrapper.vm.isChecked).toEqual(true);
+  });
 
-// Clicking updates the value isChecked (wrapper.vm.isChecked)
-it('clicking updates the value isChecked from true to false', () => {
-  const propsData = { formItem: true, value: 'check-1', checked: true };
-  const wrapper = shallow(CvCheckbox, { propsData });
-  wrapper.find('input').trigger('click');
-  expect(wrapper.vm.isChecked).toEqual(false);
+  // Clicking updates the value isChecked (wrapper.vm.isChecked)
+  it('clicking updates the value isChecked from true to false', () => {
+    const propsData = { formItem: true, value: 'check-1', checked: true };
+    const wrapper = shallow(CvCheckbox, { propsData });
+    wrapper.find('input').trigger('click');
+    expect(wrapper.vm.isChecked).toEqual(false);
+  });
 });
 
 describe('CvCheckboxSkeleton', () => {
