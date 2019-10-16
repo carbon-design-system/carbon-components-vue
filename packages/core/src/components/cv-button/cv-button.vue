@@ -10,6 +10,7 @@
       },
     ]"
     v-on="$listeners"
+    @click="$emit('click', $event)"
     role="button"
   >
     <slot></slot>
