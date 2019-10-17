@@ -42,25 +42,15 @@ export default {
         if (this.$props.modelValue !== undefined) {
           // model value always comes first
           if (this.isArrayModel) {
-            if (this.modelValue.includes(this.value)) {
-              return true;
-            } else {
-              return false;
-            }
+            return this.modelValue.includes(this.value);
           } else {
             return this.modelValue;
           }
         } else {
           if (this.dataChecked !== undefined) {
             return this.dataChecked;
-          } else {
-            // if checked defined
-            if (this.dataChecked !== undefined) {
-              return this.dataChecked;
-            }
-            if (this.dataMixed) {
-              return 'mixed';
-            }
+          } else if(this.dataMixed) {
+            return 'mixed';
           }
 
           return false;
@@ -77,7 +67,7 @@ export default {
           }
           this.dataChecked = Array.from(modelSet);
         } else {
-          this.dataChecked = checked ? true : undefined; //
+          this.dataChecked = checked || undefined; //
           if (this.dataChecked !== undefined) {
             this.dataMixed = false;
           }
