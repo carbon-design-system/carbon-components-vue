@@ -1,16 +1,29 @@
 # Changelog
 
-## 2.15.0-canary.x (Sept 28, 2019)
+## 2.15.0-canary.x (Oct 18th 2019)
 
 ### Feat
 
 - Add v-model for date picker
 - Add up down aria labels for number input
 - Update to Carbon 10.7
+  - CvButton, CvIconButton
+  - CvComboBox
+  - CvContentSwitcher
+  - CvDataTable
+  - CvDropdown
+  - CvFileUploader
+  - CvInlineNotification
+  - CvLink
+  - CvList
+  - CvNumberInput
+  - CvOverflowMenu
+  - CvToastNotification
 - Add expand all to data table
 - Add inline link
 - Add nested list ordering
 - Add CvTabsSkeleton component
+- Tests for CvCheckbox, CvToggle, CvBreadcrumb added
 
 ### Fix
 
