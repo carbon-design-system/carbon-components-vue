@@ -73,11 +73,11 @@ let preKnobs = {
     prop: 'icon',
     value: () => AddFilled16,
   },
-  tipText: {
+  label: {
     group: 'attr',
     type: text,
-    config: ['Tip text', 'Tool tip'],
-    prop: 'tip-text',
+    config: ['label for assistive text', 'Icon button'],
+    prop: 'label',
   },
   tipPosition: {
     group: 'attr',
@@ -179,7 +179,7 @@ for (const story of storySet) {
 variants = [
   {
     name: 'icon-only',
-    includes: ['kind', 'size', 'disabled', 'tipText', 'tipPosition', 'tipAlignment', 'iconAlways'],
+    includes: ['kind', 'size', 'disabled', 'label', 'tipPosition', 'tipAlignment', 'iconAlways'],
   },
 ];
 
