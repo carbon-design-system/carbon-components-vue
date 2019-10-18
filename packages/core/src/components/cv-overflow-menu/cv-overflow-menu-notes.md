@@ -23,6 +23,9 @@ CvOverflowMenu contains slotted CvOverflowMenuItem's which have slotted contents
 - flip-menu: Boolean, optionally moves caret from right to left of popup menu
 - offset: Object, optional offset setting for left and top position.
   - e.g. { left: 0, top: 200 }
+- label: assistive text shown as a tooltip
+- tipPosition: top, left, right(default) or bottom
+- tipAlignment: start, center(default) or end.
 
 NOTE: Default behaviour (no offset) automatically positions the popup menu.
 
