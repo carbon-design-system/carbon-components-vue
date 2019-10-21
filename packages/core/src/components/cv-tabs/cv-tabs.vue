@@ -56,6 +56,7 @@ export default {
     return {
       tabs: [],
       selectedIndex: -1,
+      selectedId: undefined,
       disabledTabs: [],
     };
   },
@@ -73,25 +74,34 @@ export default {
     },
     onCvMount(srcComponent) {
       this.tabs.push(srcComponent);
-      this.checkSelected();
+
       this.checkDisabled(srcComponent);
+      if (this.selectedIndex < 0) {
+        this.checkSelected();
+      }
     },
     onCvBeforeDestroy(srcComponent) {
       const tabIndex = this.tabs.findIndex(item => item.uid === srcComponent.uid);
       if (tabIndex > -1) {
         this.tabs.splice(tabIndex, 1);
+
+        this.checkDisabled(srcComponent);
+        if (tabIndex <= this.selectedIndex) {
+          this.checkSelected();
+        }
       }
-      this.checkSelected();
-      this.checkDisabled(srcComponent);
     },
     onTabClick(index) {
       if (this.disabledTabs.indexOf(index) === -1) {
-        this.selectedIndex = index;
-        // console.log(this.selectedIndex);
-        for (let i = 0; i < this.tabs.length; i++) {
-          this.tabs[i].internalSelected = i === index;
+        if (this.selectedId !== this.tabs[index].uid) {
+          this.selectedIndex = index;
+          this.selectedId = this.tabs[index].uid;
+
+          for (let i = 0; i < this.tabs.length; i++) {
+            this.tabs[i].internalSelected = i === index;
+          }
+          this.$emit('tab-selected', index);
         }
-        this.$emit('tab-selected', index);
       }
     },
     onCvSelected(srcComponent) {
