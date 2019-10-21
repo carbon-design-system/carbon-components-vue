@@ -1,6 +1,6 @@
 {
   "name": "storybook",
-  "version": "2.15.0-canary.5",
+  "version": "2.15.0-canary.6",
   "private": true,
   "description": "> TODO: description",
   "scripts": {
