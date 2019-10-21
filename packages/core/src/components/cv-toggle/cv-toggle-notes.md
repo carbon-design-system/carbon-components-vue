@@ -61,3 +61,5 @@ html
 - checked: true | false
 - disabled: standard HTML toggle property
 - small: if true small version of toggle with no labels
+- formItem: { type: Boolean, default: true }
+- hideLabel: Boolean - label becomes an aria-label

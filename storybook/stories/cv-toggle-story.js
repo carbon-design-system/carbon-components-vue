@@ -43,6 +43,18 @@ let preKnobs = {
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: 'disabled',
   },
+  formItem: {
+    group: 'attr',
+    type: boolean,
+    config: ['form-item', true], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'form-item',
+  },
+  hideLabel: {
+    group: 'attr',
+    type: boolean,
+    config: ['hide-label', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'hide-label',
+  },
   vModel: {
     group: 'attr',
     value: `v-model="modelValue"`,
