@@ -9,6 +9,7 @@
       },
     ]"
     tabindex="0"
+    role="listitem"
     :title="title"
     @keydown.enter.stop.prevent="$emit('remove')"
     @keydown.space.prevent
