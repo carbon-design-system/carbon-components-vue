@@ -10,9 +10,9 @@
       @keydown.left.prevent="moveLeft"
     >
       <cv-dropdown class="bx--tabs-trigger" :value="`${selectedIndex}`" @change="onDropChange" :form-item="false">
-        <cv-dropdown-item v-for="(tab, index) in tabs" :key="`drop-${index}`" :value="`${index}`">
-          {{ tab.label }}
-        </cv-dropdown-item>
+        <cv-dropdown-item v-for="(tab, index) in tabs" :key="`drop-${index}`" :value="`${index}`">{{
+          tab.label
+        }}</cv-dropdown-item>
       </cv-dropdown>
       <ul class="bx--tabs__nav bx--tabs__nav--hidden" role="tablist">
         <li
@@ -127,16 +127,15 @@ export default {
       }
     },
     checkSelected() {
-      const childTabs = this.$children.filter(child => child.$_CvTab);
       let somethingSelected = false;
 
-      for (let i = 0; i < childTabs.length; i++) {
-        if (childTabs[i].internalSelected) {
+      for (let i = 0; i < this.tabs.length; i++) {
+        if (this.tabs[i].internalSelected) {
           this.onTabClick(i);
           somethingSelected = true;
         }
       }
-      if (!somethingSelected && childTabs.length) {
+      if (!somethingSelected && this.tabs.length) {
         this.onTabClick(0);
       }
     },
