@@ -18,9 +18,9 @@
 <template>
   <div :class="{ 'bx--form-item': formItem }">
     <div class="bx--dropdown__wrapper" :class="{ 'bx--dropdown__wrapper--inline': inline, 'cv-dropdown': !formItem }">
-      <span v-if="label" :id="`${uid}-label`" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">{{
-        label
-      }}</span>
+      <span v-if="label" :id="`${uid}-label`" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">
+        {{ label }}
+      </span>
 
       <div
         v-if="!inline && isHelper"
@@ -192,7 +192,7 @@ export default {
     },
     onCvBeforeDestroy(srcComponent) {
       if (srcComponent.value === this.internalValue) {
-        this.internalValue = null;
+        this.dataValue = null;
       }
     },
     dropdownItems() {
