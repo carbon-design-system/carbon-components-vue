@@ -10,9 +10,9 @@
       @keydown.left.prevent="moveLeft"
     >
       <cv-dropdown class="bx--tabs-trigger" :value="`${selectedIndex}`" @change="onDropChange" :form-item="false">
-        <cv-dropdown-item v-for="(tab, index) in tabs" :key="`drop-${index}`" :value="`${index}`">{{
-          tab.label
-        }}</cv-dropdown-item>
+        <cv-dropdown-item v-for="(tab, index) in tabs" :key="`drop-${index}`" :value="`${index}`">
+          {{ tab.label }}
+        </cv-dropdown-item>
       </cv-dropdown>
       <ul class="bx--tabs__nav bx--tabs__nav--hidden" role="tablist">
         <li
@@ -52,6 +52,9 @@ import CvDropdownItem from '../cv-dropdown/cv-dropdown-item';
 export default {
   name: 'CvTabs',
   components: { CvDropdown, CvDropdownItem },
+  props: {
+    noDefaultToFirst: Boolean,
+  },
   data() {
     return {
       tabs: [],
@@ -135,7 +138,7 @@ export default {
           somethingSelected = true;
         }
       }
-      if (!somethingSelected && this.tabs.length) {
+      if (!this.noDefaultToFirst && !somethingSelected && this.tabs.length) {
         this.onTabClick(0);
       }
     },
