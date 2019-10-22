@@ -36,3 +36,4 @@ NOTE: \$attrs are assigned to the nav tab (cv-tabs).
 - selected: optional
 - label: required label for tab link
 - disabled: optional
+- no-default-to-first: Boolean - failure to select a tab or removal of selected tab will not cause the a tab to be selected
