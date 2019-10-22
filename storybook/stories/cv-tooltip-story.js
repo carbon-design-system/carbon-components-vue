@@ -14,6 +14,22 @@ const storiesExperimental = storiesOf('Experimental/CvTooltip', module);
 import Filter16 from '@carbon/icons-vue/es/filter/16';
 
 let preKnobs = {
+  alignment: {
+    group: 'attr',
+    type: select,
+    config: [
+      'alignment',
+      {
+        Start: 'start',
+        Center: 'center',
+        End: 'end',
+      },
+      'center',
+      // consts.CONFIG,// fails when used with number in storybook 4.1.4
+    ],
+    inline: true,
+    prop: 'alignment',
+  },
   direction: {
     group: 'attr',
     type: select,
@@ -114,6 +130,22 @@ for (const story of storySet) {
 // /* ----------------------------------------------------- */
 
 preKnobs = {
+  alignment: {
+    group: 'attr',
+    type: select,
+    config: [
+      'alignment',
+      {
+        Start: 'start',
+        Center: 'center',
+        End: 'end',
+      },
+      'center',
+      // consts.CONFIG,// fails when used with number in storybook 4.1.4
+    ],
+    inline: true,
+    prop: 'alignment',
+  },
   direction: {
     group: 'attr',
     type: select,
@@ -121,7 +153,9 @@ preKnobs = {
       'direction',
       {
         Top: 'top',
+        Right: 'right',
         Bottom: 'bottom',
+        Left: 'left',
       },
       'bottom',
       // consts.CONFIG,// fails when used with number in storybook 4.1.4
@@ -185,6 +219,22 @@ for (const story of storySet) {
 // /* ----------------------------------------------------- */
 
 preKnobs = {
+  alignment: {
+    group: 'attr',
+    type: select,
+    config: [
+      'alignment',
+      {
+        Start: 'start',
+        Center: 'center',
+        End: 'end',
+      },
+      'center',
+      // consts.CONFIG,// fails when used with number in storybook 4.1.4
+    ],
+    inline: true,
+    prop: 'alignment',
+  },
   direction: {
     group: 'attr',
     type: select,
