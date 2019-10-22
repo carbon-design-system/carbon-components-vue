@@ -1,33 +1,36 @@
 <template>
   <div class="cv-interactive-tooltip">
-    <div class="bx--tooltip__label" :aria-describedby="uid">
+    <div :id="`${uid}-label`" class="bx--tooltip__label">
       <slot name="label"></slot>
 
-      <div
-        tabindex="0"
-        data-tooltip-trigger
-        :data-tooltip-target="`#${uid}`"
-        role="tooltip"
+      <button
+        :aria-expanded="dataVisible"
+        :aria-labelledby="`${uid}-label`"
         class="bx--tooltip__trigger"
+        :aria-controls="`${uid}`"
+        aria-haspopup="true"
         ref="trigger"
+        role="button"
         @click="toggle"
-        @keydown.space.prevent
-        @keyup.space.prevent="toggle"
-        @keydown.enter.prevent="toggle"
         @keydown.tab="onTriggerTab"
         @focusout="checkFocusOut"
       >
         <slot name="trigger">
-          <Information16 class="banana" />
+          <Information16 />
         </slot>
-      </div>
+      </button>
     </div>
+
     <div
-      :id="uid"
+      :id="`${uid}`"
+      aria-hidden="true"
       :data-floating-menu-direction="direction"
       class="bx--tooltip"
       :class="{ 'bx--tooltip--shown': dataVisible }"
       ref="popup"
+      role="dialog"
+      :aria-describedby="`${uid}-body`"
+      :aria-labelledby="`${uid}-label`"
       @focusout="checkFocusOut"
       :style="{ left: left + 'px', top: top + 'px' }"
       tabindex="-1"
@@ -41,7 +44,9 @@
         @focus="focusBeforeContent"
       />
       <span class="bx--tooltip__caret"></span>
-      <slot name="content"></slot>
+      <div class="bx--tooltip__content">
+        <slot name="content"></slot>
+      </div>
       <div
         class="cv-interactive-tooltip__after-content"
         ref="afterContent"

@@ -1,11 +1,14 @@
 <template>
-  <div class="cv-tooltip bx--tooltip--icon">
-    <div tabindex="0" class="bx--tooltip__trigger" :class="`bx--tooltip--icon__${direction}`" :aria-label="tip">
-      <slot>
-        <Information16 />
-      </slot>
-    </div>
-  </div>
+  <button
+    class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y"
+    :class="`bx--tooltip--${direction} bx--tooltip--align-${alignment}`"
+    role="button"
+  >
+    <span class="bx--assistive-text">{{ tip }}</span>
+    <slot>
+      <Information16 />
+    </slot>
+  </button>
 </template>
 
 <script>
@@ -15,6 +18,7 @@ export default {
   name: 'CvTooltip',
   components: { Information16 },
   props: {
+    alignment: { type: String, default: 'center', validator: val => ['start', 'center', 'end'].includes(val) },
     direction: {
       type: String,
       default: 'top',
