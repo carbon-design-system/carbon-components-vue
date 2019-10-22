@@ -24,6 +24,8 @@
 - Add nested list ordering
 - Add CvTabsSkeleton component
 - Tests for CvCheckbox, CvToggle, CvBreadcrumb added
+- Rework tabs component to behave better when dynamically adding/removing tabs.
+- Added CvTabs property no-default-to-first option to revent auto default to first tab.
 
 ### Fix
 
