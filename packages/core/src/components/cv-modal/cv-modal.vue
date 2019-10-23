@@ -191,13 +191,11 @@ export default {
       }
     },
     hide() {
+      //restore any previous scrollability
+      document.body.classList.remove('bx--body--with-modal-open');
+
       this.dataVisible = false;
       this.$emit('modal-hidden');
-
-      this.$nextTick(() => {
-        //restore any previous scrollability
-        document.body.classList.remove('bx--body--with-modal-open');
-      });
     },
     onPrimaryClick(ev) {
       this.$emit('primary-click');
