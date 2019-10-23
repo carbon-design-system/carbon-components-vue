@@ -31,7 +31,7 @@
         </button>
       </div>
 
-      <div class="bx--modal-content" ref="content">
+      <div class="bx--modal-content" ref="content" :tabindex="scrollable ? 0 : undefined">
         <slot name="content">
           <p>
             Passive modal notifications should only appear if there is an action the user needs to address immediately.
@@ -97,6 +97,7 @@ export default {
   data() {
     return {
       dataVisible: false,
+      scrollable: false,
     };
   },
   mounted() {
@@ -158,6 +159,9 @@ export default {
       }
       this.$emit('modal-shown');
 
+      // check to see if content scrollable
+      this.scrollable = this.$refs.content.scrollHeight > this.$refs.content.clientHeight;
+
       this.$el.removeEventListener('transitionend', this.onShown);
     },
     onExternalClick(ev) {
@@ -172,6 +176,9 @@ export default {
       this._maybeHide(ev, 'close-click');
     },
     show() {
+      // prevent body scrolling
+      document.body.classList.add('bx--body--with-modal-open');
+
       this.$el.addEventListener('transitionend', this.onShown);
       this.dataVisible = true;
     },
@@ -186,6 +193,11 @@ export default {
     hide() {
       this.dataVisible = false;
       this.$emit('modal-hidden');
+
+      this.$nextTick(() => {
+        //restore any previous scrollability
+        document.body.classList.remove('bx--body--with-modal-open');
+      });
     },
     onPrimaryClick(ev) {
       this.$emit('primary-click');
