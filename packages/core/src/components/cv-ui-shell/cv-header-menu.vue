@@ -1,5 +1,5 @@
 <template>
-  <li class="cv-header-menu bx--header__submenu">
+  <li class="cv-header-menu bx--header__submenu" @mouseenter="doToggle(true)" @mouseleave="doToggle(false)">
     <a
       aria-haspopup="true"
       :aria-expanded="expanded ? 'true' : 'false'"
@@ -45,8 +45,8 @@ export default {
     };
   },
   methods: {
-    doToggle() {
-      this.expanded = !this.expanded;
+    doToggle(force) {
+      this.expanded = force || !this.expanded;
     },
     onFocusout(ev) {
       if (!(this.$el.contains(ev.relatedTarget) || this.$refs.menu.contains(ev.relatedTarget))) {
