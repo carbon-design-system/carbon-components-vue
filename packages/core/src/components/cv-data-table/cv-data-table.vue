@@ -306,7 +306,7 @@ export default {
       const zebraClass = this.zebra ? `${prefix}zebra ` : '';
       const borderlessClass = this.borderless ? `${prefix}no-border ` : '';
       const skeletonClass = this.skeleton ? `bx--skeleton` : '';
-      return `${sizeClass}${zebraClass}${borderlessClass}${skeletonClass}`.trimRight();
+      return `${sizeClass}${zebraClass}${borderlessClass}${skeletonClass}`.trim();
     },
     headingStyle() {
       return index => this.dataColumns[index].headingStyle;
