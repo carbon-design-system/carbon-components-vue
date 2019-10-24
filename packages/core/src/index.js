@@ -56,7 +56,7 @@ import { CvOverflowMenu, CvOverflowMenuItem } from './components/cv-overflow-men
 import { CvPagination } from './components/cv-pagination';
 import { CvProgress, CvProgressStep } from './components/cv-progress';
 import { CvRadioGroup, CvRadioButton } from './components/cv-radio-button';
-import { CvSearch } from './components/cv-search';
+import { CvSearch, CvSearchSkeleton } from './components/cv-search';
 import { CvSelect, CvSelectOption, CvSelectOptgroup } from './components/cv-select';
 import { CvSkeletonText } from './components/cv-skeleton-text';
 import { CvSliderSkeleton, CvSlider } from './components/cv-slider';
@@ -123,7 +123,7 @@ export { CvOverflowMenu, CvOverflowMenuItem };
 export { CvPagination };
 export { CvProgress, CvProgressStep };
 export { CvRadioGroup, CvRadioButton };
-export { CvSearch };
+export { CvSearch, CvSearchSkeleton };
 export { CvSelect, CvSelectOption, CvSelectOptgroup };
 export { CvSkeletonText };
 export { CvSlider, CvSliderSkeleton };

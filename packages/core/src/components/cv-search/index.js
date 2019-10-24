@@ -1,2 +1,3 @@
 import CvSearch from './cv-search';
-export { CvSearch };
+import CvSearchSkeleton from './cv-search-skeleton';
+export { CvSearch, CvSearchSkeleton };

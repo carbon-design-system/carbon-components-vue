@@ -7,12 +7,12 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvSearchNotesMD from '@carbon/vue/src/components/cv-search/cv-search-notes.md';
-import { CvSearch } from '@carbon/vue/src';
+import { CvSearch, CvSearchSkeleton } from '@carbon/vue/src';
 
 const storiesDefault = storiesOf('Components/CvSearch', module);
 const storiesExperimental = storiesOf('Experimental/CvSearch', module);
 
-const preKnobs = {
+let preKnobs = {
   theme: {
     group: 'attr',
     type: boolean,
@@ -60,14 +60,14 @@ const preKnobs = {
   },
 };
 
-const variants = [
+let variants = [
   { name: 'default', excludes: ['vModel', 'events'] },
   { name: 'minimal', includes: ['label'] },
   { name: 'events', includes: ['label', 'events'] },
   { name: 'vModel', includes: ['label', 'vModel'] },
 ];
 
-const storySet = knobsHelper.getStorySet(variants, preKnobs);
+let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
 for (const story of storySet) {
   storiesDefault.add(
@@ -101,6 +101,52 @@ for (const story of storySet) {
 
       return {
         components: { CvSearch, SvTemplateView },
+        template: templateViewString,
+        props: settings.props,
+        data() {
+          return {
+            modelValue: '',
+          };
+        },
+        methods: {
+          onInput: action('cv-search - input event'),
+        },
+      };
+    },
+    {
+      notes: { markdown: CvSearchNotesMD },
+    }
+  );
+}
+
+preKnobs = {};
+variants = [{ name: 'skeleton' }];
+storySet = knobsHelper.getStorySet(variants, preKnobs);
+
+for (const story of storySet) {
+  storiesDefault.add(
+    story.name,
+    () => {
+      const settings = story.knobs();
+
+      // ----------------------------------------------------------------
+
+      const templateString = `
+<cv-search-skeleton>
+</cv-search-skeleton>
+  `;
+      // ----------------------------------------------------------------
+
+      const templateViewString = `
+    <sv-template-view
+      sv-margin
+      sv-source='${templateString.trim()}'>
+      <template slot="component">${templateString}</template>
+    </sv-template-view>
+  `;
+
+      return {
+        components: { CvSearchSkeleton, SvTemplateView },
         template: templateViewString,
         props: settings.props,
         data() {
