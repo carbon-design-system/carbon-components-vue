@@ -63,9 +63,19 @@ let preKnobs = {
     prop: 'value',
     value: val => `${val}`,
   },
+  intValue: {
+    group: 'attr',
+    type: number,
+    config: ['value', 0], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'value',
+  },
   vModel: {
     group: 'attr',
     value: `v-model="modelValue"`,
+  },
+  vModelInt: {
+    group: 'attr',
+    value: `v-model="modelValueInt"`,
   },
   events: {
     group: 'attr',
@@ -76,15 +86,19 @@ let preKnobs = {
 let variants = [
   {
     name: 'default',
-    excludes: ['vModel', 'events', 'invalidMessageSlot', 'helperTextSlot'],
+    excludes: ['vModel', 'invalidMessageSlot', 'helperTextSlot', 'intValue', 'vModelInt'],
+  },
+  {
+    name: 'integer value',
+    excludes: ['vModel', 'invalidMessageSlot', 'helperTextSlot', 'value', 'vModelInt'],
   },
   {
     name: 'helper and invalid slots',
-    excludes: ['vModel', 'events'],
+    excludes: ['vModel', 'events', 'intValue', 'vModelInt'],
   },
   { name: 'minimal', includes: ['label'] },
-  { name: 'events', includes: ['label', 'events'] },
-  { name: 'vModel', includes: ['label', 'vModel'] },
+  { name: 'vModel', includes: ['label', 'vModel', 'events'] },
+  { name: 'vModelInt', includes: ['label', 'vModelInt', 'events'] },
 ];
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
@@ -113,7 +127,7 @@ for (const story of storySet) {
       <template slot="other">
         <div v-if="${templateString.indexOf('v-model') > 0}">
           <label>Model value:
-            <input type="number" v-model="modelValue" />
+            <input type="number" v-model="modelValue"/>
           </label>
         </div>
       </template>
@@ -127,7 +141,27 @@ for (const story of storySet) {
         data() {
           return {
             modelValue: '100',
+            modelValueInt: 100,
+            storyName: story.name,
           };
+        },
+        watch: {
+          modelValue() {
+            let intVal = parseInt(this.modelValue, 10);
+
+            if (isNaN(intVal)) {
+              intVal = 0;
+            }
+            if (intVal !== this.modelValueInt) {
+              this.modelValueInt = intVal;
+            }
+          },
+          modelValueInt() {
+            let val = '' + this.modelValueInt;
+            if (this.modelValue !== val) {
+              this.modelValue = '' + this.modelValueInt;
+            }
+          },
         },
         methods: {
           onInput: action('cv-number-input - input event'),
