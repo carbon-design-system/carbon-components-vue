@@ -28,11 +28,15 @@ http://www.carbondesignsystem.com/components/number-input/code
 - invalid-message: optional error message
 - label: the label text for the input
 - theme: optional 'light',
-- value: optional initial value of the input,
+- value: optional initial value of the input (string or number)
 - ariaLabelForDownButton: optional defaults to 'Decrease number input'
 - ariaLabelForUpButton: optional defaults to 'Increase number input'
 
 Other standard props e.g. disabled
+
+## v-model
+
+The value and/or v-model attributes can be integers represented by string or number types. The same type will be raised in events as is supplied to value or v-model attributes.
 
 ## slots
 
