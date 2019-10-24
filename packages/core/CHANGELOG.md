@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.16.0-canary.0 (Oct 24th 2019)
+
+### Feat
+
+Allow number input to work with string or number for value, v-model and events.
+
+### Fix
+
 ## 2.15.0 (Oct 24th 2019)
 
 ### Feat
