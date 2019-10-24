@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.15.0-canary.x (Oct 18th 2019)
+## 2.15.0 (Oct 24th 2019)
 
 ### Feat
 
@@ -19,6 +19,9 @@
   - CvNumberInput
   - CvOverflowMenu
   - CvToastNotification
+  - CvTextInput
+  - CvToggle
+  - CvTags
 - Add expand all to data table
 - Add inline link
 - Add nested list ordering
@@ -26,11 +29,14 @@
 - Tests for CvCheckbox, CvToggle, CvBreadcrumb added
 - Rework tabs component to behave better when dynamically adding/removing tabs.
 - Added CvTabs property no-default-to-first option to revent auto default to first tab.
+- Add hover expand for header menu items
+- Add keyboard scroll to modal dialog, suppressing background scroll.
 
 ### Fix
 
 - Uploader skeleton typo
 - CvTabs behaviour when switching tab set (beforeDestory event name typo)
+- Remove trimRight usage for wider support
 
 ### Chore
 
