@@ -149,14 +149,6 @@ for (const story of storySet) {
         components: { CvSearchSkeleton, SvTemplateView },
         template: templateViewString,
         props: settings.props,
-        data() {
-          return {
-            modelValue: '',
-          };
-        },
-        methods: {
-          onInput: action('cv-search - input event'),
-        },
       };
     },
     {
