@@ -8,8 +8,6 @@ Allow number input to work with string or number for value, v-model and events.
 
 ### Fix
 
-## 2.15.0 (Oct 24th 2019)
-
 ### Feat
 
 - Add v-model for date picker
