@@ -48,6 +48,11 @@ export const testComponent = {
       expect(getComponentProp(component, prop).default).toBeDefined();
     });
   },
+  prosHaveDefaultOfUndefined: (component, props) => {
+    test.each(props)('has a prop with a default undefined: %s', prop => {
+      expect(getComponentProp(component, prop).default).not.toBeDefined();
+    });
+  },
 };
 
 const PLACEMENT_STRING = 'Now is > the FOO &amp; of &#128169; our (discontent)';

@@ -60,7 +60,7 @@ export default {
     formItem: { type: Boolean, default: true },
     helperText: { type: String, default: undefined },
     invalidMessage: { type: String, default: undefined },
-    label: String,
+    label: { type: String, default: '' },
     value: { type: [String, Number], default: '' },
     invalid: /* deprecate */ {
       type: Boolean,
