@@ -9,40 +9,38 @@ describe('CvToggle', () => {
   it('should render with the appropriate kind', () => {
     const propsData = { label: 'test', value: 'check-1' };
     const wrapper = shallow(CvToggle, { propsData });
-    expect(wrapper.find('input').classes(`${prefix}--toggle`)).toEqual(true);
-    expect(wrapper.find('label').classes(`${prefix}--toggle__label`)).toEqual(true);
+    expect(wrapper.find('input').classes(`${prefix}--toggle-input`)).toEqual(true);
+    expect(wrapper.find('label').classes(`${prefix}--toggle-input__label`)).toEqual(true);
     expect(
       wrapper
         .findAll('div')
         .at(0)
         .classes(`${prefix}--form-item`)
     ).toEqual(true);
-    expect(
-      wrapper
-        .findAll('div')
-        .at(1)
-        .classes(`${prefix}--toggle__text--left`)
-    ).toEqual(true);
-    expect(
-      wrapper
-        .findAll('div')
-        .at(2)
-        .classes(`${prefix}--toggle__text--right`)
-    ).toEqual(true);
-    expect(wrapper.find('span').classes(`${prefix}--toggle__appearance`)).toEqual(true);
+    expect(wrapper.find(`${prefix}--toggle__text--off`)).toBeDefined();
+    expect(wrapper.find(`${prefix}--toggle__text--on`)).toBeDefined();
   });
 
-  it('should render with the appropriate kind when label is set', () => {
+  it('should render with the appropriate label when label is set', () => {
     const propsData = { label: 'test', value: 'check-1' };
     const wrapper = shallow(CvToggle, { propsData });
-    expect(wrapper.classes(`${prefix}--fieldset`)).toEqual(true);
-    expect(wrapper.find('legend').classes(`${prefix}--label`)).toEqual(true);
+    const label = wrapper.find('label');
+    expect(label.classes(`${prefix}--toggle-input__label`)).toEqual(true);
+    expect(label.html()).toContain('test');
+  });
+
+  it('should render aria-label when label is set and hideLabel is true', () => {
+    const propsData = { label: 'test', value: 'check-1', hideLabel: true };
+    const wrapper = shallow(CvToggle, { propsData });
+    const label = wrapper.find('label');
+    expect(label.classes(`${prefix}--toggle-input__label`)).toEqual(true);
+    expect(label.attributes('aria-label')).toBe('test');
   });
 
   it('should render with the appropriate kind when small is true', () => {
     const propsData = { label: 'test', small: true, value: 'check-1' };
     const wrapper = shallow(CvToggle, { propsData });
-    expect(wrapper.find('input').classes(`${prefix}--toggle--small`)).toEqual(true);
+    expect(wrapper.find('input').classes(`${prefix}--toggle-input--small`)).toEqual(true);
     expect(wrapper.find('svg').classes(`${prefix}--toggle__check`)).toEqual(true);
   });
 
