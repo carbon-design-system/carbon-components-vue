@@ -35,10 +35,12 @@ export const testComponent = {
 
     test.each(props)(`has a prop of ${typeName} type: %s`, prop => {
       let componentProp = getComponentProp(component, prop);
+      let componentPropType = componentProp.type || componentProp;
+
       if (types.map) {
-        expect(componentProp.type).toEqual(expect.arrayContaining(types));
+        expect(componentPropType).toEqual(expect.arrayContaining(types));
       } else {
-        expect(componentProp.type).toBe(types);
+        expect(componentPropType).toBe(types);
       }
     });
   },
