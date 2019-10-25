@@ -2,7 +2,7 @@
   <button
     class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y"
     :class="`bx--tooltip--${direction} bx--tooltip--align-${alignment}`"
-    role="button"
+    type="button"
   >
     <span class="bx--assistive-text">{{ tip }}</span>
     <slot>
