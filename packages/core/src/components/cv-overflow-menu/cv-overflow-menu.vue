@@ -4,7 +4,7 @@
       class="bx--overflow-menu__trigger bx--tooltip__trigger bx--tooltip--a11y"
       :class="[tipClasses, { 'bx--overflow-menu--open': open }]"
       aria-haspopup
-      role="button"
+      type="button"
       :aria-expanded="open"
       :aria-controls="`${uid}-menu`"
       :id="`${uid}-trigger`"
