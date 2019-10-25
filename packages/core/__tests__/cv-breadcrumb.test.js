@@ -1,4 +1,4 @@
-import { shallowMount as shallow, mount } from '@vue/test-utils';
+import { shallowMount as shallow } from '@vue/test-utils';
 import { testComponent, testInstance } from './_helpers';
 import { CvBreadcrumb, CvBreadcrumbSkeleton, CvBreadcrumbItem } from '@/components/cv-breadcrumb';
 import { settings } from 'carbon-components';
@@ -6,82 +6,83 @@ import { settings } from 'carbon-components';
 const { prefix } = settings;
 
 describe('CvBreadcrumb', () => {
+  // ***************
+  // PROP CHECKS
+  // ***************
+  testComponent.propsAreType(CvBreadcrumb, ['ariaLabel'], String);
+  testComponent.propsAreType(CvBreadcrumb, ['noTrailingSlash'], Boolean);
+
   testComponent.propsHaveDefault(CvBreadcrumb, ['ariaLabel']);
   testComponent.propsHaveDefault(CvBreadcrumbSkeleton, ['ariaLabel']);
 
-  it('should render with the appropriate kind without trailing slash', () => {
+  // ***************
+  // SNAPSHOT CHECKS
+  // ***************
+  it('matches breadcrumb with trailing slash', () => {
     const propsData = { noTrailingSlash: false };
     const wrapper = shallow(CvBreadcrumb, { propsData });
-    expect(wrapper.classes(`${prefix}--breadcrumb`)).toEqual(true);
-    expect(wrapper.classes(`${prefix}--breadcrumb--no-trailing-slash`)).toEqual(false);
+
+    expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('should render with the appropriate kind with trailing slash', () => {
+  it('matches breadcrumb without trailing slash', () => {
     const propsData = { noTrailingSlash: true };
     const wrapper = shallow(CvBreadcrumb, { propsData });
-    expect(wrapper.classes(`${prefix}--breadcrumb`)).toEqual(true);
-    expect(wrapper.classes(`${prefix}--breadcrumb--no-trailing-slash`)).toEqual(true);
+
+    expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('has the expected attributes', () => {
-    const ariaLabel = 'test';
-    const propsData = { noTrailingSlash: true, ariaLabel };
-    const wrapper = shallow(CvBreadcrumb, { propsData });
-    expect(wrapper.attributes('aria-label')).toEqual(ariaLabel);
-  });
-  it('is the expected HTML element', () => {
-    const propsData = { noTrailingSlash: true };
-    const wrapper = shallow(CvBreadcrumb, { propsData });
-    expect(wrapper.is('nav')).toBe(true);
-  });
-
-  it('has slot element that works as expected', () => {
+  it('matches breadcrumb with slotted content', () => {
     const wrapper = shallow(CvBreadcrumb, {
       slots: {
         default: CvBreadcrumbItem,
       },
     });
-    expect(wrapper.find(CvBreadcrumbItem).isVueInstance()).toBe(true);
+
+    expect(wrapper.html()).toMatchSnapshot();
   });
+
+  // ***************
+  // FUNCTIONAL CHECKS
+  // ***************
 });
 
 describe('CvBreadcrumbItem', () => {
-  const wrapper = shallow(CvBreadcrumbItem);
+  // ***************
+  // PROP CHECKS
+  // ***************
 
-  it('Has the expected classes', () => {
-    expect(wrapper.classes(`${prefix}--breadcrumb-item`)).toEqual(true);
-  });
+  // ***************
+  // SNAPSHOT CHECKS
+  // ***************
+  it('matches breadcrumb item with slotted content', () => {
+    const wrapper = shallow(CvBreadcrumbItem, {
+      stubs: {
+        CvBreadcrumbItem: "<div class='stub'></div>",
+      },
+    });
 
-  it('is the expected HTML element', () => {
-    expect(wrapper.is('div')).toBe(true);
+    expect(wrapper.html()).toMatchSnapshot();
   });
+  // ***************
+  // FUNCTIONAL CHECKS
+  // ***************
 });
 
 describe('CvBreadcrumbSkeleton', () => {
-  it('has the expected classes', () => {
+  // ***************
+  // PROP CHECKS
+  // ***************
+
+  // ***************
+  // SNAPSHOT CHECKS
+  // ***************
+  it('matches breadcrumb item with slotted content', () => {
     const wrapper = shallow(CvBreadcrumbSkeleton);
-    expect(wrapper.classes(`${prefix}--breadcrumb`)).toEqual(true);
-    expect(wrapper.classes(`${prefix}--skeleton`)).toEqual(true);
-  });
 
-  it('has the expected attributes', () => {
-    const ariaLabel = 'test';
-    const propsData = { ariaLabel };
-    const wrapper = shallow(CvBreadcrumbSkeleton, { propsData });
-    expect(wrapper.attributes('aria-label')).toEqual(ariaLabel);
+    expect(wrapper.html()).toMatchSnapshot();
   });
-
-  it('is the expected HTML element', () => {
-    const wrapper = shallow(CvBreadcrumbSkeleton);
-    expect(wrapper.is('nav')).toBe(true);
-  });
-
-  it('has three CvBreadcrumbItemSkeleton components', () => {
-    const wrapper = shallow(CvBreadcrumbSkeleton, {
-      stubs: {
-        CvBreadcrumbItemSkeleton: "<div class='stub'></div>",
-      },
-    });
-    expect(wrapper.findAll('.stub').length).toEqual(3);
-  });
+  // ***************
+  // FUNCTIONAL CHECKS
+  // ***************
 });
