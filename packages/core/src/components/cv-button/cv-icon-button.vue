@@ -10,7 +10,7 @@
       },
     ]"
     v-on="$listeners"
-    role="button"
+    type="button"
   >
     <span class="bx--assistive-text">{{ tipText }}</span>
 

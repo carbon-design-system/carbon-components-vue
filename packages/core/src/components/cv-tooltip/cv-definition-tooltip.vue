@@ -4,7 +4,7 @@
       :aria-describedby="`${uid}-label`"
       class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition"
       :class="`bx--tooltip--${direction} bx--tooltip--align-${alignment}`"
-      role="button"
+      type="button"
     >
       {{ term }}
     </button>

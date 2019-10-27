@@ -10,7 +10,7 @@
         :aria-controls="`${uid}`"
         aria-haspopup="true"
         ref="trigger"
-        role="button"
+        type="button"
         @click="toggle"
         @keydown.tab="onTriggerTab"
         @focusout="checkFocusOut"
