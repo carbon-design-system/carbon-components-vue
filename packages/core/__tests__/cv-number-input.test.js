@@ -1,11 +1,12 @@
-import { shallowMount as shallow, createLocalVue } from '@vue/test-utils';
-import { testComponent, testInstance } from './_helpers';
+import { shallowMount as shallow } from '@vue/test-utils';
+import { testComponent } from './_helpers';
 import { CvNumberInput, CvNumberInputSkeleton } from '@/components/cv-number-input';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
 
 describe('CvNumberInput', () => {
+  // ***************
+  // PROP CHECKS
+  // ***************
+
   testComponent.propsHaveDefault(CvNumberInput, [
     'formItem',
     'ariaLabelForUpButton',
@@ -23,6 +24,10 @@ describe('CvNumberInput', () => {
 
   testComponent.prosHaveDefaultOfUndefined(CvNumberInput, ['helperText', 'invalidMessage']);
 
+  // ***************
+  // SNAPSHOT TESTS
+  // ***************
+
   it('should match snapshot when all props are default', () => {
     const id = '1';
     const wrapper = shallow(CvNumberInput, { propsData: { id } });
@@ -32,7 +37,6 @@ describe('CvNumberInput', () => {
   it('should match snapshot when it is not a formItem', () => {
     const formItem = false;
     const id = '1';
-
     const wrapper = shallow(CvNumberInput, { propsData: { formItem, id } });
     expect(wrapper.html()).toMatchSnapshot();
   });
@@ -85,13 +89,41 @@ describe('CvNumberInput', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('should match snapshot when value is invalid', () => {
-    const formItem = false;
+  it('should match snapshot when invalid-message slot is provided', () => {
     const id = '1';
-    const value = 'not a number';
-    const wrapper = shallow(CvNumberInput, { propsData: { formItem, id, value } });
+    const value = 5;
+    const invalidMessage = 'test';
+    const wrapper = shallow(
+      CvNumberInput,
+      { propsData: { id, value, invalidMessage } },
+      {
+        slots: {
+          'invalid-message': '<div class="fake-slot">my invalid message</div>',
+        },
+      }
+    );
     expect(wrapper.html()).toMatchSnapshot();
   });
+
+  it('should match snapshot when helper-text slot is provided', () => {
+    const id = '1';
+    const value = 5;
+    const helperText = 'test';
+    const wrapper = shallow(
+      CvNumberInput,
+      { propsData: { id, value, helperText } },
+      {
+        slots: {
+          'helper-text': '<div class="fake-slot">my helper text</div>',
+        },
+      }
+    );
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
+  // ***************
+  // FUNCTIONAL TESTS
+  // ***************
 
   it('should emit input on doDown', () => {
     const id = '1';
@@ -114,14 +146,6 @@ describe('CvNumberInput', () => {
     expect(wrapper.emitted().input).toBeTruthy();
   });
 
-  it('should emit Number when value prop is Number', () => {
-    const id = '1';
-    const value = 5;
-    const wrapper = shallow(CvNumberInput, { propsData: { id, value } });
-    wrapper.find('.up-icon').trigger('click');
-    expect(wrapper.emitted().input[0]).toEqual([value + 1]);
-  });
-
   it('should emit String when value prop is String', () => {
     const id = '1';
     const value = '5';
@@ -130,12 +154,20 @@ describe('CvNumberInput', () => {
     expect(wrapper.emitted().input[0]).toEqual([(parseInt(value) + 1).toString()]);
   });
 
-  it('should increase value by 1 when doUp', () => {
+  it('should emit value encreased by 1 on doUp', () => {
     const id = '1';
     const value = 2;
     const wrapper = shallow(CvNumberInput, { propsData: { id, value } });
     wrapper.find('.up-icon').trigger('click');
     expect(wrapper.emitted().input[0]).toEqual([value + 1]);
+  });
+
+  it('should emit value decreased by 1 on doDown', () => {
+    const id = '1';
+    const value = 10;
+    const wrapper = shallow(CvNumberInput, { propsData: { id, value } });
+    wrapper.find('.down-icon').trigger('click');
+    expect(wrapper.emitted().input[0]).toEqual([value - 1]);
   });
 
   it('should emit the correct value on input', () => {
@@ -160,8 +192,20 @@ describe('CvNumberInput', () => {
 });
 
 describe('CvNumberInputSkeleton', () => {
+  // ***************
+  // PROP CHECKS
+  // ***************
+
+  // ***************
+  // SNAPSHOT TESTS
+  // ***************
+
   it('should match snapshot', () => {
     const wrapper = shallow(CvNumberInputSkeleton);
     expect(wrapper.html()).toMatchSnapshot();
   });
+
+  // ***************
+  // FUNCTIONAL TESTS
+  // ***************
 });
