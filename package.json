@@ -155,5 +155,7 @@
       "text-summary"
     ]
   },
-  "dependencies": {}
+  "dependencies": {
+    "babel-core": "7.0.0-bridge.0"
+  }
 }
