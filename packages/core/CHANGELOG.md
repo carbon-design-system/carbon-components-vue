@@ -1,12 +1,25 @@
 # Changelog
 
-## 2.16.0-canary.0 (Oct 24th 2019)
+## 2.16.0 (Oct 28th 2019)
 
 ### Feat
 
 Allow number input to work with string or number for value, v-model and events.
 
+### Chore
+
+Updated tests for
+
+- CvBreadcrumb
+- CvButton
+- CvBNumberInput
+- CvTag
+
 ### Fix
+
+CvButton raising two click events
+
+## 2.15.0 (Oct 24th 2019)
 
 ### Feat
 
