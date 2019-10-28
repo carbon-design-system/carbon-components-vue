@@ -37,4 +37,14 @@ export default {
     },
     size: { type: String, default: undefined, validator: val => ['', 'field', 'small'].includes(val) },
   },
+  computed: {
+    // Bind listeners at the component level to the embedded input element and
+    // add our own input listener to service the v-model. See:
+    // https://vuejs.org/v2/guide/components-custom-events.html#Customizing-Component-v-model
+    inputListeners() {
+      return Object.assign({}, this.$listeners, {
+        click: event => this.$emit('click', event),
+      });
+    },
+  },
 };

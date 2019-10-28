@@ -24,7 +24,7 @@ export default {
         return true;
       },
     },
-    size: { type: String, default: undefined, validator: val => ['', 'field', 'small'] },
+    size: { type: String, default: undefined, validator: val => ['', 'field', 'small'].includes(val) },
   },
 };
 </script>
