@@ -9,8 +9,7 @@
         'bx--btn--field': size === 'field',
       },
     ]"
-    v-on="$listeners"
-    @click="$emit('click', $event)"
+    v-on="inputListeners"
     role="button"
   >
     <slot></slot>

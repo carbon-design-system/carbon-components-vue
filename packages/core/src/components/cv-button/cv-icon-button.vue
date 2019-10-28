@@ -9,7 +9,7 @@
         'bx--btn--field': size === 'field',
       },
     ]"
-    v-on="$listeners"
+    v-on="inputListeners"
     type="button"
   >
     <span class="bx--assistive-text">{{ tipText }}</span>
