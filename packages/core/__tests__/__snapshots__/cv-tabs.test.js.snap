@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CvTab matches with disabled and selected 1`] = `<div id="an-id" role="tabpanel" aria-labelledby="an-id-link" class="cv-tab"></div>`;
+
+exports[`CvTab matches with slotted content 1`] = `
+<div id="an-id" role="tabpanel" aria-labelledby="an-id-link" aria-hidden="true" hidden="hidden" class="cv-tab">
+  <div class="stub"></div>
+</div>
+`;
+
+exports[`CvTabs matches render 1`] = `
+<div class="cv-tabs">
+  <div data-tabs="" role="navigation" class="cv-tab bx--tabs">
+    <cv-dropdown-stub theme="" placeholder="Choose an option" value="-1" class="bx--tabs-trigger"></cv-dropdown-stub>
+    <ul role="tablist" class="bx--tabs__nav bx--tabs__nav--hidden"></ul>
+  </div>
+  <div class="cv-tabs__panels"></div>
+</div>
+`;
+
+exports[`CvTabs matches with slotted content 1`] = `
+<div class="cv-tabs">
+  <div data-tabs="" role="navigation" class="cv-tab bx--tabs">
+    <cv-dropdown-stub theme="" placeholder="Choose an option" value="-1" class="bx--tabs-trigger"></cv-dropdown-stub>
+    <ul role="tablist" class="bx--tabs__nav bx--tabs__nav--hidden"></ul>
+  </div>
+  <div class="cv-tabs__panels">
+    <cv-tab-stub label="my-label">Some stuff</cv-tab-stub>
+    <cv-tab-stub label="my-label">Some stuff</cv-tab-stub>
+    <cv-tab-stub label="my-label">Some stuff</cv-tab-stub>
+  </div>
+</div>
+`;
