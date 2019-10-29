@@ -9,19 +9,19 @@
       @keydown.right.prevent="moveRight"
       @keydown.left.prevent="moveLeft"
     >
-      <cv-dropdown class="bx--tabs-trigger" :value="`${selectedIndex}`" @change="onDropChange" :form-item="false">
-        <cv-dropdown-item v-for="(tab, index) in tabs" :key="`drop-${index}`" :value="`${index}`">
-          {{ tab.label }}
-        </cv-dropdown-item>
+      <cv-dropdown class="bx--tabs-trigger" :value="`${selectedId}`" @change="onDropChange" :form-item="false">
+        <cv-dropdown-item v-for="tab in tabs" :key="`drop-${tab.uid}`" :value="`${tab.uid}`">{{
+          tab.label
+        }}</cv-dropdown-item>
       </cv-dropdown>
       <ul class="bx--tabs__nav bx--tabs__nav--hidden" role="tablist">
         <li
-          v-for="(tab, index) in tabs"
-          :key="index"
+          v-for="tab in tabs"
+          :key="tab.uid"
           class="cv-tabs-button bx--tabs__nav-item"
           :class="{
-            'bx--tabs__nav-item--selected': selectedIndex == index,
-            'bx--tabs__nav-item--disabled': disabledTabs.indexOf(index) !== -1,
+            'bx--tabs__nav-item--selected': selectedId == tab.uid,
+            'bx--tabs__nav-item--disabled': disabledTabs.indexOf(tab.uid) !== -1,
           }"
           role="presentation"
         >
@@ -32,7 +32,7 @@
             :aria-controls="tab.uid"
             :id="`${tab.uid}-link`"
             aria-selected="false"
-            @click="onTabClick(index)"
+            @click="onTabClick(tab.uid)"
             ref="link"
             >{{ tab.label }}</a
           >
@@ -58,7 +58,6 @@ export default {
   data() {
     return {
       tabs: [],
-      selectedIndex: -1,
       selectedId: undefined,
       disabledTabs: [],
     };
@@ -73,51 +72,61 @@ export default {
   },
   methods: {
     onDropChange(val) {
-      this.onTabClick(parseInt(val));
+      // val === tab.uid
+      this.onTabClick(val);
     },
     onCvMount(srcComponent) {
       this.tabs.push(srcComponent);
 
       this.checkDisabled(srcComponent);
-      if (this.selectedIndex < 0) {
+      if (this.selectedId === undefined) {
         this.checkSelected();
       }
     },
     onCvBeforeDestroy(srcComponent) {
       const tabIndex = this.tabs.findIndex(item => item.uid === srcComponent.uid);
       if (tabIndex > -1) {
+        const wasSelected = srcComponent.uid === this.selectedId;
+
         this.tabs.splice(tabIndex, 1);
+        this.selectedId = undefined;
 
         this.checkDisabled(srcComponent);
-        if (tabIndex <= this.selectedIndex) {
+
+        if (wasSelected) {
+          // Check to see if something else should be selected
           this.checkSelected();
         }
       }
     },
-    onTabClick(index) {
-      if (this.disabledTabs.indexOf(index) === -1) {
-        if (this.selectedId !== this.tabs[index].uid) {
-          this.selectedIndex = index;
-          this.selectedId = this.tabs[index].uid;
+    onTabClick(id) {
+      if (this.disabledTabs.indexOf(id) === -1) {
+        if (this.selectedId !== id) {
+          let newIndex = -1;
 
-          for (let i = 0; i < this.tabs.length; i++) {
-            this.tabs[i].internalSelected = i === index;
+          this.selectedId = id;
+
+          for (let i = 0; i < this.tabs.length && newIndex < 0; i++) {
+            if (this.tabs[i].uid === id) {
+              this.tabs[i].internalSelected = true;
+              newIndex = i;
+            } else {
+              this.tabs[i].internalSelected = false;
+            }
           }
-          this.$emit('tab-selected', index);
+
+          this.$emit('tab-selected', newIndex);
         }
       }
     },
     onCvSelected(srcComponent) {
-      const tabIndex = this.tabs.findIndex(item => item.uid === srcComponent.uid);
-      this.onTabClick(tabIndex);
+      this.onTabClick(srcComponent.uid);
     },
     onCvDisabled(srcComponent) {
-      const tabIndex = this.tabs.findIndex(item => item.uid === srcComponent.uid);
-      this.disabledTabs.push(tabIndex);
+      this.disabledTabs.push(srcComponent.uid);
     },
     onCvEnabled(srcComponent) {
-      const tabIndex = this.tabs.findIndex(item => item.uid === srcComponent.uid);
-      let arrIdx = this.disabledTabs.indexOf(tabIndex);
+      let arrIdx = this.disabledTabs.indexOf(srcComponent.uid);
       if (arrIdx !== -1) {
         this.disabledTabs.splice(arrIdx, 1);
       }
@@ -138,8 +147,9 @@ export default {
           somethingSelected = true;
         }
       }
+
       if (!this.noDefaultToFirst && !somethingSelected && this.tabs.length) {
-        this.onTabClick(0);
+        this.onTabClick(this.tabs[0].uid);
       }
     },
     isAllTabsDisabled() {
@@ -149,41 +159,63 @@ export default {
       if (this.isAllTabsDisabled()) {
         return;
       }
+      let newId;
       let newIndex;
-      if (this.selectedIndex > 0) {
-        newIndex = this.selectedIndex - 1;
+
+      if (this.selectedId) {
+        newIndex = this.tabs.indexOf(this.selectedId);
+      }
+
+      if (newIndex > 0) {
+        newIndex--;
       } else {
         newIndex = this.tabs.length - 1;
       }
-      while (this.disabledTabs.indexOf(newIndex) !== -1) {
+      newId = this.tabs[newIndex].uid;
+
+      while (this.disabledTabs.indexOf(newId) !== -1) {
         if (newIndex > 0) {
           newIndex--;
         } else {
           newIndex = this.tabs.length - 1;
         }
+        newId = this.tabs[newIndex].uid;
       }
-      this.onTabClick(newIndex);
+      this.onTabClick(newId);
       this.$refs.link[newIndex].focus();
     },
     moveRight() {
       if (this.isAllTabsDisabled()) {
         return;
       }
+      let newId;
       let newIndex;
-      if (this.selectedIndex < this.tabs.length - 1) {
-        newIndex = this.selectedIndex + 1;
+
+      if (this.selectedId) {
+        newIndex = this.tabs.indexOf(this.selectedId);
+      }
+
+      if (newIndex < this.tabs.length - 1) {
+        newIndex++;
       } else {
         newIndex = 0;
       }
+      newId = this.tabs[newIndex].uid;
+
       while (this.disabledTabs.indexOf(newIndex) !== -1) {
         if (newIndex < this.tabs.length - 1) {
-          newIndex = newIndex + 1;
+          newIndex++;
         } else {
           newIndex = 0;
         }
+        newId = this.tabs[newIndex].uid;
       }
-      this.onTabClick(newIndex);
+
+      this.onTabClick(newId);
       this.$refs.link[newIndex].focus();
+    },
+    clearSelected() {
+      this.selectedId = undefined;
     },
   },
 };
