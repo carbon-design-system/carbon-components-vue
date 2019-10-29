@@ -10,9 +10,9 @@
       @keydown.left.prevent="moveLeft"
     >
       <cv-dropdown class="bx--tabs-trigger" :value="`${selectedId}`" @change="onDropChange" :form-item="false">
-        <cv-dropdown-item v-for="tab in tabs" :key="`drop-${tab.uid}`" :value="`${tab.uid}`">{{
-          tab.label
-        }}</cv-dropdown-item>
+        <cv-dropdown-item v-for="tab in tabs" :key="`drop-${tab.uid}`" :value="`${tab.uid}`">
+          {{ tab.label }}
+        </cv-dropdown-item>
       </cv-dropdown>
       <ul class="bx--tabs__nav bx--tabs__nav--hidden" role="tablist">
         <li
@@ -72,7 +72,6 @@ export default {
   },
   methods: {
     onDropChange(val) {
-      // val === tab.uid
       this.onTabClick(val);
     },
     onCvMount(srcComponent) {
@@ -94,7 +93,6 @@ export default {
         this.checkDisabled(srcComponent);
 
         if (wasSelected) {
-          // Check to see if something else should be selected
           this.checkSelected();
         }
       }
@@ -214,8 +212,9 @@ export default {
       this.onTabClick(newId);
       this.$refs.link[newIndex].focus();
     },
-    clearSelected() {
-      this.selectedId = undefined;
+    selected(index) {
+      let selItem = this.tabs[index ? index : -1];
+      this.selectedId = selItem ? selItem.uid : undefined;
     },
   },
 };
