@@ -72,3 +72,11 @@ export const testInstance = {
     });
   },
 };
+
+export const events = {
+  reEmit: function(src, target, events) {
+    for (const event of events) {
+      src.$on(event, val => target.$emit(event, val));
+    }
+  },
+};

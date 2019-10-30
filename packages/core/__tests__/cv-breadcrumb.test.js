@@ -56,11 +56,7 @@ describe('CvBreadcrumbItem', () => {
   // SNAPSHOT CHECKS
   // ***************
   it('matches breadcrumb item with slotted content', () => {
-    const wrapper = shallow(CvBreadcrumbItem, {
-      stubs: {
-        CvBreadcrumbItem: "<div class='stub'></div>",
-      },
-    });
+    const wrapper = shallow(CvBreadcrumbItem);
 
     expect(wrapper.html()).toMatchSnapshot();
   });

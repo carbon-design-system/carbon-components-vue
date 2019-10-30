@@ -1,15 +1,23 @@
 import { shallowMount as shallow, mount } from '@vue/test-utils';
-import { testComponent, testInstance } from './_helpers';
+import { testComponent, testInstance, events } from './_helpers';
 import { CvTabs, CvTab } from '@/components/cv-tabs';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const Tab = {
-  name: 'Tab',
-  components: { CvTab },
-  template: '<cv-tab label="my-label">Some stuff</cv-tab>',
+const TAB = function(props) {
+  return {
+    name: 'Tab',
+    components: { CvTab },
+    template: `<cv-tab ${props}>Some stuff</cv-tab>`,
+    created() {
+      events.reEmit(this, this.$parent, ['cv:mounted', 'cv:beforeDestory', 'cv:selected', 'cv:disabled', 'cv:enabled']);
+    },
+  };
 };
+
+const Tab = TAB('label="my-label"');
+const TabSelected = TAB('label="my-label" selected');
 
 describe('CvTabs', () => {
   // ***************
@@ -40,15 +48,63 @@ describe('CvTabs', () => {
   // ***************
   // FUNCTIONAL CHECKS
   // ***************
-  // it('selects the first item by default', () => {
-  //   const wrapper = mount(CvTabs, {
-  //     slots: {
-  //       default: '<cv-tab label="test">test content</cv-tab>',
-  //     },
-  //   });
+  it('tabs to be mounted with first selected', () => {
+    const wrapper = mount(CvTabs, {
+      slots: {
+        default: [Tab, Tab, Tab],
+      },
+    });
 
-  //   expect(wrapper.vm.tabs.length).toBeGreaterThan(0);
-  // });
+    expect(wrapper.vm.tabs.length).toBeGreaterThan(0);
+    expect(wrapper.vm.tabs[0].dataSelected).toBeTruthy();
+  });
+
+  it('tabs to be mounted with none selected', () => {
+    const propsData = {
+      noDefaultToFirst: true,
+    };
+    const wrapper = mount(CvTabs, {
+      propsData,
+      slots: {
+        default: [Tab, Tab, Tab],
+      },
+    });
+
+    expect(wrapper.vm.tabs[0].dataSelected).toBeFalsy();
+  });
+
+  it('tabs to be mounted with 2nd selected', () => {
+    const propsData = {
+      noDefaultToFirst: true,
+    };
+    const wrapper = mount(CvTabs, {
+      propsData,
+      slots: {
+        default: [Tab, TabSelected, Tab],
+      },
+    });
+
+    expect(wrapper.vm.tabs[1].dataSelected).toBeTruthy();
+  });
+
+  it('click to change tab', () => {
+    const wrapper = mount(CvTabs, {
+      slots: {
+        default: [Tab, Tab, Tab],
+      },
+    });
+
+    expect(wrapper.vm.tabs[0].dataSelected).toBeTruthy();
+    wrapper
+      .findAll(`.${prefix}--tabs__nav-link`)
+      .at(2)
+      .trigger('click');
+    let dropDown = wrapper.find(`.${prefix}--tabs-trigger`);
+
+    expect(wrapper.vm.tabs[0].dataSelected).toBeFalsy();
+    expect(wrapper.vm.tabs[2].dataSelected).toBeTruthy();
+    expect(dropDown.vm.internalValue).toEqual('2');
+  });
 });
 
 describe('CvTab', () => {
