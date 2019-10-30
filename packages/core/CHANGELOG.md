@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.17.0-canary.0
+## 2.17.0-canary.0 (Oct 30th 2019)
 
 ### Feat
 
