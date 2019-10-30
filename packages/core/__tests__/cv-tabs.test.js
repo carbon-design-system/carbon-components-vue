@@ -30,7 +30,12 @@ describe('CvTabs', () => {
   // ***************
   it('matches render', () => {
     const propsData = { noDefaultToFirst: false };
-    const wrapper = shallow(CvTabs, { propsData });
+    const wrapper = shallow(CvTabs, {
+      propsData,
+      stubs: {
+        CvDropdown: '<div class="CvDropdown__stubbed"></div>',
+      },
+    });
 
     expect(wrapper.html()).toMatchSnapshot();
   });
@@ -39,6 +44,9 @@ describe('CvTabs', () => {
     const wrapper = shallow(CvTabs, {
       slots: {
         default: [Tab, Tab, Tab],
+      },
+      stubs: {
+        CvDropdown: '<div class="CvDropdown__stubbed"></div>',
       },
     });
 
@@ -75,6 +83,20 @@ describe('CvTabs', () => {
 
   it('tabs to be mounted with 2nd selected', () => {
     const propsData = {
+      noDefaultToFirst: false,
+    };
+    const wrapper = mount(CvTabs, {
+      propsData,
+      slots: {
+        default: [Tab, TabSelected, Tab],
+      },
+    });
+
+    expect(wrapper.vm.tabs[1].dataSelected).toBeTruthy();
+  });
+
+  it('tabs to be mounted with 2nd selected with no default', () => {
+    const propsData = {
       noDefaultToFirst: true,
     };
     const wrapper = mount(CvTabs, {
@@ -103,7 +125,7 @@ describe('CvTabs', () => {
 
     expect(wrapper.vm.tabs[0].dataSelected).toBeFalsy();
     expect(wrapper.vm.tabs[2].dataSelected).toBeTruthy();
-    expect(dropDown.vm.internalValue).toEqual('2');
+    expect(dropDown.vm.internalValue).toEqual(wrapper.vm.tabs[2].uid);
   });
 });
 

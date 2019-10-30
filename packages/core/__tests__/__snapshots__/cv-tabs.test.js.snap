@@ -11,7 +11,7 @@ exports[`CvTab matches with slotted content 1`] = `
 exports[`CvTabs matches render 1`] = `
 <div class="cv-tabs">
   <div data-tabs="" role="navigation" class="cv-tab bx--tabs">
-    <cv-dropdown-stub theme="" placeholder="Choose an option" value="-1" class="bx--tabs-trigger"></cv-dropdown-stub>
+    <div class="CvDropdown__stubbed bx--tabs-trigger"></div>
     <ul role="tablist" class="bx--tabs__nav bx--tabs__nav--hidden"></ul>
   </div>
   <div class="cv-tabs__panels"></div>
@@ -21,7 +21,7 @@ exports[`CvTabs matches render 1`] = `
 exports[`CvTabs matches with slotted content 1`] = `
 <div class="cv-tabs">
   <div data-tabs="" role="navigation" class="cv-tab bx--tabs">
-    <cv-dropdown-stub theme="" placeholder="Choose an option" value="-1" class="bx--tabs-trigger"></cv-dropdown-stub>
+    <div class="CvDropdown__stubbed bx--tabs-trigger"></div>
     <ul role="tablist" class="bx--tabs__nav bx--tabs__nav--hidden"></ul>
   </div>
   <div class="cv-tabs__panels">
