@@ -18,9 +18,9 @@
 <template>
   <div :class="{ 'bx--form-item': formItem }">
     <div class="bx--dropdown__wrapper" :class="{ 'bx--dropdown__wrapper--inline': inline, 'cv-dropdown': !formItem }">
-      <span v-if="label" :id="`${uid}-label`" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">
-        {{ label }}
-      </span>
+      <span v-if="label" :id="`${uid}-label`" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">{{
+        label
+      }}</span>
 
       <div
         v-if="!inline && isHelper"
@@ -162,15 +162,22 @@ export default {
       },
       set(val) {
         const childItems = this.dropdownItems();
+        let selectedChild;
         for (let index in childItems) {
           let child = childItems[index];
           let selected = child.value === val;
           child.internalSelected = selected;
 
           if (selected) {
-            this.$refs.valueContent.innerHTML = child.internalContent;
+            selectedChild = child;
           }
         }
+        if (selectedChild) {
+          this.$refs.valueContent.innerHTML = selectedChild.internalContent;
+        } else {
+          this.$refs.valueContent.innerHTML = this.placeholder;
+        }
+
         if (this.dataValue !== val) {
           // only raise event on change
           this.dataValue = val;
