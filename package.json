@@ -154,5 +154,6 @@
       "html",
       "text-summary"
     ]
-  }
+  },
+  "dependencies": {}
 }
