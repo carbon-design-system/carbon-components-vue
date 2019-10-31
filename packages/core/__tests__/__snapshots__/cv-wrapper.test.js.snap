@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CvWrapper matches render with no wrapper 1`] = `<div class="cv-wrapper-stub">StubbyMcStubFace</div>`;
+
+exports[`CvWrapper matches render with wrapper 1`] = `
+<div class="">
+  <div class="cv-wrapper-stub">StubbyMcStubFace</div>
+</div>
+`;
