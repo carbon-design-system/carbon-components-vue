@@ -1,5 +1,22 @@
 # Changelog
 
+## 2.17.0-canary.1 (Nov 1st 2019)
+
+## Feat
+
+- Tests added or updated for
+  - CvAccordion
+  - CvWrapper
+  - CvCheckbox
+  - CvToggle
+  - CvTag
+  - CvRadioButton
+
+## Fix
+
+- Dropdown workingn when disabled
+- Overflow not closing on button click
+
 ## 2.17.0-canary.0 (Oct 30th 2019)
 
 ### Feat
