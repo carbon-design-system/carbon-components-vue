@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` 1`] = `<div class="cv-checkbox bx--form-item bx--checkbox-wrapper"><label class="bx--checkbox-label bx--skeleton"></label></div>`;
+
+exports[`CvCheckbox should render with the appropriate kind 1`] = `
+<div class="cv-checkbox bx--checkbox-wrapper bx--form-item"><label class="bx--checkbox-label"><input type="checkbox" aria-checked="false" class="bx--checkbox" value="check-1">
+
+  </label></div>
+`;
+
+exports[`CvCheckbox should render with the appropriate kind when disabled 1`] = `
+<div class="cv-checkbox bx--checkbox-wrapper bx--form-item"><label data-contained-checkbox-disabled="true" class="bx--checkbox-label bx--label--disabled"><input type="checkbox" aria-checked="false" disabled="disabled" class="bx--checkbox" value="check-1">
+
+  </label></div>
+`;

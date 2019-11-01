@@ -22,7 +22,7 @@ describe('CvNumberInput', () => {
     String
   );
 
-  testComponent.prosHaveDefaultOfUndefined(CvNumberInput, ['helperText', 'invalidMessage']);
+  testComponent.propsHaveDefaultOfUndefined(CvNumberInput, ['helperText', 'invalidMessage']);
 
   // ***************
   // SNAPSHOT TESTS

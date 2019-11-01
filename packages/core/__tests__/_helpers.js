@@ -17,6 +17,11 @@ const getComponentProp = (component, prop) => {
   return componentProp;
 };
 
+const getComponentPropDefault = (component, prop) => {
+  const _default = getComponentProp(component, prop).default;
+  return typeof _default === 'function' ? _default() : _default;
+};
+
 export const testComponent = {
   propsAreRequired: (component, props) => {
     test.each(props)('has a required prop: %s', prop => {
@@ -26,6 +31,7 @@ export const testComponent = {
 
   propsAreType: (component, props, types) => {
     let typeName;
+
     if (types.map) {
       const typeNames = types.map(type => type.name);
       typeName = `(${typeNames.join('|')})`;
@@ -47,12 +53,14 @@ export const testComponent = {
 
   propsHaveDefault: (component, props) => {
     test.each(props)('has a prop with a default: %s', prop => {
-      expect(getComponentProp(component, prop).default).toBeDefined();
+      const _default = getComponentPropDefault(component, prop);
+      expect(_default).toBeDefined();
     });
   },
-  prosHaveDefaultOfUndefined: (component, props) => {
+  propsHaveDefaultOfUndefined: (component, props) => {
     test.each(props)('has a prop with a default undefined: %s', prop => {
-      expect(getComponentProp(component, prop).default).not.toBeDefined();
+      const _default = getComponentPropDefault(component, prop);
+      expect(_default).not.toBeDefined();
     });
   },
 };

@@ -11,7 +11,7 @@ describe('CvWrapper', () => {
   // ***************
   testComponent.propsAreType(CvWrapper, ['tagType'], String);
 
-  testComponent.prosHaveDefaultOfUndefined(CvWrapper, ['tagType']);
+  testComponent.propsHaveDefaultOfUndefined(CvWrapper, ['tagType']);
 
   // ***************
   // SNAPSHOT CHECKS
@@ -54,7 +54,6 @@ describe('CvWrapper', () => {
       }
     );
 
-    console.log(wrapper.html());
     expect(wrapper.attributes('test-attr')).toEqual('testAttr');
     expect(wrapper.attributes('style')).toContain('z-index: 99');
     expect(wrapper.attributes('style')).toContain('outline: none');
