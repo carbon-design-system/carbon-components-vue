@@ -16,7 +16,7 @@ describe('CvButton', () => {
     testComponent.propsAreType(CvButton, ['iconHref', 'kind', 'size'], String);
     testComponent.propsAreType(CvButton, ['icon'], [String, Object]);
     testComponent.propsHaveDefault(CvButton, ['kind']);
-    testComponent.prosHaveDefaultOfUndefined(CvButton, ['size', 'icon']);
+    testComponent.propsHaveDefaultOfUndefined(CvButton, ['size', 'icon']);
   });
 
   // ***************
@@ -68,7 +68,7 @@ describe('CvIconButton', () => {
     );
     testComponent.propsAreType(CvIconButton, ['icon'], [String, Object]);
     testComponent.propsHaveDefault(CvIconButton, ['kind']);
-    testComponent.prosHaveDefaultOfUndefined(CvIconButton, ['size', 'icon']);
+    testComponent.propsHaveDefaultOfUndefined(CvIconButton, ['size', 'icon']);
   });
 
   // ***************
@@ -113,7 +113,7 @@ describe('CvButtonSkeleton', () => {
   describe('Has expected properties', () => {
     // Deprecated props not tested
     testComponent.propsAreType(CvButtonSkeleton, ['size'], String);
-    testComponent.prosHaveDefaultOfUndefined(CvButtonSkeleton, ['size']);
+    testComponent.propsHaveDefaultOfUndefined(CvButtonSkeleton, ['size']);
   });
 
   // ***************

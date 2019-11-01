@@ -6,25 +6,37 @@ import { settings } from 'carbon-components';
 const { prefix } = settings;
 
 describe('CvCheckbox', () => {
+  // ***************
+  // PROP CHECKS
+  // ***************
+  testComponent.propsAreType(CvCheckbox, ['label', 'name', 'value'], String);
+  testComponent.propsAreType(CvCheckbox, ['mixed', 'formItem', 'checked'], Boolean);
+  testComponent.propsAreType(CvCheckbox, ['modelValue'], [Array, Boolean]);
+
   testComponent.propsHaveDefault(CvCheckbox, ['formItem']);
+  testComponent.propsHaveDefaultOfUndefined(CvCheckbox, ['modelValue', 'checked']);
+
+  // ***************
+  // SNAPSHOT CHECKS
+  // ***************
 
   it('should render with the appropriate kind', () => {
     const propsData = { formItem: true, value: 'check-1' };
     const wrapper = shallow(CvCheckbox, { propsData });
-    expect(wrapper.classes(`${prefix}--form-item`)).toEqual(true);
-    expect(wrapper.classes(`${prefix}--checkbox-wrapper`)).toEqual(true);
-    expect(wrapper.find('label').classes(`${prefix}--checkbox-label`)).toEqual(true);
-    expect(wrapper.find('label').classes(`${prefix}--label--disabled`)).toEqual(false);
-    expect(wrapper.find('label').classes(`${prefix}--checkbox-label__focus`)).toEqual(false);
-    expect(wrapper.find('input').classes(`${prefix}--checkbox`)).toEqual(true);
+
+    expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('should render with the appropriate kind when disabled', () => {
     const propsData = { formItem: true, value: 'check-1', disabled: true };
     const wrapper = shallow(CvCheckbox, { propsData });
-    expect(wrapper.find('label').classes(`${prefix}--label--disabled`)).toEqual(true);
+
+    expect(wrapper.html()).toMatchSnapshot();
   });
 
+  // ***************
+  // FUNCTIONAL CHECKS
+  // ***************
   it('should be unchecked when mixed is true and checked is false', () => {
     const propsData = { formItem: true, value: 'check-1', mixed: true, checked: false };
     const wrapper = shallow(CvCheckbox, { propsData });
@@ -151,12 +163,20 @@ describe('CvCheckbox', () => {
 });
 
 describe('CvCheckboxSkeleton', () => {
+  // ***************
+  // PROP CHECKS
+  // ***************
+
+  // ***************
+  // SNAPSHOT CHECKS
+  // ***************
   describe('Renders as expected', () => {
     const wrapper = shallow(CvCheckboxSkeleton);
 
-    it('Has the expected classes', () => {
-      expect(wrapper.find('label').classes(`${prefix}--skeleton`)).toEqual(true);
-      expect(wrapper.find('label').classes(`${prefix}--checkbox-label`)).toEqual(true);
-    });
+    expect(wrapper.html()).toMatchSnapshot();
   });
+
+  // ***************
+  // FUNCTIONAL CHECKS
+  // ***************
 });
