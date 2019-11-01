@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CvRadioButton matches render when checked 1`] = `
+<div class="cv-radio-button bx--radio-button-wrapper"><input id="1" type="radio" class="bx--radio-button" value=""> <label for="1" class="bx--radio-button__label"><span class="bx--radio-button__appearance"></span>
+    test label
+  </label></div>
+`;
+
+exports[`CvRadioButton matches render when modelValue is equal to value 1`] = `
+<div class="cv-radio-button bx--radio-button-wrapper"><input id="1" type="radio" class="bx--radio-button" value="test value"> <label for="1" class="bx--radio-button__label"><span class="bx--radio-button__appearance"></span>
+    test label
+  </label></div>
+`;
+
+exports[`CvRadioButton matches render when modelValue is not equal to value 1`] = `
+<div class="cv-radio-button bx--radio-button-wrapper"><input id="1" type="radio" class="bx--radio-button" value="test value"> <label for="1" class="bx--radio-button__label"><span class="bx--radio-button__appearance"></span>
+    test label
+  </label></div>
+`;
+
+exports[`CvRadioButton matches render with left label 1`] = `
+<div class="cv-radio-button bx--radio-button-wrapper bx--radio-button-wrapper--label-left"><input id="1" type="radio" class="bx--radio-button" value=""> <label for="1" class="bx--radio-button__label"><span class="bx--radio-button__appearance"></span>
+    left label
+  </label></div>
+`;
+
+exports[`CvRadioButton matches render with right label 1`] = `
+<div class="cv-radio-button bx--radio-button-wrapper"><input id="1" type="radio" class="bx--radio-button" value=""> <label for="1" class="bx--radio-button__label"><span class="bx--radio-button__appearance"></span>
+    right label
+  </label></div>
+`;
+
+exports[`CvRadioGroup matches render when horizontal 1`] = `
+<div class="cv-radio-group bx--form-item">
+  <div class="bx--radio-button-group">
+    <div class="cv-radio-button-stub">StubbyMcStubFace</div>
+  </div>
+</div>
+`;
+
+exports[`CvRadioGroup matches render when vertical 1`] = `
+<div class="cv-radio-group bx--form-item">
+  <div class="bx--radio-button-group bx--radio-button-group--vertical">
+    <div class="cv-radio-button-stub">StubbyMcStubFace</div>
+  </div>
+</div>
+`;

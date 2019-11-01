@@ -25,7 +25,8 @@ const getComponentPropDefault = (component, prop) => {
 export const testComponent = {
   propsAreRequired: (component, props) => {
     test.each(props)('has a required prop: %s', prop => {
-      expect(component.props[prop].required).toBe(true);
+      let componentProp = getComponentProp(component, prop);
+      expect(componentProp.required).toBe(true);
     });
   },
 
