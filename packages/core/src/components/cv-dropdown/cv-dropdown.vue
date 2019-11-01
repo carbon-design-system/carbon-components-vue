@@ -18,15 +18,15 @@
 <template>
   <div :class="{ 'bx--form-item': formItem }">
     <div class="bx--dropdown__wrapper" :class="{ 'bx--dropdown__wrapper--inline': inline, 'cv-dropdown': !formItem }">
-      <span v-if="label" :id="`${uid}-label`" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">{{
-        label
-      }}</span>
+      <span v-if="label" :id="`${uid}-label`" class="bx--label" :class="{ 'bx--label--disabled': disabled }">
+        {{ label }}
+      </span>
 
       <div
         v-if="!inline && isHelper"
         class="bx--form__helper-text"
-        :class="{ 'bx--form__helper-text--disabled': $attrs.disabled }"
-        :aria-disabled="$attrs.disabled"
+        :class="{ 'bx--form__helper-text--disabled': disabled }"
+        :aria-disabled="disabled"
       >
         <slot name="helper-text">{{ helperText }}</slot>
       </div>
@@ -42,7 +42,7 @@
           'bx--dropdown--up': up,
           'bx--dropdown--open': open,
           'bx--dropdown--invalid': isInvalid,
-          'bx--dropdown--disabled': $attrs.disabled,
+          'bx--dropdown--disabled': disabled,
           'bx--dropdown--inline': inline,
         }"
         v-bind="$attrs"
@@ -109,6 +109,7 @@ export default {
   mixins: [themeMixin, uidMixin],
   components: { WarningFilled16, ChevronDown16 },
   props: {
+    disabled: Boolean,
     formItem: { type: Boolean, default: true },
     inline: Boolean,
     invalidMessage: { type: String, default: undefined },
@@ -253,16 +254,20 @@ export default {
       this.$el.focus();
     },
     onClick(ev) {
-      this.open = !this.open;
-      if (!this.open) {
-        this.$el.focus();
-      }
+      if (this.disabled) {
+        ev.preventDefault();
+      } else {
+        this.open = !this.open;
+        if (!this.open) {
+          this.$el.focus();
+        }
 
-      if (ev.target.classList.contains('bx--dropdown-link')) {
-        const targetItemEl = ev.target.parentNode;
-        const newValue = targetItemEl.getAttribute('data-value');
+        if (ev.target.classList.contains('bx--dropdown-link')) {
+          const targetItemEl = ev.target.parentNode;
+          const newValue = targetItemEl.getAttribute('data-value');
 
-        this.internalValue = newValue;
+          this.internalValue = newValue;
+        }
       }
     },
   },
