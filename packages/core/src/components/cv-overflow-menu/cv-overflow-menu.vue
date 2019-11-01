@@ -119,7 +119,7 @@ export default {
       if (this.open) {
         if (
           ev.relatedTarget === null ||
-          !(this.$el === ev.relatedTarget || this.$refs.popup.contains(ev.relatedTarget))
+          !(this.$refs.trigger === ev.relatedTarget || this.$refs.popup.contains(ev.relatedTarget))
         ) {
           this.open = false;
           this.positionListen(false);
