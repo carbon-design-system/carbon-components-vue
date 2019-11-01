@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CvToggle should render formItem: default 1`] = `
+<div class="bx--form-item"><input type="checkbox" id="test-1" aria-checked="false" class="bx--toggle-input" value="check-1"> <label for="test-1" class="bx--toggle-input__label">
+
+    <span class="bx--toggle__switch"><svg width="6px" height="5px" viewBox="0 0 6 5" class="bx--toggle__check"><path d="M2.2 2.7L5 0 6 1 2.2 5 0 2.7 1 1.5z"></path></svg> <span aria-hidden="true" class="bx--toggle__text--off">Off</span> <span aria-hidden="true" class="bx--toggle__text--on">On</span></span></label></div>
+`;
+
+exports[`CvToggle should render when formItem: false && small && hideLabel 1`] = `
+<div class=""><input type="checkbox" id="test-1" aria-checked="false" class="bx--toggle-input bx--toggle-input--small" value="check-1"> <label for="test-1" class="bx--toggle-input__label">
+
+    <span class="bx--toggle__switch"><svg width="6px" height="5px" viewBox="0 0 6 5" class="bx--toggle__check"><path d="M2.2 2.7L5 0 6 1 2.2 5 0 2.7 1 1.5z"></path></svg> <span aria-hidden="true" class="bx--toggle__text--off">Off</span> <span aria-hidden="true" class="bx--toggle__text--on">On</span></span></label></div>
+`;
+
+exports[`CvToggle should render when formItem: true && disabled 1`] = `
+<div class="bx--form-item"><input type="checkbox" id="test-1" aria-checked="false" disabled="disabled" class="bx--toggle-input" value="check-1"> <label for="test-1" class="bx--toggle-input__label">
+
+    <span class="bx--toggle__switch"><svg width="6px" height="5px" viewBox="0 0 6 5" class="bx--toggle__check"><path d="M2.2 2.7L5 0 6 1 2.2 5 0 2.7 1 1.5z"></path></svg> <span aria-hidden="true" class="bx--toggle__text--off">Off</span> <span aria-hidden="true" class="bx--toggle__text--on">On</span></span></label></div>
+`;

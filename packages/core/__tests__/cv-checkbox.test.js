@@ -17,17 +17,17 @@ describe('CvCheckbox', () => {
   testComponent.propsHaveDefaultOfUndefined(CvCheckbox, ['modelValue', 'checked']);
 
   // ***************
-  // SNAPSHOT CHECKS
+  // SNAPSHOT TESTS
   // ***************
 
-  it('should render with the appropriate kind', () => {
+  it('should render', () => {
     const propsData = { formItem: true, value: 'check-1' };
     const wrapper = shallow(CvCheckbox, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('should render with the appropriate kind when disabled', () => {
+  it('should render when disabled', () => {
     const propsData = { formItem: true, value: 'check-1', disabled: true };
     const wrapper = shallow(CvCheckbox, { propsData });
 
@@ -35,7 +35,7 @@ describe('CvCheckbox', () => {
   });
 
   // ***************
-  // FUNCTIONAL CHECKS
+  // FUNCTIONAL TESTS
   // ***************
   it('should be unchecked when mixed is true and checked is false', () => {
     const propsData = { formItem: true, value: 'check-1', mixed: true, checked: false };
@@ -168,7 +168,7 @@ describe('CvCheckboxSkeleton', () => {
   // ***************
 
   // ***************
-  // SNAPSHOT CHECKS
+  // SNAPSHOT TESTS
   // ***************
   describe('Renders as expected', () => {
     const wrapper = shallow(CvCheckboxSkeleton);
@@ -177,6 +177,6 @@ describe('CvCheckboxSkeleton', () => {
   });
 
   // ***************
-  // FUNCTIONAL CHECKS
+  // FUNCTIONAL TESTS
   // ***************
 });

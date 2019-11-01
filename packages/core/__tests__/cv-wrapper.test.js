@@ -14,7 +14,7 @@ describe('CvWrapper', () => {
   testComponent.propsHaveDefaultOfUndefined(CvWrapper, ['tagType']);
 
   // ***************
-  // SNAPSHOT CHECKS
+  // SNAPSHOT TESTS
   // ***************
   it('matches render with wrapper', () => {
     const wrapper = shallow(CvWrapper, {
@@ -38,7 +38,7 @@ describe('CvWrapper', () => {
   });
 
   // ***************
-  // FUNCTIONAL CHECKS
+  // FUNCTIONAL TESTS
   // ***************
   it('closed to open to closed', () => {
     const wrapper = mount(

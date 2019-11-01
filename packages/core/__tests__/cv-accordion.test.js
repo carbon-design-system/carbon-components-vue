@@ -11,7 +11,7 @@ describe('CvAccordion', () => {
   // ***************
 
   // ***************
-  // SNAPSHOT CHECKS
+  // SNAPSHOT TESTS
   // ***************
   it('matches render', () => {
     const wrapper = shallow(CvAccordion, {
@@ -24,7 +24,7 @@ describe('CvAccordion', () => {
   });
 
   // ***************
-  // FUNCTIONAL CHECKS
+  // FUNCTIONAL TESTS
   // ***************
 });
 
@@ -34,7 +34,7 @@ describe('CvAccordionSkeleton', () => {
   // ***************
 
   // ***************
-  // SNAPSHOT CHECKS
+  // SNAPSHOT TESTS
   // ***************
   it('matches render', () => {
     const wrapper = shallow(CvAccordionSkeleton);
@@ -43,7 +43,7 @@ describe('CvAccordionSkeleton', () => {
   });
 
   // ***************
-  // FUNCTIONAL CHECKS
+  // FUNCTIONAL TESTS
   // ***************
 });
 
@@ -56,7 +56,7 @@ describe('CvAccordionItem', () => {
   testComponent.propsHaveDefault(CvAccordionItem, ['open']);
 
   // ***************
-  // SNAPSHOT CHECKS
+  // SNAPSHOT TESTS
   // ***************
   it('matches render', () => {
     const wrapper = shallow(CvAccordionItem, {
@@ -84,7 +84,7 @@ describe('CvAccordionItem', () => {
   });
 
   // ***************
-  // FUNCTIONAL CHECKS
+  // FUNCTIONAL TESTS
   // ***************
   it('closed to open to closed', () => {
     const wrapper = shallow(CvAccordionItem, {

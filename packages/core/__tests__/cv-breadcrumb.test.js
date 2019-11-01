@@ -16,7 +16,7 @@ describe('CvBreadcrumb', () => {
   testComponent.propsHaveDefault(CvBreadcrumbSkeleton, ['ariaLabel']);
 
   // ***************
-  // SNAPSHOT CHECKS
+  // SNAPSHOT TESTS
   // ***************
   it('matches breadcrumb with trailing slash', () => {
     const propsData = { noTrailingSlash: false };
@@ -43,7 +43,7 @@ describe('CvBreadcrumb', () => {
   });
 
   // ***************
-  // FUNCTIONAL CHECKS
+  // FUNCTIONAL TESTS
   // ***************
 });
 
@@ -53,7 +53,7 @@ describe('CvBreadcrumbItem', () => {
   // ***************
 
   // ***************
-  // SNAPSHOT CHECKS
+  // SNAPSHOT TESTS
   // ***************
   it('matches breadcrumb item with slotted content', () => {
     const wrapper = shallow(CvBreadcrumbItem);
@@ -61,7 +61,7 @@ describe('CvBreadcrumbItem', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
   // ***************
-  // FUNCTIONAL CHECKS
+  // FUNCTIONAL TESTS
   // ***************
 });
 
@@ -71,7 +71,7 @@ describe('CvBreadcrumbSkeleton', () => {
   // ***************
 
   // ***************
-  // SNAPSHOT CHECKS
+  // SNAPSHOT TESTS
   // ***************
   it('matches breadcrumb item with slotted content', () => {
     const wrapper = shallow(CvBreadcrumbSkeleton);
@@ -79,6 +79,6 @@ describe('CvBreadcrumbSkeleton', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
   // ***************
-  // FUNCTIONAL CHECKS
+  // FUNCTIONAL TESTS
   // ***************
 });

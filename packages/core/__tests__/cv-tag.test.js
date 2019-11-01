@@ -6,18 +6,46 @@ import { settings } from 'carbon-components';
 const { prefix } = settings;
 
 describe('CvTag', () => {
+  // ***************
+  // PROP CHECKS
+  // ***************
   testComponent.propsAreRequired(CvTag, ['label']);
-  testComponent.propsHaveDefault(CvTag, ['kind']);
-  testComponent.propsAreType(CvTag, ['label', 'kind'], String);
+  testComponent.propsHaveDefault(CvTag, ['kind', 'clearAriaLabel']);
 
-  testInstance.propStringIsRendered(CvTag, 'label', 'span');
+  testComponent.propsAreType(CvTag, ['label', 'kind', 'clearAriaLabel'], String);
+  testComponent.propsAreType(CvTag, ['disabled'], Boolean);
 
-  it('should render with the appropriate kind', () => {
-    const propsData = { kind: 'red', label: 'test' };
-    const wrapper = shallow(CvTag, { propsData });
-    expect(wrapper.classes(`${prefix}--tag`)).toEqual(true);
-    expect(wrapper.classes(`${prefix}--tag--red`)).toEqual(true);
+  // ***************
+  // SNAPSHOT TESTS
+  // ***************
+  it('should render', () => {
+    const propsData = { kind: '', label: 'test' };
+    const kinds = [
+      'filter',
+      'red',
+      'magenta',
+      'purple',
+      'blue',
+      'cyan',
+      'teal',
+      'green',
+      'gray',
+      'cool-gray',
+      'warm-gray',
+    ];
+
+    for (const kind of kinds) {
+      propsData.kind = kind;
+      const wrapper = shallow(CvTag, { propsData });
+
+      expect(wrapper.html()).toMatchSnapshot();
+    }
   });
+
+  // ***************
+  // FUNCTIONAL TESTS
+  // ***************
+  testInstance.propStringIsRendered(CvTag, 'label', 'span');
 
   it('click on close icon emits remove', () => {
     const propsData = { kind: 'filter', label: 'test' };
@@ -26,35 +54,22 @@ describe('CvTag', () => {
     wrapper.find('svg').trigger('click');
     expect(wrapper.emitted().remove).toBeTruthy();
   });
-
-  it('matches tag snapshot', () => {
-    const label = 'I am a tag';
-    const kind = 'red';
-    const wrapper = shallow(CvTag, {
-      propsData: { label, kind },
-    });
-
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it('matches tag filter snapshot', () => {
-    const label = 'I am a filter tag';
-    const kind = 'filter';
-    const wrapper = shallow(CvTag, {
-      propsData: { label, kind },
-    });
-
-    expect(wrapper.html()).toMatchSnapshot();
-  });
 });
 
 describe('CvTagSkeleton', () => {
+  // ***************
+  // PROP CHECKS
+  // ***************
+
+  // ***************
+  // SNAPSHOT TESTS
+  // ***************
   describe('Renders as expected', () => {
     const wrapper = shallow(CvTagSkeleton);
 
-    it('Has the expected classes', () => {
-      expect(wrapper.classes(`${prefix}--skeleton`)).toEqual(true);
-      expect(wrapper.classes(`${prefix}--tag`)).toEqual(true);
-    });
+    expect(wrapper.html()).toMatchSnapshot();
   });
+  // ***************
+  // FUNCTIONAL TESTS
+  // ***************
 });

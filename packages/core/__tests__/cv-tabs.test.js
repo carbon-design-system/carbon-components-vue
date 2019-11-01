@@ -26,7 +26,7 @@ describe('CvTabs', () => {
   testComponent.propsAreType(CvTabs, ['noDefaultToFirst'], Boolean);
 
   // ***************
-  // SNAPSHOT CHECKS
+  // SNAPSHOT TESTS
   // ***************
   it('matches render', () => {
     const propsData = { noDefaultToFirst: false };
@@ -54,7 +54,7 @@ describe('CvTabs', () => {
   });
 
   // ***************
-  // FUNCTIONAL CHECKS
+  // FUNCTIONAL TESTS
   // ***************
   it('tabs to be mounted with first selected', () => {
     const wrapper = mount(CvTabs, {
@@ -139,7 +139,7 @@ describe('CvTab', () => {
   testComponent.propsAreRequired(CvTab, ['label']);
 
   // ***************
-  // SNAPSHOT CHECKS
+  // SNAPSHOT TESTS
   // ***************
   it('matches with slotted content', () => {
     const propsData = { label: 'Tab label', disabled: false, selected: false, id: 'an-id' };
@@ -163,6 +163,6 @@ describe('CvTab', () => {
   });
 
   // ***************
-  // FUNCTIONAL CHECKS
+  // FUNCTIONAL TESTS
   // ***************
 });
