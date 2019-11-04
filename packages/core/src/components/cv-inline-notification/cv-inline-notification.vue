@@ -20,6 +20,14 @@
       </div>
     </div>
     <button
+      v-if="actionLabel"
+      @click="$emit('action')"
+      class="bx--inline-notification__action-button bx--btn bx--btn--sm bx--btn--ghost"
+      type="button"
+    >
+      {{ actionLabel }}
+    </button>
+    <button
       type="button"
       :aria-label="closeAriaLabel"
       data-notification-btn
@@ -43,6 +51,7 @@ export default {
   components: { Close16 },
   mixins: [notificationMixin],
   props: {
+    actionLabel: { type: String, default: '' },
     closeAriaLabel: { type: String, default: 'Dismiss notification' },
     kind: {
       type: String,
