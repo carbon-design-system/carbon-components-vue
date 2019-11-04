@@ -10,9 +10,9 @@
       @keydown.left.prevent="moveLeft"
     >
       <cv-dropdown class="bx--tabs-trigger" :value="`${selectedId}`" @change="onDropChange" :form-item="false">
-        <cv-dropdown-item v-for="tab in tabs" :key="`drop-${tab.uid}`" :value="`${tab.uid}`">{{
-          tab.label
-        }}</cv-dropdown-item>
+        <cv-dropdown-item v-for="tab in tabs" :key="`drop-${tab.uid}`" :value="`${tab.uid}`">
+          {{ tab.label }}
+        </cv-dropdown-item>
       </cv-dropdown>
       <ul class="bx--tabs__nav bx--tabs__nav--hidden" role="tablist">
         <li
@@ -23,7 +23,9 @@
             'bx--tabs__nav-item--selected': selectedId == tab.uid,
             'bx--tabs__nav-item--disabled': disabledTabs.indexOf(tab.uid) !== -1,
           }"
-          role="presentation"
+          role="tab"
+          :aria-selected="selectedId == tab.uid"
+          :aria-disabled="disabledTabs.indexOf(tab.uid) !== -1"
         >
           <a
             class="bx--tabs__nav-link"
@@ -31,7 +33,6 @@
             role="tab"
             :aria-controls="tab.uid"
             :id="`${tab.uid}-link`"
-            aria-selected="false"
             @click="onTabClick(tab.uid)"
             ref="link"
             >{{ tab.label }}</a
