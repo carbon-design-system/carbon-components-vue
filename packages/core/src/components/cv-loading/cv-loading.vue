@@ -1,9 +1,10 @@
 <template>
-  <div class="cv-loading" :class="overlayClasses">
+  <cv-wrapper :tag-type="overlay ? 'div' : ''" class="cv-loading" :class="overlayClasses">
     <div
       data-loading
       class="bx--loading"
       :class="{
+        'cv-loading': !overlay,
         'bx--loading--stop': !active,
         'bx--loading--small': small,
       }"
@@ -15,12 +16,15 @@
         <circle class="bx--loading__stroke" cx="0" cy="0" :r="loadingRadius" />
       </svg>
     </div>
-  </div>
+  </cv-wrapper>
 </template>
 
 <script>
+import CvWrapper from '../cv-wrapper/_cv-wrapper';
+
 export default {
   name: 'CvLoading',
+  components: { CvWrapper },
   props: {
     active: { type: Boolean, default: true },
     overlay: Boolean,

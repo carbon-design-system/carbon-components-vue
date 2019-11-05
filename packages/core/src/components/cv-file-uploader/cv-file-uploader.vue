@@ -45,24 +45,28 @@
             class="bx--file__selected-file bx--file__selected-file--invalid"
           >
             <p class="bx--file-filename">{{ file.file.name }}</p>
-            <span :data-for="uid" class="bx--file__state-container" :data-test="file.state">
+
+            <span :data-for="uid" class="bx--file__state-container" :data-test="file.state" :style="stateStyleOverides">
               <div v-if="file.state === 'uploading'" class="bx--inline-loading__animation">
-                <cv-inline-loading active loading-text loaded-text />
+                <div data-inline-loading-spinner class="bx--loading bx--loading--small">
+                  <svg class="bx--loading__svg" viewBox="-75 -75 150 150">
+                    <circle class="bx--loading__background" cx="0" cy="0" r="37.5" />
+                    <circle class="bx--loading__stroke" cx="0" cy="0" r="37.5" />
+                  </svg>
+                </div>
               </div>
               <CheckmarkFilled16 v-if="file.state === 'complete'" class="bx--file-complete" />
               <WarningFilled16 v-if="isInvalid(index)" class="bx--file--invalid" />
-              <Close16
-                v-if="removable"
+              <button
+                type="button"
                 class="bx--file-close"
-                :tabindex="'1'"
-                role="button"
+                v-if="removable"
                 :alt="removeAriaLabel"
                 :arial-label="removeAriaLabel"
                 @click="remove(index)"
-                @keydown.enter.prevent="remove(index)"
-                @keydown.space.prevent
-                @keyup.space.prevent="remove(index)"
-              />
+              >
+                <Close16 />
+              </button>
             </span>
             <div v-if="isInvalid(index)" class="bx--form-requirement">
               <div class="bx--form-requirement__title">{{ file.invalidMessageTitle || 'Invalid file' }}</div>
@@ -78,7 +82,6 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import CvFormItem from '../cv-form/cv-form-item';
-import CvInlineLoading from '../cv-inline-loading/cv-inline-loading';
 import CheckmarkFilled16 from '@carbon/icons-vue/es/checkmark--filled/16';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import Close16 from '@carbon/icons-vue/es/close/16';
@@ -94,7 +97,7 @@ const CONSTS = {
 
 export default {
   name: 'CvFileUploader',
-  components: { CvFormItem, CvInlineLoading, CheckmarkFilled16, WarningFilled16, Close16, CvWrapper },
+  components: { CvFormItem, CheckmarkFilled16, WarningFilled16, Close16, CvWrapper },
   mixins: [uidMixin],
   inheritAttrs: false,
   props: {
@@ -156,6 +159,10 @@ export default {
     },
     internalDropTargetLabel() {
       return this.dropTargetLabel || this.buttonLabel || 'Drag and drop files here or upload';
+    },
+    stateStyleOverides() {
+      // <style carbon tweaks - DO NOT USE STYLE TAG as it causes SSR issues
+      return { display: 'inline-flex', alignItems: 'center' };
     },
   },
   methods: {
@@ -228,38 +235,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.cv-file-uploader {
-  .bx--file__state-container {
-    align-items: center;
-  }
-
-  .cv-loading {
-    position: absolute;
-    height: 1rem;
-    width: 1rem;
-    margin: -0.25rem;
-  }
-
-  .bx--inline-loading__animation {
-    margin-right: 0;
-    height: 1rem;
-    width: 1rem;
-  }
-
-  .bx--file__drop-container {
-    position: relative;
-  }
-
-  // .bx--file-input {
-  //   position: absolute;
-  //   top: 0;
-  //   left: 0;
-  //   width: 100%;
-  //   height: 100%;
-  //   opacity: 0;
-  //   clip: initial;
-  // }
-}
-</style>

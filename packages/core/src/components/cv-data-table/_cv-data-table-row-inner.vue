@@ -99,9 +99,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.cv-data-table-row-inner .cv-checkbox.bx--checkbox-wrapper {
-  margin: 0;
-}
-</style>

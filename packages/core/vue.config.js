@@ -12,6 +12,6 @@ module.exports = {
   },
 
   css: {
-    extract: false,
+    extract: true, // FALSE: causes a problem with SSR, prefer :style
   },
 };

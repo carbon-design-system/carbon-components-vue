@@ -212,9 +212,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.cv-modal .bx--modal-close__icon {
-  pointer-events: none;
-}
-</style>
