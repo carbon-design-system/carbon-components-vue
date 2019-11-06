@@ -10,9 +10,9 @@
       @keydown.left.prevent="moveLeft"
     >
       <cv-dropdown class="bx--tabs-trigger" :value="`${selectedId}`" @change="onDropChange" :form-item="false">
-        <cv-dropdown-item v-for="tab in tabs" :key="`drop-${tab.uid}`" :value="`${tab.uid}`">
-          {{ tab.label }}
-        </cv-dropdown-item>
+        <cv-dropdown-item v-for="tab in tabs" :key="`drop-${tab.uid}`" :value="`${tab.uid}`">{{
+          tab.label
+        }}</cv-dropdown-item>
       </cv-dropdown>
       <ul class="bx--tabs__nav bx--tabs__nav--hidden" role="tablist">
         <li
@@ -105,7 +105,7 @@ export default {
 
           this.selectedId = id;
 
-          for (let i = 0; i < this.tabs.length && newIndex < 0; i++) {
+          for (let i = 0; i < this.tabs.length; i++) {
             if (this.tabs[i].uid === id) {
               this.tabs[i].internalSelected = true;
               newIndex = i;
