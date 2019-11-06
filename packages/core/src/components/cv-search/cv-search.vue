@@ -143,10 +143,3 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-.cv-search {
-  .bx--search-magnifier {
-    pointer-events: none;
-  }
-}
-</style>

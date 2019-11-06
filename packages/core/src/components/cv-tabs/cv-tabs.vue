@@ -9,7 +9,13 @@
       @keydown.right.prevent="moveRight"
       @keydown.left.prevent="moveLeft"
     >
-      <cv-dropdown class="bx--tabs-trigger" :value="`${selectedId}`" @change="onDropChange" :form-item="false">
+      <cv-dropdown
+        class="bx--tabs-trigger"
+        :value="`${selectedId}`"
+        @change="onDropChange"
+        :form-item="false"
+        :style="triggerStyleOverride"
+      >
         <cv-dropdown-item v-for="tab in tabs" :key="`drop-${tab.uid}`" :value="`${tab.uid}`">{{
           tab.label
         }}</cv-dropdown-item>
@@ -70,6 +76,12 @@ export default {
     this.$on('cv:selected', srcComponent => this.onCvSelected(srcComponent));
     this.$on('cv:disabled', srcComponent => this.onCvDisabled(srcComponent));
     this.$on('cv:enabled', srcComponent => this.onCvEnabled(srcComponent));
+  },
+  computed: {
+    triggerStyleOverride() {
+      // <style carbon tweaks - DO NOT USE STYLE TAG as it causes SSR issues
+      return { padding: 0 };
+    },
   },
   methods: {
     onDropChange(val) {
@@ -220,18 +232,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-@media screen and (max-width: 41.95rem) {
-  .cv-tabs .bx--tabs-trigger {
-    display: block;
-    padding: 0;
-
-    .cv-dropdown__arrow {
-      // Carbon uses a different chevron for the tabs dropdown, undo size difference.
-      width: initial;
-      height: initial;
-    }
-  }
-}
-</style>

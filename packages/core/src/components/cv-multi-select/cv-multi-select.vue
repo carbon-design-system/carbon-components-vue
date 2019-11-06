@@ -8,9 +8,7 @@
     }"
     @focusout="onFocusOut"
   >
-    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': disabled }">
-      {{ title }}
-    </label>
+    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': disabled }">{{ title }}</label>
 
     <div
       v-if="!inline && isHelper"
@@ -63,6 +61,7 @@
           :label="`${dataValue.length}`"
           @remove="clearValues"
           ref="tag"
+          :style="filterableTagOverride"
         />
         <span v-if="!filterable" class="bx--list-box__label">{{ label }}</span>
         <template v-else>
@@ -266,6 +265,10 @@ export default {
         this.$emit('filter', val);
       },
     },
+    filterableTagOverride() {
+      // <style carbon tweaks - DO NOT USE STYLE TAG as it causes SSR issues
+      return this.filterable ? { marginTop: 0, marginBottom: 0 } : {};
+    },
   },
   methods: {
     clearFilter() {
@@ -437,9 +440,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.cv-multi-select.bx--multi-select--filterable .bx--list-box__selection--multi {
-  margin: 0;
-}
-</style>

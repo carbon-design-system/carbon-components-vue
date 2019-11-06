@@ -351,13 +351,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-// .cv-combo-box.bx--combo-box--filterable .bx--list-box__selection--multi {
-//   margin: 0;
-// }
-.bx--list-box__field .bx--text-input {
-  // temporary fix for issue https://github.com/carbon-design-system/carbon/issues/3290
-  padding-right: 4.5rem;
-}
-</style>

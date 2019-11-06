@@ -460,9 +460,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-// .cv-data-table .bx--table-column-checkbox .bx--checkbox-wrapper {
-//   margin: 0;
-// }
-</style>
