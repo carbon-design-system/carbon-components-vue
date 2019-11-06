@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.18.0-canary.0 (Nov 6th 2019)
+
+### Feat
+
+- Rework for SSR, removing all style tags from components in favour of using :style in the template.
+
 ## 2.17.1 (Nov 6th 2019)
 
 ### Fix

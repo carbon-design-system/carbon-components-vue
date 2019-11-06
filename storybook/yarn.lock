@@ -841,6 +841,16 @@
   dependencies:
     "@carbon/icon-helpers" "10.4.0"
 
+"@carbon/vue@^2.17.1":
+  version "2.17.1"
+  resolved "https://registry.yarnpkg.com/@carbon/vue/-/vue-2.17.1.tgz#ec0c7386f8a50ff8f281f492bf1d19f2e3e8327f"
+  integrity sha512-LYCI29qEUmK7BK5yRjiTG+u1UrUwJ9q3paGwLXyWqvRnkIWG5Kbo7dGzcO/uwOnUeve4CdGLzp5xp1DRUP4+ew==
+  dependencies:
+    "@carbon/icons-vue" "10.6.1"
+    carbon-components "10.7.3"
+    flatpickr "4.6.3"
+    vue "^2.6.10"
+
 "@csstools/convert-colors@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
@@ -4389,6 +4399,11 @@ flatpickr@4.6.1:
   version "4.6.1"
   resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.6.1.tgz#9eb498ab805dd27f5ae02e1ac6ac6c099ce45e94"
   integrity sha512-3ULSxbXmcMIRzer/2jLNweoqHpwDvsjEawO2FUd9UFR8uPwLM+LruZcPDpuZStcEgbQKhuFOfXo4nYdGladSNw==
+
+flatpickr@4.6.3:
+  version "4.6.3"
+  resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.6.3.tgz#15a8b76b6e34e3a072861250503a5995b9d3bc60"
+  integrity sha512-007VucCkqNOMMb9ggRLNuJowwaJcyOh4sKAFcdGfahfGc7JQbf94zSzjdBq/wVyHWUEs5o3+idhFZ0wbZMRmVQ==
 
 flatten@^1.0.2:
   version "1.0.2"
