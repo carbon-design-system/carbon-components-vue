@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.17.1 (Nov 6th 2019)
+
+### Fix
+
+- CvTabs not closing lower indexed tabs
+
 ## 2.17.0 (Nov 4th 2019)
 
 ### Feat
