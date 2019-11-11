@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.18.0-canary.0 (Nov 6th 2019)
+## 2.18.0 (Nov 6th 2019)
 
 ### Feat
 
