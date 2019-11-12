@@ -64,7 +64,7 @@ for (const story of storySet) {
     Sample tab panel content 4
   </cv-tab>
   <cv-tab ${withId(5)}label="Tab link 5">
-    Sample tab panel content 5
+    Sample tab panel content 5 <a href="javascript:void(0)">with some active content</a>
   </cv-tab>
 </cv-tabs>
   `;
