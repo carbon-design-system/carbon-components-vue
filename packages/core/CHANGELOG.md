@@ -1,6 +1,14 @@
 # Changelog
 
-## 2.18.0 (Nov 6th 2019)
+## 2.19.0-canary.0 (Nov 12th 2019)
+
+### Chore
+
+- Change CvTabs to use same HTML as core carbon.
+
+# Changelog
+
+## 2.18.0 (Nov 11th 2019)
 
 ### Feat
 
