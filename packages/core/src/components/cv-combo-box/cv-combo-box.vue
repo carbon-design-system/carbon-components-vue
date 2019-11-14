@@ -206,10 +206,12 @@ export default {
   },
   methods: {
     clearFilter() {
+      this.internalUpdateValue('');
       this.filter = '';
       this.$refs.input.focus();
       this.doOpen(true);
       this.updateOptions();
+      this.$emit('change', this.dataValue);
     },
     checkHighlightPosition(newHiglight) {
       if (this.$refs.list && this.$refs.option) {
