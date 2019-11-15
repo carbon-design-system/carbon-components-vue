@@ -32,9 +32,6 @@ describe('CvTabs', () => {
     const propsData = { noDefaultToFirst: false };
     const wrapper = shallow(CvTabs, {
       propsData,
-      stubs: {
-        CvDropdown: '<div class="CvDropdown__stubbed"></div>',
-      },
     });
 
     expect(wrapper.html()).toMatchSnapshot();
@@ -44,9 +41,6 @@ describe('CvTabs', () => {
     const wrapper = shallow(CvTabs, {
       slots: {
         default: [Tab, Tab, Tab],
-      },
-      stubs: {
-        CvDropdown: '<div class="CvDropdown__stubbed"></div>',
       },
     });
 
@@ -121,11 +115,9 @@ describe('CvTabs', () => {
       .findAll(`.${prefix}--tabs__nav-link`)
       .at(2)
       .trigger('click');
-    let dropDown = wrapper.find(`.${prefix}--tabs-trigger`);
 
     expect(wrapper.vm.tabs[0].dataSelected).toBeFalsy();
     expect(wrapper.vm.tabs[2].dataSelected).toBeTruthy();
-    expect(dropDown.vm.internalValue).toEqual(wrapper.vm.tabs[2].uid);
   });
 });
 
