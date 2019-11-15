@@ -80,13 +80,18 @@ export default {
     timezones: { type: Array, default: () => [] },
     timezonesSelectLabel: { type: String, default: 'Select time zone' },
   },
+  data() {
+    return {
+      isInvalid: false,
+    };
+  },
+  mounted() {
+    this.checkSlots();
+  },
+  beforeUpdate() {
+    this.checkSlots();
+  },
   computed: {
-    isInvalid() {
-      return (
-        (this.$slots['invalid-message'] && this.$slots['invalid-message'].length) ||
-        (this.invalidMessage && this.invalidMessage.length > 0)
-      );
-    },
     validAmpm() {
       let result = this.ampm;
       if (!['AM', 'PM'].includes(this.ampm)) {
@@ -109,6 +114,12 @@ export default {
         }
       }
       return result;
+    },
+  },
+  methods: {
+    checkSlots() {
+      // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
+      this.isInvalid = this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length);
     },
   },
 };

@@ -109,7 +109,7 @@ let variants = [
   },
   {
     name: 'slots',
-    excludes: ['vModel', 'events', 'helperText', 'invalidMessage'],
+    excludes: ['vModel', 'events'],
   },
   { name: 'minimal', includes: ['value'] },
   { name: 'events', includes: ['value', 'events'] },

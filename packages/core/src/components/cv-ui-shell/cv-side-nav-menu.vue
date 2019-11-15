@@ -46,7 +46,15 @@ export default {
   data() {
     return {
       expanded: false,
+      hasNavIcon: false,
     };
+  },
+  mounted() {
+    // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
+    this.hasNavIcon = this.$slots['nav-icon'] !== undefined;
+  },
+  beforeUpdate() {
+    this.hasNavIcon = this.$slots['nav-icon'] !== undefined;
   },
   computed: {
     hasIcon() {
