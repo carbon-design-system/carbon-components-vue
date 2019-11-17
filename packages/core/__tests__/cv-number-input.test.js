@@ -92,32 +92,26 @@ describe('CvNumberInput', () => {
   it('should match snapshot when invalid-message slot is provided', () => {
     const id = '1';
     const value = 5;
-    const invalidMessage = 'test';
-    const wrapper = shallow(
-      CvNumberInput,
-      { propsData: { id, value, invalidMessage } },
-      {
-        slots: {
-          'invalid-message': '<div class="fake-slot">my invalid message</div>',
-        },
-      }
-    );
+    const propsData = { id, value };
+    const wrapper = shallow(CvNumberInput, {
+      slots: {
+        'invalid-message': '<div class="fake-slot">my invalid message</div>',
+      },
+      propsData,
+    });
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('should match snapshot when helper-text slot is provided', () => {
     const id = '1';
     const value = 5;
-    const helperText = 'test';
-    const wrapper = shallow(
-      CvNumberInput,
-      { propsData: { id, value, helperText } },
-      {
-        slots: {
-          'helper-text': '<div class="fake-slot">my helper text</div>',
-        },
-      }
-    );
+    const propsData = { id, value };
+    const wrapper = shallow(CvNumberInput, {
+      slots: {
+        'helper-text': '<div class="fake-slot">my helper text</div>',
+      },
+      propsData,
+    });
     expect(wrapper.html()).toMatchSnapshot();
   });
 
