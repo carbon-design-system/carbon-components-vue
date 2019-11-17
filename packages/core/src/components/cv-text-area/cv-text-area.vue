@@ -57,10 +57,12 @@ export default {
       };
     },
     isInvalid() {
-      return this.$slots['invalid-message'] !== undefined || (this.invalidMessage && this.invalidMessage.length);
+      return Boolean(
+        this.$slots['invalid-message'] !== undefined || (this.invalidMessage && this.invalidMessage.length)
+      );
     },
     isHelper() {
-      return this.$slots['helper-text'] || (this.helperText && this.helperText.length);
+      return Boolean(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
     },
   },
 };
