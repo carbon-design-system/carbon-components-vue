@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CvLink should render correctly when \`<a>\` is used 1`] = `<a href="/test" class="cv-link bx--link"></a>`;
+
+exports[`CvLink should render correctly when \`disabled\` 1`] = `<a aria-disabled="true" class="cv-link bx--link"></a>`;
+
+exports[`CvLink should render correctly when it is \`inline\` 1`] = `<a class="cv-link bx--link bx--link--inline"></a>`;
+
+exports[`CvLink should render correctly when it is not \`inline\` 1`] = `<a class="cv-link bx--link"></a>`;

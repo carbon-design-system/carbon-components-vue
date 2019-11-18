@@ -1,4 +1,4 @@
-import { number } from '@storybook/addon-knobs';
+import { number, boolean } from '@storybook/addon-knobs';
 
 const parsePreKnobs = (variant, preKnobs) => {
   return () => {
@@ -62,7 +62,11 @@ const parsePreKnobs = (variant, preKnobs) => {
         } else if (preKnob.slot) {
           // slot
           if (preKnob.slot !== 'default') {
-            knobs.group[preKnob.group] += `${prefix}<template slot="${preKnob.slot}">${preKnob.value}</template>`;
+            knobs.props[`use_${key}`] = { default: boolean(`use-sloted-content:${preKnob.slot}`, true) };
+            // knobs.data[key] = boolean(`slot:${preKnob.slot}`, false);
+            knobs.group[
+              preKnob.group
+            ] += `${prefix}<template v-if="use_${key}" slot="${preKnob.slot}">${preKnob.value}</template>`;
           } else {
             knobs.group[preKnob.group] += `${prefix}${preKnob.value}`;
           }

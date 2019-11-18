@@ -58,7 +58,14 @@ export default {
       dataChecked: this.checked,
       dataExpanded: this.expanded,
       dataSomeExpandingRows: this.someExpandingRows,
+      hasOverflowMenu: false,
     };
+  },
+  mounted: function() {
+    this.checkSlots();
+  },
+  beforeUpdate() {
+    this.checkSlots();
   },
   watch: {
     checked() {
@@ -75,9 +82,6 @@ export default {
     isCvDataTableRow() {
       return true;
     },
-    hasOverflowMenu() {
-      return (this.overflowMenu && this.overflowMenu.length) || this.$slots['overflow-menu'];
-    },
     hasBatchActions() {
       return this.$parent.$parent.hasBatchActions;
     },
@@ -86,6 +90,10 @@ export default {
     },
   },
   methods: {
+    checkSlots() {
+      // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
+      this.hasOverflowMenu = !!((this.overflowMenu && this.overflowMenu.length) || this.$slots['overflow-menu']);
+    },
     onChange() {
       this.$parent.$parent.onRowCheckChange(this.value, this.dataChecked);
     },

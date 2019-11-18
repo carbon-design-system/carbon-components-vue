@@ -46,6 +46,18 @@ export default {
     label: String,
     value: String,
   },
+  data() {
+    return {
+      isHelper: false,
+      isInvalid: false,
+    };
+  },
+  mounted() {
+    this.checkSlots();
+  },
+  beforeUpdate() {
+    this.checkSlots();
+  },
   computed: {
     // Bind listeners at the component level to the embedded input element and
     // add our own input listener to service the v-model. See:
@@ -56,11 +68,12 @@ export default {
         input: event => this.$emit('input', event.target.value),
       };
     },
-    isInvalid() {
-      return this.$slots['invalid-message'] !== undefined || (this.invalidMessage && this.invalidMessage.length);
-    },
-    isHelper() {
-      return this.$slots['helper-text'] || (this.helperText && this.helperText.length);
+  },
+  methods: {
+    checkSlots() {
+      // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
+      this.isInvalid = !!(this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length));
+      this.isHelper = !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
     },
   },
 };
