@@ -136,7 +136,7 @@ export default {
     checkSlots() {
       // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
       this.hasFooter = !!(this.$slots['primary-button'] || this.$slots['secondary-button']);
-      this.hasHeaderLabel = !!(this.$slots.label !== undefined);
+      this.hasHeaderLabel = !!this.$slots.label;
       this.hasSecondary = !!this.$slots['secondary-button'];
       this.hasPrimary = !!this.$slots['primary-button'];
     },

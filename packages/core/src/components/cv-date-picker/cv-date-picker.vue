@@ -190,7 +190,7 @@ export default {
     checkSlots() {
       // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
       this.isInvalid = !!(
-        this.$slots['invalid-message'] !== undefined ||
+        this.$slots['invalid-message'] ||
         (this.invalidMessage && this.invalidMessage.length) ||
         (this.invalidDateMessage && this.invalidDateMessage.length)
       );

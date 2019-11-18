@@ -33,11 +33,11 @@ export default {
   },
   data() {
     return {
-      hasNavIcon: this.$slots['nav-icon'] !== undefined,
+      hasNavIcon: this.$slots['nav-icon'],
     };
   },
   beforeUpdate() {
-    this.hasNavIcon = !!(this.$slots['nav-icon'] !== undefined);
+    this.hasNavIcon = !!this.$slots['nav-icon'];
   },
 };
 </script>
