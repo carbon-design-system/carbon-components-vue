@@ -176,7 +176,6 @@ export default {
         return this.dataHighlighted;
       },
       set(val) {
-        console.dir(this.dataOptions);
         let firstMatchIndex = this.dataOptions.findIndex(item => item.value === val);
         if (firstMatchIndex < 0) {
           firstMatchIndex = this.dataOptions.length ? 0 : -1;
