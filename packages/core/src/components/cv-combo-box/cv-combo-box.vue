@@ -208,10 +208,12 @@ export default {
       this.isHelper = !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
     },
     clearFilter() {
+      this.internalUpdateValue('');
       this.filter = '';
       this.$refs.input.focus();
       this.doOpen(true);
       this.updateOptions();
+      this.$emit('change', this.dataValue);
     },
     checkHighlightPosition(newHiglight) {
       if (this.$refs.list && this.$refs.option) {
