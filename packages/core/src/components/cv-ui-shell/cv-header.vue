@@ -31,10 +31,10 @@ export default {
   },
   mounted() {
     // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
-    this.hasGlobalHeader = this.$slots['header-global'] !== undefined;
+    this.hasGlobalHeader = !!this.$slots['header-global'];
   },
   beforeUpdate() {
-    this.hasGlobalHeader = this.$slots['header-global'] !== undefined;
+    this.hasGlobalHeader = !!this.$slots['header-global'];
   },
   computed: {
     isCvHeader() {

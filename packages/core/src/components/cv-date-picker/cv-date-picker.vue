@@ -189,10 +189,11 @@ export default {
   methods: {
     checkSlots() {
       // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
-      this.isInvalid =
-        this.$slots['invalid-message'] !== undefined ||
+      this.isInvalid = !!(
+        this.$slots['invalid-message'] ||
         (this.invalidMessage && this.invalidMessage.length) ||
-        (this.invalidDateMessage && this.invalidDateMessage.length);
+        (this.invalidDateMessage && this.invalidDateMessage.length)
+      );
     },
     initFlatpickr() {
       if (['single', 'range'].includes(this.kind)) {

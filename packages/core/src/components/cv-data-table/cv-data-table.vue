@@ -324,10 +324,10 @@ export default {
   methods: {
     checkSlots() {
       // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
-      this.hasBatchActions = this.$slots['batch-actions'];
-      this.hasActions = this.$slots.actions;
-      this.hasToolbar = this.$slots.actions || this.$listeners.search || this.$slots['batch-actions'];
-      this.isHelper = this.$slots['helper-text'] !== undefined || (this.helperText && this.helperText.length);
+      this.hasBatchActions = !!this.$slots['batch-actions'];
+      this.hasActions = !!this.$slots.actions;
+      this.hasToolbar = !!(this.$slots.actions || this.$listeners.search || this.$slots['batch-actions']);
+      this.isHelper = !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
     },
     onCvMount(row) {
       this.registeredRows.push(row);

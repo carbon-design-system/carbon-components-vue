@@ -56,9 +56,9 @@ export default {
   methods: {
     checkSlots() {
       // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
-      this.hasBatchActions = this.$slots['batch-actions'];
-      this.hasHelperText = this.$slots['helper-text'];
-      this.hasActions = this.$slots['actions'];
+      this.hasBatchActions = !!this.$slots['batch-actions'];
+      this.hasHelperText = !!this.$slots['helper-text'];
+      this.hasActions = !!this.$slots['actions'];
     },
   },
 };
