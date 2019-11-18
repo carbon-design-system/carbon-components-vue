@@ -73,7 +73,7 @@ import { CvTextInput } from './components/cv-text-input';
 import { CvTile } from './components/cv-tile';
 import { CvTimePicker } from './components/cv-time-picker';
 import { CvToastNotification } from './components/cv-toast-notification';
-import { CvToggle } from './components/cv-toggle';
+import { CvToggle, CvToggleSkeleton } from './components/cv-toggle';
 import { CvToolbar, CvToolbarTitle, CvToolbarSearch, CvToolbarOption, CvToolbarDivider } from './components/cv-toolbar';
 import { CvTooltip, CvInteractiveTooltip, CvDefinitionTooltip } from './components/cv-tooltip';
 import {
@@ -135,7 +135,7 @@ export { CvTextInput };
 export { CvTile };
 export { CvTimePicker };
 export { CvToastNotification };
-export { CvToggle };
+export { CvToggle, CvToggleSkeleton };
 export { CvToolbar, CvToolbarTitle, CvToolbarSearch, CvToolbarOption, CvToolbarDivider };
 export { CvTooltip, CvInteractiveTooltip, CvDefinitionTooltip };
 export {
