@@ -401,8 +401,12 @@ export default {
       if (this.disabled) {
         ev.preventDefault();
       } else {
-        this.doOpen(!this.open);
-        this.inputOrButtonFocus();
+        if (this.open) {
+          this.doOpen(false);
+        } else {
+          this.doOpen(true);
+          this.inputOrButtonFocus();
+        }
       }
     },
     clearValues() {
