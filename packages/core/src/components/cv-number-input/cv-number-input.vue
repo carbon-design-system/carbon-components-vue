@@ -60,8 +60,8 @@ export default {
     formItem: { type: Boolean, default: true },
     helperText: { type: String, default: undefined },
     invalidMessage: { type: String, default: undefined },
-    label: String,
-    value: String,
+    label: { type: String, default: '' },
+    value: { type: [String, Number], default: '' },
     invalid: /* deprecate */ {
       type: Boolean,
       default: undefined,
@@ -77,12 +77,12 @@ export default {
   },
   data() {
     return {
-      internalValue: this.value,
+      internalValue: this.valueAsString(this.value),
     };
   },
   watch: {
     value() {
-      this.internalValue = this.value;
+      this.internalValue = this.valueAsString(this.value);
     },
   },
   computed: {
@@ -91,7 +91,7 @@ export default {
     // https://vuejs.org/v2/guide/components-custom-events.html#Customizing-Component-v-model
     inputListeners() {
       return Object.assign({}, this.$listeners, {
-        input: () => this.$emit('input', this.internalValue),
+        input: () => this.emitValue(),
       });
     },
     internalIntValue() {
@@ -112,11 +112,24 @@ export default {
   methods: {
     doUp() {
       this.internalValue = `${this.internalIntValue + 1}`;
-      this.$emit('input', this.internalValue);
+      this.emitValue();
     },
     doDown() {
       this.internalValue = `${this.internalIntValue - 1}`;
-      this.$emit('input', this.internalValue);
+      this.emitValue();
+    },
+    emitValue() {
+      if (typeof this.value === 'number') {
+        this.$emit('input', this.internalIntValue);
+      } else {
+        this.$emit('input', this.internalValue);
+      }
+    },
+    valueAsString(val) {
+      if (typeof val === 'number') {
+        return '' + val;
+      }
+      return val;
     },
   },
 };

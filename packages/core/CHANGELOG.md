@@ -1,21 +1,100 @@
 # Changelog
 
-## 2.15.0-canary.x (Sept 28, 2019)
+## 2.19.0-canary.0 (Nov 12th 2019)
+
+### Chore
+
+- Change CvTabs to use same HTML as core carbon.
+
+# Changelog
+
+## 2.18.0 (Nov 11th 2019)
+
+### Feat
+
+- Rework for SSR, removing all style tags from components in favour of using :style in the template.
+
+## 2.17.1 (Nov 6th 2019)
+
+### Fix
+
+- CvTabs not closing lower indexed tabs
+
+## 2.17.0 (Nov 4th 2019)
+
+### Feat
+
+- Tests added or updated for
+  - CvAccordion
+  - CvWrapper
+  - CvCheckbox
+  - CvToggle
+  - CvTag
+  - CvRadioButton
+  - CvTabs
+- Updated CvTabs behaviour when tab list is dynamic
+
+### Fix
+
+- Dropdown workingn when disabled
+- Overflow not closing on button click
+
+## 2.16.0 (Oct 28th 2019)
+
+### Feat
+
+Allow number input to work with string or number for value, v-model and events.
+
+### Chore
+
+Updated tests for
+
+- CvBreadcrumb
+- CvButton
+- CvBNumberInput
+- CvTag
+
+### Fix
+
+CvButton raising two click events
+
+## 2.15.0 (Oct 24th 2019)
 
 ### Feat
 
 - Add v-model for date picker
 - Add up down aria labels for number input
 - Update to Carbon 10.7
+  - CvButton, CvIconButton
+  - CvComboBox
+  - CvContentSwitcher
+  - CvDataTable
+  - CvDropdown
+  - CvFileUploader
+  - CvInlineNotification
+  - CvLink
+  - CvList
+  - CvNumberInput
+  - CvOverflowMenu
+  - CvToastNotification
+  - CvTextInput
+  - CvToggle
+  - CvTags
 - Add expand all to data table
 - Add inline link
 - Add nested list ordering
 - Add CvTabsSkeleton component
+- Tests for CvCheckbox, CvToggle, CvBreadcrumb added
+- Rework tabs component to behave better when dynamically adding/removing tabs.
+- Added CvTabs property no-default-to-first option to revent auto default to first tab.
+- Add hover expand for header menu items
+- Add keyboard scroll to modal dialog, suppressing background scroll.
 
 ### Fix
 
 - Uploader skeleton typo
 - CvTabs behaviour when switching tab set (beforeDestory event name typo)
+- Remove trimRight usage for wider support
 
 ### Chore
 

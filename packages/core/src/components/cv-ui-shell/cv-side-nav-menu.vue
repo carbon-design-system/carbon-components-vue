@@ -60,10 +60,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.cv-side-nav-menu .cv-side-nav-menu__chevron-svg {
-  // prevent safari issue
-  will-change: initial !important;
-}
-</style>

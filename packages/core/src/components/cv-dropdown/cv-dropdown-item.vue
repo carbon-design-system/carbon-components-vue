@@ -77,10 +77,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-// carbon fix
-.cv-dropdown-item.bx--list-box__menu-item--highlighted + .bx--dropdown-item .bx--dropdown-link {
-  border-top-color: transparent;
-}
-</style>

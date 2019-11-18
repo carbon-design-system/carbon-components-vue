@@ -9,5 +9,3 @@ export default {
   name: 'CvSideNavLinkText',
 };
 </script>
-
-<style lang="scss"></style>

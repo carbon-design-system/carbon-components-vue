@@ -1,17 +1,25 @@
 <template>
-  <div class="cv-definition-tooltip bx--tooltip--definition">
-    <p class="bx--tooltip__trigger" tabindex="0">{{ term }}</p>
-    <div :class="`bx--tooltip--definition__${direction}`">
-      <span class="bx--tooltip__caret"></span>
-      <p>{{ definition }}</p>
-    </div>
+  <div class="cv-definition-tooltip bx--tooltip--definition bx--tooltip--a11y">
+    <button
+      :aria-describedby="`${uid}-label`"
+      class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition"
+      :class="`bx--tooltip--${direction} bx--tooltip--align-${alignment}`"
+      type="button"
+    >
+      {{ term }}
+    </button>
+    <div class="bx--assistive-text" :id="`${uid}-label`" role="tooltip">{{ definition }}</div>
   </div>
 </template>
 
 <script>
+import uidMixin from '../../mixins/uid-mixin';
+
 export default {
   name: 'CvDefinitionTooltip',
+  mixins: [uidMixin],
   props: {
+    alignment: { type: String, default: 'center', validator: val => ['start', 'center', 'end'].includes(val) },
     definition: { type: String, required: true },
     direction: {
       type: String,

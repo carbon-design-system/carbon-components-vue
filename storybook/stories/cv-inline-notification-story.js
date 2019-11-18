@@ -31,7 +31,13 @@ const preKnobs = {
   },
   events: {
     group: 'attr',
-    value: `@close="doClose"`,
+    value: `@close="doClose" @action="doAction"`,
+  },
+  actionlabel: {
+    group: 'attr',
+    type: text,
+    config: ['action label', 'Action'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    prop: 'action-label',
   },
   closeAriaLabel: {
     group: 'attr',
@@ -102,6 +108,7 @@ for (const story of storySet) {
             this.visible = false;
             this.actionClose(ev);
           },
+          doAction: action('CvInlineNotification - action'),
         },
       };
     },

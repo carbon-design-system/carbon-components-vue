@@ -16,9 +16,17 @@
       <component :is="icon" class="bx--inline-notification__icon" />
       <div class="bx--inline-notification__text-wrapper">
         <p class="bx--inline-notification__title">{{ title }}</p>
-        <p class="bx--inline-notification__subtitle">{{ subTitle }}.</p>
+        <p class="bx--inline-notification__subtitle">{{ subTitle }}</p>
       </div>
     </div>
+    <button
+      v-if="actionLabel"
+      @click="$emit('action')"
+      class="bx--inline-notification__action-button bx--btn bx--btn--sm bx--btn--ghost"
+      type="button"
+    >
+      {{ actionLabel }}
+    </button>
     <button
       type="button"
       :aria-label="closeAriaLabel"
@@ -43,6 +51,7 @@ export default {
   components: { Close16 },
   mixins: [notificationMixin],
   props: {
+    actionLabel: { type: String, default: '' },
     closeAriaLabel: { type: String, default: 'Dismiss notification' },
     kind: {
       type: String,

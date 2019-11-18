@@ -1,13 +1,69 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CvTag matches tag filter snapshot 1`] = `
-<span tabindex="0" title="Clear filter" class="cv-tag bx--tag bx--tag--filter bx--tag--filter">
-  I am a filter tag
+exports[` 1`] = `<div class="cv-tag bx--tag bx--skeleton"></div>`;
+
+exports[`CvTag should render 1`] = `
+<span tabindex="0" role="listitem" title="Clear filter" class="cv-tag bx--tag bx--tag--filter bx--tag--filter">
+  test
   <close16-stub aria-label="Clear filter" role="button"></close16-stub></span>
 `;
 
-exports[`CvTag matches tag snapshot 1`] = `
-<span tabindex="0" class="cv-tag bx--tag bx--tag--red">
-  I am a tag
+exports[`CvTag should render 2`] = `
+<span tabindex="0" role="listitem" class="cv-tag bx--tag bx--tag--red">
+  test
+  <!----></span>
+`;
+
+exports[`CvTag should render 3`] = `
+<span tabindex="0" role="listitem" class="cv-tag bx--tag bx--tag--magenta">
+  test
+  <!----></span>
+`;
+
+exports[`CvTag should render 4`] = `
+<span tabindex="0" role="listitem" class="cv-tag bx--tag bx--tag--purple">
+  test
+  <!----></span>
+`;
+
+exports[`CvTag should render 5`] = `
+<span tabindex="0" role="listitem" class="cv-tag bx--tag bx--tag--blue">
+  test
+  <!----></span>
+`;
+
+exports[`CvTag should render 6`] = `
+<span tabindex="0" role="listitem" class="cv-tag bx--tag bx--tag--cyan">
+  test
+  <!----></span>
+`;
+
+exports[`CvTag should render 7`] = `
+<span tabindex="0" role="listitem" class="cv-tag bx--tag bx--tag--teal">
+  test
+  <!----></span>
+`;
+
+exports[`CvTag should render 8`] = `
+<span tabindex="0" role="listitem" class="cv-tag bx--tag bx--tag--green">
+  test
+  <!----></span>
+`;
+
+exports[`CvTag should render 9`] = `
+<span tabindex="0" role="listitem" class="cv-tag bx--tag bx--tag--gray">
+  test
+  <!----></span>
+`;
+
+exports[`CvTag should render 10`] = `
+<span tabindex="0" role="listitem" class="cv-tag bx--tag bx--tag--cool-gray">
+  test
+  <!----></span>
+`;
+
+exports[`CvTag should render 11`] = `
+<span tabindex="0" role="listitem" class="cv-tag bx--tag bx--tag--warm-gray">
+  test
   <!----></span>
 `;

@@ -1,9 +1,10 @@
 <template>
-  <div class="cv-loading" :class="overlayClasses">
+  <cv-wrapper :tag-type="overlay ? 'div' : ''" class="cv-loading" :class="overlayClasses">
     <div
       data-loading
       class="bx--loading"
       :class="{
+        'cv-loading': !overlay,
         'bx--loading--stop': !active,
         'bx--loading--small': small,
       }"
@@ -11,16 +12,19 @@
     >
       <svg class="bx--loading__svg" viewBox="-75 -75 150 150">
         <title>Loading</title>
-        <circle v-if="small" class="bx--loading__background" cx="0" cy="0" r="37.5"></circle>
-        <circle class="bx--loading__stroke" cx="0" cy="0" r="37.5"></circle>
+        <circle v-if="small" class="bx--loading__background" cx="0" cy="0" :r="loadingRadius" />
+        <circle class="bx--loading__stroke" cx="0" cy="0" :r="loadingRadius" />
       </svg>
     </div>
-  </div>
+  </cv-wrapper>
 </template>
 
 <script>
+import CvWrapper from '../cv-wrapper/_cv-wrapper';
+
 export default {
   name: 'CvLoading',
+  components: { CvWrapper },
   props: {
     active: { type: Boolean, default: true },
     overlay: Boolean,
@@ -31,6 +35,9 @@ export default {
       if (!this.overlay) return '';
 
       return `bx--loading-overlay ${this.stopped ? 'bx--loading-overlay--stop' : ''}`;
+    },
+    loadingRadius() {
+      return this.small ? '26.8125' : '37.5';
     },
   },
   data() {

@@ -9,8 +9,8 @@
         'bx--btn--field': size === 'field',
       },
     ]"
-    v-on="$listeners"
-    role="button"
+    v-on="inputListeners"
+    type="button"
   >
     <span class="bx--assistive-text">{{ tipText }}</span>
 
@@ -28,19 +28,19 @@ export default {
   name: 'CvIconButton',
   mixins: [buttonMixin],
   props: {
-    tipText: { type: String, default: undefined },
+    label: { type: String, default: undefined },
     tipPosition: {
       type: String,
       default: 'bottom',
       validator: val => ['top', 'left', 'bottom', 'right'.includes(val)],
     },
-    tipAlignment: { type: String, default: 'center' },
+    tipAlignment: { type: String, default: 'center', validator: val => ['start', 'center', 'end'].includes(val) },
   },
   computed: {
     tipClasses() {
       const tipPosition = this.tipPosition || 'bottom';
       const tipAlignment = this.tipAlignment || 'center';
-      if (this.tipText) {
+      if (this.label) {
         return `bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--${tipPosition} bx--tooltip--align-${tipAlignment}`;
       } else {
         return '';

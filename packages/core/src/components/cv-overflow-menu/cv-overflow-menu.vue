@@ -1,21 +1,27 @@
 <template>
-  <div
-    data-overflow-menu
-    tabindex="0"
-    @click="doToggle"
-    @keydown.space.prevent
-    @keyup.space.prevent="doToggle"
-    @keydown.enter.prevent="doToggle"
-    @keydown.tab="onOverflowMenuTab"
-    :aria-label="label"
-    role="button"
-    class="cv-overflow-menu bx--overflow-menu"
-    :class="{ 'bx--overflow-menu--open': open }"
-  >
-    <slot name="trigger">
-      <OverflowMenuVertical16 class="bx--overflow-menu__icon" />
-    </slot>
-    <ul
+  <div data-overflow-menu class="cv-overflow-menu bx--overflow-menu">
+    <button
+      class="bx--overflow-menu__trigger bx--tooltip__trigger bx--tooltip--a11y"
+      :class="[tipClasses, { 'bx--overflow-menu--open': open }]"
+      aria-haspopup
+      type="button"
+      :aria-expanded="open"
+      :aria-controls="`${uid}-menu`"
+      :id="`${uid}-trigger`"
+      ref="trigger"
+      @click="doToggle"
+      @keydown.space.prevent
+      @keyup.space.prevent="doToggle"
+      @keydown.enter.prevent="doToggle"
+      @keydown.tab="onOverflowMenuTab"
+    >
+      <span class="bx--assistive-text">{{ label }}</span>
+
+      <slot name="trigger">
+        <OverflowMenuVertical16 class="bx--overflow-menu__icon" />
+      </slot>
+    </button>
+    <div
       class="bx--overflow-menu-options"
       :class="{
         'bx--overflow-menu--flip': flipMenu,
@@ -23,7 +29,8 @@
       }"
       tabindex="-1"
       ref="popup"
-      :id="uid"
+      :aria-labelledby="`${uid}-trigger`"
+      :id="`${uid}-menu`"
       :style="{ left: left + 'px', top: top + 'px' }"
       @focusout="checkFocusOut"
       @mousedown.prevent="preventFocusOut"
@@ -35,7 +42,9 @@
         style="position: absolute; height: 1px; width: 1px; left: -9999px;"
         @focus="focusBeforeContent"
       />
-      <slot></slot>
+      <ul class="bx--overflow-menu-options__content">
+        <slot></slot>
+      </ul>
       <div
         class="cv-overflow-menu__after-content"
         ref="afterContent"
@@ -43,7 +52,7 @@
         style="position: absolute; height: 1px; width: 1px; left: -9999px;"
         @focus="focusAfterContent"
       />
-    </ul>
+    </div>
   </div>
 </template>
 
@@ -65,6 +74,12 @@ export default {
         return value.hasOwnProperty('left') && value.hasOwnProperty('top');
       },
     },
+    tipPosition: {
+      type: String,
+      default: 'right',
+      validator: val => ['top', 'left', 'bottom', 'right'.includes(val)],
+    },
+    tipAlignment: { type: String, default: 'center', validator: val => ['start', 'center', 'end'].includes(val) },
   },
   watch: {
     flipMenu(val) {
@@ -85,6 +100,15 @@ export default {
     offsetTop() {
       return this.offset ? this.offset.top : 0;
     },
+    tipClasses() {
+      const tipPosition = this.tipPosition || 'right';
+      const tipAlignment = this.tipAlignment || 'center';
+      if (this.label) {
+        return `bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--${tipPosition} bx--tooltip--align-${tipAlignment}`;
+      } else {
+        return '';
+      }
+    },
   },
   created() {
     this.$on('cv:close', this.doClose);
@@ -95,7 +119,7 @@ export default {
       if (this.open) {
         if (
           ev.relatedTarget === null ||
-          !(this.$el === ev.relatedTarget || this.$refs.popup.contains(ev.relatedTarget))
+          !(this.$refs.trigger === ev.relatedTarget || this.$refs.popup.contains(ev.relatedTarget))
         ) {
           this.open = false;
           this.positionListen(false);
@@ -198,12 +222,12 @@ export default {
     },
     focusBeforeContent(ev) {
       if (this.$refs.popup.contains(ev.relatedTarget)) {
-        this.$el.focus();
+        this.$refs.trigger.focus();
         this.open = false;
       }
     },
     focusAfterContent() {
-      this.$el.focus();
+      this.$refs.trigger.focus();
       this.open = false;
     },
     preventFocusOut() {

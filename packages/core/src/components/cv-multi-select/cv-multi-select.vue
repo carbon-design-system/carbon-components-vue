@@ -8,14 +8,12 @@
     }"
     @focusout="onFocusOut"
   >
-    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">
-      {{ title }}
-    </label>
+    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': disabled }">{{ title }}</label>
 
     <div
       v-if="!inline && isHelper"
       class="bx--form__helper-text"
-      :class="{ 'bx--form__helper-text--disabled': $attrs.disabled }"
+      :class="{ 'bx--form__helper-text--disabled': disabled }"
     >
       <slot name="helper-text">{{ helperText }}</slot>
     </div>
@@ -28,7 +26,7 @@
         'bx--list-box--light': theme === 'light',
         'bx--multi-select--expanded': open,
         'bx--multi-select--invalid': isInvalid,
-        'bx--multi-select--disabled bx--list-box--disabled': $attrs.disabled,
+        'bx--multi-select--disabled bx--list-box--disabled': disabled,
         'bx--multi-select--inline bx--list-box--inline': inline,
         'bx--multi-select--selected': dataValue.length > 0,
         'bx--combo-box': filterable,
@@ -57,11 +55,13 @@
       >
         <cv-tag
           :class="{ 'bx--list-box__selection--multi': filterable && dataValue.length > 0 }"
+          :disabled="disabled"
           v-show="dataValue.length > 0"
           kind="filter"
           :label="`${dataValue.length}`"
           @remove="clearValues"
           ref="tag"
+          :style="filterableTagOverride"
         />
         <span v-if="!filterable" class="bx--list-box__label">{{ label }}</span>
         <template v-else>
@@ -152,6 +152,7 @@ export default {
   props: {
     autoFilter: Boolean,
     autoHighlight: Boolean,
+    disabled: Boolean,
     inline: Boolean,
     invalidMessage: { type: String, default: undefined },
     helperText: { type: String, default: undefined },
@@ -263,6 +264,10 @@ export default {
         this.dataFilter = val ? val : '';
         this.$emit('filter', val);
       },
+    },
+    filterableTagOverride() {
+      // <style carbon tweaks - DO NOT USE STYLE TAG as it causes SSR issues
+      return this.filterable ? { marginTop: 0, marginBottom: 0 } : {};
     },
   },
   methods: {
@@ -391,8 +396,12 @@ export default {
       }
     },
     onClick(ev) {
-      this.doOpen(!this.open);
-      this.inputOrButtonFocus();
+      if (this.disabled) {
+        ev.preventDefault();
+      } else {
+        this.doOpen(!this.open);
+        this.inputOrButtonFocus();
+      }
     },
     clearValues() {
       this.dataValue = [];
@@ -431,9 +440,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.cv-multi-select.bx--multi-select--filterable .bx--list-box__selection--multi {
-  margin: 0;
-}
-</style>

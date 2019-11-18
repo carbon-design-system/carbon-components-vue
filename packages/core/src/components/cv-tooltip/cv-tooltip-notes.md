@@ -28,6 +28,7 @@ http://www.carbondesignsystem.com/components/tooltip/code
 
 ## Attributes
 
+- alignment: start, center or end.
 - direction: 'top', 'left', 'right', 'bottom'
 
 ## slots
@@ -40,3 +41,45 @@ http://www.carbondesignsystem.com/components/tooltip/code
   - default: SVG i in a circle
 - content
   - Content of the tooltip can be interactive content.
+
+# cv-definition-tooltip
+
+A Vue implementation of a Carbon Components tooltip
+
+http://www.carbondesignsystem.com/components/tooltip/code
+
+## Usage
+
+```html
+<cv-definition-tooltip
+  alignment="center"
+  direction="bottom"
+  term="thing to be defined"
+  definition="definition of term"
+/>
+```
+
+## Attributes
+
+- alignment: start, center or end.
+- direction: 'top', 'left', 'right', 'bottom'
+- term: to be defined
+- definition: of the term
+
+# cv-tooltip
+
+A Vue implementation of a Carbon Components tooltip
+
+http://www.carbondesignsystem.com/components/tooltip/code
+
+## Usage
+
+```html
+<cv-definition-tooltip alignment="center" direction="bottom" tip="tip text" />
+```
+
+## Attributes
+
+- alignment: start, center or end.
+- direction: 'top', 'left', 'right', 'bottom'
+- tip: text displayed on tip

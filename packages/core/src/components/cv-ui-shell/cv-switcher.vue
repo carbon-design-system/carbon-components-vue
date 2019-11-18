@@ -9,5 +9,3 @@ export default {
   name: 'CvSwitcher',
 };
 </script>
-
-<style lang="scss"></style>

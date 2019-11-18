@@ -28,11 +28,11 @@
       />
       <button
         v-if="isPassword"
-        class="bx--text-input--password__visibility"
-        :aria-label="passwordHideShowLabel"
+        class="bx--text-input--password__visibility__toggle bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center"
         @click="togglePasswordVisibility"
         type="button"
       >
+        <span class="bx--assistive-text">{{ passwordHideShowLabel }}</span>
         <ViewOff16 v-if="isPasswordVisible" class="bx--icon-visibility-off" />
         <View16 v-else class="bx--icon-visibility-off" />
       </button>

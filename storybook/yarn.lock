@@ -841,6 +841,16 @@
   dependencies:
     "@carbon/icon-helpers" "10.4.0"
 
+"@carbon/vue@^2.17.1":
+  version "2.17.1"
+  resolved "https://registry.yarnpkg.com/@carbon/vue/-/vue-2.17.1.tgz#ec0c7386f8a50ff8f281f492bf1d19f2e3e8327f"
+  integrity sha512-LYCI29qEUmK7BK5yRjiTG+u1UrUwJ9q3paGwLXyWqvRnkIWG5Kbo7dGzcO/uwOnUeve4CdGLzp5xp1DRUP4+ew==
+  dependencies:
+    "@carbon/icons-vue" "10.6.1"
+    carbon-components "10.7.3"
+    flatpickr "4.6.3"
+    vue "^2.6.10"
+
 "@csstools/convert-colors@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
@@ -3091,10 +3101,10 @@ caniuse-lite@^1.0.30000980, caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.300009
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000998.tgz#7227a8046841e7d01e156ae7227a504d065f6744"
   integrity sha512-8Tj5sPZR9kMHeDD9SZXIVr5m9ofufLLCG2Y4QwQrH18GIwG+kCc+zYdlR036ZRkuKjVVetyxeAgGA1xF7XdmzQ==
 
-carbon-components@10.7.0:
-  version "10.7.0"
-  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.7.0.tgz#66a7c8fdf24bc935a0e7b12c90871251a9d7ce35"
-  integrity sha512-6bwf+epbTcZQOIOLhYrm6aGKMSy/G/m3wN4W8ZHuI/H+taNqW6/sQEOqc2PI1+Lp0GOElMlmS7nGO5q9YD8FPA==
+carbon-components@10.7.3:
+  version "10.7.3"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.7.3.tgz#1a5ff661f1e25aaf30698e30fa0ea903beccfbe4"
+  integrity sha512-5/w4xGqGJ30C43Df/grOr4o87H61LUhKP0AqhH/JIA6174eL1OKZmSmKgSvmDa+8y9YPWplqEaOKSXT/11VFLg==
   dependencies:
     carbon-icons "^7.0.7"
     flatpickr "4.6.1"
@@ -4389,6 +4399,11 @@ flatpickr@4.6.1:
   version "4.6.1"
   resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.6.1.tgz#9eb498ab805dd27f5ae02e1ac6ac6c099ce45e94"
   integrity sha512-3ULSxbXmcMIRzer/2jLNweoqHpwDvsjEawO2FUd9UFR8uPwLM+LruZcPDpuZStcEgbQKhuFOfXo4nYdGladSNw==
+
+flatpickr@4.6.3:
+  version "4.6.3"
+  resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.6.3.tgz#15a8b76b6e34e3a072861250503a5995b9d3bc60"
+  integrity sha512-007VucCkqNOMMb9ggRLNuJowwaJcyOh4sKAFcdGfahfGc7JQbf94zSzjdBq/wVyHWUEs5o3+idhFZ0wbZMRmVQ==
 
 flatten@^1.0.2:
   version "1.0.2"

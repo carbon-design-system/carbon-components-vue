@@ -1,88 +1,147 @@
 import { shallowMount as shallow, mount } from '@vue/test-utils';
 import { testComponent, testInstance } from './_helpers';
-import { CvButton } from '@/components/cv-button';
+import { CvButton, CvIconButton, CvButtonSkeleton } from '@/components/cv-button';
 import { settings } from 'carbon-components';
 import AddFilled16 from '@carbon/icons-vue/es/add--filled/16';
 
 const { prefix } = settings;
 
 describe('CvButton', () => {
+  // ***************
+  // PROP CHECKS
+  // ***************
   describe('Has expected properties', () => {
+    // Deprecated props not tested
     testComponent.propsHaveDefault(CvButton, ['kind']);
-    testComponent.propsAreType(CvButton, ['iconHref', 'kind'], String);
+    testComponent.propsAreType(CvButton, ['iconHref', 'kind', 'size'], String);
     testComponent.propsAreType(CvButton, ['icon'], [String, Object]);
+    testComponent.propsHaveDefault(CvButton, ['kind']);
+    testComponent.propsHaveDefaultOfUndefined(CvButton, ['size', 'icon']);
   });
 
-  describe('Renders as expected', () => {
-    const propsData = { kind: 'secondary', icon: AddFilled16, href: '/home', 'tab-index': 2 };
+  // ***************
+  // SNAPSHOT TESTS
+  // ***************
+
+  describe('Renders as expected field secondary with icon disabled', () => {
+    const propsData = { kind: 'secondary', icon: AddFilled16, 'tab-index': 2, disabled: true, size: 'field' };
     const wrapper = shallow(CvButton, { propsData, slots: { default: 'default slot content' } });
 
-    it('should render with the appropriate kind', () => {
-      expect(wrapper.classes(`${prefix}--btn`)).toEqual(true);
-      expect(wrapper.classes(`${prefix}--btn--secondary`)).toEqual(true);
-    });
-
-    it('should render href and tab-index', () => {
-      expect(wrapper.attributes('href')).toBe('/home');
-      expect(wrapper.attributes('tab-index')).toBe('2');
-    });
-
-    it('should render icon', () => {
-      const icon = wrapper.find('AddFilled16-stub');
-      expect(icon.is('AddFilled16-stub')).toBe(true);
-    });
-
-    it('should render default slot content', () => {
-      expect(wrapper.html().indexOf('default slot content')).toBeGreaterThan(-1);
-    });
+    expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('Renders a default button as primary', () => {
+  describe('Renders as expected small primary', () => {
+    const propsData = { kind: 'primary', size: 'small' };
+    const wrapper = shallow(CvButton, { propsData, slots: { default: 'default slot content' } });
+
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
+  describe('Renders as expected default', () => {
+    const propsData = {};
+    const wrapper = shallow(CvButton, { propsData, slots: { default: 'default slot content' } });
+
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
+  // ***************
+  // FUNCTIONAL TESTS
+  // ***************
+  it('Raises click event when clicked', () => {
     const wrapper = shallow(CvButton);
-    expect(wrapper.classes(`${prefix}--btn--primary`)).toEqual(true);
+    wrapper.find('button').trigger('click');
+    expect(wrapper.emitted().click).toBeTruthy();
+  });
+});
+
+describe('CvIconButton', () => {
+  // ***************
+  // PROP CHECKS
+  // ***************
+  describe('Has expected properties', () => {
+    // Deprecated props not tested
+    testComponent.propsHaveDefault(CvIconButton, ['kind']);
+    testComponent.propsAreType(
+      CvIconButton,
+      ['iconHref', 'kind', 'size', 'label', 'tipPosition', 'tipAlignment'],
+      String
+    );
+    testComponent.propsAreType(CvIconButton, ['icon'], [String, Object]);
+    testComponent.propsHaveDefault(CvIconButton, ['kind']);
+    testComponent.propsHaveDefaultOfUndefined(CvIconButton, ['size', 'icon']);
   });
 
-  it('Renders a secondary kind button as secondary', () => {
-    const wrapper = shallow(CvButton, { propsData: { kind: 'secondary' } });
-    expect(wrapper.classes(`${prefix}--btn--secondary`)).toEqual(true);
+  // ***************
+  // SNAPSHOT TESTS
+  // ***************
+
+  describe('Renders as expected field secondary with icon disabled', () => {
+    const propsData = { kind: 'secondary', icon: AddFilled16, 'tab-index': 2, disabled: true, size: 'field' };
+    const wrapper = shallow(CvIconButton, { propsData, slots: { default: 'default slot content' } });
+
+    expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('Renders a tertiary kind button as tertiary', () => {
-    const wrapper = shallow(CvButton, { propsData: { kind: 'tertiary' } });
-    expect(wrapper.classes(`${prefix}--btn--tertiary`)).toEqual(true);
+  describe('Renders as expected small primary', () => {
+    const propsData = { kind: 'primary', size: 'small' };
+    const wrapper = shallow(CvIconButton, { propsData, slots: { default: 'default slot content' } });
+
+    expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('Renders a ghost kind button as ghost', () => {
-    const wrapper = shallow(CvButton, { propsData: { kind: 'ghost' } });
-    expect(wrapper.classes(`${prefix}--btn--ghost`)).toEqual(true);
+  describe('Renders as expected default', () => {
+    const propsData = {};
+    const wrapper = shallow(CvIconButton, { propsData, slots: { default: 'default slot content' } });
+
+    expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('Renders a danger kind button as danger', () => {
-    const wrapper = shallow(CvButton, { propsData: { kind: 'danger' } });
-    expect(wrapper.classes(`${prefix}--btn--danger`)).toEqual(true);
+  // ***************
+  // FUNCTIONAL TESTS
+  // ***************
+  it('Raises click event when clicked', () => {
+    const wrapper = shallow(CvIconButton);
+    wrapper.find('button').trigger('click');
+    expect(wrapper.emitted().click).toBeTruthy();
+  });
+});
+
+describe('CvButtonSkeleton', () => {
+  // ***************
+  // PROP CHECKS
+  // ***************
+  describe('Has expected properties', () => {
+    // Deprecated props not tested
+    testComponent.propsAreType(CvButtonSkeleton, ['size'], String);
+    testComponent.propsHaveDefaultOfUndefined(CvButtonSkeleton, ['size']);
   });
 
-  it('Renders a danger--primary kind button as danger--primary', () => {
-    const wrapper = shallow(CvButton, { propsData: { kind: 'danger--primary' } });
-    expect(wrapper.classes(`${prefix}--btn--danger--primary`)).toEqual(true);
+  // ***************
+  // SNAPSHOT TESTS
+  // ***************
+
+  describe('Renders as expected small primary', () => {
+    const propsData = { size: 'field' };
+    const wrapper = shallow(CvButtonSkeleton, { propsData, slots: { default: 'default slot content' } });
+
+    expect(wrapper.html()).toMatchSnapshot();
   });
 
-  // it('Raises click event when clicked', () => {
-  //   const wrapper = shallow(CvButton, {
-  //     listeners: {
-  //       click: () => {},
-  //     },
-  //   });
-  //   wrapper.find('button').trigger('click');
-  //   console.dir(wrapper.emitted());
-  //   expect(wrapper.emitted().click).toBeTruthy();
+  describe('Renders as expected small primary', () => {
+    const propsData = { size: 'small' };
+    const wrapper = shallow(CvButtonSkeleton, { propsData, slots: { default: 'default slot content' } });
 
-  //   // const button = wrapper.find('button');
-  //   // console.dir(button);
-  //   // console.log(wrapper.emitted());
-  //   // button.trigger('click');
-  //   // console.log(wrapper.emitted());
-  //   // // expect(button.emitted().click).toBeTruthy();
-  //   // expect(wrapper.emitted().click).toBeTruthy();
-  // });
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
+  describe('Renders as expected default', () => {
+    const propsData = {};
+    const wrapper = shallow(CvButtonSkeleton, { propsData, slots: { default: 'default slot content' } });
+
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
+  // ***************
+  // FUNCTIONAL TESTS
+  // ***************
 });

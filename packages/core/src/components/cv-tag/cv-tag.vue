@@ -8,14 +8,15 @@
         'bx--tag--disabled': disabled,
       },
     ]"
-    tabindex="0"
+    :tabindex="!disabled ? 0 : undefined"
+    role="listitem"
     :title="title"
     @keydown.enter.stop.prevent="$emit('remove')"
     @keydown.space.prevent
     @keyup.space.prevent="$emit('remove')"
   >
     {{ label }}
-    <Close16 v-if="isFilter" :aria-label="clearAriaLabel" role="button" @click.stop.prevent="$emit('remove')" />
+    <Close16 v-if="isFilter" :aria-label="clearAriaLabel" role="button" @click.stop.prevent="onRemove" />
   </span>
 </template>
 
@@ -57,6 +58,13 @@ export default {
     },
     title() {
       return this.isFilter ? this.clearAriaLabel : null;
+    },
+  },
+  methods: {
+    onRemove() {
+      if (!this.disabled) {
+        this.$emit('remove');
+      }
     },
   },
 };

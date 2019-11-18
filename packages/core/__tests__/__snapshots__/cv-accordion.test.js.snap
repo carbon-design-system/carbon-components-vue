@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CvAccordion matches render 1`] = `
+<ul data-accordion="" class="cv-accordion bx--accordion">
+  <div class="cv-accordion-item-stub">StubbyMcStubFace</div>
+</ul>
+`;
+
+exports[`CvAccordionItem matches render 1`] = `
+<li data-accordion-item="" class="cv-accordion-item bx--accordion__item"><button type="button" aria-expanded="false" aria-controls="1" class="bx--accordion__heading">
+    <chevronright16-stub class="bx--accordion__arrow"></chevronright16-stub>
+    <p class="bx--accordion__title"></p>
+  </button>
+  <div id="1" class="bx--accordion__content"></div>
+</li>
+`;
+
+exports[`CvAccordionItem matches render open 1`] = `
+<li data-accordion-item="" class="cv-accordion-item bx--accordion__item bx--accordion__item--active"><button type="button" aria-expanded="true" aria-controls="1" class="bx--accordion__heading">
+    <chevronright16-stub class="bx--accordion__arrow"></chevronright16-stub>
+    <p class="bx--accordion__title"></p>
+  </button>
+  <div id="1" class="bx--accordion__content"></div>
+</li>
+`;
+
+exports[`CvAccordionSkeleton matches render 1`] = `
+<ul class="bx--accordion bx--skeleton">
+  <cv-accordion-item-skeleton-stub open="true">
+    <cv-skeleton-text-stub width="90%" linecount="3"></cv-skeleton-text-stub>
+    <cv-skeleton-text-stub width="80%" linecount="3"></cv-skeleton-text-stub>
+    <cv-skeleton-text-stub width="95%" linecount="3"></cv-skeleton-text-stub>
+  </cv-accordion-item-skeleton-stub>
+  <cv-accordion-item-skeleton-stub></cv-accordion-item-skeleton-stub>
+  <cv-accordion-item-skeleton-stub></cv-accordion-item-skeleton-stub>
+  <cv-accordion-item-skeleton-stub></cv-accordion-item-skeleton-stub>
+</ul>
+`;

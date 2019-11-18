@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CvBreadcrumb matches breadcrumb with slotted content 1`] = `
+<nav aria-label="breadcrumb" class="cv-breadcrumb bx--breadcrumb">
+  <div class="cv-breadcrumb-item bx--breadcrumb-item"></div>
+</nav>
+`;
+
+exports[`CvBreadcrumb matches breadcrumb with trailing slash 1`] = `<nav aria-label="breadcrumb" class="cv-breadcrumb bx--breadcrumb"></nav>`;
+
+exports[`CvBreadcrumb matches breadcrumb without trailing slash 1`] = `<nav aria-label="breadcrumb" class="cv-breadcrumb bx--breadcrumb bx--breadcrumb--no-trailing-slash"></nav>`;
+
+exports[`CvBreadcrumbItem matches breadcrumb item with slotted content 1`] = `<div class="cv-breadcrumb-item bx--breadcrumb-item"></div>`;
+
+exports[`CvBreadcrumbSkeleton matches breadcrumb item with slotted content 1`] = `
+<nav aria-label="breadcrumb" class="bx--breadcrumb bx--skeleton">
+  <cv-breadcrumb-item-skeleton-stub></cv-breadcrumb-item-skeleton-stub>
+  <cv-breadcrumb-item-skeleton-stub></cv-breadcrumb-item-skeleton-stub>
+  <cv-breadcrumb-item-skeleton-stub></cv-breadcrumb-item-skeleton-stub>
+</nav>
+`;

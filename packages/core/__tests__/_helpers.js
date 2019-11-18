@@ -1,32 +1,67 @@
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, mount } from '@vue/test-utils';
+
+const getComponentProp = (component, prop) => {
+  let componentProp;
+  if (component.props) {
+    componentProp = component.props[prop];
+  }
+
+  if (!componentProp && component.mixins) {
+    for (let index in component.mixins) {
+      // NOTE: Last mixin with a prop wins.
+      if (component.mixins[index].props && component.mixins[index].props[prop]) {
+        componentProp = component.mixins[index].props[prop];
+      }
+    }
+  }
+  return componentProp;
+};
+
+const getComponentPropDefault = (component, prop) => {
+  const _default = getComponentProp(component, prop).default;
+  return typeof _default === 'function' ? _default() : _default;
+};
 
 export const testComponent = {
   propsAreRequired: (component, props) => {
     test.each(props)('has a required prop: %s', prop => {
-      expect(component.props[prop].required).toBe(true);
+      let componentProp = getComponentProp(component, prop);
+      expect(componentProp.required).toBe(true);
     });
   },
 
   propsAreType: (component, props, types) => {
     let typeName;
+
     if (types.map) {
       const typeNames = types.map(type => type.name);
       typeName = `(${typeNames.join('|')})`;
     } else {
       typeName = types.name;
     }
+
     test.each(props)(`has a prop of ${typeName} type: %s`, prop => {
+      let componentProp = getComponentProp(component, prop);
+      let componentPropType = componentProp.type || componentProp;
+
       if (types.map) {
-        expect(component.props[prop].type).toEqual(expect.arrayContaining(types));
+        expect(componentPropType).toEqual(expect.arrayContaining(types));
       } else {
-        expect(component.props[prop].type).toBe(types);
+        expect(componentPropType).toBe(types);
       }
     });
   },
 
   propsHaveDefault: (component, props) => {
     test.each(props)('has a prop with a default: %s', prop => {
-      expect(component.props[prop].default).toBeDefined();
+      const _default = getComponentPropDefault(component, prop);
+      expect(_default).toBeDefined();
+    });
+  },
+  propsHaveDefaultOfUndefined: (component, props) => {
+    test.each(props)('has a prop with a default undefined: %s', prop => {
+      const _default = getComponentPropDefault(component, prop);
+      expect(_default).not.toBeDefined();
     });
   },
 };
@@ -44,5 +79,13 @@ export const testInstance = {
           .text()
       ).toMatch(PLACEMENT_STRING);
     });
+  },
+};
+
+export const events = {
+  reEmit: function(src, target, events) {
+    for (const event of events) {
+      src.$on(event, val => target.$emit(event, val));
+    }
   },
 };
