@@ -37,6 +37,7 @@
       @keydown.up.prevent="onUp"
       @keydown.enter.prevent="onEnter"
       @keydown.esc.prevent="onEsc"
+      @keydown="otherKey"
       @click="onClick"
     >
       <WarningFilled16 v-if="isInvalid" class="bx--list-box__invalid-icon" />
@@ -402,7 +403,11 @@ export default {
         ev.preventDefault();
       } else {
         if (this.open) {
-          this.doOpen(false);
+          this.inputOrButtonFocus();
+          // done this way round otherwise will auto open on focus.
+          this.$nextTick(() => {
+            this.doOpen(false);
+          });
         } else {
           this.doOpen(true);
           this.inputOrButtonFocus();
@@ -442,6 +447,11 @@ export default {
     },
     inputFocus() {
       this.doOpen(true);
+    },
+    otherKey(ev) {
+      if (!['Escape', 'ArrowUp', 'ArrowDown', 'Enter'].includes(ev.code)) {
+        console.log(ev.code);
+      }
     },
   },
 };
