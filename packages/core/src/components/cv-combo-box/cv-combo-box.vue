@@ -47,7 +47,7 @@
           role="combobox"
           :aria-expanded="open"
           autocomplete="off"
-          placeholder="label"
+          :placeholder="label"
           v-model="filter"
           @input="onInput"
           @focus="inputFocus"
