@@ -29,7 +29,7 @@ const preKnobs = {
     type: boolean,
     config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: 'theme',
-    value: val => (val ? 'xlight' : ''),
+    value: val => (val ? 'light' : ''),
   },
   label: {
     group: 'attr',

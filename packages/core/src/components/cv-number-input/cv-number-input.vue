@@ -78,7 +78,15 @@ export default {
   data() {
     return {
       internalValue: this.valueAsString(this.value),
+      isHelper: false,
+      isInvalid: false,
     };
+  },
+  mounted() {
+    this.checkSlots();
+  },
+  beforeUpdate() {
+    this.checkSlots();
   },
   watch: {
     value() {
@@ -102,14 +110,13 @@ export default {
       }
       return intVal;
     },
-    isInvalid() {
-      return this.$slots['invalid-message'] !== undefined || (this.invalidMessage && this.invalidMessage.length);
-    },
-    isHelper() {
-      return this.$slots['helper-text'] !== undefined || (this.helperText && this.helperText.length);
-    },
   },
   methods: {
+    checkSlots() {
+      // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
+      this.isInvalid = !!(this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length));
+      this.isHelper = !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
+    },
     doUp() {
       this.internalValue = `${this.internalIntValue + 1}`;
       this.emitValue();
