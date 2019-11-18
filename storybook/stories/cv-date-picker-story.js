@@ -106,7 +106,7 @@ const variants = [
   },
   {
     name: 'invalid message slot',
-    includes: ['theme', 'dateLabel', 'pattern', 'placeholder', 'invalidMessageSlot'],
+    includes: ['theme', 'dateLabel', 'pattern', 'placeholder', 'invalidMessage', 'invalidMessageSlot'],
   },
   { name: 'minimal', includes: ['eventsSimple'] },
   {

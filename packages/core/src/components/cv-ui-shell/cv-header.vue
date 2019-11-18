@@ -1,7 +1,7 @@
 <template>
   <header class="cv-header bx--header" role="banner" data-header>
     <slot />
-    <div v-if="$slots['header-global']" class="bx--header__global">
+    <div v-if="hasGlobalHeader" class="bx--header__global">
       <slot name="header-global" />
     </div>
     <slot name="left-panels" />
@@ -26,7 +26,15 @@ export default {
     return {
       panelControllers: [],
       panels: [],
+      hasGlobalHeader: false,
     };
+  },
+  mounted() {
+    // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
+    this.hasGlobalHeader = this.$slots['header-global'] !== undefined;
+  },
+  beforeUpdate() {
+    this.hasGlobalHeader = this.$slots['header-global'] !== undefined;
   },
   computed: {
     isCvHeader() {

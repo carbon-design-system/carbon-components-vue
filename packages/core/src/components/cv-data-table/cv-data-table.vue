@@ -32,7 +32,7 @@
           </div>
         </div>
 
-        <div v-if="($slots.actions || $listeners.search) && !batchActive" class="bx--toolbar-content">
+        <div v-if="(hasActions || $listeners.search) && !batchActive" class="bx--toolbar-content">
           <div
             v-if="$listeners.search"
             :class="{
@@ -235,6 +235,10 @@ export default {
             order: 'none',
           }))
         : this.columns,
+      hasBatchActions: false,
+      hasActions: false,
+      hasToolbar: false,
+      isHelper: false,
       batchActive: false,
       headingChecked: false,
       dataRowsSelected: this.rowsSelected,
@@ -263,17 +267,16 @@ export default {
   },
   mounted() {
     this.updateRowsSelected();
+    this.checkSlots();
+  },
+  beforeUpdate() {
+    this.checkSlots();
   },
   computed: {
-    hasBatchActions() {
-      return this.$slots['batch-actions'];
-    },
     hasTableHeader() {
       return this.title || this.isHelper;
     },
-    hasToolbar() {
-      return this.$slots.actions || this.$listeners.search || this.$slots['batch-actions'];
-    },
+
     hasExpandables() {
       return this.registeredRows.some(item => item.expandable);
     },
@@ -317,11 +320,15 @@ export default {
     selectedRows() {
       return this.dataRowsSelected;
     },
-    isHelper() {
-      return this.$slots['helper-text'] !== undefined || (this.helperText && this.helperText.length);
-    },
   },
   methods: {
+    checkSlots() {
+      // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
+      this.hasBatchActions = this.$slots['batch-actions'];
+      this.hasActions = this.$slots.actions;
+      this.hasToolbar = this.$slots.actions || this.$listeners.search || this.$slots['batch-actions'];
+      this.isHelper = this.$slots['helper-text'] !== undefined || (this.helperText && this.helperText.length);
+    },
     onCvMount(row) {
       this.registeredRows.push(row);
       row.$on('cv:expanded-change', this.onCvExpandedChange);

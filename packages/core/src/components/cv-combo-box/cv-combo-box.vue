@@ -138,6 +138,8 @@ export default {
       dataValue: this.value,
       dataHighlighted: null,
       dataFilter: null,
+      isHelper: false,
+      isInvalid: false,
     };
   },
   model: {
@@ -163,17 +165,12 @@ export default {
   mounted() {
     this.filter = this.value;
     this.highlighted = this.value ? this.value : this.highlight; // override highlight with value if provided
-    console.warn(
-      `${this.$vnode.componentOptions.Ctor.extendOptions.name} - Under review. This component isn't quite ready. Hopefully no features will get broken but this cannot be guarenteed.`
-    );
+    this.checkSlots();
+  },
+  beforeUpdate() {
+    this.checkSlots();
   },
   computed: {
-    isInvalid() {
-      return this.$slots['invalid-message'] !== undefined || (this.invalidMessage && this.invalidMessage.length);
-    },
-    isHelper() {
-      return this.$slots['helper-text'] !== undefined || (this.helperText && this.helperText.length);
-    },
     highlighted: {
       get() {
         return this.dataHighlighted;
@@ -205,6 +202,11 @@ export default {
     },
   },
   methods: {
+    checkSlots() {
+      // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
+      this.isInvalid = this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length);
+      this.isHelper = this.$slots['helper-text'] || (this.helperText && this.helperText.length);
+    },
     clearFilter() {
       this.filter = '';
       this.$refs.input.focus();
