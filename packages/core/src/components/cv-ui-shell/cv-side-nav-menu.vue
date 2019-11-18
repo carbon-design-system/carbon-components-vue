@@ -51,10 +51,10 @@ export default {
   },
   mounted() {
     // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
-    this.hasNavIcon = this.$slots['nav-icon'] !== undefined;
+    this.hasNavIcon = !!(this.$slots['nav-icon'] !== undefined);
   },
   beforeUpdate() {
-    this.hasNavIcon = this.$slots['nav-icon'] !== undefined;
+    this.hasNavIcon = !!(this.$slots['nav-icon'] !== undefined);
   },
   computed: {
     hasIcon() {

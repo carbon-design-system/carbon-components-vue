@@ -92,7 +92,7 @@ export default {
   methods: {
     checkSlots() {
       // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
-      this.hasOverflowMenu = (this.overflowMenu && this.overflowMenu.length) || this.$slots['overflow-menu'];
+      this.hasOverflowMenu = !!((this.overflowMenu && this.overflowMenu.length) || this.$slots['overflow-menu']);
     },
     onChange() {
       this.$parent.$parent.onRowCheckChange(this.value, this.dataChecked);

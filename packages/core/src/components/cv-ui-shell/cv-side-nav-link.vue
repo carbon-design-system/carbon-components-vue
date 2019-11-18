@@ -37,7 +37,7 @@ export default {
     };
   },
   beforeUpdate() {
-    this.hasNavIcon = this.$slots['nav-icon'] !== undefined;
+    this.hasNavIcon = !!(this.$slots['nav-icon'] !== undefined);
   },
 };
 </script>
