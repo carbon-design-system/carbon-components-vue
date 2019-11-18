@@ -1,8 +1,6 @@
 <template>
   <div class="cv-toggle bx--form-item">
-    <input disabled type="checkbox" class="bx--toggle bx--skeleton" :id="uid" />
-
-    <label class="bx--toggle__label bx--skeleton" :for="uid" :aria-label="label ? 'null' : label">
+    <label class="bx--toggle__label bx--skeleton" :for="uid" :aria-label="label ? 'Toggle is loading' : label">
       <span class="bx--toggle__label-text" />
       <span class="bx--toggle__text--left" />
       <span class="bx--toggle__appearance" />
@@ -17,7 +15,7 @@ export default {
   name: 'CvToggleSkeleton',
   mixins: [uidMixin],
   props: {
-    label: 'Toggle is loading',
+    label: { type: String, default: 'Toggle is loading' },
   },
 };
 </script>
