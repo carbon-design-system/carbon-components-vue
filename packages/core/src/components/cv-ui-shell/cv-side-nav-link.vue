@@ -7,7 +7,7 @@
       v-bind="{ ...$attrs, ...linkProps }"
       :class="{ 'bx--side-nav__link--current': active }"
     >
-      <cv-side-nav-icon v-if="$slots['nav-icon'] !== undefined" small>
+      <cv-side-nav-icon v-if="hasNavIcon" small>
         <slot name="nav-icon" />
       </cv-side-nav-icon>
       <cv-side-nav-link-text>
@@ -30,6 +30,14 @@ export default {
   props: {
     active: Boolean,
     icon: Object,
+  },
+  data() {
+    return {
+      hasNavIcon: this.$slots['nav-icon'] !== undefined,
+    };
+  },
+  beforeUpdate() {
+    this.hasNavIcon = this.$slots['nav-icon'] !== undefined;
   },
 };
 </script>

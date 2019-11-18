@@ -130,6 +130,7 @@ export default {
     return {
       dataValue: '',
       dataOptions: {},
+      isInvalid: false,
     };
   },
   watch: {
@@ -178,13 +179,6 @@ export default {
         }
       }
     },
-    isInvalid() {
-      return (
-        this.$slots['invalid-message'] !== undefined ||
-        (this.invalidMessage && this.invalidMessage.length) ||
-        (this.invalidDateMessage && this.invalidDateMessage.length)
-      );
-    },
     isRange() {
       return this.kind === 'range';
     },
@@ -193,6 +187,13 @@ export default {
     },
   },
   methods: {
+    checkSlots() {
+      // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
+      this.isInvalid =
+        this.$slots['invalid-message'] !== undefined ||
+        (this.invalidMessage && this.invalidMessage.length) ||
+        (this.invalidDateMessage && this.invalidDateMessage.length);
+    },
     initFlatpickr() {
       if (['single', 'range'].includes(this.kind)) {
         // no need to call set value as it's done through getOptions
@@ -300,6 +301,7 @@ export default {
   },
   mounted() {
     this.initFlatpickr();
+    this.checkSlots();
     // this.cal.setDate([Date.now(), Date.now()]);
     // setTimeout(() => {
     //   let curDate = new Date();
@@ -307,6 +309,9 @@ export default {
     //   anotherDate = anotherDate.setDate(anotherDate.getDate() + 16);
     //   this.cal.setDate([curDate, anotherDate], true);
     // }, 2000);
+  },
+  beforeUpdate() {
+    this.checkSlots();
   },
   beforeDestroy() {
     if (this.cal) {
