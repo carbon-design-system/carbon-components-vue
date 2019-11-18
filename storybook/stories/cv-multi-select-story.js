@@ -179,15 +179,7 @@ let variants = [
   },
   {
     name: 'slots',
-    excludes: [
-      'vModel',
-      'events',
-      'helperText',
-      'invalidMessage',
-      'userFilter',
-      'userHighlight',
-      'userFilterOrHighlight',
-    ],
+    excludes: ['vModel', 'events', 'userFilter', 'userHighlight', 'userFilterOrHighlight'],
   },
   { name: 'events', includes: ['filterable', 'events'] },
   { name: 'vModel', includes: ['vModel'] },

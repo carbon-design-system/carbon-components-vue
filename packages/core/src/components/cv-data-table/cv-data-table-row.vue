@@ -37,7 +37,7 @@ export default {
   },
   data() {
     return {
-      dataExpandable: this.$slots.expandedContent !== undefined,
+      dataExpandable: false,
       dataSomeExpandingRows: false,
       dataExpanded: this.expanded,
     };
@@ -50,10 +50,12 @@ export default {
     },
   },
   mounted() {
+    // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
+    this.dataExpandable = !!this.$slots.expandedContent;
     this.$parent.$emit('cv:mounted', this);
   },
   updated() {
-    this.dataExpandable = this.$slots.expandedContent !== undefined;
+    this.dataExpandable = !!this.$slots.expandedContent;
   },
   beforeDestroy() {
     this.$parent.$emit('cv:beforeDestroy', this);
