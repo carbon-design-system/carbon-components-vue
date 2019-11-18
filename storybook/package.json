@@ -1,5 +1,6 @@
 {
   "name": "storybook",
+  "version": "2.19.0-canary.0",
   "private": true,
   "description": "> TODO: description",
   "scripts": {
@@ -13,7 +14,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
-    "@carbon/vue": "^2.17.1",
+    "@carbon/vue": "^2.19.0-canary.0",
     "@storybook/addon-actions": "^5.2.1",
     "@storybook/addon-knobs": "^5.2.1",
     "@storybook/addon-notes": "^5.2.1",
