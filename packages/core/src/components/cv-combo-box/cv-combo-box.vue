@@ -176,6 +176,7 @@ export default {
         return this.dataHighlighted;
       },
       set(val) {
+        console.dir(this.dataOptions);
         let firstMatchIndex = this.dataOptions.findIndex(item => item.value === val);
         if (firstMatchIndex < 0) {
           firstMatchIndex = this.dataOptions.length ? 0 : -1;
@@ -254,7 +255,7 @@ export default {
       }
     },
     updateOptions() {
-      if (this.autoFilter) {
+      if (this.autoFilter && this.filter) {
         const escFilter = this.filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         const pat = new RegExp(escFilter, 'iu');
         this.dataOptions = this.options.filter(opt => pat.test(opt.label)).slice(0);
