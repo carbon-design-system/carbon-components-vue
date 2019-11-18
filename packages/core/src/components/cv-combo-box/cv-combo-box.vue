@@ -254,7 +254,7 @@ export default {
       }
     },
     updateOptions() {
-      if (this.autoFilter) {
+      if (this.autoFilter && this.filter) {
         const escFilter = this.filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         const pat = new RegExp(escFilter, 'iu');
         this.dataOptions = this.options.filter(opt => pat.test(opt.label)).slice(0);
