@@ -85,7 +85,7 @@ const variants = [
   },
   {
     name: 'slots',
-    excludes: ['vModel', 'events', 'helperText', 'invalidMessage'],
+    excludes: ['vModel', 'events'],
   },
   { name: 'minimal', includes: ['label'] },
   { name: 'events', includes: ['label', 'events'] },

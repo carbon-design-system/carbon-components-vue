@@ -70,7 +70,15 @@ export default {
     return {
       dataPasswordVisible: this.isPassword && this.passwordVisible,
       dataType: this.type,
+      isHelper: false,
+      isInvalid: false,
     };
+  },
+  mounted: function() {
+    this.checkSlots();
+  },
+  beforeUpdate() {
+    this.checkSlots();
   },
   watch: {
     passwordVisible() {
@@ -92,12 +100,6 @@ export default {
         input: event => this.$emit('input', event.target.value),
       };
     },
-    isInvalid() {
-      return this.$slots['invalid-message'] !== undefined || (this.invalidMessage && this.invalidMessage.length);
-    },
-    isHelper() {
-      return this.$slots['helper-text'] || (this.helperText && this.helperText.length);
-    },
     isPassword() {
       return this.type === 'password';
     },
@@ -109,6 +111,11 @@ export default {
     },
   },
   methods: {
+    checkSlots() {
+      // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
+      this.isInvalid = !!(this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length));
+      this.isHelper = !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
+    },
     togglePasswordVisibility() {
       const currentValue = this.$refs.input.value;
       this.dataPasswordVisible = !this.dataPasswordVisible;

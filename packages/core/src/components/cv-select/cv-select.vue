@@ -92,7 +92,11 @@ export default {
     delete this.$attrs.multiple;
   },
   data() {
-    return { dataValue: undefined };
+    return {
+      dataValue: undefined,
+      isHelper: false,
+      isInvalid: false,
+    };
   },
   mounted() {
     // this is needed to ensure selected for an option when no value is supplied
@@ -104,6 +108,10 @@ export default {
         }
       }
     }
+    this.checkSlots();
+  },
+  beforeUpdate() {
+    this.checkSlots();
   },
   watch: {
     value() {
@@ -128,14 +136,15 @@ export default {
         input: event => this.$emit('input', event.target.value),
       };
     },
-    isInvalid() {
-      return this.$slots['invalid-message'] !== undefined || (this.invalidMessage && this.invalidMessage.length);
-    },
-    isHelper() {
-      return this.$slots['helper-text'] !== undefined || (this.helperText && this.helperText.length);
-    },
     internalValue() {
       return this.dataValue ? this.dataValue : this.value;
+    },
+  },
+  methods: {
+    checkSlots() {
+      // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
+      this.isInvalid = !!(this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length));
+      this.isHelper = !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
     },
   },
 };
