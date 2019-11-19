@@ -73,7 +73,7 @@
             role="combobox"
             :aria-expanded="open"
             autocomplete="off"
-            placeholder="Filter"
+            :placeholder="label"
             v-model="filter"
             @input="onInput"
             @focus="inputFocus"
