@@ -85,13 +85,11 @@ for (const story of storySet) {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
-
       const templateString = `
 <cv-pagination${settings.group.attr}>${settings.group.slots}</cv-pagination>
   `;
 
       // ----------------------------------------------------------------
-
       const templateViewString = `
     <sv-template-view
       sv-margin

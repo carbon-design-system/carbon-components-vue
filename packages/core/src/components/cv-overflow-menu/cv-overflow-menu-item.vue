@@ -15,7 +15,9 @@
       v-on="$listeners"
       @click="onClick"
     >
-      <slot></slot>
+      <span class="bx--overflow-menu-options__option-content">
+        <slot></slot>
+      </span>
     </button>
   </li>
 </template>

@@ -37,6 +37,7 @@
       @keydown.up.prevent="onUp"
       @keydown.enter.prevent="onEnter"
       @keydown.esc.prevent="onEsc"
+      @keydown="otherKey"
       @click="onClick"
     >
       <WarningFilled16 v-if="isInvalid" class="bx--list-box__invalid-icon" />
@@ -199,6 +200,8 @@ export default {
       dataValue: '',
       dataHighlighted: null,
       dataFilter: '',
+      isHelper: false,
+      isInvalid: false,
     };
   },
   model: {
@@ -225,17 +228,12 @@ export default {
   },
   mounted() {
     this.highlighted = this.value ? this.value : this.highlight; // override highlight with value if provided
-    console.warn(
-      `${this.$vnode.componentOptions.Ctor.extendOptions.name} - Under review. This component isn't quite ready. Hopefully no features will get broken but this cannot be guarenteed.`
-    );
+    this.checkSlots();
+  },
+  beforeUpdate() {
+    this.checkSlots();
   },
   computed: {
-    isInvalid() {
-      return this.$slots['invalid-message'] !== undefined || (this.invalidMessage && this.invalidMessage.length);
-    },
-    isHelper() {
-      return this.$slots['helper-text'] !== undefined || (this.helperText && this.helperText.length);
-    },
     highlighted: {
       get() {
         return this.dataHighlighted;
@@ -271,6 +269,11 @@ export default {
     },
   },
   methods: {
+    checkSlots() {
+      // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
+      this.isInvalid = !!(this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length));
+      this.isHelper = !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
+    },
     clearFilter() {
       this.filter = '';
       this.$refs.input.focus();
@@ -399,8 +402,16 @@ export default {
       if (this.disabled) {
         ev.preventDefault();
       } else {
-        this.doOpen(!this.open);
-        this.inputOrButtonFocus();
+        if (this.open) {
+          this.inputOrButtonFocus();
+          // done this way round otherwise will auto open on focus.
+          this.$nextTick(() => {
+            this.doOpen(false);
+          });
+        } else {
+          this.doOpen(true);
+          this.inputOrButtonFocus();
+        }
       }
     },
     clearValues() {
@@ -436,6 +447,11 @@ export default {
     },
     inputFocus() {
       this.doOpen(true);
+    },
+    otherKey(ev) {
+      if (!['Escape', 'ArrowUp', 'ArrowDown', 'Enter'].includes(ev.code)) {
+        console.log(ev.code);
+      }
     },
   },
 };
