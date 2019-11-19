@@ -19,7 +19,7 @@ exports[`CvNumberInput should match snapshot when all props are default 1`] = `
 
 exports[`CvNumberInput should match snapshot when all props are provided 1`] = `
 <cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item">
-  <div data-numberinput="" data-invalid="14" class="bx--number bx--number--helpertext cv-number-input"><label for="1" class="bx--label">label</label>
+  <div data-numberinput="" class="bx--number bx--number--helpertext cv-number-input" data-invalid="true"><label for="1" class="bx--label">label</label>
     <div class="bx--form__helper-text">helperText</div>
     <div class="bx--number__input-wrapper"><input id="1" type="number">
       <warningfilled16-stub class="bx--number__invalid"></warningfilled16-stub>
@@ -55,7 +55,7 @@ exports[`CvNumberInput should match snapshot when helper-text slot is provided 1
 
 exports[`CvNumberInput should match snapshot when invalid-message slot is provided 1`] = `
 <cv-wrapper-stub tagtype="div" class="cv-number-input bx--form-item">
-  <div data-numberinput="" data-invalid="true" class="bx--number"><label for="1" class="bx--label"></label>
+  <div data-numberinput="" class="bx--number" data-invalid="true"><label for="1" class="bx--label"></label>
     <!---->
     <div class="bx--number__input-wrapper"><input id="1" type="number">
       <warningfilled16-stub class="bx--number__invalid"></warningfilled16-stub>

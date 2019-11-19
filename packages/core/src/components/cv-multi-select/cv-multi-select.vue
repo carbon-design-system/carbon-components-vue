@@ -37,6 +37,7 @@
       @keydown.up.prevent="onUp"
       @keydown.enter.prevent="onEnter"
       @keydown.esc.prevent="onEsc"
+      @keydown="otherKey"
       @click="onClick"
     >
       <WarningFilled16 v-if="isInvalid" class="bx--list-box__invalid-icon" />
@@ -73,7 +74,7 @@
             role="combobox"
             :aria-expanded="open"
             autocomplete="off"
-            placeholder="Filter"
+            :placeholder="label"
             v-model="filter"
             @input="onInput"
             @focus="inputFocus"
@@ -270,8 +271,8 @@ export default {
   methods: {
     checkSlots() {
       // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
-      this.isInvalid = this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length);
-      this.isHelper = this.$slots['helper-text'] || (this.helperText && this.helperText.length);
+      this.isInvalid = !!(this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length));
+      this.isHelper = !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
     },
     clearFilter() {
       this.filter = '';
@@ -401,8 +402,16 @@ export default {
       if (this.disabled) {
         ev.preventDefault();
       } else {
-        this.doOpen(!this.open);
-        this.inputOrButtonFocus();
+        if (this.open) {
+          this.inputOrButtonFocus();
+          // done this way round otherwise will auto open on focus.
+          this.$nextTick(() => {
+            this.doOpen(false);
+          });
+        } else {
+          this.doOpen(true);
+          this.inputOrButtonFocus();
+        }
       }
     },
     clearValues() {
@@ -438,6 +447,11 @@ export default {
     },
     inputFocus() {
       this.doOpen(true);
+    },
+    otherKey(ev) {
+      if (!['Escape', 'ArrowUp', 'ArrowDown', 'Enter'].includes(ev.code)) {
+        console.log(ev.code);
+      }
     },
   },
 };

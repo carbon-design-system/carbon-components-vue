@@ -1,5 +1,31 @@
 # Changelog
 
+## 2.19.0 (Nov 19th 2019)
+
+### Chore
+
+- CvOverflowMenu correct html to include menu-item option-content span
+
+## 2.19.0-canary.1 (Nov 18th 2019)
+
+### Feat
+
+- CvToggleSkeleton
+
+### Fix
+
+- Slot check reactivyt (accross 12 components with helperText and invalidMessage)
+- CvCombobox placeholder
+- CvMultiSelect filter clear event
+- CvMultiSelect expand / close when clicking chevron
+- CvCombobox auto-filter true at startup presenting empty list
+
+### Chore
+
+- CvLink tests
+- CvTextArea tests
+- Restored storybook version to keep package.json in sync
+
 ## 2.19.0-canary.0 (Nov 12th 2019)
 
 ### Chore

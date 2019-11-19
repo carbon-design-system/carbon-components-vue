@@ -47,7 +47,7 @@
           role="combobox"
           :aria-expanded="open"
           autocomplete="off"
-          placeholder="Filter"
+          :placeholder="label"
           v-model="filter"
           @input="onInput"
           @focus="inputFocus"
@@ -204,14 +204,16 @@ export default {
   methods: {
     checkSlots() {
       // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
-      this.isInvalid = this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length);
-      this.isHelper = this.$slots['helper-text'] || (this.helperText && this.helperText.length);
+      this.isInvalid = !!(this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length));
+      this.isHelper = !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
     },
     clearFilter() {
+      this.internalUpdateValue('');
       this.filter = '';
       this.$refs.input.focus();
       this.doOpen(true);
       this.updateOptions();
+      this.$emit('change', this.dataValue);
     },
     checkHighlightPosition(newHiglight) {
       if (this.$refs.list && this.$refs.option) {
@@ -252,7 +254,7 @@ export default {
       }
     },
     updateOptions() {
-      if (this.autoFilter) {
+      if (this.autoFilter && this.filter) {
         const escFilter = this.filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         const pat = new RegExp(escFilter, 'iu');
         this.dataOptions = this.options.filter(opt => pat.test(opt.label)).slice(0);
