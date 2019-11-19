@@ -1,11 +1,16 @@
 # Changelog
 
-## 2.19.0-canary.1 (Nov 12th 2019)
+## 2.19.0 (Nov 19th 2019)
+
+### Chore
+
+- CvOverflowMenu correct html to include menu-item option-content span
+
+## 2.19.0-canary.1 (Nov 18th 2019)
 
 ### Feat
 
 - CvToggleSkeleton
-- Cv
 
 ### Fix
 
