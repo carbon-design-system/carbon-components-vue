@@ -37,7 +37,9 @@ exports[`CvNumberInput should match snapshot when all props are provided 1`] = `
 exports[`CvNumberInput should match snapshot when helper-text slot is provided 1`] = `
 <cv-wrapper-stub tagtype="div" class="cv-number-input bx--form-item">
   <div data-numberinput="" class="bx--number bx--number--helpertext"><label for="1" class="bx--label"></label>
-    <div class="bx--form__helper-text">test</div>
+    <div class="bx--form__helper-text">
+      <div class="fake-slot">my helper text</div>
+    </div>
     <div class="bx--number__input-wrapper"><input id="1" type="number">
       <!---->
       <div class="bx--number__controls"><button type="button" aria-label="Increase number input" class="bx--number__control-btn up-icon">
@@ -63,7 +65,9 @@ exports[`CvNumberInput should match snapshot when invalid-message slot is provid
           <caretdownglyph-stub></caretdownglyph-stub>
         </button></div>
     </div>
-    <div class="bx--form-requirement">test</div>
+    <div class="bx--form-requirement">
+      <div class="fake-slot">my invalid message</div>
+    </div>
   </div>
 </cv-wrapper-stub>
 `;
