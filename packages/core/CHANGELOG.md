@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.20.0-canary.0 (Nov 21th 2019)
+
+## Feat
+
+- Add decimal ability to number input.
+
+## Fix
+
+- Fix CvIconButton tooltip
+
 ## 2.19.0 (Nov 19th 2019)
 
 ### Chore
