@@ -12,7 +12,7 @@
     v-on="inputListeners"
     type="button"
   >
-    <span class="bx--assistive-text">{{ tipText }}</span>
+    <span class="bx--assistive-text">{{ label }}</span>
 
     <component v-if="typeof icon === 'object'" :is="icon" class="bx--btn__icon" />
     <svg v-if="typeof icon === 'string' || iconHref" class="bx--btn__icon">
