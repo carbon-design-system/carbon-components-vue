@@ -81,6 +81,28 @@ describe('CvNumberInput', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
+  it('should match snapshot with min, max and step as Strings', () => {
+    const formItem = false;
+    const id = '1';
+    const value = '15';
+    const min = '-10';
+    const max = '10';
+    const step = '2';
+    const wrapper = shallow(CvNumberInput, { propsData: { formItem, id, value, min, max, step } });
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
+  it('should match snapshot with optional min, max and step as numbers', () => {
+    const formItem = false;
+    const id = '1';
+    const value = 15;
+    const min = -10;
+    const max = 10;
+    const step = 2;
+    const wrapper = shallow(CvNumberInput, { propsData: { formItem, id, value, min, max, step } });
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('should match snapshot when light theme', () => {
     const formItem = false;
     const id = '1';
@@ -162,6 +184,60 @@ describe('CvNumberInput', () => {
     const wrapper = shallow(CvNumberInput, { propsData: { id, value } });
     wrapper.find('.down-icon').trigger('click');
     expect(wrapper.emitted().input[0]).toEqual([value - 1]);
+  });
+
+  it('should emit value encreased by 0.3 on doUp', () => {
+    const id = '1';
+    const value = 0;
+    const step = 0.3;
+    const wrapper = shallow(CvNumberInput, { propsData: { id, value, step } });
+    wrapper.find('.up-icon').trigger('click');
+    expect(wrapper.emitted().input[0]).toEqual([value + 0.3]);
+  });
+
+  it('should emit value decreased by 0.3 on doDown', () => {
+    const id = '1';
+    const value = 1.2;
+    const step = 0.3;
+    const wrapper = shallow(CvNumberInput, { propsData: { id, value, step } });
+    wrapper.find('.down-icon').trigger('click');
+    expect(wrapper.emitted().input[0]).toEqual([0.9]);
+  });
+
+  it('should emit value snapped to next higher value', () => {
+    const id = '1';
+    const value = 0.5;
+    const step = 0.3;
+    const wrapper = shallow(CvNumberInput, { propsData: { id, value, step } });
+    wrapper.find('.up-icon').trigger('click');
+    expect(wrapper.emitted().input[0]).toEqual([0.6]);
+  });
+
+  it('should emit value snapped to next lower value', () => {
+    const id = '1';
+    const value = 0.5;
+    const step = 0.3;
+    const wrapper = shallow(CvNumberInput, { propsData: { id, step, value } });
+    wrapper.find('.down-icon').trigger('click');
+    expect(wrapper.emitted().input[0]).toEqual([0.3]);
+  });
+
+  it('should respect max value', () => {
+    const id = '1';
+    const value = 10;
+    const max = 10;
+    const wrapper = shallow(CvNumberInput, { propsData: { id, value, max } });
+    wrapper.find('.up-icon').trigger('click');
+    expect(wrapper.emitted().input[0]).toEqual([10]);
+  });
+
+  it('should respoect min value', () => {
+    const id = '1';
+    const value = 0;
+    const min = 0;
+    const wrapper = shallow(CvNumberInput, { propsData: { id, value, min } });
+    wrapper.find('.down-icon').trigger('click');
+    expect(wrapper.emitted().input[0]).toEqual([0]);
   });
 
   it('should emit the correct value on input', () => {

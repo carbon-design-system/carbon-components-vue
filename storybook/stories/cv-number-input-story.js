@@ -63,19 +63,58 @@ let preKnobs = {
     prop: 'value',
     value: val => `${val}`,
   },
-  intValue: {
+  numValue: {
     group: 'attr',
     type: number,
     config: ['value', 0], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: 'value',
   },
+  min: {
+    group: 'attr',
+    type: number,
+    config: ['min', 0], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'min',
+    value: val => `${val}`,
+  },
+  numMin: {
+    group: 'attr',
+    type: number,
+    config: ['min', 0], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'min',
+  },
+  max: {
+    group: 'attr',
+    type: number,
+    config: ['max', 10], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'max',
+    value: val => `${val}`,
+  },
+  numMax: {
+    group: 'attr',
+    type: number,
+    config: ['max', 10], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'max',
+  },
+  step: {
+    group: 'attr',
+    type: number,
+    config: ['step', 1], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'step',
+    value: val => `${val}`,
+  },
+  numStep: {
+    group: 'attr',
+    type: number,
+    config: ['step', 1], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'step',
+  },
   vModel: {
     group: 'attr',
     value: `v-model="modelValue"`,
   },
-  vModelInt: {
+  vModelNum: {
     group: 'attr',
-    value: `v-model="modelValueInt"`,
+    value: `v-model="modelValueNum"`,
   },
   events: {
     group: 'attr',
@@ -86,19 +125,28 @@ let preKnobs = {
 let variants = [
   {
     name: 'default',
-    excludes: ['vModel', 'invalidMessageSlot', 'helperTextSlot', 'intValue', 'vModelInt'],
+    excludes: [
+      'vModel',
+      'invalidMessageSlot',
+      'helperTextSlot',
+      'numValue',
+      'vModelNum',
+      'numMin',
+      'numMax',
+      'numStep',
+    ],
   },
   {
-    name: 'integer value',
-    excludes: ['vModel', 'invalidMessageSlot', 'helperTextSlot', 'value', 'vModelInt'],
+    name: 'number value',
+    excludes: ['vModel', 'invalidMessageSlot', 'helperTextSlot', 'value', 'vModelNum', 'min', 'max', 'step'],
   },
   {
     name: 'helper and invalid slots',
-    excludes: ['vModel', 'events', 'intValue', 'vModelInt'],
+    excludes: ['vModel', 'events', 'numValue', 'vModelNum', , 'numMin', 'numMax', 'numStep'],
   },
   { name: 'minimal', includes: ['label'] },
   { name: 'vModel', includes: ['label', 'vModel', 'events'] },
-  { name: 'vModelInt', includes: ['label', 'vModelInt', 'events'] },
+  { name: 'vModelNum', includes: ['label', 'vModelNum', 'events'] },
 ];
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
@@ -141,7 +189,7 @@ for (const story of storySet) {
         data() {
           return {
             modelValue: '100',
-            modelValueInt: 100,
+            modelValueNum: 100,
             storyName: story.name,
           };
         },
@@ -152,14 +200,14 @@ for (const story of storySet) {
             if (isNaN(intVal)) {
               intVal = 0;
             }
-            if (intVal !== this.modelValueInt) {
-              this.modelValueInt = intVal;
+            if (intVal !== this.modelValueNum) {
+              this.modelValueNum = intVal;
             }
           },
-          modelValueInt() {
-            let val = '' + this.modelValueInt;
+          modelValueNum() {
+            let val = '' + this.modelValueNum;
             if (this.modelValue !== val) {
-              this.modelValue = '' + this.modelValueInt;
+              this.modelValue = '' + this.modelValueNum;
             }
           },
         },
