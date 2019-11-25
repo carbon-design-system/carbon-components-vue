@@ -1,10 +1,10 @@
 import { shallowMount as shallow, mount } from '@vue/test-utils';
 import { testComponent, testInstance } from './_helpers';
 import { CvButton, CvIconButton, CvButtonSkeleton } from '@/components/cv-button';
-import { settings } from 'carbon-components';
+import { settings as carbonSettings } from 'carbon-components';
 import AddFilled16 from '@carbon/icons-vue/es/add--filled/16';
 
-const { prefix } = settings;
+const carbonPrefix = carbonSettings.prefix;
 
 describe('CvButton', () => {
   // ***************

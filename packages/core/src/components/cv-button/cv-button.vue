@@ -2,8 +2,8 @@
   <button
     class="cv-button"
     :class="[
-      'bx--btn',
-      'bx--btn--' + kind.toLowerCase(),
+      `${carbonPrefix}--btn`,
+      `${carbonPrefix}--btn--` + kind.toLowerCase(),
       {
         'bx--btn--sm': size === 'small' || (size === undefined && small),
         'bx--btn--field': size === 'field',
@@ -23,9 +23,20 @@
 
 <script>
 import buttonMixin from './button-mixin';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvButton',
-  mixins: [buttonMixin],
+  mixins: [buttonMixin, carbonPrefixMixin],
+  computed: {
+    buttonClasses() {
+      return `${carbonPrefix}--btn` ,
+      `${carbonPrefix}--btn--` + kind.toLowerCase(),
+      {
+        'bx--btn--sm': size === 'small' || (size === undefined && small),
+        'bx--btn--field': size === 'field',
+      },
+    }
+  }
 };
 </script>
