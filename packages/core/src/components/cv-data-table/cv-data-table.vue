@@ -149,7 +149,7 @@
 
     <cv-pagination
       v-if="pagination"
-      v-bind="pagination"
+      v-bind="internalPagination"
       :number-of-items="internalNumberOfItems"
       @change="$emit('pagination', $event)"
     >
