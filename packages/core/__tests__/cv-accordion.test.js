@@ -1,9 +1,9 @@
 import { shallowMount as shallow, mount } from '@vue/test-utils';
 import { testComponent, testInstance, events } from './_helpers';
 import { CvAccordion, CvAccordionItem, CvAccordionSkeleton } from '@/components/cv-Accordion';
-import { settings } from 'carbon-components';
+import { settings as carbonSettings } from 'carbon-components';
 
-const { prefix } = settings;
+const carbonPrefix = carbonSettings.prefix;
 
 describe('CvAccordion', () => {
   // ***************
@@ -96,17 +96,17 @@ describe('CvAccordionItem', () => {
     const button = wrapper.find('button');
 
     expect(button.attributes('aria-expanded')).toEqual('false');
-    expect(wrapper.classes()).not.toContain(`${prefix}--accordion__item--active`);
+    expect(wrapper.classes()).not.toContain(`${carbonPrefix}--accordion__item--active`);
 
     wrapper.find('button').trigger('click');
 
     expect(button.attributes('aria-expanded')).toEqual('true');
-    expect(wrapper.classes()).toContain(`${prefix}--accordion__item--active`);
+    expect(wrapper.classes()).toContain(`${carbonPrefix}--accordion__item--active`);
 
     wrapper.find('button').trigger('click');
 
     expect(button.attributes('aria-expanded')).toEqual('false');
-    expect(wrapper.classes()).not.toContain(`${prefix}--accordion__item--active`);
+    expect(wrapper.classes()).not.toContain(`${carbonPrefix}--accordion__item--active`);
   });
 
   it('topen to closed to open', () => {
@@ -122,16 +122,16 @@ describe('CvAccordionItem', () => {
     const button = wrapper.find('button');
 
     expect(button.attributes('aria-expanded')).toEqual('true');
-    expect(wrapper.classes()).toContain(`${prefix}--accordion__item--active`);
+    expect(wrapper.classes()).toContain(`${carbonPrefix}--accordion__item--active`);
 
     wrapper.find('button').trigger('click');
 
     expect(button.attributes('aria-expanded')).toEqual('false');
-    expect(wrapper.classes()).not.toContain(`${prefix}--accordion__item--active`);
+    expect(wrapper.classes()).not.toContain(`${carbonPrefix}--accordion__item--active`);
 
     wrapper.find('button').trigger('click');
 
     expect(button.attributes('aria-expanded')).toEqual('true');
-    expect(wrapper.classes()).toContain(`${prefix}--accordion__item--active`);
+    expect(wrapper.classes()).toContain(`${carbonPrefix}--accordion__item--active`);
   });
 });

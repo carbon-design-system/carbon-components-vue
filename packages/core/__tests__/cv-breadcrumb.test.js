@@ -1,9 +1,9 @@
 import { shallowMount as shallow } from '@vue/test-utils';
 import { testComponent, testInstance } from './_helpers';
 import { CvBreadcrumb, CvBreadcrumbSkeleton, CvBreadcrumbItem } from '@/components/cv-breadcrumb';
-import { settings } from 'carbon-components';
+import { settings as carbonSettings } from 'carbon-components';
 
-const { prefix } = settings;
+const carbonPrefix = carbonSettings.prefix;
 
 describe('CvBreadcrumb', () => {
   // ***************
