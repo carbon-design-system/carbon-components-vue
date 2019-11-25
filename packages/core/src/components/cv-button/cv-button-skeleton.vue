@@ -1,18 +1,14 @@
 <template>
-  <button
-    disabled
-    class="bx--btn bx--skeleton"
-    :class="{
-      'bx--btn--sm': size === 'small' || (size === undefined && small),
-      'bx--btn--field': size === 'field',
-    }"
-    type="button"
-  ></button>
+  <button disabled :class="buttonClasses" type="button"></button>
 </template>
 
 <script>
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+
 export default {
   name: 'CvButtonSkeleton',
+  mixins: [carbonPrefixMixin],
+
   props: {
     small: {
       type: Boolean,
@@ -25,6 +21,19 @@ export default {
       },
     },
     size: { type: String, default: undefined, validator: val => ['', 'field', 'small'].includes(val) },
+  },
+  computed: {
+    buttonClasses() {
+      let classes = [`${this.carbonPrefix}--btn`, `${this.carbonPrefix}--skeleton`];
+
+      if (this.size === 'small' || (this.size === undefined && this.small)) {
+        classes.push(`${this.carbonPrefix}--btn--sm`);
+      }
+      if (this.size === 'field') {
+        classes.push(`${this.carbonPrefix}--btn--field`);
+      }
+      return classes;
+    },
   },
 };
 </script>
