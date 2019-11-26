@@ -12,6 +12,12 @@ const storiesDefault = storiesOf('Components/CvInlineLoading', module);
 const storiesExperimental = storiesOf('Experimental/CvInlineLoading', module);
 
 const preKnobs = {
+  endingText: {
+    group: 'attr',
+    type: text,
+    config: ['ending text', 'Ending...'],
+    prop: 'ending-text',
+  },
   errorText: {
     group: 'attr',
     type: text,
