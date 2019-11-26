@@ -1,12 +1,15 @@
 <template>
-  <ul data-accordion class="cv-accordion bx--accordion">
+  <ul data-accordion :class="`cv-accordion ${carbonPrefix}--accordion`">
     <slot></slot>
   </ul>
 </template>
 
 <script>
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+
 export default {
   name: 'CvAccordion',
+  mixins: [carbonPrefixMixin],
   created() {
     this.$on('cv:change', srcComponent => this.onCvChange(srcComponent));
   },

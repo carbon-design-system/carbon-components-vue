@@ -6,25 +6,20 @@
 -->
 
 <template>
-  <li
-    data-accordion-item
-    class="cv-accordion-item bx--accordion__item"
-    :class="itemClasses"
-    @animationend="onAnimationEnd"
-  >
+  <li data-accordion-item class="cv-accordion-item" :class="itemClasses" @animationend="onAnimationEnd">
     <button
       type="button"
-      class="bx--accordion__heading"
+      :class="`${carbonPrefix}--accordion__heading`"
       :aria-expanded="`${dataOpen}`"
       :aria-controls="uid"
       @click="toggle"
     >
-      <ChevronRight16 class="bx--accordion__arrow" />
-      <p class="bx--accordion__title">
+      <ChevronRight16 :class="`${carbonPrefix}--accordion__arrow`" />
+      <p :class="`${carbonPrefix}--accordion__title`">
         <slot name="title"></slot>
       </p>
     </button>
-    <div :id="uid" class="bx--accordion__content">
+    <div :id="uid" :class="`${carbonPrefix}--accordion__content`">
       <slot name="content"></slot>
     </div>
   </li>
@@ -33,10 +28,11 @@
 <script>
 import ChevronRight16 from '@carbon/icons-vue/es/chevron--right/16';
 import uidMixin from '../../mixins/uid-mixin';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvAccordionItem',
-  mixins: [uidMixin],
+  mixins: [uidMixin, carbonPrefixMixin],
   components: { ChevronRight16 },
   props: {
     open: { type: Boolean, default: false },
@@ -75,12 +71,13 @@ export default {
   },
   computed: {
     itemClasses() {
-      const classes = [];
+      const classes = [`${this.carbonPrefix}--accordion__item`];
+
       if (this.dataOpen) {
-        classes.push('bx--accordion__item--active');
+        classes.push(`${this.carbonPrefix}--accordion__item--active`);
       }
       if (this.animation) {
-        classes.push(`bx--accordion__item--${this.animation}`);
+        classes.push(`${this.carbonPrefix}--accordion__item--${this.animation}`);
       }
       return classes.join(' ');
     },
