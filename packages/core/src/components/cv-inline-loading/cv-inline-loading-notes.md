@@ -13,6 +13,7 @@ http://www.carbondesignsystem.com/components/inline-loading/code
 ## Attributes
 
 - loadingText: Text shown in loading state
+- endingText: Text shown in when load is ending
 - loadedText: Text shown in complete state
 - errorText: Text shown in error state
-- state: String containing 'loading', 'loaded' or 'error'
+- state: String containing 'loading', 'ending', 'loaded' or 'error'
