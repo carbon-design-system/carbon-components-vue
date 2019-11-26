@@ -96,7 +96,12 @@
         }
       ],
       "no-debugger": "warn",
-      "no-unused-vars": "warn",
+      "no-unused-vars": [
+        "warn",
+        {
+          "ignoreRestSiblings": true
+        }
+      ],
       "no-plusplus": "off",
       "no-undef": "off",
       "no-var": "error",
