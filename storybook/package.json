@@ -5,7 +5,7 @@
   "description": "> TODO: description",
   "scripts": {
     "start": "start-storybook -p 9001 -c .storybook",
-    "build": "build-storybook"
+    "build": "yarn info @carbon/vue --json > ../package-info.json; build-storybook"
   },
   "dependencies": {
     "@carbon/icons-vue": "10.6.1",

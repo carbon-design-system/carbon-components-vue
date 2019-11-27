@@ -1,4 +1,5 @@
-import { configure, addDecorator } from '@storybook/vue';
+import { configure, addDecorator, addParameters } from '@storybook/vue';
+import { themes } from '@storybook/theming';
 import { withOptions } from '@storybook/addon-options';
 import { withNotes } from '@storybook/addon-notes';
 import { withKnobs } from '@storybook/addon-knobs';
@@ -18,6 +19,14 @@ addDecorator(
 
 addDecorator(withKnobs);
 addDecorator(withNotes);
+
+addParameters({
+  options: {
+    theme: themes.dark,
+    isToolshown: true,
+    showPanel: true,
+  },
+});
 
 Vue.use(VueHighlightJS);
 
