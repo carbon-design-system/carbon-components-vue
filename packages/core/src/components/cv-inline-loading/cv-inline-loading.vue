@@ -50,7 +50,7 @@ export default {
         if (Object.keys(STATES).some(state => STATES[state] === val)) {
           return true;
         } else {
-          console.error(`CvInlineLoading: Valid states are ${STATES}`);
+          console.error(`CvInlineLoading: Valid states are ${JSON.stringify(Object.keys(STATES))}`);
           return false;
         }
       },
