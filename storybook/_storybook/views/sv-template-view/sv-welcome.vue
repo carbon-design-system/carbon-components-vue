@@ -10,102 +10,104 @@
         </span>
       </h1>
     </div>
-    <div class="welcome__info bx--row">
-      <div class="bx--no-gutter-md--left bx--col-md-4 bx--col-lg-4">
-        <a class="welcome__card" href="/?path=/story/components-cvaccordion--default">
-          <div class="bx--aspect-ratio bx--aspect-ratio--2x1">
-            <div class="bx--aspect-ratio--object">
-              <div class="welcome__card-content">
-                <h5>Browse</h5>
-                <h4>the components</h4>
-                <div class="welcome__card-icon">
-                  <svg
-                    focusable="false"
-                    preserveAspectRatio="xMidYMid meet"
-                    aria-label="Open resource"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    role="img"
-                  >
-                    <path fill="white" d="M11.8 2.8l-1 1 5.4 5.5H1v1.4h15.2l-5.4 5.5 1 1L19 10z" />
-                  </svg>
+    <div class="welcome__info">
+      <div class="bx--row">
+        <div class="bx--no-gutter-md--left bx--col-md-4 bx--col-lg-4">
+          <a class="welcome__card" href="/?path=/story/components-cvaccordion--default">
+            <div class="bx--aspect-ratio bx--aspect-ratio--2x1">
+              <div class="bx--aspect-ratio--object">
+                <div class="welcome__card-content">
+                  <h5>Browse</h5>
+                  <h4>the components</h4>
+                  <div class="welcome__card-icon">
+                    <svg
+                      focusable="false"
+                      preserveAspectRatio="xMidYMid meet"
+                      aria-label="Open resource"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      role="img"
+                    >
+                      <path fill="white" d="M11.8 2.8l-1 1 5.4 5.5H1v1.4h15.2l-5.4 5.5 1 1L19 10z" />
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </a>
-      </div>
-      <div class="bx--no-gutter-md--left bx--col-md-4 bx--col-lg-4">
-        <a class="welcome__card" href="https://github.com/carbon-design-system/carbon-components-vue">
-          <div class="bx--aspect-ratio bx--aspect-ratio--2x1">
-            <div class="bx--aspect-ratio--object">
-              <div class="welcome__card-content">
-                <h5>Go to</h5>
-                <h4>the source repository</h4>
-                <div class="welcome__card-image">
-                  <svg
-                    focusable="false"
-                    preserveAspectRatio="xMidYMid meet"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 32 32"
-                    aria-hidden="true"
-                    class="MdxIcon-module--mdx-icon--3p_4x MdxIcon-module--icon-inverse--q6_WJ"
-                  >
-                    <path
-                      fill="white"
-                      fill-rule="evenodd"
-                      d="M16 2a14 14 0 0 0-4.43 27.28c.7.13 1-.3 1-.67v-2.38c-3.89.84-4.71-1.88-4.71-1.88a3.71 3.71 0 0 0-1.62-2.05c-1.27-.86.1-.85.1-.85a2.94 2.94 0 0 1 2.14 1.45 3 3 0 0 0 4.08 1.16 2.93 2.93 0 0 1 .88-1.87c-3.1-.36-6.37-1.56-6.37-6.92a5.4 5.4 0 0 1 1.44-3.76 5 5 0 0 1 .14-3.7s1.17-.38 3.85 1.43a13.3 13.3 0 0 1 7 0c2.67-1.81 3.84-1.43 3.84-1.43a5 5 0 0 1 .14 3.7 5.4 5.4 0 0 1 1.44 3.76c0 5.38-3.27 6.56-6.39 6.91a3.33 3.33 0 0 1 .95 2.59v3.84c0 .46.25.81 1 .67A14 14 0 0 0 16 2z"
-                    ></path>
-                  </svg>
-                </div>
+          </a>
+        </div>
+        <div class="bx--no-gutter-md--left bx--col-md-4 bx--col-lg-4">
+          <a class="welcome__card" href="https://github.com/carbon-design-system/carbon-components-vue">
+            <div class="bx--aspect-ratio bx--aspect-ratio--2x1">
+              <div class="bx--aspect-ratio--object">
+                <div class="welcome__card-content">
+                  <h5>Go to</h5>
+                  <h4>the source repository</h4>
+                  <div class="welcome__card-image">
+                    <svg
+                      focusable="false"
+                      preserveAspectRatio="xMidYMid meet"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="32"
+                      height="32"
+                      viewBox="0 0 32 32"
+                      aria-hidden="true"
+                      class="MdxIcon-module--mdx-icon--3p_4x MdxIcon-module--icon-inverse--q6_WJ"
+                    >
+                      <path
+                        fill="white"
+                        fill-rule="evenodd"
+                        d="M16 2a14 14 0 0 0-4.43 27.28c.7.13 1-.3 1-.67v-2.38c-3.89.84-4.71-1.88-4.71-1.88a3.71 3.71 0 0 0-1.62-2.05c-1.27-.86.1-.85.1-.85a2.94 2.94 0 0 1 2.14 1.45 3 3 0 0 0 4.08 1.16 2.93 2.93 0 0 1 .88-1.87c-3.1-.36-6.37-1.56-6.37-6.92a5.4 5.4 0 0 1 1.44-3.76 5 5 0 0 1 .14-3.7s1.17-.38 3.85 1.43a13.3 13.3 0 0 1 7 0c2.67-1.81 3.84-1.43 3.84-1.43a5 5 0 0 1 .14 3.7 5.4 5.4 0 0 1 1.44 3.76c0 5.38-3.27 6.56-6.39 6.91a3.33 3.33 0 0 1 .95 2.59v3.84c0 .46.25.81 1 .67A14 14 0 0 0 16 2z"
+                      ></path>
+                    </svg>
+                  </div>
 
-                <div class="welcome__card-icon">
-                  <svg
-                    focusable="false"
-                    preserveAspectRatio="xMidYMid meet"
-                    aria-label="Open resource"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    role="img"
-                  >
-                    <path fill="white" d="M11.8 2.8l-1 1 5.4 5.5H1v1.4h15.2l-5.4 5.5 1 1L19 10z" />
-                  </svg>
+                  <div class="welcome__card-icon">
+                    <svg
+                      focusable="false"
+                      preserveAspectRatio="xMidYMid meet"
+                      aria-label="Open resource"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      role="img"
+                    >
+                      <path fill="white" d="M11.8 2.8l-1 1 5.4 5.5H1v1.4h15.2l-5.4 5.5 1 1L19 10z" />
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </a>
-      </div>
-      <div class="bx--no-gutter-md--left bx--col-md-4 bx--col-lg-4">
-        <a class="welcome__card" href="/?path=/story/versions--default">
-          <div class="bx--aspect-ratio bx--aspect-ratio--2x1">
-            <div class="bx--aspect-ratio--object">
-              <div class="welcome__card-content">
-                <h4>Versions</h4>
-                <div class="welcome__card-icon">
-                  <svg
-                    focusable="false"
-                    preserveAspectRatio="xMidYMid meet"
-                    aria-label="Open resource"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    role="img"
-                  >
-                    <path fill="white" d="M11.8 2.8l-1 1 5.4 5.5H1v1.4h15.2l-5.4 5.5 1 1L19 10z" />
-                  </svg>
+          </a>
+        </div>
+        <div class="bx--no-gutter-md--left bx--col-md-4 bx--col-lg-4">
+          <a class="welcome__card" href="/?path=/story/versions--default">
+            <div class="bx--aspect-ratio bx--aspect-ratio--2x1">
+              <div class="bx--aspect-ratio--object">
+                <div class="welcome__card-content">
+                  <h4>Versions</h4>
+                  <div class="welcome__card-icon">
+                    <svg
+                      focusable="false"
+                      preserveAspectRatio="xMidYMid meet"
+                      aria-label="Open resource"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      role="img"
+                    >
+                      <path fill="white" d="M11.8 2.8l-1 1 5.4 5.5H1v1.4h15.2l-5.4 5.5 1 1L19 10z" />
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
       </div>
     </div>
     <footer class="welcome__footer bx--grid">
@@ -240,7 +242,7 @@ export default {
 }
 
 .welcome__info {
-  padding: 20px;
+  padding: 1rem;
 }
 
 .welcome__card {

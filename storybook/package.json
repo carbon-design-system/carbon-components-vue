@@ -4,7 +4,7 @@
   "private": true,
   "description": "> TODO: description",
   "scripts": {
-    "start": "start-storybook -p 9001 -c .storybook",
+    "start": "yarn info @carbon/vue --json > ../package-info.json; start-storybook -p 9001 -c .storybook",
     "build": "yarn info @carbon/vue --json > ../package-info.json; build-storybook"
   },
   "dependencies": {
