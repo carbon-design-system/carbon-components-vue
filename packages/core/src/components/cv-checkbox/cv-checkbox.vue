@@ -1,13 +1,7 @@
 <template>
-  <div class="cv-checkbox bx--checkbox-wrapper" :class="{ 'bx--form-item': formItem }">
+  <div class="cv-checkbox" :class="formItemClasses">
     <label
-      :class="[
-        'bx--checkbox-label',
-        {
-          'bx--label--disabled': $attrs.disabled !== undefined && $attrs.disabled,
-          'bx--checkbox-label__focus': hasFocus,
-        },
-      ]"
+      :class="labelClasses"
       :data-contained-checkbox-state="isChecked"
       :data-contained-checkbox-disabled="$attrs.disabled"
     >
@@ -15,7 +9,7 @@
         ref="input"
         v-bind="$attrs"
         v-on="inputListeners"
-        class="bx--checkbox"
+        :class="`${carbonPrefix}--checkbox`"
         type="checkbox"
         :checked="isChecked === true"
         :aria-checked="`${isChecked}`"
@@ -30,10 +24,11 @@
 
 <script>
 import checkMixin from '../../mixins/check-mixin';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvCheckbox',
-  mixins: [checkMixin],
+  mixins: [checkMixin, carbonPrefixMixin],
   inheritAttrs: false,
   props: {
     label: String,
@@ -53,6 +48,25 @@ export default {
       hasFocus: false,
       dataMixed: this.mixed,
     };
+  },
+  computed: {
+    formItemClasses() {
+      const classes = [`${this.carbonPrefix}--checkbox-wrapper`];
+      if (this.formItem) {
+        classes.push(`${this.carbonPrefix}--form-item`);
+      }
+      return classes;
+    },
+    labelClasses() {
+      const classes = ['bx--checkbox-label'];
+      if (this.$attrs.disabled !== undefined && this.$attrs.disabled) {
+        classes.push(`${this.carbonPrefix}--label--disabled`);
+      }
+      if (this.hasFocus) {
+        classes.push(`${this.carbonPrefix}--checkbox-label__focus`);
+      }
+      return classes;
+    },
   },
   methods: {
     onFocus() {
