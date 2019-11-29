@@ -69,7 +69,7 @@ describe('CvInlineNotification', () => {
   //   for (const kind of kinds) {
   //     propsData.kind = kind;
   //     const wrapper = shallow(CvInlineNotification, { propsData });
-  //     expect(wrapper.vm.icon).toBe(kindToIconMapping[kind]);
+  //     expect(wrapper.vm.icon).toEqual(kindToIconMapping[kind]);
   //   }
   // });
 
