@@ -70,7 +70,7 @@ export default {
         case 'success':
           return CheckmarkFilled20;
         default:
-          return null;
+          return '';
       }
     },
   },
