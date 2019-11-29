@@ -3,7 +3,7 @@
     <slot></slot>
 
     <component v-if="typeof icon === 'object'" :is="icon" class="bx--temp-fix" :class="`${carbonPrefix}--btn__icon`" />
-    <svg v-if="typeof icon === 'string' || iconHref" class="bx--temp-fix" :class="`${carbonPrefix}--btn__icon`">
+    <svg v-if="typeof icon === 'string' || iconHref" :class="`${carbonPrefix}--btn__icon`">
       <use :href="icon || iconHref" />
     </svg>
   </button>
