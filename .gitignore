@@ -42,4 +42,4 @@ node_modules
 package-lock.json
 
 # package info, regenerated during builds
-package-info.json
+package-info.jsonl
