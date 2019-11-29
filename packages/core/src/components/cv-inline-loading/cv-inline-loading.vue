@@ -1,19 +1,22 @@
 <template>
-  <div data-inline-loading class="bx--inline-loading" role="alert" aria-live="assertive">
-    <div class="bx--inline-loading__animation" :class="{ 'bx--loading--stop': internalState === STATES.ENDING }">
+  <div data-inline-loading :class="`${carbonPrefix}--inline-loading`" role="alert" aria-live="assertive">
+    <div :class="animationClasses">
       <div
         v-show="internalState === STATES.LOADING || internalState === STATES.ENDING"
-        class="bx--loading bx--loading--small"
+        :class="`${carbonPrefix}--loading ${carbonPrefix}--loading--small`"
       >
-        <svg class="bx--loading__svg" viewBox="-75 -75 150 150">
-          <circle class="bx--loading__background" cx="0" cy="0" r="26.8125" />
-          <circle class="bx--loading__stroke" cx="0" cy="0" r="26.8125" />
+        <svg :class="`${carbonPrefix}--loading__svg`" viewBox="-75 -75 150 150">
+          <circle :class="`${carbonPrefix}--loading__background`" cx="0" cy="0" r="26.8125" />
+          <circle :class="`${carbonPrefix}--loading__stroke`" cx="0" cy="0" r="26.8125" />
         </svg>
       </div>
-      <CheckmarkFilled16 :hidden="internalState !== STATES.LOADED" class="bx--inline-loading__checkmark-container" />
-      <Error20 :hidden="internalState !== STATES.ERROR" class="bx--inline-loading--error" />
+      <CheckmarkFilled16
+        :hidden="internalState !== STATES.LOADED"
+        :class="`${carbonPrefix}--inline-loading__checkmark-container`"
+      />
+      <Error20 :hidden="internalState !== STATES.ERROR" :class="`${carbonPrefix}--inline-loading--error`" />
     </div>
-    <p class="bx--inline-loading__text">{{ stateText }}</p>
+    <p :class="`${carbonPrefix}--inline-loading__text`">{{ stateText }}</p>
   </div>
 </template>
 
@@ -21,10 +24,12 @@
 import { STATES } from './consts';
 import Error20 from '@carbon/icons-vue/lib/error/20';
 import CheckmarkFilled16 from '@carbon/icons-vue/lib/checkmark--filled/16';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvInlineLoading',
   components: { Error20, CheckmarkFilled16 },
+  mixins: [carbonPrefixMixin],
   created() {
     this.STATES = STATES;
   },
@@ -76,12 +81,13 @@ export default {
           return this.loadingText;
       }
     },
-    CONSTS() {
-      return { STATES };
+    animationClasses() {
+      const classes = [`${this.carbonPrefix}--inline-loading__animation`];
+      if (this.internalState === STATES.ENDING) {
+        classes.push(`${this.carbonPrefix}--loading--stop`);
+      }
+      return classes;
     },
-  },
-  CONSTS() {
-    return { STATES };
   },
 };
 </script>

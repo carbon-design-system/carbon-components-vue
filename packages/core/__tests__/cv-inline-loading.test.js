@@ -1,10 +1,8 @@
 import { shallowMount as shallow } from '@vue/test-utils';
 import { testComponent } from './_helpers';
-import { CvInlineLoading } from '@/components/cv-inline-loading';
+import { CvInlineLoading, STATES } from '@/components/cv-inline-loading';
 
 describe('CvInlineLoading', () => {
-  const STATES = CvInlineLoading.CONSTS().STATES;
-
   // ***************
   // PROP CHECKS
   // ***************
