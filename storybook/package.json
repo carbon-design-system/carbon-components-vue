@@ -4,8 +4,8 @@
   "private": true,
   "description": "> TODO: description",
   "scripts": {
-    "start": "yarn info @carbon/vue --json > ../package-info.json; start-storybook -p 9001 -c .storybook",
-    "build": "yarn info @carbon/vue --json > ../package-info.json; build-storybook"
+    "start": "yarn info @carbon/vue --json > ../package-info.jsonl; start-storybook -p 9001 -c .storybook",
+    "build": "yarn info @carbon/vue --json > ../package-info.jsonl; build-storybook"
   },
   "dependencies": {
     "@carbon/icons-vue": "10.6.1",
@@ -27,6 +27,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-vue": "^2.0.2",
+    "jsonlines-loader": "^1.0.1",
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
     "postcss-preset-env": "^6.7.0",
