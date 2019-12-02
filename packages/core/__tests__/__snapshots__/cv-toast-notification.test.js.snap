@@ -51,3 +51,55 @@ exports[`CvToastNotification should render correctly 4`] = `
   </button>
 </div>
 `;
+
+exports[`CvToastNotification should render correctly when low contrast is used 1`] = `
+<div data-notification="" role="alert" class="cv-notifiation bx--toast-notification bx--toast-notification--error bx--toast-notification--low-contrast">
+  <errorfilled20-stub class="bx--toast-notification__icon"></errorfilled20-stub>
+  <div class="bx--toast-notification__details">
+    <h3 class="bx--toast-notification__title"></h3>
+    <p class="bx--toast-notification__subtitle"></p>
+    <p class="bx--toast-notification__caption">TEST</p>
+  </div> <button aria-label="Dismiss notification" type="button" data-notification-btn="" class="bx--toast-notification__close-button">
+    <close20-stub class="bx--toast-notification__close-icon"></close20-stub>
+  </button>
+</div>
+`;
+
+exports[`CvToastNotification should render correctly when low contrast is used 2`] = `
+<div data-notification="" aria-live="polite" class="cv-notifiation bx--toast-notification bx--toast-notification--info bx--toast-notification--low-contrast">
+  <!---->
+  <div class="bx--toast-notification__details">
+    <h3 class="bx--toast-notification__title"></h3>
+    <p class="bx--toast-notification__subtitle"></p>
+    <p class="bx--toast-notification__caption">TEST</p>
+  </div> <button aria-label="Dismiss notification" type="button" data-notification-btn="" class="bx--toast-notification__close-button">
+    <close20-stub class="bx--toast-notification__close-icon"></close20-stub>
+  </button>
+</div>
+`;
+
+exports[`CvToastNotification should render correctly when low contrast is used 3`] = `
+<div data-notification="" role="alert" class="cv-notifiation bx--toast-notification bx--toast-notification--warning bx--toast-notification--low-contrast">
+  <warningaltfilled20-stub class="bx--toast-notification__icon"></warningaltfilled20-stub>
+  <div class="bx--toast-notification__details">
+    <h3 class="bx--toast-notification__title"></h3>
+    <p class="bx--toast-notification__subtitle"></p>
+    <p class="bx--toast-notification__caption">TEST</p>
+  </div> <button aria-label="Dismiss notification" type="button" data-notification-btn="" class="bx--toast-notification__close-button">
+    <close20-stub class="bx--toast-notification__close-icon"></close20-stub>
+  </button>
+</div>
+`;
+
+exports[`CvToastNotification should render correctly when low contrast is used 4`] = `
+<div data-notification="" aria-live="polite" class="cv-notifiation bx--toast-notification bx--toast-notification--success bx--toast-notification--low-contrast">
+  <checkmarkfilled20-stub class="bx--toast-notification__icon"></checkmarkfilled20-stub>
+  <div class="bx--toast-notification__details">
+    <h3 class="bx--toast-notification__title"></h3>
+    <p class="bx--toast-notification__subtitle"></p>
+    <p class="bx--toast-notification__caption">TEST</p>
+  </div> <button aria-label="Dismiss notification" type="button" data-notification-btn="" class="bx--toast-notification__close-button">
+    <close20-stub class="bx--toast-notification__close-icon"></close20-stub>
+  </button>
+</div>
+`;
