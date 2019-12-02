@@ -24,8 +24,13 @@ module.exports = async ({ config, mode }) => {
     include: path.resolve(__dirname, '../../'),
   });
 
+  config.module.rules.push({
+    test: /\.jsonl$/,
+    loaders: ['jsonlines-loader'],
+  });
+
   // auto prefix anything in a vue file
-  config.resolve.extensions.push('.js', '.vue', '.json');
+  config.resolve.extensions.push('.js', '.vue', '.json', '.jsonl');
   let vueLoaderConfig = config.module.rules.find(item => {
     return item.loader && item.loader.indexOf('vue-loader') > -1;
   });
