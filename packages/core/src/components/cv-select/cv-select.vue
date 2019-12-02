@@ -126,6 +126,10 @@ export default {
       }
     },
   },
+  model: {
+    prop: 'value',
+    event: 'change',
+  },
   computed: {
     // Bind listeners at the component level to the embedded input element and
     // add our own input listener to service the v-model. See:
@@ -134,6 +138,7 @@ export default {
       return {
         ...this.$listeners,
         input: event => this.$emit('input', event.target.value),
+        change: event => this.$emit('change', event.target.value), // use change event for ie11 compatibility
       };
     },
     internalValue() {
