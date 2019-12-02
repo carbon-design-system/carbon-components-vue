@@ -46,6 +46,15 @@ describe('CvToastNotification', () => {
     }
   });
 
+  it('should render correctly when low contrast is used', () => {
+    const propsData = { caption: 'TEST', lowContrast: true, kind: '' };
+    for (const kind of kinds) {
+      propsData.kind = kind;
+      const wrapper = shallow(CvToastNotification, { propsData });
+      expect(wrapper.html()).toMatchSnapshot();
+    }
+  });
+
   // ***************
   // FUNCTIONAL TESTS
   // ***************
