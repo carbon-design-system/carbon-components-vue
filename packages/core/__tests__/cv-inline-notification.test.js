@@ -3,7 +3,7 @@ import { testComponent } from './_helpers';
 import { CvInlineNotification } from '@/components/cv-inline-notification';
 import ErrorFilled20 from '@carbon/icons-vue/es/error--filled/20';
 import CheckmarkFilled20 from '@carbon/icons-vue/es/checkmark--filled/20';
-import WarningAltFilled20 from '@carbon/icons-vue/es/warning--alt--filled/20';
+import WarningFilled20 from '@carbon/icons-vue/es/warning--filled/20';
 
 describe('CvInlineNotification', () => {
   const kinds = ['error', 'info', 'warning', 'success'];
@@ -58,20 +58,20 @@ describe('CvInlineNotification', () => {
   // FUNCTIONAL TESTS
   // ***************
 
-  // it('`icon` is computed correctly', () => {
-  //   const kindToIconMapping = {
-  //     error: ErrorFilled20,
-  //     warning: WarningAltFilled20,
-  //     success: CheckmarkFilled20,
-  //     info: '',
-  //   };
-  //   const propsData = { actionLabel: 'test action label', lowContrast: false, kind: '' };
-  //   for (const kind of kinds) {
-  //     propsData.kind = kind;
-  //     const wrapper = shallow(CvInlineNotification, { propsData });
-  //     expect(wrapper.vm.icon).toEqual(kindToIconMapping[kind]);
-  //   }
-  // });
+  it('`icon` is computed correctly', () => {
+    const kindToIconMapping = {
+      error: ErrorFilled20,
+      warning: WarningFilled20,
+      success: CheckmarkFilled20,
+      info: '',
+    };
+    const propsData = { actionLabel: 'test action label', lowContrast: false, kind: '' };
+    for (const kind of kinds) {
+      propsData.kind = kind;
+      const wrapper = shallow(CvInlineNotification, { propsData });
+      expect(wrapper.vm.icon).toEqual(kindToIconMapping[kind]);
+    }
+  });
 
   it('should emit close event when close button is clicked', () => {
     const propsData = { actionLabel: 'test action label', lowContrast: false };
