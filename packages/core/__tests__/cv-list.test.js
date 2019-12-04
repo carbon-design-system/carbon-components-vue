@@ -22,7 +22,6 @@ describe('CvList', () => {
   // SNAPSHOT TESTS
   // ***************
 
-  // TODO id
   it('should render correctly when nested and parent is ordered', () => {
     const propsData = { nested: false, ordered: true };
     const wrapper = mount(CvList, {
