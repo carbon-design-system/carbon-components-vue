@@ -3,7 +3,7 @@ import { testComponent } from './_helpers';
 import { CvToastNotification } from '@/components/cv-toast-notification';
 import ErrorFilled20 from '@carbon/icons-vue/es/error--filled/20';
 import CheckmarkFilled20 from '@carbon/icons-vue/es/checkmark--filled/20';
-import WarningAltFilled20 from '@carbon/icons-vue/es/warning--alt--filled/20';
+import WarningFilled20 from '@carbon/icons-vue/es/warning--filled/20';
 
 describe('CvToastNotification', () => {
   const kinds = ['error', 'info', 'warning', 'success'];
@@ -62,7 +62,7 @@ describe('CvToastNotification', () => {
   it('`icon` is computed correctly', () => {
     const kindToIconMapping = {
       error: ErrorFilled20,
-      warning: WarningAltFilled20,
+      warning: WarningFilled20,
       success: CheckmarkFilled20,
       info: '',
     };
