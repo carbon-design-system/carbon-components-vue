@@ -69,6 +69,7 @@ Like sorting and filtering it is the users responsibility to deal with edited da
   - If objects they must contain a 'label' and can optionally contain
     - a headingStyle object to be applied to the column headings.
     - a dataStyle object to be applied to the data in the column.
+    - an optional sortable property - if any column sets this to true then only columns with sortable set to true are sortable. NOTE: table sortable property ignored.
 - data: Two dimensional array of strings.
 - rows-selected: An array containing the selected row values. Supports v-model via the row-select-changes event.
 
