@@ -319,8 +319,9 @@ export default {
       const sizeClass = this.rowSize.length === 0 || this.rowSize === 'standard' ? '' : `${prefix}${this.rowSize} `;
       const zebraClass = this.zebra ? `${prefix}zebra ` : '';
       const borderlessClass = this.borderless ? `${prefix}no-border ` : '';
-      const skeletonClass = this.skeleton ? `bx--skeleton` : '';
-      return `${sizeClass}${zebraClass}${borderlessClass}${skeletonClass}`.trim();
+      const skeletonClass = this.skeleton ? `bx--skeleton ` : '';
+      const sortableClass = this.isSortable ? `${prefix}sort ` : '';
+      return `${sizeClass}${zebraClass}${borderlessClass}${skeletonClass}${sortableClass}`.trim();
     },
     headingStyle() {
       return index => this.dataColumns[index].headingStyle;
