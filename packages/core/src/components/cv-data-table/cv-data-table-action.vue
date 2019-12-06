@@ -9,7 +9,12 @@ export default {
   name: 'cv-data-table-action',
   mounted() {
     // ensure SVG has
-    this.$el.children[0].classList.add('bx--toolbar-action__icon');
+    if (this.$el.children[0].classList) {
+      this.$el.children[0].classList.add('bx--toolbar-action__icon');
+    } else if (this.$el.children[0].className) {
+      // IE 11
+      this.$el.children[0].className += ' bx--toolbar-action__icon';
+    }
   },
 };
 </script>
