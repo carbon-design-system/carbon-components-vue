@@ -1,42 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[` 1`] = `
-<button role="button" class="cv-button bx--btn bx--btn--secondary bx--btn--field" tab-index="2" disabled="disabled">default slot content <addfilled16-stub class="bx--btn__icon"></addfilled16-stub>
+exports[`CvButton Renders as expected field secondary with icon disabled 1`] = `
+<button role="button" class="cv-button bx--btn bx--btn--secondary bx--btn--field" tab-index="2" disabled="disabled">default slot content <addfilled16-stub class="bx--temp-fix bx--btn__icon"></addfilled16-stub>
   <!----></button>
 `;
 
-exports[` 2`] = `
+exports[`CvButton Renders as expected small primary 1`] = `
 <button role="button" class="cv-button bx--btn bx--btn--primary bx--btn--sm">default slot content
   <!---->
   <!----></button>
 `;
 
-exports[` 3`] = `
+exports[`CvButton Renders as expected default 1`] = `
 <button role="button" class="cv-button bx--btn bx--btn--primary">default slot content
   <!---->
   <!----></button>
 `;
 
-exports[` 4`] = `
+exports[`CvIconButton Renders as expected field secondary with icon disabled 1`] = `
 <button type="button" class="cv-button bx--btn bx--btn--icon-only bx--btn--secondary bx--btn--field" tab-index="2" disabled="disabled"><span class="bx--assistive-text"></span>
-  <addfilled16-stub class="bx--btn__icon"></addfilled16-stub>
+  <addfilled16-stub class="bx--temp-fix bx--btn__icon"></addfilled16-stub>
   <!----></button>
 `;
 
-exports[` 5`] = `
+exports[`CvIconButton Renders as expected small primary 1`] = `
 <button type="button" class="cv-button bx--btn bx--btn--icon-only bx--btn--primary bx--btn--sm"><span class="bx--assistive-text"></span>
   <!---->
   <!----></button>
 `;
 
-exports[` 6`] = `
+exports[`CvIconButton Renders as expected default 1`] = `
 <button type="button" class="cv-button bx--btn bx--btn--icon-only bx--btn--primary"><span class="bx--assistive-text"></span>
   <!---->
   <!----></button>
 `;
 
-exports[` 7`] = `<button disabled="disabled" type="button" class="bx--btn bx--skeleton bx--btn--field"></button>`;
+exports[`CvButtonSkeleton Renders as expected field primary 1`] = `<button disabled="disabled" type="button" class="bx--btn bx--skeleton bx--btn--field"></button>`;
 
-exports[` 8`] = `<button disabled="disabled" type="button" class="bx--btn bx--skeleton bx--btn--sm"></button>`;
+exports[`CvButtonSkeleton Renders as expected small primary 1`] = `<button disabled="disabled" type="button" class="bx--btn bx--skeleton bx--btn--sm"></button>`;
 
-exports[` 9`] = `<button disabled="disabled" type="button" class="bx--btn bx--skeleton"></button>`;
+exports[`CvButtonSkeleton Renders as expected default 1`] = `<button disabled="disabled" type="button" class="bx--btn bx--skeleton"></button>`;

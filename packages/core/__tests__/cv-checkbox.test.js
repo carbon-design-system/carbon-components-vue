@@ -1,9 +1,9 @@
 import { shallowMount as shallow, mount } from '@vue/test-utils';
 import { testComponent, testInstance } from './_helpers';
 import { CvCheckbox, CvCheckboxSkeleton } from '@/components/cv-checkbox';
-import { settings } from 'carbon-components';
+import { settings as carbonSettings } from 'carbon-components';
 
-const { prefix } = settings;
+const carbonPrefix = carbonSettings.prefix;
 
 describe('CvCheckbox', () => {
   // ***************

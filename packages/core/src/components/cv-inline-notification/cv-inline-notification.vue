@@ -34,21 +34,21 @@
       class="bx--inline-notification__close-button"
       @click="$emit('close')"
     >
-      <Close16 class="bx--inline-notification__close-icon" />
+      <Close20 class="bx--inline-notification__close-icon" />
     </button>
   </div>
 </template>
 
 <script>
 import notificationMixin from '../../mixins/notification-mixin';
-import ErrorFilled16 from '@carbon/icons-vue/es/error--filled/16';
-import CheckmarkFilled16 from '@carbon/icons-vue/es/checkmark--filled/16';
-import WarningAltFilled16 from '@carbon/icons-vue/es/warning--filled/16';
-import Close16 from '@carbon/icons-vue/es/close/16';
+import ErrorFilled20 from '@carbon/icons-vue/es/error--filled/20';
+import CheckmarkFilled20 from '@carbon/icons-vue/es/checkmark--filled/20';
+import WarningFilled20 from '@carbon/icons-vue/es/warning--filled/20';
+import Close20 from '@carbon/icons-vue/es/close/20';
 
 export default {
   name: 'CvInlineNotification',
-  components: { Close16 },
+  components: { Close20 },
   mixins: [notificationMixin],
   props: {
     actionLabel: { type: String, default: '' },
@@ -64,13 +64,13 @@ export default {
     icon() {
       switch (this.kind) {
         case 'error':
-          return ErrorFilled16;
+          return ErrorFilled20;
         case 'warning':
-          return WarningAltFilled16;
+          return WarningFilled20;
         case 'success':
-          return CheckmarkFilled16;
+          return CheckmarkFilled20;
         default:
-          return null;
+          return '';
       }
     },
   },

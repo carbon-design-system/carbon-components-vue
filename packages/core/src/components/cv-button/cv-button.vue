@@ -1,21 +1,9 @@
 <template>
-  <button
-    class="cv-button"
-    :class="[
-      'bx--btn',
-      'bx--btn--' + kind.toLowerCase(),
-      {
-        'bx--btn--sm': size === 'small' || (size === undefined && small),
-        'bx--btn--field': size === 'field',
-      },
-    ]"
-    v-on="inputListeners"
-    role="button"
-  >
+  <button class="cv-button" :class="buttonClasses" v-on="inputListeners" role="button">
     <slot></slot>
 
-    <component v-if="typeof icon === 'object'" :is="icon" class="bx--btn__icon" />
-    <svg v-if="typeof icon === 'string' || iconHref" class="bx--btn__icon">
+    <component v-if="typeof icon === 'object'" :is="icon" class="bx--temp-fix" :class="`${carbonPrefix}--btn__icon`" />
+    <svg v-if="typeof icon === 'string' || iconHref" :class="`${carbonPrefix}--btn__icon`">
       <use :href="icon || iconHref" />
     </svg>
   </button>
@@ -23,9 +11,23 @@
 
 <script>
 import buttonMixin from './button-mixin';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvButton',
-  mixins: [buttonMixin],
+  mixins: [buttonMixin, carbonPrefixMixin],
+  computed: {
+    buttonClasses() {
+      let classes = [`${this.carbonPrefix}--btn`, `${this.carbonPrefix}--btn--${this.kind.toLowerCase()}`];
+
+      if (this.size === 'small' || (this.size === undefined && this.small)) {
+        classes.push(`${this.carbonPrefix}--btn--sm`);
+      }
+      if (this.size === 'field') {
+        classes.push(`${this.carbonPrefix}--btn--field`);
+      }
+      return classes;
+    },
+  },
 };
 </script>

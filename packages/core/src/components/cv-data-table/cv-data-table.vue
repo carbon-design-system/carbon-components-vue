@@ -115,7 +115,7 @@
               v-for="(column, index) in dataColumns"
               :key="`${index}:${column}`"
               :heading="column.label ? column.label : column"
-              :sortable="sortable"
+              :sortable="isSortable(column)"
               :order="column.order"
               @sort="val => onSort(index, val)"
               :style="headingStyle(index)"
@@ -149,7 +149,7 @@
 
     <cv-pagination
       v-if="pagination"
-      v-bind="pagination"
+      v-bind="internalPagination"
       :number-of-items="internalNumberOfItems"
       @change="$emit('pagination', $event)"
     >
@@ -229,10 +229,11 @@ export default {
   },
   data() {
     return {
-      dataColumns: this.sortable
+      dataColumns: this.isSortable
         ? this.columns.map(item => ({
             label: item.label ? item.label : item,
             order: 'none',
+            sortable: item.sortable,
           }))
         : this.columns,
       hasBatchActions: false,
@@ -266,6 +267,7 @@ export default {
     this.$on('cv:beforeDestroy', srcComponent => this.onCvBeforeDestroy(srcComponent));
   },
   mounted() {
+    this.watchColumns();
     this.updateRowsSelected();
     this.checkSlots();
   },
@@ -273,6 +275,15 @@ export default {
     this.checkSlots();
   },
   computed: {
+    isSortable() {
+      return col => {
+        if (col && this.columns.some(column => column.sortable)) {
+          return col.sortable;
+        } else {
+          return this.sortable || this.columns.some(column => column.sortable);
+        }
+      };
+    },
     hasTableHeader() {
       return this.title || this.isHelper;
     },
@@ -308,8 +319,9 @@ export default {
       const sizeClass = this.rowSize.length === 0 || this.rowSize === 'standard' ? '' : `${prefix}${this.rowSize} `;
       const zebraClass = this.zebra ? `${prefix}zebra ` : '';
       const borderlessClass = this.borderless ? `${prefix}no-border ` : '';
-      const skeletonClass = this.skeleton ? `bx--skeleton` : '';
-      return `${sizeClass}${zebraClass}${borderlessClass}${skeletonClass}`.trim();
+      const skeletonClass = this.skeleton ? `bx--skeleton ` : '';
+      const sortableClass = this.isSortable ? `${prefix}sort ` : '';
+      return `${sizeClass}${zebraClass}${borderlessClass}${skeletonClass}${sortableClass}`.trim();
     },
     headingStyle() {
       return index => this.dataColumns[index].headingStyle;
@@ -427,10 +439,11 @@ export default {
       this.$emit('overflow-menu-click', val);
     },
     watchColumns() {
-      this.dataColumns = this.sortable
+      this.dataColumns = this.isSortable
         ? this.columns.map(item => ({
             label: item.label ? item.label : item,
             order: 'none',
+            sortable: item.sortable,
           }))
         : this.columns;
     },

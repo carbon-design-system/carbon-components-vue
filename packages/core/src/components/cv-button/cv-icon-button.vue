@@ -1,21 +1,9 @@
 <template>
-  <button
-    class="cv-button bx--btn bx--btn--icon-only"
-    :class="[
-      'bx--btn--' + kind.toLowerCase(),
-      tipClasses,
-      {
-        'bx--btn--sm': size === 'small' || (size === undefined && small),
-        'bx--btn--field': size === 'field',
-      },
-    ]"
-    v-on="inputListeners"
-    type="button"
-  >
-    <span class="bx--assistive-text">{{ label }}</span>
+  <button class="cv-button" :class="buttonClasses" v-on="inputListeners" type="button">
+    <span :class="`${carbonPrefix}--assistive-text`">{{ label }}</span>
 
-    <component v-if="typeof icon === 'object'" :is="icon" class="bx--btn__icon" />
-    <svg v-if="typeof icon === 'string' || iconHref" class="bx--btn__icon">
+    <component v-if="typeof icon === 'object'" :is="icon" class="bx--temp-fix" :class="`${carbonPrefix}--btn__icon`" />
+    <svg v-if="typeof icon === 'string' || iconHref" :class="`${carbonPrefix}--btn__icon`">
       <use :href="icon || iconHref" />
     </svg>
   </button>
@@ -23,10 +11,11 @@
 
 <script>
 import buttonMixin from './button-mixin';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvIconButton',
-  mixins: [buttonMixin],
+  mixins: [buttonMixin, carbonPrefixMixin],
   props: {
     label: { type: String, default: undefined },
     tipPosition: {
@@ -37,11 +26,26 @@ export default {
     tipAlignment: { type: String, default: 'center', validator: val => ['start', 'center', 'end'].includes(val) },
   },
   computed: {
+    buttonClasses() {
+      let classes = [
+        `${this.carbonPrefix}--btn`,
+        `${this.carbonPrefix}--btn--icon-only`,
+        `${this.carbonPrefix}--btn--${this.kind.toLowerCase()}`,
+      ];
+
+      if (this.size === 'small' || (this.size === undefined && this.small)) {
+        classes.push(`${this.carbonPrefix}--btn--sm`);
+      }
+      if (this.size === 'field') {
+        classes.push(`${this.carbonPrefix}--btn--field`);
+      }
+      return classes;
+    },
     tipClasses() {
       const tipPosition = this.tipPosition || 'bottom';
       const tipAlignment = this.tipAlignment || 'center';
       if (this.label) {
-        return `bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--${tipPosition} bx--tooltip--align-${tipAlignment}`;
+        return `${this.carbonPrefix}--tooltip__trigger ${this.carbonPrefix}--tooltip--a11y ${this.carbonPrefix}--tooltip--${tipPosition} ${this.carbonPrefix}--tooltip--align-${tipAlignment}`;
       } else {
         return '';
       }

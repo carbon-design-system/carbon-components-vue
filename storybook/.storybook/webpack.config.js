@@ -1,10 +1,22 @@
 const path = require('path');
 const autoprefixer = require('autoprefixer')({ overrideBrowserslist: ['last 2 versions', 'ie >= 10'] });
 
+const CopyPlugin = require('copy-webpack-plugin');
+
 module.exports = async ({ config, mode }) => {
   // `mode` has a value of 'DEVELOPMENT' or 'PRODUCTION'
   // You can change the configuration based on that.
   // 'PRODUCTION' is used when building the static version of storybook.
+
+  config.plugins.push(
+    new CopyPlugin([
+      {
+        context: '../docs/carbon-vue-icon/',
+        from: '*',
+        to: 'static/media/carbon-vue-icon/',
+      },
+    ])
+  );
 
   config.module.rules.push({
     test: /-story\.js$/,
@@ -24,8 +36,14 @@ module.exports = async ({ config, mode }) => {
     include: path.resolve(__dirname, '../../'),
   });
 
+  config.module.rules.push({
+    test: /\.jsonl$/,
+    loaders: ['jsonlines-loader'],
+  });
+
   // auto prefix anything in a vue file
-  config.resolve.extensions.push('.js', '.vue', '.json');
+  config.resolve.extensions.push('.js', '.vue', '.json', '.jsonl');
+
   let vueLoaderConfig = config.module.rules.find(item => {
     return item.loader && item.loader.indexOf('vue-loader') > -1;
   });

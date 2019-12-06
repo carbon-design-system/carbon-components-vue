@@ -1,9 +1,9 @@
 import { shallowMount as shallow, mount } from '@vue/test-utils';
 import { testComponent, testInstance, events } from './_helpers';
 import { CvTabs, CvTab } from '@/components/cv-tabs';
-import { settings } from 'carbon-components';
+import { settings as carbonSettings } from 'carbon-components';
 
-const { prefix } = settings;
+const carbonPrefix = carbonSettings.prefix;
 
 const TAB = function(props) {
   return {
@@ -112,7 +112,7 @@ describe('CvTabs', () => {
 
     expect(wrapper.vm.tabs[0].dataSelected).toBeTruthy();
     wrapper
-      .findAll(`.${prefix}--tabs__nav-link`)
+      .findAll(`.${carbonPrefix}--tabs__nav-link`)
       .at(2)
       .trigger('click');
 

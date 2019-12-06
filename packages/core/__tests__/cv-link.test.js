@@ -7,7 +7,8 @@ describe('CvLink', () => {
   // PROP CHECKS
   // ***************
   testComponent.propsAreType(CvLink, ['inline', 'disabled'], Boolean);
-  testComponent.propsAreType(CvLink, ['to', 'href'], String);
+  testComponent.propsAreType(CvLink, ['href'], String);
+  testComponent.propsAreType(CvLink, ['to'], [String, Object]);
 
   // ***************
   // SNAPSHOT TESTS
