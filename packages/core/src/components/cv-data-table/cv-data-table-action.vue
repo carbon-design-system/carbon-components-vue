@@ -12,7 +12,7 @@ export default {
     if (this.$el.children[0].classList) {
       this.$el.children[0].classList.add('bx--toolbar-action__icon');
     } else if (this.$el.children[0].className) {
-      // IE 11
+      // IE 11 and Edge pre-crhomium
       this.$el.children[0].className += ' bx--toolbar-action__icon';
     }
   },
