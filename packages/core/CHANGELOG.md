@@ -1,5 +1,32 @@
 # Changelog
 
+## 2.20.0-canary.1 (Dec 6th 2019)
+
+## Feat
+
+- Update to carbon-components 10.7.4 DOM
+- Add edning state to CvInlineLoader
+- Make individual columns sortable in CvDataTable
+- Router link object usage (Location)
+- Additional tests
+  - CvInlineLoader
+  - CvInlineNotification
+  - CvToastNotification
+  - CvTextInput
+  - CvList
+  - CvLoading
+
+# Chore
+
+- Welcome page updates
+
+## Fix
+
+- Use internal pagination bind property
+- IE11 missing input event (use change)
+- icon use warning in toast notification
+- SVG ClassList missing IE and pre canary Edge
+
 ## 2.20.0-canary.0 (Nov 21th 2019)
 
 ## Feat
