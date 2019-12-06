@@ -1,7 +1,7 @@
 export default {
   props: {
     disabled: Boolean,
-    to: String,
+    to: { type: [String, Object] },
     href: String,
   },
   computed: {
