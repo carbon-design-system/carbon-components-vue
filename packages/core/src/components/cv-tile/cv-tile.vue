@@ -2,6 +2,7 @@
   <component
     :is="tagType"
     class="cv-tile bx--tile"
+    :class="{ 'bx--tile--light': light }"
     :checked="selected"
     :expanded="expanded"
     v-bind="$attrs"
@@ -45,6 +46,7 @@ export default {
       default: '',
       validator: value => ['clickable', 'expandable', 'selectable', 'standard', ''].includes(value),
     },
+    light: Boolean,
   },
   computed: {
     tagType() {
