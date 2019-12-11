@@ -28,7 +28,7 @@ export default {
 // import/export individual components
 import { CvAccordion, CvAccordionItem, CvAccordionSkeleton } from './components/cv-accordion';
 import { CvBreadcrumb, CvBreadcrumbItem, CvBreadcrumbSkeleton } from './components/cv-breadcrumb';
-import { CvButton, CvIconButton, CvButtonSkeleton } from './components/cv-button';
+import { CvButton, CvIconButton, CvButtonSkeleton, CvButtonSet } from './components/cv-button';
 import { CvCheckbox, CvCheckboxSkeleton } from './components/cv-checkbox';
 import { CvCodeSnippet, CvCodeSnippetSkeleton } from './components/cv-code-snippet';
 import { CvComboBox } from './components/cv-combo-box';
@@ -101,7 +101,7 @@ import {
 // exports
 export { CvAccordion, CvAccordionItem, CvAccordionSkeleton };
 export { CvBreadcrumb, CvBreadcrumbItem, CvBreadcrumbSkeleton };
-export { CvButton, CvIconButton, CvButtonSkeleton };
+export { CvButton, CvIconButton, CvButtonSkeleton, CvButtonSet };
 export { CvCheckbox, CvCheckboxSkeleton };
 export { CvCodeSnippet, CvCodeSnippetSkeleton };
 export { CvComboBox };
