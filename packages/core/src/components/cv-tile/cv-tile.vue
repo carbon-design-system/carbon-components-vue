@@ -2,7 +2,7 @@
   <component
     :is="tagType"
     class="cv-tile bx--tile"
-    :class="{ 'bx--tile--light': light }"
+    :class="{ 'bx--tile--light': theme === 'light' }"
     :checked="selected"
     :expanded="expanded"
     v-bind="$attrs"
@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import themeMixin from '../../mixins/theme-mixin';
 import CvTileClickable from './_cv-tile-clickable';
 import CvTileExpandable from './_cv-tile-expandable';
 import CvTileSelectable from './_cv-tile-selectable';
@@ -32,6 +33,7 @@ export default {
     prop: 'modelValue',
     event: 'modelEvent',
   },
+  mixins: [themeMixin],
   components: {
     CvTileClickable,
     CvTileExpandable,
@@ -46,7 +48,6 @@ export default {
       default: '',
       validator: value => ['clickable', 'expandable', 'selectable', 'standard', ''].includes(value),
     },
-    light: Boolean,
   },
   computed: {
     tagType() {
