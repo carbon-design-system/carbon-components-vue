@@ -1,5 +1,5 @@
 <template>
-  <li class="cv-header-menu bx--header__submenu" @mouseenter="doToggle(true)" @mouseleave="doToggle(false)">
+  <li class="cv-header-menu bx--header__submenu" @mouseenter="doHoverToggle(true)" @mouseleave="doHoverToggle(false)">
     <a
       aria-haspopup="true"
       :aria-expanded="expanded ? 'true' : 'false'"
@@ -38,6 +38,7 @@ export default {
   components: { ChevronDownGlyph },
   props: {
     title: String,
+    hoverToggle: { type: Boolean, default: true },
   },
   data() {
     return {
@@ -45,8 +46,17 @@ export default {
     };
   },
   methods: {
+    doHoverToggle(force) {
+      if (this.hoverToggle) {
+        this.doToggle(force);
+      }
+    },
     doToggle(force) {
-      this.expanded = force || !this.expanded;
+      if (typeof force === 'boolean') {
+        this.expanded = force;
+      } else {
+        this.expanded = !this.expanded;
+      }
     },
     onFocusout(ev) {
       if (!(this.$el.contains(ev.relatedTarget) || this.$refs.menu.contains(ev.relatedTarget))) {

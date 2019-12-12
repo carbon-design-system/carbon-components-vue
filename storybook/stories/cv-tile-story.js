@@ -29,6 +29,13 @@ let preKnobs = {
           <li>content</li>
         </ul>`,
   },
+  theme: {
+    group: 'attr',
+    type: boolean,
+    config: ['light-theme', false],
+    prop: 'theme',
+    value: val => (val ? 'light' : ''),
+  },
   expanded: {
     group: 'attr',
     type: boolean,
@@ -63,16 +70,16 @@ let preKnobs = {
 };
 
 let variants = [
-  { name: 'default', includes: ['slotDefault'] },
+  { name: 'default', includes: ['slotDefault', 'theme'] },
   {
     name: 'standard',
 
-    includes: ['slotDefault'],
+    includes: ['slotDefault', 'theme'],
     extra: { kind: { group: 'attr', value: 'kind="standard"' } },
   },
   {
     name: 'selectable',
-    includes: ['slotDefault', 'selected', 'value'],
+    includes: ['slotDefault', 'theme', 'selected', 'value'],
     extra: {
       kind: { group: 'attr', value: 'kind="selectable"' },
       ariaLabel: { group: 'attr', value: 'aria-label="custom aria label"' },
@@ -80,22 +87,22 @@ let variants = [
   },
   {
     name: 'selectable-event',
-    includes: ['slotDefault', 'events', 'value'],
+    includes: ['slotDefault', 'theme', 'events', 'value'],
     extra: { kind: { group: 'attr', value: 'kind="selectable" @change="actionChange"' } },
   },
   {
     name: 'selectable-v-model',
-    includes: ['slotDefault', 'vModel', 'value'],
+    includes: ['slotDefault', 'theme', 'vModel', 'value'],
     extra: { kind: { group: 'attr', value: 'kind="selectable"' } },
   },
   {
     name: 'expandable',
-    includes: ['slotDefault', 'slotBelow', 'expanded'],
+    includes: ['slotDefault', 'theme', 'slotBelow', 'expanded'],
     extra: { kind: { group: 'attr', value: 'kind="expandable"' } },
   },
   {
     name: 'clickable',
-    includes: ['slotDefault', 'href'],
+    includes: ['slotDefault', 'theme', 'href'],
     extra: { kind: { group: 'attr', value: 'kind="clickable" @click="actionClick"' } },
   },
 ];

@@ -1,8 +1,8 @@
 <template>
   <button
     v-on="$listeners"
-    class="cv-header-menu-button bx--header__action bx--header__menu-trigger bx--header__menu-toggle"
-    :class="dataActive ? 'bx--header__action--active' : ''"
+    class="cv-header-menu-button"
+    :class="buttonClasses"
     type="button"
     aria-haspopup="true"
     :aria-controls="ariaControls"
@@ -37,10 +37,8 @@ export default {
   data() {
     return {
       dataActive: this.active,
+      hasRail: false,
     };
-  },
-  mounted() {
-    // watch width transition and
   },
   watch: {
     active() {
@@ -58,6 +56,16 @@ export default {
         // do not emit 'cv:panel-control-toggle'
         this.dataActive = val;
       },
+    },
+    buttonClasses() {
+      let classes = ['bx--header__action', 'bx--header__menu-trigger', 'bx--header__menu-toggle'];
+      if (this.dataActive) {
+        classes.push('bx--header__action--active');
+      }
+      if (!this.hasRail) {
+        classes.push('bx--header__menu-toggle__hidden');
+      }
+      return classes;
     },
   },
   methods: {
