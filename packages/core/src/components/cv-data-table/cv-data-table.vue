@@ -215,7 +215,7 @@ export default {
     sortable: Boolean,
     title: String,
     columns: { type: Array, required: true },
-    data: { type: Array, requried: true },
+    data: { type: Array, required: true },
     zebra: Boolean,
     rowsSelected: { type: Array, default: () => [] },
     helperText: { type: String, default: undefined },
