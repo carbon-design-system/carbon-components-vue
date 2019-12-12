@@ -4,6 +4,7 @@ import CvHeaderMenuItem from './cv-header-menu-item';
 import CvHeaderMenu from './cv-header-menu';
 import CvHeaderName from './cv-header-name';
 import CvHeaderNav from './cv-header-nav';
+import CvHeaderSideNavItems from './cv-header-side-nav-items';
 import CvHeaderPanel from './cv-header-panel';
 import CvHeader from './cv-header';
 import CvSideNavIcon from './cv-side-nav-icon';
@@ -27,6 +28,7 @@ export {
   CvHeaderName,
   CvHeaderPanel,
   CvHeaderNav,
+  CvHeaderSideNavItems,
   CvHeader,
   CvSideNav,
   CvSideNavIcon,
