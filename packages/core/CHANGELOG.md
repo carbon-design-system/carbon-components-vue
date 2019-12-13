@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.20.0-canary.2 (Dec 13th 2019)
+
+## Feat
+
+- Add side nav rail feature
+- Add support for light cv-tile (needs Carbon > 10.7.4)
+- Add button set
+
+## Fix
+
+- Fixed some typos (requried -> required)
+- Fix date picker change event error
+
 ## 2.20.0-canary.1 (Dec 6th 2019)
 
 ## Feat
