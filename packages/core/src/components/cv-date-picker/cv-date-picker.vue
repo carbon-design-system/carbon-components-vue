@@ -239,11 +239,14 @@ export default {
           return val || '';
         }
       };
-      if (this.value.startDate) {
-        firstDate = dateToString(this.value.startDate);
-        secondDate = dateToString(this.value.endDate);
-      } else {
-        firstDate = dateToString(this.value);
+
+      if (this.value) {
+        if (this.isRange) {
+          firstDate = dateToString(this.value.startDate);
+          secondDate = dateToString(this.value.endDate);
+        } else {
+          firstDate = dateToString(this.value);
+        }
       }
 
       if (this.isRange) {
