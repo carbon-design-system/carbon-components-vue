@@ -7,7 +7,7 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import CvButtonNotesMD from '@carbon/vue/src/components/cv-button/cv-button-notes.md';
-import { CvButton, CvIconButton, CvButtonSkeleton } from '@carbon/vue/src';
+import { CvButton, CvIconButton, CvButtonSkeleton, CvButtonSet } from '@carbon/vue/src';
 
 const storiesDefault = storiesOf('Components/CvButton', module);
 const storiesExperimental = storiesOf('Experimental/CvButton', module);
@@ -277,3 +277,31 @@ for (const story of storySet) {
     }
   );
 }
+
+storiesDefault.add(
+  'button-set',
+  () => {
+    const templateString = `<cv-button-set>
+  <cv-button kind="primary">button 1</cv-button>
+  <cv-button kind="secondary">button 2</cv-button>
+  <cv-button kind="danger">button 3</cv-button>
+</cv-button-set>
+  `;
+
+    const templateViewString = `
+  <sv-template-view
+    sv-margin
+    sv-source='${templateString.trim()}'>
+    <template slot="component">${templateString}</template>
+  </sv-template-view>
+`;
+
+    return {
+      components: { CvButtonSet, CvButton, SvTemplateView },
+      template: templateViewString,
+    };
+  },
+  {
+    notes: { markdown: CvButtonNotesMD },
+  }
+);
