@@ -43,3 +43,15 @@ As per CvButton with the addition of
 - tip-text: String displayed in tip
 - tip-position: top, left, bottom or right
 - tip-alignment: start, center or end.
+
+# cv-button-set
+
+A wrapper for a set of cv-button components that formats them as a group
+
+```html
+<cv-button-set>
+  <cv-button kind="primary">button 1</cv-button>
+  <cv-button kind="secondary">button 2</cv-button>
+  <cv-button kind="danger">button 3</cv-button>
+</cv-button-set>
+```
