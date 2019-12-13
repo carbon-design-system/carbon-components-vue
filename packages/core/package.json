@@ -10,7 +10,7 @@
   "bugs": {
     "url": "https://github.com/carbon-design-system/carbon-components-vue/issues/new"
   },
-  "homepage": "https://github.com/carbon-design-system/carbon-components-vue/tree/master/packages/core#readme",
+  "homepage": "http://vue.carbondesignsystem.com/",
   "main": "dist/carbon-vue.umd.min.js",
   "keywords": [
     "carbon",

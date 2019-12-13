@@ -1,8 +1,21 @@
 # Changelog
 
+## 2.20.0-canary.2 (Dec 13th 2019)
+
+### Feat
+
+- Add side nav rail feature
+- Add support for light cv-tile (needs Carbon > 10.7.4)
+- Add button set
+
+### Fix
+
+- Fixed some typos (requried -> required)
+- Fix date picker change event error
+
 ## 2.20.0-canary.1 (Dec 6th 2019)
 
-## Feat
+### Feat
 
 - Update to carbon-components 10.7.4 DOM
 - Add edning state to CvInlineLoader
@@ -16,11 +29,11 @@
   - CvList
   - CvLoading
 
-# Chore
+### Chore
 
 - Welcome page updates
 
-## Fix
+### Fix
 
 - Use internal pagination bind property
 - IE11 missing input event (use change)
@@ -29,11 +42,11 @@
 
 ## 2.20.0-canary.0 (Nov 21th 2019)
 
-## Feat
+### Feat
 
 - Add decimal ability to number input.
 
-## Fix
+### Fix
 
 - Fix CvIconButton tooltip
 
@@ -68,8 +81,6 @@
 ### Chore
 
 - Change CvTabs to use same HTML as core carbon.
-
-# Changelog
 
 ## 2.18.0 (Nov 11th 2019)
 
