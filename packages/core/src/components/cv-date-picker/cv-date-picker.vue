@@ -10,10 +10,11 @@
       <div
         :class="{
           'bx--date-picker-container': ['single', 'range'].includes(kind),
+          'bx--date-picker--nolabel': getDateLabel !== undefined,
         }"
         @change="onChange"
       >
-        <label :for="`${uid}-input-1`" class="bx--label">{{ getDateLabel }}</label>
+        <label v-if="getDateLabel.length > 0" :for="`${uid}-input-1`" class="bx--label">{{ getDateLabel }}</label>
         <div class="bx--date-picker-input__wrapper">
           <input
             :data-invalid="isInvalid"
@@ -38,7 +39,7 @@
         </div>
       </div>
       <div :class="{ 'bx--date-picker-container': kind === 'range' }" v-if="kind === 'range'">
-        <label :for="`${uid}-input-2`" class="bx--label">{{ getDateEndLabel }}</label>
+        <label v-if="getDateEndLabel.length > 0" :for="`${uid}-input-2`" class="bx--label">{{ getDateEndLabel }}</label>
         <div class="bx--date-picker-input__wrapper">
           <input
             type="text"
@@ -81,8 +82,8 @@ export default {
   mixins: [uidMixin, themeMixin],
   components: { Calendar16, CvWrapper },
   props: {
-    dateLabel: String,
-    dateEndLabel: String,
+    dateLabel: { type: String, default: undefined },
+    dateEndLabel: { type: String, default: undefined },
     formItem: { type: Boolean, default: true },
     kind: {
       type: String,
@@ -158,7 +159,7 @@ export default {
       return `bx--date-picker--${this.kind}`;
     },
     getDateLabel() {
-      if (this.dateLabel && this.dateLabel.length) {
+      if (this.dateLabel !== undefined) {
         return this.dateLabel;
       } else {
         if (this.isRange) {
@@ -169,7 +170,7 @@ export default {
       }
     },
     getDateEndLabel() {
-      if (this.dateEndLabel && this.dateEndLabel.length) {
+      if (this.dateEndLabel !== undefined) {
         return this.dateEndLabel;
       } else {
         if (this.isRange) {
