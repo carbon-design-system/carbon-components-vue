@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.20.0 (Dec 16th 2019)
+
+### fix
+
+- Prevent double event on date change
+
 ## 2.20.0-canary.2 (Dec 13th 2019)
 
 ### Feat
