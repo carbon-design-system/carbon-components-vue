@@ -142,7 +142,7 @@ http://www.carbondesignsystem.com/components/structured-list/code
 
 ## Attributes
 
-- value - requried for selectable
+- value - required for selectable
 - checked - sets selected
 
 ## Events

@@ -21,7 +21,7 @@ export default {
   name: 'cvFeedbackButton',
   inheritAttrs: false,
   props: {
-    feedback: { type: String, requried: true },
+    feedback: { type: String, required: true },
     inline: Boolean,
     timeout: { type: Number, default: 2000 },
   },

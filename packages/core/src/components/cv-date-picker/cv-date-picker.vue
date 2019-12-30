@@ -143,6 +143,7 @@ export default {
       } else {
         this.$refs.date.value = this.value;
       }
+      this.dataValue = this.value;
     },
     calOptions() {
       this.initFlatpickr();
@@ -211,11 +212,11 @@ export default {
       _options.onReady = this.onCalReady;
 
       // prefer value if set
-      if (this.value) {
+      if (this.dataValue) {
         if (this.isRange) {
-          _options.defaultDate = [this.value.startDate, this.value.endDate];
+          _options.defaultDate = [this.dataValue.startDate, this.dataValue.endDate];
         } else {
-          _options.defaultDate = this.value;
+          _options.defaultDate = this.dataValue;
         }
       }
       // _options.onValueUpdate = this.onChange;
@@ -239,27 +240,32 @@ export default {
           return val || '';
         }
       };
-      if (this.value.startDate) {
-        firstDate = dateToString(this.value.startDate);
-        secondDate = dateToString(this.value.endDate);
-      } else {
-        firstDate = dateToString(this.value);
+
+      if (this.dataValue) {
+        if (this.isRange) {
+          firstDate = dateToString(this.dataValue.startDate);
+          secondDate = dateToString(this.vdataValuealue.endDate);
+        } else {
+          firstDate = dateToString(this.dataValue);
+        }
       }
 
       if (this.isRange) {
         if (firstDate !== this.$refs.date.value || secondDate !== this.$refs.todate.value) {
-          this.$emit('change', {
+          this.dataValue = {
             startDate: this.$refs.date.value,
             endDate: this.$refs.todate.value,
-          });
+          };
+          this.$emit('change', this.dataValue);
         }
       } else {
         if (firstDate !== this.$refs.date.value) {
-          this.$emit('change', this.$refs.date.value);
+          this.dataValue = this.$refs.date.value;
+          this.$emit('change', this.dataValue);
 
           if (this.$listeners['simpleChange'] && process.env.NODE_ENV === 'development') {
             console.warn('CvDatePicker: simple change event deprecated in favour of change.');
-            this.$emit('simpleChange', this.$refs.date.value);
+            this.$emit('simpleChange', this.dataValue);
           }
         }
       }

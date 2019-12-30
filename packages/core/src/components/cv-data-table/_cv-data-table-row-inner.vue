@@ -47,7 +47,7 @@ export default {
     expandingRow: Boolean,
     overflowMenu: Array,
     someExpandingRows: Boolean,
-    value: { type: String, requried: true },
+    value: String,
   },
   model: {
     event: 'change',
