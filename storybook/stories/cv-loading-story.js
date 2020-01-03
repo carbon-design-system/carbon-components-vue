@@ -16,9 +16,7 @@ const storiesExperimental = storiesOf('Experimental/CvLoading', module);
 const preKnobs = {
   active: {
     group: 'attr',
-    type: boolean,
-    config: ['active', true], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: 'active',
+    value: ':active="isActive"',
   },
   overlay: {
     group: 'attr',
@@ -26,11 +24,9 @@ const preKnobs = {
     config: ['overlay', true], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: 'overlay',
   },
-  small: {
+  fixedOverlay: {
     group: 'attr',
-    type: boolean,
-    config: ['small', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: 'small',
+    value: 'overlay',
   },
   events: {
     group: 'attr',
@@ -38,7 +34,11 @@ const preKnobs = {
   },
 };
 
-const variants = [{ name: 'default', excludes: ['events'] }, { name: 'events' }];
+const variants = [
+  { name: 'default', excludes: ['events', 'fixedOverlay'] },
+  { name: 'fixedOverlay', excludes: ['events', 'overlay'] },
+  { name: 'events' },
+];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 
@@ -62,6 +62,9 @@ for (const story of storySet) {
       <template slot="component" ref="component">
         ${templateString}
       </template>
+      <template slot="other">
+        <button @click="makeActive" :disabled="isActive">{{buttonLabel}}</button>
+      </template>
     </sv-template-view>
   `;
 
@@ -72,6 +75,36 @@ for (const story of storySet) {
         props: settings.props,
         methods: {
           actionEnd: action('CvLoading - loading-end'),
+          runCountDown() {
+            setTimeout(() => {
+              this.countDown--;
+              if (this.countDown <= 0) {
+                this.isActive = false;
+              } else {
+                this.runCountDown();
+              }
+            }, 1000);
+          },
+          makeActive() {
+            this.isActive = true;
+            this.countDown = 5;
+            this.runCountDown();
+          },
+        },
+        data() {
+          return {
+            isActive: false,
+            countDown: 0,
+          };
+        },
+        computed: {
+          buttonLabel() {
+            if (this.isActive) {
+              return `Active: ${this.countDown}s`;
+            } else {
+              return 'Make active';
+            }
+          },
         },
       };
     },

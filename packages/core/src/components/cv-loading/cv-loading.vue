@@ -2,10 +2,10 @@
   <cv-wrapper :tag-type="overlay ? 'div' : ''" class="cv-loading" :class="overlayClasses">
     <div
       data-loading
-      class="bx--loading"
       :class="{
         'cv-loading': !overlay,
-        'bx--loading--stop': !active,
+        'bx--loading': active || stopping,
+        'bx--loading--stop': !active && stopping,
         'bx--loading--small': small,
       }"
       ref="loading"
@@ -32,9 +32,18 @@ export default {
   },
   computed: {
     overlayClasses() {
-      if (!this.overlay) return '';
+      const classes = [];
+      if (this.overlay) {
+        if (this.active || this.stopping) {
+          classes.push('bx--loading-overlay');
+        }
 
-      return `bx--loading-overlay ${this.stopped ? 'bx--loading-overlay--stop' : ''}`;
+        if (!this.active && !this.stopping) {
+          classes.push('bx--loading-overlay--stop');
+        }
+      }
+
+      return classes;
     },
     loadingRadius() {
       return this.small ? '26.8125' : '37.5';
@@ -42,7 +51,7 @@ export default {
   },
   data() {
     return {
-      stopped: false,
+      stopping: false,
     };
   },
   watch: {
@@ -55,14 +64,13 @@ export default {
       if (ev.animationName === 'rotate-end-p2') {
         this.$refs.loading.removeEventListener('animationend', this.onEnd);
 
-        this.stopped = true;
+        this.stopping = false;
         this.$emit('loading-end');
       }
     },
     onActiveUpdate(newValue) {
-      if (newValue) {
-        this.stopped = false;
-      } else {
+      if (!newValue) {
+        this.stopping = true;
         this.$refs.loading.addEventListener('animationend', this.onEnd);
       }
     },
