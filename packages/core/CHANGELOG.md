@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.20.1-canary.0 (jan 3rd 2020)
+
+### fix
+
+- Possible IE11 fix for colspan > 1000 defaulting to 1
+- Loading overlay fix
+
 ## 2.20.0 (Dec 16th 2019)
 
 ### fix
