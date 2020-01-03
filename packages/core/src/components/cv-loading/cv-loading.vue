@@ -36,9 +36,7 @@ export default {
       if (this.overlay) {
         if (this.active || this.stopping) {
           classes.push('bx--loading-overlay');
-        }
-
-        if (!this.active && !this.stopping) {
+        } else {
           classes.push('bx--loading-overlay--stop');
         }
       }
@@ -69,8 +67,8 @@ export default {
       }
     },
     onActiveUpdate(newValue) {
+      this.stopping = !newValue;
       if (!newValue) {
-        this.stopping = true;
         this.$refs.loading.addEventListener('animationend', this.onEnd);
       }
     },

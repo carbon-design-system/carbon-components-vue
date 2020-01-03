@@ -6,7 +6,7 @@ describe('CvLoading', () => {
   const RADIUS_SMALL = '26.8125';
   const RADIUS_NORMAL = '37.5';
 
-  const loadingOverlayClass = 'bx--loading-overlay ';
+  const loadingOverlayClass = 'bx--loading-overlay';
   const loadingOverlayStopClass = 'bx--loading-overlay--stop';
   // ***************
   // PROP CHECKS
@@ -104,26 +104,34 @@ describe('CvLoading', () => {
     const wrapper = shallow(CvLoading, {
       propsData,
     });
-    expect(wrapper.vm.overlayClasses).toEqual('');
+    expect(wrapper.vm.overlayClasses).toEqual([]);
   });
 
-  it('should compute `overlayClasses` correctly when overlayed', () => {
-    const propsData = { overlay: true };
+  it('should compute `overlayClasses` correctly when overlayed and active', () => {
+    const propsData = { overlay: true, active: true };
     const wrapper = shallow(CvLoading, {
       propsData,
     });
-    expect(wrapper.vm.overlayClasses).toEqual(loadingOverlayClass);
+    expect(wrapper.vm.overlayClasses).toEqual([loadingOverlayClass]);
   });
 
-  it('should compute `overlayClasses` correctly when overlayed and stopped', () => {
-    const propsData = { overlay: true };
+  it('should compute `overlayClasses` correctly when overlayed and stopping', () => {
+    const propsData = { overlay: true, active: true };
+    const wrapper = shallow(CvLoading, {
+      propsData,
+    });
+    expect(wrapper.vm.overlayClasses).toEqual([loadingOverlayClass]);
+  });
+
+  it('should compute `overlayClasses` correctly when overlayed and not active or stopped', () => {
+    const propsData = { overlay: true, active: false };
     const wrapper = shallow(CvLoading, {
       propsData,
     });
     wrapper.setData({
-      stopped: true,
+      stopping: false,
     });
-    expect(wrapper.vm.overlayClasses).toEqual(`${loadingOverlayClass}${loadingOverlayStopClass}`);
+    expect(wrapper.vm.overlayClasses).toEqual([loadingOverlayStopClass]);
   });
 
   it('animation should be stopped once `active` prop is set to false', () => {
@@ -131,13 +139,14 @@ describe('CvLoading', () => {
     const wrapper = mount(CvLoading, {
       propsData,
     });
-    expect(wrapper.vm.stopped).toEqual(false);
+    expect(wrapper.vm.stopping).toEqual(false);
 
     wrapper.setProps({
       active: false,
     });
+    expect(wrapper.vm.stopping).toEqual(true);
     wrapper.trigger('animationend', { animationName: 'rotate-end-p2' });
-    expect(wrapper.vm.stopped).toEqual(true);
+    expect(wrapper.vm.stopping).toEqual(false);
   });
 
   it('animation should be continued once `active` prop is set to true again', () => {
@@ -149,7 +158,7 @@ describe('CvLoading', () => {
     wrapper.setProps({
       active: true,
     });
-    expect(wrapper.vm.stopped).toEqual(false);
+    expect(wrapper.vm.stopping).toEqual(false);
   });
 
   it('should emit `loading-end` when animation `rotate-end-p2` stops', () => {
