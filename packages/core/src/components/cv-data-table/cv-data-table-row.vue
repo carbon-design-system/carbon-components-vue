@@ -12,7 +12,7 @@
       <slot />
     </cv-data-table-row-inner>
     <tr v-if="dataExpandable" class="bx--expandable-row bx--expandable-row--hidden" data-child-row>
-      <td colspan="9999">
+      <td colspan="999">
         <div class="bx--child-row-inner-container">
           <slot name="expandedContent" />
         </div>

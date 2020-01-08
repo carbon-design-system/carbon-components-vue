@@ -244,7 +244,7 @@ export default {
       if (this.dataValue) {
         if (this.isRange) {
           firstDate = dateToString(this.dataValue.startDate);
-          secondDate = dateToString(this.vdataValuealue.endDate);
+          secondDate = dateToString(this.dataValue.endDate);
         } else {
           firstDate = dateToString(this.dataValue);
         }
