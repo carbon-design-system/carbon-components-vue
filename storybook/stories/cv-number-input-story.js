@@ -142,11 +142,11 @@ let variants = [
   },
   {
     name: 'helper and invalid slots',
-    excludes: ['vModel', 'events', 'numValue', 'vModelNum', , 'numMin', 'numMax', 'numStep'],
+    excludes: ['vModel', 'events', 'numValue', 'vModelNum', 'numMin', 'numMax', 'numStep'],
   },
   { name: 'minimal', includes: ['label'] },
-  { name: 'vModel', includes: ['label', 'vModel', 'events'] },
-  { name: 'vModelNum', includes: ['label', 'vModelNum', 'events'] },
+  { name: 'vModel', includes: ['label', 'vModel', 'step', 'events'] },
+  { name: 'vModelNum', includes: ['label', 'vModelNum', 'numStep', 'events'] },
 ];
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
@@ -175,7 +175,7 @@ for (const story of storySet) {
       <template slot="other">
         <div v-if="${templateString.indexOf('v-model') > 0}">
           <label>Model value:
-            <input type="number" v-model="modelValue"/>
+            <input type="number" v-model="modelValue" :step="propStep" />
           </label>
         </div>
       </template>
@@ -195,24 +195,29 @@ for (const story of storySet) {
         },
         watch: {
           modelValue() {
-            let intVal = parseInt(this.modelValue, 10);
+            let val;
+            if (this.propStep.indexOf('.') >= 0) {
+              val = parseFloat(this.modelValue);
+            } else {
+              val = parseInt(this.modelValue);
+            }
 
-            if (isNaN(intVal)) {
-              intVal = 0;
+            if (isNaN(val)) {
+              val = 0;
             }
-            if (intVal !== this.modelValueNum) {
-              this.modelValueNum = intVal;
-            }
+            this.modelValueNum = val;
           },
           modelValueNum() {
-            let val = '' + this.modelValueNum;
-            if (this.modelValue !== val) {
-              this.modelValue = '' + this.modelValueNum;
-            }
+            this.modelValue = '' + this.modelValueNum;
           },
         },
         methods: {
           onInput: action('cv-number-input - input event'),
+        },
+        computed: {
+          propStep() {
+            return this.$props.step || this.$props.numStep.toString();
+          },
         },
       };
     },

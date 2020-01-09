@@ -105,7 +105,12 @@ export default {
   },
   watch: {
     value() {
-      this.internalValue = this.valueAsString(this.value);
+      if (parseFloat(this.internalValue) !== parseFloat(this.value)) {
+        // prevents this.value of 1 updating this.internalValue of 1.0
+        // which improves the typing experience
+        // does not matter if this.value is string or number
+        this.internalValue = this.value.toString();
+      }
     },
   },
   computed: {
@@ -118,6 +123,7 @@ export default {
       });
     },
     internalNumberValue() {
+      // NOTE: '10' === '10.'
       let numVal = parseFloat(this.internalValue, 10);
 
       if (isNaN(numVal)) {
@@ -223,11 +229,10 @@ export default {
     valueAsString(val) {
       let strVal;
       if (typeof val === 'number') {
-        strVal = val.toFixed(this.stepDecimalPlaces);
+        strVal = this.roundToPrecision(val, this.stepDecimalPlaces);
       } else {
         strVal = val;
       }
-
       return strVal;
     },
     roundToPrecision(x, optDecimalPlaces) {
