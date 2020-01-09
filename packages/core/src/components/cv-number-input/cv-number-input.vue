@@ -229,7 +229,7 @@ export default {
     valueAsString(val) {
       let strVal;
       if (typeof val === 'number') {
-        strVal = this.roundToPrecision(val, this.stepDecimalPlaces);
+        strVal = this.roundToPrecision(val, this.stepDecimalPlaces).toString();
       } else {
         strVal = val;
       }

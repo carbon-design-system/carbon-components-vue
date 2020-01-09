@@ -164,7 +164,7 @@ describe('CvNumberInput', () => {
 
   it('should emit String when value prop is String', () => {
     const id = '1';
-    const value = '5';
+    const value = '555';
     const wrapper = shallow(CvNumberInput, { propsData: { id, value } });
     wrapper.find('.up-icon').trigger('click');
     expect(wrapper.emitted().input[0]).toEqual([(parseInt(value) + 1).toString()]);
