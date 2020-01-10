@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.20.1-canary.1 (jan 10rd 2020)
+
+### fix
+
+- Decimal number edits e.g. 10.001 with step 001. Using the keyboard to delete .001 caused .000 to be reapplied.
+
 ## 2.20.1-canary.0 (jan 3rd 2020)
 
 ### fix
