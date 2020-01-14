@@ -52,7 +52,7 @@ This is done after the modal transitions into its visible state, which is trigge
 
 - label: optional
 - title:
-- content:
+- content: optional
 - primary-button: optional, no primary button if not specified
 - secondary-button: optional, no secondary button if not specified
 

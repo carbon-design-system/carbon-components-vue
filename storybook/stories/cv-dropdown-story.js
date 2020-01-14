@@ -76,6 +76,12 @@ let preKnobs = {
     slot: 'helper-text',
     value: 'Some helpful text',
   },
+  hideSelected: {
+    group: 'attr',
+    type: boolean,
+    config: ['hide-selected', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'hide-selected',
+  },
   invalidMessage: {
     group: 'attr',
     type: text,

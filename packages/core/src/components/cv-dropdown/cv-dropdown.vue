@@ -48,6 +48,7 @@
           'bx--dropdown--invalid': isInvalid,
           'bx--dropdown--disabled': disabled,
           'bx--dropdown--inline': inline,
+          'bx--dropdown--show-selected': !hideSelected,
         }"
         v-bind="$attrs"
         @keydown.down.prevent="onDown"
@@ -117,6 +118,7 @@ export default {
     },
     up: Boolean,
     value: String, // initial value of the dropdown,
+    hideSelected: Boolean,
   },
   data() {
     return {

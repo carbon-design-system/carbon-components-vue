@@ -124,14 +124,26 @@ const preKnobs = {
 };
 
 const variants = [
-  { name: 'default', includes: ['content', 'visible', 'events', 'autoHideOff'] },
+  { name: 'default', includes: ['label', 'title', 'content', 'visible', 'events', 'autoHideOff'] },
+  { name: 'no-body', includes: ['label', 'title', 'visible', 'events', 'autoHideOff'] },
   {
     name: 'buttons',
-    includes: ['content', 'primaryButton', 'primaryButtonDisabled', 'secondaryButton', 'events', 'autoHideOff'],
+    includes: [
+      'label',
+      'title',
+      'content',
+      'primaryButton',
+      'primaryButtonDisabled',
+      'secondaryButton',
+      'events',
+      'autoHideOff',
+    ],
   },
   {
     name: 'buttons with listeners',
     includes: [
+      'label',
+      'title',
       'content',
       'primaryButton',
       'primaryButtonDisabled',
@@ -141,19 +153,22 @@ const variants = [
       'autoHideOff',
     ],
   },
-  { name: 'primary-only', includes: ['content', 'primaryButton', 'primaryButtonDisabled', 'events', 'autoHideOff'] },
+  {
+    name: 'primary-only',
+    includes: ['label', 'title', 'content', 'primaryButton', 'primaryButtonDisabled', 'events', 'autoHideOff'],
+  },
   {
     name: 'secondary-only',
-    includes: ['content', 'secondaryButton', 'events', 'autoHideOff'],
+    includes: ['label', 'title', 'content', 'secondaryButton', 'events', 'autoHideOff'],
   },
-  { name: 'minimal', includes: ['content'] },
-  { name: 'with input', excludes: ['content', 'scrollingContent'] },
+  { name: 'minimal', includes: ['label', 'title', 'content'] },
+  { name: 'with input', excludes: ['label', 'title', 'content', 'scrollingContent'] },
   {
     name: 'danger',
     excludes: ['contentWithInput'],
     extra: { kind: { group: 'attr', value: 'kind="danger"' } },
   },
-  { name: 'scrolling-contnet', includes: ['primaryButton', 'secondaryButton', 'scrollingContent'] },
+  { name: 'scrolling-contnet', includes: ['label', 'title', 'primaryButton', 'secondaryButton', 'scrollingContent'] },
 ];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
