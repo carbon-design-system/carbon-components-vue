@@ -129,7 +129,7 @@ export default {
   },
   data() {
     return {
-      dataValue: '',
+      dataValue: this.value,
       dataOptions: {},
       isInvalid: false,
     };
