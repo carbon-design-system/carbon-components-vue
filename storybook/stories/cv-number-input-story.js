@@ -196,11 +196,7 @@ for (const story of storySet) {
         watch: {
           modelValue() {
             let val;
-            if (this.propStep.indexOf('.') >= 0) {
-              val = parseFloat(this.modelValue);
-            } else {
-              val = parseInt(this.modelValue);
-            }
+            val = parseFloat(this.modelValue);
 
             if (isNaN(val)) {
               val = 0;
@@ -208,7 +204,10 @@ for (const story of storySet) {
             this.modelValueNum = val;
           },
           modelValueNum() {
-            this.modelValue = '' + this.modelValueNum;
+            // NOTE: DELIBERATE USE OF != TO COMPARE this.modelValueNum and this.modelValue
+            if (this.modelValue != this.modelValueNum) {
+              this.modelValue = '' + this.modelValueNum;
+            }
           },
         },
         methods: {
