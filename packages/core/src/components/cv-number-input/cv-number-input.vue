@@ -18,7 +18,7 @@
         <input
           :id="uid"
           type="number"
-          v-model="internalValue"
+          :value="internalValue"
           v-bind="$attrs"
           v-on="inputListeners"
           :step="step"
@@ -119,7 +119,7 @@ export default {
     // https://vuejs.org/v2/guide/components-custom-events.html#Customizing-Component-v-model
     inputListeners() {
       return Object.assign({}, this.$listeners, {
-        input: () => this.emitValue(),
+        input: ev => this.onInput(ev.target.value),
       });
     },
     internalNumberValue() {
@@ -129,7 +129,7 @@ export default {
       if (isNaN(numVal)) {
         numVal = parseFloat(this.min, 10) || 0;
       }
-      return this.roundToPrecision(numVal);
+      return numVal; // this.roundToPrecision(numVal);
     },
     internalMinValue() {
       let numVal = parseFloat(this.min, 10);
@@ -156,14 +156,27 @@ export default {
       return numVal;
     },
     stepDecimalPlaces() {
-      if (Math.floor(this.internalStepValue) === this.internalStepValue) return 0;
-      return Math.min(maxDecimalPlaces, this.internalStepValue.toString().split('.')[1].length || 0);
+      const strStep = this.internalStepValue.toString();
+      const ePos = strStep.indexOf('e-');
+      const dotPos = strStep.indexOf('.');
+      let places = 0;
+      if (ePos > -1) {
+        if (dotPos > -1) {
+          places = ePos - dotPos - 1 + parseInt(strStep.substr(ePos + 2));
+        } else {
+          places = parseInt(strStep.substr(ePos + 2));
+        }
+      } else if (dotPos > -1) {
+        places = strStep.length - dotPos - 1;
+      }
+      return Math.min(maxDecimalPlaces, places);
     },
-    // stepPrecision() {
-    //   return Math.pow(10, -1 * this.stepDecimalPlaces);
-    // },
   },
   methods: {
+    onInput(val) {
+      this.internalValue = val;
+      this.emitValue();
+    },
     checkSlots() {
       // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
       this.isInvalid = !!(this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length));
@@ -180,34 +193,40 @@ export default {
       let steps = Math.round((this.internalNumberValue - min0) / step);
 
       if (up) {
+        // new value
         value = this.roundToPrecision(min0 + step * (steps + 1));
 
+        // check not greater than max
         if (max !== undefined && value > max) {
-          steps = Math.round((max - min0) / step);
-          value = min0 + step * steps;
-          if (value > max) {
-            value = value - step;
-          }
-          value = this.roundToPrecision(value);
+          // steps = Math.round((max - min0) / step);
+          // value = min0 + step * steps;
+          // if (value > max) {
+          //   value = value - step;
+          // }
+          // value = this.roundToPrecision(value);
+          value = this.roundToPrecision(value - step);
         }
 
-        if (this.roundToPrecision(value - this.internalNumberValue - step, maxDecimalPlaces) > 0) {
-          // this is simpler than trying to prevent rounding errors
-          value = value - step;
-        }
+        // check for floating point errors
+        // if (this.roundToPrecision(value - this.internalNumberValue - step, maxDecimalPlaces) > 0) {
+        //   // this is simpler than trying to prevent rounding errors
+        //   value = value - step;
+        // }
 
         this.internalValue = this.valueAsString(value);
       } else {
         value = this.roundToPrecision(min0 + step * (steps - 1));
 
+        // check not less than min
         if (min !== undefined && value < min) {
           value = min;
         }
 
-        if (this.roundToPrecision(value - this.internalNumberValue + step, maxDecimalPlaces) < 0) {
-          // this is simpler than trying to prevent rounding errors
-          value = value + step;
-        }
+        // check for floating point errors
+        // if (this.roundToPrecision(value - this.internalNumberValue + step, maxDecimalPlaces) < 0) {
+        //   // this is simpler than trying to prevent rounding errors
+        //   value = value + step;
+        // }
 
         this.internalValue = this.valueAsString(value);
       }
@@ -229,7 +248,7 @@ export default {
     valueAsString(val) {
       let strVal;
       if (typeof val === 'number') {
-        strVal = this.roundToPrecision(val, this.stepDecimalPlaces).toString();
+        strVal = val.toString(); // this.roundToPrecision(val, this.stepDecimalPlaces).toString();
       } else {
         strVal = val;
       }
