@@ -47,6 +47,7 @@ This is done after the modal transitions into its visible state, which is trigge
 - kind: 'danger' other wise default modal.
 - visible: visibility of modal dialog
 - primaryButtonDisabled: boolean value used to enable/disable the primary button
+- size: xs (extra small), small, default and large
 
 ## slots
 

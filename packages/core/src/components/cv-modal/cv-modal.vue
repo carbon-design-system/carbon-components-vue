@@ -11,7 +11,7 @@
     @keydown.esc.prevent="onEsc"
     @click.self="onExternalClick"
   >
-    <div class="bx--modal-container" ref="modalDialog">
+    <div class="bx--modal-container" :class="modalClasses" ref="modalDialog">
       <div
         class="cv-modal__before-content"
         ref="beforeContent"
@@ -84,6 +84,7 @@ export default {
     autoHideOff: Boolean,
     visible: Boolean,
     primaryButtonDisabled: Boolean,
+    size: String,
   },
   data() {
     return {
@@ -123,6 +124,19 @@ export default {
     },
     secondaryKind() {
       return 'secondary';
+    },
+    modalClasses() {
+      const frontBit = 'bx--modal-container--';
+      switch (this.size) {
+        case 'xs':
+          return `${frontBit}xs`;
+        case 'small':
+          return `${frontBit}sm`;
+        case 'large':
+          return `${frontBit}lg`;
+        default:
+          return '';
+      }
     },
   },
   model: {
