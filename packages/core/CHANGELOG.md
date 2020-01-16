@@ -1,6 +1,13 @@
 # Changelog
 
-## 2.20.1-canary.1 (jan 10rd 2020)
+## 2.20.1-canary.2 (jan 16th 2020)
+
+### fix
+
+- Reverted to using stepUp/stepDOwn input methods for number input after checking IE11 support.
+- Initial value of date picker was not being set
+
+## 2.20.1-canary.1 (jan 10th 2020)
 
 ### fix
 

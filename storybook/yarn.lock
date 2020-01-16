@@ -3091,10 +3091,10 @@ caniuse-lite@^1.0.30000980, caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.300009
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000998.tgz#7227a8046841e7d01e156ae7227a504d065f6744"
   integrity sha512-8Tj5sPZR9kMHeDD9SZXIVr5m9ofufLLCG2Y4QwQrH18GIwG+kCc+zYdlR036ZRkuKjVVetyxeAgGA1xF7XdmzQ==
 
-carbon-components@10.7.3:
-  version "10.7.3"
-  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.7.3.tgz#1a5ff661f1e25aaf30698e30fa0ea903beccfbe4"
-  integrity sha512-5/w4xGqGJ30C43Df/grOr4o87H61LUhKP0AqhH/JIA6174eL1OKZmSmKgSvmDa+8y9YPWplqEaOKSXT/11VFLg==
+carbon-components@10.7.4:
+  version "10.7.4"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.7.4.tgz#e8c734ee2dd736117f6dba160260760c4e795614"
+  integrity sha512-eiAfSQQVa1BTv2y/hzgv7l4rpd/SksFBenxezXEXc6684duleBLj5Jz1wyMqLGVp5ZEjJuAIbAyf9zs89AT9ig==
   dependencies:
     carbon-icons "^7.0.7"
     flatpickr "4.6.1"
