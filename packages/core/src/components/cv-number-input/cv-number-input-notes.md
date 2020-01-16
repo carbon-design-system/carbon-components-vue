@@ -48,3 +48,7 @@ The value and/or v-model attributes can be numbers represented by string or numb
 none - helper-text: optional and overrides the helper-text attribute
 
 - invalid-message: optional and overrides the invalid-message attribute
+
+## Limitations
+
+Use of a javascript number with the value property is possible. However, it is worth noting that it will suffer from the limitations of floating point and integer numbers in javascript.
