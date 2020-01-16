@@ -21,6 +21,7 @@
           :value="internalValue"
           v-bind="$attrs"
           v-on="inputListeners"
+          :disabled="disabled"
           :step="step"
           :min="min"
           :max="max"
@@ -33,6 +34,7 @@
             @click="doUp"
             type="button"
             :aria-label="ariaLabelForUpButton"
+            :disabled="disabled"
           >
             <CaretUpGlyph />
           </button>
@@ -41,6 +43,7 @@
             @click="doDown"
             type="button"
             :aria-label="ariaLabelForDownButton"
+            :disabled="disabled"
           >
             <CaretDownGlyph />
           </button>
@@ -69,6 +72,7 @@ export default {
   components: { CaretDownGlyph, CaretUpGlyph, WarningFilled16, CvWrapper },
   inheritAttrs: false,
   props: {
+    disabled: Boolean,
     formItem: { type: Boolean, default: true },
     helperText: { type: String, default: undefined },
     invalidMessage: { type: String, default: undefined },
