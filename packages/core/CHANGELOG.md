@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.20.1 (jan 16th 2020)
+
+- fix: Disable number input up down buttons when component disabled
+
 ## 2.20.1-canary.3 (jan 16th 2020)
 
 - fix: Merge missing commits from last release
