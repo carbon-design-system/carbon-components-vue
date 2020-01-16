@@ -27,6 +27,7 @@ http://www.carbondesignsystem.com/components/number-input/code
 - ariaLabelForDownButton: optional defaults to 'Decrease number input'
 - ariaLabelForUpButton: optional defaults to 'Increase number input'
 - helper-text: optional helper text
+- hide-selected: optional hides selected from dropdown list
 - invalid-message: optional error message
 - label: the label text for the input
 - max: optional max (string or number) operates as per stanard html number input

@@ -20,24 +20,21 @@
         @focus="focusBeforeContent"
       />
       <div class="bx--modal-header">
-        <h4 class="bx--modal-header__label" v-if="hasHeaderLabel">
-          <slot name="label">label (Optional)</slot>
-        </h4>
-        <h2 class="bx--modal-header__heading">
-          <slot name="title">Modal Title</slot>
-        </h2>
+        <p class="bx--modal-header__label">
+          <slot name="label"></slot>
+        </p>
+        <p class="bx--modal-header__heading">
+          <slot name="title">
+            Modal Title
+          </slot>
+        </p>
         <button class="bx--modal-close" type="button" @click="onClose" ref="close">
           <Close16 class="bx--modal-close__icon" />
         </button>
       </div>
 
       <div class="bx--modal-content" ref="content" :tabindex="scrollable ? 0 : undefined">
-        <slot name="content">
-          <p>
-            Passive modal notifications should only appear if there is an action the user needs to address immediately.
-            Passive modal notifications are persistent on the screen.
-          </p>
-        </slot>
+        <slot name="content"></slot>
       </div>
 
       <div class="bx--modal-footer" v-if="hasFooter">

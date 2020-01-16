@@ -8,8 +8,8 @@
     "build": "yarn info @carbon/vue --json > ../package-info.jsonl; build-storybook"
   },
   "dependencies": {
-    "@carbon/icons-vue": "10.6.1",
-    "carbon-components": "10.7.4",
+    "@carbon/icons-vue": "10.8.0",
+    "carbon-components": "10.9.0",
     "vue": "^2.6.10"
   },
   "devDependencies": {
