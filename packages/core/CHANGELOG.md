@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.20.1-canary.3 (jan 16th 2020)
+
+- fix: Merge missing commits from last release
+
 ## 2.20.1-canary.2 (jan 16th 2020)
 
 ### fix
