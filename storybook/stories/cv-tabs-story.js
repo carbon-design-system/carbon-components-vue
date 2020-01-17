@@ -6,6 +6,8 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
+import './cv-tabs-story.scss';
+
 import CvTabsNotesMD from '@carbon/vue/src/components/cv-tabs/cv-tabs-notes.md';
 import { CvTab, CvTabs, CvTabsSkeleton } from '@carbon/vue/src';
 
@@ -13,6 +15,12 @@ const storiesDefault = storiesOf('Components/CvTabs', module);
 const storiesExperimental = storiesOf('Experimental/CvTabs', module);
 
 let preKnobs = {
+  container: {
+    group: 'attr',
+    type: boolean,
+    config: ['Container', false],
+    prop: 'container',
+  },
   selected: {
     group: 'tab2',
     type: boolean,
@@ -96,7 +104,7 @@ for (const story of storySet) {
 }
 
 // tabs from data set
-variants = [{ name: 'tabs from data', includes: [] }];
+variants = [{ name: 'tabs from data', includes: ['container'] }];
 
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 

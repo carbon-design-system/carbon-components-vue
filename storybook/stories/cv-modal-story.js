@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { boolean } from '@storybook/addon-knobs';
+import { boolean, select } from '@storybook/addon-knobs';
 
 import { action } from '@storybook/addon-actions';
 
@@ -28,6 +28,21 @@ const preKnobs = {
     group: 'content',
     slot: 'content',
     value: `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, seed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>`,
+  },
+  size: {
+    group: 'attr',
+    type: select,
+    config: [
+      'size',
+      {
+        default: '',
+        'xs (extra small)': 'xs',
+        small: 'small',
+        large: 'large',
+      },
+      '',
+    ], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'size',
   },
   contentWithInput: {
     group: 'content',
@@ -124,14 +139,15 @@ const preKnobs = {
 };
 
 const variants = [
-  { name: 'default', includes: ['label', 'title', 'content', 'visible', 'events', 'autoHideOff'] },
-  { name: 'no-body', includes: ['label', 'title', 'visible', 'events', 'autoHideOff'] },
+  { name: 'default', includes: ['label', 'title', 'content', 'size', 'visible', 'events', 'autoHideOff'] },
+  { name: 'no-body', includes: ['label', 'title', 'visible', 'size', 'events', 'autoHideOff'] },
   {
     name: 'buttons',
     includes: [
       'label',
       'title',
       'content',
+      'size',
       'primaryButton',
       'primaryButtonDisabled',
       'secondaryButton',
@@ -145,6 +161,7 @@ const variants = [
       'label',
       'title',
       'content',
+      'size',
       'primaryButton',
       'primaryButtonDisabled',
       'secondaryButton',
@@ -155,11 +172,11 @@ const variants = [
   },
   {
     name: 'primary-only',
-    includes: ['label', 'title', 'content', 'primaryButton', 'primaryButtonDisabled', 'events', 'autoHideOff'],
+    includes: ['label', 'title', 'content', 'size', 'primaryButton', 'primaryButtonDisabled', 'events', 'autoHideOff'],
   },
   {
     name: 'secondary-only',
-    includes: ['label', 'title', 'content', 'secondaryButton', 'events', 'autoHideOff'],
+    includes: ['label', 'title', 'size', 'content', 'secondaryButton', 'events', 'autoHideOff'],
   },
   { name: 'minimal', includes: ['label', 'title', 'content'] },
   { name: 'with input', excludes: ['label', 'title', 'content', 'scrollingContent'] },
@@ -168,7 +185,10 @@ const variants = [
     excludes: ['contentWithInput'],
     extra: { kind: { group: 'attr', value: 'kind="danger"' } },
   },
-  { name: 'scrolling-contnet', includes: ['label', 'title', 'primaryButton', 'secondaryButton', 'scrollingContent'] },
+  {
+    name: 'scrolling-contnet',
+    includes: ['label', 'title', 'size', 'primaryButton', 'secondaryButton', 'scrollingContent'],
+  },
 ];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);

@@ -1,8 +1,9 @@
 <template>
-  <div class="cv-tabs" @focusout="onFocusout" @focusin="onFocusin">
+  <div class="cv-tabs" @focusout="onFocusout" @focusin="onFocusin" style="width: 100%;">
     <div
       data-tabs
       class="cv-tab bx--tabs"
+      :class="{ 'bx--tabs--container': container }"
       role="navigation"
       v-on="$listeners"
       v-bind="$attrs"
@@ -63,6 +64,7 @@ export default {
   name: 'CvTabs',
   props: {
     noDefaultToFirst: Boolean,
+    container: Boolean,
   },
   components: { ChevronDownGlyph },
   data() {
