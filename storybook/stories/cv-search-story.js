@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { text, boolean } from '@storybook/addon-knobs';
+import { text, boolean, select } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
@@ -38,11 +38,19 @@ const preKnobs = {
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: 'disabled',
   },
-  small: {
+  size: {
     group: 'attr',
-    type: boolean,
-    config: ['small', false], // consts.CONFIG],
-    prop: 'small',
+    type: select,
+    config: [
+      'size',
+      {
+        small: 'small',
+        large: 'large',
+        'default (xl)': '',
+      },
+      '',
+    ], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'size',
   },
   vModel: {
     group: 'attr',

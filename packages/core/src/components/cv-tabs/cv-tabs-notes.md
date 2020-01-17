@@ -20,6 +20,11 @@ http://www.carbondesignsystem.com/components/tabs/code
 
 NOTE: \$attrs are assigned to the nav tab (cv-tabs).
 
+### Attributes
+
+noDefaultToFirst: Boolean - prevents initial default,
+container: Boolean - content appears contained
+
 ### Events
 
 - tab-selected

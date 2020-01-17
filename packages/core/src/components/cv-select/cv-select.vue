@@ -34,7 +34,7 @@
           >
             <slot></slot>
           </select>
-          <chevron-down-glyph class="bx--select__arrow" />
+          <chevron-down-16 class="bx--select__arrow" />
           <warning-filled-16 v-if="isInvalid" class="bx--select__invalid-icon" />
         </div>
 
@@ -56,13 +56,13 @@
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
-import ChevronDownGlyph from '@carbon/icons-vue/es/chevron--down/index';
+import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 
 export default {
   name: 'CvSelect',
   inheritAttrs: false,
-  components: { CvWrapper, ChevronDownGlyph, WarningFilled16 },
+  components: { CvWrapper, ChevronDown16, WarningFilled16 },
   mixins: [uidMixin, themeMixin],
   props: {
     inline: Boolean,

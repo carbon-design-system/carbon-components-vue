@@ -15,7 +15,7 @@
     @keydown.space.prevent
     @keyup.space.prevent="$emit('remove')"
   >
-    {{ label }}
+    <span class="bx--tag__label">{{ label }}</span>
     <Close16 v-if="isFilter" :aria-label="clearAriaLabel" role="button" @click.stop.prevent="onRemove" />
   </span>
 </template>
