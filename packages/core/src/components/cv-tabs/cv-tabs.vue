@@ -162,7 +162,7 @@ export default {
         this.checkDisabled(srcComponent);
 
         if (wasSelected && this.tabs.length) {
-          this.onTabClick(this.tabs[Math.max(tabIndex - 1)].uid);
+          this.onTabClick(this.tabs[Math.max(tabIndex - 1, 0)].uid);
         }
       }
     },
