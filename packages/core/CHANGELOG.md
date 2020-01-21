@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.21.0-canary.0 (jan 21st 2020)
+
+### feat
+
+- Add size variations to CvModal
+- Add hide selected option to CvDropDown.
+- Make title only CvModal possible
+- Add container option to CvTabs
+- Update CvTag styling to 10.9
+- Update CvSearch size options
+
+### fix
+
+- Tab behaviour when adding and removing tabs when selecting a tab immediately after
+
 ## 2.20.1 (jan 16th 2020)
 
 - fix: Disable number input up down buttons when component disabled
