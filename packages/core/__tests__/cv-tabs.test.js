@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import { shallowMount as shallow, mount } from '@vue/test-utils';
 import { testComponent, testInstance, events } from './_helpers';
 import { CvTabs, CvTab } from '@/components/cv-tabs';
@@ -50,13 +51,14 @@ describe('CvTabs', () => {
   // ***************
   // FUNCTIONAL TESTS
   // ***************
-  it('tabs to be mounted with first selected', () => {
+  it('tabs to be mounted with first selected', async () => {
     const wrapper = mount(CvTabs, {
       slots: {
         default: [Tab, Tab, Tab],
       },
     });
 
+    await Vue.nextTick();
     expect(wrapper.vm.tabs.length).toBeGreaterThan(0);
     expect(wrapper.vm.tabs[0].dataSelected).toBeTruthy();
   });
@@ -103,13 +105,14 @@ describe('CvTabs', () => {
     expect(wrapper.vm.tabs[1].dataSelected).toBeTruthy();
   });
 
-  it('click to change tab', () => {
+  it('click to change tab', async () => {
     const wrapper = mount(CvTabs, {
       slots: {
         default: [Tab, Tab, Tab],
       },
     });
 
+    await Vue.nextTick();
     expect(wrapper.vm.tabs[0].dataSelected).toBeTruthy();
     wrapper
       .findAll(`.${carbonPrefix}--tabs__nav-link`)
