@@ -85,7 +85,6 @@ export default {
     this.$on('cv:disabled', srcComponent => this.onCvDisabled(srcComponent));
     this.$on('cv:enabled', srcComponent => this.onCvEnabled(srcComponent));
   },
-  mounted() {},
   computed: {
     triggerStyleOverride() {
       // <style carbon tweaks - DO NOT USE STYLE TAG as it causes SSR issues
@@ -147,6 +146,10 @@ export default {
       this.checkDisabled(srcComponent);
       if (this.selectedId === undefined) {
         this.checkSelected();
+      } else {
+        if (srcComponent.internalSelected) {
+          this.onTabClick(srcComponent.uid);
+        }
       }
     },
     onCvBeforeDestroy(srcComponent) {
@@ -155,12 +158,11 @@ export default {
         const wasSelected = srcComponent.uid === this.selectedId;
 
         this.tabs.splice(tabIndex, 1);
-        this.selectedId = undefined;
 
         this.checkDisabled(srcComponent);
 
         if (wasSelected) {
-          this.checkSelected();
+          this.onTabClick(this.tabs[Math.max(tabIndex - 1)].uid);
         }
       }
     },
@@ -210,17 +212,22 @@ export default {
       }
     },
     checkSelected() {
-      let somethingSelected = false;
+      let id;
 
       for (let i = 0; i < this.tabs.length; i++) {
         if (this.tabs[i].internalSelected) {
-          this.onTabClick(this.tabs[i].uid);
-          somethingSelected = true;
+          id = this.tabs[i].uid;
         }
       }
 
-      if (!this.noDefaultToFirst && !somethingSelected && this.tabs.length) {
-        this.onTabClick(this.tabs[0].uid);
+      if (!this.noDefaultToFirst && id === undefined && this.tabs.length) {
+        id = this.tabs[0].uid;
+      }
+
+      if (id !== undefined) {
+        this.$nextTick(() => {
+          this.onTabClick(id);
+        });
       }
     },
     isAllTabsDisabled() {
