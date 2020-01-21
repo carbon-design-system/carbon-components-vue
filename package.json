@@ -1,16 +1,7 @@
 {
   "name": "carbon-components-vue",
-  "description": "A collection of components for the Carbon Design System built using Vue.js",
   "version": "1.1.1",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/carbon-design-system/carbon-components-vue.git"
-  },
-  "bugs": {
-    "url": "https://github.com/carbon-design-system/carbon-components-vue/issues/new"
-  },
-  "homepage": "https://github.com/carbon-design-system/carbon-components-vue#readme",
-  "sideEffects": true,
+  "description": "A collection of components for the Carbon Design System built using Vue.js",
   "scripts": {
     "build": "yarn test; lerna exec yarn build --no-prefix --concurrency 1",
     "ci-check": "yarn format:diff",
@@ -23,18 +14,21 @@
     "lint:style": "vue-cli-service lint:style",
     "prepare": "lerna bootstrap",
     "prepublishOnly": "yarn build",
+    "reinstall": "find . -name node_modules -type d -prune -exec echo Removing {} ';' -exec rm -rf {} ';' && echo Clearing yarn cache && yarn cache clean && echo Removing yarn offline mirror && rm -rf \"./.yarn-offline-mirror\" && yarn install",
     "start": "lerna exec yarn start --scope storybook",
-    "test": "yarn add babel-core@7.0.0-bridge.0 --silent; vue-cli-service test:unit; yarn remove babel-core --silent",
-    "reinstall": "find . -name node_modules -type d -prune -exec echo Removing {} ';' -exec rm -rf {} ';' && echo Clearing yarn cache && yarn cache clean && echo Removing yarn offline mirror && rm -rf \"./.yarn-offline-mirror\" && yarn install"
+    "test": "yarn add babel-core@7.0.0-bridge.0 --silent; vue-cli-service test:unit; yarn remove babel-core --silent"
+  },
+  "dependencies": {
+    "core-js": "^3.4.4"
   },
   "devDependencies": {
     "@ascendancyy/vue-cli-plugin-stylelint": "^1.1.2",
     "@commitlint/cli": "^7.6.1",
     "@commitlint/config-conventional": "^7.6.0",
-    "@vue/cli-plugin-babel": "^3.11.0",
-    "@vue/cli-plugin-eslint": "^3.11.0",
-    "@vue/cli-plugin-unit-jest": "^3.11.0",
-    "@vue/cli-service": "^3.11.0",
+    "@vue/cli-plugin-babel": "^4.1.2",
+    "@vue/cli-plugin-eslint": "^4.1.2",
+    "@vue/cli-plugin-unit-jest": "^4.1.2",
+    "@vue/cli-service": "^4.1.2",
     "@vue/eslint-config-prettier": "^4.0.1",
     "@vue/test-utils": "^1.0.0-beta.29",
     "babel-eslint": "^10.0.3",
@@ -52,28 +46,6 @@
     "stylelint-config-sass-guidelines": "^6.1.0",
     "vue": "^2.6.10",
     "vue-template-compiler": "^2.6.10"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
-    }
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
-  "lint-staged": {
-    "*.{scss,css,js,md,vue}": [
-      "yarn format:staged",
-      "git add"
-    ]
-  },
-  "prettier": {
-    "printWidth": 120,
-    "singleQuote": true,
-    "trailingComma": "es5"
   },
   "eslintConfig": {
     "root": true,
@@ -119,6 +91,11 @@
       "parser": "babel-eslint"
     }
   },
+  "prettier": {
+    "printWidth": 120,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
@@ -159,5 +136,30 @@
       "text-summary"
     ]
   },
-  "dependencies": {}
+  "bugs": {
+    "url": "https://github.com/carbon-design-system/carbon-components-vue/issues/new"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "homepage": "https://github.com/carbon-design-system/carbon-components-vue#readme",
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{scss,css,js,md,vue}": [
+      "yarn format:staged",
+      "git add"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carbon-design-system/carbon-components-vue.git"
+  },
+  "sideEffects": true
 }
