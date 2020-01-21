@@ -117,8 +117,8 @@ for (const story of storySet) {
       // ----------------------------------------------------------------
 
       const templateString = `
-<cv-tabs${settings.group.attr} aria-label="navigation tab label">
-  <cv-tab :key="tab.name" :label="tab.label" v-for="tab in activeSet" v-html="tab.content" :data-test="tab.content">
+<cv-tabs${settings.group.attr} aria-label="navigation tab label" @tab-selected="onTabSelected">
+  <cv-tab :key="tab.name" :label="tab.label" v-for="(tab, index) in activeSet" v-html="tab.content" :data-selected="index===selectedIndex" :selected="index === selectedIndex">
   </cv-tab>
 </cv-tabs>
   `;
@@ -130,7 +130,12 @@ for (const story of storySet) {
       sv-margin
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
-      <template slot="other"><button @click="changeSet">Change Set</button></template>
+      <template slot="other">
+        <button @click="changeSet">Change set</button>
+        <button @click="addToSet()">Add to set</button>
+        <button @click="addToSet(true)">Add to set & select</button>
+        <button @click="removeFromSet">Remove from set</button>
+      </template>
     </sv-template-view>
   `;
 
@@ -163,6 +168,7 @@ for (const story of storySet) {
               },
             ],
             activeSet: undefined,
+            selectedIndex: 0,
           };
         },
         methods: {
@@ -170,6 +176,25 @@ for (const story of storySet) {
           actionBeingSelected: action('Cv Tabs - tab-beingselected'),
           changeSet() {
             this.activeSet = this.activeSet === this.dataSet1 ? this.dataSet2 : this.dataSet1;
+            this.selectedIndex = 0;
+          },
+          addToSet(selectNew) {
+            const id = `${Date.now()}`;
+            this.activeSet.push({
+              name: id,
+              label: `${id}`,
+              content: `Content for ${id}`,
+            });
+            if (selectNew) {
+              this.selectedIndex = this.activeSet.length - 1;
+            }
+          },
+          removeFromSet() {
+            const rnd = Math.floor(Math.random() * this.activeSet.length);
+            this.activeSet.splice(rnd, 1);
+          },
+          onTabSelected(index) {
+            this.selectedIndex = index;
           },
         },
         template: templateViewString,
