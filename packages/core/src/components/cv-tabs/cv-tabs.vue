@@ -161,7 +161,7 @@ export default {
 
         this.checkDisabled(srcComponent);
 
-        if (wasSelected) {
+        if (wasSelected && this.tabs.length) {
           this.onTabClick(this.tabs[Math.max(tabIndex - 1)].uid);
         }
       }
