@@ -46,7 +46,10 @@ const preKnobs = {
   },
 };
 
-const variants = [{ name: 'default', excludes: ['slotted'] }, { name: 'slotted', excludes: ['steps', 'initialStep'] }];
+const variants = [
+  { name: 'default', excludes: ['slotted'] },
+  { name: 'slotted', excludes: ['steps', 'initialStep'] },
+];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 

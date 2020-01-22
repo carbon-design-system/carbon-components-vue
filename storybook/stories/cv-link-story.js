@@ -43,7 +43,10 @@ const preKnobs = {
   },
 };
 
-const variants = [{ name: 'a', excludes: ['to'] }, { name: 'router-link', excludes: ['href'] }];
+const variants = [
+  { name: 'a', excludes: ['to'] },
+  { name: 'router-link', excludes: ['href'] },
+];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 

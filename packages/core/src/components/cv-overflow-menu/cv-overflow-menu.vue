@@ -184,8 +184,8 @@ export default {
         );
         for (let tryOn of focusOnList) {
           if (
-            !// don't focus on before after or something that can't be tabbed to
-            (
+            // don't focus on before after or something that can't be tabbed to
+            !(
               tryOn.classList.contains('cv-overflow-menu__before-content') ||
               tryOn.classList.contains('cv-overflow-menu__after-content') ||
               tryOn.tabindex < 0

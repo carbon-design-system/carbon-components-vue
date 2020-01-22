@@ -8,12 +8,8 @@ http://www.carbondesignsystem.com/components/modal/code
 
 ```html
 <cv-modal @modal-shown="actionShown" @modal-hidden="actionHidden">
-  <template slot="label"
-    >label</template
-  >
-  <template slot="title"
-    >A Title</template
-  >
+  <template slot="label">label</template>
+  <template slot="title">A Title</template>
   <template slot="content"
     ><p>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit, seed do eiusmod tempor incididunt ut labore et dolore
@@ -21,12 +17,8 @@ http://www.carbondesignsystem.com/components/modal/code
       consequat.
     </p></template
   >
-  <template slot="secondary-button"
-    >Help</template
-  >
-  <template slot="primary-button"
-    >OK</template
-  >
+  <template slot="secondary-button">Help</template>
+  <template slot="primary-button">OK</template>
 </cv-modal>
 ```
 

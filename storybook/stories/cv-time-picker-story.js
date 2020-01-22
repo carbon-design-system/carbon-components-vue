@@ -79,7 +79,10 @@ const preKnobs = {
     config: [
       'timezones',
       {
-        list: [{ label: 'Timezone-1', value: 'timezone1' }, { label: 'Timezone-2', value: 'timezone2' }],
+        list: [
+          { label: 'Timezone-1', value: 'timezone1' },
+          { label: 'Timezone-2', value: 'timezone2' },
+        ],
       },
       // consts.CONFIG,
     ],
