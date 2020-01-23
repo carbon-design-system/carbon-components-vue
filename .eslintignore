@@ -1,1 +1,3 @@
 dist/*.js
+storybook-static/*
+coverage/*
