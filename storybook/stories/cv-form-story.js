@@ -4,8 +4,16 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvFormNotesMD from '@carbon/vue/src/components/cv-form/cv-form-notes.md';
-import { CvForm, CvTextArea, CvTextInput, CvSelect, CvButton, CvSelectOptgroup, CvSelectOption } from '@carbon/vue/src';
+import CvFormNotesMD from '../../packages/core/src/components/cv-form/cv-form-notes.md';
+import {
+  CvForm,
+  CvTextArea,
+  CvTextInput,
+  CvSelect,
+  CvButton,
+  CvSelectOptgroup,
+  CvSelectOption,
+} from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvForm', module);
 const storiesExperimental = storiesOf('Experimental/CvForm', module);

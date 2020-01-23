@@ -7,8 +7,8 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvPaginationNotesMD from '@carbon/vue/src/components/cv-pagination/cv-pagination-notes.md';
-import { CvPagination } from '@carbon/vue/src';
+import CvPaginationNotesMD from '../../packages/core/src/components/cv-pagination/cv-pagination-notes.md';
+import { CvPagination } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvPagination', module);
 const storiesExperimental = storiesOf('Experimental/CvPagination', module);

@@ -5,8 +5,8 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvLinkNotesMD from '@carbon/vue/src/components/cv-link/cv-link-notes.md';
-import { CvLink } from '@carbon/vue/src';
+import CvLinkNotesMD from '../../packages/core/src/components/cv-link/cv-link-notes.md';
+import { CvLink } from '../../packages/core/src/';
 import { action } from '@storybook/addon-actions';
 
 const storiesDefault = storiesOf('Components/CvLink', module);

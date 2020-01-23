@@ -49,7 +49,7 @@
 <script>
 import Vue from 'vue';
 import SvView from './sv-view.vue';
-import { CvInlineNotification } from '@carbon/vue/src';
+import { CvInlineNotification } from '../../../../packages/core/src';
 
 export default {
   name: 'SvTemplateView',

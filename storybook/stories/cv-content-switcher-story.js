@@ -6,13 +6,13 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvContentSwitcherNotesMD from '@carbon/vue/src/components/cv-content-switcher/cv-content-switcher-notes.md';
-import { CvContentSwitcher, CvContentSwitcherButton, CvContentSwitcherContent } from '@carbon/vue/src';
+import CvContentSwitcherNotesMD from '../../packages/core/src/components/cv-content-switcher/cv-content-switcher-notes.md';
+import { CvContentSwitcher, CvContentSwitcherButton, CvContentSwitcherContent } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvContentSwitcher', module);
 const storiesExperimental = storiesOf('Experimental/CvContentSwitcher', module);
 
-const exampleIconPath = require('@carbon/vue/src/assets/images/example-icons.svg');
+const exampleIconPath = require('../../packages/core/src/assets/images/example-icons.svg');
 import AddFilled16 from '@carbon/icons-vue/es/add--filled/16';
 
 const preKnobs = {
