@@ -1,4 +1,4 @@
-# cv-toggle
+# cv-toast-notification
 
 A Vue implementation of a Carbon Components toast-notification
 
