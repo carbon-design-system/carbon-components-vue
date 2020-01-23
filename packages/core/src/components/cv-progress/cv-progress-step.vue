@@ -32,10 +32,6 @@
 </template>
 
 <script>
-import CvProgressStepComplete from './_cv-progress-step-complete';
-import CvProgressStepIncomplete from './_cv-progress-step-incomplete';
-import CvTooltip from '../cv-tooltip/cv-tooltip';
-import CvWrapper from '../cv-wrapper/_cv-wrapper';
 import CheckmarkOutline16 from '@carbon/icons-vue/es/checkmark--outline/16';
 import Warning16 from '@carbon/icons-vue/es/warning/16';
 
@@ -44,10 +40,6 @@ const states = ['incomplete', 'current', 'complete'];
 export default {
   name: 'CvProgressStep',
   components: {
-    CvProgressStepComplete,
-    CvProgressStepIncomplete,
-    CvTooltip,
-    CvWrapper,
     CheckmarkOutline16,
     Warning16,
   },
