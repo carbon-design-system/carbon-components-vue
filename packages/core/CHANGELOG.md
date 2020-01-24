@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.21.1 (jan 24th 2020)
+
+## fix
+
+- Error icon used in inline-loading
+- Toast notification notes typo
+
 ## 2.21.0-canary.0 (jan 21st 2020)
 
 ### feat
