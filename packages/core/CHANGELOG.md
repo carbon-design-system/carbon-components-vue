@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.21.1 (jan 24th 2020)
+## 2.21.0 (jan 24th 2020)
 
 ## fix
 
