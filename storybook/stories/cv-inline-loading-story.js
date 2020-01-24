@@ -5,8 +5,8 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvInlineLoadingNotesMD from '@carbon/vue/src/components/cv-inline-loading/cv-inline-loading-notes.md';
-import { CvInlineLoading, STATES } from '@carbon/vue/src/components/cv-inline-loading';
+import CvInlineLoadingNotesMD from '../../packages/core/src/components/cv-inline-loading/cv-inline-loading-notes.md';
+import { CvInlineLoading, STATES } from '../../packages/core/src/components/cv-inline-loading';
 
 const storiesDefault = storiesOf('Components/CvInlineLoading', module);
 const storiesExperimental = storiesOf('Experimental/CvInlineLoading', module);

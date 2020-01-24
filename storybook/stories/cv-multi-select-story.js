@@ -6,8 +6,8 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvMultiSelectNotesMD from '@carbon/vue/src/components/cv-multi-select/cv-multi-select-notes.md';
-import { CvMultiSelect } from '@carbon/vue/src';
+import CvMultiSelectNotesMD from '../../packages/core/src/components/cv-multi-select/cv-multi-select-notes.md';
+import { CvMultiSelect } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvMultiSelect', module);
 const storiesExperimental = storiesOf('Experimental/CvMultiSelect', module);

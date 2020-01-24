@@ -6,8 +6,8 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvNumberInputNotesMD from '@carbon/vue/src/components/cv-number-input/cv-number-input-notes.md';
-import { CvNumberInput, CvNumberInputSkeleton } from '@carbon/vue/src';
+import CvNumberInputNotesMD from '../../packages/core/src/components/cv-number-input/cv-number-input-notes.md';
+import { CvNumberInput, CvNumberInputSkeleton } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvNumberInput', module);
 const storiesExperimental = storiesOf('Experimental/CvNumberInput', module);

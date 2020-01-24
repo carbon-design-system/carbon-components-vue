@@ -6,7 +6,7 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvHeaderNotesMD from '@carbon/vue/src/components/cv-ui-shell/cv-ui-shell-notes.md';
+import CvHeaderNotesMD from '../../packages/core/src/components/cv-ui-shell/cv-ui-shell-notes.md';
 
 import {
   CvHeader,
@@ -27,7 +27,7 @@ import {
   CvSwitcherItem,
   CvSwitcherItemLink,
   CvHeaderSideNavItems,
-} from '@carbon/vue/src';
+} from '../../packages/core/src/';
 
 import Fade16 from '@carbon/icons-vue/es/fade/16';
 import Notification20 from '@carbon/icons-vue/es/notification/20';
