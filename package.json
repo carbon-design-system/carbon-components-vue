@@ -11,6 +11,9 @@
   },
   "homepage": "https://github.com/carbon-design-system/carbon-components-vue#readme",
   "sideEffects": true,
+  "engines": {
+    "node": "10.x"
+  },
   "scripts": {
     "build": "yarn test; lerna exec yarn build --no-prefix --concurrency 1",
     "ci-check": "yarn format:diff",
