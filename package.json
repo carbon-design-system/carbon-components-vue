@@ -1,15 +1,6 @@
 {
   "name": "carbon-components-vue",
   "version": "1.1.1",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/carbon-design-system/carbon-components-vue.git"
-  },
-  "bugs": {
-    "url": "https://github.com/carbon-design-system/carbon-components-vue/issues/new"
-  },
-  "homepage": "https://github.com/carbon-design-system/carbon-components-vue#readme",
-  "sideEffects": true,
   "engines": {
     "node": "10.x"
   },
