@@ -10,7 +10,7 @@ import CvContentSwitcherNotesMD from '../../packages/core/src/components/cv-cont
 import { CvContentSwitcher, CvContentSwitcherButton, CvContentSwitcherContent } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvContentSwitcher', module);
-const storiesExperimental = storiesOf('Experimental/CvContentSwitcher', module);
+// const storiesExperimental = storiesOf('Experimental/CvContentSwitcher', module);
 
 const exampleIconPath = require('../../packages/core/src/assets/images/example-icons.svg');
 import AddFilled16 from '@carbon/icons-vue/es/add--filled/16';

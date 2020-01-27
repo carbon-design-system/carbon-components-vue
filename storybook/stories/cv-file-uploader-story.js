@@ -11,7 +11,7 @@ import { CvFileUploader, CvFileUploaderSkeleton } from '../../packages/core/src/
 import AddFilled16 from '@carbon/icons-vue/es/add--filled/16';
 
 const storiesDefault = storiesOf('Components/CvFileUploader', module);
-const storiesExperimental = storiesOf('Experimental/CvFileUploader', module);
+// const storiesExperimental = storiesOf('Experimental/CvFileUploader', module);
 
 let preKnobs = {
   label: {

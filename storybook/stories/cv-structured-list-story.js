@@ -15,7 +15,7 @@ import {
 } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvStructuredList', module);
-const storiesExperimental = storiesOf('Experimental/CvStructuredList', module);
+// const storiesExperimental = storiesOf('Experimental/CvStructuredList', module);
 
 const preKnobs = {
   condensed: {

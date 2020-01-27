@@ -10,7 +10,7 @@ import CvRadioButtonNotesMD from '../../packages/core/src/components/cv-radio-bu
 import { CvRadioButton, CvRadioGroup } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvRadioButton', module);
-const storiesExperimental = storiesOf('Experimental/CvRadioButton', module);
+// const storiesExperimental = storiesOf('Experimental/CvRadioButton', module);
 
 const preKnobs = {
   checked1: {

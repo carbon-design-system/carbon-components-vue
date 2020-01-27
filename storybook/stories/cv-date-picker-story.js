@@ -10,7 +10,7 @@ import CvDatePickerNotesMD from '../../packages/core/src/components/cv-date-pick
 import { CvDatePicker } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvDatePicker', module);
-const storiesExperimental = storiesOf('Experimental/CvDatePicker', module);
+// const storiesExperimental = storiesOf('Experimental/CvDatePicker', module);
 
 const preKnobs = {
   theme: {

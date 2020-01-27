@@ -10,7 +10,7 @@ import CvTextInputNotesMD from '../../packages/core/src/components/cv-text-input
 import { CvTextInput } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvTextInput', module);
-const storiesExperimental = storiesOf('Experimental/CvTextInput', module);
+// const storiesExperimental = storiesOf('Experimental/CvTextInput', module);
 
 const preKnobs = {
   theme: {

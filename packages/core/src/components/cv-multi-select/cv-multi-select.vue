@@ -37,7 +37,6 @@
       @keydown.up.prevent="onUp"
       @keydown.enter.prevent="onEnter"
       @keydown.esc.prevent="onEsc"
-      @keydown="otherKey"
       @click="onClick"
     >
       <WarningFilled16 v-if="isInvalid" class="bx--list-box__invalid-icon" />
@@ -351,7 +350,7 @@ export default {
         // this.checkHighlightPosition(firstMatchIndex);
       }
     },
-    onInput(ev) {
+    onInput() {
       this.doOpen(true);
 
       this.updateOptions();
@@ -447,11 +446,6 @@ export default {
     },
     inputFocus() {
       this.doOpen(true);
-    },
-    otherKey(ev) {
-      if (!['Escape', 'ArrowUp', 'ArrowDown', 'Enter'].includes(ev.code)) {
-        console.log(ev.code);
-      }
     },
   },
 };

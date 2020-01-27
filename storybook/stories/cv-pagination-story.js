@@ -11,7 +11,7 @@ import CvPaginationNotesMD from '../../packages/core/src/components/cv-paginatio
 import { CvPagination } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvPagination', module);
-const storiesExperimental = storiesOf('Experimental/CvPagination', module);
+// const storiesExperimental = storiesOf('Experimental/CvPagination', module);
 
 const preKnobs = {
   backwardsText: {

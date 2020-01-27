@@ -9,7 +9,7 @@ import CvAccordionNotesMD from '../../packages/core/src/components/cv-accordion/
 import { CvAccordion, CvAccordionItem, CvAccordionSkeleton } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvAccordion', module);
-const storiesExperimental = storiesOf('Experimental/CvAccordion', module);
+// const storiesExperimental = storiesOf('Experimental/CvAccordion', module);
 
 const preKnobs = {
   open1: {
