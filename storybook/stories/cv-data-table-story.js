@@ -23,7 +23,7 @@ import Save16 from '@carbon/icons-vue/es/save/16';
 import Download16 from '@carbon/icons-vue/es/download/16';
 
 const storiesDefault = storiesOf('Components/CvDataTable', module);
-const storiesExperimental = storiesOf('Experimental/CvDataTable', module);
+// const storiesExperimental = storiesOf('Experimental/CvDataTable', module);
 
 let preKnobs = {
   rowSize: {

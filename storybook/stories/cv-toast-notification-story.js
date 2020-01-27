@@ -11,7 +11,7 @@ import CvToastNotificationNotesMD from '../../packages/core/src/components/cv-to
 import { CvToastNotification } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvToastNotification', module);
-const storiesExperimental = storiesOf('Experimental/CvToastNotification', module);
+// const storiesExperimental = storiesOf('Experimental/CvToastNotification', module);
 
 const preKnobs = {
   title: {

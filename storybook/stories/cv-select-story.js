@@ -10,7 +10,7 @@ import CvSelectNotesMD from '../../packages/core/src/components/cv-select/cv-sel
 import { CvSelect, CvSelectOptgroup, CvSelectOption } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvSelect', module);
-const storiesExperimental = storiesOf('Experimental/CvSelect', module);
+// const storiesExperimental = storiesOf('Experimental/CvSelect', module);
 
 const preKnobs = {
   theme: {

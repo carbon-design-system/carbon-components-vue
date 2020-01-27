@@ -10,7 +10,7 @@ import CvNumberInputNotesMD from '../../packages/core/src/components/cv-number-i
 import { CvNumberInput, CvNumberInputSkeleton } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvNumberInput', module);
-const storiesExperimental = storiesOf('Experimental/CvNumberInput', module);
+// const storiesExperimental = storiesOf('Experimental/CvNumberInput', module);
 
 let preKnobs = {
   theme: {

@@ -10,7 +10,7 @@ import CvCheckboxNotesMD from '../../packages/core/src/components/cv-checkbox/cv
 import { CvCheckbox, CvCheckboxSkeleton } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvCheckbox', module);
-const storiesExperimental = storiesOf('Experimental/CvCheckbox', module);
+// const storiesExperimental = storiesOf('Experimental/CvCheckbox', module);
 
 let preKnobs = {
   label: {

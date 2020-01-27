@@ -10,7 +10,7 @@ import CvTextAreaNotesMD from '../../packages/core/src/components/cv-text-area/c
 import { CvTextArea } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvTextArea', module);
-const storiesExperimental = storiesOf('Experimental/CvTextArea', module);
+// const storiesExperimental = storiesOf('Experimental/CvTextArea', module);
 
 const preKnobs = {
   theme: {

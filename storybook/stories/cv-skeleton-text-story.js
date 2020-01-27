@@ -8,7 +8,7 @@ import CvSkeletonTextNotesMD from '../../packages/core/src/components/cv-skeleto
 import { CvSkeletonText } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvSkeletonText', module);
-const storiesExperimental = storiesOf('Experimental/CvSkeletonText', module);
+// const storiesExperimental = storiesOf('Experimental/CvSkeletonText', module);
 
 const preKnobs = {
   heading: {

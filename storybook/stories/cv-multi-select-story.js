@@ -10,7 +10,7 @@ import CvMultiSelectNotesMD from '../../packages/core/src/components/cv-multi-se
 import { CvMultiSelect } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvMultiSelect', module);
-const storiesExperimental = storiesOf('Experimental/CvMultiSelect', module);
+// const storiesExperimental = storiesOf('Experimental/CvMultiSelect', module);
 
 const fruits = [
   'Apple',

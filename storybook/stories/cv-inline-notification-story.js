@@ -11,7 +11,7 @@ import CvInlineNotificationNotesMD from '../../packages/core/src/components/cv-i
 import { CvInlineNotification } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvInlineNotification', module);
-const storiesExperimental = storiesOf('Experimental/CvInlineNotification', module);
+// const storiesExperimental = storiesOf('Experimental/CvInlineNotification', module);
 
 const preKnobs = {
   title: {

@@ -9,7 +9,7 @@ import CvCodeSnippetNotesMD from '../../packages/core/src/components/cv-code-sni
 import { CvCodeSnippet, CvCodeSnippetSkeleton } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvCodeSnippet', module);
-const storiesExperimental = storiesOf('Experimental/CvCodeSnippet', module);
+// const storiesExperimental = storiesOf('Experimental/CvCodeSnippet', module);
 
 let preKnobs = {
   copyFeedback: {

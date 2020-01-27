@@ -10,7 +10,7 @@ import CvButtonNotesMD from '../../packages/core/src/components/cv-button/cv-but
 import { CvButton, CvIconButton, CvButtonSkeleton, CvButtonSet } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvButton', module);
-const storiesExperimental = storiesOf('Experimental/CvButton', module);
+// const storiesExperimental = storiesOf('Experimental/CvButton', module);
 const exampleIconPath = require('../../packages/core/src/assets/images/example-icons.svg');
 import AddFilled16 from '@carbon/icons-vue/es/add--filled/16';
 

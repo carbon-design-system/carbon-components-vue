@@ -9,7 +9,7 @@ import CvProgressNotesMD from '../../packages/core/src/components/cv-progress/cv
 import { CvProgress, CvProgressStep } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvProgress', module);
-const storiesExperimental = storiesOf('Experimental/CvProgress', module);
+// const storiesExperimental = storiesOf('Experimental/CvProgress', module);
 
 const preKnobs = {
   initialStep: {

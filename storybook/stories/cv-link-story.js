@@ -10,7 +10,7 @@ import { CvLink } from '../../packages/core/src/';
 import { action } from '@storybook/addon-actions';
 
 const storiesDefault = storiesOf('Components/CvLink', module);
-const storiesExperimental = storiesOf('Experimental/CvLink', module);
+// const storiesExperimental = storiesOf('Experimental/CvLink', module);
 
 const preKnobs = {
   href: {

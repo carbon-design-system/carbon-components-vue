@@ -9,7 +9,7 @@ import CvOverflowMenuNotesMD from '../../packages/core/src/components/cv-overflo
 import { CvOverflowMenu, CvOverflowMenuItem } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvOverflowMenu', module);
-const storiesExperimental = storiesOf('Experimental/CvOverflowMenu', module);
+// const storiesExperimental = storiesOf('Experimental/CvOverflowMenu', module);
 
 const preKnobs = {
   flipMenu: {

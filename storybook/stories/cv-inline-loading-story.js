@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { boolean, text, select } from '@storybook/addon-knobs';
+import { text, select } from '@storybook/addon-knobs';
 
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../_storybook/utils/consts';
@@ -9,7 +9,7 @@ import CvInlineLoadingNotesMD from '../../packages/core/src/components/cv-inline
 import { CvInlineLoading, STATES } from '../../packages/core/src/components/cv-inline-loading';
 
 const storiesDefault = storiesOf('Components/CvInlineLoading', module);
-const storiesExperimental = storiesOf('Experimental/CvInlineLoading', module);
+// const storiesExperimental = storiesOf('Experimental/CvInlineLoading', module);
 
 const preKnobs = {
   endingText: {
