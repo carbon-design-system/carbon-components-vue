@@ -6,8 +6,8 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvComboBoxNotesMD from '@carbon/vue/src/components/cv-combo-box/cv-combo-box-notes.md';
-import { CvComboBox } from '@carbon/vue/src';
+import CvComboBoxNotesMD from '../../packages/core/src/components/cv-combo-box/cv-combo-box-notes.md';
+import { CvComboBox } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvComboBox', module);
 const storiesExperimental = storiesOf('Experimental/CvComboBox', module);

@@ -1,6 +1,4 @@
 const path = require('path');
-const autoprefixer = require('autoprefixer')({ overrideBrowserslist: ['last 2 versions', 'ie >= 10'] });
-
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = async ({ config, mode }) => {
@@ -31,9 +29,8 @@ module.exports = async ({ config, mode }) => {
   });
 
   config.module.rules.push({
-    test: /\.(s){0,1}css$/,
-    loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
-    include: path.resolve(__dirname, '../../'),
+    test: /\.md$/i,
+    use: 'raw-loader',
   });
 
   config.module.rules.push({
@@ -43,14 +40,6 @@ module.exports = async ({ config, mode }) => {
 
   // auto prefix anything in a vue file
   config.resolve.extensions.push('.js', '.vue', '.json', '.jsonl');
-
-  let vueLoaderConfig = config.module.rules.find(item => {
-    return item.loader && item.loader.indexOf('vue-loader') > -1;
-  });
-  vueLoaderConfig.options = {
-    ...vueLoaderConfig.options,
-    postcss: [autoprefixer],
-  };
 
   return config;
 };
