@@ -8,11 +8,11 @@ import knobsHelper from '../_storybook/utils/knobs-helper';
 
 import './cv-tabs-story.scss';
 
-import CvTabsNotesMD from '@carbon/vue/src/components/cv-tabs/cv-tabs-notes.md';
-import { CvTab, CvTabs, CvTabsSkeleton } from '@carbon/vue/src';
+import CvTabsNotesMD from '../../packages/core/src/components/cv-tabs/cv-tabs-notes.md';
+import { CvTab, CvTabs, CvTabsSkeleton } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvTabs', module);
-const storiesExperimental = storiesOf('Experimental/CvTabs', module);
+// const storiesExperimental = storiesOf('Experimental/CvTabs', module);
 
 let preKnobs = {
   container: {

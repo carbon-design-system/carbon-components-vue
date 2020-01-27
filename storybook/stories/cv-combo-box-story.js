@@ -1,16 +1,16 @@
 import { storiesOf } from '@storybook/vue';
-import { text, boolean, select, array } from '@storybook/addon-knobs';
+import { text, boolean, select } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvComboBoxNotesMD from '@carbon/vue/src/components/cv-combo-box/cv-combo-box-notes.md';
-import { CvComboBox } from '@carbon/vue/src';
+import CvComboBoxNotesMD from '../../packages/core/src/components/cv-combo-box/cv-combo-box-notes.md';
+import { CvComboBox } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvComboBox', module);
-const storiesExperimental = storiesOf('Experimental/CvComboBox', module);
+// const storiesExperimental = storiesOf('Experimental/CvComboBox', module);
 
 const fruits = [
   'Apple',

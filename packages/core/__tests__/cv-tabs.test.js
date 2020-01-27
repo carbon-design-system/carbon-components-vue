@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { shallowMount as shallow, mount } from '@vue/test-utils';
-import { testComponent, testInstance, events } from './_helpers';
+import { testComponent, events } from './_helpers';
 import { CvTabs, CvTab } from '@/components/cv-tabs';
 import { settings as carbonSettings } from 'carbon-components';
 

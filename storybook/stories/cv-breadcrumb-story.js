@@ -5,11 +5,11 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvBreadcrumbNotesMD from '@carbon/vue/src/components/cv-breadcrumb/cv-breadcrumb-notes.md';
-import { CvBreadcrumb, CvBreadcrumbItem, CvBreadcrumbSkeleton, CvLink } from '@carbon/vue/src';
+import CvBreadcrumbNotesMD from '../../packages/core/src/components/cv-breadcrumb/cv-breadcrumb-notes.md';
+import { CvBreadcrumb, CvBreadcrumbItem, CvBreadcrumbSkeleton, CvLink } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvBreadcrumb', module);
-const storiesExperimental = storiesOf('Experimental/CvBreadcrumb', module);
+// const storiesExperimental = storiesOf('Experimental/CvBreadcrumb', module);
 
 const preKnobs = {
   ariaLabel: {
