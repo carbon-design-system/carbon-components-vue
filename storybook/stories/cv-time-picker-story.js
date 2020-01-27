@@ -9,7 +9,7 @@ import knobsHelper from '../_storybook/utils/knobs-helper';
 import CvTimePickerNotesMD from '../../packages/core/src/components/cv-time-picker/cv-time-picker-notes.md';
 import { CvTimePicker } from '../../packages/core/src/';
 const storiesDefault = storiesOf('Components/CvTimePicker', module);
-const storiesExperimental = storiesOf('Experimental/CvTimePicker', module);
+// const storiesExperimental = storiesOf('Experimental/CvTimePicker', module);
 
 const ampmConfig = [
   'ampm',

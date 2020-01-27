@@ -10,7 +10,7 @@ import CvTagNotesMD from '../../packages/core/src/components/cv-tag/cv-tag-notes
 import { CvTag, CvTagSkeleton } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvTag', module);
-// const storiesExperimental = storiesOf('Experimental/CvTag', module);
+// // const storiesExperimental = storiesOf('Experimental/CvTag', module);
 
 let preKnobs = {
   label: {

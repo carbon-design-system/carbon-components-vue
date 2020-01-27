@@ -64,8 +64,6 @@ import CaretUpGlyph from '@carbon/icons-vue/es/caret--up/index';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
 
-const maxDecimalPlaces = 10; // Stanard floating point accuracy goes at 14 cautionsly
-
 export default {
   name: 'CvNumberInput',
   mixins: [uidMixin, themeMixin],

@@ -1,5 +1,5 @@
-import { shallowMount as shallow, mount } from '@vue/test-utils';
-import { testComponent, testInstance, events } from './_helpers';
+import { shallowMount as shallow } from '@vue/test-utils';
+import { testComponent } from './_helpers';
 import { CvAccordion, CvAccordionItem, CvAccordionSkeleton } from '@/components/cv-Accordion';
 import { settings as carbonSettings } from 'carbon-components';
 

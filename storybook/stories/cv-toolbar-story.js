@@ -19,7 +19,7 @@ import {
 } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvToolbar', module);
-const storiesExperimental = storiesOf('Experimental/CvToolbar', module);
+// const storiesExperimental = storiesOf('Experimental/CvToolbar', module);
 
 import Filter16 from '@carbon/icons-vue/es/filter/16';
 

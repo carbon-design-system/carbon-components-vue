@@ -10,7 +10,7 @@ import { CvTile } from '../../packages/core/src/';
 import { action } from '@storybook/addon-actions';
 
 const storiesDefault = storiesOf('Components/CvTile', module);
-const storiesExperimental = storiesOf('Experimental/CvTile', module);
+// const storiesExperimental = storiesOf('Experimental/CvTile', module);
 
 let preKnobs = {
   slotDefault: {

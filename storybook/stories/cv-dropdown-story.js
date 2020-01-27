@@ -10,7 +10,7 @@ import CvDropdownNotesMD from '../../packages/core/src/components/cv-dropdown/cv
 import { CvDropdown, CvDropdownItem, CvDropdownSkeleton } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvDropdown', module);
-const storiesExperimental = storiesOf('Experimental/CvDropdown', module);
+// const storiesExperimental = storiesOf('Experimental/CvDropdown', module);
 
 let preKnobs = {
   theme: {

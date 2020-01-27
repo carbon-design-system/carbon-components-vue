@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { text, boolean, array } from '@storybook/addon-knobs';
+import { text, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
@@ -10,7 +10,7 @@ import CvToggleNotesMD from '../../packages/core/src/components/cv-toggle/cv-tog
 import { CvToggle, CvToggleSkeleton } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvToggle', module);
-const storiesExperimental = storiesOf('Experimental/CvToggle', module);
+// const storiesExperimental = storiesOf('Experimental/CvToggle', module);
 
 let preKnobs = {
   checked: {

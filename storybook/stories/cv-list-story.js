@@ -9,7 +9,7 @@ import CvListNotesMD from '../../packages/core/src/components/cv-list/cv-list-no
 import { CvList, CvListItem } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvList', module);
-const storiesExperimental = storiesOf('Experimental/CvList', module);
+// const storiesExperimental = storiesOf('Experimental/CvList', module);
 
 const preKnobs = {
   ordered: {

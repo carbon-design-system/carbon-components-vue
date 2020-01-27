@@ -278,7 +278,7 @@ export default {
         // this.checkHighlightPosition(firstMatchIndex);
       }
     },
-    onInput(ev) {
+    onInput() {
       this.doOpen(true);
 
       this.updateOptions();
@@ -310,7 +310,7 @@ export default {
         this.$refs.input.focus();
       }
     },
-    onClick(ev) {
+    onClick() {
       this.doOpen(!this.open);
       if (this.open) {
         this.$refs.input.focus();

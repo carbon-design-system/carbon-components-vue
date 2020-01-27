@@ -11,7 +11,7 @@ import CvModalNotesMD from '../../packages/core/src/components/cv-modal/cv-modal
 import { CvModal } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvModal', module);
-const storiesExperimental = storiesOf('Experimental/CvModal', module);
+// const storiesExperimental = storiesOf('Experimental/CvModal', module);
 
 const preKnobs = {
   label: {

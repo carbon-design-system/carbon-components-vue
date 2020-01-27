@@ -11,7 +11,7 @@ import CvLoadingNotesMD from '../../packages/core/src/components/cv-loading/cv-l
 import { CvLoading } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvLoading', module);
-const storiesExperimental = storiesOf('Experimental/CvLoading', module);
+// const storiesExperimental = storiesOf('Experimental/CvLoading', module);
 
 const preKnobs = {
   active: {

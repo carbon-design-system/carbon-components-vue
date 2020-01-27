@@ -10,7 +10,7 @@ import CvSearchNotesMD from '../../packages/core/src/components/cv-search/cv-sea
 import { CvSearch } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvSearch', module);
-const storiesExperimental = storiesOf('Experimental/CvSearch', module);
+// const storiesExperimental = storiesOf('Experimental/CvSearch', module);
 
 const preKnobs = {
   theme: {

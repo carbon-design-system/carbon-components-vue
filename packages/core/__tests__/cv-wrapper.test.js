@@ -1,9 +1,9 @@
 import { shallowMount as shallow, mount } from '@vue/test-utils';
-import { testComponent, testInstance, events } from './_helpers';
+import { testComponent } from './_helpers';
 import CvWrapper from '@/components/cv-wrapper/_cv-wrapper';
-import { settings as carbonSettings } from 'carbon-components';
+// import { settings as carbonSettings } from 'carbon-components';
 
-const carbonPrefix = carbonSettings.prefix;
+// const carbonPrefix = carbonSettings.prefix;
 
 describe('CvWrapper', () => {
   // ***************

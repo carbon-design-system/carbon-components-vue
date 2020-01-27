@@ -35,7 +35,7 @@ import UserAvatar20 from '@carbon/icons-vue/es/user--avatar/20';
 import AppSwitcher20 from '@carbon/icons-vue/es/app-switcher/20';
 
 const storiesDefault = storiesOf('Components/CvUIShell - header', module);
-const storiesExperimental = storiesOf('Experimental/CvUIShell - header', module);
+// const storiesExperimental = storiesOf('Experimental/CvUIShell - header', module);
 
 const preKnobs = {
   // flipMenu: {

@@ -16,7 +16,7 @@ import {
 } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvForm', module);
-const storiesExperimental = storiesOf('Experimental/CvForm', module);
+// const storiesExperimental = storiesOf('Experimental/CvForm', module);
 
 const preKnobs = {};
 

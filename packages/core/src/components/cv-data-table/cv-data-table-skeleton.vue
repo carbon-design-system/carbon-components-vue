@@ -47,7 +47,7 @@ export default {
   },
   computed: {
     data() {
-      return [...Array(Math.max(this.rows, 1))].map(item => Array(this.cols.length).fill(''));
+      return [...Array(Math.max(this.rows, 1))].map(() => Array(this.cols.length).fill(''));
     },
     cols() {
       return typeof this.columns !== 'number' ? this.columns : Array(Math.max(this.columns, 1)).fill('');
