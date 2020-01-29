@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.22.0-canary.0 (jan 29th 2020)
+
+## Chore
+
+- move to Vue CLI 4
+- Fix node engine version
+- Ensure CI Check run before deploying storybook
+
+## Fix
+
+- Linter warnings
+
 ## 2.21.0 (jan 24th 2020)
 
 ## fix
