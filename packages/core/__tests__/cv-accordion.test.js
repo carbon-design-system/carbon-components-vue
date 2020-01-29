@@ -1,6 +1,6 @@
 import { shallowMount as shallow } from '@vue/test-utils';
 import { testComponent } from './_helpers';
-import { CvAccordion, CvAccordionItem, CvAccordionSkeleton } from '@/components/cv-Accordion';
+import { CvAccordion, CvAccordionItem, CvAccordionSkeleton } from '@/components/cv-accordion';
 import { settings as carbonSettings } from 'carbon-components';
 
 const carbonPrefix = carbonSettings.prefix;
