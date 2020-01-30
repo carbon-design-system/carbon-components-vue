@@ -19,13 +19,7 @@ module.exports = async ({ config, mode }) => {
   config.module.rules.push({
     test: /-story\.js$/,
     include: path.resolve(__dirname, '../stories'),
-    loader: require.resolve('@storybook/addon-storysource/loader'),
-    options: {
-      prettierConfig: {
-        parser: 'babel', // Remove warnings when loading story source files
-      },
-    },
-    enforce: 'pre',
+    loader: require.resolve('@storybook/source-loader'),
   });
 
   config.module.rules.push({

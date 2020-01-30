@@ -55,7 +55,8 @@
     "/src"
   ],
   "scripts": {
-    "build": "vue-cli-service build --target lib --name carbon-vue ./src/index.js --no-clean"
+    "build": "vue-cli-service build --target lib --name carbon-vue ./src/index.js --no-clean",
+    "clean": "rimraf dist node_modules/.cache"
   },
   "engines": {
     "node": ">=10.x"
