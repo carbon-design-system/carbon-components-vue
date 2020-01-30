@@ -9,7 +9,7 @@ module.exports = async ({ config, mode }) => {
   config.plugins.push(
     new CopyPlugin([
       {
-        context: '../docs/carbon-vue-icon/',
+        context: 'docs/carbon-vue-icon/',
         from: '*',
         to: 'static/media/carbon-vue-icon/',
       },
