@@ -135,7 +135,7 @@ export default {
         // prevents this.value of 1 updating this.internalValue of 1.0
         // which improves the typing experience
         // does not matter if this.value is string or number
-        this.internalValue = this.value.toString();
+        this.internalValue = this.valueAsString(this.value);
       }
     },
   },
@@ -159,17 +159,16 @@ export default {
       this.isInvalid = !!(this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length));
       this.isHelper = !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
     },
-
     doUp() {
       this.$refs.input.stepUp();
+      this.onInput(this.$refs.input.value);
     },
     doDown() {
       this.$refs.input.stepDown();
+      this.onInput(this.$refs.input.value);
     },
     emitValue() {
       if (typeof this.value === 'number') {
-        // this.$emit('input', this.internalNumberValue);
-
         if (this.internalValue != this.value) {
           const ePos = this.internalValue.indexOf('e-');
           const dotPos = this.internalValue.indexOf('.');
@@ -186,7 +185,7 @@ export default {
     valueAsString(val) {
       let strVal;
       if (typeof val === 'number') {
-        strVal = val.toString();
+        strVal = Number.isFinite(val) ? val.toString() : '';
       } else {
         strVal = val;
       }
