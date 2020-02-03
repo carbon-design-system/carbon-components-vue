@@ -6,11 +6,11 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvDropdownNotesMD from '@carbon/vue/src/components/cv-dropdown/cv-dropdown-notes.md';
-import { CvDropdown, CvDropdownItem, CvDropdownSkeleton } from '@carbon/vue/src';
+import CvDropdownNotesMD from '../../packages/core/src/components/cv-dropdown/cv-dropdown-notes.md';
+import { CvDropdown, CvDropdownItem, CvDropdownSkeleton } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvDropdown', module);
-const storiesExperimental = storiesOf('Experimental/CvDropdown', module);
+// const storiesExperimental = storiesOf('Experimental/CvDropdown', module);
 
 let preKnobs = {
   theme: {

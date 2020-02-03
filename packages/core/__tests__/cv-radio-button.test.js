@@ -1,4 +1,4 @@
-import { shallowMount as shallow, mount } from '@vue/test-utils';
+import { shallowMount as shallow } from '@vue/test-utils';
 import { testComponent } from './_helpers';
 import { CvRadioButton, CvRadioGroup } from '@/components/cv-radio-button/';
 

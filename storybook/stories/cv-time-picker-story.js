@@ -6,10 +6,10 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvTimePickerNotesMD from '@carbon/vue/src/components/cv-time-picker/cv-time-picker-notes.md';
-import { CvTimePicker } from '@carbon/vue/src';
+import CvTimePickerNotesMD from '../../packages/core/src/components/cv-time-picker/cv-time-picker-notes.md';
+import { CvTimePicker } from '../../packages/core/src/';
 const storiesDefault = storiesOf('Components/CvTimePicker', module);
-const storiesExperimental = storiesOf('Experimental/CvTimePicker', module);
+// const storiesExperimental = storiesOf('Experimental/CvTimePicker', module);
 
 const ampmConfig = [
   'ampm',
@@ -79,7 +79,10 @@ const preKnobs = {
     config: [
       'timezones',
       {
-        list: [{ label: 'Timezone-1', value: 'timezone1' }, { label: 'Timezone-2', value: 'timezone2' }],
+        list: [
+          { label: 'Timezone-1', value: 'timezone1' },
+          { label: 'Timezone-2', value: 'timezone2' },
+        ],
       },
       // consts.CONFIG,
     ],

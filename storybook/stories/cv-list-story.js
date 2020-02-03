@@ -5,11 +5,11 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvListNotesMD from '@carbon/vue/src/components/cv-list/cv-list-notes.md';
-import { CvList, CvListItem } from '@carbon/vue/src';
+import CvListNotesMD from '../../packages/core/src/components/cv-list/cv-list-notes.md';
+import { CvList, CvListItem } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvList', module);
-const storiesExperimental = storiesOf('Experimental/CvList', module);
+// const storiesExperimental = storiesOf('Experimental/CvList', module);
 
 const preKnobs = {
   ordered: {

@@ -1,7 +1,7 @@
 {
   "name": "@carbon/vue",
   "description": "A collection of components for the Carbon Design System built using Vue.js",
-  "version": "2.21.0-canary.0",
+  "version": "2.21.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -69,7 +69,6 @@
   },
   "devDependencies": {
     "@vue/cli-service": "^3.11.0",
-    "babel-preset-env": "1.7.0",
     "eslint-plugin-prettier": "^3.1.1",
     "vue-template-compiler": "^2.6.10"
   }

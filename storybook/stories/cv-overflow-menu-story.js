@@ -5,11 +5,11 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvOverflowMenuNotesMD from '@carbon/vue/src/components/cv-overflow-menu/cv-overflow-menu-notes.md';
-import { CvOverflowMenu, CvOverflowMenuItem } from '@carbon/vue/src';
+import CvOverflowMenuNotesMD from '../../packages/core/src/components/cv-overflow-menu/cv-overflow-menu-notes.md';
+import { CvOverflowMenu, CvOverflowMenuItem } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvOverflowMenu', module);
-const storiesExperimental = storiesOf('Experimental/CvOverflowMenu', module);
+// const storiesExperimental = storiesOf('Experimental/CvOverflowMenu', module);
 
 const preKnobs = {
   flipMenu: {
