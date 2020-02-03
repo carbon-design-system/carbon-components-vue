@@ -70,10 +70,10 @@ export default {
   watch: {
     expanded: {
       immediate: true,
-      handler (value) {
-        this.isExpanded = value
-      }
-    }
-  }
+      handler(value) {
+        this.isExpanded = value;
+      },
+    },
+  },
 };
 </script>
