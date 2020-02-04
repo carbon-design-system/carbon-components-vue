@@ -28,7 +28,7 @@
             Modal Title
           </slot>
         </p>
-        <button class="bx--modal-close" type="button" @click="onClose" ref="close">
+        <button class="bx--modal-close" type="button" @click="onClose" ref="close" :aria-lael="closeAriaLabel">
           <Close16 class="bx--modal-close__icon" />
         </button>
       </div>
@@ -76,6 +76,7 @@ export default {
     Close16,
   },
   props: {
+    closeAriaLabel: { type: String, default: 'Close modal' },
     kind: {
       type: String,
       default: '',

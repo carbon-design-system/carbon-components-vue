@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { boolean, select } from '@storybook/addon-knobs';
+import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { action } from '@storybook/addon-actions';
 
@@ -14,6 +14,12 @@ const storiesDefault = storiesOf('Components/CvModal', module);
 // const storiesExperimental = storiesOf('Experimental/CvModal', module);
 
 const preKnobs = {
+  closeAriaLabel: {
+    group: 'attr',
+    type: text,
+    config: ['close-aria-label', 'Close'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'close-aria-label',
+  },
   label: {
     group: 'content',
     slot: 'label',
@@ -139,11 +145,15 @@ const preKnobs = {
 };
 
 const variants = [
-  { name: 'default', includes: ['label', 'title', 'content', 'size', 'visible', 'events', 'autoHideOff'] },
-  { name: 'no-body', includes: ['label', 'title', 'visible', 'size', 'events', 'autoHideOff'] },
+  {
+    name: 'default',
+    includes: ['closeAriaLabel', 'label', 'title', 'content', 'size', 'visible', 'events', 'autoHideOff'],
+  },
+  { name: 'no-body', includes: ['closeAriaLabel', 'label', 'title', 'visible', 'size', 'events', 'autoHideOff'] },
   {
     name: 'buttons',
     includes: [
+      'closeAriaLabel',
       'label',
       'title',
       'content',
@@ -158,6 +168,7 @@ const variants = [
   {
     name: 'buttons with listeners',
     includes: [
+      'closeAriaLabel',
       'label',
       'title',
       'content',
@@ -172,11 +183,21 @@ const variants = [
   },
   {
     name: 'primary-only',
-    includes: ['label', 'title', 'content', 'size', 'primaryButton', 'primaryButtonDisabled', 'events', 'autoHideOff'],
+    includes: [
+      'closeAriaLabel',
+      'label',
+      'title',
+      'content',
+      'size',
+      'primaryButton',
+      'primaryButtonDisabled',
+      'events',
+      'autoHideOff',
+    ],
   },
   {
     name: 'secondary-only',
-    includes: ['label', 'title', 'size', 'content', 'secondaryButton', 'events', 'autoHideOff'],
+    includes: ['closeAriaLabel', 'label', 'title', 'size', 'content', 'secondaryButton', 'events', 'autoHideOff'],
   },
   { name: 'minimal', includes: ['label', 'title', 'content'] },
   { name: 'with input', excludes: ['label', 'title', 'content', 'scrollingContent'] },
