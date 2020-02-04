@@ -202,6 +202,7 @@ describe('CvNumberInput', () => {
 
   // the next four tests are commented out until JSDOM correctly
   // implements decimal floating point for <input> elements
+  // see https://github.com/jsdom/jsdom/issues/2823
 
   // it('should emit value increased by 0.3 on doUp', () => {
   //   const id = '1';
