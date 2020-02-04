@@ -180,7 +180,7 @@ Can be added either into the headers 'left-panels' slot or stand alone.
             L2 menu item
           </cv-side-nav-menu-item>
         </cv-side-nav-menu>
-        <cv-side-nav-menu title="L1 menu">
+        <cv-side-nav-menu title="L1 menu" expanded>
           <template slot="nav-icon"><Fade16 /></template>
           <cv-side-nav-menu-item href="javascript:void(0)">
             L2 menu item
@@ -209,3 +209,4 @@ Can be added either into the headers 'left-panels' slot or stand alone.
 
 - CvSideNav can be passed the boolean attribute 'rail' this switches the side nav into rail form.
 - CvHeaderSideNavItems can be passed the boolean attribute 'divider' which will add a dividing
+- cv-side-nav-menu can be passed the boolean attribute 'expanded' that sets the expanded state of the menu
