@@ -137,6 +137,20 @@ describe('CvNumberInput', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
+  it('should match snapshot when mobile variant requested', () => {
+    const id = '1';
+    const value = 5;
+    const mobile = true;
+    const propsData = { id, value, mobile };
+    const wrapper = shallow(CvNumberInput, {
+      slots: {
+        'helper-text': '<div class="fake-slot">my helper text</div>',
+      },
+      propsData,
+    });
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   // ***************
   // FUNCTIONAL TESTS
   // ***************

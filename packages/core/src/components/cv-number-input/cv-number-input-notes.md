@@ -35,6 +35,7 @@ http://www.carbondesignsystem.com/components/number-input/code
 - step: optional step (string or number) operates as per stanard html number input
 - theme: optional 'light',
 - value: optional initial value of the input (string or number)
+- mobile: optional mobile variant
 
 Other standard props e.g. disabled, min, max, step
 

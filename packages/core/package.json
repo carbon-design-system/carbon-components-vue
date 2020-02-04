@@ -1,7 +1,7 @@
 {
   "name": "@carbon/vue",
   "description": "A collection of components for the Carbon Design System built using Vue.js",
-  "version": "2.21.0",
+  "version": "2.22.0-canary.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -55,7 +55,8 @@
     "/src"
   ],
   "scripts": {
-    "build": "vue-cli-service build --target lib --name carbon-vue ./src/index.js --no-clean"
+    "build": "vue-cli-service build --target lib --name carbon-vue ./src/index.js --no-clean",
+    "clean": "rimraf dist node_modules/.cache"
   },
   "engines": {
     "node": ">=10.x"

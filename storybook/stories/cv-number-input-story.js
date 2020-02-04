@@ -108,6 +108,12 @@ let preKnobs = {
     config: ['step', 1], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: 'step',
   },
+  mobile: {
+    group: 'attr',
+    type: boolean,
+    config: ['mobile', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'mobile',
+  },
   vModel: {
     group: 'attr',
     value: `v-model="modelValue"`,
@@ -145,8 +151,8 @@ let variants = [
     excludes: ['vModel', 'events', 'numValue', 'vModelNum', 'numMin', 'numMax', 'numStep'],
   },
   { name: 'minimal', includes: ['label'] },
-  { name: 'vModel', includes: ['label', 'vModel', 'step', 'events'] },
-  { name: 'vModelNum', includes: ['label', 'vModelNum', 'numStep', 'events'] },
+  { name: 'vModel', includes: ['label', 'vModel', 'step', 'mobile', 'events'] },
+  { name: 'vModelNum', includes: ['label', 'vModelNum', 'numStep', 'mobile', 'events'] },
 ];
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);

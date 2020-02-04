@@ -7,6 +7,7 @@
         'bx--number--light': theme === 'light',
         'bx--number--helpertext': isHelper,
         'cv-number-input': !formItem,
+        'bx--number--mobile': mobile,
       }"
       :data-invalid="isInvalid"
     >
@@ -15,6 +16,16 @@
         <slot name="helper-text">{{ helperText }}</slot>
       </div>
       <div class="bx--number__input-wrapper">
+        <button
+          v-if="mobile"
+          class="bx--number__control-btn down-icon"
+          @click="doDown"
+          type="button"
+          :aria-label="ariaLabelForDownButton"
+          :disabled="disabled"
+        >
+          <CaretDownGlyph />
+        </button>
         <input
           :id="uid"
           type="number"
@@ -27,8 +38,8 @@
           :max="max"
           ref="input"
         />
-        <WarningFilled16 v-if="isInvalid" class="bx--number__invalid" />
-        <div class="bx--number__controls">
+        <WarningFilled16 v-if="isInvalid && !mobile" class="bx--number__invalid" />
+        <div class="bx--number__controls" v-if="!mobile">
           <button
             class="bx--number__control-btn up-icon"
             @click="doUp"
@@ -48,6 +59,16 @@
             <CaretDownGlyph />
           </button>
         </div>
+        <button
+          v-else
+          class="bx--number__control-btn up-icon"
+          @click="doUp"
+          type="button"
+          :aria-label="ariaLabelForUpButton"
+          :disabled="disabled"
+        >
+          <CaretUpGlyph />
+        </button>
       </div>
       <div class="bx--form-requirement" v-if="isInvalid">
         <slot name="invalid-message">{{ invalidMessage }}</slot>
@@ -91,6 +112,7 @@ export default {
     min: { type: [String, Number], default: undefined },
     max: { type: [String, Number], default: undefined },
     step: { type: [String, Number], default: undefined },
+    mobile: Boolean,
   },
   data() {
     return {

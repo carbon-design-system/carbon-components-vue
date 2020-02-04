@@ -190,7 +190,7 @@ $component-padding: 20px;
 
 .sv-template-view__copy {
   position: absolute;
-  top: 39px;
+  top: 54px;
   left: 0;
 
   &.sv-template-view__copy--copied::after {
