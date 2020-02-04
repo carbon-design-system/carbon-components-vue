@@ -35,6 +35,7 @@ This is done after the modal transitions into its visible state, which is trigge
 
 ## Attributes
 
+- closeAriaLabel: optional label for close button, default 'Close modal'
 - auto-hide-off: boolean value if true the component user is expected to close the modal via visible property or hide method.
 - kind: 'danger' other wise default modal.
 - visible: visibility of modal dialog
