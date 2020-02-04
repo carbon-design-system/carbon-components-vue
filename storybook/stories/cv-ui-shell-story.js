@@ -340,7 +340,7 @@ const preKnobs = {
             L2 menu item
           </cv-side-nav-menu-item>
         </cv-side-nav-menu>
-        <cv-side-nav-menu title="L1 menu">
+        <cv-side-nav-menu title="L1 menu" expanded>
           <cv-side-nav-menu-item href="javascript:void(0)">
             L2 menu item
           </cv-side-nav-menu-item>
