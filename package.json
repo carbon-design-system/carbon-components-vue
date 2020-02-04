@@ -51,6 +51,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^5.2.3",
     "husky": "^2.4.1",
+    "jest-environment-jsdom-sixteen": "^1.0.0",
     "jsonlines-loader": "^1.0.1",
     "lerna": "^3.16.4",
     "lint-staged": "^8.2.1",
@@ -143,6 +144,7 @@
     "snapshotSerializers": [
       "jest-serializer-vue"
     ],
+    "testEnvironment": "jest-environment-jsdom-sixteen",
     "testMatch": [
       "**/*.test.(js|jsx|ts|tsx)"
     ],

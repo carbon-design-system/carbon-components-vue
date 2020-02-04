@@ -155,52 +155,56 @@ describe('CvNumberInput', () => {
   // FUNCTIONAL TESTS
   // ***************
 
-  // it('should emit input on doDown', () => {
-  //   const id = '1';
-  //   const wrapper = shallow(CvNumberInput, { propsData: { id } });
-  //   wrapper.find('.down-icon').trigger('click');
-  //   expect(wrapper.emitted().input).toBeTruthy();
-  // });
+  it('should emit input on doDown', () => {
+    const id = '1';
+    const wrapper = shallow(CvNumberInput, { propsData: { id } });
+    wrapper.find('.down-icon').trigger('click');
+    expect(wrapper.emitted().input).toBeTruthy();
+  });
 
-  // it('should emit input on doUp', () => {
-  //   const id = '1';
-  //   const wrapper = shallow(CvNumberInput, { propsData: { id } });
-  //   wrapper.find('.up-icon').trigger('click');
-  //   expect(wrapper.emitted().input).toBeTruthy();
-  // });
+  it('should emit input on doUp', () => {
+    const id = '1';
+    const wrapper = shallow(CvNumberInput, { propsData: { id } });
+    wrapper.find('.up-icon').trigger('click');
+    expect(wrapper.emitted().input).toBeTruthy();
+  });
 
-  // it('should emit input on change', () => {
-  //   const id = '1';
-  //   const wrapper = shallow(CvNumberInput, { propsData: { id } });
-  //   wrapper.find('input').trigger('input');
-  //   expect(wrapper.emitted().input).toBeTruthy();
-  // });
+  it('should emit input on change', () => {
+    const id = '1';
+    const wrapper = shallow(CvNumberInput, { propsData: { id } });
+    wrapper.find('input').trigger('input');
+    expect(wrapper.emitted().input).toBeTruthy();
+  });
 
-  // it('should emit String when value prop is String', () => {
-  //   const id = '1';
-  //   const value = '555';
-  //   const wrapper = shallow(CvNumberInput, { propsData: { id, value } });
-  //   wrapper.find('.up-icon').trigger('click');
-  //   expect(wrapper.emitted().input[0]).toEqual([(parseInt(value) + 1).toString()]);
-  // });
+  it('should emit String when value prop is String', () => {
+    const id = '1';
+    const value = '555';
+    const wrapper = shallow(CvNumberInput, { propsData: { id, value } });
+    wrapper.find('.up-icon').trigger('click');
+    expect(wrapper.emitted().input[0]).toEqual([(parseInt(value) + 1).toString()]);
+  });
 
-  // it('should emit value encreased by 1 on doUp', () => {
-  //   const id = '1';
-  //   const value = 2;
-  //   const wrapper = shallow(CvNumberInput, { propsData: { id, value } });
-  //   wrapper.find('.up-icon').trigger('click');
-  //   expect(wrapper.emitted().input[0]).toEqual([value + 1]);
-  // });
+  it('should emit value increased by 1 on doUp', () => {
+    const id = '1';
+    const value = 2;
+    const wrapper = shallow(CvNumberInput, { propsData: { id, value } });
+    wrapper.find('.up-icon').trigger('click');
+    expect(wrapper.emitted().input[0]).toEqual([value + 1]);
+  });
 
-  // it('should emit value decreased by 1 on doDown', () => {
-  //   const id = '1';
-  //   const value = 10;
-  //   const wrapper = shallow(CvNumberInput, { propsData: { id, value } });
-  //   wrapper.find('.down-icon').trigger('click');
-  //   expect(wrapper.emitted().input[0]).toEqual([value - 1]);
-  // });
+  it('should emit value decreased by 1 on doDown', () => {
+    const id = '1';
+    const value = 10;
+    const wrapper = shallow(CvNumberInput, { propsData: { id, value } });
+    wrapper.find('.down-icon').trigger('click');
+    expect(wrapper.emitted().input[0]).toEqual([value - 1]);
+  });
 
-  // it('should emit value encreased by 0.3 on doUp', () => {
+  // the next four tests are commented out until JSDOM correctly
+  // implements decimal floating point for <input> elements
+  // see https://github.com/jsdom/jsdom/issues/2823
+
+  // it('should emit value increased by 0.3 on doUp', () => {
   //   const id = '1';
   //   const value = 0;
   //   const step = 0.3;
@@ -236,43 +240,49 @@ describe('CvNumberInput', () => {
   //   expect(wrapper.emitted().input[0]).toEqual([0.3]);
   // });
 
-  // it('should respect max value', () => {
-  //   const id = '1';
-  //   const value = 10;
-  //   const max = 10;
-  //   const wrapper = shallow(CvNumberInput, { propsData: { id, value, max } });
-  //   wrapper.find('.up-icon').trigger('click');
-  //   expect(wrapper.emitted().input[0]).toEqual([10]);
-  // });
+  it('should respect max value', () => {
+    const id = '1';
+    const value = 9;
+    const step = 2;
+    const max = 10;
+    const wrapper = shallow(CvNumberInput, { propsData: { id, step, value, max } });
+    wrapper.find('.up-icon').trigger('click');
+    wrapper.find('.up-icon').trigger('click');
+    expect(wrapper.emitted().input[0]).toEqual([10]);
+    expect(wrapper.emitted().input[1]).toEqual([10]);
+  });
 
-  // it('should respoect min value', () => {
-  //   const id = '1';
-  //   const value = 0;
-  //   const min = 0;
-  //   const wrapper = shallow(CvNumberInput, { propsData: { id, value, min } });
-  //   wrapper.find('.down-icon').trigger('click');
-  //   expect(wrapper.emitted().input[0]).toEqual([0]);
-  // });
+  it('should respect min value', () => {
+    const id = '1';
+    const value = 1;
+    const step = 2;
+    const min = 0;
+    const wrapper = shallow(CvNumberInput, { propsData: { id, step, value, min } });
+    wrapper.find('.down-icon').trigger('click');
+    wrapper.find('.down-icon').trigger('click');
+    expect(wrapper.emitted().input[0]).toEqual([0]);
+    expect(wrapper.emitted().input[1]).toEqual([0]);
+  });
 
-  // it('should emit the correct value on input', () => {
-  //   const id = '1';
-  //   const value = 2;
-  //   const inputValue = 100;
-  //   const wrapper = shallow(CvNumberInput, { propsData: { id, value } });
-  //   wrapper.find('input').setValue(inputValue);
-  //   wrapper.find('input').trigger('input');
-  //   expect(wrapper.emitted().input[0]).toEqual([inputValue]);
-  // });
+  it('should emit the correct value on input', () => {
+    const id = '1';
+    const value = 2;
+    const inputValue = 100;
+    const wrapper = shallow(CvNumberInput, { propsData: { id, value } });
+    wrapper.find('input').setValue(inputValue);
+    wrapper.find('input').trigger('input');
+    expect(wrapper.emitted().input[0]).toEqual([inputValue]);
+  });
 
-  // it('should watch value', () => {
-  //   const id = '1';
-  //   const value1 = 2;
-  //   const value2 = 80;
-  //   const wrapper = shallow(CvNumberInput, { propsData: { id, value: value1 } });
-  //   expect(wrapper.vm.value).toEqual(value1);
-  //   wrapper.setProps({ value: value2 });
-  //   expect(wrapper.vm.value).toEqual(value2);
-  // });
+  it('should watch value', () => {
+    const id = '1';
+    const value1 = 2;
+    const value2 = 80;
+    const wrapper = shallow(CvNumberInput, { propsData: { id, value: value1 } });
+    expect(wrapper.vm.value).toEqual(value1);
+    wrapper.setProps({ value: value2 });
+    expect(wrapper.vm.value).toEqual(value2);
+  });
 });
 
 describe('CvNumberInputSkeleton', () => {
