@@ -1,5 +1,26 @@
 # Changelog
 
+## 2.22.0-canary.1 (feb 4th 2020)
+
+## Feat
+
+- Mobile number input version
+- Expanded property added to UIShell sidenav menus
+-
+
+## Fix
+
+- Number input tests
+- Input event emit from CvNumberInput on use of up down buttons
+- Add missing closeAriaLabel property to CvModal
+
+## Chore
+
+- Copy button position is stories
+- FavIcon in storybook
+- Linter warnings on story source loading
+- CI messages
+
 ## 2.22.0-canary.0 (jan 29th 2020)
 
 ## Chore

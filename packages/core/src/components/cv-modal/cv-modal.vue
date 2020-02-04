@@ -28,7 +28,7 @@
             Modal Title
           </slot>
         </p>
-        <button class="bx--modal-close" type="button" @click="onClose" ref="close" :aria-lael="closeAriaLabel">
+        <button class="bx--modal-close" type="button" @click="onClose" ref="close" :aria-label="closeAriaLabel">
           <Close16 class="bx--modal-close__icon" />
         </button>
       </div>
