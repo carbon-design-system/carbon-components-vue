@@ -27,19 +27,7 @@ export default {
   },
   computed: {
     buttonClasses() {
-      let classes = [
-        `${this.carbonPrefix}--btn`,
-        `${this.carbonPrefix}--btn--icon-only`,
-        `${this.carbonPrefix}--btn--${this.kind.toLowerCase()}`,
-      ];
-
-      if (this.size === 'small' || (this.size === undefined && this.small)) {
-        classes.push(`${this.carbonPrefix}--btn--sm`);
-      }
-      if (this.size === 'field') {
-        classes.push(`${this.carbonPrefix}--btn--field`);
-      }
-      return classes;
+      return this.buttonClassOpts({ iconOnly: true });
     },
     tipClasses() {
       const tipPosition = this.tipPosition || 'bottom';
