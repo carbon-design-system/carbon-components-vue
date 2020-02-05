@@ -1,3 +1,5 @@
+import { settings as carbonSettings } from 'carbon-components';
+
 export default {
   props: {
     icon: {
@@ -27,7 +29,7 @@ export default {
     },
     small: {
       type: Boolean,
-      default: false,
+      default: undefined,
       validator(val) {
         if (val !== undefined && process.env.NODE_ENV === 'development') {
           console.warn('CvButton: small deprecated in favour of size.');
@@ -45,6 +47,32 @@ export default {
       return Object.assign({}, this.$listeners, {
         click: event => this.$emit('click', event),
       });
+    },
+    buttonClassOpts() {
+      return (opts = {}) => {
+        let classes = [`${carbonSettings.prefix}--btn`];
+
+        if (opts.skeleton) {
+          classes.push(`${carbonSettings.prefix}--skeleton`);
+        }
+
+        if (opts.iconOnly) {
+          classes.push(`${carbonSettings.prefix}--btn--icon-only`);
+        }
+
+        if (this.kind && !opts.skeleton) {
+          classes.push(`${carbonSettings.prefix}--btn--${this.kind.toLowerCase()}`);
+        }
+
+        if (this.size === 'small' || (this.size === undefined && this.small)) {
+          classes.push(`${carbonSettings.prefix}--btn--sm`);
+        }
+        if (this.size === 'field') {
+          classes.push(`${carbonSettings.prefix}--btn--field`);
+        }
+
+        return classes;
+      };
     },
   },
 };
