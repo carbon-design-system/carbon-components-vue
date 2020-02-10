@@ -1,20 +1,26 @@
 # Changelog
 
+## 2.22.0
+
+### Fix
+
+- Removed deprecation message when using size instead of small button property
+
 ## 2.22.0-canary.1 (feb 4th 2020)
 
-## Feat
+### Feat
 
 - Mobile number input version
 - Expanded property added to UIShell sidenav menus
 -
 
-## Fix
+### Fix
 
 - Number input tests
 - Input event emit from CvNumberInput on use of up down buttons
 - Add missing closeAriaLabel property to CvModal
 
-## Chore
+### Chore
 
 - Copy button position is stories
 - FavIcon in storybook
@@ -23,19 +29,19 @@
 
 ## 2.22.0-canary.0 (jan 29th 2020)
 
-## Chore
+### Chore
 
 - move to Vue CLI 4
 - Fix node engine version
 - Ensure CI Check run before deploying storybook
 
-## Fix
+### Fix
 
 - Linter warnings
 
 ## 2.21.0 (jan 24th 2020)
 
-## fix
+### fix
 
 - Error icon used in inline-loading
 - Toast notification notes typo
