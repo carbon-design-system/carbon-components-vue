@@ -6,7 +6,7 @@
         :label="`${pageSizesLabel}`"
         inline
         ref="pageSizeSelect"
-        @input="onPageSizeChange"
+        @change="onPageSizeChange"
         :value="`${pageSizeValue}`"
       >
         <cv-select-option
@@ -31,7 +31,7 @@
         inline
         hideLabel
         ref="pageSelect"
-        @input="onPageChange"
+        @change="onPageChange"
         :value="`${pageValue}`"
       >
         <cv-select-option
