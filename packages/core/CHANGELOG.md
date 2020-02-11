@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.23.0-canary.0
+
+### Feat
+
+- Add change event to accordion on open close through UI. Show in story how to use to force single open.
+
+### Fix
+
+- Validator state checks in inline loadeing (allow case insensitive)
+- CvSelect event usage in CvTimePicker and CvPagination changed to 'chagne' event to support IE 11.
+
 ## 2.22.0
 
 ### Fix
