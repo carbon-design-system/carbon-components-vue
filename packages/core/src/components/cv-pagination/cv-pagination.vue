@@ -6,7 +6,7 @@
         :label="`${pageSizesLabel}`"
         inline
         ref="pageSizeSelect"
-        @input="onPageSizeChange"
+        @change="onPageSizeChange"
         :value="`${pageSizeValue}`"
       >
         <cv-select-option
@@ -31,8 +31,9 @@
         inline
         hideLabel
         ref="pageSelect"
-        @input="onPageChange"
+        @change="onPageChange"
         :value="`${pageValue}`"
+        v-if="numberOfItems !== Infinity"
       >
         <cv-select-option
           v-for="pageNumber in pages"
@@ -189,7 +190,7 @@ export default {
       if (items !== Infinity) {
         return `of ${pages} pages`;
       }
-      return '';
+      return `Page ${this.pageValue}`;
     },
     rangeProps() {
       return {
