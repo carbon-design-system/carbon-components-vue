@@ -21,7 +21,7 @@
         :form-item="false"
         hide-label
         :label="ampmSelectLabel"
-        @input="$emit('update:ampm', $event)"
+        @change="$emit('update:ampm', $event)"
         :value="ampm"
         :disabled="disabled"
       >
@@ -36,7 +36,7 @@
         :label="timezonesSelectLabel"
         v-if="timezones.length > 0"
         :value="validTimezone"
-        @input="$emit('update:timezone', $event)"
+        @change="$emit('update:timezone', $event)"
         :disabled="disabled"
       >
         <cv-select-option class="bx--select-option" v-for="item in timezones" :key="item.value" :value="item.value">{{
