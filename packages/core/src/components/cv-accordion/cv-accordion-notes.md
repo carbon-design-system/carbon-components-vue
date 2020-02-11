@@ -53,6 +53,12 @@ CvAccordion is used in conjunction with slotted CvAccordionItem components.
 </cv-accordion>
 ```
 
+## Events
+
+CvAccordion
+
+- change: when an accordion item opens or closes
+
 ## Attributes
 
 CvAccordionItem
