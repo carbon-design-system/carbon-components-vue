@@ -1,5 +1,6 @@
 import { storiesOf } from '@storybook/vue';
 import { boolean } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../_storybook/utils/consts';
@@ -54,7 +55,7 @@ for (const story of storySet) {
       // ----------------------------------------------------------------
 
       const templateString = `
-  <cv-accordion>
+  <cv-accordion @change="actionChange" ref="acc">
     <cv-accordion-item${settings.group.one}>
       <template slot="title">Section 1 title </template>
       <template slot="content">
@@ -89,6 +90,13 @@ for (const story of storySet) {
       sv-margin
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
+      <template slot="other">
+        <label>Single open only after on change<input type="checkbox" v-model="oneOnly" /></label>
+        <p>Listen for change events and run the following line of code.</p>
+        <pre v-highlightjs="snippet">
+          <code class="json"></code>
+        </pre>
+      </template>
     </sv-template-view>
   `;
 
@@ -96,6 +104,23 @@ for (const story of storySet) {
         components: { CvAccordion, CvAccordionItem, SvTemplateView },
         template: templateViewString,
         props: settings.props,
+        data() {
+          return {
+            oneOnly: false,
+            snippet: 'this.$refs.acc.state = this.$refs.acc.state.map((item, index) => index === ev.changedIndex);',
+          };
+        },
+        mounted() {
+          this.onActionChange = action('CvAccordion - change');
+        },
+        methods: {
+          actionChange(ev) {
+            this.onActionChange(ev);
+            if (this.oneOnly) {
+              this.$refs.acc.state = this.$refs.acc.state.map((item, index) => index === ev.changedIndex);
+            }
+          },
+        },
       };
     },
     {

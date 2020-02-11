@@ -40,12 +40,12 @@ export default {
   props: {
     open: { type: Boolean, default: false },
   },
-  mounted() {
-    this.dataOpen = this.open;
-  },
   watch: {
-    open(val) {
-      this.dataOpen = val;
+    open: {
+      immediate: true,
+      handler(value) {
+        this.dataOpen = value;
+      },
     },
   },
   data() {
@@ -53,12 +53,17 @@ export default {
       dataOpen: false,
     };
   },
+  mounted() {
+    this.$_CvAccordionItem = true; // for use by parent with $children
+  },
   methods: {
     toggle(force) {
-      if (typeof force === 'boolean') {
-        this.dataOpen = force === true;
-      } else {
-        this.dataOpen = !this.dataOpen;
+      const newValue = typeof force === 'boolean' ? !!force : !this.dataOpen;
+      const change = this.dataOpen !== undefined && newValue !== this.dataOpen;
+
+      this.dataOpen = newValue;
+      if (change) {
+        this.$parent.$emit('cv:change', this);
       }
     },
   },
