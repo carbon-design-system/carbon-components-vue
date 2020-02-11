@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { boolean } from '@storybook/addon-knobs';
+// import { boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
@@ -12,37 +12,7 @@ import { CvAccordion, CvAccordionItem, CvAccordionSkeleton } from '../../package
 const storiesDefault = storiesOf('Components/CvAccordion', module);
 // const storiesExperimental = storiesOf('Experimental/CvAccordion', module);
 
-const preKnobs = {
-  open1: {
-    group: 'one',
-    type: boolean,
-    config: ['open for item 1', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    inline: true,
-    prop: 'open',
-  },
-  open2: {
-    group: 'two',
-    type: boolean,
-    config: ['open for item 2', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    inline: true,
-    prop: 'open',
-  },
-  open3: {
-    group: 'three',
-    type: boolean,
-    config: ['open for item 3', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    inline: true,
-    prop: 'open',
-  },
-  open4: {
-    group: 'four',
-    type: boolean,
-    config: ['open for item 4', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    inline: true,
-    prop: 'open',
-  },
-};
-
+const preKnobs = {};
 const variants = [{ name: 'default' }, { name: 'minimal', includes: [] }];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
@@ -56,25 +26,25 @@ for (const story of storySet) {
 
       const templateString = `
   <cv-accordion @change="actionChange" ref="acc">
-    <cv-accordion-item${settings.group.one}>
+    <cv-accordion-item :open="open[0]">
       <template slot="title">Section 1 title </template>
       <template slot="content">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
       </template>
     </cv-accordion-item>
-    <cv-accordion-item${settings.group.two}>
+    <cv-accordion-item :open="open[1]">
       <template slot="title">Section 2 title</template>
       <template slot="content">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
       </template>
     </cv-accordion-item>
-    <cv-accordion-item${settings.group.three}>
+    <cv-accordion-item :open="open[2]">
       <template slot="title">Section 3 title</template>
       <template slot="content">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
       </template>
     </cv-accordion-item>
-    <cv-accordion-item${settings.group.four}>
+    <cv-accordion-item :open="open[3]">
       <template slot="title">Section 4 title</template>
       <template slot="content">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -91,8 +61,16 @@ for (const story of storySet) {
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">
+        <div>
+          <p>Open items</p>
+          <label>1 <input type="checkbox" v-model="open[0]"></label>
+          <label>2 <input type="checkbox" v-model="open[1]"></label>
+          <label>3 <input type="checkbox" v-model="open[2]"></label>
+          <label>4 <input type="checkbox" v-model="open[3]"></label>
+        </div>
+        <br/>
         <label>Single open only after on change<input type="checkbox" v-model="oneOnly" /></label>
-        <p>Listen for change events and run the following line of code.</p>
+        <p>Listen for change events and run one of the following lines of code.</p>
         <pre v-highlightjs="snippet">
           <code class="json"></code>
         </pre>
@@ -106,8 +84,12 @@ for (const story of storySet) {
         props: settings.props,
         data() {
           return {
+            open: [false, false, false, false],
             oneOnly: false,
-            snippet: 'this.$refs.acc.state = this.$refs.acc.state.map((item, index) => index === ev.changedIndex);',
+            snippet: `// Directly update the CvAccordionItem open property
+this.open = this.$refs.acc.state.map((item, index) => index === ev.changedIndex);
+// Alternatively set the CvAccordion item state (does not update CvAccordionItem props)
+this.$refs.acc.state = this.$refs.acc.state.map((item, index) => index === ev.changedIndex);`,
           };
         },
         mounted() {
@@ -117,7 +99,8 @@ for (const story of storySet) {
           actionChange(ev) {
             this.onActionChange(ev);
             if (this.oneOnly) {
-              this.$refs.acc.state = this.$refs.acc.state.map((item, index) => index === ev.changedIndex);
+              this.open = this.$refs.acc.state.map((item, index) => index === ev.changedIndex);
+              // this.$refs.acc.state = this.$refs.acc.state.map((item, index) => index === ev.changedIndex);
             }
           },
         },
