@@ -47,10 +47,10 @@ export default {
       type: String,
       default: undefined,
       validator: val => {
-        if (Object.keys(STATES).some(state => STATES[state] === val)) {
+        if (Object.keys(STATES).some(state => STATES[state] === val.toLowerCase())) {
           return true;
         } else {
-          console.error(`CvInlineLoading: Valid states are ${JSON.stringify(Object.keys(STATES))}`);
+          console.error(`CvInlineLoading: Valid states are ${JSON.stringify(Object.values(STATES))}`);
           return false;
         }
       },
@@ -59,7 +59,7 @@ export default {
   computed: {
     internalState() {
       if (this.state !== undefined) {
-        return this.state;
+        return this.state.toLowerCase();
       } else {
         return this.active ? STATES.LOADING : STATES.LOADED;
       }

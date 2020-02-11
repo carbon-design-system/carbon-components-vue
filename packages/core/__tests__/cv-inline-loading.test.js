@@ -32,6 +32,23 @@ describe('CvInlineLoading', () => {
       wrapper.vm.$options.props.state.validator && wrapper.vm.$options.props.state.validator(STATES.ENDING)
     ).toBeTruthy();
 
+    // accept lower case
+    expect(
+      wrapper.vm.$options.props.state.validator &&
+        wrapper.vm.$options.props.state.validator(STATES.LOADED.toUpperCase())
+    ).toBeTruthy();
+    expect(
+      wrapper.vm.$options.props.state.validator && wrapper.vm.$options.props.state.validator(STATES.ERROR.toUpperCase())
+    ).toBeTruthy();
+    expect(
+      wrapper.vm.$options.props.state.validator &&
+        wrapper.vm.$options.props.state.validator(STATES.LOADING.toUpperCase())
+    ).toBeTruthy();
+    expect(
+      wrapper.vm.$options.props.state.validator &&
+        wrapper.vm.$options.props.state.validator(STATES.LOADED.toUpperCase())
+    ).toBeTruthy();
+
     // suppress the error message from the state validator
     const consoleError = console.error;
     console.error = jest.fn();
