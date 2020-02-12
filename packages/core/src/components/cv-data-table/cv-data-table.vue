@@ -114,11 +114,11 @@
             <cv-data-table-heading
               v-for="(column, index) in dataColumns"
               :key="`${index}:${column}`"
-              :heading="column.label ? column.label : column"
-              :sortable="isSortable(column)"
+              :heading="columnHeading(column)"
+              :sortable="isColSortable(column)"
               :order="column.order"
               @sort="val => onSort(index, val)"
-              :style="headingStyle(index)"
+              :heading-style="headingStyle(index)"
               :skeleton="skeleton"
             />
             <th v-if="hasOverflowMenu"></th>
@@ -275,15 +275,23 @@ export default {
     this.checkSlots();
   },
   computed: {
-    isSortable() {
+    columnHeading() {
       return col => {
-        if (col) {
-          // specific column or all sortable
-          return (col && col.sortable) || this.sortable;
+        if (typeof col === 'object') {
+          return col.label || '';
         } else {
-          // is any column sortable
-          return this.sortable || this.columns.some(column => column.sortable);
+          return col;
         }
+      };
+    },
+    isSortable() {
+      // is any column sortable
+      return this.sortable || this.columns.some(column => column.sortable);
+    },
+    isColSortable() {
+      return col => {
+        // is specific column or all sortable
+        return (col && col.sortable) || this.sortable;
       };
     },
     hasTableHeader() {

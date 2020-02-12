@@ -1,11 +1,19 @@
 <template>
-  <th :aria-sort="sortOrder">
-    <button type="button" v-if="sortable" :class="['bx--table-sort', orderClass]" @click="onSortClick">
+  <th :aria-sort="sortOrder" :style="skeleton && headingStyle">
+    <button
+      type="button"
+      v-if="sortable"
+      :class="['bx--table-sort', orderClass]"
+      @click="onSortClick"
+      :style="headingStyle"
+    >
       <cv-wrapper :tag-type="headingLabelTag" class="bx--table-header-label">{{ heading }}</cv-wrapper>
       <ArrowDown16 class="bx--table-sort__icon" />
       <Arrows16 class="bx--table-sort__icon-unsorted" />
     </button>
-    <cv-wrapper v-else :tag-type="headingLabelTag" class="bx--table-header-label">{{ heading }}</cv-wrapper>
+    <cv-wrapper v-else :tag-type="headingLabelTag" class="bx--table-header-label" :style="headingStyle">{{
+      heading
+    }}</cv-wrapper>
   </th>
 </template>
 
@@ -28,6 +36,7 @@ export default {
     sortable: Boolean,
     order: { type: String, default: 'none' },
     skeleton: Boolean,
+    headingStyle: Object,
   },
   computed: {
     sortOrder() {
