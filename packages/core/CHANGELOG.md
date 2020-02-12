@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.23.0
+
+### Fix
+
+- Data table heading styles when sortable is used.
+
 ## 2.23.0-canary.0
 
 ### Feat
