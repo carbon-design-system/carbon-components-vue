@@ -277,9 +277,11 @@ export default {
   computed: {
     isSortable() {
       return col => {
-        if (col && this.columns.some(column => column.sortable)) {
-          return col.sortable;
+        if (col) {
+          // specific column or all sortable
+          return (col && col.sortable) || this.sortable;
         } else {
+          // is any column sortable
           return this.sortable || this.columns.some(column => column.sortable);
         }
       };
@@ -441,6 +443,7 @@ export default {
     watchColumns() {
       this.dataColumns = this.isSortable
         ? this.columns.map(item => ({
+            ...item,
             label: item.label ? item.label : item,
             order: 'none',
             sortable: item.sortable,
