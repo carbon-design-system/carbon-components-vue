@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.23.1-canary.0
+
+### Fix
+
+- Fix missing id in CvSideNav and CvHeaderPanel which caused issues for DAP
+
 ## 2.23.0
 
 ### Fix
