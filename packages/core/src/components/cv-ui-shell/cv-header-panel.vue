@@ -3,6 +3,7 @@
     class="cv-header-panel bx--header-panel"
     :class="{ 'bx--header-panel--expanded': panelExpanded }"
     :aria-hidden="!panelExpanded"
+    :id="id"
     @focusout="onFocusout"
     @mousedown="onMouseDown"
   >

@@ -8,6 +8,7 @@
       'bx--side-nav--ux': isChildOfHeader,
     }"
     :aria-hidden="!panelExpanded && !fixed"
+    :id="id"
     @focusout="onFocusout"
     @mousedown="onMouseDown"
   >
