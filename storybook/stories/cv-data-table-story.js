@@ -232,7 +232,7 @@ let preKnobs = {
     group: 'slots',
     slot: 'data',
     value:
-      '\n    <cv-data-table-row v-for="(row, rowIndex) in internalData" :key="`${rowIndex}`" :value="`${rowIndex}`">' +
+      '\n    <cv-data-table-row v-for="(row, rowIndex) in internalData" :key="`${rowIndex}`" :value="`${rowIndex}`" :aria-label-for-batch-checkbox="`Custom aria label for row ${rowIndex} batch`">' +
       '\n       <cv-data-table-cell v-for="(cell, cellIndex) in row" :key="`${cellIndex}`" :value="`${cellIndex}`" v-html="cell"></cv-data-table-cell>' +
       '\n       <template v-if="hasExpandingRows && rowIndex % 2 === 0" slot="expandedContent">A variety of content types can live here. Be sure to follow Carbon design guidelines for spacing and alignment.</template>' +
       '\n    </cv-data-table-row>\n',
@@ -347,7 +347,10 @@ let variants = [
   },
   { name: 'slottedHelper', includes: ['columns', 'data', 'title', 'helperTextSlot'] },
   { name: 'minimal', includes: ['columns', 'data'] },
-  { name: 'slotted data', includes: ['columns', 'slottedData', 'data', 'basicPagination', 'hasExpandingRows'] },
+  {
+    name: 'slotted data',
+    includes: ['columns', 'slottedData', 'data', `batchActions`, 'basicPagination', 'hasExpandingRows'],
+  },
   {
     name: 'slotted expanding data',
     includes: ['columns', 'expandingSlottedData', 'data', 'basicPagination', 'hasExpandAll'],
