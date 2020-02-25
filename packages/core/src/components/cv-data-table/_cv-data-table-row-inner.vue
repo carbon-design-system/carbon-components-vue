@@ -10,7 +10,14 @@
       </button>
     </td>
     <td v-if="hasBatchActions" class="bx--table-column-checkbox">
-      <cv-checkbox :form-item="false" :value="value" v-model="dataChecked" @change="onChange" ref="rowChecked" />
+      <cv-checkbox
+        :form-item="false"
+        :value="value"
+        v-model="dataChecked"
+        @change="onChange"
+        ref="rowChecked"
+        :aria-label="ariaLabelForBatchCheckbox || `Select row ${value} for batch action`"
+      />
     </td>
     <slot />
     <td v-if="hasOverflowMenu" class="bx--table-column-menu">
@@ -42,6 +49,7 @@ export default {
   name: 'CvDataTableRowInner',
   components: { CvCheckbox, CvOverflowMenu, CvOverflowMenuItem, ChevronRight16 },
   props: {
+    ariaLabelForBatchCheckbox: String,
     checked: Boolean,
     expanded: Boolean,
     expandingRow: Boolean,

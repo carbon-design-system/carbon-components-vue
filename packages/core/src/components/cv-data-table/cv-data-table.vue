@@ -19,7 +19,9 @@
         >
           <div class="bx--action-list">
             <slot name="batch-actions" />
-            <cv-button class="bx--batch-summary__cancel" small @click="deselect">{{ batchCancelLabel }}</cv-button>
+            <cv-button class="bx--batch-summary__cancel" size="small" @click="deselect">{{
+              batchCancelLabel
+            }}</cv-button>
           </div>
           <div class="bx--batch-summary">
             <p class="bx--batch-summary__para">
