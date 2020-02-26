@@ -1,5 +1,6 @@
-import { shallowMount as shallow, mount } from '@vue/test-utils';
-import { testComponent } from './_helpers';
+// import { shallowMount as shallow, mount } from '@vue/test-utils';
+import { testComponent, awaitNextTick } from './_helpers';
+const { shallowMount: shallow, mount, trigger } = awaitNextTick;
 import { CvTextArea } from '@/components/cv-text-area';
 
 describe('CvTextArea', () => {
@@ -13,27 +14,28 @@ describe('CvTextArea', () => {
   // ***************
   // SNAPSHOT TESTS
   // ***************
-  it('should render correctly', () => {
+  it('should render correctly', async () => {
     const propsData = { label: 'test label', value: 'test value', id: '1' };
-    const wrapper = shallow(CvTextArea, { propsData });
+    const wrapper = await shallow(CvTextArea, { propsData });
+
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('should render correctly when light theme is used', () => {
+  it('should render correctly when light theme is used', async () => {
     const propsData = { label: 'test label', value: 'test value', id: '1', theme: 'light' };
-    const wrapper = shallow(CvTextArea, { propsData });
+    const wrapper = await shallow(CvTextArea, { propsData });
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('should render correctly when invalid message is provided', () => {
+  it('should render correctly when invalid message is provided', async () => {
     const propsData = { label: 'test label', value: 'test value', invalidMessage: 'invalid test message', id: '1' };
-    const wrapper = shallow(CvTextArea, { propsData });
+    const wrapper = await shallow(CvTextArea, { propsData });
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('should render correctly when invalid message slot is provided', () => {
+  it('should render correctly when invalid message slot is provided', async () => {
     const propsData = { label: 'test label', value: 'test value', id: '1' };
-    const wrapper = shallow(CvTextArea, {
+    const wrapper = await shallow(CvTextArea, {
       slots: {
         'invalid-message': '<div class="invalid-message-class">invalid message slot</div>',
       },
@@ -42,15 +44,15 @@ describe('CvTextArea', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('should render correctly when helper text is provided', () => {
+  it('should render correctly when helper text is provided', async () => {
     const propsData = { label: 'test label', value: 'test value', helperText: 'helper test message', id: '1' };
-    const wrapper = shallow(CvTextArea, { propsData });
+    const wrapper = await shallow(CvTextArea, { propsData });
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('should render correctly when helper text slot is provided', () => {
+  it('should render correctly when helper text slot is provided', async () => {
     const propsData = { label: 'test label', value: 'test value', id: '1' };
-    const wrapper = shallow(CvTextArea, {
+    const wrapper = await shallow(CvTextArea, {
       slots: {
         'helper-text': '<div class="helper-text-class">helper text slot</div>',
       },
@@ -63,15 +65,15 @@ describe('CvTextArea', () => {
   // FUNCTIONAL TESTS
   // ***************
 
-  it('inValid should be true when invalid message is provided', () => {
+  it('inValid should be true when invalid message is provided', async () => {
     const propsData = { label: 'test label', value: 'test value', invalidMessage: 'invalid test message', id: '1' };
-    const wrapper = shallow(CvTextArea, { propsData });
+    const wrapper = await shallow(CvTextArea, { propsData });
     expect(wrapper.vm.isInvalid).toEqual(true);
   });
 
-  it('inValid should be true when invalid message slot is provided', () => {
+  it('inValid should be true when invalid message slot is provided', async () => {
     const propsData = { label: 'test label', value: 'test value', id: '1' };
-    const wrapper = mount(CvTextArea, {
+    const wrapper = await mount(CvTextArea, {
       slots: {
         'invalid-message': '<div class="invalid-message-class">invalid message slot</div>',
       },
@@ -80,21 +82,21 @@ describe('CvTextArea', () => {
     expect(wrapper.vm.isInvalid).toEqual(true);
   });
 
-  it('inValid should be false when invalid message slot and invalid message are not provided', () => {
+  it('inValid should be false when invalid message slot and invalid message are not provided', async () => {
     const propsData = { label: 'test label', value: 'test value', id: '1' };
-    const wrapper = shallow(CvTextArea, { propsData });
+    const wrapper = await shallow(CvTextArea, { propsData });
     expect(wrapper.vm.isInvalid).toEqual(false);
   });
 
-  it('isHelper should be true when helper text is provided', () => {
+  it('isHelper should be true when helper text is provided', async () => {
     const propsData = { label: 'test label', value: 'test value', helperText: 'helper text test message', id: '1' };
-    const wrapper = shallow(CvTextArea, { propsData });
+    const wrapper = await shallow(CvTextArea, { propsData });
     expect(wrapper.vm.isHelper).toEqual(true);
   });
 
-  it('isHelper should be true when helper text slot is provided', () => {
+  it('isHelper should be true when helper text slot is provided', async () => {
     const propsData = { label: 'test label', value: 'test value', id: '1' };
-    const wrapper = shallow(CvTextArea, {
+    const wrapper = await shallow(CvTextArea, {
       slots: {
         'helper-text': '<div class="helper-text-class">helper text slot</div>',
       },
@@ -103,17 +105,17 @@ describe('CvTextArea', () => {
     expect(wrapper.vm.isHelper).toEqual(true);
   });
 
-  it('isHelper should be false when helper text slot and helper text are not provided', () => {
+  it('isHelper should be false when helper text slot and helper text are not provided', async () => {
     const propsData = { label: 'test label', value: 'test value', id: '1' };
-    const wrapper = shallow(CvTextArea, { propsData });
+    const wrapper = await shallow(CvTextArea, { propsData });
     expect(wrapper.vm.isHelper).toEqual(false);
   });
 
-  it('should emit current value on change', () => {
+  it('should emit current value on change', async () => {
     const value = 'test value';
     const propsData = { label: 'test label', value, id: '1' };
-    const wrapper = shallow(CvTextArea, { propsData });
-    wrapper.find('textarea').trigger('input');
+    const wrapper = await shallow(CvTextArea, { propsData });
+    await trigger(wrapper.find('textarea'), 'input');
     expect(wrapper.emitted().input[0]).toEqual([value]);
   });
 });

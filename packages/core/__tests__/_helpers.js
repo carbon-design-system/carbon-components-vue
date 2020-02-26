@@ -1,4 +1,5 @@
-import { shallowMount } from '@vue/test-utils';
+import Vue from 'vue';
+import { shallowMount, mount } from '@vue/test-utils';
 
 const getComponentProp = (component, prop) => {
   let componentProp;
@@ -88,4 +89,26 @@ export const events = {
       src.$on(event, val => target.$emit(event, val));
     }
   },
+};
+
+export const awaitNextTick = {
+  async shallowMount(...args) {
+    const wrapper = await shallowMount(...args);
+    await Vue.nextTick();
+    return wrapper;
+  },
+  async mount(...args) {
+    const wrapper = await mount(...args);
+    await Vue.nextTick();
+    return wrapper;
+  },
+  async setProps(wrapper, ...args) {
+    wrapper.setProps(...args);
+    await Vue.nextTick();
+  },
+  async trigger(wrapper, ...args) {
+    wrapper.trigger(...args);
+    await Vue.nextTick();
+  },
+  //shallow|mount|setProps|trigger|await
 };

@@ -1,5 +1,6 @@
-import { shallowMount as shallow, mount } from '@vue/test-utils';
-import { testComponent } from './_helpers';
+// import { shallowMount as shallow, mount } from '@vue/test-utils';
+import { testComponent, awaitNextTick } from './_helpers';
+const { shallowMount: shallow, mount } = awaitNextTick;
 import { CvList, CvListItem } from '@/components/cv-list';
 
 describe('CvList', () => {
@@ -22,9 +23,9 @@ describe('CvList', () => {
   // SNAPSHOT TESTS
   // ***************
 
-  it('should render correctly when nested and parent is ordered', () => {
+  it('should render correctly when nested and parent is ordered', async () => {
     const propsData = { nested: false, ordered: true };
-    const wrapper = mount(CvList, {
+    const wrapper = await mount(CvList, {
       slots: {
         default: CvListItemWrapper,
       },
@@ -33,9 +34,9 @@ describe('CvList', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('should render correctly when nested and parent is unordered', () => {
+  it('should render correctly when nested and parent is unordered', async () => {
     const propsData = { nested: false, ordered: false };
-    const wrapper = mount(CvList, {
+    const wrapper = await mount(CvList, {
       slots: {
         default: CvListItemWrapper,
       },
@@ -44,23 +45,23 @@ describe('CvList', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('should render correctly when ordered', () => {
+  it('should render correctly when ordered', async () => {
     const propsData = { ordered: true, nested: false };
-    const wrapper = shallow(CvList, {
+    const wrapper = await shallow(CvList, {
       propsData,
     });
     expect(wrapper.html()).toMatchSnapshot();
   });
-  it('should render correctly when unordered', () => {
+  it('should render correctly when unordered', async () => {
     const propsData = { ordered: false, nested: false };
-    const wrapper = shallow(CvList, {
+    const wrapper = await shallow(CvList, {
       propsData,
     });
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('should render correctly with slots', () => {
-    const wrapper = shallow(CvList, {
+  it('should render correctly with slots', async () => {
+    const wrapper = await shallow(CvList, {
       slots: {
         default: CvListItem,
       },
@@ -71,24 +72,24 @@ describe('CvList', () => {
   // ***************
   // FUNCTIONAL TESTS
   // ***************
-  it('`internalOrdered` should be computed correctly when ordered', () => {
+  it('`internalOrdered` should be computed correctly when ordered', async () => {
     const propsData = { ordered: true, nested: true };
-    const wrapper = shallow(CvList, {
+    const wrapper = await shallow(CvList, {
       propsData,
     });
     expect(wrapper.vm.internalOrdered).toEqual(true);
   });
-  it('`internalOrdered` should be computed correctly when unordered', () => {
+  it('`internalOrdered` should be computed correctly when unordered', async () => {
     const propsData = { ordered: false, nested: true };
-    const wrapper = shallow(CvList, {
+    const wrapper = await shallow(CvList, {
       propsData,
     });
     expect(wrapper.vm.internalOrdered).toEqual(false);
   });
 
-  it('`internalOrdered` should be computed correctly when nested and parent is ordered', () => {
+  it('`internalOrdered` should be computed correctly when nested and parent is ordered', async () => {
     const propsData = { nested: false, ordered: true };
-    const wrapper = mount(CvList, {
+    const wrapper = await mount(CvList, {
       slots: {
         default: CvListItemWrapper,
       },
@@ -98,9 +99,9 @@ describe('CvList', () => {
     expect(wrapper.findAll(CvList).at(0).vm.internalOrdered).toEqual(true);
   });
 
-  it('`internalOrdered` should be computed correctly when nested and parent is unordered', () => {
+  it('`internalOrdered` should be computed correctly when nested and parent is unordered', async () => {
     const propsData = { nested: false, ordered: false };
-    const wrapper = mount(CvList, {
+    const wrapper = await mount(CvList, {
       slots: {
         default: CvListItemWrapper,
       },
@@ -110,16 +111,16 @@ describe('CvList', () => {
     expect(wrapper.findAll(CvList).at(0).vm.internalOrdered).toEqual(false);
   });
 
-  it('`tagType` should be computed correctly when ordered', () => {
+  it('`tagType` should be computed correctly when ordered', async () => {
     const propsData = { ordered: true };
-    const wrapper = shallow(CvList, {
+    const wrapper = await shallow(CvList, {
       propsData,
     });
     expect(wrapper.vm.tagType).toEqual('ol');
   });
-  it('`tagType` should be computed correctly when unordered', () => {
+  it('`tagType` should be computed correctly when unordered', async () => {
     const propsData = { ordered: false };
-    const wrapper = shallow(CvList, {
+    const wrapper = await shallow(CvList, {
       propsData,
     });
     expect(wrapper.vm.tagType).toEqual('ul');
@@ -134,13 +135,13 @@ describe('CvListItem', () => {
   // ***************
   // SNAPSHOT TESTS
   // ***************
-  it('should render correctly without slots', () => {
-    const wrapper = shallow(CvListItem);
+  it('should render correctly without slots', async () => {
+    const wrapper = await shallow(CvListItem);
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('should render correctly with slots', () => {
-    const wrapper = shallow(CvListItem, {
+  it('should render correctly with slots', async () => {
+    const wrapper = await shallow(CvListItem, {
       slots: {
         default: '<div class="slot class">slot content</div>',
       },
