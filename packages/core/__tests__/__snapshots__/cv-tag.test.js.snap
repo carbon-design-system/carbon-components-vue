@@ -1,7 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[` 1`] = `<div class="cv-tag bx--tag bx--skeleton"></div>`;
-
 exports[`CvTag should render 1`] = `
 <span tabindex="0" role="listitem" title="Clear filter" class="cv-tag bx--tag bx--tag--filter bx--tag--filter"><span class="bx--tag__label">test</span>
 <close16-stub aria-label="Clear filter" role="button"></close16-stub>
@@ -57,3 +55,5 @@ exports[`CvTag should render 11`] = `
 <span tabindex="0" role="listitem" class="cv-tag bx--tag bx--tag--warm-gray"><span class="bx--tag__label">test</span>
 <!----></span>
 `;
+
+exports[`CvTagSkeleton Renders as expected 1`] = `<div class="cv-tag bx--tag bx--skeleton"></div>`;
