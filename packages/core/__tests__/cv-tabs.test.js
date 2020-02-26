@@ -29,22 +29,24 @@ describe('CvTabs', () => {
   // ***************
   // SNAPSHOT TESTS
   // ***************
-  it('matches render', () => {
+  it('matches render', async () => {
     const propsData = { noDefaultToFirst: false };
     const wrapper = shallow(CvTabs, {
       propsData,
     });
+    await wrapper.vm.$nextTick();
 
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('matches with slotted content', () => {
+  it('matches with slotted content', async () => {
     const wrapper = shallow(CvTabs, {
       slots: {
         default: [Tab, Tab, Tab],
       },
     });
 
+    await wrapper.vm.$nextTick();
     expect(wrapper.html()).toMatchSnapshot();
   });
 
@@ -63,7 +65,7 @@ describe('CvTabs', () => {
     expect(wrapper.vm.tabs[0].dataSelected).toBeTruthy();
   });
 
-  it('tabs to be mounted with none selected', () => {
+  it('tabs to be mounted with none selected', async () => {
     const propsData = {
       noDefaultToFirst: true,
     };
@@ -74,10 +76,11 @@ describe('CvTabs', () => {
       },
     });
 
+    await wrapper.vm.$nextTick();
     expect(wrapper.vm.tabs[0].dataSelected).toBeFalsy();
   });
 
-  it('tabs to be mounted with 2nd selected', () => {
+  it('tabs to be mounted with 2nd selected', async () => {
     const propsData = {
       noDefaultToFirst: false,
     };
@@ -88,10 +91,11 @@ describe('CvTabs', () => {
       },
     });
 
+    await wrapper.vm.$nextTick();
     expect(wrapper.vm.tabs[1].dataSelected).toBeTruthy();
   });
 
-  it('tabs to be mounted with 2nd selected with no default', () => {
+  it('tabs to be mounted with 2nd selected with no default', async () => {
     const propsData = {
       noDefaultToFirst: true,
     };
@@ -102,6 +106,7 @@ describe('CvTabs', () => {
       },
     });
 
+    await wrapper.vm.$nextTick();
     expect(wrapper.vm.tabs[1].dataSelected).toBeTruthy();
   });
 
@@ -118,6 +123,7 @@ describe('CvTabs', () => {
       .findAll(`.${carbonPrefix}--tabs__nav-link`)
       .at(2)
       .trigger('click');
+    await wrapper.vm.$nextTick();
 
     expect(wrapper.vm.tabs[0].dataSelected).toBeFalsy();
     expect(wrapper.vm.tabs[2].dataSelected).toBeTruthy();
@@ -136,7 +142,7 @@ describe('CvTab', () => {
   // ***************
   // SNAPSHOT TESTS
   // ***************
-  it('matches with slotted content', () => {
+  it('matches with slotted content', async () => {
     const propsData = { label: 'Tab label', disabled: false, selected: false, id: 'an-id' };
     const wrapper = shallow(CvTab, {
       propsData,
@@ -145,14 +151,16 @@ describe('CvTab', () => {
       },
     });
 
+    await wrapper.vm.$nextTick();
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('matches with disabled and selected', () => {
+  it('matches with disabled and selected', async () => {
     const propsData = { label: 'Tab label', disabled: true, selected: true, id: 'an-id' };
     const wrapper = shallow(CvTab, {
       propsData,
     });
+    await wrapper.vm.$nextTick();
 
     expect(wrapper.html()).toMatchSnapshot();
   });

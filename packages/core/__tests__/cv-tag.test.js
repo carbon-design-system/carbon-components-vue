@@ -18,7 +18,7 @@ describe('CvTag', () => {
   // ***************
   // SNAPSHOT TESTS
   // ***************
-  it('should render', () => {
+  it('should render', async () => {
     const propsData = { kind: '', label: 'test' };
     const kinds = [
       'filter',
@@ -37,6 +37,7 @@ describe('CvTag', () => {
     for (const kind of kinds) {
       propsData.kind = kind;
       const wrapper = shallow(CvTag, { propsData });
+      await wrapper.vm.$nextTick();
 
       expect(wrapper.html()).toMatchSnapshot();
     }
@@ -47,11 +48,13 @@ describe('CvTag', () => {
   // ***************
   testInstance.propStringIsRendered(CvTag, 'label', 'span');
 
-  it('click on close icon emits remove', () => {
+  it('click on close icon emits remove', async () => {
     const propsData = { kind: 'filter', label: 'test' };
     const wrapper = mount(CvTag, { propsData });
+    await wrapper.vm.$nextTick();
 
     wrapper.find('svg').trigger('click');
+    await wrapper.vm.$nextTick();
     expect(wrapper.emitted().remove).toBeTruthy();
   });
 });
@@ -64,8 +67,9 @@ describe('CvTagSkeleton', () => {
   // ***************
   // SNAPSHOT TESTS
   // ***************
-  describe('Renders as expected', () => {
+  it('Renders as expected', async () => {
     const wrapper = shallow(CvTagSkeleton);
+    await wrapper.vm.$nextTick();
 
     expect(wrapper.html()).toMatchSnapshot();
   });

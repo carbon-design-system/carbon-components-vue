@@ -21,33 +21,36 @@ describe('CvButton', () => {
   // SNAPSHOT TESTS
   // ***************
 
-  it('Renders as expected field secondary with icon disabled', () => {
+  it('Renders as expected field secondary with icon disabled', async () => {
     const propsData = { kind: 'secondary', icon: AddFilled16, 'tab-index': 2, disabled: true, size: 'field' };
     const wrapper = shallow(CvButton, { propsData, slots: { default: 'default slot content' } });
 
+    await wrapper.vm.$nextTick();
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('Renders as expected small primary', () => {
+  it('Renders as expected small primary', async () => {
     const propsData = { kind: 'primary', size: 'small' };
     const wrapper = shallow(CvButton, { propsData, slots: { default: 'default slot content' } });
-
+    await wrapper.vm.$nextTick();
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('Renders as expected default', () => {
+  it('Renders as expected default', async () => {
     const propsData = {};
     const wrapper = shallow(CvButton, { propsData, slots: { default: 'default slot content' } });
-
+    await wrapper.vm.$nextTick();
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   // ***************
   // FUNCTIONAL TESTS
   // ***************
-  it('Raises click event when clicked', () => {
+  it('Raises click event when clicked', async () => {
     const wrapper = shallow(CvButton);
+    await wrapper.vm.$nextTick();
     wrapper.find('button').trigger('click');
+    await wrapper.vm.$nextTick();
     expect(wrapper.emitted().click).toBeTruthy();
   });
 });
@@ -72,33 +75,38 @@ describe('CvIconButton', () => {
   // SNAPSHOT TESTS
   // ***************
 
-  it('Renders as expected field secondary with icon disabled', () => {
+  it('Renders as expected field secondary with icon disabled', async () => {
     const propsData = { kind: 'secondary', icon: AddFilled16, 'tab-index': 2, disabled: true, size: 'field' };
     const wrapper = shallow(CvIconButton, { propsData, slots: { default: 'default slot content' } });
 
+    await wrapper.vm.$nextTick();
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('Renders as expected small primary', () => {
+  it('Renders as expected small primary', async () => {
     const propsData = { kind: 'primary', size: 'small' };
     const wrapper = shallow(CvIconButton, { propsData, slots: { default: 'default slot content' } });
 
+    await wrapper.vm.$nextTick();
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('Renders as expected default', () => {
+  it('Renders as expected default', async () => {
     const propsData = {};
     const wrapper = shallow(CvIconButton, { propsData, slots: { default: 'default slot content' } });
 
+    await wrapper.vm.$nextTick();
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   // ***************
   // FUNCTIONAL TESTS
   // ***************
-  it('Raises click event when clicked', () => {
+  it('Raises click event when clicked', async () => {
     const wrapper = shallow(CvIconButton);
+    await wrapper.vm.$nextTick();
     wrapper.find('button').trigger('click');
+    await wrapper.vm.$nextTick();
     expect(wrapper.emitted().click).toBeTruthy();
   });
 });
@@ -116,24 +124,27 @@ describe('CvButtonSkeleton', () => {
   // SNAPSHOT TESTS
   // ***************
 
-  it('Renders as expected field primary', () => {
+  it('Renders as expected field primary', async () => {
     const propsData = { size: 'field' };
     const wrapper = shallow(CvButtonSkeleton, { propsData, slots: { default: 'default slot content' } });
 
+    await wrapper.vm.$nextTick();
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('Renders as expected small primary', () => {
+  it('Renders as expected small primary', async () => {
     const propsData = { size: 'small' };
     const wrapper = shallow(CvButtonSkeleton, { propsData, slots: { default: 'default slot content' } });
 
+    await wrapper.vm.$nextTick();
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('Renders as expected default', () => {
+  it('Renders as expected default', async () => {
     const propsData = {};
     const wrapper = shallow(CvButtonSkeleton, { propsData, slots: { default: 'default slot content' } });
 
+    await wrapper.vm.$nextTick();
     expect(wrapper.html()).toMatchSnapshot();
   });
 

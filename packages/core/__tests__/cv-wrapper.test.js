@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import { shallowMount as shallow, mount } from '@vue/test-utils';
 import { testComponent } from './_helpers';
 import CvWrapper from '@/components/cv-wrapper/_cv-wrapper';
@@ -16,7 +17,7 @@ describe('CvWrapper', () => {
   // ***************
   // SNAPSHOT TESTS
   // ***************
-  it('matches render with wrapper', () => {
+  it('matches render with wrapper', async () => {
     const wrapper = shallow(CvWrapper, {
       propsData: { tagType: 'div' },
       slots: {
@@ -24,23 +25,25 @@ describe('CvWrapper', () => {
       },
     });
 
+    await Vue.nextTick();
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('matches render with no wrapper', () => {
+  it('matches render with no wrapper', async () => {
     const wrapper = shallow(CvWrapper, {
       slots: {
         default: '<div class="cv-wrapper-stub">StubbyMcStubFace</div>',
       },
     });
 
+    await Vue.nextTick();
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   // ***************
   // FUNCTIONAL TESTS
   // ***************
-  it('closed to open to closed', () => {
+  it('closed to open to closed', async () => {
     const wrapper = mount(
       {
         name: 'Wrap',
@@ -54,6 +57,7 @@ describe('CvWrapper', () => {
       }
     );
 
+    await wrapper.vm.$nextTick();
     expect(wrapper.attributes('test-attr')).toEqual('testAttr');
     expect(wrapper.attributes('style')).toContain('z-index: 99');
     expect(wrapper.attributes('style')).toContain('outline: none');

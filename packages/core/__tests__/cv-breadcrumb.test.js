@@ -18,27 +18,29 @@ describe('CvBreadcrumb', () => {
   // ***************
   // SNAPSHOT TESTS
   // ***************
-  it('matches breadcrumb with trailing slash', () => {
+  it('matches breadcrumb with trailing slash', async () => {
     const propsData = { noTrailingSlash: false };
     const wrapper = shallow(CvBreadcrumb, { propsData });
+    await wrapper.vm.$nextTick();
 
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('matches breadcrumb without trailing slash', () => {
+  it('matches breadcrumb without trailing slash', async () => {
     const propsData = { noTrailingSlash: true };
     const wrapper = shallow(CvBreadcrumb, { propsData });
+    await wrapper.vm.$nextTick();
 
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('matches breadcrumb with slotted content', () => {
+  it('matches breadcrumb with slotted content', async () => {
     const wrapper = shallow(CvBreadcrumb, {
       slots: {
         default: CvBreadcrumbItem,
       },
     });
-
+    await wrapper.vm.$nextTick();
     expect(wrapper.html()).toMatchSnapshot();
   });
 
@@ -55,8 +57,9 @@ describe('CvBreadcrumbItem', () => {
   // ***************
   // SNAPSHOT TESTS
   // ***************
-  it('matches breadcrumb item with slotted content', () => {
+  it('matches breadcrumb item with slotted content', async () => {
     const wrapper = shallow(CvBreadcrumbItem);
+    await wrapper.vm.$nextTick();
 
     expect(wrapper.html()).toMatchSnapshot();
   });
@@ -73,8 +76,9 @@ describe('CvBreadcrumbSkeleton', () => {
   // ***************
   // SNAPSHOT TESTS
   // ***************
-  it('matches breadcrumb item with slotted content', () => {
+  it('matches breadcrumb item with slotted content', async () => {
     const wrapper = shallow(CvBreadcrumbSkeleton);
+    await wrapper.vm.$nextTick();
 
     expect(wrapper.html()).toMatchSnapshot();
   });

@@ -15,10 +15,11 @@ describe('CvToastNotification', () => {
   testComponent.propsAreType(CvToastNotification, ['caption', 'closeAriaLabel', 'kind'], String);
   testComponent.propsHaveDefault(CvToastNotification, ['closeAriaLabel', 'kind']);
 
-  it('`kind` prop validator works as expected', () => {
+  it('`kind` prop validator works as expected', async () => {
     const propsData = { caption: 'TEST', lowContrast: false };
 
     const wrapper = shallow(CvToastNotification, { propsData });
+    await wrapper.vm.$nextTick();
     for (const kind of kinds) {
       expect(wrapper.vm.$options.props.kind.validator && wrapper.vm.$options.props.kind.validator(kind)).toBeTruthy();
     }
@@ -37,20 +38,22 @@ describe('CvToastNotification', () => {
   // SNAPSHOT TESTS
   // ***************
 
-  it('should render correctly', () => {
+  it('should render correctly', async () => {
     const propsData = { caption: 'TEST', lowContrast: false, kind: '' };
     for (const kind of kinds) {
       propsData.kind = kind;
       const wrapper = shallow(CvToastNotification, { propsData });
+      await wrapper.vm.$nextTick();
       expect(wrapper.html()).toMatchSnapshot();
     }
   });
 
-  it('should render correctly when low contrast is used', () => {
+  it('should render correctly when low contrast is used', async () => {
     const propsData = { caption: 'TEST', lowContrast: true, kind: '' };
     for (const kind of kinds) {
       propsData.kind = kind;
       const wrapper = shallow(CvToastNotification, { propsData });
+      await wrapper.vm.$nextTick();
       expect(wrapper.html()).toMatchSnapshot();
     }
   });
@@ -59,7 +62,7 @@ describe('CvToastNotification', () => {
   // FUNCTIONAL TESTS
   // ***************
 
-  it('`icon` is computed correctly', () => {
+  it('`icon` is computed correctly', async () => {
     const kindToIconMapping = {
       error: ErrorFilled20,
       warning: WarningFilled20,
@@ -70,14 +73,17 @@ describe('CvToastNotification', () => {
     for (const kind of kinds) {
       propsData.kind = kind;
       const wrapper = shallow(CvToastNotification, { propsData });
+      await wrapper.vm.$nextTick();
       expect(wrapper.vm.icon).toEqual(kindToIconMapping[kind]);
     }
   });
 
-  it('should emit close event when close button is clicked', () => {
+  it('should emit close event when close button is clicked', async () => {
     const propsData = { caption: 'TEST', lowContrast: false };
     const wrapper = shallow(CvToastNotification, { propsData });
+    await wrapper.vm.$nextTick();
     wrapper.find('button').trigger('click');
+    await wrapper.vm.$nextTick();
     expect(wrapper.emitted().close).toBeTruthy();
   });
 });
