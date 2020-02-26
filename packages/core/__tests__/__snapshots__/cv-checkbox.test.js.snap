@@ -1,7 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[` 1`] = `<div class="cv-checkbox bx--form-item bx--checkbox-wrapper"><label class="bx--checkbox-label bx--skeleton"></label></div>`;
-
 exports[`CvCheckbox should render 1`] = `
 <div class="cv-checkbox bx--checkbox-wrapper bx--form-item"><label class="bx--checkbox-label"><input type="checkbox" aria-checked="false" class="bx--checkbox" value="check-1">
 
@@ -13,3 +11,5 @@ exports[`CvCheckbox should render when disabled 1`] = `
 
   </label></div>
 `;
+
+exports[`CvCheckboxSkeleton Renders as expected 1`] = `<div class="cv-checkbox bx--form-item bx--checkbox-wrapper"><label class="bx--checkbox-label bx--skeleton"></label></div>`;

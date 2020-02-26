@@ -1,5 +1,6 @@
-import { shallowMount as shallow } from '@vue/test-utils';
-import { testComponent } from './_helpers';
+// import { shallowMount as shallow } from '@vue/test-utils';
+import { testComponent, awaitNextTick } from './_helpers';
+const { shallowMount: shallow, trigger } = awaitNextTick;
 import { CvAccordion, CvAccordionItem, CvAccordionSkeleton } from '@/components/cv-accordion';
 import { settings as carbonSettings } from 'carbon-components';
 
@@ -13,8 +14,8 @@ describe('CvAccordion', () => {
   // ***************
   // SNAPSHOT TESTS
   // ***************
-  it('matches render', () => {
-    const wrapper = shallow(CvAccordion, {
+  it('matches render', async () => {
+    const wrapper = await shallow(CvAccordion, {
       slots: {
         default: '<div class="cv-accordion-item-stub">StubbyMcStubFace</div>',
       },
@@ -36,8 +37,8 @@ describe('CvAccordionSkeleton', () => {
   // ***************
   // SNAPSHOT TESTS
   // ***************
-  it('matches render', () => {
-    const wrapper = shallow(CvAccordionSkeleton);
+  it('matches render', async () => {
+    const wrapper = await shallow(CvAccordionSkeleton);
 
     expect(wrapper.html()).toMatchSnapshot();
   });
@@ -58,8 +59,8 @@ describe('CvAccordionItem', () => {
   // ***************
   // SNAPSHOT TESTS
   // ***************
-  it('matches render', () => {
-    const wrapper = shallow(CvAccordionItem, {
+  it('matches render', async () => {
+    const wrapper = await shallow(CvAccordionItem, {
       propsData: { id: '1' },
       slots: {
         default: '<div class="cv-accordion-item-stub">StubbyMcStubFace</div>',
@@ -69,8 +70,8 @@ describe('CvAccordionItem', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('matches render open', () => {
-    const wrapper = shallow(CvAccordionItem, {
+  it('matches render open', async () => {
+    const wrapper = await shallow(CvAccordionItem, {
       propsData: {
         id: '1',
         open: true,
@@ -86,8 +87,8 @@ describe('CvAccordionItem', () => {
   // ***************
   // FUNCTIONAL TESTS
   // ***************
-  it('closed to open to closed', () => {
-    const wrapper = shallow(CvAccordionItem, {
+  it('closed to open to closed', async () => {
+    const wrapper = await shallow(CvAccordionItem, {
       slots: {
         default: '<div class="cv-accordion-item-stub">StubbyMcStubFace</div>',
       },
@@ -98,19 +99,19 @@ describe('CvAccordionItem', () => {
     expect(button.attributes('aria-expanded')).toEqual('false');
     expect(wrapper.classes()).not.toContain(`${carbonPrefix}--accordion__item--active`);
 
-    wrapper.find('button').trigger('click');
+    await trigger(wrapper.find('button'), 'click');
 
     expect(button.attributes('aria-expanded')).toEqual('true');
     expect(wrapper.classes()).toContain(`${carbonPrefix}--accordion__item--active`);
 
-    wrapper.find('button').trigger('click');
+    await trigger(wrapper.find('button'), 'click');
 
     expect(button.attributes('aria-expanded')).toEqual('false');
     expect(wrapper.classes()).not.toContain(`${carbonPrefix}--accordion__item--active`);
   });
 
-  it('topen to closed to open', () => {
-    const wrapper = shallow(CvAccordionItem, {
+  it('topen to closed to open', async () => {
+    const wrapper = await shallow(CvAccordionItem, {
       propsData: {
         open: true,
       },
@@ -124,12 +125,12 @@ describe('CvAccordionItem', () => {
     expect(button.attributes('aria-expanded')).toEqual('true');
     expect(wrapper.classes()).toContain(`${carbonPrefix}--accordion__item--active`);
 
-    wrapper.find('button').trigger('click');
+    await trigger(wrapper.find('button'), 'click');
 
     expect(button.attributes('aria-expanded')).toEqual('false');
     expect(wrapper.classes()).not.toContain(`${carbonPrefix}--accordion__item--active`);
 
-    wrapper.find('button').trigger('click');
+    await trigger(wrapper.find('button'), 'click');
 
     expect(button.attributes('aria-expanded')).toEqual('true');
     expect(wrapper.classes()).toContain(`${carbonPrefix}--accordion__item--active`);

@@ -1,5 +1,6 @@
-import { shallowMount as shallow } from '@vue/test-utils';
-import { testComponent } from './_helpers';
+// import { shallowMount as shallow } from '@vue/test-utils';
+import { testComponent, awaitNextTick } from './_helpers';
+const { shallowMount: shallow } = awaitNextTick;
 import { CvRadioButton, CvRadioGroup } from '@/components/cv-radio-button/';
 
 describe('CvRadioButton', () => {
@@ -13,8 +14,8 @@ describe('CvRadioButton', () => {
   // ***************
   // SNAPSHOT CHECKS
   // ***************
-  it('matches render with right label', () => {
-    const wrapper = shallow(CvRadioButton, {
+  it('matches render with right label', async () => {
+    const wrapper = await shallow(CvRadioButton, {
       propsData: {
         label: 'right label',
         labelLeft: false,
@@ -25,8 +26,8 @@ describe('CvRadioButton', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('matches render with left label', () => {
-    const wrapper = shallow(CvRadioButton, {
+  it('matches render with left label', async () => {
+    const wrapper = await shallow(CvRadioButton, {
       propsData: {
         label: 'left label',
         labelLeft: true,
@@ -37,8 +38,8 @@ describe('CvRadioButton', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('matches render when checked', () => {
-    const wrapper = shallow(CvRadioButton, {
+  it('matches render when checked', async () => {
+    const wrapper = await shallow(CvRadioButton, {
       propsData: {
         label: 'test label',
         labelLeft: false,
@@ -50,8 +51,8 @@ describe('CvRadioButton', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('matches render when modelValue is equal to value', () => {
-    const wrapper = shallow(CvRadioButton, {
+  it('matches render when modelValue is equal to value', async () => {
+    const wrapper = await shallow(CvRadioButton, {
       propsData: {
         label: 'test label',
         labelLeft: false,
@@ -63,8 +64,8 @@ describe('CvRadioButton', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('matches render when modelValue is not equal to value', () => {
-    const wrapper = shallow(CvRadioButton, {
+  it('matches render when modelValue is not equal to value', async () => {
+    const wrapper = await shallow(CvRadioButton, {
       propsData: {
         label: 'test label',
         labelLeft: false,
@@ -79,8 +80,8 @@ describe('CvRadioButton', () => {
   // ***************
   // FUNCTIONAL CHECKS
   // ***************
-  it('is not checked when checked and modelValue props are not set', () => {
-    const wrapper = shallow(CvRadioButton, {
+  it('is not checked when checked and modelValue props are not set', async () => {
+    const wrapper = await shallow(CvRadioButton, {
       propsData: {
         labelLeft: false,
         id: '1',
@@ -90,8 +91,8 @@ describe('CvRadioButton', () => {
     expect(wrapper.vm.isChecked).toEqual(false);
   });
 
-  it('is checked when checked prop is set to true and modelValue prop is not set', () => {
-    const wrapper = shallow(CvRadioButton, {
+  it('is checked when checked prop is set to true and modelValue prop is not set', async () => {
+    const wrapper = await shallow(CvRadioButton, {
       propsData: {
         labelLeft: false,
         id: '1',
@@ -102,8 +103,8 @@ describe('CvRadioButton', () => {
     expect(wrapper.vm.isChecked).toEqual(true);
   });
 
-  it('modelValue prop has higher priority than checked prop', () => {
-    const wrapper = shallow(CvRadioButton, {
+  it('modelValue prop has higher priority than checked prop', async () => {
+    const wrapper = await shallow(CvRadioButton, {
       propsData: {
         labelLeft: false,
         id: '1',
@@ -125,8 +126,8 @@ describe('CvRadioGroup', () => {
   // ***************
   // SNAPSHOT CHECKS
   // ***************
-  it('matches render when vertical', () => {
-    const wrapper = shallow(CvRadioGroup, {
+  it('matches render when vertical', async () => {
+    const wrapper = await shallow(CvRadioGroup, {
       propsData: { vertical: true },
       slots: {
         default: '<div class="cv-radio-button-stub">StubbyMcStubFace</div>',
@@ -135,8 +136,8 @@ describe('CvRadioGroup', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('matches render when horizontal', () => {
-    const wrapper = shallow(CvRadioGroup, {
+  it('matches render when horizontal', async () => {
+    const wrapper = await shallow(CvRadioGroup, {
       propsData: { vertical: false },
       slots: {
         default: '<div class="cv-radio-button-stub">StubbyMcStubFace</div>',
