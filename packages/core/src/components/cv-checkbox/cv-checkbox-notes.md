@@ -56,5 +56,6 @@ html
 
 - checked: true | false
 - disabled: standard HTML checkbox property
+- hideLabel: makes the label visually hidden but still labels the checkbox
 - label: checkbox label
 - mixed: if true aria-checkbox set to mixed if checked is false
