@@ -22,14 +22,14 @@ describe('CvCheckbox', () => {
   // ***************
 
   it('should render', async () => {
-    const propsData = { formItem: true, value: 'check-1' };
+    const propsData = { formItem: true, value: 'check-1', id: '1' };
     const wrapper = await shallow(CvCheckbox, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('should render when disabled', async () => {
-    const propsData = { formItem: true, value: 'check-1', disabled: true };
+    const propsData = { formItem: true, value: 'check-1', disabled: true, id: '1' };
     const wrapper = await shallow(CvCheckbox, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
