@@ -1,5 +1,22 @@
 # Changelog
 
+## 2.23.1-canary.2
+
+## Feat
+
+- Add hideLabel property to CvCheckbox and raised bug relating to the shape of the component https://github.com/carbon-design-system/carbon/issues/5461
+
+## Fix
+
+- UIShell fix ids for controlled panels
+- Overflow menu tooltip postion on IE11
+- Interactive menu tooltip position on IE11
+- Missing aria-label on CvDataTable batch action checkbox (aria-label-for-batch-checkbox)
+
+## Chore
+
+- Update package dependencies
+
 ## 2.23.0
 
 ### Fix
