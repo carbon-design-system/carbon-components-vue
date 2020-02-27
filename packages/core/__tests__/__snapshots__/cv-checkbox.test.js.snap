@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CvCheckbox should render 1`] = `
-<div class="cv-checkbox bx--checkbox-wrapper bx--form-item"><label class="bx--checkbox-label"><input type="checkbox" aria-checked="false" class="bx--checkbox" value="check-1">
+<div class="cv-checkbox bx--checkbox-wrapper bx--form-item"><input type="checkbox" aria-checked="false" id="uid-e972eca3-3ea6-4d18-9d85-7188493d95a6" class="bx--checkbox" value="check-1"> <label for="uid-e972eca3-3ea6-4d18-9d85-7188493d95a6" class="bx--checkbox-label"><span class="bx--checkbox-label-text">
 
-  </label></div>
+    </span></label></div>
 `;
 
 exports[`CvCheckbox should render when disabled 1`] = `
-<div class="cv-checkbox bx--checkbox-wrapper bx--form-item"><label data-contained-checkbox-disabled="true" class="bx--checkbox-label bx--label--disabled"><input type="checkbox" aria-checked="false" disabled="disabled" class="bx--checkbox" value="check-1">
+<div class="cv-checkbox bx--checkbox-wrapper bx--form-item"><input type="checkbox" aria-checked="false" id="uid-9f8d69e6-f461-42c1-ab0f-0377b7f03505" disabled="disabled" class="bx--checkbox" value="check-1"> <label data-contained-checkbox-disabled="true" for="uid-9f8d69e6-f461-42c1-ab0f-0377b7f03505" class="bx--checkbox-label bx--label--disabled"><span class="bx--checkbox-label-text">
 
-  </label></div>
+    </span></label></div>
 `;
 
 exports[`CvCheckboxSkeleton Renders as expected 1`] = `<div class="cv-checkbox bx--form-item bx--checkbox-wrapper"><label class="bx--checkbox-label bx--skeleton"></label></div>`;
