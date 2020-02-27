@@ -16,7 +16,7 @@ The [library](http://vue.carbondesignsystem.com/) provides front-end developers 
 [Usage and getting started instructions](./packages/core/README.md#getting-started) for @carbon/vue.
 
 ## Packages
-
+ 
 ### [@carbon/vue](./packages/core)
 
 A library of the Carbon core components
