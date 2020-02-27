@@ -157,20 +157,22 @@ export default {
       if (this.open) {
         const menuPosition = this.$el.getBoundingClientRect();
         return this.$nextTick(() => {
+          let pixelsScrolledX = window.scrollX || window.pageXOffset;
+          let pixelsScrolledY = window.scrollY || window.pageYOffset;
           if (this.flipMenu) {
             this.left =
               menuPosition.left +
               this.offsetLeft -
               this.$refs.popup.offsetWidth +
               this.$el.offsetWidth +
-              window.scrollX;
+              pixelsScrolledX;
           } else {
-            this.left = menuPosition.left + this.offsetLeft + window.scrollX;
+            this.left = menuPosition.left + this.offsetLeft + pixelsScrolledX;
           }
           if (this.up) {
-            this.top = menuPosition.top + this.offsetTop - this.$refs.popup.offsetHeight + window.scrollY;
+            this.top = menuPosition.top + this.offsetTop - this.$refs.popup.offsetHeight + pixelsScrolledY;
           } else {
-            this.top = menuPosition.bottom + this.offsetTop + window.scrollY;
+            this.top = menuPosition.bottom + this.offsetTop + pixelsScrolledY;
           }
         });
       }
