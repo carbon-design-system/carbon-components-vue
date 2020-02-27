@@ -51,13 +51,19 @@ let preKnobs = {
     group: 'attr',
     value: `@change="actionChange"`,
   },
+  hideLabel: {
+    group: 'attr',
+    type: boolean,
+    config: ['hide-label', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'hide-label',
+  },
 };
 
 let variants = [
   { name: 'default', excludes: ['vModel', 'events'] },
   { name: 'minimal', includes: ['label', 'value'] },
-  { name: 'events', includes: ['label', 'value', 'events'] },
-  { name: 'vModel', includes: ['label', 'value', 'vModel'] },
+  { name: 'events', includes: ['label', 'hideLabel', 'value', 'events'] },
+  { name: 'vModel', includes: ['label', 'hideLabel', 'value', 'vModel'] },
 ];
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
