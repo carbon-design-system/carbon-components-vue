@@ -157,8 +157,8 @@ export default {
       if (this.open) {
         const menuPosition = this.$el.getBoundingClientRect();
         return this.$nextTick(() => {
-          let pixelsScrolledX = window.scrollX || window.pageXOffset;
-          let pixelsScrolledY = window.scrollY || window.pageYOffset;
+          const pixelsScrolledX = window.scrollX || window.pageXOffset;
+          const pixelsScrolledY = window.scrollY || window.pageYOffset;
           if (this.flipMenu) {
             this.left =
               menuPosition.left +
