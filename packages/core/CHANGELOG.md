@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.23.1
+
+Roll up of canary releases.
+
 ## 2.23.1-canary.2
 
 ## Feat
