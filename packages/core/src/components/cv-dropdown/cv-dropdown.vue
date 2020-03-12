@@ -22,9 +22,9 @@
       :class="{ 'bx--dropdown__wrapper--inline': inline, 'cv-dropdown': !formItem }"
       :style="wrapperStyleOverride"
     >
-      <span v-if="label" :id="`${uid}-label`" class="bx--label" :class="{ 'bx--label--disabled': disabled }">
-        {{ label }}
-      </span>
+      <span v-if="label" :id="`${uid}-label`" class="bx--label" :class="{ 'bx--label--disabled': disabled }">{{
+        label
+      }}</span>
 
       <div
         v-if="!inline && isHelper"
@@ -66,7 +66,7 @@
           type="button"
         >
           <WarningFilled16 v-if="isInvalid && inline" class="bx--dropdown__invalid-icon" />
-          <span class="bx--dropdown-text__inner" :id="`${uid}-value`" ref="valueContent">{{ placeholder }}</span>
+          <span class="bx--dropdown-text__inner" :id="`${uid}-value`">{{ internalCaption }}</span>
           <span class="bx--dropdown__arrow-container">
             <span class="bx--dropdown__arrow" :style="chevronStyleOveride">
               <chevron-down-glyph />
@@ -126,6 +126,7 @@ export default {
       dataValue: this.value,
       isHelper: false,
       isInvalid: false,
+      selectedChild: null,
     };
   },
   created() {
@@ -155,6 +156,13 @@ export default {
     },
   },
   computed: {
+    internalCaption() {
+      if (this.selectedChild) {
+        return this.selectedChild.internalContent;
+      } else {
+        return this.placeholder;
+      }
+    },
     internalValue: {
       get() {
         return this.dataValue;
@@ -168,13 +176,8 @@ export default {
           child.internalSelected = selected;
 
           if (selected) {
-            selectedChild = child;
+            this.selectedChild = child;
           }
-        }
-        if (selectedChild) {
-          this.$refs.valueContent.innerHTML = selectedChild.internalContent;
-        } else {
-          this.$refs.valueContent.innerHTML = this.placeholder;
         }
 
         if (this.dataValue !== val) {
