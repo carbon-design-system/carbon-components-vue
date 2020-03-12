@@ -1,5 +1,5 @@
 <template>
-  <div data-content-switcher class="cv-content-switcher bx--content-switcher">
+  <div data-content-switcher class="cv-content-switcher bx--content-switcher" role="tablist">
     <slot></slot>
   </div>
 </template>
