@@ -13,6 +13,7 @@
 <template>
   <button
     type="button"
+    role="tab"
     class="cv-content-switcher-button"
     :class="[
       'bx--content-switcher-btn',
@@ -26,7 +27,7 @@
   >
     <component v-if="typeof icon === 'object'" :is="icon" class="bx--content-switcher__icon" />
     <svg v-if="typeof icon === 'string'" class="bx--content-switcher__icon" height="16" width="16">
-      <use :href="icon"></use>
+      <use :href="icon" />
     </svg>
     <span class="bx--content-switcher__label">
       <slot></slot>
