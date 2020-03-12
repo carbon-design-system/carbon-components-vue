@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.23.2-canary.0
+
+### Fix
+
+- CvDropdown placeholder updates
+- CvContentSwitcher accessibility violation #849
+
+### Chore
+
+- Removed spurious 'await' usage
+
 ## 2.23.1
 
 Roll up of canary releases.
