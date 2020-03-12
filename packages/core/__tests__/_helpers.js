@@ -93,12 +93,12 @@ export const events = {
 
 export const awaitNextTick = {
   async shallowMount(...args) {
-    const wrapper = await shallowMount(...args);
+    const wrapper = shallowMount(...args);
     await Vue.nextTick();
     return wrapper;
   },
   async mount(...args) {
-    const wrapper = await mount(...args);
+    const wrapper = mount(...args);
     await Vue.nextTick();
     return wrapper;
   },
