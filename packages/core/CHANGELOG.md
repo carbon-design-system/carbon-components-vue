@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.23.2
+
+Publis canary fixes as listed
+
+## 2.23.2-canary.1
+
+### Fix
+
+- CvContentSwitcher adds tablist to container #849
+
 ## 2.23.2-canary.0
 
 ### Fix
