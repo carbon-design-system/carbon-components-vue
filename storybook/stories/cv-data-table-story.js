@@ -334,6 +334,7 @@ let variants = [
   {
     name: 'scoped slots',
     excludes: [
+      'search2',
       'columns2',
       'columns3',
       'slottedData',

@@ -19,9 +19,9 @@
         >
           <div class="bx--action-list">
             <slot name="batch-actions" />
-            <cv-button class="bx--batch-summary__cancel" size="small" @click="deselect">{{
-              batchCancelLabel
-            }}</cv-button>
+            <cv-button class="bx--batch-summary__cancel" size="small" @click="deselect">
+              {{ batchCancelLabel }}
+            </cv-button>
           </div>
           <div class="bx--batch-summary">
             <p class="bx--batch-summary__para">
@@ -355,6 +355,11 @@ export default {
     },
     onCvMount(row) {
       this.registeredRows.push(row);
+      if (this.registeredRows.filter(item => item.uid === row.uid).length > 1) {
+        console.error(
+          `CvDataTable: Duplicate ID specified for CvDataTableRow, this may cause issues. {id: ${row.id}, value: ${row.value}}`
+        );
+      }
       row.$on('cv:expanded-change', this.onCvExpandedChange);
       this.updateSomeExpandingRows();
     },
