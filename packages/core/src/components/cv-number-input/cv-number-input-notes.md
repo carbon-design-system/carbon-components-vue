@@ -11,7 +11,7 @@ http://www.carbondesignsystem.com/components/number-input/code
 ```
 
 ```html
-<cv-number-input label="Text input label" @change="onChange">
+<cv-number-input label="Text input label" @input="onInput">
   <template slot="invalid-message">
     Number not valid
   </template>
