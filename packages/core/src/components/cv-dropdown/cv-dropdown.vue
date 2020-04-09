@@ -169,7 +169,7 @@ export default {
       },
       set(val) {
         const childItems = this.dropdownItems();
-        let selectedChild;
+
         for (let index in childItems) {
           let child = childItems[index];
           let selected = child.value === val;
