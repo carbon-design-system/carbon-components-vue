@@ -23,7 +23,7 @@ export default {
       type: String,
       default: 'top',
       validator(val) {
-        const validValues = ['top', 'bottom'];
+        const validValues = ['top', 'left', 'right', 'bottom'];
         const valid = validValues.includes(val);
         if (!valid) {
           console.warn(`CVTooltip.direction must be one of the following: ${validValues}`);
