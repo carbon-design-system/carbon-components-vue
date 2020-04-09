@@ -142,6 +142,9 @@ export default {
     },
     onCvMount(srcComponent) {
       this.tabs.push(srcComponent);
+      if (this.tabs.filter(item => item.uid === srcComponent.uid).length > 1) {
+        console.error(`CvTabs: Duplicate ID specified for CvTab, this may cause issues. {id: ${srcComponent.id}}}`);
+      }
 
       this.checkDisabled(srcComponent);
       if (this.selectedId === undefined) {
