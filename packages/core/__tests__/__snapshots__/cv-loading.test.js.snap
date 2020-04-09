@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CvLoading should render correctly when active, small and not overlayed 1`] = `
-<cv-wrapper-stub tagtype="" class="cv-loading ">
+<cv-wrapper-stub tagtype="" class="cv-loading">
   <div data-loading="" class="cv-loading bx--loading bx--loading--small"><svg viewBox="-75 -75 150 150" class="bx--loading__svg">
       <title>Loading</title>
       <circle cx="0" cy="0" r="26.8125" class="bx--loading__background"></circle>
@@ -11,7 +11,7 @@ exports[`CvLoading should render correctly when active, small and not overlayed 
 `;
 
 exports[`CvLoading should render correctly when active, small and overlayed 1`] = `
-<cv-wrapper-stub tagtype="div" class="cv-loading bx--loading-overlay">
+<cv-wrapper-stub tagtype="div" class="cv-loading  0">
   <div data-loading="" class="bx--loading bx--loading--small"><svg viewBox="-75 -75 150 150" class="bx--loading__svg">
       <title>Loading</title>
       <circle cx="0" cy="0" r="26.8125" class="bx--loading__background"></circle>
@@ -21,7 +21,7 @@ exports[`CvLoading should render correctly when active, small and overlayed 1`] 
 `;
 
 exports[`CvLoading should render correctly when active, with normal size and not overlayed 1`] = `
-<cv-wrapper-stub tagtype="" class="cv-loading ">
+<cv-wrapper-stub tagtype="" class="cv-loading">
   <div data-loading="" class="cv-loading bx--loading"><svg viewBox="-75 -75 150 150" class="bx--loading__svg">
       <title>Loading</title>
       <!---->
@@ -31,7 +31,7 @@ exports[`CvLoading should render correctly when active, with normal size and not
 `;
 
 exports[`CvLoading should render correctly when active, with normal size and overlayed 1`] = `
-<cv-wrapper-stub tagtype="div" class="cv-loading bx--loading-overlay">
+<cv-wrapper-stub tagtype="div" class="cv-loading  0">
   <div data-loading="" class="bx--loading"><svg viewBox="-75 -75 150 150" class="bx--loading__svg">
       <title>Loading</title>
       <!---->
@@ -41,7 +41,7 @@ exports[`CvLoading should render correctly when active, with normal size and ove
 `;
 
 exports[`CvLoading should render correctly when not active, small and not overlayed 1`] = `
-<cv-wrapper-stub tagtype="" class="cv-loading ">
+<cv-wrapper-stub tagtype="" class="cv-loading">
   <div data-loading="" class="cv-loading bx--loading--small"><svg viewBox="-75 -75 150 150" class="bx--loading__svg">
       <title>Loading</title>
       <circle cx="0" cy="0" r="26.8125" class="bx--loading__background"></circle>
@@ -51,7 +51,7 @@ exports[`CvLoading should render correctly when not active, small and not overla
 `;
 
 exports[`CvLoading should render correctly when not active, small and overlayed 1`] = `
-<cv-wrapper-stub tagtype="div" class="cv-loading bx--loading-overlay--stop">
+<cv-wrapper-stub tagtype="div" class="cv-loading  0">
   <div data-loading="" class="bx--loading--small"><svg viewBox="-75 -75 150 150" class="bx--loading__svg">
       <title>Loading</title>
       <circle cx="0" cy="0" r="26.8125" class="bx--loading__background"></circle>
@@ -61,7 +61,7 @@ exports[`CvLoading should render correctly when not active, small and overlayed 
 `;
 
 exports[`CvLoading should render correctly when not active, with normal size and not overlayed 1`] = `
-<cv-wrapper-stub tagtype="" class="cv-loading ">
+<cv-wrapper-stub tagtype="" class="cv-loading">
   <div data-loading="" class="cv-loading"><svg viewBox="-75 -75 150 150" class="bx--loading__svg">
       <title>Loading</title>
       <!---->
@@ -71,7 +71,7 @@ exports[`CvLoading should render correctly when not active, with normal size and
 `;
 
 exports[`CvLoading should render correctly when not active, with normal size and overlayed 1`] = `
-<cv-wrapper-stub tagtype="div" class="cv-loading bx--loading-overlay--stop">
+<cv-wrapper-stub tagtype="div" class="cv-loading  0">
   <div data-loading="" class=""><svg viewBox="-75 -75 150 150" class="bx--loading__svg">
       <title>Loading</title>
       <!---->

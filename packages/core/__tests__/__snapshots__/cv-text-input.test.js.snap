@@ -75,7 +75,8 @@ exports[`CvTextInput should render correctly when type is password and is not vi
   <!---->
   <div class="bx--text-input__field-wrapper">
     <!----> <input id="1" data-toggle-password-visibility="true" type="password" class="bx--text-input"> <button type="button" class="bx--text-input--password__visibility__toggle bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center"><span class="bx--assistive-text">Show password</span>
-      <view16-stub class="bx--icon-visibility-off"></view16-stub></button></div>
+      <view16-stub class="bx--icon-visibility-off"></view16-stub>
+    </button></div>
   <!---->
 </div>
 `;
@@ -85,7 +86,8 @@ exports[`CvTextInput should render correctly when type is password and is visibl
   <!---->
   <div class="bx--text-input__field-wrapper">
     <!----> <input id="1" data-toggle-password-visibility="true" type="password" class="bx--text-input"> <button type="button" class="bx--text-input--password__visibility__toggle bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center"><span class="bx--assistive-text">Show password</span>
-      <view16-stub class="bx--icon-visibility-off"></view16-stub></button></div>
+      <view16-stub class="bx--icon-visibility-off"></view16-stub>
+    </button></div>
   <!---->
 </div>
 `;
