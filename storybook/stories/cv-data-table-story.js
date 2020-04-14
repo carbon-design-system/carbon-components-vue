@@ -241,10 +241,17 @@ let preKnobs = {
     group: 'slots',
     slot: 'data',
     value:
-      '\n    <cv-data-table-row v-for="(row, rowIndex) in internalData" :key="`${rowIndex}`" :value="`${rowIndex}`">' +
+      '\n    <cv-data-table-row v-for="(row, rowIndex) in internalData" :key="`${rowIndex}`" :value="`${rowIndex}`" :expanded="rowIndex === rowExpanded">' +
       '\n       <cv-data-table-cell v-for="(cell, cellIndex) in row" :key="`${cellIndex}`" :value="`${cellIndex}`" v-html="cell"></cv-data-table-cell>' +
       '\n       <template slot="expandedContent">A variety of content types can live here. Be sure to follow Carbon design guidelines for spacing and alignment.</template>' +
       '\n    </cv-data-table-row>\n',
+  },
+  rowExpanded: {
+    group: '',
+    type: number,
+    config: ['Row index expanded', -1],
+    prop: 'rowExpanded',
+    value: val => val,
   },
   htmlData: {
     group: 'slots',
@@ -307,6 +314,7 @@ let variants = [
       'basicPagination',
       'hasExpandingRows',
       'expandingSlottedData',
+      'rowExpanded',
       'scopedSlots',
       'hasExpandAll',
     ],
@@ -327,6 +335,7 @@ let variants = [
       'basicPagination',
       'hasExpandingRows',
       'expandingSlottedData',
+      'rowExpanded',
       'scopedSlots',
       'hasExpandAll',
     ],
@@ -343,6 +352,7 @@ let variants = [
       'basicPagination',
       'hasExpandingRows',
       'expandingSlottedData',
+      'rowExpanded',
       'hasExpandAll',
     ],
   },
@@ -354,7 +364,7 @@ let variants = [
   },
   {
     name: 'slotted expanding data',
-    includes: ['columns', 'expandingSlottedData', 'data', 'basicPagination', 'hasExpandAll'],
+    includes: ['columns', 'expandingSlottedData', 'rowExpanded', 'data', 'basicPagination', 'hasExpandAll'],
   },
   { name: 'slotted HTML', includes: ['columns', 'htmlData', 'basicPagination'] },
   { name: 'styled columns', includes: ['sortable', 'columns2', 'data'] },

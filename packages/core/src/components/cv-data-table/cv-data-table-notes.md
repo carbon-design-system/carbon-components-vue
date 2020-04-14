@@ -113,6 +113,14 @@ As per note sort and filter behviours are delegated to the component user.
 
 ## Rows
 
+### Attributes
+
+expanded: initial state of the expanded row
+
+### Computed
+
+isExpanded: has a setter and getter and can be used interact with each row.
+
 Rows are not automatically deselected after when a batch action is executed. The selected row checks can be cleared either by calling the method deselect which will deselect all or by use of v-model with the rows-selected property.
 
 When batch actions are supplied rows require a value and aria-label for the checkboxes added. Where a simple data array is provided they are created automatically. If using slotted content then the user must supply a value. They can also supply the property "aria-label-for-batch-checkbox" which defaults to `Select row ${value} for batch action`.
