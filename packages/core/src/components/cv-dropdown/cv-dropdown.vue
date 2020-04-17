@@ -40,7 +40,6 @@
         :data-value="internalValue"
         :data-invalid="isInvalid"
         class="bx--dropdown"
-        tabindex="0"
         :class="{
           'bx--dropdown--light': theme === 'light',
           'bx--dropdown--up': up,
