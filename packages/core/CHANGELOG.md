@@ -1,5 +1,23 @@
 # Changelog
 
+## 2.24.0
+
+## Feat
+
+- Left and right options added to cv-tooltip
+
+### Fix
+
+- CvDropdown needed multiple tab presses to move past #868
+- CircleCI deployment fix
+
+### Chore
+
+- Warn on duplicate IDs in table row and tab
+- Dependency bot bumps
+- Other dependency version bumps
+- Update documentation on use of expanded/isExpanded in table rows
+
 ## 2.23.2
 
 Publis canary fixes as listed
