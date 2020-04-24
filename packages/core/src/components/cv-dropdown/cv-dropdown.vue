@@ -22,9 +22,9 @@
       :class="{ 'bx--dropdown__wrapper--inline': inline, 'cv-dropdown': !formItem }"
       :style="wrapperStyleOverride"
     >
-      <span v-if="label" :id="`${uid}-label`" class="bx--label" :class="{ 'bx--label--disabled': disabled }">{{
-        label
-      }}</span>
+      <span v-if="label" :id="`${uid}-label`" class="bx--label" :class="{ 'bx--label--disabled': disabled }">
+        {{ label }}
+      </span>
 
       <div
         v-if="!inline && isHelper"
@@ -65,7 +65,12 @@
           type="button"
         >
           <WarningFilled16 v-if="isInvalid && inline" class="bx--dropdown__invalid-icon" />
-          <span class="bx--dropdown-text__inner" :id="`${uid}-value`">{{ internalCaption }}</span>
+          <span
+            class="bx--dropdown-text__inner"
+            :id="`${uid}-value`"
+            data-test="internalCaption"
+            v-html="internalCaption"
+          />
           <span class="bx--dropdown__arrow-container">
             <span class="bx--dropdown__arrow" :style="chevronStyleOveride">
               <chevron-down-glyph />
@@ -79,6 +84,7 @@
           :aria-hidden="!open"
           wh-menu-anchor="left"
           :aria-labelledby="`${uid}-label`"
+          ref="droplist"
         >
           <slot></slot>
         </ul>
@@ -281,8 +287,13 @@ export default {
           this.$el.focus();
         }
 
-        if (ev.target.classList.contains('bx--dropdown-link')) {
-          const targetItemEl = ev.target.parentNode;
+        let target = ev.target;
+        while (!target.classList.contains('bx--dropdown-link') && this.$refs.droplist.contains(target)) {
+          target = target.parentNode; // try next one up
+        }
+
+        if (target.classList.contains('bx--dropdown-link')) {
+          const targetItemEl = target.parentNode;
           const newValue = targetItemEl.getAttribute('data-value');
 
           this.internalValue = newValue;
