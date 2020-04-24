@@ -132,7 +132,7 @@ for (const story of storySet) {
 
       const templateString = `
   <cv-dropdown ${settings.group.attr}>${settings.group.slots}
-    <cv-dropdown-item value="10">Option with value 10</cv-dropdown-item>
+    <cv-dropdown-item value="10"><span>Option with value 10 & 10.0</span></cv-dropdown-item>
     <cv-dropdown-item value="20">Option with value 20</cv-dropdown-item>
     <cv-dropdown-item value="30">Option with value 30</cv-dropdown-item>
     <cv-dropdown-item value="40">Option with value 40</cv-dropdown-item>
