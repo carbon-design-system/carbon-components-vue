@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@ascendancyy/vue-cli-plugin-stylelint": "^1.1.2",
-    "@carbon/icons-vue": "10.8.0",
+    "@carbon/icons-vue": "10.10.2",
     "@commitlint/cli": "^7.6.1",
     "@commitlint/config-conventional": "^7.6.0",
     "@storybook/addon-actions": "^5.2.1",
@@ -46,7 +46,7 @@
     "@vue/eslint-config-prettier": "^4.0.1",
     "@vue/test-utils": "^1.0.0-beta.31",
     "babel-eslint": "^10.0.3",
-    "carbon-components": "10.9.0",
+    "carbon-components": "10.11.2",
     "eslint": "^5.16.0",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^5.2.3",

@@ -1,6 +1,6 @@
 <template>
   <cv-feedback-button
-    class="cv-code-snippet-inline"
+    class="cv-code-snippet-inline bx--snippet bx--snippet--inline"
     :class="{ 'bx--snippet--light': theme === 'light' }"
     :feedback="copyFeedback"
     inline
