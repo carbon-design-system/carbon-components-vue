@@ -41,6 +41,7 @@ This is done after the modal transitions into its visible state, which is trigge
 - visible: visibility of modal dialog
 - primaryButtonDisabled: boolean value used to enable/disable the primary button
 - size: xs (extra small), small, default and large
+- hasFormContent: Adds styling specific to modals with form content
 
 ## slots
 
