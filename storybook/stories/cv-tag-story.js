@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { text, boolean } from '@storybook/addon-knobs';
+import { text, boolean, select } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
@@ -25,6 +25,16 @@ let preKnobs = {
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: 'disabled',
   },
+  type: {
+    group: 'attr',
+    type: select,
+    config: [
+      'Tag type',
+      ['red', 'magenta', 'purple', 'blue', 'cyan', 'teal', 'green', 'gray', 'cool-gray', 'warm-gray', 'high-contrast'],
+      'gray',
+    ],
+    prop: 'type',
+  },
   clearAriaLabel: {
     group: 'attr',
     type: text,
@@ -35,63 +45,17 @@ let preKnobs = {
 
 let variants = [
   {
+    name: 'standard',
+    excludes: ['clearAriaLabel'],
+  },
+  {
     name: 'filter',
     excludes: ['clearAriaLabel'],
-    extra: { kind: { group: 'attr', value: 'kind="filter" @remove="onRemove"' } },
+    extra: { kind: { group: 'attr', value: 'filter @remove="onRemove"' } },
   },
   {
     name: 'filter clear aria label',
-    extra: { kind: { group: 'attr', value: 'kind="filter" @remove="onRemove"' } },
-  },
-  {
-    name: 'red',
-    excludes: ['clearAriaLabel'],
-    extra: { kind: { group: 'attr', value: 'kind="red"' } },
-  },
-  {
-    name: 'magenta',
-    excludes: ['clearAriaLabel'],
-    extra: { kind: { group: 'attr', value: 'kind="magenta"' } },
-  },
-  {
-    name: 'purple',
-    excludes: ['clearAriaLabel'],
-    extra: { kind: { group: 'attr', value: 'kind="purple"' } },
-  },
-  {
-    name: 'blue',
-    excludes: ['clearAriaLabel'],
-    extra: { kind: { group: 'attr', value: 'kind="blue"' } },
-  },
-  {
-    name: 'cyan',
-    excludes: ['clearAriaLabel'],
-    extra: { kind: { group: 'attr', value: 'kind="cyan"' } },
-  },
-  {
-    name: 'teal',
-    excludes: ['clearAriaLabel'],
-    extra: { kind: { group: 'attr', value: 'kind="teal"' } },
-  },
-  {
-    name: 'green',
-    excludes: ['clearAriaLabel'],
-    extra: { kind: { group: 'attr', value: 'kind="green"' } },
-  },
-  {
-    name: 'gray',
-    excludes: ['clearAriaLabel'],
-    extra: { kind: { group: 'attr', value: 'kind="gray"' } },
-  },
-  {
-    name: 'cool-gray',
-    excludes: ['clearAriaLabel'],
-    extra: { kind: { group: 'attr', value: 'kind="cool-gray"' } },
-  },
-  {
-    name: 'warm-gray',
-    excludes: ['clearAriaLabel'],
-    extra: { kind: { group: 'attr', value: 'kind="warm-gray"' } },
+    extra: { kind: { group: 'attr', value: 'filter @remove="onRemove"' } },
   },
 ];
 
