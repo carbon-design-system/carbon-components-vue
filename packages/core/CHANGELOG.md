@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.24.1
+
+## Fix
+
+Dropdown value presentation
+
 ## 2.24.0
 
 ## Feat
