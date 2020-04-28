@@ -40,7 +40,8 @@ For slotting into cv-header.
 
 ```HTML
   <cv-header-nav aria-label="Carbon nav">
-    <cv-header-menu-item href="javascript:void(0)">
+    <!-- active for current or active location -->
+    <cv-header-menu-item href="javascript:void(0)" active>
       Link 1
     </cv-header-menu-item>
     <cv-header-menu-item href="javascript:void(0)">

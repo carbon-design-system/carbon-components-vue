@@ -6,6 +6,8 @@
       v-bind="{ ...$attrs, ...linkProps }"
       class="bx--header__menu-item"
       role="menuitem"
+      :class="{ 'bx--header__menu-item--current': activePage }"
+      :aria-current="ariaCurrent"
     >
       <span class="bx--text-truncate--end">
         <slot />
@@ -22,7 +24,14 @@ export default {
   mixins: [LinkMixin],
   inheritAttrs: false,
   props: {
+    active: Boolean,
+    ariaCurrent: String,
     role: String,
+  },
+  computed: {
+    activePage() {
+      return this.active && this.ariaCurrent !== 'page';
+    },
   },
 };
 </script>
