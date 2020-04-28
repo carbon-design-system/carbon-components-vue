@@ -26,7 +26,7 @@
         <ChevronDown20 class="cv-side-nav-menu__chevron-svg" />
       </cv-side-nav-icon>
     </button>
-    <ul class="bx--side-nav__menu" role="menu" ref="menu">
+    <ul class="bx--side-nav__menu" ref="menu">
       <slot></slot>
     </ul>
   </li>

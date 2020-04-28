@@ -1,5 +1,5 @@
 <template>
-  <header class="cv-header bx--header" role="banner" data-header>
+  <header class="cv-header bx--header" data-header>
     <slot />
     <div v-if="hasGlobalHeader" class="bx--header__global">
       <slot name="header-global" />
