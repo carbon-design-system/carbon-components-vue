@@ -24,7 +24,7 @@
       class="bx--multi-select bx--list-box"
       :class="{
         'bx--list-box--light': theme === 'light',
-        'bx--multi-select--expanded': open,
+        'bx--list-box--expanded': open,
         'bx--multi-select--invalid': isInvalid,
         'bx--multi-select--disabled bx--list-box--disabled': disabled,
         'bx--multi-select--inline bx--list-box--inline': inline,
@@ -98,7 +98,7 @@
         </div>
       </div>
 
-      <div v-show="open" :id="uid" class="bx--list-box__menu" role="listbox" ref="list">
+      <div :id="uid" class="bx--list-box__menu" role="listbox" ref="list">
         <div
           v-for="(item, index) in dataOptions"
           :key="`multi-select-${index}`"
