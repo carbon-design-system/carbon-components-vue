@@ -33,7 +33,12 @@
         </button>
       </div>
 
-      <div class="bx--modal-content" ref="content" :tabindex="scrollable ? 0 : undefined">
+      <div
+        class="bx--modal-content"
+        :class="{ 'bx--modal-content--with-form': hasFormContent }"
+        ref="content"
+        :tabindex="scrollable ? 0 : undefined"
+      >
         <slot name="content"></slot>
       </div>
 
@@ -86,6 +91,7 @@ export default {
     visible: Boolean,
     primaryButtonDisabled: Boolean,
     size: String,
+    hasFormContent: Boolean,
   },
   data() {
     return {

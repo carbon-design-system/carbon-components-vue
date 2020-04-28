@@ -25,9 +25,9 @@
         @click="toggleActive(true)"
         @blur="checkFocus"
       >
-        <Search16 class="bx--search-magnifier" />
+        <component :is="icon" class="bx--search-magnifier" />
       </button>
-      <Search16 v-if="!isToolbarKind" class="bx--search-magnifier" />
+      <component v-if="!isToolbarKind" :is="icon" class="bx--search-magnifier" />
       <button
         type="button"
         class="bx--search-close"
@@ -46,13 +46,14 @@
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
 import Search16 from '@carbon/icons-vue/es/search/16';
+import Search20 from '@carbon/icons-vue/es/search/20';
 import Close16 from '@carbon/icons-vue/es/close/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
 
 export default {
   name: 'CvSearch',
   mixins: [uidMixin, themeMixin],
-  components: { Close16, Search16, CvWrapper },
+  components: { Close16, CvWrapper },
   inheritAttrs: false,
   props: {
     clearAriaLabel: { type: String, default: 'Clear search input' },
@@ -139,6 +140,9 @@ export default {
     },
     isToolbarKind() {
       return this.kind === 'toolbar';
+    },
+    icon() {
+      return this.size === 'xl' ? Search20 : Search16;
     },
   },
   methods: {
