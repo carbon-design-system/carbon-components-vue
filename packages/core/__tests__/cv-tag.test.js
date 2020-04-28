@@ -49,7 +49,7 @@ describe('CvTag', () => {
   testInstance.propStringIsRendered(CvTag, 'label', 'span');
 
   it('click on close icon emits remove', async () => {
-    const propsData = { kind: 'filter', label: 'test' };
+    const propsData = { filter: true, label: 'test' };
     const wrapper = await mount(CvTag, { propsData });
 
     await trigger(wrapper.find('svg'), 'click');

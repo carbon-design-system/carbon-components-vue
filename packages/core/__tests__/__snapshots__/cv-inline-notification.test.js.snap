@@ -19,7 +19,7 @@ exports[`CvInlineNotification should render correctly 1`] = `
 exports[`CvInlineNotification should render correctly 2`] = `
 <div data-notification="" aria-live="polite" class="cv-inline-notification bx--inline-notification bx--inline-notification--info">
   <div class="bx--inline-notification__details">
-    <!---->
+    <informationfilled20-stub class="bx--inline-notification__icon"></informationfilled20-stub>
     <div class="bx--inline-notification__text-wrapper">
       <p class="bx--inline-notification__title"></p>
       <p class="bx--inline-notification__subtitle"></p>
@@ -83,7 +83,7 @@ exports[`CvInlineNotification should render correctly when low contrast is used 
 exports[`CvInlineNotification should render correctly when low contrast is used 2`] = `
 <div data-notification="" aria-live="polite" class="cv-inline-notification bx--inline-notification bx--inline-notification--info bx--inline-notification--low-contrast">
   <div class="bx--inline-notification__details">
-    <!---->
+    <informationfilled20-stub class="bx--inline-notification__icon"></informationfilled20-stub>
     <div class="bx--inline-notification__text-wrapper">
       <p class="bx--inline-notification__title"></p>
       <p class="bx--inline-notification__subtitle"></p>
