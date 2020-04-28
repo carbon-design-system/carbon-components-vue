@@ -15,7 +15,7 @@ exports[`CvToastNotification should render correctly 1`] = `
 
 exports[`CvToastNotification should render correctly 2`] = `
 <div data-notification="" aria-live="polite" class="cv-notifiation bx--toast-notification bx--toast-notification--info">
-  <!---->
+  <informationfilled20-stub class="bx--toast-notification__icon"></informationfilled20-stub>
   <div class="bx--toast-notification__details">
     <h3 class="bx--toast-notification__title"></h3>
     <p class="bx--toast-notification__subtitle"></p>
@@ -67,7 +67,7 @@ exports[`CvToastNotification should render correctly when low contrast is used 1
 
 exports[`CvToastNotification should render correctly when low contrast is used 2`] = `
 <div data-notification="" aria-live="polite" class="cv-notifiation bx--toast-notification bx--toast-notification--info bx--toast-notification--low-contrast">
-  <!---->
+  <informationfilled20-stub class="bx--toast-notification__icon"></informationfilled20-stub>
   <div class="bx--toast-notification__details">
     <h3 class="bx--toast-notification__title"></h3>
     <p class="bx--toast-notification__subtitle"></p>

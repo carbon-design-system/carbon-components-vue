@@ -5,6 +5,7 @@ import { CvInlineNotification } from '@/components/cv-inline-notification';
 import ErrorFilled20 from '@carbon/icons-vue/es/error--filled/20';
 import CheckmarkFilled20 from '@carbon/icons-vue/es/checkmark--filled/20';
 import WarningFilled20 from '@carbon/icons-vue/es/warning--filled/20';
+import InformationFilled20 from '@carbon/icons-vue/es/information--filled/20';
 
 describe('CvInlineNotification', () => {
   const kinds = ['error', 'info', 'warning', 'success'];
@@ -64,7 +65,7 @@ describe('CvInlineNotification', () => {
       error: ErrorFilled20,
       warning: WarningFilled20,
       success: CheckmarkFilled20,
-      info: '',
+      info: InformationFilled20,
     };
     const propsData = { actionLabel: 'test action label', lowContrast: false, kind: '' };
     for (const kind of kinds) {
