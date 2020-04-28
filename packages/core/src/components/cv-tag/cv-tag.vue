@@ -2,7 +2,7 @@
   <span
     class="cv-tag bx--tag"
     :class="[
-      `bx--tag--${kind}`,
+      `bx--tag--${tagKind}`,
       {
         'bx--tag--filter': isFilter,
         'bx--tag--disabled': disabled,
@@ -16,15 +16,16 @@
     @keyup.space.prevent="$emit('remove')"
   >
     <span class="bx--tag__label">{{ label }}</span>
-    <Close16 v-if="isFilter" :aria-label="clearAriaLabel" role="button" @click.stop.prevent="onRemove" />
+    <button v-if="isFilter" class="bx--tag__close-icon" :aria-label="clearAriaLabel" @click.stop.prevent="onRemove">
+      <Close16 />
+    </button>
   </span>
 </template>
 
 <script>
 import Close16 from '@carbon/icons-vue/es/close/16';
 
-const componentsTags = [
-  'filter',
+const tagKinds = [
   'red',
   'magenta',
   'purple',
@@ -35,6 +36,7 @@ const componentsTags = [
   'gray',
   'cool-gray',
   'warm-gray',
+  'high-contrast',
 ];
 
 export default {
@@ -46,15 +48,26 @@ export default {
     label: { type: String, required: true },
     kind: {
       type: String,
-      default: componentsTags[0],
+      default: tagKinds[0],
       validator(val) {
-        return componentsTags.includes(val);
+        if (val === 'filter' && process.env.NODE_ENV === 'development') {
+          console.warn('DEPRECARTED: Prefer props.filter (bool)');
+          return true;
+        }
+        return tagKinds.includes(val);
       },
+    },
+    filter: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {
     isFilter() {
-      return this.kind === 'filter';
+      return this.filter || this.kind === 'filter';
+    },
+    tagKind() {
+      return this.kind === 'filter' ? 'high-contrast' : this.kind;
     },
     title() {
       return this.isFilter ? this.clearAriaLabel : null;
