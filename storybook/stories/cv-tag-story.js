@@ -25,15 +25,15 @@ let preKnobs = {
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: 'disabled',
   },
-  type: {
+  kind: {
     group: 'attr',
     type: select,
     config: [
-      'Tag type',
+      'Tag kind',
       ['red', 'magenta', 'purple', 'blue', 'cyan', 'teal', 'green', 'gray', 'cool-gray', 'warm-gray', 'high-contrast'],
       'gray',
     ],
-    prop: 'type',
+    prop: 'kind',
   },
   clearAriaLabel: {
     group: 'attr',

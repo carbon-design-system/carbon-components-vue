@@ -2,7 +2,7 @@
   <span
     class="cv-tag bx--tag"
     :class="[
-      `bx--tag--${tagType}`,
+      `bx--tag--${tagKind}`,
       {
         'bx--tag--filter': isFilter,
         'bx--tag--disabled': disabled,
@@ -25,8 +25,7 @@
 <script>
 import Close16 from '@carbon/icons-vue/es/close/16';
 
-const componentsTags = [
-  'filter',
+const tagKinds = [
   'red',
   'magenta',
   'purple',
@@ -35,19 +34,6 @@ const componentsTags = [
   'teal',
   'green',
   'gray',
-  'cool-gray',
-  'warm-gray',
-];
-
-const tagTypes = [
-  'gray',
-  'red',
-  'magenta',
-  'purple',
-  'blue',
-  'cyan',
-  'teal',
-  'green',
   'cool-gray',
   'warm-gray',
   'high-contrast',
@@ -62,15 +48,13 @@ export default {
     label: { type: String, required: true },
     kind: {
       type: String,
+      default: tagKinds[0],
       validator(val) {
-        return componentsTags.includes(val);
-      },
-    },
-    type: {
-      type: String,
-      default: tagTypes[0],
-      validator(val) {
-        return tagTypes.includes(val);
+        if (val === 'filter' && process.env.NODE_ENV === 'development') {
+          console.warn('DEPRECARTED: Prefer props.filter (bool)');
+          return true;
+        }
+        return tagKinds.includes(val);
       },
     },
     filter: {
@@ -82,13 +66,8 @@ export default {
     isFilter() {
       return this.filter || this.kind === 'filter';
     },
-    tagType() {
-      // return kind instead of type if deprecated props.kind is used
-      if (this.kind !== undefined) {
-        return this.kind === 'filter' ? 'high-contrast' : this.kind;
-      }
-
-      return this.type;
+    tagKind() {
+      return this.kind === 'filter' ? 'high-contrast' : this.kind;
     },
     title() {
       return this.isFilter ? this.clearAriaLabel : null;

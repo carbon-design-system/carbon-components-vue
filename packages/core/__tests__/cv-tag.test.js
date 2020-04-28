@@ -22,7 +22,6 @@ describe('CvTag', () => {
   it('should render', async () => {
     const propsData = { kind: '', label: 'test' };
     const kinds = [
-      'filter',
       'red',
       'magenta',
       'purple',
@@ -33,6 +32,7 @@ describe('CvTag', () => {
       'gray',
       'cool-gray',
       'warm-gray',
+      'high-contrast',
     ];
 
     for (const kind of kinds) {
