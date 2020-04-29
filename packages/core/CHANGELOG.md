@@ -1,14 +1,22 @@
 # Changelog
 
+## 2.25.0-canary.0
+
+### Chore
+
+- Update to Carbon 10.11.2
+- Update to node 12
+- Update other dependencies
+
 ## 2.24.1
 
-## Fix
+### Fix
 
 Dropdown value presentation
 
 ## 2.24.0
 
-## Feat
+##£ Feat
 
 - Left and right options added to cv-tooltip
 
