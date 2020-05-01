@@ -113,16 +113,18 @@
                 @change="onHeadingCheckChange"
               />
             </th>
-            <cv-data-table-heading
-              v-for="(column, index) in dataColumns"
-              :key="`${index}:${column}`"
-              :heading="columnHeading(column)"
-              :sortable="isColSortable(column)"
-              :order="column.order"
-              @sort="val => onSort(index, val)"
-              :heading-style="headingStyle(index)"
-              :skeleton="skeleton"
-            />
+            <slot name="heading">
+              <cv-data-table-heading
+                v-for="(column, index) in dataColumns"
+                :key="`${index}:${column}`"
+                :heading="columnHeading(column)"
+                :sortable="isColSortable(column)"
+                :order="column.order"
+                @sort="val => onSort(index, val)"
+                :heading-style="headingStyle(index)"
+                :skeleton="skeleton"
+              />
+            </slot>
             <th v-if="hasOverflowMenu"></th>
           </tr>
         </thead>
