@@ -62,6 +62,26 @@ Like sorting and filtering it is the users responsibility to deal with edited da
 </cv-data-table>
 ```
 
+### Slotting header cells
+
+User can supply slotted content using the CvDataTableHeading component or plain html.
+
+```html
+<cv-data-table :sortable="false" :columns="columns" :data="data">
+  <template slot="heading">
+    <cv-data-table-heading
+      v-for="(column, index) in columns"
+      :key="`column${index}`"
+      :value="`${column}`"
+      :heading="column"
+      :sortable="false"
+      order="none"
+      @sort="val => onSort(index, val)"
+    />
+  </template>
+</cv-data-table>
+```
+
 ## Attributes
 
 - columns: An array containing a list of columns
@@ -99,6 +119,7 @@ Like sorting and filtering it is the users responsibility to deal with edited da
 - batch-actions: Ghost style buttons shown when rows are selected. An array of selected row indexes is returend from the computed property CvDataTable.selectedRows.
 - actions
 - data: overrides passing data as a property, expects CvDataTableRow and CvDataTableCell. CvDataTableCell expects slotted content.
+- heading: expects CvDataTableHeading.
 - expandedContent: (part of cv-data-table-row) additional content displayed when row is expanded
 
 ## Events
