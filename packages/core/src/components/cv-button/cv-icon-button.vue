@@ -27,13 +27,13 @@ export default {
   },
   computed: {
     buttonClasses() {
-      return `${this.buttonClassOpts({ iconOnly: true })} ${this.tipClasses}`;
+      return `${this.buttonClassOpts({ iconOnly: true })}${this.tipClasses}`;
     },
     tipClasses() {
       const tipPosition = this.tipPosition || 'bottom';
       const tipAlignment = this.tipAlignment || 'center';
       if (this.label) {
-        return `${this.carbonPrefix}--tooltip__trigger ${this.carbonPrefix}--tooltip--a11y ${this.carbonPrefix}--tooltip--${tipPosition} ${this.carbonPrefix}--tooltip--align-${tipAlignment}`;
+        return ` ${this.carbonPrefix}--tooltip__trigger ${this.carbonPrefix}--tooltip--a11y ${this.carbonPrefix}--tooltip--${tipPosition} ${this.carbonPrefix}--tooltip--align-${tipAlignment}`;
       } else {
         return '';
       }
