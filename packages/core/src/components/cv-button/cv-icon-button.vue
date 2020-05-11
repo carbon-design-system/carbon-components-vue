@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     buttonClasses() {
-      return this.buttonClassOpts({ iconOnly: true });
+      return `${this.buttonClassOpts({ iconOnly: true })} ${this.tipClasses}`;
     },
     tipClasses() {
       const tipPosition = this.tipPosition || 'bottom';

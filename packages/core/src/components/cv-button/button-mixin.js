@@ -71,7 +71,7 @@ export default {
           classes.push(`${carbonSettings.prefix}--btn--field`);
         }
 
-        return classes;
+        return classes.join(' ');
       };
     },
   },
