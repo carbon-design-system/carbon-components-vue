@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { text, object, number } from '@storybook/addon-knobs';
+import { text, object, number, boolean } from '@storybook/addon-knobs';
 
 import { action } from '@storybook/addon-actions';
 
@@ -57,6 +57,18 @@ const preKnobs = {
     prop: 'page-sizes',
     value: val => val.list,
   },
+  disableBackwards: {
+    group: 'attr',
+    type: boolean,
+    config: ['Disable backwards button', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'backwards-button-disabled',
+  },
+  disabledForwards: {
+    group: 'attr',
+    type: boolean,
+    config: ['Disable forwards button', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'forwards-button-disabled',
+  },
   events: {
     group: 'attr',
     value: `@change="onChange"`,
@@ -72,7 +84,7 @@ const preKnobs = {
 const variants = [
   { name: 'default', excludes: ['events', 'slots'] },
   { name: 'slottedFields', excludes: ['events'] },
-  { name: 'minimal', includes: [] },
+  { name: 'minimal', includes: ['disabledForwards'] },
   { name: 'events', includes: ['events'] },
 ];
 

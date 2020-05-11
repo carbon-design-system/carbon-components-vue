@@ -124,6 +124,8 @@ export default {
   name: 'CvPagination',
   components: { CvSelect, CvSelectOption, CaretLeft16, CaretRight16 },
   props: {
+    backwardsButtonDisabled: Boolean,
+    forwardsButtonDisabled: Boolean,
     backwardText: { type: String, default: 'Prev page' },
     forwardText: { type: String, default: 'Next page' },
     pageNumberLabel: { type: String, default: 'Page number:' },
@@ -173,10 +175,10 @@ export default {
   },
   computed: {
     noWayBack() {
-      return this.pageValue === 1;
+      return this.backwardsButtonDisabled || this.pageValue === 1;
     },
     noWayForward() {
-      return this.pageValue === this.pageCount;
+      return this.forwardsButtonDisabled || this.pageValue === this.pageCount;
     },
     ofNPagesProps() {
       return {

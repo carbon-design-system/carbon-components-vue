@@ -23,6 +23,8 @@ Minimal
 
 ## Attributes
 
+- backwards-button-disabled: manually disable the backwards/previous button
+- forwards-button-disabled: manually disable the foarwards/next button
 - backwards-text: Aria label on page down arrow. Optional defaults to "Previous page"
 - forwards-text: Aria label on page up arrow. Optional defaults to "Next page"
 - page-number-label: Hidden label for page number select. Defaults to "Page number"
