@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.25.0
+
+- Fix: tooltip on icon only button
+- Feat: Add disabled attributes for forwards and backwards pagination buttons.
+
 ## 2.25.0-canary.0
 
 ### Chore
