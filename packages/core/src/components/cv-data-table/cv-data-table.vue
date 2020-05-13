@@ -19,9 +19,9 @@
         >
           <div class="bx--action-list">
             <slot name="batch-actions" />
-            <cv-button class="bx--batch-summary__cancel" size="small" @click="deselect">
-              {{ batchCancelLabel }}
-            </cv-button>
+            <cv-button class="bx--batch-summary__cancel" size="small" @click="deselect">{{
+              batchCancelLabel
+            }}</cv-button>
           </div>
           <div class="bx--batch-summary">
             <p class="bx--batch-summary__para">
@@ -113,16 +113,17 @@
                 @change="onHeadingCheckChange"
               />
             </th>
-            <cv-data-table-heading
-              v-for="(column, index) in dataColumns"
-              :key="`${index}:${column}`"
-              :heading="columnHeading(column)"
-              :sortable="isColSortable(column)"
-              :order="column.order"
-              @sort="val => onSort(index, val)"
-              :heading-style="headingStyle(index)"
-              :skeleton="skeleton"
-            />
+            <slot name="headings">
+              <cv-data-table-heading
+                v-for="(column, index) in columns"
+                :key="`${index}:${column}`"
+                :heading="columnHeading(column)"
+                :sortable="isColSortable(column)"
+                :order="column.order"
+                :heading-style="headingStyle(column)"
+                :skeleton="skeleton"
+              />
+            </slot>
             <th v-if="hasOverflowMenu"></th>
           </tr>
         </thead>
@@ -148,7 +149,6 @@
         </cv-wrapper>
       </table>
     </div>
-
     <cv-pagination
       v-if="pagination"
       v-bind="internalPagination"
@@ -216,7 +216,7 @@ export default {
     searchClearLabel: { type: String, default: 'Clear search' },
     sortable: Boolean,
     title: String,
-    columns: { type: Array, required: true },
+    columns: Array,
     data: Array,
     zebra: Boolean,
     rowsSelected: { type: Array, default: () => [] },
@@ -231,13 +231,6 @@ export default {
   },
   data() {
     return {
-      dataColumns: this.isSortable
-        ? this.columns.map(item => ({
-            label: item.label ? item.label : item,
-            order: 'none',
-            sortable: item.sortable,
-          }))
-        : this.columns,
       hasBatchActions: false,
       hasActions: false,
       hasToolbar: false,
@@ -249,16 +242,11 @@ export default {
       clearSearchVisible: false,
       searchActive: false,
       registeredRows: [],
+      registeredHeadings: [],
       dataExpandAll: false,
     };
   },
   watch: {
-    sortable() {
-      this.watchColumns();
-    },
-    columns() {
-      this.watchColumns();
-    },
     rowsSelected() {
       this.updateRowsSelected();
     },
@@ -267,9 +255,9 @@ export default {
     // add these on created otherwise cv:mounted is too late.
     this.$on('cv:mounted', srcComponent => this.onCvMount(srcComponent));
     this.$on('cv:beforeDestroy', srcComponent => this.onCvBeforeDestroy(srcComponent));
+    this.$on('cv:sort', (srcComponent, value) => this.onSort(srcComponent, value));
   },
   mounted() {
-    this.watchColumns();
     this.updateRowsSelected();
     this.checkSlots();
   },
@@ -288,7 +276,7 @@ export default {
     },
     isSortable() {
       // is any column sortable
-      return this.sortable || this.columns.some(column => column.sortable);
+      return this.sortable || this.registeredHeadings.some(column => column.sortable);
     },
     isColSortable() {
       return col => {
@@ -336,10 +324,10 @@ export default {
       return `${sizeClass}${zebraClass}${borderlessClass}${skeletonClass}${sortableClass}`.trim();
     },
     headingStyle() {
-      return index => this.dataColumns[index].headingStyle;
+      return col => (typeof col === 'object' ? col.headingStyle : {});
     },
     dataStyle() {
-      return index => this.dataColumns[index].dataStyle;
+      return index => (this.columns && this.columns[index] && this.columns[index].dataStyle) || {};
     },
     selectedRows() {
       return this.dataRowsSelected;
@@ -353,20 +341,36 @@ export default {
       this.hasToolbar = !!(this.$slots.actions || this.$listeners.search || this.$slots['batch-actions']);
       this.isHelper = !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
     },
-    onCvMount(row) {
-      this.registeredRows.push(row);
-      if (this.registeredRows.filter(item => item.uid === row.uid).length > 1) {
-        console.error(
-          `CvDataTable: Duplicate ID specified for CvDataTableRow, this may cause issues. {id: ${row.id}, value: ${row.value}}`
-        );
+    onCvMount(thing) {
+      if (thing.$_CvDataTableHeading) {
+        this.registeredHeadings = this.$children.filter(item => item.$_CvDataTableHeading);
+        const heading = thing;
+        if (this.registeredHeadings.filter(item => item.uid === heading.uid).length > 1) {
+          console.error(
+            `CvDataTable: Duplicate ID specified for CvDataTableHeading, this may cause issues. {id: ${heading.id}}`
+          );
+        }
+      } else {
+        const row = thing;
+        this.registeredRows.push(row);
+        if (this.registeredRows.filter(item => item.uid === row.uid).length > 1) {
+          console.error(
+            `CvDataTable: Duplicate ID specified for CvDataTableRow, this may cause issues. {id: ${row.id}, value: ${row.value}}`
+          );
+        }
+        row.$on('cv:expanded-change', this.onCvExpandedChange);
+        this.updateSomeExpandingRows();
       }
-      row.$on('cv:expanded-change', this.onCvExpandedChange);
-      this.updateSomeExpandingRows();
     },
-    onCvBeforeDestroy(row) {
-      const index = this.registeredRows.findIndex(item => row.uid === item.uid);
-      this.registeredRows.splice(index, 1);
-      this.updateSomeExpandingRows();
+    onCvBeforeDestroy(thing) {
+      if (thing.$_CvDataTableHeading) {
+        this.registeredHeadings = this.$children.filter(item => item.$_CvDataTableHeading);
+      } else {
+        const row = thing;
+        const index = this.registeredRows.findIndex(item => row.uid === item.uid);
+        this.registeredRows.splice(index, 1);
+        this.updateSomeExpandingRows();
+      }
     },
     checkSearchFocus(ev) {
       if (!this.$refs.searchContainer.contains(ev.relatedTarget)) {
@@ -455,25 +459,21 @@ export default {
     onMenuItemClick(val) {
       this.$emit('overflow-menu-click', val);
     },
-    watchColumns() {
-      this.dataColumns = this.isSortable
-        ? this.columns.map(item => ({
-            ...item,
-            label: item.label ? item.label : item,
-            order: 'none',
-            sortable: item.sortable,
-          }))
-        : this.columns;
-    },
     onSearch() {
       this.clearSearchVisible = this.searchValue.length > 0;
       this.$emit('search', this.searchValue);
     },
-    onSort(index, val) {
-      for (let column of this.dataColumns) {
-        column.order = 'none';
+    onSort(srcComponent, val) {
+      let index;
+      for (let colIndex in this.registeredHeadings) {
+        const column = this.registeredHeadings[colIndex];
+        if (column.uid === srcComponent.uid) {
+          column.internalOrder = val;
+          index = colIndex;
+        } else {
+          column.internalOrder = 'none';
+        }
       }
-      this.dataColumns[index].order = val;
       this.$emit('sort', { index, order: val });
     },
     updateSomeExpandingRows() {
