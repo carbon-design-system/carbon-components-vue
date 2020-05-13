@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.25.1
+
+- Fix: missing readme
+
 ## 2.25.0
 
 - Fix: tooltip on icon only button
