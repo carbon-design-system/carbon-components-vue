@@ -1,6 +1,8 @@
 # Changelog
 
-## 2.25.0
+## 2.26.0-canary.0
+
+- Feat: Add slotted headings to data table## 2.25.0
 
 - Fix: tooltip on icon only button
 - Feat: Add disabled attributes for forwards and backwards pagination buttons.
