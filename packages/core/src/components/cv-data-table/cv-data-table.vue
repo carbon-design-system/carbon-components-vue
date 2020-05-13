@@ -19,9 +19,9 @@
         >
           <div class="bx--action-list">
             <slot name="batch-actions" />
-            <cv-button class="bx--batch-summary__cancel" size="small" @click="deselect">{{
-              batchCancelLabel
-            }}</cv-button>
+            <cv-button class="bx--batch-summary__cancel" size="small" @click="deselect">
+              {{ batchCancelLabel }}
+            </cv-button>
           </div>
           <div class="bx--batch-summary">
             <p class="bx--batch-summary__para">
@@ -167,7 +167,7 @@
 </template>
 
 <script>
-import CvDataTableHeading from './_cv-data-table-heading';
+import CvDataTableHeading from './cv-data-table-heading';
 import CvDataTableRow from './cv-data-table-row';
 import CvDataTableCell from './cv-data-table-cell';
 import CvButton from '../cv-button/cv-button';
