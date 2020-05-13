@@ -18,6 +18,12 @@ http://www.carbondesignsystem.com/components/DataTable/code
 
 See Attributes, Slots and Events to see how to add additional features to the table.
 
+### Slotting headings - WARNING EXPERIMENTAL
+
+Headings can be slotted as per the 'Slotted headings' exmaple.
+
+NOTE: When slotted headings are used only plain text content is styled by default.
+
 ### Slotting data
 
 Instead of supply data as two dimensional array the user can supply slotted content using the CvDataTableRow and CvDataTableCell components.
@@ -66,10 +72,11 @@ Like sorting and filtering it is the users responsibility to deal with edited da
 
 - columns: An array containing a list of columns
   - Columns can be string labels or objects
-  - If objects they must contain a 'label' and can optionally contain
-    - a headingStyle object to be applied to the column headings.
-    - a dataStyle object to be applied to the data in the column.
-    - an optional sortable property - if any column sets this to true then only columns with sortable set to true are sortable. NOTE: table sortable property ignored.
+  - If objects
+    - MUST contain a label if headings are not slotted
+    - Optionally a headingStyle object to be applied to the column headings if not slotted.
+    - Optionally a dataStyle object to be applied to the data in the column.
+    - Optionally a sortable property - if any column sets this to true then only columns with sortable set to true are sortable. NOTE: table sortable property not required.
 - data: Two dimensional array of strings.
 - rows-selected: An array containing the selected row values. Supports v-model via the row-select-changes event.
 

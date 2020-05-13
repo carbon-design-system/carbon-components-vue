@@ -17,6 +17,8 @@ import {
   CvOverflowMenuItem,
   CvTag,
   CvDataTableSkeleton,
+  CvDataTableHeading,
+  CvTooltip,
 } from '../../packages/core/src/';
 import TrashCan16 from '@carbon/icons-vue/es/trash-can/16';
 import Save16 from '@carbon/icons-vue/es/save/16';
@@ -228,6 +230,18 @@ let preKnobs = {
     prop: 'hasExpandingRows',
     value: val => val,
   },
+  slottedHeadings: {
+    group: 'slots',
+    slot: 'headings',
+    value:
+      '\n    <cv-data-table-heading heading="Name" sortable />' +
+      '\n    <cv-data-table-heading>Protocol<cv-tooltip direction="bottom" tip="How comms get done" /></cv-data-table-heading>' +
+      '\n    <cv-data-table-heading><cv-tooltip direction="bottom" tip="The port number">Port</cv-tooltip></cv-data-table-heading>' +
+      '\n    <cv-data-table-heading heading="Rule" />' +
+      '\n    <cv-data-table-heading heading="Attatched Groups" />' +
+      '\n    <cv-data-table-heading heading="Status" />' +
+      '\n',
+  },
   slottedData: {
     group: 'slots',
     slot: 'data',
@@ -308,6 +322,7 @@ let variants = [
       'search2',
       'columns2',
       'columns3',
+      'slottedHeadings',
       'slottedData',
       'htmlData',
       'helperTextSlot',
@@ -329,6 +344,7 @@ let variants = [
       'search',
       'columns2',
       'columns3',
+      'slottedHeadings',
       'slottedData',
       'htmlData',
       'helperTextSlot',
@@ -346,6 +362,7 @@ let variants = [
       'search2',
       'columns2',
       'columns3',
+      'slottedHeadings',
       'slottedData',
       'htmlData',
       'helperTextSlot',
@@ -367,7 +384,8 @@ let variants = [
     includes: ['columns', 'expandingSlottedData', 'rowExpanded', 'data', 'basicPagination', 'hasExpandAll'],
   },
   { name: 'slotted HTML', includes: ['columns', 'htmlData', 'basicPagination'] },
-  { name: 'styled columns', includes: ['sortable', 'columns2', 'data'] },
+  { name: 'styled columns', includes: ['sortable', 'columns2', 'data', 'sort'] },
+  { name: 'Slotted headings (EXPERIMENTAL)', includes: ['slottedHeadings', 'data', 'sort'] },
 ];
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
@@ -404,6 +422,7 @@ for (const story of storySet) {
       return {
         components: {
           CvDataTable,
+          CvDataTableHeading,
           CvDataTableAction,
           SvTemplateView,
           CvDataTableRow,
@@ -415,6 +434,7 @@ for (const story of storySet) {
           TrashCan16,
           Save16,
           CvTag,
+          CvTooltip,
         },
         template: templateViewString,
         props: settings.props,

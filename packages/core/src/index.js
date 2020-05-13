@@ -39,6 +39,7 @@ import {
   CvDataTableCell,
   CvDataTableAction,
   CvDataTableSkeleton,
+  CvDataTableHeading,
 } from './components/cv-data-table';
 import { CvDatePicker } from './components/cv-date-picker';
 import { CvDropdown, CvDropdownItem, CvDropdownSkeleton } from './components/cv-dropdown';
@@ -107,7 +108,7 @@ export { CvCheckbox, CvCheckboxSkeleton };
 export { CvCodeSnippet, CvCodeSnippetSkeleton };
 export { CvComboBox };
 export { CvContentSwitcher, CvContentSwitcherButton, CvContentSwitcherContent };
-export { CvDataTable, CvDataTableRow, CvDataTableCell, CvDataTableAction, CvDataTableSkeleton };
+export { CvDataTable, CvDataTableRow, CvDataTableCell, CvDataTableAction, CvDataTableSkeleton, CvDataTableHeading };
 export { CvDatePicker };
 export { CvDropdown, CvDropdownItem, CvDropdownSkeleton };
 export { CvFileUploader, CvFileUploaderSkeleton };
