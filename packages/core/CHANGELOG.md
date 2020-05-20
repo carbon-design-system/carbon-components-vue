@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.26.0
+
+- Fix animation issues in data table and accordion
+- Fix combo box expansion.
+- Release slotted header updates
+
 ## 2.26.0-canary.0
 
 - Feat: Add slotted headings to data table## 2.25.0

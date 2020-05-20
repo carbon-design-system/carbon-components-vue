@@ -405,7 +405,7 @@ let variants = [
   },
   { name: 'slotted HTML', includes: ['columns', 'htmlData', 'basicPagination'] },
   { name: 'styled columns', includes: ['sortable', 'columns2', 'data', 'sort'] },
-  { name: 'Slotted headings (EXPERIMENTAL)', includes: ['slottedHeadings', 'data', 'sort'] },
+  { name: 'Slotted headings', includes: ['slottedHeadings', 'data', 'sort'] },
 ];
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
