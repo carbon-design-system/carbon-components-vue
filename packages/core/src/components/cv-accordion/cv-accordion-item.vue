@@ -9,7 +9,8 @@
   <li
     data-accordion-item
     class="cv-accordion-item bx--accordion__item"
-    :class="{ 'bx--accordion__item--active': dataOpen }"
+    :class="itemClasses"
+    @animationend="onAnimationEnd"
   >
     <button
       type="button"
@@ -50,6 +51,7 @@ export default {
   },
   data() {
     return {
+      animation: '',
       dataOpen: false,
     };
   },
@@ -58,6 +60,7 @@ export default {
   },
   methods: {
     toggle(force) {
+      this.animation = this.dataOpen ? 'collapsing' : 'expanding';
       const newValue = typeof force === 'boolean' ? !!force : !this.dataOpen;
       const change = this.dataOpen !== undefined && newValue !== this.dataOpen;
 
@@ -65,6 +68,21 @@ export default {
       if (change) {
         this.$parent.$emit('cv:change', this);
       }
+    },
+    onAnimationEnd() {
+      this.animation = '';
+    },
+  },
+  computed: {
+    itemClasses() {
+      const classes = [];
+      if (this.dataOpen) {
+        classes.push('bx--accordion__item--active');
+      }
+      if (this.animation) {
+        classes.push(`bx--accordion__item--${this.animation}`);
+      }
+      return classes.join(' ');
     },
   },
 };

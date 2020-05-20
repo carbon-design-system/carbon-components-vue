@@ -9,10 +9,8 @@
       </div>
 
       <section v-if="hasToolbar" class="bx--table-toolbar">
-        <div v-if="batchActive" :style="{ minHeight: '48px', maxWidth: '0' }" />
-
         <div
-          v-if="hasBatchActions"
+          v-show="hasBatchActions"
           class="bx--batch-actions"
           :class="{ 'bx--batch-actions--active': batchActive }"
           :aria-label="actionBarAriaLabel"
@@ -34,7 +32,7 @@
           </div>
         </div>
 
-        <div v-if="(hasActions || $listeners.search) && !batchActive" class="bx--toolbar-content">
+        <div class="bx--toolbar-content">
           <div
             v-if="$listeners.search"
             :class="{

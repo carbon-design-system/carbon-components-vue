@@ -62,7 +62,7 @@ const parsePreKnobs = (variant, preKnobs) => {
         } else if (preKnob.slot) {
           // slot
           if (preKnob.slot !== 'default') {
-            knobs.props[`use_${key}`] = { default: boolean(`use-sloted-content:${preKnob.slot}`, true) };
+            knobs.props[`use_${key}`] = { default: boolean(`use-slotted-content:${preKnob.slot}`, true) };
             // knobs.data[key] = boolean(`slot:${preKnob.slot}`, false);
             knobs.group[
               preKnob.group
