@@ -15,6 +15,7 @@
       :class="{
         'bx--list-box--light': theme === 'light',
         'bx--combo-box--expanded': open,
+        'bx--list-box--expanded': open,
         'bx--combo-box--disabled bx--list-box--disabled': $attrs.disabled,
       }"
       :data-invalid="isInvalid"
