@@ -109,6 +109,8 @@
                 value="headingCheck"
                 v-model="headingChecked"
                 @change="onHeadingCheckChange"
+                :label="selectAllAriaLabel"
+                hideLabel
               />
             </th>
             <slot name="headings">
@@ -197,6 +199,7 @@ export default {
     actionBarAriaLabel: { type: String, default: 'Table Action Bar' },
     collapseAllAriaLabel: { type: String, default: 'Collapse all rows' },
     expandAllAriaLabel: { type: String, default: 'Expand all rows' },
+    selectAllAriaLabel: { type: String, default: 'Select all rows' },
     autoWidth: Boolean,
     batchCancelLabel: { type: String, default: 'cancel' },
     borderless: Boolean,
