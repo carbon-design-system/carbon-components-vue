@@ -80,7 +80,6 @@ Like sorting and filtering it is the users responsibility to deal with edited da
 - data: Two dimensional array of strings.
 - rows-selected: An array containing the selected row values. Supports v-model via the row-select-changes event.
 
-- action-bar-label: (optional) alternative aria label for the toolbar
 - auto-width: (optional) table will size use auto sizing
 - borderless: (optional) table will have no border
 - overflow-menu(optional) : An array of overflow menu labels. On click CvDataTable will raise an 'overflow-menu-click' event passing an object containing menuIndex, menuLabel and rowValue
@@ -93,6 +92,10 @@ Like sorting and filtering it is the users responsibility to deal with edited da
 - searchPlaceholder: (optional) { type: String, default: 'Search' },
 - searchClearLabel: (optional) { type: String, default: 'Clear search' },
 - batchCancelLabel: (optional) { type: String, default: 'Cancel' },
+- actionBarAriaLabel: { type: String, default: 'Table Action Bar' },
+- collapseAllAriaLabel: { type: String, default: 'Collapse all rows' },
+- expandAllAriaLabel: { type: String, default: 'Expand all rows' },
+- selectAllAriaLabel: { type: String, default: 'Select all rows' },
 
 ## Scoped slots
 
