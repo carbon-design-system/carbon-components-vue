@@ -151,6 +151,7 @@
       v-if="pagination"
       v-bind="internalPagination"
       :number-of-items="internalNumberOfItems"
+      :actual-items-on-page="this.registeredRows.length"
       @change="$emit('pagination', $event)"
     >
       <template v-slot:range-text="{ scope }">

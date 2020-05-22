@@ -30,6 +30,7 @@ Minimal
 - page-number-label: Hidden label for page number select. Defaults to "Page number"
 - page-sizes-label: label for page size select. Defaults to "Items per page:"
 - number-of-items: Number of items accross all pages, defaults to Infinity
+- actual-items-on-page: Number of items actually displayed which will trim the range value in the case where less rows than page-size are shown.
 - page-sizes: Array of page size values.
   Defaults to [10, 20, 30, 40, 50]
   - By default the first page size is selected. This can be augmented by passing an object instead of a number e.g.
