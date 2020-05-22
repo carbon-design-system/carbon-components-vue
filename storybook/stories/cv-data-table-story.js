@@ -144,8 +144,18 @@ let preKnobs = {
           ['Load Balancer 11', 'HTTP', '80', 'Round Robin', 'Maureen’s VM Groups', 'Active'],
           ['Load Balancer 4', 'HTTP', '81', 'Round Robin', 'Maureen’s VM Groups', 'Active'],
           ['Load Balancer 2', 'HTTP', '82', 'Round Robin', 'Maureen’s VM Groups', 'Active'],
-          ['Load Balancer 3', 'HTTP', '8080', 'Round Robin', 'Maureen’s VM Groups', 'Active'],
+          ['Load Balancer 3', 'HTTP', '8080', 'Round Robin', 'Maureen’s VM Groups', 'Offline'],
           ['Load Balancer 5', 'HTTP', '8001', 'Round Robin', 'Maureen’s VM Groups', 'Active'],
+          ['Load Balancer 11', 'HTTP', '10', 'Round Robin', 'Max’s VM Groups', 'Active'],
+          ['Load Balancer 24', 'HTTP', '11', 'Round Robin', 'Max’s VM Groups', 'Active'],
+          ['Load Balancer 22', 'HTTP', '12', 'Round Robin', 'Max’s VM Groups', 'Active'],
+          ['Load Balancer 23', 'HTTP', '1080', 'Round Robin', 'Max’s VM Groups', 'Active'],
+          ['Load Balancer 25', 'HTTP', '1001', 'Round Robin', 'Max’s VM Groups', 'Failed'],
+          ['Load Balancer 311', 'HTTP', '280', 'Round Robin', 'John’s VM Groups', 'Active'],
+          ['Load Balancer 324', 'HTTP', '281', 'Round Robin', 'John’s VM Groups', 'Active'],
+          ['Load Balancer 322', 'HTTP', '282', 'Round Robin', 'John’s VM Groups', 'Offline'],
+          ['Load Balancer 323', 'HTTP', '2080', 'Round Robin', 'John’s VM Groups', 'Active'],
+          ['Load Balancer 325', 'HTTP', '2001', 'Round Robin', 'John’s VM Groups', 'Active'],
         ],
       },
     ],
@@ -168,7 +178,11 @@ let preKnobs = {
   },
   pagination: {
     group: 'attr',
-    value: ':pagination="{ numberOfItems: 23, pageSizes: [5, 10, 15, 20, 25] }" @pagination="actionOnPagination"',
+    value: ':pagination="{ numberOfItems: 23, pageSizes: [5, 10, 15, 20, 25]  }" @pagination="actionOnPagination"',
+  },
+  paginationInfinity: {
+    group: 'attr',
+    value: ':pagination="{ numberOfItems: Infinity, pageSizes: [5, 10, 15, 20, 25] }" @pagination="actionOnPagination"',
   },
   rowSelects: {
     group: 'attr',
@@ -327,6 +341,26 @@ let variants = [
       'htmlData',
       'helperTextSlot',
       'basicPagination',
+      'paginationInfinity',
+      'hasExpandingRows',
+      'expandingSlottedData',
+      'rowExpanded',
+      'scopedSlots',
+      'hasExpandAll',
+    ],
+  },
+  {
+    name: 'infinite pagination',
+    excludes: [
+      'search2',
+      'columns2',
+      'columns3',
+      'slottedHeadings',
+      'slottedData',
+      'htmlData',
+      'helperTextSlot',
+      'basicPagination',
+      'pagination',
       'hasExpandingRows',
       'expandingSlottedData',
       'rowExpanded',
@@ -347,6 +381,7 @@ let variants = [
       'htmlData',
       'helperTextSlot',
       'basicPagination',
+      'paginationInfinity',
       'hasExpandingRows',
       'expandingSlottedData',
       'rowExpanded',
@@ -369,6 +404,7 @@ let variants = [
       'htmlData',
       'helperTextSlot',
       'basicPagination',
+      'paginationInfinity',
       'hasExpandingRows',
       'expandingSlottedData',
       'rowExpanded',
@@ -387,6 +423,7 @@ let variants = [
       'htmlData',
       'helperTextSlot',
       'basicPagination',
+      'paginationInfinity',
       'hasExpandingRows',
       'expandingSlottedData',
       'rowExpanded',
@@ -465,6 +502,9 @@ for (const story of storySet) {
             rowSelects: [],
             sortBy: undefined,
             sampleOverflowMenu: ['Start', 'Stop', 'Delete 3'],
+            pageStart: 1,
+            pageNumber: 1,
+            pageLength: 5,
           };
         },
         watch: {
@@ -474,13 +514,19 @@ for (const story of storySet) {
         },
         computed: {
           filteredData() {
+            let filteredData;
             if (this.filterValue) {
               const regex = new RegExp(this.filterValue, 'i');
-              return this.internalData.filter(item => {
+              filteredData = this.internalData.filter(item => {
                 return item.join('|').search(regex) >= 0;
               });
             } else {
-              return this.internalData;
+              filteredData = this.internalData;
+            }
+            if (this.pageStart) {
+              return filteredData.slice(this.pageStart, this.pageStart + this.pageLength);
+            } else {
+              return filteredData;
             }
           },
         },
@@ -533,7 +579,13 @@ for (const story of storySet) {
           action2: action('action 2'),
           action3: action('action 3'),
           actionNew: action('add new'),
-          actionOnPagination: action('pagination change'),
+          paginationAction: action('pagination change'),
+          actionOnPagination(ev) {
+            this.paginationAction();
+            this.pageStart = ev.start;
+            this.pageNumber = ev.page;
+            this.pageLength = ev.length;
+          },
           onOverflowMenuClick: action('overflow menu click'),
           actionRowSelectChange: action('row selected'),
         },
