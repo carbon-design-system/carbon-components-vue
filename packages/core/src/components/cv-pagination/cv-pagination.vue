@@ -131,6 +131,7 @@ export default {
     pageNumberLabel: { type: String, default: 'Page number:' },
     pageSizesLabel: { type: String, default: 'Items per page:' },
     numberOfItems: { type: Number, default: Infinity },
+    actualItemsOnPage: { type: Number, default: undefined },
     page: Number,
     pageSizes: { type: Array, default: () => [10, 20, 30, 40, 50] },
   },
@@ -197,7 +198,10 @@ export default {
     rangeProps() {
       return {
         start: Math.min(this.firstItem, this.numberOfItems),
-        end: Math.min(this.firstItem + parseInt(this.pageSizeValue, 10) - 1, this.numberOfItems),
+        end: Math.min(
+          this.firstItem + Math.min(parseInt(this.pageSizeValue, 10), this.actualItemsOnPage) - 1,
+          this.numberOfItems
+        ),
         items: this.numberOfItems,
       };
     },
