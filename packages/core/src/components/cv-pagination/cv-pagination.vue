@@ -131,7 +131,7 @@ export default {
     pageNumberLabel: { type: String, default: 'Page number:' },
     pageSizesLabel: { type: String, default: 'Items per page:' },
     numberOfItems: { type: Number, default: Infinity },
-    actualItemsOnPage: { type: Number, default: undefined },
+    actualItemsOnPage: { type: Number, default: Infinity },
     page: Number,
     pageSizes: { type: Array, default: () => [10, 20, 30, 40, 50] },
   },
@@ -165,7 +165,9 @@ export default {
       this.pageValue = newPageValue(this.page, this.pageCount);
       this.firstItem = newFirstItem(this.pageValue, this.pageSizeValue);
     },
-    pageSizes() {
+    pageSizes(a, b) {
+      if (!a.some(item => !b.includes(item))) return; // /possible issue when pageSizes defined in DOM
+
       this.pageSizeValue = newPageSizeValue(this.pageSizes);
       this.pageCount = newPageCount(this.numberOfItems, this.pageSizeValue);
       this.pages = newPagesArray(this.pageCount);
