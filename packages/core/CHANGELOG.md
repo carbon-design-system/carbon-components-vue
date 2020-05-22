@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.27.0-canary.0
+
+- Feat: Allow the number of items on page to be set for pagination seperately from page size
+- Fix: Checkbox labels in data table.
+
+## 2.26.0
+
+- Fix animation issues in data table and accordion
+- Fix combo box expansion.
+- Release slotted header updates
+
 ## 2.26.0-canary.0
 
 - Feat: Add slotted headings to data table## 2.25.0
