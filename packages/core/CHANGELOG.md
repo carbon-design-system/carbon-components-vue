@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.27.0-canary.0
+
+- Feat: Allow the number of items on page to be set for pagination seperately from page size
+- Fix: Checkbox labels in data table.
+
 ## 2.26.0
 
 - Fix animation issues in data table and accordion
