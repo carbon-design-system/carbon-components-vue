@@ -16,7 +16,8 @@
         v-model="dataChecked"
         @change="onChange"
         ref="rowChecked"
-        :aria-label="ariaLabelForBatchCheckbox || `Select row ${value} for batch action`"
+        :label="ariaLabelForBatchCheckbox || `Select row ${value} for batch action`"
+        hideLabel
       />
     </td>
     <slot />
