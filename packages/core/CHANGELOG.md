@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.27.0-canary.1
+
+- Fix combobox disable to fully disable
+- Fix dropdown disable to fully disable
+- Fix tag filter disable to fully disable
+
 ## 2.27.0-canary.0
 
 - Feat: Allow the number of items on page to be set for pagination seperately from page size
