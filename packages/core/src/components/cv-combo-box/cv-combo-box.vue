@@ -1,10 +1,8 @@
 <template>
   <div class="cv-combo-box bx--list-box__wrapper" @focusout="onFocusOut">
-    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">
-      {{ title }}
-    </label>
+    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': disabled }">{{ title }}</label>
 
-    <div v-if="isHelper" class="bx--form__helper-text" :class="{ 'bx--form__helper-text--disabled': $attrs.disabled }">
+    <div v-if="isHelper" class="bx--form__helper-text" :class="{ 'bx--form__helper-text--disabled': disabled }">
       <slot name="helper-text">{{ helperText }}</slot>
     </div>
 
@@ -16,10 +14,10 @@
         'bx--list-box--light': theme === 'light',
         'bx--combo-box--expanded': open,
         'bx--list-box--expanded': open,
-        'bx--combo-box--disabled bx--list-box--disabled': $attrs.disabled,
+        'bx--combo-box--disabled bx--list-box--disabled': disabled,
       }"
       :data-invalid="isInvalid"
-      v-bind="$attrs"
+      v-bind="$attr"
       @keydown.down.prevent="onDown"
       @keydown.up.prevent="onUp"
       @keydown.enter.prevent="onEnter"
@@ -46,8 +44,10 @@
           :aria-controls="uid"
           aria-autocomplete="list"
           role="combobox"
+          :aria-disabled="disabled"
           :aria-expanded="open"
           autocomplete="off"
+          :disabled="disabled"
           :placeholder="label"
           v-model="filter"
           @input="onInput"
@@ -109,6 +109,7 @@ export default {
   props: {
     autoFilter: Boolean,
     autoHighlight: Boolean,
+    disabled: Boolean,
     invalidMessage: { type: String, default: undefined },
     helperText: { type: String, default: undefined },
     title: String,
@@ -209,6 +210,7 @@ export default {
       this.isHelper = !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
     },
     clearFilter() {
+      if (this.disabled) return;
       this.internalUpdateValue('');
       this.filter = '';
       this.$refs.input.focus();
@@ -280,6 +282,7 @@ export default {
       }
     },
     onInput() {
+      if (this.disabled) return;
       this.doOpen(true);
 
       this.updateOptions();
@@ -289,6 +292,7 @@ export default {
       this.open = newVal;
     },
     onDown() {
+      if (this.disabled) return;
       if (!this.open) {
         this.doOpen(true);
       } else {
@@ -296,15 +300,18 @@ export default {
       }
     },
     onUp() {
+      if (this.disabled) return;
       if (this.open) {
         this.doMove(true);
       }
     },
     onEsc() {
+      if (this.disabled) return;
       this.doOpen(false);
       this.$el.focus();
     },
     onEnter() {
+      if (this.disabled) return;
       this.doOpen(!this.open);
       if (!this.open) {
         this.onItemClick(this.highlighted);
@@ -312,6 +319,7 @@ export default {
       }
     },
     onClick() {
+      if (this.disabled) return;
       this.doOpen(!this.open);
       if (this.open) {
         this.$refs.input.focus();
@@ -340,17 +348,20 @@ export default {
       }
     },
     onItemClick(val) {
+      if (this.disabled) return;
       this.internalUpdateValue(val);
       this.$refs.input.focus();
       this.open = false; // close after user makes a selection
       this.$emit('change', this.dataValue);
     },
     inputClick() {
+      if (this.disabled) return;
       if (!this.open) {
         this.doOpen(true);
       }
     },
     inputFocus() {
+      if (this.disabled) return;
       this.doOpen(true);
     },
   },
