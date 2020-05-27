@@ -22,9 +22,9 @@
       :class="{ 'bx--dropdown__wrapper--inline': inline, 'cv-dropdown': !formItem }"
       :style="wrapperStyleOverride"
     >
-      <span v-if="label" :id="`${uid}-label`" class="bx--label" :class="{ 'bx--label--disabled': disabled }">
-        {{ label }}
-      </span>
+      <span v-if="label" :id="`${uid}-label`" class="bx--label" :class="{ 'bx--label--disabled': disabled }">{{
+        label
+      }}</span>
 
       <div
         v-if="!inline && isHelper"
@@ -58,10 +58,12 @@
       >
         <button
           class="bx--dropdown-text"
+          :aria-disabled="disabled"
           aria-haspopup="true"
           :aria-expanded="open"
           :aria-controls="`${uid}-menu`"
           :aria-labelledby="`${uid}-label ${uid}-value`"
+          :disabled="disabled"
           type="button"
         >
           <WarningFilled16 v-if="isInvalid && inline" class="bx--dropdown__invalid-icon" />
