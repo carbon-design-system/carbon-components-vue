@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import CvFeedbackButton from './_cv-feedback-button';
+import CvFeedbackButton from '../cv-feedback-button/_cv-feedback-button';
 import themeMixin from '../../mixins/theme-mixin';
 
 export default {
