@@ -62,7 +62,7 @@
           aria-haspopup="true"
           :aria-expanded="open"
           :aria-controls="`${uid}-menu`"
-          :aria-labelledby="`${uid}-label ${uid}-value`"
+          :aria-labelledby="ariaLabeledBy"
           :disabled="disabled"
           type="button"
         >
@@ -163,6 +163,13 @@ export default {
     },
   },
   computed: {
+    ariaLabeledBy() {
+      if (this.label) {
+        return `${this.uid}-label ${this.uid}-value`;
+      } else {
+        return `${this.uid}-value`;
+      }
+    },
     internalCaption() {
       if (this.selectedChild) {
         return this.selectedChild.internalContent;

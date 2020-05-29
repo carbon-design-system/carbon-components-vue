@@ -1,5 +1,6 @@
 <template>
   <button
+    aria-label="ariaLabel"
     type="button"
     class="cv-feedback-button"
     v-bind="$attrs"
@@ -27,6 +28,7 @@ export default {
   name: 'cvFeedbackButton',
   inheritAttrs: false,
   props: {
+    ariaLabel: { type: String, default: 'Feedback button' },
     feedback: { type: String, required: true },
     inline: Boolean,
     timeout: { type: Number, default: 2000 },

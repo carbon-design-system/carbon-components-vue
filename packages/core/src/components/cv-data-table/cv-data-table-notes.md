@@ -83,6 +83,7 @@ Like sorting and filtering it is the users responsibility to deal with edited da
 - auto-width: (optional) table will size use auto sizing
 - borderless: (optional) table will have no border
 - overflow-menu(optional) : An array of overflow menu labels. On click CvDataTable will raise an 'overflow-menu-click' event passing an object containing menuIndex, menuLabel and rowValue
+- overflow-menu props: As part of the array pass an object containing props for the overflowMenu. E.g. { label: 'Overflow menu', tipAlignment: 'end', tipPosition: 'top' },
 - pagination: (optional) default: false, can be set to true or an object containing camel case props for a CvPagination component
 - sortable: (optional) can be sorted
 - row-size: (optional) default: '',
