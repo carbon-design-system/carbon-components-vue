@@ -22,9 +22,9 @@
     </td>
     <slot />
     <td v-if="hasOverflowMenu" class="bx--table-column-menu">
-      <cv-overflow-menu flip-menu>
+      <cv-overflow-menu v-bind="overflowMenuOptions">
         <cv-overflow-menu-item
-          v-for="(item, index) in overflowMenu"
+          v-for="(item, index) in overflowMenuButtons"
           :key="`${index}`"
           @click="
             onMenuItemClick({
@@ -96,6 +96,14 @@ export default {
     },
     isChecked() {
       return this.dataChecked;
+    },
+    overflowMenuButtons() {
+      return this.overflowMenu.filter(item => typeof item === 'string');
+    },
+    overflowMenuOptions() {
+      const incomingOptions = this.overflowMenu.find(item => typeof item === 'object') || {};
+      const defaultOptions = { flipMenu: true, label: 'Row overflow menu', tipPosition: 'left' };
+      return { ...defaultOptions, ...incomingOptions };
     },
   },
   methods: {

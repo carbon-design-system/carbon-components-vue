@@ -501,7 +501,7 @@ for (const story of storySet) {
             filterValue: '',
             rowSelects: [],
             sortBy: undefined,
-            sampleOverflowMenu: ['Start', 'Stop', 'Delete 3'],
+            sampleOverflowMenu: ['Start', 'Stop', 'Delete 3', { label: 'Overflow menu' }],
             pageStart: 1,
             pageNumber: 1,
             pageLength: 5,
