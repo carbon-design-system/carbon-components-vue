@@ -142,7 +142,7 @@
                 :key="`cell:${colIndex}:${rowIndex}`"
                 :style="dataStyle(colIndex)"
               >
-                <cv-wrapper :tag-type="skeleton && rowIndex < 1 ? 'span' : ''">{{ cell }}</cv-wrapper>
+                <cv-wrapper :tag-type="skeleton ? 'span' : ''">{{ cell }}</cv-wrapper>
               </cv-data-table-cell>
             </cv-data-table-row>
           </slot>
