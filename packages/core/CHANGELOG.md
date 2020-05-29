@@ -1,4 +1,9 @@
-# Changelog
+# Changelog 2.27.0-canary-2
+
+- chore: fix aria label on template view
+- fix: table skeleton appearance
+- fix: dropdown aria warning with no label
+- feat: add table oveflow options
 
 ## 2.27.0-canary.1
 
