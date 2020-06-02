@@ -1,3 +1,7 @@
+# Changelog 2.27.0
+
+Release previuos canarys
+
 # Changelog 2.27.0-canary-2
 
 - chore: fix aria label on template view
