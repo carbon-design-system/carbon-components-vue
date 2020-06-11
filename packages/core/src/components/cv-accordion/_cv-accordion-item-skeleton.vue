@@ -27,10 +27,11 @@ export default {
   },
   computed: {
     itemClasses() {
+      const classes = [`${this.carbonPrefix}--accordion__item`];
       if (this.open) {
-        return [`${this.carbonPrefix}--accordion__item--active`];
+        classes.push(`${this.carbonPrefix}--accordion__item--active`);
       }
-      return undefined;
+      return classes.join(' ');
     },
   },
 };
