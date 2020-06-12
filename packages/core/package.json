@@ -59,7 +59,7 @@
     "clean": "rimraf dist node_modules/.cache"
   },
   "engines": {
-    "node": ">=12.x"
+    "node": ">=10.x"
   },
   "sideEffects": true,
   "dependencies": {
