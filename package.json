@@ -2,7 +2,7 @@
   "name": "carbon-components-vue",
   "version": "1.1.1",
   "engines": {
-    "node": ">=12.x"
+    "node": ">=10.x"
   },
   "description": "A collection of components for the Carbon Design System built using Vue.js",
   "scripts": {
