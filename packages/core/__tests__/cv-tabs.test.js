@@ -1,5 +1,7 @@
-import { shallowMount as shallow, mount } from '@vue/test-utils';
-import { testComponent, testInstance, events } from './_helpers';
+import Vue from 'vue';
+// import { shallowMount as shallow, mount } from '@vue/test-utils';
+import { testComponent, events, awaitNextTick } from './_helpers';
+const { shallowMount: shallow, mount, trigger } = awaitNextTick;
 import { CvTabs, CvTab } from '@/components/cv-tabs';
 import { settings as carbonSettings } from 'carbon-components';
 
@@ -28,17 +30,17 @@ describe('CvTabs', () => {
   // ***************
   // SNAPSHOT TESTS
   // ***************
-  it('matches render', () => {
+  it('matches render', async () => {
     const propsData = { noDefaultToFirst: false };
-    const wrapper = shallow(CvTabs, {
+    const wrapper = await shallow(CvTabs, {
       propsData,
     });
 
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('matches with slotted content', () => {
-    const wrapper = shallow(CvTabs, {
+  it('matches with slotted content', async () => {
+    const wrapper = await shallow(CvTabs, {
       slots: {
         default: [Tab, Tab, Tab],
       },
@@ -50,22 +52,23 @@ describe('CvTabs', () => {
   // ***************
   // FUNCTIONAL TESTS
   // ***************
-  it('tabs to be mounted with first selected', () => {
-    const wrapper = mount(CvTabs, {
+  it('tabs to be mounted with first selected', async () => {
+    const wrapper = await mount(CvTabs, {
       slots: {
         default: [Tab, Tab, Tab],
       },
     });
 
+    await Vue.nextTick();
     expect(wrapper.vm.tabs.length).toBeGreaterThan(0);
     expect(wrapper.vm.tabs[0].dataSelected).toBeTruthy();
   });
 
-  it('tabs to be mounted with none selected', () => {
+  it('tabs to be mounted with none selected', async () => {
     const propsData = {
       noDefaultToFirst: true,
     };
-    const wrapper = mount(CvTabs, {
+    const wrapper = await mount(CvTabs, {
       propsData,
       slots: {
         default: [Tab, Tab, Tab],
@@ -75,11 +78,11 @@ describe('CvTabs', () => {
     expect(wrapper.vm.tabs[0].dataSelected).toBeFalsy();
   });
 
-  it('tabs to be mounted with 2nd selected', () => {
+  it('tabs to be mounted with 2nd selected', async () => {
     const propsData = {
       noDefaultToFirst: false,
     };
-    const wrapper = mount(CvTabs, {
+    const wrapper = await mount(CvTabs, {
       propsData,
       slots: {
         default: [Tab, TabSelected, Tab],
@@ -89,11 +92,11 @@ describe('CvTabs', () => {
     expect(wrapper.vm.tabs[1].dataSelected).toBeTruthy();
   });
 
-  it('tabs to be mounted with 2nd selected with no default', () => {
+  it('tabs to be mounted with 2nd selected with no default', async () => {
     const propsData = {
       noDefaultToFirst: true,
     };
-    const wrapper = mount(CvTabs, {
+    const wrapper = await mount(CvTabs, {
       propsData,
       slots: {
         default: [Tab, TabSelected, Tab],
@@ -103,18 +106,16 @@ describe('CvTabs', () => {
     expect(wrapper.vm.tabs[1].dataSelected).toBeTruthy();
   });
 
-  it('click to change tab', () => {
-    const wrapper = mount(CvTabs, {
+  it('click to change tab', async () => {
+    const wrapper = await mount(CvTabs, {
       slots: {
         default: [Tab, Tab, Tab],
       },
     });
 
+    await Vue.nextTick();
     expect(wrapper.vm.tabs[0].dataSelected).toBeTruthy();
-    wrapper
-      .findAll(`.${carbonPrefix}--tabs__nav-link`)
-      .at(2)
-      .trigger('click');
+    await trigger(wrapper.findAll(`.${carbonPrefix}--tabs__nav-link`).at(2), 'click');
 
     expect(wrapper.vm.tabs[0].dataSelected).toBeFalsy();
     expect(wrapper.vm.tabs[2].dataSelected).toBeTruthy();
@@ -133,9 +134,9 @@ describe('CvTab', () => {
   // ***************
   // SNAPSHOT TESTS
   // ***************
-  it('matches with slotted content', () => {
+  it('matches with slotted content', async () => {
     const propsData = { label: 'Tab label', disabled: false, selected: false, id: 'an-id' };
-    const wrapper = shallow(CvTab, {
+    const wrapper = await shallow(CvTab, {
       propsData,
       slots: {
         default: "<div class='stub'></div>",
@@ -145,9 +146,9 @@ describe('CvTab', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('matches with disabled and selected', () => {
+  it('matches with disabled and selected', async () => {
     const propsData = { label: 'Tab label', disabled: true, selected: true, id: 'an-id' };
-    const wrapper = shallow(CvTab, {
+    const wrapper = await shallow(CvTab, {
       propsData,
     });
 

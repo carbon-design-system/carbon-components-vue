@@ -6,11 +6,11 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvTextInputNotesMD from '@carbon/vue/src/components/cv-text-input/cv-text-input-notes.md';
-import { CvTextInput } from '@carbon/vue/src';
+import CvTextInputNotesMD from '../../packages/core/src/components/cv-text-input/cv-text-input-notes.md';
+import { CvTextInput } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvTextInput', module);
-const storiesExperimental = storiesOf('Experimental/CvTextInput', module);
+// const storiesExperimental = storiesOf('Experimental/CvTextInput', module);
 
 const preKnobs = {
   theme: {

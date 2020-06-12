@@ -3,16 +3,18 @@
     class="cv-side-nav bx--side-nav bx--side-nav__navigation"
     :class="{
       'bx--side-nav--expanded': panelExpanded,
+      'bx--side-nav--rail': rail,
       'bx--side-nav--collapsed': !panelExpanded && fixed,
       'bx--side-nav--ux': isChildOfHeader,
     }"
     :aria-hidden="!panelExpanded && !fixed"
+    :id="id"
     @focusout="onFocusout"
     @mousedown="onMouseDown"
   >
     <slot></slot>
     <cv-side-nav-footer
-      v-if="!fixed"
+      v-if="!fixed && !rail && !headerEmbedded"
       :expanded="panelExpanded"
       :assistiveText="assistiveToggleText"
       @toggle-expand="toggleExpand"
@@ -31,6 +33,7 @@ export default {
     fixed: Boolean,
     id: { type: String, required: true },
     assistiveToggleText: String,
+    rail: Boolean,
   },
   mounted() {
     this.$parent.$emit('cv:panel-mounted', this);
@@ -41,6 +44,7 @@ export default {
   data() {
     return {
       dataExpanded: this.expanded,
+      headerEmbedded: false,
     };
   },
   watch: {

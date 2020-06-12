@@ -5,12 +5,12 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvTileNotesMD from '@carbon/vue/src/components/cv-tile/cv-tile-notes.md';
-import { CvTile } from '@carbon/vue/src';
+import CvTileNotesMD from '../../packages/core/src/components/cv-tile/cv-tile-notes.md';
+import { CvTile } from '../../packages/core/src/';
 import { action } from '@storybook/addon-actions';
 
 const storiesDefault = storiesOf('Components/CvTile', module);
-const storiesExperimental = storiesOf('Experimental/CvTile', module);
+// const storiesExperimental = storiesOf('Experimental/CvTile', module);
 
 let preKnobs = {
   slotDefault: {
@@ -28,6 +28,13 @@ let preKnobs = {
           <li>more</li>
           <li>content</li>
         </ul>`,
+  },
+  theme: {
+    group: 'attr',
+    type: boolean,
+    config: ['light-theme', false],
+    prop: 'theme',
+    value: val => (val ? 'light' : ''),
   },
   expanded: {
     group: 'attr',
@@ -63,16 +70,16 @@ let preKnobs = {
 };
 
 let variants = [
-  { name: 'default', includes: ['slotDefault'] },
+  { name: 'default', includes: ['slotDefault', 'theme'] },
   {
     name: 'standard',
 
-    includes: ['slotDefault'],
+    includes: ['slotDefault', 'theme'],
     extra: { kind: { group: 'attr', value: 'kind="standard"' } },
   },
   {
     name: 'selectable',
-    includes: ['slotDefault', 'selected', 'value'],
+    includes: ['slotDefault', 'theme', 'selected', 'value'],
     extra: {
       kind: { group: 'attr', value: 'kind="selectable"' },
       ariaLabel: { group: 'attr', value: 'aria-label="custom aria label"' },
@@ -80,22 +87,22 @@ let variants = [
   },
   {
     name: 'selectable-event',
-    includes: ['slotDefault', 'events', 'value'],
+    includes: ['slotDefault', 'theme', 'events', 'value'],
     extra: { kind: { group: 'attr', value: 'kind="selectable" @change="actionChange"' } },
   },
   {
     name: 'selectable-v-model',
-    includes: ['slotDefault', 'vModel', 'value'],
+    includes: ['slotDefault', 'theme', 'vModel', 'value'],
     extra: { kind: { group: 'attr', value: 'kind="selectable"' } },
   },
   {
     name: 'expandable',
-    includes: ['slotDefault', 'slotBelow', 'expanded'],
+    includes: ['slotDefault', 'theme', 'slotBelow', 'expanded'],
     extra: { kind: { group: 'attr', value: 'kind="expandable"' } },
   },
   {
     name: 'clickable',
-    includes: ['slotDefault', 'href'],
+    includes: ['slotDefault', 'theme', 'href'],
     extra: { kind: { group: 'attr', value: 'kind="clickable" @click="actionClick"' } },
   },
 ];

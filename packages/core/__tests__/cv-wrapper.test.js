@@ -1,9 +1,10 @@
-import { shallowMount as shallow, mount } from '@vue/test-utils';
-import { testComponent, testInstance, events } from './_helpers';
+// import { shallowMount as shallow, mount } from '@vue/test-utils';
+import { testComponent, awaitNextTick } from './_helpers';
+const { shallowMount: shallow, mount } = awaitNextTick;
 import CvWrapper from '@/components/cv-wrapper/_cv-wrapper';
-import { settings as carbonSettings } from 'carbon-components';
+// import { settings as carbonSettings } from 'carbon-components';
 
-const carbonPrefix = carbonSettings.prefix;
+// const carbonPrefix = carbonSettings.prefix;
 
 describe('CvWrapper', () => {
   // ***************
@@ -16,8 +17,8 @@ describe('CvWrapper', () => {
   // ***************
   // SNAPSHOT TESTS
   // ***************
-  it('matches render with wrapper', () => {
-    const wrapper = shallow(CvWrapper, {
+  it('matches render with wrapper', async () => {
+    const wrapper = await shallow(CvWrapper, {
       propsData: { tagType: 'div' },
       slots: {
         default: '<div class="cv-wrapper-stub">StubbyMcStubFace</div>',
@@ -27,8 +28,8 @@ describe('CvWrapper', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('matches render with no wrapper', () => {
-    const wrapper = shallow(CvWrapper, {
+  it('matches render with no wrapper', async () => {
+    const wrapper = await shallow(CvWrapper, {
       slots: {
         default: '<div class="cv-wrapper-stub">StubbyMcStubFace</div>',
       },
@@ -40,8 +41,8 @@ describe('CvWrapper', () => {
   // ***************
   // FUNCTIONAL TESTS
   // ***************
-  it('closed to open to closed', () => {
-    const wrapper = mount(
+  it('closed to open to closed', async () => {
+    const wrapper = await mount(
       {
         name: 'Wrap',
         components: { CvWrapper },

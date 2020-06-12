@@ -10,13 +10,21 @@
       </button>
     </td>
     <td v-if="hasBatchActions" class="bx--table-column-checkbox">
-      <cv-checkbox :form-item="false" :value="value" v-model="dataChecked" @change="onChange" ref="rowChecked" />
+      <cv-checkbox
+        :form-item="false"
+        :value="value"
+        v-model="dataChecked"
+        @change="onChange"
+        ref="rowChecked"
+        :label="ariaLabelForBatchCheckbox || `Select row ${value} for batch action`"
+        hideLabel
+      />
     </td>
     <slot />
     <td v-if="hasOverflowMenu" class="bx--table-column-menu">
-      <cv-overflow-menu flip-menu>
+      <cv-overflow-menu v-bind="overflowMenuOptions">
         <cv-overflow-menu-item
-          v-for="(item, index) in overflowMenu"
+          v-for="(item, index) in overflowMenuButtons"
           :key="`${index}`"
           @click="
             onMenuItemClick({
@@ -42,12 +50,13 @@ export default {
   name: 'CvDataTableRowInner',
   components: { CvCheckbox, CvOverflowMenu, CvOverflowMenuItem, ChevronRight16 },
   props: {
+    ariaLabelForBatchCheckbox: String,
     checked: Boolean,
     expanded: Boolean,
     expandingRow: Boolean,
     overflowMenu: Array,
     someExpandingRows: Boolean,
-    value: { type: String, requried: true },
+    value: String,
   },
   model: {
     event: 'change',
@@ -87,6 +96,14 @@ export default {
     },
     isChecked() {
       return this.dataChecked;
+    },
+    overflowMenuButtons() {
+      return this.overflowMenu.filter(item => typeof item === 'string');
+    },
+    overflowMenuOptions() {
+      const incomingOptions = this.overflowMenu.find(item => typeof item === 'object') || {};
+      const defaultOptions = { flipMenu: true, label: 'Row overflow menu', tipPosition: 'left' };
+      return { ...defaultOptions, ...incomingOptions };
     },
   },
   methods: {

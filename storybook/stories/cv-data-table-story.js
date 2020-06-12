@@ -6,7 +6,7 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvDataTableNotesMD from '@carbon/vue/src/components/cv-data-table/cv-data-table-notes.md';
+import CvDataTableNotesMD from '../../packages/core/src/components/cv-data-table/cv-data-table-notes.md';
 import {
   CvDataTable,
   CvDataTableAction,
@@ -17,13 +17,15 @@ import {
   CvOverflowMenuItem,
   CvTag,
   CvDataTableSkeleton,
-} from '@carbon/vue/src';
+  CvDataTableHeading,
+  CvTooltip,
+} from '../../packages/core/src/';
 import TrashCan16 from '@carbon/icons-vue/es/trash-can/16';
 import Save16 from '@carbon/icons-vue/es/save/16';
 import Download16 from '@carbon/icons-vue/es/download/16';
 
 const storiesDefault = storiesOf('Components/CvDataTable', module);
-const storiesExperimental = storiesOf('Experimental/CvDataTable', module);
+// const storiesExperimental = storiesOf('Experimental/CvDataTable', module);
 
 let preKnobs = {
   rowSize: {
@@ -97,7 +99,7 @@ let preKnobs = {
       'columns',
       {
         columns: [
-          { label: 'Name', headingStyle: { textTransform: 'uppercase' } },
+          { label: 'Name', headingStyle: { textTransform: 'uppercase' }, sortable: true },
           { label: 'Protocol', headingStyle: { textTransform: 'uppercase' } },
           {
             label: 'Port',
@@ -120,6 +122,18 @@ let preKnobs = {
     prop: 'columns',
     value: val => val.columns,
   },
+  columns3: {
+    group: 'attr',
+    type: object,
+    config: [
+      'columns',
+      {
+        columns: [{ label: 'Name', sortable: true }, 'Protocol', 'Port', 'Rule', 'Attached Groups', 'Status'],
+      },
+    ],
+    prop: 'columns',
+    value: val => val.columns,
+  },
   data: {
     group: '',
     type: object,
@@ -130,8 +144,18 @@ let preKnobs = {
           ['Load Balancer 11', 'HTTP', '80', 'Round Robin', 'Maureen’s VM Groups', 'Active'],
           ['Load Balancer 4', 'HTTP', '81', 'Round Robin', 'Maureen’s VM Groups', 'Active'],
           ['Load Balancer 2', 'HTTP', '82', 'Round Robin', 'Maureen’s VM Groups', 'Active'],
-          ['Load Balancer 3', 'HTTP', '8080', 'Round Robin', 'Maureen’s VM Groups', 'Active'],
+          ['Load Balancer 3', 'HTTP', '8080', 'Round Robin', 'Maureen’s VM Groups', 'Offline'],
           ['Load Balancer 5', 'HTTP', '8001', 'Round Robin', 'Maureen’s VM Groups', 'Active'],
+          ['Load Balancer 11', 'HTTP', '10', 'Round Robin', 'Max’s VM Groups', 'Active'],
+          ['Load Balancer 24', 'HTTP', '11', 'Round Robin', 'Max’s VM Groups', 'Active'],
+          ['Load Balancer 22', 'HTTP', '12', 'Round Robin', 'Max’s VM Groups', 'Active'],
+          ['Load Balancer 23', 'HTTP', '1080', 'Round Robin', 'Max’s VM Groups', 'Active'],
+          ['Load Balancer 25', 'HTTP', '1001', 'Round Robin', 'Max’s VM Groups', 'Failed'],
+          ['Load Balancer 311', 'HTTP', '280', 'Round Robin', 'John’s VM Groups', 'Active'],
+          ['Load Balancer 324', 'HTTP', '281', 'Round Robin', 'John’s VM Groups', 'Active'],
+          ['Load Balancer 322', 'HTTP', '282', 'Round Robin', 'John’s VM Groups', 'Offline'],
+          ['Load Balancer 323', 'HTTP', '2080', 'Round Robin', 'John’s VM Groups', 'Active'],
+          ['Load Balancer 325', 'HTTP', '2001', 'Round Robin', 'John’s VM Groups', 'Active'],
         ],
       },
     ],
@@ -154,7 +178,11 @@ let preKnobs = {
   },
   pagination: {
     group: 'attr',
-    value: ':pagination="{ numberOfItems: 23, pageSizes: [5, 10, 15, 20, 25] }" @pagination="actionOnPagination"',
+    value: ':pagination="{ numberOfItems: 23, pageSizes: [5, 10, 15, 20, 25]  }" @pagination="actionOnPagination"',
+  },
+  paginationInfinity: {
+    group: 'attr',
+    value: ':pagination="{ numberOfItems: Infinity, pageSizes: [5, 10, 15, 20, 25] }" @pagination="actionOnPagination"',
   },
   rowSelects: {
     group: 'attr',
@@ -216,11 +244,23 @@ let preKnobs = {
     prop: 'hasExpandingRows',
     value: val => val,
   },
+  slottedHeadings: {
+    group: 'slots',
+    slot: 'headings',
+    value:
+      '\n    <cv-data-table-heading heading="Name" sortable />' +
+      '\n    <cv-data-table-heading>Protocol<cv-tooltip direction="bottom" tip="How comms get done" /></cv-data-table-heading>' +
+      '\n    <cv-data-table-heading><cv-tooltip direction="bottom" tip="The port number">Port</cv-tooltip></cv-data-table-heading>' +
+      '\n    <cv-data-table-heading heading="Rule" />' +
+      '\n    <cv-data-table-heading heading="Attatched Groups" />' +
+      '\n    <cv-data-table-heading heading="Status" />' +
+      '\n',
+  },
   slottedData: {
     group: 'slots',
     slot: 'data',
     value:
-      '\n    <cv-data-table-row v-for="(row, rowIndex) in internalData" :key="`${rowIndex}`" :value="`${rowIndex}`">' +
+      '\n    <cv-data-table-row v-for="(row, rowIndex) in internalData" :key="`${rowIndex}`" :value="`${rowIndex}`" :aria-label-for-batch-checkbox="`Custom aria label for row ${rowIndex} batch`">' +
       '\n       <cv-data-table-cell v-for="(cell, cellIndex) in row" :key="`${cellIndex}`" :value="`${cellIndex}`" v-html="cell"></cv-data-table-cell>' +
       '\n       <template v-if="hasExpandingRows && rowIndex % 2 === 0" slot="expandedContent">A variety of content types can live here. Be sure to follow Carbon design guidelines for spacing and alignment.</template>' +
       '\n    </cv-data-table-row>\n',
@@ -229,10 +269,17 @@ let preKnobs = {
     group: 'slots',
     slot: 'data',
     value:
-      '\n    <cv-data-table-row v-for="(row, rowIndex) in internalData" :key="`${rowIndex}`" :value="`${rowIndex}`">' +
+      '\n    <cv-data-table-row v-for="(row, rowIndex) in internalData" :key="`${rowIndex}`" :value="`${rowIndex}`" :expanded="rowIndex === rowExpanded">' +
       '\n       <cv-data-table-cell v-for="(cell, cellIndex) in row" :key="`${cellIndex}`" :value="`${cellIndex}`" v-html="cell"></cv-data-table-cell>' +
       '\n       <template slot="expandedContent">A variety of content types can live here. Be sure to follow Carbon design guidelines for spacing and alignment.</template>' +
       '\n    </cv-data-table-row>\n',
+  },
+  rowExpanded: {
+    group: '',
+    type: number,
+    config: ['Row index expanded', -1],
+    prop: 'rowExpanded',
+    value: val => val,
   },
   htmlData: {
     group: 'slots',
@@ -288,27 +335,79 @@ let variants = [
     excludes: [
       'search2',
       'columns2',
+      'columns3',
+      'slottedHeadings',
       'slottedData',
       'htmlData',
       'helperTextSlot',
       'basicPagination',
+      'paginationInfinity',
       'hasExpandingRows',
       'expandingSlottedData',
+      'rowExpanded',
       'scopedSlots',
       'hasExpandAll',
     ],
+  },
+  {
+    name: 'infinite pagination',
+    excludes: [
+      'search2',
+      'columns2',
+      'columns3',
+      'slottedHeadings',
+      'slottedData',
+      'htmlData',
+      'helperTextSlot',
+      'basicPagination',
+      'pagination',
+      'hasExpandingRows',
+      'expandingSlottedData',
+      'rowExpanded',
+      'scopedSlots',
+      'hasExpandAll',
+    ],
+  },
+  {
+    name: 'batch-no-toolbar',
+    excludes: [
+      'actions',
+      'search',
+      'search2',
+      'columns2',
+      'columns3',
+      'slottedHeadings',
+      'slottedData',
+      'htmlData',
+      'helperTextSlot',
+      'basicPagination',
+      'paginationInfinity',
+      'hasExpandingRows',
+      'expandingSlottedData',
+      'rowExpanded',
+      'scopedSlots',
+      'hasExpandAll',
+    ],
+  },
+  {
+    name: 'name-only-sortable',
+    includes: ['columns3', 'data', 'sortable', 'sort'],
   },
   {
     name: 'search labels',
     excludes: [
       'search',
       'columns2',
+      'columns3',
+      'slottedHeadings',
       'slottedData',
       'htmlData',
       'helperTextSlot',
       'basicPagination',
+      'paginationInfinity',
       'hasExpandingRows',
       'expandingSlottedData',
+      'rowExpanded',
       'scopedSlots',
       'hasExpandAll',
     ],
@@ -316,25 +415,34 @@ let variants = [
   {
     name: 'scoped slots',
     excludes: [
+      'search2',
       'columns2',
+      'columns3',
+      'slottedHeadings',
       'slottedData',
       'htmlData',
       'helperTextSlot',
       'basicPagination',
+      'paginationInfinity',
       'hasExpandingRows',
       'expandingSlottedData',
+      'rowExpanded',
       'hasExpandAll',
     ],
   },
   { name: 'slottedHelper', includes: ['columns', 'data', 'title', 'helperTextSlot'] },
   { name: 'minimal', includes: ['columns', 'data'] },
-  { name: 'slotted data', includes: ['columns', 'slottedData', 'data', 'basicPagination', 'hasExpandingRows'] },
+  {
+    name: 'slotted data',
+    includes: ['columns', 'slottedData', 'data', `batchActions`, 'basicPagination', 'hasExpandingRows'],
+  },
   {
     name: 'slotted expanding data',
-    includes: ['columns', 'expandingSlottedData', 'data', 'basicPagination', 'hasExpandAll'],
+    includes: ['columns', 'expandingSlottedData', 'rowExpanded', 'data', 'basicPagination', 'hasExpandAll'],
   },
   { name: 'slotted HTML', includes: ['columns', 'htmlData', 'basicPagination'] },
-  { name: 'styled columns', includes: ['columns2', 'data'] },
+  { name: 'styled columns', includes: ['sortable', 'columns2', 'data', 'sort'] },
+  { name: 'Slotted headings', includes: ['slottedHeadings', 'data', 'sort'] },
 ];
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
@@ -371,6 +479,7 @@ for (const story of storySet) {
       return {
         components: {
           CvDataTable,
+          CvDataTableHeading,
           CvDataTableAction,
           SvTemplateView,
           CvDataTableRow,
@@ -382,6 +491,7 @@ for (const story of storySet) {
           TrashCan16,
           Save16,
           CvTag,
+          CvTooltip,
         },
         template: templateViewString,
         props: settings.props,
@@ -391,7 +501,10 @@ for (const story of storySet) {
             filterValue: '',
             rowSelects: [],
             sortBy: undefined,
-            sampleOverflowMenu: ['Start', 'Stop', 'Delete 3'],
+            sampleOverflowMenu: ['Start', 'Stop', 'Delete 3', { label: 'Overflow menu' }],
+            pageStart: 1,
+            pageNumber: 1,
+            pageLength: 5,
           };
         },
         watch: {
@@ -401,13 +514,19 @@ for (const story of storySet) {
         },
         computed: {
           filteredData() {
+            let filteredData;
             if (this.filterValue) {
               const regex = new RegExp(this.filterValue, 'i');
-              return this.internalData.filter(item => {
+              filteredData = this.internalData.filter(item => {
                 return item.join('|').search(regex) >= 0;
               });
             } else {
-              return this.internalData;
+              filteredData = this.internalData;
+            }
+            if (this.pageStart) {
+              return filteredData.slice(this.pageStart, this.pageStart + this.pageLength);
+            } else {
+              return filteredData;
             }
           },
         },
@@ -460,7 +579,13 @@ for (const story of storySet) {
           action2: action('action 2'),
           action3: action('action 3'),
           actionNew: action('add new'),
-          actionOnPagination: action('pagination change'),
+          paginationAction: action('pagination change'),
+          actionOnPagination(ev) {
+            this.paginationAction();
+            this.pageStart = ev.start;
+            this.pageNumber = ev.page;
+            this.pageLength = ev.length;
+          },
           onOverflowMenuClick: action('overflow menu click'),
           actionRowSelectChange: action('row selected'),
         },

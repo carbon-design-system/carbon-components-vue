@@ -24,7 +24,7 @@
       class="bx--multi-select bx--list-box"
       :class="{
         'bx--list-box--light': theme === 'light',
-        'bx--multi-select--expanded': open,
+        'bx--list-box--expanded': open,
         'bx--multi-select--invalid': isInvalid,
         'bx--multi-select--disabled bx--list-box--disabled': disabled,
         'bx--multi-select--inline bx--list-box--inline': inline,
@@ -37,7 +37,6 @@
       @keydown.up.prevent="onUp"
       @keydown.enter.prevent="onEnter"
       @keydown.esc.prevent="onEsc"
-      @keydown="otherKey"
       @click="onClick"
     >
       <WarningFilled16 v-if="isInvalid" class="bx--list-box__invalid-icon" />
@@ -99,7 +98,7 @@
         </div>
       </div>
 
-      <div v-show="open" :id="uid" class="bx--list-box__menu" role="listbox" ref="list">
+      <div :id="uid" class="bx--list-box__menu" role="listbox" ref="list">
         <div
           v-for="(item, index) in dataOptions"
           :key="`multi-select-${index}`"
@@ -351,7 +350,7 @@ export default {
         // this.checkHighlightPosition(firstMatchIndex);
       }
     },
-    onInput(ev) {
+    onInput() {
       this.doOpen(true);
 
       this.updateOptions();
@@ -447,11 +446,6 @@ export default {
     },
     inputFocus() {
       this.doOpen(true);
-    },
-    otherKey(ev) {
-      if (!['Escape', 'ArrowUp', 'ArrowDown', 'Enter'].includes(ev.code)) {
-        console.log(ev.code);
-      }
     },
   },
 };

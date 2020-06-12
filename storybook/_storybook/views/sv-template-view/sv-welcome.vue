@@ -19,6 +19,13 @@
                 <div class="welcome__card-content">
                   <h5>Browse</h5>
                   <h4>the components</h4>
+                  <div class="welcome__card-image">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 196.32 170.02">
+                      <path fill="#42b883" d="M120.83 0L98.16 39.26 75.49 0H0l98.16 170.02L196.32 0h-75.49z" />
+                      <path fill="#35495e" d="M120.83 0L98.16 39.26 75.49 0H39.26l58.9 102.01L157.06 0h-36.23z" />
+                    </svg>
+                  </div>
+
                   <div class="welcome__card-icon">
                     <svg
                       focusable="false"
@@ -154,13 +161,15 @@
               >GitHub.</a
             >
           </p>
-          <ul>
+          <ul v-if="hasPackageInfo">
             <li>{{ packageName }} latest version: {{ packageLatest }}</li>
             <li v-for="(version, tag) of packageOtherTags" :key="tag">
               {{ packageName }} {{ tag }} version: {{ version }}
             </li>
           </ul>
-          <p>Last updated {{ packageUpdated }} <br />Copyright © 2019 IBM</p>
+          <p>
+            <span v-if="hasPackageInfo">Last updated {{ packageUpdated }} <br /></span>Copyright © 2019 IBM
+          </p>
         </div>
       </div>
       <div class="bx--row">
@@ -179,11 +188,15 @@
 </template>
 
 <script>
-import packageInfo from '../../../../package-info';
+import packageInfoRaw from '../../../../package-info';
+const packageInfo = Object.values(packageInfoRaw).reduce((acc, line) => (line.type === 'inspect' ? line : acc), 0);
 
 export default {
   name: 'SvWelcome',
   computed: {
+    hasPackageInfo() {
+      return !!packageInfo;
+    },
     packageName() {
       return packageInfo.data.name;
     },

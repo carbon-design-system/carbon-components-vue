@@ -38,7 +38,7 @@ export default {
   },
   computed: {
     state() {
-      return step => {
+      return () => {
         console.warn('CvProgress: method deprecated');
         return;
       };
@@ -72,7 +72,7 @@ export default {
     getSteps() {
       console.warn('CvProgress: method deprecated');
     },
-    setCurrent(step) {
+    setCurrent() {
       console.warn('CvProgress: method deprecated');
     },
   },

@@ -13,7 +13,7 @@
       <Copy16 class="bx--snippet__icon" />
     </cv-feedback-button>
 
-    <cv-button type="button" kind="ghost" small class="bx--snippet-btn--expand" @click="toggleExpand">
+    <cv-button type="button" kind="ghost" size="small" class="bx--snippet-btn--expand" @click="toggleExpand">
       <span class="bx--snippet-btn--text">{{ expandButtonText }}</span>
       <ChevronDown16 class="bx--icon-chevron--down" />
     </cv-button>
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import CvFeedbackButton from './_cv-feedback-button';
+import CvFeedbackButton from '../cv-feedback-button/_cv-feedback-button';
 import CvButton from '../cv-button/cv-button';
 
 import Copy16 from '@carbon/icons-vue/es/copy/16';

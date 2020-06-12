@@ -7,6 +7,7 @@
         'bx--number--light': theme === 'light',
         'bx--number--helpertext': isHelper,
         'cv-number-input': !formItem,
+        'bx--number--mobile': mobile,
       }"
       :data-invalid="isInvalid"
     >
@@ -15,23 +16,36 @@
         <slot name="helper-text">{{ helperText }}</slot>
       </div>
       <div class="bx--number__input-wrapper">
+        <button
+          v-if="mobile"
+          class="bx--number__control-btn down-icon"
+          @click="doDown"
+          type="button"
+          :aria-label="ariaLabelForDownButton"
+          :disabled="disabled"
+        >
+          <CaretDownGlyph />
+        </button>
         <input
           :id="uid"
           type="number"
-          v-model="internalValue"
+          :value="internalValue"
           v-bind="$attrs"
           v-on="inputListeners"
+          :disabled="disabled"
           :step="step"
           :min="min"
           :max="max"
+          ref="input"
         />
-        <WarningFilled16 v-if="isInvalid" class="bx--number__invalid" />
-        <div class="bx--number__controls">
+        <WarningFilled16 v-if="isInvalid && !mobile" class="bx--number__invalid" />
+        <div class="bx--number__controls" v-if="!mobile">
           <button
             class="bx--number__control-btn up-icon"
             @click="doUp"
             type="button"
             :aria-label="ariaLabelForUpButton"
+            :disabled="disabled"
           >
             <CaretUpGlyph />
           </button>
@@ -40,10 +54,21 @@
             @click="doDown"
             type="button"
             :aria-label="ariaLabelForDownButton"
+            :disabled="disabled"
           >
             <CaretDownGlyph />
           </button>
         </div>
+        <button
+          v-else
+          class="bx--number__control-btn up-icon"
+          @click="doUp"
+          type="button"
+          :aria-label="ariaLabelForUpButton"
+          :disabled="disabled"
+        >
+          <CaretUpGlyph />
+        </button>
       </div>
       <div class="bx--form-requirement" v-if="isInvalid">
         <slot name="invalid-message">{{ invalidMessage }}</slot>
@@ -60,14 +85,13 @@ import CaretUpGlyph from '@carbon/icons-vue/es/caret--up/index';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
 
-const maxDecimalPlaces = 10; // Stanard floating point accuracy goes at 14 cautionsly
-
 export default {
   name: 'CvNumberInput',
   mixins: [uidMixin, themeMixin],
   components: { CaretDownGlyph, CaretUpGlyph, WarningFilled16, CvWrapper },
   inheritAttrs: false,
   props: {
+    disabled: Boolean,
     formItem: { type: Boolean, default: true },
     helperText: { type: String, default: undefined },
     invalidMessage: { type: String, default: undefined },
@@ -88,6 +112,7 @@ export default {
     min: { type: [String, Number], default: undefined },
     max: { type: [String, Number], default: undefined },
     step: { type: [String, Number], default: undefined },
+    mobile: Boolean,
   },
   data() {
     return {
@@ -105,7 +130,13 @@ export default {
   },
   watch: {
     value() {
-      this.internalValue = this.valueAsString(this.value);
+      // NOTE: DELIBERATE USE OF != TO COMPARE this.interanlValue and this.value
+      if (typeof this.value !== 'number' || this.internalValue != this.value) {
+        // prevents this.value of 1 updating this.internalValue of 1.0
+        // which improves the typing experience
+        // does not matter if this.value is string or number
+        this.internalValue = this.valueAsString(this.value);
+      }
     },
   },
   computed: {
@@ -114,108 +145,39 @@ export default {
     // https://vuejs.org/v2/guide/components-custom-events.html#Customizing-Component-v-model
     inputListeners() {
       return Object.assign({}, this.$listeners, {
-        input: () => this.emitValue(),
+        input: ev => this.onInput(ev.target.value),
       });
     },
-    internalNumberValue() {
-      let numVal = parseFloat(this.internalValue, 10);
-
-      if (isNaN(numVal)) {
-        numVal = parseFloat(this.min, 10) || 0;
-      }
-      return this.roundToPrecision(numVal);
-    },
-    internalMinValue() {
-      let numVal = parseFloat(this.min, 10);
-
-      if (isNaN(numVal)) {
-        return undefined;
-      }
-      return this.roundToPrecision(numVal);
-    },
-    internalMaxValue() {
-      let numVal = parseFloat(this.max, 10);
-
-      if (isNaN(numVal)) {
-        return undefined;
-      }
-      return this.roundToPrecision((this.internalStepValue * numVal) / this.internalStepValue);
-    },
-    internalStepValue() {
-      let numVal = parseFloat(this.step, 10);
-
-      if (isNaN(numVal) || numVal <= 0) {
-        numVal = 1;
-      }
-      return numVal;
-    },
-    stepDecimalPlaces() {
-      if (Math.floor(this.internalStepValue) === this.internalStepValue) return 0;
-      return Math.min(maxDecimalPlaces, this.internalStepValue.toString().split('.')[1].length || 0);
-    },
-    // stepPrecision() {
-    //   return Math.pow(10, -1 * this.stepDecimalPlaces);
-    // },
   },
   methods: {
+    onInput(val) {
+      this.internalValue = val;
+      this.emitValue();
+    },
     checkSlots() {
       // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
       this.isInvalid = !!(this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length));
       this.isHelper = !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
     },
-    _doUpDown(up) {
-      let value;
-      let min = this.internalMinValue;
-      let min0 = min || 0;
-      let max = this.internalMaxValue;
-      let step = this.internalStepValue;
-      // be wary of floating point error
-      // steps should be from min value to less than or equal to max
-      let steps = Math.round((this.internalNumberValue - min0) / step);
-
-      if (up) {
-        value = this.roundToPrecision(min0 + step * (steps + 1));
-
-        if (max !== undefined && value > max) {
-          steps = Math.round((max - min0) / step);
-          value = min0 + step * steps;
-          if (value > max) {
-            value = value - step;
-          }
-          value = this.roundToPrecision(value);
-        }
-
-        if (this.roundToPrecision(value - this.internalNumberValue - step, maxDecimalPlaces) > 0) {
-          // this is simpler than trying to prevent rounding errors
-          value = value - step;
-        }
-
-        this.internalValue = this.valueAsString(value);
-      } else {
-        value = this.roundToPrecision(min0 + step * (steps - 1));
-
-        if (min !== undefined && value < min) {
-          value = min;
-        }
-
-        if (this.roundToPrecision(value - this.internalNumberValue + step, maxDecimalPlaces) < 0) {
-          // this is simpler than trying to prevent rounding errors
-          value = value + step;
-        }
-
-        this.internalValue = this.valueAsString(value);
-      }
-      this.emitValue();
-    },
     doUp() {
-      this._doUpDown(true);
+      this.$refs.input.stepUp();
+      this.onInput(this.$refs.input.value);
     },
     doDown() {
-      this._doUpDown(false);
+      this.$refs.input.stepDown();
+      this.onInput(this.$refs.input.value);
     },
     emitValue() {
       if (typeof this.value === 'number') {
-        this.$emit('input', this.internalNumberValue);
+        if (this.internalValue != this.value) {
+          const ePos = this.internalValue.indexOf('e-');
+          const dotPos = this.internalValue.indexOf('.');
+          if (ePos > -1 || dotPos > -1) {
+            this.$emit('input', parseFloat(this.internalValue));
+          } else {
+            this.$emit('input', parseInt(this.internalValue));
+          }
+        }
       } else {
         this.$emit('input', this.internalValue);
       }
@@ -223,19 +185,11 @@ export default {
     valueAsString(val) {
       let strVal;
       if (typeof val === 'number') {
-        strVal = val.toFixed(this.stepDecimalPlaces);
+        strVal = Number.isFinite(val) ? val.toString() : '';
       } else {
         strVal = val;
       }
-
       return strVal;
-    },
-    roundToPrecision(x, optDecimalPlaces) {
-      // let sign = x >= 0 ? 1 : -1;
-      // let y = x + sign * (this.stepPrecision === undefined ? 0.5 : this.stepPrecision / 2);
-      // return y - (y % (this.stepPrecision === undefined ? 1 : this.stepPrecision));
-      let decimalPlaces = optDecimalPlaces || this.stepDecimalPlaces;
-      return parseFloat(x.toFixed(decimalPlaces));
     },
   },
 };

@@ -40,7 +40,8 @@ For slotting into cv-header.
 
 ```HTML
   <cv-header-nav aria-label="Carbon nav">
-    <cv-header-menu-item href="javascript:void(0)">
+    <!-- active for current or active location -->
+    <cv-header-menu-item href="javascript:void(0)" active>
       Link 1
     </cv-header-menu-item>
     <cv-header-menu-item href="javascript:void(0)">
@@ -159,6 +160,12 @@ Can be added either into the headers 'left-panels' slot or stand alone.
   <template slot="left-panels">
     <!-- Can be used with or without a header, has hover expand abiliity without -->
     <cv-side-nav id="side-nav">
+
+      <cv-header-side-nav-items v-if="header_nav_contents">
+        <!-- Duplicate header nav contents in cv-header-side-nav-items -->
+        <!-- otherwise omit -->
+      </cv-header-side-nav-items>
+
       <!-- Use cv-side-nav-items to create a child menu -->
       <cv-side-nav-items>
         <cv-side-nav-menu title="L1 menu">
@@ -174,7 +181,7 @@ Can be added either into the headers 'left-panels' slot or stand alone.
             L2 menu item
           </cv-side-nav-menu-item>
         </cv-side-nav-menu>
-        <cv-side-nav-menu title="L1 menu">
+        <cv-side-nav-menu title="L1 menu" expanded>
           <template slot="nav-icon"><Fade16 /></template>
           <cv-side-nav-menu-item href="javascript:void(0)">
             L2 menu item
@@ -198,3 +205,9 @@ Can be added either into the headers 'left-panels' slot or stand alone.
     </cv-side-nav>
   </template>
 ```
+
+### options
+
+- CvSideNav can be passed the boolean attribute 'rail' this switches the side nav into rail form.
+- CvHeaderSideNavItems can be passed the boolean attribute 'divider' which will add a dividing
+- cv-side-nav-menu can be passed the boolean attribute 'expanded' that sets the expanded state of the menu

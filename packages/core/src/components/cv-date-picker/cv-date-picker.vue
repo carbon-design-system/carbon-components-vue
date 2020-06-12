@@ -10,10 +10,11 @@
       <div
         :class="{
           'bx--date-picker-container': ['single', 'range'].includes(kind),
+          'bx--date-picker--nolabel': getDateLabel !== undefined,
         }"
         @change="onChange"
       >
-        <label :for="`${uid}-input-1`" class="bx--label">{{ getDateLabel }}</label>
+        <label v-if="getDateLabel.length > 0" :for="`${uid}-input-1`" class="bx--label">{{ getDateLabel }}</label>
         <div class="bx--date-picker-input__wrapper">
           <input
             :data-invalid="isInvalid"
@@ -38,7 +39,7 @@
         </div>
       </div>
       <div :class="{ 'bx--date-picker-container': kind === 'range' }" v-if="kind === 'range'">
-        <label :for="`${uid}-input-2`" class="bx--label">{{ getDateEndLabel }}</label>
+        <label v-if="getDateEndLabel.length > 0" :for="`${uid}-input-2`" class="bx--label">{{ getDateEndLabel }}</label>
         <div class="bx--date-picker-input__wrapper">
           <input
             type="text"
@@ -81,8 +82,8 @@ export default {
   mixins: [uidMixin, themeMixin],
   components: { Calendar16, CvWrapper },
   props: {
-    dateLabel: String,
-    dateEndLabel: String,
+    dateLabel: { type: String, default: undefined },
+    dateEndLabel: { type: String, default: undefined },
     formItem: { type: Boolean, default: true },
     kind: {
       type: String,
@@ -128,7 +129,7 @@ export default {
   },
   data() {
     return {
-      dataValue: '',
+      dataValue: this.value,
       dataOptions: {},
       isInvalid: false,
     };
@@ -142,6 +143,7 @@ export default {
       } else {
         this.$refs.date.value = this.value;
       }
+      this.dataValue = this.value;
     },
     calOptions() {
       this.initFlatpickr();
@@ -158,7 +160,7 @@ export default {
       return `bx--date-picker--${this.kind}`;
     },
     getDateLabel() {
-      if (this.dateLabel && this.dateLabel.length) {
+      if (this.dateLabel !== undefined) {
         return this.dateLabel;
       } else {
         if (this.isRange) {
@@ -169,7 +171,7 @@ export default {
       }
     },
     getDateEndLabel() {
-      if (this.dateEndLabel && this.dateEndLabel.length) {
+      if (this.dateEndLabel !== undefined) {
         return this.dateEndLabel;
       } else {
         if (this.isRange) {
@@ -210,11 +212,11 @@ export default {
       _options.onReady = this.onCalReady;
 
       // prefer value if set
-      if (this.value) {
+      if (this.dataValue) {
         if (this.isRange) {
-          _options.defaultDate = [this.value.startDate, this.value.endDate];
+          _options.defaultDate = [this.dataValue.startDate, this.dataValue.endDate];
         } else {
-          _options.defaultDate = this.value;
+          _options.defaultDate = this.dataValue;
         }
       }
       // _options.onValueUpdate = this.onChange;
@@ -238,27 +240,32 @@ export default {
           return val || '';
         }
       };
-      if (this.value.startDate) {
-        firstDate = dateToString(this.value.startDate);
-        secondDate = dateToString(this.value.endDate);
-      } else {
-        firstDate = dateToString(this.value);
+
+      if (this.dataValue) {
+        if (this.isRange) {
+          firstDate = dateToString(this.dataValue.startDate);
+          secondDate = dateToString(this.dataValue.endDate);
+        } else {
+          firstDate = dateToString(this.dataValue);
+        }
       }
 
       if (this.isRange) {
         if (firstDate !== this.$refs.date.value || secondDate !== this.$refs.todate.value) {
-          this.$emit('change', {
+          this.dataValue = {
             startDate: this.$refs.date.value,
             endDate: this.$refs.todate.value,
-          });
+          };
+          this.$emit('change', this.dataValue);
         }
       } else {
         if (firstDate !== this.$refs.date.value) {
-          this.$emit('change', this.$refs.date.value);
+          this.dataValue = this.$refs.date.value;
+          this.$emit('change', this.dataValue);
 
           if (this.$listeners['simpleChange'] && process.env.NODE_ENV === 'development') {
             console.warn('CvDatePicker: simple change event deprecated in favour of change.');
-            this.$emit('simpleChange', this.$refs.date.value);
+            this.$emit('simpleChange', this.dataValue);
           }
         }
       }

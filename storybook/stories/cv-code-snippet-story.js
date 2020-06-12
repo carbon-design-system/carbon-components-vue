@@ -5,11 +5,11 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvCodeSnippetNotesMD from '@carbon/vue/src/components/cv-code-snippet/cv-code-snippet-notes.md';
-import { CvCodeSnippet, CvCodeSnippetSkeleton } from '@carbon/vue/src';
+import CvCodeSnippetNotesMD from '../../packages/core/src/components/cv-code-snippet/cv-code-snippet-notes.md';
+import { CvCodeSnippet, CvCodeSnippetSkeleton } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvCodeSnippet', module);
-const storiesExperimental = storiesOf('Experimental/CvCodeSnippet', module);
+// const storiesExperimental = storiesOf('Experimental/CvCodeSnippet', module);
 
 let preKnobs = {
   copyFeedback: {

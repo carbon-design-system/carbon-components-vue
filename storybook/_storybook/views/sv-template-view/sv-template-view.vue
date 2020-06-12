@@ -35,13 +35,19 @@
       <pre v-highlightjs="propsJSON">
         <code class="json"></code>
       </pre>
-      <button @click="sourceToClipboard" title="Copy to clipboard" class="sv-template-view__copy" ref="copyButton">
+      <button @click="sourceToClipboard" aria-label="Copy to clipboard" class="sv-template-view__copy" ref="copyButton">
         <svg width="18" height="24" viewBox="0 0 18 24" fill-rule="evenodd">
           <path d="M13 5V0H0v19h5v5h13V5h-5zM2 17V2h9v3H5v12H2zm14 5H7V7h9v15z" />
           <path d="M9 9h5v2H9zM9 12h5v2H9zM9 15h3v2H9z" />
         </svg>
       </button>
-      <textarea class="sv-template-view__clippy" aria-hidden="true" ref="clippy"></textarea>
+      <textarea
+        id="clipboard text area"
+        class="sv-template-view__clippy"
+        aria-hidden="true"
+        aria-label="hidden text area used by clipboard"
+        ref="clippy"
+      ></textarea>
     </section>
   </sv-view>
 </template>
@@ -49,7 +55,8 @@
 <script>
 import Vue from 'vue';
 import SvView from './sv-view.vue';
-import { CvInlineNotification } from '@carbon/vue/src';
+import { CvInlineNotification } from '../../../../packages/core/src';
+import { CvFeedbackButton } from '../../../../packages/core/src/components/cv-feedback-button/_cv-feedback-button';
 
 export default {
   name: 'SvTemplateView',
@@ -190,7 +197,7 @@ $component-padding: 20px;
 
 .sv-template-view__copy {
   position: absolute;
-  top: 39px;
+  top: 54px;
   left: 0;
 
   &.sv-template-view__copy--copied::after {

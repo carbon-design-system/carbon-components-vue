@@ -6,11 +6,11 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvDatePickerNotesMD from '@carbon/vue/src/components/cv-date-picker/cv-date-picker-notes.md';
-import { CvDatePicker } from '@carbon/vue/src';
+import CvDatePickerNotesMD from '../../packages/core/src/components/cv-date-picker/cv-date-picker-notes.md';
+import { CvDatePicker } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvDatePicker', module);
-const storiesExperimental = storiesOf('Experimental/CvDatePicker', module);
+// const storiesExperimental = storiesOf('Experimental/CvDatePicker', module);
 
 const preKnobs = {
   theme: {

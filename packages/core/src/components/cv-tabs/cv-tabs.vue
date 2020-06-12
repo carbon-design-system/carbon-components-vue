@@ -1,8 +1,9 @@
 <template>
-  <div class="cv-tabs" @focusout="onFocusout" @focusin="onFocusin">
+  <div class="cv-tabs" @focusout="onFocusout" @focusin="onFocusin" style="width: 100%;">
     <div
       data-tabs
       class="cv-tab bx--tabs"
+      :class="{ 'bx--tabs--container': container }"
       role="navigation"
       v-on="$listeners"
       v-bind="$attrs"
@@ -63,6 +64,7 @@ export default {
   name: 'CvTabs',
   props: {
     noDefaultToFirst: Boolean,
+    container: Boolean,
   },
   components: { ChevronDownGlyph },
   data() {
@@ -83,7 +85,6 @@ export default {
     this.$on('cv:disabled', srcComponent => this.onCvDisabled(srcComponent));
     this.$on('cv:enabled', srcComponent => this.onCvEnabled(srcComponent));
   },
-  mounted() {},
   computed: {
     triggerStyleOverride() {
       // <style carbon tweaks - DO NOT USE STYLE TAG as it causes SSR issues
@@ -141,10 +142,17 @@ export default {
     },
     onCvMount(srcComponent) {
       this.tabs.push(srcComponent);
+      if (this.tabs.filter(item => item.uid === srcComponent.uid).length > 1) {
+        console.error(`CvTabs: Duplicate ID specified for CvTab, this may cause issues. {id: ${srcComponent.id}}}`);
+      }
 
       this.checkDisabled(srcComponent);
       if (this.selectedId === undefined) {
         this.checkSelected();
+      } else {
+        if (srcComponent.internalSelected) {
+          this.onTabClick(srcComponent.uid);
+        }
       }
     },
     onCvBeforeDestroy(srcComponent) {
@@ -153,12 +161,11 @@ export default {
         const wasSelected = srcComponent.uid === this.selectedId;
 
         this.tabs.splice(tabIndex, 1);
-        this.selectedId = undefined;
 
         this.checkDisabled(srcComponent);
 
-        if (wasSelected) {
-          this.checkSelected();
+        if (wasSelected && this.tabs.length) {
+          this.onTabClick(this.tabs[Math.max(tabIndex - 1, 0)].uid);
         }
       }
     },
@@ -208,17 +215,22 @@ export default {
       }
     },
     checkSelected() {
-      let somethingSelected = false;
+      let id;
 
       for (let i = 0; i < this.tabs.length; i++) {
         if (this.tabs[i].internalSelected) {
-          this.onTabClick(this.tabs[i].uid);
-          somethingSelected = true;
+          id = this.tabs[i].uid;
         }
       }
 
-      if (!this.noDefaultToFirst && !somethingSelected && this.tabs.length) {
-        this.onTabClick(this.tabs[0].uid);
+      if (!this.noDefaultToFirst && id === undefined && this.tabs.length) {
+        id = this.tabs[0].uid;
+      }
+
+      if (id !== undefined) {
+        this.$nextTick(() => {
+          this.onTabClick(id);
+        });
       }
     },
     isAllTabsDisabled() {

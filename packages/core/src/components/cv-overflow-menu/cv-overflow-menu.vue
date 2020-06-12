@@ -157,20 +157,22 @@ export default {
       if (this.open) {
         const menuPosition = this.$el.getBoundingClientRect();
         return this.$nextTick(() => {
+          const pixelsScrolledX = window.scrollX || window.pageXOffset;
+          const pixelsScrolledY = window.scrollY || window.pageYOffset;
           if (this.flipMenu) {
             this.left =
               menuPosition.left +
               this.offsetLeft -
               this.$refs.popup.offsetWidth +
               this.$el.offsetWidth +
-              window.scrollX;
+              pixelsScrolledX;
           } else {
-            this.left = menuPosition.left + this.offsetLeft + window.scrollX;
+            this.left = menuPosition.left + this.offsetLeft + pixelsScrolledX;
           }
           if (this.up) {
-            this.top = menuPosition.top + this.offsetTop - this.$refs.popup.offsetHeight + window.scrollY;
+            this.top = menuPosition.top + this.offsetTop - this.$refs.popup.offsetHeight + pixelsScrolledY;
           } else {
-            this.top = menuPosition.bottom + this.offsetTop + window.scrollY;
+            this.top = menuPosition.bottom + this.offsetTop + pixelsScrolledY;
           }
         });
       }
@@ -184,8 +186,8 @@ export default {
         );
         for (let tryOn of focusOnList) {
           if (
-            !// don't focus on before after or something that can't be tabbed to
-            (
+            // don't focus on before after or something that can't be tabbed to
+            !(
               tryOn.classList.contains('cv-overflow-menu__before-content') ||
               tryOn.classList.contains('cv-overflow-menu__after-content') ||
               tryOn.tabindex < 0

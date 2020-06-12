@@ -2,7 +2,7 @@
   <button class="cv-button" :class="buttonClasses" v-on="inputListeners" type="button">
     <span :class="`${carbonPrefix}--assistive-text`">{{ label }}</span>
 
-    <component v-if="typeof icon === 'object'" :is="icon" :class="`${carbonPrefix}--btn__icon`" />
+    <component v-if="typeof icon === 'object'" :is="icon" class="bx--temp-fix" :class="`${carbonPrefix}--btn__icon`" />
     <svg v-if="typeof icon === 'string' || iconHref" :class="`${carbonPrefix}--btn__icon`">
       <use :href="icon || iconHref" />
     </svg>
@@ -27,25 +27,13 @@ export default {
   },
   computed: {
     buttonClasses() {
-      let classes = [
-        `${this.carbonPrefix}--btn`,
-        `${this.carbonPrefix}--btn--icon-only`,
-        `${this.carbonPrefix}--btn--${this.kind.toLowerCase()}`,
-      ];
-
-      if (this.size === 'small' || (this.size === undefined && this.small)) {
-        classes.push(`${this.carbonPrefix}--btn--sm`);
-      }
-      if (this.size === 'field') {
-        classes.push(`${this.carbonPrefix}--btn--field`);
-      }
-      return classes;
+      return `${this.buttonClassOpts({ iconOnly: true })}${this.tipClasses}`;
     },
     tipClasses() {
       const tipPosition = this.tipPosition || 'bottom';
       const tipAlignment = this.tipAlignment || 'center';
       if (this.label) {
-        return `${this.carbonPrefix}--tooltip__trigger ${this.carbonPrefix}--tooltip--a11y ${this.carbonPrefix}--tooltip--${tipPosition} ${this.carbonPrefix}--tooltip--align-${tipAlignment}`;
+        return ` ${this.carbonPrefix}--tooltip__trigger ${this.carbonPrefix}--tooltip--a11y ${this.carbonPrefix}--tooltip--${tipPosition} ${this.carbonPrefix}--tooltip--align-${tipAlignment}`;
       } else {
         return '';
       }
