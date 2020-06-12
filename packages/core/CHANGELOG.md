@@ -1,3 +1,8 @@
+# Changelog 2.27.1
+
+- fix: lower node requirement to 10
+- chore: make accordion class prefix use carbon prefix
+
 # Changelog 2.27.0
 
 Release previuos canarys
