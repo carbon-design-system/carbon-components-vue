@@ -1,4 +1,3 @@
-import { shallowMount as shallow } from '@vue/test-utils';
 import { testComponent, awaitNextTick } from './_helpers';
 const { shallowMount: shallow } = awaitNextTick;
 import { CvInlineLoading, STATES } from '@/components/cv-inline-loading';

@@ -1,6 +1,6 @@
 <template>
   <cv-wrapper :tag-type="formItem ? 'div' : ''" class="cv-number-input" :class="`${carbonPrefix}--form-item`">
-    <div data-numberinput :class="numberClasses" :class="numberInputClasses" :data-invalid="isInvalid">
+    <div data-numberinput :class="numberInputClasses" :data-invalid="isInvalid">
       <label :for="uid" :class="`${carbonPrefix}--label`">{{ label }}</label>
       <div :class="`${carbonPrefix}--form__helper-text`" v-if="isHelper">
         <slot name="helper-text">{{ helperText }}</slot>
