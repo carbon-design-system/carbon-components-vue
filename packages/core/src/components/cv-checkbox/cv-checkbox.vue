@@ -74,12 +74,12 @@ export default {
       return classes;
     },
     labelContentClasses() {
-      cosnt classes = [`${this.carbonPrefix}--checkbox-label-text`];
+      const classes = [`${this.carbonPrefix}--checkbox-label-text`];
       if (this.hideLabel) {
         classes.push(`${this.carbonPrefix}--visually-hidden`);
       }
       return classes;
-    }
+    },
   },
   methods: {
     onFocus() {
