@@ -1,10 +1,10 @@
 <template>
-  <div class="cv-checkbox bx--checkbox-wrapper" :class="{ 'bx--form-item': formItem }">
+  <div class="cv-checkbox" :class="formItemClasses">
     <input
       ref="input"
       v-bind="$attrs"
       v-on="inputListeners"
-      class="bx--checkbox"
+      :class="`${carbonPrefix}--checkbox`"
       type="checkbox"
       :checked="isChecked === true"
       :aria-checked="`${isChecked}`"
@@ -14,18 +14,12 @@
       :id="uid"
     />
     <label
-      :class="[
-        'bx--checkbox-label',
-        {
-          'bx--label--disabled': $attrs.disabled !== undefined && $attrs.disabled,
-          'bx--checkbox-label__focus': hasFocus,
-        },
-      ]"
+      :class="labelClasses"
       :data-contained-checkbox-state="isChecked"
       :data-contained-checkbox-disabled="$attrs.disabled"
       :for="uid"
     >
-      <span class="bx--checkbox-label-text" :class="{ 'bx--visually-hidden': hideLabel }">
+      <span :class="labelContentClasses">
         {{ label }}
       </span>
     </label>
@@ -35,10 +29,11 @@
 <script>
 import checkMixin from '../../mixins/check-mixin';
 import uidMixin from '../../mixins/uid-mixin';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvCheckbox',
-  mixins: [checkMixin, uidMixin],
+  mixins: [checkMixin, uidMixin, carbonPrefixMixin],
   inheritAttrs: false,
   props: {
     hideLabel: Boolean,
@@ -59,6 +54,32 @@ export default {
       hasFocus: false,
       dataMixed: this.mixed,
     };
+  },
+  computed: {
+    formItemClasses() {
+      const classes = [`${this.carbonPrefix}--checkbox-wrapper`];
+      if (this.formItem) {
+        classes.push(`${this.carbonPrefix}--form-item`);
+      }
+      return classes;
+    },
+    labelClasses() {
+      const classes = [`${this.carbonPrefix}--checkbox-label`];
+      if (this.$attrs.disabled !== undefined && this.$attrs.disabled) {
+        classes.push(`${this.carbonPrefix}--label--disabled`);
+      }
+      if (this.hasFocus) {
+        classes.push(`${this.carbonPrefix}--checkbox-label__focus`);
+      }
+      return classes;
+    },
+    labelContentClasses() {
+      const classes = [`${this.carbonPrefix}--checkbox-label-text`];
+      if (this.hideLabel) {
+        classes.push(`${this.carbonPrefix}--visually-hidden`);
+      }
+      return classes;
+    },
   },
   methods: {
     onFocus() {

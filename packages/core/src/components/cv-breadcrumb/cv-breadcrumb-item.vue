@@ -1,16 +1,14 @@
 <template>
-  <div
-    class="cv-breadcrumb-item bx--breadcrumb-item"
-    :class="{ 'bx--breadcrumb-item--current': activePage }"
-    :aria-current="ariaCurrent"
-  >
+  <div :class="breadcrumbItemClasses" :aria-current="ariaCurrent">
     <slot></slot>
   </div>
 </template>
 
 <script>
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 export default {
   name: 'CvBreadcrumbItem',
+  mixins: [carbonPrefixMixin],
   props: {
     active: Boolean,
     ariaCurrent: String,
@@ -18,6 +16,13 @@ export default {
   computed: {
     activePage() {
       return this.active && this.ariaCurrent !== 'page';
+    },
+    breadcrumbItemClasses() {
+      const classes = [`cv-breadcrumb-item ${this.carbonPrefix}--breadcrumb-item`];
+      if (this.activePage) {
+        classes.push(`${this.carbonPrefix}--breadcrumb-item--current`);
+      }
+      return classes.join(' ');
     },
   },
 };
