@@ -1,24 +1,14 @@
 <template>
-  <cv-wrapper :tag-type="formItem ? 'div' : ''" class="cv-number-input bx--form-item">
-    <div
-      data-numberinput
-      class="bx--number"
-      :class="{
-        'bx--number--light': theme === 'light',
-        'bx--number--helpertext': isHelper,
-        'cv-number-input': !formItem,
-        'bx--number--mobile': mobile,
-      }"
-      :data-invalid="isInvalid"
-    >
-      <label :for="uid" class="bx--label">{{ label }}</label>
-      <div class="bx--form__helper-text" v-if="isHelper">
+  <cv-wrapper :tag-type="formItem ? 'div' : ''" class="cv-number-input" :class="`${carbonPrefix}--form-item`">
+    <div data-numberinput :class="numberInputClasses" :data-invalid="isInvalid">
+      <label :for="uid" :class="`${carbonPrefix}--label`">{{ label }}</label>
+      <div :class="`${carbonPrefix}--form__helper-text`" v-if="isHelper">
         <slot name="helper-text">{{ helperText }}</slot>
       </div>
-      <div class="bx--number__input-wrapper">
+      <div :class="`${carbonPrefix}--number__input-wrapper`">
         <button
           v-if="mobile"
-          class="bx--number__control-btn down-icon"
+          :class="`${carbonPrefix}--number__control-btn down-icon`"
           @click="doDown"
           type="button"
           :aria-label="ariaLabelForDownButton"
@@ -38,10 +28,10 @@
           :max="max"
           ref="input"
         />
-        <WarningFilled16 v-if="isInvalid && !mobile" class="bx--number__invalid" />
-        <div class="bx--number__controls" v-if="!mobile">
+        <WarningFilled16 v-if="isInvalid && !mobile" :class="`${carbonPrefix}--number__invalid`" />
+        <div :class="`${carbonPrefix}--number__controls`" v-if="!mobile">
           <button
-            class="bx--number__control-btn up-icon"
+            :class="`${carbonPrefix}--number__control-btn up-icon`"
             @click="doUp"
             type="button"
             :aria-label="ariaLabelForUpButton"
@@ -50,7 +40,7 @@
             <CaretUpGlyph />
           </button>
           <button
-            class="bx--number__control-btn down-icon"
+            :class="`${carbonPrefix}--number__control-btn down-icon`"
             @click="doDown"
             type="button"
             :aria-label="ariaLabelForDownButton"
@@ -61,7 +51,7 @@
         </div>
         <button
           v-else
-          class="bx--number__control-btn up-icon"
+          :class="`${carbonPrefix}--number__control-btn up-icon`"
           @click="doUp"
           type="button"
           :aria-label="ariaLabelForUpButton"
@@ -70,7 +60,7 @@
           <CaretUpGlyph />
         </button>
       </div>
-      <div class="bx--form-requirement" v-if="isInvalid">
+      <div :class="`${carbonPrefix}--form-requirement`" v-if="isInvalid">
         <slot name="invalid-message">{{ invalidMessage }}</slot>
       </div>
     </div>
@@ -84,10 +74,11 @@ import CaretDownGlyph from '@carbon/icons-vue/es/caret--down/index';
 import CaretUpGlyph from '@carbon/icons-vue/es/caret--up/index';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvNumberInput',
-  mixins: [uidMixin, themeMixin],
+  mixins: [uidMixin, themeMixin, carbonPrefixMixin],
   components: { CaretDownGlyph, CaretUpGlyph, WarningFilled16, CvWrapper },
   inheritAttrs: false,
   props: {
@@ -140,6 +131,24 @@ export default {
     },
   },
   computed: {
+    numberInputClasses() {
+      const classes = [`${this.carbonPrefix}--number`];
+
+      if (this.theme === 'light') {
+        classes.push(`${this.carbonPrefix}--number--light`);
+      }
+      if (this.isHelper) {
+        classes.push(`${this.carbonPrefix}--number--helpertext`);
+      }
+      if (!this.formItem) {
+        classes.push(`cv-number-input`);
+      }
+      if (this.mobile) {
+        classes.push(`${this.carbonPrefix}--number--mobile`);
+      }
+
+      return classes;
+    },
     // Bind listeners at the component level to the embedded input element and
     // add our own input listener to service the v-model. See:
     // https://vuejs.org/v2/guide/components-custom-events.html#Customizing-Component-v-model
