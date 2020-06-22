@@ -22,9 +22,9 @@
       :class="{ 'bx--dropdown__wrapper--inline': inline, 'cv-dropdown': !formItem }"
       :style="wrapperStyleOverride"
     >
-      <span v-if="label" :id="`${uid}-label`" class="bx--label" :class="{ 'bx--label--disabled': disabled }">{{
-        label
-      }}</span>
+      <span v-if="label" :id="`${uid}-label`" class="bx--label" :class="{ 'bx--label--disabled': disabled }">
+        {{ label }}
+      </span>
 
       <div
         v-if="!inline && isHelper"
@@ -65,6 +65,7 @@
           :aria-labelledby="ariaLabeledBy"
           :disabled="disabled"
           type="button"
+          ref="button"
         >
           <WarningFilled16 v-if="isInvalid && inline" class="bx--dropdown__invalid-icon" />
           <span
@@ -285,7 +286,7 @@ export default {
     },
     onEsc() {
       this.open = false;
-      this.$el.focus();
+      this.focus();
     },
     onClick(ev) {
       if (this.disabled) {
@@ -293,7 +294,7 @@ export default {
       } else {
         this.open = !this.open;
         if (!this.open) {
-          this.$el.focus();
+          this.focus();
         }
 
         let target = ev.target;
@@ -308,6 +309,11 @@ export default {
           this.internalValue = newValue;
         }
       }
+    },
+    focus() {
+      this.$nextTick(() => {
+        this.$refs.button.focus();
+      });
     },
   },
 };
