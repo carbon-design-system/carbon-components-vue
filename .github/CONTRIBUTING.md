@@ -15,7 +15,7 @@
 - Do not add a dependency on core javascript.
 - Do create multiple components where they make semantic sense e.g. `cv-list` and `cv-item`, or `cv-menu` and `cv-menu-item`.
 - Do capture and re-throw existing events (including from carbon components) where they have a clear need beyond the template. E.g. A button click.
-- Do not capture and re-throw all possible events e.g. `focus`, `mouseOver` etc. Users can make user of `.native` for these, see https://vuejs.org/v2/guide/components-custom-events.html#Binding-Native-Events-to-Components
+- Do not capture and re-throw all possible events e.g. `focus`, `mouseOver` etc. Users can make use of `.native` for these, see https://vuejs.org/v2/guide/components-custom-events.html#Binding-Native-Events-to-Components
 - Where an id is required use `uidMixin` which will generate an ID if none is supplied.
 - Log all raised events as actions in the story.
 

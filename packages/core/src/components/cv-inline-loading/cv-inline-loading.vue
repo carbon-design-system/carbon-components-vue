@@ -14,7 +14,7 @@
         :hidden="internalState !== STATES.LOADED"
         :class="`${carbonPrefix}--inline-loading__checkmark-container`"
       />
-      <Error20 :hidden="internalState !== STATES.ERROR" :class="`${carbonPrefix}--inline-loading--error`" />
+      <ErrorFilled16 :hidden="internalState !== STATES.ERROR" :class="`${carbonPrefix}--inline-loading--error`" />
     </div>
     <p :class="`${carbonPrefix}--inline-loading__text`">{{ stateText }}</p>
   </div>
@@ -22,13 +22,13 @@
 
 <script>
 import { STATES } from './consts';
-import Error20 from '@carbon/icons-vue/lib/error/20';
+import ErrorFilled16 from '@carbon/icons-vue/lib/error--filled/16';
 import CheckmarkFilled16 from '@carbon/icons-vue/lib/checkmark--filled/16';
 import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvInlineLoading',
-  components: { Error20, CheckmarkFilled16 },
+  components: { ErrorFilled16, CheckmarkFilled16 },
   mixins: [carbonPrefixMixin],
   created() {
     this.STATES = STATES;
@@ -52,10 +52,10 @@ export default {
       type: String,
       default: undefined,
       validator: val => {
-        if (Object.keys(STATES).some(state => STATES[state] === val)) {
+        if (Object.keys(STATES).some(state => STATES[state] === val.toLowerCase())) {
           return true;
         } else {
-          console.error(`CvInlineLoading: Valid states are ${JSON.stringify(Object.keys(STATES))}`);
+          console.error(`CvInlineLoading: Valid states are ${JSON.stringify(Object.values(STATES))}`);
           return false;
         }
       },
@@ -64,7 +64,7 @@ export default {
   computed: {
     internalState() {
       if (this.state !== undefined) {
-        return this.state;
+        return this.state.toLowerCase();
       } else {
         return this.active ? STATES.LOADING : STATES.LOADED;
       }

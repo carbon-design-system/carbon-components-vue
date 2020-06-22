@@ -6,11 +6,11 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvCheckboxNotesMD from '@carbon/vue/src/components/cv-checkbox/cv-checkbox-notes.md';
-import { CvCheckbox, CvCheckboxSkeleton } from '@carbon/vue/src';
+import CvCheckboxNotesMD from '../../packages/core/src/components/cv-checkbox/cv-checkbox-notes.md';
+import { CvCheckbox, CvCheckboxSkeleton } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvCheckbox', module);
-const storiesExperimental = storiesOf('Experimental/CvCheckbox', module);
+// const storiesExperimental = storiesOf('Experimental/CvCheckbox', module);
 
 let preKnobs = {
   label: {
@@ -51,13 +51,19 @@ let preKnobs = {
     group: 'attr',
     value: `@change="actionChange"`,
   },
+  hideLabel: {
+    group: 'attr',
+    type: boolean,
+    config: ['hide-label', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'hide-label',
+  },
 };
 
 let variants = [
   { name: 'default', excludes: ['vModel', 'events'] },
   { name: 'minimal', includes: ['label', 'value'] },
-  { name: 'events', includes: ['label', 'value', 'events'] },
-  { name: 'vModel', includes: ['label', 'value', 'vModel'] },
+  { name: 'events', includes: ['label', 'hideLabel', 'value', 'events'] },
+  { name: 'vModel', includes: ['label', 'hideLabel', 'value', 'vModel'] },
 ];
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);

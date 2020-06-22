@@ -1,6 +1,6 @@
 <template>
   <cv-feedback-button
-    class="cv-code-snippet-inline"
+    class="cv-code-snippet-inline bx--snippet bx--snippet--inline"
     :class="{ 'bx--snippet--light': theme === 'light' }"
     :feedback="copyFeedback"
     inline
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import CvFeedbackButton from './_cv-feedback-button';
+import CvFeedbackButton from '../cv-feedback-button/_cv-feedback-button';
 import themeMixin from '../../mixins/theme-mixin';
 
 export default {

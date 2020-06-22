@@ -25,9 +25,9 @@
         @click="toggleActive(true)"
         @blur="checkFocus"
       >
-        <Search16 class="bx--search-magnifier" />
+        <component :is="icon" class="bx--search-magnifier" />
       </button>
-      <Search16 v-if="!isToolbarKind" class="bx--search-magnifier" />
+      <component v-if="!isToolbarKind" :is="icon" class="bx--search-magnifier" />
       <button
         type="button"
         class="bx--search-close"
@@ -46,26 +46,37 @@
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
 import Search16 from '@carbon/icons-vue/es/search/16';
+import Search20 from '@carbon/icons-vue/es/search/20';
 import Close16 from '@carbon/icons-vue/es/close/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
 
 export default {
   name: 'CvSearch',
   mixins: [uidMixin, themeMixin],
-  components: { Close16, Search16, CvWrapper },
+  components: { Close16, CvWrapper },
   inheritAttrs: false,
   props: {
     clearAriaLabel: { type: String, default: 'Clear search input' },
     formItem: { type: Boolean, default: true },
     kind: { type: String, default: undefined },
     label: String,
-    small: Boolean,
+    size: { type: String, default: undefined },
+    small: {
+      type: Boolean,
+      default: undefined,
+      validator(val) {
+        if (val !== undefined && process.env.NODE_ENV === 'development') {
+          console.warn('DEPRECARTED: Prefer size property: small, large or xl (default)');
+        }
+        return true;
+      },
+    },
     large: {
       type: Boolean,
       default: undefined,
       validator(val) {
         if (val !== undefined && process.env.NODE_ENV === 'development') {
-          console.warn('The larger search input is now the default.');
+          console.warn('DEPRECARTED: Prefer size property: small, large or xl (default)');
         }
         return true;
       },
@@ -99,7 +110,25 @@ export default {
     },
     searchClasses() {
       const themeClass = this.theme.length ? `bx--search--${this.theme}` : '';
-      const sizeClass = `bx--search--${this.small ? 'sm' : 'xl'}`;
+      let size;
+
+      if (this.size !== undefined && (this.size || (this.small === undefined && this.large === undefined))) {
+        switch (this.size) {
+          case 'small':
+            size = 'sm';
+            break;
+          case 'large':
+            size = 'lg';
+            break;
+          default:
+            size = 'xl';
+            break;
+        }
+      } else {
+        size = this.small ? 'sm' : 'xl';
+      }
+      const sizeClass = `bx--search--${size}`;
+
       let toolbarClasses = '';
       if (this.isToolbarKind) {
         toolbarClasses = this.toolbarActive ? 'bx--toolbar-search bx--toolbar-search--active' : 'bx--toolbar-search';
@@ -111,6 +140,9 @@ export default {
     },
     isToolbarKind() {
       return this.kind === 'toolbar';
+    },
+    icon() {
+      return this.size === 'xl' ? Search20 : Search16;
     },
   },
   methods: {

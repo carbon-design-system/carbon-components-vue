@@ -6,11 +6,11 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvSliderNotesMD from '@carbon/vue/src/components/cv-slider/cv-slider-notes.md';
-import { CvSlider, CvSliderSkeleton } from '@carbon/vue/src';
+import CvSliderNotesMD from '../../packages/core/src/components/cv-slider/cv-slider-notes.md';
+import { CvSlider, CvSliderSkeleton } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvSlider', module);
-const storiesExperimental = storiesOf('Experimental/CvSlider', module);
+// const storiesExperimental = storiesOf('Experimental/CvSlider', module);
 
 let preKnobs = {
   theme: {

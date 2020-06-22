@@ -14,7 +14,7 @@
     data-option
     :data-value="value"
     class="cv-dropdown-item bx--dropdown-item"
-    :class="{ ' bx--list-box__menu-item--active bx--list-box__menu-item--highlighted': internalSelected }"
+    :class="{ 'bx--dropdown--selected': internalSelected }"
   >
     <a
       :aria-checked="internalSelected"

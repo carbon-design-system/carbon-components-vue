@@ -1,7 +1,7 @@
 {
   "name": "@carbon/vue",
   "description": "A collection of components for the Carbon Design System built using Vue.js",
-  "version": "2.20.0-canary.0",
+  "version": "2.27.1",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -10,7 +10,7 @@
   "bugs": {
     "url": "https://github.com/carbon-design-system/carbon-components-vue/issues/new"
   },
-  "homepage": "https://github.com/carbon-design-system/carbon-components-vue/tree/master/packages/core#readme",
+  "homepage": "http://vue.carbondesignsystem.com/",
   "main": "dist/carbon-vue.umd.min.js",
   "keywords": [
     "carbon",
@@ -55,21 +55,21 @@
     "/src"
   ],
   "scripts": {
-    "build": "vue-cli-service build --target lib --name carbon-vue ./src/index.js --no-clean"
+    "build": "vue-cli-service build --target lib --name carbon-vue ./src/index.js --no-clean",
+    "clean": "rimraf dist node_modules/.cache"
   },
   "engines": {
     "node": ">=10.x"
   },
   "sideEffects": true,
   "dependencies": {
-    "@carbon/icons-vue": "10.6.1",
-    "carbon-components": "10.7.3",
+    "@carbon/icons-vue": "10.10.2",
+    "carbon-components": "10.11.2",
     "flatpickr": "4.6.3",
-    "vue": "^2.6.10"
+    "vue": "^2.6.11"
   },
   "devDependencies": {
     "@vue/cli-service": "^3.11.0",
-    "babel-preset-env": "1.7.0",
     "eslint-plugin-prettier": "^3.1.1",
     "vue-template-compiler": "^2.6.10"
   }

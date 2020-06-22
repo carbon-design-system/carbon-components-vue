@@ -5,11 +5,11 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvTooltipNotesMD from '@carbon/vue/src/components/cv-tooltip/cv-tooltip-notes.md';
-import { CvInteractiveTooltip, CvTooltip, CvDefinitionTooltip } from '@carbon/vue/src';
+import CvTooltipNotesMD from '../../packages/core/src/components/cv-tooltip/cv-tooltip-notes.md';
+import { CvInteractiveTooltip, CvTooltip, CvDefinitionTooltip } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvTooltip', module);
-const storiesExperimental = storiesOf('Experimental/CvTooltip', module);
+// const storiesExperimental = storiesOf('Experimental/CvTooltip', module);
 
 import Filter16 from '@carbon/icons-vue/es/filter/16';
 

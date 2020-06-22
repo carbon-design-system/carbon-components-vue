@@ -1,1 +1,5 @@
 dist/*.js
+storybook-static/*
+coverage/*
+snapshots/*
+node_modules/*

@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { boolean } from '@storybook/addon-knobs';
+import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { action } from '@storybook/addon-actions';
 
@@ -7,13 +7,19 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvModalNotesMD from '@carbon/vue/src/components/cv-modal/cv-modal-notes.md';
-import { CvModal } from '@carbon/vue/src';
+import CvModalNotesMD from '../../packages/core/src/components/cv-modal/cv-modal-notes.md';
+import { CvModal } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvModal', module);
-const storiesExperimental = storiesOf('Experimental/CvModal', module);
+// const storiesExperimental = storiesOf('Experimental/CvModal', module);
 
 const preKnobs = {
+  closeAriaLabel: {
+    group: 'attr',
+    type: text,
+    config: ['close-aria-label', 'Close'], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'close-aria-label',
+  },
   label: {
     group: 'content',
     slot: 'label',
@@ -28,6 +34,21 @@ const preKnobs = {
     group: 'content',
     slot: 'content',
     value: `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, seed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>`,
+  },
+  size: {
+    group: 'attr',
+    type: select,
+    config: [
+      'size',
+      {
+        default: '',
+        'xs (extra small)': 'xs',
+        small: 'small',
+        large: 'large',
+      },
+      '',
+    ], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'size',
   },
   contentWithInput: {
     group: 'content',
@@ -124,15 +145,34 @@ const preKnobs = {
 };
 
 const variants = [
-  { name: 'default', includes: ['content', 'visible', 'events', 'autoHideOff'] },
+  {
+    name: 'default',
+    includes: ['closeAriaLabel', 'label', 'title', 'content', 'size', 'visible', 'events', 'autoHideOff'],
+  },
+  { name: 'no-body', includes: ['closeAriaLabel', 'label', 'title', 'visible', 'size', 'events', 'autoHideOff'] },
   {
     name: 'buttons',
-    includes: ['content', 'primaryButton', 'primaryButtonDisabled', 'secondaryButton', 'events', 'autoHideOff'],
+    includes: [
+      'closeAriaLabel',
+      'label',
+      'title',
+      'content',
+      'size',
+      'primaryButton',
+      'primaryButtonDisabled',
+      'secondaryButton',
+      'events',
+      'autoHideOff',
+    ],
   },
   {
     name: 'buttons with listeners',
     includes: [
+      'closeAriaLabel',
+      'label',
+      'title',
       'content',
+      'size',
       'primaryButton',
       'primaryButtonDisabled',
       'secondaryButton',
@@ -141,19 +181,35 @@ const variants = [
       'autoHideOff',
     ],
   },
-  { name: 'primary-only', includes: ['content', 'primaryButton', 'primaryButtonDisabled', 'events', 'autoHideOff'] },
+  {
+    name: 'primary-only',
+    includes: [
+      'closeAriaLabel',
+      'label',
+      'title',
+      'content',
+      'size',
+      'primaryButton',
+      'primaryButtonDisabled',
+      'events',
+      'autoHideOff',
+    ],
+  },
   {
     name: 'secondary-only',
-    includes: ['content', 'secondaryButton', 'events', 'autoHideOff'],
+    includes: ['closeAriaLabel', 'label', 'title', 'size', 'content', 'secondaryButton', 'events', 'autoHideOff'],
   },
-  { name: 'minimal', includes: ['content'] },
-  { name: 'with input', excludes: ['content', 'scrollingContent'] },
+  { name: 'minimal', includes: ['label', 'title', 'content'] },
+  { name: 'with input', excludes: ['label', 'title', 'content', 'scrollingContent'] },
   {
     name: 'danger',
     excludes: ['contentWithInput'],
     extra: { kind: { group: 'attr', value: 'kind="danger"' } },
   },
-  { name: 'scrolling-contnet', includes: ['primaryButton', 'secondaryButton', 'scrollingContent'] },
+  {
+    name: 'scrolling-contnet',
+    includes: ['label', 'title', 'size', 'primaryButton', 'secondaryButton', 'scrollingContent'],
+  },
 ];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);

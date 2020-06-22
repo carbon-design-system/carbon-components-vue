@@ -4,7 +4,7 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvToolbarNotesMD from '@carbon/vue/src/components/cv-toolbar/cv-toolbar-notes.md';
+import CvToolbarNotesMD from '../../packages/core/src/components/cv-toolbar/cv-toolbar-notes.md';
 import {
   CvToolbar,
   CvOverflowMenu,
@@ -16,10 +16,10 @@ import {
   CvToolbarSearch,
   CvToolbarTitle,
   CvButton,
-} from '@carbon/vue/src';
+} from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvToolbar', module);
-const storiesExperimental = storiesOf('Experimental/CvToolbar', module);
+// const storiesExperimental = storiesOf('Experimental/CvToolbar', module);
 
 import Filter16 from '@carbon/icons-vue/es/filter/16';
 

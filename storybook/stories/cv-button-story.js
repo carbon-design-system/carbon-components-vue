@@ -6,12 +6,12 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvButtonNotesMD from '@carbon/vue/src/components/cv-button/cv-button-notes.md';
-import { CvButton, CvIconButton, CvButtonSkeleton } from '@carbon/vue/src';
+import CvButtonNotesMD from '../../packages/core/src/components/cv-button/cv-button-notes.md';
+import { CvButton, CvIconButton, CvButtonSkeleton, CvButtonSet } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvButton', module);
-const storiesExperimental = storiesOf('Experimental/CvButton', module);
-const exampleIconPath = require('@carbon/vue/src/assets/images/example-icons.svg');
+// const storiesExperimental = storiesOf('Experimental/CvButton', module);
+const exampleIconPath = require('../../packages/core/src/assets/images/example-icons.svg');
 import AddFilled16 from '@carbon/icons-vue/es/add--filled/16';
 
 let preKnobs = {
@@ -277,3 +277,31 @@ for (const story of storySet) {
     }
   );
 }
+
+storiesDefault.add(
+  'button-set',
+  () => {
+    const templateString = `<cv-button-set>
+  <cv-button kind="primary">button 1</cv-button>
+  <cv-button kind="secondary">button 2</cv-button>
+  <cv-button kind="danger">button 3</cv-button>
+</cv-button-set>
+  `;
+
+    const templateViewString = `
+  <sv-template-view
+    sv-margin
+    sv-source='${templateString.trim()}'>
+    <template slot="component">${templateString}</template>
+  </sv-template-view>
+`;
+
+    return {
+      components: { CvButtonSet, CvButton, SvTemplateView },
+      template: templateViewString,
+    };
+  },
+  {
+    notes: { markdown: CvButtonNotesMD },
+  }
+);

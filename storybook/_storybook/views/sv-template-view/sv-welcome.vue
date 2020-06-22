@@ -161,13 +161,15 @@
               >GitHub.</a
             >
           </p>
-          <ul>
+          <ul v-if="hasPackageInfo">
             <li>{{ packageName }} latest version: {{ packageLatest }}</li>
             <li v-for="(version, tag) of packageOtherTags" :key="tag">
               {{ packageName }} {{ tag }} version: {{ version }}
             </li>
           </ul>
-          <p>Last updated {{ packageUpdated }} <br />Copyright © 2019 IBM</p>
+          <p>
+            <span v-if="hasPackageInfo">Last updated {{ packageUpdated }} <br /></span>Copyright © 2019 IBM
+          </p>
         </div>
       </div>
       <div class="bx--row">
@@ -186,11 +188,15 @@
 </template>
 
 <script>
-import packageInfo from '../../../../package-info';
+import packageInfoRaw from '../../../../package-info';
+const packageInfo = Object.values(packageInfoRaw).reduce((acc, line) => (line.type === 'inspect' ? line : acc), 0);
 
 export default {
   name: 'SvWelcome',
   computed: {
+    hasPackageInfo() {
+      return !!packageInfo;
+    },
     packageName() {
       return packageInfo.data.name;
     },

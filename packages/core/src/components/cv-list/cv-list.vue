@@ -7,7 +7,6 @@
       'bx--list--ordered': internalOrdered,
       'bx--list--unordered': !internalOrdered,
     }"
-    :data-uid="_uid"
     :data-nested="nested"
   >
     <slot></slot>

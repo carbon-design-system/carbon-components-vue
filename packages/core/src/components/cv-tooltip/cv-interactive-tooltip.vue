@@ -119,28 +119,30 @@ export default {
     },
     position() {
       const menuPosition = this.$refs.trigger.getBoundingClientRect();
+      const pixelsScrolledX = window.scrollX || window.pageXOffset;
+      const pixelsScrolledY = window.scrollY || window.pageYOffset;
 
       if (this.direction === 'top' || this.direction === 'bottom') {
         this.left =
           menuPosition.left +
           0.5 +
           (this.$refs.trigger.offsetWidth - this.$refs.popup.offsetWidth) / 2 +
-          window.scrollX;
+          pixelsScrolledX;
 
         if (this.direction === 'bottom') {
-          this.top = menuPosition.bottom + 10 + window.scrollY;
+          this.top = menuPosition.bottom + 10 + pixelsScrolledY;
         } else {
-          this.top = menuPosition.top - 15 - this.$refs.popup.offsetHeight + window.scrollY;
+          this.top = menuPosition.top - 15 - this.$refs.popup.offsetHeight + pixelsScrolledY;
         }
       } else {
         this.top =
           menuPosition.top +
           (this.$refs.trigger.offsetHeight - 0.5 - this.$refs.popup.offsetHeight) / 2 +
-          window.scrollY;
+          pixelsScrolledY;
         if (this.direction === 'left') {
-          this.left = menuPosition.left - 10 - this.$refs.popup.offsetWidth + window.scrollX;
+          this.left = menuPosition.left - 10 - this.$refs.popup.offsetWidth + pixelsScrolledX;
         } else {
-          this.left = menuPosition.right + 15 + window.scrollX;
+          this.left = menuPosition.right + 15 + pixelsScrolledX;
         }
       }
     },

@@ -4,7 +4,8 @@ exports[`CvNumberInput should match snapshot when all props are default 1`] = `
 <cv-wrapper-stub tagtype="div" class="cv-number-input bx--form-item">
   <div data-numberinput="" class="bx--number"><label for="1" class="bx--label"></label>
     <!---->
-    <div class="bx--number__input-wrapper"><input id="1" type="number">
+    <div class="bx--number__input-wrapper">
+      <!----> <input id="1" type="number">
       <!---->
       <div class="bx--number__controls"><button type="button" aria-label="Increase number input" class="bx--number__control-btn up-icon">
           <caretupglyph-stub></caretupglyph-stub>
@@ -21,7 +22,8 @@ exports[`CvNumberInput should match snapshot when all props are provided 1`] = `
 <cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item">
   <div data-numberinput="" class="bx--number bx--number--helpertext cv-number-input" data-invalid="true"><label for="1" class="bx--label">label</label>
     <div class="bx--form__helper-text">helperText</div>
-    <div class="bx--number__input-wrapper"><input id="1" type="number">
+    <div class="bx--number__input-wrapper">
+      <!----> <input id="1" type="number">
       <warningfilled16-stub class="bx--number__invalid"></warningfilled16-stub>
       <div class="bx--number__controls"><button type="button" aria-label="ariaLabelForUpButton" class="bx--number__control-btn up-icon">
           <caretupglyph-stub></caretupglyph-stub>
@@ -40,7 +42,8 @@ exports[`CvNumberInput should match snapshot when helper-text slot is provided 1
     <div class="bx--form__helper-text">
       <div class="fake-slot">my helper text</div>
     </div>
-    <div class="bx--number__input-wrapper"><input id="1" type="number">
+    <div class="bx--number__input-wrapper">
+      <!----> <input id="1" type="number">
       <!---->
       <div class="bx--number__controls"><button type="button" aria-label="Increase number input" class="bx--number__control-btn up-icon">
           <caretupglyph-stub></caretupglyph-stub>
@@ -57,7 +60,8 @@ exports[`CvNumberInput should match snapshot when invalid-message slot is provid
 <cv-wrapper-stub tagtype="div" class="cv-number-input bx--form-item">
   <div data-numberinput="" class="bx--number" data-invalid="true"><label for="1" class="bx--label"></label>
     <!---->
-    <div class="bx--number__input-wrapper"><input id="1" type="number">
+    <div class="bx--number__input-wrapper">
+      <!----> <input id="1" type="number">
       <warningfilled16-stub class="bx--number__invalid"></warningfilled16-stub>
       <div class="bx--number__controls"><button type="button" aria-label="Increase number input" class="bx--number__control-btn up-icon">
           <caretupglyph-stub></caretupglyph-stub>
@@ -76,7 +80,8 @@ exports[`CvNumberInput should match snapshot when it is not a formItem 1`] = `
 <cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item">
   <div data-numberinput="" class="bx--number cv-number-input"><label for="1" class="bx--label"></label>
     <!---->
-    <div class="bx--number__input-wrapper"><input id="1" type="number">
+    <div class="bx--number__input-wrapper">
+      <!----> <input id="1" type="number">
       <!---->
       <div class="bx--number__controls"><button type="button" aria-label="Increase number input" class="bx--number__control-btn up-icon">
           <caretupglyph-stub></caretupglyph-stub>
@@ -93,7 +98,8 @@ exports[`CvNumberInput should match snapshot when light theme 1`] = `
 <cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item">
   <div data-numberinput="" class="bx--number bx--number--light cv-number-input"><label for="1" class="bx--label"></label>
     <!---->
-    <div class="bx--number__input-wrapper"><input id="1" type="number">
+    <div class="bx--number__input-wrapper">
+      <!----> <input id="1" type="number">
       <!---->
       <div class="bx--number__controls"><button type="button" aria-label="Increase number input" class="bx--number__control-btn up-icon">
           <caretupglyph-stub></caretupglyph-stub>
@@ -106,11 +112,29 @@ exports[`CvNumberInput should match snapshot when light theme 1`] = `
 </cv-wrapper-stub>
 `;
 
+exports[`CvNumberInput should match snapshot when mobile variant requested 1`] = `
+<cv-wrapper-stub tagtype="div" class="cv-number-input bx--form-item">
+  <div data-numberinput="" class="bx--number bx--number--helpertext bx--number--mobile"><label for="1" class="bx--label"></label>
+    <div class="bx--form__helper-text">
+      <div class="fake-slot">my helper text</div>
+    </div>
+    <div class="bx--number__input-wrapper"><button type="button" aria-label="Decrease number input" class="bx--number__control-btn down-icon">
+        <caretdownglyph-stub></caretdownglyph-stub>
+      </button> <input id="1" type="number">
+      <!----> <button type="button" aria-label="Increase number input" class="bx--number__control-btn up-icon">
+        <caretupglyph-stub></caretupglyph-stub>
+      </button></div>
+    <!---->
+  </div>
+</cv-wrapper-stub>
+`;
+
 exports[`CvNumberInput should match snapshot when value is Number 1`] = `
 <cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item">
   <div data-numberinput="" class="bx--number cv-number-input"><label for="1" class="bx--label"></label>
     <!---->
-    <div class="bx--number__input-wrapper"><input id="1" type="number">
+    <div class="bx--number__input-wrapper">
+      <!----> <input id="1" type="number">
       <!---->
       <div class="bx--number__controls"><button type="button" aria-label="Increase number input" class="bx--number__control-btn up-icon">
           <caretupglyph-stub></caretupglyph-stub>
@@ -127,7 +151,8 @@ exports[`CvNumberInput should match snapshot when value is String 1`] = `
 <cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item">
   <div data-numberinput="" class="bx--number cv-number-input"><label for="1" class="bx--label"></label>
     <!---->
-    <div class="bx--number__input-wrapper"><input id="1" type="number">
+    <div class="bx--number__input-wrapper">
+      <!----> <input id="1" type="number">
       <!---->
       <div class="bx--number__controls"><button type="button" aria-label="Increase number input" class="bx--number__control-btn up-icon">
           <caretupglyph-stub></caretupglyph-stub>
@@ -144,7 +169,8 @@ exports[`CvNumberInput should match snapshot with min, max and step as Strings 1
 <cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item">
   <div data-numberinput="" class="bx--number cv-number-input"><label for="1" class="bx--label"></label>
     <!---->
-    <div class="bx--number__input-wrapper"><input id="1" type="number" step="2" min="-10" max="10">
+    <div class="bx--number__input-wrapper">
+      <!----> <input id="1" type="number" step="2" min="-10" max="10">
       <!---->
       <div class="bx--number__controls"><button type="button" aria-label="Increase number input" class="bx--number__control-btn up-icon">
           <caretupglyph-stub></caretupglyph-stub>
@@ -161,7 +187,8 @@ exports[`CvNumberInput should match snapshot with optional min, max and step as 
 <cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item">
   <div data-numberinput="" class="bx--number cv-number-input"><label for="1" class="bx--label"></label>
     <!---->
-    <div class="bx--number__input-wrapper"><input id="1" type="number" step="2" min="-10" max="10">
+    <div class="bx--number__input-wrapper">
+      <!----> <input id="1" type="number" step="2" min="-10" max="10">
       <!---->
       <div class="bx--number__controls"><button type="button" aria-label="Increase number input" class="bx--number__control-btn up-icon">
           <caretupglyph-stub></caretupglyph-stub>

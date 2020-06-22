@@ -6,11 +6,11 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvDropdownNotesMD from '@carbon/vue/src/components/cv-dropdown/cv-dropdown-notes.md';
-import { CvDropdown, CvDropdownItem, CvDropdownSkeleton } from '@carbon/vue/src';
+import CvDropdownNotesMD from '../../packages/core/src/components/cv-dropdown/cv-dropdown-notes.md';
+import { CvDropdown, CvDropdownItem, CvDropdownSkeleton } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvDropdown', module);
-const storiesExperimental = storiesOf('Experimental/CvDropdown', module);
+// const storiesExperimental = storiesOf('Experimental/CvDropdown', module);
 
 let preKnobs = {
   theme: {
@@ -76,6 +76,12 @@ let preKnobs = {
     slot: 'helper-text',
     value: 'Some helpful text',
   },
+  hideSelected: {
+    group: 'attr',
+    type: boolean,
+    config: ['hide-selected', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'hide-selected',
+  },
   invalidMessage: {
     group: 'attr',
     type: text,
@@ -126,7 +132,7 @@ for (const story of storySet) {
 
       const templateString = `
   <cv-dropdown ${settings.group.attr}>${settings.group.slots}
-    <cv-dropdown-item value="10">Option with value 10</cv-dropdown-item>
+    <cv-dropdown-item value="10"><span>Option with value 10 & 10.0</span></cv-dropdown-item>
     <cv-dropdown-item value="20">Option with value 20</cv-dropdown-item>
     <cv-dropdown-item value="30">Option with value 30</cv-dropdown-item>
     <cv-dropdown-item value="40">Option with value 40</cv-dropdown-item>

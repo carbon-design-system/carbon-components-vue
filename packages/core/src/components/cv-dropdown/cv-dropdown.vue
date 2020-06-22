@@ -22,9 +22,9 @@
       :class="{ 'bx--dropdown__wrapper--inline': inline, 'cv-dropdown': !formItem }"
       :style="wrapperStyleOverride"
     >
-      <span v-if="label" :id="`${uid}-label`" class="bx--label" :class="{ 'bx--label--disabled': disabled }">
-        {{ label }}
-      </span>
+      <span v-if="label" :id="`${uid}-label`" class="bx--label" :class="{ 'bx--label--disabled': disabled }">{{
+        label
+      }}</span>
 
       <div
         v-if="!inline && isHelper"
@@ -40,7 +40,6 @@
         :data-value="internalValue"
         :data-invalid="isInvalid"
         class="bx--dropdown"
-        tabindex="0"
         :class="{
           'bx--dropdown--light': theme === 'light',
           'bx--dropdown--up': up,
@@ -48,6 +47,7 @@
           'bx--dropdown--invalid': isInvalid,
           'bx--dropdown--disabled': disabled,
           'bx--dropdown--inline': inline,
+          'bx--dropdown--show-selected': !hideSelected,
         }"
         v-bind="$attrs"
         @keydown.down.prevent="onDown"
@@ -58,14 +58,21 @@
       >
         <button
           class="bx--dropdown-text"
+          :aria-disabled="disabled"
           aria-haspopup="true"
           :aria-expanded="open"
           :aria-controls="`${uid}-menu`"
-          :aria-labelledby="`${uid}-label ${uid}-value`"
+          :aria-labelledby="ariaLabeledBy"
+          :disabled="disabled"
           type="button"
         >
           <WarningFilled16 v-if="isInvalid && inline" class="bx--dropdown__invalid-icon" />
-          <span class="bx--dropdown-text__inner" :id="`${uid}-value`" ref="valueContent">{{ placeholder }}</span>
+          <span
+            class="bx--dropdown-text__inner"
+            :id="`${uid}-value`"
+            data-test="internalCaption"
+            v-html="internalCaption"
+          />
           <span class="bx--dropdown__arrow-container">
             <span class="bx--dropdown__arrow" :style="chevronStyleOveride">
               <chevron-down-glyph />
@@ -79,6 +86,7 @@
           :aria-hidden="!open"
           wh-menu-anchor="left"
           :aria-labelledby="`${uid}-label`"
+          ref="droplist"
         >
           <slot></slot>
         </ul>
@@ -117,6 +125,7 @@ export default {
     },
     up: Boolean,
     value: String, // initial value of the dropdown,
+    hideSelected: Boolean,
   },
   data() {
     return {
@@ -124,6 +133,7 @@ export default {
       dataValue: this.value,
       isHelper: false,
       isInvalid: false,
+      selectedChild: null,
     };
   },
   created() {
@@ -153,26 +163,35 @@ export default {
     },
   },
   computed: {
+    ariaLabeledBy() {
+      if (this.label) {
+        return `${this.uid}-label ${this.uid}-value`;
+      } else {
+        return `${this.uid}-value`;
+      }
+    },
+    internalCaption() {
+      if (this.selectedChild) {
+        return this.selectedChild.internalContent;
+      } else {
+        return this.placeholder;
+      }
+    },
     internalValue: {
       get() {
         return this.dataValue;
       },
       set(val) {
         const childItems = this.dropdownItems();
-        let selectedChild;
+
         for (let index in childItems) {
           let child = childItems[index];
           let selected = child.value === val;
           child.internalSelected = selected;
 
           if (selected) {
-            selectedChild = child;
+            this.selectedChild = child;
           }
-        }
-        if (selectedChild) {
-          this.$refs.valueContent.innerHTML = selectedChild.internalContent;
-        } else {
-          this.$refs.valueContent.innerHTML = this.placeholder;
         }
 
         if (this.dataValue !== val) {
@@ -277,8 +296,13 @@ export default {
           this.$el.focus();
         }
 
-        if (ev.target.classList.contains('bx--dropdown-link')) {
-          const targetItemEl = ev.target.parentNode;
+        let target = ev.target;
+        while (!target.classList.contains('bx--dropdown-link') && this.$refs.droplist.contains(target)) {
+          target = target.parentNode; // try next one up
+        }
+
+        if (target.classList.contains('bx--dropdown-link')) {
+          const targetItemEl = target.parentNode;
           const newValue = targetItemEl.getAttribute('data-value');
 
           this.internalValue = newValue;

@@ -6,7 +6,7 @@
         :label="`${pageSizesLabel}`"
         inline
         ref="pageSizeSelect"
-        @input="onPageSizeChange"
+        @change="onPageSizeChange"
         :value="`${pageSizeValue}`"
       >
         <cv-select-option
@@ -31,8 +31,9 @@
         inline
         hideLabel
         ref="pageSelect"
-        @input="onPageChange"
+        @change="onPageChange"
         :value="`${pageValue}`"
+        v-if="numberOfItems !== Infinity"
       >
         <cv-select-option
           v-for="pageNumber in pages"
@@ -123,11 +124,14 @@ export default {
   name: 'CvPagination',
   components: { CvSelect, CvSelectOption, CaretLeft16, CaretRight16 },
   props: {
+    backwardsButtonDisabled: Boolean,
+    forwardsButtonDisabled: Boolean,
     backwardText: { type: String, default: 'Prev page' },
     forwardText: { type: String, default: 'Next page' },
     pageNumberLabel: { type: String, default: 'Page number:' },
     pageSizesLabel: { type: String, default: 'Items per page:' },
     numberOfItems: { type: Number, default: Infinity },
+    actualItemsOnPage: { type: Number, default: Infinity },
     page: Number,
     pageSizes: { type: Array, default: () => [10, 20, 30, 40, 50] },
   },
@@ -161,7 +165,9 @@ export default {
       this.pageValue = newPageValue(this.page, this.pageCount);
       this.firstItem = newFirstItem(this.pageValue, this.pageSizeValue);
     },
-    pageSizes() {
+    pageSizes(a, b) {
+      if (!a.some(item => !b.includes(item))) return; // /possible issue when pageSizes defined in DOM
+
       this.pageSizeValue = newPageSizeValue(this.pageSizes);
       this.pageCount = newPageCount(this.numberOfItems, this.pageSizeValue);
       this.pages = newPagesArray(this.pageCount);
@@ -172,10 +178,10 @@ export default {
   },
   computed: {
     noWayBack() {
-      return this.pageValue === 1;
+      return this.backwardsButtonDisabled || this.pageValue === 1;
     },
     noWayForward() {
-      return this.pageValue === this.pageCount;
+      return this.forwardsButtonDisabled || this.pageValue === this.pageCount;
     },
     ofNPagesProps() {
       return {
@@ -189,12 +195,15 @@ export default {
       if (items !== Infinity) {
         return `of ${pages} pages`;
       }
-      return '';
+      return `Page ${this.pageValue}`;
     },
     rangeProps() {
       return {
         start: Math.min(this.firstItem, this.numberOfItems),
-        end: Math.min(this.firstItem + parseInt(this.pageSizeValue, 10) - 1, this.numberOfItems),
+        end: Math.min(
+          this.firstItem + Math.min(parseInt(this.pageSizeValue, 10), this.actualItemsOnPage) - 1,
+          this.numberOfItems
+        ),
         items: this.numberOfItems,
       };
     },

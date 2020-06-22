@@ -11,7 +11,7 @@
     @keydown.esc.prevent="onEsc"
     @click.self="onExternalClick"
   >
-    <div class="bx--modal-container" ref="modalDialog">
+    <div class="bx--modal-container" :class="modalClasses" ref="modalDialog">
       <div
         class="cv-modal__before-content"
         ref="beforeContent"
@@ -20,24 +20,26 @@
         @focus="focusBeforeContent"
       />
       <div class="bx--modal-header">
-        <h4 class="bx--modal-header__label" v-if="hasHeaderLabel">
-          <slot name="label">label (Optional)</slot>
-        </h4>
-        <h2 class="bx--modal-header__heading">
-          <slot name="title">Modal Title</slot>
-        </h2>
-        <button class="bx--modal-close" type="button" @click="onClose" ref="close">
+        <p class="bx--modal-header__label">
+          <slot name="label"></slot>
+        </p>
+        <p class="bx--modal-header__heading">
+          <slot name="title">
+            Modal Title
+          </slot>
+        </p>
+        <button class="bx--modal-close" type="button" @click="onClose" ref="close" :aria-label="closeAriaLabel">
           <Close16 class="bx--modal-close__icon" />
         </button>
       </div>
 
-      <div class="bx--modal-content" ref="content" :tabindex="scrollable ? 0 : undefined">
-        <slot name="content">
-          <p>
-            Passive modal notifications should only appear if there is an action the user needs to address immediately.
-            Passive modal notifications are persistent on the screen.
-          </p>
-        </slot>
+      <div
+        class="bx--modal-content"
+        :class="{ 'bx--modal-content--with-form': hasFormContent }"
+        ref="content"
+        :tabindex="scrollable ? 0 : undefined"
+      >
+        <slot name="content"></slot>
       </div>
 
       <div class="bx--modal-footer" v-if="hasFooter">
@@ -79,6 +81,7 @@ export default {
     Close16,
   },
   props: {
+    closeAriaLabel: { type: String, default: 'Close modal' },
     kind: {
       type: String,
       default: '',
@@ -87,6 +90,8 @@ export default {
     autoHideOff: Boolean,
     visible: Boolean,
     primaryButtonDisabled: Boolean,
+    size: String,
+    hasFormContent: Boolean,
   },
   data() {
     return {
@@ -126,6 +131,19 @@ export default {
     },
     secondaryKind() {
       return 'secondary';
+    },
+    modalClasses() {
+      const frontBit = 'bx--modal-container--';
+      switch (this.size) {
+        case 'xs':
+          return `${frontBit}xs`;
+        case 'small':
+          return `${frontBit}sm`;
+        case 'large':
+          return `${frontBit}lg`;
+        default:
+          return '';
+      }
     },
   },
   model: {
