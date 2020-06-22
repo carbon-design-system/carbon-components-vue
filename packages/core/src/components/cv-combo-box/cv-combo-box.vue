@@ -17,7 +17,7 @@
         'bx--combo-box--disabled bx--list-box--disabled': disabled,
       }"
       :data-invalid="isInvalid"
-      v-bind="$attr"
+      v-bind="$attrs"
       @keydown.down.prevent="onDown"
       @keydown.up.prevent="onUp"
       @keydown.enter.prevent="onEnter"
