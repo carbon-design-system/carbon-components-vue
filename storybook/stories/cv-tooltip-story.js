@@ -96,6 +96,7 @@ for (const story of storySet) {
 
       const templateViewString = `
     <sv-template-view
+      ref="templateView"
       sv-margin
       sv-source='${templateString.trim()}'
       sv-position="center"
@@ -114,10 +115,10 @@ for (const story of storySet) {
         props: settings.props,
         methods: {
           show() {
-            this.$children[0].$children[0].$children[0].show();
+            this.$refs.templateView.$slots.component[0].componentInstance.show();
           },
           hide() {
-            this.$children[0].$children[0].$children[0].hide();
+            this.$refs.templateView.$slots.component[0].componentInstance.hide();
           },
         },
       };

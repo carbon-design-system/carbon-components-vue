@@ -134,6 +134,7 @@ for (const story of storySet) {
       const templateViewString = `
     <sv-template-view
       sv-margin
+      ref="templateView"
       :sv-alt-back="this.$options.propsData.theme !== 'light'"
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
@@ -143,6 +144,7 @@ for (const story of storySet) {
             <input type="text" v-model="modelValue" />
           </label>
         </div>
+        <button @click="focus">Call focus method on component</button>
       </template>
     </sv-template-view>
   `;
@@ -158,6 +160,9 @@ for (const story of storySet) {
         props: settings.props,
         methods: {
           onInput: action('cv-text-input - input event'),
+          focus() {
+            this.$refs.templateView.$slots.component[0].componentInstance.focus();
+          },
         },
       };
     },
