@@ -1,5 +1,5 @@
 <template>
-  <form class="cv-form bx--form">
+  <form class="cv-form bx--form" v-on="$listeners">
     <slot></slot>
   </form>
 </template>
