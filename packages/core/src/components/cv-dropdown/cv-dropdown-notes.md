@@ -24,6 +24,10 @@ https://www.carbondesignsystem.com/components/dropdown/code
 - up - diretction of dropdown
 - value - string matching value of one of the options or ''
 
+## Methods
+
+Focus - sets focus to the text dropdown
+
 ### cv-dropdown-item
 
 - value - The value that will be returned upon selection of the dropdown item by users

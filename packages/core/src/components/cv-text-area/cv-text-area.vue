@@ -22,6 +22,7 @@
         v-bind="$attrs"
         :value="value"
         v-on="inputListeners"
+        ref="textarea"
       ></textarea>
     </div>
     <div class="bx--form-requirement" v-if="isInvalid">
@@ -74,6 +75,11 @@ export default {
       // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
       this.isInvalid = !!(this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length));
       this.isHelper = !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
+    },
+    focus() {
+      this.$nextTick(() => {
+        this.$refs.textarea.focus();
+      });
     },
   },
 };

@@ -144,6 +144,7 @@ for (const story of storySet) {
       const templateViewString = `
   <sv-template-view
     sv-margin
+    ref="templateView"
     :sv-alt-back="this.$options.propsData.theme !== 'light'"
     sv-source='${templateString.trim()}'>
     <template slot="component">${templateString}</template>
@@ -159,6 +160,7 @@ for (const story of storySet) {
           </select>
         </span>
       </div>
+      <button @click="focus">Call focus method on component</button>
     </template>
   </sv-template-view>
   `;
@@ -177,6 +179,9 @@ for (const story of storySet) {
         },
         methods: {
           actionChange: action('CV Dropdown - change'),
+          focus() {
+            this.$refs.templateView.$slots.component[0].componentInstance.focus();
+          },
         },
         template: templateViewString,
         watch: {

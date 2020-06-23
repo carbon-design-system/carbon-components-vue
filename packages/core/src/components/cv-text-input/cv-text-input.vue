@@ -125,6 +125,11 @@ export default {
         this.$refs.input.value = currentValue;
       });
     },
+    focus() {
+      this.$nextTick(() => {
+        this.$refs.input.focus();
+      });
+    },
   },
 };
 </script>
