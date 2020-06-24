@@ -10,7 +10,7 @@
     <button
       type="button"
       :class="`${carbonPrefix}--accordion__heading`"
-      :aria-expanded="`${dataOpen}`"
+      :aria-expanded="dataOpen ? 'true' : 'false'"
       :aria-controls="uid"
       @click="toggle"
     >

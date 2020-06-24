@@ -22,7 +22,7 @@
       },
     ]"
     :data-target="contentSelector"
-    :aria-selected="`${dataSelected}`"
+    :aria-selected="dataSelected ? 'true' : 'false'"
     @click="open"
   >
     <CvSvg v-if="icon" :svg="icon" class="bx--content-switcher__icon" height="16" width="16" />

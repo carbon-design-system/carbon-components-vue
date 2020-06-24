@@ -4,7 +4,7 @@
       <slot name="label"></slot>
 
       <button
-        :aria-expanded="dataVisible"
+        :aria-expanded="dataVisible ? 'true' : 'false'"
         :aria-labelledby="`${uid}-label`"
         class="bx--tooltip__trigger"
         :aria-controls="`${uid}`"

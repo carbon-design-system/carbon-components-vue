@@ -7,7 +7,7 @@
       'bx--side-nav--collapsed': !panelExpanded && fixed,
       'bx--side-nav--ux': isChildOfHeader,
     }"
-    :aria-hidden="!panelExpanded && !fixed"
+    :aria-hidden="!panelExpanded && !fixed ? 'true' : 'false'"
     :id="id"
     @focusout="onFocusout"
     @mousedown="onMouseDown"

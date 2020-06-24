@@ -6,7 +6,7 @@
     type="button"
     aria-haspopup="true"
     :aria-controls="ariaControls"
-    :aria-expanded="active"
+    :aria-expanded="active ? 'true' : 'false'"
     @click="gaToggle"
     @focusout="gaFocusout"
   >

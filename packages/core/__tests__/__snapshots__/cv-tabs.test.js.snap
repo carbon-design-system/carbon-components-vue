@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CvTab matches with disabled and selected 1`] = `<div id="an-id" role="tabpanel" aria-labelledby="an-id-link" class="cv-tab"></div>`;
+exports[`CvTab matches with disabled and selected 1`] = `<div id="an-id" role="tabpanel" aria-labelledby="an-id-link" aria-hidden="false" class="cv-tab"></div>`;
 
 exports[`CvTab matches with slotted content 1`] = `
 <div id="an-id" role="tabpanel" aria-labelledby="an-id-link" aria-hidden="true" hidden="hidden" class="cv-tab">
