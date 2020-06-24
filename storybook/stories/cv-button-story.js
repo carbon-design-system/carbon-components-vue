@@ -11,7 +11,10 @@ import { CvButton, CvIconButton, CvButtonSkeleton, CvButtonSet } from '../../pac
 
 const storiesDefault = storiesOf('Components/CvButton', module);
 // const storiesExperimental = storiesOf('Experimental/CvButton', module);
-const exampleIconPath = require('../../packages/core/src/assets/images/example-icons.svg');
+import exampleIconSvg from '../../packages/core/src/assets/images/example-icon-svg.js';
+const exampleIconSvgString = exampleIconSvg.exampleSvgString;
+import exampleIconPathSymbol from '../../packages/core/src/assets/images/example-icons.svg';
+import exampleIconPathSvg from '../../packages/core/src/assets/images/example-icon.svg';
 import AddFilled16 from '@carbon/icons-vue/es/add--filled/16';
 
 let preKnobs = {
@@ -120,12 +123,32 @@ let variants = [
     excludes: ['iconAlways'],
   },
   {
-    name: 'icon as path',
+    name: 'icon as SVG path',
     excludes: ['size', 'disabled', 'icon', 'iconHref', 'iconAlways'],
     extra: {
       icon: {
         group: 'attr',
-        value: `icon="${exampleIconPath}#icon--add--solid"`,
+        value: `icon="${exampleIconPathSvg}"`,
+      },
+    },
+  },
+  {
+    name: 'icon as SVG symbol path',
+    excludes: ['size', 'disabled', 'icon', 'iconHref', 'iconAlways'],
+    extra: {
+      icon: {
+        group: 'attr',
+        value: `icon="${exampleIconPathSymbol}#icon--add--solid"`,
+      },
+    },
+  },
+  {
+    name: 'icon as SVG',
+    excludes: ['size', 'disabled', 'icon', 'iconHref', 'iconAlways'],
+    extra: {
+      icon: {
+        group: 'attr',
+        value: `:icon="exampleIconSvgString"`,
       },
     },
   },
@@ -157,6 +180,12 @@ for (const story of storySet) {
         sv-margin
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>
+        <template slot="other">
+          <p>NOTE: Until SVG2 using a non-symbol SVG path with use does not work. Using img tags has styling issues.</p>
+          <br />
+          <p>Svg String</p>
+          <p v-if="exampleIconSvgString" v-text="exampleIconSvgString" />
+        </template>
       </sv-template-view>
     `;
 
@@ -168,6 +197,9 @@ for (const story of storySet) {
         },
         template: templateViewString,
         props: settings.props,
+        data() {
+          return { exampleIconSvgString: story.name === 'icon as SVG' ? exampleIconSvgString : '' };
+        },
       };
     },
     {
@@ -203,6 +235,9 @@ for (const story of storySet) {
         sv-margin
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>
+        <template slot="other">
+          <p>NOTE: Until SVG2 using a non-symbol SVG path with use does not work. Using img tags has styling issues.</p>
+        </template>
       </sv-template-view>
     `;
 
