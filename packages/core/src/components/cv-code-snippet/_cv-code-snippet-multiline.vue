@@ -1,21 +1,23 @@
 <template>
-  <div
-    class="cv-code-snippet-multiline bx--snippet bx--snippet--multi"
-    :class="{ 'bx--snippet--expand': expanded }"
-    data-code-snippet
-  >
-    <div class="bx--snippet-container">
+  <div class="cv-code-snippet-multiline" :class="snippetClasses" data-code-snippet>
+    <div :class="`${carbonPrefix}--snippet-container`">
       <pre>
         <slot></slot>
       </pre>
     </div>
     <cv-feedback-button :feedback="copyFeedback" :aria-label="feedbackAriaLabel" @click="$emit('copy-code')">
-      <Copy16 class="bx--snippet__icon" />
+      <Copy16 :class="`${carbonPrefix}--snippet__icon`" />
     </cv-feedback-button>
 
-    <cv-button type="button" kind="ghost" size="small" class="bx--snippet-btn--expand" @click="toggleExpand">
-      <span class="bx--snippet-btn--text">{{ expandButtonText }}</span>
-      <ChevronDown16 class="bx--icon-chevron--down" />
+    <cv-button
+      type="button"
+      kind="ghost"
+      size="small"
+      :class="`${carbonPrefix}--snippet-btn--expand`"
+      @click="toggleExpand"
+    >
+      <span :class="`${carbonPrefix}--snippet-btn--text`">{{ expandButtonText }}</span>
+      <ChevronDown16 :class="`${carbonPrefix}--icon-chevron--down`" />
     </cv-button>
   </div>
 </template>
@@ -26,9 +28,12 @@ import CvButton from '../cv-button/cv-button';
 
 import Copy16 from '@carbon/icons-vue/es/copy/16';
 import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import themeMixin from '../../mixins/theme-mixin';
 
 export default {
   name: 'CvCodeSnippetMultiline',
+  mixins: [themeMixin, carbonPrefixMixin],
   components: {
     CvButton,
     CvFeedbackButton,
@@ -49,6 +54,16 @@ export default {
   computed: {
     expandButtonText() {
       return this.expanded ? this.lessText : this.moreText;
+    },
+    snippetClasses() {
+      const classes = [`${this.carbonPrefix}--snippet`, `${this.carbonPrefix}--snippet--multi`];
+      if (this.expanded) {
+        classes.push(`${this.carbonPrefix}--snippet--expand`);
+      }
+      if (this.theme === 'light') {
+        classes.push(`${this.carbonPrefix}--snippet--light`);
+      }
+      return classes.join(' ');
     },
   },
   methods: {

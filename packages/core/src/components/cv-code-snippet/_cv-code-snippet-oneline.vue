@@ -1,23 +1,25 @@
 <template>
-  <div class="cv-code-snippet-oneline bx--snippet bx--snippet--single">
-    <div class="bx--snippet-container">
+  <div class="cv-code-snippet-oneline" :class="snippetClasses">
+    <div :class="`${carbonPrefix}--snippet-container`">
       <pre>
         <slot></slot>
       </pre>
     </div>
     <cv-feedback-button :feedback="copyFeedback" :aria-label="feedbackAriaLabel" @click="$emit('copy-code')">
-      <Copy16 class="bx--snippet__icon" />
+      <Copy16 :class="`${carbonPrefix}--snippet__icon`" />
     </cv-feedback-button>
   </div>
 </template>
 
 <script>
+import themeMixin from '../../mixins/theme-mixin';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 import CvFeedbackButton from '../cv-feedback-button/_cv-feedback-button';
-
 import Copy16 from '@carbon/icons-vue/es/copy/16';
 
 export default {
   name: 'CvCodeSnippetOneline',
+  mixins: [themeMixin, carbonPrefixMixin],
   components: {
     CvFeedbackButton,
     Copy16,
@@ -25,6 +27,15 @@ export default {
   props: {
     copyFeedback: String,
     feedbackAriaLabel: String,
+  },
+  computed: {
+    snippetClasses() {
+      const classes = [`${this.carbonPrefix}--snippet`, `${this.carbonPrefix}--snippet--single`];
+      if (this.theme === 'light') {
+        classes.push(`${this.carbonPrefix}--snippet--light`);
+      }
+      return classes.join(' ');
+    },
   },
 };
 </script>
