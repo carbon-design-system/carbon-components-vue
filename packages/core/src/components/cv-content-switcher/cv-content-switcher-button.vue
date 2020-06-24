@@ -25,10 +25,7 @@
     :aria-selected="`${dataSelected}`"
     @click="open"
   >
-    <component v-if="typeof icon === 'object'" :is="icon" class="bx--content-switcher__icon" />
-    <svg v-if="typeof icon === 'string'" class="bx--content-switcher__icon" height="16" width="16">
-      <use :href="icon" />
-    </svg>
+    <CvSvg v-if="icon" :svg="icon" class="bx--content-switcher__icon" height="16" width="16" />
     <span class="bx--content-switcher__label">
       <slot></slot>
     </span>
@@ -37,10 +34,12 @@
 
 <script>
 import uidMixin from '../../mixins/uid-mixin';
+import CvSvg from '../cv-svg/_cv-svg';
 
 export default {
   name: 'CvContentSwitcherButton',
   mixins: [uidMixin],
+  components: { CvSvg },
   props: {
     contentSelector: { type: String, default: undefined },
     icon: {
