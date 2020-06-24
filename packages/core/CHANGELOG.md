@@ -1,3 +1,13 @@
+# Changelog 2.28.0
+
+- chore: added carbonPrefix to inline-loading, link, number input, breadcrumb and checkbox
+- fix: combobox typoe v-bind="$attr" -> v-bind="$attrs"
+- fix: add \$listeners to CvForm to allow @submit
+- fix: return focus on dropdown to dropdown component after item click
+- feat: add focus methods to CvDropdown, CvTextInput, CvTextArea
+- fix: improvve SVG icon support in buttons, now possible to specify component (e.g. @carbon/icons-vue), SVG path, SVG symbol path or raw SVG. NOTE: Until SVG2 using SVG path does not style.
+- fix: aria-hidden, aria-selected and aria-expanded false values. These do not default to false on undefined. Instead undefined means not applicable, false as a result implies true is possible.
+
 # Changelog 2.27.1
 
 - fix: lower node requirement to 10
