@@ -34,7 +34,7 @@
             'bx--tabs__nav-item--disabled': disabledTabs.indexOf(tab.uid) !== -1,
           }"
           role="tab"
-          :aria-selected="selectedId == tab.uid"
+          :aria-selected="selectedId == tab.uid ? 'true' : 'false'"
           :aria-disabled="disabledTabs.indexOf(tab.uid) !== -1"
         >
           <a

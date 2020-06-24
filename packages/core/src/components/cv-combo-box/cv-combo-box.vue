@@ -28,7 +28,7 @@
       <div
         role="button"
         aria-haspopup="true"
-        :aria-expanded="open"
+        :aria-expanded="open ? 'true' : 'false'"
         :aria-owns="uid"
         :aria-controls="uid"
         class="bx--list-box__field"
@@ -45,7 +45,7 @@
           aria-autocomplete="list"
           role="combobox"
           :aria-disabled="disabled"
-          :aria-expanded="open"
+          :aria-expanded="open ? 'true' : 'false'"
           autocomplete="off"
           :disabled="disabled"
           :placeholder="label"

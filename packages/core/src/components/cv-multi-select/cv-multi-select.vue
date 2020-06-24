@@ -43,7 +43,7 @@
       <div
         role="button"
         aria-haspopup="true"
-        :aria-expanded="open"
+        :aria-expanded="open ? 'true' : 'false'"
         :aria-owns="uid"
         :aria-controls="uid"
         class="bx--list-box__field"
@@ -71,7 +71,7 @@
             :aria-controls="uid"
             aria-autocomplete="list"
             role="combobox"
-            :aria-expanded="open"
+            :aria-expanded="open ? 'true' : 'false'"
             autocomplete="off"
             :placeholder="label"
             v-model="filter"

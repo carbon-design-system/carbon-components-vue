@@ -5,7 +5,7 @@
       :class="[tipClasses, { 'bx--overflow-menu--open': open }]"
       aria-haspopup
       type="button"
-      :aria-expanded="open"
+      :aria-expanded="open ? 'true' : 'false'"
       :aria-controls="`${uid}-menu`"
       :id="`${uid}-trigger`"
       ref="trigger"

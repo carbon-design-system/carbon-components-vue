@@ -2,7 +2,7 @@
   <div
     class="cv-header-panel bx--header-panel"
     :class="{ 'bx--header-panel--expanded': panelExpanded }"
-    :aria-hidden="!panelExpanded"
+    :aria-hidden="!panelExpanded ? 'true' : 'false'"
     :id="id"
     @focusout="onFocusout"
     @mousedown="onMouseDown"
