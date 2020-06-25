@@ -1,5 +1,11 @@
 <template>
-  <div :class="breadcrumbItemClasses" :aria-current="ariaCurrent">
+  <div
+    :class="[
+      `cv-breadcrumb-item ${carbonPrefix}--breadcrumb-item`,
+      { [`${carbonPrefix}--breadcrumb-item--current`]: activePage },
+    ]"
+    :aria-current="ariaCurrent"
+  >
     <slot></slot>
   </div>
 </template>
@@ -16,13 +22,6 @@ export default {
   computed: {
     activePage() {
       return this.active && this.ariaCurrent !== 'page';
-    },
-    breadcrumbItemClasses() {
-      const classes = [`cv-breadcrumb-item ${this.carbonPrefix}--breadcrumb-item`];
-      if (this.activePage) {
-        classes.push(`${this.carbonPrefix}--breadcrumb-item--current`);
-      }
-      return classes.join(' ');
     },
   },
 };

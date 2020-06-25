@@ -1,5 +1,5 @@
 <template>
-  <div class="cv-checkbox" :class="formItemClasses">
+  <div class="cv-checkbox" :class="[`${carbonPrefix}--checkbox-wrapper`, { [`${carbonPrefix}--form-item`]: formItem }]">
     <input
       ref="input"
       v-bind="$attrs"
@@ -14,12 +14,18 @@
       :id="uid"
     />
     <label
-      :class="labelClasses"
+      :class="[
+        `${carbonPrefix}--checkbox-label`,
+        {
+          [`${carbonPrefix}--label--disabled`]: $attrs.disabled !== undefined && this.$attrs.disabled,
+          [`${carbonPrefix}--checkbox-label__focus`]: hasFocus,
+        },
+      ]"
       :data-contained-checkbox-state="isChecked"
       :data-contained-checkbox-disabled="$attrs.disabled"
       :for="uid"
     >
-      <span :class="labelContentClasses">
+      <span :class="[`${carbonPrefix}--checkbox-label-text`, { [`${carbonPrefix}--visually-hidden`]: hideLabel }]">
         {{ label }}
       </span>
     </label>
@@ -54,32 +60,6 @@ export default {
       hasFocus: false,
       dataMixed: this.mixed,
     };
-  },
-  computed: {
-    formItemClasses() {
-      const classes = [`${this.carbonPrefix}--checkbox-wrapper`];
-      if (this.formItem) {
-        classes.push(`${this.carbonPrefix}--form-item`);
-      }
-      return classes;
-    },
-    labelClasses() {
-      const classes = [`${this.carbonPrefix}--checkbox-label`];
-      if (this.$attrs.disabled !== undefined && this.$attrs.disabled) {
-        classes.push(`${this.carbonPrefix}--label--disabled`);
-      }
-      if (this.hasFocus) {
-        classes.push(`${this.carbonPrefix}--checkbox-label__focus`);
-      }
-      return classes;
-    },
-    labelContentClasses() {
-      const classes = [`${this.carbonPrefix}--checkbox-label-text`];
-      if (this.hideLabel) {
-        classes.push(`${this.carbonPrefix}--visually-hidden`);
-      }
-      return classes;
-    },
   },
   methods: {
     onFocus() {

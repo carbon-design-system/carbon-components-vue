@@ -1,7 +1,11 @@
 <template>
   <cv-feedback-button
     class="cv-code-snippet-inline"
-    :class="snippetClasses"
+    :class="[
+      `${carbonPrefix}--snippet`,
+      `${carbonPrefix}--snippet--inline`,
+      { [`${carbonPrefix}--snippet--light`]: theme === 'light' },
+    ]"
     :feedback="copyFeedback"
     inline
     :aria-label="feedbackAriaLabel"
@@ -25,15 +29,6 @@ export default {
   props: {
     copyFeedback: String,
     feedbackAriaLabel: String,
-  },
-  computed: {
-    snippetClasses() {
-      const classes = [`${this.carbonPrefix}--snippet`, `${this.carbonPrefix}--snippet--inline`];
-      if (this.theme === 'light') {
-        classes.push(`${this.carbonPrefix}--snippet--light`);
-      }
-      return classes.join(' ');
-    },
   },
 };
 </script>

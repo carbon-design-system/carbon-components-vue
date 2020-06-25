@@ -1,6 +1,11 @@
 <template>
   <div data-inline-loading :class="`${carbonPrefix}--inline-loading`" role="alert" aria-live="assertive">
-    <div :class="animationClasses">
+    <div
+      :class="[
+        `${carbonPrefix}--inline-loading__animation`,
+        { [`${carbonPrefix}--loading--stop`]: internalState === STATES.ENDING },
+      ]"
+    >
       <div
         v-show="internalState === STATES.LOADING || internalState === STATES.ENDING"
         :class="`${carbonPrefix}--loading ${carbonPrefix}--loading--small`"
@@ -80,13 +85,6 @@ export default {
         default:
           return this.loadingText;
       }
-    },
-    animationClasses() {
-      const classes = [`${this.carbonPrefix}--inline-loading__animation`];
-      if (this.internalState === STATES.ENDING) {
-        classes.push(`${this.carbonPrefix}--loading--stop`);
-      }
-      return classes;
     },
   },
 };

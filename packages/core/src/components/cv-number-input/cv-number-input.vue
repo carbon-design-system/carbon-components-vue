@@ -1,6 +1,18 @@
 <template>
   <cv-wrapper :tag-type="formItem ? 'div' : ''" class="cv-number-input" :class="`${carbonPrefix}--form-item`">
-    <div data-numberinput :class="numberInputClasses" :data-invalid="isInvalid">
+    <div
+      data-numberinput
+      :class="[
+        `${carbonPrefix}--number`,
+        { [`${carbonPrefix}--number--light`]: theme === 'light' },
+        { [`${carbonPrefix}--number--helpertext`]: isHelper },
+        ,
+        { [`cv-number-input`]: !formItem },
+        ,
+        { [`${carbonPrefix}--number--mobile`]: mobile },
+      ]"
+      :data-invalid="isInvalid"
+    >
       <label :for="uid" :class="`${carbonPrefix}--label`">{{ label }}</label>
       <div :class="`${carbonPrefix}--form__helper-text`" v-if="isHelper">
         <slot name="helper-text">{{ helperText }}</slot>
@@ -131,24 +143,6 @@ export default {
     },
   },
   computed: {
-    numberInputClasses() {
-      const classes = [`${this.carbonPrefix}--number`];
-
-      if (this.theme === 'light') {
-        classes.push(`${this.carbonPrefix}--number--light`);
-      }
-      if (this.isHelper) {
-        classes.push(`${this.carbonPrefix}--number--helpertext`);
-      }
-      if (!this.formItem) {
-        classes.push(`cv-number-input`);
-      }
-      if (this.mobile) {
-        classes.push(`${this.carbonPrefix}--number--mobile`);
-      }
-
-      return classes;
-    },
     // Bind listeners at the component level to the embedded input element and
     // add our own input listener to service the v-model. See:
     // https://vuejs.org/v2/guide/components-custom-events.html#Customizing-Component-v-model

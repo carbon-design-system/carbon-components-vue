@@ -1,5 +1,12 @@
 <template>
-  <div class="cv-code-snippet-oneline" :class="snippetClasses">
+  <div
+    class="cv-code-snippet-oneline"
+    :class="[
+      `${carbonPrefix}--snippet`,
+      `${carbonPrefix}--snippet--single`,
+      { [`${carbonPrefix}--snippet--light`]: theme === 'light' },
+    ]"
+  >
     <div :class="`${carbonPrefix}--snippet-container`">
       <pre>
         <slot></slot>
@@ -27,15 +34,6 @@ export default {
   props: {
     copyFeedback: String,
     feedbackAriaLabel: String,
-  },
-  computed: {
-    snippetClasses() {
-      const classes = [`${this.carbonPrefix}--snippet`, `${this.carbonPrefix}--snippet--single`];
-      if (this.theme === 'light') {
-        classes.push(`${this.carbonPrefix}--snippet--light`);
-      }
-      return classes.join(' ');
-    },
   },
 };
 </script>

@@ -1,5 +1,13 @@
 <template>
-  <div class="cv-code-snippet-multiline" :class="snippetClasses" data-code-snippet>
+  <div
+    class="cv-code-snippet-multiline"
+    :class="[
+      `${carbonPrefix}--snippet`,
+      `${carbonPrefix}--snippet--multi`,
+      { [`${carbonPrefix}--snippet--expand`]: expanded, [`${carbonPrefix}--snippet--light`]: theme === 'light' },
+    ]"
+    data-code-snippet
+  >
     <div :class="`${carbonPrefix}--snippet-container`">
       <pre>
         <slot></slot>
@@ -54,16 +62,6 @@ export default {
   computed: {
     expandButtonText() {
       return this.expanded ? this.lessText : this.moreText;
-    },
-    snippetClasses() {
-      const classes = [`${this.carbonPrefix}--snippet`, `${this.carbonPrefix}--snippet--multi`];
-      if (this.expanded) {
-        classes.push(`${this.carbonPrefix}--snippet--expand`);
-      }
-      if (this.theme === 'light') {
-        classes.push(`${this.carbonPrefix}--snippet--light`);
-      }
-      return classes.join(' ');
     },
   },
   methods: {
