@@ -3,7 +3,7 @@
     <input
       v-bind="$attrs"
       v-on="inputListeners"
-      :class="`${carbonPrefix}--toggle-input`"
+      :class="[`${carbonPrefix}--toggle-input`, { 'bx--toggle-input--small': small }]"
       type="checkbox"
       :id="uid"
       :checked="isChecked === true"
