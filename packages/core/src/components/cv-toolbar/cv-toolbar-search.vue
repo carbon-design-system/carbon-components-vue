@@ -14,9 +14,11 @@
 
 <script>
 import CvSearch from '../cv-search/cv-search';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvToolbarSearch',
+  mixins: [carbonPrefixMixin],
   components: {
     CvSearch,
   },
@@ -27,11 +29,11 @@ export default {
   methods: {
     onBlur(ev) {
       if (!this.$el.contains(ev.target)) {
-        this.$el.classList.remove('bx--toolbar-search--active');
+        this.$el.classList.remove(`${this.carbonPrefix}--toolbar-search--active`);
       }
     },
     onFocus() {
-      this.$el.classList.add('bx--toolbar-search--active');
+      this.$el.classList.add(`${this.carbonPrefix}--toolbar-search--active`);
     },
   },
 };

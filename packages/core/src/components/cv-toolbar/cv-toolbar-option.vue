@@ -1,11 +1,16 @@
 <template>
-  <li class="cv-toolbar-option bx--toolbar-menu__option" @keydown.esc.prevent="$parent.$emit('cv:close')">
+  <li
+    :class="`cv-toolbar-option ${carbonPrefix}--toolbar-menu__option`"
+    @keydown.esc.prevent="$parent.$emit('cv:close')"
+  >
     <slot></slot>
   </li>
 </template>
 
 <script>
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 export default {
   name: 'CvToolbarOption',
+  mixins: [carbonPrefixMixin],
 };
 </script>

@@ -1,12 +1,16 @@
 <template>
   <nav
-    class="cv-side-nav bx--side-nav bx--side-nav__navigation"
-    :class="{
-      'bx--side-nav--expanded': panelExpanded,
-      'bx--side-nav--rail': rail,
-      'bx--side-nav--collapsed': !panelExpanded && fixed,
-      'bx--side-nav--ux': isChildOfHeader,
-    }"
+    :class="[
+      `cv-side-nav`,
+      `${carbonPrefix}--side-nav`,
+      `${carbonPrefix}--side-nav__navigation`,
+      {
+        [`${carbonPrefix}--side-nav--expanded`]: panelExpanded,
+        [`${carbonPrefix}--side-nav--rail`]: rail,
+        [`${carbonPrefix}--side-nav--collapsed`]: !panelExpanded && fixed,
+        [`${carbonPrefix}--side-nav--ux`]: isChildOfHeader,
+      },
+    ]"
     :aria-hidden="!panelExpanded && !fixed ? 'true' : 'false'"
     :id="id"
     @focusout="onFocusout"
@@ -24,10 +28,12 @@
 
 <script>
 import CvSideNavFooter from './_cv-side-nav-footer';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvSideNav',
   components: { CvSideNavFooter },
+  mixins: [carbonPrefixMixin],
   props: {
     expanded: Boolean,
     fixed: Boolean,

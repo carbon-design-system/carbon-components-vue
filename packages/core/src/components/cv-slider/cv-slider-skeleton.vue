@@ -1,20 +1,22 @@
 <template>
-  <div class="cv-slider bx--form-item">
-    <label class="bx--label bx--skeleton"></label>
-    <div class="bx--slider-container bx--skeleton">
-      <span class="bx--slider__range-label"></span>
-      <div class="bx--slider">
-        <div class="bx--slider__track"></div>
-        <div class="bx--slider__filled-track"></div>
-        <div class="bx--slider__thumb"></div>
+  <div :class="`cv-slider ${carbonPrefix}--form-item`">
+    <label :class="`${carbonPrefix}--label ${carbonPrefix}--skeleton`"></label>
+    <div :class="`${carbonPrefix}--slider-container ${carbonPrefix}--skeleton`">
+      <span :class="`${carbonPrefix}--slider__range-label`"></span>
+      <div :class="`${carbonPrefix}--slider`">
+        <div :class="`${carbonPrefix}--slider__track`"></div>
+        <div :class="`${carbonPrefix}--slider__filled-track`"></div>
+        <div :class="`${carbonPrefix}--slider__thumb`"></div>
       </div>
-      <span class="bx--slider__range-label"></span>
+      <span :class="`${carbonPrefix}--slider__range-label`"></span>
     </div>
   </div>
 </template>
 
 <script>
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 export default {
   name: 'CvSliderSkeleton',
+  mixins: [carbonPrefixMixin],
 };
 </script>

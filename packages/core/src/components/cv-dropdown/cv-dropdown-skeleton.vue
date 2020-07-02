@@ -1,10 +1,18 @@
 <template>
-  <div disabled class="bx--list-box bx--dropdown bx--skeleton" :class="{ 'bx--list-box--inline': inline }"></div>
+  <div
+    disabled
+    :class="[
+      `${carbonPrefix}--list-box ${carbonPrefix}--dropdown ${carbonPrefix}--skeleton`,
+      { [`${carbonPrefix}--list-box--inline`]: inline },
+    ]"
+  ></div>
 </template>
 
 <script>
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 export default {
   name: 'CvDropdownSkeleton',
+  mixins: [carbonPrefixMixin],
   props: {
     inline: { type: Boolean, default: false },
   },

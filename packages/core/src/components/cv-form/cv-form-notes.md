@@ -33,7 +33,7 @@ Used inside a form to provide positional styling.
 
 ```html
 <cv-form-item>
-  <label for="text-input-3" class="bx--label">Text Input label</label>
-  <input id="text-input-3" type="text" class="bx--text-input" placeholder="Optional placeholder text" />
+  <label for="text-input-3" :class="`bx--label`">Text Input label</label>
+  <input id="text-input-3" type="text" :class="`bx--text-input`" placeholder="Optional placeholder text" />
 </cv-form-item>
 ```

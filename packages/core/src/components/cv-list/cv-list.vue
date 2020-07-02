@@ -3,9 +3,9 @@
     :is="tagType"
     class="cv-list"
     :class="{
-      'bx--list--nested': nested,
-      'bx--list--ordered': internalOrdered,
-      'bx--list--unordered': !internalOrdered,
+      [`${carbonPrefix}--list--nested`]: nested,
+      [`${carbonPrefix}--list--ordered`]: internalOrdered,
+      [`${carbonPrefix}--list--unordered`]: !internalOrdered,
     }"
     :data-nested="nested"
   >
@@ -14,8 +14,10 @@
 </template>
 
 <script>
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 export default {
   name: 'CvList',
+  mixins: [carbonPrefixMixin],
   props: {
     ordered: { type: Boolean, default: undefined },
     nested: Boolean,

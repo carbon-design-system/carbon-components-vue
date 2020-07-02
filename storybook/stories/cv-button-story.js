@@ -120,11 +120,11 @@ let preKnobs = {
 let variants = [
   {
     name: 'default',
-    excludes: ['iconAlways'],
+    excludes: ['iconAlways', 'tipPosition', 'tipAlignment', 'label'],
   },
   {
     name: 'icon as SVG path',
-    excludes: ['size', 'disabled', 'icon', 'iconHref', 'iconAlways'],
+    excludes: ['size', 'disabled', 'icon', 'iconHref', 'iconAlways', 'tipPosition', 'tipAlignment', 'label'],
     extra: {
       icon: {
         group: 'attr',
@@ -134,7 +134,7 @@ let variants = [
   },
   {
     name: 'icon as SVG symbol path',
-    excludes: ['size', 'disabled', 'icon', 'iconHref', 'iconAlways'],
+    excludes: ['size', 'disabled', 'icon', 'iconHref', 'iconAlways', 'tipPosition', 'tipAlignment', 'label'],
     extra: {
       icon: {
         group: 'attr',
@@ -144,7 +144,7 @@ let variants = [
   },
   {
     name: 'icon as SVG',
-    excludes: ['size', 'disabled', 'icon', 'iconHref', 'iconAlways'],
+    excludes: ['size', 'disabled', 'icon', 'iconHref', 'iconAlways', 'tipPosition', 'tipAlignment', 'label'],
     extra: {
       icon: {
         group: 'attr',
@@ -154,7 +154,7 @@ let variants = [
   },
   {
     name: 'minimal',
-    excludes: ['size', 'disabled', 'icon', 'iconAlways'],
+    excludes: ['size', 'disabled', 'icon', 'iconAlways', 'tipPosition', 'tipAlignment', 'label'],
   },
 ];
 

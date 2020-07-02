@@ -1,6 +1,6 @@
 <template>
-  <fieldset class="cv-form-group bx--fieldset">
-    <legend class="bx--label">
+  <fieldset :class="`cv-form-group ${carbonPrefix}--fieldset`">
+    <legend :class="`${carbonPrefix}--label`">
       <slot name="label"></slot>
     </legend>
     <slot name="content"></slot>
@@ -8,7 +8,9 @@
 </template>
 
 <script>
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 export default {
   name: 'CvFormGroup',
+  mixins: [carbonPrefixMixin],
 };
 </script>

@@ -1,28 +1,27 @@
 <template>
   <div :style="tableStyle" class="cv-data-table">
-    <div class="bx--data-table-container">
-      <div v-if="hasTableHeader" class="bx--data-table-header">
-        <h4 class="bx--data-table-header__title" v-if="title">{{ title }}</h4>
-        <p v-if="isHelper" class="bx--data-table-header__description">
+    <div :class="`${carbonPrefix}--data-table-container`">
+      <div v-if="hasTableHeader" :class="`${carbonPrefix}--data-table-header`">
+        <h4 :class="`${carbonPrefix}--data-table-header__title`" v-if="title">{{ title }}</h4>
+        <p v-if="isHelper" :class="`${carbonPrefix}--data-table-header__description`">
           <slot name="helper-text">{{ helperText }}</slot>
         </p>
       </div>
 
-      <section v-if="hasToolbar" class="bx--table-toolbar">
+      <section v-if="hasToolbar" :class="`${carbonPrefix}--table-toolbar`">
         <div
           v-show="hasBatchActions"
-          class="bx--batch-actions"
-          :class="{ 'bx--batch-actions--active': batchActive }"
+          :class="[`${carbonPrefix}--batch-actions`, { [`${carbonPrefix}--batch-actions--active`]: batchActive }]"
           :aria-label="actionBarAriaLabel"
         >
-          <div class="bx--action-list">
+          <div :class="`${carbonPrefix}--action-list`">
             <slot name="batch-actions" />
-            <cv-button class="bx--batch-summary__cancel" size="small" @click="deselect">
-              {{ batchCancelLabel }}
-            </cv-button>
+            <cv-button :class="`${carbonPrefix}--batch-summary__cancel`" size="small" @click="deselect">{{
+              batchCancelLabel
+            }}</cv-button>
           </div>
-          <div class="bx--batch-summary">
-            <p class="bx--batch-summary__para">
+          <div :class="`${carbonPrefix}--batch-summary`">
+            <p :class="`${carbonPrefix}--batch-summary__para`">
               <span data-items-selected>
                 <slot name="items-selected" v-bind:scope="{ count: dataRowsSelected.length }"
                   >{{ dataRowsSelected.length }} items selected</slot
@@ -32,19 +31,19 @@
           </div>
         </div>
 
-        <div class="bx--toolbar-content">
+        <div :class="`${carbonPrefix}--toolbar-content`">
           <div
             v-if="$listeners.search"
             :class="{
-              'bx--toolbar-search-container-active': searchActive || searchValue.length > 0,
-              'bx--toolbar-search-container-persistent': !expandingSearch,
-              'bx--toolbar-search-container-expandable': expandingSearch,
+              [`${carbonPrefix}--toolbar-search-container-active`]: searchActive || searchValue.length > 0,
+              [`${carbonPrefix}--toolbar-search-container-persistent`]: !expandingSearch,
+              [`${carbonPrefix}--toolbar-search-container-expandable`]: expandingSearch,
             }"
             ref="searchContainer"
           >
-            <div data-search class="bx--search bx--search--sm" role="search">
+            <div data-search :class="`${carbonPrefix}--search ${carbonPrefix}--search--sm`" role="search">
               <div
-                class="bx--search-magnifier"
+                :class="`${carbonPrefix}--search-magnifier`"
                 tabindex="0"
                 @click="checkSearchExpand(true)"
                 @keydown.enter.prevent="checkSearchExpand(true)"
@@ -53,11 +52,11 @@
                 @blur="checkSearchFocus"
                 ref="magnifier"
               >
-                <Search16 class="bx--toolbar-action__icon" />
+                <Search16 :class="`${carbonPrefix}--toolbar-action__icon`" />
               </div>
-              <label :for="uid" class="bx--label">{{ searchLabel }}</label>
+              <label :for="uid" :class="`${carbonPrefix}--label`">{{ searchLabel }}</label>
               <input
-                class="bx--search-input"
+                :class="`${carbonPrefix}--search-input`"
                 type="text"
                 :id="uid"
                 role="search"
@@ -70,8 +69,10 @@
                 @keydown.esc.prevent="checkSearchExpand(false)"
               />
               <button
-                class="bx--search-close"
-                :class="{ 'bx--search-close--hidden': !clearSearchVisible }"
+                :class="[
+                  `${carbonPrefix}--search-close`,
+                  { [`${carbonPrefix}--search-close--hidden`]: !clearSearchVisible },
+                ]"
                 :title="searchClearLabel"
                 :aria-label="searchClearLabel"
                 @click="onClearClick"
@@ -85,25 +86,36 @@
         </div>
       </section>
 
-      <table class="bx--data-table" :class="modifierClasses">
+      <table
+        :class="[
+          `${carbonPrefix}--data-table`,
+          {
+            [`${carbonPrefix}--data-table--${rowSize} `]: !(rowSize.length === 0 || rowSize === 'standard'),
+            [`${carbonPrefix}--data-table--zebra `]: zebra,
+            [`${carbonPrefix}--data-table--no-border `]: borderless,
+            [`${carbonPrefix}--skeleton `]: skeleton,
+            [`${carbonPrefix}--data-table--sort `]: isSortable,
+          },
+        ]"
+      >
         <thead>
           <tr>
             <th
               v-if="hasExpandables"
-              class="bx--table-expand"
+              :class="`${carbonPrefix}--table-expand`"
               :data-previous-value="dataExpandAll ? 'collapsed' : 'expanded'"
             >
               <button
                 v-if="hasExpandAll"
-                class="bx--table-expand__button"
+                :class="`${carbonPrefix}--table-expand__button`"
                 @click="toggleExpandAll"
                 type="button"
                 :aria-label="dataExpandAll ? collapseAllAriaLabel : expandAllAriaLabel"
               >
-                <ChevronRight16 class="bx--table-expand__svg" />
+                <ChevronRight16 :class="`${carbonPrefix}--table-expand__svg`" />
               </button>
             </th>
-            <th v-if="hasBatchActions" class="bx--table-column-checkbox">
+            <th v-if="hasBatchActions" :class="`${carbonPrefix}--table-column-checkbox`">
               <cv-checkbox
                 :form-item="false"
                 value="headingCheck"
@@ -179,6 +191,7 @@ import uidMixin from '../../mixins/uid-mixin';
 import Search16 from '@carbon/icons-vue/es/search/16';
 import Close16 from '@carbon/icons-vue/es/close/16';
 import ChevronRight16 from '@carbon/icons-vue/es/chevron--right/16';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvDataTable',
@@ -194,7 +207,7 @@ export default {
     Close16,
     ChevronRight16,
   },
-  mixins: [uidMixin],
+  mixins: [uidMixin, carbonPrefixMixin],
   props: {
     actionBarAriaLabel: { type: String, default: 'Table Action Bar' },
     collapseAllAriaLabel: { type: String, default: 'Collapse all rows' },
@@ -315,15 +328,6 @@ export default {
       } else {
         return this.registeredRows.length;
       }
-    },
-    modifierClasses() {
-      const prefix = 'bx--data-table--';
-      const sizeClass = this.rowSize.length === 0 || this.rowSize === 'standard' ? '' : `${prefix}${this.rowSize} `;
-      const zebraClass = this.zebra ? `${prefix}zebra ` : '';
-      const borderlessClass = this.borderless ? `${prefix}no-border ` : '';
-      const skeletonClass = this.skeleton ? `bx--skeleton ` : '';
-      const sortableClass = this.isSortable ? `${prefix}sort ` : '';
-      return `${sizeClass}${zebraClass}${borderlessClass}${skeletonClass}${sortableClass}`.trim();
     },
     headingStyle() {
       return col => (typeof col === 'object' ? col.headingStyle : {});

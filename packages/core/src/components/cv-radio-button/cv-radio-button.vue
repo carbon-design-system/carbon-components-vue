@@ -1,18 +1,23 @@
 <template>
-  <div class="cv-radio-button bx--radio-button-wrapper" :class="{ 'bx--radio-button-wrapper--label-left': labelLeft }">
+  <div
+    :class="[
+      `cv-radio-button ${carbonPrefix}--radio-button-wrapper`,
+      { [`${carbonPrefix}--radio-button-wrapper--label-left`]: labelLeft },
+    ]"
+  >
     <input
       v-bind="$attrs"
       v-on="inputListeners"
       :id="uid"
       :checked="isChecked"
-      class="bx--radio-button"
+      :class="`${carbonPrefix}--radio-button`"
       ref="input"
       type="radio"
       :value="value"
     />
     <!-- symbol causes problem in codepen? -->
-    <label :for="uid" class="bx--radio-button__label">
-      <span class="bx--radio-button__appearance"></span>
+    <label :for="uid" :class="`${carbonPrefix}--radio-button__label`">
+      <span :class="`${carbonPrefix}--radio-button__appearance`"></span>
       {{ label }}
     </label>
   </div>
@@ -21,11 +26,12 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import radioMixin from '../../mixins/radio-mixin';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvRadioButton',
   inheritAttrs: false,
-  mixins: [uidMixin, radioMixin],
+  mixins: [uidMixin, radioMixin, carbonPrefixMixin],
   props: {
     labelLeft: Boolean,
   },

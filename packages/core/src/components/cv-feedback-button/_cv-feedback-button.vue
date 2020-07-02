@@ -5,19 +5,22 @@
     class="cv-feedback-button"
     v-bind="$attrs"
     data-copy-btn
-    :class="buttonClasses"
+    :class="{
+      [`${carbonPrefix}--copy-btn`]: !inline,
+      [`${carbonPrefix}--copy-btn--animating`]: feedbackPhase && feedbackPhase !== feedbackPhases.DEFAULT,
+      [`${carbonPrefix}--copy-btn--fade-in`]: feedbackPhase && feedbackPhase === feedbackPhases.FADE_IN,
+      [`${carbonPrefix}--copy-btn--fade-out`]: feedbackPhase && feedbackPhase === feedbackPhases.FADE_OUT,
+    }"
     @click="onClick"
     @animationend="onAnimationEnd"
   >
     <slot></slot>
-    <span :class="assistiveTextClasses">{{ feedback }}</span>
+    <span :class="`${carbonPrefix}--assistive-text ${carbonPrefix}--copy-btn__feedback`">{{ feedback }}</span>
   </button>
 </template>
 
 <script>
-const animationClass = 'bx--copy-btn--animating';
-const fadeInClass = 'bx--copy-btn--fade-in';
-const fadeOutClass = 'bx--copy-btn--fade-out';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 const feedbackPhases = {
   DEFAULT: 0,
   FADE_IN: 1,
@@ -26,6 +29,7 @@ const feedbackPhases = {
 };
 export default {
   name: 'cvFeedbackButton',
+  mixins: [carbonPrefixMixin],
   inheritAttrs: false,
   props: {
     ariaLabel: { type: String, default: 'Feedback button' },
@@ -33,31 +37,8 @@ export default {
     inline: Boolean,
     timeout: { type: Number, default: 2000 },
   },
-  computed: {
-    buttonClasses() {
-      const stdClasses = this.inline ? '' : 'bx--copy-btn';
-      let animationClasses;
-
-      switch (this.feedbackPhase) {
-        case feedbackPhases.FADE_IN:
-          animationClasses = ` ${animationClass} ${fadeInClass}`;
-          break;
-        case feedbackPhases.ACTIVE:
-          animationClasses = ` ${animationClass}`;
-          break;
-        case feedbackPhases.FADE_OUT:
-          animationClasses = ` ${animationClass} ${fadeOutClass}`;
-          break;
-        default:
-          animationClasses = '';
-          break;
-      }
-
-      return `${stdClasses}${animationClasses}`;
-    },
-    assistiveTextClasses() {
-      return `bx--assistive-text bx--copy-btn__feedback`;
-    },
+  created() {
+    this.feedbackPhases = feedbackPhases;
   },
   data() {
     return {

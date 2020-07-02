@@ -1,7 +1,7 @@
 <template>
-  <header class="cv-header bx--header" data-header>
+  <header :class="`cv-header ${carbonPrefix}--header`" data-header>
     <slot />
-    <div v-if="hasGlobalHeader" class="bx--header__global">
+    <div v-if="hasGlobalHeader" :class="`${carbonPrefix}--header__global`">
       <slot name="header-global" />
     </div>
     <slot name="left-panels" />
@@ -10,8 +10,10 @@
 </template>
 
 <script>
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 export default {
   name: 'CvHeader',
+  mixins: [carbonPrefixMixin],
   created() {
     // add these on created otherwise cv:mounted is too late.
     this.$on('cv:panel-control-mounted', this.onCvPanelControlMounted);

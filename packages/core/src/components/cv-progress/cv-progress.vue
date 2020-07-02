@@ -2,8 +2,7 @@
   <ul
     data-progress
     data-progress-current
-    class="cv-progress bx--progress"
-    :class="{ 'bx--progress--vertical': vertical }"
+    :class="[`cv-progress ${carbonPrefix}--progress`, { [`${carbonPrefix}--progress--vertical`]: vertical }]"
   >
     <slot>
       <cv-progress-step
@@ -19,9 +18,11 @@
 
 <script>
 import CvProgressStep from './cv-progress-step';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvProgress',
+  mixins: [carbonPrefixMixin],
   components: {
     CvProgressStep,
   },

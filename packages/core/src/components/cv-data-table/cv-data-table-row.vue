@@ -11,9 +11,13 @@
     >
       <slot />
     </cv-data-table-row-inner>
-    <tr v-if="dataExpandable" class="bx--expandable-row bx--expandable-row--hidden" data-child-row>
+    <tr
+      v-if="dataExpandable"
+      :class="`${carbonPrefix}--expandable-row ${carbonPrefix}--expandable-row--hidden`"
+      data-child-row
+    >
       <td colspan="999">
-        <div class="bx--child-row-inner-container">
+        <div :class="`${carbonPrefix}--child-row-inner-container`">
           <slot name="expandedContent" />
         </div>
       </td>
@@ -27,10 +31,11 @@
 <script>
 import CvDataTableRowInner from './_cv-data-table-row-inner';
 import uidMixin from '../../mixins/uid-mixin';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvDataTableRow',
-  mixins: [uidMixin],
+  mixins: [uidMixin, carbonPrefixMixin],
   components: { CvDataTableRowInner },
   props: {
     expanded: Boolean,

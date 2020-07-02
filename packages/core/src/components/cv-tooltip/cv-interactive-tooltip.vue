@@ -1,12 +1,12 @@
 <template>
   <div class="cv-interactive-tooltip">
-    <div :id="`${uid}-label`" class="bx--tooltip__label">
+    <div :id="`${uid}-label`" :class="`${carbonPrefix}--tooltip__label`">
       <slot name="label"></slot>
 
       <button
         :aria-expanded="dataVisible ? 'true' : 'false'"
         :aria-labelledby="`${uid}-label`"
-        class="bx--tooltip__trigger"
+        :class="`${carbonPrefix}--tooltip__trigger`"
         :aria-controls="`${uid}`"
         aria-haspopup="true"
         ref="trigger"
@@ -25,8 +25,7 @@
       :id="`${uid}`"
       aria-hidden="true"
       :data-floating-menu-direction="direction"
-      class="bx--tooltip"
-      :class="{ 'bx--tooltip--shown': dataVisible }"
+      :class="[`${carbonPrefix}--tooltip`, { [`${carbonPrefix}--tooltip--shown`]: dataVisible }]"
       ref="popup"
       role="dialog"
       :aria-describedby="`${uid}-body`"
@@ -43,8 +42,8 @@
         style="position: absolute; height: 1px; width: 1px; left: -9999px;"
         @focus="focusBeforeContent"
       />
-      <span class="bx--tooltip__caret"></span>
-      <div class="bx--tooltip__content">
+      <span :class="`${carbonPrefix}--tooltip__caret`"></span>
+      <div :class="`${carbonPrefix}--tooltip__content`">
         <slot name="content"></slot>
       </div>
       <div
@@ -61,10 +60,11 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import Information16 from '@carbon/icons-vue/es/information/16';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvInteractiveTooltip',
-  mixins: [uidMixin],
+  mixins: [uidMixin, carbonPrefixMixin],
   components: { Information16 },
   props: {
     direction: {

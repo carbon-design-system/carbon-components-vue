@@ -1,10 +1,15 @@
 <template>
   <button
-    class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y"
-    :class="`bx--tooltip--${direction} bx--tooltip--align-${alignment}`"
+    :class="[
+      `cv-tooltip`,
+      `${carbonPrefix}--tooltip__trigger`,
+      `${carbonPrefix}--tooltip--a11y`,
+      `${carbonPrefix}--tooltip--${direction}`,
+      `${carbonPrefix}--tooltip--align-${alignment}`,
+    ]"
     type="button"
   >
-    <span class="bx--assistive-text">{{ tip }}</span>
+    <span :class="`${carbonPrefix}--assistive-text`">{{ tip }}</span>
     <slot>
       <Information16 />
     </slot>
@@ -13,9 +18,11 @@
 
 <script>
 import Information16 from '@carbon/icons-vue/es/information/16';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvTooltip',
+  mixins: [carbonPrefixMixin],
   components: { Information16 },
   props: {
     alignment: { type: String, default: 'center', validator: val => ['start', 'center', 'end'].includes(val) },

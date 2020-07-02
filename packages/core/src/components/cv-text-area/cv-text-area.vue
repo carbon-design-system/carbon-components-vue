@@ -1,31 +1,36 @@
 <template>
-  <div class="cv-text-area bx--form-item">
+  <div :class="`cv-text-area ${carbonPrefix}--form-item`">
     <label
       :for="uid"
       :class="[
-        'bx--label',
+        `${carbonPrefix}--label`,
         {
-          'bx--label--disabled': $attrs.disabled !== undefined && $attrs.disabled,
+          [`${carbonPrefix}--label--disabled`]: $attrs.disabled !== undefined && $attrs.disabled,
         },
       ]"
       >{{ label }}</label
     >
-    <div v-if="isHelper" class="bx--form__helper-text" :class="{ 'bx--form__helper-text--disabled': $attrs.disabled }">
+    <div v-if="isHelper" :class="{ [`${carbonPrefix}--form__helper-text--disabled`]: $attrs.disabled }">
       <slot name="helper-text">{{ helperText }}</slot>
     </div>
-    <div class="bx--text-area__wrapper" :data-invalid="isInvalid">
-      <WarningFilled16 v-if="isInvalid" class="bx--text-area__invalid-icon" />
+    <div :class="`${carbonPrefix}--text-area__wrapper`" :data-invalid="isInvalid">
+      <WarningFilled16 v-if="isInvalid" :class="`${carbonPrefix}--text-area__invalid-icon`" />
       <textarea
         :id="uid"
-        class="bx--text-area"
-        :class="{ 'bx--text-area--light': theme === 'light', 'bx--text-area--invalid': isInvalid }"
+        :class="[
+          `${carbonPrefix}--text-area`,
+          {
+            [`${carbonPrefix}--text-area--light`]: theme === 'light',
+            [`${carbonPrefix}--text-area--invalid`]: isInvalid,
+          },
+        ]"
         v-bind="$attrs"
         :value="value"
         v-on="inputListeners"
         ref="textarea"
       ></textarea>
     </div>
-    <div class="bx--form-requirement" v-if="isInvalid">
+    <div :class="`${carbonPrefix}--form-requirement`" v-if="isInvalid">
       <slot name="invalid-message">{{ invalidMessage }}</slot>
     </div>
   </div>
@@ -35,10 +40,11 @@
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvTextArea',
-  mixins: [uidMixin, themeMixin],
+  mixins: [uidMixin, themeMixin, carbonPrefixMixin],
   inheritAttrs: false,
   components: { WarningFilled16 },
   props: {

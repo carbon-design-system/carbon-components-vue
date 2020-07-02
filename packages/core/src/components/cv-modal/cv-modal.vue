@@ -2,16 +2,24 @@
   <div
     data-modal
     :id="uid"
-    class="cv-modal bx--modal"
-    :class="{
-      'is-visible': dataVisible,
-      'bx--modal--danger': kind === 'danger',
-    }"
+    :class="[
+      `cv-modal ${carbonPrefix}--modal`,
+      {
+        'is-visible': dataVisible,
+        [`${carbonPrefix}--modal--danger`]: kind === 'danger',
+      },
+    ]"
     tabindex="-1"
     @keydown.esc.prevent="onEsc"
     @click.self="onExternalClick"
   >
-    <div class="bx--modal-container" :class="modalClasses" ref="modalDialog">
+    <div
+      :class="[
+        `${carbonPrefix}--modal-container`,
+        { [`${carbonPrefix}--modal-container--${internalSize}`]: internalSize },
+      ]"
+      ref="modalDialog"
+    >
       <div
         class="cv-modal__before-content"
         ref="beforeContent"
@@ -19,30 +27,33 @@
         style="position: absolute; height: 1px; width: 1px; left: -9999px;"
         @focus="focusBeforeContent"
       />
-      <div class="bx--modal-header">
-        <p class="bx--modal-header__label">
+      <div :class="`${carbonPrefix}--modal-header`">
+        <p :class="`${carbonPrefix}--modal-header__label`">
           <slot name="label"></slot>
         </p>
-        <p class="bx--modal-header__heading">
-          <slot name="title">
-            Modal Title
-          </slot>
+        <p :class="`${carbonPrefix}--modal-header__heading`">
+          <slot name="title">Modal Title</slot>
         </p>
-        <button class="bx--modal-close" type="button" @click="onClose" ref="close" :aria-label="closeAriaLabel">
-          <Close16 class="bx--modal-close__icon" />
+        <button
+          :class="`${carbonPrefix}--modal-close`"
+          type="button"
+          @click="onClose"
+          ref="close"
+          :aria-label="closeAriaLabel"
+        >
+          <Close16 :class="`${carbonPrefix}--modal-close__icon`" />
         </button>
       </div>
 
       <div
-        class="bx--modal-content"
-        :class="{ 'bx--modal-content--with-form': hasFormContent }"
+        :class="[`${carbonPrefix}--modal-content`, { [`${carbonPrefix}--modal-content--with-form`]: hasFormContent }]"
         ref="content"
         :tabindex="scrollable ? 0 : undefined"
       >
         <slot name="content"></slot>
       </div>
 
-      <div class="bx--modal-footer" v-if="hasFooter">
+      <div :class="`${carbonPrefix}--modal-footer`" v-if="hasFooter">
         <cv-button type="button" :kind="secondaryKind" @click="onSecondaryClick" v-if="hasSecondary" ref="secondary">
           <slot name="secondary-button">Secondary button</slot>
         </cv-button>
@@ -72,10 +83,11 @@
 import CvButton from '../cv-button/cv-button';
 import uidMixin from '../../mixins/uid-mixin';
 import Close16 from '@carbon/icons-vue/es/close/16';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvModal',
-  mixins: [uidMixin],
+  mixins: [uidMixin, carbonPrefixMixin],
   components: {
     CvButton,
     Close16,
@@ -132,15 +144,14 @@ export default {
     secondaryKind() {
       return 'secondary';
     },
-    modalClasses() {
-      const frontBit = 'bx--modal-container--';
+    internalSize() {
       switch (this.size) {
         case 'xs':
-          return `${frontBit}xs`;
+          return 'xs';
         case 'small':
-          return `${frontBit}sm`;
+          return 'sm';
         case 'large':
-          return `${frontBit}lg`;
+          return 'lg';
         default:
           return '';
       }
@@ -201,7 +212,7 @@ export default {
     },
     show() {
       // prevent body scrolling
-      document.body.classList.add('bx--body--with-modal-open');
+      document.body.classList.add(`${this.carbonPrefix}--body--with-modal-open`);
 
       this.$el.addEventListener('transitionend', this.onShown);
       this.dataVisible = true;
@@ -216,7 +227,7 @@ export default {
     },
     hide() {
       //restore any previous scrollability
-      document.body.classList.remove('bx--body--with-modal-open');
+      document.body.classList.remove(`${this.carbonPrefix}--body--with-modal-open`);
 
       this.dataVisible = false;
       this.$emit('modal-hidden');

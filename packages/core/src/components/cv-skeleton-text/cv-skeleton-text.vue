@@ -1,8 +1,7 @@
 <template>
   <div :style="{ width: width }">
     <p
-      class="bx--skeleton__text"
-      :class="{ 'bx--skeleton__heading': heading }"
+      :class="[`${carbonPrefix}--skeleton__text`, { [`${carbonPrefix}--skeleton__heading`]: heading }]"
       :style="{ width: line.width }"
       :key="index"
       v-for="(line, index) in lines"
@@ -11,8 +10,10 @@
 </template>
 
 <script>
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 export default {
   name: 'CvSkeletonText',
+  mixins: [carbonPrefixMixin],
   props: {
     width: { type: String, default: '100%' },
     heading: { type: Boolean, default: false },

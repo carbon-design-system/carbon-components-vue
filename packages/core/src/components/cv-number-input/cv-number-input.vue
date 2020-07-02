@@ -4,12 +4,12 @@
       data-numberinput
       :class="[
         `${carbonPrefix}--number`,
-        { [`${carbonPrefix}--number--light`]: theme === 'light' },
-        { [`${carbonPrefix}--number--helpertext`]: isHelper },
-        ,
-        { [`cv-number-input`]: !formItem },
-        ,
-        { [`${carbonPrefix}--number--mobile`]: mobile },
+        {
+          [`${carbonPrefix}--number--light`]: theme === 'light',
+          [`${carbonPrefix}--number--helpertext`]: isHelper,
+          [`cv-number-input`]: !formItem,
+          [`${carbonPrefix}--number--mobile`]: mobile,
+        },
       ]"
       :data-invalid="isInvalid"
     >

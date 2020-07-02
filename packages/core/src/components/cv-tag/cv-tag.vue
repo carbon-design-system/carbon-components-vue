@@ -1,11 +1,11 @@
 <template>
   <span
-    class="cv-tag bx--tag"
     :class="[
-      `bx--tag--${tagKind}`,
+      `cv-tag ${carbonPrefix}--tag`,
+      `${carbonPrefix}--tag--${tagKind}`,
       {
-        'bx--tag--filter': isFilter,
-        'bx--tag--disabled': disabled,
+        [`${carbonPrefix}--tag--filter`]: isFilter,
+        [`${carbonPrefix}--tag--disabled`]: disabled,
       },
     ]"
     :tabindex="!disabled ? 0 : undefined"
@@ -15,10 +15,10 @@
     @keydown.space.prevent
     @keyup.space.prevent="$emit('remove')"
   >
-    <span class="bx--tag__label">{{ label }}</span>
+    <span :class="`${carbonPrefix}--tag__label`">{{ label }}</span>
     <button
       v-if="isFilter"
-      class="bx--tag__close-icon"
+      :class="`${carbonPrefix}--tag__close-icon`"
       :aria-label="clearAriaLabel"
       @click.stop.prevent="onRemove"
       :disabled="disabled"
@@ -30,6 +30,7 @@
 
 <script>
 import Close16 from '@carbon/icons-vue/es/close/16';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 const tagKinds = [
   'red',
@@ -47,6 +48,7 @@ const tagKinds = [
 
 export default {
   name: 'CvTag',
+  mixins: [carbonPrefixMixin],
   components: { Close16 },
   props: {
     clearAriaLabel: { type: String, default: 'Clear filter' },
