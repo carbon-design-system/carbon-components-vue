@@ -11,9 +11,17 @@
     ]"
     @focusout="onFocusOut"
   >
-    <label v-if="title" :for="uid" :class="{ [`${carbonPrefix}--label--disabled`]: disabled }">{{ title }}</label>
+    <label
+      v-if="title"
+      :for="uid"
+      :class="[`${carbonPrefix}--label`, { [`${carbonPrefix}--label--disabled`]: disabled }]"
+      >{{ title }}</label
+    >
 
-    <div v-if="!inline && isHelper" :class="{ [`${carbonPrefix}--form__helper-text--disabled`]: disabled }">
+    <div
+      v-if="!inline && isHelper"
+      :class="[`${carbonPrefix}--form__helper-text`, { [`${carbonPrefix}--form__helper-text--disabled`]: disabled }]"
+    >
       <slot name="helper-text">{{ helperText }}</slot>
     </div>
 
@@ -108,7 +116,10 @@
         <div
           v-for="(item, index) in dataOptions"
           :key="`multi-select-${index}`"
-          :class="{ [`${carbonPrefix}--list-box__menu-item--highlighted`]: highlighted === item.value }"
+          :class="[
+            `${carbonPrefix}--list-box__menu-item`,
+            { [`${carbonPrefix}--list-box__menu-item--highlighted`]: highlighted === item.value },
+          ]"
           ref="option"
           @click.stop.prevent="onItemClick(item.value)"
           @mousemove="onMousemove(item.value)"

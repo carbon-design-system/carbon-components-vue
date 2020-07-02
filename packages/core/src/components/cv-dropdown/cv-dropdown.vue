@@ -24,13 +24,17 @@
       ]"
       :style="wrapperStyleOverride"
     >
-      <span v-if="label" :id="`${uid}-label`" :class="{ [`${carbonPrefix}--label--disabled`]: disabled }">{{
-        label
-      }}</span>
+      <span
+        v-if="label"
+        :id="`${uid}-label`"
+        :class="[`${carbonPrefix}--label`, { [`${carbonPrefix}--label--disabled`]: disabled }]"
+      >
+        {{ label }}
+      </span>
 
       <div
         v-if="!inline && isHelper"
-        :class="{ [`${carbonPrefix}--form__helper-text--disabled`]: disabled }"
+        :class="[`${carbonPrefix}--form__helper-text`, { [`${carbonPrefix}--form__helper-text--disabled`]: disabled }]"
         :aria-disabled="disabled"
       >
         <slot name="helper-text">{{ helperText }}</slot>

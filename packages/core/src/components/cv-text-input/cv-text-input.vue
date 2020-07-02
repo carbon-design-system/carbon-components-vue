@@ -10,7 +10,13 @@
       ]"
       >{{ label }}</label
     >
-    <div v-if="isHelper" :class="{ [`${carbonPrefix}--form__helper-text--disabled`]: $attrs.disabled }">
+    <div
+      v-if="isHelper"
+      :class="[
+        `${carbonPrefix}--form__helper-text`,
+        { [`${carbonPrefix}--form__helper-text--disabled`]: $attrs.disabled },
+      ]"
+    >
       <slot name="helper-text">{{ helperText }}</slot>
     </div>
     <div :class="`${carbonPrefix}--text-input__field-wrapper`" :data-invalid="isInvalid">
