@@ -1,9 +1,13 @@
 <template>
-  <li class="cv-header-menu bx--header__submenu" @mouseenter="doHoverToggle(true)" @mouseleave="doHoverToggle(false)">
+  <li
+    :class="`cv-header-menu ${carbonPrefix}--header__submenu`"
+    @mouseenter="doHoverToggle(true)"
+    @mouseleave="doHoverToggle(false)"
+  >
     <a
       aria-haspopup="true"
       :aria-expanded="expanded ? 'true' : 'false'"
-      class="bx--header__menu-item bx--header__menu-title"
+      :class="`${carbonPrefix}--header__menu-item ${carbonPrefix}--header__menu-title`"
       href="javascript:void(0)"
       role="menuitem"
       tabindex="0"
@@ -15,12 +19,12 @@
       @focusout="onFocusout"
     >
       {{ title }}
-      <chevron-down-glyph class="bx--header__menu-arrow" :aria-label="$attrs.ariaLabel" />
+      <chevron-down-glyph :class="`${carbonPrefix}--header__menu-arrow`" :aria-label="$attrs.ariaLabel" />
     </a>
     <ul
       :aria-label="$attrs.ariaLabel"
       :aria-labelledby="$attrs.ariaLabelledBy"
-      class="bx--header__menu"
+      :class="`${carbonPrefix}--header__menu`"
       role="menu"
       ref="menu"
       @focusout="onFocusout"
@@ -32,9 +36,11 @@
 
 <script>
 import ChevronDownGlyph from '@carbon/icons-vue/es/chevron--down';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvHeaderMenu',
+  mixins: [carbonPrefixMixin],
   components: { ChevronDownGlyph },
   props: {
     title: String,

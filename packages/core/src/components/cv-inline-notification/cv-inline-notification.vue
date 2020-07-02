@@ -1,28 +1,34 @@
 <template>
   <div
     data-notification
-    class="cv-inline-notification bx--inline-notification"
     :class="[
-      `bx--inline-notification--${kind.toLowerCase()}`,
+      'cv-inline-notification',
+      `${carbonPrefix}--inline-notification`,
+      `${carbonPrefix}--inline-notification--${kind.toLowerCase()}`,
       {
-        'bx--inline-notification--low-contrast': lowContrast,
+        [`${carbonPrefix}--inline-notification--low-contrast`]: lowContrast,
       },
     ]"
     v-on="$listeners"
     :role="isAlert ? 'alert' : false"
     :aria-live="!isAlert ? 'polite' : false"
   >
-    <div class="bx--inline-notification__details">
-      <component :is="icon" class="bx--inline-notification__icon" />
-      <div class="bx--inline-notification__text-wrapper">
-        <p class="bx--inline-notification__title">{{ title }}</p>
-        <p class="bx--inline-notification__subtitle">{{ subTitle }}</p>
+    <div :class="`${carbonPrefix}--inline-notification__details`">
+      <component :is="icon" :class="`${carbonPrefix}--inline-notification__icon`" />
+      <div :class="`${carbonPrefix}--inline-notification__text-wrapper`">
+        <p :class="`${carbonPrefix}--inline-notification__title`">{{ title }}</p>
+        <p :class="`${carbonPrefix}--inline-notification__subtitle`">{{ subTitle }}</p>
       </div>
     </div>
     <button
       v-if="actionLabel"
       @click="$emit('action')"
-      class="bx--inline-notification__action-button bx--btn bx--btn--sm bx--btn--ghost"
+      :class="[
+        `${carbonPrefix}--inline-notification__action-button`,
+        `${carbonPrefix}--btn`,
+        `${carbonPrefix}--btn--sm`,
+        `${carbonPrefix}--btn--ghost`,
+      ]"
       type="button"
     >
       {{ actionLabel }}
@@ -31,10 +37,10 @@
       type="button"
       :aria-label="closeAriaLabel"
       data-notification-btn
-      class="bx--inline-notification__close-button"
+      :class="`${carbonPrefix}--inline-notification__close-button`"
       @click="$emit('close')"
     >
-      <Close20 class="bx--inline-notification__close-icon" />
+      <Close20 :class="`${carbonPrefix}--inline-notification__close-icon`" />
     </button>
   </div>
 </template>
@@ -46,11 +52,12 @@ import CheckmarkFilled20 from '@carbon/icons-vue/es/checkmark--filled/20';
 import WarningFilled20 from '@carbon/icons-vue/es/warning--filled/20';
 import Close20 from '@carbon/icons-vue/es/close/20';
 import InformationFilled20 from '@carbon/icons-vue/es/information--filled/20';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvInlineNotification',
   components: { Close20 },
-  mixins: [notificationMixin],
+  mixins: [notificationMixin, carbonPrefixMixin],
   props: {
     actionLabel: { type: String, default: '' },
     closeAriaLabel: { type: String, default: 'Dismiss notification' },

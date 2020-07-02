@@ -18,7 +18,7 @@ import {
   CvButton,
 } from '../../packages/core/src/';
 
-const storiesDefault = storiesOf('Components/CvToolbar', module);
+const storiesDefault = storiesOf('Components/CvToolbar [Depercated]', module);
 // const storiesExperimental = storiesOf('Experimental/CvToolbar', module);
 
 import Filter16 from '@carbon/icons-vue/es/filter/16';

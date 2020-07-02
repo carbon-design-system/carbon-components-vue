@@ -1,5 +1,5 @@
 <template>
-  <button class="cv-button" :class="buttonClasses" v-on="inputListeners" role="button">
+  <button class="cv-button" :class="buttonClassOpts()" v-on="inputListeners" role="button">
     <slot></slot>
 
     <CvSvg v-if="icon || iconHref" :svg="icon || iconHref" :class="`${carbonPrefix}--btn__icon`" />
@@ -15,10 +15,5 @@ export default {
   name: 'CvButton',
   mixins: [buttonMixin, carbonPrefixMixin],
   components: { CvSvg },
-  computed: {
-    buttonClasses() {
-      return this.buttonClassOpts();
-    },
-  },
 };
 </script>

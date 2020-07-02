@@ -207,7 +207,7 @@ const variants = [
     extra: { kind: { group: 'attr', value: 'kind="danger"' } },
   },
   {
-    name: 'scrolling-contnet',
+    name: 'scrolling-content',
     includes: ['label', 'title', 'size', 'primaryButton', 'secondaryButton', 'scrollingContent'],
   },
 ];

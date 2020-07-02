@@ -1,15 +1,18 @@
 <template>
-  <tr class="cv-data-table-row-inner" :class="{ 'bx--parent-row': expandingRow, 'bx--expandable-row': dataExpanded }">
+  <tr
+    class="cv-data-table-row-inner"
+    :class="{ [`${carbonPrefix}--parent-row`]: expandingRow, [`${carbonPrefix}--expandable-row`]: dataExpanded }"
+  >
     <td
       v-if="dataSomeExpandingRows"
-      class="bx--table-expand"
+      :class="`${carbonPrefix}--table-expand`"
       :data-previous-value="dataExpanded ? 'collapsed' : 'expanded'"
     >
-      <button v-if="expandingRow" class="bx--table-expand__button" @click="toggleExpand" type="button">
-        <ChevronRight16 class="bx--table-expand__svg" />
+      <button v-if="expandingRow" :class="`${carbonPrefix}--table-expand__button`" @click="toggleExpand" type="button">
+        <ChevronRight16 :class="`${carbonPrefix}--table-expand__svg`" />
       </button>
     </td>
-    <td v-if="hasBatchActions" class="bx--table-column-checkbox">
+    <td v-if="hasBatchActions" :class="`${carbonPrefix}--table-column-checkbox`">
       <cv-checkbox
         :form-item="false"
         :value="value"
@@ -21,7 +24,7 @@
       />
     </td>
     <slot />
-    <td v-if="hasOverflowMenu" class="bx--table-column-menu">
+    <td v-if="hasOverflowMenu" :class="`${carbonPrefix}--table-column-menu`">
       <cv-overflow-menu v-bind="overflowMenuOptions">
         <cv-overflow-menu-item
           v-for="(item, index) in overflowMenuButtons"
@@ -45,9 +48,11 @@ import CvCheckbox from '../cv-checkbox/cv-checkbox';
 import CvOverflowMenu from '../cv-overflow-menu/cv-overflow-menu';
 import CvOverflowMenuItem from '../cv-overflow-menu/cv-overflow-menu-item';
 import ChevronRight16 from '@carbon/icons-vue/es/chevron--right/16';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvDataTableRowInner',
+  mixins: [carbonPrefixMixin],
   components: { CvCheckbox, CvOverflowMenu, CvOverflowMenuItem, ChevronRight16 },
   props: {
     ariaLabelForBatchCheckbox: String,

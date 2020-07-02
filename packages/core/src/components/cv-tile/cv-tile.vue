@@ -1,8 +1,7 @@
 <template>
   <component
     :is="tagType"
-    class="cv-tile bx--tile"
-    :class="{ 'bx--tile--light': theme === 'light' }"
+    :class="[`cv-tile ${carbonPrefix}--tile`, { [`${carbonPrefix}--tile--light`]: theme === 'light' }]"
     :checked="selected"
     :expanded="expanded"
     v-bind="$attrs"
@@ -24,6 +23,7 @@ import CvTileClickable from './_cv-tile-clickable';
 import CvTileExpandable from './_cv-tile-expandable';
 import CvTileSelectable from './_cv-tile-selectable';
 import CvTileStandard from './_cv-tile-standard';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvTile',
@@ -33,7 +33,7 @@ export default {
     prop: 'modelValue',
     event: 'modelEvent',
   },
-  mixins: [themeMixin],
+  mixins: [themeMixin, carbonPrefixMixin],
   components: {
     CvTileClickable,
     CvTileExpandable,

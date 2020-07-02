@@ -3,17 +3,24 @@
     <button
       type="button"
       v-if="sortable"
-      :class="['bx--table-sort', orderClass]"
+      :class="[
+        `${carbonPrefix}--table-sort`,
+        {
+          [`${carbonPrefix}--table-sort--active`]: this.internalOrder === 'descending',
+          [`${carbonPrefix}--table-sort--active ${carbonPrefix}--table-sort--ascending`]:
+            this.internalOrder === 'ascending',
+        },
+      ]"
       @click="onSortClick"
       :style="headingStyle"
     >
-      <cv-wrapper :tag-type="headingLabelTag" class="bx--table-header-label">
+      <cv-wrapper :tag-type="headingLabelTag" :class="`${carbonPrefix}--table-header-label`">
         <slot>{{ heading }}</slot>
       </cv-wrapper>
-      <ArrowDown16 class="bx--table-sort__icon" />
-      <Arrows16 class="bx--table-sort__icon-unsorted" />
+      <ArrowDown16 :class="`${carbonPrefix}--table-sort__icon`" />
+      <Arrows16 :class="`${carbonPrefix}--table-sort__icon-unsorted`" />
     </button>
-    <cv-wrapper v-else :tag-type="headingLabelTag" class="bx--table-header-label" :style="headingStyle">
+    <cv-wrapper v-else :tag-type="headingLabelTag" :class="`${carbonPrefix}--table-header-label`" :style="headingStyle">
       <slot>{{ heading }}</slot>
     </cv-wrapper>
   </th>
@@ -24,6 +31,7 @@ import ArrowDown16 from '@carbon/icons-vue/es/arrow--down/16';
 import Arrows16 from '@carbon/icons-vue/es/arrows/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
 import uidMixin from '../../mixins/uid-mixin';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 const nextOrder = {
   ascending: 'descending',
@@ -34,7 +42,7 @@ const nextOrder = {
 export default {
   name: 'CvDataTableHeading',
   components: { ArrowDown16, Arrows16, CvWrapper },
-  mixins: [uidMixin],
+  mixins: [uidMixin, carbonPrefixMixin],
   props: {
     dataStyle: Object,
     heading: String,
@@ -79,15 +87,6 @@ export default {
       return this.internalOrder !== 'descending'
         ? 'Sort rows by this header in descending order'
         : 'Sort rows by this header in ascending order';
-    },
-    orderClass() {
-      let result = '';
-      if (this.internalOrder === 'descending') {
-        result = 'bx--table-sort--active';
-      } else if (this.internalOrder === 'ascending') {
-        result = 'bx--table-sort--active bx--table-sort--ascending';
-      }
-      return result;
     },
     headingLabelTag() {
       // no tag if non-blank skeleton

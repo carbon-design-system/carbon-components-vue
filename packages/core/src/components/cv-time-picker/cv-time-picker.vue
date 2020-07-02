@@ -1,12 +1,18 @@
 <template>
-  <div class="cv-time-picker bx--form-item">
-    <div class="bx--time-picker" :class="{ 'bx--time-picker--light': theme === 'light' }" :data-invalid="isInvalid">
-      <div class="bx--time-picker__input">
-        <label :for="uid" class="bx--label">{{ label }}</label>
+  <div :class="`cv-time-picker ${carbonPrefix}--form-item`">
+    <div
+      :class="[`${carbonPrefix}--time-picker`, { [`${carbonPrefix}--time-picker--light`]: theme === 'light' }]"
+      :data-invalid="isInvalid"
+    >
+      <div :class="`${carbonPrefix}--time-picker__input`">
+        <label :for="uid" :class="`${carbonPrefix}--label`">{{ label }}</label>
         <input
           :id="uid"
           type="text"
-          class="bx--time-picker__input-field"
+          :class="[
+            `${carbonPrefix}--time-picker__input-field ${carbonPrefix}--text-input`,
+            { [`${carbonPrefix}--text-input--light`]: theme === 'light' },
+          ]"
           :pattern="pattern"
           v-bind="$attrs"
           :placeholder="placeholder"
@@ -17,7 +23,7 @@
         />
       </div>
       <cv-select
-        class="bx--time-picker__select"
+        :class="`${carbonPrefix}--time-picker__select`"
         :form-item="false"
         hide-label
         :label="ampmSelectLabel"
@@ -25,12 +31,12 @@
         :value="ampm"
         :disabled="disabled"
       >
-        <cv-select-option class="bx--select-option" value="AM">AM</cv-select-option>
-        <cv-select-option class="bx--select-option" value="PM">PM</cv-select-option>
+        <cv-select-option :class="`${carbonPrefix}--select-option`" value="AM">AM</cv-select-option>
+        <cv-select-option :class="`${carbonPrefix}--select-option`" value="PM">PM</cv-select-option>
       </cv-select>
 
       <cv-select
-        class="bx--time-picker__select"
+        :class="`${carbonPrefix}--time-picker__select`"
         :form-item="false"
         hide-label
         :label="timezonesSelectLabel"
@@ -39,12 +45,16 @@
         @change="$emit('update:timezone', $event)"
         :disabled="disabled"
       >
-        <cv-select-option class="bx--select-option" v-for="item in timezones" :key="item.value" :value="item.value">{{
-          item.label
-        }}</cv-select-option>
+        <cv-select-option
+          :class="`${carbonPrefix}--select-option`"
+          v-for="item in timezones"
+          :key="item.value"
+          :value="item.value"
+          >{{ item.label }}</cv-select-option
+        >
       </cv-select>
     </div>
-    <div class="bx--form-requirement" v-if="isInvalid">
+    <div :class="`${carbonPrefix}--form-requirement`" v-if="isInvalid">
       <slot name="invalid-message">{{ invalidMessage }}</slot>
     </div>
   </div>
@@ -55,6 +65,7 @@ import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
 import CvSelect from '../cv-select/cv-select';
 import CvSelectOption from '../cv-select/cv-select-option';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvTimePicker',
@@ -62,7 +73,7 @@ export default {
     CvSelect,
     CvSelectOption,
   },
-  mixins: [uidMixin, themeMixin],
+  mixins: [uidMixin, themeMixin, carbonPrefixMixin],
   inheritAttrs: false,
   props: {
     ampm: {

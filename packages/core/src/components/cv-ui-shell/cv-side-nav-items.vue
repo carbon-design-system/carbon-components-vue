@@ -1,12 +1,14 @@
 <template>
-  <ul class="cv-side-nav-items bx--side-nav__items" @mousedown="onMousedown">
+  <ul :class="`cv-side-nav-items ${carbonPrefix}--side-nav__items`" @mousedown="onMousedown">
     <slot />
   </ul>
 </template>
 
 <script>
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 export default {
   name: 'CvSideNavItems',
+  mixins: [carbonPrefixMixin],
   methods: {
     onMousedown(ev) {
       if (ev.target === this.$el) {

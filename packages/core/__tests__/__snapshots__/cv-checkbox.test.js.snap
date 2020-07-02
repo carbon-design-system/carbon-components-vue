@@ -12,4 +12,4 @@ exports[`CvCheckbox should render when disabled 1`] = `
     </span></label></div>
 `;
 
-exports[`CvCheckboxSkeleton Renders as expected 1`] = `<div class="cv-checkbox bx--form-item bx--checkbox-wrapper"><label class="bx--checkbox-label bx--skeleton"></label></div>`;
+exports[`CvCheckboxSkeleton Renders as expected 1`] = `<div class="cv-checkbox bx--form-item bx--checkbox-wrapper"><label class="bx--checkbox-label bx--skeleton"><span class="bx--checkbox-label-text bx--skeleton"></span></label></div>`;

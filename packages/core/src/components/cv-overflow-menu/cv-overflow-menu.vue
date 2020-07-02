@@ -1,8 +1,15 @@
 <template>
-  <div data-overflow-menu class="cv-overflow-menu bx--overflow-menu">
+  <div data-overflow-menu :class="`cv-overflow-menu ${carbonPrefix}--overflow-menu`">
     <button
-      class="bx--overflow-menu__trigger bx--tooltip__trigger bx--tooltip--a11y"
-      :class="[tipClasses, { 'bx--overflow-menu--open': open }]"
+      :class="[
+        `${carbonPrefix}--overflow-menu__trigger ${carbonPrefix}--tooltip__trigger`,
+        `${carbonPrefix}--tooltip--a11y`,
+        {
+          [`${this.carbonPrefix}--tooltip--${tipPosition}`]: label,
+          [`${this.carbonPrefix}--tooltip--align-${tipAlignment}`]: label,
+          [`${carbonPrefix}--overflow-menu--open`]: open,
+        },
+      ]"
       aria-haspopup
       type="button"
       :aria-expanded="open ? 'true' : 'false'"
@@ -15,18 +22,20 @@
       @keydown.enter.prevent="doToggle"
       @keydown.tab="onOverflowMenuTab"
     >
-      <span class="bx--assistive-text">{{ label }}</span>
+      <span :class="`${carbonPrefix}--assistive-text`" v-if="label">{{ label }}</span>
 
       <slot name="trigger">
-        <OverflowMenuVertical16 class="bx--overflow-menu__icon" />
+        <OverflowMenuVertical16 :class="`${carbonPrefix}--overflow-menu__icon`" />
       </slot>
     </button>
     <div
-      class="bx--overflow-menu-options"
-      :class="{
-        'bx--overflow-menu--flip': flipMenu,
-        'bx--overflow-menu-options--open': open,
-      }"
+      :class="[
+        `${carbonPrefix}--overflow-menu-options`,
+        {
+          [`${carbonPrefix}--overflow-menu--flip`]: flipMenu,
+          [`${carbonPrefix}--overflow-menu-options--open`]: open,
+        },
+      ]"
       tabindex="-1"
       ref="popup"
       :aria-labelledby="`${uid}-trigger`"
@@ -42,7 +51,7 @@
         style="position: absolute; height: 1px; width: 1px; left: -9999px;"
         @focus="focusBeforeContent"
       />
-      <ul class="bx--overflow-menu-options__content">
+      <ul :class="`${carbonPrefix}--overflow-menu-options__content`">
         <slot></slot>
       </ul>
       <div
@@ -59,11 +68,12 @@
 <script>
 import OverflowMenuVertical16 from '@carbon/icons-vue/es/overflow-menu--vertical/16';
 import uidMixin from '../../mixins/uid-mixin';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvOverflowMenu',
   components: { OverflowMenuVertical16 },
-  mixins: [uidMixin],
+  mixins: [uidMixin, carbonPrefixMixin],
   props: {
     label: String,
     flipMenu: Boolean,
@@ -99,15 +109,6 @@ export default {
     },
     offsetTop() {
       return this.offset ? this.offset.top : 0;
-    },
-    tipClasses() {
-      const tipPosition = this.tipPosition || 'right';
-      const tipAlignment = this.tipAlignment || 'center';
-      if (this.label) {
-        return `bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--${tipPosition} bx--tooltip--align-${tipAlignment}`;
-      } else {
-        return '';
-      }
     },
   },
   created() {
@@ -182,7 +183,7 @@ export default {
       if (this.open) {
         // set focus somewhere sensible, first focusable item or leave on over flow
         let focusOnList = this.$refs.popup.querySelectorAll(
-          '.bx--overflow-menu-options__btn, button, link, input, textarea, [contentEditable="true"], [tabindex]'
+          `.${this.carbonPrefix}--overflow-menu-options__btn, button, link, input, textarea, [contentEditable="true"], [tabindex]`
         );
         for (let tryOn of focusOnList) {
           if (

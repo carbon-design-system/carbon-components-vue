@@ -1,5 +1,5 @@
 <template>
-  <li :class="itemClasses">
+  <li :class="[`${carbonPrefix}--accordion__item`, { [`${carbonPrefix}--accordion__item--active`]: open }]">
     <button disabled type="button" :class="`${carbonPrefix}--accordion__heading`">
       <ChevronRight16 :class="`${carbonPrefix}--accordion__arrow`" />
       <cv-skeleton-text :class="`${carbonPrefix}--accordion__title`"></cv-skeleton-text>
@@ -24,15 +24,6 @@ export default {
   },
   props: {
     open: { type: Boolean, default: false },
-  },
-  computed: {
-    itemClasses() {
-      const classes = [`${this.carbonPrefix}--accordion__item`];
-      if (this.open) {
-        classes.push(`${this.carbonPrefix}--accordion__item--active`);
-      }
-      return classes.join(' ');
-    },
   },
 };
 </script>

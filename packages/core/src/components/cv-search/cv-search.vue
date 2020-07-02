@@ -1,11 +1,24 @@
 <template>
-  <cv-wrapper :tag-type="formItem ? 'div' : ''" class="cv-search bx--form-item">
-    <div class="bx--search" :class="[searchClasses, { 'cv-search': !formItem }]" role="search" ref="search">
-      <label :for="uid" class="bx--label">{{ label }}</label>
+  <cv-wrapper :tag-type="formItem ? 'div' : ''" :class="`cv-search ${carbonPrefix}--form-item`">
+    <div
+      :class="[
+        `${carbonPrefix}--search`,
+        {
+          [`${carbonPrefix}--search--${theme}`]: theme.length,
+          [`${carbonPrefix}--search--${internalSize}`]: internalSize,
+          [`${carbonPrefix}--toolbar-search`]: isToolbarKind,
+          [`${carbonPrefix}--toolbar-search--active`]: toolbarActive,
+          'cv-search': !formItem,
+        },
+      ]"
+      role="search"
+      ref="search"
+    >
+      <label :for="uid" :class="`${carbonPrefix}--label`">{{ label }}</label>
 
       <input
         :id="uid"
-        class="bx--search-input"
+        :class="`${carbonPrefix}--search-input`"
         v-bind="$attrs"
         v-model="internalValue"
         v-on="inputListeners"
@@ -20,18 +33,17 @@
       <button
         type="button"
         v-if="isToolbarKind"
-        class="bx--toolbar-search__btn"
+        :class="`${carbonPrefix}--toolbar-search__btn`"
         :aria-label="toolbarAriaLabel"
         @click="toggleActive(true)"
         @blur="checkFocus"
       >
-        <component :is="icon" class="bx--search-magnifier" />
+        <component :is="icon" :class="`${carbonPrefix}--search-magnifier`" />
       </button>
-      <component v-if="!isToolbarKind" :is="icon" class="bx--search-magnifier" />
+      <component v-if="!isToolbarKind" :is="icon" :class="`${carbonPrefix}--search-magnifier`" />
       <button
         type="button"
-        class="bx--search-close"
-        :class="{ 'bx--search-close--hidden': !clearVisible }"
+        :class="[`${carbonPrefix}--search-close`, { [`${carbonPrefix}--search-close--hidden`]: !clearVisible }]"
         :title="clearAriaLabel"
         :aria-label="clearAriaLabel"
         @click="onClearClick"
@@ -49,10 +61,11 @@ import Search16 from '@carbon/icons-vue/es/search/16';
 import Search20 from '@carbon/icons-vue/es/search/20';
 import Close16 from '@carbon/icons-vue/es/close/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvSearch',
-  mixins: [uidMixin, themeMixin],
+  mixins: [uidMixin, themeMixin, carbonPrefixMixin],
   components: { Close16, CvWrapper },
   inheritAttrs: false,
   props: {
@@ -108,8 +121,7 @@ export default {
         input: this.onInput,
       };
     },
-    searchClasses() {
-      const themeClass = this.theme.length ? `bx--search--${this.theme}` : '';
+    internalSize() {
       let size;
 
       if (this.size !== undefined && (this.size || (this.small === undefined && this.large === undefined))) {
@@ -127,16 +139,7 @@ export default {
       } else {
         size = this.small ? 'sm' : 'xl';
       }
-      const sizeClass = `bx--search--${size}`;
-
-      let toolbarClasses = '';
-      if (this.isToolbarKind) {
-        toolbarClasses = this.toolbarActive ? 'bx--toolbar-search bx--toolbar-search--active' : 'bx--toolbar-search';
-      }
-      return `${themeClass} ${sizeClass} ${toolbarClasses}`;
-    },
-    closeHiddenClass() {
-      return this.clearVisible ? '' : 'bx--search-close--hidden';
+      return size;
     },
     isToolbarKind() {
       return this.kind === 'toolbar';

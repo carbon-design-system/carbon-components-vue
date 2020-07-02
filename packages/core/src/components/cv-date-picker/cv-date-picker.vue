@@ -1,26 +1,34 @@
 <template>
-  <cv-wrapper :tag-type="formItem ? 'div' : ''" class="cv-date-picker bx--form-item">
+  <cv-wrapper :tag-type="formItem ? 'div' : ''" :class="`cv-date-picker ${carbonPrefix}--form-item`">
     <div
       :data-date-picker="['single', 'range'].includes(kind)"
       :data-date-picker-type="kind"
-      class="bx--date-picker"
-      :class="[kindClasses, { 'bx--date-picker--light': theme === 'light', 'cv-date-pciker': !formItem }]"
+      :class="[
+        `${this.carbonPrefix}--date-picker ${this.carbonPrefix}--date-picker--${this.kind}`,
+        {
+          [`${carbonPrefix}--date-picker--simple`]: this.kind === 'short',
+          [`${carbonPrefix}--date-picker--light`]: theme === 'light',
+          'cv-date-pciker': !formItem,
+        },
+      ]"
       ref="date-picker"
     >
       <div
         :class="{
-          'bx--date-picker-container': ['single', 'range'].includes(kind),
-          'bx--date-picker--nolabel': getDateLabel !== undefined,
+          [`${carbonPrefix}--date-picker-container`]: ['single', 'range'].includes(kind),
+          [`${carbonPrefix}--date-picker--nolabel`]: getDateLabel !== undefined,
         }"
         @change="onChange"
       >
-        <label v-if="getDateLabel.length > 0" :for="`${uid}-input-1`" class="bx--label">{{ getDateLabel }}</label>
-        <div class="bx--date-picker-input__wrapper">
+        <label v-if="getDateLabel.length > 0" :for="`${uid}-input-1`" :class="`${carbonPrefix}--label`">
+          {{ getDateLabel }}
+        </label>
+        <div :class="`${carbonPrefix}--date-picker-input__wrapper`">
           <input
             :data-invalid="isInvalid"
             type="text"
             :id="`${uid}-input-1`"
-            class="bx--date-picker__input"
+            :class="`${carbonPrefix}--date-picker__input`"
             :pattern="pattern"
             :placeholder="placeholder"
             data-date-picker-input
@@ -29,29 +37,31 @@
           />
           <Calendar16
             v-if="['single', 'range'].includes(kind)"
-            class="bx--date-picker__icon"
+            :class="`${carbonPrefix}--date-picker__icon`"
             data-date-picker-icon
             @click="cal.open()"
           />
         </div>
-        <div class="bx--form-requirement" v-if="isInvalid">
+        <div :class="`${carbonPrefix}--form-requirement`" v-if="isInvalid">
           <slot name="invalid-message">{{ invalidMessage || invalidDateMessage }}</slot>
         </div>
       </div>
-      <div :class="{ 'bx--date-picker-container': kind === 'range' }" v-if="kind === 'range'">
-        <label v-if="getDateEndLabel.length > 0" :for="`${uid}-input-2`" class="bx--label">{{ getDateEndLabel }}</label>
-        <div class="bx--date-picker-input__wrapper">
+      <div :class="{ [`${carbonPrefix}--date-picker-container`]: kind === 'range' }" v-if="kind === 'range'">
+        <label v-if="getDateEndLabel.length > 0" :for="`${uid}-input-2`" :class="`${carbonPrefix}--label`">
+          {{ getDateEndLabel }}
+        </label>
+        <div :class="`${carbonPrefix}--date-picker-input__wrapper`">
           <input
             type="text"
             :id="`${uid}-input-2`"
-            class="bx--date-picker__input"
+            :class="`${carbonPrefix}--date-picker__input`"
             :pattern="pattern"
             :placeholder="placeholder"
             data-date-picker-input
             :data-date-picker-input-to="kind === 'range'"
             ref="todate"
           />
-          <Calendar16 class="bx--date-picker__icon" data-date-picker-icon @click="openTodateCal()" />
+          <Calendar16 :class="`${carbonPrefix}--date-picker__icon`" data-date-picker-icon @click="openTodateCal()" />
         </div>
       </div>
     </div>
@@ -66,6 +76,7 @@ import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
 import Calendar16 from '@carbon/icons-vue/es/calendar/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 // Weekdays shorthand for english locale
 l10n.en.weekdays.shorthand.forEach((day, index) => {
@@ -79,7 +90,7 @@ l10n.en.weekdays.shorthand.forEach((day, index) => {
 
 export default {
   name: 'CvDatePicker',
-  mixins: [uidMixin, themeMixin],
+  mixins: [uidMixin, themeMixin, carbonPrefixMixin],
   components: { Calendar16, CvWrapper },
   props: {
     dateLabel: { type: String, default: undefined },
@@ -151,14 +162,11 @@ export default {
     kind() {
       this.initFlatpickr();
     },
+    invalidMessage() {
+      this.checkSlots();
+    },
   },
   computed: {
-    kindClasses() {
-      if (this.kind === 'short') {
-        return 'bx--date-picker--short bx--date-picker--simple';
-      }
-      return `bx--date-picker--${this.kind}`;
-    },
     getDateLabel() {
       if (this.dateLabel !== undefined) {
         return this.dateLabel;
@@ -273,14 +281,14 @@ export default {
     onCalReady(selectedDates, dateString, instance) {
       const calendarContainer = instance.calendarContainer;
       const options = {
-        classCalendarContainer: `bx--date-picker__calendar`,
-        classMonth: `bx--date-picker__month`,
-        classWeekdays: `bx--date-picker__weekdays`,
-        classDays: `bx--date-picker__days`,
-        classWeekday: `bx--date-picker__weekday`,
-        classDay: `bx--date-picker__day`,
-        classFocused: `bx--focused`,
-        classVisuallyHidden: `bx--visually-hidden`,
+        classCalendarContainer: `${this.carbonPrefix}--date-picker__calendar`,
+        classMonth: `${this.carbonPrefix}--date-picker__month`,
+        classWeekdays: `${this.carbonPrefix}--date-picker__weekdays`,
+        classDays: `${this.carbonPrefix}--date-picker__days`,
+        classWeekday: `${this.carbonPrefix}--date-picker__weekday`,
+        classDay: `${this.carbonPrefix}--date-picker__day`,
+        classFocused: `${this.carbonPrefix}--focused`,
+        classVisuallyHidden: `${this.carbonPrefix}--visually-hidden`,
       };
 
       if (calendarContainer) {

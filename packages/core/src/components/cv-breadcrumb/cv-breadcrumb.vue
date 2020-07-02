@@ -1,5 +1,9 @@
 <template>
-  <nav class="cv-breadcrumb" :class="breadcrumbClasses" :aria-label="ariaLabel">
+  <nav
+    class="cv-breadcrumb"
+    :class="[`${carbonPrefix}--breadcrumb`, { [`${carbonPrefix}--breadcrumb--no-trailing-slash`]: noTrailingSlash }]"
+    :aria-label="ariaLabel"
+  >
     <slot></slot>
   </nav>
 </template>
@@ -12,15 +16,6 @@ export default {
   props: {
     ariaLabel: { type: String, default: 'breadcrumb' },
     noTrailingSlash: Boolean,
-  },
-  computed: {
-    breadcrumbClasses() {
-      let classes = [`${this.carbonPrefix}--breadcrumb`];
-      if (this.noTrailingSlash) {
-        classes.push(`${this.carbonPrefix}--breadcrumb--no-trailing-slash`);
-      }
-      return classes;
-    },
   },
 };
 </script>

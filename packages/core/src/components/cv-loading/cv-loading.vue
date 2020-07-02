@@ -4,16 +4,16 @@
       data-loading
       :class="{
         'cv-loading': !overlay,
-        'bx--loading': active || stopping,
-        'bx--loading--stop': !active && stopping,
-        'bx--loading--small': small,
+        [`${carbonPrefix}--loading`]: active || stopping,
+        [`${carbonPrefix}--loading--stop`]: !active && stopping,
+        [`${carbonPrefix}--loading--small`]: small,
       }"
       ref="loading"
     >
-      <svg class="bx--loading__svg" viewBox="-75 -75 150 150">
+      <svg :class="`${carbonPrefix}--loading__svg`" viewBox="-75 -75 150 150">
         <title>Loading</title>
-        <circle v-if="small" class="bx--loading__background" cx="0" cy="0" :r="loadingRadius" />
-        <circle class="bx--loading__stroke" cx="0" cy="0" :r="loadingRadius" />
+        <circle v-if="small" :class="`${carbonPrefix}--loading__background`" cx="0" cy="0" :r="loadingRadius" />
+        <circle :class="`${carbonPrefix}--loading__stroke`" cx="0" cy="0" :r="loadingRadius" />
       </svg>
     </div>
   </cv-wrapper>
@@ -21,9 +21,11 @@
 
 <script>
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvLoading',
+  mixins: [carbonPrefixMixin],
   components: { CvWrapper },
   props: {
     active: { type: Boolean, default: true },
@@ -35,9 +37,9 @@ export default {
       const classes = [];
       if (this.overlay) {
         if (this.active || this.stopping) {
-          classes.push('bx--loading-overlay');
+          classes.push(`${this.carbonPrefix}--loading-overlay`);
         } else {
-          classes.push('bx--loading-overlay--stop');
+          classes.push(`${this.carbonPrefix}--loading-overlay--stop`);
         }
       }
 

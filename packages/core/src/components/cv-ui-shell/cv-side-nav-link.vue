@@ -1,11 +1,14 @@
 <template>
-  <li class="bx--side-nav__item">
+  <li :class="`${carbonPrefix}--side-nav__item`">
     <component
       :is="tagType"
       v-on="$listeners"
-      class="cv-side-nav-item-link bx--side-nav__link"
+      :class="[
+        'cv-side-nav-item-link',
+        `${carbonPrefix}--side-nav__link`,
+        { [`${carbonPrefix}--side-nav__link--current`]: active },
+      ]"
       v-bind="{ ...$attrs, ...linkProps }"
-      :class="{ 'bx--side-nav__link--current': active }"
     >
       <cv-side-nav-icon v-if="hasNavIcon" small>
         <slot name="nav-icon" />
@@ -21,11 +24,12 @@
 import LinkMixin from '../../mixins/link-mixin';
 import CvSideNavIcon from './cv-side-nav-icon';
 import CvSideNavLinkText from './_cv-side-nav-link-text';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvSideNavLink',
   inheritAttrs: false,
-  mixins: [LinkMixin],
+  mixins: [LinkMixin, carbonPrefixMixin],
   components: { CvSideNavIcon, CvSideNavLinkText },
   props: {
     active: Boolean,

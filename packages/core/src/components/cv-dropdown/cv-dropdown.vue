@@ -16,20 +16,25 @@
 -->
 
 <template>
-  <div :class="{ 'bx--form-item': formItem }">
+  <div :class="{ [`${carbonPrefix}--form-item`]: formItem }">
     <div
-      class="bx--dropdown__wrapper"
-      :class="{ 'bx--dropdown__wrapper--inline': inline, 'cv-dropdown': !formItem }"
+      :class="[
+        `${carbonPrefix}--dropdown__wrapper`,
+        { [`${carbonPrefix}--dropdown__wrapper--inline`]: inline, 'cv-dropdown': !formItem },
+      ]"
       :style="wrapperStyleOverride"
     >
-      <span v-if="label" :id="`${uid}-label`" class="bx--label" :class="{ 'bx--label--disabled': disabled }">{{
-        label
-      }}</span>
+      <span
+        v-if="label"
+        :id="`${uid}-label`"
+        :class="[`${carbonPrefix}--label`, { [`${carbonPrefix}--label--disabled`]: disabled }]"
+      >
+        {{ label }}
+      </span>
 
       <div
         v-if="!inline && isHelper"
-        class="bx--form__helper-text"
-        :class="{ 'bx--form__helper-text--disabled': disabled }"
+        :class="[`${carbonPrefix}--form__helper-text`, { [`${carbonPrefix}--form__helper-text--disabled`]: disabled }]"
         :aria-disabled="disabled"
       >
         <slot name="helper-text">{{ helperText }}</slot>
@@ -39,16 +44,18 @@
         data-dropdown
         :data-value="internalValue"
         :data-invalid="isInvalid"
-        class="bx--dropdown"
-        :class="{
-          'bx--dropdown--light': theme === 'light',
-          'bx--dropdown--up': up,
-          'bx--dropdown--open': open,
-          'bx--dropdown--invalid': isInvalid,
-          'bx--dropdown--disabled': disabled,
-          'bx--dropdown--inline': inline,
-          'bx--dropdown--show-selected': !hideSelected,
-        }"
+        :class="[
+          `${carbonPrefix}--dropdown`,
+          {
+            [`${carbonPrefix}--dropdown--light`]: theme === 'light',
+            [`${carbonPrefix}--dropdown--up`]: up,
+            [`${carbonPrefix}--dropdown--open`]: open,
+            [`${carbonPrefix}--dropdown--invalid`]: isInvalid,
+            [`${carbonPrefix}--dropdown--disabled`]: disabled,
+            [`${carbonPrefix}--dropdown--inline`]: inline,
+            [`${carbonPrefix}--dropdown--show-selected`]: !hideSelected,
+          },
+        ]"
         v-bind="$attrs"
         @keydown.down.prevent="onDown"
         @keydown.up.prevent="onUp"
@@ -57,7 +64,7 @@
         @click="onClick"
       >
         <button
-          class="bx--dropdown-text"
+          :class="`${carbonPrefix}--dropdown-text`"
           :aria-disabled="disabled"
           aria-haspopup="true"
           :aria-expanded="open ? 'true' : 'false'"
@@ -67,21 +74,21 @@
           type="button"
           ref="button"
         >
-          <WarningFilled16 v-if="isInvalid && inline" class="bx--dropdown__invalid-icon" />
+          <WarningFilled16 v-if="isInvalid && inline" :class="`${carbonPrefix}--dropdown__invalid-icon`" />
           <span
-            class="bx--dropdown-text__inner"
+            :class="`${carbonPrefix}--dropdown-text__inner`"
             :id="`${uid}-value`"
             data-test="internalCaption"
             v-html="internalCaption"
           />
-          <span class="bx--dropdown__arrow-container">
-            <span class="bx--dropdown__arrow" :style="chevronStyleOveride">
+          <span :class="`${carbonPrefix}--dropdown__arrow-container`">
+            <span :class="`${carbonPrefix}--dropdown__arrow`" :style="chevronStyleOveride">
               <chevron-down-glyph />
             </span>
           </span>
         </button>
         <ul
-          class="bx--dropdown-list"
+          :class="`${carbonPrefix}--dropdown-list`"
           :id="`${uid}-menu`"
           role="menu"
           :aria-hidden="!open ? 'true' : 'false'"
@@ -92,11 +99,11 @@
           <slot></slot>
         </ul>
       </div>
-      <div v-if="isInvalid && inline" class="bx--form-requirement">
+      <div v-if="isInvalid && inline" :class="`${carbonPrefix}--form-requirement`">
         <slot name="invalid-message">{{ invalidMessage }}</slot>
       </div>
     </div>
-    <div v-if="isInvalid && !inline" class="bx--form-requirement">
+    <div v-if="isInvalid && !inline" :class="`${carbonPrefix}--form-requirement`">
       <slot name="invalid-message">{{ invalidMessage }}</slot>
     </div>
   </div>
@@ -107,11 +114,12 @@ import themeMixin from '../../mixins/theme-mixin';
 import uidMixin from '../../mixins/uid-mixin';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import ChevronDownGlyph from '@carbon/icons-vue/es/chevron--down';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvDropdown',
   inheritAttrs: false,
-  mixins: [themeMixin, uidMixin],
+  mixins: [themeMixin, uidMixin, carbonPrefixMixin],
   components: { WarningFilled16, ChevronDownGlyph },
   props: {
     disabled: Boolean,
@@ -298,11 +306,14 @@ export default {
         }
 
         let target = ev.target;
-        while (!target.classList.contains('bx--dropdown-link') && this.$refs.droplist.contains(target)) {
+        while (
+          !target.classList.contains(`${this.carbonPrefix}--dropdown-link`) &&
+          this.$refs.droplist.contains(target)
+        ) {
           target = target.parentNode; // try next one up
         }
 
-        if (target.classList.contains('bx--dropdown-link')) {
+        if (target.classList.contains(`${this.carbonPrefix}--dropdown-link`)) {
           const targetItemEl = target.parentNode;
           const newValue = targetItemEl.getAttribute('data-value');
 

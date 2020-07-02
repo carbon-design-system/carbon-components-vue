@@ -11,7 +11,9 @@ exports[`CvTab matches with slotted content 1`] = `
 exports[`CvTabs matches render 1`] = `
 <div class="cv-tabs" style="width: 100%;">
   <div data-tabs="" role="navigation" class="cv-tab bx--tabs">
-    <div tabindex="0" class="bx--tabs-trigger"><a href="javascript:void(0)" tabindex="-1" class="bx--tabs-trigger-text"></a>
+    <div tabindex="0" class="bx--tabs-trigger"><a href="javascript:void(0)" tabindex="-1" class="bx--tabs-trigger-text">
+
+      </a>
       <chevron-down-glyph-stub></chevron-down-glyph-stub>
     </div>
     <ul role="tablist" class="bx--tabs__nav bx--tabs__nav--hidden"></ul>
@@ -23,7 +25,9 @@ exports[`CvTabs matches render 1`] = `
 exports[`CvTabs matches with slotted content 1`] = `
 <div class="cv-tabs" style="width: 100%;">
   <div data-tabs="" role="navigation" class="cv-tab bx--tabs">
-    <div tabindex="0" class="bx--tabs-trigger"><a href="javascript:void(0)" tabindex="-1" class="bx--tabs-trigger-text"></a>
+    <div tabindex="0" class="bx--tabs-trigger"><a href="javascript:void(0)" tabindex="-1" class="bx--tabs-trigger-text">
+
+      </a>
       <chevron-down-glyph-stub></chevron-down-glyph-stub>
     </div>
     <ul role="tablist" class="bx--tabs__nav bx--tabs__nav--hidden"></ul>

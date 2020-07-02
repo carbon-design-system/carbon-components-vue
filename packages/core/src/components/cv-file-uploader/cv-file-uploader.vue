@@ -1,11 +1,11 @@
 <template>
   <cv-form-item class="cv-file-uploader">
-    <strong class="bx--file--label">{{ label }}</strong>
-    <p class="bx--label-description">{{ helperText }}</p>
-    <div class="bx--file" data-file>
+    <strong :class="`${carbonPrefix}--file--label`">{{ label }}</strong>
+    <p :class="`${carbonPrefix}--label-description`">{{ helperText }}</p>
+    <div :class="`${carbonPrefix}--file`" data-file>
       <label
         :for="uid"
-        class="bx--file-browse-btn"
+        :class="`${carbonPrefix}--file-browse-btn`"
         role="button"
         tabindex="0"
         @keydown.enter.prevent="onShow()"
@@ -14,8 +14,10 @@
       >
         <div
           data-file-drop-container
-          class="bx--file__drop-container"
-          :class="{ 'bx--file__drop-container--drag-over': allowDrop }"
+          :class="[
+            `${carbonPrefix}--file__drop-container`,
+            { [`${carbonPrefix}--file__drop-container--drag-over`]: allowDrop },
+          ]"
           @dragover="onDragEvent"
           @dragleave="onDragEvent"
           @drop="onDragEvent"
@@ -24,7 +26,7 @@
           <input
             v-bind="$attrs"
             type="file"
-            class="bx--file-input"
+            :class="`${carbonPrefix}--file-input`"
             :id="uid"
             data-file-uploader
             data-target="[data-file-container]"
@@ -34,32 +36,41 @@
         </div>
       </label>
 
-      <div data-file-container class="bx--file-container">
+      <div data-file-container :class="`${carbonPrefix}--file-container`">
         <div
           v-for="(file, index) in internalFiles"
           :key="index"
-          :class="isInvalid(index) ? 'bx--file__selected-file--invalid__wrapper' : 'bx--file__selected-file'"
+          :class="
+            isInvalid(index)
+              ? `${carbonPrefix}--file__selected-file--invalid__wrapper`
+              : `${carbonPrefix}--file__selected-file`
+          "
         >
           <cv-wrapper
             :tag-type="isInvalid(index) ? 'div' : ''"
-            class="bx--file__selected-file bx--file__selected-file--invalid"
+            :class="`${carbonPrefix}--file__selected-file ${carbonPrefix}--file__selected-file--invalid`"
           >
-            <p class="bx--file-filename">{{ file.file.name }}</p>
+            <p :class="`${carbonPrefix}--file-filename`">{{ file.file.name }}</p>
 
-            <span :data-for="uid" class="bx--file__state-container" :data-test="file.state" :style="stateStyleOverides">
-              <div v-if="file.state === 'uploading'" class="bx--inline-loading__animation">
-                <div data-inline-loading-spinner class="bx--loading bx--loading--small">
-                  <svg class="bx--loading__svg" viewBox="-75 -75 150 150">
-                    <circle class="bx--loading__background" cx="0" cy="0" r="37.5" />
-                    <circle class="bx--loading__stroke" cx="0" cy="0" r="37.5" />
+            <span
+              :data-for="uid"
+              :class="`${carbonPrefix}--file__state-container`"
+              :data-test="file.state"
+              :style="stateStyleOverides"
+            >
+              <div v-if="file.state === 'uploading'" :class="`${carbonPrefix}--inline-loading__animation`">
+                <div data-inline-loading-spinner :class="`${carbonPrefix}--loading ${carbonPrefix}--loading--small`">
+                  <svg :class="`${carbonPrefix}--loading__svg`" viewBox="-75 -75 150 150">
+                    <circle :class="`${carbonPrefix}--loading__background`" cx="0" cy="0" r="37.5" />
+                    <circle :class="`${carbonPrefix}--loading__stroke`" cx="0" cy="0" r="37.5" />
                   </svg>
                 </div>
               </div>
-              <CheckmarkFilled16 v-if="file.state === 'complete'" class="bx--file-complete" />
-              <WarningFilled16 v-if="isInvalid(index)" class="bx--file--invalid" />
+              <CheckmarkFilled16 v-if="file.state === 'complete'" :class="`${carbonPrefix}--file-complete`" />
+              <WarningFilled16 v-if="isInvalid(index)" :class="`${carbonPrefix}--file--invalid`" />
               <button
                 type="button"
-                class="bx--file-close"
+                :class="`${carbonPrefix}--file-close`"
                 v-if="removable"
                 :alt="removeAriaLabel"
                 :arial-label="removeAriaLabel"
@@ -68,9 +79,11 @@
                 <Close16 />
               </button>
             </span>
-            <div v-if="isInvalid(index)" class="bx--form-requirement">
-              <div class="bx--form-requirement__title">{{ file.invalidMessageTitle || 'Invalid file' }}</div>
-              <p class="bx--form-requirement__supplement">{{ file.invalidMessage }}</p>
+            <div v-if="isInvalid(index)" :class="`${carbonPrefix}--form-requirement`">
+              <div :class="`${carbonPrefix}--form-requirement__title`">
+                {{ file.invalidMessageTitle || 'Invalid file' }}
+              </div>
+              <p :class="`${carbonPrefix}--form-requirement__supplement`">{{ file.invalidMessage }}</p>
             </div>
           </cv-wrapper>
         </div>
@@ -86,6 +99,7 @@ import CheckmarkFilled16 from '@carbon/icons-vue/es/checkmark--filled/16';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import Close16 from '@carbon/icons-vue/es/close/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 const CONSTS = {
   STATES: {
@@ -98,7 +112,7 @@ const CONSTS = {
 export default {
   name: 'CvFileUploader',
   components: { CvFormItem, CheckmarkFilled16, WarningFilled16, Close16, CvWrapper },
-  mixins: [uidMixin],
+  mixins: [uidMixin, carbonPrefixMixin],
   inheritAttrs: false,
   props: {
     clearOnReselect: Boolean,

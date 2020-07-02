@@ -1,5 +1,11 @@
 <template>
-  <component :is="tagType" v-on="$listeners" v-bind="linkProps" class="cv-link" :class="linkClasses">
+  <component
+    :is="tagType"
+    v-on="$listeners"
+    v-bind="linkProps"
+    class="cv-link"
+    :class="[`${carbonPrefix}--link`, { [`${carbonPrefix}--link--inline`]: inline }]"
+  >
     <slot></slot>
   </component>
 </template>
@@ -13,15 +19,6 @@ export default {
   mixins: [LinkMixin, carbonPrefixMixin],
   props: {
     inline: Boolean,
-  },
-  computed: {
-    linkClasses() {
-      const classes = [`${this.carbonPrefix}--link`];
-      if (this.inline) {
-        classes.push(`${this.carbonPrefix}--link--inline`);
-      }
-      return classes;
-    },
   },
 };
 </script>

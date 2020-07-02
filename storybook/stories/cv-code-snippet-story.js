@@ -103,7 +103,7 @@ let variants = [
   },
   {
     name: 'oneline',
-    includes: ['content', 'copyFeedback', 'feedbackAriaLabel'],
+    includes: ['content', 'copyFeedback', 'feedbackAriaLabel', 'theme'],
     extra: { kind: { group: 'attr', value: 'kind="oneline"', inline: true } },
   },
   {

@@ -1,7 +1,10 @@
 <template>
   <div
-    class="cv-header-panel bx--header-panel"
-    :class="{ 'bx--header-panel--expanded': panelExpanded }"
+    :class="[
+      `cv-header-panel`,
+      `${carbonPrefix}--header-panel`,
+      { [`${carbonPrefix}--header-panel--expanded`]: panelExpanded },
+    ]"
     :aria-hidden="!panelExpanded ? 'true' : 'false'"
     :id="id"
     @focusout="onFocusout"
@@ -12,8 +15,10 @@
 </template>
 
 <script>
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 export default {
   name: 'CvHeaderPanel',
+  mixins: [carbonPrefixMixin],
   props: {
     expanded: Boolean,
     id: { type: String, required: true },

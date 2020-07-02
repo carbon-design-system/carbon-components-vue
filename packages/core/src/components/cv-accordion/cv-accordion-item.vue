@@ -6,7 +6,18 @@
 -->
 
 <template>
-  <li data-accordion-item class="cv-accordion-item" :class="itemClasses" @animationend="onAnimationEnd">
+  <li
+    data-accordion-item
+    class="cv-accordion-item"
+    :class="[
+      `${carbonPrefix}--accordion__item`,
+      {
+        [`${carbonPrefix}--accordion__item--active`]: dataOpen,
+        [`${carbonPrefix}--accordion__item--${this.animation}`]: animation,
+      },
+    ]"
+    @animationend="onAnimationEnd"
+  >
     <button
       type="button"
       :class="`${carbonPrefix}--accordion__heading`"
@@ -67,19 +78,6 @@ export default {
     },
     onAnimationEnd() {
       this.animation = '';
-    },
-  },
-  computed: {
-    itemClasses() {
-      const classes = [`${this.carbonPrefix}--accordion__item`];
-
-      if (this.dataOpen) {
-        classes.push(`${this.carbonPrefix}--accordion__item--active`);
-      }
-      if (this.animation) {
-        classes.push(`${this.carbonPrefix}--accordion__item--${this.animation}`);
-      }
-      return classes.join(' ');
     },
   },
 };
