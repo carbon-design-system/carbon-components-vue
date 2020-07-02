@@ -1,3 +1,7 @@
+# Changelog 2.29.0-canary.0
+
+- chore: Replace use of the 'bx' prefix with the prefix in carbon components everywhere. This was quite an extensive change. It is more than possible one or two errors may have crept in. A full weeks Canary is likely.
+
 # Changelog 2.28.0
 
 - chore: added carbonPrefix to inline-loading, link, number input, breadcrumb and checkbox
