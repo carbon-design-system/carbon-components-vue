@@ -1,4 +1,10 @@
-# Changelog 2.28.0
+# Changelog
+
+## 2.29.0-canary.0
+
+- chore: Replace use of the 'bx' prefix with the prefix in carbon components everywhere. This was quite an extensive change. It is more than possible one or two errors may have crept in. A full weeks Canary is likely.
+
+## 2.28.0
 
 - chore: added carbonPrefix to inline-loading, link, number input, breadcrumb and checkbox
 - fix: combobox typoe v-bind="$attr" -> v-bind="$attrs"
@@ -8,16 +14,16 @@
 - fix: improvve SVG icon support in buttons, now possible to specify component (e.g. @carbon/icons-vue), SVG path, SVG symbol path or raw SVG. NOTE: Until SVG2 using SVG path does not style.
 - fix: aria-hidden, aria-selected and aria-expanded false values. These do not default to false on undefined. Instead undefined means not applicable, false as a result implies true is possible.
 
-# Changelog 2.27.1
+## 2.27.1
 
 - fix: lower node requirement to 10
 - chore: make accordion class prefix use carbon prefix
 
-# Changelog 2.27.0
+## 2.27.0
 
 Release previuos canarys
 
-# Changelog 2.27.0-canary-2
+## 2.27.0-canary-2
 
 - chore: fix aria label on template view
 - fix: table skeleton appearance
