@@ -81,7 +81,8 @@ export default {
     offset: {
       type: Object,
       validator(value) {
-        return value.hasOwnProperty('left') && value.hasOwnProperty('top');
+        return value && value.left !== undefined && value.top !== undefined;
+        // value.hasOwnProperty('left') && value.hasOwnProperty('top');
       },
     },
     tipPosition: {
