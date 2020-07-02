@@ -56,7 +56,6 @@
 import Vue from 'vue';
 import SvView from './sv-view.vue';
 import { CvInlineNotification } from '../../../../packages/core/src';
-import { CvFeedbackButton } from '../../../../packages/core/src/components/cv-feedback-button/_cv-feedback-button';
 
 export default {
   name: 'SvTemplateView',
