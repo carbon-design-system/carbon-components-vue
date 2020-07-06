@@ -156,7 +156,7 @@ export default {
         this.open = false;
       }
     });
-    this.internalValue = this.internalValue; // forces update of value
+    this.updateChildren(this.internalValue);
     this.checkSlots();
   },
   beforeUpdate() {
@@ -191,17 +191,7 @@ export default {
         return this.dataValue;
       },
       set(val) {
-        const childItems = this.dropdownItems();
-
-        for (let index in childItems) {
-          let child = childItems[index];
-          let selected = child.value === val;
-          child.internalSelected = selected;
-
-          if (selected) {
-            this.selectedChild = child;
-          }
-        }
+        this.updateChildren(val);
 
         if (this.dataValue !== val) {
           // only raise event on change
@@ -226,6 +216,19 @@ export default {
     },
   },
   methods: {
+    updateChildren(val) {
+      const childItems = this.dropdownItems();
+
+      for (let index in childItems) {
+        let child = childItems[index];
+        let selected = child.value === val;
+        child.internalSelected = selected;
+
+        if (selected) {
+          this.selectedChild = child;
+        }
+      }
+    },
     checkSlots() {
       // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
       this.isInvalid = !!(this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length));
