@@ -92,7 +92,7 @@ export default {
       isInvalid: false,
     };
   },
-  mounted: function() {
+  mounted() {
     this.checkSlots();
   },
   beforeUpdate() {
