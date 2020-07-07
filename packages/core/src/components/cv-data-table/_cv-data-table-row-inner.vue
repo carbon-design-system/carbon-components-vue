@@ -75,7 +75,7 @@ export default {
       hasOverflowMenu: false,
     };
   },
-  mounted: function() {
+  mounted() {
     this.checkSlots();
   },
   beforeUpdate() {

@@ -24,7 +24,7 @@ export default {
     getRandomInt: function(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     },
-    calcWidth: function() {
+    calcWidth() {
       let width = this.width;
       if (this.paragraph) {
         const { num, unit } = this.widthObj;
@@ -39,7 +39,7 @@ export default {
     },
   },
   computed: {
-    widthObj: function() {
+    widthObj() {
       const widthObj = { num: parseInt(this.width, 10) };
       if (this.width.includes('px')) {
         widthObj.unit = 'px';
@@ -49,7 +49,7 @@ export default {
       }
       return widthObj;
     },
-    lines: function() {
+    lines() {
       return Array.from(
         {
           length: this.paragraph ? this.lineCount : 1,
