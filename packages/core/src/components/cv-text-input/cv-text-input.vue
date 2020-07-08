@@ -143,10 +143,11 @@ export default {
         this.$refs.input.value = currentValue;
       });
     },
+    blur() {
+      this.$refs.input.blur();
+    },
     focus() {
-      this.$nextTick(() => {
-        this.$refs.input.focus();
-      });
+      this.$refs.input.focus();
     },
   },
 };

@@ -5,6 +5,7 @@ import { action } from '@storybook/addon-actions';
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
+import TimerButton from '../_storybook/components/timer-button';
 
 import CvTextAreaNotesMD from '../../packages/core/src/components/cv-text-area/cv-text-area-notes.md';
 import { CvTextArea } from '../../packages/core/src/';
@@ -118,7 +119,7 @@ for (const story of storySet) {
             <textarea v-model="modelValue"></textarea>
           </label>
         </div>
-        <button @click="focus">Call focus method on component</button>
+      <TimerButton @timer-start="doStart" @timer-end="doEnd" label="Set Focus" active-label-prefix="Blur in" />
       </template>
       </sv-template-view>
   `;
@@ -129,13 +130,18 @@ for (const story of storySet) {
             modelValue: 'initial value',
           };
         },
-        components: { CvTextArea, SvTemplateView },
+        components: { CvTextArea, SvTemplateView, TimerButton },
         template: templateViewString,
         props: settings.props,
         methods: {
           onInput: action('cv-text-area - input event'),
-          focus() {
-            this.$refs.templateView.$slots.component[0].componentInstance.focus();
+          doStart() {
+            this.$nextTick(() => {
+              this.$refs.templateView.$slots.component[0].componentInstance.focus();
+            });
+          },
+          doEnd() {
+            this.$refs.templateView.$slots.component[0].componentInstance.blur();
           },
         },
       };
