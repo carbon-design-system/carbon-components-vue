@@ -45,12 +45,13 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
+import methodsMixin from '../../mixins/methods-mixin';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvTextArea',
-  mixins: [uidMixin, themeMixin, carbonPrefixMixin],
+  mixins: [uidMixin, themeMixin, carbonPrefixMixin, methodsMixin({ textarea: ['blur', 'focus'] })],
   inheritAttrs: false,
   components: { WarningFilled16 },
   props: {
@@ -87,12 +88,6 @@ export default {
       // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
       this.isInvalid = !!(this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length));
       this.isHelper = !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
-    },
-    blur() {
-      this.$refs.textarea.blur();
-    },
-    focus() {
-      this.$refs.textarea.focus();
     },
   },
 };

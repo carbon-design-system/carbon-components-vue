@@ -63,6 +63,7 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
+import methodsMixin from '../../mixins/methods-mixin';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import View16 from '@carbon/icons-vue/es/view/16';
 import ViewOff16 from '@carbon/icons-vue/es/view--off/16';
@@ -71,7 +72,7 @@ import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 export default {
   name: 'CvTextInput',
   components: { WarningFilled16, View16, ViewOff16 },
-  mixins: [uidMixin, themeMixin, carbonPrefixMixin],
+  mixins: [uidMixin, themeMixin, carbonPrefixMixin, methodsMixin({ input: ['blur', 'focus'] })],
   inheritAttrs: false,
   props: {
     helperText: { type: String, default: undefined },
@@ -142,12 +143,6 @@ export default {
       this.$nextTick(() => {
         this.$refs.input.value = currentValue;
       });
-    },
-    blur() {
-      this.$refs.input.blur();
-    },
-    focus() {
-      this.$refs.input.focus();
     },
   },
 };
