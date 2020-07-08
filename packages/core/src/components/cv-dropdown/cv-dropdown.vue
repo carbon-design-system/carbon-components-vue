@@ -324,6 +324,11 @@ export default {
         }
       }
     },
+    blur() {
+      this.$nextTick(() => {
+        this.$refs.button.blur();
+      });
+    },
     focus() {
       this.$nextTick(() => {
         this.$refs.button.focus();

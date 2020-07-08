@@ -88,10 +88,11 @@ export default {
       this.isInvalid = !!(this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length));
       this.isHelper = !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
     },
+    blur() {
+      this.$refs.textarea.blur();
+    },
     focus() {
-      this.$nextTick(() => {
-        this.$refs.textarea.focus();
-      });
+      this.$refs.textarea.focus();
     },
   },
 };
