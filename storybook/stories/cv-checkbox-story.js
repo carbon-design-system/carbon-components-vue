@@ -5,6 +5,7 @@ import { action } from '@storybook/addon-actions';
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
+import TimerButton from '../_storybook/components/timer-button';
 
 import CvCheckboxNotesMD from '../../packages/core/src/components/cv-checkbox/cv-checkbox-notes.md';
 import { CvCheckbox, CvCheckboxSkeleton } from '../../packages/core/src/';
@@ -85,11 +86,13 @@ for (const story of storySet) {
 
       const templateViewString = `
     <sv-template-view
+      ref="templateView"
       sv-margin
       :sv-alt-back="this.$options.propsData.theme !== 'light'"
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">
+        <TimerButton @timer-start="doStart" @timer-end="doEnd" label="Set Focus" active-label-prefix="Blur in" />
         <div v-if="${templateString.indexOf('v-model') > 0}">
           <br>
           <br>
@@ -108,7 +111,7 @@ for (const story of storySet) {
   `;
 
       return {
-        components: { CvCheckbox, SvTemplateView },
+        components: { CvCheckbox, SvTemplateView, TimerButton },
         props: settings.props,
         data() {
           return {
@@ -117,6 +120,14 @@ for (const story of storySet) {
         },
         methods: {
           actionChange: action('CV Checkbox - change'),
+          doStart() {
+            this.$nextTick(() => {
+              this.$refs.templateView.$slots.component[0].componentInstance.focus();
+            });
+          },
+          doEnd() {
+            this.$refs.templateView.$slots.component[0].componentInstance.blur();
+          },
         },
         template: templateViewString,
       };

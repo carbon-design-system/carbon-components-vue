@@ -36,10 +36,11 @@
 import checkMixin from '../../mixins/check-mixin';
 import uidMixin from '../../mixins/uid-mixin';
 import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import methodsMixin from '../../mixins/methods-mixin';
 
 export default {
   name: 'CvCheckbox',
-  mixins: [checkMixin, uidMixin, carbonPrefixMixin],
+  mixins: [checkMixin, uidMixin, carbonPrefixMixin, methodsMixin({ input: ['blur', 'focus'] })],
   inheritAttrs: false,
   props: {
     hideLabel: Boolean,
