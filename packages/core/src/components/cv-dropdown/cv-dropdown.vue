@@ -112,6 +112,7 @@
 <script>
 import themeMixin from '../../mixins/theme-mixin';
 import uidMixin from '../../mixins/uid-mixin';
+import methodsMixin from '../../mixins/methods-mixin';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import ChevronDownGlyph from '@carbon/icons-vue/es/chevron--down';
 import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
@@ -119,7 +120,7 @@ import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 export default {
   name: 'CvDropdown',
   inheritAttrs: false,
-  mixins: [themeMixin, uidMixin, carbonPrefixMixin],
+  mixins: [themeMixin, uidMixin, carbonPrefixMixin, methodsMixin({ button: ['blur', 'focus'] })],
   components: { WarningFilled16, ChevronDownGlyph },
   props: {
     disabled: Boolean,
@@ -323,16 +324,6 @@ export default {
           this.internalValue = newValue;
         }
       }
-    },
-    blur() {
-      this.$nextTick(() => {
-        this.$refs.button.blur();
-      });
-    },
-    focus() {
-      this.$nextTick(() => {
-        this.$refs.button.focus();
-      });
     },
   },
 };
