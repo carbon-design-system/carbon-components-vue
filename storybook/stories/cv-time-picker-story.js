@@ -16,6 +16,7 @@ const ampmConfig = [
   {
     AM: 'AM',
     PM: 'PM',
+    TwentyFourHour: '24',
   },
   'AM',
   // consts.CONFIG,// fails when used with number in storybook 4.1.4

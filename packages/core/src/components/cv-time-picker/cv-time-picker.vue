@@ -23,6 +23,7 @@
         />
       </div>
       <cv-select
+        v-if="ampm !== '24'"
         :class="`${carbonPrefix}--time-picker__select`"
         :form-item="false"
         hide-label
@@ -34,6 +35,7 @@
         <cv-select-option :class="`${carbonPrefix}--select-option`" value="AM">AM</cv-select-option>
         <cv-select-option :class="`${carbonPrefix}--select-option`" value="PM">PM</cv-select-option>
       </cv-select>
+      <div v-else v-html="`&nbsp;`"></div>
 
       <cv-select
         :class="`${carbonPrefix}--time-picker__select`"
@@ -105,7 +107,7 @@ export default {
   computed: {
     validAmpm() {
       let result = this.ampm;
-      if (!['AM', 'PM'].includes(this.ampm)) {
+      if (!['AM', 'PM', '24'].includes(this.ampm)) {
         console.error(`CvTimePicker: invalid value '${this.ampm}' supplied for prop ampm. Default applied.`);
         // set to valid value
         result = this.ampm[0].value;
