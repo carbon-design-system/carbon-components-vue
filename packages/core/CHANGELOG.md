@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.29.0
+
+- feat: Includes use of coded prefix
+- feat: Adds 24 hour support to time picker.
+
 ## 2.29.0-canary.0
 
 - chore: Replace use of the 'bx' prefix with the prefix in carbon components everywhere. This was quite an extensive change. It is more than possible one or two errors may have crept in. A full weeks Canary is likely.
