@@ -100,6 +100,7 @@ methods: {
 ## Attributes
 
 ```javascript
+ampm: { type: String, default: 'AM' }, // AM, PM or 24
 ampmSelectLabel: { type: String, default: 'Select AM/PM' },
 disabled: Boolean,
 initialValue: {
