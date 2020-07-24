@@ -1,7 +1,9 @@
 # Changelog
 
-## Canary
+## 2.30.0-canary.0
 
+- feat: add kind 'button' to file upload component.
+- chore: update inputs to 10.16.0 most noticably by moving helper text below the input
 - fix: Multiselect filter tag usage (causing validator warning)
 - fix: Combobox and multiselect user filter for non-existent item
 
