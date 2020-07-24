@@ -1041,10 +1041,10 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001038, caniuse-lite@^1.0.30001039:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001040.tgz#103fc8e6eb1d7397e95134cd0e996743353d58ea"
   integrity sha512-Ep0tEPeI5wCvmJNrXjE3etgfI+lkl1fTDU6Y3ZH1mhrjkPlVI9W4pcKbMo+BQLpEWKVYYp2EmYaRsqpPC3k7lQ==
 
-carbon-components@10.11.2:
-  version "10.11.2"
-  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.11.2.tgz#c2e6e2168e548010d3033e3c620e3bdc4c1182c7"
-  integrity sha512-bclmy7lXH3/GXXh5Udwcup51i+MUDbDle1kUEilRF9e6phkVhn7I+qN7y/xuRfE4PuXsBC7CtMVNEjtnie6Qow==
+carbon-components@10.16.0:
+  version "10.16.0"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.16.0.tgz#1f631788ea16485041729c5a6b65d1d79063eb86"
+  integrity sha512-7MltjxNKEjjJ+TOJv3qexE2wBiXQ5qNtMb+in2OJqAWEfixeDHLB+ZtkShAQmKzNw5jIX7w8jfsp2JC4CkApiw==
   dependencies:
     flatpickr "4.6.1"
     lodash.debounce "^4.0.8"
