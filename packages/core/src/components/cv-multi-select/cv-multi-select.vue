@@ -68,7 +68,8 @@
           :class="{ [`${carbonPrefix}--list-box__selection--multi`]: filterable && dataValue.length > 0 }"
           :disabled="disabled"
           v-show="dataValue.length > 0"
-          kind="filter"
+          :kind="filterTagKind"
+          filter
           :label="`${dataValue.length}`"
           @remove="clearValues"
           ref="tag"
@@ -170,6 +171,7 @@ export default {
     autoFilter: Boolean,
     autoHighlight: Boolean,
     disabled: Boolean,
+    filterTagKind: { type: String, default: 'high-contrast' },
     inline: Boolean,
     invalidMessage: { type: String, default: undefined },
     helperText: { type: String, default: undefined },
