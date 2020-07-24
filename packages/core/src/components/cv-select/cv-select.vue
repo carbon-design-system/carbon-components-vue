@@ -25,10 +25,6 @@
         >{{ label }}</label
       >
 
-      <div v-if="!inline && isHelper" :class="`${carbonPrefix}--form__helper-text`">
-        <slot name="helper-text">{{ helperText }}</slot>
-      </div>
-
       <cv-wrapper :tag-type="inline ? 'div' : ''" :class="`${carbonPrefix}--select-input--inline__wrapper`">
         <div :class="`${carbonPrefix}--select-input__wrapper`" :data-invalid="isInvalid">
           <select
@@ -48,12 +44,12 @@
         <div v-if="isInvalid" :class="`${carbonPrefix}--form-requirement`">
           <slot name="invalid-message">{{ invalidMessage }}</slot>
         </div>
+        <div v-if="!isInvalid && !inline && isHelper" :class="`${carbonPrefix}--form__helper-text`">
+          <slot name="helper-text">{{ helperText }}</slot>
+        </div>
+
         <!-- cv-wrapper div ${carbonPrefix}--select-input--inline__wrapper -->
       </cv-wrapper>
-
-      <div v-if="inline && isHelper" :class="`${carbonPrefix}--form__helper-text`">
-        <slot name="helper-text">{{ helperText }}</slot>
-      </div>
     </div>
     <!-- cv-wrapper div ${carbonPrefix}--form-item -->
   </cv-wrapper>
