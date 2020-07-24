@@ -8,13 +8,6 @@
     >
 
     <div
-      v-if="isHelper"
-      :class="[`${carbonPrefix}--form__helper-text`, { [`${carbonPrefix}--form__helper-text--disabled`]: disabled }]"
-    >
-      <slot name="helper-text">{{ helperText }}</slot>
-    </div>
-
-    <div
       role="listbox"
       tabindex="-1"
       class=""
@@ -106,6 +99,12 @@
     </div>
     <div v-if="isInvalid" :class="[`${carbonPrefix}--form-requirement`]">
       <slot name="invalid-message">{{ invalidMessage }}</slot>
+    </div>
+    <div
+      v-if="!isInvalid && isHelper"
+      :class="[`${carbonPrefix}--form__helper-text`, { [`${carbonPrefix}--form__helper-text--disabled`]: disabled }]"
+    >
+      <slot name="helper-text">{{ helperText }}</slot>
     </div>
   </div>
 </template>
