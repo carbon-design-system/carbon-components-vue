@@ -1,5 +1,9 @@
 # Changelog
 
+## Canary
+
+- fix: Combobox filter tag usage (causing validator warning)
+
 ## 2.29.0
 
 - feat: Includes use of coded prefix
