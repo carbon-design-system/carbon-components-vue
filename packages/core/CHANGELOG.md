@@ -3,6 +3,7 @@
 ## Canary
 
 - fix: Multiselect filter tag usage (causing validator warning)
+- fix: Combobox and multiselect user filter for non-existent item
 
 ## 2.29.0
 
