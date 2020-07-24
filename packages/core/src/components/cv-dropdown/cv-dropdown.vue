@@ -33,19 +33,11 @@
       </span>
 
       <div
-        v-if="!inline && isHelper"
-        :class="[`${carbonPrefix}--form__helper-text`, { [`${carbonPrefix}--form__helper-text--disabled`]: disabled }]"
-        :aria-disabled="disabled"
-      >
-        <slot name="helper-text">{{ helperText }}</slot>
-      </div>
-
-      <div
         data-dropdown
         :data-value="internalValue"
         :data-invalid="isInvalid"
         :class="[
-          `${carbonPrefix}--dropdown`,
+          `${carbonPrefix}--dropdown ${carbonPrefix}--list-box`,
           {
             [`${carbonPrefix}--dropdown--light`]: theme === 'light',
             [`${carbonPrefix}--dropdown--up`]: up,
@@ -64,7 +56,7 @@
         @click="onClick"
       >
         <button
-          :class="`${carbonPrefix}--dropdown-text`"
+          :class="`${carbonPrefix}--list-box__field`"
           :aria-disabled="disabled"
           aria-haspopup="true"
           :aria-expanded="open ? 'true' : 'false'"
@@ -74,18 +66,19 @@
           type="button"
           ref="button"
         >
-          <WarningFilled16 v-if="isInvalid && inline" :class="`${carbonPrefix}--dropdown__invalid-icon`" />
+          <WarningFilled16 v-if="isInvalid" :class="`${carbonPrefix}--list-box__invalid-icon`" />
           <span
             :class="`${carbonPrefix}--dropdown-text__inner`"
             :id="`${uid}-value`"
             data-test="internalCaption"
             v-html="internalCaption"
           />
-          <span :class="`${carbonPrefix}--dropdown__arrow-container`">
-            <span :class="`${carbonPrefix}--dropdown__arrow`" :style="chevronStyleOveride">
-              <chevron-down-glyph />
-            </span>
-          </span>
+          <div
+            :class="[`${carbonPrefix}--list-box__menu-icon`, { [`${carbonPrefix}--list-box__menu-icon--open`]: open }]"
+            role="button"
+          >
+            <chevron-down-16 :aria-label="open ? 'Close menu' : 'Open menu'" />
+          </div>
         </button>
         <ul
           :class="`${carbonPrefix}--dropdown-list`"
@@ -106,6 +99,13 @@
     <div v-if="isInvalid && !inline" :class="`${carbonPrefix}--form-requirement`">
       <slot name="invalid-message">{{ invalidMessage }}</slot>
     </div>
+    <div
+      v-if="!inline && !isInvalid && isHelper"
+      :class="[`${carbonPrefix}--form__helper-text`, { [`${carbonPrefix}--form__helper-text--disabled`]: disabled }]"
+      :aria-disabled="disabled"
+    >
+      <slot name="helper-text">{{ helperText }}</slot>
+    </div>
   </div>
 </template>
 
@@ -113,14 +113,14 @@
 import themeMixin from '../../mixins/theme-mixin';
 import uidMixin from '../../mixins/uid-mixin';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
-import ChevronDownGlyph from '@carbon/icons-vue/es/chevron--down';
+import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16';
 import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvDropdown',
   inheritAttrs: false,
   mixins: [themeMixin, uidMixin, carbonPrefixMixin],
-  components: { WarningFilled16, ChevronDownGlyph },
+  components: { WarningFilled16, ChevronDown16 },
   props: {
     disabled: Boolean,
     formItem: { type: Boolean, default: true },
