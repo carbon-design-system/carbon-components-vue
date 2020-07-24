@@ -14,7 +14,7 @@
       :data-invalid="isInvalid"
     >
       <label :for="uid" :class="`${carbonPrefix}--label`">{{ label }}</label>
-      <div :class="`${carbonPrefix}--form__helper-text`" v-if="isHelper">
+      <div :class="`${carbonPrefix}--form__helper-text`" v-if="isHelper && mobile">
         <slot name="helper-text">{{ helperText }}</slot>
       </div>
       <div :class="`${carbonPrefix}--number__input-wrapper`">
@@ -74,6 +74,9 @@
       </div>
       <div :class="`${carbonPrefix}--form-requirement`" v-if="isInvalid">
         <slot name="invalid-message">{{ invalidMessage }}</slot>
+      </div>
+      <div :class="`${carbonPrefix}--form__helper-text`" v-if="!isInvalid && isHelper && !mobile">
+        <slot name="helper-text">{{ helperText }}</slot>
       </div>
     </div>
   </cv-wrapper>

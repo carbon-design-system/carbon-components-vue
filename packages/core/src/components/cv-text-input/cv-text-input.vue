@@ -10,15 +10,6 @@
       ]"
       >{{ label }}</label
     >
-    <div
-      v-if="isHelper"
-      :class="[
-        `${carbonPrefix}--form__helper-text`,
-        { [`${carbonPrefix}--form__helper-text--disabled`]: $attrs.disabled },
-      ]"
-    >
-      <slot name="helper-text">{{ helperText }}</slot>
-    </div>
     <div :class="`${carbonPrefix}--text-input__field-wrapper`" :data-invalid="isInvalid">
       <WarningFilled16 v-if="isInvalid" :class="`${carbonPrefix}--text-input__invalid-icon`" />
       <input
@@ -56,6 +47,15 @@
     </div>
     <div :class="`${carbonPrefix}--form-requirement`" v-if="isInvalid">
       <slot name="invalid-message">{{ invalidMessage }}</slot>
+    </div>
+    <div
+      v-if="!isInvalid && isHelper"
+      :class="[
+        `${carbonPrefix}--form__helper-text`,
+        { [`${carbonPrefix}--form__helper-text--disabled`]: $attrs.disabled },
+      ]"
+    >
+      <slot name="helper-text">{{ helperText }}</slot>
     </div>
   </div>
 </template>
