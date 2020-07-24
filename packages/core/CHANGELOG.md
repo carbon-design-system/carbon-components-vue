@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.30.0-canary.1
+
+- fix snapshots
+
 ## 2.30.0-canary.0
 
 - feat: add kind 'button' to file upload component.
