@@ -2,7 +2,7 @@
 
 ## Canary
 
-- fix: Combobox filter tag usage (causing validator warning)
+- fix: Multiselect filter tag usage (causing validator warning)
 
 ## 2.29.0
 
