@@ -5,25 +5,30 @@
     <div :class="`${carbonPrefix}--file`" data-file>
       <label
         :for="uid"
-        :class="`${carbonPrefix}--file-browse-btn`"
+        :class="[
+          {
+            [`${carbonPrefix}--file-browse-btn`]: kind !== 'button',
+            [`${carbonPrefix}--btn`]: kind === 'button',
+            [`${carbonPrefix}--btn--primary`]: kind === 'button',
+          },
+        ]"
         role="button"
         tabindex="0"
         @keydown.enter.prevent="onShow()"
         @keydown.space.prevent
         @keyup.space.prevent="onShow()"
       >
-        <div
+        <cv-wrapper
+          :tag-type="kind !== 'button' ? 'div' : ''"
           data-file-drop-container
-          :class="[
-            `${carbonPrefix}--file__drop-container`,
-            { [`${carbonPrefix}--file__drop-container--drag-over`]: allowDrop },
-          ]"
+          :class="`${carbonPrefix}--file__drop-container${allowDropClass}`"
           @dragover="onDragEvent"
           @dragleave="onDragEvent"
           @drop="onDragEvent"
         >
           <slot name="drop-target">{{ internalDropTargetLabel }}</slot>
           <input
+            v-if="kind !== 'button'"
             v-bind="$attrs"
             type="file"
             :class="`${carbonPrefix}--file-input`"
@@ -33,8 +38,19 @@
             v-on="inputListeners"
             ref="file-input"
           />
-        </div>
+        </cv-wrapper>
       </label>
+      <input
+        v-if="kind === 'button'"
+        v-bind="$attrs"
+        type="file"
+        :class="`${carbonPrefix}--file-input`"
+        :id="uid"
+        data-file-uploader
+        data-target="[data-file-container]"
+        v-on="inputListeners"
+        ref="file-input"
+      />
 
       <div data-file-container :class="`${carbonPrefix}--file-container`">
         <div
@@ -100,14 +116,7 @@ import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import Close16 from '@carbon/icons-vue/es/close/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
 import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
-
-const CONSTS = {
-  STATES: {
-    NONE: '',
-    UPLOADING: 'uploading',
-    COMPLETE: 'complete',
-  },
-};
+import { STATES, KINDS } from './consts.js';
 
 export default {
   name: 'CvFileUploader',
@@ -117,6 +126,18 @@ export default {
   props: {
     clearOnReselect: Boolean,
     files: Array,
+    kind: {
+      type: String,
+      default: 'drag-target',
+      validator: val => {
+        const validValues = Object.values(KINDS);
+
+        if (!validValues.includes(val)) {
+          console.warn(`CvFileUploader: valid values for 'kind' are ${validValues}`);
+        }
+        return true;
+      },
+    },
     label: String,
     helperText: String,
     initialStateUploading: Boolean,
@@ -139,7 +160,7 @@ export default {
     event: 'change',
   },
   created() {
-    this.STATES = Object.freeze(CONSTS.STATES);
+    this.STATES = Object.freeze(STATES);
   },
   data() {
     return {
@@ -178,6 +199,9 @@ export default {
       // <style carbon tweaks - DO NOT USE STYLE TAG as it causes SSR issues
       return { display: 'inline-flex', alignItems: 'center' };
     },
+    allowDropClass() {
+      return this.allowDrop ? ` ${this.carbonPrefix}--file__drop-container--drag-over` : '';
+    },
   },
   methods: {
     remove(index) {
@@ -187,7 +211,7 @@ export default {
     addFiles(files) {
       for (const file of files) {
         this.internalFiles.push({
-          state: this.initialStateUploading ? CONSTS.STATES.UPLOADING : CONSTS.STATES.NONE,
+          state: this.initialStateUploading ? STATES.UPLOADING : STATES.NONE,
           file,
           invalidMessageTitle: '',
           invalidMessage: '',
