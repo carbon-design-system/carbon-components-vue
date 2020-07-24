@@ -299,7 +299,7 @@ export default {
       this.updateOptions();
     },
     checkHighlightPosition(newHiglight) {
-      if (this.$refs.list && this.$refs.option) {
+      if (this.$refs.list && this.$refs.option && this.$refs.option[newHiglight]) {
         if (this.$refs.list.scrollTop > this.$refs.option[newHiglight].offsetTop) {
           this.$refs.list.scrollTop = this.$refs.option[newHiglight].offsetTop;
         } else if (
