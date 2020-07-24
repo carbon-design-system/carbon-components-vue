@@ -25,6 +25,7 @@ accept - standard input attribute for file type
 clear-on-reselect - selecting files a second time clears the first selection
 dropTargetLabel: { type: String, default: 'Drag and drop files here or upload' },
 initial-state-uploading - set the uploading state when a file is selected
+kind - Defaults to 'drag-target' other options 'button'.
 label - text label for the input
 multiple - standard input attribute for file type
 removable - show remove button

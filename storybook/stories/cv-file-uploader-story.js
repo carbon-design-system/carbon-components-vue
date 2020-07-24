@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { text, boolean } from '@storybook/addon-knobs';
+import { text, boolean, select } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
@@ -14,6 +14,20 @@ const storiesDefault = storiesOf('Components/CvFileUploader', module);
 // const storiesExperimental = storiesOf('Experimental/CvFileUploader', module);
 
 let preKnobs = {
+  kind: {
+    group: 'attr',
+    type: select,
+    config: [
+      'kind',
+      {
+        default: '',
+        button: 'button',
+        dragDrop: 'drag-drop',
+      },
+      '',
+    ], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'kind',
+  },
   label: {
     group: 'attr',
     type: text,
