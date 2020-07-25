@@ -79,7 +79,7 @@
         <template v-else>
           <input
             ref="input"
-            :class="`${carbonPrefix}--text-input`"
+            :class="[`${carbonPrefix}--text-input`, { [`${carbonPrefix}--text-input--empty`]: dataInput.length === 0 }]"
             :aria-controls="uid"
             aria-autocomplete="list"
             role="combobox"
