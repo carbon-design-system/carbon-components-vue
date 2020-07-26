@@ -19,6 +19,7 @@
     @animationend="onAnimationEnd"
   >
     <button
+      ref="button"
       type="button"
       :class="`${carbonPrefix}--accordion__heading`"
       :aria-expanded="dataOpen ? 'true' : 'false'"
@@ -40,10 +41,11 @@
 import ChevronRight16 from '@carbon/icons-vue/es/chevron--right/16';
 import uidMixin from '../../mixins/uid-mixin';
 import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import methodsMixin from '../../mixins/methods-mixin';
 
 export default {
   name: 'CvAccordionItem',
-  mixins: [uidMixin, carbonPrefixMixin],
+  mixins: [uidMixin, carbonPrefixMixin, methodsMixin({ button: ['blur', 'focus'] })],
   components: { ChevronRight16 },
   props: {
     open: { type: Boolean, default: false },

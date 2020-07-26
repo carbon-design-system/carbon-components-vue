@@ -5,6 +5,7 @@ import { action } from '@storybook/addon-actions';
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
+import TimerButton from '../_storybook/components/timer-button';
 
 import CvDropdownNotesMD from '../../packages/core/src/components/cv-dropdown/cv-dropdown-notes.md';
 import { CvDropdown, CvDropdownItem, CvDropdownSkeleton } from '../../packages/core/src/';
@@ -160,7 +161,7 @@ for (const story of storySet) {
           </select>
         </span>
       </div>
-      <button @click="focus">Call focus method on component</button>
+      <TimerButton @timer-start="doStart" @timer-end="doEnd" label="Call focus() method" active-label-prefix="Call blur() method in" />
     </template>
   </sv-template-view>
   `;
@@ -170,6 +171,7 @@ for (const story of storySet) {
           CvDropdown,
           CvDropdownItem,
           SvTemplateView,
+          TimerButton,
         },
         props: settings.props,
         data() {
@@ -179,8 +181,13 @@ for (const story of storySet) {
         },
         methods: {
           actionChange: action('CV Dropdown - change'),
-          focus() {
-            this.$refs.templateView.$slots.component[0].componentInstance.focus();
+          doStart() {
+            this.$nextTick(() => {
+              this.$refs.templateView.$slots.component[0].componentInstance.focus();
+            });
+          },
+          doEnd() {
+            this.$refs.templateView.$slots.component[0].componentInstance.blur();
           },
         },
         template: templateViewString,

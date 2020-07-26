@@ -5,6 +5,7 @@ import { action } from '@storybook/addon-actions';
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
+import TimerButton from '../_storybook/components/timer-button';
 
 import CvAccordionNotesMD from '../../packages/core/src/components/cv-accordion/cv-accordion-notes.md';
 import { CvAccordion, CvAccordionItem, CvAccordionSkeleton } from '../../packages/core/src/';
@@ -57,10 +58,12 @@ for (const story of storySet) {
 
       const templateViewString = `
     <sv-template-view
+      ref="templateView"
       sv-margin
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">
+        <TimerButton @timer-start="doStart" @timer-end="doEnd" label="Call item 1 focus() method" active-label-prefix="Call item 1 blur() method in" />
         <div>
           <p>Open items</p>
           <label>1 <input type="checkbox" v-model="open[0]"></label>
@@ -79,7 +82,7 @@ for (const story of storySet) {
   `;
 
       return {
-        components: { CvAccordion, CvAccordionItem, SvTemplateView },
+        components: { CvAccordion, CvAccordionItem, SvTemplateView, TimerButton },
         template: templateViewString,
         props: settings.props,
         data() {
@@ -102,6 +105,14 @@ this.$refs.acc.state = this.$refs.acc.state.map((item, index) => index === ev.ch
               this.open = this.$refs.acc.state.map((item, index) => index === ev.changedIndex);
               // this.$refs.acc.state = this.$refs.acc.state.map((item, index) => index === ev.changedIndex);
             }
+          },
+          doStart() {
+            this.$nextTick(() => {
+              this.$refs.templateView.$slots.component[0].componentInstance.$children[0].focus();
+            });
+          },
+          doEnd() {
+            this.$refs.templateView.$slots.component[0].componentInstance.$children[0].blur();
           },
         },
       };

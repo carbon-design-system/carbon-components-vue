@@ -4,6 +4,7 @@ import { object, boolean, text, select } from '@storybook/addon-knobs';
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
+import TimerButton from '../_storybook/components/timer-button';
 
 import CvOverflowMenuNotesMD from '../../packages/core/src/components/cv-overflow-menu/cv-overflow-menu-notes.md';
 import { CvOverflowMenu, CvOverflowMenuItem } from '../../packages/core/src/';
@@ -94,20 +95,34 @@ for (const story of storySet) {
 
       const templateViewString = `
     <sv-template-view
+      ref="templateView"
       sv-margin
       sv-source='${templateString.trim()}'
       sv-position="center"
       sv-padding="150px 0 50px 0"
       >
       <template slot="component">${templateString}</template>
+      <template slot="other">
+        <TimerButton @timer-start="doStart" @timer-end="doEnd" label="Call focus() method" active-label-prefix="Call blur() method in" />
+      </template>
     </sv-template-view>
   `;
 
       return {
-        components: { CvOverflowMenu, CvOverflowMenuItem, SvTemplateView },
+        components: { CvOverflowMenu, CvOverflowMenuItem, SvTemplateView, TimerButton },
 
         template: templateViewString,
         props: settings.props,
+        methods: {
+          doStart() {
+            this.$nextTick(() => {
+              this.$refs.templateView.$slots.component[0].componentInstance.focus();
+            });
+          },
+          doEnd() {
+            this.$refs.templateView.$slots.component[0].componentInstance.blur();
+          },
+        },
       };
     },
     {

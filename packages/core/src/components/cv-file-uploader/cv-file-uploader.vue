@@ -14,6 +14,7 @@
         ]"
         role="button"
         tabindex="0"
+        ref="focusTarget"
         @keydown.enter.prevent="onShow()"
         @keydown.space.prevent
         @keyup.space.prevent="onShow()"
@@ -117,11 +118,12 @@ import Close16 from '@carbon/icons-vue/es/close/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
 import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 import { STATES, KINDS } from './consts.js';
+import methodsMixin from '../../mixins/methods-mixin';
 
 export default {
   name: 'CvFileUploader',
   components: { CvFormItem, CheckmarkFilled16, WarningFilled16, Close16, CvWrapper },
-  mixins: [uidMixin, carbonPrefixMixin],
+  mixins: [uidMixin, carbonPrefixMixin, methodsMixin({ focusTarget: ['blur', 'focus'] })],
   inheritAttrs: false,
   props: {
     clearOnReselect: Boolean,

@@ -7,6 +7,7 @@
       <div :class="`${carbonPrefix}--time-picker__input`">
         <label :for="uid" :class="`${carbonPrefix}--label`">{{ label }}</label>
         <input
+          ref="input"
           :id="uid"
           type="text"
           :class="[
@@ -68,6 +69,7 @@ import themeMixin from '../../mixins/theme-mixin';
 import CvSelect from '../cv-select/cv-select';
 import CvSelectOption from '../cv-select/cv-select-option';
 import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import methodsMixin from '../../mixins/methods-mixin';
 
 export default {
   name: 'CvTimePicker',
@@ -75,7 +77,7 @@ export default {
     CvSelect,
     CvSelectOption,
   },
-  mixins: [uidMixin, themeMixin, carbonPrefixMixin],
+  mixins: [uidMixin, themeMixin, carbonPrefixMixin, methodsMixin({ input: ['blur', 'focus'] })],
   inheritAttrs: false,
   props: {
     ampm: {

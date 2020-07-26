@@ -5,6 +5,7 @@ import { action } from '@storybook/addon-actions';
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
+import TimerButton from '../_storybook/components/timer-button';
 
 import CvSearchNotesMD from '../../packages/core/src/components/cv-search/cv-search-notes.md';
 import { CvSearch } from '../../packages/core/src/';
@@ -93,11 +94,13 @@ for (const story of storySet) {
 
       const templateViewString = `
     <sv-template-view
+      ref="templateView"
       sv-margin
       :sv-alt-back="this.$options.propsData.theme !== 'light'"
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">
+        <TimerButton @timer-start="doStart" @timer-end="doEnd" label="Call focus() method" active-label-prefix="Call blur() method in" />
         <div v-if="${templateString.indexOf('v-model') > 0}">
           <label>Model value:
             <input type="text" v-model="modelValue" />
@@ -108,7 +111,7 @@ for (const story of storySet) {
   `;
 
       return {
-        components: { CvSearch, SvTemplateView },
+        components: { CvSearch, SvTemplateView, TimerButton },
         template: templateViewString,
         props: settings.props,
         data() {
@@ -118,6 +121,14 @@ for (const story of storySet) {
         },
         methods: {
           onInput: action('cv-search - input event'),
+          doStart() {
+            this.$nextTick(() => {
+              this.$refs.templateView.$slots.component[0].componentInstance.focus();
+            });
+          },
+          doEnd() {
+            this.$refs.templateView.$slots.component[0].componentInstance.blur();
+          },
         },
       };
     },

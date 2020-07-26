@@ -5,6 +5,7 @@ import { action } from '@storybook/addon-actions';
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
+import TimerButton from '../_storybook/components/timer-button';
 
 import CvNumberInputNotesMD from '../../packages/core/src/components/cv-number-input/cv-number-input-notes.md';
 import { CvNumberInput, CvNumberInputSkeleton } from '../../packages/core/src/';
@@ -174,11 +175,13 @@ for (const story of storySet) {
 
       const templateViewString = `
     <sv-template-view
+      ref="templateView"
       sv-margin
       :sv-alt-back="this.$options.propsData.theme !== 'light'"
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">
+        <TimerButton @timer-start="doStart" @timer-end="doEnd" label="Call focus() method" active-label-prefix="Call blur() method in" />
         <div v-if="${templateString.indexOf('v-model') > 0}">
           <label>Model value:
             <input type="number" v-model="modelValue" :step="propStep" />
@@ -189,7 +192,7 @@ for (const story of storySet) {
   `;
 
       return {
-        components: { CvNumberInput, SvTemplateView },
+        components: { CvNumberInput, SvTemplateView, TimerButton },
         template: templateViewString,
         props: settings.props,
         data() {
@@ -218,6 +221,14 @@ for (const story of storySet) {
         },
         methods: {
           onInput: action('cv-number-input - input event'),
+          doStart() {
+            this.$nextTick(() => {
+              this.$refs.templateView.$slots.component[0].componentInstance.focus();
+            });
+          },
+          doEnd() {
+            this.$refs.templateView.$slots.component[0].componentInstance.blur();
+          },
         },
         computed: {
           propStep() {

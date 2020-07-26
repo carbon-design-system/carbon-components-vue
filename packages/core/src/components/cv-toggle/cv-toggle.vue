@@ -9,6 +9,7 @@
       :checked="isChecked === true"
       :aria-checked="`${isChecked}`"
       :value="value"
+      ref="input"
     />
     <label :class="`${carbonPrefix}--toggle-input__label`" :for="uid" :aria-label="hiddenLabel">
       {{ visibleLabel }}
@@ -31,10 +32,11 @@
 import uidMixin from '../../mixins/uid-mixin';
 import checkMixin from '../../mixins/check-mixin';
 import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import methodsMixin from '../../mixins/methods-mixin';
 
 export default {
   name: 'CvToggle',
-  mixins: [uidMixin, checkMixin, carbonPrefixMixin],
+  mixins: [uidMixin, checkMixin, carbonPrefixMixin, methodsMixin({ input: ['blur', 'focus'] })],
   inheritAttrs: false,
   props: {
     small: Boolean,

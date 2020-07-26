@@ -62,12 +62,13 @@ import CvWrapper from '../cv-wrapper/_cv-wrapper';
 import ChevronDownGlyph from '@carbon/icons-vue/es/chevron--down';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import methodsMixin from '../../mixins/methods-mixin';
 
 export default {
   name: 'CvSelect',
   inheritAttrs: false,
   components: { CvWrapper, ChevronDownGlyph, WarningFilled16 },
-  mixins: [uidMixin, themeMixin, carbonPrefixMixin],
+  mixins: [uidMixin, themeMixin, carbonPrefixMixin, methodsMixin({ select: ['blur', 'focus'] })],
   props: {
     inline: Boolean,
     invalidMessage: { type: String, default: undefined },

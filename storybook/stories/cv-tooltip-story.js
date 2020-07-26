@@ -4,6 +4,7 @@ import { text, select, boolean } from '@storybook/addon-knobs';
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
+import TimerButton from '../_storybook/components/timer-button';
 
 import CvTooltipNotesMD from '../../packages/core/src/components/cv-tooltip/cv-tooltip-notes.md';
 import { CvInteractiveTooltip, CvTooltip, CvDefinitionTooltip } from '../../packages/core/src/';
@@ -102,22 +103,21 @@ for (const story of storySet) {
       sv-position="center"
       >
       <template slot="other">
-        <button @click="show" style="margin-left: 500px;">Show tip</button>
-        <button @click="hide">Hide tip</button>
+      <TimerButton @timer-start="doStart" @timer-end="doEnd" label="Show" active-label-prefix="Hide in" />
       </template>
       <template slot="component">${templateString}</template>
     </sv-template-view>
   `;
 
       return {
-        components: { CvInteractiveTooltip, SvTemplateView, Filter16 },
+        components: { CvInteractiveTooltip, SvTemplateView, Filter16, TimerButton },
         template: templateViewString,
         props: settings.props,
         methods: {
-          show() {
+          doStart() {
             this.$refs.templateView.$slots.component[0].componentInstance.show();
           },
-          hide() {
+          doEnd() {
             this.$refs.templateView.$slots.component[0].componentInstance.hide();
           },
         },

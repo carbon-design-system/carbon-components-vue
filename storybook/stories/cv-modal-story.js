@@ -6,6 +6,7 @@ import { action } from '@storybook/addon-actions';
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
+import TimerButton from '../_storybook/components/timer-button';
 
 import CvModalNotesMD from '../../packages/core/src/components/cv-modal/cv-modal-notes.md';
 import { CvModal } from '../../packages/core/src/';
@@ -234,18 +235,20 @@ for (const story of storySet) {
       sv-margin
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
-      <template slot="other"><button @click="show">Show</button></template>
+      <template slot="other">
+      <TimerButton @timer-start="doStart" @timer-end="doEnd" label="Call show() method" active-label-prefix="Call hide() method in" />
+      </template>
     </sv-template-view>
   `;
 
       return {
-        components: { CvModal, SvTemplateView },
+        components: { CvModal, SvTemplateView, TimerButton },
         props: settings.props,
         methods: {
-          doSave() {
+          doEnd() {
             this.$refs.view.method('hide')();
           },
-          show() {
+          doStart() {
             this.$refs.view.method('show')();
           },
           actionShown: action('CV Modal - modal-shown'),

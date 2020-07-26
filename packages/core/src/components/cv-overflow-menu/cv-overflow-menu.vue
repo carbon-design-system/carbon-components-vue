@@ -69,11 +69,12 @@
 import OverflowMenuVertical16 from '@carbon/icons-vue/es/overflow-menu--vertical/16';
 import uidMixin from '../../mixins/uid-mixin';
 import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import methodsMixin from '../../mixins/methods-mixin';
 
 export default {
   name: 'CvOverflowMenu',
   components: { OverflowMenuVertical16 },
-  mixins: [uidMixin, carbonPrefixMixin],
+  mixins: [uidMixin, carbonPrefixMixin, methodsMixin({ trigger: ['blur', 'focus'] })],
   props: {
     label: String,
     flipMenu: Boolean,

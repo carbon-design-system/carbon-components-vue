@@ -10,6 +10,7 @@
     data-tile="selectable"
     tabindex="0"
     :data-contained-checkbox-state="isChecked"
+    ref="target"
   >
     <input
       tabindex="-1"
@@ -37,10 +38,11 @@ import uidMixin from '../../mixins/uid-mixin';
 import checkMixin from '../../mixins/check-mixin';
 import CheckmarkFilled16 from '@carbon/icons-vue/es/checkmark--filled/16';
 import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import methodsMixin from '../../mixins/methods-mixin';
 
 export default {
   name: 'CvTileSelectable',
-  mixins: [uidMixin, checkMixin, carbonPrefixMixin],
+  mixins: [uidMixin, checkMixin, carbonPrefixMixin, methodsMixin({ target: ['blur', 'focus'] })],
   components: { CheckmarkFilled16 },
   inheritAttrs: false,
   props: {

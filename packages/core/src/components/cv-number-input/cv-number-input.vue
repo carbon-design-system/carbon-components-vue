@@ -90,10 +90,11 @@ import CaretUpGlyph from '@carbon/icons-vue/es/caret--up/index';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
 import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import methodsMixin from '../../mixins/methods-mixin';
 
 export default {
   name: 'CvNumberInput',
-  mixins: [uidMixin, themeMixin, carbonPrefixMixin],
+  mixins: [uidMixin, themeMixin, carbonPrefixMixin, methodsMixin({ input: ['blur', 'focus'] })],
   components: { CaretDownGlyph, CaretUpGlyph, WarningFilled16, CvWrapper },
   inheritAttrs: false,
   props: {
