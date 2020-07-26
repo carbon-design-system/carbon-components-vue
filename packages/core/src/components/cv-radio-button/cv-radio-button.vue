@@ -27,11 +27,12 @@
 import uidMixin from '../../mixins/uid-mixin';
 import radioMixin from '../../mixins/radio-mixin';
 import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import methodsMixin from '../../mixins/methods-mixin';
 
 export default {
   name: 'CvRadioButton',
   inheritAttrs: false,
-  mixins: [uidMixin, radioMixin, carbonPrefixMixin],
+  mixins: [uidMixin, radioMixin, carbonPrefixMixin, methodsMixin({ input: ['blur', 'focus'] })],
   props: {
     labelLeft: Boolean,
   },
