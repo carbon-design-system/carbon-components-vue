@@ -62,10 +62,11 @@ import Search20 from '@carbon/icons-vue/es/search/20';
 import Close16 from '@carbon/icons-vue/es/close/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
 import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import methodsMixin from '../../mixins/methods-mixin';
 
 export default {
   name: 'CvSearch',
-  mixins: [uidMixin, themeMixin, carbonPrefixMixin],
+  mixins: [uidMixin, themeMixin, carbonPrefixMixin, methodsMixin({ input: ['blur', 'focus'] })],
   components: { Close16, CvWrapper },
   inheritAttrs: false,
   props: {
