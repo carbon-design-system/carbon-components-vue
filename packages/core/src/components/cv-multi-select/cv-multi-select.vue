@@ -159,6 +159,7 @@ import uidMixin from '../../mixins/uid-mixin';
 import CvCheckbox from '../cv-checkbox/cv-checkbox';
 import CvTag from '../cv-tag/cv-tag';
 import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import methodsMixin from '../../mixins/methods-mixin';
 
 const TOP_AFTER_REOPEN = 0;
 const TOP = 1;
@@ -168,7 +169,7 @@ const selectionFeedbackOptions = ['top-after-reopen', 'top', 'fixed'];
 export default {
   name: 'CvMultiSelect',
   inheritAttrs: false,
-  mixins: [themeMixin, uidMixin, carbonPrefixMixin],
+  mixins: [themeMixin, uidMixin, carbonPrefixMixin, methodsMixin({ button: ['blur', 'focus'] })],
   components: { WarningFilled16, ChevronDown16, CvCheckbox, CvTag, Close16 },
   props: {
     autoFilter: Boolean,
