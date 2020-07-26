@@ -63,7 +63,7 @@ for (const story of storySet) {
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">
-        <TimerButton @timer-start="doStart" @timer-end="doEnd" label="Set Focus item 1" active-label-prefix="Blur in" />
+        <TimerButton @timer-start="doStart" @timer-end="doEnd" label="Call item 1 focus() method" active-label-prefix="Call item 1 blur() method in" />
         <div>
           <p>Open items</p>
           <label>1 <input type="checkbox" v-model="open[0]"></label>

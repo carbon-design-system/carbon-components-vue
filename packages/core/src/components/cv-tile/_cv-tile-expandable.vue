@@ -5,6 +5,7 @@
       `cv-tile-expandable ${carbonPrefix}--tile--expandable`,
       { [`${carbonPrefix}--tile--is-expanded`]: internalExpanded },
     ]"
+    ref="target"
     tabindex="0"
     :style="styleObject"
     @click="toggle"
@@ -37,10 +38,11 @@
 <script>
 import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16';
 import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import methodsMixin from '../../mixins/methods-mixin';
 
 export default {
   name: 'CvTileExpandable',
-  mixins: [carbonPrefixMixin],
+  mixins: [carbonPrefixMixin, methodsMixin({ target: ['blur', 'focus'] })],
   props: {
     expanded: Boolean,
   },

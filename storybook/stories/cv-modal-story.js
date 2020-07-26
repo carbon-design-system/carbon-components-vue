@@ -236,7 +236,7 @@ for (const story of storySet) {
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">
-      <TimerButton @timer-start="doStart" @timer-end="doEnd" label="Show" active-label-prefix="Hide in" />
+      <TimerButton @timer-start="doStart" @timer-end="doEnd" label="Call show() method" active-label-prefix="Call hide() method in" />
       </template>
     </sv-template-view>
   `;

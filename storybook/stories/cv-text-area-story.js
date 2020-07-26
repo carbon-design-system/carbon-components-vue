@@ -119,7 +119,7 @@ for (const story of storySet) {
             <textarea v-model="modelValue"></textarea>
           </label>
         </div>
-      <TimerButton @timer-start="doStart" @timer-end="doEnd" label="Set Focus" active-label-prefix="Blur in" />
+      <TimerButton @timer-start="doStart" @timer-end="doEnd" label="Call focus() method" active-label-prefix="Call blur() method in" />
       </template>
       </sv-template-view>
   `;

@@ -195,7 +195,7 @@ for (const story of storySet) {
     sv-source='${templateString.trim()}'>
     <template slot="component">${templateString}</template>
     <template slot="other">
-    <TimerButton @timer-start="doStart" @timer-end="doEnd" label="Set Focus" active-label-prefix="Blur in" />
+    <TimerButton @timer-start="doStart" @timer-end="doEnd" label="Call focus() method" active-label-prefix="Call blur() method in" />
     <div v-if="${templateString.indexOf('v-model') > 0}">
       <br>
       <br>
