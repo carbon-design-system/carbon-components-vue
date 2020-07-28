@@ -46,7 +46,7 @@
           ref="input"
           :class="[
             `${carbonPrefix}--text-input`,
-            { [`${carbonPrefix}--text-input--empty`]: dataInput && dataInput.length === 0 },
+            { [`${carbonPrefix}--text-input--empty`]: !filter || filter.length === 0 },
           ]"
           :aria-controls="uid"
           aria-autocomplete="list"
