@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.30.0
+
+- fix: empty space in combo and multi
+- feat: add focus and blur methods to numerous components
+
 ## 2.30.0-canary.1
 
 - fix snapshots
