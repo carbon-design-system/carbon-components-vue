@@ -4,8 +4,8 @@
       `cv-progress-step ${carbonPrefix}--progress-step`,
       `${carbonPrefix}--progress-step--${stateString}`,
       {
-        [' ${carbonPrefix}--progress-step--disabled']: disabled,
-        [' ${carbonPrefix}--progress-step--invalid']: invalid,
+        [`${carbonPrefix}--progress-step--disabled`]: disabled,
+        [`${carbonPrefix}--progress-step--invalid`]: invalid,
       },
     ]"
     :aria-disabled="disabled"
