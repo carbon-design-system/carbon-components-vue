@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.30.1
+
+fix: dropdown clearing of value (#975)
+chore(deps): bump elliptic from 6.5.2 to 6.5.3 in /packages/core (#972)
+fix: progress step carbonPrefix (#974)
+fix: ie11 svg class usage (#973)
+
 ## 2.30.0
 
 - fix: empty space in combo and multi
