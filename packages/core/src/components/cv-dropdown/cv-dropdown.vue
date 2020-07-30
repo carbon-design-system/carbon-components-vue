@@ -28,9 +28,8 @@
         v-if="label"
         :id="`${uid}-label`"
         :class="[`${carbonPrefix}--label`, { [`${carbonPrefix}--label--disabled`]: disabled }]"
+        >{{ label }}</span
       >
-        {{ label }}
-      </span>
 
       <div
         data-dropdown
@@ -219,6 +218,7 @@ export default {
   methods: {
     updateChildren(val) {
       const childItems = this.dropdownItems();
+      let foundSelection = false;
 
       for (let index in childItems) {
         let child = childItems[index];
@@ -226,8 +226,13 @@ export default {
         child.internalSelected = selected;
 
         if (selected) {
+          foundSelection = true;
           this.selectedChild = child;
         }
+      }
+
+      if (!foundSelection) {
+        this.selectedChild = null;
       }
     },
     checkSlots() {
