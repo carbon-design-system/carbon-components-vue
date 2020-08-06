@@ -88,7 +88,10 @@
           :aria-labelledby="`${uid}-label`"
           ref="droplist"
         >
-          <slot></slot>
+          <slot v-if="!this.$props.items"></slot>
+          <cv-dropdown-item v-else v-for="item in this.$props.items" v-bind:key="item" :value="item">{{
+            item
+          }}</cv-dropdown-item>
         </ul>
       </div>
       <div v-if="isInvalid && inline" :class="`${carbonPrefix}--form-requirement`">
@@ -112,6 +115,7 @@
 import themeMixin from '../../mixins/theme-mixin';
 import uidMixin from '../../mixins/uid-mixin';
 import methodsMixin from '../../mixins/methods-mixin';
+import CvDropdownItem from './cv-dropdown-item';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16';
 import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
@@ -120,7 +124,7 @@ export default {
   name: 'CvDropdown',
   inheritAttrs: false,
   mixins: [themeMixin, uidMixin, carbonPrefixMixin, methodsMixin({ button: ['blur', 'focus'] })],
-  components: { WarningFilled16, ChevronDown16 },
+  components: { WarningFilled16, ChevronDown16, CvDropdownItem },
   props: {
     disabled: Boolean,
     formItem: { type: Boolean, default: true },
@@ -128,6 +132,15 @@ export default {
     invalidMessage: { type: String, default: undefined },
     helperText: { type: String, default: undefined },
     label: String,
+    items: {
+      type: Array,
+      validator(arr) {
+        if (!Array.isArray(arr)) {
+          console.warn('CvDropdown - items must be in array');
+        }
+        return arr;
+      },
+    },
     placeholder: {
       type: String,
       default: 'Choose an option',
