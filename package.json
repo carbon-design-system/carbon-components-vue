@@ -18,8 +18,7 @@
     "prepare": "lerna bootstrap",
     "prepublishOnly": "yarn build",
     "reinstall": "echo Clearing yarn cache; yarn cache clean; echo Removing yarn offline mirror; rimraf .yarn-offline-mirror; echo Removing package folders; lerna clean --yes; rimraf node_modules; yarn install",
-    "start:a": "yarn info @carbon/vue --json > package-info.jsonl;",
-    "start:b": "vue-cli-service storybook:serve -p 9001 -c storybook/.storybook",
+    "start": "yarn info @carbon/vue --json > package-info.jsonl; vue-cli-service storybook:serve -p 9001 -c storybook/.storybook",
     "test": "vue-cli-service test:unit"
   },
   "dependencies": {

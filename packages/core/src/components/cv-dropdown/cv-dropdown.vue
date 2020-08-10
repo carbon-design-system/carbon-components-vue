@@ -88,10 +88,9 @@
           :aria-labelledby="`${uid}-label`"
           ref="droplist"
         >
-          <slot v-if="!this.$props.items"></slot>
-          <cv-dropdown-item v-else v-for="item in this.$props.items" v-bind:key="item" :value="item">{{
-            item
-          }}</cv-dropdown-item>
+          <slot>
+            <cv-dropdown-item v-for="item in items" v-bind:key="item" :value="item">{{ item }}</cv-dropdown-item>
+          </slot>
         </ul>
       </div>
       <div v-if="isInvalid && inline" :class="`${carbonPrefix}--form-requirement`">
