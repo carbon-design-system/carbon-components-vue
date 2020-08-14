@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { text, boolean, select } from '@storybook/addon-knobs';
+import { text, boolean, select, array } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
@@ -26,6 +26,12 @@ let preKnobs = {
     type: text,
     config: ['placeholder', 'Choose an option'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: 'placeholder',
+  },
+  items: {
+    group: 'attr',
+    type: array,
+    config: ['items', ['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5']],
+    prop: 'items',
   },
   value: {
     group: 'attr',
@@ -112,12 +118,13 @@ let preKnobs = {
 let variants = [
   {
     name: 'default',
-    excludes: ['vModel', 'events', 'helperTextSlot', 'invalidMessageSlot'],
+    excludes: ['vModel', 'events', 'helperTextSlot', 'invalidMessageSlot', 'items'],
   },
   {
     name: 'slots',
-    excludes: ['vModel', 'events'],
+    excludes: ['vModel', 'events', 'items'],
   },
+  { name: 'items', includes: ['items'] },
   { name: 'minimal', includes: ['value'] },
   { name: 'events', includes: ['value', 'events'] },
   { name: 'vModel', includes: ['value', 'vModel'] },
@@ -130,16 +137,23 @@ for (const story of storySet) {
     story.name,
     () => {
       const settings = story.knobs();
-
-      const templateString = `
-  <cv-dropdown ${settings.group.attr}>${settings.group.slots}
-    <cv-dropdown-item value="10"><span>Option with value 10 & 10.0</span></cv-dropdown-item>
-    <cv-dropdown-item value="20">Option with value 20</cv-dropdown-item>
-    <cv-dropdown-item value="30">Option with value 30</cv-dropdown-item>
-    <cv-dropdown-item value="40">Option with value 40</cv-dropdown-item>
-    <cv-dropdown-item value="50">Option with value 50</cv-dropdown-item>
-  </cv-dropdown>
-  `;
+      let templateString = '';
+      if (settings.group.attr.indexOf('items') > 0) {
+        templateString = `
+        <cv-dropdown ${settings.group.attr}>${settings.group.slots}
+      </cv-dropdown>
+      `;
+      } else {
+        templateString = `
+        <cv-dropdown ${settings.group.attr}>${settings.group.slots}
+          <cv-dropdown-item value="10"><span>Option with value 10 & 10.0</span></cv-dropdown-item>
+          <cv-dropdown-item value="20">Option with value 20</cv-dropdown-item>
+          <cv-dropdown-item value="30">Option with value 30</cv-dropdown-item>
+          <cv-dropdown-item value="40">Option with value 40</cv-dropdown-item>
+          <cv-dropdown-item value="50">Option with value 50</cv-dropdown-item>
+      </cv-dropdown>
+      `;
+      }
 
       // ----------------------------------------------------------------
       const templateViewString = `
