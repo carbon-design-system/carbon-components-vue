@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.31.0-canary.0
+
+fix: Dropdown focus on firefox (and any browser where click does not focus on button)
+
 ## 2.30.2
 
 chore: remove empty folder (#984)
