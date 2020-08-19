@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.30.2
+
+chore: remove empty folder (#984)
+feat: Added items prop to Cv-Dropdown (#982)
+
 ## 2.30.1
 
 fix: dropdown clearing of value (#975)
