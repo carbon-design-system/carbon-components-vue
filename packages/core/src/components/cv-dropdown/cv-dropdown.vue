@@ -301,6 +301,11 @@ export default {
 
       childItems[nextFocusIndex].setFocus();
     },
+    doFocus() {
+      this.$nextTick(() => {
+        this.focus();
+      });
+    },
     onDown() {
       if (!this.open) {
         this.open = true;
@@ -315,16 +320,14 @@ export default {
     },
     onEsc() {
       this.open = false;
-      this.focus();
+      this.doFocus();
     },
     onClick(ev) {
       if (this.disabled) {
         ev.preventDefault();
       } else {
         this.open = !this.open;
-        if (!this.open) {
-          this.focus();
-        }
+        this.doFocus(); // open or close (Some browsers do not focus on button when clicked)
 
         let target = ev.target;
         while (
