@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.31.0
+
+fix: dropdown in darker themes
+chore: add theme switching to stories
+
 ## 2.31.0-canary.0
 
 fix: Dropdown focus on firefox (and any browser where click does not focus on button)
