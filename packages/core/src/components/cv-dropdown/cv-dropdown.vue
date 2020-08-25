@@ -67,7 +67,7 @@
         >
           <WarningFilled16 v-if="isInvalid" :class="`${carbonPrefix}--list-box__invalid-icon`" />
           <span
-            :class="`${carbonPrefix}  --list-box__label`"
+            :class="`${carbonPrefix}--list-box__label`"
             :id="`${uid}-value`"
             data-test="internalCaption"
             v-html="internalCaption"
