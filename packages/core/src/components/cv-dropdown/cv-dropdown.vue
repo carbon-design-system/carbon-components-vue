@@ -54,6 +54,7 @@
         @keydown.esc.prevent="onEsc"
         @keydown.tab="onTab"
         @click="onClick"
+        ref="listbox"
       >
         <button
           :class="`${carbonPrefix}--list-box__field`"
@@ -227,7 +228,7 @@ export default {
   },
   methods: {
     checkClickOut(ev) {
-      if (ev.target === null || !this.$el.contains(ev.target)) {
+      if (ev.target === null || !this.$refs.listboxntains(ev.target)) {
         this.open = false;
       }
     },
@@ -334,7 +335,7 @@ export default {
         if (this.$refs.button.$el === ev.target) {
           // button has focus ensure we are closed
           this.open = false;
-        } else if (ev.target === null || this.$el.contains(ev.target)) {
+        } else if (ev.target === null || this.$refs.listbox.contains(ev.target)) {
           // list has focus, close and return focus to dropdown
           this.open = false;
           this.doFocus();
