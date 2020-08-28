@@ -52,7 +52,9 @@
         @keydown.up.prevent="onUp"
         @keydown.enter.prevent="onClick"
         @keydown.esc.prevent="onEsc"
+        @keydown.tab="onTab"
         @click="onClick"
+        ref="listbox"
       >
         <button
           :class="`${carbonPrefix}--list-box__field`"
@@ -80,13 +82,13 @@
           </div>
         </button>
         <ul
-          :class="`${carbonPrefix}--dropdown-list`"
+          :class="`${carbonPrefix}--list-box__menu`"
           :id="`${uid}-menu`"
           role="menu"
           :aria-hidden="!open ? 'true' : 'false'"
-          wh-menu-anchor="left"
           :aria-labelledby="`${uid}-label`"
           ref="droplist"
+          tabindex="-1"
         >
           <slot>
             <cv-dropdown-item v-for="item in items" v-bind:key="item" :value="item">{{ item }}</cv-dropdown-item>
@@ -163,15 +165,12 @@ export default {
     this.$on('cv:beforeDestroy', srcComponent => this.onCvBeforeDestroy(srcComponent));
   },
   mounted() {
-    this.$el.addEventListener('focusout', ev => {
-      if (ev.relatedTarget === null || !this.$el.contains(ev.relatedTarget)) {
-        this.open = false;
-      }
-    });
+    document.body.addEventListener('click', this.checkClickOut);
     this.updateChildren(this.internalValue);
     this.checkSlots();
   },
   beforeUpdate() {
+    document.body.removeEventListener('click', this.checkSlots);
     this.checkSlots();
   },
   model: {
@@ -228,6 +227,11 @@ export default {
     },
   },
   methods: {
+    checkClickOut(ev) {
+      if (ev.target === null || !this.$refs.listbox.contains(ev.target)) {
+        this.open = false;
+      }
+    },
     updateChildren(val) {
       const childItems = this.dropdownItems();
       let foundSelection = false;
@@ -303,7 +307,11 @@ export default {
     },
     doFocus() {
       this.$nextTick(() => {
-        this.focus();
+        if (this.open) {
+          this.$refs.droplist.focus();
+        } else {
+          this.focus();
+        }
       });
     },
     onDown() {
@@ -321,6 +329,19 @@ export default {
     onEsc() {
       this.open = false;
       this.doFocus();
+    },
+    onTab(ev) {
+      if (this.open) {
+        if (this.$refs.button.$el === ev.target) {
+          // button has focus ensure we are closed
+          this.open = false;
+        } else if (ev.target === null || this.$refs.listbox.contains(ev.target)) {
+          // list has focus, close and return focus to dropdown
+          this.open = false;
+          this.doFocus();
+          ev.preventDefault();
+        }
+      }
     },
     onClick(ev) {
       if (this.disabled) {
