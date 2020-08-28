@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.31.1
+
+fix: dropdown click closing list on firefox and safari (caused by button not getting focus on click)
+
 ## 2.31.0
 
 fix: dropdown in darker themes
