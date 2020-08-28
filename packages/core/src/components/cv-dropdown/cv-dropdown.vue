@@ -228,7 +228,7 @@ export default {
   },
   methods: {
     checkClickOut(ev) {
-      if (ev.target === null || !this.$refs.listboxntains(ev.target)) {
+      if (ev.target === null || !this.$refs.listbox.contains(ev.target)) {
         this.open = false;
       }
     },
