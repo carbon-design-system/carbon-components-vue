@@ -20,9 +20,12 @@ jobs:
               curl -fsSL https://clis.ng.bluemix.net/install/linux | sh
 
               # Login and install blue-green-deploy plugin
-              ibmcloud login -a 'https://cloud.ibm.com' --apikey $CLOUD_API_KEY -r 'us-south'
-              ibmcloud target -o 'carbon-design-system' -s production
-              ibmcloud cf install
+              ibmcloud login \
+                -a 'https://cloud.ibm.com' \
+                -r 'us-south' \
+                --apikey "$CLOUD_API_KEY"
+              ibmcloud target -o carbon-design-system -s production
+              ibmcloud cf install -v 6.50.0
               ibmcloud cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
               ibmcloud cf install-plugin blue-green-deploy -f -r CF-Community
 
