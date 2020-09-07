@@ -22,7 +22,7 @@
     </div>
 
     <div
-      :id="`${uid}`"
+      :id="uid"
       aria-hidden="true"
       :data-floating-menu-direction="direction"
       :class="[`${carbonPrefix}--tooltip`, { [`${carbonPrefix}--tooltip--shown`]: dataVisible }]"

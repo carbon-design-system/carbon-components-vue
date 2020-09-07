@@ -1,5 +1,5 @@
 <template>
-  <div :class="`cv-toggle ${carbonPrefix}--form-item`">
+  <div :class="`cv-toggle ${carbonPrefix}--form-item`" :id="uid">
     <label
       :class="`${carbonPrefix}--toggle__label ${carbonPrefix}--skeleton`"
       :for="uid"
