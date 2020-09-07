@@ -1,5 +1,5 @@
 <template>
-  <th :aria-sort="internalOrder" :style="skeleton && headingStyle">
+  <th :aria-sort="internalOrder" :style="skeleton && headingStyle" :id="uid">
     <button
       type="button"
       v-if="sortable"

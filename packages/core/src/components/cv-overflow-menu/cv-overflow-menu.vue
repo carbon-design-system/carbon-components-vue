@@ -1,5 +1,5 @@
 <template>
-  <div data-overflow-menu :class="`cv-overflow-menu ${carbonPrefix}--overflow-menu`">
+  <div data-overflow-menu :class="`cv-overflow-menu ${carbonPrefix}--overflow-menu`" :id="uid">
     <button
       :class="[
         `${carbonPrefix}--overflow-menu__trigger ${carbonPrefix}--tooltip__trigger`,

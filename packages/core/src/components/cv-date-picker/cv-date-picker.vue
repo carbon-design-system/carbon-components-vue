@@ -1,5 +1,5 @@
 <template>
-  <cv-wrapper :tag-type="formItem ? 'div' : ''" :class="`cv-date-picker ${carbonPrefix}--form-item`">
+  <cv-wrapper :tag-type="formItem ? 'div' : ''" :class="`cv-date-picker ${carbonPrefix}--form-item`" :id="uid">
     <div
       :data-date-picker="['single', 'range'].includes(kind)"
       :data-date-picker-type="kind"
@@ -12,6 +12,7 @@
         },
       ]"
       ref="date-picker"
+      :id="formItem ? '' : uid"
     >
       <div
         :class="{

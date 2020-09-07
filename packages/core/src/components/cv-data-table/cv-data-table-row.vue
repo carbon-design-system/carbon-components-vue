@@ -1,5 +1,5 @@
 <template>
-  <tbody v-if="someExpandingRows" class="cv-data-table-row cv-data-table-row--expandable">
+  <tbody v-if="someExpandingRows" class="cv-data-table-row cv-data-table-row--expandable" :id="uid">
     <cv-data-table-row-inner
       ref="row"
       v-bind="$attrs"
@@ -23,7 +23,7 @@
       </td>
     </tr>
   </tbody>
-  <cv-data-table-row-inner v-else ref="row" v-bind="$attrs" v-on="$listeners" class="cv-data-table-row">
+  <cv-data-table-row-inner v-else ref="row" v-bind="$attrs" v-on="$listeners" class="cv-data-table-row" :id="uid">
     <slot />
   </cv-data-table-row-inner>
 </template>

@@ -23,6 +23,7 @@
     ]"
     :data-target="contentSelector"
     :aria-selected="dataSelected ? 'true' : 'false'"
+    :id="uid"
     @click="open"
   >
     <CvSvg v-if="icon" :svg="icon" :class="`${carbonPrefix}--content-switcher__icon`" height="16" width="16" />

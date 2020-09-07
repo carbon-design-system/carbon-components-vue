@@ -1,5 +1,5 @@
 <template>
-  <div :class="`cv-definition-tooltip ${carbonPrefix}--tooltip--definition ${carbonPrefix}--tooltip--a11y`">
+  <div :class="`cv-definition-tooltip ${carbonPrefix}--tooltip--definition ${carbonPrefix}--tooltip--a11y`" :id="uid">
     <button
       :aria-describedby="`${uid}-label`"
       :class="[

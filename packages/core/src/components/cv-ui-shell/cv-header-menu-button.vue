@@ -17,6 +17,7 @@
     :aria-expanded="active ? 'true' : 'false'"
     @click="gaToggle"
     @focusout="gaFocusout"
+    :id="uid"
   >
     <Close20 v-if="dataActive" />
     <Menu20 v-if="!dataActive" />

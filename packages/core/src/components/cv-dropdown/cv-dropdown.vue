@@ -16,7 +16,7 @@
 -->
 
 <template>
-  <div :class="{ [`${carbonPrefix}--form-item`]: formItem }">
+  <div :class="{ [`${carbonPrefix}--form-item`]: formItem }" :id="uid">
     <div
       :class="[
         `${carbonPrefix}--dropdown__wrapper`,
