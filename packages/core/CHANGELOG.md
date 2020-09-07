@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.32.0-canary.0
+
+feat: use of uidMixin without id use (add to top level element)
+fix: aria label for expanding row button (expanded and collapsed)
+fix: remove event listener from dropdown in beforeDestroy
+
 ## 2.31.1
 
 fix: dropdown click closing list on firefox and safari (caused by button not getting focus on click)
