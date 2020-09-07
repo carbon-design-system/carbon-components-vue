@@ -173,7 +173,7 @@ export default {
     document.body.removeEventListener('click', this.checkSlots);
     this.checkSlots();
   },
-  destroyed() {
+  beforeDestroy() {
     document.body.removeEventListener('click', this.checkSlots);
   },
   model: {
