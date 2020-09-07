@@ -126,6 +126,9 @@ As per note sort and filter behviours are delegated to the component user.
 
 ### Attributes
 
+aria-label-for-batch-checkbox: Aria label for batch checkbox. default Select row N for batch action.
+aria-label-expand-row: Aria label for expanding row expansion button. default: 'Expand current row'
+aria-label-collapse-row: Aria label for expanding row collapse button. default: 'Collapse current row'
 expanded: initial state of the expanded row
 
 ### Computed
