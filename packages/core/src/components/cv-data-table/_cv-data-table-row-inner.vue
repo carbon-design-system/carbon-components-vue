@@ -8,7 +8,13 @@
       :class="`${carbonPrefix}--table-expand`"
       :data-previous-value="dataExpanded ? 'collapsed' : 'expanded'"
     >
-      <button v-if="expandingRow" :class="`${carbonPrefix}--table-expand__button`" @click="toggleExpand" type="button">
+      <button
+        v-if="expandingRow"
+        :class="`${carbonPrefix}--table-expand__button`"
+        @click="toggleExpand"
+        type="button"
+        :aria-label="dataExpanded ? ariaLabelCollapseRow : ariaLabelExpandRow"
+      >
         <ChevronRight16 :class="`${carbonPrefix}--table-expand__svg`" />
       </button>
     </td>
@@ -59,6 +65,8 @@ export default {
     checked: Boolean,
     expanded: Boolean,
     expandingRow: Boolean,
+    ariaLabelExpandRow: { type: String, default: 'Expand current row' },
+    ariaLabelCollapseRow: { type: String, default: 'Collapse current row' },
     overflowMenu: Array,
     someExpandingRows: Boolean,
     value: String,

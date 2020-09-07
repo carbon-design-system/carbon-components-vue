@@ -269,7 +269,7 @@ let preKnobs = {
     group: 'slots',
     slot: 'data',
     value:
-      '\n    <cv-data-table-row v-for="(row, rowIndex) in internalData" :key="`${rowIndex}`" :value="`${rowIndex}`" :expanded="rowIndex === rowExpanded">' +
+      '\n    <cv-data-table-row v-for="(row, rowIndex) in internalData" :key="`${rowIndex}`" :value="`${rowIndex}`" :expanded="rowIndex === rowExpanded" aria-label-expand-row="Go large" aria-label-collapse-row="Go small">' +
       '\n       <cv-data-table-cell v-for="(cell, cellIndex) in row" :key="`${cellIndex}`" :value="`${cellIndex}`" v-html="cell"></cv-data-table-cell>' +
       '\n       <template slot="expandedContent">A variety of content types can live here. Be sure to follow Carbon design guidelines for spacing and alignment.</template>' +
       '\n    </cv-data-table-row>\n',
