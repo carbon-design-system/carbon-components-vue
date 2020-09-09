@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.32.0
+
+Promote canary
+
 ## 2.32.0-canary.0
 
 feat: use of uidMixin without id use (add to top level element)
