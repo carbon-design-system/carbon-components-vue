@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.33.0-canary.0
+
+fix: dropdown click outside - issue #1004 was still causing problems which a directive seems more reliable for.
+
 ## 2.32.0
 
 Promote canary
