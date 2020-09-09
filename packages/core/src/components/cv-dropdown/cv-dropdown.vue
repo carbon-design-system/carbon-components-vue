@@ -54,6 +54,7 @@
         @keydown.esc.prevent="onEsc"
         @keydown.tab="onTab"
         @click="onClick"
+        v-clickout="onClickout"
         ref="listbox"
       >
         <button
@@ -120,10 +121,12 @@ import CvDropdownItem from './cv-dropdown-item';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16';
 import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import clickout from '../../directives/clickout';
 
 export default {
   name: 'CvDropdown',
   inheritAttrs: false,
+  directives: { clickout },
   mixins: [themeMixin, uidMixin, carbonPrefixMixin, methodsMixin({ button: ['blur', 'focus'] })],
   components: { WarningFilled16, ChevronDown16, CvDropdownItem },
   props: {
@@ -165,16 +168,12 @@ export default {
     this.$on('cv:beforeDestroy', srcComponent => this.onCvBeforeDestroy(srcComponent));
   },
   mounted() {
-    document.body.addEventListener('click', this.checkClickOut);
     this.updateChildren(this.internalValue);
     this.checkSlots();
   },
   beforeUpdate() {
     document.body.removeEventListener('click', this.checkSlots);
     this.checkSlots();
-  },
-  beforeDestroy() {
-    document.body.removeEventListener('click', this.checkSlots);
   },
   model: {
     prop: 'value',
@@ -230,10 +229,8 @@ export default {
     },
   },
   methods: {
-    checkClickOut(ev) {
-      if (ev.target === null || !this.$refs.listbox.contains(ev.target)) {
-        this.open = false;
-      }
+    onClickout(ev) {
+      this.open = false;
     },
     updateChildren(val) {
       const childItems = this.dropdownItems();
