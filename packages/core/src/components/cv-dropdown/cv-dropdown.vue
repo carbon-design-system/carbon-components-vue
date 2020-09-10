@@ -229,7 +229,7 @@ export default {
     },
   },
   methods: {
-    onClickout(ev) {
+    onClickout() {
       this.open = false;
     },
     updateChildren(val) {
