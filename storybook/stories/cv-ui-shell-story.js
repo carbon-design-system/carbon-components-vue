@@ -32,9 +32,10 @@ import {
 import Fade16 from '@carbon/icons-vue/es/fade/16';
 import Notification20 from '@carbon/icons-vue/es/notification/20';
 import UserAvatar20 from '@carbon/icons-vue/es/user--avatar/20';
+import Login20 from '@carbon/icons-vue/es/login/20';
 import AppSwitcher20 from '@carbon/icons-vue/es/app-switcher/20';
 
-const storiesDefault = storiesOf('Components/CvUIShell - header', module);
+const storiesDefault = storiesOf('Components/CvUIShell', module);
 // const storiesExperimental = storiesOf('Experimental/CvUIShell - header', module);
 
 const preKnobs = {
@@ -92,7 +93,7 @@ const preKnobs = {
   },
   headerActions: {
     group: 'headerActions',
-    value: `<template slot="header-global">
+    value: `<template v-slot:header-global>
     <cv-header-global-action
       aria-label="Notifications"
       aria-controls="notifications-panel"
@@ -100,7 +101,8 @@ const preKnobs = {
       <Notification20 />
     </cv-header-global-action>
     <cv-header-global-action aria-label="User avatar" @click="actionUserAvatar" aria-controls="user-panel">
-      <UserAvatar20 />
+      <UserAvatar20 v-if="loggedIn"/>
+      <Login20 v-else />
     </cv-header-global-action>
     <cv-header-global-action
       aria-label="App switcher"
@@ -203,7 +205,7 @@ const preKnobs = {
     value: `<cv-side-nav id="side-nav" fixed expanded>
       <cv-side-nav-items>
         <cv-side-nav-menu title="L1 menu">
-          <template slot="nav-icon"><Fade16 /></template>
+          <template v-slot:nav-icon><Fade16 /></template>
           <cv-side-nav-menu-item href="javascript:void(0)" active>
             L2 menu item
           </cv-side-nav-menu-item>
@@ -215,7 +217,7 @@ const preKnobs = {
           </cv-side-nav-menu-item>
         </cv-side-nav-menu>
         <cv-side-nav-menu title="L1 menu">
-          <template slot="nav-icon"><Fade16 /></template>
+          <template v-slot:nav-icon><Fade16 /></template>
           <cv-side-nav-menu-item href="javascript:void(0)">
             L2 menu item
           </cv-side-nav-menu-item>
@@ -227,11 +229,11 @@ const preKnobs = {
           </cv-side-nav-menu-item>
         </cv-side-nav-menu>
         <cv-side-nav-link href="javascript:void(0)">
-          <template slot="nav-icon"><Fade16 /></template>
+          <template v-slot:nav-icon><Fade16 /></template>
           L1 link
         </cv-side-nav-link>
         <cv-side-nav-link href="javascript:void(0)">
-          <template slot="nav-icon"><Fade16 /></template>
+          <template v-slot:nav-icon><Fade16 /></template>
           L1 link
         </cv-side-nav-link>
       </cv-side-nav-items>
@@ -365,7 +367,7 @@ const preKnobs = {
     value: `<cv-side-nav id="side-nav">
       <cv-side-nav-items>
         <cv-side-nav-menu title="L1 menu">
-          <template slot="nav-icon"><Fade16 /></template>
+          <template v-slot:nav-icon><Fade16 /></template>
           <cv-side-nav-menu-item href="javascript:void(0)" active>
             L2 menu item
           </cv-side-nav-menu-item>
@@ -377,7 +379,7 @@ const preKnobs = {
           </cv-side-nav-menu-item>
         </cv-side-nav-menu>
         <cv-side-nav-menu title="L1 menu">
-          <template slot="nav-icon"><Fade16 /></template>
+          <template v-slot:nav-icon><Fade16 /></template>
           <cv-side-nav-menu-item href="javascript:void(0)">
             L2 menu item
           </cv-side-nav-menu-item>
@@ -389,11 +391,11 @@ const preKnobs = {
           </cv-side-nav-menu-item>
         </cv-side-nav-menu>
         <cv-side-nav-link href="javascript:void(0)">
-          <template slot="nav-icon"><Fade16 /></template>
+          <template v-slot:nav-icon><Fade16 /></template>
           L1 link
         </cv-side-nav-link>
         <cv-side-nav-link href="javascript:void(0)">
-          <template slot="nav-icon"><Fade16 /></template>
+          <template v-slot:nav-icon><Fade16 /></template>
           L1 link
         </cv-side-nav-link>
       </cv-side-nav-items>
@@ -439,7 +441,7 @@ const preKnobs = {
     value: `<cv-side-nav id="side-nav">
       <cv-side-nav-items>
         <cv-side-nav-menu title="L1 menu">
-          <template slot="nav-icon"><Fade16 /></template>
+          <template v-slot:nav-icon><Fade16 /></template>
           <cv-side-nav-menu-item href="javascript:void(0)" active>
             L2 menu item
           </cv-side-nav-menu-item>
@@ -451,7 +453,7 @@ const preKnobs = {
           </cv-side-nav-menu-item>
         </cv-side-nav-menu>
         <cv-side-nav-menu title="L1 menu">
-          <template slot="nav-icon"><Fade16 /></template>
+          <template v-slot:nav-icon><Fade16 /></template>
           <cv-side-nav-menu-item href="javascript:void(0)">
             L2 menu item
           </cv-side-nav-menu-item>
@@ -463,11 +465,11 @@ const preKnobs = {
           </cv-side-nav-menu-item>
         </cv-side-nav-menu>
         <cv-side-nav-link href="javascript:void(0)">
-          <template slot="nav-icon"><Fade16 /></template>
+          <template v-slot:nav-icon><Fade16 /></template>
           L1 link
         </cv-side-nav-link>
         <cv-side-nav-link href="javascript:void(0)">
-          <template slot="nav-icon"><Fade16 /></template>
+          <template v-slot:nav-icon><Fade16 /></template>
           L1 link
         </cv-side-nav-link>
       </cv-side-nav-items>
@@ -478,7 +480,7 @@ const preKnobs = {
     value: `<cv-side-nav id="side-nav" rail>
       <cv-side-nav-items>
         <cv-side-nav-menu title="L1 menu">
-          <template slot="nav-icon"><Fade16 /></template>
+          <template v-slot:nav-icon><Fade16 /></template>
           <cv-side-nav-menu-item href="javascript:void(0)" active>
             L2 menu item
           </cv-side-nav-menu-item>
@@ -490,7 +492,7 @@ const preKnobs = {
           </cv-side-nav-menu-item>
         </cv-side-nav-menu>
         <cv-side-nav-menu title="L1 menu">
-          <template slot="nav-icon"><Fade16 /></template>
+          <template v-slot:nav-icon><Fade16 /></template>
           <cv-side-nav-menu-item href="javascript:void(0)">
             L2 menu item
           </cv-side-nav-menu-item>
@@ -502,11 +504,11 @@ const preKnobs = {
           </cv-side-nav-menu-item>
         </cv-side-nav-menu>
         <cv-side-nav-link href="javascript:void(0)">
-          <template slot="nav-icon"><Fade16 /></template>
+          <template v-slot:nav-icon><Fade16 /></template>
           L1 link
         </cv-side-nav-link>
         <cv-side-nav-link href="javascript:void(0)">
-          <template slot="nav-icon"><Fade16 /></template>
+          <template v-slot:nav-icon><Fade16 /></template>
           L1 link
         </cv-side-nav-link>
       </cv-side-nav-items>
@@ -574,10 +576,10 @@ for (const story of storySet) {
 
       // ----------------------------------------------------------------
       const templateString = `<cv-header aria-label="Carbon header">${settings.group.headerMenuButton}${settings.group.headerName}${settings.group.headerNav}${settings.group.headerActions}
-    <template slot="left-panels" v-if="areLeftPanels">
+    <template v-slot:left-panels v-if="areLeftPanels">
       ${settings.group.leftPanels}
     </template>
-    <template slot="right-panels" v-if="areRightPanels">
+    <template v-slot:right-panels v-if="areRightPanels">
     ${settings.group.rightPanels}
   </template>
 </cv-header>
@@ -594,7 +596,7 @@ ${settings.group.leftPanels2}
       sv-padding="150px 0 50px 0"
       :sv-extra-margin="areLeftPanels ? '300px' : ''"
       >
-      <template slot="component">${templateString}</template>
+      <template v-slot:component>${templateString}</template>
     </sv-template-view>
   `;
 
@@ -621,6 +623,7 @@ ${settings.group.leftPanels2}
           CvSwitcherItemLink,
           Notification20,
           UserAvatar20,
+          Login20,
           AppSwitcher20,
           Fade16,
         },
@@ -629,6 +632,12 @@ ${settings.group.leftPanels2}
         mounted() {
           this.doActionNotification = () => action('Notifications - click');
           this.doActionSwitcher = () => action('Notifications - click');
+          this.doActionUserAvatar = () => action('User avatar - click');
+        },
+        data() {
+          return {
+            loggedIn: false,
+          };
         },
         computed: {
           areLeftPanels() {
@@ -642,7 +651,10 @@ ${settings.group.leftPanels2}
           actionNotifications() {
             this.doActionNotification();
           },
-          actionUserAvatar: action('User avatar - click'),
+          actionUserAvatar() {
+            this.loggedIn = !this.loggedIn;
+            this.doActionUserAvatar();
+          },
           actionAppSwitcher() {
             this.doActionSwitcher();
           },

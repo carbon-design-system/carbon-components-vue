@@ -32,10 +32,10 @@ export default {
     };
   },
   mounted() {
-    // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
+    // NOTE: this.$slots is not reactive so needs to be managed on updated
     this.hasGlobalHeader = !!this.$slots['header-global'];
   },
-  beforeUpdate() {
+  updated() {
     this.hasGlobalHeader = !!this.$slots['header-global'];
   },
   computed: {

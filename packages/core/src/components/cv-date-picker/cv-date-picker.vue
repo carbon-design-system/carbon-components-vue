@@ -199,7 +199,7 @@ export default {
   },
   methods: {
     checkSlots() {
-      // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
+      // NOTE: this.$slots is not reactive so needs to be managed on updated
       this.isInvalid = !!(
         this.$slots['invalid-message'] ||
         (this.invalidMessage && this.invalidMessage.length) ||
@@ -327,7 +327,7 @@ export default {
     //   this.cal.setDate([curDate, anotherDate], true);
     // }, 2000);
   },
-  beforeUpdate() {
+  updated() {
     this.checkSlots();
   },
   beforeDestroy() {

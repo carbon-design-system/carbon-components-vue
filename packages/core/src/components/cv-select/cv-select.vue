@@ -115,7 +115,7 @@ export default {
     }
     this.checkSlots();
   },
-  beforeUpdate() {
+  updated() {
     this.checkSlots();
   },
   watch: {
@@ -152,7 +152,7 @@ export default {
   },
   methods: {
     checkSlots() {
-      // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
+      // NOTE: this.$slots is not reactive so needs to be managed on updated
       this.isInvalid = !!(this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length));
       this.isHelper = !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
     },

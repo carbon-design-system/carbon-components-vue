@@ -86,7 +86,7 @@ export default {
   mounted() {
     this.checkSlots();
   },
-  beforeUpdate() {
+  updated() {
     this.checkSlots();
   },
   watch: {
@@ -121,7 +121,7 @@ export default {
   },
   methods: {
     checkSlots() {
-      // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
+      // NOTE: this.$slots is not reactive so needs to be managed on updated
       this.hasOverflowMenu = !!((this.overflowMenu && this.overflowMenu.length) || this.$slots['overflow-menu']);
     },
     onChange() {
