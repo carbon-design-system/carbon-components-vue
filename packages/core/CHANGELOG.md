@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.34.0-canary.0
+
+fix: use of v-slot syntax not visible in beforeUpdate lifecycle method switched to updated.
+
 ## 2.33.0
 
 Promote canary
