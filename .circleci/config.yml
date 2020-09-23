@@ -25,7 +25,7 @@ jobs:
                 -r 'us-south' \
                 --apikey "$CLOUD_API_KEY"
               ibmcloud target -o carbon-design-system -s production
-              ibmcloud cf install -v 6.50.0
+              ibmcloud cf install -v 6.51.0
               ibmcloud cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
               ibmcloud cf install-plugin blue-green-deploy -f -r CF-Community
 
