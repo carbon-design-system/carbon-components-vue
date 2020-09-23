@@ -56,10 +56,10 @@ export default {
     };
   },
   mounted() {
-    // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
+    // NOTE: this.$slots is not reactive so needs to be managed on updated
     this.hasNavIcon = !!this.$slots['nav-icon'];
   },
-  beforeUpdate() {
+  updated() {
     this.hasNavIcon = !!this.$slots['nav-icon'];
   },
   computed: {

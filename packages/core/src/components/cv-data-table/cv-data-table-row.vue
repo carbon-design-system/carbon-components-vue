@@ -55,7 +55,7 @@ export default {
     },
   },
   mounted() {
-    // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
+    // NOTE: this.$slots is not reactive so needs to be managed on updated
     this.dataExpandable = !!this.$slots.expandedContent;
     this.$parent.$emit('cv:mounted', this);
   },
