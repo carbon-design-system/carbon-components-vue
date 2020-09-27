@@ -137,7 +137,7 @@ export default {
       },
     },
     invalidMessage: { type: String, default: undefined },
-    value: [String, Object, Array],
+    value: [String, Object, Array, Date],
   },
   model: {
     prop: 'value',
