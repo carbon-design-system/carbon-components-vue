@@ -1,0 +1,1009 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CvDefinitionTooltip should render definition tooltip with aligment and direction set as expected 1`] = `
+<div id="test-1" class="cv-definition-tooltip bx--tooltip--definition bx--tooltip--a11y"><button aria-describedby="test-1-label" type="button" class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--bottom bx--tooltip--align-end">
+    A term needeing definition
+  </button>
+  <div id="test-1-label" role="tooltip" class="bx--assistive-text">Brief description of the dotted, underlined term</div>
+</div>
+`;
+
+exports[`CvDefinitionTooltip should render definition tooltip with aligment set to "center" as expected 1`] = `
+<div id="test-1" class="cv-definition-tooltip bx--tooltip--definition bx--tooltip--a11y"><button aria-describedby="test-1-label" type="button" class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--top bx--tooltip--align-center">
+    A term needeing definition
+  </button>
+  <div id="test-1-label" role="tooltip" class="bx--assistive-text">Brief description of the dotted, underlined term</div>
+</div>
+`;
+
+exports[`CvDefinitionTooltip should render definition tooltip with aligment set to "end" as expected 1`] = `
+<div id="test-1" class="cv-definition-tooltip bx--tooltip--definition bx--tooltip--a11y"><button aria-describedby="test-1-label" type="button" class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--top bx--tooltip--align-end">
+    A term needeing definition
+  </button>
+  <div id="test-1-label" role="tooltip" class="bx--assistive-text">Brief description of the dotted, underlined term</div>
+</div>
+`;
+
+exports[`CvDefinitionTooltip should render definition tooltip with aligment set to "start" as expected 1`] = `
+<div id="test-1" class="cv-definition-tooltip bx--tooltip--definition bx--tooltip--a11y"><button aria-describedby="test-1-label" type="button" class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--top bx--tooltip--align-start">
+    A term needeing definition
+  </button>
+  <div id="test-1-label" role="tooltip" class="bx--assistive-text">Brief description of the dotted, underlined term</div>
+</div>
+`;
+
+exports[`CvDefinitionTooltip should render definition tooltip with aligment set to \`center\` as expected 1`] = `
+<div id="test-1" class="cv-definition-tooltip bx--tooltip--definition bx--tooltip--a11y"><button aria-describedby="test-1-label" type="button" class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--top bx--tooltip--align-center">
+    A term needeing definition
+  </button>
+  <div id="test-1-label" role="tooltip" class="bx--assistive-text">Brief description of the dotted, underlined term</div>
+</div>
+`;
+
+exports[`CvDefinitionTooltip should render definition tooltip with aligment set to \`end\` as expected 1`] = `
+<div id="test-1" class="cv-definition-tooltip bx--tooltip--definition bx--tooltip--a11y"><button aria-describedby="test-1-label" type="button" class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--top bx--tooltip--align-end">
+    A term needeing definition
+  </button>
+  <div id="test-1-label" role="tooltip" class="bx--assistive-text">Brief description of the dotted, underlined term</div>
+</div>
+`;
+
+exports[`CvDefinitionTooltip should render definition tooltip with aligment set to \`start\` as expected 1`] = `
+<div id="test-1" class="cv-definition-tooltip bx--tooltip--definition bx--tooltip--a11y"><button aria-describedby="test-1-label" type="button" class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--top bx--tooltip--align-start">
+    A term needeing definition
+  </button>
+  <div id="test-1-label" role="tooltip" class="bx--assistive-text">Brief description of the dotted, underlined term</div>
+</div>
+`;
+
+exports[`CvDefinitionTooltip should render definition tooltip with direction set to "bottom" as expected 1`] = `
+<div id="test-1" class="cv-definition-tooltip bx--tooltip--definition bx--tooltip--a11y"><button aria-describedby="test-1-label" type="button" class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--bottom bx--tooltip--align-center">
+    A term needeing definition
+  </button>
+  <div id="test-1-label" role="tooltip" class="bx--assistive-text">Brief description of the dotted, underlined term</div>
+</div>
+`;
+
+exports[`CvDefinitionTooltip should render definition tooltip with direction set to "top" as expected 1`] = `
+<div id="test-1" class="cv-definition-tooltip bx--tooltip--definition bx--tooltip--a11y"><button aria-describedby="test-1-label" type="button" class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--top bx--tooltip--align-center">
+    A term needeing definition
+  </button>
+  <div id="test-1-label" role="tooltip" class="bx--assistive-text">Brief description of the dotted, underlined term</div>
+</div>
+`;
+
+exports[`CvDefinitionTooltip should render definition tooltip with direction set to \`bottom\` as expected 1`] = `
+<div id="test-1" class="cv-definition-tooltip bx--tooltip--definition bx--tooltip--a11y"><button aria-describedby="test-1-label" type="button" class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--bottom bx--tooltip--align-center">
+    A term needeing definition
+  </button>
+  <div id="test-1-label" role="tooltip" class="bx--assistive-text">Brief description of the dotted, underlined term</div>
+</div>
+`;
+
+exports[`CvDefinitionTooltip should render definition tooltip with direction set to \`top\` as expected 1`] = `
+<div id="test-1" class="cv-definition-tooltip bx--tooltip--definition bx--tooltip--a11y"><button aria-describedby="test-1-label" type="button" class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--top bx--tooltip--align-center">
+    A term needeing definition
+  </button>
+  <div id="test-1-label" role="tooltip" class="bx--assistive-text">Brief description of the dotted, underlined term</div>
+</div>
+`;
+
+exports[`CvDefinitionTooltip should render definition tooltip: minimal as expected 1`] = `
+<div id="test-1" class="cv-definition-tooltip bx--tooltip--definition bx--tooltip--a11y"><button aria-describedby="test-1-label" type="button" class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--top bx--tooltip--align-center">
+    A term needeing definition
+  </button>
+  <div id="test-1-label" role="tooltip" class="bx--assistive-text">Brief description of the dotted, underlined term</div>
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltip with direction and visible set as expected 1`] = `
+<div class="cv-interactive-tooltip">
+  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="true" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger">
+      <information16-stub></information16-stub>
+    </button></div>
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltip with direction and visible set as expected 2`] = `
+<div
+  aria-describedby="test-1-body"
+  aria-hidden="true"
+  aria-labelledby="test-1-label"
+  class="bx--tooltip bx--tooltip--shown"
+  data-floating-menu-direction="left"
+  id="test-1"
+  role="dialog"
+  style="left: -10px; top: -0.25px;"
+  tabindex="-1"
+>
+  <div
+    class="cv-interactive-tooltip__before-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+   
+  <span
+    class="bx--tooltip__caret"
+  />
+   
+  <div
+    class="bx--tooltip__content"
+  />
+   
+  <div
+    class="cv-interactive-tooltip__after-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltip with direction set to \`bottom\` as expected 1`] = `
+<div class="cv-interactive-tooltip">
+  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger">
+      <information16-stub></information16-stub>
+    </button></div>
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltip with direction set to \`bottom\` as expected 2`] = `
+<div
+  aria-describedby="test-1-body"
+  aria-hidden="true"
+  aria-labelledby="test-1-label"
+  class="bx--tooltip"
+  data-floating-menu-direction="bottom"
+  id="test-1"
+  role="dialog"
+  style="left: -9999px; top: 0px;"
+  tabindex="-1"
+>
+  <div
+    class="cv-interactive-tooltip__before-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+   
+  <span
+    class="bx--tooltip__caret"
+  />
+   
+  <div
+    class="bx--tooltip__content"
+  />
+   
+  <div
+    class="cv-interactive-tooltip__after-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltip with direction set to \`left\` as expected 1`] = `
+<div class="cv-interactive-tooltip">
+  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger">
+      <information16-stub></information16-stub>
+    </button></div>
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltip with direction set to \`left\` as expected 2`] = `
+<div
+  aria-describedby="test-1-body"
+  aria-hidden="true"
+  aria-labelledby="test-1-label"
+  class="bx--tooltip"
+  data-floating-menu-direction="left"
+  id="test-1"
+  role="dialog"
+  style="left: -9999px; top: 0px;"
+  tabindex="-1"
+>
+  <div
+    class="cv-interactive-tooltip__before-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+   
+  <span
+    class="bx--tooltip__caret"
+  />
+   
+  <div
+    class="bx--tooltip__content"
+  />
+   
+  <div
+    class="cv-interactive-tooltip__after-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltip with direction set to \`right\` as expected 1`] = `
+<div class="cv-interactive-tooltip">
+  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger">
+      <information16-stub></information16-stub>
+    </button></div>
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltip with direction set to \`right\` as expected 2`] = `
+<div
+  aria-describedby="test-1-body"
+  aria-hidden="true"
+  aria-labelledby="test-1-label"
+  class="bx--tooltip"
+  data-floating-menu-direction="right"
+  id="test-1"
+  role="dialog"
+  style="left: -9999px; top: 0px;"
+  tabindex="-1"
+>
+  <div
+    class="cv-interactive-tooltip__before-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+   
+  <span
+    class="bx--tooltip__caret"
+  />
+   
+  <div
+    class="bx--tooltip__content"
+  />
+   
+  <div
+    class="cv-interactive-tooltip__after-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltip with direction set to \`top\` as expected 1`] = `
+<div class="cv-interactive-tooltip">
+  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger">
+      <information16-stub></information16-stub>
+    </button></div>
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltip with direction set to \`top\` as expected 2`] = `
+<div
+  aria-describedby="test-1-body"
+  aria-hidden="true"
+  aria-labelledby="test-1-label"
+  class="bx--tooltip"
+  data-floating-menu-direction="top"
+  id="test-1"
+  role="dialog"
+  style="left: -9999px; top: 0px;"
+  tabindex="-1"
+>
+  <div
+    class="cv-interactive-tooltip__before-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+   
+  <span
+    class="bx--tooltip__caret"
+  />
+   
+  <div
+    class="bx--tooltip__content"
+  />
+   
+  <div
+    class="cv-interactive-tooltip__after-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltip with slot "content" as expected 1`] = `
+<div class="cv-interactive-tooltip">
+  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger">
+      <information16-stub></information16-stub>
+    </button></div>
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltip with slot "content" as expected 2`] = `
+<div
+  aria-describedby="test-1-body"
+  aria-hidden="true"
+  aria-labelledby="test-1-label"
+  class="bx--tooltip"
+  data-floating-menu-direction="top"
+  id="test-1"
+  role="dialog"
+  style="left: -9999px; top: 0px;"
+  tabindex="-1"
+>
+  <div
+    class="cv-interactive-tooltip__before-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+   
+  <span
+    class="bx--tooltip__caret"
+  />
+   
+  <div
+    class="bx--tooltip__content"
+  >
+    <div>
+      Interactive tooptip content
+      <button>
+        Close tooltip
+      </button>
+    </div>
+  </div>
+   
+  <div
+    class="cv-interactive-tooltip__after-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltip with slot "label" as expected 1`] = `
+<div class="cv-interactive-tooltip">
+  <div id="test-1-label" class="bx--tooltip__label">
+    <div>Interactive tooptip label</div> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger">
+      <information16-stub></information16-stub>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltip with slot "label" as expected 2`] = `
+<div
+  aria-describedby="test-1-body"
+  aria-hidden="true"
+  aria-labelledby="test-1-label"
+  class="bx--tooltip"
+  data-floating-menu-direction="top"
+  id="test-1"
+  role="dialog"
+  style="left: -9999px; top: 0px;"
+  tabindex="-1"
+>
+  <div
+    class="cv-interactive-tooltip__before-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+   
+  <span
+    class="bx--tooltip__caret"
+  />
+   
+  <div
+    class="bx--tooltip__content"
+  />
+   
+  <div
+    class="cv-interactive-tooltip__after-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltip with slot "trigger" as expected 1`] = `
+<div class="cv-interactive-tooltip">
+  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger">
+      <div>Interactive tooptip trigger</div>
+    </button></div>
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltip with slot "trigger" as expected 2`] = `
+<div
+  aria-describedby="test-1-body"
+  aria-hidden="true"
+  aria-labelledby="test-1-label"
+  class="bx--tooltip"
+  data-floating-menu-direction="top"
+  id="test-1"
+  role="dialog"
+  style="left: -9999px; top: 0px;"
+  tabindex="-1"
+>
+  <div
+    class="cv-interactive-tooltip__before-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+   
+  <span
+    class="bx--tooltip__caret"
+  />
+   
+  <div
+    class="bx--tooltip__content"
+  />
+   
+  <div
+    class="cv-interactive-tooltip__after-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltip with slot \`content\` as expected 1`] = `
+<div class="cv-interactive-tooltip">
+  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger">
+      <information16-stub></information16-stub>
+    </button></div>
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltip with slot \`content\` as expected 2`] = `
+<div
+  aria-describedby="test-1-body"
+  aria-hidden="true"
+  aria-labelledby="test-1-label"
+  class="bx--tooltip"
+  data-floating-menu-direction="top"
+  id="test-1"
+  role="dialog"
+  style="left: -9999px; top: 0px;"
+  tabindex="-1"
+>
+  <div
+    class="cv-interactive-tooltip__before-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+   
+  <span
+    class="bx--tooltip__caret"
+  />
+   
+  <div
+    class="bx--tooltip__content"
+  >
+    <div>
+      Interactive tooptip content
+      <button>
+        Close tooltip
+      </button>
+    </div>
+  </div>
+   
+  <div
+    class="cv-interactive-tooltip__after-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltip with slot \`label\` as expected 1`] = `
+<div class="cv-interactive-tooltip">
+  <div id="test-1-label" class="bx--tooltip__label">
+    <div>Interactive tooptip label</div> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger">
+      <information16-stub></information16-stub>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltip with slot \`label\` as expected 2`] = `
+<div
+  aria-describedby="test-1-body"
+  aria-hidden="true"
+  aria-labelledby="test-1-label"
+  class="bx--tooltip"
+  data-floating-menu-direction="top"
+  id="test-1"
+  role="dialog"
+  style="left: -9999px; top: 0px;"
+  tabindex="-1"
+>
+  <div
+    class="cv-interactive-tooltip__before-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+   
+  <span
+    class="bx--tooltip__caret"
+  />
+   
+  <div
+    class="bx--tooltip__content"
+  />
+   
+  <div
+    class="cv-interactive-tooltip__after-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltip with slot \`trigger\` as expected 1`] = `
+<div class="cv-interactive-tooltip">
+  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger">
+      <div>Interactive tooptip trigger</div>
+    </button></div>
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltip with slot \`trigger\` as expected 2`] = `
+<div
+  aria-describedby="test-1-body"
+  aria-hidden="true"
+  aria-labelledby="test-1-label"
+  class="bx--tooltip"
+  data-floating-menu-direction="top"
+  id="test-1"
+  role="dialog"
+  style="left: -9999px; top: 0px;"
+  tabindex="-1"
+>
+  <div
+    class="cv-interactive-tooltip__before-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+   
+  <span
+    class="bx--tooltip__caret"
+  />
+   
+  <div
+    class="bx--tooltip__content"
+  />
+   
+  <div
+    class="cv-interactive-tooltip__after-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltip with visible set to \`true\` as expected 1`] = `
+<div class="cv-interactive-tooltip">
+  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="true" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger">
+      <information16-stub></information16-stub>
+    </button></div>
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltip with visible set to \`true\` as expected 2`] = `
+<div
+  aria-describedby="test-1-body"
+  aria-hidden="true"
+  aria-labelledby="test-1-label"
+  class="bx--tooltip bx--tooltip--shown"
+  data-floating-menu-direction="top"
+  id="test-1"
+  role="dialog"
+  style="left: 0.5px; top: -15px;"
+  tabindex="-1"
+>
+  <div
+    class="cv-interactive-tooltip__before-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+   
+  <span
+    class="bx--tooltip__caret"
+  />
+   
+  <div
+    class="bx--tooltip__content"
+  />
+   
+  <div
+    class="cv-interactive-tooltip__after-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltip with visible set to true as expected 1`] = `
+<div class="cv-interactive-tooltip">
+  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="true" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger">
+      <information16-stub></information16-stub>
+    </button></div>
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltip with visible set to true as expected 2`] = `
+<div
+  aria-describedby="test-1-body"
+  aria-hidden="true"
+  aria-labelledby="test-1-label"
+  class="bx--tooltip bx--tooltip--shown"
+  data-floating-menu-direction="top"
+  id="test-1"
+  role="dialog"
+  style="left: 0.5px; top: -15px;"
+  tabindex="-1"
+>
+  <div
+    class="cv-interactive-tooltip__before-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+   
+  <span
+    class="bx--tooltip__caret"
+  />
+   
+  <div
+    class="bx--tooltip__content"
+  />
+   
+  <div
+    class="cv-interactive-tooltip__after-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltip: minimal as expected 1`] = `
+<div class="cv-interactive-tooltip">
+  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger">
+      <information16-stub></information16-stub>
+    </button></div>
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltip: minimal as expected 2`] = `
+<div
+  aria-describedby="test-1-body"
+  aria-hidden="true"
+  aria-labelledby="test-1-label"
+  class="bx--tooltip"
+  data-floating-menu-direction="top"
+  id="test-1"
+  role="dialog"
+  style="left: -9999px; top: 0px;"
+  tabindex="-1"
+>
+  <div
+    class="cv-interactive-tooltip__before-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+   
+  <span
+    class="bx--tooltip__caret"
+  />
+   
+  <div
+    class="bx--tooltip__content"
+  />
+   
+  <div
+    class="cv-interactive-tooltip__after-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltipwith direction and visible set as expected 1`] = `
+<div class="cv-interactive-tooltip">
+  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="true" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger">
+      <information16-stub></information16-stub>
+    </button></div>
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltipwith direction and visible set as expected 2`] = `
+<div
+  aria-describedby="test-1-body"
+  aria-hidden="true"
+  aria-labelledby="test-1-label"
+  class="bx--tooltip bx--tooltip--shown"
+  data-floating-menu-direction="left"
+  id="test-1"
+  role="dialog"
+  style="left: -10px; top: -0.25px;"
+  tabindex="-1"
+>
+  <div
+    class="cv-interactive-tooltip__before-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+   
+  <span
+    class="bx--tooltip__caret"
+  />
+   
+  <div
+    class="bx--tooltip__content"
+  />
+   
+  <div
+    class="cv-interactive-tooltip__after-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltipwith direction set to "bottom" as expected 1`] = `
+<div class="cv-interactive-tooltip">
+  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger">
+      <information16-stub></information16-stub>
+    </button></div>
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltipwith direction set to "bottom" as expected 2`] = `
+<div
+  aria-describedby="test-1-body"
+  aria-hidden="true"
+  aria-labelledby="test-1-label"
+  class="bx--tooltip"
+  data-floating-menu-direction="bottom"
+  id="test-1"
+  role="dialog"
+  style="left: -9999px; top: 0px;"
+  tabindex="-1"
+>
+  <div
+    class="cv-interactive-tooltip__before-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+   
+  <span
+    class="bx--tooltip__caret"
+  />
+   
+  <div
+    class="bx--tooltip__content"
+  />
+   
+  <div
+    class="cv-interactive-tooltip__after-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltipwith direction set to "left" as expected 1`] = `
+<div class="cv-interactive-tooltip">
+  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger">
+      <information16-stub></information16-stub>
+    </button></div>
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltipwith direction set to "left" as expected 2`] = `
+<div
+  aria-describedby="test-1-body"
+  aria-hidden="true"
+  aria-labelledby="test-1-label"
+  class="bx--tooltip"
+  data-floating-menu-direction="left"
+  id="test-1"
+  role="dialog"
+  style="left: -9999px; top: 0px;"
+  tabindex="-1"
+>
+  <div
+    class="cv-interactive-tooltip__before-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+   
+  <span
+    class="bx--tooltip__caret"
+  />
+   
+  <div
+    class="bx--tooltip__content"
+  />
+   
+  <div
+    class="cv-interactive-tooltip__after-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltipwith direction set to "right" as expected 1`] = `
+<div class="cv-interactive-tooltip">
+  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger">
+      <information16-stub></information16-stub>
+    </button></div>
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltipwith direction set to "right" as expected 2`] = `
+<div
+  aria-describedby="test-1-body"
+  aria-hidden="true"
+  aria-labelledby="test-1-label"
+  class="bx--tooltip"
+  data-floating-menu-direction="right"
+  id="test-1"
+  role="dialog"
+  style="left: -9999px; top: 0px;"
+  tabindex="-1"
+>
+  <div
+    class="cv-interactive-tooltip__before-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+   
+  <span
+    class="bx--tooltip__caret"
+  />
+   
+  <div
+    class="bx--tooltip__content"
+  />
+   
+  <div
+    class="cv-interactive-tooltip__after-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltipwith direction set to "top" as expected 1`] = `
+<div class="cv-interactive-tooltip">
+  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger">
+      <information16-stub></information16-stub>
+    </button></div>
+</div>
+`;
+
+exports[`CvInteractiveTooltip should render interactive tooltipwith direction set to "top" as expected 2`] = `
+<div
+  aria-describedby="test-1-body"
+  aria-hidden="true"
+  aria-labelledby="test-1-label"
+  class="bx--tooltip"
+  data-floating-menu-direction="top"
+  id="test-1"
+  role="dialog"
+  style="left: -9999px; top: 0px;"
+  tabindex="-1"
+>
+  <div
+    class="cv-interactive-tooltip__before-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+   
+  <span
+    class="bx--tooltip__caret"
+  />
+   
+  <div
+    class="bx--tooltip__content"
+  />
+   
+  <div
+    class="cv-interactive-tooltip__after-content"
+    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    tabindex="0"
+  />
+</div>
+`;
+
+exports[`CvToopltip should render tooltip with aligment and direction set as expected 1`] = `
+<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--right bx--tooltip--align-end"><span class="bx--assistive-text">this is a tip</span>
+  <information16-stub></information16-stub>
+</button>
+`;
+
+exports[`CvToopltip should render tooltip with aligment set to "center" as expected 1`] = `
+<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--top bx--tooltip--align-center"><span class="bx--assistive-text">this is a tip</span>
+  <information16-stub></information16-stub>
+</button>
+`;
+
+exports[`CvToopltip should render tooltip with aligment set to "end" as expected 1`] = `
+<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--top bx--tooltip--align-end"><span class="bx--assistive-text">this is a tip</span>
+  <information16-stub></information16-stub>
+</button>
+`;
+
+exports[`CvToopltip should render tooltip with aligment set to "start" as expected 1`] = `
+<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--top bx--tooltip--align-start"><span class="bx--assistive-text">this is a tip</span>
+  <information16-stub></information16-stub>
+</button>
+`;
+
+exports[`CvToopltip should render tooltip with aligment set to \`center\` as expected 1`] = `
+<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--top bx--tooltip--align-center"><span class="bx--assistive-text">this is a tip</span>
+  <information16-stub></information16-stub>
+</button>
+`;
+
+exports[`CvToopltip should render tooltip with aligment set to \`end\` as expected 1`] = `
+<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--top bx--tooltip--align-end"><span class="bx--assistive-text">this is a tip</span>
+  <information16-stub></information16-stub>
+</button>
+`;
+
+exports[`CvToopltip should render tooltip with aligment set to \`start\` as expected 1`] = `
+<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--top bx--tooltip--align-start"><span class="bx--assistive-text">this is a tip</span>
+  <information16-stub></information16-stub>
+</button>
+`;
+
+exports[`CvToopltip should render tooltip with direction set to "bottom" as expected 1`] = `
+<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center"><span class="bx--assistive-text">this is a tip</span>
+  <information16-stub></information16-stub>
+</button>
+`;
+
+exports[`CvToopltip should render tooltip with direction set to "left" as expected 1`] = `
+<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--left bx--tooltip--align-center"><span class="bx--assistive-text">this is a tip</span>
+  <information16-stub></information16-stub>
+</button>
+`;
+
+exports[`CvToopltip should render tooltip with direction set to "right" as expected 1`] = `
+<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--right bx--tooltip--align-center"><span class="bx--assistive-text">this is a tip</span>
+  <information16-stub></information16-stub>
+</button>
+`;
+
+exports[`CvToopltip should render tooltip with direction set to "top" as expected 1`] = `
+<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--top bx--tooltip--align-center"><span class="bx--assistive-text">this is a tip</span>
+  <information16-stub></information16-stub>
+</button>
+`;
+
+exports[`CvToopltip should render tooltip with direction set to \`bottom\` as expected 1`] = `
+<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center"><span class="bx--assistive-text">this is a tip</span>
+  <information16-stub></information16-stub>
+</button>
+`;
+
+exports[`CvToopltip should render tooltip with direction set to \`left\` as expected 1`] = `
+<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--left bx--tooltip--align-center"><span class="bx--assistive-text">this is a tip</span>
+  <information16-stub></information16-stub>
+</button>
+`;
+
+exports[`CvToopltip should render tooltip with direction set to \`right\` as expected 1`] = `
+<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--right bx--tooltip--align-center"><span class="bx--assistive-text">this is a tip</span>
+  <information16-stub></information16-stub>
+</button>
+`;
+
+exports[`CvToopltip should render tooltip with direction set to \`top\` as expected 1`] = `
+<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--top bx--tooltip--align-center"><span class="bx--assistive-text">this is a tip</span>
+  <information16-stub></information16-stub>
+</button>
+`;
+
+exports[`CvToopltip should render tooltip: minimal as expected 1`] = `
+<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--top bx--tooltip--align-center"><span class="bx--assistive-text">this is a tip</span>
+  <information16-stub></information16-stub>
+</button>
+`;
