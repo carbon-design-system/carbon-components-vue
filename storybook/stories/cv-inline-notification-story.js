@@ -23,10 +23,8 @@ const preKnobs = {
   subtitle: {
     group: 'attr',
     type: text,
-    config: [
-      'subtitle',
-      'Lorem ipsum dolor sit amet, consectetur adipisicing elit, seed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    ], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    value: () =>
+      `Lorem ipsum dolor sit amet, <a>consectetur adipisicing elit</a>, seed do eiusmod tempor <strong>incididunt ut labore</strong> et dolore magna aliqua.`,
     prop: 'sub-title',
   },
   events: {
