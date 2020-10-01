@@ -1,17 +1,23 @@
 import { storiesOf } from '@storybook/vue';
-import { boolean, text, select } from '@storybook/addon-knobs';
+import { text, select } from '@storybook/addon-knobs';
 
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvInlineLoadingNotesMD from '@carbon/vue/src/components/cv-inline-loading/cv-inline-loading-notes.md';
-import { CvInlineLoading, STATES } from '@carbon/vue/src/components/cv-inline-loading';
+import CvInlineLoadingNotesMD from '../../packages/core/src/components/cv-inline-loading/cv-inline-loading-notes.md';
+import { CvInlineLoading, STATES } from '../../packages/core/src/components/cv-inline-loading';
 
 const storiesDefault = storiesOf('Components/CvInlineLoading', module);
-const storiesExperimental = storiesOf('Experimental/CvInlineLoading', module);
+// const storiesExperimental = storiesOf('Experimental/CvInlineLoading', module);
 
 const preKnobs = {
+  endingText: {
+    group: 'attr',
+    type: text,
+    config: ['ending text', 'Ending...'],
+    prop: 'ending-text',
+  },
   errorText: {
     group: 'attr',
     type: text,

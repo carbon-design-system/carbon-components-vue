@@ -1,14 +1,23 @@
 <template>
   <button
     v-on="$listeners"
-    class="cv-header-menu-button bx--header__action bx--header__menu-trigger bx--header__menu-toggle"
-    :class="dataActive ? 'bx--header__action--active' : ''"
+    class="cv-header-menu-button"
+    :class="[
+      `${carbonPrefix}--header__action`,
+      `${carbonPrefix}--header__menu-trigger`,
+      `${carbonPrefix}--header__menu-toggle`,
+      {
+        [`${carbonPrefix}--header__action--active`]: dataActive,
+        [`${carbonPrefix}--header__menu-toggle__hidden`]: !hasRail,
+      },
+    ]"
     type="button"
     aria-haspopup="true"
     :aria-controls="ariaControls"
-    :aria-expanded="active"
+    :aria-expanded="active ? 'true' : 'false'"
     @click="gaToggle"
     @focusout="gaFocusout"
+    :id="uid"
   >
     <Close20 v-if="dataActive" />
     <Menu20 v-if="!dataActive" />
@@ -19,10 +28,11 @@
 import uidMixin from '../../mixins/uid-mixin';
 import Close20 from '@carbon/icons-vue/es/close/20';
 import Menu20 from '@carbon/icons-vue/es/menu/20';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvHeaderMenuButton',
-  mixins: [uidMixin],
+  mixins: [uidMixin, carbonPrefixMixin],
   components: { Close20, Menu20 },
   props: {
     active: Boolean,
@@ -37,10 +47,8 @@ export default {
   data() {
     return {
       dataActive: this.active,
+      hasRail: false,
     };
-  },
-  mounted() {
-    // watch width transition and
   },
   watch: {
     active() {

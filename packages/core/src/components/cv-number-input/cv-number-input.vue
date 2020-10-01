@@ -1,43 +1,82 @@
 <template>
-  <cv-wrapper :tag-type="formItem ? 'div' : ''" class="cv-number-input bx--form-item">
+  <cv-wrapper :tag-type="formItem ? 'div' : ''" class="cv-number-input" :class="`${carbonPrefix}--form-item`">
     <div
       data-numberinput
-      class="bx--number"
-      :class="{
-        'bx--number--light': theme === 'light',
-        'bx--number--helpertext': isHelper,
-        'cv-number-input': !formItem,
-      }"
+      :class="[
+        `${carbonPrefix}--number`,
+        {
+          [`${carbonPrefix}--number--light`]: theme === 'light',
+          [`${carbonPrefix}--number--helpertext`]: isHelper,
+          [`cv-number-input`]: !formItem,
+          [`${carbonPrefix}--number--mobile`]: mobile,
+        },
+      ]"
       :data-invalid="isInvalid"
     >
-      <label :for="uid" class="bx--label">{{ label }}</label>
-      <div class="bx--form__helper-text" v-if="isHelper">
+      <label :for="uid" :class="`${carbonPrefix}--label`">{{ label }}</label>
+      <div :class="`${carbonPrefix}--form__helper-text`" v-if="isHelper && mobile">
         <slot name="helper-text">{{ helperText }}</slot>
       </div>
-      <div class="bx--number__input-wrapper">
-        <input :id="uid" type="number" v-model="internalValue" v-bind="$attrs" v-on="inputListeners" />
-        <WarningFilled16 v-if="isInvalid" class="bx--number__invalid" />
-        <div class="bx--number__controls">
+      <div :class="`${carbonPrefix}--number__input-wrapper`">
+        <button
+          v-if="mobile"
+          :class="`${carbonPrefix}--number__control-btn down-icon`"
+          @click="doDown"
+          type="button"
+          :aria-label="ariaLabelForDownButton"
+          :disabled="disabled"
+        >
+          <CaretDownGlyph />
+        </button>
+        <input
+          :id="uid"
+          type="number"
+          :value="internalValue"
+          v-bind="$attrs"
+          v-on="inputListeners"
+          :disabled="disabled"
+          :step="step"
+          :min="min"
+          :max="max"
+          ref="input"
+        />
+        <WarningFilled16 v-if="isInvalid && !mobile" :class="`${carbonPrefix}--number__invalid`" />
+        <div :class="`${carbonPrefix}--number__controls`" v-if="!mobile">
           <button
-            class="bx--number__control-btn up-icon"
+            :class="`${carbonPrefix}--number__control-btn up-icon`"
             @click="doUp"
             type="button"
             :aria-label="ariaLabelForUpButton"
+            :disabled="disabled"
           >
             <CaretUpGlyph />
           </button>
           <button
-            class="bx--number__control-btn down-icon"
+            :class="`${carbonPrefix}--number__control-btn down-icon`"
             @click="doDown"
             type="button"
             :aria-label="ariaLabelForDownButton"
+            :disabled="disabled"
           >
             <CaretDownGlyph />
           </button>
         </div>
+        <button
+          v-else
+          :class="`${carbonPrefix}--number__control-btn up-icon`"
+          @click="doUp"
+          type="button"
+          :aria-label="ariaLabelForUpButton"
+          :disabled="disabled"
+        >
+          <CaretUpGlyph />
+        </button>
       </div>
-      <div class="bx--form-requirement" v-if="isInvalid">
+      <div :class="`${carbonPrefix}--form-requirement`" v-if="isInvalid">
         <slot name="invalid-message">{{ invalidMessage }}</slot>
+      </div>
+      <div :class="`${carbonPrefix}--form__helper-text`" v-if="!isInvalid && isHelper && !mobile">
+        <slot name="helper-text">{{ helperText }}</slot>
       </div>
     </div>
   </cv-wrapper>
@@ -50,13 +89,16 @@ import CaretDownGlyph from '@carbon/icons-vue/es/caret--down/index';
 import CaretUpGlyph from '@carbon/icons-vue/es/caret--up/index';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import methodsMixin from '../../mixins/methods-mixin';
 
 export default {
   name: 'CvNumberInput',
-  mixins: [uidMixin, themeMixin],
+  mixins: [uidMixin, themeMixin, carbonPrefixMixin, methodsMixin({ input: ['blur', 'focus'] })],
   components: { CaretDownGlyph, CaretUpGlyph, WarningFilled16, CvWrapper },
   inheritAttrs: false,
   props: {
+    disabled: Boolean,
     formItem: { type: Boolean, default: true },
     helperText: { type: String, default: undefined },
     invalidMessage: { type: String, default: undefined },
@@ -74,15 +116,34 @@ export default {
     },
     ariaLabelForUpButton: { type: String, default: 'Increase number input' },
     ariaLabelForDownButton: { type: String, default: 'Decrease number input' },
+    min: { type: [String, Number], default: undefined },
+    max: { type: [String, Number], default: undefined },
+    step: { type: [String, Number], default: undefined },
+    mobile: Boolean,
   },
   data() {
     return {
-      internalValue: this.valueAsString(this.value),
+      internalValue: 0,
+      isHelper: false,
+      isInvalid: false,
     };
+  },
+  mounted() {
+    this.internalValue = this.valueAsString(this.value);
+    this.checkSlots();
+  },
+  updated() {
+    this.checkSlots();
   },
   watch: {
     value() {
-      this.internalValue = this.valueAsString(this.value);
+      // NOTE: DELIBERATE USE OF != TO COMPARE this.interanlValue and this.value
+      if (typeof this.value !== 'number' || this.internalValue != this.value) {
+        // prevents this.value of 1 updating this.internalValue of 1.0
+        // which improves the typing experience
+        // does not matter if this.value is string or number
+        this.internalValue = this.valueAsString(this.value);
+      }
     },
   },
   computed: {
@@ -91,45 +152,51 @@ export default {
     // https://vuejs.org/v2/guide/components-custom-events.html#Customizing-Component-v-model
     inputListeners() {
       return Object.assign({}, this.$listeners, {
-        input: () => this.emitValue(),
+        input: ev => this.onInput(ev.target.value),
       });
-    },
-    internalIntValue() {
-      let intVal = parseInt(this.internalValue, 10);
-
-      if (isNaN(intVal)) {
-        intVal = 0;
-      }
-      return intVal;
-    },
-    isInvalid() {
-      return this.$slots['invalid-message'] !== undefined || (this.invalidMessage && this.invalidMessage.length);
-    },
-    isHelper() {
-      return this.$slots['helper-text'] !== undefined || (this.helperText && this.helperText.length);
     },
   },
   methods: {
-    doUp() {
-      this.internalValue = `${this.internalIntValue + 1}`;
+    onInput(val) {
+      this.internalValue = val;
       this.emitValue();
     },
+    checkSlots() {
+      // NOTE: this.$slots is not reactive so needs to be managed on updated
+      this.isInvalid = !!(this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length));
+      this.isHelper = !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
+    },
+    doUp() {
+      this.$refs.input.stepUp();
+      this.onInput(this.$refs.input.value);
+    },
     doDown() {
-      this.internalValue = `${this.internalIntValue - 1}`;
-      this.emitValue();
+      this.$refs.input.stepDown();
+      this.onInput(this.$refs.input.value);
     },
     emitValue() {
       if (typeof this.value === 'number') {
-        this.$emit('input', this.internalIntValue);
+        if (this.internalValue != this.value) {
+          const ePos = this.internalValue.indexOf('e-');
+          const dotPos = this.internalValue.indexOf('.');
+          if (ePos > -1 || dotPos > -1) {
+            this.$emit('input', parseFloat(this.internalValue));
+          } else {
+            this.$emit('input', parseInt(this.internalValue));
+          }
+        }
       } else {
         this.$emit('input', this.internalValue);
       }
     },
     valueAsString(val) {
+      let strVal;
       if (typeof val === 'number') {
-        return '' + val;
+        strVal = Number.isFinite(val) ? val.toString() : '';
+      } else {
+        strVal = val;
       }
-      return val;
+      return strVal;
     },
   },
 };

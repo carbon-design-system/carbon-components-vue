@@ -1,21 +1,24 @@
 <template>
-  <div class="cv-slider bx--form-item">
-    <label :for="uid" class="bx--label" :class="{ 'bx--label--disabled': disabled }">{{ label }}</label>
-    <div class="bx--slider-container">
-      <span class="bx--slider__range-label">{{ internalMinLabel }}</span>
+  <div :class="`cv-slider ${carbonPrefix}--form-item`">
+    <label :for="uid" :class="[`${carbonPrefix}--label`, { [`${carbonPrefix}--label--disabled`]: disabled }]">
+      {{ label }}
+    </label>
+    <div :class="`${carbonPrefix}--slider-container`">
+      <span :class="`${carbonPrefix}--slider__range-label`">{{ internalMinLabel }}</span>
       <div
-        class="bx--slider"
-        :class="{ 'bx--slider--disabled': disabled }"
+        :class="[`${carbonPrefix}--slider`, { [`${carbonPrefix}--slider--disabled`]: disabled }]"
         data-slider
         data-slider-input-box="#slider-input-box"
       >
-        <div class="bx--slider__track" @click="onTrackClick" ref="track"></div>
-        <div class="bx--slider__filled-track" :style="`width: ${percentage};`"></div>
+        <div :class="`${carbonPrefix}--slider__track`" @click="onTrackClick" ref="track"></div>
+        <div :class="`${carbonPrefix}--slider__filled-track`" :style="`width: ${percentage};`"></div>
         <div
-          class="bx--slider__thumb"
-          :class="{
-            'bx--slider__thumb--clicked': animateClick,
-          }"
+          :class="[
+            `${carbonPrefix}--slider__thumb`,
+            {
+              [`${carbonPrefix}--slider__thumb--clicked`]: animateClick,
+            },
+          ]"
           tabindex="0"
           :style="`left: ${percentage};`"
           ref="thumb"
@@ -23,13 +26,23 @@
           @keydown.down.left.prevent="onDown"
           @mousedown="onStartDrag"
         ></div>
-        <input :id="uid" class="bx--slider__input" type="range" :step="step" :min="min" :max="max" ref="range" />
+        <input
+          :id="uid"
+          :class="`${carbonPrefix}--slider__input`"
+          type="range"
+          :step="step"
+          :min="min"
+          :max="max"
+          ref="range"
+        />
       </div>
-      <span class="bx--slider__range-label">{{ internalMaxLabel }}</span>
+      <span :class="`${carbonPrefix}--slider__range-label`">{{ internalMaxLabel }}</span>
       <input
         type="number"
-        class="bx--text-input bx--slider-text-input"
-        :class="{ 'bx--text-input--light': theme === 'light' }"
+        :class="[
+          `${carbonPrefix}--text-input ${carbonPrefix}--slider-text-input`,
+          { [`${carbonPrefix}--text-input--light`]: theme === 'light' },
+        ]"
         :placeholder="min"
         v-model="internalValue"
         @change="onChange"
@@ -45,10 +58,12 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import methodsMixin from '../../mixins/methods-mixin';
 
 export default {
   name: 'CvSlider',
-  mixins: [uidMixin, themeMixin],
+  mixins: [uidMixin, themeMixin, carbonPrefixMixin, methodsMixin({ thumb: ['blur', 'focus'] })],
   props: {
     disabled: Boolean,
     label: String,

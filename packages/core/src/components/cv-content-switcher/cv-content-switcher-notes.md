@@ -54,7 +54,10 @@ http://www.carbondesignsystem.com/components/content-switcher/code
 
 - ownerId : Used with CvContentSwitcherPanel
 - content-selector : DOM CSS selector used to manipulate the DOM directly.
-- icon: is optional. It takes an Vue Component expected to be an icon or a string path to an SVG icon.
+- icon: is optional. It takes an Vue Component expected to be a an icon that follows the pattern used for fill/color/stroke in Carbon Icons. It can be in the form of: a component (e.g. @carbon/icons-vue), an SVG symbol path, an SVG path, raw SVG.
+
+NOTE: Recommend using icons as components or SVG symbols.
+NOTE 2: Using an SVG path without an element ID will not style correctly. This is due to SVG1.1 not supporting 'use' tag without ID being specified, as a result an img tag is used.
 
 NOTE: Prefer ownerId
 

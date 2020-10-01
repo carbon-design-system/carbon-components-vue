@@ -5,12 +5,13 @@ import { action } from '@storybook/addon-actions';
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
+import TimerButton from '../_storybook/components/timer-button';
 
-import CvSelectNotesMD from '@carbon/vue/src/components/cv-select/cv-select-notes.md';
-import { CvSelect, CvSelectOptgroup, CvSelectOption } from '@carbon/vue/src';
+import CvSelectNotesMD from '../../packages/core/src/components/cv-select/cv-select-notes.md';
+import { CvSelect, CvSelectOptgroup, CvSelectOption } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvSelect', module);
-const storiesExperimental = storiesOf('Experimental/CvSelect', module);
+// const storiesExperimental = storiesOf('Experimental/CvSelect', module);
 
 const preKnobs = {
   theme: {
@@ -85,7 +86,7 @@ const variants = [
   },
   {
     name: 'slots',
-    excludes: ['vModel', 'events', 'helperText', 'invalidMessage'],
+    excludes: ['vModel', 'events'],
   },
   { name: 'minimal', includes: ['label'] },
   { name: 'events', includes: ['label', 'events'] },
@@ -121,12 +122,14 @@ for (const story of storySet) {
 
       const templateViewString = `
     <sv-template-view
+      ref="templateView"
       sv-margin
       :sv-alt-back="this.$options.propsData.theme !== 'light'"
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
 
       <template slot="other">
+        <TimerButton @timer-start="doStart" @timer-end="doEnd" label="Call focus() method" active-label-prefix="Call blur() method in" />
         <div v-if="${templateString.indexOf('v-model') > 0}">
           <span>V-Model value</span>
             <select v-model="selectValue" >
@@ -142,7 +145,7 @@ for (const story of storySet) {
   `;
 
       return {
-        components: { CvSelect, CvSelectOption, CvSelectOptgroup, SvTemplateView },
+        components: { CvSelect, CvSelectOption, CvSelectOptgroup, SvTemplateView, TimerButton },
         props: settings.props,
         data() {
           return {
@@ -151,6 +154,14 @@ for (const story of storySet) {
         },
         methods: {
           actionChange: action('CV Select - change'),
+          doStart() {
+            this.$nextTick(() => {
+              this.$refs.templateView.$slots.component[0].componentInstance.focus();
+            });
+          },
+          doEnd() {
+            this.$refs.templateView.$slots.component[0].componentInstance.blur();
+          },
         },
         template: templateViewString,
       };

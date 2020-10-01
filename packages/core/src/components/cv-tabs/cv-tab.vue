@@ -4,7 +4,7 @@
     :id="uid"
     role="tabpanel"
     :aria-labelledby="`${uid}-link`"
-    :aria-hidden="!dataSelected"
+    :aria-hidden="!dataSelected ? 'true' : 'false'"
     :hidden="!dataSelected"
   >
     <slot>

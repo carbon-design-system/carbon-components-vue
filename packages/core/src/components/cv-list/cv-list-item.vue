@@ -1,9 +1,13 @@
 <template>
-  <li class="cv-list-item bx--list__item"><slot></slot></li>
+  <li :class="`cv-list-item ${carbonPrefix}--list__item`">
+    <slot></slot>
+  </li>
 </template>
 
 <script>
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 export default {
   name: 'CvListItem',
+  mixins: [carbonPrefixMixin],
 };
 </script>

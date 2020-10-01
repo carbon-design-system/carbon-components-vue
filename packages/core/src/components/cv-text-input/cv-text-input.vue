@@ -1,24 +1,26 @@
 <template>
-  <div class="cv-text-input bx--form-item">
+  <div :class="`cv-text-input ${carbonPrefix}--form-item`">
     <label
       :for="uid"
       :class="[
-        'bx--label',
+        `${carbonPrefix}--label`,
         {
-          'bx--label--disabled': $attrs.disabled !== undefined && $attrs.disabled,
+          [`${carbonPrefix}--label--disabled`]: $attrs.disabled !== undefined && $attrs.disabled,
         },
       ]"
       >{{ label }}</label
     >
-    <div v-if="isHelper" class="bx--form__helper-text" :class="{ 'bx--form__helper-text--disabled': $attrs.disabled }">
-      <slot name="helper-text">{{ helperText }}</slot>
-    </div>
-    <div class="bx--text-input__field-wrapper" :data-invalid="isInvalid">
-      <WarningFilled16 v-if="isInvalid" class="bx--text-input__invalid-icon" />
+    <div :class="`${carbonPrefix}--text-input__field-wrapper`" :data-invalid="isInvalid">
+      <WarningFilled16 v-if="isInvalid" :class="`${carbonPrefix}--text-input__invalid-icon`" />
       <input
         :id="uid"
-        class="bx--text-input"
-        :class="{ 'bx--text-input--light': theme === 'light', 'bx--text-input--invalid': isInvalid }"
+        :class="[
+          `${carbonPrefix}--text-input`,
+          {
+            [`${carbonPrefix}--text-input--light`]: theme === 'light',
+            [`${carbonPrefix}--text-input--invalid`]: isInvalid,
+          },
+        ]"
         v-bind="$attrs"
         :value="value"
         v-on="inputListeners"
@@ -28,17 +30,32 @@
       />
       <button
         v-if="isPassword"
-        class="bx--text-input--password__visibility__toggle bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center"
+        :class="[
+          `${carbonPrefix}--text-input--password__visibility__toggle`,
+          `${carbonPrefix}--tooltip__trigger`,
+          `${carbonPrefix}--tooltip--a11y`,
+          `${carbonPrefix}--tooltip--bottom`,
+          `${carbonPrefix}--tooltip--align-center`,
+        ]"
         @click="togglePasswordVisibility"
         type="button"
       >
-        <span class="bx--assistive-text">{{ passwordHideShowLabel }}</span>
-        <ViewOff16 v-if="isPasswordVisible" class="bx--icon-visibility-off" />
-        <View16 v-else class="bx--icon-visibility-off" />
+        <span :class="`${carbonPrefix}--assistive-text`">{{ passwordHideShowLabel }}</span>
+        <ViewOff16 v-if="isPasswordVisible" :class="`${carbonPrefix}--icon-visibility-off`" />
+        <View16 v-else :class="`${carbonPrefix}--icon-visibility-off`" />
       </button>
     </div>
-    <div class="bx--form-requirement" v-if="isInvalid">
+    <div :class="`${carbonPrefix}--form-requirement`" v-if="isInvalid">
       <slot name="invalid-message">{{ invalidMessage }}</slot>
+    </div>
+    <div
+      v-if="!isInvalid && isHelper"
+      :class="[
+        `${carbonPrefix}--form__helper-text`,
+        { [`${carbonPrefix}--form__helper-text--disabled`]: $attrs.disabled },
+      ]"
+    >
+      <slot name="helper-text">{{ helperText }}</slot>
     </div>
   </div>
 </template>
@@ -46,14 +63,16 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
+import methodsMixin from '../../mixins/methods-mixin';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import View16 from '@carbon/icons-vue/es/view/16';
 import ViewOff16 from '@carbon/icons-vue/es/view--off/16';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvTextInput',
   components: { WarningFilled16, View16, ViewOff16 },
-  mixins: [uidMixin, themeMixin],
+  mixins: [uidMixin, themeMixin, carbonPrefixMixin, methodsMixin({ input: ['blur', 'focus'] })],
   inheritAttrs: false,
   props: {
     helperText: { type: String, default: undefined },
@@ -70,7 +89,15 @@ export default {
     return {
       dataPasswordVisible: this.isPassword && this.passwordVisible,
       dataType: this.type,
+      isHelper: false,
+      isInvalid: false,
     };
+  },
+  mounted() {
+    this.checkSlots();
+  },
+  updated() {
+    this.checkSlots();
   },
   watch: {
     passwordVisible() {
@@ -92,12 +119,6 @@ export default {
         input: event => this.$emit('input', event.target.value),
       };
     },
-    isInvalid() {
-      return this.$slots['invalid-message'] !== undefined || (this.invalidMessage && this.invalidMessage.length);
-    },
-    isHelper() {
-      return this.$slots['helper-text'] || (this.helperText && this.helperText.length);
-    },
     isPassword() {
       return this.type === 'password';
     },
@@ -109,6 +130,11 @@ export default {
     },
   },
   methods: {
+    checkSlots() {
+      // NOTE: this.$slots is not reactive so needs to be managed on updated
+      this.isInvalid = !!(this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length));
+      this.isHelper = !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
+    },
     togglePasswordVisibility() {
       const currentValue = this.$refs.input.value;
       this.dataPasswordVisible = !this.dataPasswordVisible;

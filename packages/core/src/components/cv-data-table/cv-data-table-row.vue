@@ -1,5 +1,5 @@
 <template>
-  <tbody v-if="someExpandingRows" class="cv-data-table-row cv-data-table-row--expandable">
+  <tbody v-if="someExpandingRows" class="cv-data-table-row cv-data-table-row--expandable" :id="uid">
     <cv-data-table-row-inner
       ref="row"
       v-bind="$attrs"
@@ -11,15 +11,19 @@
     >
       <slot />
     </cv-data-table-row-inner>
-    <tr v-if="dataExpandable" class="bx--expandable-row bx--expandable-row--hidden" data-child-row>
-      <td colspan="9999">
-        <div class="bx--child-row-inner-container">
+    <tr
+      v-if="dataExpandable"
+      :class="`${carbonPrefix}--expandable-row ${carbonPrefix}--expandable-row--hidden`"
+      data-child-row
+    >
+      <td colspan="999">
+        <div :class="`${carbonPrefix}--child-row-inner-container`">
           <slot name="expandedContent" />
         </div>
       </td>
     </tr>
   </tbody>
-  <cv-data-table-row-inner v-else ref="row" v-bind="$attrs" v-on="$listeners" class="cv-data-table-row">
+  <cv-data-table-row-inner v-else ref="row" v-bind="$attrs" v-on="$listeners" class="cv-data-table-row" :id="uid">
     <slot />
   </cv-data-table-row-inner>
 </template>
@@ -27,17 +31,18 @@
 <script>
 import CvDataTableRowInner from './_cv-data-table-row-inner';
 import uidMixin from '../../mixins/uid-mixin';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvDataTableRow',
-  mixins: [uidMixin],
+  mixins: [uidMixin, carbonPrefixMixin],
   components: { CvDataTableRowInner },
   props: {
     expanded: Boolean,
   },
   data() {
     return {
-      dataExpandable: this.$slots.expandedContent !== undefined,
+      dataExpandable: false,
       dataSomeExpandingRows: false,
       dataExpanded: this.expanded,
     };
@@ -50,10 +55,12 @@ export default {
     },
   },
   mounted() {
+    // NOTE: this.$slots is not reactive so needs to be managed on updated
+    this.dataExpandable = !!this.$slots.expandedContent;
     this.$parent.$emit('cv:mounted', this);
   },
   updated() {
-    this.dataExpandable = this.$slots.expandedContent !== undefined;
+    this.dataExpandable = !!this.$slots.expandedContent;
   },
   beforeDestroy() {
     this.$parent.$emit('cv:beforeDestroy', this);

@@ -1,8 +1,7 @@
 <template>
   <div :style="{ width: width }">
     <p
-      class="bx--skeleton__text"
-      :class="{ 'bx--skeleton__heading': heading }"
+      :class="[`${carbonPrefix}--skeleton__text`, { [`${carbonPrefix}--skeleton__heading`]: heading }]"
       :style="{ width: line.width }"
       :key="index"
       v-for="(line, index) in lines"
@@ -11,8 +10,10 @@
 </template>
 
 <script>
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 export default {
   name: 'CvSkeletonText',
+  mixins: [carbonPrefixMixin],
   props: {
     width: { type: String, default: '100%' },
     heading: { type: Boolean, default: false },
@@ -23,7 +24,7 @@ export default {
     getRandomInt: function(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     },
-    calcWidth: function() {
+    calcWidth() {
       let width = this.width;
       if (this.paragraph) {
         const { num, unit } = this.widthObj;
@@ -38,7 +39,7 @@ export default {
     },
   },
   computed: {
-    widthObj: function() {
+    widthObj() {
       const widthObj = { num: parseInt(this.width, 10) };
       if (this.width.includes('px')) {
         widthObj.unit = 'px';
@@ -48,7 +49,7 @@ export default {
       }
       return widthObj;
     },
-    lines: function() {
+    lines() {
       return Array.from(
         {
           length: this.paragraph ? this.lineCount : 1,

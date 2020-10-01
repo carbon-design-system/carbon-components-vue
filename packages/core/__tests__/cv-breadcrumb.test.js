@@ -1,9 +1,10 @@
-import { shallowMount as shallow } from '@vue/test-utils';
-import { testComponent, testInstance } from './_helpers';
+// import { shallowMount as shallow } from '@vue/test-utils';
+import { testComponent, awaitNextTick } from './_helpers';
+const { shallowMount: shallow } = awaitNextTick;
 import { CvBreadcrumb, CvBreadcrumbSkeleton, CvBreadcrumbItem } from '@/components/cv-breadcrumb';
-import { settings } from 'carbon-components';
+// import { settings as carbonSettings } from 'carbon-components';
 
-const { prefix } = settings;
+// const carbonPrefix = carbonSettings.prefix;
 
 describe('CvBreadcrumb', () => {
   // ***************
@@ -18,22 +19,22 @@ describe('CvBreadcrumb', () => {
   // ***************
   // SNAPSHOT TESTS
   // ***************
-  it('matches breadcrumb with trailing slash', () => {
+  it('matches breadcrumb with trailing slash', async () => {
     const propsData = { noTrailingSlash: false };
-    const wrapper = shallow(CvBreadcrumb, { propsData });
+    const wrapper = await shallow(CvBreadcrumb, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('matches breadcrumb without trailing slash', () => {
+  it('matches breadcrumb without trailing slash', async () => {
     const propsData = { noTrailingSlash: true };
-    const wrapper = shallow(CvBreadcrumb, { propsData });
+    const wrapper = await shallow(CvBreadcrumb, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('matches breadcrumb with slotted content', () => {
-    const wrapper = shallow(CvBreadcrumb, {
+  it('matches breadcrumb with slotted content', async () => {
+    const wrapper = await shallow(CvBreadcrumb, {
       slots: {
         default: CvBreadcrumbItem,
       },
@@ -55,8 +56,8 @@ describe('CvBreadcrumbItem', () => {
   // ***************
   // SNAPSHOT TESTS
   // ***************
-  it('matches breadcrumb item with slotted content', () => {
-    const wrapper = shallow(CvBreadcrumbItem);
+  it('matches breadcrumb item with slotted content', async () => {
+    const wrapper = await shallow(CvBreadcrumbItem);
 
     expect(wrapper.html()).toMatchSnapshot();
   });
@@ -73,8 +74,8 @@ describe('CvBreadcrumbSkeleton', () => {
   // ***************
   // SNAPSHOT TESTS
   // ***************
-  it('matches breadcrumb item with slotted content', () => {
-    const wrapper = shallow(CvBreadcrumbSkeleton);
+  it('matches breadcrumb item with slotted content', async () => {
+    const wrapper = await shallow(CvBreadcrumbSkeleton);
 
     expect(wrapper.html()).toMatchSnapshot();
   });

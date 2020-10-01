@@ -1,11 +1,13 @@
 <template>
-  <ul class="cv-switcher bx--switcher__item">
+  <ul :class="`cv-switcher ${carbonPrefix}--switcher__item`">
     <slot />
   </ul>
 </template>
 
 <script>
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 export default {
   name: 'CvSwitcher',
+  mixins: [carbonPrefixMixin],
 };
 </script>

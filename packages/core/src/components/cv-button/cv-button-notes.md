@@ -17,8 +17,11 @@ http://www.carbondesignsystem.com/components/button/code
 - kind: 'primary' (default), 'secondary', ghost, or 'danger'. Optional.
 - small: (deprecated prefer size) If true smaller version of button.
 - size: optional value 'field' or 'small'
-- icon: is optional. It takes an Vue Component expected to be an icon or a string path to an SVG icon.
+- icon: is optional. It takes an Vue Component expected to be a an icon that follows the pattern used for fill/color/stroke in Carbon Icons. It can be in the form of: a component (e.g. @carbon/icons-vue), an SVG symbol path, an SVG path, raw SVG.
 - icon-href: deprecated in favour of icon attribute. Expects tring path to SVG icon..
+
+NOTE: Recommend using icons as components or SVG symbols.
+NOTE 2: Using an SVG path without an element ID will not style correctly. This is due to SVG1.1 not supporting 'use' tag without ID being specified, as a result an img tag is used.
 
 # cv-icon-button
 
@@ -43,3 +46,15 @@ As per CvButton with the addition of
 - tip-text: String displayed in tip
 - tip-position: top, left, bottom or right
 - tip-alignment: start, center or end.
+
+# cv-button-set
+
+A wrapper for a set of cv-button components that formats them as a group
+
+```html
+<cv-button-set>
+  <cv-button kind="primary">button 1</cv-button>
+  <cv-button kind="secondary">button 2</cv-button>
+  <cv-button kind="danger">button 3</cv-button>
+</cv-button-set>
+```

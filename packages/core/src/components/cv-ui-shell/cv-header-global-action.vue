@@ -1,14 +1,18 @@
 <template>
   <button
     v-on="$listeners"
-    class="cv-header-global-action bx--header__action"
-    :class="dataActive ? 'bx--header__action--active' : ''"
+    :class="[
+      `cv-header-global-action`,
+      `${carbonPrefix}--header__action`,
+      { [`${carbonPrefix}--header__action--active`]: dataActive },
+    ]"
     type="button"
     aria-haspopup="true"
     :aria-controls="ariaControls"
-    :aria-expanded="active"
+    :aria-expanded="active ? 'true' : 'false'"
     @click="gaToggle"
     @focusout="gaFocusout"
+    :id="uid"
   >
     <slot />
   </button>
@@ -16,10 +20,11 @@
 
 <script>
 import uidMixin from '../../mixins/uid-mixin';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvHeaderGlobalAction',
-  mixins: [uidMixin],
+  mixins: [uidMixin, carbonPrefixMixin],
   props: {
     active: Boolean,
     ariaControls: String,

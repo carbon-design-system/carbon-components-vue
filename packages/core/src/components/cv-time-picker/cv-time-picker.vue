@@ -1,12 +1,19 @@
 <template>
-  <div class="cv-time-picker bx--form-item">
-    <div class="bx--time-picker" :class="{ 'bx--time-picker--light': theme === 'light' }" :data-invalid="isInvalid">
-      <div class="bx--time-picker__input">
-        <label :for="uid" class="bx--label">{{ label }}</label>
+  <div :class="`cv-time-picker ${carbonPrefix}--form-item`">
+    <div
+      :class="[`${carbonPrefix}--time-picker`, { [`${carbonPrefix}--time-picker--light`]: theme === 'light' }]"
+      :data-invalid="isInvalid"
+    >
+      <div :class="`${carbonPrefix}--time-picker__input`">
+        <label :for="uid" :class="`${carbonPrefix}--label`">{{ label }}</label>
         <input
+          ref="input"
           :id="uid"
           type="text"
-          class="bx--time-picker__input-field"
+          :class="[
+            `${carbonPrefix}--time-picker__input-field ${carbonPrefix}--text-input`,
+            { [`${carbonPrefix}--text-input--light`]: theme === 'light' },
+          ]"
           :pattern="pattern"
           v-bind="$attrs"
           :placeholder="placeholder"
@@ -17,34 +24,40 @@
         />
       </div>
       <cv-select
-        class="bx--time-picker__select"
+        v-if="ampm !== '24'"
+        :class="`${carbonPrefix}--time-picker__select`"
         :form-item="false"
         hide-label
         :label="ampmSelectLabel"
-        @input="$emit('update:ampm', $event)"
+        @change="$emit('update:ampm', $event)"
         :value="ampm"
         :disabled="disabled"
       >
-        <cv-select-option class="bx--select-option" value="AM">AM</cv-select-option>
-        <cv-select-option class="bx--select-option" value="PM">PM</cv-select-option>
+        <cv-select-option :class="`${carbonPrefix}--select-option`" value="AM">AM</cv-select-option>
+        <cv-select-option :class="`${carbonPrefix}--select-option`" value="PM">PM</cv-select-option>
       </cv-select>
+      <div v-else v-html="`&nbsp;`"></div>
 
       <cv-select
-        class="bx--time-picker__select"
+        :class="`${carbonPrefix}--time-picker__select`"
         :form-item="false"
         hide-label
         :label="timezonesSelectLabel"
         v-if="timezones.length > 0"
         :value="validTimezone"
-        @input="$emit('update:timezone', $event)"
+        @change="$emit('update:timezone', $event)"
         :disabled="disabled"
       >
-        <cv-select-option class="bx--select-option" v-for="item in timezones" :key="item.value" :value="item.value">{{
-          item.label
-        }}</cv-select-option>
+        <cv-select-option
+          :class="`${carbonPrefix}--select-option`"
+          v-for="item in timezones"
+          :key="item.value"
+          :value="item.value"
+          >{{ item.label }}</cv-select-option
+        >
       </cv-select>
     </div>
-    <div class="bx--form-requirement" v-if="isInvalid">
+    <div :class="`${carbonPrefix}--form-requirement`" v-if="isInvalid">
       <slot name="invalid-message">{{ invalidMessage }}</slot>
     </div>
   </div>
@@ -55,6 +68,8 @@ import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
 import CvSelect from '../cv-select/cv-select';
 import CvSelectOption from '../cv-select/cv-select-option';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import methodsMixin from '../../mixins/methods-mixin';
 
 export default {
   name: 'CvTimePicker',
@@ -62,7 +77,7 @@ export default {
     CvSelect,
     CvSelectOption,
   },
-  mixins: [uidMixin, themeMixin],
+  mixins: [uidMixin, themeMixin, carbonPrefixMixin, methodsMixin({ input: ['blur', 'focus'] })],
   inheritAttrs: false,
   props: {
     ampm: {
@@ -80,16 +95,21 @@ export default {
     timezones: { type: Array, default: () => [] },
     timezonesSelectLabel: { type: String, default: 'Select time zone' },
   },
+  data() {
+    return {
+      isInvalid: false,
+    };
+  },
+  mounted() {
+    this.checkSlots();
+  },
+  updated() {
+    this.checkSlots();
+  },
   computed: {
-    isInvalid() {
-      return (
-        (this.$slots['invalid-message'] && this.$slots['invalid-message'].length) ||
-        (this.invalidMessage && this.invalidMessage.length > 0)
-      );
-    },
     validAmpm() {
       let result = this.ampm;
-      if (!['AM', 'PM'].includes(this.ampm)) {
+      if (!['AM', 'PM', '24'].includes(this.ampm)) {
         console.error(`CvTimePicker: invalid value '${this.ampm}' supplied for prop ampm. Default applied.`);
         // set to valid value
         result = this.ampm[0].value;
@@ -109,6 +129,12 @@ export default {
         }
       }
       return result;
+    },
+  },
+  methods: {
+    checkSlots() {
+      // NOTE: this.$slots is not reactive so needs to be managed on updated
+      this.isInvalid = !!(this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length));
     },
   },
 };

@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CvInlineLoading should render correctly when state is ENDING\` 1`] = `
+<div data-inline-loading="" role="alert" aria-live="assertive" class="bx--inline-loading">
+  <div class="bx--inline-loading__animation bx--loading--stop">
+    <div class="bx--loading bx--loading--small"><svg viewBox="-75 -75 150 150" class="bx--loading__svg">
+        <circle cx="0" cy="0" r="26.8125" class="bx--loading__background"></circle>
+        <circle cx="0" cy="0" r="26.8125" class="bx--loading__stroke"></circle>
+      </svg></div>
+    <checkmarkfilled16-stub hidden="true" class="bx--inline-loading__checkmark-container"></checkmarkfilled16-stub>
+    <errorfilled16-stub hidden="true" class="bx--inline-loading--error"></errorfilled16-stub>
+  </div>
+  <p class="bx--inline-loading__text">Load ending...</p>
+</div>
+`;
+
+exports[`CvInlineLoading should render correctly when state is ERROR\` 1`] = `
+<div data-inline-loading="" role="alert" aria-live="assertive" class="bx--inline-loading">
+  <div class="bx--inline-loading__animation">
+    <div class="bx--loading bx--loading--small" style="display: none;"><svg viewBox="-75 -75 150 150" class="bx--loading__svg">
+        <circle cx="0" cy="0" r="26.8125" class="bx--loading__background"></circle>
+        <circle cx="0" cy="0" r="26.8125" class="bx--loading__stroke"></circle>
+      </svg></div>
+    <checkmarkfilled16-stub hidden="true" class="bx--inline-loading__checkmark-container"></checkmarkfilled16-stub>
+    <errorfilled16-stub class="bx--inline-loading--error"></errorfilled16-stub>
+  </div>
+  <p class="bx--inline-loading__text">error text test</p>
+</div>
+`;
+
+exports[`CvInlineLoading should render correctly when state is LOADED\` 1`] = `
+<div data-inline-loading="" role="alert" aria-live="assertive" class="bx--inline-loading">
+  <div class="bx--inline-loading__animation">
+    <div class="bx--loading bx--loading--small" style="display: none;"><svg viewBox="-75 -75 150 150" class="bx--loading__svg">
+        <circle cx="0" cy="0" r="26.8125" class="bx--loading__background"></circle>
+        <circle cx="0" cy="0" r="26.8125" class="bx--loading__stroke"></circle>
+      </svg></div>
+    <checkmarkfilled16-stub class="bx--inline-loading__checkmark-container"></checkmarkfilled16-stub>
+    <errorfilled16-stub hidden="true" class="bx--inline-loading--error"></errorfilled16-stub>
+  </div>
+  <p class="bx--inline-loading__text">loaded text test</p>
+</div>
+`;
+
+exports[`CvInlineLoading should render correctly when state is LOADING\` 1`] = `
+<div data-inline-loading="" role="alert" aria-live="assertive" class="bx--inline-loading">
+  <div class="bx--inline-loading__animation">
+    <div class="bx--loading bx--loading--small"><svg viewBox="-75 -75 150 150" class="bx--loading__svg">
+        <circle cx="0" cy="0" r="26.8125" class="bx--loading__background"></circle>
+        <circle cx="0" cy="0" r="26.8125" class="bx--loading__stroke"></circle>
+      </svg></div>
+    <checkmarkfilled16-stub hidden="true" class="bx--inline-loading__checkmark-container"></checkmarkfilled16-stub>
+    <errorfilled16-stub hidden="true" class="bx--inline-loading--error"></errorfilled16-stub>
+  </div>
+  <p class="bx--inline-loading__text">loading text test</p>
+</div>
+`;

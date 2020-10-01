@@ -86,6 +86,7 @@ filterable: false
   - 'top': joins other selected options at the top immediately
   - 'fixed': stays where it is in the list.
     -filterable: If true the multi select list can be filtered.
+- filterTagKind: passed through to CvTag as kind property.
 
 Other standard props e.g. disabled and placeholder
 

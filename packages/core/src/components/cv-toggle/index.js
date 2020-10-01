@@ -1,2 +1,3 @@
 import CvToggle from './cv-toggle';
-export { CvToggle };
+import CvToggleSkeleton from './cv-toggle-skeleton';
+export { CvToggle, CvToggleSkeleton };

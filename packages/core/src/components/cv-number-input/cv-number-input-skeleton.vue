@@ -1,12 +1,14 @@
 <template>
-  <div class="cv-number-input bx--form-item">
-    <label class="bx--label bx--skeleton" />
-    <div class="bx--number bx--skeleton" />
+  <div class="cv-number-input" :class="`${carbonPrefix}--form-item`">
+    <label :class="`${carbonPrefix}--label ${carbonPrefix}--skeleton`" />
+    <div :class="`${carbonPrefix}--number ${carbonPrefix}--skeleton`" />
   </div>
 </template>
 
 <script>
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 export default {
   name: 'CvNumberInputSkeleton',
+  mixins: [carbonPrefixMixin],
 };
 </script>

@@ -20,6 +20,10 @@ http://www.carbondesignsystem.com/components/text-input/code
 
 Other standard props e.g. disabled and placeholder
 
+## Methods
+
+Focus - sets focus to the text area
+
 ## slots
 
 - helper-text: optional and overrides the helper-text attribute

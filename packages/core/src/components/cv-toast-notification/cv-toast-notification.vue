@@ -1,41 +1,46 @@
 <template>
   <div
     data-notification
-    class="cv-notifiation bx--toast-notification"
-    :class="[`bx--toast-notification--${kind.toLowerCase()}`, { 'bx--toast-notification--low-contrast': lowContrast }]"
+    :class="[
+      `cv-notifiation ${carbonPrefix}--toast-notification`,
+      `${carbonPrefix}--toast-notification--${kind.toLowerCase()}`,
+      { [`${carbonPrefix}--toast-notification--low-contrast`]: lowContrast },
+    ]"
     v-on="$listeners"
     :role="isAlert ? 'alert' : undefined"
     :aria-live="!isAlert ? 'polite' : false"
   >
-    <component :is="icon" class="bx--toast-notification__icon" />
-    <div class="bx--toast-notification__details">
-      <h3 class="bx--toast-notification__title">{{ title }}</h3>
-      <p class="bx--toast-notification__subtitle">{{ subTitle }}</p>
-      <p class="bx--toast-notification__caption">{{ caption }}</p>
+    <component :is="icon" :class="`${carbonPrefix}--toast-notification__icon`" />
+    <div :class="`${carbonPrefix}--toast-notification__details`">
+      <h3 :class="`${carbonPrefix}--toast-notification__title`">{{ title }}</h3>
+      <p :class="`${carbonPrefix}--toast-notification__subtitle`">{{ subTitle }}</p>
+      <p :class="`${carbonPrefix}--toast-notification__caption`">{{ caption }}</p>
     </div>
     <button
       :aria-label="closeAriaLabel"
       type="button"
       data-notification-btn
-      class="bx--toast-notification__close-button"
+      :class="`${carbonPrefix}--toast-notification__close-button`"
       @click="$emit('close')"
     >
-      <Close16 class="bx--toast-notification__close-icon" />
+      <Close20 :class="`${carbonPrefix}--toast-notification__close-icon`" />
     </button>
   </div>
 </template>
 
 <script>
 import notificationMixin from '../../mixins/notification-mixin';
-import ErrorFilled16 from '@carbon/icons-vue/es/error--filled/16';
-import CheckmarkFilled16 from '@carbon/icons-vue/es/checkmark--filled/16';
-import WarningAltFilled16 from '@carbon/icons-vue/es/warning--alt--filled/16';
-import Close16 from '@carbon/icons-vue/es/close/16';
+import ErrorFilled20 from '@carbon/icons-vue/es/error--filled/20';
+import CheckmarkFilled20 from '@carbon/icons-vue/es/checkmark--filled/20';
+import WarningFilled20 from '@carbon/icons-vue/es/warning--filled/20';
+import Close20 from '@carbon/icons-vue/es/close/20';
+import InformationFilled20 from '@carbon/icons-vue/es/information--filled/20';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvToastNotification',
-  components: { Close16 },
-  mixins: [notificationMixin],
+  components: { Close20 },
+  mixins: [notificationMixin, carbonPrefixMixin],
   props: {
     caption: String,
     closeAriaLabel: { type: String, default: 'Dismiss notification' },
@@ -50,13 +55,15 @@ export default {
     icon() {
       switch (this.kind) {
         case 'error':
-          return ErrorFilled16;
+          return ErrorFilled20;
         case 'warning':
-          return WarningAltFilled16;
+          return WarningFilled20;
         case 'success':
-          return CheckmarkFilled16;
+          return CheckmarkFilled20;
+        case 'info':
+          return InformationFilled20;
         default:
-          return null;
+          return '';
       }
     },
   },

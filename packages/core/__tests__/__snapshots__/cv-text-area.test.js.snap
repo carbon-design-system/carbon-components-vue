@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CvTextArea should render correctly 1`] = `
+<div class="cv-text-area bx--form-item"><label for="1" class="bx--label">test label</label>
+  <div class="bx--text-area__wrapper">
+    <!----> <textarea id="1" class="bx--text-area"></textarea></div>
+  <!---->
+  <!---->
+</div>
+`;
+
+exports[`CvTextArea should render correctly when helper text is provided 1`] = `
+<div class="cv-text-area bx--form-item"><label for="1" class="bx--label">test label</label>
+  <div class="bx--text-area__wrapper">
+    <!----> <textarea id="1" class="bx--text-area"></textarea></div>
+  <!---->
+  <div class="bx--form__helper-text">helper test message</div>
+</div>
+`;
+
+exports[`CvTextArea should render correctly when helper text slot is provided 1`] = `
+<div class="cv-text-area bx--form-item"><label for="1" class="bx--label">test label</label>
+  <div class="bx--text-area__wrapper">
+    <!----> <textarea id="1" class="bx--text-area"></textarea></div>
+  <!---->
+  <div class="bx--form__helper-text">
+    <div class="helper-text-class">helper text slot</div>
+  </div>
+</div>
+`;
+
+exports[`CvTextArea should render correctly when invalid message is provided 1`] = `
+<div class="cv-text-area bx--form-item"><label for="1" class="bx--label">test label</label>
+  <div class="bx--text-area__wrapper" data-invalid="true">
+    <warningfilled16-stub class="bx--text-area__invalid-icon"></warningfilled16-stub> <textarea id="1" class="bx--text-area bx--text-area--invalid"></textarea>
+  </div>
+  <div class="bx--form-requirement">invalid test message</div>
+  <!---->
+</div>
+`;
+
+exports[`CvTextArea should render correctly when invalid message slot is provided 1`] = `
+<div class="cv-text-area bx--form-item"><label for="1" class="bx--label">test label</label>
+  <div class="bx--text-area__wrapper" data-invalid="true">
+    <warningfilled16-stub class="bx--text-area__invalid-icon"></warningfilled16-stub> <textarea id="1" class="bx--text-area bx--text-area--invalid"></textarea>
+  </div>
+  <div class="bx--form-requirement">
+    <div class="invalid-message-class">invalid message slot</div>
+  </div>
+  <!---->
+</div>
+`;
+
+exports[`CvTextArea should render correctly when light theme is used 1`] = `
+<div class="cv-text-area bx--form-item"><label for="1" class="bx--label">test label</label>
+  <div class="bx--text-area__wrapper">
+    <!----> <textarea id="1" class="bx--text-area bx--text-area--light"></textarea></div>
+  <!---->
+  <!---->
+</div>
+`;

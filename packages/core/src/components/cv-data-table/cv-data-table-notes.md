@@ -18,6 +18,12 @@ http://www.carbondesignsystem.com/components/DataTable/code
 
 See Attributes, Slots and Events to see how to add additional features to the table.
 
+### Slotting headings - WARNING EXPERIMENTAL
+
+Headings can be slotted as per the 'Slotted headings' exmaple.
+
+NOTE: When slotted headings are used only plain text content is styled by default.
+
 ### Slotting data
 
 Instead of supply data as two dimensional array the user can supply slotted content using the CvDataTableRow and CvDataTableCell components.
@@ -66,16 +72,18 @@ Like sorting and filtering it is the users responsibility to deal with edited da
 
 - columns: An array containing a list of columns
   - Columns can be string labels or objects
-  - If objects they must contain a 'label' and can optionally contain
-    - a headingStyle object to be applied to the column headings.
-    - a dataStyle object to be applied to the data in the column.
+  - If objects
+    - MUST contain a label if headings are not slotted
+    - Optionally a headingStyle object to be applied to the column headings if not slotted.
+    - Optionally a dataStyle object to be applied to the data in the column.
+    - Optionally a sortable property - if any column sets this to true then only columns with sortable set to true are sortable. NOTE: table sortable property not required.
 - data: Two dimensional array of strings.
 - rows-selected: An array containing the selected row values. Supports v-model via the row-select-changes event.
 
-- action-bar-label: (optional) alternative aria label for the toolbar
 - auto-width: (optional) table will size use auto sizing
 - borderless: (optional) table will have no border
 - overflow-menu(optional) : An array of overflow menu labels. On click CvDataTable will raise an 'overflow-menu-click' event passing an object containing menuIndex, menuLabel and rowValue
+- overflow-menu props: As part of the array pass an object containing props for the overflowMenu. E.g. { label: 'Overflow menu', tipAlignment: 'end', tipPosition: 'top' },
 - pagination: (optional) default: false, can be set to true or an object containing camel case props for a CvPagination component
 - sortable: (optional) can be sorted
 - row-size: (optional) default: '',
@@ -85,6 +93,10 @@ Like sorting and filtering it is the users responsibility to deal with edited da
 - searchPlaceholder: (optional) { type: String, default: 'Search' },
 - searchClearLabel: (optional) { type: String, default: 'Clear search' },
 - batchCancelLabel: (optional) { type: String, default: 'Cancel' },
+- actionBarAriaLabel: { type: String, default: 'Table Action Bar' },
+- collapseAllAriaLabel: { type: String, default: 'Collapse all rows' },
+- expandAllAriaLabel: { type: String, default: 'Expand all rows' },
+- selectAllAriaLabel: { type: String, default: 'Select all rows' },
 
 ## Scoped slots
 
@@ -110,6 +122,19 @@ Like sorting and filtering it is the users responsibility to deal with edited da
 
 As per note sort and filter behviours are delegated to the component user.
 
-### Additional
+## Rows
+
+### Attributes
+
+aria-label-for-batch-checkbox: Aria label for batch checkbox. default Select row N for batch action.
+aria-label-expand-row: Aria label for expanding row expansion button. default: 'Expand current row'
+aria-label-collapse-row: Aria label for expanding row collapse button. default: 'Collapse current row'
+expanded: initial state of the expanded row
+
+### Computed
+
+isExpanded: has a setter and getter and can be used interact with each row.
 
 Rows are not automatically deselected after when a batch action is executed. The selected row checks can be cleared either by calling the method deselect which will deselect all or by use of v-model with the rows-selected property.
+
+When batch actions are supplied rows require a value and aria-label for the checkboxes added. Where a simple data array is provided they are created automatically. If using slotted content then the user must supply a value. They can also supply the property "aria-label-for-batch-checkbox" which defaults to `Select row ${value} for batch action`.

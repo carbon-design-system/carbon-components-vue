@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:10
+      - image: circleci/node:12
     working_directory: ~/repo
     steps:
       - checkout
@@ -21,15 +21,16 @@ jobs:
 
               # Login and install blue-green-deploy plugin
               ibmcloud login \
-                --apikey $CLOUD_API_KEY \
-                -a https://api.ng.bluemix.net \
-                -o carbon-design-system \
-                -s production
+                -a 'https://cloud.ibm.com' \
+                -r 'us-south' \
+                --apikey "$CLOUD_API_KEY"
+              ibmcloud target -o carbon-design-system -s production
+              ibmcloud cf install
               ibmcloud cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
               ibmcloud cf install-plugin blue-green-deploy -f -r CF-Community
 
               # Build default storybook
-              yarn build --scope storybook
+              yarn build:storybook --quiet
 
               # Use blue-green-deploy for our buildpack
               ibmcloud cf blue-green-deploy carbon-storybook-vue \

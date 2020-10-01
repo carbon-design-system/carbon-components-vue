@@ -28,7 +28,7 @@ export default {
 // import/export individual components
 import { CvAccordion, CvAccordionItem, CvAccordionSkeleton } from './components/cv-accordion';
 import { CvBreadcrumb, CvBreadcrumbItem, CvBreadcrumbSkeleton } from './components/cv-breadcrumb';
-import { CvButton, CvIconButton, CvButtonSkeleton } from './components/cv-button';
+import { CvButton, CvIconButton, CvButtonSkeleton, CvButtonSet } from './components/cv-button';
 import { CvCheckbox, CvCheckboxSkeleton } from './components/cv-checkbox';
 import { CvCodeSnippet, CvCodeSnippetSkeleton } from './components/cv-code-snippet';
 import { CvComboBox } from './components/cv-combo-box';
@@ -39,6 +39,7 @@ import {
   CvDataTableCell,
   CvDataTableAction,
   CvDataTableSkeleton,
+  CvDataTableHeading,
 } from './components/cv-data-table';
 import { CvDatePicker } from './components/cv-date-picker';
 import { CvDropdown, CvDropdownItem, CvDropdownSkeleton } from './components/cv-dropdown';
@@ -73,7 +74,7 @@ import { CvTextInput } from './components/cv-text-input';
 import { CvTile } from './components/cv-tile';
 import { CvTimePicker } from './components/cv-time-picker';
 import { CvToastNotification } from './components/cv-toast-notification';
-import { CvToggle } from './components/cv-toggle';
+import { CvToggle, CvToggleSkeleton } from './components/cv-toggle';
 import { CvToolbar, CvToolbarTitle, CvToolbarSearch, CvToolbarOption, CvToolbarDivider } from './components/cv-toolbar';
 import { CvTooltip, CvInteractiveTooltip, CvDefinitionTooltip } from './components/cv-tooltip';
 import {
@@ -84,6 +85,7 @@ import {
   CvHeaderMenu,
   CvHeaderName,
   CvHeaderNav,
+  CvHeaderSideNavItems,
   CvHeaderPanel,
   CvHeader,
   CvSideNavIcon,
@@ -101,12 +103,12 @@ import {
 // exports
 export { CvAccordion, CvAccordionItem, CvAccordionSkeleton };
 export { CvBreadcrumb, CvBreadcrumbItem, CvBreadcrumbSkeleton };
-export { CvButton, CvIconButton, CvButtonSkeleton };
+export { CvButton, CvIconButton, CvButtonSkeleton, CvButtonSet };
 export { CvCheckbox, CvCheckboxSkeleton };
 export { CvCodeSnippet, CvCodeSnippetSkeleton };
 export { CvComboBox };
 export { CvContentSwitcher, CvContentSwitcherButton, CvContentSwitcherContent };
-export { CvDataTable, CvDataTableRow, CvDataTableCell, CvDataTableAction, CvDataTableSkeleton };
+export { CvDataTable, CvDataTableRow, CvDataTableCell, CvDataTableAction, CvDataTableSkeleton, CvDataTableHeading };
 export { CvDatePicker };
 export { CvDropdown, CvDropdownItem, CvDropdownSkeleton };
 export { CvFileUploader, CvFileUploaderSkeleton };
@@ -135,7 +137,7 @@ export { CvTextInput };
 export { CvTile };
 export { CvTimePicker };
 export { CvToastNotification };
-export { CvToggle };
+export { CvToggle, CvToggleSkeleton };
 export { CvToolbar, CvToolbarTitle, CvToolbarSearch, CvToolbarOption, CvToolbarDivider };
 export { CvTooltip, CvInteractiveTooltip, CvDefinitionTooltip };
 export {
@@ -147,6 +149,7 @@ export {
   CvHeaderName,
   CvHeaderPanel,
   CvHeaderNav,
+  CvHeaderSideNavItems,
   CvHeader,
   CvSideNav,
   CvSideNavIcon,

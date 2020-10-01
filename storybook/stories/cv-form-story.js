@@ -1,14 +1,23 @@
 import { storiesOf } from '@storybook/vue';
+import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvFormNotesMD from '@carbon/vue/src/components/cv-form/cv-form-notes.md';
-import { CvForm, CvTextArea, CvTextInput, CvSelect, CvButton, CvSelectOptgroup, CvSelectOption } from '@carbon/vue/src';
+import CvFormNotesMD from '../../packages/core/src/components/cv-form/cv-form-notes.md';
+import {
+  CvForm,
+  CvTextArea,
+  CvTextInput,
+  CvSelect,
+  CvButton,
+  CvSelectOptgroup,
+  CvSelectOption,
+} from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvForm', module);
-const storiesExperimental = storiesOf('Experimental/CvForm', module);
+// const storiesExperimental = storiesOf('Experimental/CvForm', module);
 
 const preKnobs = {};
 
@@ -25,7 +34,7 @@ for (const story of storySet) {
       // ----------------------------------------------------------------
 
       const templateString = `
-  <cv-form>
+  <cv-form @submit.prevent="actionSubmit">
     <cv-text-input
       label="Example text label"
       helper-text="Optional helper text here; if message is more than one line text should wrap (~100 character count maximum)"
@@ -75,6 +84,17 @@ for (const story of storySet) {
 
         template: templateViewString,
         props: settings.props,
+        mounted() {
+          this.doSubmit = action('cv-form -submit event');
+        },
+        methods: {
+          actionSubmit(ev) {
+            // eslint-disable-next-line
+            console.dir([].slice.call(ev.target, [0, ev.target.length]));
+
+            this.doSubmit();
+          },
+        },
       };
     },
     {

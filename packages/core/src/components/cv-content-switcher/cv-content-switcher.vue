@@ -1,11 +1,12 @@
 <template>
-  <div data-content-switcher class="cv-content-switcher bx--content-switcher">
+  <div data-content-switcher :class="`cv-content-switcher ${carbonPrefix}--content-switcher`" role="tablist">
     <slot></slot>
   </div>
 </template>
 
 <script>
 import store from './cv-content-switcher-store';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 const toggleContent = (selector, on) => {
   // hide content
@@ -23,6 +24,7 @@ const toggleContent = (selector, on) => {
 
 export default {
   name: 'CvContentSwitcher',
+  mixins: [carbonPrefixMixin],
   created() {
     // add these on created otherwise cv:mounted is too late.
     this.$on('cv:open', srcComponent => this.onCvOpen(srcComponent));

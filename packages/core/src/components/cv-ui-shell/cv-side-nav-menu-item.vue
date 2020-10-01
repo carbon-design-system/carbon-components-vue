@@ -1,11 +1,10 @@
 <template>
-  <li class="bx--side-nav__menu-item">
+  <li :class="`${carbonPrefix}--side-nav__menu-item`">
     <component
       :is="tagType"
       v-on="$listeners"
-      class="bx--side-nav__link"
+      :class="[`${carbonPrefix}--side-nav__link`, { [`${carbonPrefix}--side-nav__link--current`]: active }]"
       v-bind="{ ...$attrs, ...linkProps }"
-      :class="{ 'bx--side-nav__link--current': active }"
       role="menuitem"
     >
       <cv-side-nav-link-text>
@@ -18,11 +17,12 @@
 <script>
 import LinkMixin from '../../mixins/link-mixin';
 import CvSideNavLinkText from './_cv-side-nav-link-text';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvSideNavMenuItem',
   inheritAttrs: false,
-  mixins: [LinkMixin],
+  mixins: [LinkMixin, carbonPrefixMixin],
   components: { CvSideNavLinkText },
   props: {
     active: Boolean,

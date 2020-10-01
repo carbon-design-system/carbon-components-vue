@@ -1,8 +1,8 @@
 <template>
-  <div class="cv-tabs" @focusout="onFocusout" @focusin="onFocusin">
+  <div class="cv-tabs" @focusout="onFocusout" @focusin="onFocusin" style="width: 100%;">
     <div
       data-tabs
-      class="cv-tab bx--tabs"
+      :class="[`cv-tab ${carbonPrefix}--tabs`, { [`${carbonPrefix}--tabs--container`]: container }]"
       role="navigation"
       v-on="$listeners"
       v-bind="$attrs"
@@ -13,31 +13,34 @@
       @keydown.esc.prevent="onEsc"
     >
       <div
-        class="bx--tabs-trigger"
-        :class="{ ' bx--tabs-trigger--open': open }"
+        :class="[`${carbonPrefix}--tabs-trigger`, { ' ${carbonPrefix}--tabs-trigger--open': open }]"
         tabindex="0"
         ref="trigger"
         @click="onClick"
         @keydown.enter.prevent="onClick"
       >
-        <a href="javascript:void(0)" class="bx--tabs-trigger-text" tabindex="-1">{{ currentTabLabel }}</a>
+        <a href="javascript:void(0)" :class="`${carbonPrefix}--tabs-trigger-text`" tabindex="-1">
+          {{ currentTabLabel }}
+        </a>
         <chevron-down-glyph />
       </div>
-      <ul class="bx--tabs__nav" :class="{ 'bx--tabs__nav--hidden': !open }" role="tablist">
+      <ul :class="[`${carbonPrefix}--tabs__nav`, { [`${carbonPrefix}--tabs__nav--hidden`]: !open }]" role="tablist">
         <li
           v-for="tab in tabs"
           :key="tab.uid"
-          class="cv-tabs-button bx--tabs__nav-item"
-          :class="{
-            'bx--tabs__nav-item--selected': selectedId == tab.uid,
-            'bx--tabs__nav-item--disabled': disabledTabs.indexOf(tab.uid) !== -1,
-          }"
+          :class="[
+            `cv-tabs-button  ${carbonPrefix}--tabs__nav-item`,
+            {
+              [`${carbonPrefix}--tabs__nav-item--selected`]: selectedId == tab.uid,
+              [`${carbonPrefix}--tabs__nav-item--disabled`]: disabledTabs.indexOf(tab.uid) !== -1,
+            },
+          ]"
           role="tab"
-          :aria-selected="selectedId == tab.uid"
+          :aria-selected="selectedId == tab.uid ? 'true' : 'false'"
           :aria-disabled="disabledTabs.indexOf(tab.uid) !== -1"
         >
           <a
-            class="bx--tabs__nav-link"
+            :class="`${carbonPrefix}--tabs__nav-link`"
             href="javascript:void(0)"
             role="tab"
             :aria-controls="tab.uid"
@@ -58,11 +61,14 @@
 
 <script>
 import ChevronDownGlyph from '@carbon/icons-vue/es/chevron--down';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvTabs',
+  mixins: [carbonPrefixMixin],
   props: {
     noDefaultToFirst: Boolean,
+    container: Boolean,
   },
   components: { ChevronDownGlyph },
   data() {
@@ -83,7 +89,6 @@ export default {
     this.$on('cv:disabled', srcComponent => this.onCvDisabled(srcComponent));
     this.$on('cv:enabled', srcComponent => this.onCvEnabled(srcComponent));
   },
-  mounted() {},
   computed: {
     triggerStyleOverride() {
       // <style carbon tweaks - DO NOT USE STYLE TAG as it causes SSR issues
@@ -97,7 +102,10 @@ export default {
   },
   methods: {
     onFocusin(ev) {
-      if (ev.target.classList.contains('bx--tabs__nav-link') || ev.target.classList.contains('bx--tabs-trigger')) {
+      if (
+        ev.target.classList.contains(`${this.carbonPrefix}--tabs__nav-link`) ||
+        ev.target.classList.contains(`${this.carbonPrefix}--tabs-trigger`)
+      ) {
         // record display prop state
         this.lastDisplayProp = window.getComputedStyle(this.$refs.trigger).getPropertyValue('display');
       } else {
@@ -109,8 +117,8 @@ export default {
       const displayProp = window.getComputedStyle(this.$refs.trigger).getPropertyValue('display');
       if (ev.relatedTarget) {
         if (
-          ev.relatedTarget.classList.contains('bx--tabs__nav-link') ||
-          ev.relatedTarget.classList.contains('bx--tabs-trigger')
+          ev.relatedTarget.classList.contains(`${this.carbonPrefix}--tabs__nav-link`) ||
+          ev.relatedTarget.classList.contains(`${this.carbonPrefix}--tabs-trigger`)
         ) {
           return; // no need to do anything - focus is going somewhere
         } else {
@@ -141,10 +149,17 @@ export default {
     },
     onCvMount(srcComponent) {
       this.tabs.push(srcComponent);
+      if (this.tabs.filter(item => item.uid === srcComponent.uid).length > 1) {
+        console.error(`CvTabs: Duplicate ID specified for CvTab, this may cause issues. {id: ${srcComponent.id}}}`);
+      }
 
       this.checkDisabled(srcComponent);
       if (this.selectedId === undefined) {
         this.checkSelected();
+      } else {
+        if (srcComponent.internalSelected) {
+          this.onTabClick(srcComponent.uid);
+        }
       }
     },
     onCvBeforeDestroy(srcComponent) {
@@ -153,12 +168,11 @@ export default {
         const wasSelected = srcComponent.uid === this.selectedId;
 
         this.tabs.splice(tabIndex, 1);
-        this.selectedId = undefined;
 
         this.checkDisabled(srcComponent);
 
-        if (wasSelected) {
-          this.checkSelected();
+        if (wasSelected && this.tabs.length) {
+          this.onTabClick(this.tabs[Math.max(tabIndex - 1, 0)].uid);
         }
       }
     },
@@ -208,17 +222,22 @@ export default {
       }
     },
     checkSelected() {
-      let somethingSelected = false;
+      let id;
 
       for (let i = 0; i < this.tabs.length; i++) {
         if (this.tabs[i].internalSelected) {
-          this.onTabClick(this.tabs[i].uid);
-          somethingSelected = true;
+          id = this.tabs[i].uid;
         }
       }
 
-      if (!this.noDefaultToFirst && !somethingSelected && this.tabs.length) {
-        this.onTabClick(this.tabs[0].uid);
+      if (!this.noDefaultToFirst && id === undefined && this.tabs.length) {
+        id = this.tabs[0].uid;
+      }
+
+      if (id !== undefined) {
+        this.$nextTick(() => {
+          this.onTabClick(id);
+        });
       }
     },
     isAllTabsDisabled() {
@@ -246,7 +265,7 @@ export default {
       if (displayProp !== 'none') {
         const el = document.activeElement;
         let id;
-        if (el.classList.contains('bx--tabs__nav-link')) {
+        if (el.classList.contains(`${this.carbonPrefix}--tabs__nav-link`)) {
           id = el.getAttribute('aria-controls');
         } else {
           id = this.selectedId;
@@ -269,7 +288,7 @@ export default {
         } else {
           const el = document.activeElement;
           let id;
-          if (el.classList.contains('bx--tabs__nav-link')) {
+          if (el.classList.contains(`${this.carbonPrefix}--tabs__nav-link`)) {
             id = el.getAttribute('aria-controls');
           } else {
             id = this.selectedId;

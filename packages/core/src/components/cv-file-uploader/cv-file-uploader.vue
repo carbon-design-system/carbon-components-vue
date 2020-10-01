@@ -1,65 +1,93 @@
 <template>
   <cv-form-item class="cv-file-uploader">
-    <strong class="bx--file--label">{{ label }}</strong>
-    <p class="bx--label-description">{{ helperText }}</p>
-    <div class="bx--file" data-file>
+    <strong :class="`${carbonPrefix}--file--label`">{{ label }}</strong>
+    <p :class="`${carbonPrefix}--label-description`">{{ helperText }}</p>
+    <div :class="`${carbonPrefix}--file`" data-file>
       <label
         :for="uid"
-        class="bx--file-browse-btn"
+        :class="[
+          {
+            [`${carbonPrefix}--file-browse-btn`]: kind !== 'button',
+            [`${carbonPrefix}--btn`]: kind === 'button',
+            [`${carbonPrefix}--btn--primary`]: kind === 'button',
+          },
+        ]"
         role="button"
         tabindex="0"
+        ref="focusTarget"
         @keydown.enter.prevent="onShow()"
         @keydown.space.prevent
         @keyup.space.prevent="onShow()"
       >
-        <div
+        <cv-wrapper
+          :tag-type="kind !== 'button' ? 'div' : ''"
           data-file-drop-container
-          class="bx--file__drop-container"
-          :class="{ 'bx--file__drop-container--drag-over': allowDrop }"
+          :class="`${carbonPrefix}--file__drop-container${allowDropClass}`"
           @dragover="onDragEvent"
           @dragleave="onDragEvent"
           @drop="onDragEvent"
         >
           <slot name="drop-target">{{ internalDropTargetLabel }}</slot>
           <input
+            v-if="kind !== 'button'"
             v-bind="$attrs"
             type="file"
-            class="bx--file-input"
+            :class="`${carbonPrefix}--file-input`"
             :id="uid"
             data-file-uploader
             data-target="[data-file-container]"
             v-on="inputListeners"
             ref="file-input"
           />
-        </div>
+        </cv-wrapper>
       </label>
+      <input
+        v-if="kind === 'button'"
+        v-bind="$attrs"
+        type="file"
+        :class="`${carbonPrefix}--file-input`"
+        :id="uid"
+        data-file-uploader
+        data-target="[data-file-container]"
+        v-on="inputListeners"
+        ref="file-input"
+      />
 
-      <div data-file-container class="bx--file-container">
+      <div data-file-container :class="`${carbonPrefix}--file-container`">
         <div
           v-for="(file, index) in internalFiles"
           :key="index"
-          :class="isInvalid(index) ? 'bx--file__selected-file--invalid__wrapper' : 'bx--file__selected-file'"
+          :class="
+            isInvalid(index)
+              ? `${carbonPrefix}--file__selected-file--invalid__wrapper`
+              : `${carbonPrefix}--file__selected-file`
+          "
         >
           <cv-wrapper
             :tag-type="isInvalid(index) ? 'div' : ''"
-            class="bx--file__selected-file bx--file__selected-file--invalid"
+            :class="`${carbonPrefix}--file__selected-file ${carbonPrefix}--file__selected-file--invalid`"
           >
-            <p class="bx--file-filename">{{ file.file.name }}</p>
+            <p :class="`${carbonPrefix}--file-filename`">{{ file.file.name }}</p>
 
-            <span :data-for="uid" class="bx--file__state-container" :data-test="file.state" :style="stateStyleOverides">
-              <div v-if="file.state === 'uploading'" class="bx--inline-loading__animation">
-                <div data-inline-loading-spinner class="bx--loading bx--loading--small">
-                  <svg class="bx--loading__svg" viewBox="-75 -75 150 150">
-                    <circle class="bx--loading__background" cx="0" cy="0" r="37.5" />
-                    <circle class="bx--loading__stroke" cx="0" cy="0" r="37.5" />
+            <span
+              :data-for="uid"
+              :class="`${carbonPrefix}--file__state-container`"
+              :data-test="file.state"
+              :style="stateStyleOverides"
+            >
+              <div v-if="file.state === 'uploading'" :class="`${carbonPrefix}--inline-loading__animation`">
+                <div data-inline-loading-spinner :class="`${carbonPrefix}--loading ${carbonPrefix}--loading--small`">
+                  <svg :class="`${carbonPrefix}--loading__svg`" viewBox="-75 -75 150 150">
+                    <circle :class="`${carbonPrefix}--loading__background`" cx="0" cy="0" r="37.5" />
+                    <circle :class="`${carbonPrefix}--loading__stroke`" cx="0" cy="0" r="37.5" />
                   </svg>
                 </div>
               </div>
-              <CheckmarkFilled16 v-if="file.state === 'complete'" class="bx--file-complete" />
-              <WarningFilled16 v-if="isInvalid(index)" class="bx--file--invalid" />
+              <CheckmarkFilled16 v-if="file.state === 'complete'" :class="`${carbonPrefix}--file-complete`" />
+              <WarningFilled16 v-if="isInvalid(index)" :class="`${carbonPrefix}--file--invalid`" />
               <button
                 type="button"
-                class="bx--file-close"
+                :class="`${carbonPrefix}--file-close`"
                 v-if="removable"
                 :alt="removeAriaLabel"
                 :arial-label="removeAriaLabel"
@@ -68,9 +96,11 @@
                 <Close16 />
               </button>
             </span>
-            <div v-if="isInvalid(index)" class="bx--form-requirement">
-              <div class="bx--form-requirement__title">{{ file.invalidMessageTitle || 'Invalid file' }}</div>
-              <p class="bx--form-requirement__supplement">{{ file.invalidMessage }}</p>
+            <div v-if="isInvalid(index)" :class="`${carbonPrefix}--form-requirement`">
+              <div :class="`${carbonPrefix}--form-requirement__title`">
+                {{ file.invalidMessageTitle || 'Invalid file' }}
+              </div>
+              <p :class="`${carbonPrefix}--form-requirement__supplement`">{{ file.invalidMessage }}</p>
             </div>
           </cv-wrapper>
         </div>
@@ -86,23 +116,30 @@ import CheckmarkFilled16 from '@carbon/icons-vue/es/checkmark--filled/16';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import Close16 from '@carbon/icons-vue/es/close/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
-
-const CONSTS = {
-  STATES: {
-    NONE: '',
-    UPLOADING: 'uploading',
-    COMPLETE: 'complete',
-  },
-};
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import { STATES, KINDS } from './consts.js';
+import methodsMixin from '../../mixins/methods-mixin';
 
 export default {
   name: 'CvFileUploader',
   components: { CvFormItem, CheckmarkFilled16, WarningFilled16, Close16, CvWrapper },
-  mixins: [uidMixin],
+  mixins: [uidMixin, carbonPrefixMixin, methodsMixin({ focusTarget: ['blur', 'focus'] })],
   inheritAttrs: false,
   props: {
     clearOnReselect: Boolean,
     files: Array,
+    kind: {
+      type: String,
+      default: 'drag-target',
+      validator: val => {
+        const validValues = Object.values(KINDS);
+
+        if (!validValues.includes(val)) {
+          console.warn(`CvFileUploader: valid values for 'kind' are ${validValues}`);
+        }
+        return true;
+      },
+    },
     label: String,
     helperText: String,
     initialStateUploading: Boolean,
@@ -125,7 +162,7 @@ export default {
     event: 'change',
   },
   created() {
-    this.STATES = Object.freeze(CONSTS.STATES);
+    this.STATES = Object.freeze(STATES);
   },
   data() {
     return {
@@ -164,6 +201,9 @@ export default {
       // <style carbon tweaks - DO NOT USE STYLE TAG as it causes SSR issues
       return { display: 'inline-flex', alignItems: 'center' };
     },
+    allowDropClass() {
+      return this.allowDrop ? ` ${this.carbonPrefix}--file__drop-container--drag-over` : '';
+    },
   },
   methods: {
     remove(index) {
@@ -173,7 +213,7 @@ export default {
     addFiles(files) {
       for (const file of files) {
         this.internalFiles.push({
-          state: this.initialStateUploading ? CONSTS.STATES.UPLOADING : CONSTS.STATES.NONE,
+          state: this.initialStateUploading ? STATES.UPLOADING : STATES.NONE,
           file,
           invalidMessageTitle: '',
           invalidMessage: '',

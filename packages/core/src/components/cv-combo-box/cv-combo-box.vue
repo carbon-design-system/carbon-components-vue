@@ -1,22 +1,25 @@
 <template>
-  <div class="cv-combo-box bx--list-box__wrapper" @focusout="onFocusOut">
-    <label v-if="title" :for="uid" class="bx--label" :class="{ 'bx--label--disabled': $attrs.disabled }">
-      {{ title }}
-    </label>
-
-    <div v-if="isHelper" class="bx--form__helper-text" :class="{ 'bx--form__helper-text--disabled': $attrs.disabled }">
-      <slot name="helper-text">{{ helperText }}</slot>
-    </div>
+  <div class="cv-combo-box" :class="`${carbonPrefix}--list-box__wrapper`" @focusout="onFocusOut">
+    <label
+      v-if="title"
+      :for="uid"
+      :class="[`${carbonPrefix}--label`, { [`${carbonPrefix}--label--disabled`]: disabled }]"
+      >{{ title }}</label
+    >
 
     <div
       role="listbox"
       tabindex="-1"
-      class="bx--combo-box bx--list-box"
-      :class="{
-        'bx--list-box--light': theme === 'light',
-        'bx--combo-box--expanded': open,
-        'bx--combo-box--disabled bx--list-box--disabled': $attrs.disabled,
-      }"
+      class=""
+      :class="[
+        `${carbonPrefix}--combo-box ${carbonPrefix}--list-box`,
+        {
+          [`${carbonPrefix}--list-box--light`]: theme === 'light',
+          [`${carbonPrefix}--combo-box--expanded`]: open,
+          [`${carbonPrefix}--list-box--expanded`]: open,
+          [`${carbonPrefix}--combo-box--disabled ${carbonPrefix}--list-box--disabled`]: disabled,
+        },
+      ]"
       :data-invalid="isInvalid"
       v-bind="$attrs"
       @keydown.down.prevent="onDown"
@@ -25,14 +28,14 @@
       @keydown.esc.prevent="onEsc"
       @click="onClick"
     >
-      <WarningFilled16 v-if="isInvalid" class="bx--list-box__invalid-icon" />
+      <WarningFilled16 v-if="isInvalid" :class="[`${carbonPrefix}--list-box__invalid-icon`]" />
       <div
         role="button"
         aria-haspopup="true"
-        :aria-expanded="open"
+        :aria-expanded="open ? 'true' : 'false'"
         :aria-owns="uid"
         :aria-controls="uid"
-        class="bx--list-box__field"
+        :class="[`${carbonPrefix}--list-box__field`]"
         tabindex="-1"
         type="button"
         :aria-label="open ? 'close menu' : 'open menu'"
@@ -41,13 +44,18 @@
       >
         <input
           ref="input"
-          class="bx--text-input"
+          :class="[
+            `${carbonPrefix}--text-input`,
+            { [`${carbonPrefix}--text-input--empty`]: !filter || filter.length === 0 },
+          ]"
           :aria-controls="uid"
           aria-autocomplete="list"
           role="combobox"
-          :aria-expanded="open"
+          :aria-disabled="disabled"
+          :aria-expanded="open ? 'true' : 'false'"
           autocomplete="off"
-          placeholder="Filter"
+          :disabled="disabled"
+          :placeholder="label"
           v-model="filter"
           @input="onInput"
           @focus="inputFocus"
@@ -56,7 +64,7 @@
         <div
           v-if="filter"
           role="button"
-          class="bx--list-box__selection"
+          :class="[`${carbonPrefix}--list-box__selection`]"
           tabindex="0"
           title="Clear filter"
           @click.stop="clearFilter"
@@ -67,28 +75,39 @@
           <Close16 />
         </div>
 
-        <div class="bx--list-box__menu-icon" :class="{ 'bx--list-box__menu-icon--open': open }" role="button">
+        <div
+          :class="[`${carbonPrefix}--list-box__menu-icon`, { [`${carbonPrefix}--list-box__menu-icon--open`]: open }]"
+          role="button"
+        >
           <chevron-down-16 :aria-label="open ? 'Close menu' : 'Open menu'" />
         </div>
       </div>
 
-      <div v-show="open" :id="uid" class="bx--list-box__menu" role="listbox" ref="list">
+      <div v-show="open" :id="uid" :class="[`${carbonPrefix}--list-box__menu`]" role="listbox" ref="list">
         <div
           v-for="(item, index) in dataOptions"
           :key="`combo-box-${index}`"
-          class="bx--list-box__menu-item"
-          :class="{ 'bx--list-box__menu-item--highlighted': highlighted === item.value }"
+          :class="[
+            `${carbonPrefix}--list-box__menu-item`,
+            { [`${carbonPrefix}--list-box__menu-item--highlighted`]: highlighted === item.value },
+          ]"
           ref="option"
           @click.stop.prevent="onItemClick(item.value)"
           @mousemove="onMousemove(item.value)"
           @mousedown.prevent
         >
-          <div class="bx--list-box__menu-item__option">{{ item.label }}</div>
+          <div :class="[`${carbonPrefix}--list-box__menu-item__option`]">{{ item.label }}</div>
         </div>
       </div>
     </div>
-    <div v-if="isInvalid" class="bx--form-requirement">
+    <div v-if="isInvalid" :class="[`${carbonPrefix}--form-requirement`]">
       <slot name="invalid-message">{{ invalidMessage }}</slot>
+    </div>
+    <div
+      v-if="!isInvalid && isHelper"
+      :class="[`${carbonPrefix}--form__helper-text`, { [`${carbonPrefix}--form__helper-text--disabled`]: disabled }]"
+    >
+      <slot name="helper-text">{{ helperText }}</slot>
     </div>
   </div>
 </template>
@@ -99,15 +118,18 @@ import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16';
 import Close16 from '@carbon/icons-vue/es/close/16';
 import uidMixin from '../../mixins/uid-mixin';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import methodsMixin from '../../mixins/methods-mixin';
 
 export default {
   name: 'CvComboBox',
   inheritAttrs: false,
-  mixins: [themeMixin, uidMixin],
+  mixins: [themeMixin, uidMixin, carbonPrefixMixin, methodsMixin({ input: ['focus', 'blur'] })],
   components: { WarningFilled16, ChevronDown16, Close16 },
   props: {
     autoFilter: Boolean,
     autoHighlight: Boolean,
+    disabled: Boolean,
     invalidMessage: { type: String, default: undefined },
     helperText: { type: String, default: undefined },
     title: String,
@@ -138,6 +160,8 @@ export default {
       dataValue: this.value,
       dataHighlighted: null,
       dataFilter: null,
+      isHelper: false,
+      isInvalid: false,
     };
   },
   model: {
@@ -163,17 +187,12 @@ export default {
   mounted() {
     this.filter = this.value;
     this.highlighted = this.value ? this.value : this.highlight; // override highlight with value if provided
-    console.warn(
-      `${this.$vnode.componentOptions.Ctor.extendOptions.name} - Under review. This component isn't quite ready. Hopefully no features will get broken but this cannot be guarenteed.`
-    );
+    this.checkSlots();
+  },
+  updated() {
+    this.checkSlots();
   },
   computed: {
-    isInvalid() {
-      return this.$slots['invalid-message'] !== undefined || (this.invalidMessage && this.invalidMessage.length);
-    },
-    isHelper() {
-      return this.$slots['helper-text'] !== undefined || (this.helperText && this.helperText.length);
-    },
     highlighted: {
       get() {
         return this.dataHighlighted;
@@ -205,14 +224,22 @@ export default {
     },
   },
   methods: {
+    checkSlots() {
+      // NOTE: this.$slots is not reactive so needs to be managed on updated
+      this.isInvalid = !!(this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length));
+      this.isHelper = !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
+    },
     clearFilter() {
+      if (this.disabled) return;
+      this.internalUpdateValue('');
       this.filter = '';
       this.$refs.input.focus();
       this.doOpen(true);
       this.updateOptions();
+      this.$emit('change', this.dataValue);
     },
     checkHighlightPosition(newHiglight) {
-      if (this.$refs.list && this.$refs.option) {
+      if (this.$refs.list && this.$refs.option && this.$refs.option[newHiglight]) {
         if (this.$refs.list.scrollTop > this.$refs.option[newHiglight].offsetTop) {
           this.$refs.list.scrollTop = this.$refs.option[newHiglight].offsetTop;
         } else if (
@@ -250,7 +277,7 @@ export default {
       }
     },
     updateOptions() {
-      if (this.autoFilter) {
+      if (this.autoFilter && this.filter) {
         const escFilter = this.filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         const pat = new RegExp(escFilter, 'iu');
         this.dataOptions = this.options.filter(opt => pat.test(opt.label)).slice(0);
@@ -274,7 +301,8 @@ export default {
         // this.checkHighlightPosition(firstMatchIndex);
       }
     },
-    onInput(ev) {
+    onInput() {
+      if (this.disabled) return;
       this.doOpen(true);
 
       this.updateOptions();
@@ -284,6 +312,7 @@ export default {
       this.open = newVal;
     },
     onDown() {
+      if (this.disabled) return;
       if (!this.open) {
         this.doOpen(true);
       } else {
@@ -291,22 +320,26 @@ export default {
       }
     },
     onUp() {
+      if (this.disabled) return;
       if (this.open) {
         this.doMove(true);
       }
     },
     onEsc() {
+      if (this.disabled) return;
       this.doOpen(false);
       this.$el.focus();
     },
     onEnter() {
+      if (this.disabled) return;
       this.doOpen(!this.open);
       if (!this.open) {
         this.onItemClick(this.highlighted);
         this.$refs.input.focus();
       }
     },
-    onClick(ev) {
+    onClick() {
+      if (this.disabled) return;
       this.doOpen(!this.open);
       if (this.open) {
         this.$refs.input.focus();
@@ -335,17 +368,20 @@ export default {
       }
     },
     onItemClick(val) {
+      if (this.disabled) return;
       this.internalUpdateValue(val);
       this.$refs.input.focus();
       this.open = false; // close after user makes a selection
       this.$emit('change', this.dataValue);
     },
     inputClick() {
+      if (this.disabled) return;
       if (!this.open) {
         this.doOpen(true);
       }
     },
     inputFocus() {
+      if (this.disabled) return;
       this.doOpen(true);
     },
   },

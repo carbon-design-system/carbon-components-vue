@@ -2,16 +2,24 @@
   <div
     data-modal
     :id="uid"
-    class="cv-modal bx--modal"
-    :class="{
-      'is-visible': dataVisible,
-      'bx--modal--danger': kind === 'danger',
-    }"
+    :class="[
+      `cv-modal ${carbonPrefix}--modal`,
+      {
+        'is-visible': dataVisible,
+        [`${carbonPrefix}--modal--danger`]: kind === 'danger',
+      },
+    ]"
     tabindex="-1"
     @keydown.esc.prevent="onEsc"
     @click.self="onExternalClick"
   >
-    <div class="bx--modal-container" ref="modalDialog">
+    <div
+      :class="[
+        `${carbonPrefix}--modal-container`,
+        { [`${carbonPrefix}--modal-container--${internalSize}`]: internalSize },
+      ]"
+      ref="modalDialog"
+    >
       <div
         class="cv-modal__before-content"
         ref="beforeContent"
@@ -19,35 +27,34 @@
         style="position: absolute; height: 1px; width: 1px; left: -9999px;"
         @focus="focusBeforeContent"
       />
-      <div class="bx--modal-header">
-        <h4 class="bx--modal-header__label" v-if="$slots.label">
-          <slot name="label">label (Optional)</slot>
-        </h4>
-        <h2 class="bx--modal-header__heading">
+      <div :class="`${carbonPrefix}--modal-header`">
+        <p :class="`${carbonPrefix}--modal-header__label`">
+          <slot name="label"></slot>
+        </p>
+        <p :class="`${carbonPrefix}--modal-header__heading`">
           <slot name="title">Modal Title</slot>
-        </h2>
-        <button class="bx--modal-close" type="button" @click="onClose" ref="close">
-          <Close16 class="bx--modal-close__icon" />
+        </p>
+        <button
+          :class="`${carbonPrefix}--modal-close`"
+          type="button"
+          @click="onClose"
+          ref="close"
+          :aria-label="closeAriaLabel"
+        >
+          <Close16 :class="`${carbonPrefix}--modal-close__icon`" />
         </button>
       </div>
 
-      <div class="bx--modal-content" ref="content" :tabindex="scrollable ? 0 : undefined">
-        <slot name="content">
-          <p>
-            Passive modal notifications should only appear if there is an action the user needs to address immediately.
-            Passive modal notifications are persistent on the screen.
-          </p>
-        </slot>
+      <div
+        :class="[`${carbonPrefix}--modal-content`, { [`${carbonPrefix}--modal-content--with-form`]: hasFormContent }]"
+        ref="content"
+        :tabindex="scrollable ? 0 : undefined"
+      >
+        <slot name="content"></slot>
       </div>
 
-      <div class="bx--modal-footer" v-if="hasFooter">
-        <cv-button
-          type="button"
-          :kind="secondaryKind"
-          @click="onSecondaryClick"
-          v-if="this.$slots['secondary-button']"
-          ref="secondary"
-        >
+      <div :class="`${carbonPrefix}--modal-footer`" v-if="hasFooter">
+        <cv-button type="button" :kind="secondaryKind" @click="onSecondaryClick" v-if="hasSecondary" ref="secondary">
           <slot name="secondary-button">Secondary button</slot>
         </cv-button>
         <cv-button
@@ -55,7 +62,7 @@
           type="button"
           :kind="primaryKind"
           @click="onPrimaryClick"
-          v-if="this.$slots['primary-button']"
+          v-if="hasPrimary"
           ref="primary"
         >
           <slot name="primary-button">Primary button</slot>
@@ -76,15 +83,17 @@
 import CvButton from '../cv-button/cv-button';
 import uidMixin from '../../mixins/uid-mixin';
 import Close16 from '@carbon/icons-vue/es/close/16';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvModal',
-  mixins: [uidMixin],
+  mixins: [uidMixin, carbonPrefixMixin],
   components: {
     CvButton,
     Close16,
   },
   props: {
+    closeAriaLabel: { type: String, default: 'Close modal' },
     kind: {
       type: String,
       default: '',
@@ -93,17 +102,27 @@ export default {
     autoHideOff: Boolean,
     visible: Boolean,
     primaryButtonDisabled: Boolean,
+    size: String,
+    hasFormContent: Boolean,
   },
   data() {
     return {
       dataVisible: false,
       scrollable: false,
+      hasFooter: false,
+      hasHeaderLabel: false,
+      hasPrimary: false,
+      hasSecondary: false,
     };
   },
   mounted() {
     if (this.visible) {
       this.show();
     }
+    this.checkSlots();
+  },
+  updated() {
+    this.checkSlots();
   },
   watch: {
     visible(val) {
@@ -125,8 +144,17 @@ export default {
     secondaryKind() {
       return 'secondary';
     },
-    hasFooter() {
-      return this.$slots['primary-button'] || this.$slots['secondary-button'];
+    internalSize() {
+      switch (this.size) {
+        case 'xs':
+          return 'xs';
+        case 'small':
+          return 'sm';
+        case 'large':
+          return 'lg';
+        default:
+          return '';
+      }
     },
   },
   model: {
@@ -134,6 +162,13 @@ export default {
     prop: 'visible',
   },
   methods: {
+    checkSlots() {
+      // NOTE: this.$slots is not reactive so needs to be managed on updated
+      this.hasFooter = !!(this.$slots['primary-button'] || this.$slots['secondary-button']);
+      this.hasHeaderLabel = !!this.$slots.label;
+      this.hasSecondary = !!this.$slots['secondary-button'];
+      this.hasPrimary = !!this.$slots['primary-button'];
+    },
     focusBeforeContent() {
       if (this.$slots['primary-button']) {
         this.$refs.primary.$el.focus();
@@ -177,7 +212,7 @@ export default {
     },
     show() {
       // prevent body scrolling
-      document.body.classList.add('bx--body--with-modal-open');
+      document.body.classList.add(`${this.carbonPrefix}--body--with-modal-open`);
 
       this.$el.addEventListener('transitionend', this.onShown);
       this.dataVisible = true;
@@ -192,7 +227,7 @@ export default {
     },
     hide() {
       //restore any previous scrollability
-      document.body.classList.remove('bx--body--with-modal-open');
+      document.body.classList.remove(`${this.carbonPrefix}--body--with-modal-open`);
 
       this.dataVisible = false;
       this.$emit('modal-hidden');

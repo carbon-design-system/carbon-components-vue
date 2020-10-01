@@ -2,8 +2,7 @@
   <ul
     data-progress
     data-progress-current
-    class="cv-progress bx--progress"
-    :class="{ 'bx--progress--vertical': vertical }"
+    :class="[`cv-progress ${carbonPrefix}--progress`, { [`${carbonPrefix}--progress--vertical`]: vertical }]"
   >
     <slot>
       <cv-progress-step
@@ -19,9 +18,11 @@
 
 <script>
 import CvProgressStep from './cv-progress-step';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvProgress',
+  mixins: [carbonPrefixMixin],
   components: {
     CvProgressStep,
   },
@@ -38,7 +39,7 @@ export default {
   },
   computed: {
     state() {
-      return step => {
+      return () => {
         console.warn('CvProgress: method deprecated');
         return;
       };
@@ -72,7 +73,7 @@ export default {
     getSteps() {
       console.warn('CvProgress: method deprecated');
     },
-    setCurrent(step) {
+    setCurrent() {
       console.warn('CvProgress: method deprecated');
     },
   },

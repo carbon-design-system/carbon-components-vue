@@ -1,25 +1,32 @@
 <template>
   <div
     data-tile="expandable"
-    class="cv-tile-expandable bx--tile--expandable"
+    :class="[
+      `cv-tile-expandable ${carbonPrefix}--tile--expandable`,
+      { [`${carbonPrefix}--tile--is-expanded`]: internalExpanded },
+    ]"
+    ref="target"
     tabindex="0"
-    :class="[{ 'bx--tile--is-expanded': internalExpanded }]"
     :style="styleObject"
     @click="toggle"
     @keydown.enter.prevent="toggle"
     @keydown.space.prevent
     @keyup.space.prevent="toggle"
   >
-    <button type="button" class="bx--tile__chevron">
+    <button type="button" :class="`${carbonPrefix}--tile__chevron`">
       <ChevronDown16 />
     </button>
-    <div class="bx--tile-content">
-      <span data-tile-atf class="bx--tile-content__above-the-fold" ref="aboveFold">
+    <div :class="`${carbonPrefix}--tile-content`">
+      <span data-tile-atf :class="`${carbonPrefix}--tile-content__above-the-fold`" ref="aboveFold">
         <slot>
           <!-- Above the fold content here -->
         </slot>
       </span>
-      <span class="bx--tile-content__below-the-fold" ref="belowFold" v-show="internalExpanded || initialized">
+      <span
+        :class="`${carbonPrefix}--tile-content__below-the-fold`"
+        ref="belowFold"
+        v-show="internalExpanded || initialized"
+      >
         <slot name="below">
           <!-- Rest of the content here -->
         </slot>
@@ -30,9 +37,12 @@
 
 <script>
 import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import methodsMixin from '../../mixins/methods-mixin';
 
 export default {
   name: 'CvTileExpandable',
+  mixins: [carbonPrefixMixin, methodsMixin({ target: ['blur', 'focus'] })],
   props: {
     expanded: Boolean,
   },

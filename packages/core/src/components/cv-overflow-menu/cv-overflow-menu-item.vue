@@ -1,28 +1,34 @@
 <template>
   <li
-    class="cv-overflow-menu-item bx--overflow-menu-options__option"
-    :class="{
-      'bx--overflow-menu-options__option--disabled': disabled,
-      'bx--overflow-menu-options__option--danger': danger,
-    }"
+    :class="[
+      `cv-overflow-menu-item ${carbonPrefix}--overflow-menu-options__option`,
+      {
+        [`${carbonPrefix}--overflow-menu-options__option--disabled`]: disabled,
+        [`${carbonPrefix}--overflow-menu-options__option--danger`]: danger,
+      },
+    ]"
     @keydown.esc.prevent="onEsc"
   >
     <button
       type="button"
-      class="bx--overflow-menu-options__btn"
+      :class="`${carbonPrefix}--overflow-menu-options__btn`"
       :data-floating-menu-primary-focus="primaryFocus"
       :disabled="disabled"
       v-on="$listeners"
       @click="onClick"
     >
-      <slot></slot>
+      <span :class="`${carbonPrefix}--overflow-menu-options__option-content`">
+        <slot></slot>
+      </span>
     </button>
   </li>
 </template>
 
 <script>
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 export default {
   name: 'CvOverflowMenuItem',
+  mixins: [carbonPrefixMixin],
   props: {
     primaryFocus: Boolean,
     disabled: Boolean,

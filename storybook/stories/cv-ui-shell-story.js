@@ -6,7 +6,7 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvHeaderNotesMD from '@carbon/vue/src/components/cv-ui-shell/cv-ui-shell-notes.md';
+import CvHeaderNotesMD from '../../packages/core/src/components/cv-ui-shell/cv-ui-shell-notes.md';
 
 import {
   CvHeader,
@@ -26,15 +26,17 @@ import {
   CvSwitcher,
   CvSwitcherItem,
   CvSwitcherItemLink,
-} from '@carbon/vue/src';
+  CvHeaderSideNavItems,
+} from '../../packages/core/src/';
 
 import Fade16 from '@carbon/icons-vue/es/fade/16';
 import Notification20 from '@carbon/icons-vue/es/notification/20';
 import UserAvatar20 from '@carbon/icons-vue/es/user--avatar/20';
+import Login20 from '@carbon/icons-vue/es/login/20';
 import AppSwitcher20 from '@carbon/icons-vue/es/app-switcher/20';
 
-const storiesDefault = storiesOf('Components/CvUIShell - header', module);
-const storiesExperimental = storiesOf('Experimental/CvUIShell - header', module);
+const storiesDefault = storiesOf('Components/CvUIShell', module);
+// const storiesExperimental = storiesOf('Experimental/CvUIShell - header', module);
 
 const preKnobs = {
   // flipMenu: {
@@ -91,15 +93,16 @@ const preKnobs = {
   },
   headerActions: {
     group: 'headerActions',
-    value: `<template slot="header-global">
+    value: `<template v-slot:header-global>
     <cv-header-global-action
       aria-label="Notifications"
       aria-controls="notifications-panel"
       @click="actionNotifications" >
       <Notification20 />
     </cv-header-global-action>
-    <cv-header-global-action aria-label="User avatar" @click="actionUserAvatar" aria-controls="">
-      <UserAvatar20 />
+    <cv-header-global-action aria-label="User avatar" @click="actionUserAvatar" aria-controls="user-panel">
+      <UserAvatar20 v-if="loggedIn"/>
+      <Login20 v-else />
     </cv-header-global-action>
     <cv-header-global-action
       aria-label="App switcher"
@@ -108,6 +111,12 @@ const preKnobs = {
       <AppSwitcher20 />
     </cv-header-global-action>
   </template>`,
+  },
+  userPanel: {
+    group: 'rightPanels',
+    value: `<cv-header-panel  id="user-panel">
+      An empty user panel
+    </cv-header-panel>`,
   },
   notificationsPanel: {
     group: 'rightPanels',
@@ -196,7 +205,7 @@ const preKnobs = {
     value: `<cv-side-nav id="side-nav" fixed expanded>
       <cv-side-nav-items>
         <cv-side-nav-menu title="L1 menu">
-          <template slot="nav-icon"><Fade16 /></template>
+          <template v-slot:nav-icon><Fade16 /></template>
           <cv-side-nav-menu-item href="javascript:void(0)" active>
             L2 menu item
           </cv-side-nav-menu-item>
@@ -208,7 +217,7 @@ const preKnobs = {
           </cv-side-nav-menu-item>
         </cv-side-nav-menu>
         <cv-side-nav-menu title="L1 menu">
-          <template slot="nav-icon"><Fade16 /></template>
+          <template v-slot:nav-icon><Fade16 /></template>
           <cv-side-nav-menu-item href="javascript:void(0)">
             L2 menu item
           </cv-side-nav-menu-item>
@@ -220,15 +229,103 @@ const preKnobs = {
           </cv-side-nav-menu-item>
         </cv-side-nav-menu>
         <cv-side-nav-link href="javascript:void(0)">
-          <template slot="nav-icon"><Fade16 /></template>
+          <template v-slot:nav-icon><Fade16 /></template>
           L1 link
         </cv-side-nav-link>
         <cv-side-nav-link href="javascript:void(0)">
-          <template slot="nav-icon"><Fade16 /></template>
+          <template v-slot:nav-icon><Fade16 /></template>
           L1 link
         </cv-side-nav-link>
       </cv-side-nav-items>
     </cv-side-nav>`,
+  },
+  sideNavHeader: {
+    group: 'leftPanels',
+    value: `<cv-side-nav id="side-nav" fixed>
+    <cv-side-nav-items>
+      <cv-header-side-nav-items>
+        <cv-header-menu-item href="javascript:void(0)">
+        Link 1
+      </cv-header-menu-item>
+      <cv-header-menu-item href="javascript:void(0)">
+        Link 2
+      </cv-header-menu-item>
+      <cv-header-menu-item href="javascript:void(0)">
+        Link 3
+      </cv-header-menu-item>
+      <cv-header-menu aria-label="Link 4" title="Link 4" :hover-toggle="false">
+        <cv-header-menu-item href="javascript:void(0)">
+          Submenu Link 1
+        </cv-header-menu-item>
+        <cv-header-menu-item href="javascript:void(0)">
+          Submenu Link 2
+        </cv-header-menu-item>
+        <cv-header-menu-item href="javascript:void(0)">
+          Submenu Link 3
+        </cv-header-menu-item>
+      </cv-header-menu>
+    </cv-header-side-nav-items>
+    </cv-side-nav-items>
+  </cv-side-nav>`,
+  },
+  sideNavAndHeaderNav: {
+    group: 'leftPanels',
+    value: `<cv-side-nav id="side-nav" rail>
+    <cv-side-nav-items>
+      <cv-header-side-nav-items divider>
+        <cv-header-menu-item href="javascript:void(0)">
+        Link 1
+      </cv-header-menu-item>
+      <cv-header-menu-item href="javascript:void(0)">
+        Link 2
+      </cv-header-menu-item>
+      <cv-header-menu-item href="javascript:void(0)">
+        Link 3
+      </cv-header-menu-item>
+      <cv-header-menu aria-label="Link 4" title="Link 4" :hover-toggle="false">
+        <cv-header-menu-item href="javascript:void(0)">
+          Submenu Link 1
+        </cv-header-menu-item>
+        <cv-header-menu-item href="javascript:void(0)">
+          Submenu Link 2
+        </cv-header-menu-item>
+        <cv-header-menu-item href="javascript:void(0)">
+          Submenu Link 3
+        </cv-header-menu-item>
+      </cv-header-menu>
+    </cv-header-side-nav-items>
+
+    <cv-side-nav-menu title="L1 menu">
+      <cv-side-nav-menu-item href="javascript:void(0)" active>
+        L2 menu item
+      </cv-side-nav-menu-item>
+      <cv-side-nav-menu-item href="javascript:void(0)">
+        L2 menu item
+      </cv-side-nav-menu-item>
+      <cv-side-nav-menu-item href="javascript:void(0)">
+        L2 menu item
+      </cv-side-nav-menu-item>
+    </cv-side-nav-menu>
+    <cv-side-nav-menu title="L1 menu">
+      <cv-side-nav-menu-item href="javascript:void(0)">
+        L2 menu item
+      </cv-side-nav-menu-item>
+      <cv-side-nav-menu-item href="javascript:void(0)" aria-current="page">
+        L2 menu item
+      </cv-side-nav-menu-item>
+      <cv-side-nav-menu-item href="javascript:void(0)">
+        L2 menu item
+      </cv-side-nav-menu-item>
+    </cv-side-nav-menu>
+    <cv-side-nav-link href="javascript:void(0)">
+      L1 link
+    </cv-side-nav-link>
+    <cv-side-nav-link href="javascript:void(0)">
+      L1 link
+    </cv-side-nav-link>
+
+    </cv-side-nav-items>
+  </cv-side-nav>`,
   },
   sideNav: {
     group: 'leftPanels',
@@ -245,7 +342,7 @@ const preKnobs = {
             L2 menu item
           </cv-side-nav-menu-item>
         </cv-side-nav-menu>
-        <cv-side-nav-menu title="L1 menu">
+        <cv-side-nav-menu title="L1 menu" expanded>
           <cv-side-nav-menu-item href="javascript:void(0)">
             L2 menu item
           </cv-side-nav-menu-item>
@@ -270,7 +367,7 @@ const preKnobs = {
     value: `<cv-side-nav id="side-nav">
       <cv-side-nav-items>
         <cv-side-nav-menu title="L1 menu">
-          <template slot="nav-icon"><Fade16 /></template>
+          <template v-slot:nav-icon><Fade16 /></template>
           <cv-side-nav-menu-item href="javascript:void(0)" active>
             L2 menu item
           </cv-side-nav-menu-item>
@@ -282,7 +379,7 @@ const preKnobs = {
           </cv-side-nav-menu-item>
         </cv-side-nav-menu>
         <cv-side-nav-menu title="L1 menu">
-          <template slot="nav-icon"><Fade16 /></template>
+          <template v-slot:nav-icon><Fade16 /></template>
           <cv-side-nav-menu-item href="javascript:void(0)">
             L2 menu item
           </cv-side-nav-menu-item>
@@ -294,11 +391,11 @@ const preKnobs = {
           </cv-side-nav-menu-item>
         </cv-side-nav-menu>
         <cv-side-nav-link href="javascript:void(0)">
-          <template slot="nav-icon"><Fade16 /></template>
+          <template v-slot:nav-icon><Fade16 /></template>
           L1 link
         </cv-side-nav-link>
         <cv-side-nav-link href="javascript:void(0)">
-          <template slot="nav-icon"><Fade16 /></template>
+          <template v-slot:nav-icon><Fade16 /></template>
           L1 link
         </cv-side-nav-link>
       </cv-side-nav-items>
@@ -344,7 +441,7 @@ const preKnobs = {
     value: `<cv-side-nav id="side-nav">
       <cv-side-nav-items>
         <cv-side-nav-menu title="L1 menu">
-          <template slot="nav-icon"><Fade16 /></template>
+          <template v-slot:nav-icon><Fade16 /></template>
           <cv-side-nav-menu-item href="javascript:void(0)" active>
             L2 menu item
           </cv-side-nav-menu-item>
@@ -356,7 +453,7 @@ const preKnobs = {
           </cv-side-nav-menu-item>
         </cv-side-nav-menu>
         <cv-side-nav-menu title="L1 menu">
-          <template slot="nav-icon"><Fade16 /></template>
+          <template v-slot:nav-icon><Fade16 /></template>
           <cv-side-nav-menu-item href="javascript:void(0)">
             L2 menu item
           </cv-side-nav-menu-item>
@@ -368,11 +465,50 @@ const preKnobs = {
           </cv-side-nav-menu-item>
         </cv-side-nav-menu>
         <cv-side-nav-link href="javascript:void(0)">
-          <template slot="nav-icon"><Fade16 /></template>
+          <template v-slot:nav-icon><Fade16 /></template>
           L1 link
         </cv-side-nav-link>
         <cv-side-nav-link href="javascript:void(0)">
-          <template slot="nav-icon"><Fade16 /></template>
+          <template v-slot:nav-icon><Fade16 /></template>
+          L1 link
+        </cv-side-nav-link>
+      </cv-side-nav-items>
+    </cv-side-nav>`,
+  },
+  sideNavRail: {
+    group: 'leftPanels',
+    value: `<cv-side-nav id="side-nav" rail>
+      <cv-side-nav-items>
+        <cv-side-nav-menu title="L1 menu">
+          <template v-slot:nav-icon><Fade16 /></template>
+          <cv-side-nav-menu-item href="javascript:void(0)" active>
+            L2 menu item
+          </cv-side-nav-menu-item>
+          <cv-side-nav-menu-item href="javascript:void(0)">
+            L2 menu item
+          </cv-side-nav-menu-item>
+          <cv-side-nav-menu-item href="javascript:void(0)">
+            L2 menu item
+          </cv-side-nav-menu-item>
+        </cv-side-nav-menu>
+        <cv-side-nav-menu title="L1 menu">
+          <template v-slot:nav-icon><Fade16 /></template>
+          <cv-side-nav-menu-item href="javascript:void(0)">
+            L2 menu item
+          </cv-side-nav-menu-item>
+          <cv-side-nav-menu-item href="javascript:void(0)" aria-current="page">
+            L2 menu item
+          </cv-side-nav-menu-item>
+          <cv-side-nav-menu-item href="javascript:void(0)">
+            L2 menu item
+          </cv-side-nav-menu-item>
+        </cv-side-nav-menu>
+        <cv-side-nav-link href="javascript:void(0)">
+          <template v-slot:nav-icon><Fade16 /></template>
+          L1 link
+        </cv-side-nav-link>
+        <cv-side-nav-link href="javascript:void(0)">
+          <template v-slot:nav-icon><Fade16 /></template>
           L1 link
         </cv-side-nav-link>
       </cv-side-nav-items>
@@ -382,14 +518,15 @@ const preKnobs = {
 
 const variants = [
   { name: 'Header Base', includes: ['headerName'] },
-  { name: 'Header Base with Navigation', includes: ['headerName', 'headerNav'] },
+  { name: 'Header Base with Navigation', includes: ['headerMenuButton', 'headerName', 'headerNav', 'sideNavHeader'] },
   { name: 'Header Base with Actions', includes: ['headerName', 'headerActions'] },
-  { name: 'Header Base with Navigation and Actions', includes: ['headerName', 'headerActions', 'headerActions'] },
-  { name: 'Header Base with Actions and right panel', includes: ['headerName', 'headerActions', 'notificationsPanel'] },
-  { name: 'Header Base with Actions and switcher panel', includes: ['headerName', 'headerActions', 'switcherPanel'] },
+  {
+    name: 'Header Base with Navigation and Actions',
+    includes: ['headerName', 'headerMenuButton', 'headerNav', 'headerActions', 'sideNavHeader'],
+  },
   {
     name: 'Header Base with Actions and right panels',
-    includes: ['headerName', 'headerActions', 'notificationsPanel', 'switcherPanel'],
+    includes: ['headerName', 'headerActions', 'notificationsPanel', 'userPanel', 'switcherPanel'],
   },
   {
     name: 'Fixed Side Nav',
@@ -398,6 +535,18 @@ const variants = [
   {
     name: 'Fixed Side Nav and icons',
     includes: ['headerName', 'sideNavFixedWithIcons'],
+  },
+  {
+    name: 'Side Nav rail',
+    includes: ['sideNavRail'],
+  },
+  {
+    name: 'Side Nav rail with header',
+    includes: ['headerName', 'headerMenuButton', 'sideNavRail'],
+  },
+  {
+    name: 'Header Base with Side rail and header Nav',
+    includes: ['headerName', 'headerMenuButton', 'headerNav', 'sideNavAndHeaderNav'],
   },
   {
     name: 'Header Base with Side Nav',
@@ -427,10 +576,10 @@ for (const story of storySet) {
 
       // ----------------------------------------------------------------
       const templateString = `<cv-header aria-label="Carbon header">${settings.group.headerMenuButton}${settings.group.headerName}${settings.group.headerNav}${settings.group.headerActions}
-    <template slot="left-panels" v-if="areLeftPanels">
+    <template v-slot:left-panels v-if="areLeftPanels">
       ${settings.group.leftPanels}
     </template>
-    <template slot="right-panels" v-if="areRightPanels">
+    <template v-slot:right-panels v-if="areRightPanels">
     ${settings.group.rightPanels}
   </template>
 </cv-header>
@@ -447,7 +596,7 @@ ${settings.group.leftPanels2}
       sv-padding="150px 0 50px 0"
       :sv-extra-margin="areLeftPanels ? '300px' : ''"
       >
-      <template slot="component">${templateString}</template>
+      <template v-slot:component>${templateString}</template>
     </sv-template-view>
   `;
 
@@ -458,6 +607,7 @@ ${settings.group.leftPanels2}
           CvHeaderPanel,
           CvHeaderName,
           CvHeaderNav,
+          CvHeaderSideNavItems,
           CvHeaderGlobalAction,
           CvHeaderMenu,
           CvHeaderMenuItem,
@@ -473,6 +623,7 @@ ${settings.group.leftPanels2}
           CvSwitcherItemLink,
           Notification20,
           UserAvatar20,
+          Login20,
           AppSwitcher20,
           Fade16,
         },
@@ -481,6 +632,12 @@ ${settings.group.leftPanels2}
         mounted() {
           this.doActionNotification = () => action('Notifications - click');
           this.doActionSwitcher = () => action('Notifications - click');
+          this.doActionUserAvatar = () => action('User avatar - click');
+        },
+        data() {
+          return {
+            loggedIn: false,
+          };
         },
         computed: {
           areLeftPanels() {
@@ -494,7 +651,10 @@ ${settings.group.leftPanels2}
           actionNotifications() {
             this.doActionNotification();
           },
-          actionUserAvatar: action('User avatar - click'),
+          actionUserAvatar() {
+            this.loggedIn = !this.loggedIn;
+            this.doActionUserAvatar();
+          },
           actionAppSwitcher() {
             this.doActionSwitcher();
           },

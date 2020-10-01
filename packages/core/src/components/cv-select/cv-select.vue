@@ -1,54 +1,57 @@
 <template>
-  <cv-wrapper :tag-type="formItem ? 'div' : ''" class="cv-select bx--form-item">
+  <cv-wrapper :tag-type="formItem ? 'div' : ''" :class="`cv-select ${carbonPrefix}--form-item`">
     <div
       :data-test="value"
-      class="bx--select"
-      :class="{
-        'cv-select': !formItem,
-        'bx--select--inline': inline,
-        'bx--select--light': theme === 'light',
-        'bx--select--invalid': isInvalid,
-        'bx--select--disabled': $attrs.disabled,
-      }"
+      :class="[
+        `${carbonPrefix}--select`,
+        {
+          'cv-select': !formItem,
+          [`${carbonPrefix}--select--inline`]: inline,
+          [`${carbonPrefix}--select--light`]: theme === 'light',
+          [`${carbonPrefix}--select--invalid`]: isInvalid,
+          [`${carbonPrefix}--select--disabled`]: $attrs.disabled,
+        },
+      ]"
     >
       <label
         :for="uid"
-        class="bx--label"
-        :class="{ 'bx--visually-hidden': hideLabel, 'bx--label--disabled': $attrs.disabled }"
+        :class="[
+          `${carbonPrefix}--label`,
+          {
+            [`${carbonPrefix}--visually-hidden`]: hideLabel,
+            [`${carbonPrefix}--label--disabled`]: $attrs.disabled,
+          },
+        ]"
         >{{ label }}</label
       >
 
-      <div v-if="!inline && isHelper" class="bx--form__helper-text">
-        <slot name="helper-text">{{ helperText }}</slot>
-      </div>
-
-      <cv-wrapper :tag-type="inline ? 'div' : ''" class="bx--select-input--inline__wrapper">
-        <div class="bx--select-input__wrapper" :data-invalid="isInvalid">
+      <cv-wrapper :tag-type="inline ? 'div' : ''" :class="`${carbonPrefix}--select-input--inline__wrapper`">
+        <div :class="`${carbonPrefix}--select-input__wrapper`" :data-invalid="isInvalid">
           <select
             v-bind="$attrs"
             :id="uid"
-            class="bx--select-input"
+            :class="`${carbonPrefix}--select-input`"
             v-on="inputListeners"
             ref="select"
             :value="internalValue"
           >
             <slot></slot>
           </select>
-          <chevron-down-glyph class="bx--select__arrow" />
-          <warning-filled-16 v-if="isInvalid" class="bx--select__invalid-icon" />
+          <chevron-down-glyph :class="`${carbonPrefix}--select__arrow`" />
+          <warning-filled-16 v-if="isInvalid" :class="`${carbonPrefix}--select__invalid-icon`" />
         </div>
 
-        <div v-if="isInvalid" class="bx--form-requirement">
+        <div v-if="isInvalid" :class="`${carbonPrefix}--form-requirement`">
           <slot name="invalid-message">{{ invalidMessage }}</slot>
         </div>
-        <!-- cv-wrapper div bx--select-input--inline__wrapper -->
-      </cv-wrapper>
+        <div v-if="!isInvalid && !inline && isHelper" :class="`${carbonPrefix}--form__helper-text`">
+          <slot name="helper-text">{{ helperText }}</slot>
+        </div>
 
-      <div v-if="inline && isHelper" class="bx--form__helper-text">
-        <slot name="helper-text">{{ helperText }}</slot>
-      </div>
+        <!-- cv-wrapper div ${carbonPrefix}--select-input--inline__wrapper -->
+      </cv-wrapper>
     </div>
-    <!-- cv-wrapper div bx--form-item -->
+    <!-- cv-wrapper div ${carbonPrefix}--form-item -->
   </cv-wrapper>
 </template>
 
@@ -56,14 +59,16 @@
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
-import ChevronDownGlyph from '@carbon/icons-vue/es/chevron--down/index';
+import ChevronDownGlyph from '@carbon/icons-vue/es/chevron--down';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import methodsMixin from '../../mixins/methods-mixin';
 
 export default {
   name: 'CvSelect',
   inheritAttrs: false,
   components: { CvWrapper, ChevronDownGlyph, WarningFilled16 },
-  mixins: [uidMixin, themeMixin],
+  mixins: [uidMixin, themeMixin, carbonPrefixMixin, methodsMixin({ select: ['blur', 'focus'] })],
   props: {
     inline: Boolean,
     invalidMessage: { type: String, default: undefined },
@@ -92,7 +97,11 @@ export default {
     delete this.$attrs.multiple;
   },
   data() {
-    return { dataValue: undefined };
+    return {
+      dataValue: undefined,
+      isHelper: false,
+      isInvalid: false,
+    };
   },
   mounted() {
     // this is needed to ensure selected for an option when no value is supplied
@@ -104,6 +113,10 @@ export default {
         }
       }
     }
+    this.checkSlots();
+  },
+  updated() {
+    this.checkSlots();
   },
   watch: {
     value() {
@@ -118,6 +131,10 @@ export default {
       }
     },
   },
+  model: {
+    prop: 'value',
+    event: 'change',
+  },
   computed: {
     // Bind listeners at the component level to the embedded input element and
     // add our own input listener to service the v-model. See:
@@ -126,16 +143,18 @@ export default {
       return {
         ...this.$listeners,
         input: event => this.$emit('input', event.target.value),
+        change: event => this.$emit('change', event.target.value), // use change event for ie11 compatibility
       };
-    },
-    isInvalid() {
-      return this.$slots['invalid-message'] !== undefined || (this.invalidMessage && this.invalidMessage.length);
-    },
-    isHelper() {
-      return this.$slots['helper-text'] !== undefined || (this.helperText && this.helperText.length);
     },
     internalValue() {
       return this.dataValue ? this.dataValue : this.value;
+    },
+  },
+  methods: {
+    checkSlots() {
+      // NOTE: this.$slots is not reactive so needs to be managed on updated
+      this.isInvalid = !!(this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length));
+      this.isHelper = !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
     },
   },
 };

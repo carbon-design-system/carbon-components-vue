@@ -1,18 +1,24 @@
 <template>
   <nav
-    class="cv-side-nav bx--side-nav bx--side-nav__navigation"
-    :class="{
-      'bx--side-nav--expanded': panelExpanded,
-      'bx--side-nav--collapsed': !panelExpanded && fixed,
-      'bx--side-nav--ux': isChildOfHeader,
-    }"
-    :aria-hidden="!panelExpanded && !fixed"
+    :class="[
+      `cv-side-nav`,
+      `${carbonPrefix}--side-nav`,
+      `${carbonPrefix}--side-nav__navigation`,
+      {
+        [`${carbonPrefix}--side-nav--expanded`]: panelExpanded,
+        [`${carbonPrefix}--side-nav--rail`]: rail,
+        [`${carbonPrefix}--side-nav--collapsed`]: !panelExpanded && fixed,
+        [`${carbonPrefix}--side-nav--ux`]: isChildOfHeader,
+      },
+    ]"
+    :aria-hidden="!panelExpanded && !fixed ? 'true' : 'false'"
+    :id="id"
     @focusout="onFocusout"
     @mousedown="onMouseDown"
   >
     <slot></slot>
     <cv-side-nav-footer
-      v-if="!fixed"
+      v-if="!fixed && !rail && !headerEmbedded"
       :expanded="panelExpanded"
       :assistiveText="assistiveToggleText"
       @toggle-expand="toggleExpand"
@@ -22,15 +28,18 @@
 
 <script>
 import CvSideNavFooter from './_cv-side-nav-footer';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvSideNav',
   components: { CvSideNavFooter },
+  mixins: [carbonPrefixMixin],
   props: {
     expanded: Boolean,
     fixed: Boolean,
     id: { type: String, required: true },
     assistiveToggleText: String,
+    rail: Boolean,
   },
   mounted() {
     this.$parent.$emit('cv:panel-mounted', this);
@@ -41,6 +50,7 @@ export default {
   data() {
     return {
       dataExpanded: this.expanded,
+      headerEmbedded: false,
     };
   },
   watch: {

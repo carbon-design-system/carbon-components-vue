@@ -5,17 +5,19 @@ import { action } from '@storybook/addon-actions';
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
+import TimerButton from '../_storybook/components/timer-button';
 
-import CvTimePickerNotesMD from '@carbon/vue/src/components/cv-time-picker/cv-time-picker-notes.md';
-import { CvTimePicker } from '@carbon/vue/src';
+import CvTimePickerNotesMD from '../../packages/core/src/components/cv-time-picker/cv-time-picker-notes.md';
+import { CvTimePicker } from '../../packages/core/src/';
 const storiesDefault = storiesOf('Components/CvTimePicker', module);
-const storiesExperimental = storiesOf('Experimental/CvTimePicker', module);
+// const storiesExperimental = storiesOf('Experimental/CvTimePicker', module);
 
 const ampmConfig = [
   'ampm',
   {
     AM: 'AM',
     PM: 'PM',
+    TwentyFourHour: '24',
   },
   'AM',
   // consts.CONFIG,// fails when used with number in storybook 4.1.4
@@ -29,7 +31,7 @@ const preKnobs = {
     type: boolean,
     config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: 'theme',
-    value: val => (val ? 'xlight' : ''),
+    value: val => (val ? 'light' : ''),
   },
   label: {
     group: 'attr',
@@ -79,7 +81,10 @@ const preKnobs = {
     config: [
       'timezones',
       {
-        list: [{ label: 'Timezone-1', value: 'timezone1' }, { label: 'Timezone-2', value: 'timezone2' }],
+        list: [
+          { label: 'Timezone-1', value: 'timezone1' },
+          { label: 'Timezone-2', value: 'timezone2' },
+        ],
       },
       // consts.CONFIG,
     ],
@@ -171,11 +176,13 @@ for (const story of storySet) {
 
       const templateViewString = `
     <sv-template-view
+      ref="templateView"
       sv-margin
       :sv-alt-back="this.$options.propsData.theme !== 'light'"
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">
+        <TimerButton @timer-start="doStart" @timer-end="doEnd" label="Call focus() method" active-label-prefix="Call blur() method in" />
         <div v-if="${templateString.indexOf('.sync') > 0}">
           <label>time:
             <input type="text" v-model="timeSync" />
@@ -198,7 +205,7 @@ for (const story of storySet) {
   `;
 
       return {
-        components: { CvTimePicker, SvTemplateView },
+        components: { CvTimePicker, SvTemplateView, TimerButton },
         template: templateViewString,
         props: settings.props,
         data() {
@@ -208,6 +215,14 @@ for (const story of storySet) {
           onUpdateTime: action('cv-time-picker - update:time event'),
           onUpdateAmpm: action('cv-time-picker - update:ampm event'),
           onUpdateTimezone: action('cv-time-picker - update:timezone event'),
+          doStart() {
+            this.$nextTick(() => {
+              this.$refs.templateView.$slots.component[0].componentInstance.focus();
+            });
+          },
+          doEnd() {
+            this.$refs.templateView.$slots.component[0].componentInstance.blur();
+          },
         },
         mounted() {
           // console.dir(this);

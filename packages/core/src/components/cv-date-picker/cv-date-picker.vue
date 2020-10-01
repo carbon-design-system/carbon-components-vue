@@ -1,25 +1,35 @@
 <template>
-  <cv-wrapper :tag-type="formItem ? 'div' : ''" class="cv-date-picker bx--form-item">
+  <cv-wrapper :tag-type="formItem ? 'div' : ''" :class="`cv-date-picker ${carbonPrefix}--form-item`" :id="uid">
     <div
       :data-date-picker="['single', 'range'].includes(kind)"
       :data-date-picker-type="kind"
-      class="bx--date-picker"
-      :class="[kindClasses, { 'bx--date-picker--light': theme === 'light', 'cv-date-pciker': !formItem }]"
+      :class="[
+        `${this.carbonPrefix}--date-picker ${this.carbonPrefix}--date-picker--${this.kind}`,
+        {
+          [`${carbonPrefix}--date-picker--simple`]: this.kind === 'short',
+          [`${carbonPrefix}--date-picker--light`]: theme === 'light',
+          'cv-date-pciker': !formItem,
+        },
+      ]"
       ref="date-picker"
+      :id="formItem ? undefined : uid"
     >
       <div
         :class="{
-          'bx--date-picker-container': ['single', 'range'].includes(kind),
+          [`${carbonPrefix}--date-picker-container`]: ['single', 'range'].includes(kind),
+          [`${carbonPrefix}--date-picker--nolabel`]: getDateLabel !== undefined,
         }"
         @change="onChange"
       >
-        <label :for="`${uid}-input-1`" class="bx--label">{{ getDateLabel }}</label>
-        <div class="bx--date-picker-input__wrapper">
+        <label v-if="getDateLabel.length > 0" :for="`${uid}-input-1`" :class="`${carbonPrefix}--label`">
+          {{ getDateLabel }}
+        </label>
+        <div :class="`${carbonPrefix}--date-picker-input__wrapper`">
           <input
             :data-invalid="isInvalid"
             type="text"
             :id="`${uid}-input-1`"
-            class="bx--date-picker__input"
+            :class="`${carbonPrefix}--date-picker__input`"
             :pattern="pattern"
             :placeholder="placeholder"
             data-date-picker-input
@@ -28,29 +38,31 @@
           />
           <Calendar16
             v-if="['single', 'range'].includes(kind)"
-            class="bx--date-picker__icon"
+            :class="`${carbonPrefix}--date-picker__icon`"
             data-date-picker-icon
             @click="cal.open()"
           />
         </div>
-        <div class="bx--form-requirement" v-if="isInvalid">
+        <div :class="`${carbonPrefix}--form-requirement`" v-if="isInvalid">
           <slot name="invalid-message">{{ invalidMessage || invalidDateMessage }}</slot>
         </div>
       </div>
-      <div :class="{ 'bx--date-picker-container': kind === 'range' }" v-if="kind === 'range'">
-        <label :for="`${uid}-input-2`" class="bx--label">{{ getDateEndLabel }}</label>
-        <div class="bx--date-picker-input__wrapper">
+      <div :class="{ [`${carbonPrefix}--date-picker-container`]: kind === 'range' }" v-if="kind === 'range'">
+        <label v-if="getDateEndLabel.length > 0" :for="`${uid}-input-2`" :class="`${carbonPrefix}--label`">
+          {{ getDateEndLabel }}
+        </label>
+        <div :class="`${carbonPrefix}--date-picker-input__wrapper`">
           <input
             type="text"
             :id="`${uid}-input-2`"
-            class="bx--date-picker__input"
+            :class="`${carbonPrefix}--date-picker__input`"
             :pattern="pattern"
             :placeholder="placeholder"
             data-date-picker-input
             :data-date-picker-input-to="kind === 'range'"
             ref="todate"
           />
-          <Calendar16 class="bx--date-picker__icon" data-date-picker-icon @click="openTodateCal()" />
+          <Calendar16 :class="`${carbonPrefix}--date-picker__icon`" data-date-picker-icon @click="openTodateCal()" />
         </div>
       </div>
     </div>
@@ -60,11 +72,16 @@
 <script>
 import Flatpickr from 'flatpickr';
 import l10n from 'flatpickr/dist/l10n/index';
-import RangePlugin from 'flatpickr/dist/plugins/rangePlugin';
+// import carbonFlatpickrAppendToPlugin from './plugins/appendToPlugin';
+import carbonFlatpickrFixEventsPlugin from './plugins/fixEventsPlugin';
+import carbonFlatpickrRangePlugin from './plugins/rangePlugin';
+import carbonFlatpickrMonthSelectPlugin from './plugins/monthSelectPlugin';
+
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
 import Calendar16 from '@carbon/icons-vue/es/calendar/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 // Weekdays shorthand for english locale
 l10n.en.weekdays.shorthand.forEach((day, index) => {
@@ -78,11 +95,11 @@ l10n.en.weekdays.shorthand.forEach((day, index) => {
 
 export default {
   name: 'CvDatePicker',
-  mixins: [uidMixin, themeMixin],
+  mixins: [uidMixin, themeMixin, carbonPrefixMixin],
   components: { Calendar16, CvWrapper },
   props: {
-    dateLabel: String,
-    dateEndLabel: String,
+    dateLabel: { type: String, default: undefined },
+    dateEndLabel: { type: String, default: undefined },
     formItem: { type: Boolean, default: true },
     kind: {
       type: String,
@@ -120,7 +137,7 @@ export default {
       },
     },
     invalidMessage: { type: String, default: undefined },
-    value: [String, Object, Array],
+    value: [String, Object, Array, Date],
   },
   model: {
     prop: 'value',
@@ -128,8 +145,9 @@ export default {
   },
   data() {
     return {
-      dataValue: '',
+      dataValue: this.value,
       dataOptions: {},
+      isInvalid: false,
     };
   },
   watch: {
@@ -141,6 +159,7 @@ export default {
       } else {
         this.$refs.date.value = this.value;
       }
+      this.dataValue = this.value;
     },
     calOptions() {
       this.initFlatpickr();
@@ -148,16 +167,13 @@ export default {
     kind() {
       this.initFlatpickr();
     },
+    invalidMessage() {
+      this.checkSlots();
+    },
   },
   computed: {
-    kindClasses() {
-      if (this.kind === 'short') {
-        return 'bx--date-picker--short bx--date-picker--simple';
-      }
-      return `bx--date-picker--${this.kind}`;
-    },
     getDateLabel() {
-      if (this.dateLabel && this.dateLabel.length) {
+      if (this.dateLabel !== undefined) {
         return this.dateLabel;
       } else {
         if (this.isRange) {
@@ -168,7 +184,7 @@ export default {
       }
     },
     getDateEndLabel() {
-      if (this.dateEndLabel && this.dateEndLabel.length) {
+      if (this.dateEndLabel !== undefined) {
         return this.dateEndLabel;
       } else {
         if (this.isRange) {
@@ -178,13 +194,6 @@ export default {
         }
       }
     },
-    isInvalid() {
-      return (
-        this.$slots['invalid-message'] !== undefined ||
-        (this.invalidMessage && this.invalidMessage.length) ||
-        (this.invalidDateMessage && this.invalidDateMessage.length)
-      );
-    },
     isRange() {
       return this.kind === 'range';
     },
@@ -193,6 +202,14 @@ export default {
     },
   },
   methods: {
+    checkSlots() {
+      // NOTE: this.$slots is not reactive so needs to be managed on updated
+      this.isInvalid = !!(
+        this.$slots['invalid-message'] ||
+        (this.invalidMessage && this.invalidMessage.length) ||
+        (this.invalidDateMessage && this.invalidDateMessage.length)
+      );
+    },
     initFlatpickr() {
       if (['single', 'range'].includes(this.kind)) {
         // no need to call set value as it's done through getOptions
@@ -208,22 +225,42 @@ export default {
       _options.onReady = this.onCalReady;
 
       // prefer value if set
-      if (this.value) {
+      if (this.dataValue) {
         if (this.isRange) {
-          _options.defaultDate = [this.value.startDate, this.value.endDate];
+          _options.defaultDate = [this.dataValue.startDate, this.dataValue.endDate];
         } else {
-          _options.defaultDate = this.value;
+          _options.defaultDate = this.dataValue;
         }
       }
       // _options.onValueUpdate = this.onChange;
 
-      if (this.isRange) {
-        // let curDate = new Date();
-        // let anotherDate = new Date();
-        // anotherDate = anotherDate.setDate(anotherDate.getDate() + 6);
-        // _options.defaultDate = [curDate, anotherDate];
-        _options.plugins = [new RangePlugin({ input: this.$refs.todate, position: 'left' })];
-      }
+      _options.plugins = [
+        this.isRange
+          ? new carbonFlatpickrRangePlugin({
+              input: this.$refs.todate,
+            })
+          : () => {},
+        carbonFlatpickrMonthSelectPlugin({
+          selectorFlatpickrMonthYearContainer: '.flatpickr-current-month',
+          selectorFlatpickrYearContainer: '.numInputWrapper',
+          selectorFlatpickrCurrentMonth: '.cur-month',
+          classFlatpickrCurrentMonth: 'cur-month',
+        }),
+        carbonFlatpickrFixEventsPlugin({
+          inputFrom: this.$refs.date,
+          inputTo: this.$refs.todate,
+        }),
+      ];
+      _options.nextArrow = `
+      <svg width="16px" height="16px" viewBox="0 0 16 16">
+        <polygon points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3 "/>
+        <rect width="16" height="16" style="fill:none" />
+      </svg>`;
+      _options.prevArrow = `
+      <svg width="16px" height="16px" viewBox="0 0 16 16">
+        <polygon points="5,8 10,3 10.7,3.7 6.4,8 10.7,12.3 10,13 "/>
+        <rect width="16" height="16" style="fill:none" />
+      </svg>`;
 
       return _options;
     },
@@ -236,27 +273,32 @@ export default {
           return val || '';
         }
       };
-      if (this.value.startDate) {
-        firstDate = dateToString(this.value.startDate);
-        secondDate = dateToString(this.value.endDate);
-      } else {
-        firstDate = dateToString(this.value);
+
+      if (this.dataValue) {
+        if (this.isRange) {
+          firstDate = dateToString(this.dataValue.startDate);
+          secondDate = dateToString(this.dataValue.endDate);
+        } else {
+          firstDate = dateToString(this.dataValue);
+        }
       }
 
       if (this.isRange) {
         if (firstDate !== this.$refs.date.value || secondDate !== this.$refs.todate.value) {
-          this.$emit('change', {
+          this.dataValue = {
             startDate: this.$refs.date.value,
             endDate: this.$refs.todate.value,
-          });
+          };
+          this.$emit('change', this.dataValue);
         }
       } else {
         if (firstDate !== this.$refs.date.value) {
-          this.$emit('change', this.$refs.date.value);
+          this.dataValue = this.$refs.date.value;
+          this.$emit('change', this.dataValue);
 
           if (this.$listeners['simpleChange'] && process.env.NODE_ENV === 'development') {
             console.warn('CvDatePicker: simple change event deprecated in favour of change.');
-            this.$emit('simpleChange', this.$refs.date.value);
+            this.$emit('simpleChange', this.dataValue);
           }
         }
       }
@@ -264,14 +306,14 @@ export default {
     onCalReady(selectedDates, dateString, instance) {
       const calendarContainer = instance.calendarContainer;
       const options = {
-        classCalendarContainer: `bx--date-picker__calendar`,
-        classMonth: `bx--date-picker__month`,
-        classWeekdays: `bx--date-picker__weekdays`,
-        classDays: `bx--date-picker__days`,
-        classWeekday: `bx--date-picker__weekday`,
-        classDay: `bx--date-picker__day`,
-        classFocused: `bx--focused`,
-        classVisuallyHidden: `bx--visually-hidden`,
+        classCalendarContainer: `${this.carbonPrefix}--date-picker__calendar`,
+        classMonth: `${this.carbonPrefix}--date-picker__month`,
+        classWeekdays: `${this.carbonPrefix}--date-picker__weekdays`,
+        classDays: `${this.carbonPrefix}--date-picker__days`,
+        classWeekday: `${this.carbonPrefix}--date-picker__weekday`,
+        classDay: `${this.carbonPrefix}--date-picker__day`,
+        classFocused: `${this.carbonPrefix}--focused`,
+        classVisuallyHidden: `${this.carbonPrefix}--visually-hidden`,
       };
 
       if (calendarContainer) {
@@ -300,6 +342,7 @@ export default {
   },
   mounted() {
     this.initFlatpickr();
+    this.checkSlots();
     // this.cal.setDate([Date.now(), Date.now()]);
     // setTimeout(() => {
     //   let curDate = new Date();
@@ -307,6 +350,9 @@ export default {
     //   anotherDate = anotherDate.setDate(anotherDate.getDate() + 16);
     //   this.cal.setDate([curDate, anotherDate], true);
     // }, 2000);
+  },
+  updated() {
+    this.checkSlots();
   },
   beforeDestroy() {
     if (this.cal) {

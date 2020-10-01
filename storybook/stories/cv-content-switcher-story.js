@@ -6,13 +6,13 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvContentSwitcherNotesMD from '@carbon/vue/src/components/cv-content-switcher/cv-content-switcher-notes.md';
-import { CvContentSwitcher, CvContentSwitcherButton, CvContentSwitcherContent } from '@carbon/vue/src';
+import CvContentSwitcherNotesMD from '../../packages/core/src/components/cv-content-switcher/cv-content-switcher-notes.md';
+import { CvContentSwitcher, CvContentSwitcherButton, CvContentSwitcherContent } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvContentSwitcher', module);
-const storiesExperimental = storiesOf('Experimental/CvContentSwitcher', module);
+// const storiesExperimental = storiesOf('Experimental/CvContentSwitcher', module);
 
-const exampleIconPath = require('@carbon/vue/src/assets/images/example-icons.svg');
+const exampleIconPath = require('../../packages/core/src/assets/images/example-icons.svg');
 import AddFilled16 from '@carbon/icons-vue/es/add--filled/16';
 
 const preKnobs = {
@@ -161,7 +161,7 @@ for (const story of storySet) {
   <cv-content-switcher${settings.group.attr}>
     <cv-content-switcher-button content-selector=".content-1" :selected="isSelected(0)" ${settings.group.icon}>Button Name 1</cv-content-switcher-button>
     <cv-content-switcher-button content-selector=".content-2" :selected="isSelected(1)" ${settings.group.icon}>Button Name 2</cv-content-switcher-button>
-    <cv-content-switcher-button content-selector=".content-3" :selected="isSelected(2)" v-if="toggle3" ${settings.group.icon}>Button Name 3</cv-content-switcher-button>
+    <cv-content-switcher-button content-selector=".content-3" :selected="isSelected(2)" v-if="toggle3" ${settings.group.attr3} ${settings.group.icon}>Button Name 3</cv-content-switcher-button>
   </cv-content-switcher>
 
   <section style="margin: 10px 0;">

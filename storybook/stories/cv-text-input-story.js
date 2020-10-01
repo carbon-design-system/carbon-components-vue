@@ -5,12 +5,13 @@ import { action } from '@storybook/addon-actions';
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
+import TimerButton from '../_storybook/components/timer-button';
 
-import CvTextInputNotesMD from '@carbon/vue/src/components/cv-text-input/cv-text-input-notes.md';
-import { CvTextInput } from '@carbon/vue/src';
+import CvTextInputNotesMD from '../../packages/core/src/components/cv-text-input/cv-text-input-notes.md';
+import { CvTextInput } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvTextInput', module);
-const storiesExperimental = storiesOf('Experimental/CvTextInput', module);
+// const storiesExperimental = storiesOf('Experimental/CvTextInput', module);
 
 const preKnobs = {
   theme: {
@@ -134,6 +135,7 @@ for (const story of storySet) {
       const templateViewString = `
     <sv-template-view
       sv-margin
+      ref="templateView"
       :sv-alt-back="this.$options.propsData.theme !== 'light'"
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
@@ -143,6 +145,7 @@ for (const story of storySet) {
             <input type="text" v-model="modelValue" />
           </label>
         </div>
+      <TimerButton @timer-start="doStart" @timer-end="doEnd" label="Call focus() method" active-label-prefix="Call blur() method in" />
       </template>
     </sv-template-view>
   `;
@@ -153,11 +156,19 @@ for (const story of storySet) {
             modelValue: 'initial value',
           };
         },
-        components: { CvTextInput, SvTemplateView },
+        components: { CvTextInput, SvTemplateView, TimerButton },
         template: templateViewString,
         props: settings.props,
         methods: {
           onInput: action('cv-text-input - input event'),
+          doStart() {
+            this.$nextTick(() => {
+              this.$refs.templateView.$slots.component[0].componentInstance.focus();
+            });
+          },
+          doEnd() {
+            this.$refs.templateView.$slots.component[0].componentInstance.blur();
+          },
         },
       };
     },

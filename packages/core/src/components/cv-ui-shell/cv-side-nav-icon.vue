@@ -1,12 +1,14 @@
 <template>
-  <div class="bx--side-nav__icon" :class="{ 'bx--side-nav__icon--small': small }">
+  <div :class="[`${carbonPrefix}--side-nav__icon`, { [`${carbonPrefix}--side-nav__icon--small`]: small }]">
     <slot />
   </div>
 </template>
 
 <script>
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 export default {
   name: 'CvSideNavIcon',
+  mixins: [carbonPrefixMixin],
   props: {
     small: Boolean,
   },

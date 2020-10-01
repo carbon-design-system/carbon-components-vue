@@ -13,12 +13,14 @@
   <li
     data-option
     :data-value="value"
-    class="cv-dropdown-item bx--dropdown-item"
-    :class="{ ' bx--list-box__menu-item--active bx--list-box__menu-item--highlighted': internalSelected }"
+    :class="[
+      `cv-dropdown-item ${carbonPrefix}--dropdown-item`,
+      { [`${carbonPrefix}--dropdown--selected`]: internalSelected },
+    ]"
   >
     <a
       :aria-checked="internalSelected"
-      class="bx--dropdown-link"
+      :class="`${carbonPrefix}--dropdown-link`"
       href="javascript:void(0)"
       ref="link"
       role="menuitemradio"
@@ -30,8 +32,10 @@
 </template>
 
 <script>
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 export default {
   name: 'CvDropdownItem',
+  mixins: [carbonPrefixMixin],
   props: {
     value: {
       type: String,

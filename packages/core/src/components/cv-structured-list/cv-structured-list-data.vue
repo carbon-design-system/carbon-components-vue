@@ -1,17 +1,21 @@
 <template>
   <div
-    class="cv-structured-list-data bx--structured-list-td"
-    :class="{
-      'bx--structured-list-content--nowrap': noWrap,
-    }"
+    :class="[
+      `cv-structured-list-data ${carbonPrefix}--structured-list-td`,
+      {
+        [`${carbonPrefix}--structured-list-content--nowrap`]: noWrap,
+      },
+    ]"
   >
     <slot></slot>
   </div>
 </template>
 
 <script>
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 export default {
   name: 'CvStructuredListData',
+  mixins: [carbonPrefixMixin],
   props: {
     noWrap: Boolean,
   },

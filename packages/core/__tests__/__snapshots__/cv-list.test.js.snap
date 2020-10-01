@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CvList should render correctly when nested and parent is ordered 1`] = `
+<ol class="cv-list bx--list--ordered">
+  <ol data-nested="true" class="cv-list bx--list--nested bx--list--ordered">
+    <li class="cv-list-item bx--list__item">test item</li>
+  </ol>
+</ol>
+`;
+
+exports[`CvList should render correctly when nested and parent is unordered 1`] = `
+<ul class="cv-list bx--list--unordered">
+  <ul data-nested="true" class="cv-list bx--list--nested bx--list--unordered">
+    <li class="cv-list-item bx--list__item">test item</li>
+  </ul>
+</ul>
+`;
+
+exports[`CvList should render correctly when ordered 1`] = `<ol class="cv-list bx--list--ordered"></ol>`;
+
+exports[`CvList should render correctly when unordered 1`] = `<ul class="cv-list bx--list--unordered"></ul>`;
+
+exports[`CvList should render correctly with slots 1`] = `
+<ul class="cv-list bx--list--unordered">
+  <li class="cv-list-item bx--list__item"></li>
+</ul>
+`;
+
+exports[`CvListItem should render correctly with slots 1`] = `
+<li class="cv-list-item bx--list__item">
+  <div class="slot class">slot content</div>
+</li>
+`;
+
+exports[`CvListItem should render correctly without slots 1`] = `<li class="cv-list-item bx--list__item"></li>`;

@@ -1,8 +1,11 @@
 <template>
-  <div class="bx--snippet bx--skeleton" :class="typeClass">
-    <div class="bx--snippet-container">
-      <span v-if="!multi" />
-      <span v-if="multi" />
+  <div
+    :class="
+      `${carbonPrefix}--snippet ${carbonPrefix}--skeleton ${carbonPrefix}--snippet--${multi ? 'multi' : 'single'}`
+    "
+  >
+    <div :class="`${carbonPrefix}--snippet-container`">
+      <span />
       <span v-if="multi" />
       <span v-if="multi" />
     </div>
@@ -10,15 +13,15 @@
 </template>
 
 <script>
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+
 export default {
   name: 'CvCodeSnippetSkeleton',
+  mixins: [carbonPrefixMixin],
   props: {
     kind: { type: String, default: 'oneline' },
   },
   computed: {
-    typeClass() {
-      return `bx--snippet--${this.multi ? 'multi' : 'single'}`;
-    },
     multi() {
       return this.kind === 'multiline';
     },

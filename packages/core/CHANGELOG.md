@@ -1,12 +1,394 @@
 # Changelog
 
+## 2.34.0-canary.0
+
+fix: use of v-slot syntax not visible in beforeUpdate lifecycle method switched to updated.
+
+## 2.33.0
+
+Promote canary
+
+## 2.33.0-canary.0
+
+fix: dropdown click outside - issue #1004 was still causing problems which a directive seems more reliable for.
+
+## 2.32.0
+
+Promote canary
+
+## 2.32.0-canary.0
+
+feat: use of uidMixin without id use (add to top level element)
+fix: aria label for expanding row button (expanded and collapsed)
+fix: remove event listener from dropdown in beforeDestroy
+
+## 2.31.1
+
+fix: dropdown click closing list on firefox and safari (caused by button not getting focus on click)
+
+## 2.31.0
+
+fix: dropdown in darker themes
+chore: add theme switching to stories
+
+## 2.31.0-canary.0
+
+fix: Dropdown focus on firefox (and any browser where click does not focus on button)
+
+## 2.30.2
+
+chore: remove empty folder (#984)
+feat: Added items prop to Cv-Dropdown (#982)
+
+## 2.30.1
+
+fix: dropdown clearing of value (#975)
+chore(deps): bump elliptic from 6.5.2 to 6.5.3 in /packages/core (#972)
+fix: progress step carbonPrefix (#974)
+fix: ie11 svg class usage (#973)
+
+## 2.30.0
+
+- fix: empty space in combo and multi
+- feat: add focus and blur methods to numerous components
+
+## 2.30.0-canary.1
+
+- fix snapshots
+
+## 2.30.0-canary.0
+
+- feat: add kind 'button' to file upload component.
+- chore: update inputs to 10.16.0 most noticably by moving helper text below the input
+- fix: Multiselect filter tag usage (causing validator warning)
+- fix: Combobox and multiselect user filter for non-existent item
+
+## 2.29.0
+
+- feat: Includes use of coded prefix
+- feat: Adds 24 hour support to time picker.
+
+## 2.29.0-canary.0
+
+- chore: Replace use of the 'bx' prefix with the prefix in carbon components everywhere. This was quite an extensive change. It is more than possible one or two errors may have crept in. A full weeks Canary is likely.
+
+## 2.28.0
+
+- chore: added carbonPrefix to inline-loading, link, number input, breadcrumb and checkbox
+- fix: combobox typoe v-bind="$attr" -> v-bind="$attrs"
+- fix: add \$listeners to CvForm to allow @submit
+- fix: return focus on dropdown to dropdown component after item click
+- feat: add focus methods to CvDropdown, CvTextInput, CvTextArea
+- fix: improvve SVG icon support in buttons, now possible to specify component (e.g. @carbon/icons-vue), SVG path, SVG symbol path or raw SVG. NOTE: Until SVG2 using SVG path does not style.
+- fix: aria-hidden, aria-selected and aria-expanded false values. These do not default to false on undefined. Instead undefined means not applicable, false as a result implies true is possible.
+
+## 2.27.1
+
+- fix: lower node requirement to 10
+- chore: make accordion class prefix use carbon prefix
+
+## 2.27.0
+
+Release previuos canarys
+
+## 2.27.0-canary-2
+
+- chore: fix aria label on template view
+- fix: table skeleton appearance
+- fix: dropdown aria warning with no label
+- feat: add table oveflow options
+
+## 2.27.0-canary.1
+
+- Fix combobox disable to fully disable
+- Fix dropdown disable to fully disable
+- Fix tag filter disable to fully disable
+
+## 2.27.0-canary.0
+
+- Feat: Allow the number of items on page to be set for pagination seperately from page size
+- Fix: Checkbox labels in data table.
+
+## 2.26.0
+
+- Fix animation issues in data table and accordion
+- Fix combo box expansion.
+- Release slotted header updates
+
+## 2.26.0-canary.0
+
+- Feat: Add slotted headings to data table## 2.25.0
+
+- Fix: tooltip on icon only button
+- Feat: Add disabled attributes for forwards and backwards pagination buttons.
+
+## 2.25.0-canary.0
+
+### Chore
+
+- Update to Carbon 10.11.2
+- Update to node 12
+- Update other dependencies
+
+## 2.24.1
+
+### Fix
+
+Dropdown value presentation
+
+## 2.24.0
+
+##£ Feat
+
+- Left and right options added to cv-tooltip
+
+### Fix
+
+- CvDropdown needed multiple tab presses to move past #868
+- CircleCI deployment fix
+
+### Chore
+
+- Warn on duplicate IDs in table row and tab
+- Dependency bot bumps
+- Other dependency version bumps
+- Update documentation on use of expanded/isExpanded in table rows
+
+## 2.23.2
+
+Publis canary fixes as listed
+
+## 2.23.2-canary.1
+
+### Fix
+
+- CvContentSwitcher adds tablist to container #849
+
+## 2.23.2-canary.0
+
+### Fix
+
+- CvDropdown placeholder updates
+- CvContentSwitcher accessibility violation #849
+
+### Chore
+
+- Removed spurious 'await' usage
+
+## 2.23.1
+
+Roll up of canary releases.
+
+## 2.23.1-canary.2
+
+## Feat
+
+- Add hideLabel property to CvCheckbox and raised bug relating to the shape of the component https://github.com/carbon-design-system/carbon/issues/5461
+
+## Fix
+
+- UIShell fix ids for controlled panels
+- Overflow menu tooltip postion on IE11
+- Interactive menu tooltip position on IE11
+- Missing aria-label on CvDataTable batch action checkbox (aria-label-for-batch-checkbox)
+
+## Chore
+
+- Update package dependencies
+
+## 2.23.0
+
+### Fix
+
+- Data table heading styles when sortable is used.
+
+## 2.23.0-canary.0
+
+### Feat
+
+- Add change event to accordion on open close through UI. Show in story how to use to force single open.
+
+### Fix
+
+- Validator state checks in inline loadeing (allow case insensitive)
+- CvSelect event usage in CvTimePicker and CvPagination changed to 'chagne' event to support IE 11.
+
+## 2.22.0
+
+### Fix
+
+- Removed deprecation message when using size instead of small button property
+
+## 2.22.0-canary.1 (feb 4th 2020)
+
+### Feat
+
+- Mobile number input version
+- Expanded property added to UIShell sidenav menus
+-
+
+### Fix
+
+- Number input tests
+- Input event emit from CvNumberInput on use of up down buttons
+- Add missing closeAriaLabel property to CvModal
+
+### Chore
+
+- Copy button position is stories
+- FavIcon in storybook
+- Linter warnings on story source loading
+- CI messages
+
+## 2.22.0-canary.0 (jan 29th 2020)
+
+### Chore
+
+- move to Vue CLI 4
+- Fix node engine version
+- Ensure CI Check run before deploying storybook
+
+### Fix
+
+- Linter warnings
+
+## 2.21.0 (jan 24th 2020)
+
+### fix
+
+- Error icon used in inline-loading
+- Toast notification notes typo
+
+## 2.21.0-canary.0 (jan 21st 2020)
+
+### feat
+
+- Add size variations to CvModal
+- Add hide selected option to CvDropDown.
+- Make title only CvModal possible
+- Add container option to CvTabs
+- Update CvTag styling to 10.9
+- Update CvSearch size options
+
+### fix
+
+- Tab behaviour when adding and removing tabs when selecting a tab immediately after
+
+## 2.20.1 (jan 16th 2020)
+
+- fix: Disable number input up down buttons when component disabled
+
+## 2.20.1-canary.3 (jan 16th 2020)
+
+- fix: Merge missing commits from last release
+
+## 2.20.1-canary.2 (jan 16th 2020)
+
+### fix
+
+- Reverted to using stepUp/stepDOwn input methods for number input after checking IE11 support.
+- Initial value of date picker was not being set
+
+## 2.20.1-canary.1 (jan 10th 2020)
+
+### fix
+
+- Decimal number edits e.g. 10.001 with step 001. Using the keyboard to delete .001 caused .000 to be reapplied.
+
+## 2.20.1-canary.0 (jan 3rd 2020)
+
+### fix
+
+- Possible IE11 fix for colspan > 1000 defaulting to 1
+- Loading overlay fix
+
+## 2.20.0 (Dec 16th 2019)
+
+### fix
+
+- Prevent double event on date change
+
+## 2.20.0-canary.2 (Dec 13th 2019)
+
+### Feat
+
+- Add side nav rail feature
+- Add support for light cv-tile (needs Carbon > 10.7.4)
+- Add button set
+
+### Fix
+
+- Fixed some typos (requried -> required)
+- Fix date picker change event error
+
+## 2.20.0-canary.1 (Dec 6th 2019)
+
+### Feat
+
+- Update to carbon-components 10.7.4 DOM
+- Add edning state to CvInlineLoader
+- Make individual columns sortable in CvDataTable
+- Router link object usage (Location)
+- Additional tests
+  - CvInlineLoader
+  - CvInlineNotification
+  - CvToastNotification
+  - CvTextInput
+  - CvList
+  - CvLoading
+
+### Chore
+
+- Welcome page updates
+
+### Fix
+
+- Use internal pagination bind property
+- IE11 missing input event (use change)
+- icon use warning in toast notification
+- SVG ClassList missing IE and pre canary Edge
+
+## 2.20.0-canary.0 (Nov 21th 2019)
+
+### Feat
+
+- Add decimal ability to number input.
+
+### Fix
+
+- Fix CvIconButton tooltip
+
+## 2.19.0 (Nov 19th 2019)
+
+### Chore
+
+- CvOverflowMenu correct html to include menu-item option-content span
+
+## 2.19.0-canary.1 (Nov 18th 2019)
+
+### Feat
+
+- CvToggleSkeleton
+
+### Fix
+
+- Slot check reactivyt (accross 12 components with helperText and invalidMessage)
+- CvCombobox placeholder
+- CvMultiSelect filter clear event
+- CvMultiSelect expand / close when clicking chevron
+- CvCombobox auto-filter true at startup presenting empty list
+
+### Chore
+
+- CvLink tests
+- CvTextArea tests
+- Restored storybook version to keep package.json in sync
+
 ## 2.19.0-canary.0 (Nov 12th 2019)
 
 ### Chore
 
 - Change CvTabs to use same HTML as core carbon.
-
-# Changelog
 
 ## 2.18.0 (Nov 11th 2019)
 

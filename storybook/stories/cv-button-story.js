@@ -6,12 +6,15 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvButtonNotesMD from '@carbon/vue/src/components/cv-button/cv-button-notes.md';
-import { CvButton, CvIconButton, CvButtonSkeleton } from '@carbon/vue/src';
+import CvButtonNotesMD from '../../packages/core/src/components/cv-button/cv-button-notes.md';
+import { CvButton, CvIconButton, CvButtonSkeleton, CvButtonSet } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvButton', module);
-const storiesExperimental = storiesOf('Experimental/CvButton', module);
-const exampleIconPath = require('@carbon/vue/src/assets/images/example-icons.svg');
+// const storiesExperimental = storiesOf('Experimental/CvButton', module);
+import exampleIconSvg from '../../packages/core/src/assets/images/example-icon-svg.js';
+const exampleIconSvgString = exampleIconSvg.exampleSvgString;
+import exampleIconPathSymbol from '../../packages/core/src/assets/images/example-icons.svg';
+import exampleIconPathSvg from '../../packages/core/src/assets/images/example-icon.svg';
 import AddFilled16 from '@carbon/icons-vue/es/add--filled/16';
 
 let preKnobs = {
@@ -117,21 +120,41 @@ let preKnobs = {
 let variants = [
   {
     name: 'default',
-    excludes: ['iconAlways'],
+    excludes: ['iconAlways', 'tipPosition', 'tipAlignment', 'label'],
   },
   {
-    name: 'icon as path',
-    excludes: ['size', 'disabled', 'icon', 'iconHref', 'iconAlways'],
+    name: 'icon as SVG path',
+    excludes: ['size', 'disabled', 'icon', 'iconHref', 'iconAlways', 'tipPosition', 'tipAlignment', 'label'],
     extra: {
       icon: {
         group: 'attr',
-        value: `icon="${exampleIconPath}#icon--add--solid"`,
+        value: `icon="${exampleIconPathSvg}"`,
+      },
+    },
+  },
+  {
+    name: 'icon as SVG symbol path',
+    excludes: ['size', 'disabled', 'icon', 'iconHref', 'iconAlways', 'tipPosition', 'tipAlignment', 'label'],
+    extra: {
+      icon: {
+        group: 'attr',
+        value: `icon="${exampleIconPathSymbol}#icon--add--solid"`,
+      },
+    },
+  },
+  {
+    name: 'icon as SVG',
+    excludes: ['size', 'disabled', 'icon', 'iconHref', 'iconAlways', 'tipPosition', 'tipAlignment', 'label'],
+    extra: {
+      icon: {
+        group: 'attr',
+        value: `:icon="exampleIconSvgString"`,
       },
     },
   },
   {
     name: 'minimal',
-    excludes: ['size', 'disabled', 'icon', 'iconAlways'],
+    excludes: ['size', 'disabled', 'icon', 'iconAlways', 'tipPosition', 'tipAlignment', 'label'],
   },
 ];
 
@@ -157,6 +180,12 @@ for (const story of storySet) {
         sv-margin
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>
+        <template slot="other">
+          <p>NOTE: Until SVG2 using a non-symbol SVG path with use does not work. Using img tags has styling issues.</p>
+          <br />
+          <p>Svg String</p>
+          <p v-if="exampleIconSvgString" v-text="exampleIconSvgString" />
+        </template>
       </sv-template-view>
     `;
 
@@ -168,6 +197,9 @@ for (const story of storySet) {
         },
         template: templateViewString,
         props: settings.props,
+        data() {
+          return { exampleIconSvgString: story.name === 'icon as SVG' ? exampleIconSvgString : '' };
+        },
       };
     },
     {
@@ -203,6 +235,9 @@ for (const story of storySet) {
         sv-margin
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>
+        <template slot="other">
+          <p>NOTE: Until SVG2 using a non-symbol SVG path with use does not work. Using img tags has styling issues.</p>
+        </template>
       </sv-template-view>
     `;
 
@@ -277,3 +312,31 @@ for (const story of storySet) {
     }
   );
 }
+
+storiesDefault.add(
+  'button-set',
+  () => {
+    const templateString = `<cv-button-set>
+  <cv-button kind="primary">button 1</cv-button>
+  <cv-button kind="secondary">button 2</cv-button>
+  <cv-button kind="danger">button 3</cv-button>
+</cv-button-set>
+  `;
+
+    const templateViewString = `
+  <sv-template-view
+    sv-margin
+    sv-source='${templateString.trim()}'>
+    <template slot="component">${templateString}</template>
+  </sv-template-view>
+`;
+
+    return {
+      components: { CvButtonSet, CvButton, SvTemplateView },
+      template: templateViewString,
+    };
+  },
+  {
+    notes: { markdown: CvButtonNotesMD },
+  }
+);

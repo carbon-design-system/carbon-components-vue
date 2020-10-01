@@ -1,12 +1,12 @@
 <template>
-  <div class="cv-pagination bx--pagination" data-pagination>
-    <div class="bx--pagination__left">
+  <div :class="`cv-pagination ${carbonPrefix}--pagination`" data-pagination>
+    <div :class="`${carbonPrefix}--pagination__left`">
       <cv-select
-        class="bx--select__item-count"
+        :class="`${carbonPrefix}--select__item-count`"
         :label="`${pageSizesLabel}`"
         inline
         ref="pageSizeSelect"
-        @input="onPageSizeChange"
+        @change="onPageSizeChange"
         :value="`${pageSizeValue}`"
       >
         <cv-select-option
@@ -17,22 +17,23 @@
         >
       </cv-select>
 
-      <span class="bx--pagination__text">
+      <span :class="`${carbonPrefix}--pagination__text`">
         <span data-displayed-item-range>
           <slot name="range-text" v-bind:scope="rangeProps">{{ rangeText }}</slot>
         </span>
       </span>
     </div>
 
-    <div class="bx--pagination__right">
+    <div :class="`${carbonPrefix}--pagination__right`">
       <cv-select
-        class="bx--select__page-number"
+        :class="`${carbonPrefix}--select__page-number`"
         :label="`${pageNumberLabel}:`"
         inline
         hideLabel
         ref="pageSelect"
-        @input="onPageChange"
+        @change="onPageChange"
         :value="`${pageValue}`"
+        v-if="numberOfItems !== Infinity"
       >
         <cv-select-option
           v-for="pageNumber in pages"
@@ -42,32 +43,36 @@
           >{{ pageNumber }}</cv-select-option
         >
       </cv-select>
-      <span class="bx--pagination__text">
+      <span :class="`${carbonPrefix}--pagination__text`">
         <slot name="of-n-pages" v-bind:scope="ofNPagesProps">{{ pageOfPages }}</slot>
       </span>
 
       <button
         type="button"
-        class="bx--pagination__button bx--pagination__button--backward"
+        :class="[
+          `${carbonPrefix}--pagination__button ${carbonPrefix}--pagination__button--backward`,
+          { [`${carbonPrefix}--pagination__button--no-index`]: noWayBack },
+        ]"
         data-page-backward
         :aria-label="backwardText"
         @click="onPrevPage"
         :disabled="noWayBack"
-        :class="{ 'bx--pagination__button--no-index': noWayBack }"
       >
-        <CaretLeft16 class="bx--pagination__button-icon" />
+        <CaretLeft16 :class="`${carbonPrefix}--pagination__button-icon`" />
       </button>
 
       <button
         type="button"
-        class="bx--pagination__button bx--pagination__button--forward"
+        :class="[
+          `${carbonPrefix}--pagination__button ${carbonPrefix}--pagination__button--forward`,
+          { [`${carbonPrefix}--pagination__button--no-index`]: noWayForward },
+        ]"
         data-page-forward
         :aria-label="forwardText"
         @click="onNextPage"
         :disabled="noWayForward"
-        :class="{ 'bx--pagination__button--no-index': noWayForward }"
       >
-        <CaretRight16 class="bx--pagination__button-icon" />
+        <CaretRight16 :class="`${carbonPrefix}--pagination__button-icon`" />
       </button>
     </div>
   </div>
@@ -78,6 +83,7 @@ import CvSelect from '../cv-select/cv-select';
 import CvSelectOption from '../cv-select/cv-select-option';
 import CaretLeft16 from '@carbon/icons-vue/es/caret--left/16';
 import CaretRight16 from '@carbon/icons-vue/es/caret--right/16';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 const newPageValue = (page, lastPage) => {
   let result = 1;
@@ -121,13 +127,17 @@ const newFirstItem = (pageValue, pageSizeValue) => 1 + (pageValue - 1) * pageSiz
 
 export default {
   name: 'CvPagination',
+  mixins: [carbonPrefixMixin],
   components: { CvSelect, CvSelectOption, CaretLeft16, CaretRight16 },
   props: {
+    backwardsButtonDisabled: Boolean,
+    forwardsButtonDisabled: Boolean,
     backwardText: { type: String, default: 'Prev page' },
     forwardText: { type: String, default: 'Next page' },
     pageNumberLabel: { type: String, default: 'Page number:' },
     pageSizesLabel: { type: String, default: 'Items per page:' },
     numberOfItems: { type: Number, default: Infinity },
+    actualItemsOnPage: { type: Number, default: Infinity },
     page: Number,
     pageSizes: { type: Array, default: () => [10, 20, 30, 40, 50] },
   },
@@ -161,7 +171,9 @@ export default {
       this.pageValue = newPageValue(this.page, this.pageCount);
       this.firstItem = newFirstItem(this.pageValue, this.pageSizeValue);
     },
-    pageSizes() {
+    pageSizes(a, b) {
+      if (!a.some(item => !b.includes(item))) return; // /possible issue when pageSizes defined in DOM
+
       this.pageSizeValue = newPageSizeValue(this.pageSizes);
       this.pageCount = newPageCount(this.numberOfItems, this.pageSizeValue);
       this.pages = newPagesArray(this.pageCount);
@@ -172,10 +184,10 @@ export default {
   },
   computed: {
     noWayBack() {
-      return this.pageValue === 1;
+      return this.backwardsButtonDisabled || this.pageValue === 1;
     },
     noWayForward() {
-      return this.pageValue === this.pageCount;
+      return this.forwardsButtonDisabled || this.pageValue === this.pageCount;
     },
     ofNPagesProps() {
       return {
@@ -189,12 +201,15 @@ export default {
       if (items !== Infinity) {
         return `of ${pages} pages`;
       }
-      return '';
+      return `Page ${this.pageValue}`;
     },
     rangeProps() {
       return {
         start: Math.min(this.firstItem, this.numberOfItems),
-        end: Math.min(this.firstItem + parseInt(this.pageSizeValue, 10) - 1, this.numberOfItems),
+        end: Math.min(
+          this.firstItem + Math.min(parseInt(this.pageSizeValue, 10), this.actualItemsOnPage) - 1,
+          this.numberOfItems
+        ),
         items: this.numberOfItems,
       };
     },

@@ -1,28 +1,27 @@
 <template>
   <div :style="tableStyle" class="cv-data-table">
-    <div class="bx--data-table-container">
-      <div v-if="hasTableHeader" class="bx--data-table-header">
-        <h4 class="bx--data-table-header__title" v-if="title">{{ title }}</h4>
-        <p v-if="isHelper" class="bx--data-table-header__description">
+    <div :class="`${carbonPrefix}--data-table-container`">
+      <div v-if="hasTableHeader" :class="`${carbonPrefix}--data-table-header`">
+        <h4 :class="`${carbonPrefix}--data-table-header__title`" v-if="title">{{ title }}</h4>
+        <p v-if="isHelper" :class="`${carbonPrefix}--data-table-header__description`">
           <slot name="helper-text">{{ helperText }}</slot>
         </p>
       </div>
 
-      <section v-if="hasToolbar" class="bx--table-toolbar">
-        <div v-if="batchActive" :style="{ minHeight: '48px', maxWidth: '0' }" />
-
+      <section v-if="hasToolbar" :class="`${carbonPrefix}--table-toolbar`">
         <div
-          v-if="hasBatchActions"
-          class="bx--batch-actions"
-          :class="{ 'bx--batch-actions--active': batchActive }"
+          v-show="hasBatchActions"
+          :class="[`${carbonPrefix}--batch-actions`, { [`${carbonPrefix}--batch-actions--active`]: batchActive }]"
           :aria-label="actionBarAriaLabel"
         >
-          <div class="bx--action-list">
+          <div :class="`${carbonPrefix}--action-list`">
             <slot name="batch-actions" />
-            <cv-button class="bx--batch-summary__cancel" small @click="deselect">{{ batchCancelLabel }}</cv-button>
+            <cv-button :class="`${carbonPrefix}--batch-summary__cancel`" size="small" @click="deselect">{{
+              batchCancelLabel
+            }}</cv-button>
           </div>
-          <div class="bx--batch-summary">
-            <p class="bx--batch-summary__para">
+          <div :class="`${carbonPrefix}--batch-summary`">
+            <p :class="`${carbonPrefix}--batch-summary__para`">
               <span data-items-selected>
                 <slot name="items-selected" v-bind:scope="{ count: dataRowsSelected.length }"
                   >{{ dataRowsSelected.length }} items selected</slot
@@ -32,19 +31,19 @@
           </div>
         </div>
 
-        <div v-if="($slots.actions || $listeners.search) && !batchActive" class="bx--toolbar-content">
+        <div :class="`${carbonPrefix}--toolbar-content`">
           <div
             v-if="$listeners.search"
             :class="{
-              'bx--toolbar-search-container-active': searchActive || searchValue.length > 0,
-              'bx--toolbar-search-container-persistent': !expandingSearch,
-              'bx--toolbar-search-container-expandable': expandingSearch,
+              [`${carbonPrefix}--toolbar-search-container-active`]: searchActive || searchValue.length > 0,
+              [`${carbonPrefix}--toolbar-search-container-persistent`]: !expandingSearch,
+              [`${carbonPrefix}--toolbar-search-container-expandable`]: expandingSearch,
             }"
             ref="searchContainer"
           >
-            <div data-search class="bx--search bx--search--sm" role="search">
+            <div data-search :class="`${carbonPrefix}--search ${carbonPrefix}--search--sm`" role="search">
               <div
-                class="bx--search-magnifier"
+                :class="`${carbonPrefix}--search-magnifier`"
                 tabindex="0"
                 @click="checkSearchExpand(true)"
                 @keydown.enter.prevent="checkSearchExpand(true)"
@@ -53,11 +52,11 @@
                 @blur="checkSearchFocus"
                 ref="magnifier"
               >
-                <Search16 class="bx--toolbar-action__icon" />
+                <Search16 :class="`${carbonPrefix}--toolbar-action__icon`" />
               </div>
-              <label :for="uid" class="bx--label">{{ searchLabel }}</label>
+              <label :for="uid" :class="`${carbonPrefix}--label`">{{ searchLabel }}</label>
               <input
-                class="bx--search-input"
+                :class="`${carbonPrefix}--search-input`"
                 type="text"
                 :id="uid"
                 role="search"
@@ -70,8 +69,10 @@
                 @keydown.esc.prevent="checkSearchExpand(false)"
               />
               <button
-                class="bx--search-close"
-                :class="{ 'bx--search-close--hidden': !clearSearchVisible }"
+                :class="[
+                  `${carbonPrefix}--search-close`,
+                  { [`${carbonPrefix}--search-close--hidden`]: !clearSearchVisible },
+                ]"
                 :title="searchClearLabel"
                 :aria-label="searchClearLabel"
                 @click="onClearClick"
@@ -85,42 +86,56 @@
         </div>
       </section>
 
-      <table class="bx--data-table" :class="modifierClasses">
+      <table
+        :class="[
+          `${carbonPrefix}--data-table`,
+          {
+            [`${carbonPrefix}--data-table--${rowSize} `]: !(rowSize.length === 0 || rowSize === 'standard'),
+            [`${carbonPrefix}--data-table--zebra `]: zebra,
+            [`${carbonPrefix}--data-table--no-border `]: borderless,
+            [`${carbonPrefix}--skeleton `]: skeleton,
+            [`${carbonPrefix}--data-table--sort `]: isSortable,
+          },
+        ]"
+      >
         <thead>
           <tr>
             <th
               v-if="hasExpandables"
-              class="bx--table-expand"
+              :class="`${carbonPrefix}--table-expand`"
               :data-previous-value="dataExpandAll ? 'collapsed' : 'expanded'"
             >
               <button
                 v-if="hasExpandAll"
-                class="bx--table-expand__button"
+                :class="`${carbonPrefix}--table-expand__button`"
                 @click="toggleExpandAll"
                 type="button"
                 :aria-label="dataExpandAll ? collapseAllAriaLabel : expandAllAriaLabel"
               >
-                <ChevronRight16 class="bx--table-expand__svg" />
+                <ChevronRight16 :class="`${carbonPrefix}--table-expand__svg`" />
               </button>
             </th>
-            <th v-if="hasBatchActions" class="bx--table-column-checkbox">
+            <th v-if="hasBatchActions" :class="`${carbonPrefix}--table-column-checkbox`">
               <cv-checkbox
                 :form-item="false"
                 value="headingCheck"
                 v-model="headingChecked"
                 @change="onHeadingCheckChange"
+                :label="selectAllAriaLabel"
+                hideLabel
               />
             </th>
-            <cv-data-table-heading
-              v-for="(column, index) in dataColumns"
-              :key="`${index}:${column}`"
-              :heading="column.label ? column.label : column"
-              :sortable="sortable"
-              :order="column.order"
-              @sort="val => onSort(index, val)"
-              :style="headingStyle(index)"
-              :skeleton="skeleton"
-            />
+            <slot name="headings">
+              <cv-data-table-heading
+                v-for="(column, index) in columns"
+                :key="`${index}:${column}`"
+                :heading="columnHeading(column)"
+                :sortable="isColSortable(column)"
+                :order="column.order"
+                :heading-style="headingStyle(column)"
+                :skeleton="skeleton"
+              />
+            </slot>
             <th v-if="hasOverflowMenu"></th>
           </tr>
         </thead>
@@ -139,18 +154,18 @@
                 :key="`cell:${colIndex}:${rowIndex}`"
                 :style="dataStyle(colIndex)"
               >
-                <cv-wrapper :tag-type="skeleton && rowIndex < 1 ? 'span' : ''">{{ cell }}</cv-wrapper>
+                <cv-wrapper :tag-type="skeleton ? 'span' : ''">{{ cell }}</cv-wrapper>
               </cv-data-table-cell>
             </cv-data-table-row>
           </slot>
         </cv-wrapper>
       </table>
     </div>
-
     <cv-pagination
       v-if="pagination"
-      v-bind="pagination"
+      v-bind="internalPagination"
       :number-of-items="internalNumberOfItems"
+      :actual-items-on-page="this.registeredRows.length"
       @change="$emit('pagination', $event)"
     >
       <template v-slot:range-text="{ scope }">
@@ -165,7 +180,7 @@
 </template>
 
 <script>
-import CvDataTableHeading from './_cv-data-table-heading';
+import CvDataTableHeading from './cv-data-table-heading';
 import CvDataTableRow from './cv-data-table-row';
 import CvDataTableCell from './cv-data-table-cell';
 import CvButton from '../cv-button/cv-button';
@@ -176,6 +191,7 @@ import uidMixin from '../../mixins/uid-mixin';
 import Search16 from '@carbon/icons-vue/es/search/16';
 import Close16 from '@carbon/icons-vue/es/close/16';
 import ChevronRight16 from '@carbon/icons-vue/es/chevron--right/16';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvDataTable',
@@ -191,11 +207,12 @@ export default {
     Close16,
     ChevronRight16,
   },
-  mixins: [uidMixin],
+  mixins: [uidMixin, carbonPrefixMixin],
   props: {
     actionBarAriaLabel: { type: String, default: 'Table Action Bar' },
     collapseAllAriaLabel: { type: String, default: 'Collapse all rows' },
     expandAllAriaLabel: { type: String, default: 'Expand all rows' },
+    selectAllAriaLabel: { type: String, default: 'Select all rows' },
     autoWidth: Boolean,
     batchCancelLabel: { type: String, default: 'cancel' },
     borderless: Boolean,
@@ -214,8 +231,8 @@ export default {
     searchClearLabel: { type: String, default: 'Clear search' },
     sortable: Boolean,
     title: String,
-    columns: { type: Array, required: true },
-    data: { type: Array, requried: true },
+    columns: Array,
+    data: Array,
     zebra: Boolean,
     rowsSelected: { type: Array, default: () => [] },
     helperText: { type: String, default: undefined },
@@ -229,12 +246,10 @@ export default {
   },
   data() {
     return {
-      dataColumns: this.sortable
-        ? this.columns.map(item => ({
-            label: item.label ? item.label : item,
-            order: 'none',
-          }))
-        : this.columns,
+      hasBatchActions: false,
+      hasActions: false,
+      hasToolbar: false,
+      isHelper: false,
       batchActive: false,
       headingChecked: false,
       dataRowsSelected: this.rowsSelected,
@@ -242,16 +257,11 @@ export default {
       clearSearchVisible: false,
       searchActive: false,
       registeredRows: [],
+      registeredHeadings: [],
       dataExpandAll: false,
     };
   },
   watch: {
-    sortable() {
-      this.watchColumns();
-    },
-    columns() {
-      this.watchColumns();
-    },
     rowsSelected() {
       this.updateRowsSelected();
     },
@@ -260,20 +270,39 @@ export default {
     // add these on created otherwise cv:mounted is too late.
     this.$on('cv:mounted', srcComponent => this.onCvMount(srcComponent));
     this.$on('cv:beforeDestroy', srcComponent => this.onCvBeforeDestroy(srcComponent));
+    this.$on('cv:sort', (srcComponent, value) => this.onSort(srcComponent, value));
   },
   mounted() {
     this.updateRowsSelected();
+    this.checkSlots();
+  },
+  updated() {
+    this.checkSlots();
   },
   computed: {
-    hasBatchActions() {
-      return this.$slots['batch-actions'];
+    columnHeading() {
+      return col => {
+        if (typeof col === 'object') {
+          return col.label || '';
+        } else {
+          return col;
+        }
+      };
+    },
+    isSortable() {
+      // is any column sortable
+      return this.sortable || this.registeredHeadings.some(column => column.sortable);
+    },
+    isColSortable() {
+      return col => {
+        // is specific column or all sortable
+        return (col && col.sortable) || this.sortable;
+      };
     },
     hasTableHeader() {
       return this.title || this.isHelper;
     },
-    hasToolbar() {
-      return this.$slots.actions || this.$listeners.search || this.$slots['batch-actions'];
-    },
+
     hasExpandables() {
       return this.registeredRows.some(item => item.expandable);
     },
@@ -300,37 +329,54 @@ export default {
         return this.registeredRows.length;
       }
     },
-    modifierClasses() {
-      const prefix = 'bx--data-table--';
-      const sizeClass = this.rowSize.length === 0 || this.rowSize === 'standard' ? '' : `${prefix}${this.rowSize} `;
-      const zebraClass = this.zebra ? `${prefix}zebra ` : '';
-      const borderlessClass = this.borderless ? `${prefix}no-border ` : '';
-      const skeletonClass = this.skeleton ? `bx--skeleton` : '';
-      return `${sizeClass}${zebraClass}${borderlessClass}${skeletonClass}`.trim();
-    },
     headingStyle() {
-      return index => this.dataColumns[index].headingStyle;
+      return col => (typeof col === 'object' ? col.headingStyle : {});
     },
     dataStyle() {
-      return index => this.dataColumns[index].dataStyle;
+      return index => (this.columns && this.columns[index] && this.columns[index].dataStyle) || {};
     },
     selectedRows() {
       return this.dataRowsSelected;
     },
-    isHelper() {
-      return this.$slots['helper-text'] !== undefined || (this.helperText && this.helperText.length);
-    },
   },
   methods: {
-    onCvMount(row) {
-      this.registeredRows.push(row);
-      row.$on('cv:expanded-change', this.onCvExpandedChange);
-      this.updateSomeExpandingRows();
+    checkSlots() {
+      // NOTE: this.$slots is not reactive so needs to be managed on updated
+      this.hasBatchActions = !!this.$slots['batch-actions'];
+      this.hasActions = !!this.$slots.actions;
+      this.hasToolbar = !!(this.$slots.actions || this.$listeners.search || this.$slots['batch-actions']);
+      this.isHelper = !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
     },
-    onCvBeforeDestroy(row) {
-      const index = this.registeredRows.findIndex(item => row.uid === item.uid);
-      this.registeredRows.splice(index, 1);
-      this.updateSomeExpandingRows();
+    onCvMount(thing) {
+      if (thing.$_CvDataTableHeading) {
+        this.registeredHeadings = this.$children.filter(item => item.$_CvDataTableHeading);
+        const heading = thing;
+        if (this.registeredHeadings.filter(item => item.uid === heading.uid).length > 1) {
+          console.error(
+            `CvDataTable: Duplicate ID specified for CvDataTableHeading, this may cause issues. {id: ${heading.id}}`
+          );
+        }
+      } else {
+        const row = thing;
+        this.registeredRows.push(row);
+        if (this.registeredRows.filter(item => item.uid === row.uid).length > 1) {
+          console.error(
+            `CvDataTable: Duplicate ID specified for CvDataTableRow, this may cause issues. {id: ${row.id}, value: ${row.value}}`
+          );
+        }
+        row.$on('cv:expanded-change', this.onCvExpandedChange);
+        this.updateSomeExpandingRows();
+      }
+    },
+    onCvBeforeDestroy(thing) {
+      if (thing.$_CvDataTableHeading) {
+        this.registeredHeadings = this.$children.filter(item => item.$_CvDataTableHeading);
+      } else {
+        const row = thing;
+        const index = this.registeredRows.findIndex(item => row.uid === item.uid);
+        this.registeredRows.splice(index, 1);
+        this.updateSomeExpandingRows();
+      }
     },
     checkSearchFocus(ev) {
       if (!this.$refs.searchContainer.contains(ev.relatedTarget)) {
@@ -419,23 +465,21 @@ export default {
     onMenuItemClick(val) {
       this.$emit('overflow-menu-click', val);
     },
-    watchColumns() {
-      this.dataColumns = this.sortable
-        ? this.columns.map(item => ({
-            label: item.label ? item.label : item,
-            order: 'none',
-          }))
-        : this.columns;
-    },
     onSearch() {
       this.clearSearchVisible = this.searchValue.length > 0;
       this.$emit('search', this.searchValue);
     },
-    onSort(index, val) {
-      for (let column of this.dataColumns) {
-        column.order = 'none';
+    onSort(srcComponent, val) {
+      let index;
+      for (let colIndex in this.registeredHeadings) {
+        const column = this.registeredHeadings[colIndex];
+        if (column.uid === srcComponent.uid) {
+          column.internalOrder = val;
+          index = colIndex;
+        } else {
+          column.internalOrder = 'none';
+        }
       }
-      this.dataColumns[index].order = val;
       this.$emit('sort', { index, order: val });
     },
     updateSomeExpandingRows() {

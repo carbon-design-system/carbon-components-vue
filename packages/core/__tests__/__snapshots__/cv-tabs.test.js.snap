@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CvTab matches with disabled and selected 1`] = `<div id="an-id" role="tabpanel" aria-labelledby="an-id-link" class="cv-tab"></div>`;
+exports[`CvTab matches with disabled and selected 1`] = `<div id="an-id" role="tabpanel" aria-labelledby="an-id-link" aria-hidden="false" class="cv-tab"></div>`;
 
 exports[`CvTab matches with slotted content 1`] = `
 <div id="an-id" role="tabpanel" aria-labelledby="an-id-link" aria-hidden="true" hidden="hidden" class="cv-tab">
@@ -9,9 +9,11 @@ exports[`CvTab matches with slotted content 1`] = `
 `;
 
 exports[`CvTabs matches render 1`] = `
-<div class="cv-tabs">
+<div class="cv-tabs" style="width: 100%;">
   <div data-tabs="" role="navigation" class="cv-tab bx--tabs">
-    <div tabindex="0" class="bx--tabs-trigger"><a href="javascript:void(0)" tabindex="-1" class="bx--tabs-trigger-text"></a>
+    <div tabindex="0" class="bx--tabs-trigger"><a href="javascript:void(0)" tabindex="-1" class="bx--tabs-trigger-text">
+
+      </a>
       <chevron-down-glyph-stub></chevron-down-glyph-stub>
     </div>
     <ul role="tablist" class="bx--tabs__nav bx--tabs__nav--hidden"></ul>
@@ -21,9 +23,11 @@ exports[`CvTabs matches render 1`] = `
 `;
 
 exports[`CvTabs matches with slotted content 1`] = `
-<div class="cv-tabs">
+<div class="cv-tabs" style="width: 100%;">
   <div data-tabs="" role="navigation" class="cv-tab bx--tabs">
-    <div tabindex="0" class="bx--tabs-trigger"><a href="javascript:void(0)" tabindex="-1" class="bx--tabs-trigger-text"></a>
+    <div tabindex="0" class="bx--tabs-trigger"><a href="javascript:void(0)" tabindex="-1" class="bx--tabs-trigger-text">
+
+      </a>
       <chevron-down-glyph-stub></chevron-down-glyph-stub>
     </div>
     <ul role="tablist" class="bx--tabs__nav bx--tabs__nav--hidden"></ul>

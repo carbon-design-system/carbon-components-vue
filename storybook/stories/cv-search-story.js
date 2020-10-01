@@ -1,16 +1,17 @@
 import { storiesOf } from '@storybook/vue';
-import { text, boolean } from '@storybook/addon-knobs';
+import { text, boolean, select } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
+import TimerButton from '../_storybook/components/timer-button';
 
-import CvSearchNotesMD from '@carbon/vue/src/components/cv-search/cv-search-notes.md';
-import { CvSearch } from '@carbon/vue/src';
+import CvSearchNotesMD from '../../packages/core/src/components/cv-search/cv-search-notes.md';
+import { CvSearch } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvSearch', module);
-const storiesExperimental = storiesOf('Experimental/CvSearch', module);
+// const storiesExperimental = storiesOf('Experimental/CvSearch', module);
 
 const preKnobs = {
   theme: {
@@ -38,11 +39,19 @@ const preKnobs = {
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: 'disabled',
   },
-  small: {
+  size: {
     group: 'attr',
-    type: boolean,
-    config: ['small', false], // consts.CONFIG],
-    prop: 'small',
+    type: select,
+    config: [
+      'size',
+      {
+        small: 'small',
+        large: 'large',
+        'default (xl)': '',
+      },
+      '',
+    ], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'size',
   },
   vModel: {
     group: 'attr',
@@ -85,11 +94,13 @@ for (const story of storySet) {
 
       const templateViewString = `
     <sv-template-view
+      ref="templateView"
       sv-margin
       :sv-alt-back="this.$options.propsData.theme !== 'light'"
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">
+        <TimerButton @timer-start="doStart" @timer-end="doEnd" label="Call focus() method" active-label-prefix="Call blur() method in" />
         <div v-if="${templateString.indexOf('v-model') > 0}">
           <label>Model value:
             <input type="text" v-model="modelValue" />
@@ -100,7 +111,7 @@ for (const story of storySet) {
   `;
 
       return {
-        components: { CvSearch, SvTemplateView },
+        components: { CvSearch, SvTemplateView, TimerButton },
         template: templateViewString,
         props: settings.props,
         data() {
@@ -110,6 +121,14 @@ for (const story of storySet) {
         },
         methods: {
           onInput: action('cv-search - input event'),
+          doStart() {
+            this.$nextTick(() => {
+              this.$refs.templateView.$slots.component[0].componentInstance.focus();
+            });
+          },
+          doEnd() {
+            this.$refs.templateView.$slots.component[0].componentInstance.blur();
+          },
         },
       };
     },

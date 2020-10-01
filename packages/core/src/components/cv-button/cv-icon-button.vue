@@ -1,32 +1,31 @@
 <template>
   <button
-    class="cv-button bx--btn bx--btn--icon-only"
+    class="cv-button"
     :class="[
-      'bx--btn--' + kind.toLowerCase(),
-      tipClasses,
-      {
-        'bx--btn--sm': size === 'small' || (size === undefined && small),
-        'bx--btn--field': size === 'field',
-      },
+      buttonClassOpts({ iconOnly: true }),
+      `${carbonPrefix}--tooltip__trigger`,
+      `${carbonPrefix}--tooltip--a11y`,
+      `${carbonPrefix}--tooltip--${tipPosition || 'bottom'}`,
+      `${carbonPrefix}--tooltip--align-${tipAlignment || 'center'}`,
     ]"
     v-on="inputListeners"
     type="button"
   >
-    <span class="bx--assistive-text">{{ tipText }}</span>
+    <span :class="`${carbonPrefix}--assistive-text`">{{ label }}</span>
 
-    <component v-if="typeof icon === 'object'" :is="icon" class="bx--btn__icon" />
-    <svg v-if="typeof icon === 'string' || iconHref" class="bx--btn__icon">
-      <use :href="icon || iconHref" />
-    </svg>
+    <CvSvg v-if="icon || iconHref" :svg="icon || iconHref" :class="`${carbonPrefix}--btn__icon`" />
   </button>
 </template>
 
 <script>
 import buttonMixin from './button-mixin';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import CvSvg from '../cv-svg/_cv-svg';
 
 export default {
   name: 'CvIconButton',
-  mixins: [buttonMixin],
+  mixins: [buttonMixin, carbonPrefixMixin],
+  components: { CvSvg },
   props: {
     label: { type: String, default: undefined },
     tipPosition: {
@@ -35,17 +34,6 @@ export default {
       validator: val => ['top', 'left', 'bottom', 'right'.includes(val)],
     },
     tipAlignment: { type: String, default: 'center', validator: val => ['start', 'center', 'end'].includes(val) },
-  },
-  computed: {
-    tipClasses() {
-      const tipPosition = this.tipPosition || 'bottom';
-      const tipAlignment = this.tipAlignment || 'center';
-      if (this.label) {
-        return `bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--${tipPosition} bx--tooltip--align-${tipAlignment}`;
-      } else {
-        return '';
-      }
-    },
   },
 };
 </script>

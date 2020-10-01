@@ -1,16 +1,17 @@
 import { storiesOf } from '@storybook/vue';
-import { text, boolean, select } from '@storybook/addon-knobs';
+import { text, boolean, select, array } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
+import TimerButton from '../_storybook/components/timer-button';
 
-import CvDropdownNotesMD from '@carbon/vue/src/components/cv-dropdown/cv-dropdown-notes.md';
-import { CvDropdown, CvDropdownItem, CvDropdownSkeleton } from '@carbon/vue/src';
+import CvDropdownNotesMD from '../../packages/core/src/components/cv-dropdown/cv-dropdown-notes.md';
+import { CvDropdown, CvDropdownItem, CvDropdownSkeleton } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvDropdown', module);
-const storiesExperimental = storiesOf('Experimental/CvDropdown', module);
+// const storiesExperimental = storiesOf('Experimental/CvDropdown', module);
 
 let preKnobs = {
   theme: {
@@ -25,6 +26,12 @@ let preKnobs = {
     type: text,
     config: ['placeholder', 'Choose an option'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: 'placeholder',
+  },
+  items: {
+    group: 'attr',
+    type: array,
+    config: ['items', ['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5']],
+    prop: 'items',
   },
   value: {
     group: 'attr',
@@ -76,6 +83,12 @@ let preKnobs = {
     slot: 'helper-text',
     value: 'Some helpful text',
   },
+  hideSelected: {
+    group: 'attr',
+    type: boolean,
+    config: ['hide-selected', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'hide-selected',
+  },
   invalidMessage: {
     group: 'attr',
     type: text,
@@ -105,12 +118,13 @@ let preKnobs = {
 let variants = [
   {
     name: 'default',
-    excludes: ['vModel', 'events', 'helperTextSlot', 'invalidMessageSlot'],
+    excludes: ['vModel', 'events', 'helperTextSlot', 'invalidMessageSlot', 'items'],
   },
   {
     name: 'slots',
-    excludes: ['vModel', 'events', 'helperText', 'invalidMessage'],
+    excludes: ['vModel', 'events', 'items'],
   },
+  { name: 'items', includes: ['items'] },
   { name: 'minimal', includes: ['value'] },
   { name: 'events', includes: ['value', 'events'] },
   { name: 'vModel', includes: ['value', 'vModel'] },
@@ -123,21 +137,29 @@ for (const story of storySet) {
     story.name,
     () => {
       const settings = story.knobs();
-
-      const templateString = `
-  <cv-dropdown ${settings.group.attr}>${settings.group.slots}
-    <cv-dropdown-item value="10">Option with value 10</cv-dropdown-item>
-    <cv-dropdown-item value="20">Option with value 20</cv-dropdown-item>
-    <cv-dropdown-item value="30">Option with value 30</cv-dropdown-item>
-    <cv-dropdown-item value="40">Option with value 40</cv-dropdown-item>
-    <cv-dropdown-item value="50">Option with value 50</cv-dropdown-item>
-  </cv-dropdown>
-  `;
+      let templateString = '';
+      if (settings.group.attr.indexOf('items') > 0) {
+        templateString = `
+        <cv-dropdown ${settings.group.attr}>${settings.group.slots}
+      </cv-dropdown>
+      `;
+      } else {
+        templateString = `
+        <cv-dropdown ${settings.group.attr}>${settings.group.slots}
+          <cv-dropdown-item value="10"><span>Option with value 10 & 10.0</span></cv-dropdown-item>
+          <cv-dropdown-item value="20">Option with value 20</cv-dropdown-item>
+          <cv-dropdown-item value="30">Option with value 30</cv-dropdown-item>
+          <cv-dropdown-item value="40">Option with value 40</cv-dropdown-item>
+          <cv-dropdown-item value="50">Option with value 50</cv-dropdown-item>
+      </cv-dropdown>
+      `;
+      }
 
       // ----------------------------------------------------------------
       const templateViewString = `
   <sv-template-view
     sv-margin
+    ref="templateView"
     :sv-alt-back="this.$options.propsData.theme !== 'light'"
     sv-source='${templateString.trim()}'>
     <template slot="component">${templateString}</template>
@@ -153,6 +175,7 @@ for (const story of storySet) {
           </select>
         </span>
       </div>
+      <TimerButton @timer-start="doStart" @timer-end="doEnd" label="Call focus() method" active-label-prefix="Call blur() method in" />
     </template>
   </sv-template-view>
   `;
@@ -162,6 +185,7 @@ for (const story of storySet) {
           CvDropdown,
           CvDropdownItem,
           SvTemplateView,
+          TimerButton,
         },
         props: settings.props,
         data() {
@@ -171,6 +195,14 @@ for (const story of storySet) {
         },
         methods: {
           actionChange: action('CV Dropdown - change'),
+          doStart() {
+            this.$nextTick(() => {
+              this.$refs.templateView.$slots.component[0].componentInstance.focus();
+            });
+          },
+          doEnd() {
+            this.$refs.templateView.$slots.component[0].componentInstance.blur();
+          },
         },
         template: templateViewString,
         watch: {

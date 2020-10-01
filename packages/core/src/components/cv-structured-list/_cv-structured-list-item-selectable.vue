@@ -2,8 +2,10 @@
   <label
     :for="uid"
     :aria-label="label"
-    class="cv-structured-list-item--selectable bx--structured-list-row"
-    :class="{ ' bx--structured-list-row--selected': isChecked }"
+    :class="[
+      `cv-structured-list-item--selectable ${carbonPrefix}--structured-list-row`,
+      { ' ${carbonPrefix}--structured-list-row--selected': isChecked },
+    ]"
     tabindex="0"
   >
     <slot></slot>
@@ -12,13 +14,13 @@
       v-on="inputListeners"
       tabindex="-1"
       :id="uid"
-      class="bx--structured-list-input"
+      :class="`${carbonPrefix}--structured-list-input`"
       :checked="isChecked"
       :value="value"
       type="radio"
     />
-    <div class="bx--structured-list-td">
-      <CheckmarkFilled16 class="bx--structured-list-svg" />
+    <div :class="`${carbonPrefix}--structured-list-td`">
+      <CheckmarkFilled16 :class="`${carbonPrefix}--structured-list-svg`" />
     </div>
   </label>
 </template>
@@ -27,11 +29,12 @@
 import uidMixin from '../../mixins/uid-mixin';
 import radioMixin from '../../mixins/radio-mixin';
 import CheckmarkFilled16 from '@carbon/icons-vue/es/checkmark--filled/16';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvStructuredListItemSelectable',
   components: { CheckmarkFilled16 },
   inheritAttrs: false,
-  mixins: [uidMixin, radioMixin],
+  mixins: [uidMixin, radioMixin, carbonPrefixMixin],
 };
 </script>

@@ -1,12 +1,12 @@
 <template>
   <div class="cv-interactive-tooltip">
-    <div :id="`${uid}-label`" class="bx--tooltip__label">
+    <div :id="`${uid}-label`" :class="`${carbonPrefix}--tooltip__label`">
       <slot name="label"></slot>
 
       <button
-        :aria-expanded="dataVisible"
+        :aria-expanded="dataVisible ? 'true' : 'false'"
         :aria-labelledby="`${uid}-label`"
-        class="bx--tooltip__trigger"
+        :class="`${carbonPrefix}--tooltip__trigger`"
         :aria-controls="`${uid}`"
         aria-haspopup="true"
         ref="trigger"
@@ -22,11 +22,10 @@
     </div>
 
     <div
-      :id="`${uid}`"
+      :id="uid"
       aria-hidden="true"
       :data-floating-menu-direction="direction"
-      class="bx--tooltip"
-      :class="{ 'bx--tooltip--shown': dataVisible }"
+      :class="[`${carbonPrefix}--tooltip`, { [`${carbonPrefix}--tooltip--shown`]: dataVisible }]"
       ref="popup"
       role="dialog"
       :aria-describedby="`${uid}-body`"
@@ -43,8 +42,8 @@
         style="position: absolute; height: 1px; width: 1px; left: -9999px;"
         @focus="focusBeforeContent"
       />
-      <span class="bx--tooltip__caret"></span>
-      <div class="bx--tooltip__content">
+      <span :class="`${carbonPrefix}--tooltip__caret`"></span>
+      <div :class="`${carbonPrefix}--tooltip__content`">
         <slot name="content"></slot>
       </div>
       <div
@@ -61,10 +60,11 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import Information16 from '@carbon/icons-vue/es/information/16';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvInteractiveTooltip',
-  mixins: [uidMixin],
+  mixins: [uidMixin, carbonPrefixMixin],
   components: { Information16 },
   props: {
     direction: {
@@ -119,28 +119,30 @@ export default {
     },
     position() {
       const menuPosition = this.$refs.trigger.getBoundingClientRect();
+      const pixelsScrolledX = window.scrollX || window.pageXOffset;
+      const pixelsScrolledY = window.scrollY || window.pageYOffset;
 
       if (this.direction === 'top' || this.direction === 'bottom') {
         this.left =
           menuPosition.left +
           0.5 +
           (this.$refs.trigger.offsetWidth - this.$refs.popup.offsetWidth) / 2 +
-          window.scrollX;
+          pixelsScrolledX;
 
         if (this.direction === 'bottom') {
-          this.top = menuPosition.bottom + 10 + window.scrollY;
+          this.top = menuPosition.bottom + 10 + pixelsScrolledY;
         } else {
-          this.top = menuPosition.top - 15 - this.$refs.popup.offsetHeight + window.scrollY;
+          this.top = menuPosition.top - 15 - this.$refs.popup.offsetHeight + pixelsScrolledY;
         }
       } else {
         this.top =
           menuPosition.top +
           (this.$refs.trigger.offsetHeight - 0.5 - this.$refs.popup.offsetHeight) / 2 +
-          window.scrollY;
+          pixelsScrolledY;
         if (this.direction === 'left') {
-          this.left = menuPosition.left - 10 - this.$refs.popup.offsetWidth + window.scrollX;
+          this.left = menuPosition.left - 10 - this.$refs.popup.offsetWidth + pixelsScrolledX;
         } else {
-          this.left = menuPosition.right + 15 + window.scrollX;
+          this.left = menuPosition.right + 15 + pixelsScrolledX;
         }
       }
     },

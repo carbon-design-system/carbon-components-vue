@@ -16,79 +16,99 @@
 -->
 
 <template>
-  <div :class="{ 'bx--form-item': formItem }">
+  <div :class="{ [`${carbonPrefix}--form-item`]: formItem }" :id="uid">
     <div
-      class="bx--dropdown__wrapper"
-      :class="{ 'bx--dropdown__wrapper--inline': inline, 'cv-dropdown': !formItem }"
+      :class="[
+        `${carbonPrefix}--dropdown__wrapper`,
+        { [`${carbonPrefix}--dropdown__wrapper--inline`]: inline, 'cv-dropdown': !formItem },
+      ]"
       :style="wrapperStyleOverride"
     >
-      <span v-if="label" :id="`${uid}-label`" class="bx--label" :class="{ 'bx--label--disabled': disabled }">
-        {{ label }}
-      </span>
-
-      <div
-        v-if="!inline && isHelper"
-        class="bx--form__helper-text"
-        :class="{ 'bx--form__helper-text--disabled': disabled }"
-        :aria-disabled="disabled"
+      <span
+        v-if="label"
+        :id="`${uid}-label`"
+        :class="[`${carbonPrefix}--label`, { [`${carbonPrefix}--label--disabled`]: disabled }]"
+        >{{ label }}</span
       >
-        <slot name="helper-text">{{ helperText }}</slot>
-      </div>
 
       <div
         data-dropdown
         :data-value="internalValue"
         :data-invalid="isInvalid"
-        class="bx--dropdown"
-        tabindex="0"
-        :class="{
-          'bx--dropdown--light': theme === 'light',
-          'bx--dropdown--up': up,
-          'bx--dropdown--open': open,
-          'bx--dropdown--invalid': isInvalid,
-          'bx--dropdown--disabled': disabled,
-          'bx--dropdown--inline': inline,
-        }"
+        :class="[
+          `${carbonPrefix}--dropdown ${carbonPrefix}--list-box`,
+          {
+            [`${carbonPrefix}--dropdown--light`]: theme === 'light',
+            [`${carbonPrefix}--dropdown--up`]: up,
+            [`${carbonPrefix}--dropdown--open`]: open,
+            [`${carbonPrefix}--dropdown--invalid`]: isInvalid,
+            [`${carbonPrefix}--dropdown--disabled`]: disabled,
+            [`${carbonPrefix}--dropdown--inline`]: inline,
+            [`${carbonPrefix}--dropdown--show-selected`]: !hideSelected,
+          },
+        ]"
         v-bind="$attrs"
         @keydown.down.prevent="onDown"
         @keydown.up.prevent="onUp"
         @keydown.enter.prevent="onClick"
         @keydown.esc.prevent="onEsc"
+        @keydown.tab="onTab"
         @click="onClick"
+        v-clickout="onClickout"
+        ref="listbox"
       >
         <button
-          class="bx--dropdown-text"
+          :class="`${carbonPrefix}--list-box__field`"
+          :aria-disabled="disabled"
           aria-haspopup="true"
-          :aria-expanded="open"
+          :aria-expanded="open ? 'true' : 'false'"
           :aria-controls="`${uid}-menu`"
-          :aria-labelledby="`${uid}-label ${uid}-value`"
+          :aria-labelledby="ariaLabeledBy"
+          :disabled="disabled"
           type="button"
+          ref="button"
         >
-          <WarningFilled16 v-if="isInvalid && inline" class="bx--dropdown__invalid-icon" />
-          <span class="bx--dropdown-text__inner" :id="`${uid}-value`" ref="valueContent">{{ placeholder }}</span>
-          <span class="bx--dropdown__arrow-container">
-            <span class="bx--dropdown__arrow" :style="chevronStyleOveride">
-              <chevron-down-glyph />
-            </span>
-          </span>
+          <WarningFilled16 v-if="isInvalid" :class="`${carbonPrefix}--list-box__invalid-icon`" />
+          <span
+            :class="`${carbonPrefix}--list-box__label`"
+            :id="`${uid}-value`"
+            data-test="internalCaption"
+            v-html="internalCaption"
+          />
+          <div
+            :class="[`${carbonPrefix}--list-box__menu-icon`, { [`${carbonPrefix}--list-box__menu-icon--open`]: open }]"
+            role="button"
+          >
+            <chevron-down-16 :aria-label="open ? 'Close menu' : 'Open menu'" />
+          </div>
         </button>
         <ul
-          class="bx--dropdown-list"
+          :class="`${carbonPrefix}--list-box__menu`"
           :id="`${uid}-menu`"
           role="menu"
-          :aria-hidden="!open"
-          wh-menu-anchor="left"
+          :aria-hidden="!open ? 'true' : 'false'"
           :aria-labelledby="`${uid}-label`"
+          ref="droplist"
+          tabindex="-1"
         >
-          <slot></slot>
+          <slot>
+            <cv-dropdown-item v-for="item in items" v-bind:key="item" :value="item">{{ item }}</cv-dropdown-item>
+          </slot>
         </ul>
       </div>
-      <div v-if="isInvalid && inline" class="bx--form-requirement">
+      <div v-if="isInvalid && inline" :class="`${carbonPrefix}--form-requirement`">
         <slot name="invalid-message">{{ invalidMessage }}</slot>
       </div>
     </div>
-    <div v-if="isInvalid && !inline" class="bx--form-requirement">
+    <div v-if="isInvalid && !inline" :class="`${carbonPrefix}--form-requirement`">
       <slot name="invalid-message">{{ invalidMessage }}</slot>
+    </div>
+    <div
+      v-if="!inline && !isInvalid && isHelper"
+      :class="[`${carbonPrefix}--form__helper-text`, { [`${carbonPrefix}--form__helper-text--disabled`]: disabled }]"
+      :aria-disabled="disabled"
+    >
+      <slot name="helper-text">{{ helperText }}</slot>
     </div>
   </div>
 </template>
@@ -96,14 +116,19 @@
 <script>
 import themeMixin from '../../mixins/theme-mixin';
 import uidMixin from '../../mixins/uid-mixin';
+import methodsMixin from '../../mixins/methods-mixin';
+import CvDropdownItem from './cv-dropdown-item';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
-import ChevronDownGlyph from '@carbon/icons-vue/es/chevron--down';
+import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import clickout from '../../directives/clickout';
 
 export default {
   name: 'CvDropdown',
   inheritAttrs: false,
-  mixins: [themeMixin, uidMixin],
-  components: { WarningFilled16, ChevronDownGlyph },
+  directives: { clickout },
+  mixins: [themeMixin, uidMixin, carbonPrefixMixin, methodsMixin({ button: ['blur', 'focus'] })],
+  components: { WarningFilled16, ChevronDown16, CvDropdownItem },
   props: {
     disabled: Boolean,
     formItem: { type: Boolean, default: true },
@@ -111,17 +136,30 @@ export default {
     invalidMessage: { type: String, default: undefined },
     helperText: { type: String, default: undefined },
     label: String,
+    items: {
+      type: Array,
+      validator(arr) {
+        if (!Array.isArray(arr)) {
+          console.warn('CvDropdown - items must be in array');
+        }
+        return arr;
+      },
+    },
     placeholder: {
       type: String,
       default: 'Choose an option',
     },
     up: Boolean,
     value: String, // initial value of the dropdown,
+    hideSelected: Boolean,
   },
   data() {
     return {
       open: false,
       dataValue: this.value,
+      isHelper: false,
+      isInvalid: false,
+      selectedChild: null,
     };
   },
   created() {
@@ -130,12 +168,12 @@ export default {
     this.$on('cv:beforeDestroy', srcComponent => this.onCvBeforeDestroy(srcComponent));
   },
   mounted() {
-    this.$el.addEventListener('focusout', ev => {
-      if (ev.relatedTarget === null || !this.$el.contains(ev.relatedTarget)) {
-        this.open = false;
-      }
-    });
-    this.internalValue = this.internalValue; // forces update of value
+    this.updateChildren(this.internalValue);
+    this.checkSlots();
+  },
+  updated() {
+    document.body.removeEventListener('click', this.checkSlots);
+    this.checkSlots();
   },
   model: {
     prop: 'value',
@@ -147,33 +185,26 @@ export default {
     },
   },
   computed: {
-    isInvalid() {
-      return this.$slots['invalid-message'] !== undefined || (this.invalidMessage && this.invalidMessage.length);
+    ariaLabeledBy() {
+      if (this.label) {
+        return `${this.uid}-label ${this.uid}-value`;
+      } else {
+        return `${this.uid}-value`;
+      }
     },
-    isHelper() {
-      return this.$slots['helper-text'] !== undefined || (this.helperText && this.helperText.length);
+    internalCaption() {
+      if (this.selectedChild) {
+        return this.selectedChild.internalContent;
+      } else {
+        return this.placeholder;
+      }
     },
     internalValue: {
       get() {
         return this.dataValue;
       },
       set(val) {
-        const childItems = this.dropdownItems();
-        let selectedChild;
-        for (let index in childItems) {
-          let child = childItems[index];
-          let selected = child.value === val;
-          child.internalSelected = selected;
-
-          if (selected) {
-            selectedChild = child;
-          }
-        }
-        if (selectedChild) {
-          this.$refs.valueContent.innerHTML = selectedChild.internalContent;
-        } else {
-          this.$refs.valueContent.innerHTML = this.placeholder;
-        }
+        this.updateChildren(val);
 
         if (this.dataValue !== val) {
           // only raise event on change
@@ -198,6 +229,33 @@ export default {
     },
   },
   methods: {
+    onClickout() {
+      this.open = false;
+    },
+    updateChildren(val) {
+      const childItems = this.dropdownItems();
+      let foundSelection = false;
+
+      for (let index in childItems) {
+        let child = childItems[index];
+        let selected = child.value === val;
+        child.internalSelected = selected;
+
+        if (selected) {
+          foundSelection = true;
+          this.selectedChild = child;
+        }
+      }
+
+      if (!foundSelection) {
+        this.selectedChild = null;
+      }
+    },
+    checkSlots() {
+      // NOTE: this.$slots is not reactive so needs to be managed on updated
+      this.isInvalid = !!(this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length));
+      this.isHelper = !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
+    },
     onCvMount(srcComponent) {
       if (srcComponent.internalSelected) {
         this.internalValue = srcComponent.value;
@@ -247,6 +305,15 @@ export default {
 
       childItems[nextFocusIndex].setFocus();
     },
+    doFocus() {
+      this.$nextTick(() => {
+        if (this.open) {
+          this.$refs.droplist.focus();
+        } else {
+          this.focus();
+        }
+      });
+    },
     onDown() {
       if (!this.open) {
         this.open = true;
@@ -261,19 +328,38 @@ export default {
     },
     onEsc() {
       this.open = false;
-      this.$el.focus();
+      this.doFocus();
+    },
+    onTab(ev) {
+      if (this.open) {
+        if (this.$refs.button.$el === ev.target) {
+          // button has focus ensure we are closed
+          this.open = false;
+        } else if (ev.target === null || this.$refs.listbox.contains(ev.target)) {
+          // list has focus, close and return focus to dropdown
+          this.open = false;
+          this.doFocus();
+          ev.preventDefault();
+        }
+      }
     },
     onClick(ev) {
       if (this.disabled) {
         ev.preventDefault();
       } else {
         this.open = !this.open;
-        if (!this.open) {
-          this.$el.focus();
+        this.doFocus(); // open or close (Some browsers do not focus on button when clicked)
+
+        let target = ev.target;
+        while (
+          !target.classList.contains(`${this.carbonPrefix}--dropdown-link`) &&
+          this.$refs.droplist.contains(target)
+        ) {
+          target = target.parentNode; // try next one up
         }
 
-        if (ev.target.classList.contains('bx--dropdown-link')) {
-          const targetItemEl = ev.target.parentNode;
+        if (target.classList.contains(`${this.carbonPrefix}--dropdown-link`)) {
+          const targetItemEl = target.parentNode;
           const newValue = targetItemEl.getAttribute('data-value');
 
           this.internalValue = newValue;

@@ -5,11 +5,11 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvProgressNotesMD from '@carbon/vue/src/components/cv-progress/cv-progress-notes.md';
-import { CvProgress, CvProgressStep } from '@carbon/vue/src';
+import CvProgressNotesMD from '../../packages/core/src/components/cv-progress/cv-progress-notes.md';
+import { CvProgress, CvProgressStep } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvProgress', module);
-const storiesExperimental = storiesOf('Experimental/CvProgress', module);
+// const storiesExperimental = storiesOf('Experimental/CvProgress', module);
 
 const preKnobs = {
   initialStep: {
@@ -46,7 +46,10 @@ const preKnobs = {
   },
 };
 
-const variants = [{ name: 'default', excludes: ['slotted'] }, { name: 'slotted', excludes: ['steps', 'initialStep'] }];
+const variants = [
+  { name: 'default', excludes: ['slotted'] },
+  { name: 'slotted', excludes: ['steps', 'initialStep'] },
+];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
 

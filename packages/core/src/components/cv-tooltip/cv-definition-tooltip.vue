@@ -1,23 +1,29 @@
 <template>
-  <div class="cv-definition-tooltip bx--tooltip--definition bx--tooltip--a11y">
+  <div :class="`cv-definition-tooltip ${carbonPrefix}--tooltip--definition ${carbonPrefix}--tooltip--a11y`" :id="uid">
     <button
       :aria-describedby="`${uid}-label`"
-      class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition"
-      :class="`bx--tooltip--${direction} bx--tooltip--align-${alignment}`"
+      :class="[
+        `${carbonPrefix}--tooltip__trigger`,
+        `${carbonPrefix}--tooltip--a11y`,
+        `${carbonPrefix}--tooltip__trigger--definition`,
+        `${carbonPrefix}--tooltip--${direction}`,
+        `${carbonPrefix}--tooltip--align-${alignment}`,
+      ]"
       type="button"
     >
       {{ term }}
     </button>
-    <div class="bx--assistive-text" :id="`${uid}-label`" role="tooltip">{{ definition }}</div>
+    <div :class="`${carbonPrefix}--assistive-text`" :id="`${uid}-label`" role="tooltip">{{ definition }}</div>
   </div>
 </template>
 
 <script>
 import uidMixin from '../../mixins/uid-mixin';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvDefinitionTooltip',
-  mixins: [uidMixin],
+  mixins: [uidMixin, carbonPrefixMixin],
   props: {
     alignment: { type: String, default: 'center', validator: val => ['start', 'center', 'end'].includes(val) },
     definition: { type: String, required: true },

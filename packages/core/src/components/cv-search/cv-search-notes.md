@@ -7,14 +7,14 @@ http://www.carbondesignsystem.com/components/text-input/code
 ## Usage
 
 ```html
-<cv-search small v-model="modelValue" label="Search label"> </cv-search>
+<cv-search v-model="modelValue" label="Search label" size="small"> </cv-search>
 ```
 
 ## Attributes
 
 - clearAriaLabel: { type: String, default: 'Clear search input' },
 - label: the label text for the search box
-- small: makes hte search box smaller
+- size: small, large or xl (default)
 - value: initial value
 
 ### Toolbar kind only

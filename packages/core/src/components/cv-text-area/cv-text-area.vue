@@ -1,31 +1,43 @@
 <template>
-  <div class="cv-text-area bx--form-item">
+  <div :class="`cv-text-area ${carbonPrefix}--form-item`">
     <label
       :for="uid"
       :class="[
-        'bx--label',
+        `${carbonPrefix}--label`,
         {
-          'bx--label--disabled': $attrs.disabled !== undefined && $attrs.disabled,
+          [`${carbonPrefix}--label--disabled`]: $attrs.disabled !== undefined && $attrs.disabled,
         },
       ]"
       >{{ label }}</label
     >
-    <div v-if="isHelper" class="bx--form__helper-text" :class="{ 'bx--form__helper-text--disabled': $attrs.disabled }">
-      <slot name="helper-text">{{ helperText }}</slot>
-    </div>
-    <div class="bx--text-area__wrapper" :data-invalid="isInvalid">
-      <WarningFilled16 v-if="isInvalid" class="bx--text-area__invalid-icon" />
+    <div :class="`${carbonPrefix}--text-area__wrapper`" :data-invalid="isInvalid">
+      <WarningFilled16 v-if="isInvalid" :class="`${carbonPrefix}--text-area__invalid-icon`" />
       <textarea
         :id="uid"
-        class="bx--text-area"
-        :class="{ 'bx--text-area--light': theme === 'light', 'bx--text-area--invalid': isInvalid }"
+        :class="[
+          `${carbonPrefix}--text-area`,
+          {
+            [`${carbonPrefix}--text-area--light`]: theme === 'light',
+            [`${carbonPrefix}--text-area--invalid`]: isInvalid,
+          },
+        ]"
         v-bind="$attrs"
         :value="value"
         v-on="inputListeners"
+        ref="textarea"
       ></textarea>
     </div>
-    <div class="bx--form-requirement" v-if="isInvalid">
+    <div :class="`${carbonPrefix}--form-requirement`" v-if="isInvalid">
       <slot name="invalid-message">{{ invalidMessage }}</slot>
+    </div>
+    <div
+      v-if="!isInvalid && isHelper"
+      :class="[
+        `${carbonPrefix}--form__helper-text`,
+        { [`${carbonPrefix}--form__helper-text--disabled`]: $attrs.disabled },
+      ]"
+    >
+      <slot name="helper-text">{{ helperText }}</slot>
     </div>
   </div>
 </template>
@@ -33,11 +45,13 @@
 <script>
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
+import methodsMixin from '../../mixins/methods-mixin';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvTextArea',
-  mixins: [uidMixin, themeMixin],
+  mixins: [uidMixin, themeMixin, carbonPrefixMixin, methodsMixin({ textarea: ['blur', 'focus'] })],
   inheritAttrs: false,
   components: { WarningFilled16 },
   props: {
@@ -45,6 +59,18 @@ export default {
     invalidMessage: { type: String, default: undefined },
     label: String,
     value: String,
+  },
+  data() {
+    return {
+      isHelper: false,
+      isInvalid: false,
+    };
+  },
+  mounted() {
+    this.checkSlots();
+  },
+  updated() {
+    this.checkSlots();
   },
   computed: {
     // Bind listeners at the component level to the embedded input element and
@@ -56,11 +82,12 @@ export default {
         input: event => this.$emit('input', event.target.value),
       };
     },
-    isInvalid() {
-      return this.$slots['invalid-message'] !== undefined || (this.invalidMessage && this.invalidMessage.length);
-    },
-    isHelper() {
-      return this.$slots['helper-text'] || (this.helperText && this.helperText.length);
+  },
+  methods: {
+    checkSlots() {
+      // NOTE: this.$slots is not reactive so needs to be managed on updated
+      this.isInvalid = !!(this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length));
+      this.isHelper = !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
     },
   },
 };

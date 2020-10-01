@@ -4,4 +4,4 @@ Closes #
 
 #### Changelog
 
-{{run "git diff --name-status master" and paste result here}}
+{{run "git diff --name-status $(git merge-base head master)" and paste result here}}

@@ -1,11 +1,12 @@
 <template>
   <component
     :is="tagType"
-    class="cv-tile bx--tile"
+    :class="[`cv-tile ${carbonPrefix}--tile`, { [`${carbonPrefix}--tile--light`]: theme === 'light' }]"
     :checked="selected"
     :expanded="expanded"
     v-bind="$attrs"
     v-on="$listeners"
+    ref="tile"
   >
     <!-- can i now click on this -->
     <template>
@@ -18,10 +19,13 @@
 </template>
 
 <script>
+import themeMixin from '../../mixins/theme-mixin';
 import CvTileClickable from './_cv-tile-clickable';
 import CvTileExpandable from './_cv-tile-expandable';
 import CvTileSelectable from './_cv-tile-selectable';
 import CvTileStandard from './_cv-tile-standard';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import methodsMixin from '../../mixins/methods-mixin';
 
 export default {
   name: 'CvTile',
@@ -31,6 +35,7 @@ export default {
     prop: 'modelValue',
     event: 'modelEvent',
   },
+  mixins: [themeMixin, carbonPrefixMixin, methodsMixin({ tile: ['blur', 'focus'] })],
   components: {
     CvTileClickable,
     CvTileExpandable,
@@ -60,5 +65,17 @@ export default {
       }
     },
   },
+  // methods: {
+  //   focus() {
+  //     if (this.$children[0].focus) {
+  //       this.$children[0].focus();
+  //     }
+  //   },
+  //   blur() {
+  //     if (this.$children[0].blur) {
+  //       this.$children[0].blur();
+  //     }
+  //   },
+  // },
 };
 </script>

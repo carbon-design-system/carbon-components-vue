@@ -13,22 +13,21 @@
 <template>
   <button
     type="button"
+    role="tab"
     class="cv-content-switcher-button"
     :class="[
-      'bx--content-switcher-btn',
+      `${carbonPrefix}--content-switcher-btn`,
       {
-        'bx--content-switcher--selected': dataSelected,
+        [`${carbonPrefix}--content-switcher--selected`]: dataSelected,
       },
     ]"
     :data-target="contentSelector"
-    :aria-selected="`${dataSelected}`"
+    :aria-selected="dataSelected ? 'true' : 'false'"
+    :id="uid"
     @click="open"
   >
-    <component v-if="typeof icon === 'object'" :is="icon" class="bx--content-switcher__icon" />
-    <svg v-if="typeof icon === 'string'" class="bx--content-switcher__icon" height="16" width="16">
-      <use :href="icon"></use>
-    </svg>
-    <span class="bx--content-switcher__label">
+    <CvSvg v-if="icon" :svg="icon" :class="`${carbonPrefix}--content-switcher__icon`" height="16" width="16" />
+    <span :class="`${carbonPrefix}--content-switcher__label`">
       <slot></slot>
     </span>
   </button>
@@ -36,10 +35,13 @@
 
 <script>
 import uidMixin from '../../mixins/uid-mixin';
+import CvSvg from '../cv-svg/_cv-svg';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvContentSwitcherButton',
-  mixins: [uidMixin],
+  mixins: [uidMixin, carbonPrefixMixin],
+  components: { CvSvg },
   props: {
     contentSelector: { type: String, default: undefined },
     icon: {

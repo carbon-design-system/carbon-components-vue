@@ -2,18 +2,18 @@
   <cv-wrapper :tag-type="overlay ? 'div' : ''" class="cv-loading" :class="overlayClasses">
     <div
       data-loading
-      class="bx--loading"
       :class="{
         'cv-loading': !overlay,
-        'bx--loading--stop': !active,
-        'bx--loading--small': small,
+        [`${carbonPrefix}--loading`]: active || stopping,
+        [`${carbonPrefix}--loading--stop`]: !active && stopping,
+        [`${carbonPrefix}--loading--small`]: small,
       }"
       ref="loading"
     >
-      <svg class="bx--loading__svg" viewBox="-75 -75 150 150">
+      <svg :class="`${carbonPrefix}--loading__svg`" viewBox="-75 -75 150 150">
         <title>Loading</title>
-        <circle v-if="small" class="bx--loading__background" cx="0" cy="0" :r="loadingRadius" />
-        <circle class="bx--loading__stroke" cx="0" cy="0" :r="loadingRadius" />
+        <circle v-if="small" :class="`${carbonPrefix}--loading__background`" cx="0" cy="0" :r="loadingRadius" />
+        <circle :class="`${carbonPrefix}--loading__stroke`" cx="0" cy="0" :r="loadingRadius" />
       </svg>
     </div>
   </cv-wrapper>
@@ -21,9 +21,11 @@
 
 <script>
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvLoading',
+  mixins: [carbonPrefixMixin],
   components: { CvWrapper },
   props: {
     active: { type: Boolean, default: true },
@@ -32,9 +34,16 @@ export default {
   },
   computed: {
     overlayClasses() {
-      if (!this.overlay) return '';
+      const classes = [];
+      if (this.overlay) {
+        if (this.active || this.stopping) {
+          classes.push(`${this.carbonPrefix}--loading-overlay`);
+        } else {
+          classes.push(`${this.carbonPrefix}--loading-overlay--stop`);
+        }
+      }
 
-      return `bx--loading-overlay ${this.stopped ? 'bx--loading-overlay--stop' : ''}`;
+      return classes;
     },
     loadingRadius() {
       return this.small ? '26.8125' : '37.5';
@@ -42,7 +51,7 @@ export default {
   },
   data() {
     return {
-      stopped: false,
+      stopping: false,
     };
   },
   watch: {
@@ -55,14 +64,13 @@ export default {
       if (ev.animationName === 'rotate-end-p2') {
         this.$refs.loading.removeEventListener('animationend', this.onEnd);
 
-        this.stopped = true;
+        this.stopping = false;
         this.$emit('loading-end');
       }
     },
     onActiveUpdate(newValue) {
-      if (newValue) {
-        this.stopped = false;
-      } else {
+      this.stopping = !newValue;
+      if (!newValue) {
         this.$refs.loading.addEventListener('animationend', this.onEnd);
       }
     },

@@ -1,14 +1,18 @@
 <template>
-  <div class="cv-radio-group bx--form-item">
-    <div class="bx--radio-button-group" :class="{ 'bx--radio-button-group--vertical': vertical }">
+  <div :class="`cv-radio-group ${carbonPrefix}--form-item`">
+    <div
+      :class="[`${carbonPrefix}--radio-button-group`, { [`${carbonPrefix}--radio-button-group--vertical`]: vertical }]"
+    >
       <slot></slot>
     </div>
   </div>
 </template>
 
 <script>
+import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 export default {
   name: 'CvRadioGroup',
+  mixins: [carbonPrefixMixin],
   props: {
     vertical: Boolean,
   },

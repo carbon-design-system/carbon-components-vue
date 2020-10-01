@@ -1,9 +1,10 @@
-import { shallowMount as shallow, mount } from '@vue/test-utils';
-import { testComponent, testInstance } from './_helpers';
+// import { shallowMount as shallow, mount } from '@vue/test-utils';
+import { testComponent, testInstance, awaitNextTick } from './_helpers';
+const { shallowMount: shallow, mount, trigger } = awaitNextTick;
 import { CvTag, CvTagSkeleton } from '@/components/cv-tag';
-import { settings } from 'carbon-components';
+// import { settings as carbonSettings } from 'carbon-components';
 
-const { prefix } = settings;
+// const carbonPrefix = carbonSettings.prefix;
 
 describe('CvTag', () => {
   // ***************
@@ -18,10 +19,9 @@ describe('CvTag', () => {
   // ***************
   // SNAPSHOT TESTS
   // ***************
-  it('should render', () => {
+  it('should render', async () => {
     const propsData = { kind: '', label: 'test' };
     const kinds = [
-      'filter',
       'red',
       'magenta',
       'purple',
@@ -32,11 +32,12 @@ describe('CvTag', () => {
       'gray',
       'cool-gray',
       'warm-gray',
+      'high-contrast',
     ];
 
     for (const kind of kinds) {
       propsData.kind = kind;
-      const wrapper = shallow(CvTag, { propsData });
+      const wrapper = await shallow(CvTag, { propsData });
 
       expect(wrapper.html()).toMatchSnapshot();
     }
@@ -47,11 +48,11 @@ describe('CvTag', () => {
   // ***************
   testInstance.propStringIsRendered(CvTag, 'label', 'span');
 
-  it('click on close icon emits remove', () => {
-    const propsData = { kind: 'filter', label: 'test' };
-    const wrapper = mount(CvTag, { propsData });
+  it('click on close icon emits remove', async () => {
+    const propsData = { filter: true, label: 'test' };
+    const wrapper = await mount(CvTag, { propsData });
 
-    wrapper.find('svg').trigger('click');
+    await trigger(wrapper.find('svg'), 'click');
     expect(wrapper.emitted().remove).toBeTruthy();
   });
 });
@@ -64,8 +65,8 @@ describe('CvTagSkeleton', () => {
   // ***************
   // SNAPSHOT TESTS
   // ***************
-  describe('Renders as expected', () => {
-    const wrapper = shallow(CvTagSkeleton);
+  it('Renders as expected', async () => {
+    const wrapper = await shallow(CvTagSkeleton);
 
     expect(wrapper.html()).toMatchSnapshot();
   });

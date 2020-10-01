@@ -11,9 +11,7 @@ CvAccordion is used in conjunction with slotted CvAccordionItem components.
 ```html
 <cv-accordion>
   <cv-accordion-item>
-    <template slot="title"
-      >Section 1 title
-    </template>
+    <template slot="title">Section 1 title </template>
     <template slot="content">
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
@@ -23,9 +21,7 @@ CvAccordion is used in conjunction with slotted CvAccordionItem components.
     </template>
   </cv-accordion-item>
   <cv-accordion-item>
-    <template slot="title"
-      >Section 2 title</template
-    >
+    <template slot="title">Section 2 title</template>
     <template slot="content">
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
@@ -35,9 +31,7 @@ CvAccordion is used in conjunction with slotted CvAccordionItem components.
     </template>
   </cv-accordion-item>
   <cv-accordion-item>
-    <template slot="title"
-      >Section 3 title</template
-    >
+    <template slot="title">Section 3 title</template>
     <template slot="content">
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
@@ -47,9 +41,7 @@ CvAccordion is used in conjunction with slotted CvAccordionItem components.
     </template>
   </cv-accordion-item>
   <cv-accordion-item>
-    <template slot="title"
-      >Section 4 title</template
-    >
+    <template slot="title">Section 4 title</template>
     <template slot="content">
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
@@ -60,6 +52,12 @@ CvAccordion is used in conjunction with slotted CvAccordionItem components.
   </cv-accordion-item>
 </cv-accordion>
 ```
+
+## Events
+
+CvAccordion
+
+- change: when an accordion item opens or closes
 
 ## Attributes
 

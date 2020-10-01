@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { text, object, number } from '@storybook/addon-knobs';
+import { text, object, number, boolean } from '@storybook/addon-knobs';
 
 import { action } from '@storybook/addon-actions';
 
@@ -7,11 +7,11 @@ import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-vie
 // import consts from '../_storybook/utils/consts';
 import knobsHelper from '../_storybook/utils/knobs-helper';
 
-import CvPaginationNotesMD from '@carbon/vue/src/components/cv-pagination/cv-pagination-notes.md';
-import { CvPagination } from '@carbon/vue/src';
+import CvPaginationNotesMD from '../../packages/core/src/components/cv-pagination/cv-pagination-notes.md';
+import { CvPagination } from '../../packages/core/src/';
 
 const storiesDefault = storiesOf('Components/CvPagination', module);
-const storiesExperimental = storiesOf('Experimental/CvPagination', module);
+// const storiesExperimental = storiesOf('Experimental/CvPagination', module);
 
 const preKnobs = {
   backwardsText: {
@@ -57,6 +57,18 @@ const preKnobs = {
     prop: 'page-sizes',
     value: val => val.list,
   },
+  disableBackwards: {
+    group: 'attr',
+    type: boolean,
+    config: ['Disable backwards button', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'backwards-button-disabled',
+  },
+  disabledForwards: {
+    group: 'attr',
+    type: boolean,
+    config: ['Disable forwards button', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'forwards-button-disabled',
+  },
   events: {
     group: 'attr',
     value: `@change="onChange"`,
@@ -72,7 +84,7 @@ const preKnobs = {
 const variants = [
   { name: 'default', excludes: ['events', 'slots'] },
   { name: 'slottedFields', excludes: ['events'] },
-  { name: 'minimal', includes: [] },
+  { name: 'minimal', includes: ['disabledForwards'] },
   { name: 'events', includes: ['events'] },
 ];
 
@@ -85,13 +97,11 @@ for (const story of storySet) {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
-
       const templateString = `
 <cv-pagination${settings.group.attr}>${settings.group.slots}</cv-pagination>
   `;
 
       // ----------------------------------------------------------------
-
       const templateViewString = `
     <sv-template-view
       sv-margin
