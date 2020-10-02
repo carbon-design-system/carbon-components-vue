@@ -10,7 +10,7 @@ http://www.carbondesignsystem.com/components/notification/code
 <cv-toast-notification
   kind="success"
   title="notification title"
-  sub-title="a subtitle"
+  sub-title="a <a href="#">subtitle</a>"
   caption="Time stamp [00:00:00]"
   @close="actionClose"
 ></cv-toast-notification>
@@ -20,8 +20,8 @@ http://www.carbondesignsystem.com/components/notification/code
 
 - kind: 'error', 'info', 'success', 'warning'
 - title: 'title'
-- subtitle: 'subtitle'
-- caption: 'caption'
+- subtitle: 'subtitle' inputs as an `v-html` so any markup is rendered.
+- caption: 'caption' inputs as an `v-html` so any markup is rendered.
 - closeAriaLabel: { type: String, default: 'Clear filter' },
 - lowContrast: Boolean to use a lower contrast version of the notification
 

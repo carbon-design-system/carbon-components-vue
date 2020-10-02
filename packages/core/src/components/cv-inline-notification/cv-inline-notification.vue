@@ -17,7 +17,7 @@
       <component :is="icon" :class="`${carbonPrefix}--inline-notification__icon`" />
       <div :class="`${carbonPrefix}--inline-notification__text-wrapper`">
         <p :class="`${carbonPrefix}--inline-notification__title`">{{ title }}</p>
-        <p :class="`${carbonPrefix}--inline-notification__subtitle`">{{ subTitle }}</p>
+        <p :class="`${carbonPrefix}--inline-notification__subtitle`" v-html="subTitle"></p>
       </div>
     </div>
     <button
