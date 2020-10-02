@@ -18,7 +18,7 @@
 
 <script>
 import Information16 from '@carbon/icons-vue/es/information/16';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import { carbonPrefixMixin } from '../../mixins';
 
 export default {
   name: 'CvTooltip',

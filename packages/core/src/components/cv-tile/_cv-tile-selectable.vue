@@ -34,11 +34,8 @@
 </template>
 
 <script>
-import uidMixin from '../../mixins/uid-mixin';
-import checkMixin from '../../mixins/check-mixin';
+import { uidMixin, checkMixin, carbonPrefixMixin, methodsMixin } from '../../mixins';
 import CheckmarkFilled16 from '@carbon/icons-vue/es/checkmark--filled/16';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
-import methodsMixin from '../../mixins/methods-mixin';
 
 export default {
   name: 'CvTileSelectable',

@@ -15,9 +15,8 @@
 </template>
 
 <script>
-import LinkMixin from '../../mixins/link-mixin';
+import { LinkMixin, carbonPrefixMixin } from '../../mixins';
 import CvSideNavLinkText from './_cv-side-nav-link-text';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvSideNavMenuItem',

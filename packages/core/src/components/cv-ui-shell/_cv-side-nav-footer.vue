@@ -25,7 +25,7 @@
 <script>
 import Close20 from '@carbon/icons-vue/es/close/20';
 import ChevronRight20 from '@carbon/icons-vue/es/chevron--right/20';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import { carbonPrefixMixin } from '../../mixins';
 
 export default {
   name: 'CvSideNavFooter',

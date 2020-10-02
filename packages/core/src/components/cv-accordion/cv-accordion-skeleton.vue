@@ -14,7 +14,7 @@
 <script>
 import CvSkeletonText from '../cv-skeleton-text/cv-skeleton-text';
 import CvAccordionItemSkeleton from './_cv-accordion-item-skeleton';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import { carbonPrefixMixin } from '../../mixins';
 
 export default {
   name: 'CvAccordionSkeleton',

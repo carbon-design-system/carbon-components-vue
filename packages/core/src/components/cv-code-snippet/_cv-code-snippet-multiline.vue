@@ -36,8 +36,7 @@ import CvButton from '../cv-button/cv-button';
 
 import Copy16 from '@carbon/icons-vue/es/copy/16';
 import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
-import themeMixin from '../../mixins/theme-mixin';
+import { carbonPrefixMixin, themeMixin } from '../../mixins';
 
 export default {
   name: 'CvCodeSnippetMultiline',

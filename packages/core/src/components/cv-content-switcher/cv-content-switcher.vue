@@ -6,7 +6,7 @@
 
 <script>
 import store from './cv-content-switcher-store';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import { carbonPrefixMixin } from '../../mixins';
 
 const toggleContent = (selector, on) => {
   // hide content

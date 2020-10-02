@@ -34,9 +34,8 @@
 </template>
 
 <script>
-import uidMixin from '../../mixins/uid-mixin';
+import { uidMixin, carbonPrefixMixin } from '../../mixins';
 import CvSvg from '../cv-svg/_cv-svg';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvContentSwitcherButton',

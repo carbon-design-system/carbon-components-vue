@@ -18,7 +18,7 @@
 
 <script>
 import CvProgressStep from './cv-progress-step';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import { carbonPrefixMixin } from '../../mixins';
 
 export default {
   name: 'CvProgress',
