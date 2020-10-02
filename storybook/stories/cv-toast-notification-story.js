@@ -29,7 +29,7 @@ const preKnobs = {
   caption: {
     group: 'attr',
     type: text,
-    config: ['caption', 'Time stamp <a>[00:00:00]</a>'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
+    config: ['caption', 'Time stamp <a href="#">[00:00:00]</a>'], // consts.CONTENT], // fails when used with number in storybook 4.1.4
     prop: 'caption',
   },
   events: {
