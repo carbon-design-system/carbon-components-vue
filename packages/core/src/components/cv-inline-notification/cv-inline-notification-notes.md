@@ -10,7 +10,7 @@ http://www.carbondesignsystem.com/components/notification/code
 <cv-inline-notification
   kind="error"
   title="notification title"
-  sub-title="a <a>subtitle</a>"
+  sub-title="a <a href="#">subtitle</a>"
   @close="actionClose"
 ></cv-inline-notification>
 ```
