@@ -21,14 +21,14 @@
 </template>
 
 <script>
-import { LinkMixin, carbonPrefixMixin } from '../../mixins';
+import { linkMixin, carbonPrefixMixin } from '../../mixins';
 import CvSideNavIcon from './cv-side-nav-icon';
 import CvSideNavLinkText from './_cv-side-nav-link-text';
 
 export default {
   name: 'CvSideNavLink',
   inheritAttrs: false,
-  mixins: [LinkMixin, carbonPrefixMixin],
+  mixins: [linkMixin, carbonPrefixMixin],
   components: { CvSideNavIcon, CvSideNavLinkText },
   props: {
     active: Boolean,

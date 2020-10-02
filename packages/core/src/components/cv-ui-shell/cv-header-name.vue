@@ -6,11 +6,11 @@
 </template>
 
 <script>
-import { LinkMixin, carbonPrefixMixin } from '../../mixins';
+import { linkMixin, carbonPrefixMixin } from '../../mixins';
 
 export default {
   name: 'CvHeaderName',
-  mixins: [LinkMixin, carbonPrefixMixin],
+  mixins: [linkMixin, carbonPrefixMixin],
   props: {
     prefix: String,
   },

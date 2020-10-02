@@ -13,10 +13,10 @@
 </template>
 
 <script>
-import { LinkMixin, carbonPrefixMixin, methodsMixin } from '../../mixins';
+import { linkMixin, carbonPrefixMixin, methodsMixin } from '../../mixins';
 
 export default {
   name: 'CvTileClickable',
-  mixins: [LinkMixin, carbonPrefixMixin, methodsMixin({ target: ['blur', 'focus'] })],
+  mixins: [linkMixin, carbonPrefixMixin, methodsMixin({ target: ['blur', 'focus'] })],
 };
 </script>

@@ -11,11 +11,11 @@
 </template>
 
 <script>
-import { LinkMixin, carbonPrefixMixin } from '../../mixins';
+import { linkMixin, carbonPrefixMixin } from '../../mixins';
 
 export default {
   name: 'CvLink',
-  mixins: [LinkMixin, carbonPrefixMixin],
+  mixins: [linkMixin, carbonPrefixMixin],
   props: {
     inline: Boolean,
   },

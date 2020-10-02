@@ -16,11 +16,11 @@
 </template>
 
 <script>
-import { LinkMixin, carbonPrefixMixin } from '../../mixins';
+import { linkMixin, carbonPrefixMixin } from '../../mixins';
 
 export default {
   name: 'CvHeaderMenuItem',
-  mixins: [LinkMixin, carbonPrefixMixin],
+  mixins: [linkMixin, carbonPrefixMixin],
   inheritAttrs: false,
   props: {
     active: Boolean,

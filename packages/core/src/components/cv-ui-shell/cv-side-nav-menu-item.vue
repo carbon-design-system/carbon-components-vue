@@ -15,13 +15,13 @@
 </template>
 
 <script>
-import { LinkMixin, carbonPrefixMixin } from '../../mixins';
+import { linkMixin, carbonPrefixMixin } from '../../mixins';
 import CvSideNavLinkText from './_cv-side-nav-link-text';
 
 export default {
   name: 'CvSideNavMenuItem',
   inheritAttrs: false,
-  mixins: [LinkMixin, carbonPrefixMixin],
+  mixins: [linkMixin, carbonPrefixMixin],
   components: { CvSideNavLinkText },
   props: {
     active: Boolean,
