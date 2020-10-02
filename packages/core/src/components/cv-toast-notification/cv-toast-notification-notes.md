@@ -10,7 +10,7 @@ http://www.carbondesignsystem.com/components/notification/code
 <cv-toast-notification
   kind="success"
   title="notification title"
-  sub-title="a <a>subtitle</a>"
+  sub-title="a <a href="#">subtitle</a>"
   caption="Time stamp [00:00:00]"
   @close="actionClose"
 ></cv-toast-notification>
