@@ -121,7 +121,7 @@ export default {
     }
     this.checkSlots();
   },
-  beforeUpdate() {
+  updated() {
     this.checkSlots();
   },
   watch: {
@@ -163,7 +163,7 @@ export default {
   },
   methods: {
     checkSlots() {
-      // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
+      // NOTE: this.$slots is not reactive so needs to be managed on updated
       this.hasFooter = !!(this.$slots['primary-button'] || this.$slots['secondary-button']);
       this.hasHeaderLabel = !!this.$slots.label;
       this.hasSecondary = !!this.$slots['secondary-button'];

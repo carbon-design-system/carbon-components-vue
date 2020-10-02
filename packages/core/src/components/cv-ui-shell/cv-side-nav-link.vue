@@ -40,7 +40,7 @@ export default {
       hasNavIcon: this.$slots['nav-icon'],
     };
   },
-  beforeUpdate() {
+  updated() {
     this.hasNavIcon = !!this.$slots['nav-icon'];
   },
 };

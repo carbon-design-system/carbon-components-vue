@@ -12,7 +12,7 @@
         },
       ]"
       ref="date-picker"
-      :id="formItem ? '' : uid"
+      :id="formItem ? undefined : uid"
     >
       <div
         :class="{
@@ -72,7 +72,11 @@
 <script>
 import Flatpickr from 'flatpickr';
 import l10n from 'flatpickr/dist/l10n/index';
-import RangePlugin from 'flatpickr/dist/plugins/rangePlugin';
+// import carbonFlatpickrAppendToPlugin from './plugins/appendToPlugin';
+import carbonFlatpickrFixEventsPlugin from './plugins/fixEventsPlugin';
+import carbonFlatpickrRangePlugin from './plugins/rangePlugin';
+import carbonFlatpickrMonthSelectPlugin from './plugins/monthSelectPlugin';
+
 import uidMixin from '../../mixins/uid-mixin';
 import themeMixin from '../../mixins/theme-mixin';
 import Calendar16 from '@carbon/icons-vue/es/calendar/16';
@@ -133,7 +137,7 @@ export default {
       },
     },
     invalidMessage: { type: String, default: undefined },
-    value: [String, Object, Array],
+    value: [String, Object, Array, Date],
   },
   model: {
     prop: 'value',
@@ -199,7 +203,7 @@ export default {
   },
   methods: {
     checkSlots() {
-      // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
+      // NOTE: this.$slots is not reactive so needs to be managed on updated
       this.isInvalid = !!(
         this.$slots['invalid-message'] ||
         (this.invalidMessage && this.invalidMessage.length) ||
@@ -230,13 +234,33 @@ export default {
       }
       // _options.onValueUpdate = this.onChange;
 
-      if (this.isRange) {
-        // let curDate = new Date();
-        // let anotherDate = new Date();
-        // anotherDate = anotherDate.setDate(anotherDate.getDate() + 6);
-        // _options.defaultDate = [curDate, anotherDate];
-        _options.plugins = [new RangePlugin({ input: this.$refs.todate, position: 'left' })];
-      }
+      _options.plugins = [
+        this.isRange
+          ? new carbonFlatpickrRangePlugin({
+              input: this.$refs.todate,
+            })
+          : () => {},
+        carbonFlatpickrMonthSelectPlugin({
+          selectorFlatpickrMonthYearContainer: '.flatpickr-current-month',
+          selectorFlatpickrYearContainer: '.numInputWrapper',
+          selectorFlatpickrCurrentMonth: '.cur-month',
+          classFlatpickrCurrentMonth: 'cur-month',
+        }),
+        carbonFlatpickrFixEventsPlugin({
+          inputFrom: this.$refs.date,
+          inputTo: this.$refs.todate,
+        }),
+      ];
+      _options.nextArrow = `
+      <svg width="16px" height="16px" viewBox="0 0 16 16">
+        <polygon points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3 "/>
+        <rect width="16" height="16" style="fill:none" />
+      </svg>`;
+      _options.prevArrow = `
+      <svg width="16px" height="16px" viewBox="0 0 16 16">
+        <polygon points="5,8 10,3 10.7,3.7 6.4,8 10.7,12.3 10,13 "/>
+        <rect width="16" height="16" style="fill:none" />
+      </svg>`;
 
       return _options;
     },
@@ -327,7 +351,7 @@ export default {
     //   this.cal.setDate([curDate, anotherDate], true);
     // }, 2000);
   },
-  beforeUpdate() {
+  updated() {
     this.checkSlots();
   },
   beforeDestroy() {

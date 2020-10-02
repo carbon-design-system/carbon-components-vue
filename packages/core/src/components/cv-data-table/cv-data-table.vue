@@ -276,7 +276,7 @@ export default {
     this.updateRowsSelected();
     this.checkSlots();
   },
-  beforeUpdate() {
+  updated() {
     this.checkSlots();
   },
   computed: {
@@ -341,7 +341,7 @@ export default {
   },
   methods: {
     checkSlots() {
-      // NOTE: this.$slots is not reactive so needs to be managed on beforeUpdate
+      // NOTE: this.$slots is not reactive so needs to be managed on updated
       this.hasBatchActions = !!this.$slots['batch-actions'];
       this.hasActions = !!this.$slots.actions;
       this.hasToolbar = !!(this.$slots.actions || this.$listeners.search || this.$slots['batch-actions']);
