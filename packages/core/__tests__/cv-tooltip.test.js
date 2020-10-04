@@ -555,4 +555,45 @@ describe('CvInteractiveTooltip', () => {
 
     expect(wrapper.vm.contentAfter).toBeFalsy();
   });
+
+  it('`beforeContent` is focused on tab if `contentAfter` exists', async () => {
+    const propsData = { visible: true, direction: 'right' };
+    const wrapper = await shallow(CvInteractiveTooltip, {
+      propsData,
+    });
+    await trigger(wrapper.find('button'), 'keydown.tab');
+
+    expect(wrapper.vm.$refs.beforeContent).toBe(document.activeElement);
+  });
+
+  it('`afterContent` is focused on shift tab if `contentAfter` does not exist', async () => {
+    const propsData = { visible: true, direction: 'top' };
+    const wrapper = await shallow(CvInteractiveTooltip, {
+      propsData,
+    });
+    const spy = jest.spyOn(wrapper.vm, 'focusAfterContent');
+    await trigger(wrapper.find('button'), 'keydown.tab', { shiftKey: true });
+    expect(wrapper.vm.$refs.afterContent).toBe(document.activeElement);
+  });
+
+  it('`positionListen` is called with `false` on wrapper destroy', async () => {
+    const propsData = { visible: false };
+    const wrapper = await shallow(CvInteractiveTooltip, {
+      propsData,
+    });
+    const spy = jest.spyOn(wrapper.vm, 'positionListen');
+    wrapper.destroy();
+    expect(spy).toBeCalledWith(false);
+  });
+
+  it('`preventFocusOut` is called on popup mousedown event', async () => {
+    const id = 'test';
+    const propsData = { visible: true, id };
+    const wrapper = await shallow(CvInteractiveTooltip, {
+      propsData,
+    });
+    const spy = jest.spyOn(wrapper.vm, 'preventFocusOut');
+    await trigger(wrapper.find(`#${id}`), 'mousedown.prevent');
+    expect(spy).toBeCalled();
+  });
 });
