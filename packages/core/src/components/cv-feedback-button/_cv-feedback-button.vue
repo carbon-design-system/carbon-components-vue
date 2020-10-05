@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import { carbonPrefixMixin } from '../../mixins';
 const feedbackPhases = {
   DEFAULT: 0,
   FADE_IN: 1,

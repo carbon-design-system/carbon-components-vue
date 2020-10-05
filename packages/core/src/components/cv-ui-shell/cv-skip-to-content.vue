@@ -10,11 +10,10 @@
 </template>
 
 <script>
-import LinkMixin from '../../mixins/link-mixin';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import { linkMixin, carbonPrefixMixin } from '../../mixins';
 
 export default {
   name: 'CvSkipToContent',
-  mixins: [LinkMixin, carbonPrefixMixin],
+  mixins: [linkMixin, carbonPrefixMixin],
 };
 </script>

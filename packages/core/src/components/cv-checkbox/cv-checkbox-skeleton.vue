@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import { carbonPrefixMixin } from '../../mixins';
 export default {
   name: 'CvCheckboxSkeleton',
   mixins: [carbonPrefixMixin],

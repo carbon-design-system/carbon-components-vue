@@ -83,14 +83,11 @@
 </template>
 
 <script>
-import uidMixin from '../../mixins/uid-mixin';
-import themeMixin from '../../mixins/theme-mixin';
+import { uidMixin, themeMixin, carbonPrefixMixin, methodsMixin } from '../../mixins';
 import CaretDownGlyph from '@carbon/icons-vue/es/caret--down/index';
 import CaretUpGlyph from '@carbon/icons-vue/es/caret--up/index';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
-import methodsMixin from '../../mixins/methods-mixin';
 
 export default {
   name: 'CvNumberInput',

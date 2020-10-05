@@ -58,9 +58,8 @@
 </template>
 
 <script>
-import uidMixin from '../../mixins/uid-mixin';
+import { uidMixin, carbonPrefixMixin } from '../../mixins';
 import Information16 from '@carbon/icons-vue/es/information/16';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvInteractiveTooltip',

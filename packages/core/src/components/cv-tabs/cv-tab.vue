@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import uidMixin from '../../mixins/uid-mixin';
+import { uidMixin } from '../../mixins';
 
 export default {
   name: 'CvTab',

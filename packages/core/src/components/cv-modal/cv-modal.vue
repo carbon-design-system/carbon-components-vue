@@ -81,9 +81,8 @@
 
 <script>
 import CvButton from '../cv-button/cv-button';
-import uidMixin from '../../mixins/uid-mixin';
+import { uidMixin, carbonPrefixMixin } from '../../mixins';
 import Close16 from '@carbon/icons-vue/es/close/16';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvModal',

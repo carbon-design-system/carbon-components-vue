@@ -24,10 +24,7 @@
 </template>
 
 <script>
-import uidMixin from '../../mixins/uid-mixin';
-import radioMixin from '../../mixins/radio-mixin';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
-import methodsMixin from '../../mixins/methods-mixin';
+import { uidMixin, radioMixin, carbonPrefixMixin, methodsMixin } from '../../mixins';
 
 export default {
   name: 'CvRadioButton',

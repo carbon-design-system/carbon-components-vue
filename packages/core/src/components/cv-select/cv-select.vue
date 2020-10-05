@@ -56,13 +56,10 @@
 </template>
 
 <script>
-import uidMixin from '../../mixins/uid-mixin';
-import themeMixin from '../../mixins/theme-mixin';
+import { uidMixin, themeMixin, carbonPrefixMixin, methodsMixin } from '../../mixins';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
 import ChevronDownGlyph from '@carbon/icons-vue/es/chevron--down';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
-import methodsMixin from '../../mixins/methods-mixin';
 
 export default {
   name: 'CvSelect',

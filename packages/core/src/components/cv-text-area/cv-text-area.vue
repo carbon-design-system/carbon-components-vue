@@ -43,11 +43,8 @@
 </template>
 
 <script>
-import uidMixin from '../../mixins/uid-mixin';
-import themeMixin from '../../mixins/theme-mixin';
-import methodsMixin from '../../mixins/methods-mixin';
+import { uidMixin, themeMixin, methodsMixin, carbonPrefixMixin } from '../../mixins';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 export default {
   name: 'CvTextArea',

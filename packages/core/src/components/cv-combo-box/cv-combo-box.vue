@@ -113,13 +113,10 @@
 </template>
 
 <script>
-import themeMixin from '../../mixins/theme-mixin';
+import { themeMixin, uidMixin, carbonPrefixMixin, methodsMixin } from '../../mixins';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16';
 import Close16 from '@carbon/icons-vue/es/close/16';
-import uidMixin from '../../mixins/uid-mixin';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
-import methodsMixin from '../../mixins/methods-mixin';
 
 export default {
   name: 'CvComboBox',

@@ -36,7 +36,7 @@
 
 <script>
 import ChevronDownGlyph from '@carbon/icons-vue/es/chevron--down';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import { carbonPrefixMixin } from '../../mixins';
 
 export default {
   name: 'CvHeaderMenu',
