@@ -13,8 +13,8 @@
     <component :is="icon" :class="`${carbonPrefix}--toast-notification__icon`" />
     <div :class="`${carbonPrefix}--toast-notification__details`">
       <h3 :class="`${carbonPrefix}--toast-notification__title`">{{ title }}</h3>
-      <p :class="`${carbonPrefix}--toast-notification__subtitle`">{{ subTitle }}</p>
-      <p :class="`${carbonPrefix}--toast-notification__caption`">{{ caption }}</p>
+      <p :class="`${carbonPrefix}--toast-notification__subtitle`" v-html="subTitle"></p>
+      <p :class="`${carbonPrefix}--toast-notification__caption`" v-html="caption"></p>
     </div>
     <button
       :aria-label="closeAriaLabel"
