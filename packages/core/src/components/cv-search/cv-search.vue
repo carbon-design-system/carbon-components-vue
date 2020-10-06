@@ -55,14 +55,11 @@
 </template>
 
 <script>
-import uidMixin from '../../mixins/uid-mixin';
-import themeMixin from '../../mixins/theme-mixin';
+import { uidMixin, themeMixin, carbonPrefixMixin, methodsMixin } from '../../mixins';
 import Search16 from '@carbon/icons-vue/es/search/16';
 import Search20 from '@carbon/icons-vue/es/search/20';
 import Close16 from '@carbon/icons-vue/es/close/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
-import methodsMixin from '../../mixins/methods-mixin';
 
 export default {
   name: 'CvSearch',

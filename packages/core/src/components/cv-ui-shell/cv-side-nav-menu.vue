@@ -38,7 +38,7 @@
 <script>
 import ChevronDown20 from '@carbon/icons-vue/es/chevron--down/20';
 import CvSideNavIcon from './cv-side-nav-icon';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import { carbonPrefixMixin } from '../../mixins';
 
 export default {
   name: 'CvSideNavMenu',

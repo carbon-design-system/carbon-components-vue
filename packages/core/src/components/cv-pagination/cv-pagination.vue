@@ -83,7 +83,7 @@ import CvSelect from '../cv-select/cv-select';
 import CvSelectOption from '../cv-select/cv-select-option';
 import CaretLeft16 from '@carbon/icons-vue/es/caret--left/16';
 import CaretRight16 from '@carbon/icons-vue/es/caret--right/16';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import { carbonPrefixMixin } from '../../mixins';
 
 const newPageValue = (page, lastPage) => {
   let result = 1;

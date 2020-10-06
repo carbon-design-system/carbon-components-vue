@@ -43,7 +43,7 @@
 <script>
 import CheckmarkOutline16 from '@carbon/icons-vue/es/checkmark--outline/16';
 import Warning16 from '@carbon/icons-vue/es/warning/16';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import { carbonPrefixMixin } from '../../mixins';
 
 const states = ['incomplete', 'current', 'complete'];
 

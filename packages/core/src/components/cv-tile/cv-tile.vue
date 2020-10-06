@@ -19,13 +19,11 @@
 </template>
 
 <script>
-import themeMixin from '../../mixins/theme-mixin';
+import { themeMixin, carbonPrefixMixin, methodsMixin } from '../../mixins';
 import CvTileClickable from './_cv-tile-clickable';
 import CvTileExpandable from './_cv-tile-expandable';
 import CvTileSelectable from './_cv-tile-selectable';
 import CvTileStandard from './_cv-tile-standard';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
-import methodsMixin from '../../mixins/methods-mixin';
 
 export default {
   name: 'CvTile',

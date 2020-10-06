@@ -21,7 +21,7 @@
 
 <script>
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import { carbonPrefixMixin } from '../../mixins';
 
 export default {
   name: 'CvLoading',

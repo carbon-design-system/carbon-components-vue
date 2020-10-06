@@ -14,7 +14,7 @@
 
 <script>
 import CvSearch from '../cv-search/cv-search';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import { carbonPrefixMixin } from '../../mixins';
 
 export default {
   name: 'CvToolbarSearch',

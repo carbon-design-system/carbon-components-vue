@@ -64,12 +64,9 @@
 </template>
 
 <script>
-import uidMixin from '../../mixins/uid-mixin';
-import themeMixin from '../../mixins/theme-mixin';
+import { uidMixin, themeMixin, carbonPrefixMixin, methodsMixin } from '../../mixins';
 import CvSelect from '../cv-select/cv-select';
 import CvSelectOption from '../cv-select/cv-select-option';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
-import methodsMixin from '../../mixins/methods-mixin';
 
 export default {
   name: 'CvTimePicker',
