@@ -120,13 +120,10 @@
 </template>
 
 <script>
-import themeMixin from '../../mixins/theme-mixin';
-import uidMixin from '../../mixins/uid-mixin';
-import methodsMixin from '../../mixins/methods-mixin';
+import { themeMixin, uidMixin, methodsMixin, carbonPrefixMixin } from '../../mixins';
 import CvDropdownItem from './cv-dropdown-item';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 import clickout from '../../directives/clickout';
 
 export default {

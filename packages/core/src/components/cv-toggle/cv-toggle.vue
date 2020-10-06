@@ -29,10 +29,7 @@
 </template>
 
 <script>
-import uidMixin from '../../mixins/uid-mixin';
-import checkMixin from '../../mixins/check-mixin';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
-import methodsMixin from '../../mixins/methods-mixin';
+import { uidMixin, checkMixin, carbonPrefixMixin, methodsMixin } from '../../mixins';
 
 export default {
   name: 'CvToggle',

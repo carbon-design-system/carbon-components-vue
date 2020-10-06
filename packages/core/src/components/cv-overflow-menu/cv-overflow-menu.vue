@@ -67,9 +67,7 @@
 
 <script>
 import OverflowMenuVertical16 from '@carbon/icons-vue/es/overflow-menu--vertical/16';
-import uidMixin from '../../mixins/uid-mixin';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
-import methodsMixin from '../../mixins/methods-mixin';
+import { uidMixin, carbonPrefixMixin, methodsMixin } from '../../mixins';
 
 export default {
   name: 'CvOverflowMenu',

@@ -39,10 +39,7 @@
 
 <script>
 import ChevronRight16 from '@carbon/icons-vue/es/chevron--right/16';
-import uidMixin from '../../mixins/uid-mixin';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
-import methodsMixin from '../../mixins/methods-mixin';
-
+import { uidMixin, carbonPrefixMixin, methodsMixin } from '../../mixins';
 export default {
   name: 'CvAccordionItem',
   mixins: [uidMixin, carbonPrefixMixin, methodsMixin({ button: ['blur', 'focus'] })],
