@@ -11,6 +11,10 @@
 
 The [library](http://vue.carbondesignsystem.com/) provides front-end developers & engineers a collection of reusable Vue components to build websites and user interfaces. Adopting the library enables developers to use consistent markup, styles, and behavior in prototype and production work.
 
+### Changelog
+
+[CHANGELOG.md](./packages/core/CHANGELOG.md)
+
 ## Gettting started
 
 [Usage and getting started instructions](./packages/core/README.md#getting-started) for @carbon/vue.
