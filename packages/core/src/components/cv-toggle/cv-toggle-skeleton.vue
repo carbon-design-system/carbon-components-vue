@@ -14,8 +14,7 @@
 </template>
 
 <script>
-import uidMixin from '../../mixins/uid-mixin';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import { uidMixin, carbonPrefixMixin } from '../../mixins';
 export default {
   name: 'CvToggleSkeleton',
   mixins: [uidMixin, carbonPrefixMixin],

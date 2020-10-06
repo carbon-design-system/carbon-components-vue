@@ -28,7 +28,7 @@
 
 <script>
 import CvSideNavFooter from './_cv-side-nav-footer';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import { carbonPrefixMixin } from '../../mixins';
 
 export default {
   name: 'CvSideNav',

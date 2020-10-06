@@ -110,15 +110,13 @@
 </template>
 
 <script>
-import uidMixin from '../../mixins/uid-mixin';
+import { uidMixin, carbonPrefixMixin, methodsMixin } from '../../mixins';
 import CvFormItem from '../cv-form/cv-form-item';
 import CheckmarkFilled16 from '@carbon/icons-vue/es/checkmark--filled/16';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import Close16 from '@carbon/icons-vue/es/close/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 import { STATES, KINDS } from './consts.js';
-import methodsMixin from '../../mixins/methods-mixin';
 
 export default {
   name: 'CvFileUploader',

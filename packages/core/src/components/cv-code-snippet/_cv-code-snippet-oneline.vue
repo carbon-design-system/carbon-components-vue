@@ -19,8 +19,7 @@
 </template>
 
 <script>
-import themeMixin from '../../mixins/theme-mixin';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import { themeMixin, carbonPrefixMixin } from '../../mixins';
 import CvFeedbackButton from '../cv-feedback-button/_cv-feedback-button';
 import Copy16 from '@carbon/icons-vue/es/copy/16';
 

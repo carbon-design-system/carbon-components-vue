@@ -187,12 +187,10 @@ import CvButton from '../cv-button/cv-button';
 import CvCheckbox from '../cv-checkbox/cv-checkbox';
 import CvPagination from '../cv-pagination/cv-pagination';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
-import uidMixin from '../../mixins/uid-mixin';
+import { uidMixin, carbonPrefixMixin } from '../../mixins';
 import Search16 from '@carbon/icons-vue/es/search/16';
 import Close16 from '@carbon/icons-vue/es/close/16';
 import ChevronRight16 from '@carbon/icons-vue/es/chevron--right/16';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
-
 export default {
   name: 'CvDataTable',
   components: {

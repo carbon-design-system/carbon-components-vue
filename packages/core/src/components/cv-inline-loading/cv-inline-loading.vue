@@ -29,7 +29,7 @@
 import { STATES } from './consts';
 import ErrorFilled16 from '@carbon/icons-vue/lib/error--filled/16';
 import CheckmarkFilled16 from '@carbon/icons-vue/lib/checkmark--filled/16';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import { carbonPrefixMixin } from '../../mixins';
 
 export default {
   name: 'CvInlineLoading',
