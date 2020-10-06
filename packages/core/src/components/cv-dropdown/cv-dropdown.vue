@@ -20,7 +20,12 @@
     <div
       :class="[
         `${carbonPrefix}--dropdown__wrapper`,
-        { [`${carbonPrefix}--dropdown__wrapper--inline`]: inline, 'cv-dropdown': !formItem },
+        `${carbonPrefix}--list-box__wrapper`,
+        {
+          [`${carbonPrefix}--dropdown__wrapper--inline`]: inline,
+          [`${carbonPrefix}--list-box__wrapper--inline`]: inline,
+          'cv-dropdown': !formItem,
+        },
       ]"
       :style="wrapperStyleOverride"
     >
@@ -41,6 +46,7 @@
             [`${carbonPrefix}--dropdown--light`]: theme === 'light',
             [`${carbonPrefix}--dropdown--up`]: up,
             [`${carbonPrefix}--dropdown--open`]: open,
+            [`${carbonPrefix}--list-box--expanded`]: open,
             [`${carbonPrefix}--dropdown--invalid`]: isInvalid,
             [`${carbonPrefix}--dropdown--disabled`]: disabled,
             [`${carbonPrefix}--dropdown--inline`]: inline,
