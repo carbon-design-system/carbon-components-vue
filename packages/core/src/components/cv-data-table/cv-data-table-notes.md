@@ -2,7 +2,7 @@
 
 A Vue implementation of a Carbon Components DataTable.
 
-http://www.carbondesignsystem.com/components/DataTable/code
+https://www.carbondesignsystem.com/components/data-table/code
 
 ## Usage
 

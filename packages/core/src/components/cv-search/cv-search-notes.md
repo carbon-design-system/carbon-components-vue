@@ -2,7 +2,7 @@
 
 A Vue implementation of a Carbon Components search
 
-http://www.carbondesignsystem.com/components/text-input/code
+https://www.carbondesignsystem.com/components/search/code
 
 ## Usage
 

@@ -2,7 +2,7 @@
 
 A Vue implementation of a Carbon Components multi-select
 
-https://www.carbondesignsystem.com/components/multi-select/code
+https://www.carbondesignsystem.com/components/dropdown/code
 
 ## Usage
 

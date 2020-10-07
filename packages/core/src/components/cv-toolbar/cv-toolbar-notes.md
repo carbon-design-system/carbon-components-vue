@@ -1,8 +1,6 @@
 # CvToolbar
 
-A Vue implementation of a Carbon Components Toolbar.
-
-http://www.carbondesignsystem.com/components/Toolbar/code
+A Vue implementation of a Carbon Components Toolbar (Deprecated).
 
 ## Usage
 
