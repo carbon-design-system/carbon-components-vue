@@ -83,7 +83,6 @@
           />
           <div
             :class="[`${carbonPrefix}--list-box__menu-icon`, { [`${carbonPrefix}--list-box__menu-icon--open`]: open }]"
-            role="button"
           >
             <chevron-down-16 :aria-label="open ? 'Close menu' : 'Open menu'" />
           </div>
