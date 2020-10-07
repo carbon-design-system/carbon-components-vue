@@ -2,7 +2,9 @@
 
 A Vue implementation of a Carbon Components Header
 
-https://www.carbondesignsystem.com/experimental/ui-shell/code
+- https://www.carbondesignsystem.com/components/UI-shell-header/usage
+- https://www.carbondesignsystem.com/components/UI-shell-left-panel/usage
+- https://www.carbondesignsystem.com/components/UI-shell-right-panel/usage
 
 ## Usage
 

@@ -2,7 +2,7 @@
 
 A Vue implementation of a Carbon Components time-picker
 
-http://www.carbondesignsystem.com/components/time-picker/code
+https://www.carbondesignsystem.com/components/date-picker/code
 
 ## Usage
 
