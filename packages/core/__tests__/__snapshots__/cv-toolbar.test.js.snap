@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CvToolbar should render with slot correctly 1`] = `
+<div data-toolbar="" class="bx--toolbar" id="test-1">
+  <div>default test slot</div>
+</div>
+`;
+
+exports[`CvToolbar should render without slot correctly 1`] = `<div data-toolbar="" class="bx--toolbar" id="test-1"></div>`;
+
+exports[`CvToolbarDivider should render correctly 1`] = `<hr class="cv-toolbar-divider bx--toolbar-menu__divider" id="test-1">`;
+
+exports[`CvToolbarOption should render with slot correctly 1`] = `
+<li class="cv-toolbar-option bx--toolbar-menu__option" id="test-1">
+  <div>default test slot</div>
+</li>
+`;
+
+exports[`CvToolbarOption should render without slot correctly 1`] = `<li class="cv-toolbar-option bx--toolbar-menu__option" id="test-1"></li>`;
+
+exports[`CvToolbarSearch should render correctly 1`] = `<cv-search-stub id="test-1" theme="" cleararialabel="Clear search input" kind="toolbar" small="true" value="check-1" placeholder="Search" toolbararialabel="Toolbar search" class="cv-toolbar-search"></cv-search-stub>`;
+
+exports[`CvToolbarTitle should render correctly 1`] = `<li class="cv-toolbar-title bx--toolbar-menu__title" id="test-1">Toolbar test title</li>`;
