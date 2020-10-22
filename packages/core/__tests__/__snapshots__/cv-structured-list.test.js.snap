@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CvStructuredList should render \`headings\` slot correctly 1`] = `
+<div data-structured-list="true" class="bx--structured-list bx--structured-list--selection bx--structured-list--condensed" id="test-1">
+  <div class="bx--structured-list-thead">
+    <div class="bx--structured-list-row bx--structured-list-row--header-row">
+      <div class="headings-slot-test">Headings slot test</div>
+      <div class="bx--structured-list-th"></div>
+    </div>
+  </div>
+  <div class="bx--structured-list-tbody"></div>
+</div>
+`;
+
+exports[`CvStructuredList should render \`items\` slot correctly 1`] = `
+<div data-structured-list="true" class="bx--structured-list bx--structured-list--selection bx--structured-list--condensed" id="test-1">
+  <div class="bx--structured-list-thead">
+    <div class="bx--structured-list-row bx--structured-list-row--header-row">
+      <div class="bx--structured-list-th"></div>
+    </div>
+  </div>
+  <div class="bx--structured-list-tbody">
+    <ul class="items-slot-test">
+      <li>Test 1.1</li>
+      <li>Test 1.2</li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`CvStructuredList should render correctly when condensed 1`] = `
+<div class="bx--structured-list bx--structured-list--condensed" id="test-1">
+  <div class="bx--structured-list-thead">
+    <div class="bx--structured-list-row bx--structured-list-row--header-row">
+      <!---->
+    </div>
+  </div>
+  <div class="bx--structured-list-tbody"></div>
+</div>
+`;
+
+exports[`CvStructuredList should render correctly when not selectable and not condensed 1`] = `
+<div class="bx--structured-list" id="test-1">
+  <div class="bx--structured-list-thead">
+    <div class="bx--structured-list-row bx--structured-list-row--header-row">
+      <!---->
+    </div>
+  </div>
+  <div class="bx--structured-list-tbody"></div>
+</div>
+`;
+
+exports[`CvStructuredList should render correctly when selectable 1`] = `
+<div data-structured-list="true" class="bx--structured-list bx--structured-list--selection" id="test-1">
+  <div class="bx--structured-list-thead">
+    <div class="bx--structured-list-row bx--structured-list-row--header-row">
+      <div class="bx--structured-list-th"></div>
+    </div>
+  </div>
+  <div class="bx--structured-list-tbody"></div>
+</div>
+`;
+
+exports[`CvStructuredList should render correctly when selectable and condensed 1`] = `
+<div data-structured-list="true" class="bx--structured-list bx--structured-list--selection bx--structured-list--condensed" id="test-1">
+  <div class="bx--structured-list-thead">
+    <div class="bx--structured-list-row bx--structured-list-row--header-row">
+      <div class="bx--structured-list-th"></div>
+    </div>
+  </div>
+  <div class="bx--structured-list-tbody"></div>
+</div>
+`;
+
+exports[`CvStructuredListData should render correctly when not wrapped 1`] = `<div class="cv-structured-list-data bx--structured-list-td bx--structured-list-content--nowrap" id="test-1"></div>`;
+
+exports[`CvStructuredListData should render correctly when wrapped 1`] = `<div class="cv-structured-list-data bx--structured-list-td" id="test-1"></div>`;
+
+exports[`CvStructuredListHeading should render correctly 1`] = `<div class="cv-structured-list-heading bx--structured-list-th" id="test-1"></div>`;
+
+exports[`CvStructuredListHeading should render with slot correctly 1`] = `
+<div class="cv-structured-list-heading bx--structured-list-th" id="test-1">
+  <div class="headings-slot-default-test">Headings slot default test</div>
+</div>
+`;
+
+exports[`CvStructuredListItem should render correctly when \`value\` is default 1`] = `<cv-structured-list-item-standard-stub value="" modelvalue="test" id="test-1" class="cv-structured-list-item"></cv-structured-list-item-standard-stub>`;
+
+exports[`CvStructuredListItem should render correctly when \`value\` is set 1`] = `<cv-structured-list-item-standard-stub value="strictured list item value test" modelvalue="test" id="test-1" class="cv-structured-list-item"></cv-structured-list-item-standard-stub>`;
+
+exports[`CvStructuredListItem should render correctly when slot is specified 1`] = `
+<cv-structured-list-item-standard-stub value="" modelvalue="test" id="test-1" class="cv-structured-list-item">
+  <div class="default-slot-test">Default slot test</div>
+</cv-structured-list-item-standard-stub>
+`;
