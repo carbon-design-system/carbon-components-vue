@@ -129,7 +129,7 @@ let preKnobs = {
   autoHighlight: {
     group: 'attr',
     type: boolean,
-    config: ['auto hihglight', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    config: ['auto highlight', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: 'auto-highlight',
   },
   initialValue: {
