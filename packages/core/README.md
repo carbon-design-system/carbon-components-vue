@@ -16,7 +16,7 @@ See [CHANGELOG.md](CHANGELOG.md)
 
 ## Current Components
 
-View available Vue.js components [here](http://vue.carbondesignsystem.com). Usage information is available when you click the blue ? icon in the top right corner of the selected component.
+View available Vue.js components [here](http://vue.carbondesignsystem.com). Usage information is available when you click the blue `?` icon in the top right corner of the selected component.
 
 See [component status pages](https://www.carbondesignsystem.com/component-status) for the status of each component.
 
@@ -26,7 +26,7 @@ Please refer to the [Contribution Guidelines](../../.github/CONTRIBUTING.md) bef
 
 ## Contributing
 
-Fork, create branch, submit PR. The PR will be used as part of a review process.
+Fork this repository, create a new branch, and submit a pull request to this repository. The PR will be used as part of a review process.
 
 # Usage
 
@@ -41,15 +41,16 @@ The components do not import any of the carbon styles themselves. Use the SCSS o
 
 ## List of Available Components
 
-View available Vue Components [here](http://vue.carbondesignsystem.com). Usage information is in the notes tab.
+View the available Carbon Vue components [here](http://vue.carbondesignsystem.com). Usage information is in the notes tab.
 
 # Getting Started
 
 ## Quick Start (Vue CLI)
 
-Assuming we're starting with a new Vue CLI project:
+Assuming we're starting with a new project through the [Vue CLI](https://cli.vuejs.org/) (not with the plain Vue Webpack template, which might not work):
 
 ```sh
+> vue create newprojectname
 Vue CLI v3.7.0
 ? Please pick a preset: Manually select features
 ? Check the features needed for your project: Babel, CSS Pre-processors
@@ -62,13 +63,13 @@ sass)
 Using Yarn
 
 ```sh
-$ yarn add @carbon/vue
+$ yarn add @carbon/vue --dev
 ```
 
 Or npm
 
 ```sh
-$ npm install @carbon/vue
+$ npm install --save-dev @carbon/vue
 ```
 
 In src/main.js add the following to include the carbon styles and components.
@@ -154,16 +155,16 @@ $ npm serve
 
 ### Install
 
-Run the following command using [npm](https://www.npmjs.com/):
+Run the following command using [Yarn](https://yarnpkg.com/en/):
 
 ```bash
-npm install @carbon/vue
+yarn add @carbon/vue --dev
 ```
 
-If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead:
+If you prefer [npm](https://www.npmjs.com/), use the following command instead:
 
 ```bash
-yarn add @carbon/vue
+npm install --save-dev @carbon/vue
 ```
 
 NOTE: [current-script-polyfill](https://www.npmjs.com/package/current-script-polyfill) is required for older browsers (_e.g._ IE11)
