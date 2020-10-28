@@ -28,7 +28,7 @@ const preKnobs = {
   itemsShown: {
     group: 'attr',
     type: number,
-    config: ['Number of items to be shown', 100],
+    config: ['Number of items to be shown', 5],
     prop: 'items-shown',
   },
   allowLoop: {
@@ -36,18 +36,6 @@ const preKnobs = {
     type: boolean,
     config: ['Allow user to loop through the items', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: 'allow-loop',
-  },
-  disableBackwards: {
-    group: 'attr',
-    type: boolean,
-    config: ['Disable backwards button', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: 'backwards-button-disabled',
-  },
-  disabledForwards: {
-    group: 'attr',
-    type: boolean,
-    config: ['Disable forwards button', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: 'forwards-button-disabled',
   },
   events: {
     group: 'attr',

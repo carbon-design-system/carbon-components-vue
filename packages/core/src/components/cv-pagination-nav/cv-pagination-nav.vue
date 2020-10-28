@@ -11,20 +11,20 @@
           <CaretLeft16 :class="`${carbonPrefix}--pagination__button-icon`" />
         </button>
       </li>
+      <!-- render first item if at least 5 items can be displayed or
+      4 items can be displayed and the current page is either 0 or 1 -->
+      <!-- <CvPaginationNavItem :item="1" :selected="currentPage === 1" /> -->
+      <!-- render first overflow -->
+      <!-- <CvPaginationNavOverflow v-if="frontCut" :from-index="frontCut.from" :count="frontCut.count" /> -->
 
-      <li :class="`${carbonPrefix}--pagination-nav__list-item`" v-for="item in totalItems" :key="item">
-        <button
-          type="button"
-          :class="[
-            `${carbonPrefix}--pagination-nav__page`,
-            { [`${carbonPrefix}--pagination-nav__page--active`]: item == currentPage },
-          ]"
-          :data-page="item"
-          @click="onSelect(item)"
-        >
-          <span :class="`${carbonPrefix}--pagination-nav__accessibility-label`">Page</span>{{ item }}
-        </button>
-      </li>
+      <!-- render items between overflows -->
+      <CvPaginationNavItem v-for="item in totalItems" :key="item" :item="item" :selected="item == currentPage" />
+
+      <!-- render second overflow -->
+      <!-- <CvPaginationNavOverflow v-if="backCut" :from-index="backCut.from" :count="backCut.count" /> -->
+
+      <!-- render last item unless there is only one in total -->
+      <!-- <CvPaginationNavItem v-if="totalItems > 1" :item="totalItems" :selected="currentPage === totalItems" /> -->
 
       <li :class="`${carbonPrefix}--pagination-nav__list-item`">
         <button
@@ -41,19 +41,17 @@
 </template>
 
 <script>
-// import CvSelect from '../cv-select/cv-select';
-// import CvSelectOption from '../cv-select/cv-select-option';
 import CaretLeft16 from '@carbon/icons-vue/es/caret--left/16';
 import CaretRight16 from '@carbon/icons-vue/es/caret--right/16';
 import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+// import CvPaginationNavOverflow from './cv-pagination-nav-overflow';
+import CvPaginationNavItem from './cv-pagination-nav-item';
 
 export default {
   name: 'CvPaginationNav',
   mixins: [carbonPrefixMixin],
-  components: { CaretLeft16, CaretRight16 },
+  components: { CaretLeft16, CaretRight16, CvPaginationNavItem },
   props: {
-    backwardsButtonDisabled: Boolean,
-    forwardsButtonDisabled: Boolean,
     allowLoop: { type: Boolean, default: false },
     page: { type: Number, default: 1 },
     totalItems: { type: Number, default: 10 },
@@ -64,19 +62,43 @@ export default {
       currentPage: this.page,
     };
   },
-  mounted() {},
-  watch: {},
+  created: function() {
+    this.$on('cv:selected', index => this.onSelect(index));
+  },
   computed: {
     noWayBack() {
       if (this.backwardsButtonDisabled) return this.backwardsButtonDisabled;
-      if (this.allowLoop) return !this.allowLoop;
+      if (this.allowLoop) return false;
       return this.currentPage === 1;
     },
     noWayForward() {
       if (this.forwardsButtonDisabled) return this.forwardsButtonDisabled;
-      if (this.allowLoop) return !this.allowLoop;
+      if (this.allowLoop) return false;
       return this.currentPage === this.totalItems;
     },
+    // frontCut() {
+    //   if (this.totalItems <= this.itemsShown) return null;
+    //   const split = Math.ceil(this.itemsShown / 2) - 1;
+    //   let x = {
+    //     from: 2,
+    //     count: this.page + 1 - split,
+    //   };
+    //   return x;
+    // },
+    // backCut() {
+    //   if (this.totalItems <= this.itemsShown) return null;
+    //   const split = Math.ceil(this.itemsShown / 2) - 1;
+    //   let count = this.totalItems - this.page - (this.totalItems - split) + 1;
+    //   let x = {
+    //     from: this.totalItems - count - 1,
+    //     count: count,
+    //   };
+    //   return x;
+    // },
+    // middleItems() {
+    //   let middleStart = this.frontCut.from + this.frontCut.count - 1 || 2;
+    //   return Array.from({ length: this.totalItems }, (_, i) => i + middleStart).filter(i => i < this.backCut.from - 1);
+    // },
   },
   methods: {
     onSelect(index) {
