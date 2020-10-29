@@ -26,11 +26,8 @@
 </template>
 
 <script>
-import uidMixin from '../../mixins/uid-mixin';
-import radioMixin from '../../mixins/radio-mixin';
+import { uidMixin, radioMixin, carbonPrefixMixin } from '../../mixins';
 import CheckmarkFilled16 from '@carbon/icons-vue/es/checkmark--filled/16';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
-
 export default {
   name: 'CvStructuredListItemSelectable',
   components: { CheckmarkFilled16 },

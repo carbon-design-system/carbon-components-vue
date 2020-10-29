@@ -54,7 +54,7 @@ import CvCheckbox from '../cv-checkbox/cv-checkbox';
 import CvOverflowMenu from '../cv-overflow-menu/cv-overflow-menu';
 import CvOverflowMenuItem from '../cv-overflow-menu/cv-overflow-menu-item';
 import ChevronRight16 from '@carbon/icons-vue/es/chevron--right/16';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import { carbonPrefixMixin } from '../../mixins';
 
 export default {
   name: 'CvDataTableRowInner',

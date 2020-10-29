@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.34.0-canary.1
+
+fix: update flatpikr to use Carbon plugin versions
+feat: allow html in notification subtitle and caption
+fix: add tests for cv-tooltip
+chore: update mixin imports
+fix: CvDropdown missing listbox classes
+fix: add test for cv-search
+feat: add cv-grid, cv-row and cv-column to match Carbon React feature.
+
 ## 2.34.0-canary.0
 
 fix: use of v-slot syntax not visible in beforeUpdate lifecycle method switched to updated.

@@ -20,7 +20,12 @@
     <div
       :class="[
         `${carbonPrefix}--dropdown__wrapper`,
-        { [`${carbonPrefix}--dropdown__wrapper--inline`]: inline, 'cv-dropdown': !formItem },
+        `${carbonPrefix}--list-box__wrapper`,
+        {
+          [`${carbonPrefix}--dropdown__wrapper--inline`]: inline,
+          [`${carbonPrefix}--list-box__wrapper--inline`]: inline,
+          'cv-dropdown': !formItem,
+        },
       ]"
       :style="wrapperStyleOverride"
     >
@@ -41,6 +46,7 @@
             [`${carbonPrefix}--dropdown--light`]: theme === 'light',
             [`${carbonPrefix}--dropdown--up`]: up,
             [`${carbonPrefix}--dropdown--open`]: open,
+            [`${carbonPrefix}--list-box--expanded`]: open,
             [`${carbonPrefix}--dropdown--invalid`]: isInvalid,
             [`${carbonPrefix}--dropdown--disabled`]: disabled,
             [`${carbonPrefix}--dropdown--inline`]: inline,
@@ -77,7 +83,6 @@
           />
           <div
             :class="[`${carbonPrefix}--list-box__menu-icon`, { [`${carbonPrefix}--list-box__menu-icon--open`]: open }]"
-            role="button"
           >
             <chevron-down-16 :aria-label="open ? 'Close menu' : 'Open menu'" />
           </div>
@@ -114,13 +119,10 @@
 </template>
 
 <script>
-import themeMixin from '../../mixins/theme-mixin';
-import uidMixin from '../../mixins/uid-mixin';
-import methodsMixin from '../../mixins/methods-mixin';
+import { themeMixin, uidMixin, methodsMixin, carbonPrefixMixin } from '../../mixins';
 import CvDropdownItem from './cv-dropdown-item';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 import clickout from '../../directives/clickout';
 
 export default {

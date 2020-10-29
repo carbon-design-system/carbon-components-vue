@@ -13,7 +13,7 @@
 <script>
 import CvSkeletonText from '../cv-skeleton-text/cv-skeleton-text';
 import ChevronRight16 from '@carbon/icons-vue/es/chevron--right/16';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import { carbonPrefixMixin } from '../../mixins';
 
 export default {
   name: 'CvAccordionItemSkeleton',

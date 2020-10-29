@@ -77,11 +77,9 @@ import carbonFlatpickrFixEventsPlugin from './plugins/fixEventsPlugin';
 import carbonFlatpickrRangePlugin from './plugins/rangePlugin';
 import carbonFlatpickrMonthSelectPlugin from './plugins/monthSelectPlugin';
 
-import uidMixin from '../../mixins/uid-mixin';
-import themeMixin from '../../mixins/theme-mixin';
+import { uidMixin, themeMixin, carbonPrefixMixin } from '../../mixins';
 import Calendar16 from '@carbon/icons-vue/es/calendar/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
 
 // Weekdays shorthand for english locale
 l10n.en.weekdays.shorthand.forEach((day, index) => {

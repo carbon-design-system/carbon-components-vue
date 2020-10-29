@@ -9,7 +9,7 @@
 <script>
 import CvSkeletonText from '../cv-skeleton-text/cv-skeleton-text';
 import CvButtonSkeleton from '../cv-button/cv-button-skeleton';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import { carbonPrefixMixin } from '../../mixins';
 
 export default {
   name: 'CvFileUploaderSkeleton',

@@ -8,7 +8,7 @@
 
 <script>
 import buttonMixin from './button-mixin';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import { carbonPrefixMixin } from '../../mixins';
 import CvSvg from '../cv-svg/_cv-svg';
 
 export default {

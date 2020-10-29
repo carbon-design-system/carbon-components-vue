@@ -37,8 +37,7 @@
 
 <script>
 import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
-import methodsMixin from '../../mixins/methods-mixin';
+import { carbonPrefixMixin, methodsMixin } from '../../mixins';
 
 export default {
   name: 'CvTileExpandable',

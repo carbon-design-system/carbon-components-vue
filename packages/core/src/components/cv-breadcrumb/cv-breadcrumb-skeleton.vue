@@ -8,7 +8,7 @@
 
 <script>
 import CvBreadcrumbItemSkeleton from './_cv-breadcrumb-item-skeleton';
-import carbonPrefixMixin from '../../mixins/carbon-prefix-mixin';
+import { carbonPrefixMixin } from '../../mixins';
 
 export default {
   name: 'CvBreadcrumbSkeleton',
