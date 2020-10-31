@@ -318,7 +318,7 @@ for (const story of storySet) {
 storiesDefault.add(
   'button-set',
   () => {
-    const templateString = `<cv-button-set>
+    const templateString = `<cv-button-set :stacked="stacked"">
   <cv-button kind="primary">button 1</cv-button>
   <cv-button kind="secondary">button 2</cv-button>
   <cv-button kind="danger">button 3</cv-button>
@@ -336,6 +336,9 @@ storiesDefault.add(
     return {
       components: { CvButtonSet, CvButton, SvTemplateView },
       template: templateViewString,
+      props: {
+        stacked: { default: boolean('Stacked', false) },
+      },
     };
   },
   {
