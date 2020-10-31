@@ -16,7 +16,7 @@ http://www.carbondesignsystem.com/components/button/code
 
 - kind: 'primary' (default), 'secondary', ghost, or 'danger'. Optional.
 - small: (deprecated prefer size) If true smaller version of button.
-- size: optional value 'field' or 'small'
+- size: optional value; default, 'field', 'sm' (small), 'lg' (large), 'xl' (extra large). NOTE: At Carbon 10.23.1 icon-button treats 'lg' and 'xl' as default.
 - icon: is optional. It takes an Vue Component expected to be a an icon that follows the pattern used for fill/color/stroke in Carbon Icons. It can be in the form of: a component (e.g. @carbon/icons-vue), an SVG symbol path, an SVG path, raw SVG.
 - icon-href: deprecated in favour of icon attribute. Expects tring path to SVG icon..
 
@@ -50,6 +50,10 @@ As per CvButton with the addition of
 # cv-button-set
 
 A wrapper for a set of cv-button components that formats them as a group
+
+## Attributes
+
+- stacked: Button set is arranged vertically
 
 ```html
 <cv-button-set>

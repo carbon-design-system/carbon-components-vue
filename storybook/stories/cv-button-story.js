@@ -43,7 +43,9 @@ let preKnobs = {
       {
         default: '',
         field: 'field',
-        small: 'small',
+        'small (sm)': 'sm',
+        'large (lg)': 'lg',
+        'Extra large (xl)': 'xl',
       },
       '',
     ], // consts.CONFIG], // fails when used with number in storybook 4.1.4
