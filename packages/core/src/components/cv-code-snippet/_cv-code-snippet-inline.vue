@@ -1,11 +1,8 @@
 <template>
   <cv-feedback-button
+    v-if="!hideCopyButton"
     class="cv-code-snippet-inline"
-    :class="[
-      `${carbonPrefix}--snippet`,
-      `${carbonPrefix}--snippet--inline`,
-      { [`${carbonPrefix}--snippet--light`]: theme === 'light' },
-    ]"
+    :class="classes"
     :feedback="copyFeedback"
     inline
     :aria-label="feedbackAriaLabel"
@@ -13,6 +10,9 @@
   >
     <slot></slot>
   </cv-feedback-button>
+  <span v-else :class="classes">
+    <slot></slot>
+  </span>
 </template>
 
 <script>
@@ -28,6 +28,12 @@ export default {
   props: {
     copyFeedback: String,
     feedbackAriaLabel: String,
+    hideCopyButton: Boolean,
+  },
+  computed: {
+    classes() {
+      return [`${this.carbonPrefix}--snippet`, `${this.carbonPrefix}--snippet--inline`];
+    },
   },
 };
 </script>

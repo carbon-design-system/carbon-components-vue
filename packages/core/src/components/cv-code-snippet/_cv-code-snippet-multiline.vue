@@ -4,16 +4,21 @@
     :class="[
       `${carbonPrefix}--snippet`,
       `${carbonPrefix}--snippet--multi`,
-      { [`${carbonPrefix}--snippet--expand`]: expanded, [`${carbonPrefix}--snippet--light`]: theme === 'light' },
+      { [`${carbonPrefix}--snippet--expand`]: expanded },
     ]"
     data-code-snippet
   >
-    <div :class="`${carbonPrefix}--snippet-container`">
+    <div :class="[`${carbonPrefix}--snippet-container`]">
       <pre>
         <slot></slot>
       </pre>
     </div>
-    <cv-feedback-button :feedback="copyFeedback" :aria-label="feedbackAriaLabel" @click="$emit('copy-code')">
+    <cv-feedback-button
+      v-if="!hideCopyButton"
+      :feedback="copyFeedback"
+      :aria-label="feedbackAriaLabel"
+      @click="$emit('copy-code')"
+    >
       <Copy16 :class="`${carbonPrefix}--snippet__icon`" />
     </cv-feedback-button>
 
@@ -48,10 +53,11 @@ export default {
     ChevronDown16,
   },
   props: {
+    copyFeedback: String,
+    feedbackAriaLabel: String,
+    hideCopyButton: Boolean,
     lessText: { type: String, default: 'Show less' },
     moreText: { type: String, default: 'Show more' },
-    feedbackAriaLabel: String,
-    copyFeedback: String,
   },
   data() {
     return {
