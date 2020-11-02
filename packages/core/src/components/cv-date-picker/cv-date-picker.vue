@@ -7,7 +7,7 @@
         `${this.carbonPrefix}--date-picker ${this.carbonPrefix}--date-picker--${this.kind}`,
         {
           [`${carbonPrefix}--date-picker--simple`]: this.kind === 'short',
-          [`${carbonPrefix}--date-picker--light`]: theme === 'light',
+          [`${carbonPrefix}--date-picker--light`]: isLight,
           'cv-date-pciker': !formItem,
         },
       ]"

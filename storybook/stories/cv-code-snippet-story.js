@@ -49,12 +49,11 @@ let preKnobs = {
     slot: 'default',
     value: 'printf("A short bit of code.");',
   },
-  theme: {
+  light: {
     group: 'attr',
     type: boolean,
-    config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: 'theme',
-    value: val => (val ? 'light' : ''),
+    config: ['light', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'light',
   },
   wrapText: {
     group: 'attr',
@@ -96,7 +95,7 @@ let variants = [
   },
   {
     name: 'inline',
-    includes: ['inlineContent', 'theme', 'copyFeedback', 'feedbackAriaLabel', 'hideCopyButton'],
+    includes: ['inlineContent', 'light', 'copyFeedback', 'feedbackAriaLabel', 'hideCopyButton'],
     extra: { kind: { group: 'attr', value: 'kind="inline"', inline: true } },
   },
   {
@@ -116,7 +115,7 @@ let variants = [
   },
   {
     name: 'oneline',
-    includes: ['content', 'copyFeedback', 'feedbackAriaLabel', 'theme', 'hideCopyButton'],
+    includes: ['content', 'copyFeedback', 'feedbackAriaLabel', 'light', 'hideCopyButton'],
     extra: { kind: { group: 'attr', value: 'kind="oneline"' } },
   },
   {
@@ -147,7 +146,7 @@ for (const story of storySet) {
       const templateViewString = `
     <sv-template-view ref="view"
       sv-margin
-      :sv-alt-back="this.$options.propsData.theme !== 'light'"
+      :sv-alt-back="!this.$options.propsData.light"
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
     </sv-template-view>

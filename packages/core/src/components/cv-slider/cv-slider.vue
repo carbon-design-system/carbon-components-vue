@@ -41,7 +41,7 @@
         type="number"
         :class="[
           `${carbonPrefix}--text-input ${carbonPrefix}--slider-text-input`,
-          { [`${carbonPrefix}--text-input--light`]: theme === 'light' },
+          { [`${carbonPrefix}--text-input--light`]: isLight },
         ]"
         :placeholder="min"
         v-model="internalValue"

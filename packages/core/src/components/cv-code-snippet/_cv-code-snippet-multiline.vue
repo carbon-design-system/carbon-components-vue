@@ -41,11 +41,11 @@ import CvButton from '../cv-button/cv-button';
 
 import Copy16 from '@carbon/icons-vue/es/copy/16';
 import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16';
-import { carbonPrefixMixin, themeMixin } from '../../mixins';
+import { carbonPrefixMixin } from '../../mixins';
 
 export default {
   name: 'CvCodeSnippetMultiline',
-  mixins: [themeMixin, carbonPrefixMixin],
+  mixins: [carbonPrefixMixin],
   components: {
     CvButton,
     CvFeedbackButton,

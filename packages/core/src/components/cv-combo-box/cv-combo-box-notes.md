@@ -80,7 +80,8 @@ autohighlight: false
 - helper-text: optional helper text
 - invalid-message: optional error message
 - title: the title text for the input
-- theme: optional 'light',
+- light: Lighter variant, typically alternate background
+- theme: (deprecated use light) '' or 'light'
 - inline: optional boolean, if true changes layout and hides helper text
 - disabled: enable disables the component
 - options: array objects containing value, label and name for checkboxes.

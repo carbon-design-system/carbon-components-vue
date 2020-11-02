@@ -24,7 +24,7 @@
       :class="[
         `${carbonPrefix}--multi-select ${carbonPrefix}--list-box`,
         {
-          [`${carbonPrefix}--list-box--light`]: theme === 'light',
+          [`${carbonPrefix}--list-box--light`]: isLight,
           [`${carbonPrefix}--list-box--expanded`]: open,
           [`${carbonPrefix}--multi-select--invalid`]: isInvalid,
           [`${carbonPrefix}--multi-select--disabled`]: disabled,

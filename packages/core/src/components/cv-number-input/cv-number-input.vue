@@ -5,7 +5,7 @@
       :class="[
         `${carbonPrefix}--number`,
         {
-          [`${carbonPrefix}--number--light`]: theme === 'light',
+          [`${carbonPrefix}--number--light`]: isLight,
           [`${carbonPrefix}--number--helpertext`]: isHelper,
           [`cv-number-input`]: !formItem,
           [`${carbonPrefix}--number--mobile`]: mobile,

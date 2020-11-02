@@ -26,12 +26,12 @@
 import CvCodeSnippetInline from './_cv-code-snippet-inline';
 import CvCodeSnippetMultiline from './_cv-code-snippet-multiline';
 import CvCodeSnippetOneline from './_cv-code-snippet-oneline';
-import { carbonPrefixMixin } from '../../mixins';
+import { carbonPrefixMixin, themeMixin } from '../../mixins';
 
 export default {
   name: 'CvCodeSnippet',
   inheritAttrs: false,
-  mixins: [carbonPrefixMixin],
+  mixins: [carbonPrefixMixin, themeMixin],
   components: {
     CvCodeSnippetInline,
     CvCodeSnippetMultiline,
@@ -53,7 +53,7 @@ export default {
       return [
         `cv-code-snippet`,
         {
-          [`${this.carbonPrefix}--snippet--light`]: this.theme === 'light',
+          [`${this.carbonPrefix}--snippet--light`]: this.isLight,
           [`${this.carbonPrefix}--snippet--no-copy`]: this.hideCopyButton,
           [`${this.carbonPrefix}--snippet--wraptext`]: this.wrapText,
         },

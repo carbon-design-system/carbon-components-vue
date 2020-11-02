@@ -13,12 +13,11 @@ const storiesDefault = storiesOf('Components/CvDatePicker', module);
 // const storiesExperimental = storiesOf('Experimental/CvDatePicker', module);
 
 const preKnobs = {
-  theme: {
+  light: {
     group: 'attr',
     type: boolean,
-    config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: 'theme',
-    value: val => (val ? 'light' : ''),
+    config: ['light', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'light',
   },
   dateLabel: {
     group: 'attr',
@@ -102,11 +101,11 @@ const preKnobs = {
 const variants = [
   {
     name: 'default',
-    includes: ['theme', 'dateLabel', 'pattern', 'placeholder', 'invalidMessage'],
+    includes: ['light', 'dateLabel', 'pattern', 'placeholder', 'invalidMessage'],
   },
   {
     name: 'invalid message slot',
-    includes: ['theme', 'dateLabel', 'pattern', 'placeholder', 'invalidMessage', 'invalidMessageSlot'],
+    includes: ['light', 'dateLabel', 'pattern', 'placeholder', 'invalidMessage', 'invalidMessageSlot'],
   },
   { name: 'minimal', includes: ['eventsSimple'] },
   {
@@ -177,7 +176,7 @@ for (const story of storySet) {
       const templateViewString = `
       <sv-template-view
         sv-margin
-        :sv-alt-back="this.$options.propsData.theme !== 'light'"
+        :sv-alt-back="!this.$options.propsData.light"
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>
         <template slot="other">

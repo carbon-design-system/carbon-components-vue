@@ -17,11 +17,11 @@
 
 <script>
 import CvFeedbackButton from '../cv-feedback-button/_cv-feedback-button';
-import { themeMixin, carbonPrefixMixin } from '../../mixins';
+import { carbonPrefixMixin } from '../../mixins';
 
 export default {
   name: 'CvCodeSnippetInline',
-  mixins: [themeMixin, carbonPrefixMixin],
+  mixins: [carbonPrefixMixin],
   components: {
     CvFeedbackButton,
   },

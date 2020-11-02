@@ -1,7 +1,7 @@
 <template>
   <div :class="`cv-time-picker ${carbonPrefix}--form-item`">
     <div
-      :class="[`${carbonPrefix}--time-picker`, { [`${carbonPrefix}--time-picker--light`]: theme === 'light' }]"
+      :class="[`${carbonPrefix}--time-picker`, { [`${carbonPrefix}--time-picker--light`]: isLight }]"
       :data-invalid="isInvalid"
     >
       <div :class="`${carbonPrefix}--time-picker__input`">
@@ -12,7 +12,7 @@
           type="text"
           :class="[
             `${carbonPrefix}--time-picker__input-field ${carbonPrefix}--text-input`,
-            { [`${carbonPrefix}--text-input--light`]: theme === 'light' },
+            { [`${carbonPrefix}--text-input--light`]: isLight },
           ]"
           :pattern="pattern"
           v-bind="$attrs"
