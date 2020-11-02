@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.34.0
+
+fix: links in storybook notes
+fix: #1042 - CvDropdown role applied incorrectly to chevron
+
 ## 2.34.0-canary.1
 
 fix: update flatpikr to use Carbon plugin versions
