@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.34.1
+
+chore: add tests for cv-code-snippet, cv-toolbar, cv-structured-list
+fix: spurious tab index in tag
+fix: safari focus out before click
+
 ## 2.34.0
 
 fix: links in storybook notes
