@@ -8,7 +8,6 @@
         [`${carbonPrefix}--tag--disabled`]: disabled,
       },
     ]"
-    :tabindex="!disabled ? 0 : undefined"
     role="listitem"
     :title="title"
     @keydown.enter.stop.prevent="$emit('remove')"
