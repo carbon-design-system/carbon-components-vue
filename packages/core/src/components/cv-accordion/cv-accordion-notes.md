@@ -63,7 +63,7 @@ CvAccordion
 
 CvAccordion
 align: Accordion heading alignment (start, end)
-size: default, sm or xl
+size: default, 'sm' or 'xl'
 
 CvAccordionItem
 disabled: accordion item disabled

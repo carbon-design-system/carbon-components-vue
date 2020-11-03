@@ -1,12 +1,22 @@
 <template>
-  <div data-content-switcher :class="`cv-content-switcher ${carbonPrefix}--content-switcher`" role="tablist">
+  <div
+    data-content-switcher
+    :class="[
+      `cv-content-switcher ${carbonPrefix}--content-switcher`,
+      {
+        [`${carbonPrefix}--content-switcher--light`]: isLight,
+        [`${carbonPrefix}--content-switcher--${size}`]: size,
+      },
+    ]"
+    role="tablist"
+  >
     <slot></slot>
   </div>
 </template>
 
 <script>
 import store from './cv-content-switcher-store';
-import { carbonPrefixMixin } from '../../mixins';
+import { carbonPrefixMixin, themeMixin } from '../../mixins';
 
 const toggleContent = (selector, on) => {
   // hide content
@@ -24,12 +34,19 @@ const toggleContent = (selector, on) => {
 
 export default {
   name: 'CvContentSwitcher',
-  mixins: [carbonPrefixMixin],
+  mixins: [carbonPrefixMixin, themeMixin],
   created() {
     // add these on created otherwise cv:mounted is too late.
     this.$on('cv:open', srcComponent => this.onCvOpen(srcComponent));
     this.$on('cv:mounted', srcComponent => this.onCvMount(srcComponent));
     this.$on('cv:beforeDestroy', srcComponent => this.onCvBeforeDestroy(srcComponent));
+  },
+  props: {
+    size: {
+      type: String,
+      default: undefined,
+      validator: val => ['', 'sm', 'xl'].includes(val),
+    },
   },
   data() {
     return {
