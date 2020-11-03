@@ -251,5 +251,10 @@ export default {
       }
     },
   },
+  beforeDestroy() {
+    if (this.dataVisible) {
+      this.$emit('after-modal-hidden');
+    }
+  },
 };
 </script>
