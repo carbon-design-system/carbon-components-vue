@@ -13,6 +13,7 @@ http://www.carbondesignsystem.com/components/loading/code
 ## Attributes
 
 - active: Boolean,
+- description: Optional description used as a title text default 'Loading'
 - overlay: Boolean,
 - small: Boolean,
 

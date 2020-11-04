@@ -10,8 +10,11 @@
       }"
       ref="loading"
     >
+      <label :class="`${carbonPrefix}--visually-hidden`">
+        {{ description }}
+      </label>
       <svg :class="`${carbonPrefix}--loading__svg`" viewBox="-75 -75 150 150">
-        <title>Loading</title>
+        <title>{{ description }}</title>
         <circle v-if="small" :class="`${carbonPrefix}--loading__background`" cx="0" cy="0" :r="loadingRadius" />
         <circle :class="`${carbonPrefix}--loading__stroke`" cx="0" cy="0" :r="loadingRadius" />
       </svg>
@@ -29,6 +32,7 @@ export default {
   components: { CvWrapper },
   props: {
     active: { type: Boolean, default: true },
+    description: { type: String, default: 'Loading' },
     overlay: Boolean,
     small: Boolean,
   },
