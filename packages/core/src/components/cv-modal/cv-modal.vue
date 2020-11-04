@@ -18,6 +18,7 @@
         `${carbonPrefix}--modal-container`,
         { [`${carbonPrefix}--modal-container--${internalSize}`]: internalSize },
       ]"
+      v-bind="dialogAttrs"
       ref="modalDialog"
     >
       <div
@@ -92,6 +93,7 @@ export default {
     Close16,
   },
   props: {
+    alert: Boolean,
     closeAriaLabel: { type: String, default: 'Close modal' },
     kind: {
       type: String,
@@ -133,6 +135,20 @@ export default {
     },
   },
   computed: {
+    dialogAttrs() {
+      const passive = !(this.hasPrimary || this.hasSecondary);
+      const attrs = { role: 'dialog' };
+
+      if (this.alert) {
+        if (passive) {
+          attrs.role = 'alert';
+        } else {
+          attrs.role = 'alertdialog';
+          attrs['aria-describedBy'] = this.uid;
+        }
+      }
+      return attrs;
+    },
     primaryKind() {
       if (this.kind === 'danger') {
         return 'danger';
