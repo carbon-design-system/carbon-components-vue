@@ -63,13 +63,13 @@ sass)
 Using Yarn
 
 ```sh
-$ yarn add @carbon/vue --dev
+$ yarn add @carbon/vue
 ```
 
 Or npm
 
 ```sh
-$ npm install --save-dev @carbon/vue
+$ npm install --save @carbon/vue
 ```
 
 In src/main.js add the following to include the carbon styles and components.
@@ -158,13 +158,13 @@ $ npm serve
 Run the following command using [Yarn](https://yarnpkg.com/en/):
 
 ```bash
-yarn add @carbon/vue --dev
+yarn add @carbon/vue
 ```
 
 If you prefer [npm](https://www.npmjs.com/), use the following command instead:
 
 ```bash
-npm install --save-dev @carbon/vue
+npm install --save @carbon/vue
 ```
 
 NOTE: [current-script-polyfill](https://www.npmjs.com/package/current-script-polyfill) is required for older browsers (_e.g._ IE11)
