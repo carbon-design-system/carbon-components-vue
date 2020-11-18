@@ -244,8 +244,15 @@ export default {
       //restore any previous scrollability
       document.body.classList.remove(`${this.carbonPrefix}--body--with-modal-open`);
 
+      if (this.dataVisible) {
+        this.$el.addEventListener('transitionend', this.afterHide, { once: true });
+      }
+
       this.dataVisible = false;
       this.$emit('modal-hidden');
+    },
+    afterHide() {
+      this.$emit('after-modal-hidden');
     },
     onPrimaryClick(ev) {
       this.$emit('primary-click');
@@ -259,6 +266,11 @@ export default {
         this._maybeHide(ev, 'secondary-click');
       }
     },
+  },
+  beforeDestroy() {
+    if (this.dataVisible) {
+      this.$emit('after-modal-hidden');
+    }
   },
 };
 </script>

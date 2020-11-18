@@ -129,7 +129,8 @@ const preKnobs = {
     group: 'attr',
     value: `@modal-shown="actionShown"
   @modal-hidden="actionHidden"
-  @modal-hide-request="actionHideRequest"`,
+  @modal-hide-request="actionHideRequest"
+  @after-modal-hidden="actionAfterHidden"`,
   },
   primarySecondaryEvents: {
     group: 'attr',
@@ -256,6 +257,7 @@ for (const story of storySet) {
           actionPrimary: action('CV Modal - primary-click'),
           actionSecondary: action('CV Modal - secondary-click'),
           actionHideRequest: action('Cv Modal - modal-hide-request'),
+          actionAfterHidden: action('CV Modal - after-modal-hidden'),
         },
         template: templateViewString,
       };

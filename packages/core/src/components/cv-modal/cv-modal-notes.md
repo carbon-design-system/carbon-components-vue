@@ -68,5 +68,6 @@ This is done after the modal transitions into its visible state, which is trigge
 - modal-shown
 - modal-hidden
 - modal-hide-request - emitted when 'auto-hide-off' is set to true. Raw event with the additional attribute 'cv:reason' set to 'primary-click', 'secondary-click', 'escape-press', 'external-click' or 'close-click'
+- after-modal-hidden - emitted only after the modal hide transition is finished. It will NOT fire if the modal is hidden when it's not visible
 - primary-click
 - secondary-click
