@@ -11,7 +11,9 @@
     class="cv-accordion-item"
     :class="[
       `${carbonPrefix}--accordion__item`,
+
       {
+        [`${carbonPrefix}--accordion__item--disabled`]: disabled,
         [`${carbonPrefix}--accordion__item--active`]: dataOpen,
         [`${carbonPrefix}--accordion__item--${this.animation}`]: animation,
       },
@@ -19,6 +21,7 @@
     @animationend="onAnimationEnd"
   >
     <button
+      :disabled="disabled"
       ref="button"
       type="button"
       :class="`${carbonPrefix}--accordion__heading`"
@@ -45,6 +48,7 @@ export default {
   mixins: [uidMixin, carbonPrefixMixin, methodsMixin({ button: ['blur', 'focus'] })],
   components: { ChevronRight16 },
   props: {
+    disabled: Boolean,
     open: { type: Boolean, default: false },
   },
   watch: {

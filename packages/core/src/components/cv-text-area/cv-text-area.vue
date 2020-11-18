@@ -17,7 +17,7 @@
         :class="[
           `${carbonPrefix}--text-area`,
           {
-            [`${carbonPrefix}--text-area--light`]: theme === 'light',
+            [`${carbonPrefix}--text-area--light`]: isLight,
             [`${carbonPrefix}--text-area--invalid`]: isInvalid,
           },
         ]"

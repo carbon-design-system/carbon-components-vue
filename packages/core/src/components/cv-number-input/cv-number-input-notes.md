@@ -33,7 +33,8 @@ http://www.carbondesignsystem.com/components/number-input/code
 - max: optional max (string or number) operates as per stanard html number input
 - min: optional min (string or number) operates as per stanard html number input
 - step: optional step (string or number) operates as per stanard html number input
-- theme: optional 'light',
+- light: Lighter variant, typically alternate background
+- theme: (deprecated use light) '' or 'light'
 - value: optional initial value of the input (string or number)
 - mobile: optional mobile variant
 

@@ -87,6 +87,27 @@ describe('CvIconButton', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
+  it('Renders size (sm) as expected small primary', async () => {
+    const propsData = { kind: 'primary', size: 'sm' };
+    const wrapper = await shallow(CvIconButton, { propsData, slots: { default: 'default slot content' } });
+
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
+  it('Renders as expected lg primary', async () => {
+    const propsData = { kind: 'primary', size: 'lg' };
+    const wrapper = await shallow(CvIconButton, { propsData, slots: { default: 'default slot content' } });
+
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
+  it('Renders as expected lg primary', async () => {
+    const propsData = { kind: 'primary', size: 'xl' };
+    const wrapper = await shallow(CvIconButton, { propsData, slots: { default: 'default slot content' } });
+
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('Renders as expected default', async () => {
     const propsData = {};
     const wrapper = await shallow(CvIconButton, { propsData, slots: { default: 'default slot content' } });

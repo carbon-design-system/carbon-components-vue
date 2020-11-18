@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-// import { boolean } from '@storybook/addon-knobs';
+import { select, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
@@ -13,7 +13,42 @@ import { CvAccordion, CvAccordionItem, CvAccordionSkeleton } from '../../package
 const storiesDefault = storiesOf('Components/CvAccordion', module);
 // const storiesExperimental = storiesOf('Experimental/CvAccordion', module);
 
-const preKnobs = {};
+const preKnobs = {
+  align: {
+    group: 'attr',
+    type: select,
+    config: [
+      'align',
+      {
+        default: '',
+        start: 'start',
+        end: 'end',
+      },
+      '',
+    ], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'align',
+  },
+  disabled3: {
+    group: 'attr3',
+    type: boolean,
+    config: ['disabled 3', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'disabled',
+  },
+  size: {
+    group: 'attr',
+    type: select,
+    config: [
+      'size',
+      {
+        default: '',
+        'small (sm)': 'sm',
+        'large (xl)': 'xl',
+      },
+      '',
+    ], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'size',
+  },
+};
 const variants = [{ name: 'default' }, { name: 'minimal', includes: [] }];
 
 const storySet = knobsHelper.getStorySet(variants, preKnobs);
@@ -26,7 +61,7 @@ for (const story of storySet) {
       // ----------------------------------------------------------------
 
       const templateString = `
-  <cv-accordion @change="actionChange" ref="acc">
+  <cv-accordion @change="actionChange" ref="acc" ${settings.group.attr}>
     <cv-accordion-item :open="open[0]">
       <template slot="title">Section 1 title </template>
       <template slot="content">
@@ -39,7 +74,7 @@ for (const story of storySet) {
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
       </template>
     </cv-accordion-item>
-    <cv-accordion-item :open="open[2]">
+    <cv-accordion-item :open="open[2]" ${settings.group.attr3}>
       <template slot="title">Section 3 title</template>
       <template slot="content">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -123,7 +158,7 @@ this.$refs.acc.state = this.$refs.acc.state.map((item, index) => index === ev.ch
   );
 }
 
-const templateString = `<cv-accordion-skeleton></cv-accordion-skeleton>`;
+const templateString = `<cv-accordion-skeleton :align="align" :size="size"></cv-accordion-skeleton>`;
 
 storiesDefault.add(
   'skeleton',
@@ -138,7 +173,12 @@ storiesDefault.add(
         <template slot="component">${templateString}</template>
       </sv-template-view>
     `,
-      props: {},
+      props: {
+        align: { default: select('Alignment', { default: '', start: 'start', end: 'end' }, '') },
+        size: {
+          default: select('Size', { default: '', 'small (sm)': 'sm', 'large (xl)': 'xl' }, ''),
+        },
+      },
     };
   },
   {

@@ -45,6 +45,8 @@ This is done after the modal transitions into its visible state, which is trigge
 
 ## slots
 
+- alert: used with kind danger sets the dialog role to 'alert' or 'alertdialog'
+- aria-label
 - label: optional
 - title:
 - content: optional

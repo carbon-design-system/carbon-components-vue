@@ -1,5 +1,14 @@
 <template>
-  <ul data-accordion :class="`cv-accordion ${carbonPrefix}--accordion`">
+  <ul
+    data-accordion
+    :class="[
+      `cv-accordion ${carbonPrefix}--accordion`,
+      {
+        [`${carbonPrefix}--accordion--${align}`]: align,
+        [`${carbonPrefix}--accordion--${size}`]: size,
+      },
+    ]"
+  >
     <slot></slot>
   </ul>
 </template>
@@ -9,6 +18,14 @@ import { carbonPrefixMixin } from '../../mixins';
 
 export default {
   name: 'CvAccordion',
+  props: {
+    align: { type: String, default: 'start', validator: val => ['start', 'end', ''].includes(val) },
+    size: {
+      type: String,
+      default: '',
+      validator: val => ['sm', 'xl', ''].includes(val),
+    },
+  },
   mixins: [carbonPrefixMixin],
   created() {
     this.$on('cv:change', srcComponent => this.onCvChange(srcComponent));

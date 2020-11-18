@@ -7,9 +7,8 @@ describe('CvTextArea', () => {
   // ***************
   // PROP CHECKS
   // ***************
-  testComponent.propsAreType(CvTextArea, ['helperText', 'invalidMessage', 'label', 'value', 'id', 'theme'], String);
-  testComponent.propsHaveDefaultOfUndefined(CvTextArea, ['helperText', 'invalidMessage']);
-  testComponent.propsHaveDefault(CvTextArea, ['theme']);
+  testComponent.propsAreType(CvTextArea, ['helperText', 'invalidMessage', 'label', 'value', 'id'], String);
+  testComponent.propsHaveDefaultOfUndefined(CvTextArea, ['helperText', 'invalidMessage', 'light']);
 
   // ***************
   // SNAPSHOT TESTS

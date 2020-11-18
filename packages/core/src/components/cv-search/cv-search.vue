@@ -4,7 +4,7 @@
       :class="[
         `${carbonPrefix}--search`,
         {
-          [`${carbonPrefix}--search--${theme}`]: theme.length,
+          [`${carbonPrefix}--search--light`]: isLight,
           [`${carbonPrefix}--search--${internalSize}`]: internalSize,
           [`${carbonPrefix}--toolbar-search`]: isToolbarKind,
           [`${carbonPrefix}--toolbar-search--active`]: toolbarActive,

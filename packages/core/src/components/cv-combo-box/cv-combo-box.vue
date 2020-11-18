@@ -14,7 +14,7 @@
       :class="[
         `${carbonPrefix}--combo-box ${carbonPrefix}--list-box`,
         {
-          [`${carbonPrefix}--list-box--light`]: theme === 'light',
+          [`${carbonPrefix}--list-box--light`]: isLight,
           [`${carbonPrefix}--combo-box--expanded`]: open,
           [`${carbonPrefix}--list-box--expanded`]: open,
           [`${carbonPrefix}--combo-box--disabled ${carbonPrefix}--list-box--disabled`]: disabled,

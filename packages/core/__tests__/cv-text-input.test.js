@@ -11,11 +11,11 @@ describe('CvTextInput', () => {
   // ***************
   testComponent.propsAreType(
     CvTextInput,
-    ['helperText', 'invalidMessage', 'label', 'passwordHideLabel', 'passwordShowLabel', 'theme', 'type', 'value', 'id'],
+    ['helperText', 'invalidMessage', 'label', 'passwordHideLabel', 'passwordShowLabel', 'type', 'value', 'id'],
     String
   );
   testComponent.propsAreType(CvTextInput, ['passwordVisible'], Boolean);
-  testComponent.propsHaveDefaultOfUndefined(CvTextInput, ['helperText', 'invalidMessage']);
+  testComponent.propsHaveDefaultOfUndefined(CvTextInput, ['helperText', 'invalidMessage', 'light']);
   testComponent.propsHaveDefault(CvTextInput, ['passwordHideLabel', 'passwordShowLabel']);
 
   // ***************

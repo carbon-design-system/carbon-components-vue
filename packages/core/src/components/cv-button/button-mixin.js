@@ -37,7 +37,11 @@ export default {
         return true;
       },
     },
-    size: { type: String, default: undefined, validator: val => ['', 'field', 'small'].includes(val) },
+    size: {
+      type: String,
+      default: undefined,
+      validator: val => ['', 'default', 'field', 'small', 'sm', 'lg', 'xl'].includes(val),
+    },
   },
   computed: {
     // Bind listeners at the component level to the embedded input element and
@@ -64,14 +68,15 @@ export default {
           classes.push(`${carbonSettings.prefix}--btn--${this.kind.toLowerCase()}`);
         }
 
-        if (this.size === 'small' || (this.size === undefined && this.small)) {
-          classes.push(`${carbonSettings.prefix}--btn--sm`);
+        let size = this.size ? this.size : this.small && 'sm';
+        if (size === 'small') {
+          size = 'sm';
         }
-        if (this.size === 'field') {
-          classes.push(`${carbonSettings.prefix}--btn--field`);
+        if (size && !(size === '' || size === 'default')) {
+          classes.push(`${carbonSettings.prefix}--btn--${size}`);
         }
 
-        return classes.join(' ');
+        return classes;
       };
     },
   },

@@ -43,7 +43,7 @@
         :class="[
           `${carbonPrefix}--dropdown ${carbonPrefix}--list-box`,
           {
-            [`${carbonPrefix}--dropdown--light`]: theme === 'light',
+            [`${carbonPrefix}--dropdown--light`]: isLight,
             [`${carbonPrefix}--dropdown--up`]: up,
             [`${carbonPrefix}--dropdown--open`]: open,
             [`${carbonPrefix}--list-box--expanded`]: open,

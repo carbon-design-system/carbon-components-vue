@@ -14,12 +14,11 @@ const storiesDefault = storiesOf('Components/CvSelect', module);
 // const storiesExperimental = storiesOf('Experimental/CvSelect', module);
 
 const preKnobs = {
-  theme: {
+  light: {
     group: 'attr',
     type: boolean,
-    config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: 'theme',
-    value: val => (val ? 'light' : ''),
+    config: ['light', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'light',
   },
   label: {
     group: 'attr',
@@ -124,7 +123,7 @@ for (const story of storySet) {
     <sv-template-view
       ref="templateView"
       sv-margin
-      :sv-alt-back="this.$options.propsData.theme !== 'light'"
+      :sv-alt-back="!this.$options.propsData.light"
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
 

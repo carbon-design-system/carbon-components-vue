@@ -1,5 +1,13 @@
 <template>
-  <ul :class="`${carbonPrefix}--accordion ${carbonPrefix}--skeleton`">
+  <ul
+    :class="[
+      `${carbonPrefix}--accordion ${carbonPrefix}--skeleton`,
+      {
+        [`${carbonPrefix}--accordion--${align}`]: align,
+        [`${carbonPrefix}--accordion--${size}`]: size,
+      },
+    ]"
+  >
     <cv-accordion-item-skeleton :open="true">
       <cv-skeleton-text width="90%"></cv-skeleton-text>
       <cv-skeleton-text width="80%"></cv-skeleton-text>
@@ -18,6 +26,14 @@ import { carbonPrefixMixin } from '../../mixins';
 
 export default {
   name: 'CvAccordionSkeleton',
+  props: {
+    align: { type: String, default: 'start', validator: val => ['start', 'end', ''].includes(val) },
+    size: {
+      type: String,
+      default: '',
+      validator: val => ['sm', 'xl', ''].includes(val),
+    },
+  },
   mixins: [carbonPrefixMixin],
   components: {
     CvSkeletonText,

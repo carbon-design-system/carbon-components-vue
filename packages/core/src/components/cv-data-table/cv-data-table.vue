@@ -308,7 +308,7 @@ export default {
       return this.overflowMenu === true || (this.overflowMenu && this.overflowMenu.length > 0);
     },
     tableStyle() {
-      return this.autoWidth ? { width: 'initial' } : { width: '100%' };
+      return this.autoWidth ? { width: 'initial', display: 'inline-block' } : { width: '100%' };
     },
     internalPagination() {
       if (typeof this.pagination === 'object') {

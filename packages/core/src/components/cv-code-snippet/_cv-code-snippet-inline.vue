@@ -1,11 +1,8 @@
 <template>
   <cv-feedback-button
+    v-if="!hideCopyButton"
     class="cv-code-snippet-inline"
-    :class="[
-      `${carbonPrefix}--snippet`,
-      `${carbonPrefix}--snippet--inline`,
-      { [`${carbonPrefix}--snippet--light`]: theme === 'light' },
-    ]"
+    :class="classes"
     :feedback="copyFeedback"
     inline
     :aria-label="feedbackAriaLabel"
@@ -13,21 +10,30 @@
   >
     <slot></slot>
   </cv-feedback-button>
+  <span v-else :class="classes">
+    <slot></slot>
+  </span>
 </template>
 
 <script>
 import CvFeedbackButton from '../cv-feedback-button/_cv-feedback-button';
-import { themeMixin, carbonPrefixMixin } from '../../mixins';
+import { carbonPrefixMixin } from '../../mixins';
 
 export default {
   name: 'CvCodeSnippetInline',
-  mixins: [themeMixin, carbonPrefixMixin],
+  mixins: [carbonPrefixMixin],
   components: {
     CvFeedbackButton,
   },
   props: {
     copyFeedback: String,
     feedbackAriaLabel: String,
+    hideCopyButton: Boolean,
+  },
+  computed: {
+    classes() {
+      return [`${this.carbonPrefix}--snippet`, `${this.carbonPrefix}--snippet--inline`];
+    },
   },
 };
 </script>

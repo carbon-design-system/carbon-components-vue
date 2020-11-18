@@ -1,7 +1,7 @@
 <template>
   <component
     :is="tagType"
-    :class="[`cv-tile ${carbonPrefix}--tile`, { [`${carbonPrefix}--tile--light`]: theme === 'light' }]"
+    :class="[`cv-tile ${carbonPrefix}--tile`, { [`${carbonPrefix}--tile--light`]: isLight }]"
     :checked="selected"
     :expanded="expanded"
     v-bind="$attrs"

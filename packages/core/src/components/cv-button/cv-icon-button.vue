@@ -2,7 +2,7 @@
   <button
     class="cv-button"
     :class="[
-      buttonClassOpts({ iconOnly: true }),
+      ...buttonClassOpts({ iconOnly: true }),
       `${carbonPrefix}--tooltip__trigger`,
       `${carbonPrefix}--tooltip--a11y`,
       `${carbonPrefix}--tooltip--${tipPosition || 'bottom'}`,

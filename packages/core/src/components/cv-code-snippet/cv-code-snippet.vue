@@ -1,11 +1,13 @@
 <template>
   <component
-    class="cv-code-snippet"
+    :class="classes"
     :is="theComponent"
     v-bind="$attrs"
     @copy-code="onCopyCode"
     :copy-feedback="copyFeedback"
     :feedback-aria-label="feedbackAriaLabel"
+    :hideCopyButton="hideCopyButton"
+    :wrap-text="wrapText"
   >
     <code ref="code">
       <slot></slot>
@@ -24,10 +26,12 @@
 import CvCodeSnippetInline from './_cv-code-snippet-inline';
 import CvCodeSnippetMultiline from './_cv-code-snippet-multiline';
 import CvCodeSnippetOneline from './_cv-code-snippet-oneline';
+import { carbonPrefixMixin, themeMixin } from '../../mixins';
 
 export default {
   name: 'CvCodeSnippet',
   inheritAttrs: false,
+  mixins: [carbonPrefixMixin, themeMixin],
   components: {
     CvCodeSnippetInline,
     CvCodeSnippetMultiline,
@@ -36,13 +40,25 @@ export default {
   props: {
     feedbackAriaLabel: { type: String, default: 'Copy code' },
     copyFeedback: { type: String, default: 'Copied!' },
+    hideCopyButton: Boolean,
     kind: {
       type: String,
       default: 'oneline',
       validator: value => ['inline', 'multiline', 'oneline'].includes(value),
     },
+    wrapText: Boolean,
   },
   computed: {
+    classes() {
+      return [
+        `cv-code-snippet`,
+        {
+          [`${this.carbonPrefix}--snippet--light`]: this.isLight,
+          [`${this.carbonPrefix}--snippet--no-copy`]: this.hideCopyButton,
+          [`${this.carbonPrefix}--snippet--wraptext`]: this.wrapText,
+        },
+      ];
+    },
     theComponent() {
       switch (this.kind) {
         case 'inline':

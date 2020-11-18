@@ -17,7 +17,7 @@
         :class="[
           `${carbonPrefix}--text-input`,
           {
-            [`${carbonPrefix}--text-input--light`]: theme === 'light',
+            [`${carbonPrefix}--text-input--light`]: isLight,
             [`${carbonPrefix}--text-input--invalid`]: isInvalid,
           },
         ]"
@@ -78,7 +78,6 @@ export default {
     passwordHideLabel: { type: String, default: 'Hide password' },
     passwordShowLabel: { type: String, default: 'Show password' },
     passwordVisible: Boolean,
-    theme: String,
     type: String,
     value: String,
   },
