@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.35.0
+
+feat: 10 23 1 update (#1058) - adds numerous minor changes to bring the library up to Carbon v10.23.1
+chore: listen for click out only post blur (#1061)
+chore: Content tune the first usage steps (#1055)
+feat: Add after hidden modal event (#1069)
+fix: cv-button default color error issue (#1076)
+
 ## 2.34.1
 
 chore: add tests for cv-code-snippet, cv-toolbar, cv-structured-list

@@ -7,9 +7,13 @@
 > Vue implementation of the Carbon Design System
 > A collection of [Carbon Components](https://github.com/carbon-design-system/carbon-components) implemented using <img src="https://vuejs.org/images/logo.png" width="20" alt="Vue logo"> [Vue.js](https://vuejs.org/).
 
-## Carbon Vue library
+## Carbon Vue library - A Carbon Community Project
 
 The [library](http://vue.carbondesignsystem.com/) provides front-end developers & engineers a collection of reusable Vue components to build websites and user interfaces. Adopting the library enables developers to use consistent markup, styles, and behavior in prototype and production work.
+
+## Community Contributions Needed
+
+As a community project contributions are not only welcome, but essential for the maintenance and growth of this project.
 
 ### Changelog
 
