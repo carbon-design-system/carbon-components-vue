@@ -1,5 +1,5 @@
 <template>
-  <div class="cv-tabs" @focusout="onFocusout" @focusin="onFocusin" style="width: 100%;">
+  <div class="cv-tabs" ref="tabs" style="width: 100%;">
     <div
       data-tabs
       :class="[`cv-tab ${carbonPrefix}--tabs`, { [`${carbonPrefix}--tabs--container`]: container }]"
@@ -88,6 +88,14 @@ export default {
     this.$on('cv:selected', srcComponent => this.onCvSelected(srcComponent));
     this.$on('cv:disabled', srcComponent => this.onCvDisabled(srcComponent));
     this.$on('cv:enabled', srcComponent => this.onCvEnabled(srcComponent));
+  },
+  mounted() {
+    this.$refs.tabs.addEventListener('focusout', this.onFocusout)
+    this.$refs.tabs.addEventListener('focusin', this.onFocusin)
+  },
+  beforeDestroy() {
+    this.$refs.tabs.removeEventListener('focusout', this.onFocusout)
+    this.$refs.tabs.removeEventListener('focusin', this.onFocusin)
   },
   computed: {
     triggerStyleOverride() {
