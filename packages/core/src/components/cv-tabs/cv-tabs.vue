@@ -90,12 +90,12 @@ export default {
     this.$on('cv:enabled', srcComponent => this.onCvEnabled(srcComponent));
   },
   mounted() {
-    this.$refs.tabs.addEventListener('focusout', this.onFocusout)
-    this.$refs.tabs.addEventListener('focusin', this.onFocusin)
+    this.$refs.tabs.addEventListener('focusout', this.onFocusout);
+    this.$refs.tabs.addEventListener('focusin', this.onFocusin);
   },
   beforeDestroy() {
-    this.$refs.tabs.removeEventListener('focusout', this.onFocusout)
-    this.$refs.tabs.removeEventListener('focusin', this.onFocusin)
+    this.$refs.tabs.removeEventListener('focusout', this.onFocusout);
+    this.$refs.tabs.removeEventListener('focusin', this.onFocusin);
   },
   computed: {
     triggerStyleOverride() {
