@@ -34,13 +34,10 @@ export default {
     active: Boolean,
     icon: Object,
   },
-  data() {
-    return {
-      hasNavIcon: this.$slots['nav-icon'],
-    };
-  },
-  updated() {
-    this.hasNavIcon = !!this.$slots['nav-icon'];
+  computed: {
+    hasNavIcon() {
+      return !!this.$slots['nav-icon'];
+    },
   },
 };
 </script>
