@@ -49,7 +49,6 @@
                 @keydown.enter.prevent="checkSearchExpand(true)"
                 @keydown.space.prevent
                 @keyup.space.prevent="checkSearchExpand(true)"
-                @blur="checkSearchFocus"
                 ref="magnifier"
               >
                 <Search16 :class="`${carbonPrefix}--toolbar-action__icon`" />
@@ -65,7 +64,6 @@
                 ref="search"
                 v-model="searchValue"
                 @input="onSearch"
-                @blur="checkSearchFocus"
                 @keydown.esc.prevent="checkSearchExpand(false)"
               />
               <button
@@ -271,8 +269,18 @@ export default {
     this.$on('cv:sort', (srcComponent, value) => this.onSort(srcComponent, value));
   },
   mounted() {
+    if (this.$refs.searchContainer) {
+      this.$refs.magnifier.addEventListener('blur', this.checkSearchFocus);
+      this.$refs.search.addEventListener('blur', this.checkSearchFocus);
+    }
     this.updateRowsSelected();
     this.checkSlots();
+  },
+  beforeDestroy() {
+    if (this.$refs.searchContainer) {
+      this.$refs.magnifier.removeEventListener('blur', this.checkSearchFocus);
+      this.$refs.search.removeEventListener('blur', this.checkSearchFocus);
+    }
   },
   updated() {
     this.checkSlots();
