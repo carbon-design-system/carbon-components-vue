@@ -36,11 +36,19 @@ export default {
   },
   data() {
     return {
-      hasNavIcon: this.$slots['nav-icon'],
+      hasNavIcon: false,
     };
   },
+  mounted() {
+    this.checkSlots();
+  },
   updated() {
-    this.hasNavIcon = !!this.$slots['nav-icon'];
+    this.checkSlots();
+  },
+  methods: {
+    checkSlots() {
+      this.hasNavIcon = !!this.$slots['nav-icon'];
+    },
   },
 };
 </script>
