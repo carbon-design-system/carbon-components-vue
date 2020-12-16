@@ -105,6 +105,13 @@ export default {
         this.position();
       }
     },
+    dataVisible() {
+      if (this.dataVisible) {
+        this.$emit('show-tooltip');
+      } else {
+        this.$emit('hide-tooltip');
+      }
+    },
   },
   methods: {
     positionListen(on) {
