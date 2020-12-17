@@ -78,8 +78,8 @@ let preKnobs = {
   },
   events: {
     group: 'attr',
-    value: `v-on:show-tooltip="actionTooltipShow"
-  v-on:hide-tooltip="actionTooltipHide"`,
+    value: `@tooltip-shown="actionShown"
+  @tooltip-hidden="actionHidden"`,
   },
 };
 
@@ -124,8 +124,8 @@ for (const story of storySet) {
         template: templateViewString,
         props: settings.props,
         methods: {
-          actionTooltipShow: action('CV Tooltip - show'),
-          actionTooltipHide: action('CV Tooltip - hide'),
+          actionShown: action('CV Tooltip - shown'),
+          actionHidden: action('CV Tooltip - hidden'),
           doStart() {
             this.$refs.templateView.$slots.component[0].componentInstance.show();
           },

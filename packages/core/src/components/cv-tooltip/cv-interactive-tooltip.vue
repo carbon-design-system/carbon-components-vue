@@ -107,9 +107,9 @@ export default {
     },
     dataVisible() {
       if (this.dataVisible) {
-        this.$emit('show-tooltip');
+        this.$emit('tooltip-shown');
       } else {
-        this.$emit('hide-tooltip');
+        this.$emit('tooltip-hidden');
       }
     },
   },

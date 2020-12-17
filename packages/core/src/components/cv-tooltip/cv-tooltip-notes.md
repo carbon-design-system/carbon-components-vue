@@ -31,8 +31,8 @@ http://www.carbondesignsystem.com/components/tooltip/code
 
 ### Events
 
-- show-tooltip
-- hide-tooltip
+- tooltip-shown
+- tooltip-hidden
 
 ## slots
 
