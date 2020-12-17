@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.36.0
+
+fix: use check slot patter in side nav
+fix: cv-tabs fail during focus event
+fix cv-data-table listener called after navigation
+chore: update dependency
+
 ## 2.36.0-canary.0
 
 fix: transition end after modal hidden
