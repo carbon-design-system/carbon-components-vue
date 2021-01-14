@@ -234,7 +234,7 @@ export default {
 
       _options.plugins = [
         this.isRange
-          ? new carbonFlatpickrRangePlugin({
+          ? carbonFlatpickrRangePlugin({
               input: this.$refs.todate,
             })
           : () => {},
