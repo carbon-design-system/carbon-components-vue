@@ -1,5 +1,6 @@
 import { storiesOf } from '@storybook/vue';
 import { text, select, boolean } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../_storybook/utils/consts';
@@ -75,9 +76,18 @@ let preKnobs = {
     config: ['visible', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: 'visible',
   },
+  events: {
+    group: 'attr',
+    value: `@tooltip-shown="actionShown"
+  @tooltip-hidden="actionHidden"`,
+  },
 };
 
-const variants = [{ name: 'default' }, { name: 'minimal', includes: ['content', 'definition', 'term', 'tip'] }];
+const variants = [
+  { name: 'default', excludes: ['events'] },
+  { name: 'minimal', includes: ['content', 'definition', 'term', 'tip'] },
+  { name: 'events', includes: ['content', 'visible', 'events'] },
+];
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
 
@@ -114,6 +124,8 @@ for (const story of storySet) {
         template: templateViewString,
         props: settings.props,
         methods: {
+          actionShown: action('CV Tooltip - shown'),
+          actionHidden: action('CV Tooltip - hidden'),
           doStart() {
             this.$refs.templateView.$slots.component[0].componentInstance.show();
           },
