@@ -245,14 +245,17 @@ export default {
       document.body.classList.remove(`${this.carbonPrefix}--body--with-modal-open`);
 
       if (this.dataVisible) {
-        this.$el.addEventListener('transitionend', this.afterHide, { once: true });
+        this.$el.addEventListener('transitionend', this.afterHide);
       }
 
       this.dataVisible = false;
       this.$emit('modal-hidden');
     },
-    afterHide() {
-      this.$emit('after-modal-hidden');
+    afterHide(event) {
+      if (event.propertyName === 'opacity') {
+        this.$emit('after-modal-hidden');
+        this.$el.removeEventListener('transitionend', this.afterHide);
+      }
     },
     onPrimaryClick(ev) {
       this.$emit('primary-click');
