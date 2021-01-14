@@ -29,6 +29,11 @@ http://www.carbondesignsystem.com/components/tooltip/code
 - alignment: start, center or end.
 - direction: 'top', 'left', 'right', 'bottom'
 
+### Events
+
+- tooltip-shown
+- tooltip-hidden
+
 ## slots
 
 - label - hover does not display tooltip.

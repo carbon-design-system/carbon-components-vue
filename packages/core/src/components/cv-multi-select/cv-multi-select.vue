@@ -300,7 +300,7 @@ export default {
     },
     checkHighlightPosition(newHiglight) {
       if (this.$refs.list && this.$refs.option && this.$refs.option[newHiglight]) {
-        if (this.$refs.list.scrollTop > this.$refs.option[newHiglight].offsetTop) {
+        if (this.$refs.list.scrollTop >= this.$refs.option[newHiglight].offsetTop) {
           this.$refs.list.scrollTop = this.$refs.option[newHiglight].offsetTop;
         } else if (
           this.$refs.list.scrollTop + this.$refs.list.clientHeight <

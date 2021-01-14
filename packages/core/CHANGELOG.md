@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.36.0
+
+fix: use check slot patter in side nav
+fix: cv-tabs fail during focus event
+fix cv-data-table listener called after navigation
+chore: update dependency
+
+## 2.36.0-canary.0
+
+fix: transition end after modal hidden
+feat: add left right to tooltip direction
+fix: data table listener called after navigation
+fix: tab listener when called after nav
+fix: use check slot pattern for side nav icons
+
 ## 2.35.0
 
 feat: 10 23 1 update (#1058) - adds numerous minor changes to bring the library up to Carbon v10.23.1
