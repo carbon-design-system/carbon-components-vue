@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.37.0
+
+fix: CvDatePicker use of range plugin
+fix: CvMultiSelect hiding first option alternately on expand
+feat: add show and hide events to CvTooltip
+
 ## 2.36.0
 
 fix: use check slot patter in side nav
