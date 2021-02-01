@@ -56,7 +56,8 @@
   ],
   "scripts": {
     "build": "vue-cli-service build --target lib --name carbon-vue ./src/index.js --no-clean",
-    "clean": "rimraf dist node_modules/.cache"
+    "clean": "rimraf dist node_modules/.cache",
+    "postinstall": "carbon-telemetry collect --install"
   },
   "engines": {
     "node": ">=10.x"
@@ -64,6 +65,7 @@
   "sideEffects": true,
   "dependencies": {
     "@carbon/icons-vue": "10.20.0",
+    "@carbon/telemetry": "^0.0.0-alpha.6",
     "carbon-components": "10.23.1",
     "flatpickr": "4.6.3",
     "vue": "^2.6.12"
