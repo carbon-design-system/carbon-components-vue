@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.37.1
+
+chore: documentation correction for CvDataTable
+chore: added Carbon Telemetry
+
 ## 2.37.0
 
 fix: CvDatePicker use of range plugin
