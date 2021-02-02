@@ -86,7 +86,7 @@ Like sorting and filtering it is the users responsibility to deal with edited da
 - overflow-menu props: As part of the array pass an object containing props for the overflowMenu. E.g. { label: 'Overflow menu', tipAlignment: 'end', tipPosition: 'top' },
 - pagination: (optional) default: false, can be set to true or an object containing camel case props for a CvPagination component
 - sortable: (optional) can be sorted
-- row-size: (optional) default: '',
+- rowSize: (optional) default: '',
   - 'compact', 'small', '', 'tall'
 - zebra: (optional) default: false ; boolean is the table striped
 - searchLabel: (optional) { type: String, default: 'Search' },
