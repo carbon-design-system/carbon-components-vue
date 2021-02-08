@@ -9,8 +9,18 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@carbon/icons-vue": "^10.25.0",
+    "@carbon/layout": "^10.17.0",
+    "@carbon/themes": "^10.26.0",
+    "@carbon/type": "^10.20.0",
+    "carbon-components": "^10.28.0",
     "core-js": "^3.6.5",
+    "flatpickr": "^4.6.9",
     "vue": "^3.0.0"
+  },
+  "peerDependencies": {
+    "carbon-components": "^10.28.0",
+    "carbon-icons": "^7.0.7"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
