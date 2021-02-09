@@ -4,7 +4,13 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --target lib --name carbon-vue-3 ./src/index.js --no-clean",
+    "format": "prettier --write '**/*.{scss,css,js,md,vue}' '!**/{build,es,lib,storybook,ts,umd,.coverage}/**'",
+    "format:diff": "prettier --list-different '**/*.{scss,css,js,md,vue}' '!**/{dist,storybook-static,.coverage}/**'",
+    "format:staged": "prettier --write '**/*.{scss,css,js,md,vue}' '!**/{dist,storybook-static,.coverage}/**'",
+    "lint:css": "stylelint '{packages,storybook}/**/*.{vue,scss}'",
+    "lint:es": "eslint {packages,storybook}/**/*.{js,vue}",
+    "lint:style": "vue-cli-service lint:style",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "storybook": "start-storybook -p 6006",
@@ -16,6 +22,7 @@
     "@carbon/themes": "^10.26.0",
     "@carbon/type": "^10.20.0",
     "carbon-components": "^10.28.0",
+    "copy-webpack-plugin": "^7.0.0",
     "core-js": "^3.6.5",
     "flatpickr": "^4.6.9",
     "storybook": "^6.2.0-alpha.24",
@@ -47,8 +54,8 @@
     "prettier": "^1.19.1",
     "sass-loader": "^8.0.2",
     "typescript": "~3.9.3",
-    "vue-loader": "^16.0.0",
-    "vue-jest": "^5.0.0-0"
+    "vue-jest": "^5.0.0-0",
+    "vue-loader": "^16.0.0"
   },
   "eslintConfig": {
     "root": true,
@@ -90,5 +97,15 @@
   "resolutions": {
     "vue": "^3.0.0",
     "vue-loader": "^16.1.2"
-  }
+  },
+  "files": [
+    "/dist",
+    "/src"
+  ],
+  "prettier": {
+    "printWidth": 120,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "sideEffects": true
 }

@@ -5,21 +5,18 @@
 </template>
 
 <script>
-import {
-  props as commonCvButtonProps,
-  useCvButtonCommon
-} from "./CvButtonCommon";
+import { props as commonCvButtonProps, useCvButtonCommon } from './CvButtonCommon';
 
 const { disabled, icon, kind, size, skeleton } = commonCvButtonProps;
 
 export default {
-  name: "CvIconButton",
+  name: 'CvIconButton',
   props: {
     disabled,
     icon,
     kind,
     size,
-    skeleton
+    skeleton,
     // alternative use of commonCvButtonProps
     // disabled: commonCvButtonProps.disabled,
     // icon: commonCvButtonProps.icon,
@@ -28,17 +25,12 @@ export default {
     // skeleton: commonCvButtonProps.skeleton
   },
   setup(props) {
-    const { buttonClasses } = useCvButtonCommon(
-      true,
-      props.kind,
-      props.size,
-      props.skeleton
-    );
+    const { buttonClasses } = useCvButtonCommon(true, props.kind, props.size, props.skeleton);
 
     return {
-      buttonClasses
+      buttonClasses,
     };
-  }
+  },
 };
 </script>
 

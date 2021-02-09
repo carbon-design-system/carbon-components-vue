@@ -7,24 +7,21 @@
 </template>
 
 <script>
-import { carbonPrefix } from "../../global/settings";
-import {
-  props as commonCvButtonProps,
-  useCvButtonCommon
-} from "./CvButtonCommon";
-import CvSvg from "../CvSvg/_CvSvg";
+import { carbonPrefix } from '../../global/settings';
+import { props as commonCvButtonProps, useCvButtonCommon } from './CvButtonCommon';
+import CvSvg from '../CvSvg/_CvSvg';
 
 const { disabled, icon, kind, size, skeleton } = commonCvButtonProps;
 
 export default {
-  name: "CvButton",
+  name: 'CvButton',
   components: { CvSvg },
   props: {
     disabled,
     icon,
     kind,
     size,
-    skeleton
+    skeleton,
     // alternative use of commonCvButtonProps
     // disabled: commonCvButtonProps.disabled,
     // icon: commonCvButtonProps.icon,
@@ -33,18 +30,13 @@ export default {
     // skeleton: commonCvButtonProps.skeleton
   },
   setup(props) {
-    const { buttonClasses } = useCvButtonCommon(
-      false,
-      props.kind,
-      props.size,
-      props.skeleton
-    );
+    const { buttonClasses } = useCvButtonCommon(false, props.kind, props.size, props.skeleton);
 
     return {
       buttonClasses,
-      carbonPrefix
+      carbonPrefix,
     };
-  }
+  },
 };
 </script>
 

@@ -1,12 +1,12 @@
 const storybookType = prop => {
-  const type = typeof prop === "function" ? prop : prop.type;
+  const type = typeof prop === 'function' ? prop : prop.type;
 
   if (type === Boolean) {
-    return "boolean";
+    return 'boolean';
   } else if (type === String) {
-    return "text";
+    return 'text';
   } else if (type === Number) {
-    return "number";
+    return 'number';
   }
 };
 
