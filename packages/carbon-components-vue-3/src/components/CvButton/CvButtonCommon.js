@@ -1,21 +1,9 @@
 import { computed } from "vue";
-
 import { carbonPrefix } from "../../global/settings";
+import { buttonKinds, buttonSizes } from "./consts.js";
 
-const buttonKinds = [
-  "primary",
-  "secondary",
-  "tertiary",
-  "ghost",
-  "danger",
-  "danger--ghost",
-  "danger--tertiary"
-];
-
-const buttonSizes = ["", "default", "field", "small", "sm", "lg", "xl"];
-
-const props = {
-  disabled: Boolean,
+export const props = {
+  disabled: Boolean, // hello
   icon: {
     type: [String, Object],
     default: undefined,
@@ -55,10 +43,10 @@ const props = {
       return valid;
     }
   },
-  skeleton: Boolean // { type: Boolean }
+  skeleton: { type: Boolean, default: false } // { type: Boolean }
 };
 
-const useCvButtonCommon = (iconOnly, kind, size, skeleton) => {
+export const useCvButtonCommon = (iconOnly, kind, size, skeleton) => {
   const buttonClasses = computed(() => {
     const classes = [`${carbonPrefix}--btn`];
 
@@ -84,5 +72,3 @@ const useCvButtonCommon = (iconOnly, kind, size, skeleton) => {
 
   return { buttonClasses };
 };
-
-export { props, useCvButtonCommon };

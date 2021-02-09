@@ -1,4 +1,6 @@
 import CvButton from "./CvButton";
 import CvIconButton from "./CvIconButton";
-export { CvButton, CvIconButton };
+import CvButtonConsts from "./consts";
+
+export { CvButton, CvButtonConsts, CvIconButton };
 export default CvButton;
