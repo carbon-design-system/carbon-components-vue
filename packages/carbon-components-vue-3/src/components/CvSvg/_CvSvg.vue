@@ -16,8 +16,13 @@ export default {
     },
   },
   setup(props) {
-    const isSvg = computed(() => props.svg !== undefined && props.svg.indexOf('<svg') >= 0);
-    const isSymbol = computed(() => props.svg !== undefined && !props.isSvg && props.svg.indexOf('#') >= 0);
+    const isSvg = computed(
+      () => props.svg !== undefined && props.svg.indexOf('<svg') >= 0
+    );
+    const isSymbol = computed(
+      () =>
+        props.svg !== undefined && !props.isSvg && props.svg.indexOf('#') >= 0
+    );
 
     return () => {
       if (typeof props.svg === 'object') {

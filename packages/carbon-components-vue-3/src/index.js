@@ -1,4 +1,8 @@
-const ctx = require.context('./components/', true, /^(?!.*(?:\/_|\.stories\.vue|\.test\.vue|\.spec\.vue)).*\.vue$/);
+const ctx = require.context(
+  './components/',
+  true,
+  /^(?!.*(?:\/_|\.stories\.vue|\.test\.vue|\.spec\.vue)).*\.vue$/
+);
 const components = ctx.keys().map(ctx);
 
 // Export the components as a plugin

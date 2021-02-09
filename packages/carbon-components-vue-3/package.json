@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "start-storybook -p 6006",
     "build": "vue-cli-service build --target lib --name carbon-vue-3 ./src/index.js --no-clean",
     "format": "prettier --write '**/*.{scss,css,js,md,vue}' '!**/{build,es,lib,storybook,ts,umd,.coverage}/**'",
     "format:diff": "prettier --list-different '**/*.{scss,css,js,md,vue}' '!**/{dist,storybook-static,.coverage}/**'",
@@ -22,10 +22,11 @@
     "@carbon/themes": "^10.26.0",
     "@carbon/type": "^10.20.0",
     "carbon-components": "^10.28.0",
-    "copy-webpack-plugin": "^7.0.0",
     "core-js": "^3.6.5",
     "flatpickr": "^4.6.9",
     "storybook": "^6.2.0-alpha.24",
+    "stylelint-config-property-sort-order-smacss": "^7.0.0",
+    "stylelint-config-sass-guidelines": "^7.1.0",
     "vue": "^3.0.0"
   },
   "peerDependencies": {
@@ -47,10 +48,12 @@
     "@vue/test-utils": "^2.0.0-0",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
+    "copy-webpack-plugin": "^7.0.0",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-vue": "^7.0.0-0",
     "node-sass": "^4.12.0",
+    "postcss-loader": "^5.0.0",
     "prettier": "^1.19.1",
     "sass-loader": "^8.0.2",
     "typescript": "~3.9.3",
@@ -102,10 +105,5 @@
     "/dist",
     "/src"
   ],
-  "prettier": {
-    "printWidth": 120,
-    "singleQuote": true,
-    "trailingComma": "es5"
-  },
   "sideEffects": true
 }

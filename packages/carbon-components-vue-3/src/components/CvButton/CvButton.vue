@@ -2,16 +2,23 @@
   <button :class="buttonClasses" :disabled="disabled || skeleton">
     <slot v-if="!skeleton" />
 
-    <cv-svg v-if="icon" :svg="icon" :class="`${carbonPrefix}--btn__icon`" />
+    <cv-svg
+      v-if="!skeleton && icon"
+      :svg="icon"
+      :class="`${carbonPrefix}--btn__icon`"
+    />
   </button>
 </template>
 
 <script>
 import { carbonPrefix } from '../../global/settings';
-import { props as commonCvButtonProps, useCvButtonCommon } from './CvButtonCommon';
+import {
+  props as commonCvButtonProps,
+  useCvButtonCommon,
+} from './CvButtonCommon';
 import CvSvg from '../CvSvg/_CvSvg';
 
-const { disabled, icon, kind, size, skeleton } = commonCvButtonProps;
+const { disabled, icon, kind, size } = commonCvButtonProps;
 
 export default {
   name: 'CvButton',
@@ -21,7 +28,7 @@ export default {
     icon,
     kind,
     size,
-    skeleton,
+    skeleton: Boolean,
     // alternative use of commonCvButtonProps
     // disabled: commonCvButtonProps.disabled,
     // icon: commonCvButtonProps.icon,
@@ -30,7 +37,11 @@ export default {
     // skeleton: commonCvButtonProps.skeleton
   },
   setup(props) {
-    const { buttonClasses } = useCvButtonCommon(false, props.kind, props.size, props.skeleton);
+    const { buttonClasses } = useCvButtonCommon(
+      props.kind,
+      props.size,
+      props.skeleton
+    );
 
     return {
       buttonClasses,

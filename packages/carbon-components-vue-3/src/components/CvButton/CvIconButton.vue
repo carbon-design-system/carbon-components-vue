@@ -1,34 +1,61 @@
 <template>
-  <button :class="buttonClasses" :disabled="disabled || skeleton">
-    <component :is="icon" />
+  <button
+    :class="[
+      buttonClasses,
+      `${carbonPrefix}--tooltip__trigger`,
+      `${carbonPrefix}--tooltip--a11y`,
+      `${carbonPrefix}--tooltip--${tipPosition || 'bottom'}`,
+      `${carbonPrefix}--tooltip--align-${tipAlignment || 'center'}`,
+    ]"
+    :disabled="disabled || skeleton"
+  >
+    <span :class="`${carbonPrefix}--assistive-text`">{{ label }}</span>
+
+    <cv-svg v-if="icon" :svg="icon" :class="`${carbonPrefix}--btn__icon`" />
   </button>
 </template>
 
 <script>
-import { props as commonCvButtonProps, useCvButtonCommon } from './CvButtonCommon';
+import { carbonPrefix } from '../../global/settings';
+import {
+  props as commonCvButtonProps,
+  useCvButtonCommon,
+} from './CvButtonCommon';
+import CvSvg from '../CvSvg/_CvSvg';
 
-const { disabled, icon, kind, size, skeleton } = commonCvButtonProps;
+const { disabled, icon, kind, size } = commonCvButtonProps;
 
 export default {
   name: 'CvIconButton',
+  components: { CvSvg },
   props: {
     disabled,
     icon,
     kind,
+    label: { type: String, default: undefined },
     size,
-    skeleton,
-    // alternative use of commonCvButtonProps
-    // disabled: commonCvButtonProps.disabled,
-    // icon: commonCvButtonProps.icon,
-    // kind: commonCvButtonProps.kind,
-    // size: commonCvButtonProps.size,
-    // skeleton: commonCvButtonProps.skeleton
+    tipPosition: {
+      type: String,
+      default: 'bottom',
+      validator: val => ['top', 'left', 'bottom', 'right'.includes(val)],
+    },
+    tipAlignment: {
+      type: String,
+      default: 'center',
+      validator: val => ['start', 'center', 'end'].includes(val),
+    },
   },
   setup(props) {
-    const { buttonClasses } = useCvButtonCommon(true, props.kind, props.size, props.skeleton);
+    const { buttonClasses } = useCvButtonCommon(
+      props.kind,
+      props.size,
+      false,
+      true
+    );
 
     return {
       buttonClasses,
+      carbonPrefix,
     };
   },
 };

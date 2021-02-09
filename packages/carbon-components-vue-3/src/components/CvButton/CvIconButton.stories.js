@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import CvButton from './CvButton';
+import CvIconButton from './CvIconButton';
 import { buttonKinds, buttonSizes } from './consts.js';
 import commonPropsControls from '../../global/storybook-utils';
 
@@ -23,13 +23,20 @@ const icons = {
 };
 
 export default {
-  title: 'Components/CvButton',
-  component: CvButton,
+  title: 'Components/CvIconButton',
+  component: CvIconButton,
   argTypes: {
     ...commonPropsControls(commonCvButtonProps),
-    icon: { control: { type: 'select', options: Object.keys(icons) } },
+    icon: {
+      control: {
+        name: 'test',
+        type: 'select',
+        options: Object.keys(icons),
+        value: 'Bee20',
+      },
+    },
     kind: { control: { type: 'select', options: buttonKinds } },
-    size: { control: { type: 'select', options: buttonSizes } },
+    size: { control: { type: 'select', options: buttonSizes, value: 'sm' } },
   },
   parameters: {
     actions: {
@@ -46,8 +53,8 @@ const Template = (args, { argTypes }) => {
 
   return {
     props: Object.keys(argTypes),
-    components: { CvButton },
-    template: `<cv-button @click="handleClick" :data-test="label" v-bind="$props">{{label}}</cv-button>`,
+    components: { CvIconButton },
+    template: `<cv-icon-button @click="handleClick" :data-test="label" v-bind="$props"/>`,
     setup() {
       const handleClick = action('Click handler');
 
@@ -60,29 +67,33 @@ export const Primary = Template.bind({});
 Primary.args = {
   kind: 'primary',
   label: 'primary',
-  banana: 'banana',
+  icon: 'Bee20',
 };
 
 export const Secondary = Template.bind({});
 Secondary.args = {
   kind: 'secondary',
   label: 'Secondary',
+  icon: 'Bee20',
 };
 
 export const Field = Template.bind({});
 Field.args = {
   label: 'Field size',
   size: 'field',
+  icon: 'Bee20',
 };
 
 export const Small = Template.bind({});
 Small.args = {
   label: 'sm',
   size: 'sm',
+  icon: 'Bee20',
 };
 
 export const Large = Template.bind({});
 Large.args = {
   label: 'Large size',
   size: 'large',
+  icon: 'Bee20',
 };
