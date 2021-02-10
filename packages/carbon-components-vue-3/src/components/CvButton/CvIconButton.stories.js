@@ -40,7 +40,7 @@ export default {
   },
   parameters: {
     actions: {
-      handles: ['mouseover', 'mousedown .bx--btn'],
+      handles: ['mouseover', 'mousedown .bx--btn', 'click'],
     },
   },
 };
@@ -54,12 +54,7 @@ const Template = (args, { argTypes }) => {
   return {
     props: Object.keys(argTypes),
     components: { CvIconButton },
-    template: `<cv-icon-button @click="handleClick" :data-test="label" v-bind="$props"/>`,
-    setup() {
-      const handleClick = action('Click handler');
-
-      return { handleClick };
-    },
+    template: `<cv-icon-button :data-test="label" v-bind="$props"/>`,
   };
 };
 

@@ -7,11 +7,11 @@
       `${carbonPrefix}--tooltip--${tipPosition || 'bottom'}`,
       `${carbonPrefix}--tooltip--align-${tipAlignment || 'center'}`,
     ]"
-    :disabled="disabled || skeleton"
+    :disabled="disabled"
   >
     <span :class="`${carbonPrefix}--assistive-text`">{{ label }}</span>
 
-    <cv-svg v-if="icon" :svg="icon" :class="`${carbonPrefix}--btn__icon`" />
+    <cv-svg :svg="icon" :class="`${carbonPrefix}--btn__icon`" />
   </button>
 </template>
 

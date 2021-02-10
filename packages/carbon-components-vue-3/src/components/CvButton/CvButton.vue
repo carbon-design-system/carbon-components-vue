@@ -29,12 +29,6 @@ export default {
     kind,
     size,
     skeleton: Boolean,
-    // alternative use of commonCvButtonProps
-    // disabled: commonCvButtonProps.disabled,
-    // icon: commonCvButtonProps.icon,
-    // kind: commonCvButtonProps.kind,
-    // size: commonCvButtonProps.size,
-    // skeleton: commonCvButtonProps.skeleton
   },
   setup(props) {
     const { buttonClasses } = useCvButtonCommon(
