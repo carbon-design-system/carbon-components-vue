@@ -1,5 +1,5 @@
 {
-  "name": "carbon-components-vue-3",
+  "name": "@carbon/vue-3",
   "version": "0.1.0",
   "private": true,
   "scripts": {

@@ -1,4 +1,4 @@
-# carbon-components-vue-3
+# @carbon/vue-3
 
 ## Project setup
 
