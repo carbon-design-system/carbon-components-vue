@@ -1,4 +1,5 @@
-import { action } from '@storybook/addon-actions';
+import { shallowRef } from '@vue/reactivity';
+
 import CvIconButton from './CvIconButton';
 import { buttonKinds, buttonSizes } from './consts.js';
 import commonPropsControls from '../../global/storybook-utils';
@@ -29,7 +30,6 @@ export default {
     ...commonPropsControls(commonCvButtonProps),
     icon: {
       control: {
-        name: 'test',
         type: 'select',
         options: Object.keys(icons),
         value: 'Bee20',
@@ -47,14 +47,22 @@ export default {
 
 // Some magic passes args
 const Template = (args, { argTypes }) => {
-  if (args.icon) {
-    args.icon = icons[args.icon];
-  }
-
   return {
     props: Object.keys(argTypes),
     components: { CvIconButton },
-    template: `<cv-icon-button :data-test="label" v-bind="$props"/>`,
+    template: `<cv-icon-button :data-test="label" v-bind="$props" :icon="icon"/>`,
+    setup(props) {
+      const icon = shallowRef(icons[props.icon]);
+
+      if (icon.value === undefined) {
+        // assigning an icon seem sto need a kick
+        setTimeout(() => {
+          icon.value === icons[props.icon];
+        }, 1);
+      }
+
+      return { icon };
+    },
   };
 };
 
@@ -89,6 +97,6 @@ Small.args = {
 export const Large = Template.bind({});
 Large.args = {
   label: 'Large size',
-  size: 'large',
+  size: 'lg',
   icon: 'Bee20',
 };

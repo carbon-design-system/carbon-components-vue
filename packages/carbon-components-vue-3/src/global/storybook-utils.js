@@ -13,8 +13,6 @@ const storybookType = prop => {
 export default function(commonProps) {
   const controls = {};
 
-  console.dir(commonProps);
-
   for (let key of Object.keys(commonProps)) {
     const prop = commonProps[key];
 
