@@ -1,9 +1,6 @@
 <script>
-import CvWrapper from '../cv-wrapper/_cv-wrapper';
-
 export default {
   name: 'CvSvg',
-  components: { CvWrapper },
   props: {
     svg: {
       type: [String, Object],
