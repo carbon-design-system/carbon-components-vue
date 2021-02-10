@@ -45,7 +45,6 @@ export default {
   },
 };
 
-// Some magic passes args
 const Template = (args, { argTypes }) => {
   return {
     props: Object.keys(argTypes),
