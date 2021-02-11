@@ -43,3 +43,6 @@ package-lock.json
 
 # package info, regenerated during builds
 package-info.jsonl
+
+# Local Netlify folder
+.netlify
