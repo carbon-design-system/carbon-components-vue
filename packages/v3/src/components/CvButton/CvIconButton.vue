@@ -29,16 +29,38 @@ export default {
   name: 'CvIconButton',
   components: { CvSvg },
   props: {
+    // Docgen comments added for storybook doc page
+    /**
+     * disabled by property or if skeleton
+     */
     disabled,
+    /**
+     * \@carbon/icons-vue icon, href, svg or symbol
+     */
     icon,
+    /**
+     * Carbon button kind
+     */
     kind,
+    /**
+     * label displayed as a tooltip for the icon
+     */
     label: { type: String, default: undefined },
+    /**
+     * Size of the button
+     */
     size,
+    /**
+     * tipPosition as per CvTooltip
+     */
     tipPosition: {
       type: String,
       default: 'bottom',
       validator: val => ['top', 'left', 'bottom', 'right'.includes(val)],
     },
+    /**
+     * tipAlignment as per CvTooltip
+     */
     tipAlignment: {
       type: String,
       default: 'center',
