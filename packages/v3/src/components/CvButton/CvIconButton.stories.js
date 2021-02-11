@@ -28,6 +28,9 @@ export default {
   component: CvIconButton,
   argTypes: {
     ...commonPropsControls(commonCvButtonProps),
+    /**
+     * \@carbon/icons-vue icon, href, svg or symbol
+     */
     icon: {
       control: {
         type: 'select',
@@ -35,7 +38,13 @@ export default {
         value: 'Bee20',
       },
     },
+    /**
+     * Carbon button kind
+     */
     kind: { control: { type: 'select', options: buttonKinds } },
+    /**
+     * Size of the button
+     */
     size: { control: { type: 'select', options: buttonSizes, value: 'sm' } },
   },
   parameters: {

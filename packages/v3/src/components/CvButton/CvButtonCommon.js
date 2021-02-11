@@ -3,7 +3,11 @@ import { carbonPrefix } from '../../global/settings';
 import { buttonKinds, buttonSizes } from './consts.js';
 
 export const props = {
-  disabled: Boolean, // hello
+  /**
+   * disabled by property or if skeleton
+   */
+  disabled: Boolean,
+
   icon: {
     type: [String, Object],
     default: undefined,

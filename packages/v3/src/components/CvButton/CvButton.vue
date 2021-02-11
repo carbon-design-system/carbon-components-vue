@@ -24,10 +24,26 @@ export default {
   name: 'CvButton',
   components: { CvSvg },
   props: {
+    // Docgen comments added for storybook doc page
+    /**
+     * disabled by property or if skeleton
+     */
     disabled,
+    /**
+     * \@carbon/icons-vue icon, href, svg or symbol
+     */
     icon,
+    /**
+     * Carbon button kind
+     */
     kind,
+    /**
+     * Size of the button
+     */
     size,
+    /**
+     * skeleton - shows the skeleton version of the button
+     */
     skeleton: Boolean,
   },
   setup(props) {
