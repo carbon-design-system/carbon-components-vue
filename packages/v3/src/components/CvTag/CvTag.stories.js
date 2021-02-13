@@ -29,10 +29,36 @@ Default.args = {
   label: 'This is a tag',
   filter: false
 };
+Default.parameters = {
+  docs: {
+    source: {
+      code: `
+<CvTag
+  kind="red"
+  label="This is a tag"
+  :filter="false"
+/>
+`,
+    },
+  },
+};
 
 export const Filter = Template.bind({});
 Filter.args = {
   kind: 'teal',
   label: 'This is a tag',
   filter: true
+};
+Filter.parameters = {
+  docs: {
+    source: {
+      code: `
+<CvTag
+  kind="teal"
+  label="This is a tag"
+  :filter="true"
+/>
+`,
+    },
+  },
 };
