@@ -1,5 +1,6 @@
 <template>
   <button :class="buttonClasses" :disabled="disabled || skeleton">
+    <!-- @slot Default content of button -->
     <slot v-if="!skeleton" />
 
     <cv-svg
