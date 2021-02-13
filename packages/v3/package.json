@@ -92,6 +92,8 @@
     "not dead"
   ],
   "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": ["src/*/**/*.{js,vue}", "!**/node_modules/**"],
     "preset": "@vue/cli-plugin-unit-jest",
     "transform": {
       "^.+\\.vue$": "vue-jest"
