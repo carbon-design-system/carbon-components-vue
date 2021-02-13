@@ -1,5 +1,5 @@
 import CvTag from './CvTag';
-import CvButtonConsts from './consts';
+import CvTagConsts from './consts';
 
-export { CvTag, CvButtonConsts, CvIconButton };
+export { CvTag, CvTagConsts };
 export default CvTag;

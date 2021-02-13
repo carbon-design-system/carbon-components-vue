@@ -8,7 +8,7 @@
       {{ label }}
       </span>
     <button 
-      v-if="isFilter"
+      v-if="filter"
       :class="`${carbonPrefix}--tag__close-icon`"
       :aria-label="clearAriaLabel"
       @click="onRemove"
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { computed, getCurrentInstance } from 'vue';
+import { computed } from 'vue';
 import { carbonPrefix } from '../../global/settings';
 import { tagKinds } from './consts';
 import Close16 from '@carbon/icons-vue/es/close/16';
@@ -29,23 +29,29 @@ export default {
   name: 'CvTag',
   components: { Close16 },
   props: {
-    // Docgen comments added for storybook doc page
-    /**
-     * asd by property or if skeleton
-     */
+    
     clearAriaLabel: { type: String, default: 'Clear filter' },
     /**
      * disabled by property or if skeleton
      */
     disabled: Boolean,
+    /**
+     * label to be used in the CvTag component
+     */
     label: { type: String, required: true },
+    /**
+     * kind of the CvTag
+     */
     kind: {
       type: String,
-      default: tagKinds[0],
+      default: 'red',
       validator(val) {
         return tagKinds.includes(val);
       },
     },
+    /**
+     * If filter is true, the CvTag will include a remove button on the right side, which on a click, will emit the 'remove' event.
+     */
     filter: {
       type: Boolean,
       default: false,
@@ -58,28 +64,17 @@ export default {
     'remove'
   ],
   setup(props, { emit }) {
-    const instance = getCurrentInstance();
-
-    const isFilter = computed(() => {
-      return props.filter;
-    });
-
-    const tagKind = computed(() => {
-      return props.kind === 'filter' ? 'high-contrast' : props.kind;
-    });
-
     const title = computed(() => {
-      return isFilter.value ? props.clearAriaLabel : null;
+      return props.filter ? props.clearAriaLabel : null;
     });
 
     const tagClasses = computed(() => {
       const classes = [
-        `cv-tag`,
         `${carbonPrefix}--tag`,
-        `${carbonPrefix}--tag--${tagKind.value}`
+        `${carbonPrefix}--tag--${props.kind}`
       ];
 
-      if (isFilter.value)
+      if (props.filter)
       {
         classes.push(`${carbonPrefix}--tag--filter`);
       }
@@ -100,8 +95,6 @@ export default {
 
     return {
       carbonPrefix,
-      isFilter,
-      tagKind,
       title,
       tagClasses,
       onRemove
