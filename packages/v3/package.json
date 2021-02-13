@@ -93,11 +93,18 @@
   ],
   "jest": {
     "collectCoverage": true,
-    "collectCoverageFrom": ["src/*/**/*.{js,vue}", "!**/node_modules/**"],
+    "collectCoverageFrom": [
+      "src/*/**/*.{js,vue}", 
+      "!**/node_modules/**",
+      "!src/components/**/*.stories.js"
+    ],
     "preset": "@vue/cli-plugin-unit-jest",
     "transform": {
       "^.+\\.vue$": "vue-jest"
-    }
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!@carbon)"
+    ]
   },
   "resolutions": {
     "vue": "^3.0.0",

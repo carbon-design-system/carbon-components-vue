@@ -1,13 +1,13 @@
 import CvTag from './CvTag';
 import { tagKinds } from './consts.js';
-import { action } from '@storybook/addon-actions'
+import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'Components/CvTag',
   component: CvTag,
   argTypes: {
     kind: { control: { type: 'select', options: tagKinds } },
-  }
+  },
 };
 
 const Template = (args, { argTypes }) => {
@@ -17,7 +17,7 @@ const Template = (args, { argTypes }) => {
     template: `<CvTag @remove="onRemove" v-bind="$props" />`,
     setup(props) {
       return {
-        onRemove: action('remove')
+        onRemove: action('remove'),
       };
     },
   };
@@ -27,7 +27,7 @@ export const Default = Template.bind({});
 Default.args = {
   kind: 'red',
   label: 'This is a tag',
-  filter: false
+  filter: false,
 };
 Default.parameters = {
   docs: {
@@ -47,7 +47,7 @@ export const Filter = Template.bind({});
 Filter.args = {
   kind: 'teal',
   label: 'This is a tag',
-  filter: true
+  filter: true,
 };
 Filter.parameters = {
   docs: {

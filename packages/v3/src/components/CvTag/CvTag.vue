@@ -1,13 +1,9 @@
 <template>
-  <span
-    :class="tagClasses"
-    role="listitem"
-    :title="title"
-  >
+  <span :class="tagClasses" role="listitem" :title="title">
     <span :class="`${carbonPrefix}--tag__label`">
       {{ label }}
-      </span>
-    <button 
+    </span>
+    <button
       v-if="filter"
       :class="`${carbonPrefix}--tag__close-icon`"
       :aria-label="clearAriaLabel"
@@ -29,7 +25,6 @@ export default {
   name: 'CvTag',
   components: { Close16 },
   props: {
-    
     clearAriaLabel: { type: String, default: 'Clear filter' },
     /**
      * disabled by property or if skeleton
@@ -61,7 +56,7 @@ export default {
     /**
      * Triggers when the clear button is pressed on a filter CvTag
      */
-    'remove'
+    'remove',
   ],
   setup(props, { emit }) {
     const title = computed(() => {
@@ -71,33 +66,30 @@ export default {
     const tagClasses = computed(() => {
       const classes = [
         `${carbonPrefix}--tag`,
-        `${carbonPrefix}--tag--${props.kind}`
+        `${carbonPrefix}--tag--${props.kind}`,
       ];
 
-      if (props.filter)
-      {
+      if (props.filter) {
         classes.push(`${carbonPrefix}--tag--filter`);
       }
 
-      if (props.disabled)
-      {
+      if (props.disabled) {
         classes.push(`${carbonPrefix}--tag--disabled`);
       }
-      return classes
-    })
+      return classes;
+    });
 
-    const onRemove = ()  => {
+    const onRemove = () => {
       if (!props.disabled) {
         emit('remove');
       }
     };
 
-
     return {
       carbonPrefix,
       title,
       tagClasses,
-      onRemove
+      onRemove,
     };
   },
 };
