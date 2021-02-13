@@ -14,18 +14,25 @@ const Template = (args, { argTypes }) => {
   return {
     props: Object.keys(argTypes),
     components: { CvTag },
-    template: `<CvTag @remove="remove" v-bind="$props" />`,
+    template: `<CvTag @remove="onRemove" v-bind="$props" />`,
     setup(props) {
       return {
-        remove: action('remove')
+        onRemove: action('remove')
       };
     },
   };
 };
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const Default = Template.bind({});
+Default.args = {
   kind: 'red',
-  label: 'something',
+  label: 'This is a tag',
+  filter: false
+};
+
+export const Filter = Template.bind({});
+Filter.args = {
+  kind: 'teal',
+  label: 'This is a tag',
   filter: true
 };

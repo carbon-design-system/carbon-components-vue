@@ -30,6 +30,9 @@ export default {
   components: { Close16 },
   props: {
     // Docgen comments added for storybook doc page
+    /**
+     * asd by property or if skeleton
+     */
     clearAriaLabel: { type: String, default: 'Clear filter' },
     /**
      * disabled by property or if skeleton
@@ -48,7 +51,12 @@ export default {
       default: false,
     },
   },
-  emits: ['remove'],
+  emits: [
+    /**
+     * Triggers when the clear button is pressed on a filter CvTag
+     */
+    'remove'
+  ],
   setup(props, { emit }) {
     const instance = getCurrentInstance();
 
@@ -101,5 +109,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss"></style>
