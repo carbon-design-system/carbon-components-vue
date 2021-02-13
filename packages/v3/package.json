@@ -93,7 +93,7 @@
   ],
   "jest": {
     "collectCoverage": true,
-    "collectCoverageFrom": ["src/*/**/*.{js,vue}", "!**/node_modules/**"],
+    "collectCoverageFrom": ["src/*/**/*.{js,vue}", "!**/node_modules/**", "!**/*.stories.js", "!**/*.spec.js", "!**/*.test.js"],
     "preset": "@vue/cli-plugin-unit-jest",
     "transform": {
       "^.+\\.vue$": "vue-jest"

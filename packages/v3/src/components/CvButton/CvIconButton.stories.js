@@ -2,7 +2,7 @@ import { shallowRef } from '@vue/reactivity';
 
 import CvIconButton from './CvIconButton';
 import { buttonKinds, buttonSizes } from './consts.js';
-import commonPropsControls from '../../global/storybook-utils';
+import { storybookControlsFromProps } from '../../global/storybook-utils';
 
 import { props as commonCvButtonProps } from './CvButtonCommon';
 import {
@@ -27,7 +27,7 @@ export default {
   title: 'Components/CvIconButton',
   component: CvIconButton,
   argTypes: {
-    ...commonPropsControls(commonCvButtonProps),
+    ...storybookControlsFromProps(commonCvButtonProps),
     /**
      * \@carbon/icons-vue icon, href, svg or symbol
      */
