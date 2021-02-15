@@ -5,7 +5,6 @@ import { CvButton } from '..';
 
 describe('CvButton', () => {
   it('renders button and slot', async () => {
-    // const onClick = jest.fn();
     const slotContent = 'slot content';
     const wrapper = shallowMount(CvButton, {
       slots: {
