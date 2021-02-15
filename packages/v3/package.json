@@ -94,6 +94,14 @@
   "jest": {
     "collectCoverage": true,
     "collectCoverageFrom": ["src/*/**/*.{js,vue}", "!**/node_modules/**", "!**/*.stories.js", "!**/*.spec.js", "!**/*.test.js"],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 0
+      }
+    },
     "preset": "@vue/cli-plugin-unit-jest",
     "transform": {
       "^.+\\.vue$": "vue-jest"
