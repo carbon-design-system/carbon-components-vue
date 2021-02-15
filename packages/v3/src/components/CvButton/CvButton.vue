@@ -5,8 +5,7 @@
     @click="$emit('click', $event)"
   >
     <!-- @slot Default content of button -->
-    <!-- <slot v-if="!skeleton" /> -->
-    <slot></slot>
+    <slot v-if="!skeleton" />
 
     <cv-svg
       v-if="!skeleton && icon"
@@ -67,5 +66,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss"></style>
