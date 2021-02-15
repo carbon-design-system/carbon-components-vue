@@ -1,6 +1,6 @@
 import { shallowRef } from '@vue/reactivity';
 
-import CvIconButton from './CvIconButton';
+import { CvIconButton } from './';
 import { buttonKinds, buttonSizes } from './consts.js';
 import { storybookControlsFromProps } from '../../global/storybook-utils';
 
