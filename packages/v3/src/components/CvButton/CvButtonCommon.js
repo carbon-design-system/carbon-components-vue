@@ -11,12 +11,6 @@ export const props = {
   icon: {
     type: [String, Object],
     default: undefined,
-    validator(val) {
-      if (!val || typeof val === 'string') {
-        return true;
-      }
-      return val.render !== null;
-    },
   },
   kind: {
     type: String,

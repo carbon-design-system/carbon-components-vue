@@ -2,7 +2,7 @@ import { shallowRef } from '@vue/reactivity';
 
 import CvButton from './CvButton';
 import { buttonKinds, buttonSizes } from './consts.js';
-import commonPropsControls from '../../global/storybook-utils';
+import { storybookControlsFromProps } from '../../global/storybook-utils';
 
 import { props as commonCvButtonProps } from './CvButtonCommon';
 import {
@@ -27,7 +27,7 @@ export default {
   title: 'Components/CvButton',
   component: CvButton,
   argTypes: {
-    ...commonPropsControls(commonCvButtonProps),
+    ...storybookControlsFromProps(commonCvButtonProps),
     icon: { control: { type: 'select', options: Object.keys(icons) } },
     kind: { control: { type: 'select', options: buttonKinds } },
     size: { control: { type: 'select', options: buttonSizes } },

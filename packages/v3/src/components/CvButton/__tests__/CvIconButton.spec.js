@@ -1,15 +1,14 @@
 import { shallowMount } from '@vue/test-utils';
 import { carbonPrefix } from '../../../global/settings';
 
-import { CvButton } from '..';
+import { CvIconButton } from '..';
 
-describe('CvButton', () => {
-  it('renders button and slot', async () => {
-    // const onClick = jest.fn();
-    const slotContent = 'slot content';
-    const wrapper = shallowMount(CvButton, {
-      slots: {
-        default: slotContent,
+describe('CvIconButton', () => {
+  it('renders button and slot', () => {
+    const labelContent = 'label content';
+    const wrapper = shallowMount(CvIconButton, {
+      props: {
+        label: labelContent,
       },
     });
 
@@ -17,11 +16,12 @@ describe('CvButton', () => {
     expect(button.classes()).toContain(`${carbonPrefix}--btn`);
     expect(button.classes()).toContain(`${carbonPrefix}--btn--primary`);
 
-    expect(button.text()).toBe(slotContent);
+    const assistiveText = button.find(`.${carbonPrefix}--assistive-text`);
+    expect(assistiveText.text()).toBe(labelContent);
   });
 
   it('Raises click event when clicked', async () => {
-    const wrapper = shallowMount(CvButton);
+    const wrapper = shallowMount(CvIconButton);
     await wrapper.find('button').trigger('click');
     expect(wrapper.emitted('click')).toHaveLength(1);
   });
