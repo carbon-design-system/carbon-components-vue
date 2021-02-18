@@ -11,7 +11,13 @@ export default {
         if (!val || typeof val === 'string') {
           return true;
         }
-        return val.setup !== null;
+        const result = val.render !== undefined;
+        if (!result) {
+          console.error(
+            'Expected a Vue icon component, SVG, SVG Symbol or SVG file'
+          );
+        }
+        return result;
       },
     },
   },

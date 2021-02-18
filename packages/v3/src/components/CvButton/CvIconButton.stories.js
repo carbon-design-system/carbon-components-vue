@@ -1,8 +1,7 @@
-import { shallowRef } from '@vue/reactivity';
-
-import CvIconButton from './CvIconButton';
+import { computed } from 'vue';
+import { CvIconButton } from './';
 import { buttonKinds, buttonSizes } from './consts.js';
-import commonPropsControls from '../../global/storybook-utils';
+import { storybookControlsFromProps } from '../../global/storybook-utils';
 
 import { props as commonCvButtonProps } from './CvButtonCommon';
 import {
@@ -27,7 +26,7 @@ export default {
   title: 'Components/CvIconButton',
   component: CvIconButton,
   argTypes: {
-    ...commonPropsControls(commonCvButtonProps),
+    ...storybookControlsFromProps(commonCvButtonProps),
     /**
      * \@carbon/icons-vue icon, href, svg or symbol
      */
@@ -35,7 +34,6 @@ export default {
       control: {
         type: 'select',
         options: Object.keys(icons),
-        value: 'Bee20',
       },
     },
     /**
@@ -45,7 +43,7 @@ export default {
     /**
      * Size of the button
      */
-    size: { control: { type: 'select', options: buttonSizes, value: 'sm' } },
+    size: { control: { type: 'select', options: buttonSizes } },
   },
   parameters: {
     actions: {
@@ -58,18 +56,10 @@ const Template = (args, { argTypes }) => {
   return {
     props: Object.keys(argTypes),
     components: { CvIconButton },
-    template: `<cv-icon-button :data-test="label" v-bind="$props" :icon="icon"/>`,
+    template: `<cv-icon-button v-bind="$props" :icon="theIcon"/>`,
     setup(props) {
-      const icon = shallowRef(icons[props.icon]);
-
-      if (icon.value === undefined) {
-        // assigning an icon seem sto need a kick
-        setTimeout(() => {
-          icon.value === icons[props.icon];
-        }, 1);
-      }
-
-      return { icon };
+      const theIcon = computed(() => icons[props.icon]);
+      return { theIcon };
     },
   };
 };

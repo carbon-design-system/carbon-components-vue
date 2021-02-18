@@ -8,6 +8,7 @@
       `${carbonPrefix}--tooltip--align-${tipAlignment || 'center'}`,
     ]"
     :disabled="disabled"
+    @click="$emit('click', $event)"
   >
     <span :class="`${carbonPrefix}--assistive-text`">{{ label }}</span>
 
@@ -28,6 +29,7 @@ const { disabled, icon, kind, size } = commonCvButtonProps;
 export default {
   name: 'CvIconButton',
   components: { CvSvg },
+  emits: ['click'], // emitted to allow testing of click
   props: {
     // Docgen comments added for storybook doc page
     /**
@@ -82,5 +84,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss"></style>

@@ -1,5 +1,9 @@
 <template>
-  <button :class="buttonClasses" :disabled="disabled || skeleton">
+  <button
+    :class="buttonClasses"
+    :disabled="disabled || skeleton"
+    @click="$emit('click', $event)"
+  >
     <!-- @slot Default content of button -->
     <slot v-if="!skeleton" />
 
@@ -24,6 +28,7 @@ const { disabled, icon, kind, size } = commonCvButtonProps;
 export default {
   name: 'CvButton',
   components: { CvSvg },
+  emits: ['click'], // emitted to allow testing of click
   props: {
     // Docgen comments added for storybook doc page
     /**
@@ -61,5 +66,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss"></style>
