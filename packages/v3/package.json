@@ -24,7 +24,7 @@
     "carbon-components": "^10.28.0",
     "core-js": "^3.6.5",
     "flatpickr": "^4.6.9",
-    "storybook": "^6.2.0-alpha.24",
+    "storybook": "^6.2.0-alpha.29",
     "stylelint-config-property-sort-order-smacss": "^7.0.0",
     "stylelint-config-sass-guidelines": "^7.1.0",
     "vue": "^3.0.0"
