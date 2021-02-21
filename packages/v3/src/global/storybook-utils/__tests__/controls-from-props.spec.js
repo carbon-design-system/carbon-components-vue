@@ -1,4 +1,4 @@
-import { storybookControlsFromProps } from '../storybook-utils';
+import { storybookControlsFromProps } from '..';
 
 const props = {
   boolean_0: true,
@@ -40,7 +40,7 @@ const expectedResult = {
   errNotSure2: { control: { type: 'text', default: '' } },
 };
 
-describe('global/storybook-utils', () => {
+describe('global/storybook-utils/controls-from-props', () => {
   it('Should convert common props to storybook control types', () => {
     const controls = storybookControlsFromProps(props);
 

@@ -11,7 +11,7 @@ export default {
         if (!val || typeof val === 'string') {
           return true;
         }
-        const result = val.render !== undefined;
+        const result = val.render !== undefined || val.setup !== undefined;
         if (!result) {
           console.error(
             'Expected a Vue icon component, SVG, SVG Symbol or SVG file'
