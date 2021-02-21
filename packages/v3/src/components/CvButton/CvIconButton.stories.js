@@ -1,7 +1,10 @@
-import { computed } from 'vue';
+import { action } from '@storybook/addon-actions';
 import { CvIconButton } from './';
 import { buttonKinds, buttonSizes } from './consts.js';
-import { storybookControlsFromProps } from '../../global/storybook-utils';
+import {
+  storybookControlsFromProps,
+  storyParametersObject,
+} from '../../global/storybook-utils';
 
 import { props as commonCvButtonProps } from './CvButtonCommon';
 import {
@@ -45,21 +48,17 @@ export default {
      */
     size: { control: { type: 'select', options: buttonSizes } },
   },
-  parameters: {
-    actions: {
-      handles: ['mouseover', 'mousedown .bx--btn', 'click'],
-    },
-  },
 };
 
+const template = `<cv-icon-button @click="onClick" v-bind="newArgs" />`;
 const Template = (args, { argTypes }) => {
+  const newArgs = { ...args, icon: icons[args.icon] };
   return {
     props: Object.keys(argTypes),
     components: { CvIconButton },
-    template: `<cv-icon-button v-bind="$props" :icon="theIcon"/>`,
-    setup(props) {
-      const theIcon = computed(() => icons[props.icon]);
-      return { theIcon };
+    template,
+    setup() {
+      return { newArgs, onClick: action('click') };
     },
   };
 };
@@ -70,6 +69,12 @@ Primary.args = {
   label: 'primary',
   icon: 'Bee20',
 };
+Primary.parameters = storyParametersObject(
+  Primary.parameters,
+  template,
+  Primary.args,
+  'v-bind="newArgs"'
+);
 
 export const Secondary = Template.bind({});
 Secondary.args = {
@@ -77,6 +82,12 @@ Secondary.args = {
   label: 'Secondary',
   icon: 'Bee20',
 };
+Secondary.parameters = storyParametersObject(
+  Secondary.parameters,
+  template,
+  Secondary.args,
+  'v-bind="newArgs"'
+);
 
 export const Field = Template.bind({});
 Field.args = {
@@ -84,6 +95,12 @@ Field.args = {
   size: 'field',
   icon: 'Bee20',
 };
+Field.parameters = storyParametersObject(
+  Field.parameters,
+  template,
+  Field.args,
+  'v-bind="newArgs"'
+);
 
 export const Small = Template.bind({});
 Small.args = {
@@ -91,6 +108,12 @@ Small.args = {
   size: 'sm',
   icon: 'Bee20',
 };
+Small.parameters = storyParametersObject(
+  Small.parameters,
+  template,
+  Small.args,
+  'v-bind="newArgs"'
+);
 
 export const Large = Template.bind({});
 Large.args = {
@@ -98,3 +121,9 @@ Large.args = {
   size: 'lg',
   icon: 'Bee20',
 };
+Large.parameters = storyParametersObject(
+  Large.parameters,
+  template,
+  Large.args,
+  'v-bind="newArgs"'
+);
