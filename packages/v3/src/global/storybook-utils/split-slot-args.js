@@ -1,4 +1,4 @@
-export const splitSlotArgs = argsIn => {
+export const splitSlotArgs = (argsIn = {}) => {
   const keys = Object.keys(argsIn);
   const slotArgs = {};
   const args = {};

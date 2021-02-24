@@ -64,7 +64,7 @@ export const storybookControlsFromProps = props => {
       controls[key] = type;
     } catch {
       // Type not added here yet.
-      controls[key] = { control: { type: 'text', default: '' } };
+      controls[key] = { control: { type: 'text' }, defaultValue: '' };
     }
   }
 
