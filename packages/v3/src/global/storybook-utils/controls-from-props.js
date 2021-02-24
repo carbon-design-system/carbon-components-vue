@@ -22,6 +22,7 @@ const storybookType = prop => {
   };
 
   let control = {};
+  let defaultValue;
   if (typeOfProp === 'object') {
     if (prop.type) {
       control.type = functionToControlType(prop.type);
@@ -29,33 +30,33 @@ const storybookType = prop => {
       control.type = baseTypeToControlType(typeof prop.default);
     }
     if (prop.default) {
-      control.default = prop.default;
+      defaultValue = prop.default;
     } else {
-      control.default = prop.type();
+      defaultValue = prop.type();
     }
   } else {
     if (typeOfProp === 'function') {
       control.type = functionToControlType(prop);
-      control.default = prop();
+      defaultValue = prop();
     } else {
       // base type
       control.type = baseTypeToControlType(typeOfProp);
-      control.default = prop;
+      defaultValue = prop;
     }
   }
 
-  return { control };
+  return { control, defaultValue };
 };
 
 /**
  * When declaring props in another file storybook/docgen does not understand the type.
  * This function returns a storybook control selection for each prop
  */
-export const storybookControlsFromProps = commonProps => {
+export const storybookControlsFromProps = props => {
   const controls = {};
 
-  for (let key of Object.keys(commonProps)) {
-    const prop = commonProps[key];
+  for (let key of Object.keys(props)) {
+    const prop = props[key];
 
     try {
       const type = storybookType(prop);
@@ -63,7 +64,7 @@ export const storybookControlsFromProps = commonProps => {
       controls[key] = type;
     } catch {
       // Type not added here yet.
-      controls[key] = { control: { type: 'text', default: '' } };
+      controls[key] = { control: { type: 'text' }, defaultValue: '' };
     }
   }
 

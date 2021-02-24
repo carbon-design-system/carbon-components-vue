@@ -42,11 +42,17 @@ export default {
     /**
      * Carbon button kind
      */
-    kind: { control: { type: 'select', options: buttonKinds } },
+    kind: {
+      control: { type: 'select', options: buttonKinds },
+      defaultValue: CvIconButton.props.kind.default,
+    },
     /**
      * Size of the button
      */
-    size: { control: { type: 'select', options: buttonSizes } },
+    size: {
+      control: { type: 'select', options: buttonSizes },
+      defaultValue: CvIconButton.props.size.default,
+    },
   },
 };
 
@@ -63,11 +69,13 @@ const Template = (args, { argTypes }) => {
   };
 };
 
+const defaultArgs = { icon: 'Bee20' };
+
 export const Primary = Template.bind({});
 Primary.args = {
+  ...defaultArgs,
   kind: 'primary',
   label: 'primary',
-  icon: 'Bee20',
 };
 Primary.parameters = storyParametersObject(
   Primary.parameters,

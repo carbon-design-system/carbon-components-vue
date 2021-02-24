@@ -135,12 +135,26 @@ describe('global/storybook-utils/storyParametersObject', () => {
       },
     });
   });
+
+  it('Is does not add slotArgs', () => {
+    const parameters = storyParametersObject(null, '<div v-bind="$props" />', {
+      'slotArgs.abc': 'abc',
+    });
+
+    expect(parameters).toEqual({
+      docs: {
+        source: {
+          code: '<div  />',
+        },
+      },
+    });
+  });
 });
 
 describe('global/storybook-utils/storySourceCode', () => {
   it('Works with a default parameter', () => {
     const result = storySourceCode('<div v-bind="$props" />', {
-      prop1: 'prop1 ',
+      prop1: 'prop1',
     });
 
     expect(result).toEqual('<div prop1="prop1" />');

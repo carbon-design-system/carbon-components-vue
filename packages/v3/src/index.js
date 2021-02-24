@@ -30,4 +30,4 @@ export default {
 };
 
 // import/export individual components
-export { CvButton, CvIconButton } from './components/CvButton';
+export { CvButton, CvIconButton, CvButtonSet } from './components/CvButton';

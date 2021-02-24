@@ -4,6 +4,8 @@ export const storySourceCode = (
   replacing = 'v-bind="$props"'
 ) => {
   const propToSource = (key, val) => {
+    if (key.startsWith('slotArgs.')) return '';
+
     const type = typeof val;
     switch (type) {
       case 'boolean':
