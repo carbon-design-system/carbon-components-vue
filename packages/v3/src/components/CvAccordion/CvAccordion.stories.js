@@ -2,10 +2,13 @@ import { action } from '@storybook/addon-actions';
 import { CvAccordion, CvAccordionItem } from '.';
 import { alignConsts, sizeConsts } from './consts';
 
-import { storyParametersObject } from '../../global/storybook-utils';
+import {
+  sbCompPrefix,
+  storyParametersObject,
+} from '../../global/storybook-utils';
 
 export default {
-  title: 'Components/CvAccordion',
+  title: `${sbCompPrefix}/CvAccordion`,
   component: CvAccordion,
   argTypes: {
     align: {

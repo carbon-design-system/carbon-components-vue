@@ -1,5 +1,6 @@
 <template>
-  <span :class="tagClasses" role="listitem" :title="title">
+  <div v-if="skeleton" :class="tagClasses" />
+  <div v-else :class="tagClasses" role="listitem" :title="title">
     <span :class="`${carbonPrefix}--tag__label`">
       {{ label }}
     </span>
@@ -12,7 +13,7 @@
     >
       <Close16 />
     </button>
-  </span>
+  </div>
 </template>
 
 <script>
@@ -51,6 +52,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    /**
+     * skeleton used when loading
+     */
+    skeleton: Boolean,
   },
   emits: [
     /**
@@ -69,12 +74,16 @@ export default {
         `${carbonPrefix}--tag--${props.kind}`,
       ];
 
-      if (props.filter) {
-        classes.push(`${carbonPrefix}--tag--filter`);
-      }
+      if (props.skeleton) {
+        classes.push(`${carbonPrefix}--skeleton`);
+      } else {
+        if (props.filter) {
+          classes.push(`${carbonPrefix}--tag--filter`);
+        }
 
-      if (props.disabled) {
-        classes.push(`${carbonPrefix}--tag--disabled`);
+        if (props.disabled) {
+          classes.push(`${carbonPrefix}--tag--disabled`);
+        }
       }
       return classes;
     });
