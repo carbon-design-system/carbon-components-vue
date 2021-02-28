@@ -85,5 +85,10 @@ describe('CvTag', () => {
     // - verify tag disabled class on span
     const tagSpan = wrapper.find('span');
     expect(tagSpan.classes()).toContain(`${carbonPrefix}--tag--disabled`);
+
+    // Call onRemove directly to test disabled path
+    wrapper.vm.onRemove();
+    // check if it emitted remove
+    expect(wrapper.emitted().remove).toBeFalsy();
   });
 });

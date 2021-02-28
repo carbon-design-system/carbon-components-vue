@@ -7,7 +7,7 @@
       v-if="filter"
       :class="`${carbonPrefix}--tag__close-icon`"
       :aria-label="clearAriaLabel"
-      @click="onRemove"
+      @click.stop.prevent="onRemove"
       :disabled="disabled"
     >
       <Close16 />
