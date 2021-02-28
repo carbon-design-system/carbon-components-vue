@@ -8,7 +8,7 @@
       {
         [`${carbonPrefix}--accordion__item--disabled`]: disabled,
         [`${carbonPrefix}--accordion__item--active`]: isOpen,
-        [`${carbonPrefix}--accordion__item--${this.animation}`]: animation,
+        [`${carbonPrefix}--accordion__item--${animation}`]: animation,
       },
     ]"
     @animationend="onAnimationEnd"
@@ -20,14 +20,16 @@
       :class="`${carbonPrefix}--accordion__heading`"
       :aria-expanded="isOpen ? 'true' : 'false'"
       :aria-controls="cvId"
-      @click.prevent.stop="handleClick"
+      @click.prevent.stop="onClick"
     >
       <ChevronRight16 :class="`${carbonPrefix}--accordion__arrow`" />
       <p :class="`${carbonPrefix}--accordion__title`">
+        <!-- @slot title of the accordion item -->
         <slot name="title"></slot>
       </p>
     </button>
     <div :id="cvId" :class="`${carbonPrefix}--accordion__content`">
+      <!-- @slot content of accordion item -->
       <slot name="content"></slot>
     </div>
   </li>
@@ -36,8 +38,10 @@
 <script>
 import { onMounted, onBeforeUnmount, inject, ref } from 'vue';
 import { carbonPrefix } from '../../global/settings';
-import { useCvId } from '../../use/cvId';
-import ChevronRight16 from '@carbon/icons-vue/es/chevron--right/16';
+import { useCvId, props as propsCvId } from '../../use/cvId';
+import { ChevronRight16 } from '@carbon/icons-vue/';
+
+const { id } = propsCvId;
 
 export default {
   name: 'CvAccordionItem',
@@ -48,36 +52,50 @@ export default {
      */
     disabled: Boolean,
     /**
+     * id for element, optional uses cvId if not set
+     */
+    id,
+    /**
      * initial open state of the accordion item
      */
     open: Boolean,
   },
   setup(props) {
+    // Accordion methods
+    const registerItem = inject('registerItem');
+    const deregisterItem = inject('deregisterItem');
+    const onAccItemChagne = inject('onAccItemChagne');
+
+    // Accordion item methods
     const cvId = useCvId(props);
-    const isOpen = ref(false);
-    const reg = inject('registerItem');
-    const dereg = inject('deregisterItem');
-    const onAccItemClick = inject('onAccItemClick');
+    const isOpen = ref(props.open);
+    const animation = ref('');
 
     const toggleOpen = force => {
-      isOpen.value = typeof force !== 'undefined' ? force : !isOpen.value;
+      const newValue = typeof force !== 'undefined' ? force : !isOpen.value;
+
+      animation.value = newValue ? 'expanding' : 'collapsing';
+      isOpen.value = newValue;
+      onAccItemChagne(cvId.value, newValue);
     };
 
-    const handleClick = () => {
-      const newOpen = !isOpen.value;
-      toggleOpen(newOpen);
-      onAccItemClick(cvId, newOpen);
+    const onClick = () => {
+      toggleOpen(!isOpen.value);
+    };
+
+    const onAnimationEnd = () => {
+      animation.value = '';
     };
 
     onMounted(() => {
-      reg(cvId, { open: isOpen, toggleOpen });
+      registerItem(cvId.value, { open: isOpen.value, toggleOpen });
     });
 
     onBeforeUnmount(() => {
-      dereg(cvId);
+      deregisterItem(cvId.value);
     });
 
-    return { carbonPrefix, cvId, handleClick, isOpen };
+    return { animation, carbonPrefix, cvId, onClick, onAnimationEnd, isOpen };
   },
 };
 </script>

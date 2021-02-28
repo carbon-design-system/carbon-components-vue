@@ -12,6 +12,10 @@ function genCvId() {
   );
 }
 
+export const props = {
+  id: String,
+};
+
 export const useCvId = props => {
   const cvId = computed(() => {
     return props?.id && props.id.length ? props.id : genCvId();

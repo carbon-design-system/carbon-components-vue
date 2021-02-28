@@ -1,1 +1,1 @@
-export { useCvId } from './cvId';
+export { useCvId, props as propsCvId } from './cvId';

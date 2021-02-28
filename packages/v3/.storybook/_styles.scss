@@ -41,5 +41,23 @@ $carbon--theme: $carbon--theme--white;
 @import '~carbon-components/scss/globals/scss/typography';
 @import '~carbon-components/scss/globals/scss/vars';
 
-@import '~carbon-components/css/carbon-components.min.css';
-// @import '~carbon-components/scss/globals/scss/styles';
+// @import '~carbon-components/css/carbon-components.min.css';
+@import '~carbon-components/scss/globals/scss/styles';
+
+// set default color and background for stories
+.cv-vue-3 {
+  margin: $layout-04;
+  background-color: $ui-background;
+  color: $text-01;
+}
+
+/**
+  Override used for modals in any .mdx preview block.
+  storybook generates preview blocks with a surrounding div with style="position: relative; z-index: 0;"
+  this causes style problems for modals when not using react portals.
+  modals in mdx files should now be formatted like this to prevent z-index issues
+*/
+// stylelint-disable-next-line
+.preview-position--fix > div {
+  position: static !important; /* stylelint-disable-line declaration-no-important */
+}
