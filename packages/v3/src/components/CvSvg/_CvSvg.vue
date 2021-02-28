@@ -11,7 +11,7 @@ export default {
         if (!val || typeof val === 'string') {
           return true;
         }
-        const result = val.render !== undefined || val.setup !== undefined;
+        const result = !!(val.render || val.setup);
         if (!result) {
           console.error(
             'Expected a Vue icon component, SVG, SVG Symbol or SVG file'
@@ -22,12 +22,9 @@ export default {
     },
   },
   setup(props) {
-    const isSvg = computed(
-      () => props.svg !== undefined && props.svg.indexOf('<svg') >= 0
-    );
+    const isSvg = computed(() => props.svg && props.svg.indexOf('<svg') >= 0);
     const isSymbol = computed(
-      () =>
-        props.svg !== undefined && !props.isSvg && props.svg.indexOf('#') >= 0
+      () => props.svg && !props.isSvg && props.svg.indexOf('#') >= 0
     );
 
     return () => {

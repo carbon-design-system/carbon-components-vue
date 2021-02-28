@@ -30,4 +30,5 @@ export default {
 };
 
 // import/export individual components
+export { CvAccordion, CvAccordionItem } from './components/CvAccordion';
 export { CvButton, CvIconButton, CvButtonSet } from './components/CvButton';
