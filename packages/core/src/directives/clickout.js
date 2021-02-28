@@ -5,7 +5,7 @@ const handlerMap = new WeakMap();
 export default {
   bind(el, binding, vnode) {
     if (!el.clickOutsideBlur) {
-      el.clickOutsideBlur = function(blurEv) {
+      el.clickOutsideBlur = function() {
         // neither element or child of
         if (!handlerMap.has(el)) {
           handlerMap.set(el, clickoutEv => {

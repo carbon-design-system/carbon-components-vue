@@ -13,7 +13,7 @@ exports[`CvLoading should render correctly when active, small and not overlayed 
 `;
 
 exports[`CvLoading should render correctly when active, small and overlayed 1`] = `
-<cv-wrapper-stub tagtype="div" class="cv-loading  0">
+<cv-wrapper-stub tagtype="div" class="cv-loading bx--loading-overlay">
   <div data-loading="" class="bx--loading bx--loading--small"><label class="bx--visually-hidden">
       Loading
     </label> <svg viewBox="-75 -75 150 150" class="bx--loading__svg">
@@ -37,7 +37,7 @@ exports[`CvLoading should render correctly when active, with normal size and not
 `;
 
 exports[`CvLoading should render correctly when active, with normal size and overlayed 1`] = `
-<cv-wrapper-stub tagtype="div" class="cv-loading  0">
+<cv-wrapper-stub tagtype="div" class="cv-loading bx--loading-overlay">
   <div data-loading="" class="bx--loading"><label class="bx--visually-hidden">
       Loading
     </label> <svg viewBox="-75 -75 150 150" class="bx--loading__svg">
@@ -61,7 +61,7 @@ exports[`CvLoading should render correctly when not active, small and not overla
 `;
 
 exports[`CvLoading should render correctly when not active, small and overlayed 1`] = `
-<cv-wrapper-stub tagtype="div" class="cv-loading  0">
+<cv-wrapper-stub tagtype="div" class="cv-loading bx--loading-overlay--stop">
   <div data-loading="" class="bx--loading--small"><label class="bx--visually-hidden">
       Loading
     </label> <svg viewBox="-75 -75 150 150" class="bx--loading__svg">
@@ -85,7 +85,7 @@ exports[`CvLoading should render correctly when not active, with normal size and
 `;
 
 exports[`CvLoading should render correctly when not active, with normal size and overlayed 1`] = `
-<cv-wrapper-stub tagtype="div" class="cv-loading  0">
+<cv-wrapper-stub tagtype="div" class="cv-loading bx--loading-overlay--stop">
   <div data-loading="" class=""><label class="bx--visually-hidden">
       Loading
     </label> <svg viewBox="-75 -75 150 150" class="bx--loading__svg">
