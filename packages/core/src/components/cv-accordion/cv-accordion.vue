@@ -37,7 +37,6 @@ export default {
         return items.map(item => item.dataOpen);
       },
       set(val) {
-        console.warn('CvAccordion.state.set - not ');
         const items = this.$children.filter(item => item.$_CvAccordionItem);
 
         if (items.length > 0) {
