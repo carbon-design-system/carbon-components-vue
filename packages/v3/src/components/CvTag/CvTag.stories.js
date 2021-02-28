@@ -14,9 +14,10 @@ const Template = (args, { argTypes }) => {
   return {
     props: Object.keys(argTypes),
     components: { CvTag },
-    template: `<CvTag @remove="onRemove" v-bind="$props" />`,
-    setup(props) {
+    template: `<CvTag @remove="onRemove" v-bind="args" />`,
+    setup() {
       return {
+        args,
         onRemove: action('remove'),
       };
     },
