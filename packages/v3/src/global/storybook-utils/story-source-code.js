@@ -31,7 +31,7 @@ export const storyParametersObject = (
   parameters,
   templateSource,
   args,
-  replacing = 'v-bind="$props"'
+  replacing = 'v-bind="args"'
 ) => {
   const code = storySourceCode(templateSource, args, replacing);
 
