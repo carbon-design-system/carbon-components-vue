@@ -114,19 +114,19 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@carbon/icon-helpers@^10.9.0":
-  version "10.9.0"
-  resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-10.9.0.tgz#5aee08e9d253d3bf6f996bc61f739660c62cbb21"
-  integrity sha512-JtmCXV7iIc+N5RqQQy+MGT8T+5KcF7+BUKADvHnJKZ8o+ncF5gI4hmrP450dQD76mikI4fqQ0dQflaosesdSPw==
+"@carbon/icon-helpers@^10.14.0":
+  version "10.14.0"
+  resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-10.14.0.tgz#8c24ff6519d5210bb609c07cf5badb4c3125f5e8"
+  integrity sha512-dTU/+YYojsqwqGdh+QPMqj28C4gj2dP/ImlWoZsk8syiKqEZ7DeHksGIGz6EweQ8UhGEJFP1rFV7WwQ/ybXrFw==
 
-"@carbon/icons-vue@10.20.0":
-  version "10.20.0"
-  resolved "https://registry.yarnpkg.com/@carbon/icons-vue/-/icons-vue-10.20.0.tgz#da8d00cd32fc4e985f6295d3f9f07593cb78a314"
-  integrity sha512-q3JsKgCNsteM9WKEt2EPomUtDc/cWf6m348/Kjn8nOnVuoVWrWJ5H8SzaVMF/mZfUw5ZBJbqO/GonQM7vVD0ww==
+"@carbon/icons-vue@10.27.0":
+  version "10.27.0"
+  resolved "https://registry.yarnpkg.com/@carbon/icons-vue/-/icons-vue-10.27.0.tgz#ddb216ff508274ef69f167fd5aa50498be005b44"
+  integrity sha512-29r79v+kfwUiTciOvMW0gs4a0X0Vnq/IUM9oJmN0tpRBlXTO+w/6Co5TU+B3puI38uN1LX9BugMaLDPmBZxbAw==
   dependencies:
-    "@carbon/icon-helpers" "^10.9.0"
+    "@carbon/icon-helpers" "^10.14.0"
 
-"@carbon/telemetry@^0.0.0-alpha.6":
+"@carbon/telemetry@0.0.0-alpha.6", "@carbon/telemetry@^0.0.0-alpha.6":
   version "0.0.0-alpha.6"
   resolved "https://registry.yarnpkg.com/@carbon/telemetry/-/telemetry-0.0.0-alpha.6.tgz#1d11e64f310e98f32c3db0c55f02e047f2398087"
   integrity sha512-DCE8ui/tFi+qvCH+mewbUbWzsiq5Ko3HU1lgrVbpjWv1LfswLKFmMg4Os+PmX6edYoBj39qVChJPeaN/UyfJDw==
@@ -1254,11 +1254,12 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001038, caniuse-lite@^1.0.30001039:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001040.tgz#103fc8e6eb1d7397e95134cd0e996743353d58ea"
   integrity sha512-Ep0tEPeI5wCvmJNrXjE3etgfI+lkl1fTDU6Y3ZH1mhrjkPlVI9W4pcKbMo+BQLpEWKVYYp2EmYaRsqpPC3k7lQ==
 
-carbon-components@10.23.1:
-  version "10.23.1"
-  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.23.1.tgz#cf649a09aa25eac14dc158f0fb79ba625730026c"
-  integrity sha512-izeyNCo9cPfdw9358y5VPsDRzmGAO1wAjSnkD5gGEQO46P2HBdQcgXV1IqjAbFuit+TgfG/MrP38u+pmjp4zyQ==
+carbon-components@^10.30.0:
+  version "10.30.0"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.30.0.tgz#c572620361ffdc8f4f67ed84b19ca2e29a912330"
+  integrity sha512-pHnrPcICl7L8vUHEXks4ZfAtyaGIP01aX7O/szg45/7Po2pQ3hXW1TBppYaUsw3UD+qGOF/CW7ID9Op6IQK4dA==
   dependencies:
+    "@carbon/telemetry" "0.0.0-alpha.6"
     flatpickr "4.6.1"
     lodash.debounce "^4.0.8"
     warning "^3.0.0"
@@ -2398,10 +2399,10 @@ escape-string-regexp@^1.0.2, escape-string-regexp@^1.0.5:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
   integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
 
-eslint-plugin-prettier@^3.1.1:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-3.1.2.tgz#432e5a667666ab84ce72f945c72f77d996a5c9ba"
-  integrity sha512-GlolCC9y3XZfv3RQfwGew7NnuFDKsfI4lbvRK+PIIo23SFH+LemGs4cKwzAaRa+Mdb+lQO/STaIayno8T5sJJA==
+eslint-plugin-prettier@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-3.3.1.tgz#7079cfa2497078905011e6f82e8dd8453d1371b7"
+  integrity sha512-Rq3jkcFY8RYeQLgk2cCwuc0P7SEFwDravPhsJZOQ5N4YI4DSg50NyqJ/9gdZHzQlHf8MvafSesbNJCcP/FF6pQ==
   dependencies:
     prettier-linter-helpers "^1.0.0"
 
@@ -2765,10 +2766,10 @@ flatpickr@4.6.1:
   resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.6.1.tgz#9eb498ab805dd27f5ae02e1ac6ac6c099ce45e94"
   integrity sha512-3ULSxbXmcMIRzer/2jLNweoqHpwDvsjEawO2FUd9UFR8uPwLM+LruZcPDpuZStcEgbQKhuFOfXo4nYdGladSNw==
 
-flatpickr@4.6.3:
-  version "4.6.3"
-  resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.6.3.tgz#15a8b76b6e34e3a072861250503a5995b9d3bc60"
-  integrity sha512-007VucCkqNOMMb9ggRLNuJowwaJcyOh4sKAFcdGfahfGc7JQbf94zSzjdBq/wVyHWUEs5o3+idhFZ0wbZMRmVQ==
+flatpickr@4.6.9:
+  version "4.6.9"
+  resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.6.9.tgz#9a13383e8a6814bda5d232eae3fcdccb97dc1499"
+  integrity sha512-F0azNNi8foVWKSF+8X+ZJzz8r9sE1G4hl06RyceIaLvyltKvDl6vqk9Lm/6AUUCi5HWaIjiUbk7UpeE/fOXOpw==
 
 flush-write-stream@^1.0.0:
   version "1.1.1"
