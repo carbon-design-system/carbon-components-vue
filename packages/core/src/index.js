@@ -26,14 +26,15 @@ export default {
 };
 
 // import/export individual components
-import { CvAccordion, CvAccordionItem, CvAccordionSkeleton } from './components/cv-accordion';
-import { CvBreadcrumb, CvBreadcrumbItem, CvBreadcrumbSkeleton } from './components/cv-breadcrumb';
-import { CvButton, CvIconButton, CvButtonSkeleton, CvButtonSet } from './components/cv-button';
-import { CvCheckbox, CvCheckboxSkeleton } from './components/cv-checkbox';
-import { CvCodeSnippet, CvCodeSnippetSkeleton } from './components/cv-code-snippet';
-import { CvComboBox } from './components/cv-combo-box';
-import { CvContentSwitcher, CvContentSwitcherButton, CvContentSwitcherContent } from './components/cv-content-switcher';
-import {
+export { CvAccordion, CvAccordionItem, CvAccordionSkeleton } from './components/cv-accordion';
+export { CvAspectRatio } from './components/cv-aspect-ratio';
+export { CvBreadcrumb, CvBreadcrumbItem, CvBreadcrumbSkeleton } from './components/cv-breadcrumb';
+export { CvButton, CvIconButton, CvButtonSkeleton, CvButtonSet } from './components/cv-button';
+export { CvCheckbox, CvCheckboxSkeleton } from './components/cv-checkbox';
+export { CvCodeSnippet, CvCodeSnippetSkeleton } from './components/cv-code-snippet';
+export { CvComboBox } from './components/cv-combo-box';
+export { CvContentSwitcher, CvContentSwitcherButton, CvContentSwitcherContent } from './components/cv-content-switcher';
+export {
   CvDataTable,
   CvDataTableRow,
   CvDataTableCell,
@@ -41,44 +42,44 @@ import {
   CvDataTableSkeleton,
   CvDataTableHeading,
 } from './components/cv-data-table';
-import { CvDatePicker } from './components/cv-date-picker';
-import { CvDropdown, CvDropdownItem, CvDropdownSkeleton } from './components/cv-dropdown';
-import { CvFileUploader, CvFileUploaderSkeleton } from './components/cv-file-uploader';
-import { CvForm, CvFormItem, CvFormGroup } from './components/cv-form';
-import { CvGrid, CvRow, CvColumn } from './components/cv-grid';
-import { CvInlineLoading } from './components/cv-inline-loading';
-import { CvInlineNotification } from './components/cv-inline-notification';
-import { CvLink } from './components/cv-link';
-import { CvList, CvListItem } from './components/cv-list';
-import { CvLoading } from './components/cv-loading';
-import { CvModal } from './components/cv-modal';
-import { CvMultiSelect } from './components/cv-multi-select';
-import { CvNumberInput, CvNumberInputSkeleton } from './components/cv-number-input';
-import { CvOverflowMenu, CvOverflowMenuItem } from './components/cv-overflow-menu';
-import { CvPagination } from './components/cv-pagination';
-import { CvProgress, CvProgressStep } from './components/cv-progress';
-import { CvRadioGroup, CvRadioButton } from './components/cv-radio-button';
-import { CvSearch } from './components/cv-search';
-import { CvSelect, CvSelectOption, CvSelectOptgroup } from './components/cv-select';
-import { CvSkeletonText } from './components/cv-skeleton-text';
-import { CvSliderSkeleton, CvSlider } from './components/cv-slider';
-import {
+export { CvDatePicker } from './components/cv-date-picker';
+export { CvDropdown, CvDropdownItem, CvDropdownSkeleton } from './components/cv-dropdown';
+export { CvFileUploader, CvFileUploaderSkeleton } from './components/cv-file-uploader';
+export { CvForm, CvFormItem, CvFormGroup } from './components/cv-form';
+export { CvGrid, CvRow, CvColumn } from './components/cv-grid';
+export { CvInlineLoading } from './components/cv-inline-loading';
+export { CvInlineNotification } from './components/cv-inline-notification';
+export { CvLink } from './components/cv-link';
+export { CvList, CvListItem } from './components/cv-list';
+export { CvLoading } from './components/cv-loading';
+export { CvModal } from './components/cv-modal';
+export { CvMultiSelect } from './components/cv-multi-select';
+export { CvNumberInput, CvNumberInputSkeleton } from './components/cv-number-input';
+export { CvOverflowMenu, CvOverflowMenuItem } from './components/cv-overflow-menu';
+export { CvPagination } from './components/cv-pagination';
+export { CvProgress, CvProgressStep } from './components/cv-progress';
+export { CvRadioGroup, CvRadioButton } from './components/cv-radio-button';
+export { CvSearch } from './components/cv-search';
+export { CvSelect, CvSelectOption, CvSelectOptgroup } from './components/cv-select';
+export { CvSkeletonText } from './components/cv-skeleton-text';
+export { CvSliderSkeleton, CvSlider } from './components/cv-slider';
+export {
   CvStructuredListData,
   CvStructuredListHeading,
   CvStructuredListItem,
   CvStructuredList,
 } from './components/cv-structured-list';
-import { CvTabs, CvTab, CvTabsSkeleton } from './components/cv-tabs';
-import { CvTag, CvTagSkeleton } from './components/cv-tag';
-import { CvTextArea } from './components/cv-text-area';
-import { CvTextInput } from './components/cv-text-input';
-import { CvTile } from './components/cv-tile';
-import { CvTimePicker } from './components/cv-time-picker';
-import { CvToastNotification } from './components/cv-toast-notification';
-import { CvToggle, CvToggleSkeleton } from './components/cv-toggle';
-import { CvToolbar, CvToolbarTitle, CvToolbarSearch, CvToolbarOption, CvToolbarDivider } from './components/cv-toolbar';
-import { CvTooltip, CvInteractiveTooltip, CvDefinitionTooltip } from './components/cv-tooltip';
-import {
+export { CvTabs, CvTab, CvTabsSkeleton } from './components/cv-tabs';
+export { CvTag, CvTagSkeleton } from './components/cv-tag';
+export { CvTextArea } from './components/cv-text-area';
+export { CvTextInput } from './components/cv-text-input';
+export { CvTile } from './components/cv-tile';
+export { CvTimePicker } from './components/cv-time-picker';
+export { CvToastNotification } from './components/cv-toast-notification';
+export { CvToggle, CvToggleSkeleton } from './components/cv-toggle';
+export { CvToolbar, CvToolbarTitle, CvToolbarSearch, CvToolbarOption, CvToolbarDivider } from './components/cv-toolbar';
+export { CvTooltip, CvInteractiveTooltip, CvDefinitionTooltip } from './components/cv-tooltip';
+export {
   CvContent,
   CvHeaderGlobalAction,
   CvHeaderMenuButton,
@@ -100,67 +101,3 @@ import {
   CvSwitcherItem,
   CvSwitcher,
 } from './components/cv-ui-shell';
-
-// exports
-export { CvAccordion, CvAccordionItem, CvAccordionSkeleton };
-export { CvBreadcrumb, CvBreadcrumbItem, CvBreadcrumbSkeleton };
-export { CvButton, CvIconButton, CvButtonSkeleton, CvButtonSet };
-export { CvCheckbox, CvCheckboxSkeleton };
-export { CvCodeSnippet, CvCodeSnippetSkeleton };
-export { CvComboBox };
-export { CvContentSwitcher, CvContentSwitcherButton, CvContentSwitcherContent };
-export { CvDataTable, CvDataTableRow, CvDataTableCell, CvDataTableAction, CvDataTableSkeleton, CvDataTableHeading };
-export { CvDatePicker };
-export { CvDropdown, CvDropdownItem, CvDropdownSkeleton };
-export { CvFileUploader, CvFileUploaderSkeleton };
-export { CvForm, CvFormItem, CvFormGroup };
-export { CvGrid, CvRow, CvColumn };
-export { CvInlineLoading };
-export { CvInlineNotification };
-export { CvLink };
-export { CvList, CvListItem };
-export { CvLoading };
-export { CvModal };
-export { CvMultiSelect };
-export { CvNumberInput, CvNumberInputSkeleton };
-export { CvOverflowMenu, CvOverflowMenuItem };
-export { CvPagination };
-export { CvProgress, CvProgressStep };
-export { CvRadioGroup, CvRadioButton };
-export { CvSearch };
-export { CvSelect, CvSelectOption, CvSelectOptgroup };
-export { CvSkeletonText };
-export { CvSlider, CvSliderSkeleton };
-export { CvStructuredList, CvStructuredListItem, CvStructuredListHeading, CvStructuredListData };
-export { CvTab, CvTabs, CvTabsSkeleton };
-export { CvTag, CvTagSkeleton };
-export { CvTextArea };
-export { CvTextInput };
-export { CvTile };
-export { CvTimePicker };
-export { CvToastNotification };
-export { CvToggle, CvToggleSkeleton };
-export { CvToolbar, CvToolbarTitle, CvToolbarSearch, CvToolbarOption, CvToolbarDivider };
-export { CvTooltip, CvInteractiveTooltip, CvDefinitionTooltip };
-export {
-  CvContent,
-  CvHeaderGlobalAction,
-  CvHeaderMenuButton,
-  CvHeaderMenuItem,
-  CvHeaderMenu,
-  CvHeaderName,
-  CvHeaderPanel,
-  CvHeaderNav,
-  CvHeaderSideNavItems,
-  CvHeader,
-  CvSideNav,
-  CvSideNavIcon,
-  CvSideNavItems,
-  CvSideNavLink,
-  CvSideNavMenuItem,
-  CvSideNavMenu,
-  CvSkipToContent,
-  CvSwitcherItemLink,
-  CvSwitcherItem,
-  CvSwitcher,
-};
