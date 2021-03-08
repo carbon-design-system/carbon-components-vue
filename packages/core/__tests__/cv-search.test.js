@@ -1,5 +1,5 @@
 import { testComponent, awaitNextTick } from './_helpers';
-const { shallowMount: shallow, trigger, setProps } = awaitNextTick;
+const { shallowMount: shallow, mount, trigger, setProps } = awaitNextTick;
 import { CvSearch } from '@/components/cv-search';
 import Search16 from '@carbon/icons-vue/es/search/16';
 import Search20 from '@carbon/icons-vue/es/search/20';
@@ -23,7 +23,7 @@ describe('CvSearch', () => {
   // ***************
   it('should render correctly with only `value` prop set', async () => {
     const propsData = { id: 'test-1', value: 'check-1' };
-    const wrapper = await shallow(CvSearch, { propsData });
+    const wrapper = await mount(CvSearch, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
   });

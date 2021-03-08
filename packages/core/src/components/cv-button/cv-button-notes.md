@@ -43,6 +43,7 @@ Rather than add extra properties that do not work with the standard button, an i
 
 As per CvButton with the addition of
 
+- selected: whether the Button is currently selected
 - tip-text: String displayed in tip
 - tip-position: top, left, bottom or right
 - tip-alignment: start, center or end.

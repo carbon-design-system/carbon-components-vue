@@ -84,6 +84,12 @@ let preKnobs = {
     config: ['label for assistive text', 'Icon button'],
     prop: 'label',
   },
+  selected: {
+    group: 'attr',
+    type: boolean,
+    config: ['selected', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'selected',
+  },
   tipPosition: {
     group: 'attr',
     type: select,
@@ -122,11 +128,21 @@ let preKnobs = {
 let variants = [
   {
     name: 'default',
-    excludes: ['iconAlways', 'tipPosition', 'tipAlignment', 'label'],
+    excludes: ['iconAlways', 'selected', 'tipPosition', 'tipAlignment', 'label'],
   },
   {
     name: 'icon as SVG path',
-    excludes: ['size', 'disabled', 'icon', 'iconHref', 'iconAlways', 'tipPosition', 'tipAlignment', 'label'],
+    excludes: [
+      'size',
+      'disabled',
+      'icon',
+      'iconHref',
+      'iconAlways',
+      'selected',
+      'tipPosition',
+      'tipAlignment',
+      'label',
+    ],
     extra: {
       icon: {
         group: 'attr',
@@ -136,7 +152,17 @@ let variants = [
   },
   {
     name: 'icon as SVG symbol path',
-    excludes: ['size', 'disabled', 'icon', 'iconHref', 'iconAlways', 'tipPosition', 'tipAlignment', 'label'],
+    excludes: [
+      'size',
+      'disabled',
+      'icon',
+      'iconHref',
+      'iconAlways',
+      'selected',
+      'tipPosition',
+      'tipAlignment',
+      'label',
+    ],
     extra: {
       icon: {
         group: 'attr',
@@ -146,7 +172,17 @@ let variants = [
   },
   {
     name: 'icon as SVG',
-    excludes: ['size', 'disabled', 'icon', 'iconHref', 'iconAlways', 'tipPosition', 'tipAlignment', 'label'],
+    excludes: [
+      'size',
+      'disabled',
+      'icon',
+      'iconHref',
+      'iconAlways',
+      'selected',
+      'tipPosition',
+      'tipAlignment',
+      'label',
+    ],
     extra: {
       icon: {
         group: 'attr',
@@ -156,7 +192,7 @@ let variants = [
   },
   {
     name: 'minimal',
-    excludes: ['size', 'disabled', 'icon', 'iconAlways', 'tipPosition', 'tipAlignment', 'label'],
+    excludes: ['size', 'disabled', 'icon', 'iconAlways', 'selected', 'tipPosition', 'tipAlignment', 'label'],
   },
 ];
 
@@ -213,7 +249,7 @@ for (const story of storySet) {
 variants = [
   {
     name: 'icon-only',
-    includes: ['kind', 'size', 'disabled', 'label', 'tipPosition', 'tipAlignment', 'iconAlways'],
+    includes: ['kind', 'size', 'disabled', 'label', 'selected', 'tipPosition', 'tipAlignment', 'iconAlways'],
   },
 ];
 

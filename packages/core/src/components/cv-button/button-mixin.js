@@ -25,7 +25,8 @@ export default {
     kind: {
       type: String,
       default: 'primary',
-      validator: val => ['', 'primary', 'secondary', 'tertiary', 'ghost', 'danger', 'danger--primary'].includes(val),
+      validator: val =>
+        ['', 'primary', 'secondary', 'danger', 'ghost', 'danger--ghost', 'danger--tertiary', 'tertiary'].includes(val),
     },
     small: {
       type: Boolean,
@@ -54,7 +55,8 @@ export default {
     },
     buttonClassOpts() {
       return (opts = {}) => {
-        let classes = [`${carbonSettings.prefix}--btn`];
+        const classes = [`${carbonSettings.prefix}--btn`];
+        const lowerCaseKind = this.kind.toLowerCase();
 
         if (opts.skeleton) {
           classes.push(`${carbonSettings.prefix}--skeleton`);
@@ -62,10 +64,13 @@ export default {
 
         if (opts.iconOnly) {
           classes.push(`${carbonSettings.prefix}--btn--icon-only`);
+          if (this.selected && lowerCaseKind === 'ghost') {
+            classes.push(`${carbonSettings.prefix}--btn--selected`);
+          }
         }
 
         if (this.kind && !opts.skeleton) {
-          classes.push(`${carbonSettings.prefix}--btn--${this.kind.toLowerCase()}`);
+          classes.push(`${carbonSettings.prefix}--btn--${lowerCaseKind}`);
         }
 
         let size = this.size ? this.size : this.small && 'sm';
