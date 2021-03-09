@@ -43,6 +43,10 @@ $z-indexes: (
 - light: Lighter variant, typically alternate background
 - theme: (deprecated use light) '' or 'light'
 
+Oneline and Multiline
+
+- diabled: standard disable behaviour
+
 Multiline code snippet where expand is possible
 
 - lessText: label for show more button

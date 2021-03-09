@@ -1,6 +1,7 @@
 <template>
   <component
     :class="classes"
+    :disabled="disabled"
     :is="theComponent"
     v-bind="$attrs"
     @copy-code="onCopyCode"
@@ -9,9 +10,7 @@
     :hideCopyButton="hideCopyButton"
     :wrap-text="wrapText"
   >
-    <code ref="code">
-      <slot></slot>
-    </code>
+    <code ref="code"><slot /></code>
     <!-- textarea cannot be fully hidden for clipboard to work -->
     <textarea
       class="cv-code-snippet__clippy"
@@ -38,6 +37,7 @@ export default {
     CvCodeSnippetOneline,
   },
   props: {
+    disabled: Boolean,
     feedbackAriaLabel: { type: String, default: 'Copy code' },
     copyFeedback: { type: String, default: 'Copied!' },
     hideCopyButton: Boolean,

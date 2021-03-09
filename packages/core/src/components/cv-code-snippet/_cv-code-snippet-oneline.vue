@@ -1,12 +1,20 @@
 <template>
-  <div class="cv-code-snippet-oneline" :class="[`${carbonPrefix}--snippet`, `${carbonPrefix}--snippet--single`]">
+  <div
+    class="cv-code-snippet-oneline"
+    :class="[
+      `${carbonPrefix}--snippet`,
+      `${carbonPrefix}--snippet--single`,
+      {
+        [`${carbonPrefix}--snippet--disabled`]: disabled,
+      },
+    ]"
+  >
     <div :class="`${carbonPrefix}--snippet-container`">
-      <pre>
-        <slot></slot>
-      </pre>
+      <pre><slot /></pre>
     </div>
     <cv-feedback-button
       v-if="!hideCopyButton"
+      :disabled="disabled"
       :feedback="copyFeedback"
       :aria-label="feedbackAriaLabel"
       @click="$emit('copy-code')"
@@ -30,6 +38,7 @@ export default {
   },
   props: {
     copyFeedback: String,
+    disabled: Boolean,
     feedbackAriaLabel: String,
     hideCopyButton: Boolean,
   },

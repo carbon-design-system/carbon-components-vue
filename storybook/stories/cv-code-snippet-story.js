@@ -18,6 +18,12 @@ let preKnobs = {
     config: ['copy feedback', 'Content copied!'],
     prop: 'copy-feedback',
   },
+  disabled: {
+    group: 'attr',
+    type: boolean,
+    config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'disabled',
+  },
   feedbackAriaLabel: {
     group: 'attr',
     type: text,
@@ -91,7 +97,7 @@ $z-indexes: (
 let variants = [
   {
     name: 'default',
-    includes: ['content'],
+    includes: ['inlineContent'],
   },
   {
     name: 'inline',
@@ -115,12 +121,12 @@ let variants = [
   },
   {
     name: 'oneline',
-    includes: ['content', 'copyFeedback', 'feedbackAriaLabel', 'light', 'hideCopyButton'],
+    includes: ['inlineContent', 'copyFeedback', 'feedbackAriaLabel', 'light', 'hideCopyButton', 'disabled'],
     extra: { kind: { group: 'attr', value: 'kind="oneline"' } },
   },
   {
     name: 'oneline (minimal)',
-    includes: ['content'],
+    includes: ['inlineContent'],
     extra: { kind: { group: 'attr', value: 'kind="oneline"' } },
   },
 ];
@@ -136,9 +142,7 @@ for (const story of storySet) {
       // ----------------------------------------------------------------
       // console.dir(settings);
       const templateString = `
-<cv-code-snippet${settings.group.attr}>
-  ${settings.group['content']}
-</cv-code-snippet>
+<cv-code-snippet${settings.group.attr}>${settings.group['content'].trim()}</cv-code-snippet>
   `;
 
       // ----------------------------------------------------------------
