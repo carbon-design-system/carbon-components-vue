@@ -1,4 +1,9 @@
-import { CvBreadcrumb, CvBreadcrumbItem } from '.';
+import {
+  CvBreadcrumb,
+  CvBreadcrumbItem,
+  CvBreadcrumbSkeleton,
+  CvBreadcrumbSkeletonItem,
+} from '.';
 
 import {
   sbCompPrefix,
@@ -38,4 +43,31 @@ Default.parameters = storyParametersObject(
   Default.parameters,
   template,
   Default.args
+);
+
+const skeletonTemplate = `<cv-breadcrumb-skeleton v-bind="args">
+  <cv-breadcrumb-skeleton-item />
+  <cv-breadcrumb-skeleton-item />
+  <cv-breadcrumb-skeleton-item />
+</cv-breadcrumb-skeleton>`;
+const SkeletonTemplate = args => ({
+  props: ['noTrailingSlash'],
+  components: { CvBreadcrumbSkeleton, CvBreadcrumbSkeletonItem },
+  setup() {
+    return { args };
+  },
+  template: skeletonTemplate,
+});
+
+export const Skeleton = SkeletonTemplate.bind({});
+Skeleton.args = {};
+Skeleton.parameters = storyParametersObject(
+  {
+    ...Skeleton.parameters,
+    controls: {
+      exclude: ['ariaLabel'],
+    },
+  },
+  template,
+  Skeleton.args
 );
