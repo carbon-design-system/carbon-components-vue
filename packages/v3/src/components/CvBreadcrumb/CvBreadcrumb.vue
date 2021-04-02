@@ -1,6 +1,11 @@
 <template>
   <nav :aria-label="ariaLabel">
-    <ol :class="classes">
+    <ol
+      :class="[
+        `${carbonPrefix}--breadcrumb`,
+        { [`${carbonPrefix}--breadcrumb--no-trailing-slash`]: noTrailingSlash },
+      ]"
+    >
       <slot />
     </ol>
   </nav>
@@ -27,13 +32,6 @@ export default {
       default: false,
     },
   },
-  setup(props) {
-    const classes = {
-      [`${carbonPrefix}--breadcrumb`]: true,
-      [`${carbonPrefix}--breadcrumb--no-trailing-slash`]: props.noTrailingSlash,
-    };
-
-    return { classes };
-  },
+  setup: () => ({ carbonPrefix }),
 };
 </script>

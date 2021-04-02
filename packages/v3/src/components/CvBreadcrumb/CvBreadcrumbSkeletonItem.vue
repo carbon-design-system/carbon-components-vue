@@ -1,6 +1,6 @@
 <template>
-  <div :class="breadcrumbItemClasses">
-    <span :class="linkClasses">&nbsp;</span>
+  <div :class="`${carbonPrefix}--breadcrumb-item`">
+    <span :class="`${carbonPrefix}--link`">&nbsp;</span>
   </div>
 </template>
 
@@ -9,11 +9,6 @@ import { carbonPrefix } from '../../global/settings';
 
 export default {
   name: 'CvBreadcrumbSkeletonItem',
-  setup() {
-    const breadcrumbItemClasses = [`${carbonPrefix}--breadcrumb-item`];
-    const linkClasses = [`${carbonPrefix}--link`];
-
-    return { breadcrumbItemClasses, linkClasses };
-  },
+  setup: () => ({ carbonPrefix }),
 };
 </script>

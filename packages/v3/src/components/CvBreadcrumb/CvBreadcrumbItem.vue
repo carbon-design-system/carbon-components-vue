@@ -1,5 +1,10 @@
 <template>
-  <li :class="classes">
+  <li
+    :class="[
+      `${carbonPrefix}--breadcrumb-item`,
+      { [`${carbonPrefix}--breadcrumb-item--current`]: isCurrentPage },
+    ]"
+  >
     <slot />
   </li>
 </template>
@@ -18,13 +23,6 @@ export default {
       default: false,
     },
   },
-  setup(props) {
-    const classes = {
-      [`${carbonPrefix}--breadcrumb-item`]: true,
-      [`${carbonPrefix}--breadcrumb-item--current`]: props.isCurrentPage,
-    };
-
-    return { classes };
-  },
+  setup: () => ({ carbonPrefix }),
 };
 </script>

@@ -1,5 +1,11 @@
 <template>
-  <div :class="classes">
+  <div
+    :class="[
+      `${carbonPrefix}--breadcrumb`,
+      `${carbonPrefix}--skeleton`,
+      { [`${carbonPrefix}--breadcrumb--no-trailing-slash`]: noTrailingSlash },
+    ]"
+  >
     <slot />
   </div>
 </template>
@@ -18,14 +24,6 @@ export default {
       default: false,
     },
   },
-  setup(props) {
-    const classes = {
-      [`${carbonPrefix}--breadcrumb`]: true,
-      [`${carbonPrefix}--skeleton`]: true,
-      [`${carbonPrefix}--breadcrumb--no-trailing-slash`]: props.noTrailingSlash,
-    };
-
-    return { classes };
-  },
+  setup: () => ({ carbonPrefix }),
 };
 </script>
