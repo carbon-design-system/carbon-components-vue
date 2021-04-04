@@ -10,7 +10,7 @@ describe('CvSkeletonText', () => {
     expect(wrapper.find('div').exists()).toEqual(false);
 
     const pTag = wrapper.find('p');
-    expect(new Set([...pTag.classes()])).toEqual(
+    expect(new Set(pTag.classes())).toEqual(
       new Set([`${carbonPrefix}--skeleton__text`])
     );
     expect(pTag.element.children.length).toEqual(0);
@@ -25,7 +25,7 @@ describe('CvSkeletonText', () => {
     });
 
     const pTag = wrapper.find('p');
-    expect(new Set([...pTag.classes()])).toEqual(
+    expect(new Set(pTag.classes())).toEqual(
       new Set([
         `${carbonPrefix}--skeleton__text`,
         `${carbonPrefix}--skeleton__heading`,
