@@ -67,4 +67,13 @@ describe('CvSkeletonText', () => {
     expect(pTags[2].attributes().style).toEqual('width: calc(250px - 32px);');
     expect(pTags[3].attributes().style).toEqual('width: calc(250px - 64px);');
   });
+
+  it('CvSkeletonText - lineCount validator', () => {
+    expect(CvSkeletonText.props.lineCount.validator(-42)).toEqual(false);
+    expect(CvSkeletonText.props.lineCount.validator(-1)).toEqual(false);
+    expect(CvSkeletonText.props.lineCount.validator(0)).toEqual(false);
+    expect(CvSkeletonText.props.lineCount.validator(1)).toEqual(true);
+    expect(CvSkeletonText.props.lineCount.validator(10)).toEqual(true);
+    expect(CvSkeletonText.props.lineCount.validator(42)).toEqual(true);
+  });
 });
