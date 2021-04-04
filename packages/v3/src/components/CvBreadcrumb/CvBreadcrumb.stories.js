@@ -61,13 +61,11 @@ const SkeletonTemplate = args => ({
 
 export const Skeleton = SkeletonTemplate.bind({});
 Skeleton.args = {};
+Skeleton.argTypes = {
+  ariaLabel: { table: { disable: true } },
+};
 Skeleton.parameters = storyParametersObject(
-  {
-    ...Skeleton.parameters,
-    controls: {
-      exclude: ['ariaLabel'],
-    },
-  },
+  Skeleton.parameters,
   template,
   Skeleton.args
 );
