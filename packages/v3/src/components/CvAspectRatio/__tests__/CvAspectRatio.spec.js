@@ -8,7 +8,7 @@ describe('CvAspectRatio', () => {
     const wrapper = shallowMount(CvAspectRatio);
 
     const divTag = wrapper.find('div');
-    expect(new Set([...divTag.classes()])).toEqual(
+    expect(new Set(divTag.classes())).toEqual(
       new Set([
         `${carbonPrefix}--aspect-ratio`,
         `${carbonPrefix}--aspect-ratio--1x1`,
@@ -23,7 +23,7 @@ describe('CvAspectRatio', () => {
 
     for (const ratio of CvAspectRatioConsts.aspectRatios) {
       await wrapper.setProps({ ratio });
-      expect(new Set([...divTag.classes()])).toEqual(
+      expect(new Set(divTag.classes())).toEqual(
         new Set([
           `${carbonPrefix}--aspect-ratio`,
           `${carbonPrefix}--aspect-ratio--${ratio}`,
