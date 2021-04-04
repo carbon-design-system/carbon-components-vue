@@ -67,7 +67,7 @@
             :tag-type="isInvalid(index) ? 'div' : ''"
             :class="`${carbonPrefix}--file__selected-file ${carbonPrefix}--file__selected-file--invalid`"
           >
-            <p :class="`${carbonPrefix}--file-filename`">{{ file.file.name }}</p>
+            <p :class="`${carbonPrefix}--file-filename`" :title="file.file.name">{{ file.file.name }}</p>
 
             <span
               :data-for="uid"

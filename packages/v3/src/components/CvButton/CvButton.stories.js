@@ -48,12 +48,15 @@ export default {
 };
 
 const template = `<cv-button @click="onClick" v-bind="args">{{slotArgs.default}}</cv-button>`;
-const Template = (argsIn, { argTypes }) => {
+const Template = (argsIn, other) => {
+  console.dir(argsIn);
+  console.dir(other);
+
   let { args, slotArgs } = splitSlotArgs(argsIn);
   args = { ...args, icon: icons[args.icon] };
 
   return {
-    props: Object.keys(argTypes),
+    props: Object.keys(other.argTypes),
     components: { CvButton },
     setup() {
       return { args, onClick: action('click'), slotArgs };
