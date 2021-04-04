@@ -9,7 +9,7 @@ describe('CvList', () => {
     const wrapper = shallowMount(CvList);
 
     const listTag = wrapper.find('ul');
-    expect(new Set([...listTag.classes()])).toEqual(
+    expect(new Set(listTag.classes())).toEqual(
       new Set([`${carbonPrefix}--list--unordered`])
     );
   });
@@ -22,7 +22,7 @@ describe('CvList', () => {
     });
 
     const listTag = wrapper.find('ol');
-    expect(new Set([...listTag.classes()])).toEqual(
+    expect(new Set(listTag.classes())).toEqual(
       new Set([`${carbonPrefix}--list--ordered`])
     );
   });
@@ -35,7 +35,7 @@ describe('CvList', () => {
     });
 
     const listTag = wrapper.find('ul');
-    expect(new Set([...listTag.classes()])).toEqual(
+    expect(new Set(listTag.classes())).toEqual(
       new Set([
         `${carbonPrefix}--list--unordered`,
         `${carbonPrefix}--list--nested`,
@@ -57,7 +57,7 @@ describe('CvList', () => {
     });
 
     const unorderedChildListTag = wrapper.find('ul ul');
-    expect(new Set([...unorderedChildListTag.classes()])).toEqual(
+    expect(new Set(unorderedChildListTag.classes())).toEqual(
       new Set([
         `${carbonPrefix}--list--nested`,
         `${carbonPrefix}--list--unordered`,
@@ -67,7 +67,7 @@ describe('CvList', () => {
     await wrapper.setProps({ ordered: true });
 
     const orderedChildListTag = wrapper.find('ol ol');
-    expect(new Set([...orderedChildListTag.classes()])).toEqual(
+    expect(new Set(orderedChildListTag.classes())).toEqual(
       new Set([
         `${carbonPrefix}--list--nested`,
         `${carbonPrefix}--list--ordered`,
@@ -88,7 +88,7 @@ describe('CvList', () => {
     });
 
     const unorderedListChildListTag = unorderedWrapper.find('ul ul');
-    expect(new Set([...unorderedListChildListTag.classes()])).toEqual(
+    expect(new Set(unorderedListChildListTag.classes())).toEqual(
       new Set([
         `${carbonPrefix}--list--nested`,
         `${carbonPrefix}--list--unordered`,
@@ -110,7 +110,7 @@ describe('CvList', () => {
     });
 
     const orderedListChildListTag = orderedWrapper.find('ol ul');
-    expect(new Set([...orderedListChildListTag.classes()])).toEqual(
+    expect(new Set(orderedListChildListTag.classes())).toEqual(
       new Set([
         `${carbonPrefix}--list--nested`,
         `${carbonPrefix}--list--unordered`,
