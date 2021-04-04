@@ -11,7 +11,13 @@ export default {
   argTypes: {
     heading: { control: { type: 'boolean' } },
     lineCount: { control: { type: 'number', min: 1 } },
-    width: { control: { type: 'text' } },
+    width: {
+      control: { type: 'text' },
+      defaultValue: CvSkeletonText.props.width.default,
+      table: {
+        defaultValue: { summary: `"${CvSkeletonText.props.width.default}"` },
+      },
+    },
   },
 };
 
