@@ -39,4 +39,14 @@ describe('CvAspectRatio', () => {
     await wrapper.setProps({ as: 'p' });
     expect(wrapper.element.tagName.toLowerCase()).toEqual('p');
   });
+
+  it('CvAspectRatio - ratio validator', () => {
+    for (const ratio of CvAspectRatioConsts.aspectRatios) {
+      expect(CvAspectRatio.props.ratio.validator(ratio)).toEqual(true);
+    }
+
+    expect(CvAspectRatio.props.ratio.validator('any other string')).toEqual(
+      false
+    );
+  });
 });
