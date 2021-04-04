@@ -16,6 +16,10 @@ export default {
   argTypes: {
     ariaLabel: {
       control: { type: 'text' },
+      defaultValue: CvBreadcrumb.props.ariaLabel.default,
+      table: {
+        defaultValue: { summary: `"${CvBreadcrumb.props.ariaLabel.default}"` },
+      },
     },
     noTrailingSlash: {
       control: { type: 'boolean' },
