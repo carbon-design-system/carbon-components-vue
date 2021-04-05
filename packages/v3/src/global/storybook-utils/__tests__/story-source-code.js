@@ -3,7 +3,7 @@ import { storySourceCode } from '../story-source-code';
 
 describe('global/storybook-utils/storyParametersObject', () => {
   it('Should build properties from null', () => {
-    const parameters = storyParametersObject(null, '<div v-bind="$props" />', {
+    const parameters = storyParametersObject(null, '<div v-bind="args" />', {
       prop1: 'prop1',
       prop2: 'prop2',
     });
@@ -18,7 +18,7 @@ describe('global/storybook-utils/storyParametersObject', () => {
   });
 
   it('Should build properties from {}', () => {
-    const parameters = storyParametersObject({}, '<div v-bind="$props" />', {
+    const parameters = storyParametersObject({}, '<div v-bind="args" />', {
       prop1: 'prop1',
       prop2: 'prop2',
     });
@@ -35,7 +35,7 @@ describe('global/storybook-utils/storyParametersObject', () => {
   it('Should build properties from { docs: {}}', () => {
     const parameters = storyParametersObject(
       { docs: {} },
-      '<div v-bind="$props" />',
+      '<div v-bind="args" />',
       {
         prop1: 'prop1',
         prop2: 'prop2',
@@ -54,7 +54,7 @@ describe('global/storybook-utils/storyParametersObject', () => {
   it('Should build properties from { docs: { source: {}}}', () => {
     const parameters = storyParametersObject(
       { docs: { source: {} } },
-      '<div v-bind="$props" />',
+      '<div v-bind="args" />',
       {
         prop1: 'prop1',
         prop2: 'prop2',
@@ -71,7 +71,7 @@ describe('global/storybook-utils/storyParametersObject', () => {
   });
 
   it('Should build properties from with non-string props', () => {
-    const parameters = storyParametersObject(null, '<div v-bind="$props" />', {
+    const parameters = storyParametersObject(null, '<div v-bind="args" />', {
       prop1: true,
       prop2: 2,
     });
@@ -105,7 +105,7 @@ describe('global/storybook-utils/storyParametersObject', () => {
   });
 
   it('Should deal with default values', () => {
-    const parameters = storyParametersObject(null, '<div v-bind="$props" />', {
+    const parameters = storyParametersObject(null, '<div v-bind="args" />', {
       prop1: false,
       prop2: '',
       prop3: 0,
@@ -123,7 +123,7 @@ describe('global/storybook-utils/storyParametersObject', () => {
   it('Is OK with zero pros', () => {
     const parameters = storyParametersObject(
       null,
-      '<div v-bind="$props" />',
+      '<div v-bind="args" />',
       null
     );
 
@@ -137,7 +137,7 @@ describe('global/storybook-utils/storyParametersObject', () => {
   });
 
   it('Is does not add slotArgs', () => {
-    const parameters = storyParametersObject(null, '<div v-bind="$props" />', {
+    const parameters = storyParametersObject(null, '<div v-bind="args" />', {
       'slotArgs.abc': 'abc',
     });
 
@@ -153,7 +153,7 @@ describe('global/storybook-utils/storyParametersObject', () => {
 
 describe('global/storybook-utils/storySourceCode', () => {
   it('Works with a default parameter', () => {
-    const result = storySourceCode('<div v-bind="$props" />', {
+    const result = storySourceCode('<div v-bind="args" />', {
       prop1: 'prop1',
     });
 
