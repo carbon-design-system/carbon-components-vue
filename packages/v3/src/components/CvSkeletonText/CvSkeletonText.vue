@@ -47,19 +47,15 @@ export default {
     },
   },
   setup(props) {
-    const widths = computed(() => {
-      if (props.lineCount === 1) {
-        return [];
-      }
-
-      return Array.from(
+    const widths = computed(() =>
+      Array.from(
         { length: props.lineCount },
         (_, i) =>
           `calc(${props.width} - ${
             LENGTH_MODIFIERS[i % LENGTH_MODIFIERS.length]
           })`
-      );
-    });
+      )
+    );
 
     return { carbonPrefix, widths };
   },
