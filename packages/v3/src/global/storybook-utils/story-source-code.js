@@ -1,7 +1,7 @@
 export const storySourceCode = (
   templateSource,
   args,
-  replacing = 'v-bind="$props"'
+  replacing = 'v-bind="args"'
 ) => {
   const propToSource = (key, val) => {
     if (key.startsWith('slotArgs.')) return '';
