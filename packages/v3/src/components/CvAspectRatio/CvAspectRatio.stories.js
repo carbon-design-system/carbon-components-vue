@@ -16,7 +16,8 @@ export default {
   ],
   argTypes: {
     ratio: {
-      control: { type: 'select', options: CvAspectRatioConsts.aspectRatios },
+      control: { type: 'select' },
+      options: CvAspectRatioConsts.aspectRatios,
       defaultValue: CvAspectRatioConsts.aspectRatios[0],
       table: {
         defaultValue: { summary: `"${CvAspectRatioConsts.aspectRatios[0]}"` },
@@ -25,10 +26,6 @@ export default {
     width: {
       control: { type: 'range', min: 200, max: 500 },
       description: 'Width of container around `CvAspectRatio`',
-    },
-    as: {
-      defaultValue: 'div',
-      table: { defaultValue: { summary: '"div"' } },
     },
   },
 };
@@ -50,7 +47,6 @@ const Template = args => {
 
 export const Default = Template.bind({});
 Default.args = {
-  ratio: CvAspectRatioConsts.aspectRatios[0],
   width: 200,
 };
 Default.parameters = storyParametersObject(
