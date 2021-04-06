@@ -1,7 +1,13 @@
-Closes #
+Contributes to #
 
-{{short description}}
+## What did you do?
 
-#### Changelog
+## Why did you do it?
 
-{{run "git diff --name-status $(git merge-base head master)" and paste result here}}
+## How have you tested it?
+
+## Were docs updated if needed?
+
+- [ ] N/A
+- [ ] No
+- [ ] Yes
