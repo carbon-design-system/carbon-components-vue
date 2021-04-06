@@ -41,12 +41,18 @@ describe('CvAspectRatio', () => {
   });
 
   it('CvAspectRatio - ratio validator', () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation();
+
     for (const ratio of CvAspectRatioConsts.aspectRatios) {
       expect(CvAspectRatio.props.ratio.validator(ratio)).toEqual(true);
     }
 
+    expect(spy).not.toBeCalled();
+
     expect(CvAspectRatio.props.ratio.validator('any other string')).toEqual(
-      false
+      true
     );
+
+    expect(spy).toBeCalled();
   });
 });
