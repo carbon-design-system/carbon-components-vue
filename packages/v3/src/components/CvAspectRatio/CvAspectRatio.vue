@@ -13,6 +13,7 @@
 <script>
 import { carbonPrefix } from '../../global/settings';
 import { aspectRatios } from './consts';
+import { includesOrError } from '../../global/component-utils/validators';
 
 export default {
   name: 'CvAspectRatio',
@@ -24,7 +25,7 @@ export default {
     ratio: {
       type: String,
       default: aspectRatios[0],
-      validator: value => aspectRatios.includes(value),
+      validator: includesOrError(aspectRatios, 'CvAspectRatio', 'ratio'),
     },
   },
   setup: () => ({ carbonPrefix }),
