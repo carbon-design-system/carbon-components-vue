@@ -15,6 +15,7 @@ import { carbonPrefix } from '../../global/settings';
 import { aspectRatios } from './consts';
 
 export default {
+  name: 'CvAspectRatio',
   props: {
     as: {
       type: String,
