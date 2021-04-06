@@ -74,7 +74,10 @@ export default {
       default: false,
     },
   },
-  emits: ['action', 'close'],
+  emits: [
+    /** Emitted on clicking the close button */
+    'close',
+  ],
   setup(props) {
     const icon = computed(() => notificationIcons[props.kind]);
 
