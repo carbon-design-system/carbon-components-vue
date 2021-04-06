@@ -20,6 +20,7 @@
       <div :class="`${carbonPrefix}--toast-notification__caption`">
         {{ caption }}
       </div>
+      <slot />
     </div>
     <button
       type="button"
