@@ -1,6 +1,6 @@
 <template>
   <cv-form-item class="cv-file-uploader">
-    <strong :class="`${carbonPrefix}--file--label`">{{ label }}</strong>
+    <p :class="`${carbonPrefix}--file--label`">{{ label }}</p>
     <p :class="`${carbonPrefix}--label-description`">{{ helperText }}</p>
     <div :class="`${carbonPrefix}--file`" data-file>
       <label
