@@ -1,10 +1,10 @@
-export const splitSlotArgs = (argsIn = {}) => {
+export const splitSlotArgs = (argsIn = {}, slotArgKeys) => {
   const keys = Object.keys(argsIn);
   const slotArgs = {};
   const args = {};
   keys.forEach(key => {
-    if (key.startsWith('slotArgs.')) {
-      slotArgs[key.substr(9)] = argsIn[key];
+    if (slotArgKeys.includes(key)) {
+      slotArgs[key] = argsIn[key];
     } else {
       args[key] = argsIn[key];
     }

@@ -32,6 +32,7 @@ export default {
   component: CvButton,
   argTypes: {
     ...storybookControlsFromProps(commonCvButtonProps),
+    default: { control: { type: 'text' } },
     icon: { control: { type: 'select', options: Object.keys(icons) } },
     kind: {
       control: { type: 'select', options: buttonKinds },
@@ -48,15 +49,12 @@ export default {
 };
 
 const template = `<cv-button @click="onClick" v-bind="args">{{slotArgs.default}}</cv-button>`;
-const Template = (argsIn, other) => {
-  console.dir(argsIn);
-  console.dir(other);
-
-  let { args, slotArgs } = splitSlotArgs(argsIn);
+const Template = (argsIn, { argTypes }) => {
+  let { args, slotArgs } = splitSlotArgs(argsIn, ['default']);
   args = { ...args, icon: icons[args.icon] };
 
   return {
-    props: Object.keys(other.argTypes),
+    props: Object.keys(argTypes),
     components: { CvButton },
     setup() {
       return { args, onClick: action('click'), slotArgs };
@@ -68,7 +66,7 @@ const Template = (argsIn, other) => {
 export const Primary = Template.bind({});
 Primary.args = {
   kind: 'primary',
-  'slotArgs.default': 'Primary',
+  default: 'Primary',
 };
 Primary.parameters = storyParametersObject(
   Primary.parameters,
@@ -79,7 +77,7 @@ Primary.parameters = storyParametersObject(
 export const Secondary = Template.bind({});
 Secondary.args = {
   kind: 'secondary',
-  'slotArgs.default': 'Secondary',
+  default: 'Secondary',
 };
 Secondary.parameters = storyParametersObject(
   Secondary.parameters,

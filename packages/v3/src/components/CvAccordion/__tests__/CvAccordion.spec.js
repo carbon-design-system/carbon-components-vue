@@ -80,6 +80,13 @@ describe('CvAccordion', () => {
 
     // Click item[0] and see change in state and classes
     // also confirms registration
+    const classes1b4 = item1.classes();
+    expect(classes1b4).not.toContain(
+      `${carbonPrefix}--accordion__item--active`
+    );
+    expect(classes1b4).not.toContain(
+      `${carbonPrefix}--accordion__item--expanding`
+    );
     await item1Button.trigger('click');
     expectedState[0].open = true; // 0 open
     expect(acc.vm.state).toEqual(expectedState);
@@ -91,7 +98,7 @@ describe('CvAccordion', () => {
     expect(item1.classes()).not.toContain(
       `${carbonPrefix}--accordion__item--expanding`
     );
-    // >> emitted correct chagne
+    // >> emitted correct change
     expect(wrapper.emitted().change[0]).toEqual([
       {
         change: { id: expectedState[0].id, open: true },

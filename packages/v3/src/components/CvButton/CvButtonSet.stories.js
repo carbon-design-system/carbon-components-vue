@@ -12,7 +12,7 @@ export default {
 };
 
 const template = `
-<cv-button-set v-bind="$props">
+<cv-button-set v-bind="args">
   <cv-button>One</cv-button>
   <cv-button kind="secondary">Two</cv-button>
   <cv-button kind="danger">Three</cv-button>
