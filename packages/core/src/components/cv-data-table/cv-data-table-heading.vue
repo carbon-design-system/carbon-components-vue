@@ -70,6 +70,10 @@ export default {
   computed: {
     internalOrder: {
       get() {
+        if (!this.sortable) {
+          return undefined;
+        }
+
         if (this.dataOrder !== 'ascending' && this.dataOrder !== 'descending') {
           return 'none';
         } else {
