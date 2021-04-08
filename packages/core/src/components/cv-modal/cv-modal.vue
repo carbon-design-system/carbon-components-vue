@@ -54,21 +54,24 @@
         <slot name="content"></slot>
       </div>
 
-      <div :class="`${carbonPrefix}--modal-footer`" v-if="hasFooter">
-        <cv-button type="button" :kind="secondaryKind" @click="onSecondaryClick" v-if="hasSecondary" ref="secondary">
+      <cv-button-set :class="`${carbonPrefix}--modal-footer`" v-if="hasFooter">
+        <cv-button type="button" kind="secondary" @click="onOtherBtnClick" v-if="hasOtherBtn" ref="otherBtn">
+          <slot name="other-button">Other button</slot>
+        </cv-button>
+        <cv-button type="button" kind="secondary" @click="onSecondaryClick" v-if="hasSecondary" ref="secondary">
           <slot name="secondary-button">Secondary button</slot>
         </cv-button>
         <cv-button
           :disabled="primaryButtonDisabled"
           type="button"
           :kind="primaryKind"
-          @click="onPrimaryClick"
+          @click="() => onPrimaryClick"
           v-if="hasPrimary"
           ref="primary"
         >
           <slot name="primary-button">Primary button</slot>
         </cv-button>
-      </div>
+      </cv-button-set>
       <div
         class="cv-modal__after-content"
         ref="afterContent"
@@ -84,6 +87,7 @@
 import CvButton from '../cv-button/cv-button';
 import { uidMixin, carbonPrefixMixin } from '../../mixins';
 import Close16 from '@carbon/icons-vue/es/close/16';
+import CvButtonSet from '../cv-button/cv-button-set.vue';
 
 export default {
   name: 'CvModal',
@@ -91,6 +95,7 @@ export default {
   components: {
     CvButton,
     Close16,
+    CvButtonSet,
   },
   props: {
     alert: Boolean,
@@ -114,6 +119,7 @@ export default {
       hasHeaderLabel: false,
       hasPrimary: false,
       hasSecondary: false,
+      hasOtherBtn: false,
     };
   },
   mounted() {
@@ -136,7 +142,7 @@ export default {
   },
   computed: {
     dialogAttrs() {
-      const passive = !(this.hasPrimary || this.hasSecondary);
+      const passive = !(this.hasPrimary || this.hasSecondary || this.hasOtherBtn);
       const attrs = { role: 'dialog' };
 
       if (this.alert) {
@@ -155,9 +161,6 @@ export default {
       } else {
         return 'primary';
       }
-    },
-    secondaryKind() {
-      return 'secondary';
     },
     internalSize() {
       switch (this.size) {
@@ -181,14 +184,17 @@ export default {
       // NOTE: this.$slots is not reactive so needs to be managed on updated
       this.hasFooter = !!(this.$slots['primary-button'] || this.$slots['secondary-button']);
       this.hasHeaderLabel = !!this.$slots.label;
-      this.hasSecondary = !!this.$slots['secondary-button'];
       this.hasPrimary = !!this.$slots['primary-button'];
+      this.hasSecondary = !!this.$slots['secondary-button'];
+      this.hasOtherBtn = !!this.$slots['other-button'];
     },
     focusBeforeContent() {
       if (this.$slots['primary-button']) {
         this.$refs.primary.$el.focus();
       } else if (this.$slots['secondary-button']) {
         this.$refs.secondary.$el.focus();
+      } else if (this.$slots['other-button']) {
+        this.$refs.otherBtn.$el.focus();
       } else {
         this.$refs.close.focus();
       }
@@ -200,12 +206,8 @@ export default {
       const focusEl = this.$refs.content.querySelector('[data-modal-primary-focus]');
       if (focusEl) {
         focusEl.focus();
-      } else if (this.$slots['primary-button']) {
-        this.$refs.primary.$el.focus();
-      } else if (this.$slots['secondary-button']) {
-        this.$refs.secondary.$el.focus();
       } else {
-        this.$refs.close.focus();
+        this.focusBeforeContent();
       }
       this.$emit('modal-shown');
 
@@ -257,17 +259,20 @@ export default {
         this.$el.removeEventListener('transitionend', this.afterHide);
       }
     },
-    onPrimaryClick(ev) {
-      this.$emit('primary-click');
-      if (!this.$listeners['primary-click']) {
-        this._maybeHide(ev, 'primary-click');
+    onFooterButtonClick(buttonId, ev) {
+      this.$emit(buttonId);
+      if (!this.$listeners[buttonId]) {
+        this._maybeHide(ev, buttonId);
       }
     },
+    onPrimaryClick(ev) {
+      this.onFooterButtonClick('primary-click', ev);
+    },
     onSecondaryClick(ev) {
-      this.$emit('secondary-click');
-      if (!this.$listeners['secondary-click']) {
-        this._maybeHide(ev, 'secondary-click');
-      }
+      this.onFooterButtonClick('primary-click', ev);
+    },
+    onOtherBtnClick(ev) {
+      this.onFooterButtonClick('other-btn-click', ev);
     },
   },
   beforeDestroy() {
