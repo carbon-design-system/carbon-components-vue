@@ -48,7 +48,7 @@ export default {
   },
   watch: {
     expanded() {
-      if (this.dataExpanded !== this.expaned) {
+      if (this.dataExpanded !== this.expanded) {
         this.dataExpanded = this.expanded;
       }
     },
