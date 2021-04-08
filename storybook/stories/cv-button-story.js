@@ -30,6 +30,8 @@ let preKnobs = {
         tertiary: 'tertiary',
         ghost: 'ghost',
         danger: 'danger',
+        'danger--ghost': 'danger--ghost',
+        'danger--tertiary': 'danger--tertiary',
       },
       'primary',
     ], // consts.CONFIG], // fails when used with number in storybook 4.1.4
