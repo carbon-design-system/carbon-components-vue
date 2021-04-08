@@ -4,8 +4,8 @@ const { shallowMount: shallow, mount, trigger, setProps } = awaitNextTick;
 import { CvLoading } from '@/components/cv-loading';
 
 describe('CvLoading', () => {
-  const RADIUS_SMALL = '26.8125';
-  const RADIUS_NORMAL = '37.5';
+  const RADIUS_SMALL = '42';
+  const RADIUS_NORMAL = '44';
 
   const loadingOverlayClass = 'bx--loading-overlay';
   const loadingOverlayStopClass = 'bx--loading-overlay--stop';
