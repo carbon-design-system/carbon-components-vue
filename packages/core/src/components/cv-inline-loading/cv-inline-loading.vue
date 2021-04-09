@@ -10,10 +10,7 @@
         v-show="internalState === STATES.LOADING || internalState === STATES.ENDING"
         :class="`${carbonPrefix}--loading ${carbonPrefix}--loading--small`"
       >
-        <svg :class="`${carbonPrefix}--loading__svg`" viewBox="-75 -75 150 150">
-          <circle :class="`${carbonPrefix}--loading__background`" cx="0" cy="0" r="26.8125" />
-          <circle :class="`${carbonPrefix}--loading__stroke`" cx="0" cy="0" r="26.8125" />
-        </svg>
+        <cv-loading :description="description" :active="active" small />
       </div>
       <CheckmarkFilled16
         :hidden="internalState !== STATES.LOADED"
@@ -30,10 +27,11 @@ import { STATES } from './consts';
 import ErrorFilled16 from '@carbon/icons-vue/lib/error--filled/16';
 import CheckmarkFilled16 from '@carbon/icons-vue/lib/checkmark--filled/16';
 import { carbonPrefixMixin } from '../../mixins';
+import CvLoading from '../cv-loading/cv-loading.vue';
 
 export default {
   name: 'CvInlineLoading',
-  components: { ErrorFilled16, CheckmarkFilled16 },
+  components: { ErrorFilled16, CheckmarkFilled16, CvLoading },
   mixins: [carbonPrefixMixin],
   created() {
     this.STATES = STATES;
@@ -49,6 +47,7 @@ export default {
         return true;
       },
     },
+    description: { type: String, default: 'Loading' },
     endingText: { type: String, default: 'Load ending...' },
     errorText: { type: String, default: 'Loading data failed.' },
     loadingText: { type: String, default: 'Loading data...' },

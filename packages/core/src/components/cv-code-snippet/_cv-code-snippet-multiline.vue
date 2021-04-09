@@ -4,17 +4,16 @@
     :class="[
       `${carbonPrefix}--snippet`,
       `${carbonPrefix}--snippet--multi`,
-      { [`${carbonPrefix}--snippet--expand`]: expanded },
+      { [`${carbonPrefix}--snippet--expand`]: expanded, [`${carbonPrefix}--snippet--disabled`]: disabled },
     ]"
     data-code-snippet
   >
     <div :class="[`${carbonPrefix}--snippet-container`]">
-      <pre>
-        <slot></slot>
-      </pre>
+      <pre><slot /></pre>
     </div>
     <cv-feedback-button
       v-if="!hideCopyButton"
+      :disabled="disabled"
       :feedback="copyFeedback"
       :aria-label="feedbackAriaLabel"
       @click="$emit('copy-code')"
@@ -54,6 +53,7 @@ export default {
   },
   props: {
     copyFeedback: String,
+    disabled: Boolean,
     feedbackAriaLabel: String,
     hideCopyButton: Boolean,
     lessText: { type: String, default: 'Show less' },

@@ -1,5 +1,6 @@
 <template>
   <button
+    :aria-pressed="kind === 'ghost' && selected"
     class="cv-button"
     :class="[
       ...buttonClassOpts({ iconOnly: true }),
@@ -28,6 +29,7 @@ export default {
   components: { CvSvg },
   props: {
     label: { type: String, default: undefined },
+    selected: Boolean,
     tipPosition: {
       type: String,
       default: 'bottom',

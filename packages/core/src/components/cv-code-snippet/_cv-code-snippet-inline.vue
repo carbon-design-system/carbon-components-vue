@@ -3,16 +3,14 @@
     v-if="!hideCopyButton"
     class="cv-code-snippet-inline"
     :class="classes"
+    :disabled="disabled"
     :feedback="copyFeedback"
     inline
     :aria-label="feedbackAriaLabel"
     @click="$emit('copy-code')"
-  >
-    <slot></slot>
-  </cv-feedback-button>
-  <span v-else :class="classes">
-    <slot></slot>
-  </span>
+    ><slot
+  /></cv-feedback-button>
+  <span v-else :class="classes"><slot /></span>
 </template>
 
 <script>
@@ -27,6 +25,7 @@ export default {
   },
   props: {
     copyFeedback: String,
+    disabled: Boolean,
     feedbackAriaLabel: String,
     hideCopyButton: Boolean,
   },
