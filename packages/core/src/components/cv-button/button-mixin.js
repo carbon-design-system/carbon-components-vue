@@ -26,7 +26,7 @@ export default {
       type: String,
       default: 'primary',
       validator: val =>
-        ['', 'primary', 'secondary', 'danger', 'ghost', 'danger--ghost', 'danger--tertiary', 'tertiary'].includes(val),
+        ['', 'primary', 'secondary', 'tertiary', 'ghost', 'danger', 'danger--ghost', 'danger--tertiary'].includes(val),
     },
     small: {
       type: Boolean,
