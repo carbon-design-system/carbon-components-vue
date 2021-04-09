@@ -29,7 +29,8 @@ When the modal dialog is shown focus is set to the first interactive element fou
 1. To the first element with a 'data-modal-primary-focus' attribute.
 2. To the primary button if shown
 3. To the secondary button if shown
-4. To the close button
+4. To the other button if shown
+5. To the close button
 
 This is done after the modal transitions into its visible state, which is triggered by either changing the visible property to true or mounting with the visible property set to true.
 
@@ -52,11 +53,12 @@ This is done after the modal transitions into its visible state, which is trigge
 - content: optional
 - primary-button: optional, no primary button if not specified
 - secondary-button: optional, no secondary button if not specified
+- other-button: optional, not shown if not specified
 
 ### NOTE: primary and secondary buttons
 
-1. If no primary or secondary button is specified then no footer is shown.
-2. If no listener is created for 'primary-click' or 'secondary-click' the associated event will cause the modal to close
+1. If no primary, secondary or other button is specified then no footer is shown.
+2. If no listener is created for 'primary-click', 'secondary-click' or 'other-btn-click' the associated event will cause the modal to close
 
 ## Methods
 
@@ -67,7 +69,8 @@ This is done after the modal transitions into its visible state, which is trigge
 
 - modal-shown
 - modal-hidden
-- modal-hide-request - emitted when 'auto-hide-off' is set to true. Raw event with the additional attribute 'cv:reason' set to 'primary-click', 'secondary-click', 'escape-press', 'external-click' or 'close-click'
+- modal-hide-request - emitted when 'auto-hide-off' is set to true. Raw event with the additional attribute 'cv:reason' set to 'primary-click', 'secondary-click', 'other-btn-click', 'escape-press', 'external-click' or 'close-click'
 - after-modal-hidden - emitted only after the modal hide transition is finished. It will NOT fire if the modal is hidden when it's not visible
 - primary-click
 - secondary-click
+- other-btn-click

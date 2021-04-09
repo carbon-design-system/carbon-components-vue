@@ -103,6 +103,11 @@ const preKnobs = {
     Etiam venenatis molestie tellus. Quisque consectetur non risus eu rutrum. </p>
     `,
   },
+  otherButton: {
+    group: 'content',
+    slot: 'other-button',
+    value: 'other',
+  },
   secondaryButton: {
     group: 'content',
     slot: 'secondary-button',
@@ -132,11 +137,18 @@ const preKnobs = {
   @modal-hide-request="actionHideRequest"
   @after-modal-hidden="actionAfterHidden"`,
   },
-  primarySecondaryEvents: {
+  twoButtonFooterEvents: {
     group: 'attr',
     value: `
     @primary-click="actionPrimary"
     @secondary-click="actionSecondary"`,
+  },
+  threeButtonFooterEvents: {
+    group: 'attr',
+    value: `
+    @primary-click="actionPrimary"
+    @secondary-click="actionSecondary"
+    @other-btn-click="actionOther"`,
   },
   autoHideOff: {
     group: 'attr',
@@ -179,7 +191,24 @@ const variants = [
       'primaryButtonDisabled',
       'secondaryButton',
       'events',
-      'primarySecondaryEvents',
+      'twoBbuttonFooterEvents',
+      'autoHideOff',
+    ],
+  },
+  {
+    name: 'three buttons with listeners',
+    includes: [
+      'closeAriaLabel',
+      'label',
+      'title',
+      'content',
+      'size',
+      'primaryButton',
+      'primaryButtonDisabled',
+      'secondaryButton',
+      'otherButton',
+      'events',
+      'threeBbuttonFooterEvents',
       'autoHideOff',
     ],
   },

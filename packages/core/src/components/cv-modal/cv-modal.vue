@@ -54,7 +54,13 @@
         <slot name="content"></slot>
       </div>
 
-      <cv-button-set :class="`${carbonPrefix}--modal-footer`" v-if="hasFooter">
+      <cv-button-set
+        :class="[
+          `${carbonPrefix}--modal-footer`,
+          { [`${carbonPrefix}--modal-footer--three-button`]: hasPrimary && hasSecondary && hasOtherBtn },
+        ]"
+        v-if="hasFooter"
+      >
         <cv-button type="button" kind="secondary" @click="onOtherBtnClick" v-if="hasOtherBtn" ref="otherBtn">
           <slot name="other-button">Other button</slot>
         </cv-button>
@@ -142,7 +148,7 @@ export default {
   },
   computed: {
     dialogAttrs() {
-      const passive = !(this.hasPrimary || this.hasSecondary || this.hasOtherBtn);
+      const passive = !this.hasFooter;
       const attrs = { role: 'dialog' };
 
       if (this.alert) {
@@ -182,7 +188,11 @@ export default {
   methods: {
     checkSlots() {
       // NOTE: this.$slots is not reactive so needs to be managed on updated
-      this.hasFooter = !!(this.$slots['primary-button'] || this.$slots['secondary-button']);
+      this.hasFooter = !!(
+        this.$slots['primary-button'] ||
+        this.$slots['secondary-button'] ||
+        this.$slots['other-button']
+      );
       this.hasHeaderLabel = !!this.$slots.label;
       this.hasPrimary = !!this.$slots['primary-button'];
       this.hasSecondary = !!this.$slots['secondary-button'];
