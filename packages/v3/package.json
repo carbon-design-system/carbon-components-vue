@@ -21,6 +21,7 @@
     "@carbon/layout": "^10.17.0",
     "@carbon/themes": "^10.26.0",
     "@carbon/type": "^10.20.0",
+    "@vueuse/core": "^4.8.1",
     "carbon-components": "10.30.0",
     "core-js": "^3.6.5",
     "flatpickr": "^4.6.9",
@@ -93,7 +94,13 @@
   ],
   "jest": {
     "collectCoverage": true,
-    "collectCoverageFrom": ["src/*/**/*.{js,vue}", "!**/node_modules/**", "!**/*.stories.js", "!**/*.spec.js", "!**/*.test.js"],
+    "collectCoverageFrom": [
+      "src/*/**/*.{js,vue}",
+      "!**/node_modules/**",
+      "!**/*.stories.js",
+      "!**/*.spec.js",
+      "!**/*.test.js"
+    ],
     "coverageThreshold": {
       "global": {
         "branches": 100,
