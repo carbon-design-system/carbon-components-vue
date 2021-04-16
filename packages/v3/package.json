@@ -22,7 +22,7 @@
     "@carbon/themes": "^10.26.0",
     "@carbon/type": "^10.20.0",
     "@vueuse/core": "^4.8.1",
-    "carbon-components": "10.30.0",
+    "carbon-components": "10.33.0",
     "core-js": "^3.6.5",
     "flatpickr": "^4.6.9",
     "stylelint-config-property-sort-order-smacss": "^7.0.0",
@@ -30,7 +30,7 @@
     "vue": "^3.0.0"
   },
   "peerDependencies": {
-    "carbon-components": "10.30.0",
+    "carbon-components": "10.33.0",
     "carbon-icons": "^7.0.7"
   },
   "devDependencies": {
