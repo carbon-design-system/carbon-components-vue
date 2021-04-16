@@ -17,9 +17,7 @@
       :aria-label="ariaLabel || 'code-snippet'"
       ref="container"
     >
-      <code>
-        <pre ref="text"><slot /></pre>
-      </code>
+      <pre><code ref="text"><slot /></code></pre>
     </div>
     <div
       v-if="hasOverflowLeft"
