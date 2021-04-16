@@ -1,47 +1,80 @@
-import { CvCodeSnippet } from '.';
-
+import { carbonPrefix } from '../../global/settings';
 import {
   sbCompPrefix,
   splitSlotArgs,
   storyParametersObject,
 } from '../../global/storybook-utils';
+import { action } from '@storybook/addon-actions';
+
+import { CvCodeSnippet, CvCodeSnippetConsts } from '.';
+
+import './CvCodeSnippet.stories.scss';
 
 export default {
   title: `${sbCompPrefix}/CvCodeSnippet`,
   component: CvCodeSnippet,
   argTypes: {
     default: { control: { type: 'text' } },
+    kind: {
+      control: { type: 'select' },
+      options: CvCodeSnippetConsts.codeSnippetKinds,
+      defaultValue: CvCodeSnippetConsts.codeSnippetKinds[0],
+      table: {
+        defaultValue: {
+          summary: `'${CvCodeSnippetConsts.codeSnippetKinds[0]}'`,
+        },
+      },
+    },
   },
 };
 
-const template = `<cv-code-snippet v-bind="args">{{ slotArgs.default }}</cv-code-snippet>`;
+const template = `
+<div class="code-snippet-story" :class="{ '${carbonPrefix}--tile': args.light }">
+  <small v-if="args.light">
+    The snippet container should never be the same color as the page background.<br />
+    Do not use the <cv-code-snippet kind="inline" :light="true" :hide-copy-button="true">light</cv-code-snippet> variant on <cv-code-snippet kind="inline" :light="true" :hide-copy-button="true">$ui-background</cv-code-snippet> or <cv-code-snippet kind="inline" :light="true" :hide-copy-button="true">$ui-02</cv-code-snippet>.
+  </small>
+  <cv-code-snippet v-bind="args" @copy="copy">{{ slotArgs.default }}</cv-code-snippet>
+</div>
+`;
 const Template = argsIn => {
   const { args, slotArgs } = splitSlotArgs(argsIn, ['default']);
 
   return {
     components: { CvCodeSnippet },
-    setup: () => ({ args, slotArgs }),
+    setup: () => ({ args, slotArgs, copy: action('copy') }),
     template,
   };
 };
 
-export const Inline = Template.bind({});
-Inline.args = {
-  kind: 'inline',
-  default: 'node -v',
+export const Default = Template.bind({});
+Default.args = {
+  kind: CvCodeSnippetConsts.codeSnippetKinds[0],
+  default:
+    'yarn add carbon-components@latest carbon-components-react@latest @carbon/icons-react@latest carbon-icons@latest',
+  ariaLabel: 'Container label',
 };
-Inline.parameters = storyParametersObject(
-  Inline.parameters,
-  template,
-  Inline.args
+Default.parameters = storyParametersObject(
+  Default.parameters,
+  '<cv-code-snippet v-bind="args" @copy="copy">{{ slotArgs.default }}</cv-code-snippet>',
+  Default.args
 );
 
 export const Oneline = Template.bind({});
 Oneline.args = {
-  kind: 'oneline',
+  kind: CvCodeSnippetConsts.codeSnippetKinds[0],
   default:
     'yarn add carbon-components@latest carbon-components-react@latest @carbon/icons-react@latest carbon-icons@latest',
   ariaLabel: 'Container label',
+};
+Oneline.argTypes = {
+  wrapText: { table: { disable: true } },
+  lessText: { table: { disable: true } },
+  moreText: { table: { disable: true } },
+  minCollapsedNumberOfRows: { table: { disable: true } },
+  maxCollapsedNumberOfRows: { table: { disable: true } },
+  minExpandedNumberOfRows: { table: { disable: true } },
+  maxExpandedNumberOfRows: { table: { disable: true } },
 };
 Oneline.parameters = storyParametersObject(
   Oneline.parameters,
@@ -51,7 +84,7 @@ Oneline.parameters = storyParametersObject(
 
 export const Multiline = Template.bind({});
 Multiline.args = {
-  kind: 'multiline',
+  kind: CvCodeSnippetConsts.codeSnippetKinds[1],
   default: `"scripts": {
     "build": "lerna run build --stream --prefix --npm-client yarn",
     "ci-check": "carbon-cli ci-check",
@@ -86,4 +119,25 @@ Multiline.parameters = storyParametersObject(
   Multiline.parameters,
   template,
   Multiline.args
+);
+
+export const Inline = Template.bind({});
+Inline.args = {
+  kind: CvCodeSnippetConsts.codeSnippetKinds[2],
+  default: 'node -v',
+};
+Inline.argTypes = {
+  ariaLabel: { table: { disable: true } },
+  wrapText: { table: { disable: true } },
+  lessText: { table: { disable: true } },
+  moreText: { table: { disable: true } },
+  minCollapsedNumberOfRows: { table: { disable: true } },
+  maxCollapsedNumberOfRows: { table: { disable: true } },
+  minExpandedNumberOfRows: { table: { disable: true } },
+  maxExpandedNumberOfRows: { table: { disable: true } },
+};
+Inline.parameters = storyParametersObject(
+  Inline.parameters,
+  template,
+  Inline.args
 );

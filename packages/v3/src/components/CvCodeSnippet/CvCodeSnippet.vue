@@ -34,18 +34,28 @@ export default {
       type: Number,
       default: 2000,
     },
-    /** Should the copy button be hidden? */
+    /** Should the copy button be hidden? (disables copying for inline) */
     hideCopyButton: {
       type: Boolean,
       default: false,
     },
-    /** Should the code wrap if it's too long? */
-    wrapText: {
+    /** Make the component show as disabled & disable copying */
+    disabled: {
       type: Boolean,
       default: false,
     },
-    /** Disable copying */
-    disabled: {
+    /** Use the light variant */
+    light: {
+      type: Boolean,
+      default: false,
+    },
+    /** (if oneline/multiline) A11y label */
+    ariaLabel: {
+      type: String,
+      default: '',
+    },
+    /** (if multiline) should the code wrap if it's too long? */
+    wrapText: {
       type: Boolean,
       default: false,
     },
@@ -58,16 +68,6 @@ export default {
     moreText: {
       type: String,
       default: 'Show more',
-    },
-    /** A11y label */
-    ariaLabel: {
-      type: String,
-      default: '',
-    },
-    /** Use the light variant */
-    light: {
-      type: Boolean,
-      default: false,
     },
     /** (if multiline) max amount of rows shown in collapsed view (0 to disable) */
     maxCollapsedNumberOfRows: {
