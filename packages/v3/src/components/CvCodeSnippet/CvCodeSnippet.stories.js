@@ -6,7 +6,7 @@ import {
 } from '../../global/storybook-utils';
 import { action } from '@storybook/addon-actions';
 
-import { CvCodeSnippet, CvCodeSnippetConsts } from '.';
+import { CvCodeSnippet, CvCodeSnippetConsts, CvCodeSnippetSkeleton } from '.';
 
 import './CvCodeSnippet.stories.scss';
 
@@ -140,4 +140,41 @@ Inline.parameters = storyParametersObject(
   Inline.parameters,
   template,
   Inline.args
+);
+
+const skeletonTemplate = `
+<div class="code-snippet-story" :class="{ '${carbonPrefix}--tile': args.light }">
+  <small v-if="args.light">
+    The snippet container should never be the same color as the page background.<br />
+    Do not use the <cv-code-snippet kind="inline" :light="true" :hide-copy-button="true">light</cv-code-snippet> variant on <cv-code-snippet kind="inline" :light="true" :hide-copy-button="true">$ui-background</cv-code-snippet> or <cv-code-snippet kind="inline" :light="true" :hide-copy-button="true">$ui-02</cv-code-snippet>.
+  </small>
+  <cv-code-snippet-skeleton v-bind="args" />
+</div>
+`;
+const SkeletonTemplate = args => ({
+  components: { CvCodeSnippet, CvCodeSnippetSkeleton },
+  setup: () => ({ args }),
+  template: skeletonTemplate,
+});
+
+export const Skeleton = SkeletonTemplate.bind({});
+Skeleton.argTypes = {
+  kind: { options: CvCodeSnippetConsts.codeSnippetKinds.slice(0, 2) },
+  copyFeedback: { table: { disable: true } },
+  copyFeedbackTimeout: { table: { disable: true } },
+  hideCopyButton: { table: { disable: true } },
+  disabled: { table: { disable: true } },
+  ariaLabel: { table: { disable: true } },
+  wrapText: { table: { disable: true } },
+  lessText: { table: { disable: true } },
+  moreText: { table: { disable: true } },
+  minCollapsedNumberOfRows: { table: { disable: true } },
+  maxCollapsedNumberOfRows: { table: { disable: true } },
+  minExpandedNumberOfRows: { table: { disable: true } },
+  maxExpandedNumberOfRows: { table: { disable: true } },
+};
+Skeleton.parameters = storyParametersObject(
+  Skeleton.parameters,
+  `<cv-code-snippet-skeleton v-bind="args" />`,
+  Skeleton.args
 );
