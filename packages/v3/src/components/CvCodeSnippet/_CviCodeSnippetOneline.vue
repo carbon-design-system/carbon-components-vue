@@ -45,7 +45,6 @@ import { useElementHasOverflow } from '../../use/overflow';
 import CvCopyButton from '../CvCopyButton/CvCopyButton';
 
 export default {
-  inheritAttrs: false,
   props: {
     /** Text shown to user when copying code */
     copyFeedback: {

@@ -21,7 +21,6 @@ import { useCvId } from '../../use';
 import CviCopyButton from '../CvCopyButton/_CviCopyButton';
 
 export default {
-  inheritAttrs: false,
   props: {
     /** Text shown to user when copying code */
     copyFeedback: {

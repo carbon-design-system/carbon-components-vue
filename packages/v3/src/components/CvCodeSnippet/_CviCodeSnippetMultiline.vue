@@ -66,7 +66,6 @@ import { ChevronDown16 } from '@carbon/icons-vue';
 const ROW_HEIGHT_IN_PX = 16;
 
 export default {
-  inheritAttrs: false,
   props: {
     /** Text shown to user when copying code */
     copyFeedback: {

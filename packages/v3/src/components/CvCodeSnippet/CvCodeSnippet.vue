@@ -1,15 +1,13 @@
 <template>
-  <component :is="component" v-bind="$props" @copy="handleCopy"
-    ><slot
-  /></component>
+  <component :is="component" v-bind="subProps"><slot /></component>
 </template>
 
 <script>
-import { computed } from 'vue';
 import { useClipboard } from '@vueuse/core';
 import { codeSnippetKinds } from './consts';
 import { includesOrError } from '../../global/component-utils/validators';
 import { carbonPrefix } from '../../global/settings';
+import { useSubcomponent } from '../../use/components';
 
 import CviCodeSnippetInline from './_CviCodeSnippetInline';
 import CviCodeSnippetOneline from './_CviCodeSnippetOneline';
@@ -100,15 +98,6 @@ export default {
     'copy',
   ],
   setup(props, { emit }) {
-    const component = computed(
-      () =>
-        ({
-          inline: CviCodeSnippetInline,
-          oneline: CviCodeSnippetOneline,
-          multiline: CviCodeSnippetMultiline,
-        }[props.kind])
-    );
-
     const { copy } = useClipboard();
 
     const handleCopy = text => {
@@ -116,7 +105,19 @@ export default {
       emit('copy');
     };
 
-    return { component, handleCopy, carbonPrefix };
+    const { component, subProps } = useSubcomponent(props, {
+      oneline: CviCodeSnippetOneline,
+      multiline: CviCodeSnippetMultiline,
+      inline: CviCodeSnippetInline,
+    });
+
+    return {
+      component,
+      subProps,
+      handleCopy,
+      carbonPrefix,
+      kinds: codeSnippetKinds,
+    };
   },
 };
 </script>
