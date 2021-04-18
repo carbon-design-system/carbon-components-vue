@@ -1,5 +1,7 @@
 <template>
-  <component :is="component" v-bind="subProps"><slot /></component>
+  <component :is="component" v-bind="subProps" @copy="handleCopy"
+    ><slot
+  /></component>
 </template>
 
 <script>
