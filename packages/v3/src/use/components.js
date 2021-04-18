@@ -22,6 +22,6 @@ export const useSubcomponent = (props, subcomponents, kindKey = 'kind') => ({
   component: computed(() => subcomponents[props[kindKey]]),
   subProps: reactivePick(
     props,
-    Object.keys(subcomponents[props[kindKey]].props)
+    ...Object.keys(subcomponents[props[kindKey]].props)
   ),
 });
