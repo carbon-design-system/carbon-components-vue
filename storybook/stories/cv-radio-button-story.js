@@ -26,17 +26,23 @@ const preKnobs = {
     config: ['radio-2:disabled', true], // consts.CONFIG],
     prop: 'disabled',
   },
-  vertical: {
-    group: 'attr',
+  hideLabel: {
+    group: 'each',
     type: boolean,
-    config: ['vertical', false], // consts.CONFIG],
-    prop: 'vertical',
+    config: ['hideLabel', false], // consts.CONFIG],
+    prop: 'hide-label',
   },
   labelLeft: {
     group: 'each',
     type: boolean,
     config: ['label left', false], // consts.CONFIG],
     prop: 'label-left',
+  },
+  vertical: {
+    group: 'attr',
+    type: boolean,
+    config: ['vertical', false], // consts.CONFIG],
+    prop: 'vertical',
   },
   vModel: {
     group: 'each',
