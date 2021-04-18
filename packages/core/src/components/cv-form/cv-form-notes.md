@@ -18,7 +18,7 @@ CvForm has no properties and a single default slot
 Used inside a form to group components such as checkboxes and radio buttons.
 
 ```html
-<cv-form-group>
+<cv-form-group noMargin invalid message="Optional text message">
   <template slot="label">Form group legend</template>
   <template slot="content">
     <label> Small <input type="radio" name="size" id="size_1" value="small" /> </label>
