@@ -100,7 +100,7 @@ export default {
     'copy',
   ],
   setup(props, { emit }) {
-    const { copy } = useClipboard();
+    const { copy } = useClipboard({ read: false });
 
     const handleCopy = text => {
       copy(text);

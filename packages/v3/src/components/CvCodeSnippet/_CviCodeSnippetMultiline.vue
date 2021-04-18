@@ -17,7 +17,7 @@
       :aria-label="ariaLabel || 'code-snippet'"
       :style="styles"
     >
-      <pre><code ref="text"><slot /></code></pre>
+      <pre ref="text"><code><slot /></code></pre>
     </div>
     <div
       v-if="hasOverflowLeft"
@@ -37,6 +37,7 @@
     />
     <cv-button
       v-if="showMoreLessButton"
+      kind="ghost"
       :class="`${carbonPrefix}--snippet-btn--expand`"
       :disabled="disabled"
       @click="isExpanded = !isExpanded"
@@ -133,6 +134,7 @@ export default {
       default: 16,
     },
   },
+  emits: ['copy'],
   components: {
     CvCopyButton,
     CvButton,

@@ -82,9 +82,8 @@ export default {
       default: false,
     },
   },
-  components: {
-    CvCopyButton,
-  },
+  emits: ['copy'],
+  components: { CvCopyButton },
   setup: (props, { emit }) => {
     const text = ref(null);
     const container = ref(null);
