@@ -18,7 +18,9 @@
     <!-- symbol causes problem in codepen? -->
     <label :for="uid" :class="`${carbonPrefix}--radio-button__label`">
       <span :class="`${carbonPrefix}--radio-button__appearance`"></span>
-      {{ label }}
+      <span v-if="label" :class="{ [`${carbonPrefix}--visually-hidden`]: hideLabel }">
+        {{ label }}
+      </span>
     </label>
   </div>
 </template>
@@ -31,6 +33,7 @@ export default {
   inheritAttrs: false,
   mixins: [uidMixin, radioMixin, carbonPrefixMixin, methodsMixin({ input: ['blur', 'focus'] })],
   props: {
+    hideLabel: Boolean,
     labelLeft: Boolean,
   },
 };

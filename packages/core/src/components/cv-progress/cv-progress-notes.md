@@ -32,6 +32,7 @@ NOTE: The current step is deemed to be the first incomplete step.
 
 - complete: Boolean
 - invalid: Boolean
+- description: of the step
 - disabled: Boolean
 - additional-info: optional additional info for step.
 - tip-text: Hard coded tip text always displayed
