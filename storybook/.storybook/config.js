@@ -13,7 +13,7 @@ addDecorator(withNotes);
 addParameters({
   options: {
     name: 'Carbon Components in Vue.js',
-    url: 'https://github.com/carbon-design-system/carbon-components-vue/blob/master/packages/core/README.md',
+    url: 'https://github.com/carbon-design-system/carbon-components-vue/blob/main/packages/core/README.md',
     theme: themes.dark,
     isToolshown: true,
     showPanel: true,

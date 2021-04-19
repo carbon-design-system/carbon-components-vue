@@ -53,7 +53,7 @@ let preKnobs = {
     type: text,
     config: [
       'where to go when clicked',
-      'https://github.com/carbon-design-system/carbon-components-vue/blob/master/README.md',
+      'https://github.com/carbon-design-system/carbon-components-vue/blob/main/README.md',
     ],
     prop: 'href',
   },

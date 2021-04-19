@@ -1,11 +1,13 @@
 <template>
-  <span
+  <component
+    :is="!isFilter || !hasClickListener ? 'div' : 'button'"
+    :id="uid"
     :class="[
       `cv-tag ${carbonPrefix}--tag`,
       `${carbonPrefix}--tag--${tagKind}`,
       {
         [`${carbonPrefix}--tag--filter`]: isFilter,
-        [`${carbonPrefix}--tag--disabled`]: disabled,
+        [`${carbonPrefix}--tag--${size}`]: size,
       },
     ]"
     role="listitem"
@@ -14,6 +16,9 @@
     @keydown.space.prevent
     @keyup.space.prevent="$emit('remove')"
   >
+    <div v-if="icon && !filter" :class="`${carbonPrefix}--tag__custom-icon`">
+      <CvSvg :svg="icon" />
+    </div>
     <span :class="`${carbonPrefix}--tag__label`">{{ label }}</span>
     <button
       v-if="isFilter"
@@ -24,12 +29,13 @@
     >
       <Close16 />
     </button>
-  </span>
+  </component>
 </template>
 
 <script>
 import Close16 from '@carbon/icons-vue/es/close/16';
-import { carbonPrefixMixin } from '../../mixins';
+import { carbonPrefixMixin, uidMixin } from '../../mixins';
+import CvSvg from '../cv-svg/_cv-svg';
 
 const tagKinds = [
   'red',
@@ -47,11 +53,21 @@ const tagKinds = [
 
 export default {
   name: 'CvTag',
-  mixins: [carbonPrefixMixin],
-  components: { Close16 },
+  mixins: [carbonPrefixMixin, uidMixin],
+  components: { Close16, CvSvg },
   props: {
     clearAriaLabel: { type: String, default: 'Clear filter' },
     disabled: Boolean,
+    icon: {
+      type: [String, Object],
+      default: undefined,
+      validator(val) {
+        if (!val || typeof val === 'string') {
+          return true;
+        }
+        return val.render !== null;
+      },
+    },
     label: { type: String, required: true },
     kind: {
       type: String,
@@ -68,6 +84,20 @@ export default {
       type: Boolean,
       default: false,
     },
+    size: {
+      type: String,
+      validator(val) {
+        return !val || val == 'sm';
+      },
+    },
+  },
+  data() {
+    return {
+      hasClickListener: !!this.$listeners.click,
+    };
+  },
+  updated() {
+    this.hasClickListener = !!this.$listeners.click;
   },
   computed: {
     isFilter() {
