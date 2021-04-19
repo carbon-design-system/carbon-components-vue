@@ -12,6 +12,8 @@ http://www.carbondesignsystem.com/components/tag/code
 
 ## Attributes
 
+- icon: non-filter only add icon before label
+
 - kind
   'filter',
   'red',
@@ -28,9 +30,11 @@ http://www.carbondesignsystem.com/components/tag/code
 - label (required)
   string content value
 
+- size: 'sm' or default
+
 ### kind === 'filter'
 
-A special kind which includes a clickable x which raieses a 'remove' event'
+A special kind which includes a clickable x which raises a 'remove' event'
 
 - clearAriaLabel: { type: String, default: 'Clear filter' },
 
