@@ -9,7 +9,7 @@ import { useClipboard } from '@vueuse/core';
 import { codeSnippetKinds } from './consts';
 import { includesOrError } from '../../global/component-utils/validators';
 import { carbonPrefix } from '../../global/settings';
-import { useSubcomponent } from '../../use/components';
+import { useSubComponent } from '../../use/components';
 
 import CviCodeSnippetInline from './_CviCodeSnippetInline';
 import CviCodeSnippetOneline from './_CviCodeSnippetOneline';
@@ -107,7 +107,7 @@ export default {
       emit('copy');
     };
 
-    const { component, subProps } = useSubcomponent(props, {
+    const { component, subProps } = useSubComponent(props, {
       oneline: CviCodeSnippetOneline,
       multiline: CviCodeSnippetMultiline,
       inline: CviCodeSnippetInline,

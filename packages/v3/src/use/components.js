@@ -4,24 +4,21 @@ import { computed } from 'vue';
 /**
  * Picks subcomponent props from super component props based on a subcomponent map
  * @param props Reactive super component props
- * @param subcomponents Map of kind name to component
+ * @param subComponents Map of kind name to component
  * @param kindKey key under which to find the current kind name in props
  */
-export const useSubcomponentProps = (props, subcomponents, kindKey = 'kind') =>
+export const useSubComponentProps = (props, subComponents, kindKey = 'kind') =>
   computed(() =>
-    reactivePick(props, Object.keys(subcomponents[props[kindKey]].props))
+    reactivePick(props, ...Object.keys(subComponents[props[kindKey]].props))
   );
 
 /**
  * Reactive subcomponent and sub props
  * @param props Reactive super component props
- * @param subcomponents Map of kind name to component
+ * @param subComponents Map of kind name to component
  * @param kindKey key under which to find the current kind name in props
  */
-export const useSubcomponent = (props, subcomponents, kindKey = 'kind') => ({
-  component: computed(() => subcomponents[props[kindKey]]),
-  subProps: reactivePick(
-    props,
-    ...Object.keys(subcomponents[props[kindKey]].props)
-  ),
+export const useSubComponent = (props, subComponents, kindKey = 'kind') => ({
+  component: computed(() => subComponents[props[kindKey]]),
+  subProps: useSubComponentProps(props, subComponents, kindKey),
 });
