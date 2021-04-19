@@ -12,7 +12,7 @@
   >
     <div
       role="textbox"
-      :tabindex="disabled ? undefined : 0"
+      :tabindex="disabled ? -1 : 0"
       :class="`${carbonPrefix}--snippet-container`"
       :aria-label="ariaLabel || 'code-snippet'"
       ref="container"
