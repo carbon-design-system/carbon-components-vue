@@ -73,7 +73,7 @@ exports[`CvTextInput should render correctly when light theme is used 1`] = `
 exports[`CvTextInput should render correctly when type is password and is not visible 1`] = `
 <div class="cv-text-input bx--form-item"><label for="1" class="bx--label">test label</label>
   <div class="bx--text-input__field-wrapper">
-    <!----> <input id="1" data-toggle-password-visibility="true" type="password" class="bx--text-input"> <button type="button" class="bx--text-input--password__visibility__toggle bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center"><span class="bx--assistive-text">Show password</span>
+    <!----> <input id="1" data-toggle-password-visibility="true" type="password" class="bx--text-input bx--password-input"> <button type="button" class="bx--btn bx--text-input--password__visibility__toggle bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center"><span class="bx--assistive-text">Show password</span>
       <view16-stub class="bx--icon-visibility-off"></view16-stub>
     </button></div>
   <!---->
@@ -84,7 +84,7 @@ exports[`CvTextInput should render correctly when type is password and is not vi
 exports[`CvTextInput should render correctly when type is password and is visible 1`] = `
 <div class="cv-text-input bx--form-item"><label for="1" class="bx--label">test label</label>
   <div class="bx--text-input__field-wrapper">
-    <!----> <input id="1" data-toggle-password-visibility="true" type="password" class="bx--text-input"> <button type="button" class="bx--text-input--password__visibility__toggle bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center"><span class="bx--assistive-text">Show password</span>
+    <!----> <input id="1" data-toggle-password-visibility="true" type="password" class="bx--text-input bx--password-input"> <button type="button" class="bx--btn bx--text-input--password__visibility__toggle bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center"><span class="bx--assistive-text">Show password</span>
       <view16-stub class="bx--icon-visibility-off"></view16-stub>
     </button></div>
   <!---->
