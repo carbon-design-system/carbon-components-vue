@@ -1,5 +1,12 @@
 <template>
-  <div :class="`cv-text-input ${carbonPrefix}--form-item`">
+  <div
+    :class="[
+      `cv-text-input`,
+      `${carbonPrefix}--form-item`,
+      `${carbonPrefix}--text-input-wrapper`,
+      { [`${carbonPrefix}--password-input-wrapper`]: isPassword },
+    ]"
+  >
     <label
       :for="uid"
       :class="[
