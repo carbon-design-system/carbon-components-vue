@@ -26,6 +26,7 @@
           {
             [`${carbonPrefix}--text-input--light`]: isLight,
             [`${carbonPrefix}--text-input--invalid`]: isInvalid,
+            [`${carbonPrefix}--password-input`]: isPassword,
           },
         ]"
         v-bind="$attrs"
@@ -38,6 +39,7 @@
       <button
         v-if="isPassword"
         :class="[
+          `${carbonPrefix}--btn`,
           `${carbonPrefix}--text-input--password__visibility__toggle`,
           `${carbonPrefix}--tooltip__trigger`,
           `${carbonPrefix}--tooltip--a11y`,
