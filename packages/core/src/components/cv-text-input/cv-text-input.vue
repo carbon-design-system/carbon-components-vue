@@ -1,5 +1,12 @@
 <template>
-  <div :class="`cv-text-input ${carbonPrefix}--form-item`">
+  <div
+    :class="[
+      `cv-text-input`,
+      `${carbonPrefix}--form-item`,
+      `${carbonPrefix}--text-input-wrapper`,
+      { [`${carbonPrefix}--password-input-wrapper`]: isPassword },
+    ]"
+  >
     <label
       :for="uid"
       :class="[
@@ -31,6 +38,7 @@
             [`${carbonPrefix}--text-input--light`]: isLight,
             [`${carbonPrefix}--text-input--invalid`]: isInvalid,
             [`${carbonPrefix}--text-input--warning`]: isWarn,
+            [`${carbonPrefix}--password-input`]: isPassword,
           },
         ]"
         v-bind="$attrs"
@@ -43,6 +51,7 @@
       <button
         v-if="isPassword"
         :class="[
+          `${carbonPrefix}--btn`,
           `${carbonPrefix}--text-input--password__visibility__toggle`,
           `${carbonPrefix}--tooltip__trigger`,
           `${carbonPrefix}--tooltip--a11y`,
