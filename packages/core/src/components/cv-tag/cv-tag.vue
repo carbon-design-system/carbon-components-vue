@@ -1,6 +1,7 @@
 <template>
   <component
-    :is="!isFilter || !hasClickListener ? 'div' : 'button'"
+    :is="!isFilter && hasClickListener ? 'button' : 'div'"
+    v-on="this.$listeners"
     :id="uid"
     :class="[
       `cv-tag ${carbonPrefix}--tag`,
@@ -10,7 +11,6 @@
         [`${carbonPrefix}--tag--${size}`]: size,
       },
     ]"
-    role="listitem"
     :title="title"
     @keydown.enter.stop.prevent="$emit('remove')"
     @keydown.space.prevent
