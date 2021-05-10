@@ -79,6 +79,11 @@ let variants = [
     name: 'filter clear aria label',
     extra: { kind: { group: 'attr', value: 'filter @remove="onRemove"' } },
   },
+  {
+    name: 'interactive',
+    excludes: ['clearAriaLabel'],
+    extra: { kind: { group: 'attr', value: '@click="onClick"' } },
+  },
 ];
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
@@ -110,6 +115,7 @@ for (const story of storySet) {
         template: templateViewString,
         props: settings.props,
         methods: {
+          onClick: action('Interactive as clicked'),
           onRemove: action('Filter remove event'),
         },
       };

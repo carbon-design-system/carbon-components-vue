@@ -16,6 +16,7 @@ http://www.carbondesignsystem.com/components/text-input/code
 - invalid-message: optional error message
 - label: the label text for the text area
 - light: Lighter variant, typically alternate background
+- placeholder: standard behavior
 - theme: (deprecated use light) '' or 'light'
 - value: optional initial value of the text area,
 

@@ -102,14 +102,26 @@ const preKnobs = {
     slot: 'invalid-message',
     value: 'Invalid message text',
   },
+  warnText: {
+    group: 'attr',
+    type: text,
+    config: ['warn text', ''],
+    prop: 'warn-text',
+    value: val => (val.length ? val : undefined),
+  },
+  warnTextSlot: {
+    group: 'slots',
+    slot: 'warn-text',
+    value: 'Some warning e.g. will override previous value',
+  },
 };
 
 const variants = [
   {
     name: 'default',
-    excludes: ['vModel', 'events', 'helperTextSlot', 'invalidMessageSlot'],
+    excludes: ['vModel', 'events', 'helperTextSlot', 'invalidMessageSlot', 'warnTextSlot'],
   },
-  { name: 'helper and error slots', excludes: ['vModel', 'events'] },
+  { name: 'helper, warn and error slots', excludes: ['vModel', 'events'] },
   { name: 'minimal', includes: ['label'] },
   { name: 'events', includes: ['label', 'events'] },
   { name: 'vModel', includes: ['label', 'vModel'] },
