@@ -7,7 +7,7 @@ http://www.carbondesignsystem.com/components/tooltip/code
 ## Usage
 
 ```html
-<cv-interactive-tooltip direction="bottom">
+<cv-interactive-tooltip alignment="center" direction="bottom">
   <template slot="label">Tooltip label</template>
   <template slot="trigger">
     <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
