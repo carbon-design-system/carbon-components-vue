@@ -13,6 +13,7 @@ import CvSideNavLink from './cv-side-nav-link';
 import CvSideNavMenuItem from './cv-side-nav-menu-item';
 import CvSideNavMenu from './cv-side-nav-menu';
 import CvSideNav from './cv-side-nav';
+import CvSideNavDivider from './cv-side-nav-divider';
 import CvSkipToContent from './cv-skip-to-content';
 import CvSwitcherItemLink from './cv-switcher-item-link';
 import CvSwitcherItem from './cv-switcher-item';
@@ -31,6 +32,7 @@ export {
   CvHeaderSideNavItems,
   CvHeader,
   CvSideNav,
+  CvSideNavDivider,
   CvSideNavIcon,
   CvSideNavItems,
   CvSideNavLink,

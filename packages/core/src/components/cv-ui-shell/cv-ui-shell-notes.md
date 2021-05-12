@@ -176,6 +176,7 @@ Can be added either into the headers 'left-panels' slot or stand alone.
           <cv-side-nav-menu-item href="javascript:void(0)" active>
             L2 menu item
           </cv-side-nav-menu-item>
+          <cv-side-nav-divider />
           <cv-side-nav-menu-item href="javascript:void(0)">
             L2 menu item
           </cv-side-nav-menu-item>
@@ -183,6 +184,7 @@ Can be added either into the headers 'left-panels' slot or stand alone.
             L2 menu item
           </cv-side-nav-menu-item>
         </cv-side-nav-menu>
+        <cv-side-nav-divider />
         <cv-side-nav-menu title="L1 menu" expanded>
           <template slot="nav-icon"><Fade16 /></template>
           <cv-side-nav-menu-item href="javascript:void(0)">

@@ -1,5 +1,5 @@
 <template>
-  <button
+  <cv-icon-button
     v-on="$listeners"
     :class="[
       `cv-header-global-action`,
@@ -13,20 +13,34 @@
     @click="gaToggle"
     @focusout="gaFocusout"
     :id="uid"
+    :label="label"
+    :tipAlignment="tipAlignment"
+    :tipPosition="tipPosition"
   >
-    <slot />
-  </button>
+    <template slot="icon">
+      <slot />
+    </template>
+  </cv-icon-button>
 </template>
 
 <script>
 import { uidMixin, carbonPrefixMixin } from '../../mixins';
+import { CvIconButton } from '../cv-button';
 
 export default {
+  components: { CvIconButton },
   name: 'CvHeaderGlobalAction',
   mixins: [uidMixin, carbonPrefixMixin],
   props: {
     active: Boolean,
     ariaControls: String,
+    label: { type: String, default: undefined },
+    tipPosition: {
+      type: String,
+      default: 'bottom',
+      validator: val => ['top', 'left', 'bottom', 'right'.includes(val)],
+    },
+    tipAlignment: { type: String, default: 'center', validator: val => ['start', 'center', 'end'].includes(val) },
   },
   mounted() {
     this.$parent.$emit('cv:panel-control-mounted', this);
