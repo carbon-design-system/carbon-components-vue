@@ -17,7 +17,7 @@ let preKnobs = {
   slotDefault: {
     group: 'slots',
     slot: 'default',
-    value: '<h1>Hello</h1><p>This is some tile content</p>',
+    value: '<h1>Hello</h1><p>This is some tile content.</p>',
   },
   slotBelow: {
     group: 'slots',
@@ -56,6 +56,18 @@ let preKnobs = {
       'https://github.com/carbon-design-system/carbon-components-vue/blob/main/README.md',
     ],
     prop: 'href',
+  },
+  tileCollapsed: {
+    group: 'attr',
+    type: text,
+    config: ['Tile collapsed label', ''], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'tile-collapsed-label',
+  },
+  tileExpanded: {
+    group: 'attr',
+    type: text,
+    config: ['Tile expanded label', ''], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'tile-expanded-label',
   },
   vModel: {
     group: 'attr',
@@ -97,7 +109,7 @@ let variants = [
   },
   {
     name: 'expandable',
-    includes: ['slotDefault', 'light', 'slotBelow', 'expanded'],
+    includes: ['slotDefault', 'light', 'slotBelow', 'expanded', 'tileCollapsed', 'tileExpanded'],
     extra: { kind: { group: 'attr', value: 'kind="expandable"' } },
   },
   {
