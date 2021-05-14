@@ -18,6 +18,7 @@ import {
   CvHeaderNav,
   CvHeaderPanel,
   CvSideNav,
+  CvSideNavDivider,
   CvSideNavItems,
   CvSideNavLink,
   CvSideNavMenu,
@@ -97,17 +98,32 @@ const preKnobs = {
     <cv-header-global-action
       aria-label="Notifications"
       aria-controls="notifications-panel"
-      @click="actionNotifications" >
+      @click="actionNotifications"
+      label="Notifications"
+      tipPosition="bottom"
+      tipAlignment="start"
+      >
       <Notification20 />
     </cv-header-global-action>
-    <cv-header-global-action aria-label="User avatar" @click="actionUserAvatar" aria-controls="user-panel">
+    <cv-header-global-action
+      aria-label="User avatar"
+      @click="actionUserAvatar"
+      aria-controls="user-panel"
+      label="Log in"
+      tipPosition="bottom"
+      tipAlignment="center"
+      >
       <UserAvatar20 v-if="loggedIn"/>
       <Login20 v-else />
     </cv-header-global-action>
     <cv-header-global-action
       aria-label="App switcher"
       aria-controls="switcher-panel"
-      @click="actionAppSwitcher">
+      @click="actionAppSwitcher"
+      label="App switcher"
+      tipPosition="bottom"
+      tipAlignment="end"
+      >
       <AppSwitcher20 />
     </cv-header-global-action>
   </template>`,
@@ -180,10 +196,12 @@ const preKnobs = {
             L2 menu item
           </cv-side-nav-menu-item>
         </cv-side-nav-menu>
+        <cv-side-nav-divider />
         <cv-side-nav-menu title="L1 menu">
           <cv-side-nav-menu-item href="javascript:void(0)">
             L2 menu item
           </cv-side-nav-menu-item>
+        <cv-side-nav-divider />
           <cv-side-nav-menu-item href="javascript:void(0)" aria-current="page">
             L2 menu item
           </cv-side-nav-menu-item>
@@ -613,6 +631,7 @@ ${settings.group.leftPanels2}
           CvHeaderMenuItem,
           CvHeaderMenuButton,
           CvSideNav,
+          CvSideNavDivider,
           CvSideNavLink,
           CvSideNavMenu,
           CvSideNavItems,

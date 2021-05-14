@@ -13,8 +13,9 @@
     type="button"
   >
     <span :class="`${carbonPrefix}--assistive-text`">{{ label }}</span>
-
-    <CvSvg v-if="icon || iconHref" :svg="icon || iconHref" :class="`${carbonPrefix}--btn__icon`" />
+    <slot name="icon">
+      <CvSvg v-if="icon || iconHref" :svg="icon || iconHref" :class="`${carbonPrefix}--btn__icon`" />
+    </slot>
   </button>
 </template>
 

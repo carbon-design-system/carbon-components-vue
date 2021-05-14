@@ -96,6 +96,7 @@ export {
   CvSideNavMenuItem,
   CvSideNavMenu,
   CvSideNav,
+  CvSideNavDivider,
   CvSkipToContent,
   CvSwitcherItemLink,
   CvSwitcherItem,
