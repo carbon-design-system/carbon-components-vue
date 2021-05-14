@@ -319,7 +319,7 @@ export default {
       this.selectedId = selItem ? selItem.uid : undefined;
     },
     onOverflowClick(e, { direction, multiplier = 10 }) {
-      const { clientWidth, scrollLeft, scrollWidth } = this.$refs.tablist;
+      const { scrollLeft } = this.$refs.tablist;
 
       // account for overflow button appearing and causing tablist width change
       if (direction === 1 && !scrollLeft) {
