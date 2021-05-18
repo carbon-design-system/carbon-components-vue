@@ -1,5 +1,30 @@
 # Changelog
 
+## 2.38.0-canary.0
+
+fix: cv-file-uploader dom update
+fix: cv-data-table header padding
+fix: 10.30 update
+
+- cv-inline-loading
+- cv-button
+- cv-icon-button
+- cv-code-snippet-inline
+- cv-code-snippet-oneline
+- cv-code-snippet-multiline
+- cv-data-table
+- cv-loading
+- cv-modal
+- cv-number-input
+- cv-progress-indicator
+- cv-form-group
+- cv-text-area
+- cv-text-input
+- cv-tile
+- cv-tooltip
+- cv-ui-shell
+- cv-tab - now uses the scroll format
+
 ## 2.37.1
 
 chore: documentation correction for CvDataTable
