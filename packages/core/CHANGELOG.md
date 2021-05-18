@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.38.0-canary.1
+
+fix: dist versioning
+
 ## 2.38.0-canary.0
 
 fix: cv-file-uploader dom update
