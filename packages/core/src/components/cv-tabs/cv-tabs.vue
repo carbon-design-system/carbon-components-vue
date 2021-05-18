@@ -154,7 +154,7 @@ export default {
         if (this.$refs.tablist) {
           this.horizontalOverflow = this.$refs.tablist.scrollWidth > this.$refs.tablist.clientWidth;
 
-          if (this.$refs.link?.length > 0) {
+          if (this.$refs.link && this.$refs.link.length > 0) {
             this.leftOverflowNavButtonHidden = this.$refs.tablist.scrollLeft <= 0;
             this.rightOverflowNavButtonHidden =
               this.$refs.tablist.scrollLeft + this.$refs.tablist.clientWidth >= this.$refs.tablist.scrollWidth;
@@ -196,7 +196,7 @@ export default {
     },
     doScrollIntoView(index) {
       const tab = this.$refs.link[index];
-      const scrollContainer = tab?.parentNode?.parentNode;
+      const scrollContainer = tab.parentNode ? tab.parentNode.parentNode : null;
       let newScrollLeft;
 
       if (tab && scrollContainer) {

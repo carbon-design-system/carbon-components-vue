@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CvTab matches with disabled and selected 1`] = `<div id="an-id" role="tabpanel" aria-labelledby="an-id-link" aria-hidden="false" class="cv-tab"></div>`;
+
+exports[`CvTab matches with slotted content 1`] = `
+<div id="an-id" role="tabpanel" aria-labelledby="an-id-link" aria-hidden="true" hidden="hidden" class="cv-tab">
+  <div class="stub"></div>
+</div>
+`;
+
+exports[`CvTabs matches render 1`] = `
+<div class="cv-tabs" style="width: 100%;">
+  <div data-tabs="" role="navigation" class="cv-tab bx--tabs--scrollable"><button aria-hidden="true" aria-label="scroll left" tabindex="-1" type="button" class="">
+      <chevronleft16-stub></chevronleft16-stub>
+    </button>
+    <div class="bx--tabs__overflow-indicator--left"></div>
+    <ul role="tablist" class="bx--tabs--scrollable__nav"></ul>
+    <div class="bx--tabs__overflow-indicator--right"></div> <button aria-hidden="true" aria-label="scroll right" tabindex="-1" type="button" class="">
+      <chevronright16-stub></chevronright16-stub>
+    </button>
+  </div>
+  <div class="cv-tabs__panels"></div>
+</div>
+`;
+
+exports[`CvTabs matches with slotted content 1`] = `
+<div class="cv-tabs" style="width: 100%;">
+  <div data-tabs="" role="navigation" class="cv-tab bx--tabs--scrollable"><button aria-hidden="true" aria-label="scroll left" tabindex="-1" type="button" class="">
+      <chevronleft16-stub></chevronleft16-stub>
+    </button>
+    <div class="bx--tabs__overflow-indicator--left"></div>
+    <ul role="tablist" class="bx--tabs--scrollable__nav"></ul>
+    <div class="bx--tabs__overflow-indicator--right"></div> <button aria-hidden="true" aria-label="scroll right" tabindex="-1" type="button" class="">
+      <chevronright16-stub></chevronright16-stub>
+    </button>
+  </div>
+  <div class="cv-tabs__panels">
+    <cv-tab-stub label="my-label">Some stuff</cv-tab-stub>
+    <cv-tab-stub label="my-label">Some stuff</cv-tab-stub>
+    <cv-tab-stub label="my-label">Some stuff</cv-tab-stub>
+  </div>
+</div>
+`;
