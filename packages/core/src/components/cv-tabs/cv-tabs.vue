@@ -6,8 +6,8 @@
       role="navigation"
       v-on="$listeners"
       v-bind="$attrs"
-      @keydown.right.prevent="onRight"
-      @keydown.left.prevent="onLeft"
+      @keydown.right.prevent.stop="onRight"
+      @keydown.left.prevent.stop="onLeft"
     >
       <button
         aria-hidden="true"
@@ -55,9 +55,12 @@
             :aria-selected="selectedId == tab.uid"
             :id="`${tab.uid}-link`"
             @click="onTabClick(tab.uid)"
-            @keydown.enter.prevent="onTabEnter(tab.uid)"
             ref="link"
-            tabindex="-1"
+            eslint-disable-next-line
+            :tabindex="
+              // eslint-disable-nextx-line
+              selectedId == tab.uid ? 0 : -1
+            "
           >
             {{ tab.label }}
           </button>
@@ -110,7 +113,6 @@ export default {
       disabledTabs: [],
       horizontalOverflow: false,
       leftOverflowNavButtonHidden: false,
-      open: false,
       rightOverflowNavButtonHidden: false,
       // scrollIntoView,
       // selectionMode,
@@ -140,10 +142,6 @@ export default {
     this.$refs.tablist.removeEventListener('scroll', this.checkScroll);
   },
   computed: {
-    triggerStyleOverride() {
-      // <style carbon tweaks - DO NOT USE STYLE TAG as it causes SSR issues
-      return { padding: 0 };
-    },
     currentTabLabel() {
       const index = this.tabs.findIndex(tab => tab.uid === this.selectedId);
 
@@ -152,13 +150,15 @@ export default {
   },
   methods: {
     checkScroll() {
-      if (this.$refs.tablist) {
-        this.horizontalOverflow = this.$refs.tablist.scrollWidth > this.$refs.tablist.clientWidth;
+      if (!this.skipScroll) {
+        if (this.$refs.tablist) {
+          this.horizontalOverflow = this.$refs.tablist.scrollWidth > this.$refs.tablist.clientWidth;
 
-        if (this.$refs.link?.length > 0 && this.$refs.link?.[0].offsetParent) {
-          this.leftOverflowNavButtonHidden = this.$refs.tablist.scrollLeft <= 0;
-          this.rightOverflowNavButtonHidden =
-            this.$refs.tablist.scrollLeft + this.$refs.tablist.clientWidth >= this.$refs.tablist.scrollWidth;
+          if (this.$refs.link?.length > 0) {
+            this.leftOverflowNavButtonHidden = this.$refs.tablist.scrollLeft <= 0;
+            this.rightOverflowNavButtonHidden =
+              this.$refs.tablist.scrollLeft + this.$refs.tablist.clientWidth >= this.$refs.tablist.scrollWidth;
+          }
         }
       }
     },
@@ -176,7 +176,7 @@ export default {
         this.checkSelected();
       } else {
         if (srcComponent.internalSelected) {
-          this.onTabClick(srcComponent.uid);
+          this.doTabClick(srcComponent.uid);
         }
       }
     },
@@ -190,11 +190,51 @@ export default {
         this.checkDisabled(srcComponent);
 
         if (wasSelected && this.tabs.length) {
-          this.onTabClick(this.tabs[Math.max(tabIndex - 1, 0)].uid);
+          this.doTabClick(this.tabs[Math.max(tabIndex - 1, 0)].uid);
         }
       }
     },
-    onTabClick(id) {
+    doScrollIntoView(index) {
+      const tab = this.$refs.link[index];
+      const scrollContainer = tab?.parentNode?.parentNode;
+      let newScrollLeft;
+
+      if (tab && scrollContainer) {
+        const scrollLeft = scrollContainer.scrollLeft;
+        const tabLeft = tab.offsetLeft - scrollContainer.offsetLeft;
+
+        if (index === 0) {
+          newScrollLeft = 0;
+        } else if (index === this.$refs.link.length - 1) {
+          newScrollLeft = scrollContainer.scrollWidth - scrollContainer.offsetWidth;
+        } else if (tabLeft < scrollLeft) {
+          newScrollLeft = tabLeft;
+        } else {
+          const rightOfTab = tab.offsetLeft - scrollContainer.offsetLeft + tab.offsetWidth;
+          if (rightOfTab > scrollContainer.offsetWidth + scrollLeft) {
+            newScrollLeft = rightOfTab - scrollContainer.offsetWidth;
+
+            if (!this.rightOverflowNavButtonHidden) {
+              newScrollLeft += this.OVERFLOW_BUTTON_OFFSET;
+            }
+          }
+        }
+      }
+
+      if (newScrollLeft !== undefined) {
+        this.skipScroll = true;
+        this.leftOverflowNavButtonHidden = newScrollLeft <= 0;
+        this.rightOverflowNavButtonHidden =
+          newScrollLeft + this.$refs.tablist.clientWidth >= this.$refs.tablist.scrollWidth;
+
+        this.$nextTick(() => {
+          // allow left and right nav hide to propegate before setting scroll
+          scrollContainer.scrollLeft = newScrollLeft;
+          this.skipScroll = false;
+        });
+      }
+    },
+    doTabClick(id, setFocus = false) {
       if (this.disabledTabs.indexOf(id) === -1) {
         if (this.selectedId !== id) {
           let newIndex = -1;
@@ -203,6 +243,13 @@ export default {
 
           for (let i = 0; i < this.tabs.length; i++) {
             if (this.tabs[i].uid === id) {
+              this.doScrollIntoView(i, setFocus);
+              if (setFocus) {
+                this.$nextTick(() => {
+                  this.$refs.link[i].focus();
+                });
+              }
+
               this.tabs[i].internalSelected = true;
               newIndex = i;
             } else {
@@ -210,18 +257,15 @@ export default {
             }
           }
 
-          this.open = false;
-          if (this.$refs.trigger) {
-            // following code build sometimes trigger is not yet available
-            this.$refs.trigger.focus();
-          }
-
           this.$emit('tab-selected', newIndex);
         }
       }
     },
+    onTabClick(id) {
+      this.doTabClick(id);
+    },
     onCvSelected(srcComponent) {
-      this.onTabClick(srcComponent.uid);
+      this.doTabClick(srcComponent.uid);
     },
     onCvDisabled(srcComponent) {
       this.disabledTabs.push(srcComponent.uid);
@@ -254,17 +298,12 @@ export default {
 
       if (id !== undefined) {
         this.$nextTick(() => {
-          this.onTabClick(id);
+          this.doTabClick(id);
         });
       }
     },
     isAllTabsDisabled() {
       return this.disabledTabs.length === this.tabs.length;
-    },
-    onTabEnter(id) {
-      // const newIndex = this.tabs.findIndex(tab => tab.uid === id);
-
-      this.onTabClick(id);
     },
     onLeft() {
       if (this.isAllTabsDisabled()) {
@@ -274,8 +313,7 @@ export default {
       const curIndex = this.move(this.selectedId, false);
       const newId = this.tabs[curIndex].uid;
 
-      this.onTabClick(newId);
-      this.$refs.link[curIndex].focus();
+      this.doTabClick(newId, true);
     },
     move(id, next) {
       let newIndex;
@@ -311,12 +349,14 @@ export default {
       const curIndex = this.move(this.selectedId, true);
       const newId = this.tabs[curIndex].uid;
 
-      this.onTabClick(newId);
-      this.$refs.link[curIndex].focus();
+      this.doTabClick(newId, true);
     },
     selected(index) {
       let selItem = this.tabs[index ? index : -1];
       this.selectedId = selItem ? selItem.uid : undefined;
+
+      // const selectedTab = this.tabs.find(tab => tab.id === id);
+      // selectedTab.$el.scrollIntoView();
     },
     onOverflowClick(e, { direction, multiplier = 10 }) {
       const { scrollLeft } = this.$refs.tablist;
