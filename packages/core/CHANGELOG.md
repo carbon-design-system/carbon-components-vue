@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.38.0
+
+chore: promote canary release
+
 ## 2.38.0-canary.1
 
 fix: dist versioning
