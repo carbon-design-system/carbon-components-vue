@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.38.2
+
+fix: modal primary button and storybook usage.
+
 ## 2.38.1
 
 fix: correct secondary button on modal to raise a 'secondary-click'
