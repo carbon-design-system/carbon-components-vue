@@ -279,7 +279,7 @@ export default {
       this.onFooterButtonClick('primary-click', ev);
     },
     onSecondaryClick(ev) {
-      this.onFooterButtonClick('primary-click', ev);
+      this.onFooterButtonClick('secondary-click', ev);
     },
     onOtherBtnClick(ev) {
       this.onFooterButtonClick('other-btn-click', ev);
