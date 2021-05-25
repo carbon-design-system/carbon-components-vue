@@ -71,7 +71,7 @@
           :disabled="primaryButtonDisabled"
           type="button"
           :kind="primaryKind"
-          @click="() => onPrimaryClick"
+          @click="onPrimaryClick"
           v-if="hasPrimary"
           ref="primary"
         >
