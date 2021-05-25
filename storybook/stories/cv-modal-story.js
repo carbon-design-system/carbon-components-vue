@@ -137,17 +137,19 @@ const preKnobs = {
   @modal-hide-request="actionHideRequest"
   @after-modal-hidden="actionAfterHidden"`,
   },
-  twoButtonFooterEvents: {
+  buttonOne: {
     group: 'attr',
     value: `
-    @primary-click="actionPrimary"
+    @primary-click="actionPrimary"`,
+  },
+  buttonTwo: {
+    group: 'attr',
+    value: `
     @secondary-click="actionSecondary"`,
   },
-  threeButtonFooterEvents: {
+  buttonThree: {
     group: 'attr',
     value: `
-    @primary-click="actionPrimary"
-    @secondary-click="actionSecondary"
     @other-btn-click="actionOther"`,
   },
   autoHideOff: {
@@ -177,6 +179,8 @@ const variants = [
       'secondaryButton',
       'events',
       'autoHideOff',
+      'buttonOne',
+      'buttonTwo',
     ],
   },
   {
@@ -193,6 +197,8 @@ const variants = [
       'events',
       'twoBbuttonFooterEvents',
       'autoHideOff',
+      'buttonOne',
+      'buttonTwo',
     ],
   },
   {
@@ -210,6 +216,9 @@ const variants = [
       'events',
       'threeBbuttonFooterEvents',
       'autoHideOff',
+      'buttonOne',
+      'buttonTwo',
+      'buttonThree',
     ],
   },
   {
@@ -224,11 +233,22 @@ const variants = [
       'primaryButtonDisabled',
       'events',
       'autoHideOff',
+      'buttonOne',
     ],
   },
   {
     name: 'secondary-only',
-    includes: ['closeAriaLabel', 'label', 'title', 'size', 'content', 'secondaryButton', 'events', 'autoHideOff'],
+    includes: [
+      'closeAriaLabel',
+      'label',
+      'title',
+      'size',
+      'content',
+      'secondaryButton',
+      'events',
+      'autoHideOff',
+      'buttonTwo',
+    ],
   },
   { name: 'minimal', includes: ['label', 'title', 'content'] },
   { name: 'with input', excludes: ['label', 'title', 'content', 'scrollingContent'] },
@@ -266,7 +286,8 @@ for (const story of storySet) {
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">
-      <TimerButton @timer-start="doStart" @timer-end="doEnd" label="Call show() method" active-label-prefix="Call hide() method in" />
+      <button @click="doStart">Call show() only</button>
+      <TimerButton @timer-start="doStart" @timer-end="doEnd" label="Call show() method and then hide()" active-label-prefix="Call hide() method in" />
       </template>
     </sv-template-view>
   `;
@@ -285,6 +306,7 @@ for (const story of storySet) {
           actionHidden: action('CV Modal - modal-hidden'),
           actionPrimary: action('CV Modal - primary-click'),
           actionSecondary: action('CV Modal - secondary-click'),
+          actionOther: action('CV Modal - other-click'),
           actionHideRequest: action('Cv Modal - modal-hide-request'),
           actionAfterHidden: action('CV Modal - after-modal-hidden'),
         },
