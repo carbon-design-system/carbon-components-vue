@@ -114,6 +114,7 @@ Like sorting and filtering it is the users responsibility to deal with edited da
 
 ## Events
 
+- row-expanded: Supplied row component, where if value is set it can be accessed to get the index of the row
 - pagination: re-raises CvPageination change event.
 - row-select-change: Supplies { value: rowValue, selected: rowSelected }. Raised on row select/deselect
 - row-select-changes: Supplies array of selected row values.

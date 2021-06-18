@@ -501,6 +501,7 @@ export default {
       }
     },
     onCvExpandedChange(row) {
+      this.$emit('row-expanded', row)
       if (row.isExpanded) {
         // are all rows expanded
         this.dataExpandAll = this.registeredRows.every(item => item.isExpanded);
