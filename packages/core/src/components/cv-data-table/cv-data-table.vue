@@ -91,6 +91,7 @@
           {
             [`${carbonPrefix}--data-table--${rowSize} `]: !(rowSize.length === 0 || rowSize === 'standard'),
             [`${carbonPrefix}--data-table--zebra `]: zebra,
+            [`${carbonPrefix}--data-table--sticky-header `]: stickyHeader,
             [`${carbonPrefix}--data-table--no-border `]: borderless,
             [`${carbonPrefix}--skeleton `]: skeleton,
             [`${carbonPrefix}--data-table--sort `]: isSortable,
@@ -231,6 +232,7 @@ export default {
     columns: Array,
     data: Array,
     zebra: Boolean,
+    stickyHeader: Boolean,
     rowsSelected: { type: Array, default: () => [] },
     helperText: { type: String, default: undefined },
     expandingSearch: { type: Boolean, default: true },
