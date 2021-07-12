@@ -18,6 +18,7 @@
       :class="[`${carbonPrefix}--progress-label`, { [`${carbonPrefix}--progress-label-overflow`]: showOverflow }]"
       @mouseenter="onMouseEnter"
       @mouseleave="onMouseLeave"
+      @click="$emit('step-clicked')"
       ref="label"
     >
       {{ label }}
