@@ -62,7 +62,7 @@ for (const story of storySet) {
 
       // ----------------------------------------------------------------
 
-      let templateString = `<cv-progress${settings.group.attr}>${settings.group.slots}</cv-progress>`;
+      let templateString = `<cv-progress${settings.group.attr} @step-clicked="actionStepClicked">${settings.group.slots}</cv-progress>`;
       // console.log(templateString);
       // ----------------------------------------------------------------
       const templateViewString = `

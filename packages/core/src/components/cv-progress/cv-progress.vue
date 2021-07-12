@@ -11,6 +11,7 @@
         :label="step"
         :complete="initialStep > index"
         ref="steps"
+        @step-clicked="$emit('step-clicked', $event)"
       />
     </slot>
   </ul>

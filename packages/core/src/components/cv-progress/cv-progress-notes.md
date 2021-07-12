@@ -54,4 +54,4 @@ NOTE: steps is an array of strings declared elsewhere.
 
 ## Events
 
-Clicking on the steps raise step-cliked events.
+Clicking on the steps raise step-clicked events either directly from the step or from cv-progress if steps array used.
