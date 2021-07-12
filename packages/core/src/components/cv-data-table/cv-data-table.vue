@@ -507,6 +507,7 @@ export default {
       } else {
         this.dataExpandAll = false;
       }
+      this.$emit('row-expanded', row);
     },
   },
 };
