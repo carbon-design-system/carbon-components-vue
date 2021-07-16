@@ -94,6 +94,7 @@
             [`${carbonPrefix}--data-table--no-border `]: borderless,
             [`${carbonPrefix}--skeleton `]: skeleton,
             [`${carbonPrefix}--data-table--sort `]: isSortable,
+            [`${carbonPrefix}--data-table--static `]: staticWidth,
           },
         ]"
       >
@@ -236,6 +237,7 @@ export default {
     expandingSearch: { type: Boolean, default: true },
     skeleton: Boolean,
     hasExpandAll: Boolean,
+    staticWidth: Boolean,
   },
   model: {
     prop: 'rows-selected',
