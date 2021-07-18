@@ -80,6 +80,12 @@ let preKnobs = {
     config: ['zebra', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: 'zebra',
   },
+  stickyHeader: {
+    group: 'attr',
+    type: boolean,
+    config: ['sticky-header', false],
+    prop: 'stickyHeader',
+  },
   columns: {
     group: 'attr',
     type: object,
