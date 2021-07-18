@@ -85,80 +85,85 @@
         </div>
       </section>
 
-      <table
-        :class="[
-          `${carbonPrefix}--data-table`,
-          {
-            [`${carbonPrefix}--data-table--${rowSize} `]: !(rowSize.length === 0 || rowSize === 'standard'),
-            [`${carbonPrefix}--data-table--zebra `]: zebra,
-            [`${carbonPrefix}--data-table--no-border `]: borderless,
-            [`${carbonPrefix}--skeleton `]: skeleton,
-            [`${carbonPrefix}--data-table--sort `]: isSortable,
-          },
-        ]"
-      >
-        <thead>
-          <tr>
-            <th
-              v-if="hasExpandables"
-              :class="`${carbonPrefix}--table-expand`"
-              :data-previous-value="dataExpandAll ? 'collapsed' : 'expanded'"
-            >
-              <button
-                v-if="hasExpandAll"
-                :class="`${carbonPrefix}--table-expand__button`"
-                @click="toggleExpandAll"
-                type="button"
-                :aria-label="dataExpandAll ? collapseAllAriaLabel : expandAllAriaLabel"
-              >
-                <ChevronRight16 :class="`${carbonPrefix}--table-expand__svg`" />
-              </button>
-            </th>
-            <th v-if="hasBatchActions" :class="`${carbonPrefix}--table-column-checkbox`">
-              <cv-checkbox
-                :form-item="false"
-                value="headingCheck"
-                v-model="headingChecked"
-                @change="onHeadingCheckChange"
-                :label="selectAllAriaLabel"
-                hideLabel
-              />
-            </th>
-            <slot name="headings">
-              <cv-data-table-heading
-                v-for="(column, index) in columns"
-                :key="`${index}:${column}`"
-                :heading="columnHeading(column)"
-                :sortable="isColSortable(column)"
-                :order="column.order"
-                :heading-style="headingStyle(column)"
-                :skeleton="skeleton"
-              />
-            </slot>
-            <th v-if="hasOverflowMenu"></th>
-          </tr>
-        </thead>
+      <div :class="`${carbonPrefix}--data-table-content`">
+        <cv-wrapper :tagType="stickyHeader ? section : ''" :class="`${carbonPrefix}--data-table_inner-container`">
+          <table
+            :class="[
+              `${carbonPrefix}--data-table`,
+              {
+                [`${carbonPrefix}--data-table--${rowSize} `]: !(rowSize.length === 0 || rowSize === 'standard'),
+                [`${carbonPrefix}--data-table--zebra `]: zebra,
+                [`${carbonPrefix}--data-table--sticky-header `]: stickyHeader,
+                [`${carbonPrefix}--data-table--no-border `]: borderless,
+                [`${carbonPrefix}--skeleton `]: skeleton,
+                [`${carbonPrefix}--data-table--sort `]: isSortable,
+              },
+            ]"
+          >
+            <thead>
+              <tr>
+                <th
+                  v-if="hasExpandables"
+                  :class="`${carbonPrefix}--table-expand`"
+                  :data-previous-value="dataExpandAll ? 'collapsed' : 'expanded'"
+                >
+                  <button
+                    v-if="hasExpandAll"
+                    :class="`${carbonPrefix}--table-expand__button`"
+                    @click="toggleExpandAll"
+                    type="button"
+                    :aria-label="dataExpandAll ? collapseAllAriaLabel : expandAllAriaLabel"
+                  >
+                    <ChevronRight16 :class="`${carbonPrefix}--table-expand__svg`" />
+                  </button>
+                </th>
+                <th v-if="hasBatchActions" :class="`${carbonPrefix}--table-column-checkbox`">
+                  <cv-checkbox
+                    :form-item="false"
+                    value="headingCheck"
+                    v-model="headingChecked"
+                    @change="onHeadingCheckChange"
+                    :label="selectAllAriaLabel"
+                    hideLabel
+                  />
+                </th>
+                <slot name="headings">
+                  <cv-data-table-heading
+                    v-for="(column, index) in columns"
+                    :key="`${index}:${column}`"
+                    :heading="columnHeading(column)"
+                    :sortable="isColSortable(column)"
+                    :order="column.order"
+                    :heading-style="headingStyle(column)"
+                    :skeleton="skeleton"
+                  />
+                </slot>
+                <th v-if="hasOverflowMenu"></th>
+              </tr>
+            </thead>
 
-        <cv-wrapper :tag-type="hasExpandables ? '' : 'tbody'">
-          <slot name="data">
-            <cv-data-table-row
-              v-for="(row, rowIndex) in data"
-              :key="`row:${rowIndex}`"
-              :value="`${rowIndex}`"
-              ref="dataRows"
-              :overflow-menu="overflowMenu"
-            >
-              <cv-data-table-cell
-                v-for="(cell, colIndex) in row"
-                :key="`cell:${colIndex}:${rowIndex}`"
-                :style="dataStyle(colIndex)"
-              >
-                <cv-wrapper :tag-type="skeleton ? 'span' : ''">{{ cell }}</cv-wrapper>
-              </cv-data-table-cell>
-            </cv-data-table-row>
-          </slot>
+            <cv-wrapper :tag-type="hasExpandables ? '' : 'tbody'">
+              <slot name="data">
+                <cv-data-table-row
+                  v-for="(row, rowIndex) in data"
+                  :key="`row:${rowIndex}`"
+                  :value="`${rowIndex}`"
+                  ref="dataRows"
+                  :overflow-menu="overflowMenu"
+                >
+                  <cv-data-table-cell
+                    v-for="(cell, colIndex) in row"
+                    :key="`cell:${colIndex}:${rowIndex}`"
+                    :style="dataStyle(colIndex)"
+                  >
+                    <cv-wrapper :tag-type="skeleton ? 'span' : ''">{{ cell }}</cv-wrapper>
+                  </cv-data-table-cell>
+                </cv-data-table-row>
+              </slot>
+            </cv-wrapper>
+          </table>
         </cv-wrapper>
-      </table>
+      </div>
     </div>
     <cv-pagination
       v-if="pagination"
@@ -231,6 +236,7 @@ export default {
     columns: Array,
     data: Array,
     zebra: Boolean,
+    stickyHeader: Boolean,
     rowsSelected: { type: Array, default: () => [] },
     helperText: { type: String, default: undefined },
     expandingSearch: { type: Boolean, default: true },

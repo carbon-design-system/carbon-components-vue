@@ -89,6 +89,7 @@ Like sorting and filtering it is the users responsibility to deal with edited da
 - rowSize: (optional) default: '',
   - 'compact', 'small', '', 'tall'
 - zebra: (optional) default: false ; boolean is the table striped
+- stickyHeader: (optional) default: false ; boolean is the table header fixed
 - searchLabel: (optional) { type: String, default: 'Search' },
 - searchPlaceholder: (optional) { type: String, default: 'Search' },
 - searchClearLabel: (optional) { type: String, default: 'Clear search' },
