@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.39.0
+
+feat: emit event on progress step click
+feat: emit event on data table row expand
+feat: add sticky header option to data table
+feat: add static width option to data table
+
 ## 2.38.2
 
 fix: modal primary button and storybook usage.
