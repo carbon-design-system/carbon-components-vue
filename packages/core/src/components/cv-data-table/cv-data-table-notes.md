@@ -80,24 +80,25 @@ Like sorting and filtering it is the users responsibility to deal with edited da
 - data: Two dimensional array of strings.
 - rows-selected: An array containing the selected row values. Supports v-model via the row-select-changes event.
 
+- actionBarAriaLabel: { type: String, default: 'Table Action Bar' },
 - auto-width: (optional) table will size use auto sizing
+- batchCancelLabel: (optional) { type: String, default: 'Cancel' },
 - borderless: (optional) table will have no border
+- collapseAllAriaLabel: { type: String, default: 'Collapse all rows' },
+- expandAllAriaLabel: { type: String, default: 'Expand all rows' },
 - overflow-menu(optional) : An array of overflow menu labels. On click CvDataTable will raise an 'overflow-menu-click' event passing an object containing menuIndex, menuLabel and rowValue
 - overflow-menu props: As part of the array pass an object containing props for the overflowMenu. E.g. { label: 'Overflow menu', tipAlignment: 'end', tipPosition: 'top' },
 - pagination: (optional) default: false, can be set to true or an object containing camel case props for a CvPagination component
-- sortable: (optional) can be sorted
 - rowSize: (optional) default: '',
   - 'compact', 'small', '', 'tall'
-- zebra: (optional) default: false ; boolean is the table striped
-- stickyHeader: (optional) default: false ; boolean is the table header fixed
 - searchLabel: (optional) { type: String, default: 'Search' },
 - searchPlaceholder: (optional) { type: String, default: 'Search' },
 - searchClearLabel: (optional) { type: String, default: 'Clear search' },
-- batchCancelLabel: (optional) { type: String, default: 'Cancel' },
-- actionBarAriaLabel: { type: String, default: 'Table Action Bar' },
-- collapseAllAriaLabel: { type: String, default: 'Collapse all rows' },
-- expandAllAriaLabel: { type: String, default: 'Expand all rows' },
 - selectAllAriaLabel: { type: String, default: 'Select all rows' },
+- sortable: (optional) can be sorted
+- staticWidth: (optional) if true, will use a width of 'auto' instead of 100%
+- stickyHeader: (optional) default: false ; Table does not stretch to width of container.
+- zebra: (optional) default: false ; boolean is the table striped
 
 ## Scoped slots
 
