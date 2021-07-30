@@ -51,6 +51,12 @@ const preKnobs = {
     config: ['Low contrast', false],
     prop: 'low-contrast',
   },
+  hideCloseButton: {
+    group: 'attr',
+    type: boolean,
+    config: ['Hide close button', false],
+    prop: 'hide-close-button',
+  },
 };
 
 const variants = [

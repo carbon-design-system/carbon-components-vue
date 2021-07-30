@@ -34,6 +34,7 @@
       {{ actionLabel }}
     </button>
     <button
+      v-if="!hideCloseButton"
       type="button"
       :aria-label="closeAriaLabel"
       data-notification-btn
@@ -66,6 +67,7 @@ export default {
       validator: val => ['error', 'info', 'warning', 'success'].includes(val),
     },
     lowContrast: Boolean,
+    hideCloseButton: Boolean,
   },
   computed: {
     icon() {
