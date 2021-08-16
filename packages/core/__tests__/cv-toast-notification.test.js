@@ -13,7 +13,7 @@ describe('CvToastNotification', () => {
   // ***************
   // PROP CHECKS
   // ***************
-  testComponent.propsAreType(CvToastNotification, ['lowContrast'], Boolean);
+  testComponent.propsAreType(CvToastNotification, ['lowContrast', 'hideCloseButton'], Boolean);
   testComponent.propsAreType(CvToastNotification, ['caption', 'closeAriaLabel', 'kind'], String);
   testComponent.propsHaveDefault(CvToastNotification, ['closeAriaLabel', 'kind']);
 
@@ -50,6 +50,15 @@ describe('CvToastNotification', () => {
 
   it('should render correctly when low contrast is used', async () => {
     const propsData = { caption: 'TEST', lowContrast: true, kind: '' };
+    for (const kind of kinds) {
+      propsData.kind = kind;
+      const wrapper = await shallow(CvToastNotification, { propsData });
+      expect(wrapper.html()).toMatchSnapshot();
+    }
+  });
+
+  it('should not render close button when hideCloseButton is true', async () => {
+    const propsData = { lowContrast: false, kind: '', actionLabel: 'test action label', hideCloseButton: true };
     for (const kind of kinds) {
       propsData.kind = kind;
       const wrapper = await shallow(CvToastNotification, { propsData });
