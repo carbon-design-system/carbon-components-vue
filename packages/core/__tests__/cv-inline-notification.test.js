@@ -13,7 +13,7 @@ describe('CvInlineNotification', () => {
   // ***************
   // PROP CHECKS
   // ***************
-  testComponent.propsAreType(CvInlineNotification, ['lowContrast'], Boolean);
+  testComponent.propsAreType(CvInlineNotification, ['lowContrast', 'hideCloseButton'], Boolean);
   testComponent.propsAreType(CvInlineNotification, ['actionLabel', 'closeAriaLabel', 'kind'], String);
   testComponent.propsHaveDefault(CvInlineNotification, ['closeAriaLabel', 'kind', 'actionLabel']);
 
@@ -49,6 +49,15 @@ describe('CvInlineNotification', () => {
 
   it('should render correctly when low contrast is used', async () => {
     const propsData = { lowContrast: true, kind: '', actionLabel: 'test action label' };
+    for (const kind of kinds) {
+      propsData.kind = kind;
+      const wrapper = await shallow(CvInlineNotification, { propsData });
+      expect(wrapper.html()).toMatchSnapshot();
+    }
+  });
+
+  it('should not render close button when hideCloseButton is true', async () => {
+    const propsData = { lowContrast: false, kind: '', actionLabel: 'test action label', hideCloseButton: true };
     for (const kind of kinds) {
       propsData.kind = kind;
       const wrapper = await shallow(CvInlineNotification, { propsData });
