@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.40.0
+
+feat: CvFileUploader mark dropped files of the wrong type as invalid
+feat: CvInlineNotification add ability to hide close button
+feat: CvToastNotification add ability to hide close button
+
 ## 2.39.0
 
 feat: emit event on progress step click
