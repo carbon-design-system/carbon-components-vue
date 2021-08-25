@@ -32,6 +32,7 @@
             v-if="kind !== 'button'"
             v-bind="$attrs"
             type="file"
+            :accept="accept"
             :class="`${carbonPrefix}--file-input`"
             :id="uid"
             data-file-uploader
@@ -45,6 +46,7 @@
         v-if="kind === 'button'"
         v-bind="$attrs"
         type="file"
+        :accept="accept"
         :class="`${carbonPrefix}--file-input`"
         :id="uid"
         data-file-uploader
@@ -140,6 +142,7 @@ export default {
     },
     label: String,
     helperText: String,
+    accept: String,
     initialStateUploading: Boolean,
     removable: Boolean,
     buttonLabel: {
@@ -210,12 +213,19 @@ export default {
     },
     addFiles(files) {
       for (const file of files) {
-        this.internalFiles.push({
+        const internalFile = {
           state: this.initialStateUploading ? STATES.UPLOADING : STATES.NONE,
           file,
           invalidMessageTitle: '',
           invalidMessage: '',
-        });
+        };
+
+        if (file.messageBundle) {
+          internalFile.invalidMessageTitle = file.messageBundle.invalidMessageTitle;
+          internalFile.invalidMessage = file.messageBundle.invalidMessage;
+          delete file.messageBundle;
+        }
+        this.internalFiles.push(internalFile);
       }
       this.$emit('change', this.internalFiles);
     },
@@ -241,32 +251,55 @@ export default {
       this.internalFiles[index].invalidMessage = message;
     },
     onDragEvent(evt) {
-      // NOTE: Validation of dragged files is not currently done.
-      // It may be possible to do this here or defer to the caller.
-      // It is certainly possible for the user to remove files after they are dropped.
+      if (Array.prototype.indexOf.call(evt.dataTransfer.types, 'Files') === -1) {
+        return;
+      }
 
-      if (Array.prototype.indexOf.call(evt.dataTransfer.types, 'Files') >= 0) {
-        if (evt.type === 'dragover') {
-          evt.preventDefault();
-          const dropEffect = 'copy';
-          if (Array.isArray(evt.dataTransfer.types)) {
-            try {
-              // IE11 throws a "permission denied" error accessing `.effectAllowed`
-              evt.dataTransfer.effectAllowed = dropEffect;
-            } catch (e) {
-              // ignore
-            }
+      if (evt.type === 'dragleave') {
+        this.allowDrop = false;
+        return;
+      }
+
+      if (evt.type === 'dragover') {
+        evt.preventDefault();
+        const dropEffect = 'copy';
+        if (Array.isArray(evt.dataTransfer.types)) {
+          try {
+            // IE11 throws a "permission denied" error accessing `.effectAllowed`
+            evt.dataTransfer.effectAllowed = dropEffect;
+          } catch (e) {
+            // ignore
           }
-          evt.dataTransfer.dropEffect = dropEffect;
-          this.allowDrop = true;
         }
-        if (evt.type === 'dragleave') {
-          this.allowDrop = false;
+        evt.dataTransfer.dropEffect = dropEffect;
+        this.allowDrop = true;
+      }
+
+      if (evt.type === 'drop') {
+        evt.preventDefault();
+        if (this.accept) {
+          this.markInvalidFileTypes(evt.dataTransfer.files);
         }
-        if (evt.type === 'drop') {
-          evt.preventDefault();
-          this.addFiles(evt.dataTransfer.files);
-          this.allowDrop = false;
+        this.addFiles(evt.dataTransfer.files);
+        this.allowDrop = false;
+      }
+    },
+    markInvalidFileTypes(files) {
+      const isFileAllowed = file => {
+        const extension = '.' + file.name.split('.').pop();
+        const allowed = this.accept.split(',').map(x => x.trim());
+        if (allowed.includes('.jpg')) {
+          allowed.push('.jpeg');
+        }
+        return allowed.includes(file.type) || allowed.includes(extension);
+      };
+
+      for (const file of files) {
+        if (!isFileAllowed(file)) {
+          file.messageBundle = {
+            invalidMessageTitle: 'Invalid file type',
+            invalidMessage: `"${file.name}" does not have a valid file type.`,
+          };
         }
       }
     },

@@ -23,6 +23,7 @@ http://www.carbondesignsystem.com/components/notification/code
 - actionLabel: optional action button label, without it no action button is displayed.
 - closeAriaLabel: { type: String, default: 'Clear filter' },
 - lowContrast: Boolean to use a lower contrast version of the notification
+- hideCloseButton: Boolean removes close button
 
 ## Events
 

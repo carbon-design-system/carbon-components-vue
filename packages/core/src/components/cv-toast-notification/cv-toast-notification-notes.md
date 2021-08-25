@@ -24,6 +24,7 @@ http://www.carbondesignsystem.com/components/notification/code
 - caption: 'caption' inputs as an `v-html` so any markup is rendered.
 - closeAriaLabel: { type: String, default: 'Clear filter' },
 - lowContrast: Boolean to use a lower contrast version of the notification
+- hideCloseButton: Boolean removes close button
 
 ## Events
 

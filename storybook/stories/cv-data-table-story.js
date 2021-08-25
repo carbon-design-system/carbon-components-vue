@@ -80,6 +80,18 @@ let preKnobs = {
     config: ['zebra', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: 'zebra',
   },
+  staticWidth: {
+    group: 'attr',
+    type: boolean,
+    config: ['static-width', false],
+    prop: 'staticWidth',
+  },
+  stickyHeader: {
+    group: 'attr',
+    type: boolean,
+    config: ['sticky-header', false],
+    prop: 'stickyHeader',
+  },
   columns: {
     group: 'attr',
     type: object,
@@ -443,6 +455,7 @@ let variants = [
   { name: 'slotted HTML', includes: ['columns', 'htmlData', 'basicPagination'] },
   { name: 'styled columns', includes: ['sortable', 'columns2', 'data', 'sort'] },
   { name: 'Slotted headings', includes: ['slottedHeadings', 'data', 'sort'] },
+  { name: 'Static width', includes: ['staticWidth', 'columns', 'data'] },
 ];
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);

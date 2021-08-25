@@ -1,5 +1,6 @@
 import { storiesOf } from '@storybook/vue';
 import { array, number, boolean } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
 
 import SvTemplateView from '../_storybook/views/sv-template-view/sv-template-view';
 // import consts from '../_storybook/utils/consts';
@@ -37,11 +38,11 @@ const preKnobs = {
   },
   slotted: {
     group: 'slots',
-    value: `<cv-progress-step label="Step 1" additional-info="Optional info" :complete="complete[0]" description="This is the first step"/>
-  <cv-progress-step label="Step 2 is a bit longer" :complete="complete[1]" description="This is the second step"/>
-  <cv-progress-step label="Step 3" :complete="complete[2]" tip-text="Step 3 has hard coded tip" description="This is the third step"/>
-  <cv-progress-step label="Step 4" :complete="complete[3]" invalid description="This is the penultimate step"/>
-  <cv-progress-step label="Step 4" :complete="complete[4]" disabled description="This is the last step"/>
+    value: `<cv-progress-step label="Step 1" additional-info="Optional info" :complete="complete[0]" description="This is the first step" @step-clicked="actionStepClicked" />
+  <cv-progress-step label="Step 2 is a bit longer" :complete="complete[1]" description="This is the second step" @step-clicked="actionStepClicked"/>
+  <cv-progress-step label="Step 3" :complete="complete[2]" tip-text="Step 3 has hard coded tip" description="This is the third step" @step-clicked="actionStepClicked" />
+  <cv-progress-step label="Step 4" :complete="complete[3]" invalid description="This is the penultimate step" @step-clicked="actionStepClicked"/>
+  <cv-progress-step label="Step 4" :complete="complete[4]" disabled description="This is the last step" @step-clicked="actionStepClicked"/>
 `,
   },
 };
@@ -61,7 +62,7 @@ for (const story of storySet) {
 
       // ----------------------------------------------------------------
 
-      let templateString = `<cv-progress${settings.group.attr}>${settings.group.slots}</cv-progress>`;
+      let templateString = `<cv-progress${settings.group.attr} @step-clicked="actionStepClicked">${settings.group.slots}</cv-progress>`;
       // console.log(templateString);
       // ----------------------------------------------------------------
       const templateViewString = `
@@ -83,6 +84,9 @@ for (const story of storySet) {
         data: () => ({ complete: [true, false, false, false, false] }),
         template: templateViewString,
         props: settings.props,
+        methods: {
+          actionStepClicked: action('CV Progress Step - step-clicked'),
+        },
       };
     },
     {
