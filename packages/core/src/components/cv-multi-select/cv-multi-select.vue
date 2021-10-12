@@ -131,6 +131,7 @@
               :name="item.name"
               :data-test="item.name"
               :label="item.label"
+              :disabled="item.disabled"
               style="pointer-events: none;"
             />
           </div>

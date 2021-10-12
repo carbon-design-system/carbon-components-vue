@@ -38,6 +38,7 @@ const fruits = [
     name: nameVal,
     label: item,
     value: nameVal,
+    disabled: false,
   };
 });
 
@@ -158,6 +159,35 @@ let preKnobs = {
     config: ['initial-value', ['banana', 'ugli_fruit'], ','],
     prop: 'value',
   },
+  // data: {
+  //   group: '',
+  //   type: array,
+  //   config: [
+  //     'data',
+  //     [
+  //       {name: 'apple', label: 'Apple', value: 'apple', disabled: false},
+  //       {name: 'banana', label: 'Banana', value: 'banana', disabled: false},
+  //       {name: 'cherry', label: 'Cherry', value: 'cherry', disabled: false},
+  //       {name: 'date', label: 'Date', value: 'date', disabled: false},
+  //       {name: 'elderberry', label: 'Elderberry', value: 'elderberry', disabled: false},
+  //       {name: 'fig', label: 'Fig', value: 'fig', disabled: false},
+  //       {name: 'grape', label: 'Grape', value: 'grape', disabled: false},
+  //       {name: 'kiwi_fruit', label: 'Kiwi Fruit', value: 'kiwi_fruit', disabled: false},
+  //       {name: 'lemon', label: 'Lemon', value: 'lemon', disabled: false},
+  //       {name: 'lime', label: 'Lime', value: 'lime', disabled: false},
+  //       {name: 'mango', label: 'Mango', value: 'mango', disabled: false},
+  //       {name: 'orange', label: 'Orange', value: 'orange', disabled: false},
+  //       {name: 'passion_fruit', label: 'Passion Fruit', value: 'passion_fruit', disabled: false},
+  //       {name: 'raisin', label: 'Raisin', value: 'raisin', disabled: false},
+  //       {name: 'satsuma', label: 'Satsuma', value: 'satsuma', disabled: false},
+  //       {name: 'tangerine', label: 'Tangerine', value: 'tangerine', disabled: false},
+  //       {name: 'ugli_fruit', label: 'Ugli Fruit', value: 'ugli_fruit', disabled: false},
+  //       {name: 'watermelon', label: 'Watermelon', value: 'watermelon', disabled: false},
+  //     ]
+  //   ],
+  //   prop: 'data',
+  //   value: val => val.data,
+  // },
 };
 
 let variants = [
@@ -171,6 +201,7 @@ let variants = [
       'userFilter',
       'userHighlight',
       'userFilterOrHighlight',
+      // 'data'
     ],
   },
   {
