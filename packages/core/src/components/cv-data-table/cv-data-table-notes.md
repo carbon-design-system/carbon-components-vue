@@ -94,6 +94,7 @@ Like sorting and filtering it is the users responsibility to deal with edited da
 - searchLabel: (optional) { type: String, default: 'Search' },
 - searchPlaceholder: (optional) { type: String, default: 'Search' },
 - searchClearLabel: (optional) { type: String, default: 'Clear search' },
+- initialSearchValue: (optional) default: '' ; Set text in search bar on table generation
 - selectAllAriaLabel: { type: String, default: 'Select all rows' },
 - sortable: (optional) can be sorted
 - staticWidth: (optional) if true, will use a width of 'auto' instead of 100%
