@@ -29,7 +29,7 @@ export default {
   mixins: [buttonMixin, carbonPrefixMixin],
   components: { CvSvg },
   props: {
-    label: { type: String, default: undefined },
+    label: { type: String, required: true },
     selected: Boolean,
     tipPosition: {
       type: String,
