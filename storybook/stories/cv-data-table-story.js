@@ -328,6 +328,11 @@ let preKnobs = {
     slot: 'helper-text',
     value: 'Some slotted helpful text',
   },
+  initialSearchSlot: {
+    group: 'slots',
+    slot: 'initial-search-text',
+    value: '',
+  },
   scopedSlots: {
     group: 'slots',
     value: `<template v-slot:items-selected="{scope}">You picked {{scope.count}} rows.</template>
@@ -352,6 +357,7 @@ let variants = [
       'slottedData',
       'htmlData',
       'helperTextSlot',
+      'initialSearchSlot',
       'basicPagination',
       'paginationInfinity',
       'hasExpandingRows',
@@ -371,6 +377,7 @@ let variants = [
       'slottedData',
       'htmlData',
       'helperTextSlot',
+      'initialSearchSlot',
       'basicPagination',
       'pagination',
       'hasExpandingRows',
@@ -415,6 +422,7 @@ let variants = [
       'slottedData',
       'htmlData',
       'helperTextSlot',
+      'initialSearchSlot',
       'basicPagination',
       'paginationInfinity',
       'hasExpandingRows',
@@ -434,6 +442,7 @@ let variants = [
       'slottedData',
       'htmlData',
       'helperTextSlot',
+      'initialSearchSlot',
       'basicPagination',
       'paginationInfinity',
       'hasExpandingRows',

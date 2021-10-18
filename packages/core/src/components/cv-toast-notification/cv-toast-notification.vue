@@ -2,7 +2,7 @@
   <div
     data-notification
     :class="[
-      `cv-notifiation ${carbonPrefix}--toast-notification`,
+      `cv-notification ${carbonPrefix}--toast-notification`,
       `${carbonPrefix}--toast-notification--${kind.toLowerCase()}`,
       { [`${carbonPrefix}--toast-notification--low-contrast`]: lowContrast },
     ]"

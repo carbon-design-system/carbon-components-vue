@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CvToastNotification should not render close button when hideCloseButton is true 1`] = `
-<div data-notification="" role="alert" class="cv-notifiation bx--toast-notification bx--toast-notification--error" actionlabel="test action label">
+<div data-notification="" role="alert" class="cv-notification bx--toast-notification bx--toast-notification--error" actionlabel="test action label">
   <anonymous-stub class="bx--toast-notification__icon"></anonymous-stub>
   <div class="bx--toast-notification__details">
     <h3 class="bx--toast-notification__title"></h3>
@@ -13,7 +13,7 @@ exports[`CvToastNotification should not render close button when hideCloseButton
 `;
 
 exports[`CvToastNotification should not render close button when hideCloseButton is true 2`] = `
-<div data-notification="" aria-live="polite" class="cv-notifiation bx--toast-notification bx--toast-notification--info" actionlabel="test action label">
+<div data-notification="" aria-live="polite" class="cv-notification bx--toast-notification bx--toast-notification--info" actionlabel="test action label">
   <anonymous-stub class="bx--toast-notification__icon"></anonymous-stub>
   <div class="bx--toast-notification__details">
     <h3 class="bx--toast-notification__title"></h3>
@@ -25,7 +25,7 @@ exports[`CvToastNotification should not render close button when hideCloseButton
 `;
 
 exports[`CvToastNotification should not render close button when hideCloseButton is true 3`] = `
-<div data-notification="" role="alert" class="cv-notifiation bx--toast-notification bx--toast-notification--warning" actionlabel="test action label">
+<div data-notification="" role="alert" class="cv-notification bx--toast-notification bx--toast-notification--warning" actionlabel="test action label">
   <anonymous-stub class="bx--toast-notification__icon"></anonymous-stub>
   <div class="bx--toast-notification__details">
     <h3 class="bx--toast-notification__title"></h3>
@@ -37,7 +37,7 @@ exports[`CvToastNotification should not render close button when hideCloseButton
 `;
 
 exports[`CvToastNotification should not render close button when hideCloseButton is true 4`] = `
-<div data-notification="" aria-live="polite" class="cv-notifiation bx--toast-notification bx--toast-notification--success" actionlabel="test action label">
+<div data-notification="" aria-live="polite" class="cv-notification bx--toast-notification bx--toast-notification--success" actionlabel="test action label">
   <anonymous-stub class="bx--toast-notification__icon"></anonymous-stub>
   <div class="bx--toast-notification__details">
     <h3 class="bx--toast-notification__title"></h3>
@@ -49,7 +49,7 @@ exports[`CvToastNotification should not render close button when hideCloseButton
 `;
 
 exports[`CvToastNotification should render correctly 1`] = `
-<div data-notification="" role="alert" class="cv-notifiation bx--toast-notification bx--toast-notification--error">
+<div data-notification="" role="alert" class="cv-notification bx--toast-notification bx--toast-notification--error">
   <anonymous-stub class="bx--toast-notification__icon"></anonymous-stub>
   <div class="bx--toast-notification__details">
     <h3 class="bx--toast-notification__title"></h3>
@@ -62,7 +62,7 @@ exports[`CvToastNotification should render correctly 1`] = `
 `;
 
 exports[`CvToastNotification should render correctly 2`] = `
-<div data-notification="" aria-live="polite" class="cv-notifiation bx--toast-notification bx--toast-notification--info">
+<div data-notification="" aria-live="polite" class="cv-notification bx--toast-notification bx--toast-notification--info">
   <anonymous-stub class="bx--toast-notification__icon"></anonymous-stub>
   <div class="bx--toast-notification__details">
     <h3 class="bx--toast-notification__title"></h3>
@@ -75,7 +75,7 @@ exports[`CvToastNotification should render correctly 2`] = `
 `;
 
 exports[`CvToastNotification should render correctly 3`] = `
-<div data-notification="" role="alert" class="cv-notifiation bx--toast-notification bx--toast-notification--warning">
+<div data-notification="" role="alert" class="cv-notification bx--toast-notification bx--toast-notification--warning">
   <anonymous-stub class="bx--toast-notification__icon"></anonymous-stub>
   <div class="bx--toast-notification__details">
     <h3 class="bx--toast-notification__title"></h3>
@@ -88,7 +88,7 @@ exports[`CvToastNotification should render correctly 3`] = `
 `;
 
 exports[`CvToastNotification should render correctly 4`] = `
-<div data-notification="" aria-live="polite" class="cv-notifiation bx--toast-notification bx--toast-notification--success">
+<div data-notification="" aria-live="polite" class="cv-notification bx--toast-notification bx--toast-notification--success">
   <anonymous-stub class="bx--toast-notification__icon"></anonymous-stub>
   <div class="bx--toast-notification__details">
     <h3 class="bx--toast-notification__title"></h3>
@@ -101,7 +101,7 @@ exports[`CvToastNotification should render correctly 4`] = `
 `;
 
 exports[`CvToastNotification should render correctly when low contrast is used 1`] = `
-<div data-notification="" role="alert" class="cv-notifiation bx--toast-notification bx--toast-notification--error bx--toast-notification--low-contrast">
+<div data-notification="" role="alert" class="cv-notification bx--toast-notification bx--toast-notification--error bx--toast-notification--low-contrast">
   <anonymous-stub class="bx--toast-notification__icon"></anonymous-stub>
   <div class="bx--toast-notification__details">
     <h3 class="bx--toast-notification__title"></h3>
@@ -114,7 +114,7 @@ exports[`CvToastNotification should render correctly when low contrast is used 1
 `;
 
 exports[`CvToastNotification should render correctly when low contrast is used 2`] = `
-<div data-notification="" aria-live="polite" class="cv-notifiation bx--toast-notification bx--toast-notification--info bx--toast-notification--low-contrast">
+<div data-notification="" aria-live="polite" class="cv-notification bx--toast-notification bx--toast-notification--info bx--toast-notification--low-contrast">
   <anonymous-stub class="bx--toast-notification__icon"></anonymous-stub>
   <div class="bx--toast-notification__details">
     <h3 class="bx--toast-notification__title"></h3>
@@ -127,7 +127,7 @@ exports[`CvToastNotification should render correctly when low contrast is used 2
 `;
 
 exports[`CvToastNotification should render correctly when low contrast is used 3`] = `
-<div data-notification="" role="alert" class="cv-notifiation bx--toast-notification bx--toast-notification--warning bx--toast-notification--low-contrast">
+<div data-notification="" role="alert" class="cv-notification bx--toast-notification bx--toast-notification--warning bx--toast-notification--low-contrast">
   <anonymous-stub class="bx--toast-notification__icon"></anonymous-stub>
   <div class="bx--toast-notification__details">
     <h3 class="bx--toast-notification__title"></h3>
@@ -140,7 +140,7 @@ exports[`CvToastNotification should render correctly when low contrast is used 3
 `;
 
 exports[`CvToastNotification should render correctly when low contrast is used 4`] = `
-<div data-notification="" aria-live="polite" class="cv-notifiation bx--toast-notification bx--toast-notification--success bx--toast-notification--low-contrast">
+<div data-notification="" aria-live="polite" class="cv-notification bx--toast-notification bx--toast-notification--success bx--toast-notification--low-contrast">
   <anonymous-stub class="bx--toast-notification__icon"></anonymous-stub>
   <div class="bx--toast-notification__details">
     <h3 class="bx--toast-notification__title"></h3>
