@@ -42,6 +42,11 @@ const fruits = [
   };
 });
 
+const fruitsDisabledEven = fruits.map((item, index) => ({
+  ...item,
+  disabled: index % 2 === 0,
+}));
+
 let preKnobs = {
   light: {
     group: 'attr',
@@ -159,35 +164,6 @@ let preKnobs = {
     config: ['initial-value', ['banana', 'ugli_fruit'], ','],
     prop: 'value',
   },
-  // data: {
-  //   group: '',
-  //   type: array,
-  //   config: [
-  //     'data',
-  //     [
-  //       {name: 'apple', label: 'Apple', value: 'apple', disabled: false},
-  //       {name: 'banana', label: 'Banana', value: 'banana', disabled: false},
-  //       {name: 'cherry', label: 'Cherry', value: 'cherry', disabled: false},
-  //       {name: 'date', label: 'Date', value: 'date', disabled: false},
-  //       {name: 'elderberry', label: 'Elderberry', value: 'elderberry', disabled: false},
-  //       {name: 'fig', label: 'Fig', value: 'fig', disabled: false},
-  //       {name: 'grape', label: 'Grape', value: 'grape', disabled: false},
-  //       {name: 'kiwi_fruit', label: 'Kiwi Fruit', value: 'kiwi_fruit', disabled: false},
-  //       {name: 'lemon', label: 'Lemon', value: 'lemon', disabled: false},
-  //       {name: 'lime', label: 'Lime', value: 'lime', disabled: false},
-  //       {name: 'mango', label: 'Mango', value: 'mango', disabled: false},
-  //       {name: 'orange', label: 'Orange', value: 'orange', disabled: false},
-  //       {name: 'passion_fruit', label: 'Passion Fruit', value: 'passion_fruit', disabled: false},
-  //       {name: 'raisin', label: 'Raisin', value: 'raisin', disabled: false},
-  //       {name: 'satsuma', label: 'Satsuma', value: 'satsuma', disabled: false},
-  //       {name: 'tangerine', label: 'Tangerine', value: 'tangerine', disabled: false},
-  //       {name: 'ugli_fruit', label: 'Ugli Fruit', value: 'ugli_fruit', disabled: false},
-  //       {name: 'watermelon', label: 'Watermelon', value: 'watermelon', disabled: false},
-  //     ]
-  //   ],
-  //   prop: 'data',
-  //   value: val => val.data,
-  // },
 };
 
 let variants = [
@@ -201,7 +177,6 @@ let variants = [
       'userFilter',
       'userHighlight',
       'userFilterOrHighlight',
-      // 'data'
     ],
   },
   {
@@ -214,6 +189,7 @@ let variants = [
   },
   { name: 'events', includes: ['filterable', 'events'] },
   { name: 'vModel', includes: ['vModel'] },
+  { name: 'Disabled even', includes: [] },
 ];
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);
@@ -228,7 +204,6 @@ for (const story of storySet) {
   :options="options">${settings.group.slots}
 </cv-multi-select>
   `;
-
       // ----------------------------------------------------------------
       const templateViewString = `
   <sv-template-view
@@ -260,6 +235,8 @@ for (const story of storySet) {
   </template>  </sv-template-view>
   `;
 
+      const realFruits = story.name === 'Disabled even' ? fruitsDisabledEven : fruits;
+
       return {
         components: {
           CvMultiSelect,
@@ -270,7 +247,7 @@ for (const story of storySet) {
         data() {
           return {
             checks: [],
-            options: fruits,
+            options: realFruits,
             highlight: '',
           };
         },
@@ -280,7 +257,7 @@ for (const story of storySet) {
           onFilter(filter) {
             let pat = new RegExp(`^${filter}`, 'ui');
             if (this.userFilter) {
-              this.options = fruits.filter(opt => pat.test(opt.label)).slice(0);
+              this.options = realFruits.filter(opt => pat.test(opt.label)).slice(0);
             }
             if (this.userHighlight && this.options.length > 0) {
               let found = this.options.find(opt => pat.test(opt.label));
