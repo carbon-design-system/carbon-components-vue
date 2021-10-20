@@ -131,6 +131,7 @@
               :name="item.name"
               :data-test="item.name"
               :label="item.label"
+              :disabled="item.disabled"
               style="pointer-events: none;"
             />
           </div>
@@ -407,7 +408,9 @@ export default {
     onEnter() {
       if (this.open) {
         this.onItemClick(this.highlighted);
-        this.$refs.input.focus();
+        if (this.$refs.input) {
+          this.$refs.input.focus();
+        }
         this.filter = '';
 
         this.doOpen(false);
@@ -446,17 +449,20 @@ export default {
       this.highlighted = val;
     },
     onItemClick(val) {
-      const index = this.dataValue.findIndex(item => val === item);
-      if (index > -1) {
-        this.dataValue.splice(index, 1);
-      } else {
-        this.dataValue.push(val);
+      const option = this.options.find(item => item.value === val);
+      if (option && !option.disabled) {
+        const index = this.dataValue.findIndex(item => val === item);
+        if (index > -1) {
+          this.dataValue.splice(index, 1);
+        } else {
+          this.dataValue.push(val);
+        }
+        if (this.selectionFeedback === selectionFeedbackOptions[TOP]) {
+          this.updateOptions();
+        }
+        this.$refs.button.focus();
+        this.$emit('change', this.dataValue);
       }
-      if (this.selectionFeedback === selectionFeedbackOptions[TOP]) {
-        this.updateOptions();
-      }
-      this.$refs.button.focus();
-      this.$emit('change', this.dataValue);
     },
     inputClick() {
       if (!this.open) {
