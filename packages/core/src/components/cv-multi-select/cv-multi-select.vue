@@ -408,7 +408,9 @@ export default {
     onEnter() {
       if (this.open) {
         this.onItemClick(this.highlighted);
-        this.$refs.input?.focus();
+        if (this.$refs.input) {
+          this.$refs.input.focus();
+        }
         this.filter = '';
 
         this.doOpen(false);
