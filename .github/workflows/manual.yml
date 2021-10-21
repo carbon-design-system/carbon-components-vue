@@ -43,5 +43,5 @@ jobs:
         run: |
           yarn build:storybook --quiet
           ibmcloud cf blue-green-deploy carbon-storybook-vue \
-            -f manifest.yml \
+            -f storybook/manifest.yml \
             --delete-old-apps
