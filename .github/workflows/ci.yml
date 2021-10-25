@@ -25,7 +25,7 @@ jobs:
         run: yarn build
 
       - name: Package CI checks
-        run: yarn run-all --no-sort ci-check
+        run: yarn ci-check
 
   lint:
     runs-on: ubuntu-latest
@@ -41,9 +41,6 @@ jobs:
 
       - name: Install
         run: yarn --offline
-
-      - name: Audit
-        run: yarn run audit
 
       - name: Lint
         run: yarn run lint
