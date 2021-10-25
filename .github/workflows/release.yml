@@ -4,7 +4,7 @@ on:
   push:
     tags:
       # Push events to matching v*, i.e. v1.0, v20.15.10
-      - 'v*-test'
+      - 'v*'
 
 jobs:
   build:
@@ -28,7 +28,9 @@ jobs:
       - name: Run Continuous Integration checks
         run: yarn ci-check
 
-      - name: Publish packages under the `next` dist tag
-        run: yarn lerna publish from-package --dist-tag next --yes
+      # Dry run - `yarn lerna version --no-git-tag-version --no-push --yes`
+      - name: Publish
         env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: yarn lerna publish --create-release github --yes --dist-tag canary
