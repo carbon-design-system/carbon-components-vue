@@ -33,4 +33,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: yarn lerna publish --create-release github --yes --dist-tag canary
+        run: lerna publish --create-release github --yes --dist-tag canary
