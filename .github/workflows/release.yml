@@ -11,8 +11,18 @@ jobs:
     name: Create Release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # https://github.com/actions/checkout/issues/217
+          path: main
+          token: ${{ secrets.GH_TOKEN_LERNA }} # https://github.com/lerna/lerna/issues/1957
 
+      # https://github.com/actions/checkout#push-a-commit-using-the-built-in-token
+      - run: |
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git config user.name $GITHUB_ACTOR
+          
       - name: Use Node.js 14.x
         uses: actions/setup-node@v2.4.0
         with:
