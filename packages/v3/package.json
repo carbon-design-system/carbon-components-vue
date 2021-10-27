@@ -1,6 +1,6 @@
 {
   "name": "@carbon/vue-3",
-  "version": "0.3.0",
+  "version": "0.2.6",
   "private": true,
   "scripts": {
     "serve": "start-storybook -p 6006",
