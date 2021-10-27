@@ -2,10 +2,11 @@ name: Release
 
 on:
   workflow_dispatch:
-#   push:
-#     tags:
-#       # Push events to matching v*, i.e. v1.0, v20.15.10
-#       - 'v*'
+  push:
+    tags:
+      # Push events to matching \@carbon/vue\@([0-9]\.*){3} i.e. @carbon/vue@1.0.0 @carbon/vue@2.30.1
+      - '\@carbon/vue\@([0-9]\.*){3}'
+      '
 
 jobs:
   build:
@@ -44,4 +45,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: lerna publish --create-release github --yes --dist-tag canary
+        run: lerna publish from-package --dist-tag next --yes
