@@ -3,9 +3,10 @@ name: Update packages
 permissions:
   pull-requests: write
 
-on:
-  schedule:
-    - cron: '0 4 * * WED'
+ on:
+  workflow_dispatch:
+  #   schedule:
+  #     - cron: '0 4 * * WED'
 
 jobs:
   release:
