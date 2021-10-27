@@ -1,10 +1,11 @@
 name: Release
 
 on:
-  push:
-    tags:
-      # Push events to matching v*, i.e. v1.0, v20.15.10
-      - 'v*'
+  workflow_dispatch:
+#   push:
+#     tags:
+#       # Push events to matching v*, i.e. v1.0, v20.15.10
+#       - 'v*'
 
 jobs:
   build:
@@ -20,8 +21,8 @@ jobs:
 
       # https://github.com/actions/checkout#push-a-commit-using-the-built-in-token
       - run: |
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git config user.name $GITHUB_ACTOR
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           
       - name: Use Node.js 14.x
         uses: actions/setup-node@v2.4.0
