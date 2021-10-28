@@ -23,7 +23,7 @@ jobs:
           node-version: lts/fermium
 
       - name: Install
-        run: yarn --offline
+        run: yarn --prefer-offline
 
       - name: Build
         run: yarn build
