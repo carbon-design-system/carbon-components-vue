@@ -196,7 +196,7 @@ export default {
     },
     doScrollIntoView(index) {
       const tab = this.$refs.link[index];
-      const scrollContainer = tab.parentNode ? tab.parentNode.parentNode : null;
+      const scrollContainer = tab && tab.parentNode ? tab.parentNode.parentNode : null;
       let newScrollLeft;
 
       if (tab && scrollContainer) {
