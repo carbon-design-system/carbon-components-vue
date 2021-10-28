@@ -11,7 +11,6 @@ storybook-static
 
 # Cache folders
 .cache
-.yarn-offline-mirror
 
 # Logs
 logs
