@@ -1,7 +1,7 @@
 // import { shallowMount as shallow } from '@vue/test-utils';
 import { testComponent, awaitNextTick } from './_helpers';
 const { shallowMount: shallow, trigger, setProps } = awaitNextTick;
-import { CvNumberInput, CvNumberInputSkeleton } from '@/components/cv-number-input';
+import { CvNumberInput, CvNumberInputSkeleton } from '../src';
 
 describe('CvNumberInput', () => {
   // ***************
