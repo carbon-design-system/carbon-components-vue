@@ -58,9 +58,7 @@ exports[`CvDefinitionTooltip should render definition tooltip: minimal as expect
 
 exports[`CvInteractiveTooltip should render interactive tooltip with direction and visible set as expected 1`] = `
 <div class="cv-interactive-tooltip">
-  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="true" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger">
-      <information16-stub></information16-stub>
-    </button></div>
+  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="true" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger"></button></div>
 </div>
 `;
 
@@ -100,9 +98,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with direction a
 
 exports[`CvInteractiveTooltip should render interactive tooltip with direction set to \`bottom\` as expected 1`] = `
 <div class="cv-interactive-tooltip">
-  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger">
-      <information16-stub></information16-stub>
-    </button></div>
+  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger"></button></div>
 </div>
 `;
 
@@ -142,9 +138,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with direction s
 
 exports[`CvInteractiveTooltip should render interactive tooltip with direction set to \`left\` as expected 1`] = `
 <div class="cv-interactive-tooltip">
-  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger">
-      <information16-stub></information16-stub>
-    </button></div>
+  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger"></button></div>
 </div>
 `;
 
@@ -184,9 +178,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with direction s
 
 exports[`CvInteractiveTooltip should render interactive tooltip with direction set to \`right\` as expected 1`] = `
 <div class="cv-interactive-tooltip">
-  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger">
-      <information16-stub></information16-stub>
-    </button></div>
+  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger"></button></div>
 </div>
 `;
 
@@ -226,9 +218,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with direction s
 
 exports[`CvInteractiveTooltip should render interactive tooltip with direction set to \`top\` as expected 1`] = `
 <div class="cv-interactive-tooltip">
-  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger">
-      <information16-stub></information16-stub>
-    </button></div>
+  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger"></button></div>
 </div>
 `;
 
@@ -268,9 +258,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with direction s
 
 exports[`CvInteractiveTooltip should render interactive tooltip with slot \`content\` as expected 1`] = `
 <div class="cv-interactive-tooltip">
-  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger">
-      <information16-stub></information16-stub>
-    </button></div>
+  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger"></button></div>
 </div>
 `;
 
@@ -318,9 +306,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with slot \`cont
 exports[`CvInteractiveTooltip should render interactive tooltip with slot \`label\` as expected 1`] = `
 <div class="cv-interactive-tooltip">
   <div id="test-1-label" class="bx--tooltip__label">
-    <div>Interactive tooptip label</div> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger">
-      <information16-stub></information16-stub>
-    </button>
+    <div>Interactive tooptip label</div> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger"></button>
   </div>
 </div>
 `;
@@ -403,9 +389,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with slot \`trig
 
 exports[`CvInteractiveTooltip should render interactive tooltip with visible set to \`true\` as expected 1`] = `
 <div class="cv-interactive-tooltip">
-  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="true" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger">
-      <information16-stub></information16-stub>
-    </button></div>
+  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="true" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger"></button></div>
 </div>
 `;
 
@@ -445,9 +429,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with visible set
 
 exports[`CvInteractiveTooltip should render interactive tooltip: minimal as expected 1`] = `
 <div class="cv-interactive-tooltip">
-  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger">
-      <information16-stub></information16-stub>
-    </button></div>
+  <div id="test-1-label" class="bx--tooltip__label"> <button aria-expanded="false" aria-labelledby="test-1-label" aria-controls="test-1" aria-haspopup="true" type="button" class="bx--tooltip__trigger"></button></div>
 </div>
 `;
 
@@ -485,56 +467,20 @@ exports[`CvInteractiveTooltip should render interactive tooltip: minimal as expe
 </div>
 `;
 
-exports[`CvToopltip should render tooltip with aligment and direction set as expected 1`] = `
-<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--right bx--tooltip--align-end"><span class="bx--assistive-text">this is a tip</span>
-  <information16-stub></information16-stub>
-</button>
-`;
+exports[`CvToopltip should render tooltip with aligment and direction set as expected 1`] = `<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--right bx--tooltip--align-end"><span class="bx--assistive-text">this is a tip</span> undefined</button>`;
 
-exports[`CvToopltip should render tooltip with aligment set to \`center\` as expected 1`] = `
-<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--top bx--tooltip--align-center"><span class="bx--assistive-text">this is a tip</span>
-  <information16-stub></information16-stub>
-</button>
-`;
+exports[`CvToopltip should render tooltip with aligment set to \`center\` as expected 1`] = `<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--top bx--tooltip--align-center"><span class="bx--assistive-text">this is a tip</span> undefined</button>`;
 
-exports[`CvToopltip should render tooltip with aligment set to \`end\` as expected 1`] = `
-<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--top bx--tooltip--align-end"><span class="bx--assistive-text">this is a tip</span>
-  <information16-stub></information16-stub>
-</button>
-`;
+exports[`CvToopltip should render tooltip with aligment set to \`end\` as expected 1`] = `<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--top bx--tooltip--align-end"><span class="bx--assistive-text">this is a tip</span> undefined</button>`;
 
-exports[`CvToopltip should render tooltip with aligment set to \`start\` as expected 1`] = `
-<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--top bx--tooltip--align-start"><span class="bx--assistive-text">this is a tip</span>
-  <information16-stub></information16-stub>
-</button>
-`;
+exports[`CvToopltip should render tooltip with aligment set to \`start\` as expected 1`] = `<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--top bx--tooltip--align-start"><span class="bx--assistive-text">this is a tip</span> undefined</button>`;
 
-exports[`CvToopltip should render tooltip with direction set to \`bottom\` as expected 1`] = `
-<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center"><span class="bx--assistive-text">this is a tip</span>
-  <information16-stub></information16-stub>
-</button>
-`;
+exports[`CvToopltip should render tooltip with direction set to \`bottom\` as expected 1`] = `<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center"><span class="bx--assistive-text">this is a tip</span> undefined</button>`;
 
-exports[`CvToopltip should render tooltip with direction set to \`left\` as expected 1`] = `
-<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--left bx--tooltip--align-center"><span class="bx--assistive-text">this is a tip</span>
-  <information16-stub></information16-stub>
-</button>
-`;
+exports[`CvToopltip should render tooltip with direction set to \`left\` as expected 1`] = `<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--left bx--tooltip--align-center"><span class="bx--assistive-text">this is a tip</span> undefined</button>`;
 
-exports[`CvToopltip should render tooltip with direction set to \`right\` as expected 1`] = `
-<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--right bx--tooltip--align-center"><span class="bx--assistive-text">this is a tip</span>
-  <information16-stub></information16-stub>
-</button>
-`;
+exports[`CvToopltip should render tooltip with direction set to \`right\` as expected 1`] = `<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--right bx--tooltip--align-center"><span class="bx--assistive-text">this is a tip</span> undefined</button>`;
 
-exports[`CvToopltip should render tooltip with direction set to \`top\` as expected 1`] = `
-<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--top bx--tooltip--align-center"><span class="bx--assistive-text">this is a tip</span>
-  <information16-stub></information16-stub>
-</button>
-`;
+exports[`CvToopltip should render tooltip with direction set to \`top\` as expected 1`] = `<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--top bx--tooltip--align-center"><span class="bx--assistive-text">this is a tip</span> undefined</button>`;
 
-exports[`CvToopltip should render tooltip: minimal as expected 1`] = `
-<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--top bx--tooltip--align-center"><span class="bx--assistive-text">this is a tip</span>
-  <information16-stub></information16-stub>
-</button>
-`;
+exports[`CvToopltip should render tooltip: minimal as expected 1`] = `<button type="button" class="cv-tooltip bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--top bx--tooltip--align-center"><span class="bx--assistive-text">this is a tip</span> undefined</button>`;

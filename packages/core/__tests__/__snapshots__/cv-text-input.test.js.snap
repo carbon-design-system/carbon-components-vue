@@ -22,7 +22,7 @@ exports[`CvTextInput should render correctly when helper text is provided 1`] = 
   </div>
   <!---->
   <!---->
-  <div class="bx--form__helper-text">helper test message</div>
+  <div class="bx--form__helper-text"></div>
 </div>
 `;
 
@@ -48,7 +48,7 @@ exports[`CvTextInput should render correctly when invalid message is provided 1`
     <!----> <input id="1" type="text" class="bx--text-input bx--text-input--invalid">
     <!---->
   </div>
-  <div class="bx--form-requirement">invalid test message</div>
+  <div class="bx--form-requirement"></div>
   <!---->
   <!---->
 </div>

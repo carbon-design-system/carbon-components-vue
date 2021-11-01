@@ -18,33 +18,14 @@ exports[`CvButtonSkeleton Renders as expected field primary 1`] = `<button disab
 
 exports[`CvButtonSkeleton Renders as expected small primary 1`] = `<button disabled="disabled" type="button" class="bx--btn bx--skeleton bx--btn--sm"></button>`;
 
-exports[`CvIconButton Renders as expected default 1`] = `
-<button type="button" class="cv-button bx--btn bx--btn--icon-only bx--btn--primary bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center"><span class="bx--assistive-text"></span>
-  <!----></button>
-`;
+exports[`CvIconButton Renders as expected default 1`] = `<button type="button" class="cv-button bx--btn bx--btn--icon-only bx--btn--primary bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center"><span class="bx--assistive-text"></span> undefined</button>`;
 
-exports[`CvIconButton Renders as expected field secondary with icon disabled 1`] = `
-<button type="button" class="cv-button bx--btn bx--btn--icon-only bx--btn--secondary bx--btn--field bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center" tab-index="2" disabled="disabled"><span class="bx--assistive-text"></span>
-  <cvsvg-stub svg="[object Object]" class="bx--btn__icon"></cvsvg-stub>
-</button>
-`;
+exports[`CvIconButton Renders as expected field secondary with icon disabled 1`] = `<button type="button" class="cv-button bx--btn bx--btn--icon-only bx--btn--secondary bx--btn--field bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center" tab-index="2" disabled="disabled"><span class="bx--assistive-text"></span> undefined</button>`;
 
-exports[`CvIconButton Renders as expected lg primary 1`] = `
-<button type="button" class="cv-button bx--btn bx--btn--icon-only bx--btn--primary bx--btn--lg bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center"><span class="bx--assistive-text"></span>
-  <!----></button>
-`;
+exports[`CvIconButton Renders as expected lg primary 1`] = `<button type="button" class="cv-button bx--btn bx--btn--icon-only bx--btn--primary bx--btn--lg bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center"><span class="bx--assistive-text"></span> undefined</button>`;
 
-exports[`CvIconButton Renders as expected lg primary 2`] = `
-<button type="button" class="cv-button bx--btn bx--btn--icon-only bx--btn--primary bx--btn--xl bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center"><span class="bx--assistive-text"></span>
-  <!----></button>
-`;
+exports[`CvIconButton Renders as expected lg primary 2`] = `<button type="button" class="cv-button bx--btn bx--btn--icon-only bx--btn--primary bx--btn--xl bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center"><span class="bx--assistive-text"></span> undefined</button>`;
 
-exports[`CvIconButton Renders as expected small primary 1`] = `
-<button type="button" class="cv-button bx--btn bx--btn--icon-only bx--btn--primary bx--btn--sm bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center"><span class="bx--assistive-text"></span>
-  <!----></button>
-`;
+exports[`CvIconButton Renders as expected small primary 1`] = `<button type="button" class="cv-button bx--btn bx--btn--icon-only bx--btn--primary bx--btn--sm bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center"><span class="bx--assistive-text"></span> undefined</button>`;
 
-exports[`CvIconButton Renders size (sm) as expected small primary 1`] = `
-<button type="button" class="cv-button bx--btn bx--btn--icon-only bx--btn--primary bx--btn--sm bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center"><span class="bx--assistive-text"></span>
-  <!----></button>
-`;
+exports[`CvIconButton Renders size (sm) as expected small primary 1`] = `<button type="button" class="cv-button bx--btn bx--btn--icon-only bx--btn--primary bx--btn--sm bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center"><span class="bx--assistive-text"></span> undefined</button>`;
