@@ -14,7 +14,7 @@ exports[`CvTextArea should render correctly when helper text is provided 1`] = `
   <div class="bx--text-area__wrapper">
     <!----> <textarea id="1" class="bx--text-area"></textarea></div>
   <!---->
-  <div class="bx--form__helper-text"></div>
+  <div class="bx--form__helper-text">helper test message</div>
 </div>
 `;
 
@@ -34,7 +34,7 @@ exports[`CvTextArea should render correctly when invalid message is provided 1`]
   <div class="bx--text-area__wrapper" data-invalid="true">
     <warningfilled16-stub class="bx--text-area__invalid-icon"></warningfilled16-stub> <textarea id="1" class="bx--text-area bx--text-area--invalid" aria-invalid="true" aria-describedby="error-1"></textarea>
   </div>
-  <div id="error-1" class="bx--form-requirement"></div>
+  <div id="error-1" class="bx--form-requirement">invalid test message</div>
   <!---->
 </div>
 `;

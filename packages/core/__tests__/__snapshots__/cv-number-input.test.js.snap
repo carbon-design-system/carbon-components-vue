@@ -38,7 +38,7 @@ exports[`CvNumberInput should match snapshot when all props are provided 1`] = `
         <div class="bx--number__rule-divider"></div>
       </div>
     </div>
-    <div class="bx--form-requirement"></div>
+    <div class="bx--form-requirement">invalidMessage</div>
     <!---->
   </div>
 </cv-wrapper-stub>
