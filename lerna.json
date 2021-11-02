@@ -1,11 +1,6 @@
 {
   "npmClient": "yarn",
-  "npmClientArgs": [
-    "--frozen-lockfile"
-  ],
-  "packages": [
-    "packages/*"
-  ],
+  "packages": ["packages/*"],
   "version": "independent",
   "command": {
     "version": {
