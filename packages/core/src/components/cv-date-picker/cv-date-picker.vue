@@ -81,16 +81,6 @@ import { uidMixin, themeMixin, carbonPrefixMixin } from '../../mixins';
 import Calendar16 from '@carbon/icons-vue/es/calendar/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
 
-// Weekdays shorthand for english locale
-l10n.en.weekdays.shorthand.forEach((day, index) => {
-  const currentDay = l10n.en.weekdays.shorthand;
-  if (currentDay[index] === 'Thu' || currentDay[index] === 'Th') {
-    currentDay[index] = 'Th';
-  } else {
-    currentDay[index] = currentDay[index].charAt(0);
-  }
-});
-
 export default {
   name: 'CvDatePicker',
   mixins: [uidMixin, themeMixin, carbonPrefixMixin],
@@ -337,6 +327,17 @@ export default {
     openTodateCal() {
       this.$refs.todate.click();
     },
+  },
+  created() {
+    // Weekdays shorthand for english locale
+    l10n.en.weekdays.shorthand.forEach((day, index) => {
+      const currentDay = l10n.en.weekdays.shorthand;
+      if (currentDay[index] === 'Thu' || currentDay[index] === 'Th') {
+        currentDay[index] = 'Th';
+      } else {
+        currentDay[index] = currentDay[index].charAt(0);
+      }
+    });
   },
   mounted() {
     this.initFlatpickr();
