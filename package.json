@@ -28,7 +28,8 @@
     "test": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "core-js": "^3.19.0"
+    "@babel/runtime": "^7.16.0",
+    "core-js": "^3.9.0"
   },
   "devDependencies": {
     "@ascendancyy/vue-cli-plugin-stylelint": "^1.1.2",
