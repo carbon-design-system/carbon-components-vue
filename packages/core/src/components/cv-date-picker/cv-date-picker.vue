@@ -81,8 +81,6 @@ import { uidMixin, themeMixin, carbonPrefixMixin } from '../../mixins';
 import Calendar16 from '@carbon/icons-vue/es/calendar/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
 
-
-
 export default {
   name: 'CvDatePicker',
   mixins: [uidMixin, themeMixin, carbonPrefixMixin],
