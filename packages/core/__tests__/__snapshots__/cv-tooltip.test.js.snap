@@ -69,7 +69,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with direction a
   aria-describedby="test-1-body"
   aria-hidden="true"
   aria-labelledby="test-1-label"
-  class="bx--tooltip bx--tooltip--shown"
+  class="bx--tooltip bx--tooltip--shown bx--tooltip--left bx--tooltip--align-center"
   data-floating-menu-direction="left"
   id="test-1"
   role="dialog"
@@ -78,7 +78,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with direction a
 >
   <div
     class="cv-interactive-tooltip__before-content"
-    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    style="position: absolute; left: -9999px; width: 1px; height: 1px;"
     tabindex="0"
   />
    
@@ -92,7 +92,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with direction a
    
   <div
     class="cv-interactive-tooltip__after-content"
-    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    style="position: absolute; left: -9999px; width: 1px; height: 1px;"
     tabindex="0"
   />
 </div>
@@ -111,7 +111,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with direction s
   aria-describedby="test-1-body"
   aria-hidden="true"
   aria-labelledby="test-1-label"
-  class="bx--tooltip"
+  class="bx--tooltip bx--tooltip--bottom bx--tooltip--align-center"
   data-floating-menu-direction="bottom"
   id="test-1"
   role="dialog"
@@ -120,7 +120,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with direction s
 >
   <div
     class="cv-interactive-tooltip__before-content"
-    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    style="position: absolute; left: -9999px; width: 1px; height: 1px;"
     tabindex="0"
   />
    
@@ -134,7 +134,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with direction s
    
   <div
     class="cv-interactive-tooltip__after-content"
-    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    style="position: absolute; left: -9999px; width: 1px; height: 1px;"
     tabindex="0"
   />
 </div>
@@ -153,7 +153,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with direction s
   aria-describedby="test-1-body"
   aria-hidden="true"
   aria-labelledby="test-1-label"
-  class="bx--tooltip"
+  class="bx--tooltip bx--tooltip--left bx--tooltip--align-center"
   data-floating-menu-direction="left"
   id="test-1"
   role="dialog"
@@ -162,7 +162,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with direction s
 >
   <div
     class="cv-interactive-tooltip__before-content"
-    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    style="position: absolute; left: -9999px; width: 1px; height: 1px;"
     tabindex="0"
   />
    
@@ -176,7 +176,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with direction s
    
   <div
     class="cv-interactive-tooltip__after-content"
-    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    style="position: absolute; left: -9999px; width: 1px; height: 1px;"
     tabindex="0"
   />
 </div>
@@ -195,7 +195,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with direction s
   aria-describedby="test-1-body"
   aria-hidden="true"
   aria-labelledby="test-1-label"
-  class="bx--tooltip"
+  class="bx--tooltip bx--tooltip--right bx--tooltip--align-center"
   data-floating-menu-direction="right"
   id="test-1"
   role="dialog"
@@ -204,7 +204,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with direction s
 >
   <div
     class="cv-interactive-tooltip__before-content"
-    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    style="position: absolute; left: -9999px; width: 1px; height: 1px;"
     tabindex="0"
   />
    
@@ -218,7 +218,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with direction s
    
   <div
     class="cv-interactive-tooltip__after-content"
-    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    style="position: absolute; left: -9999px; width: 1px; height: 1px;"
     tabindex="0"
   />
 </div>
@@ -237,7 +237,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with direction s
   aria-describedby="test-1-body"
   aria-hidden="true"
   aria-labelledby="test-1-label"
-  class="bx--tooltip"
+  class="bx--tooltip bx--tooltip--top bx--tooltip--align-center"
   data-floating-menu-direction="top"
   id="test-1"
   role="dialog"
@@ -246,7 +246,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with direction s
 >
   <div
     class="cv-interactive-tooltip__before-content"
-    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    style="position: absolute; left: -9999px; width: 1px; height: 1px;"
     tabindex="0"
   />
    
@@ -260,7 +260,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with direction s
    
   <div
     class="cv-interactive-tooltip__after-content"
-    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    style="position: absolute; left: -9999px; width: 1px; height: 1px;"
     tabindex="0"
   />
 </div>
@@ -279,7 +279,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with slot \`cont
   aria-describedby="test-1-body"
   aria-hidden="true"
   aria-labelledby="test-1-label"
-  class="bx--tooltip"
+  class="bx--tooltip bx--tooltip--top bx--tooltip--align-center"
   data-floating-menu-direction="top"
   id="test-1"
   role="dialog"
@@ -288,7 +288,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with slot \`cont
 >
   <div
     class="cv-interactive-tooltip__before-content"
-    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    style="position: absolute; left: -9999px; width: 1px; height: 1px;"
     tabindex="0"
   />
    
@@ -309,7 +309,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with slot \`cont
    
   <div
     class="cv-interactive-tooltip__after-content"
-    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    style="position: absolute; left: -9999px; width: 1px; height: 1px;"
     tabindex="0"
   />
 </div>
@@ -330,7 +330,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with slot \`labe
   aria-describedby="test-1-body"
   aria-hidden="true"
   aria-labelledby="test-1-label"
-  class="bx--tooltip"
+  class="bx--tooltip bx--tooltip--top bx--tooltip--align-center"
   data-floating-menu-direction="top"
   id="test-1"
   role="dialog"
@@ -339,7 +339,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with slot \`labe
 >
   <div
     class="cv-interactive-tooltip__before-content"
-    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    style="position: absolute; left: -9999px; width: 1px; height: 1px;"
     tabindex="0"
   />
    
@@ -353,7 +353,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with slot \`labe
    
   <div
     class="cv-interactive-tooltip__after-content"
-    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    style="position: absolute; left: -9999px; width: 1px; height: 1px;"
     tabindex="0"
   />
 </div>
@@ -372,7 +372,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with slot \`trig
   aria-describedby="test-1-body"
   aria-hidden="true"
   aria-labelledby="test-1-label"
-  class="bx--tooltip"
+  class="bx--tooltip bx--tooltip--top bx--tooltip--align-center"
   data-floating-menu-direction="top"
   id="test-1"
   role="dialog"
@@ -381,7 +381,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with slot \`trig
 >
   <div
     class="cv-interactive-tooltip__before-content"
-    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    style="position: absolute; left: -9999px; width: 1px; height: 1px;"
     tabindex="0"
   />
    
@@ -395,7 +395,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with slot \`trig
    
   <div
     class="cv-interactive-tooltip__after-content"
-    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    style="position: absolute; left: -9999px; width: 1px; height: 1px;"
     tabindex="0"
   />
 </div>
@@ -414,7 +414,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with visible set
   aria-describedby="test-1-body"
   aria-hidden="true"
   aria-labelledby="test-1-label"
-  class="bx--tooltip bx--tooltip--shown"
+  class="bx--tooltip bx--tooltip--shown bx--tooltip--top bx--tooltip--align-center"
   data-floating-menu-direction="top"
   id="test-1"
   role="dialog"
@@ -423,7 +423,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with visible set
 >
   <div
     class="cv-interactive-tooltip__before-content"
-    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    style="position: absolute; left: -9999px; width: 1px; height: 1px;"
     tabindex="0"
   />
    
@@ -437,7 +437,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip with visible set
    
   <div
     class="cv-interactive-tooltip__after-content"
-    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    style="position: absolute; left: -9999px; width: 1px; height: 1px;"
     tabindex="0"
   />
 </div>
@@ -456,7 +456,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip: minimal as expe
   aria-describedby="test-1-body"
   aria-hidden="true"
   aria-labelledby="test-1-label"
-  class="bx--tooltip"
+  class="bx--tooltip bx--tooltip--top bx--tooltip--align-center"
   data-floating-menu-direction="top"
   id="test-1"
   role="dialog"
@@ -465,7 +465,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip: minimal as expe
 >
   <div
     class="cv-interactive-tooltip__before-content"
-    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    style="position: absolute; left: -9999px; width: 1px; height: 1px;"
     tabindex="0"
   />
    
@@ -479,7 +479,7 @@ exports[`CvInteractiveTooltip should render interactive tooltip: minimal as expe
    
   <div
     class="cv-interactive-tooltip__after-content"
-    style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+    style="position: absolute; left: -9999px; width: 1px; height: 1px;"
     tabindex="0"
   />
 </div>

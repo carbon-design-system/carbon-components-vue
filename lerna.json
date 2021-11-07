@@ -4,7 +4,18 @@
   "version": "independent",
   "command": {
     "version": {
-      "message": "chore(release): publish %s"
+      "conventionalCommits": true,
+      "message": "chore(release): publish [skip ci]"
     }
-  }
+  },
+  "ignoreChanges": [
+    "**/__fixtures__/**",
+    "**/__tests__/**",
+    "**/docs/**",
+    "**/e2e/**",
+    "**/examples/**",
+    "**/*.md",
+    "**/*-story.js",
+    "**/*-stories.*"
+  ]
 }

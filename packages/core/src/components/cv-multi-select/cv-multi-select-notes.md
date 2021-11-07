@@ -42,26 +42,31 @@ The data
                 value: '10s',
                 label: '10s',
                 name: 'Tens',
+                disabled: false,
               },
               {
                 value: '20s',
                 label: '20s',
                 name: 'Twenties',
+                disabled: false,
               },
               {
                 value: '30s',
                 label: '30s',
                 name: 'Thirties',
+                disabled: false,
               },
               {
                 value: '40s',
                 label: '40s',
                 name: 'Fourties',
+                disabled: true,
               },
               {
                 value: '50s',
                 label: '50s',
                 name: 'Fifties',
+                disabled: false,
               },
             ]
 },
@@ -76,10 +81,11 @@ filterable: false
 - helper-text: optional helper text
 - invalid-message: optional error message
 - title: the title text for the input
-- theme: optional 'light',
+- light: Lighter variant, typically alternate background
+- theme: (deprecated use light) '' or 'light'
 - inline: optional boolean, if true changes layout and hides helper text
 - disabled: enable disables the component
-- options: array objects containing value, label and name for checkboxes.
+- options: array objects containing value, label, name and disabled for checkboxes.
 - value: initial selected values
 - selection-feedback: after checking an option it is sorted based on the following values
   - 'top-after-reopen': joins other selected options at the top after the dropdown is reopened

@@ -7,7 +7,7 @@
         `${this.carbonPrefix}--date-picker ${this.carbonPrefix}--date-picker--${this.kind}`,
         {
           [`${carbonPrefix}--date-picker--simple`]: this.kind === 'short',
-          [`${carbonPrefix}--date-picker--light`]: theme === 'light',
+          [`${carbonPrefix}--date-picker--light`]: isLight,
           'cv-date-pciker': !formItem,
         },
       ]"
@@ -80,16 +80,6 @@ import carbonFlatpickrMonthSelectPlugin from './plugins/monthSelectPlugin';
 import { uidMixin, themeMixin, carbonPrefixMixin } from '../../mixins';
 import Calendar16 from '@carbon/icons-vue/es/calendar/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
-
-// Weekdays shorthand for english locale
-l10n.en.weekdays.shorthand.forEach((day, index) => {
-  const currentDay = l10n.en.weekdays.shorthand;
-  if (currentDay[index] === 'Thu' || currentDay[index] === 'Th') {
-    currentDay[index] = 'Th';
-  } else {
-    currentDay[index] = currentDay[index].charAt(0);
-  }
-});
 
 export default {
   name: 'CvDatePicker',
@@ -234,7 +224,7 @@ export default {
 
       _options.plugins = [
         this.isRange
-          ? new carbonFlatpickrRangePlugin({
+          ? carbonFlatpickrRangePlugin({
               input: this.$refs.todate,
             })
           : () => {},
@@ -337,6 +327,17 @@ export default {
     openTodateCal() {
       this.$refs.todate.click();
     },
+  },
+  created() {
+    // Weekdays shorthand for english locale
+    l10n.en.weekdays.shorthand.forEach((day, index) => {
+      const currentDay = l10n.en.weekdays.shorthand;
+      if (currentDay[index] === 'Thu' || currentDay[index] === 'Th') {
+        currentDay[index] = 'Th';
+      } else {
+        currentDay[index] = currentDay[index].charAt(0);
+      }
+    });
   },
   mounted() {
     this.initFlatpickr();

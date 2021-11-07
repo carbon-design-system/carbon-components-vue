@@ -55,6 +55,27 @@ const preKnobs = {
     prop: 'icon',
     value: val => (val ? AddFilled16 : undefined),
   },
+  light: {
+    group: 'attr',
+    type: boolean,
+    config: ['light', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'light',
+  },
+
+  size: {
+    group: 'attr',
+    type: select,
+    config: [
+      'size',
+      {
+        default: '',
+        'small (sm)': 'sm',
+        'large (xl)': 'xl',
+      },
+      '',
+    ], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'size',
+  },
 };
 
 const variants = [
@@ -111,6 +132,7 @@ for (const story of storySet) {
 
       const templateViewString = `
       <sv-template-view
+        :sv-alt-back="!this.$options.propsData.light"
         sv-margin
         sv-source='${templateString.trim()}'>
         <template slot="component">${templateString}</template>

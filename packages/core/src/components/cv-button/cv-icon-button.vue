@@ -1,8 +1,9 @@
 <template>
   <button
+    :aria-pressed="kind === 'ghost' && selected"
     class="cv-button"
     :class="[
-      buttonClassOpts({ iconOnly: true }),
+      ...buttonClassOpts({ iconOnly: true }),
       `${carbonPrefix}--tooltip__trigger`,
       `${carbonPrefix}--tooltip--a11y`,
       `${carbonPrefix}--tooltip--${tipPosition || 'bottom'}`,
@@ -12,8 +13,9 @@
     type="button"
   >
     <span :class="`${carbonPrefix}--assistive-text`">{{ label }}</span>
-
-    <CvSvg v-if="icon || iconHref" :svg="icon || iconHref" :class="`${carbonPrefix}--btn__icon`" />
+    <slot name="icon">
+      <CvSvg v-if="icon || iconHref" :svg="icon || iconHref" :class="`${carbonPrefix}--btn__icon`" />
+    </slot>
   </button>
 </template>
 
@@ -27,7 +29,8 @@ export default {
   mixins: [buttonMixin, carbonPrefixMixin],
   components: { CvSvg },
   props: {
-    label: { type: String, default: undefined },
+    label: { type: String, required: true },
+    selected: Boolean,
     tipPosition: {
       type: String,
       default: 'bottom',

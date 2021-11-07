@@ -61,7 +61,12 @@ CvAccordion
 
 ## Attributes
 
+CvAccordion
+align: Accordion heading alignment (start, end)
+size: default, 'sm' or 'xl'
+
 CvAccordionItem
+disabled: accordion item disabled
 open: accordion item is open
 
 ### Additional

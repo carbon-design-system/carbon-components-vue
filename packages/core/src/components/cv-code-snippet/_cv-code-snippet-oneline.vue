@@ -4,35 +4,43 @@
     :class="[
       `${carbonPrefix}--snippet`,
       `${carbonPrefix}--snippet--single`,
-      { [`${carbonPrefix}--snippet--light`]: theme === 'light' },
+      {
+        [`${carbonPrefix}--snippet--disabled`]: disabled,
+      },
     ]"
   >
     <div :class="`${carbonPrefix}--snippet-container`">
-      <pre>
-        <slot></slot>
-      </pre>
+      <pre><slot /></pre>
     </div>
-    <cv-feedback-button :feedback="copyFeedback" :aria-label="feedbackAriaLabel" @click="$emit('copy-code')">
+    <cv-feedback-button
+      v-if="!hideCopyButton"
+      :disabled="disabled"
+      :feedback="copyFeedback"
+      :aria-label="feedbackAriaLabel"
+      @click="$emit('copy-code')"
+    >
       <Copy16 :class="`${carbonPrefix}--snippet__icon`" />
     </cv-feedback-button>
   </div>
 </template>
 
 <script>
-import { themeMixin, carbonPrefixMixin } from '../../mixins';
+import { carbonPrefixMixin } from '../../mixins';
 import CvFeedbackButton from '../cv-feedback-button/_cv-feedback-button';
 import Copy16 from '@carbon/icons-vue/es/copy/16';
 
 export default {
   name: 'CvCodeSnippetOneline',
-  mixins: [themeMixin, carbonPrefixMixin],
+  mixins: [carbonPrefixMixin],
   components: {
     CvFeedbackButton,
     Copy16,
   },
   props: {
     copyFeedback: String,
+    disabled: Boolean,
     feedbackAriaLabel: String,
+    hideCopyButton: Boolean,
   },
 };
 </script>

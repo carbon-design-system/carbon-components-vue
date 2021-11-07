@@ -18,11 +18,23 @@ let preKnobs = {
     config: ['copy feedback', 'Content copied!'],
     prop: 'copy-feedback',
   },
+  disabled: {
+    group: 'attr',
+    type: boolean,
+    config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'disabled',
+  },
   feedbackAriaLabel: {
     group: 'attr',
     type: text,
     config: ['feedback aria label', 'feedback aria label'],
     prop: 'feedback-aria-label',
+  },
+  hideCopyButton: {
+    group: 'attr',
+    type: boolean,
+    config: ['Hide and disable copy button', false],
+    prop: 'hide-copy-button',
   },
   lessText: {
     group: 'attr',
@@ -43,12 +55,17 @@ let preKnobs = {
     slot: 'default',
     value: 'printf("A short bit of code.");',
   },
-  theme: {
+  light: {
     group: 'attr',
     type: boolean,
-    config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: 'theme',
-    value: val => (val ? 'light' : ''),
+    config: ['light', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'light',
+  },
+  wrapText: {
+    group: 'attr',
+    type: boolean,
+    config: ['Wrap code/text', false],
+    prop: 'wrap-text',
   },
   content: {
     group: 'content',
@@ -80,11 +97,11 @@ $z-indexes: (
 let variants = [
   {
     name: 'default',
-    includes: ['content'],
+    includes: ['inlineContent'],
   },
   {
     name: 'inline',
-    includes: ['inlineContent', 'theme', 'copyFeedback', 'feedbackAriaLabel'],
+    includes: ['inlineContent', 'light', 'copyFeedback', 'feedbackAriaLabel', 'hideCopyButton'],
     extra: { kind: { group: 'attr', value: 'kind="inline"', inline: true } },
   },
   {
@@ -94,22 +111,23 @@ let variants = [
   },
   {
     name: 'multiline',
-    extra: { kind: { group: 'attr', value: 'kind="multiline"', inline: true } },
+    excludes: ['inlineContent'],
+    extra: { kind: { group: 'attr', value: 'kind="multiline"' } },
   },
   {
     name: 'multiline (minimal)',
     includes: ['content'],
-    extra: { kind: { group: 'attr', value: 'kind="multiline"', inline: true } },
+    extra: { kind: { group: 'attr', value: 'kind="multiline"' } },
   },
   {
     name: 'oneline',
-    includes: ['content', 'copyFeedback', 'feedbackAriaLabel', 'theme'],
-    extra: { kind: { group: 'attr', value: 'kind="oneline"', inline: true } },
+    includes: ['inlineContent', 'copyFeedback', 'feedbackAriaLabel', 'light', 'hideCopyButton', 'disabled'],
+    extra: { kind: { group: 'attr', value: 'kind="oneline"' } },
   },
   {
     name: 'oneline (minimal)',
-    includes: ['content'],
-    extra: { kind: { group: 'attr', value: 'kind="oneline"', inline: true } },
+    includes: ['inlineContent'],
+    extra: { kind: { group: 'attr', value: 'kind="oneline"' } },
   },
 ];
 
@@ -124,9 +142,7 @@ for (const story of storySet) {
       // ----------------------------------------------------------------
       // console.dir(settings);
       const templateString = `
-<cv-code-snippet${settings.group.attr}>
-  ${settings.group['content']}
-</cv-code-snippet>
+<cv-code-snippet${settings.group.attr}>${settings.group['content'].trim()}</cv-code-snippet>
   `;
 
       // ----------------------------------------------------------------
@@ -134,7 +150,7 @@ for (const story of storySet) {
       const templateViewString = `
     <sv-template-view ref="view"
       sv-margin
-      :sv-alt-back="this.$options.propsData.theme !== 'light'"
+      :sv-alt-back="!this.$options.propsData.light"
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
     </sv-template-view>

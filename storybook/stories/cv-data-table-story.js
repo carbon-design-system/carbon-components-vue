@@ -80,6 +80,18 @@ let preKnobs = {
     config: ['zebra', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: 'zebra',
   },
+  staticWidth: {
+    group: 'attr',
+    type: boolean,
+    config: ['static-width', false],
+    prop: 'staticWidth',
+  },
+  stickyHeader: {
+    group: 'attr',
+    type: boolean,
+    config: ['sticky-header', false],
+    prop: 'stickyHeader',
+  },
   columns: {
     group: 'attr',
     type: object,
@@ -316,6 +328,11 @@ let preKnobs = {
     slot: 'helper-text',
     value: 'Some slotted helpful text',
   },
+  initialSearchSlot: {
+    group: 'slots',
+    slot: 'initial-search-text',
+    value: '',
+  },
   scopedSlots: {
     group: 'slots',
     value: `<template v-slot:items-selected="{scope}">You picked {{scope.count}} rows.</template>
@@ -340,6 +357,7 @@ let variants = [
       'slottedData',
       'htmlData',
       'helperTextSlot',
+      'initialSearchSlot',
       'basicPagination',
       'paginationInfinity',
       'hasExpandingRows',
@@ -359,6 +377,7 @@ let variants = [
       'slottedData',
       'htmlData',
       'helperTextSlot',
+      'initialSearchSlot',
       'basicPagination',
       'pagination',
       'hasExpandingRows',
@@ -403,6 +422,7 @@ let variants = [
       'slottedData',
       'htmlData',
       'helperTextSlot',
+      'initialSearchSlot',
       'basicPagination',
       'paginationInfinity',
       'hasExpandingRows',
@@ -422,6 +442,7 @@ let variants = [
       'slottedData',
       'htmlData',
       'helperTextSlot',
+      'initialSearchSlot',
       'basicPagination',
       'paginationInfinity',
       'hasExpandingRows',
@@ -443,6 +464,7 @@ let variants = [
   { name: 'slotted HTML', includes: ['columns', 'htmlData', 'basicPagination'] },
   { name: 'styled columns', includes: ['sortable', 'columns2', 'data', 'sort'] },
   { name: 'Slotted headings', includes: ['slottedHeadings', 'data', 'sort'] },
+  { name: 'Static width', includes: ['staticWidth', 'columns', 'data'] },
 ];
 
 let storySet = knobsHelper.getStorySet(variants, preKnobs);

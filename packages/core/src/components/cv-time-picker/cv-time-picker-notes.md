@@ -58,7 +58,7 @@ data() {
   label="Time select label"
   pattern="[01][0-9]:[0-6][0-9]"
   placeholder="hh:mm"
-  theme="light"
+  light
   timezonesSelectLabel="timezone label"
   ampmSelectLabel="ampm label"
   invalidMessage="invalid time"

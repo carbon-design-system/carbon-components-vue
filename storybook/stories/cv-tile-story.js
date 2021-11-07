@@ -17,7 +17,7 @@ let preKnobs = {
   slotDefault: {
     group: 'slots',
     slot: 'default',
-    value: '<h1>Hello</h1><p>This is some tile content</p>',
+    value: '<h1>Hello</h1><p>This is some tile content.</p>',
   },
   slotBelow: {
     group: 'slots',
@@ -30,12 +30,11 @@ let preKnobs = {
           <li>content</li>
         </ul>`,
   },
-  theme: {
+  light: {
     group: 'attr',
     type: boolean,
-    config: ['light-theme', false],
-    prop: 'theme',
-    value: val => (val ? 'light' : ''),
+    config: ['light', false],
+    prop: 'light',
   },
   expanded: {
     group: 'attr',
@@ -54,9 +53,21 @@ let preKnobs = {
     type: text,
     config: [
       'where to go when clicked',
-      'https://github.com/carbon-design-system/carbon-components-vue/blob/master/README.md',
+      'https://github.com/carbon-design-system/carbon-components-vue/blob/main/README.md',
     ],
     prop: 'href',
+  },
+  tileCollapsed: {
+    group: 'attr',
+    type: text,
+    config: ['Tile collapsed label', ''], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'tile-collapsed-label',
+  },
+  tileExpanded: {
+    group: 'attr',
+    type: text,
+    config: ['Tile expanded label', ''], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'tile-expanded-label',
   },
   vModel: {
     group: 'attr',
@@ -71,16 +82,16 @@ let preKnobs = {
 };
 
 let variants = [
-  { name: 'default', includes: ['slotDefault', 'theme'] },
+  { name: 'default', includes: ['slotDefault', 'light'] },
   {
     name: 'standard',
 
-    includes: ['slotDefault', 'theme'],
+    includes: ['slotDefault', 'light'],
     extra: { kind: { group: 'attr', value: 'kind="standard"' } },
   },
   {
     name: 'selectable',
-    includes: ['slotDefault', 'theme', 'selected', 'value'],
+    includes: ['slotDefault', 'light', 'selected', 'value'],
     extra: {
       kind: { group: 'attr', value: 'kind="selectable"' },
       ariaLabel: { group: 'attr', value: 'aria-label="custom aria label"' },
@@ -88,22 +99,22 @@ let variants = [
   },
   {
     name: 'selectable-event',
-    includes: ['slotDefault', 'theme', 'events', 'value'],
+    includes: ['slotDefault', 'light', 'events', 'value'],
     extra: { kind: { group: 'attr', value: 'kind="selectable" @change="actionChange"' } },
   },
   {
     name: 'selectable-v-model',
-    includes: ['slotDefault', 'theme', 'vModel', 'value'],
+    includes: ['slotDefault', 'light', 'vModel', 'value'],
     extra: { kind: { group: 'attr', value: 'kind="selectable"' } },
   },
   {
     name: 'expandable',
-    includes: ['slotDefault', 'theme', 'slotBelow', 'expanded'],
+    includes: ['slotDefault', 'light', 'slotBelow', 'expanded', 'tileCollapsed', 'tileExpanded'],
     extra: { kind: { group: 'attr', value: 'kind="expandable"' } },
   },
   {
     name: 'clickable',
-    includes: ['slotDefault', 'theme', 'href'],
+    includes: ['slotDefault', 'light', 'href'],
     extra: { kind: { group: 'attr', value: 'kind="clickable" @click="actionClick"' } },
   },
 ];
@@ -133,6 +144,7 @@ for (const story of storySet) {
     <sv-template-view
       ref="templateView"
       sv-margin
+      :sv-alt-back="!this.$options.propsData.light"
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">

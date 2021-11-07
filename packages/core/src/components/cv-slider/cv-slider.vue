@@ -1,6 +1,10 @@
 <template>
   <div :class="`cv-slider ${carbonPrefix}--form-item`">
-    <label :for="uid" :class="[`${carbonPrefix}--label`, { [`${carbonPrefix}--label--disabled`]: disabled }]">
+    <label
+      :for="uid"
+      :class="[`${carbonPrefix}--label`, { [`${carbonPrefix}--label--disabled`]: disabled }]"
+      :id="labelId"
+    >
       {{ label }}
     </label>
     <div :class="`${carbonPrefix}--slider-container`">
@@ -20,6 +24,7 @@
             },
           ]"
           tabindex="0"
+          :aria-labelledby="labelId"
           :style="`left: ${percentage};`"
           ref="thumb"
           @keydown.up.right.prevent="onUp"
@@ -41,7 +46,7 @@
         type="number"
         :class="[
           `${carbonPrefix}--text-input ${carbonPrefix}--slider-text-input`,
-          { [`${carbonPrefix}--text-input--light`]: theme === 'light' },
+          { [`${carbonPrefix}--text-input--light`]: isLight },
         ]"
         :placeholder="min"
         v-model="internalValue"
@@ -101,6 +106,9 @@ export default {
     };
   },
   computed: {
+    labelId() {
+      return `${this.uid}-label`;
+    },
     internalMinLabel() {
       return this.minLabel !== undefined ? this.minLabel : this.getMin();
     },

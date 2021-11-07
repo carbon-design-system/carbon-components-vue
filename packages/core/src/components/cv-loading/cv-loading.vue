@@ -10,10 +10,13 @@
       }"
       ref="loading"
     >
-      <svg :class="`${carbonPrefix}--loading__svg`" viewBox="-75 -75 150 150">
-        <title>Loading</title>
-        <circle v-if="small" :class="`${carbonPrefix}--loading__background`" cx="0" cy="0" :r="loadingRadius" />
-        <circle :class="`${carbonPrefix}--loading__stroke`" cx="0" cy="0" :r="loadingRadius" />
+      <label :class="`${carbonPrefix}--visually-hidden`">
+        {{ description }}
+      </label>
+      <svg :class="`${carbonPrefix}--loading__svg`" viewBox="0 0 100 100">
+        <title>{{ description }}</title>
+        <circle v-if="small" :class="`${carbonPrefix}--loading__background`" cx="50%" cy="50%" :r="loadingRadius" />
+        <circle :class="`${carbonPrefix}--loading__stroke`" cx="50%" cy="50%" :r="loadingRadius" />
       </svg>
     </div>
   </cv-wrapper>
@@ -29,6 +32,7 @@ export default {
   components: { CvWrapper },
   props: {
     active: { type: Boolean, default: true },
+    description: { type: String, default: 'Loading' },
     overlay: Boolean,
     small: Boolean,
   },
@@ -46,7 +50,7 @@ export default {
       return classes;
     },
     loadingRadius() {
-      return this.small ? '26.8125' : '37.5';
+      return this.small ? '42' : '44';
     },
   },
   data() {

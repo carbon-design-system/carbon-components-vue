@@ -25,7 +25,8 @@ export default {
     kind: {
       type: String,
       default: 'primary',
-      validator: val => ['primary', 'secondary', 'tertiary', 'ghost', 'danger', 'danger--primary'].includes(val),
+      validator: val =>
+        ['', 'primary', 'secondary', 'tertiary', 'ghost', 'danger', 'danger--ghost', 'danger--tertiary'].includes(val),
     },
     small: {
       type: Boolean,
@@ -37,7 +38,11 @@ export default {
         return true;
       },
     },
-    size: { type: String, default: undefined, validator: val => ['', 'field', 'small'].includes(val) },
+    size: {
+      type: String,
+      default: undefined,
+      validator: val => ['', 'default', 'field', 'small', 'sm', 'lg', 'xl'].includes(val),
+    },
   },
   computed: {
     // Bind listeners at the component level to the embedded input element and
@@ -50,7 +55,8 @@ export default {
     },
     buttonClassOpts() {
       return (opts = {}) => {
-        let classes = [`${carbonSettings.prefix}--btn`];
+        const classes = [`${carbonSettings.prefix}--btn`];
+        const lowerCaseKind = this.kind.toLowerCase();
 
         if (opts.skeleton) {
           classes.push(`${carbonSettings.prefix}--skeleton`);
@@ -58,20 +64,24 @@ export default {
 
         if (opts.iconOnly) {
           classes.push(`${carbonSettings.prefix}--btn--icon-only`);
+          if (this.selected && lowerCaseKind === 'ghost') {
+            classes.push(`${carbonSettings.prefix}--btn--selected`);
+          }
         }
 
         if (this.kind && !opts.skeleton) {
-          classes.push(`${carbonSettings.prefix}--btn--${this.kind.toLowerCase()}`);
+          classes.push(`${carbonSettings.prefix}--btn--${lowerCaseKind}`);
         }
 
-        if (this.size === 'small' || (this.size === undefined && this.small)) {
-          classes.push(`${carbonSettings.prefix}--btn--sm`);
+        let size = this.size ? this.size : this.small && 'sm';
+        if (size === 'small') {
+          size = 'sm';
         }
-        if (this.size === 'field') {
-          classes.push(`${carbonSettings.prefix}--btn--field`);
+        if (size && !(size === '' || size === 'default')) {
+          classes.push(`${carbonSettings.prefix}--btn--${size}`);
         }
 
-        return classes.join(' ');
+        return classes;
       };
     },
   },

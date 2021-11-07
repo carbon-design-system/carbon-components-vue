@@ -91,11 +91,6 @@ export default {
     },
     tipAlignment: { type: String, default: 'center', validator: val => ['start', 'center', 'end'].includes(val) },
   },
-  watch: {
-    flipMenu(val) {
-      this.flipMenu = val;
-    },
-  },
   data() {
     return {
       open: false,

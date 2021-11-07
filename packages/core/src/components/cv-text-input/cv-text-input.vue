@@ -1,5 +1,12 @@
 <template>
-  <div :class="`cv-text-input ${carbonPrefix}--form-item`">
+  <div
+    :class="[
+      `cv-text-input`,
+      `${carbonPrefix}--form-item`,
+      `${carbonPrefix}--text-input-wrapper`,
+      { [`${carbonPrefix}--password-input-wrapper`]: isPassword },
+    ]"
+  >
     <label
       :for="uid"
       :class="[
@@ -10,15 +17,28 @@
       ]"
       >{{ label }}</label
     >
-    <div :class="`${carbonPrefix}--text-input__field-wrapper`" :data-invalid="isInvalid">
+    <div
+      :class="[
+        `${carbonPrefix}--text-input__field-wrapper`,
+        { [`${carbonPrefix}--text-input__field-wrapper--warning`]: !isInvalid && isWarn },
+      ]"
+      :data-invalid="isInvalid"
+    >
       <WarningFilled16 v-if="isInvalid" :class="`${carbonPrefix}--text-input__invalid-icon`" />
+      <WarningAltFilled16
+        v-if="isWarn"
+        :class="`${carbonPrefix}--text-input__invalid-icon ${carbonPrefix}--text-input__invalid-icon--warning`"
+      />
+
       <input
         :id="uid"
         :class="[
           `${carbonPrefix}--text-input`,
           {
-            [`${carbonPrefix}--text-input--light`]: theme === 'light',
+            [`${carbonPrefix}--text-input--light`]: isLight,
             [`${carbonPrefix}--text-input--invalid`]: isInvalid,
+            [`${carbonPrefix}--text-input--warning`]: isWarn,
+            [`${carbonPrefix}--password-input`]: isPassword,
           },
         ]"
         v-bind="$attrs"
@@ -31,6 +51,7 @@
       <button
         v-if="isPassword"
         :class="[
+          `${carbonPrefix}--btn`,
           `${carbonPrefix}--text-input--password__visibility__toggle`,
           `${carbonPrefix}--tooltip__trigger`,
           `${carbonPrefix}--tooltip--a11y`,
@@ -48,8 +69,11 @@
     <div :class="`${carbonPrefix}--form-requirement`" v-if="isInvalid">
       <slot name="invalid-message">{{ invalidMessage }}</slot>
     </div>
+    <div v-if="isWarn" :class="`${carbonPrefix}--form__requirement`">
+      <slot name="warn-text">{{ warnText }}</slot>
+    </div>
     <div
-      v-if="!isInvalid && isHelper"
+      v-if="isHelper"
       :class="[
         `${carbonPrefix}--form__helper-text`,
         { [`${carbonPrefix}--form__helper-text--disabled`]: $attrs.disabled },
@@ -62,13 +86,11 @@
 
 <script>
 import { uidMixin, themeMixin, methodsMixin, carbonPrefixMixin } from '../../mixins';
-import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
-import View16 from '@carbon/icons-vue/es/view/16';
-import ViewOff16 from '@carbon/icons-vue/es/view--off/16';
+import { WarningFilled16, WarningAltFilled16, View16, ViewOff16 } from '@carbon/icons-vue';
 
 export default {
   name: 'CvTextInput',
-  components: { WarningFilled16, View16, ViewOff16 },
+  components: { WarningFilled16, WarningAltFilled16, View16, ViewOff16 },
   mixins: [uidMixin, themeMixin, carbonPrefixMixin, methodsMixin({ input: ['blur', 'focus'] })],
   inheritAttrs: false,
   props: {
@@ -78,9 +100,9 @@ export default {
     passwordHideLabel: { type: String, default: 'Hide password' },
     passwordShowLabel: { type: String, default: 'Show password' },
     passwordVisible: Boolean,
-    theme: String,
     type: String,
     value: String,
+    warnText: { type: String, default: undefined },
   },
   data() {
     return {
@@ -88,6 +110,7 @@ export default {
       dataType: this.type,
       isHelper: false,
       isInvalid: false,
+      isWarn: false,
     };
   },
   mounted() {
@@ -130,7 +153,11 @@ export default {
     checkSlots() {
       // NOTE: this.$slots is not reactive so needs to be managed on updated
       this.isInvalid = !!(this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length));
-      this.isHelper = !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
+      this.isWarn = !this.isInvalid && !!(this.$slots['warn-text'] || (this.warnText && this.warnText.length));
+      this.isHelper =
+        !this.isInvalid &&
+        !this.isWarn &&
+        !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
     },
     togglePasswordVisibility() {
       const currentValue = this.$refs.input.value;

@@ -7,7 +7,7 @@
         {
           'cv-select': !formItem,
           [`${carbonPrefix}--select--inline`]: inline,
-          [`${carbonPrefix}--select--light`]: theme === 'light',
+          [`${carbonPrefix}--select--light`]: isLight,
           [`${carbonPrefix}--select--invalid`]: isInvalid,
           [`${carbonPrefix}--select--disabled`]: $attrs.disabled,
         },

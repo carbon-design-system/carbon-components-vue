@@ -1,7 +1,7 @@
 {
   "name": "@carbon/vue",
   "description": "A collection of components for the Carbon Design System built using Vue.js",
-  "version": "2.34.0-canary.1",
+  "version": "2.42.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -56,21 +56,23 @@
   ],
   "scripts": {
     "build": "vue-cli-service build --target lib --name carbon-vue ./src/index.js --no-clean",
-    "clean": "rimraf dist node_modules/.cache"
+    "clean": "rimraf dist node_modules/.cache",
+    "postinstall": "carbon-telemetry collect --install"
   },
   "engines": {
     "node": ">=10.x"
   },
   "sideEffects": true,
   "dependencies": {
-    "@carbon/icons-vue": "10.10.2",
-    "carbon-components": "10.16.0",
-    "flatpickr": "4.6.3",
-    "vue": "^2.6.11"
+    "@carbon/icons-vue": "10.41.0",
+    "@carbon/telemetry": "^0.0.0-alpha.6",
+    "carbon-components": "10.46.0",
+    "flatpickr": "4.6.9",
+    "vue": "^2.6.14"
   },
   "devDependencies": {
     "@vue/cli-service": "^3.11.0",
-    "eslint-plugin-prettier": "^3.1.1",
-    "vue-template-compiler": "^2.6.10"
+    "eslint-plugin-prettier": "^3.3.1",
+    "vue-template-compiler": "^2.6.14"
   }
 }

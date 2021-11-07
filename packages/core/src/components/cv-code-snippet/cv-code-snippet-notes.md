@@ -37,9 +37,21 @@ $z-indexes: (
 
 ## attributes
 
-- feedback-aria-label: aria label for the feedback button. Default: 'Copy code'
 - copyFeedback: string of tip shown after copy performed. Default: 'Copied!'
-- thme: inline only allows 'light' version
+- feedback-aria-label: aria label for the feedback button. Default: 'Copy code'
+- hideCopyButton: disable/hide the copy button
+- light: Lighter variant, typically alternate background
+- theme: (deprecated use light) '' or 'light'
+
+Oneline and Multiline
+
+- diabled: standard disable behaviour
+
+Multiline code snippet where expand is possible
+
+- lessText: label for show more button
+- moreText: label for show more button
+- wrapText: Wrap text/code or not
 
 ## slots
 

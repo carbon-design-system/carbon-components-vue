@@ -13,39 +13,6 @@
     <div class="welcome__info">
       <div class="bx--row">
         <div class="bx--no-gutter-md--left bx--col-md-4 bx--col-lg-4">
-          <a class="welcome__card" href="/?path=/story/components-cvaccordion--default">
-            <div class="bx--aspect-ratio bx--aspect-ratio--2x1">
-              <div class="bx--aspect-ratio--object">
-                <div class="welcome__card-content">
-                  <h5>Browse</h5>
-                  <h4>the components</h4>
-                  <div class="welcome__card-image">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 196.32 170.02">
-                      <path fill="#42b883" d="M120.83 0L98.16 39.26 75.49 0H0l98.16 170.02L196.32 0h-75.49z" />
-                      <path fill="#35495e" d="M120.83 0L98.16 39.26 75.49 0H39.26l58.9 102.01L157.06 0h-36.23z" />
-                    </svg>
-                  </div>
-
-                  <div class="welcome__card-icon">
-                    <svg
-                      focusable="false"
-                      preserveAspectRatio="xMidYMid meet"
-                      aria-label="Open resource"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 20 20"
-                      role="img"
-                    >
-                      <path fill="white" d="M11.8 2.8l-1 1 5.4 5.5H1v1.4h15.2l-5.4 5.5 1 1L19 10z" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="bx--no-gutter-md--left bx--col-md-4 bx--col-lg-4">
           <a class="welcome__card" href="https://github.com/carbon-design-system/carbon-components-vue">
             <div class="bx--aspect-ratio bx--aspect-ratio--2x1">
               <div class="bx--aspect-ratio--object">
@@ -96,6 +63,39 @@
               <div class="bx--aspect-ratio--object">
                 <div class="welcome__card-content">
                   <h4>Versions</h4>
+                  <div class="welcome__card-icon">
+                    <svg
+                      focusable="false"
+                      preserveAspectRatio="xMidYMid meet"
+                      aria-label="Open resource"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      role="img"
+                    >
+                      <path fill="white" d="M11.8 2.8l-1 1 5.4 5.5H1v1.4h15.2l-5.4 5.5 1 1L19 10z" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="bx--no-gutter-md--left bx--col-md-4 bx--col-lg-4">
+          <a class="welcome__card" href="https://carbon-components-vue-3.netlify.app/">
+            <div class="bx--aspect-ratio bx--aspect-ratio--2x1">
+              <div class="bx--aspect-ratio--object">
+                <div class="welcome__card-content">
+                  <h5>Take a look at our</h5>
+                  <h4>Vue 3 version</h4>
+                  <div class="welcome__card-image">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 196.32 170.02">
+                      <path fill="#42b883" d="M120.83 0L98.16 39.26 75.49 0H0l98.16 170.02L196.32 0h-75.49z" />
+                      <path fill="#35495e" d="M120.83 0L98.16 39.26 75.49 0H39.26l58.9 102.01L157.06 0h-36.23z" />
+                    </svg>
+                  </div>
+
                   <div class="welcome__card-icon">
                     <svg
                       focusable="false"

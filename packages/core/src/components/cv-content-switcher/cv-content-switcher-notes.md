@@ -75,4 +75,6 @@ NOTE:
 ### CvContentSwitcher
 
 - selected
-  - contentSelector
+- contentSelector
+- light: Lighter variant, typically alternate background
+- size: default, 'sm' or 'xl'

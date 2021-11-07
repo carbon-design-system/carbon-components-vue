@@ -9,21 +9,30 @@ import knobsHelper from '../_storybook/utils/knobs-helper';
 import CvTagNotesMD from '../../packages/core/src/components/cv-tag/cv-tag-notes.md';
 import { CvTag, CvTagSkeleton } from '../../packages/core/src/';
 
+import AddFilled16 from '@carbon/icons-vue/es/add--filled/16';
+
 const storiesDefault = storiesOf('Components/CvTag', module);
 // // const storiesExperimental = storiesOf('Experimental/CvTag', module);
 
 let preKnobs = {
-  label: {
+  clearAriaLabel: {
     group: 'attr',
     type: text,
-    config: ['Tag label', 'I am a tag'], // consts.CONTENT],
-    prop: 'label',
+    config: ['Clear aria label', 'Custom clear filter'], // consts.CONTENT],
+    prop: 'clear-aria-label',
   },
   disabled: {
     group: 'attr',
     type: boolean,
     config: ['disabled', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
     prop: 'disabled',
+  },
+  icon: {
+    group: 'attr',
+    type: boolean,
+    config: ['with icon', false],
+    prop: 'icon',
+    value: val => (val ? AddFilled16 : undefined),
   },
   kind: {
     group: 'attr',
@@ -35,11 +44,24 @@ let preKnobs = {
     ],
     prop: 'kind',
   },
-  clearAriaLabel: {
+  label: {
     group: 'attr',
     type: text,
-    config: ['Clear aria label', 'Custom clear filter'], // consts.CONTENT],
-    prop: 'clear-aria-label',
+    config: ['Tag label', 'I am a tag'], // consts.CONTENT],
+    prop: 'label',
+  },
+  size: {
+    group: 'attr',
+    type: select,
+    config: [
+      'size',
+      {
+        small: 'sm',
+        default: '',
+      },
+      '',
+    ], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'size',
   },
 };
 
@@ -56,6 +78,11 @@ let variants = [
   {
     name: 'filter clear aria label',
     extra: { kind: { group: 'attr', value: 'filter @remove="onRemove"' } },
+  },
+  {
+    name: 'interactive',
+    excludes: ['clearAriaLabel'],
+    extra: { kind: { group: 'attr', value: '@click="onClick"' } },
   },
 ];
 
@@ -88,6 +115,7 @@ for (const story of storySet) {
         template: templateViewString,
         props: settings.props,
         methods: {
+          onClick: action('Interactive as clicked'),
           onRemove: action('Filter remove event'),
         },
       };
@@ -98,7 +126,21 @@ for (const story of storySet) {
   );
 }
 
-preKnobs = {};
+preKnobs = {
+  size: {
+    group: 'attr',
+    type: select,
+    config: [
+      'size',
+      {
+        small: 'sm',
+        default: '',
+      },
+      '',
+    ], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'size',
+  },
+};
 variants = [{ name: 'skeleton' }];
 storySet = knobsHelper.getStorySet(variants, preKnobs);
 
@@ -109,9 +151,8 @@ for (const story of storySet) {
       const settings = story.knobs();
 
       // ----------------------------------------------------------------
-
       const templateString = `
-<cv-tag-skeleton></cv-tag-skeleton>
+<cv-tag-skeleton${settings.group.attr}></cv-tag-skeleton>
   `;
 
       // ----------------------------------------------------------------

@@ -14,12 +14,11 @@ const storiesDefault = storiesOf('Components/CvTextInput', module);
 // const storiesExperimental = storiesOf('Experimental/CvTextInput', module);
 
 const preKnobs = {
-  theme: {
+  light: {
     group: 'attr',
     type: boolean,
-    config: ['light-theme', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
-    prop: 'theme',
-    value: val => (val ? 'light' : ''),
+    config: ['light', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'light',
   },
   label: {
     group: 'attr',
@@ -103,14 +102,26 @@ const preKnobs = {
     slot: 'invalid-message',
     value: 'Invalid message text',
   },
+  warnText: {
+    group: 'attr',
+    type: text,
+    config: ['warn text', ''],
+    prop: 'warn-text',
+    value: val => (val.length ? val : undefined),
+  },
+  warnTextSlot: {
+    group: 'slots',
+    slot: 'warn-text',
+    value: 'Some warning e.g. will override previous value',
+  },
 };
 
 const variants = [
   {
     name: 'default',
-    excludes: ['vModel', 'events', 'helperTextSlot', 'invalidMessageSlot'],
+    excludes: ['vModel', 'events', 'helperTextSlot', 'invalidMessageSlot', 'warnTextSlot'],
   },
-  { name: 'helper and error slots', excludes: ['vModel', 'events'] },
+  { name: 'helper, warn and error slots', excludes: ['vModel', 'events'] },
   { name: 'minimal', includes: ['label'] },
   { name: 'events', includes: ['label', 'events'] },
   { name: 'vModel', includes: ['label', 'vModel'] },
@@ -136,7 +147,7 @@ for (const story of storySet) {
     <sv-template-view
       sv-margin
       ref="templateView"
-      :sv-alt-back="this.$options.propsData.theme !== 'light'"
+      :sv-alt-back="!this.$options.propsData.light"
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">

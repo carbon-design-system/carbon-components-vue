@@ -1,9 +1,11 @@
 <template>
   <component
     :is="tagType"
-    :class="[`cv-tile ${carbonPrefix}--tile`, { [`${carbonPrefix}--tile--light`]: theme === 'light' }]"
+    :class="[`cv-tile ${carbonPrefix}--tile`, { [`${carbonPrefix}--tile--light`]: isLight }]"
     :checked="selected"
     :expanded="expanded"
+    :tileCollapsedLabel="tileCollapsedLabel"
+    :tileExpandedLabel="tileExpandedLabel"
     v-bind="$attrs"
     v-on="$listeners"
     ref="tile"
@@ -43,6 +45,8 @@ export default {
   props: {
     expanded: Boolean,
     selected: Boolean,
+    tileCollapsedLabel: { type: String, default: 'Tile collapsed' },
+    tileExpandedLabel: { type: String, default: 'Tile expanded' },
     kind: {
       type: String,
       default: '',

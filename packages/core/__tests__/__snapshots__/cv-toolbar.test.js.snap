@@ -18,6 +18,6 @@ exports[`CvToolbarOption should render with slot correctly 1`] = `
 
 exports[`CvToolbarOption should render without slot correctly 1`] = `<li class="cv-toolbar-option bx--toolbar-menu__option" id="test-1"></li>`;
 
-exports[`CvToolbarSearch should render correctly 1`] = `<cv-search-stub id="test-1" theme="" cleararialabel="Clear search input" kind="toolbar" small="true" value="check-1" placeholder="Search" toolbararialabel="Toolbar search" class="cv-toolbar-search"></cv-search-stub>`;
+exports[`CvToolbarSearch should render correctly 1`] = `<cv-search-stub id="test-1" cleararialabel="Clear search input" kind="toolbar" small="true" value="check-1" placeholder="Search" toolbararialabel="Toolbar search" class="cv-toolbar-search"></cv-search-stub>`;
 
 exports[`CvToolbarTitle should render correctly 1`] = `<li class="cv-toolbar-title bx--toolbar-menu__title" id="test-1">Toolbar test title</li>`;

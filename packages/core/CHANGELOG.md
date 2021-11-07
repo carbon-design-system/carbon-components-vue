@@ -1,4 +1,204 @@
-# Changelog
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [2.42.0](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@2.22.0-canary.0...@carbon/vue@2.42.0) (2021-11-02)
+
+### Bug Fixes
+
+- change label HTML tag in cv-file-uploader component ([#1145](https://github.com/carbon-design-system/carbon-components-vue/issues/1145)) ([5c8da0a](https://github.com/carbon-design-system/carbon-components-vue/commit/5c8da0a5faf143fe44103e7622804863214840e9))
+- cv-data-table headers have no padding when sortable = false ([#1162](https://github.com/carbon-design-system/carbon-components-vue/issues/1162)) ([22564a4](https://github.com/carbon-design-system/carbon-components-vue/commit/22564a4b42eb7bc9dc5e8699312eb883379b3746))
+- cv-data-table listener is called after navigation ([#1089](https://github.com/carbon-design-system/carbon-components-vue/issues/1089)) ([68a18d5](https://github.com/carbon-design-system/carbon-components-vue/commit/68a18d50bade6af70e9bca48c2cb7f4e7a4b475f))
+- cv-date-picker range plugin use ([#1104](https://github.com/carbon-design-system/carbon-components-vue/issues/1104)) ([1d58ca4](https://github.com/carbon-design-system/carbon-components-vue/commit/1d58ca4d82783a3bac691a5a7a781abd86ef599e))
+- cv-tabs fails in focusout event when using router-link in a tab ([#1084](https://github.com/carbon-design-system/carbon-components-vue/issues/1084)) ([91adefb](https://github.com/carbon-design-system/carbon-components-vue/commit/91adefbd24b2e6a837fe732e2f132049eda9dc87)), closes [#1083](https://github.com/carbon-design-system/carbon-components-vue/issues/1083) [#1083](https://github.com/carbon-design-system/carbon-components-vue/issues/1083)
+- **cv-tabs:** Fix error on parentNode on doScrollIntoView. ([#1269](https://github.com/carbon-design-system/carbon-components-vue/issues/1269)) ([f4aab3a](https://github.com/carbon-design-system/carbon-components-vue/commit/f4aab3a7235f159c99d21a0445358402f1c212b2))
+- ensure no previous transitionend event triggers after-modal-hidden ([#1081](https://github.com/carbon-design-system/carbon-components-vue/issues/1081)) ([0c5ffe2](https://github.com/carbon-design-system/carbon-components-vue/commit/0c5ffe2ba8dc78567eb0f528d56074877b96119c))
+- error due to l10n exported with "default" field. ([#1271](https://github.com/carbon-design-system/carbon-components-vue/issues/1271)) ([97781a4](https://github.com/carbon-design-system/carbon-components-vue/commit/97781a40e42d6ccd289e555177c828a4401d2944))
+- **file-uploader:** mark files with invalid types/formats ([#1231](https://github.com/carbon-design-system/carbon-components-vue/issues/1231)) ([dc3d8e1](https://github.com/carbon-design-system/carbon-components-vue/commit/dc3d8e1bbf2bbf55952d60e486218bff2ce8cc1a))
+- ignore side panel focusout b4 click on safari ([#1060](https://github.com/carbon-design-system/carbon-components-vue/issues/1060)) ([ae9bf76](https://github.com/carbon-design-system/carbon-components-vue/commit/ae9bf76d14127d0b2076113c87a89cc15a2c3602))
+- make label on cv-icon-button required ([#1258](https://github.com/carbon-design-system/carbon-components-vue/issues/1258)) ([8716c3e](https://github.com/carbon-design-system/carbon-components-vue/commit/8716c3e1a41c2ddb2f46dadfcbfd06ab367bed46))
+- modal 10-30 updates ([#1166](https://github.com/carbon-design-system/carbon-components-vue/issues/1166)) ([ff56466](https://github.com/carbon-design-system/carbon-components-vue/commit/ff564667ee46f11327e2e800e7b8ea6451821d74))
+- remove extra tabIndex in tag ([#1049](https://github.com/carbon-design-system/carbon-components-vue/issues/1049)) ([bfbd2ad](https://github.com/carbon-design-system/carbon-components-vue/commit/bfbd2ad6f13d75de864e98e1c3412040d7e243b9))
+- **server:** cv-button default color error issue ([#1076](https://github.com/carbon-design-system/carbon-components-vue/issues/1076)) ([451816b](https://github.com/carbon-design-system/carbon-components-vue/commit/451816bdb6ec19babb99519d5e92870e0cfbdced))
+- typo ([#1163](https://github.com/carbon-design-system/carbon-components-vue/issues/1163)) ([cc46805](https://github.com/carbon-design-system/carbon-components-vue/commit/cc46805edca34fb0d1d90bf04e70ca83936a9984))
+- use check slot pattern in side nav ([#1092](https://github.com/carbon-design-system/carbon-components-vue/issues/1092)) ([b6d1287](https://github.com/carbon-design-system/carbon-components-vue/commit/b6d1287a7cc93d7ebf9304a353023a36f99ab3a8))
+
+### Features
+
+- 1030 update for text components ([#1186](https://github.com/carbon-design-system/carbon-components-vue/issues/1186)) ([71f7848](https://github.com/carbon-design-system/carbon-components-vue/commit/71f78481ff59d6ad988d7dc561cb01e1f7123002))
+- add hide close to toast ([#1242](https://github.com/carbon-design-system/carbon-components-vue/issues/1242)) ([15b4f66](https://github.com/carbon-design-system/carbon-components-vue/commit/15b4f66162f55fbe4d4819163673271aa4fe580a))
+- add show/hide events to cv-interactive-tooltip ([#1094](https://github.com/carbon-design-system/carbon-components-vue/issues/1094)) ([6670837](https://github.com/carbon-design-system/carbon-components-vue/commit/66708375181af8ad93b26dd455afe16a9782a00c))
+- adding hideCloseButton prop to cv-inline-notification ([#1233](https://github.com/carbon-design-system/carbon-components-vue/issues/1233)) ([fd41a30](https://github.com/carbon-design-system/carbon-components-vue/commit/fd41a30880680a8c02f2f12772f2e237b827e2d9))
+- emit event on progress step click. update story book & update md ([#1219](https://github.com/carbon-design-system/carbon-components-vue/issues/1219)) ([6088957](https://github.com/carbon-design-system/carbon-components-vue/commit/60889573650481cc59a26758fc82623d405b42c2))
+- update number input to 10-30 ([#1168](https://github.com/carbon-design-system/carbon-components-vue/issues/1168)) ([b72c49d](https://github.com/carbon-design-system/carbon-components-vue/commit/b72c49d00701f208653b7b88154058097ebce08f))
+- update progress indicator to 1030 format ([#1170](https://github.com/carbon-design-system/carbon-components-vue/issues/1170)) ([f924de1](https://github.com/carbon-design-system/carbon-components-vue/commit/f924de141f8ddcf5785b52d10fb56a2c38c5313a))
+- update tile to 1030 ([#1189](https://github.com/carbon-design-system/carbon-components-vue/issues/1189)) ([b8a4fd6](https://github.com/carbon-design-system/carbon-components-vue/commit/b8a4fd69949352b3e39228fddf6be0ad19a5447e))
+- update ui shell to 1030 ([#1191](https://github.com/carbon-design-system/carbon-components-vue/issues/1191)) ([41b9241](https://github.com/carbon-design-system/carbon-components-vue/commit/41b924188d0e174853d81079aa52c008ce5440a6))
+- update v2 radio button to 1030 ([#1171](https://github.com/carbon-design-system/carbon-components-vue/issues/1171)) ([a9eb378](https://github.com/carbon-design-system/carbon-components-vue/commit/a9eb378e3dc2582658d61d666b91ded8fc27700e))
+- v2 tooltip to 1030 ([#1190](https://github.com/carbon-design-system/carbon-components-vue/issues/1190)) ([6a18cf6](https://github.com/carbon-design-system/carbon-components-vue/commit/6a18cf67684b09d618f5e685ba378e7d7659aecd))
+
+# 2.34.0 (2020-10-07)
+
+### Bug Fixes
+
+- 927 dropdown focus reset post selection ([#931](https://github.com/carbon-design-system/carbon-components-vue/issues/931)) ([803d36c](https://github.com/carbon-design-system/carbon-components-vue/commit/803d36c2ab5317eac511c9180331def762c6a284))
+- add close aria label to modal ([#815](https://github.com/carbon-design-system/carbon-components-vue/issues/815)) ([9b56b0f](https://github.com/carbon-design-system/carbon-components-vue/commit/9b56b0f19c820e22d54c6a453d8d3b1105fa5633))
+- add role tablist to CvContentSwitcher ([#854](https://github.com/carbon-design-system/carbon-components-vue/issues/854)) ([378a517](https://github.com/carbon-design-system/carbon-components-vue/commit/378a5179715809f3fa809974b9b3006d25c22de6))
+- aria states for bools ([#934](https://github.com/carbon-design-system/carbon-components-vue/issues/934)) ([191cb6e](https://github.com/carbon-design-system/carbon-components-vue/commit/191cb6e856c0fdf11127ed75095e9ce2e7de2af5))
+- button snapshot ([#897](https://github.com/carbon-design-system/carbon-components-vue/issues/897)) ([42a9ab6](https://github.com/carbon-design-system/carbon-components-vue/commit/42a9ab6349b9d57d2caa23f3df646707b470ab13))
+- column styles on chrome ([#827](https://github.com/carbon-design-system/carbon-components-vue/issues/827)) ([acae072](https://github.com/carbon-design-system/carbon-components-vue/commit/acae07261b93b7a3185200bfefc0f6dad2b53310))
+- notes links to carbondesignsystem.com ([#1043](https://github.com/carbon-design-system/carbon-components-vue/issues/1043)) ([3aafcff](https://github.com/carbon-design-system/carbon-components-vue/commit/3aafcffe63a16d61257b4c0bb5bbb971ebe6c660))
+- remove down chevron role ([#1044](https://github.com/carbon-design-system/carbon-components-vue/issues/1044)) ([7904f2d](https://github.com/carbon-design-system/carbon-components-vue/commit/7904f2dac69b98f3c951150b742d94fa1bcde9bf))
+- **cv-dropdown:** missing classes ([#1039](https://github.com/carbon-design-system/carbon-components-vue/issues/1039)) ([010dd69](https://github.com/carbon-design-system/carbon-components-vue/commit/010dd69665ccf8b44edca1d4726216bcf67f89b5))
+- click outside dropdown ([#1013](https://github.com/carbon-design-system/carbon-components-vue/issues/1013)) ([9a1ff2c](https://github.com/carbon-design-system/carbon-components-vue/commit/9a1ff2cff2d5a36950f88b05bc7707f8b0bca871))
+- combo and multi empty class ([#964](https://github.com/carbon-design-system/carbon-components-vue/issues/964)) ([beb2fdb](https://github.com/carbon-design-system/carbon-components-vue/commit/beb2fdb8cf6a2a171df7c9f958c00d13dd8acca4))
+- content switcher accessibility ([#851](https://github.com/carbon-design-system/carbon-components-vue/issues/851)) ([b93f464](https://github.com/carbon-design-system/carbon-components-vue/commit/b93f464393ef71f2dd39a0791a30913b5134e6c7))
+- correct button small deprecation behaviour ([#818](https://github.com/carbon-design-system/carbon-components-vue/issues/818)) ([d704b48](https://github.com/carbon-design-system/carbon-components-vue/commit/d704b4876b364d4d481c120ec7b40c39a85363bd))
+- deploy step ([#865](https://github.com/carbon-design-system/carbon-components-vue/issues/865)) ([8c76692](https://github.com/carbon-design-system/carbon-components-vue/commit/8c76692f19fe9aad0eb87ba7fc82e3a5f7b9c392))
+- disabled drop combo tag ([#912](https://github.com/carbon-design-system/carbon-components-vue/issues/912)) ([1cc67ab](https://github.com/carbon-design-system/carbon-components-vue/commit/1cc67ab727175c8fe429b6ce7235a08456f3893f))
+- dropdown clearing of value ([#975](https://github.com/carbon-design-system/carbon-components-vue/issues/975)) ([bc17f76](https://github.com/carbon-design-system/carbon-components-vue/commit/bc17f76832aa56dd9cd828aa4fc23cb6ad27e890))
+- dropdown placeholder updates ([#850](https://github.com/carbon-design-system/carbon-components-vue/issues/850)) ([59c265a](https://github.com/carbon-design-system/carbon-components-vue/commit/59c265a86038d19093ce1c2488cd72fa771d824a))
+- dropdown value presentation ([#873](https://github.com/carbon-design-system/carbon-components-vue/issues/873)) ([1d4ab65](https://github.com/carbon-design-system/carbon-components-vue/commit/1d4ab65a79fd790f731f0c7c793bc3e4fbf9d9c8))
+- empty space in combo and multi ([#963](https://github.com/carbon-design-system/carbon-components-vue/issues/963)) ([229759e](https://github.com/carbon-design-system/carbon-components-vue/commit/229759e33a8239c5129c829bee868aba058a3124))
+- empty space on combo and multi ([#967](https://github.com/carbon-design-system/carbon-components-vue/issues/967)) ([14e82ec](https://github.com/carbon-design-system/carbon-components-vue/commit/14e82ec729e5ad2c8e1fcd609685931054f24221))
+- ensure that CvDropdown has single tabindex for accessibility ([#868](https://github.com/carbon-design-system/carbon-components-vue/issues/868)) ([b8f0d55](https://github.com/carbon-design-system/carbon-components-vue/commit/b8f0d555f9def1616f3777410031b1ab28865d3d))
+- firefox dropdown close ([#993](https://github.com/carbon-design-system/carbon-components-vue/issues/993)) ([9ee8d9e](https://github.com/carbon-design-system/carbon-components-vue/commit/9ee8d9ed3e8a70bce7cf5240cf2c2608c695041c))
+- heading and data style when sortable ([#826](https://github.com/carbon-design-system/carbon-components-vue/issues/826)) ([59bd310](https://github.com/carbon-design-system/carbon-components-vue/commit/59bd3101835854c01eb47b974a0a446b072cf42f))
+- ids for controlled panels ([#829](https://github.com/carbon-design-system/carbon-components-vue/issues/829)) ([b27c2f6](https://github.com/carbon-design-system/carbon-components-vue/commit/b27c2f69c254a5570b2be99512de2fcacc8d9165))
+- ie11 svg class usage ([#973](https://github.com/carbon-design-system/carbon-components-vue/issues/973)) ([e861cfa](https://github.com/carbon-design-system/carbon-components-vue/commit/e861cfa0fb0a0d55dac8e4acdc656d40d7be2560))
+- improve svg icon support ([#933](https://github.com/carbon-design-system/carbon-components-vue/issues/933)) ([2fc40e4](https://github.com/carbon-design-system/carbon-components-vue/commit/2fc40e4fda6cb79da455b9723abe7e43c0ce426f))
+- interactive tooltip position on ie11 ([#841](https://github.com/carbon-design-system/carbon-components-vue/issues/841)) ([3551531](https://github.com/carbon-design-system/carbon-components-vue/commit/35515312dc1205aa7d4c74a371dba036869cd0cb))
+- issue 923 comboBox attrs name ([#928](https://github.com/carbon-design-system/carbon-components-vue/issues/928)) ([2759d48](https://github.com/carbon-design-system/carbon-components-vue/commit/2759d48e55986aafd6d2d1ce94b6839e2ad25619))
+- issue 924 passing \$listeners to cv-form ([#929](https://github.com/carbon-design-system/carbon-components-vue/issues/929)) ([3fd9208](https://github.com/carbon-design-system/carbon-components-vue/commit/3fd920859a451177cd51b33ba11194d5522ffc17))
+- labels in table checkboxes ([#906](https://github.com/carbon-design-system/carbon-components-vue/issues/906)) ([4acf0c7](https://github.com/carbon-design-system/carbon-components-vue/commit/4acf0c7d1e6136ddfd417344dec5442cfc7edac1))
+- lower case loading states ([#823](https://github.com/carbon-design-system/carbon-components-vue/issues/823)) ([f9fa047](https://github.com/carbon-design-system/carbon-components-vue/commit/f9fa047c45e7203f0032f9cc58fc4f0cfc927e56))
+- missing aria label on batch action checkbox ([#834](https://github.com/carbon-design-system/carbon-components-vue/issues/834)) ([c2864fd](https://github.com/carbon-design-system/carbon-components-vue/commit/c2864fddcb50a04b73464b570f0b22144c5a66b0))
+- multi select expand ([#880](https://github.com/carbon-design-system/carbon-components-vue/issues/880)) ([e032ea2](https://github.com/carbon-design-system/carbon-components-vue/commit/e032ea283bde18cb9f26d5e61252890e8560ece5))
+- multi select use of filter tag ([#957](https://github.com/carbon-design-system/carbon-components-vue/issues/957)) ([136610e](https://github.com/carbon-design-system/carbon-components-vue/commit/136610e7dad7bd35b3e4feac6e75a09c2dfc12e0))
+- multi select user filter ([#958](https://github.com/carbon-design-system/carbon-components-vue/issues/958)) ([5c03407](https://github.com/carbon-design-system/carbon-components-vue/commit/5c03407d1d853cc0649c5ad47f4226b9d2d04253))
+- number input snapshot ([#808](https://github.com/carbon-design-system/carbon-components-vue/issues/808)) ([dc38a3a](https://github.com/carbon-design-system/carbon-components-vue/commit/dc38a3a98fe7b42de57e3c2b6c0487846d9f7208))
+- progress step carbonPrefix ([#974](https://github.com/carbon-design-system/carbon-components-vue/issues/974)) ([7ede1a9](https://github.com/carbon-design-system/carbon-components-vue/commit/7ede1a9a7a70b40daa9ffb30af816db5f4cfec03))
+- slot not updating with v-slot ([#1026](https://github.com/carbon-design-system/carbon-components-vue/issues/1026)) ([2b026c4](https://github.com/carbon-design-system/carbon-components-vue/commit/2b026c40954c5e680efbc19213b32e43aa7cf224))
+- snapshot test ([#844](https://github.com/carbon-design-system/carbon-components-vue/issues/844)) ([6d08a80](https://github.com/carbon-design-system/carbon-components-vue/commit/6d08a8049113fcd5ebea0c421f8bc42c0a2c80f2))
+- tooltip on icon only button ([#895](https://github.com/carbon-design-system/carbon-components-vue/issues/895)) ([a116424](https://github.com/carbon-design-system/carbon-components-vue/commit/a11642424f0220c54e46100579c13cfaa8936ad9))
+- try just 5 workers on test ([#879](https://github.com/carbon-design-system/carbon-components-vue/issues/879)) ([aa03ee1](https://github.com/carbon-design-system/carbon-components-vue/commit/aa03ee14822a0dcc7750648f15fa8c1d3a5fbd3a))
+- use of uidMixin without id use ([#1009](https://github.com/carbon-design-system/carbon-components-vue/issues/1009)) ([397be58](https://github.com/carbon-design-system/carbon-components-vue/commit/397be581e1503d506acb0278208bc78decc4fb8f))
+
+### Features
+
+- add cv-grid, cv-row, cv-column ([#1038](https://github.com/carbon-design-system/carbon-components-vue/issues/1038)) ([2ba3a5f](https://github.com/carbon-design-system/carbon-components-vue/commit/2ba3a5ff1887b558d3fd1f92bf8417e44689502d))
+- **mixins:** add index for mixins and simplify imports ([#1036](https://github.com/carbon-design-system/carbon-components-vue/issues/1036)) ([a0a57d7](https://github.com/carbon-design-system/carbon-components-vue/commit/a0a57d76d7b7cefb650d5fa02dc8c56d59e9f5b8))
+- add 10-11-2 update to carbon modal ([#881](https://github.com/carbon-design-system/carbon-components-vue/issues/881)) ([5b57dec](https://github.com/carbon-design-system/carbon-components-vue/commit/5b57decec3496784b7ea6df166d963264f3927d2))
+- add 24 hour clock support to the time input ([#952](https://github.com/carbon-design-system/carbon-components-vue/issues/952)) ([2783e9e](https://github.com/carbon-design-system/carbon-components-vue/commit/2783e9eb1fd40fa5f91126c9623b646225c8b559))
+- add accordion change event and state value ([#820](https://github.com/carbon-design-system/carbon-components-vue/issues/820)) ([e9e27e0](https://github.com/carbon-design-system/carbon-components-vue/commit/e9e27e0498cf01ced5f3022bc53b8e3217235e00))
+- add aria label for expanding row button ([#1008](https://github.com/carbon-design-system/carbon-components-vue/issues/1008)) ([5c3a9a1](https://github.com/carbon-design-system/carbon-components-vue/commit/5c3a9a163d7e00e6d7606db9a86555b2f1e4098c))
+- add focus method to text inputs ([#932](https://github.com/carbon-design-system/carbon-components-vue/issues/932)) ([64ab976](https://github.com/carbon-design-system/carbon-components-vue/commit/64ab9760db3bb1ad36dd635cbeb86a5f6e303c03))
+- add hide label to checkbox ([#843](https://github.com/carbon-design-system/carbon-components-vue/issues/843)) ([ee6ed25](https://github.com/carbon-design-system/carbon-components-vue/commit/ee6ed25e000d5e726d02aed8ec91a73ae8dffa2c))
+- add mobile number input ([#805](https://github.com/carbon-design-system/carbon-components-vue/issues/805)) ([e8cc1e8](https://github.com/carbon-design-system/carbon-components-vue/commit/e8cc1e861e13d4cabace8b8a9aa84e4ac2015158))
+- disabled pagination forwards backwards btn ([#896](https://github.com/carbon-design-system/carbon-components-vue/issues/896)) ([324d78c](https://github.com/carbon-design-system/carbon-components-vue/commit/324d78c96665e41d50bb092d6e8e7485f0dd475c))
+- prefix inline-loading link and number input ([#721](https://github.com/carbon-design-system/carbon-components-vue/issues/721)) ([eef6e51](https://github.com/carbon-design-system/carbon-components-vue/commit/eef6e510141b5a487661c5f5c315353e3202114b))
+- use carbon flatpickr plugins ([#1031](https://github.com/carbon-design-system/carbon-components-vue/issues/1031)) ([4bbcceb](https://github.com/carbon-design-system/carbon-components-vue/commit/4bbccebfc905c97844c2ea1bec1ee281e794d3ba))
+- v-html in notifications to allow markup ([#1035](https://github.com/carbon-design-system/carbon-components-vue/issues/1035)) ([44f1b61](https://github.com/carbon-design-system/carbon-components-vue/commit/44f1b612aa237564edec943f00d6ada27606d7de))
+
+## 2.40.0
+
+feat: CvFileUploader mark dropped files of the wrong type as invalid
+feat: CvInlineNotification add ability to hide close button
+feat: CvToastNotification add ability to hide close button
+
+## 2.39.0
+
+feat: emit event on progress step click
+feat: emit event on data table row expand
+feat: add sticky header option to data table
+feat: add static width option to data table
+
+## 2.38.2
+
+fix: modal primary button and storybook usage.
+
+## 2.38.1
+
+fix: correct secondary button on modal to raise a 'secondary-click'
+
+## 2.38.0
+
+chore: promote canary release
+
+## 2.38.0-canary.1
+
+fix: dist versioning
+
+## 2.38.0-canary.0
+
+fix: cv-file-uploader dom update
+fix: cv-data-table header padding
+fix: 10.30 update
+
+- cv-inline-loading
+- cv-button
+- cv-icon-button
+- cv-code-snippet-inline
+- cv-code-snippet-oneline
+- cv-code-snippet-multiline
+- cv-data-table
+- cv-loading
+- cv-modal
+- cv-number-input
+- cv-progress-indicator
+- cv-form-group
+- cv-text-area
+- cv-text-input
+- cv-tile
+- cv-tooltip
+- cv-ui-shell
+- cv-tab - now uses the scroll format
+
+## 2.37.1
+
+chore: documentation correction for CvDataTable
+chore: added Carbon Telemetry
+
+## 2.37.0
+
+fix: CvDatePicker use of range plugin
+fix: CvMultiSelect hiding first option alternately on expand
+feat: add show and hide events to CvTooltip
+
+## 2.36.0
+
+fix: use check slot patter in side nav
+fix: cv-tabs fail during focus event
+fix cv-data-table listener called after navigation
+chore: update dependency
+
+## 2.36.0-canary.0
+
+fix: transition end after modal hidden
+feat: add left right to tooltip direction
+fix: data table listener called after navigation
+fix: tab listener when called after nav
+fix: use check slot pattern for side nav icons
+
+## 2.35.0
+
+feat: 10 23 1 update (#1058) - adds numerous minor changes to bring the library up to Carbon v10.23.1
+chore: listen for click out only post blur (#1061)
+chore: Content tune the first usage steps (#1055)
+feat: Add after hidden modal event (#1069)
+fix: cv-button default color error issue (#1076)
+
+## 2.34.1
+
+chore: add tests for cv-code-snippet, cv-toolbar, cv-structured-list
+fix: spurious tab index in tag
+fix: safari focus out before click
+
+## 2.34.0
+
+fix: links in storybook notes
+fix: #1042 - CvDropdown role applied incorrectly to chevron
 
 ## 2.34.0-canary.1
 
@@ -235,6 +435,7 @@ Roll up of canary releases.
 
 - Mobile number input version
 - Expanded property added to UIShell sidenav menus
+
 -
 
 ### Fix

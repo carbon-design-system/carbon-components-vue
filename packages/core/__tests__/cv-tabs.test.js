@@ -115,7 +115,7 @@ describe('CvTabs', () => {
 
     await Vue.nextTick();
     expect(wrapper.vm.tabs[0].dataSelected).toBeTruthy();
-    await trigger(wrapper.findAll(`.${carbonPrefix}--tabs__nav-link`).at(2), 'click');
+    await trigger(wrapper.findAll(`.${carbonPrefix}--tabs--scrollable__nav-link`).at(2), 'click');
 
     expect(wrapper.vm.tabs[0].dataSelected).toBeFalsy();
     expect(wrapper.vm.tabs[2].dataSelected).toBeTruthy();

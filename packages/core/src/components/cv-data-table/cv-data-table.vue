@@ -10,6 +10,7 @@
 
       <section v-if="hasToolbar" :class="`${carbonPrefix}--table-toolbar`">
         <div
+          :aria-hidden="!batchActive"
           v-show="hasBatchActions"
           :class="[`${carbonPrefix}--batch-actions`, { [`${carbonPrefix}--batch-actions--active`]: batchActive }]"
           :aria-label="actionBarAriaLabel"
@@ -49,7 +50,6 @@
                 @keydown.enter.prevent="checkSearchExpand(true)"
                 @keydown.space.prevent
                 @keyup.space.prevent="checkSearchExpand(true)"
-                @blur="checkSearchFocus"
                 ref="magnifier"
               >
                 <Search16 :class="`${carbonPrefix}--toolbar-action__icon`" />
@@ -65,7 +65,6 @@
                 ref="search"
                 v-model="searchValue"
                 @input="onSearch"
-                @blur="checkSearchFocus"
                 @keydown.esc.prevent="checkSearchExpand(false)"
               />
               <button
@@ -86,80 +85,86 @@
         </div>
       </section>
 
-      <table
-        :class="[
-          `${carbonPrefix}--data-table`,
-          {
-            [`${carbonPrefix}--data-table--${rowSize} `]: !(rowSize.length === 0 || rowSize === 'standard'),
-            [`${carbonPrefix}--data-table--zebra `]: zebra,
-            [`${carbonPrefix}--data-table--no-border `]: borderless,
-            [`${carbonPrefix}--skeleton `]: skeleton,
-            [`${carbonPrefix}--data-table--sort `]: isSortable,
-          },
-        ]"
-      >
-        <thead>
-          <tr>
-            <th
-              v-if="hasExpandables"
-              :class="`${carbonPrefix}--table-expand`"
-              :data-previous-value="dataExpandAll ? 'collapsed' : 'expanded'"
-            >
-              <button
-                v-if="hasExpandAll"
-                :class="`${carbonPrefix}--table-expand__button`"
-                @click="toggleExpandAll"
-                type="button"
-                :aria-label="dataExpandAll ? collapseAllAriaLabel : expandAllAriaLabel"
-              >
-                <ChevronRight16 :class="`${carbonPrefix}--table-expand__svg`" />
-              </button>
-            </th>
-            <th v-if="hasBatchActions" :class="`${carbonPrefix}--table-column-checkbox`">
-              <cv-checkbox
-                :form-item="false"
-                value="headingCheck"
-                v-model="headingChecked"
-                @change="onHeadingCheckChange"
-                :label="selectAllAriaLabel"
-                hideLabel
-              />
-            </th>
-            <slot name="headings">
-              <cv-data-table-heading
-                v-for="(column, index) in columns"
-                :key="`${index}:${column}`"
-                :heading="columnHeading(column)"
-                :sortable="isColSortable(column)"
-                :order="column.order"
-                :heading-style="headingStyle(column)"
-                :skeleton="skeleton"
-              />
-            </slot>
-            <th v-if="hasOverflowMenu"></th>
-          </tr>
-        </thead>
+      <div :class="`${carbonPrefix}--data-table-content`">
+        <cv-wrapper :tagType="stickyHeader ? section : ''" :class="`${carbonPrefix}--data-table_inner-container`">
+          <table
+            :class="[
+              `${carbonPrefix}--data-table`,
+              {
+                [`${carbonPrefix}--data-table--${rowSize} `]: !(rowSize.length === 0 || rowSize === 'standard'),
+                [`${carbonPrefix}--data-table--zebra `]: zebra,
+                [`${carbonPrefix}--data-table--sticky-header `]: stickyHeader,
+                [`${carbonPrefix}--data-table--no-border `]: borderless,
+                [`${carbonPrefix}--skeleton `]: skeleton,
+                [`${carbonPrefix}--data-table--sort `]: isSortable,
+                [`${carbonPrefix}--data-table--static `]: staticWidth,
+              },
+            ]"
+          >
+            <thead>
+              <tr>
+                <th
+                  v-if="hasExpandables"
+                  :class="`${carbonPrefix}--table-expand`"
+                  :data-previous-value="dataExpandAll ? 'collapsed' : 'expanded'"
+                >
+                  <button
+                    v-if="hasExpandAll"
+                    :class="`${carbonPrefix}--table-expand__button`"
+                    @click="toggleExpandAll"
+                    type="button"
+                    :aria-label="dataExpandAll ? collapseAllAriaLabel : expandAllAriaLabel"
+                  >
+                    <ChevronRight16 :class="`${carbonPrefix}--table-expand__svg`" />
+                  </button>
+                </th>
+                <th v-if="hasBatchActions" :class="`${carbonPrefix}--table-column-checkbox`">
+                  <cv-checkbox
+                    :form-item="false"
+                    value="headingCheck"
+                    v-model="headingChecked"
+                    @change="onHeadingCheckChange"
+                    :label="selectAllAriaLabel"
+                    hideLabel
+                  />
+                </th>
+                <slot name="headings">
+                  <cv-data-table-heading
+                    v-for="(column, index) in columns"
+                    :key="`${index}:${column}`"
+                    :heading="columnHeading(column)"
+                    :sortable="isColSortable(column)"
+                    :order="column.order"
+                    :heading-style="headingStyle(column)"
+                    :skeleton="skeleton"
+                  />
+                </slot>
+                <th v-if="hasOverflowMenu"></th>
+              </tr>
+            </thead>
 
-        <cv-wrapper :tag-type="hasExpandables ? '' : 'tbody'">
-          <slot name="data">
-            <cv-data-table-row
-              v-for="(row, rowIndex) in data"
-              :key="`row:${rowIndex}`"
-              :value="`${rowIndex}`"
-              ref="dataRows"
-              :overflow-menu="overflowMenu"
-            >
-              <cv-data-table-cell
-                v-for="(cell, colIndex) in row"
-                :key="`cell:${colIndex}:${rowIndex}`"
-                :style="dataStyle(colIndex)"
-              >
-                <cv-wrapper :tag-type="skeleton ? 'span' : ''">{{ cell }}</cv-wrapper>
-              </cv-data-table-cell>
-            </cv-data-table-row>
-          </slot>
+            <cv-wrapper :tag-type="hasExpandables ? '' : 'tbody'">
+              <slot name="data">
+                <cv-data-table-row
+                  v-for="(row, rowIndex) in data"
+                  :key="`row:${rowIndex}`"
+                  :value="`${rowIndex}`"
+                  ref="dataRows"
+                  :overflow-menu="overflowMenu"
+                >
+                  <cv-data-table-cell
+                    v-for="(cell, colIndex) in row"
+                    :key="`cell:${colIndex}:${rowIndex}`"
+                    :style="dataStyle(colIndex)"
+                  >
+                    <cv-wrapper :tag-type="skeleton ? 'span' : ''">{{ cell }}</cv-wrapper>
+                  </cv-data-table-cell>
+                </cv-data-table-row>
+              </slot>
+            </cv-wrapper>
+          </table>
         </cv-wrapper>
-      </table>
+      </div>
     </div>
     <cv-pagination
       v-if="pagination"
@@ -227,16 +232,19 @@ export default {
     searchLabel: { type: String, default: 'Search' },
     searchPlaceholder: { type: String, default: 'Search' },
     searchClearLabel: { type: String, default: 'Clear search' },
+    initialSearchValue: { type: String, default: '' },
     sortable: Boolean,
     title: String,
     columns: Array,
     data: Array,
     zebra: Boolean,
+    stickyHeader: Boolean,
     rowsSelected: { type: Array, default: () => [] },
     helperText: { type: String, default: undefined },
     expandingSearch: { type: Boolean, default: true },
     skeleton: Boolean,
     hasExpandAll: Boolean,
+    staticWidth: Boolean,
   },
   model: {
     prop: 'rows-selected',
@@ -251,7 +259,7 @@ export default {
       batchActive: false,
       headingChecked: false,
       dataRowsSelected: this.rowsSelected,
-      searchValue: '',
+      searchValue: this.initialSearchValue,
       clearSearchVisible: false,
       searchActive: false,
       registeredRows: [],
@@ -271,8 +279,18 @@ export default {
     this.$on('cv:sort', (srcComponent, value) => this.onSort(srcComponent, value));
   },
   mounted() {
+    if (this.$refs.searchContainer) {
+      this.$refs.magnifier.addEventListener('blur', this.checkSearchFocus);
+      this.$refs.search.addEventListener('blur', this.checkSearchFocus);
+    }
     this.updateRowsSelected();
     this.checkSlots();
+  },
+  beforeDestroy() {
+    if (this.$refs.searchContainer) {
+      this.$refs.magnifier.removeEventListener('blur', this.checkSearchFocus);
+      this.$refs.search.removeEventListener('blur', this.checkSearchFocus);
+    }
   },
   updated() {
     this.checkSlots();
@@ -308,7 +326,7 @@ export default {
       return this.overflowMenu === true || (this.overflowMenu && this.overflowMenu.length > 0);
     },
     tableStyle() {
-      return this.autoWidth ? { width: 'initial' } : { width: '100%' };
+      return this.autoWidth ? { width: 'initial', display: 'inline-block' } : { width: '100%' };
     },
     internalPagination() {
       if (typeof this.pagination === 'object') {
@@ -498,6 +516,7 @@ export default {
       } else {
         this.dataExpandAll = false;
       }
+      this.$emit('row-expanded', row);
     },
   },
 };

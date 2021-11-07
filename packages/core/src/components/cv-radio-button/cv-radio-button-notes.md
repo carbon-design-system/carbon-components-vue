@@ -41,7 +41,9 @@ NOTE 2: radioVal is the value of the radio button to be checked.
 ## Attributes
 
 - checked: true | false
+- hideLabel: true | false do not show the label
 - label: radio-button label
+- labelLeft: true | false position label on left
 - value:
 
 ## Events

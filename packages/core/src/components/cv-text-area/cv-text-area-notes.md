@@ -15,7 +15,9 @@ http://www.carbondesignsystem.com/components/text-input/code
 - helper-text: optional helper text
 - invalid-message: optional error message
 - label: the label text for the text area
-- theme: optional 'light',
+- light: Lighter variant, typically alternate background
+- placeholder: standard behavior
+- theme: (deprecated use light) '' or 'light'
 - value: optional initial value of the text area,
 
 Other standard props e.g. disabled and placeholder

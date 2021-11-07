@@ -5,7 +5,7 @@
       :class="[
         `${carbonPrefix}--number`,
         {
-          [`${carbonPrefix}--number--light`]: theme === 'light',
+          [`${carbonPrefix}--number--light`]: isLight,
           [`${carbonPrefix}--number--helpertext`]: isHelper,
           [`cv-number-input`]: !formItem,
           [`${carbonPrefix}--number--mobile`]: mobile,
@@ -26,9 +26,10 @@
           :aria-label="ariaLabelForDownButton"
           :disabled="disabled"
         >
-          <CaretDownGlyph />
+          <Subtract16 />
         </button>
         <input
+          :data-invalid="isInvalid"
           :id="uid"
           type="number"
           :value="internalValue"
@@ -43,23 +44,29 @@
         <WarningFilled16 v-if="isInvalid && !mobile" :class="`${carbonPrefix}--number__invalid`" />
         <div :class="`${carbonPrefix}--number__controls`" v-if="!mobile">
           <button
-            :class="`${carbonPrefix}--number__control-btn up-icon`"
-            @click="doUp"
-            type="button"
-            :aria-label="ariaLabelForUpButton"
-            :disabled="disabled"
-          >
-            <CaretUpGlyph />
-          </button>
-          <button
             :class="`${carbonPrefix}--number__control-btn down-icon`"
             @click="doDown"
             type="button"
             :aria-label="ariaLabelForDownButton"
             :disabled="disabled"
+            aria-live="polite"
+            aria-atomic="true"
           >
-            <CaretDownGlyph />
+            <Subtract16 class="down-icon" />
           </button>
+          <div :class="`${carbonPrefix}--number__rule-divider`" />
+          <button
+            :class="`${carbonPrefix}--number__control-btn up-icon`"
+            @click="doUp"
+            type="button"
+            :aria-label="ariaLabelForUpButton"
+            :disabled="disabled"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            <Add16 class="up-icon" />
+          </button>
+          <div :class="`${carbonPrefix}--number__rule-divider`" />
         </div>
         <button
           v-else
@@ -69,7 +76,7 @@
           :aria-label="ariaLabelForUpButton"
           :disabled="disabled"
         >
-          <CaretUpGlyph />
+          <Add16 />
         </button>
       </div>
       <div :class="`${carbonPrefix}--form-requirement`" v-if="isInvalid">
@@ -84,15 +91,15 @@
 
 <script>
 import { uidMixin, themeMixin, carbonPrefixMixin, methodsMixin } from '../../mixins';
-import CaretDownGlyph from '@carbon/icons-vue/es/caret--down/index';
-import CaretUpGlyph from '@carbon/icons-vue/es/caret--up/index';
+import Add16 from '@carbon/icons-vue/es/add/16';
+import Subtract16 from '@carbon/icons-vue/es/subtract/16';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
 
 export default {
   name: 'CvNumberInput',
   mixins: [uidMixin, themeMixin, carbonPrefixMixin, methodsMixin({ input: ['blur', 'focus'] })],
-  components: { CaretDownGlyph, CaretUpGlyph, WarningFilled16, CvWrapper },
+  components: { Add16, Subtract16, WarningFilled16, CvWrapper },
   inheritAttrs: false,
   props: {
     disabled: Boolean,

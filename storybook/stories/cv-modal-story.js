@@ -103,6 +103,11 @@ const preKnobs = {
     Etiam venenatis molestie tellus. Quisque consectetur non risus eu rutrum. </p>
     `,
   },
+  otherButton: {
+    group: 'content',
+    slot: 'other-button',
+    value: 'other',
+  },
   secondaryButton: {
     group: 'content',
     slot: 'secondary-button',
@@ -129,13 +134,23 @@ const preKnobs = {
     group: 'attr',
     value: `@modal-shown="actionShown"
   @modal-hidden="actionHidden"
-  @modal-hide-request="actionHideRequest"`,
+  @modal-hide-request="actionHideRequest"
+  @after-modal-hidden="actionAfterHidden"`,
   },
-  primarySecondaryEvents: {
+  buttonOne: {
     group: 'attr',
     value: `
-    @primary-click="actionPrimary"
+    @primary-click="actionPrimary"`,
+  },
+  buttonTwo: {
+    group: 'attr',
+    value: `
     @secondary-click="actionSecondary"`,
+  },
+  buttonThree: {
+    group: 'attr',
+    value: `
+    @other-btn-click="actionOther"`,
   },
   autoHideOff: {
     group: 'attr',
@@ -164,6 +179,8 @@ const variants = [
       'secondaryButton',
       'events',
       'autoHideOff',
+      'buttonOne',
+      'buttonTwo',
     ],
   },
   {
@@ -178,8 +195,30 @@ const variants = [
       'primaryButtonDisabled',
       'secondaryButton',
       'events',
-      'primarySecondaryEvents',
+      'twoBbuttonFooterEvents',
       'autoHideOff',
+      'buttonOne',
+      'buttonTwo',
+    ],
+  },
+  {
+    name: 'three buttons with listeners',
+    includes: [
+      'closeAriaLabel',
+      'label',
+      'title',
+      'content',
+      'size',
+      'primaryButton',
+      'primaryButtonDisabled',
+      'secondaryButton',
+      'otherButton',
+      'events',
+      'threeBbuttonFooterEvents',
+      'autoHideOff',
+      'buttonOne',
+      'buttonTwo',
+      'buttonThree',
     ],
   },
   {
@@ -194,11 +233,22 @@ const variants = [
       'primaryButtonDisabled',
       'events',
       'autoHideOff',
+      'buttonOne',
     ],
   },
   {
     name: 'secondary-only',
-    includes: ['closeAriaLabel', 'label', 'title', 'size', 'content', 'secondaryButton', 'events', 'autoHideOff'],
+    includes: [
+      'closeAriaLabel',
+      'label',
+      'title',
+      'size',
+      'content',
+      'secondaryButton',
+      'events',
+      'autoHideOff',
+      'buttonTwo',
+    ],
   },
   { name: 'minimal', includes: ['label', 'title', 'content'] },
   { name: 'with input', excludes: ['label', 'title', 'content', 'scrollingContent'] },
@@ -236,7 +286,8 @@ for (const story of storySet) {
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">
-      <TimerButton @timer-start="doStart" @timer-end="doEnd" label="Call show() method" active-label-prefix="Call hide() method in" />
+      <button @click="doStart">Call show() only</button>
+      <TimerButton @timer-start="doStart" @timer-end="doEnd" label="Call show() method and then hide()" active-label-prefix="Call hide() method in" />
       </template>
     </sv-template-view>
   `;
@@ -255,7 +306,9 @@ for (const story of storySet) {
           actionHidden: action('CV Modal - modal-hidden'),
           actionPrimary: action('CV Modal - primary-click'),
           actionSecondary: action('CV Modal - secondary-click'),
+          actionOther: action('CV Modal - other-click'),
           actionHideRequest: action('Cv Modal - modal-hide-request'),
+          actionAfterHidden: action('CV Modal - after-modal-hidden'),
         },
         template: templateViewString,
       };

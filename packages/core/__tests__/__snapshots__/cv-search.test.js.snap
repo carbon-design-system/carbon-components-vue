@@ -4,7 +4,7 @@ exports[`CvSearch should render correctly when \`clearAriaLabel\` is set 1`] = `
 <cv-wrapper-stub tagtype="div" class="cv-search bx--form-item">
   <div role="search" class="bx--search bx--search--xl"><label for="test-1" class="bx--label"></label> <input id="test-1" type="text" role="search" placeholder="Search" aria-labelledby="test-1" class="bx--search-input">
     <!---->
-    <search16-stub class="bx--search-magnifier"></search16-stub> <button type="button" title="test clear aria label" aria-label="test clear aria label" class="bx--search-close">
+    <anonymous-stub class="bx--search-magnifier"></anonymous-stub> <button type="button" title="test clear aria label" aria-label="test clear aria label" class="bx--search-close">
       <close16-stub></close16-stub>
     </button>
   </div>
@@ -15,7 +15,7 @@ exports[`CvSearch should render correctly when \`formItem\` is false 1`] = `
 <cv-wrapper-stub tagtype="" class="cv-search bx--form-item">
   <div role="search" class="bx--search bx--search--xl cv-search"><label for="test-1" class="bx--label"></label> <input id="test-1" type="text" role="search" placeholder="Search" aria-labelledby="test-1" class="bx--search-input">
     <!---->
-    <search16-stub class="bx--search-magnifier"></search16-stub> <button type="button" title="Clear search input" aria-label="Clear search input" class="bx--search-close">
+    <anonymous-stub class="bx--search-magnifier"></anonymous-stub> <button type="button" title="Clear search input" aria-label="Clear search input" class="bx--search-close">
       <close16-stub></close16-stub>
     </button>
   </div>
@@ -25,7 +25,7 @@ exports[`CvSearch should render correctly when \`formItem\` is false 1`] = `
 exports[`CvSearch should render correctly when \`kind\` is toolbar 1`] = `
 <cv-wrapper-stub tagtype="div" class="cv-search bx--form-item">
   <div role="search" class="bx--search bx--search--xl bx--toolbar-search"><label for="test-1" class="bx--label"></label> <input id="test-1" type="text" role="search" placeholder="Search" aria-labelledby="test-1" class="bx--search-input"> <button type="button" aria-label="Toolbar search" class="bx--toolbar-search__btn">
-      <search16-stub class="bx--search-magnifier"></search16-stub>
+      <anonymous-stub class="bx--search-magnifier"></anonymous-stub>
     </button>
     <!----> <button type="button" title="Clear search input" aria-label="Clear search input" class="bx--search-close">
       <close16-stub></close16-stub>
@@ -37,7 +37,7 @@ exports[`CvSearch should render correctly when \`placeholder\` is set 1`] = `
 <cv-wrapper-stub tagtype="div" class="cv-search bx--form-item">
   <div role="search" class="bx--search bx--search--xl"><label for="test-1" class="bx--label"></label> <input id="test-1" type="text" role="search" placeholder="test placeholder" aria-labelledby="test-1" class="bx--search-input">
     <!---->
-    <search16-stub class="bx--search-magnifier"></search16-stub> <button type="button" title="Clear search input" aria-label="Clear search input" class="bx--search-close">
+    <anonymous-stub class="bx--search-magnifier"></anonymous-stub> <button type="button" title="Clear search input" aria-label="Clear search input" class="bx--search-close">
       <close16-stub></close16-stub>
     </button>
   </div>
@@ -48,7 +48,7 @@ exports[`CvSearch should render correctly when \`size\` is large 1`] = `
 <cv-wrapper-stub tagtype="div" class="cv-search bx--form-item">
   <div role="search" class="bx--search bx--search--lg"><label for="test-1" class="bx--label"></label> <input id="test-1" type="text" role="search" placeholder="Search" aria-labelledby="test-1" class="bx--search-input">
     <!---->
-    <search16-stub class="bx--search-magnifier"></search16-stub> <button type="button" title="Clear search input" aria-label="Clear search input" class="bx--search-close">
+    <anonymous-stub class="bx--search-magnifier"></anonymous-stub> <button type="button" title="Clear search input" aria-label="Clear search input" class="bx--search-close">
       <close16-stub></close16-stub>
     </button>
   </div>
@@ -59,7 +59,7 @@ exports[`CvSearch should render correctly when \`size\` is small 1`] = `
 <cv-wrapper-stub tagtype="div" class="cv-search bx--form-item">
   <div role="search" class="bx--search bx--search--sm"><label for="test-1" class="bx--label"></label> <input id="test-1" type="text" role="search" placeholder="Search" aria-labelledby="test-1" class="bx--search-input">
     <!---->
-    <search16-stub class="bx--search-magnifier"></search16-stub> <button type="button" title="Clear search input" aria-label="Clear search input" class="bx--search-close">
+    <anonymous-stub class="bx--search-magnifier"></anonymous-stub> <button type="button" title="Clear search input" aria-label="Clear search input" class="bx--search-close">
       <close16-stub></close16-stub>
     </button>
   </div>
@@ -70,7 +70,7 @@ exports[`CvSearch should render correctly when \`size\` is xl 1`] = `
 <cv-wrapper-stub tagtype="div" class="cv-search bx--form-item">
   <div role="search" class="bx--search bx--search--xl"><label for="test-1" class="bx--label"></label> <input id="test-1" type="text" role="search" placeholder="Search" aria-labelledby="test-1" class="bx--search-input">
     <!---->
-    <search20-stub class="bx--search-magnifier"></search20-stub> <button type="button" title="Clear search input" aria-label="Clear search input" class="bx--search-close">
+    <anonymous-stub class="bx--search-magnifier"></anonymous-stub> <button type="button" title="Clear search input" aria-label="Clear search input" class="bx--search-close">
       <close16-stub></close16-stub>
     </button>
   </div>
@@ -80,7 +80,7 @@ exports[`CvSearch should render correctly when \`size\` is xl 1`] = `
 exports[`CvSearch should render correctly when \`toolbarAriaLabel\` is set 1`] = `
 <cv-wrapper-stub tagtype="div" class="cv-search bx--form-item">
   <div role="search" class="bx--search bx--search--xl bx--toolbar-search"><label for="test-1" class="bx--label"></label> <input id="test-1" type="text" role="search" placeholder="Search" aria-labelledby="test-1" class="bx--search-input"> <button type="button" aria-label="test toolbar aria label" class="bx--toolbar-search__btn">
-      <search16-stub class="bx--search-magnifier"></search16-stub>
+      <anonymous-stub class="bx--search-magnifier"></anonymous-stub>
     </button>
     <!----> <button type="button" title="Clear search input" aria-label="Clear search input" class="bx--search-close">
       <close16-stub></close16-stub>
@@ -89,12 +89,12 @@ exports[`CvSearch should render correctly when \`toolbarAriaLabel\` is set 1`] =
 `;
 
 exports[`CvSearch should render correctly with only \`value\` prop set 1`] = `
-<cv-wrapper-stub tagtype="div" class="cv-search bx--form-item">
+<div class="cv-search bx--form-item">
   <div role="search" class="bx--search bx--search--xl"><label for="test-1" class="bx--label"></label> <input id="test-1" type="text" role="search" placeholder="Search" aria-labelledby="test-1" class="bx--search-input">
-    <!---->
-    <search16-stub class="bx--search-magnifier"></search16-stub> <button type="button" title="Clear search input" aria-label="Clear search input" class="bx--search-close">
-      <close16-stub></close16-stub>
-    </button>
-  </div>
-</cv-wrapper-stub>
+    <!----> <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" class="bx--search-magnifier">
+      <path d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5	C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"></path>
+    </svg> <button type="button" title="Clear search input" aria-label="Clear search input" class="bx--search-close"><svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="16" height="16" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"></path>
+      </svg></button></div>
+</div>
 `;

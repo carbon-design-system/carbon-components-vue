@@ -1,27 +1,23 @@
 <template>
-  <div
-    data-tile="expandable"
+  <button
+    type="button"
+    :style="styleObject"
+    @click="toggle"
     :class="[
       `cv-tile-expandable ${carbonPrefix}--tile--expandable`,
       { [`${carbonPrefix}--tile--is-expanded`]: internalExpanded },
     ]"
-    ref="target"
-    tabindex="0"
-    :style="styleObject"
-    @click="toggle"
-    @keydown.enter.prevent="toggle"
-    @keydown.space.prevent
-    @keyup.space.prevent="toggle"
   >
-    <button type="button" :class="`${carbonPrefix}--tile__chevron`">
-      <ChevronDown16 />
-    </button>
     <div :class="`${carbonPrefix}--tile-content`">
       <span data-tile-atf :class="`${carbonPrefix}--tile-content__above-the-fold`" ref="aboveFold">
         <slot>
           <!-- Above the fold content here -->
         </slot>
       </span>
+      <div :class="`${carbonPrefix}--tile__chevron`">
+        <span>{{ chevronLabel }}</span>
+        <ChevronDown16 />
+      </div>
       <span
         :class="`${carbonPrefix}--tile-content__below-the-fold`"
         ref="belowFold"
@@ -32,7 +28,7 @@
         </slot>
       </span>
     </div>
-  </div>
+  </button>
 </template>
 
 <script>
@@ -44,6 +40,8 @@ export default {
   mixins: [carbonPrefixMixin, methodsMixin({ target: ['blur', 'focus'] })],
   props: {
     expanded: Boolean,
+    tileCollapsedLabel: String,
+    tileExpandedLabel: String,
   },
   components: { ChevronDown16 },
   data() {
@@ -60,6 +58,11 @@ export default {
       if (val !== this.internalExpanded) {
         this.toggle(val);
       }
+    },
+  },
+  computed: {
+    chevronLabel() {
+      return this.internalExpanded ? this.tileExpandedLabel : this.tileCollapsedLabel;
     },
   },
   methods: {

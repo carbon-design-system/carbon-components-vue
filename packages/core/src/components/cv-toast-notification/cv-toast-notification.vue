@@ -2,7 +2,7 @@
   <div
     data-notification
     :class="[
-      `cv-notifiation ${carbonPrefix}--toast-notification`,
+      `cv-notification ${carbonPrefix}--toast-notification`,
       `${carbonPrefix}--toast-notification--${kind.toLowerCase()}`,
       { [`${carbonPrefix}--toast-notification--low-contrast`]: lowContrast },
     ]"
@@ -17,6 +17,7 @@
       <p :class="`${carbonPrefix}--toast-notification__caption`" v-html="caption"></p>
     </div>
     <button
+      v-if="!hideCloseButton"
       :aria-label="closeAriaLabel"
       type="button"
       data-notification-btn
@@ -43,6 +44,7 @@ export default {
   props: {
     caption: String,
     closeAriaLabel: { type: String, default: 'Dismiss notification' },
+    hideCloseButton: Boolean,
     kind: {
       type: String,
       default: 'info',

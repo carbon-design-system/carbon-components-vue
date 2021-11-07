@@ -88,7 +88,7 @@ for (const story of storySet) {
     <sv-template-view
       ref="templateView"
       sv-margin
-      :sv-alt-back="this.$options.propsData.theme !== 'light'"
+      :sv-alt-back="!this.$options.propsData.light"
       sv-source='${templateString.trim()}'>
       <template slot="component">${templateString}</template>
       <template slot="other">

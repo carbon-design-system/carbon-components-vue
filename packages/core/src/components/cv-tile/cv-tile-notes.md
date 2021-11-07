@@ -31,7 +31,9 @@ The tile comes in four types selected by the kind attribute.
 ```HTML
 <cv-tile
   cv-type="expandable"
- expanded
+  expanded
+  tileCollapsedLabel,
+  tileExpandedLabel,
   >
   Tile content
   <template slot="below">Below the fold content</template>
@@ -41,14 +43,16 @@ The tile comes in four types selected by the kind attribute.
 ## Attributes
 
 - kind: 'standard', 'clickable', 'expandable' or 'selectable'
-- selected: Selectable type only sets initial state to selected
-- cv-expandable: Expandable type only sets initial state to expanded
+- selected: Selectable kind only sets initial state to selected
+- expanded: Expandable kind only sets initial state to expanded
+- tileCollapsedLabel: String expandable kind only default: 'Tile collapsed'
+- tileExpandedLabel: String expandable kind only default: 'Tile expanded'
 
-### Clickable Type
+### Clickable kind
 
-The clickable type is intended as a navigation link. Users should supply href or click handling.
+The clickable kind is intended as a navigation link. Users should supply href or click handling.
 
-### Selectable type is based on an input. Users should supply name and value if needed.
+### Selectable kind is based on an input. Users should supply name and value if needed.
 
 Has the following unique attribute
 

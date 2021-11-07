@@ -4,16 +4,20 @@
     :class="[
       `${carbonPrefix}--snippet`,
       `${carbonPrefix}--snippet--multi`,
-      { [`${carbonPrefix}--snippet--expand`]: expanded, [`${carbonPrefix}--snippet--light`]: theme === 'light' },
+      { [`${carbonPrefix}--snippet--expand`]: expanded, [`${carbonPrefix}--snippet--disabled`]: disabled },
     ]"
     data-code-snippet
   >
-    <div :class="`${carbonPrefix}--snippet-container`">
-      <pre>
-        <slot></slot>
-      </pre>
+    <div :class="[`${carbonPrefix}--snippet-container`]">
+      <pre><slot /></pre>
     </div>
-    <cv-feedback-button :feedback="copyFeedback" :aria-label="feedbackAriaLabel" @click="$emit('copy-code')">
+    <cv-feedback-button
+      v-if="!hideCopyButton"
+      :disabled="disabled"
+      :feedback="copyFeedback"
+      :aria-label="feedbackAriaLabel"
+      @click="$emit('copy-code')"
+    >
       <Copy16 :class="`${carbonPrefix}--snippet__icon`" />
     </cv-feedback-button>
 
@@ -36,11 +40,11 @@ import CvButton from '../cv-button/cv-button';
 
 import Copy16 from '@carbon/icons-vue/es/copy/16';
 import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16';
-import { carbonPrefixMixin, themeMixin } from '../../mixins';
+import { carbonPrefixMixin } from '../../mixins';
 
 export default {
   name: 'CvCodeSnippetMultiline',
-  mixins: [themeMixin, carbonPrefixMixin],
+  mixins: [carbonPrefixMixin],
   components: {
     CvButton,
     CvFeedbackButton,
@@ -48,10 +52,12 @@ export default {
     ChevronDown16,
   },
   props: {
+    copyFeedback: String,
+    disabled: Boolean,
+    feedbackAriaLabel: String,
+    hideCopyButton: Boolean,
     lessText: { type: String, default: 'Show less' },
     moreText: { type: String, default: 'Show more' },
-    feedbackAriaLabel: String,
-    copyFeedback: String,
   },
   data() {
     return {

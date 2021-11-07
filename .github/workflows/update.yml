@@ -1,0 +1,59 @@
+name: Update packages
+
+permissions:
+  pull-requests: write
+
+on:
+  workflow_dispatch:
+  #   schedule:
+  #     - cron: '0 4 * * WED'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install
+        run: yarn --offline
+
+      - name: Update packages
+        run: |
+          yarn upgrade:automatic
+          rm yarn.lock
+          yarn
+
+      - name: Create PR
+        id: create-pr
+        uses: peter-evans/create-pull-request@v3
+        with:
+          # token: ${{ secrets.CREATE_PR_ACCESS_TOKEN }}
+          commit-message:
+            'feat: update Carbon versions and dependencies to latest'
+          committer: GitHub <noreply@github.com>
+          author:
+            ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          branch: 'update-packages'
+          branch-suffix: random
+          title:
+            'feat: update Carbon versions and package dependencies to latest'
+          body: |
+            This PR was automatically generated to update Carbon versions and other package dependencies on a regular basis. This is not intended to create any breaking changes, and will be reflected as a minor version bump for affected packages. NB we'll run all tests and do visual verifications, but there is always the opportunity for unexpected regressions. If you're using one of the packages in a stable or production context you may want to check this before taking the next minor version, and do let us know ASAP if you see anything problematic.
+
+            The goal is to update to the latest Carbon versions each Wednesday, to ensure we remain up-to-date with the latest changes and to ensure interoperability with other packages that also depend on Carbon. We will normally update all other dependencies at the same time to their latest versions, except for specific cases where we have found the updates to be problematic or require further work before they can be used. By using the latest stable version of each dependency we ensure we get fixes and improvements in a timely fashion and reduce the impact of updating the versions that can arise if versions are allowed to become stale for an extended period.
+
+            #### What did you change?
+
+            This action ran `yarn upgrade:automatic` to upgrade all carbon-related packages to the latest versions and to upgrade most other packages to the latest version, though certain critical packages are intentionally excluded.
+
+            This action also deleted the `yarn.lock` file in order to recreate it with the latest matching versions of secondary dependencies.
+
+            This PR includes the various `package.json` that pull our dependencies forward to the latest versions, the `yarn.lock` update that maps required versions to the actual versions to be used, and updates the offline mirror.
+
+            #### How did you test and verify your work?
+
+            This PR should not be merged until the following checks have been made:
+            - [ ] A reminder message has been posted onto the ccs-pal-dev Slack channel that a version update PR is going through.
+            - [ ] `yarn ci-check` runs cleanly and all tests pass (done automatically as part of the PR checks).
+            - [ ] the Netlify deploy-preview has been used to ensure that storybook runs and the main published components render correctly.

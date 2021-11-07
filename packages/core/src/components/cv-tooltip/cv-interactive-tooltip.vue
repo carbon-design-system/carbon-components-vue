@@ -25,7 +25,14 @@
       :id="uid"
       aria-hidden="true"
       :data-floating-menu-direction="direction"
-      :class="[`${carbonPrefix}--tooltip`, { [`${carbonPrefix}--tooltip--shown`]: dataVisible }]"
+      :class="[
+        `${carbonPrefix}--tooltip`,
+        {
+          [`${carbonPrefix}--tooltip--shown`]: dataVisible,
+          [`${carbonPrefix}--tooltip--${direction}`]: direction,
+          [`${carbonPrefix}--tooltip--align-${alignment}`]: alignment,
+        },
+      ]"
       ref="popup"
       role="dialog"
       :aria-describedby="`${uid}-body`"
@@ -39,7 +46,7 @@
         class="cv-interactive-tooltip__before-content"
         ref="beforeContent"
         tabindex="0"
-        style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+        style="position: absolute; left: -9999px; width: 1px; height: 1px;"
         @focus="focusBeforeContent"
       />
       <span :class="`${carbonPrefix}--tooltip__caret`"></span>
@@ -50,7 +57,7 @@
         class="cv-interactive-tooltip__after-content"
         ref="afterContent"
         tabindex="0"
-        style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+        style="position: absolute; left: -9999px; width: 1px; height: 1px;"
         @focus="focusAfterContent"
       />
     </div>
@@ -66,6 +73,7 @@ export default {
   mixins: [uidMixin, carbonPrefixMixin],
   components: { Information16 },
   props: {
+    alignment: { type: String, default: 'center', validator: val => ['start', 'center', 'end'].includes(val) },
     direction: {
       type: String,
       default: 'top',
@@ -103,6 +111,13 @@ export default {
     direction() {
       if (this.visible) {
         this.position();
+      }
+    },
+    dataVisible() {
+      if (this.dataVisible) {
+        this.$emit('tooltip-shown');
+      } else {
+        this.$emit('tooltip-hidden');
       }
     },
   },

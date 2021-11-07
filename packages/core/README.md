@@ -10,27 +10,35 @@
   <img src="/docs/AtCarbonVue2.png" alt="@carbon/vue">
 </div>
 
-# Change log
+## Carbon Vue library - A Carbon Community Project
+
+The [library](http://vue.carbondesignsystem.com/) provides front-end developers & engineers a collection of reusable Vue components to build websites and user interfaces. Adopting the library enables developers to use consistent markup, styles, and behavior in prototype and production work.
+
+## Community Contributions Needed
+
+As a community project contributions are not only welcome, but essential for the maintenance and growth of this project.
+
+## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md)
 
 ## Current Components
 
-View available Vue.js components [here](http://vue.carbondesignsystem.com). Usage information is available when you click the blue ? icon in the top right corner of the selected component.
+View available Vue.js components [here](http://vue.carbondesignsystem.com). Usage information is available when you click the blue `?` icon in the top right corner of the selected component.
 
 See [component status pages](https://www.carbondesignsystem.com/component-status) for the status of each component.
 
-# Development
+## Development
 
 Please refer to the [Contribution Guidelines](../../.github/CONTRIBUTING.md) before starting any work.
 
 ## Contributing
 
-Fork, create branch, submit PR. The PR will be used as part of a review process.
+Fork this repository, create a new branch, and submit a pull request to this repository. The PR will be used as part of a review process.
 
-# Usage
+## Usage
 
-## General
+### General
 
 The components do not import any of the carbon styles themselves. Use the SCSS or CSS from carbon-components to provide the styling.
 
@@ -39,17 +47,18 @@ The components do not import any of the carbon styles themselves. Use the SCSS o
 - If you prefer to build the SCSS, in the `<style>` tag of your top-level component you can include the styles wholesale: `@import "~carbon-components/scss/globals/scss/styles.scss";`
 - Check out the [Carbon Design System developers](https://www.carbondesignsystem.com/getting-started/developers/vanilla) page for information on including individual component styles into your project.
 
-## List of Available Components
+### List of Available Components
 
-View available Vue Components [here](http://vue.carbondesignsystem.com). Usage information is in the notes tab.
+View the available Carbon Vue components [here](http://vue.carbondesignsystem.com). Usage information is in the notes tab.
 
-# Getting Started
+## Getting Started
 
-## Quick Start (Vue CLI)
+### Quick Start (Vue CLI)
 
-Assuming we're starting with a new Vue CLI project:
+Assuming we're starting with a new project through the [Vue CLI](https://cli.vuejs.org/) (not with the plain Vue Webpack template, which might not work):
 
 ```sh
+> vue create newprojectname
 Vue CLI v3.7.0
 ? Please pick a preset: Manually select features
 ? Check the features needed for your project: Babel, CSS Pre-processors
@@ -68,7 +77,7 @@ $ yarn add @carbon/vue
 Or npm
 
 ```sh
-$ npm install @carbon/vue
+$ npm install --save @carbon/vue
 ```
 
 In src/main.js add the following to include the carbon styles and components.
@@ -150,20 +159,18 @@ Or npm
 $ npm serve
 ```
 
-## Longer start
-
 ### Install
 
-Run the following command using [npm](https://www.npmjs.com/):
-
-```bash
-npm install @carbon/vue
-```
-
-If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead:
+Run the following command using [Yarn](https://yarnpkg.com/en/):
 
 ```bash
 yarn add @carbon/vue
+```
+
+If you prefer [npm](https://www.npmjs.com/), use the following command instead:
+
+```bash
+npm install --save @carbon/vue
 ```
 
 NOTE: [current-script-polyfill](https://www.npmjs.com/package/current-script-polyfill) is required for older browsers (_e.g._ IE11)

@@ -10,21 +10,15 @@
     ]"
     :aria-disabled="disabled"
   >
-    <svg v-if="isCurrent">
-      <path d="M 7, 7 m -7, 0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" />
-    </svg>
-    <Warning16 v-else-if="!isComplete && invalid" :class="`${carbonPrefix}--progress__warning`" />
-    <svg v-else-if="!isComplete">
-      <path
-        d="M8 1C4.1 1 1 4.1 1 8s3.1 7 7 7 7-3.1 7-7-3.1-7-7-7zm0 13c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z"
-      />
-    </svg>
-    <CheckmarkOutline16 v-else-if="isComplete" />
+    <conponent :is="stepIcon" :class="stepClass">
+      <title>{{ description }}</title>
+    </conponent>
 
     <p
       :class="[`${carbonPrefix}--progress-label`, { [`${carbonPrefix}--progress-label-overflow`]: showOverflow }]"
       @mouseenter="onMouseEnter"
       @mouseleave="onMouseLeave"
+      @click="$emit('step-clicked', $event)"
       ref="label"
     >
       {{ label }}
@@ -41,8 +35,7 @@
 </template>
 
 <script>
-import CheckmarkOutline16 from '@carbon/icons-vue/es/checkmark--outline/16';
-import Warning16 from '@carbon/icons-vue/es/warning/16';
+import { CircleFilled16, CheckmarkOutline16, Warning16, RadioButton16 } from '@carbon/icons-vue';
 import { carbonPrefixMixin } from '../../mixins';
 
 const states = ['incomplete', 'current', 'complete'];
@@ -52,10 +45,13 @@ export default {
   mixins: [carbonPrefixMixin],
   components: {
     CheckmarkOutline16,
+    CircleFilled16,
+    RadioButton16,
     Warning16,
   },
   props: {
     additionalInfo: String,
+    description: String,
     disabled: Boolean,
     invalid: Boolean,
     label: String,
@@ -98,6 +94,22 @@ export default {
     },
     isCurrent() {
       return this.state === 0;
+    },
+    stepClass() {
+      return this.invalid ? `${this.carbonPrefix}--progress__warning` : '';
+    },
+    stepIcon() {
+      if (this.invalid) {
+        return Warning16;
+      } else {
+        if (this.isCurrent) {
+          return CircleFilled16;
+        } else if (this.isComplete) {
+          return CheckmarkOutline16;
+        } else {
+          return RadioButton16;
+        }
+      }
     },
   },
   methods: {

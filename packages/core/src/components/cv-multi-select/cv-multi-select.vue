@@ -19,19 +19,12 @@
     >
 
     <div
-      v-if="!inline && isHelper"
-      :class="[`${carbonPrefix}--form__helper-text`, { [`${carbonPrefix}--form__helper-text--disabled`]: disabled }]"
-    >
-      <slot name="helper-text">{{ helperText }}</slot>
-    </div>
-
-    <div
       role="listbox"
       tabindex="-1"
       :class="[
         `${carbonPrefix}--multi-select ${carbonPrefix}--list-box`,
         {
-          [`${carbonPrefix}--list-box--light`]: theme === 'light',
+          [`${carbonPrefix}--list-box--light`]: isLight,
           [`${carbonPrefix}--list-box--expanded`]: open,
           [`${carbonPrefix}--multi-select--invalid`]: isInvalid,
           [`${carbonPrefix}--multi-select--disabled`]: disabled,
@@ -138,6 +131,7 @@
               :name="item.name"
               :data-test="item.name"
               :label="item.label"
+              :disabled="item.disabled"
               style="pointer-events: none;"
             />
           </div>
@@ -146,6 +140,12 @@
     </div>
     <div v-if="isInvalid && !inline" :class="`${carbonPrefix}--form-requirement`">
       <slot name="invalid-message">{{ invalidMessage }}</slot>
+    </div>
+    <div
+      v-if="!inline && !isInvalid && isHelper"
+      :class="[`${carbonPrefix}--form__helper-text`, { [`${carbonPrefix}--form__helper-text--disabled`]: disabled }]"
+    >
+      <slot name="helper-text">{{ helperText }}</slot>
     </div>
   </div>
 </template>
@@ -301,7 +301,7 @@ export default {
     },
     checkHighlightPosition(newHiglight) {
       if (this.$refs.list && this.$refs.option && this.$refs.option[newHiglight]) {
-        if (this.$refs.list.scrollTop > this.$refs.option[newHiglight].offsetTop) {
+        if (this.$refs.list.scrollTop >= this.$refs.option[newHiglight].offsetTop) {
           this.$refs.list.scrollTop = this.$refs.option[newHiglight].offsetTop;
         } else if (
           this.$refs.list.scrollTop + this.$refs.list.clientHeight <
@@ -408,7 +408,9 @@ export default {
     onEnter() {
       if (this.open) {
         this.onItemClick(this.highlighted);
-        this.$refs.input.focus();
+        if (this.$refs.input) {
+          this.$refs.input.focus();
+        }
         this.filter = '';
 
         this.doOpen(false);
@@ -447,17 +449,20 @@ export default {
       this.highlighted = val;
     },
     onItemClick(val) {
-      const index = this.dataValue.findIndex(item => val === item);
-      if (index > -1) {
-        this.dataValue.splice(index, 1);
-      } else {
-        this.dataValue.push(val);
+      const option = this.options.find(item => item.value === val);
+      if (option && !option.disabled) {
+        const index = this.dataValue.findIndex(item => val === item);
+        if (index > -1) {
+          this.dataValue.splice(index, 1);
+        } else {
+          this.dataValue.push(val);
+        }
+        if (this.selectionFeedback === selectionFeedbackOptions[TOP]) {
+          this.updateOptions();
+        }
+        this.$refs.button.focus();
+        this.$emit('change', this.dataValue);
       }
-      if (this.selectionFeedback === selectionFeedbackOptions[TOP]) {
-        this.updateOptions();
-      }
-      this.$refs.button.focus();
-      this.$emit('change', this.dataValue);
     },
     inputClick() {
       if (!this.open) {

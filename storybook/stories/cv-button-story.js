@@ -30,6 +30,8 @@ let preKnobs = {
         tertiary: 'tertiary',
         ghost: 'ghost',
         danger: 'danger',
+        'danger--ghost': 'danger--ghost',
+        'danger--tertiary': 'danger--tertiary',
       },
       'primary',
     ], // consts.CONFIG], // fails when used with number in storybook 4.1.4
@@ -43,7 +45,9 @@ let preKnobs = {
       {
         default: '',
         field: 'field',
-        small: 'small',
+        'small (sm)': 'sm',
+        'large (lg)': 'lg',
+        'Extra large (xl)': 'xl',
       },
       '',
     ], // consts.CONFIG], // fails when used with number in storybook 4.1.4
@@ -81,6 +85,12 @@ let preKnobs = {
     type: text,
     config: ['label for assistive text', 'Icon button'],
     prop: 'label',
+  },
+  selected: {
+    group: 'attr',
+    type: boolean,
+    config: ['selected', false], // consts.CONFIG], // fails when used with number in storybook 4.1.4
+    prop: 'selected',
   },
   tipPosition: {
     group: 'attr',
@@ -120,11 +130,21 @@ let preKnobs = {
 let variants = [
   {
     name: 'default',
-    excludes: ['iconAlways', 'tipPosition', 'tipAlignment', 'label'],
+    excludes: ['iconAlways', 'selected', 'tipPosition', 'tipAlignment', 'label'],
   },
   {
     name: 'icon as SVG path',
-    excludes: ['size', 'disabled', 'icon', 'iconHref', 'iconAlways', 'tipPosition', 'tipAlignment', 'label'],
+    excludes: [
+      'size',
+      'disabled',
+      'icon',
+      'iconHref',
+      'iconAlways',
+      'selected',
+      'tipPosition',
+      'tipAlignment',
+      'label',
+    ],
     extra: {
       icon: {
         group: 'attr',
@@ -134,7 +154,17 @@ let variants = [
   },
   {
     name: 'icon as SVG symbol path',
-    excludes: ['size', 'disabled', 'icon', 'iconHref', 'iconAlways', 'tipPosition', 'tipAlignment', 'label'],
+    excludes: [
+      'size',
+      'disabled',
+      'icon',
+      'iconHref',
+      'iconAlways',
+      'selected',
+      'tipPosition',
+      'tipAlignment',
+      'label',
+    ],
     extra: {
       icon: {
         group: 'attr',
@@ -144,7 +174,17 @@ let variants = [
   },
   {
     name: 'icon as SVG',
-    excludes: ['size', 'disabled', 'icon', 'iconHref', 'iconAlways', 'tipPosition', 'tipAlignment', 'label'],
+    excludes: [
+      'size',
+      'disabled',
+      'icon',
+      'iconHref',
+      'iconAlways',
+      'selected',
+      'tipPosition',
+      'tipAlignment',
+      'label',
+    ],
     extra: {
       icon: {
         group: 'attr',
@@ -154,7 +194,7 @@ let variants = [
   },
   {
     name: 'minimal',
-    excludes: ['size', 'disabled', 'icon', 'iconAlways', 'tipPosition', 'tipAlignment', 'label'],
+    excludes: ['size', 'disabled', 'icon', 'iconAlways', 'selected', 'tipPosition', 'tipAlignment', 'label'],
   },
 ];
 
@@ -211,7 +251,7 @@ for (const story of storySet) {
 variants = [
   {
     name: 'icon-only',
-    includes: ['kind', 'size', 'disabled', 'label', 'tipPosition', 'tipAlignment', 'iconAlways'],
+    includes: ['kind', 'size', 'disabled', 'label', 'selected', 'tipPosition', 'tipAlignment', 'iconAlways'],
   },
 ];
 
@@ -316,7 +356,7 @@ for (const story of storySet) {
 storiesDefault.add(
   'button-set',
   () => {
-    const templateString = `<cv-button-set>
+    const templateString = `<cv-button-set :stacked="stacked"">
   <cv-button kind="primary">button 1</cv-button>
   <cv-button kind="secondary">button 2</cv-button>
   <cv-button kind="danger">button 3</cv-button>
@@ -334,6 +374,9 @@ storiesDefault.add(
     return {
       components: { CvButtonSet, CvButton, SvTemplateView },
       template: templateViewString,
+      props: {
+        stacked: { default: boolean('Stacked', false) },
+      },
     };
   },
   {

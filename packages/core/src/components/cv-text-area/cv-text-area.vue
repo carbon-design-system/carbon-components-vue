@@ -13,11 +13,13 @@
     <div :class="`${carbonPrefix}--text-area__wrapper`" :data-invalid="isInvalid">
       <WarningFilled16 v-if="isInvalid" :class="`${carbonPrefix}--text-area__invalid-icon`" />
       <textarea
+        :aria-invalid="isInvalid"
+        :aria-describedby="isInvalid ? errorId : undefined"
         :id="uid"
         :class="[
           `${carbonPrefix}--text-area`,
           {
-            [`${carbonPrefix}--text-area--light`]: theme === 'light',
+            [`${carbonPrefix}--text-area--light`]: isLight,
             [`${carbonPrefix}--text-area--invalid`]: isInvalid,
           },
         ]"
@@ -27,11 +29,11 @@
         ref="textarea"
       ></textarea>
     </div>
-    <div :class="`${carbonPrefix}--form-requirement`" v-if="isInvalid">
+    <div :class="`${carbonPrefix}--form-requirement`" v-if="isInvalid" :id="errorId">
       <slot name="invalid-message">{{ invalidMessage }}</slot>
     </div>
     <div
-      v-if="!isInvalid && isHelper"
+      v-if="isHelper"
       :class="[
         `${carbonPrefix}--form__helper-text`,
         { [`${carbonPrefix}--form__helper-text--disabled`]: $attrs.disabled },
@@ -56,11 +58,13 @@ export default {
     invalidMessage: { type: String, default: undefined },
     label: String,
     value: String,
+    warnText: { type: String, default: undefined },
   },
   data() {
     return {
       isHelper: false,
       isInvalid: false,
+      isWarn: false,
     };
   },
   mounted() {
@@ -70,6 +74,9 @@ export default {
     this.checkSlots();
   },
   computed: {
+    errorId() {
+      return `error-${this.uid}`;
+    },
     // Bind listeners at the component level to the embedded input element and
     // add our own input listener to service the v-model. See:
     // https://vuejs.org/v2/guide/components-custom-events.html#Customizing-Component-v-model
@@ -84,7 +91,7 @@ export default {
     checkSlots() {
       // NOTE: this.$slots is not reactive so needs to be managed on updated
       this.isInvalid = !!(this.$slots['invalid-message'] || (this.invalidMessage && this.invalidMessage.length));
-      this.isHelper = !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
+      this.isHelper = !this.isInvalid && !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
     },
   },
 };
