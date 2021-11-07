@@ -29,13 +29,13 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.16.0",
-    "core-js": "^3.9.0"
+    "core-js": "^3.19.1"
   },
   "devDependencies": {
     "@ascendancyy/vue-cli-plugin-stylelint": "^1.1.2",
-    "@carbon/icons-vue": "10.41.0",
-    "@carbon/themes": "^10.45.0",
-    "@carbon/type": "^10.37.0",
+    "@carbon/icons-vue": "10.42.0",
+    "@carbon/themes": "^10.46.0",
+    "@carbon/type": "^10.38.0",
     "@commitlint/cli": "^7.6.1",
     "@commitlint/config-conventional": "^7.6.0",
     "@storybook/addon-actions": "^5.2.1",
@@ -52,7 +52,7 @@
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/test-utils": "^1.2.2",
     "babel-eslint": "^10.1.0",
-    "carbon-components": "^10.46.0",
+    "carbon-components": "^10.47.1",
     "eslint": "^7.20.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^7.20.0",
