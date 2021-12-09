@@ -11,7 +11,7 @@
       <section v-if="hasToolbar" :class="`${carbonPrefix}--table-toolbar`">
         <div
           :aria-hidden="!batchActive"
-          v-show="hasBatchActions"
+          v-show="hasBatchActions && batchActive"
           :class="[`${carbonPrefix}--batch-actions`, { [`${carbonPrefix}--batch-actions--active`]: batchActive }]"
           :aria-label="actionBarAriaLabel"
         >
@@ -35,58 +35,58 @@
         <div :class="`${carbonPrefix}--toolbar-content`">
           <div
             v-if="$listeners.search"
-            :class="{
-              [`${carbonPrefix}--toolbar-search-container-active`]: searchActive || searchValue.length > 0,
-              [`${carbonPrefix}--toolbar-search-container-persistent`]: !expandingSearch,
-              [`${carbonPrefix}--toolbar-search-container-expandable`]: expandingSearch,
-            }"
+            :class="[
+              `${carbonPrefix}--search`,
+              `${carbonPrefix}--search--xl`,
+              {
+                [`${carbonPrefix}--toolbar-search-container-active`]: searchActive || searchValue.length > 0,
+                [`${carbonPrefix}--toolbar-search-container-persistent`]: !expandingSearch,
+                [`${carbonPrefix}--toolbar-search-container-expandable`]: expandingSearch,
+              },
+            ]"
             ref="searchContainer"
+            @click="checkSearchExpand(true)"
+            @keydown.enter.prevent="checkSearchExpand(true)"
+            @keydown.space.prevent
+            @keyup.space.prevent="checkSearchExpand(true)"
           >
-            <div data-search :class="`${carbonPrefix}--search ${carbonPrefix}--search--sm`" role="search">
-              <div
-                :class="`${carbonPrefix}--search-magnifier`"
-                tabindex="0"
-                @click="checkSearchExpand(true)"
-                @keydown.enter.prevent="checkSearchExpand(true)"
-                @keydown.space.prevent
-                @keyup.space.prevent="checkSearchExpand(true)"
-                ref="magnifier"
-              >
-                <Search16 :class="`${carbonPrefix}--toolbar-action__icon`" />
-              </div>
-              <label :for="uid" :class="`${carbonPrefix}--label`">{{ searchLabel }}</label>
-              <input
-                :class="`${carbonPrefix}--search-input`"
-                type="text"
-                :id="uid"
-                role="search"
-                :placeholder="searchPlaceholder"
-                :aria-labelledby="uid"
-                ref="search"
-                v-model="searchValue"
-                @input="onSearch"
-                @keydown.esc.prevent="checkSearchExpand(false)"
-              />
-              <button
-                :class="[
-                  `${carbonPrefix}--search-close`,
-                  { [`${carbonPrefix}--search-close--hidden`]: !clearSearchVisible },
-                ]"
-                :title="searchClearLabel"
-                :aria-label="searchClearLabel"
-                @click="onClearClick"
-                type="button"
-              >
-                <Close16 />
-              </button>
+            <div :class="`${carbonPrefix}--search-magnifier`">
+              <Search16 :class="`${carbonPrefix}--search-magnifier-icon`" />
             </div>
+            <label :for="uid" :class="`${carbonPrefix}--label`">{{ searchLabel }}</label>
+            <input
+              :class="`${carbonPrefix}--search-input`"
+              type="text"
+              :id="uid"
+              role="search"
+              :placeholder="searchPlaceholder"
+              :aria-labelledby="uid"
+              ref="search"
+              v-model="searchValue"
+              @input="onSearch"
+              @keydown.esc.prevent="checkSearchExpand(false)"
+              @blur="checkSearchExpand(false)"
+              @focus="checkSearchExpand(true)"
+            />
+            <button
+              :class="[
+                `${carbonPrefix}--search-close`,
+                { [`${carbonPrefix}--search-close--hidden`]: !clearSearchVisible },
+              ]"
+              :title="searchClearLabel"
+              :aria-label="searchClearLabel"
+              @click="onClearClick"
+              type="button"
+            >
+              <Close16 />
+            </button>
           </div>
           <slot name="actions" />
         </div>
       </section>
 
       <div :class="`${carbonPrefix}--data-table-content`">
-        <cv-wrapper :tagType="stickyHeader ? section : ''" :class="`${carbonPrefix}--data-table_inner-container`">
+        <cv-wrapper :tagType="stickyHeader ? 'section' : ''" :class="`${carbonPrefix}--data-table_inner-container`">
           <table
             :class="[
               `${carbonPrefix}--data-table`,
@@ -279,18 +279,8 @@ export default {
     this.$on('cv:sort', (srcComponent, value) => this.onSort(srcComponent, value));
   },
   mounted() {
-    if (this.$refs.searchContainer) {
-      this.$refs.magnifier.addEventListener('blur', this.checkSearchFocus);
-      this.$refs.search.addEventListener('blur', this.checkSearchFocus);
-    }
     this.updateRowsSelected();
     this.checkSlots();
-  },
-  beforeDestroy() {
-    if (this.$refs.searchContainer) {
-      this.$refs.magnifier.removeEventListener('blur', this.checkSearchFocus);
-      this.$refs.search.removeEventListener('blur', this.checkSearchFocus);
-    }
   },
   updated() {
     this.checkSlots();
@@ -411,7 +401,7 @@ export default {
         });
       } else {
         this.$nextTick(() => {
-          this.$refs.magnifier.focus();
+          this.$refs.searchContainer.focus();
         });
       }
     },

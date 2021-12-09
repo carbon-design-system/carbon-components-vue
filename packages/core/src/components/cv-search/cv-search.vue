@@ -40,7 +40,9 @@
       >
         <component :is="icon" :class="`${carbonPrefix}--search-magnifier`" />
       </button>
-      <component v-if="!isToolbarKind" :is="icon" :class="`${carbonPrefix}--search-magnifier`" />
+      <div v-if="!isToolbarKind" :class="`${carbonPrefix}--search-magnifier`">
+        <component :is="icon" :class="`${carbonPrefix}--search-magnifier-icon`" />
+      </div>
       <button
         type="button"
         :class="[`${carbonPrefix}--search-close`, { [`${carbonPrefix}--search-close--hidden`]: !clearVisible }]"
