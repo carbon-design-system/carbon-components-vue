@@ -43,7 +43,7 @@
               [`${carbonPrefix}--tabs--scrollable__nav-item--selected`]: selectedId == tab.uid,
             },
           ]"
-          role="presentation"
+          role="tab"
           :aria-selected="selectedId == tab.uid ? 'true' : 'false'"
           :aria-disabled="disabledTabs.indexOf(tab.uid) !== -1"
         >
