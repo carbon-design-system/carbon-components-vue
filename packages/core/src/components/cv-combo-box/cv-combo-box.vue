@@ -182,7 +182,7 @@ export default {
     this.updateOptions();
   },
   mounted() {
-    this.filter = this.value;
+    this.internalUpdateValue(this.value);
     this.highlighted = this.value ? this.value : this.highlight; // override highlight with value if provided
     this.checkSlots();
   },
