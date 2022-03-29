@@ -5,9 +5,6 @@
     "
   >
     <label :class="labelClasses">{{ label }}</label>
-    <div v-show="helperText" :class="helperTextClasses">
-      {{ helperText }}
-    </div>
     <div
       :class="`${carbonPrefix}--text-input__field-wrapper`"
       :data-invalid="isInvalid"
@@ -18,8 +15,11 @@
       />
       <input type="text" :class="inputClasses" :disabled="disabled" />
     </div>
-    <div v-show="isInvalid" :class="`${carbonPrefix}--form-requirement`">
+    <div v-if="isInvalid" :class="`${carbonPrefix}--form-requirement`">
       {{ invalidMessage }}
+    </div>
+    <div v-else :class="helperTextClasses">
+      {{ helperText }}
     </div>
   </div>
 </template>
