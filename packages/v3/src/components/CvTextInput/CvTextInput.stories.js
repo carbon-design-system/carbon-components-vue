@@ -14,6 +14,12 @@ export default {
     invalidMessage: {
       control: { type: 'text' },
     },
+    type: {
+      control: {
+        type: 'select',
+        options: ['text', 'password'],
+      },
+    },
   },
 };
 
