@@ -1,6 +1,6 @@
 <template>
   <button
-    aria-label="ariaLabel"
+    :aria-label="ariaLabel"
     type="button"
     class="cv-feedback-button"
     v-bind="$attrs"
