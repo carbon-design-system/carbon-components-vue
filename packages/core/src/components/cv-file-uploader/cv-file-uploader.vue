@@ -148,6 +148,7 @@ export default {
     buttonLabel: {
       type: String,
       default: undefined,
+      deprecated: true,
       validator: val => {
         if (val !== undefined && process.env.NODE_ENV === 'development') {
           console.warn('CvFileUploader: button-label prop deprecated in favour of drop-target-label');
@@ -213,20 +214,30 @@ export default {
     },
     addFiles(files) {
       for (const file of files) {
-        const internalFile = {
-          state: this.initialStateUploading ? STATES.UPLOADING : STATES.NONE,
-          file,
-          invalidMessageTitle: '',
-          invalidMessage: '',
-        };
+        const internalFile = this.internalFiles.find(item => item.file.name === file.name);
 
-        if (file.messageBundle) {
-          internalFile.invalidMessageTitle = file.messageBundle.invalidMessageTitle;
-          internalFile.invalidMessage = file.messageBundle.invalidMessage;
-          delete file.messageBundle;
+        if (internalFile) {
+          internalFile.state = this.initialStateUploading ? STATES.UPLOADING : STATES.NONE;
+          internalFile.invalidMessageTitle = '';
+          internalFile.invalidMessage = '';
+        } else {
+          const internalFile = {
+            state: this.initialStateUploading ? STATES.UPLOADING : STATES.NONE,
+            file,
+            invalidMessageTitle: '',
+            invalidMessage: '',
+          };
+
+          if (file.messageBundle) {
+            internalFile.invalidMessageTitle = file.messageBundle.invalidMessageTitle;
+            internalFile.invalidMessage = file.messageBundle.invalidMessage;
+            delete file.messageBundle;
+          }
+          this.internalFiles.push(internalFile);
         }
-        this.internalFiles.push(internalFile);
       }
+      // clear input we do not need to maintain it
+      this.$refs['file-input'].value = '';
       this.$emit('change', this.internalFiles);
     },
     onChange(ev) {
