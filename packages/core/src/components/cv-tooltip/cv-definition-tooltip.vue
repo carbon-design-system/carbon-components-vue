@@ -19,21 +19,21 @@
 
 <script>
 import { uidMixin, carbonPrefixMixin } from '../../mixins';
+import { alignments, directions } from './consts';
 
 export default {
   name: 'CvDefinitionTooltip',
   mixins: [uidMixin, carbonPrefixMixin],
   props: {
-    alignment: { type: String, default: 'center', validator: val => ['start', 'center', 'end'].includes(val) },
+    alignment: { type: String, default: 'center', validator: val => alignments.includes(val) },
     definition: { type: String, required: true },
     direction: {
       type: String,
       default: 'top',
-      validator(val) {
-        const validValues = ['top', 'left', 'right', 'bottom'];
-        const valid = validValues.includes(val);
+      validator: val => {
+        const valid = directions.includes(val);
         if (!valid) {
-          console.warn(`CVDefinitionTooltip.direction must be one of the following: ${validValues}`);
+          console.warn(`CVDefinitionTooltip.direction must be one of the following: ${directions}`);
         }
         return valid;
       },
