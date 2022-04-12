@@ -12,9 +12,7 @@ export default {
   props: {
     size: {
       type: String,
-      validator(val) {
-        return !val || val == 'sm';
-      },
+      validator: val => ['sm', ''].includes(val),
     },
   },
 };

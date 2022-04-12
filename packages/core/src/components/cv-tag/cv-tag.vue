@@ -7,7 +7,9 @@
       `cv-tag ${carbonPrefix}--tag`,
       `${carbonPrefix}--tag--${tagKind}`,
       {
+        [`${carbonPrefix}--tag--disabled`]: disabled,
         [`${carbonPrefix}--tag--filter`]: isFilter,
+        [`${carbonPrefix}--tag--interactive`]: hasClickListener,
         [`${carbonPrefix}--tag--${size}`]: size,
       },
     ]"
@@ -19,7 +21,7 @@
     <div v-if="icon && !filter" :class="`${carbonPrefix}--tag__custom-icon`">
       <CvSvg :svg="icon" />
     </div>
-    <span :class="`${carbonPrefix}--tag__label`">{{ label }}</span>
+    <span :class="`${carbonPrefix}--tag__label`" :title="hasClickListener ? label : ''">{{ label }}</span>
     <button
       v-if="isFilter"
       :class="`${carbonPrefix}--tag__close-icon`"
@@ -37,7 +39,7 @@ import Close16 from '@carbon/icons-vue/es/close/16';
 import { carbonPrefixMixin, uidMixin } from '../../mixins';
 import CvSvg from '../cv-svg/_cv-svg';
 
-const tagKinds = [
+export const tagKinds = [
   'red',
   'magenta',
   'purple',
@@ -71,8 +73,7 @@ export default {
     label: { type: String, required: true },
     kind: {
       type: String,
-      default: tagKinds[0],
-      validator(val) {
+      validator: val => {
         if (val === 'filter' && process.env.NODE_ENV === 'development') {
           console.warn('DEPRECARTED: Prefer props.filter (bool)');
           return true;
@@ -86,9 +87,7 @@ export default {
     },
     size: {
       type: String,
-      validator(val) {
-        return !val || val == 'sm';
-      },
+      validator: val => ['sm'].includes(val),
     },
   },
   data() {
