@@ -4,7 +4,13 @@
     v-on="$listeners"
     v-bind="linkProps"
     class="cv-link"
-    :class="[`${carbonPrefix}--link`, { [`${carbonPrefix}--link--inline`]: inline }]"
+    :class="[
+      `${carbonPrefix}--link`,
+      {
+        [`${carbonPrefix}--link--disabled`]: disabled,
+        [`${carbonPrefix}--link--inline`]: inline,
+      },
+    ]"
   >
     <slot></slot>
   </component>
@@ -17,6 +23,7 @@ export default {
   name: 'CvLink',
   mixins: [linkMixin, carbonPrefixMixin],
   props: {
+    disabled: Boolean,
     inline: Boolean,
   },
 };
