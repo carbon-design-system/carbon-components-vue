@@ -1,11 +1,9 @@
-const autoprefixer = require('autoprefixer');
 
 module.exports = {
   parser: 'postcss-scss',
-  plugins: {
-    'postcss-import': {},
-    'postcss-preset-env': {},
-    cssnano: {},
-    autoprefixer: {},
-  },
+  plugins: [
+    require('postcss-import'), 
+    require('postcss-preset-env'),
+    require('autoprefixer')
+  ],
 };
