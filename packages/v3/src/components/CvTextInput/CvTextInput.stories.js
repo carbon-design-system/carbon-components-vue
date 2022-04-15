@@ -1,7 +1,6 @@
-import CvTextInput from './CvTextInput';
+import CvTextInput from './CvTextInput.vue';
 import {
   sbCompPrefix,
-  storyParametersObject,
   storybookControlsFromProps,
 } from '../../global/storybook-utils';
 
@@ -23,12 +22,10 @@ export default {
   },
 };
 
-const template = `<CvTextInput v-bind="args" />`;
-const Template = (args, { argTypes }) => {
+const Template = (args) => {
   return {
-    props: Object.keys(argTypes),
     components: { CvTextInput },
-    template,
+    template: `<CvTextInput v-bind="args" />`,
     setup() {
       return {
         args,
@@ -41,8 +38,3 @@ export const Default = Template.bind({});
 Default.args = {
   label: 'Text input label',
 };
-Default.parameters = storyParametersObject(
-  Default.parameters,
-  template,
-  Default.args
-);
