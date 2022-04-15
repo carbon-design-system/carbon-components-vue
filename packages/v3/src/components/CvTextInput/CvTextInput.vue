@@ -7,6 +7,7 @@
         :class="`${carbonPrefix}--text-input__invalid-icon`"
       />
       <input
+        v-model="value"
         :type="inputType"
         :data-toggle-password-visibility="isPassword"
         :class="inputClasses"
@@ -36,11 +37,14 @@
 </template>
 
 <script setup>
-import { computed, defineProps, ref } from 'vue';
+import { computed, ref } from 'vue';
 import { carbonPrefix } from '../../global/settings';
 import { WarningFilled16, View16, ViewOff16 } from '@carbon/icons-vue';
 
 const props = defineProps({
+  modelValue: {
+    type: String,
+  },
   label: {
     type: String,
   },
@@ -61,6 +65,17 @@ const props = defineProps({
   },
   light: {
     type: Boolean,
+  },
+});
+
+const emit = defineEmits('update:modelValue');
+
+const value = computed({
+  get() {
+    return props.modelValue;
+  },
+  set(value) {
+    emit('update:modelValue', value);
   },
 });
 
