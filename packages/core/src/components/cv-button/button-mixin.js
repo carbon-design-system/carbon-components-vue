@@ -59,7 +59,7 @@ export default {
       return (opts = {}) => {
         const classes = [`${carbonSettings.prefix}--btn`];
         // ensure lower case and default to primary
-        const _kind = this?.kind?.toLowerCase?.() || 'primary';
+        const _kind = this.kind ? this.kind.toLowerCase() : 'primary';
 
         if (opts.skeleton) {
           classes.push(`${carbonSettings.prefix}--skeleton`);

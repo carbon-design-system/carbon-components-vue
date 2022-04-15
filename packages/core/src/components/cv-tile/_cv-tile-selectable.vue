@@ -1,6 +1,5 @@
 <template>
   <label
-    :data-wibble="`${isChecked}`"
     :for="uid"
     :aria-label="ariaLabel"
     :class="[
