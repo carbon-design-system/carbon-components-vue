@@ -5,17 +5,21 @@
   "scripts": {
     "serve": "start-storybook -p 6006",
     "build": "vue-cli-service build --target lib --name carbon-vue-3 ./src/index.js --no-clean",
+    "test:unit": "vue-cli-service test:unit",
+    "lint": "vue-cli-service lint",
     "format": "prettier --write '**/*.{scss,css,js,md,vue}' '!**/{build,es,lib,storybook,ts,umd,.coverage}/**'",
     "format:diff": "prettier --list-different '**/*.{scss,css,js,md,vue}' '!**/{dist,storybook-static,.coverage}/**'",
     "format:staged": "prettier --write '**/*.{scss,css,js,md,vue}' '!**/{dist,storybook-static,.coverage}/**'",
     "lint:css": "stylelint '{packages,storybook}/**/*.{vue,scss}'",
     "lint:es": "eslint {packages,storybook}/**/*.{js,vue}",
     "lint:style": "vue-cli-service lint:style",
-    "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
+  "files": [
+    "/dist",
+    "/src"
+  ],
   "dependencies": {
     "@carbon/icons-vue": "10.27.0",
     "@carbon/layout": "^10.17.0",
@@ -38,14 +42,18 @@
     "@storybook/vue3": "^6.4.22",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-plugin-unit-jest": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "@vue/test-utils": "^2.0.0-0",
+    "@vue/vue3-jest": "^27.0.0-alpha.1",
     "autoprefixer": "^10.4.4",
+    "babel-jest": "^27.0.6",
     "babel-loader": "^8.2.4",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.0.3",
+    "jest": "^27.0.5",
     "postcss": "^8.0.0",
     "prettier": "^2.4.1",
     "sass": "^1.50.0",
@@ -88,9 +96,5 @@
     "vue": "^3.0.0",
     "vue-loader": "^16.1.2"
   },
-  "files": [
-    "/dist",
-    "/src"
-  ],
   "sideEffects": true
 }
