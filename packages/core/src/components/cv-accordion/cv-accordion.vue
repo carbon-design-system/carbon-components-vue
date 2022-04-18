@@ -23,7 +23,7 @@ export default {
     size: {
       type: String,
       default: '',
-      validator: val => ['sm', 'xl', ''].includes(val),
+      validator: val => ['sm', 'md', 'lg', 'xl', ''].includes(val),
     },
   },
   mixins: [carbonPrefixMixin],
