@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CvTextInput should render correctly 1`] = `
+<div class="cv-text-input bx--form-item bx--text-input-wrapper"><label for="1" class="bx--label">test label</label>
+  <div class="bx--text-input__field-wrapper">
+    <!---->
+    <!----> <input id="1" type="text" class="bx--text-input">
+    <!---->
+  </div>
+  <!---->
+  <!---->
+  <!---->
+</div>
+`;
+
+exports[`CvTextInput should render correctly when helper text is provided 1`] = `
+<div class="cv-text-input bx--form-item bx--text-input-wrapper"><label for="1" class="bx--label">test label</label>
+  <div class="bx--text-input__field-wrapper">
+    <!---->
+    <!----> <input id="1" type="text" class="bx--text-input">
+    <!---->
+  </div>
+  <!---->
+  <!---->
+  <div class="bx--form__helper-text">helper test message</div>
+</div>
+`;
+
+exports[`CvTextInput should render correctly when helper text slot is provided 1`] = `
+<div class="cv-text-input bx--form-item bx--text-input-wrapper"><label for="1" class="bx--label">test label</label>
+  <div class="bx--text-input__field-wrapper">
+    <!---->
+    <!----> <input id="1" type="text" class="bx--text-input">
+    <!---->
+  </div>
+  <!---->
+  <!---->
+  <div class="bx--form__helper-text">
+    <div class="helper-text-class">helper text slot</div>
+  </div>
+</div>
+`;
+
+exports[`CvTextInput should render correctly when invalid message is provided 1`] = `
+<div class="cv-text-input bx--form-item bx--text-input-wrapper"><label for="1" class="bx--label">test label</label>
+  <div class="bx--text-input__field-wrapper" data-invalid="true">
+    <warningfilled16-stub class="bx--text-input__invalid-icon"></warningfilled16-stub>
+    <!----> <input id="1" type="text" class="bx--text-input bx--text-input--invalid">
+    <!---->
+  </div>
+  <div class="bx--form-requirement">invalid test message</div>
+  <!---->
+  <!---->
+</div>
+`;
+
+exports[`CvTextInput should render correctly when invalid message slot is provided 1`] = `
+<div class="cv-text-input bx--form-item bx--text-input-wrapper"><label for="1" class="bx--label">test label</label>
+  <div class="bx--text-input__field-wrapper" data-invalid="true">
+    <warningfilled16-stub class="bx--text-input__invalid-icon"></warningfilled16-stub>
+    <!----> <input id="1" type="text" class="bx--text-input bx--text-input--invalid">
+    <!---->
+  </div>
+  <div class="bx--form-requirement">
+    <div class="invalid-message-class">invalid message slot</div>
+  </div>
+  <!---->
+  <!---->
+</div>
+`;
+
+exports[`CvTextInput should render correctly when light theme is used 1`] = `
+<div class="cv-text-input bx--form-item bx--text-input-wrapper"><label for="1" class="bx--label">test label</label>
+  <div class="bx--text-input__field-wrapper">
+    <!---->
+    <!----> <input id="1" type="text" class="bx--text-input bx--text-input--light">
+    <!---->
+  </div>
+  <!---->
+  <!---->
+  <!---->
+</div>
+`;
+
+exports[`CvTextInput should render correctly when type is password and is not visible 1`] = `
+<div class="cv-text-input bx--form-item bx--text-input-wrapper bx--password-input-wrapper"><label for="1" class="bx--label">test label</label>
+  <div class="bx--text-input__field-wrapper">
+    <!---->
+    <!----> <input id="1" data-toggle-password-visibility="true" type="password" class="bx--text-input bx--password-input"> <button type="button" class="bx--btn bx--text-input--password__visibility__toggle bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center"><span class="bx--assistive-text">Show password</span>
+      <view16-stub class="bx--icon-visibility-off"></view16-stub>
+    </button></div>
+  <!---->
+  <!---->
+  <!---->
+</div>
+`;
+
+exports[`CvTextInput should render correctly when type is password and is visible 1`] = `
+<div class="cv-text-input bx--form-item bx--text-input-wrapper bx--password-input-wrapper"><label for="1" class="bx--label">test label</label>
+  <div class="bx--text-input__field-wrapper">
+    <!---->
+    <!----> <input id="1" data-toggle-password-visibility="true" type="password" class="bx--text-input bx--password-input"> <button type="button" class="bx--btn bx--text-input--password__visibility__toggle bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center"><span class="bx--assistive-text">Show password</span>
+      <view16-stub class="bx--icon-visibility-off"></view16-stub>
+    </button></div>
+  <!---->
+  <!---->
+  <!---->
+</div>
+`;
