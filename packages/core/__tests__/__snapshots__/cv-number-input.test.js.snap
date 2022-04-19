@@ -2,10 +2,9 @@
 
 exports[`CvNumberInput should match snapshot when all props are default 1`] = `
 <cv-wrapper-stub tagtype="div" class="cv-number-input bx--form-item">
-  <div data-numberinput="" class="bx--number"><label for="1" class="bx--label"></label>
-    <!---->
-    <div class="bx--number__input-wrapper">
-      <!----> <input id="1" type="number">
+  <div class="bx--number"><label for="1" class="bx--label"></label>
+    <div class="bx--number__input-wrapper"><input id="1" type="number">
+      <!---->
       <!---->
       <div class="bx--number__controls"><button type="button" aria-label="Decrease number input" aria-live="polite" aria-atomic="true" class="bx--number__control-btn down-icon">
           <subtract16-stub class="down-icon"></subtract16-stub>
@@ -18,17 +17,17 @@ exports[`CvNumberInput should match snapshot when all props are default 1`] = `
     </div>
     <!---->
     <!---->
+    <!---->
   </div>
 </cv-wrapper-stub>
 `;
 
 exports[`CvNumberInput should match snapshot when all props are provided 1`] = `
 <cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item">
-  <div data-numberinput="" class="bx--number bx--number--helpertext cv-number-input" data-invalid="true"><label for="1" class="bx--label">label</label>
-    <!---->
-    <div class="bx--number__input-wrapper">
-      <!----> <input id="1" type="number" data-invalid="true">
+  <div class="bx--number bx--number--helpertext cv-number-input" data-invalid="true"><label for="1" class="bx--label">label</label>
+    <div class="bx--number__input-wrapper"><input id="1" type="number" data-invalid="true">
       <warningfilled16-stub class="bx--number__invalid"></warningfilled16-stub>
+      <!---->
       <div class="bx--number__controls"><button type="button" aria-label="ariaLabelForDownButton" aria-live="polite" aria-atomic="true" class="bx--number__control-btn down-icon">
           <subtract16-stub class="down-icon"></subtract16-stub>
         </button>
@@ -40,16 +39,16 @@ exports[`CvNumberInput should match snapshot when all props are provided 1`] = `
     </div>
     <div class="bx--form-requirement">invalidMessage</div>
     <!---->
+    <!---->
   </div>
 </cv-wrapper-stub>
 `;
 
 exports[`CvNumberInput should match snapshot when helper-text slot is provided 1`] = `
 <cv-wrapper-stub tagtype="div" class="cv-number-input bx--form-item">
-  <div data-numberinput="" class="bx--number bx--number--helpertext"><label for="1" class="bx--label"></label>
-    <!---->
-    <div class="bx--number__input-wrapper">
-      <!----> <input id="1" type="number">
+  <div class="bx--number bx--number--helpertext"><label for="1" class="bx--label"></label>
+    <div class="bx--number__input-wrapper"><input id="1" type="number">
+      <!---->
       <!---->
       <div class="bx--number__controls"><button type="button" aria-label="Decrease number input" aria-live="polite" aria-atomic="true" class="bx--number__control-btn down-icon">
           <subtract16-stub class="down-icon"></subtract16-stub>
@@ -61,6 +60,7 @@ exports[`CvNumberInput should match snapshot when helper-text slot is provided 1
       </div>
     </div>
     <!---->
+    <!---->
     <div class="bx--form__helper-text">
       <div class="fake-slot">my helper text</div>
     </div>
@@ -70,11 +70,10 @@ exports[`CvNumberInput should match snapshot when helper-text slot is provided 1
 
 exports[`CvNumberInput should match snapshot when invalid-message slot is provided 1`] = `
 <cv-wrapper-stub tagtype="div" class="cv-number-input bx--form-item">
-  <div data-numberinput="" class="bx--number" data-invalid="true"><label for="1" class="bx--label"></label>
-    <!---->
-    <div class="bx--number__input-wrapper">
-      <!----> <input id="1" type="number" data-invalid="true">
+  <div class="bx--number" data-invalid="true"><label for="1" class="bx--label"></label>
+    <div class="bx--number__input-wrapper"><input id="1" type="number" data-invalid="true">
       <warningfilled16-stub class="bx--number__invalid"></warningfilled16-stub>
+      <!---->
       <div class="bx--number__controls"><button type="button" aria-label="Decrease number input" aria-live="polite" aria-atomic="true" class="bx--number__control-btn down-icon">
           <subtract16-stub class="down-icon"></subtract16-stub>
         </button>
@@ -88,16 +87,16 @@ exports[`CvNumberInput should match snapshot when invalid-message slot is provid
       <div class="fake-slot">my invalid message</div>
     </div>
     <!---->
+    <!---->
   </div>
 </cv-wrapper-stub>
 `;
 
 exports[`CvNumberInput should match snapshot when it is not a formItem 1`] = `
 <cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item">
-  <div data-numberinput="" class="bx--number cv-number-input"><label for="1" class="bx--label"></label>
-    <!---->
-    <div class="bx--number__input-wrapper">
-      <!----> <input id="1" type="number">
+  <div class="bx--number cv-number-input"><label for="1" class="bx--label"></label>
+    <div class="bx--number__input-wrapper"><input id="1" type="number">
+      <!---->
       <!---->
       <div class="bx--number__controls"><button type="button" aria-label="Decrease number input" aria-live="polite" aria-atomic="true" class="bx--number__control-btn down-icon">
           <subtract16-stub class="down-icon"></subtract16-stub>
@@ -108,6 +107,7 @@ exports[`CvNumberInput should match snapshot when it is not a formItem 1`] = `
         <div class="bx--number__rule-divider"></div>
       </div>
     </div>
+    <!---->
     <!---->
     <!---->
   </div>
@@ -116,10 +116,9 @@ exports[`CvNumberInput should match snapshot when it is not a formItem 1`] = `
 
 exports[`CvNumberInput should match snapshot when light theme 1`] = `
 <cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item">
-  <div data-numberinput="" class="bx--number bx--number--light cv-number-input"><label for="1" class="bx--label"></label>
-    <!---->
-    <div class="bx--number__input-wrapper">
-      <!----> <input id="1" type="number">
+  <div class="bx--number bx--number--light cv-number-input"><label for="1" class="bx--label"></label>
+    <div class="bx--number__input-wrapper"><input id="1" type="number">
+      <!---->
       <!---->
       <div class="bx--number__controls"><button type="button" aria-label="Decrease number input" aria-live="polite" aria-atomic="true" class="bx--number__control-btn down-icon">
           <subtract16-stub class="down-icon"></subtract16-stub>
@@ -130,6 +129,7 @@ exports[`CvNumberInput should match snapshot when light theme 1`] = `
         <div class="bx--number__rule-divider"></div>
       </div>
     </div>
+    <!---->
     <!---->
     <!---->
   </div>
@@ -138,28 +138,9 @@ exports[`CvNumberInput should match snapshot when light theme 1`] = `
 
 exports[`CvNumberInput should match snapshot when mobile variant requested 1`] = `
 <cv-wrapper-stub tagtype="div" class="cv-number-input bx--form-item">
-  <div data-numberinput="" class="bx--number bx--number--helpertext bx--number--mobile"><label for="1" class="bx--label"></label>
-    <div class="bx--form__helper-text">
-      <div class="fake-slot">my helper text</div>
-    </div>
-    <div class="bx--number__input-wrapper"><button type="button" aria-label="Decrease number input" class="bx--number__control-btn down-icon">
-        <subtract16-stub></subtract16-stub>
-      </button> <input id="1" type="number">
-      <!----> <button type="button" aria-label="Increase number input" class="bx--number__control-btn up-icon">
-        <add16-stub></add16-stub>
-      </button></div>
-    <!---->
-    <!---->
-  </div>
-</cv-wrapper-stub>
-`;
-
-exports[`CvNumberInput should match snapshot when value is Number 1`] = `
-<cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item">
-  <div data-numberinput="" class="bx--number cv-number-input"><label for="1" class="bx--label"></label>
-    <!---->
-    <div class="bx--number__input-wrapper">
-      <!----> <input id="1" type="number">
+  <div class="bx--number bx--number--helpertext bx--number--mobile"><label for="1" class="bx--label"></label>
+    <div class="bx--number__input-wrapper"><input id="1" type="number">
+      <!---->
       <!---->
       <div class="bx--number__controls"><button type="button" aria-label="Decrease number input" aria-live="polite" aria-atomic="true" class="bx--number__control-btn down-icon">
           <subtract16-stub class="down-icon"></subtract16-stub>
@@ -170,6 +151,31 @@ exports[`CvNumberInput should match snapshot when value is Number 1`] = `
         <div class="bx--number__rule-divider"></div>
       </div>
     </div>
+    <!---->
+    <!---->
+    <div class="bx--form__helper-text">
+      <div class="fake-slot">my helper text</div>
+    </div>
+  </div>
+</cv-wrapper-stub>
+`;
+
+exports[`CvNumberInput should match snapshot when value is Number 1`] = `
+<cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item">
+  <div class="bx--number cv-number-input"><label for="1" class="bx--label"></label>
+    <div class="bx--number__input-wrapper"><input id="1" type="number">
+      <!---->
+      <!---->
+      <div class="bx--number__controls"><button type="button" aria-label="Decrease number input" aria-live="polite" aria-atomic="true" class="bx--number__control-btn down-icon">
+          <subtract16-stub class="down-icon"></subtract16-stub>
+        </button>
+        <div class="bx--number__rule-divider"></div> <button type="button" aria-label="Increase number input" aria-live="polite" aria-atomic="true" class="bx--number__control-btn up-icon">
+          <add16-stub class="up-icon"></add16-stub>
+        </button>
+        <div class="bx--number__rule-divider"></div>
+      </div>
+    </div>
+    <!---->
     <!---->
     <!---->
   </div>
@@ -178,10 +184,9 @@ exports[`CvNumberInput should match snapshot when value is Number 1`] = `
 
 exports[`CvNumberInput should match snapshot when value is String 1`] = `
 <cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item">
-  <div data-numberinput="" class="bx--number cv-number-input"><label for="1" class="bx--label"></label>
-    <!---->
-    <div class="bx--number__input-wrapper">
-      <!----> <input id="1" type="number">
+  <div class="bx--number cv-number-input"><label for="1" class="bx--label"></label>
+    <div class="bx--number__input-wrapper"><input id="1" type="number">
+      <!---->
       <!---->
       <div class="bx--number__controls"><button type="button" aria-label="Decrease number input" aria-live="polite" aria-atomic="true" class="bx--number__control-btn down-icon">
           <subtract16-stub class="down-icon"></subtract16-stub>
@@ -192,6 +197,7 @@ exports[`CvNumberInput should match snapshot when value is String 1`] = `
         <div class="bx--number__rule-divider"></div>
       </div>
     </div>
+    <!---->
     <!---->
     <!---->
   </div>
@@ -200,10 +206,9 @@ exports[`CvNumberInput should match snapshot when value is String 1`] = `
 
 exports[`CvNumberInput should match snapshot with min, max and step as Strings 1`] = `
 <cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item">
-  <div data-numberinput="" class="bx--number cv-number-input"><label for="1" class="bx--label"></label>
-    <!---->
-    <div class="bx--number__input-wrapper">
-      <!----> <input id="1" type="number" step="2" min="-10" max="10">
+  <div class="bx--number cv-number-input"><label for="1" class="bx--label"></label>
+    <div class="bx--number__input-wrapper"><input id="1" type="number" step="2" min="-10" max="10">
+      <!---->
       <!---->
       <div class="bx--number__controls"><button type="button" aria-label="Decrease number input" aria-live="polite" aria-atomic="true" class="bx--number__control-btn down-icon">
           <subtract16-stub class="down-icon"></subtract16-stub>
@@ -214,6 +219,7 @@ exports[`CvNumberInput should match snapshot with min, max and step as Strings 1
         <div class="bx--number__rule-divider"></div>
       </div>
     </div>
+    <!---->
     <!---->
     <!---->
   </div>
@@ -222,10 +228,9 @@ exports[`CvNumberInput should match snapshot with min, max and step as Strings 1
 
 exports[`CvNumberInput should match snapshot with optional min, max and step as numbers 1`] = `
 <cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item">
-  <div data-numberinput="" class="bx--number cv-number-input"><label for="1" class="bx--label"></label>
-    <!---->
-    <div class="bx--number__input-wrapper">
-      <!----> <input id="1" type="number" step="2" min="-10" max="10">
+  <div class="bx--number cv-number-input"><label for="1" class="bx--label"></label>
+    <div class="bx--number__input-wrapper"><input id="1" type="number" step="2" min="-10" max="10">
+      <!---->
       <!---->
       <div class="bx--number__controls"><button type="button" aria-label="Decrease number input" aria-live="polite" aria-atomic="true" class="bx--number__control-btn down-icon">
           <subtract16-stub class="down-icon"></subtract16-stub>
@@ -236,6 +241,7 @@ exports[`CvNumberInput should match snapshot with optional min, max and step as 
         <div class="bx--number__rule-divider"></div>
       </div>
     </div>
+    <!---->
     <!---->
     <!---->
   </div>

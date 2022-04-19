@@ -13,6 +13,7 @@ export default {
       },
     },
     iconHref: {
+      deprecated: true,
       type: String,
       default: undefined,
       validator(val) {
@@ -29,6 +30,7 @@ export default {
         ['', 'primary', 'secondary', 'tertiary', 'ghost', 'danger', 'danger--ghost', 'danger--tertiary'].includes(val),
     },
     small: {
+      deprecated: true,
       type: Boolean,
       default: undefined,
       validator(val) {
@@ -56,7 +58,8 @@ export default {
     buttonClassOpts() {
       return (opts = {}) => {
         const classes = [`${carbonSettings.prefix}--btn`];
-        const lowerCaseKind = this.kind.toLowerCase();
+        // ensure lower case and default to primary
+        const _kind = this.kind ? this.kind.toLowerCase() : 'primary';
 
         if (opts.skeleton) {
           classes.push(`${carbonSettings.prefix}--skeleton`);
@@ -64,13 +67,13 @@ export default {
 
         if (opts.iconOnly) {
           classes.push(`${carbonSettings.prefix}--btn--icon-only`);
-          if (this.selected && lowerCaseKind === 'ghost') {
+          if (this.selected && _kind === 'ghost') {
             classes.push(`${carbonSettings.prefix}--btn--selected`);
           }
         }
 
-        if (this.kind && !opts.skeleton) {
-          classes.push(`${carbonSettings.prefix}--btn--${lowerCaseKind}`);
+        if (_kind && !opts.skeleton) {
+          classes.push(`${carbonSettings.prefix}--btn--${_kind}`);
         }
 
         let size = this.size ? this.size : this.small && 'sm';

@@ -1,6 +1,7 @@
 <template>
   <cv-wrapper :tag-type="formItem ? 'div' : ''" :class="`cv-search ${carbonPrefix}--form-item`">
     <div
+      :aria-labelledby="uid"
       :class="[
         `${carbonPrefix}--search`,
         {
@@ -14,6 +15,21 @@
       role="search"
       ref="search"
     >
+      <button
+        type="button"
+        v-if="isToolbarKind"
+        :class="`${carbonPrefix}--toolbar-search__btn`"
+        :aria-label="toolbarAriaLabel"
+        @click="toggleActive(true)"
+        @blur="checkFocus"
+      >
+        <component :is="icon" :class="`${carbonPrefix}--search-magnifier`" />
+      </button>
+
+      <div v-if="!isToolbarKind" :class="`${carbonPrefix}--search-magnifier`">
+        <Search20 :class="`${carbonPrefix}--search-magnifier-icon`" />
+      </div>
+
       <label :for="uid" :class="`${carbonPrefix}--label`">{{ label }}</label>
 
       <input
@@ -30,17 +46,6 @@
         @blur="checkFocus"
       />
 
-      <button
-        type="button"
-        v-if="isToolbarKind"
-        :class="`${carbonPrefix}--toolbar-search__btn`"
-        :aria-label="toolbarAriaLabel"
-        @click="toggleActive(true)"
-        @blur="checkFocus"
-      >
-        <component :is="icon" :class="`${carbonPrefix}--search-magnifier`" />
-      </button>
-      <component v-if="!isToolbarKind" :is="icon" :class="`${carbonPrefix}--search-magnifier`" />
       <button
         type="button"
         :class="[`${carbonPrefix}--search-close`, { [`${carbonPrefix}--search-close--hidden`]: !clearVisible }]"
@@ -64,7 +69,7 @@ import CvWrapper from '../cv-wrapper/_cv-wrapper';
 export default {
   name: 'CvSearch',
   mixins: [uidMixin, themeMixin, carbonPrefixMixin, methodsMixin({ input: ['blur', 'focus'] })],
-  components: { Close16, CvWrapper },
+  components: { Close16, CvWrapper, Search20 },
   inheritAttrs: false,
   props: {
     clearAriaLabel: { type: String, default: 'Clear search input' },

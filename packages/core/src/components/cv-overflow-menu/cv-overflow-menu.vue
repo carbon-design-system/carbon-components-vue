@@ -48,7 +48,7 @@
         class="cv-overflow-menu__before-content"
         ref="beforeContent"
         tabindex="0"
-        style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+        style="position: absolute; height: 1px; width: 1px; left: -9999px"
         @focus="focusBeforeContent"
       />
       <ul :class="`${carbonPrefix}--overflow-menu-options__content`">
@@ -58,7 +58,7 @@
         class="cv-overflow-menu__after-content"
         ref="afterContent"
         tabindex="0"
-        style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+        style="position: absolute; height: 1px; width: 1px; left: -9999px"
         @focus="focusAfterContent"
       />
     </div>
@@ -87,7 +87,7 @@ export default {
     tipPosition: {
       type: String,
       default: 'right',
-      validator: val => ['top', 'left', 'bottom', 'right'.includes(val)],
+      validator: val => ['top', 'left', 'bottom', 'right'].includes(val),
     },
     tipAlignment: { type: String, default: 'center', validator: val => ['start', 'center', 'end'].includes(val) },
   },

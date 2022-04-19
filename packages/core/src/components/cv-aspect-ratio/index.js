@@ -1,2 +1,2 @@
-import CvAspectRatio from './cv-aspect-ratio';
-export { CvAspectRatio };
+import CvAspectRatio, { ratios } from './cv-aspect-ratio';
+export { CvAspectRatio, ratios };
