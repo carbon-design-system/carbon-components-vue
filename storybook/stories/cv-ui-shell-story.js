@@ -34,7 +34,7 @@ import Fade16 from '@carbon/icons-vue/es/fade/16';
 import Notification20 from '@carbon/icons-vue/es/notification/20';
 import UserAvatar20 from '@carbon/icons-vue/es/user--avatar/20';
 import Login20 from '@carbon/icons-vue/es/login/20';
-import AppSwitcher20 from '@carbon/icons-vue/es/app-switcher/20';
+import AppSwitcher20 from '@carbon/icons-vue/es/switcher/20';
 
 const storiesDefault = storiesOf('Components/CvUIShell', module);
 // const storiesExperimental = storiesOf('Experimental/CvUIShell - header', module);
