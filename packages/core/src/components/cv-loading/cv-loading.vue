@@ -5,7 +5,7 @@
       :class="{
         'cv-loading': !overlay,
         [`${carbonPrefix}--loading`]: active || stopping,
-        [`${carbonPrefix}--loading--stop`]: !active && stopping,
+        [`${carbonPrefix}--loading--stop`]: (!active && stopping) || stopped,
         [`${carbonPrefix}--loading--small`]: small,
       }"
       ref="loading"
@@ -55,6 +55,7 @@ export default {
   },
   data() {
     return {
+      stopped: false,
       stopping: false,
     };
   },
@@ -69,10 +70,12 @@ export default {
         this.$refs.loading.removeEventListener('animationend', this.onEnd);
 
         this.stopping = false;
+        this.stopped = true;
         this.$emit('loading-end');
       }
     },
     onActiveUpdate(newValue) {
+      this.stopped = false;
       this.stopping = !newValue;
       if (!newValue) {
         this.$refs.loading.addEventListener('animationend', this.onEnd);

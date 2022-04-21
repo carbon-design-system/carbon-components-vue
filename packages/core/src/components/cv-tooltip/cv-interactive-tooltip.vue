@@ -46,7 +46,7 @@
         class="cv-interactive-tooltip__before-content"
         ref="beforeContent"
         tabindex="0"
-        style="position: absolute; left: -9999px; width: 1px; height: 1px;"
+        style="position: absolute; left: -9999px; width: 1px; height: 1px"
         @focus="focusBeforeContent"
       />
       <span :class="`${carbonPrefix}--tooltip__caret`"></span>
@@ -57,7 +57,7 @@
         class="cv-interactive-tooltip__after-content"
         ref="afterContent"
         tabindex="0"
-        style="position: absolute; left: -9999px; width: 1px; height: 1px;"
+        style="position: absolute; left: -9999px; width: 1px; height: 1px"
         @focus="focusAfterContent"
       />
     </div>
@@ -67,21 +67,21 @@
 <script>
 import { uidMixin, carbonPrefixMixin } from '../../mixins';
 import Information16 from '@carbon/icons-vue/es/information/16';
+import { alignments, directions } from './consts';
 
 export default {
   name: 'CvInteractiveTooltip',
   mixins: [uidMixin, carbonPrefixMixin],
   components: { Information16 },
   props: {
-    alignment: { type: String, default: 'center', validator: val => ['start', 'center', 'end'].includes(val) },
+    alignment: { type: String, default: 'center', validator: val => alignments.includes(val) },
     direction: {
       type: String,
       default: 'top',
-      validator(val) {
-        const validValues = ['top', 'bottom', 'right', 'left'];
-        const valid = validValues.includes(val);
+      validator: val => {
+        const valid = directions.includes(val);
         if (!valid) {
-          console.warn(`CVInteractiveTooltip.direction must be one of the following: ${validValues}`);
+          console.warn(`CVInteractiveTooltip.direction must be one of the following: ${directions}`);
         }
         return valid;
       },

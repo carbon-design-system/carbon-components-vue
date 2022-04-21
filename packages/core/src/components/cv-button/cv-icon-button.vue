@@ -29,12 +29,12 @@ export default {
   mixins: [buttonMixin, carbonPrefixMixin],
   components: { CvSvg },
   props: {
-    label: { type: String, required: true },
+    label: { type: String, default: undefined },
     selected: Boolean,
     tipPosition: {
       type: String,
       default: 'bottom',
-      validator: val => ['top', 'left', 'bottom', 'right'.includes(val)],
+      validator: val => ['top', 'left', 'bottom', 'right'].includes(val),
     },
     tipAlignment: { type: String, default: 'center', validator: val => ['start', 'center', 'end'].includes(val) },
   },

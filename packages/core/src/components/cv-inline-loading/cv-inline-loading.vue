@@ -40,6 +40,7 @@ export default {
     active: {
       type: Boolean,
       default: undefined,
+      deprecated: true,
       validator: val => {
         if (val !== undefined && process.env.NODE_ENV === 'development') {
           console.warn('CvInlineLoading: active prop deprecated in favour of state prop');

@@ -1,5 +1,11 @@
 <template>
-  <nav :class="`${carbonPrefix}--breadcrumb ${carbonPrefix}--skeleton`" :aria-label="ariaLabel">
+  <nav
+    :class="[
+      `${carbonPrefix}--breadcrumb ${carbonPrefix}--skeleton`,
+      { [`${carbonPrefix}--breadcrumb--no-trailing-slash`]: noTrailingSlash },
+    ]"
+    :aria-label="ariaLabel"
+  >
     <cv-breadcrumb-item-skeleton></cv-breadcrumb-item-skeleton>
     <cv-breadcrumb-item-skeleton></cv-breadcrumb-item-skeleton>
     <cv-breadcrumb-item-skeleton></cv-breadcrumb-item-skeleton>
@@ -18,6 +24,7 @@ export default {
   },
   props: {
     ariaLabel: { type: String, default: 'breadcrumb' },
+    noTrailingSlash: Boolean,
   },
 };
 </script>

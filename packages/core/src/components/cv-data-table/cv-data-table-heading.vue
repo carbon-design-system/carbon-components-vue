@@ -28,7 +28,7 @@
 
 <script>
 import ArrowDown16 from '@carbon/icons-vue/es/arrow--down/16';
-import Arrows16 from '@carbon/icons-vue/es/arrows/16';
+import Arrows16 from '@carbon/icons-vue/es/arrows--vertical/16';
 import CvWrapper from '../cv-wrapper/_cv-wrapper';
 import { uidMixin, carbonPrefixMixin } from '../../mixins';
 

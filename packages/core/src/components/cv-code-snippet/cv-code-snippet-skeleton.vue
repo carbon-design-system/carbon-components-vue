@@ -19,7 +19,7 @@ export default {
   name: 'CvCodeSnippetSkeleton',
   mixins: [carbonPrefixMixin],
   props: {
-    kind: { type: String, default: 'oneline' },
+    kind: { type: String, default: 'oneline', validator: val => ['multiline', 'oneline'].includes(val) },
   },
   computed: {
     multi() {

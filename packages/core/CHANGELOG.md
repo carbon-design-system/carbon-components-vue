@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.43.0](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@2.42.0...@carbon/vue@2.43.0) (2022-04-20)
+
+
+### Bug Fixes
+
+* code snippet validator ([ad93c93](https://github.com/carbon-design-system/carbon-components-vue/commit/ad93c93ca6309fc8c4c28c8a31b27c6ce44e21e5))
+* data skeleton layout ([b7b7342](https://github.com/carbon-design-system/carbon-components-vue/commit/b7b7342bbf6b5154c8fdfa46efff5a8de0a3df9f))
+* duplicate files in file upload ([3407a51](https://github.com/carbon-design-system/carbon-components-vue/commit/3407a51d8b7623fd51dfa8f1d7e19edfb0c9134f))
+* feedback button aria label ([93805d2](https://github.com/carbon-design-system/carbon-components-vue/commit/93805d293f041751b0a3a021d5c4b96ad35264d5))
+* header global action tip position validator ([ac10478](https://github.com/carbon-design-system/carbon-components-vue/commit/ac104780f1566d3097ab5fb1bc95d8c62d4a1be5))
+* icon button tip position validator ([e361f55](https://github.com/carbon-design-system/carbon-components-vue/commit/e361f55ebf9780ca7aa86f693cda52dcb2b10c2f))
+* internal state of uploading component when stopped ([b5fa8e4](https://github.com/carbon-design-system/carbon-components-vue/commit/b5fa8e48a1744318ad16d84958108c80d6edaca4))
+* minor updates ([0f46f96](https://github.com/carbon-design-system/carbon-components-vue/commit/0f46f96c6f6cfa508a817efae84268239ccd2174))
+* number input dom format ([afcb907](https://github.com/carbon-design-system/carbon-components-vue/commit/afcb9075179bcca2e338304d0971666bb99224d3))
+* search dom layout ([5425648](https://github.com/carbon-design-system/carbon-components-vue/commit/54256489edc376222337dc35c2c89e39d6c5b130))
+* snapshots ([24099c1](https://github.com/carbon-design-system/carbon-components-vue/commit/24099c1de99042b47c2b48caec8f80660c9abf58))
+* tab skeleton dom ([a1ff113](https://github.com/carbon-design-system/carbon-components-vue/commit/a1ff113bf8ea946229e63c233b7e1867d834079a))
+
+
+### Features
+
+* accordion size update ([d1ef1e3](https://github.com/carbon-design-system/carbon-components-vue/commit/d1ef1e311d6ec1f53a32291940aa6c941f309106))
+* add interactivce tag ([6cf54a8](https://github.com/carbon-design-system/carbon-components-vue/commit/6cf54a8bd82960d4c300e595e56533666231a065))
+* add no trailing slash to breadcrumb skeleton ([4603804](https://github.com/carbon-design-system/carbon-components-vue/commit/4603804350b61573867ee6ce686750649a91d36b))
+* disabled link property ([c32a189](https://github.com/carbon-design-system/carbon-components-vue/commit/c32a1898b76402df539c537290a00715132772fa))
+* export tooltip consts ([2ca0796](https://github.com/carbon-design-system/carbon-components-vue/commit/2ca0796fd7ab00aac9c58b807b8c7570b77b354a))
+* update carbon dependencies ([4dd96f0](https://github.com/carbon-design-system/carbon-components-vue/commit/4dd96f048d4f8a1b9aba42b289000331a970fe3d))
+
+
+
+
+
 # [2.42.0](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@2.22.0-canary.0...@carbon/vue@2.42.0) (2021-11-02)
 
 ### Bug Fixes

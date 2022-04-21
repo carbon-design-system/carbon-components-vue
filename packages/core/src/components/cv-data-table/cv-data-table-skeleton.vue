@@ -1,6 +1,6 @@
 <template>
   <cv-data-table skeleton :data="data" :columns="cols" v-on="$listeners" v-bind="$attrs">
-    <template v-if="hasBatchActions" slot="helper-text">
+    <template v-if="hasHelperText" slot="helper-text">
       <slot name="helper-text" />
     </template>
 
@@ -29,7 +29,6 @@ export default {
   },
   props: {
     columns: { type: [Array, Number], default: DEFAULTS.COLS },
-    hasExpandables: Boolean,
     rows: { type: Number, default: DEFAULTS.ROWS },
   },
   data() {
