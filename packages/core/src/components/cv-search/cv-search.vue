@@ -12,7 +12,6 @@
           'cv-search': !formItem,
         },
       ]"
-      role="search"
       ref="search"
     >
       <button
