@@ -25,9 +25,8 @@ jobs:
       - name: Install
         run: yarn --offline
 
-      - name: Build
-        run: yarn build
-
+        # yarn build is part of ci-check
+        # yarn test is also part of ci-check
       - name: Package CI checks
         run: yarn ci-check
 
@@ -49,20 +48,3 @@ jobs:
       - name: Lint
         run: yarn run lint
 
-  tests:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: lts/fermium
-
-      - name: Install
-        run: yarn --offline
-
-      - name: Tests
-        run: yarn test --ci
