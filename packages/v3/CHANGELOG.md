@@ -5,14 +5,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [0.5.0](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue-3@0.4.0...@carbon/vue-3@0.5.0) (2022-04-20)
 
-
 ### Features
 
-* update carbon dependencies ([4dd96f0](https://github.com/carbon-design-system/carbon-components-vue/commit/4dd96f048d4f8a1b9aba42b289000331a970fe3d))
-
-
-
-
+- update carbon dependencies ([4dd96f0](https://github.com/carbon-design-system/carbon-components-vue/commit/4dd96f048d4f8a1b9aba42b289000331a970fe3d))
 
 # 0.4.0 (2021-11-02)
 
