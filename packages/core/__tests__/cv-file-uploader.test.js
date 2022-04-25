@@ -1,7 +1,9 @@
-import { testComponent, awaitNextTick } from './_helpers';
+import { awaitNextTick } from './_helpers';
 import { CvFileUploader } from '@/components/cv-file-uploader';
 
 const { shallowMount: shallow, trigger, setProps } = awaitNextTick;
+trigger;
+setProps;
 
 describe('CvFileUploader', () => {
   // ***************
