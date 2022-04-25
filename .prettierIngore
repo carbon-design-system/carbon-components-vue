@@ -1,0 +1,11 @@
+.yarn
+storybook-static
+build
+es
+lib
+umd
+dist
+
+# Managed by Lerna - <https://github.com/lerna/lerna/tree/main/commands/version#--conventional-commits>
+
+CHANGELOG.md
