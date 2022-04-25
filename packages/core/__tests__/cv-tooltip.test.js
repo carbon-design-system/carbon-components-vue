@@ -571,7 +571,7 @@ describe('CvInteractiveTooltip', () => {
     const wrapper = await shallow(CvInteractiveTooltip, {
       propsData,
     });
-    const spy = jest.spyOn(wrapper.vm, 'focusAfterContent');
+    jest.spyOn(wrapper.vm, 'focusAfterContent');
     await trigger(wrapper.find('button'), 'keydown.tab', { shiftKey: true });
     expect(wrapper.vm.$refs.afterContent).toBe(document.activeElement);
   });
