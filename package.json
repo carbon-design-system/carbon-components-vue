@@ -14,8 +14,8 @@
     "clean:finally:files": "rimraf coverage node_modules storybook/storybook-static package-info.jsonl",
     "clean:lerna": "lerna clean --yes",
     "clean:packages": "yarn run-all --no-sort clean",
-    "format": "prettier --write '**/*.{scss,css,js,md,vue}' '!**/{build,es,lib,storybook,ts,umd,.coverage}/**'",
-    "format:diff": "prettier --list-different '**/*.{scss,css,js,md,vue}' '!**/{dist,storybook-static,.coverage}/**'",
+    "format": "prettier --ignore-path ./.gitignore --write '**/*.{scss,css,js,md,vue}' '!**/{build,es,lib,storybook,ts,umd,.coverage}/**'",
+    "format:diff": "prettier --ignore-path ./.gitignore --list-different '**/*.{scss,css,js,md,vue}' '!**/{dist,storybook-static,.coverage}/**'",
     "format:staged": "prettier --write '**/*.{scss,css,js,md,vue}' '!**/{dist,storybook-static,.coverage}/**'",
     "lint:css": "stylelint '{packages,storybook}/**/*.{vue,scss}'",
     "lint:es": "eslint {packages,storybook}/**/*.{js,vue}",
@@ -26,6 +26,7 @@
     "run-all": "lerna run --stream --prefix --loglevel success",
     "start": "yarn info @carbon/vue --json > package-info.jsonl && vue-cli-service storybook:serve -p 9001 -c storybook/.storybook",
     "test": "vue-cli-service test:unit",
+    "a11test": "node -v",
     "upgrade:carbon": "npm-check-updates -u --dep dev,peer,prod --packageFile '{package.json,{config/**,packages/**}/package.json}' --filter '/carbon/' --target minor"
 
   },
