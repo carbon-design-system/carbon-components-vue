@@ -8,8 +8,6 @@ import {
 } from '@/components/cv-structured-list';
 
 describe('CvStructuredList', () => {
-  const kinds = ['', 'danger'];
-
   // ***************
   // PROP CHECKS
   // ***************

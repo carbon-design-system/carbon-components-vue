@@ -25,9 +25,8 @@ jobs:
       - name: Install
         run: yarn --offline
 
-      - name: Build
-        run: yarn build
-
+        # yarn build is part of ci-check
+        # yarn test is also part of ci-check
       - name: Package CI checks
         run: yarn ci-check
 
@@ -65,4 +64,4 @@ jobs:
         run: yarn --offline
 
       - name: Tests
-        run: yarn test --ci
+        run: yarn a11test
