@@ -31,55 +31,52 @@
             </p>
           </div>
         </div>
-
         <div :class="`${carbonPrefix}--toolbar-content`">
           <div
             v-if="$listeners.search"
-            :class="{
-              [`${carbonPrefix}--toolbar-search-container-active`]: searchActive || searchValue.length > 0,
-              [`${carbonPrefix}--toolbar-search-container-persistent`]: !expandingSearch,
-              [`${carbonPrefix}--toolbar-search-container-expandable`]: expandingSearch,
-            }"
+            :aria-labelledby="`${uid}-search`"
+            :class="[
+              `${carbonPrefix}--search ${carbonPrefix}--search--xl`,
+              {
+                [`${carbonPrefix}--toolbar-search-container-active`]: searchActive || searchValue.length > 0,
+                [`${carbonPrefix}--toolbar-search-container-persistent`]: !expandingSearch,
+                [`${carbonPrefix}--toolbar-search-container-expandable`]: expandingSearch,
+              },
+            ]"
+            role="search"
             ref="searchContainer"
           >
-            <div data-search :class="`${carbonPrefix}--search ${carbonPrefix}--search--sm`" role="search">
-              <div
-                :class="`${carbonPrefix}--search-magnifier`"
-                tabindex="0"
-                @click="checkSearchExpand(true)"
-                @keydown.enter.prevent="checkSearchExpand(true)"
-                @keydown.space.prevent
-                @keyup.space.prevent="checkSearchExpand(true)"
-                ref="magnifier"
-              >
-                <Search16 :class="`${carbonPrefix}--toolbar-action__icon`" />
-              </div>
-              <label :for="uid" :class="`${carbonPrefix}--label`">{{ searchLabel }}</label>
-              <input
-                :class="`${carbonPrefix}--search-input`"
-                type="text"
-                :id="uid"
-                role="search"
-                :placeholder="searchPlaceholder"
-                :aria-labelledby="uid"
-                ref="search"
-                v-model="searchValue"
-                @input="onSearch"
-                @keydown.esc.prevent="checkSearchExpand(false)"
-              />
-              <button
-                :class="[
-                  `${carbonPrefix}--search-close`,
-                  { [`${carbonPrefix}--search-close--hidden`]: !clearSearchVisible },
-                ]"
-                :title="searchClearLabel"
-                :aria-label="searchClearLabel"
-                @click="onClearClick"
-                type="button"
-              >
-                <Close16 />
-              </button>
+            <div :class="`${carbonPrefix}--search-magnifier`" ref="magnifier">
+              <Search16 :class="`${carbonPrefix}--search-magnifier-icon`" />
             </div>
+            <label :id="`${uid}-search`" :for="uid" :class="`${carbonPrefix}--label`">{{ searchLabel }}</label>
+            <input
+              :class="`${carbonPrefix}--search-input`"
+              type="text"
+              :id="uid"
+              role="search"
+              :placeholder="searchPlaceholder"
+              :aria-labelledby="uid"
+              ref="search"
+              v-model="searchValue"
+              @input="onSearch"
+              @click="checkSearchExpand(true)"
+              @keydown.esc.prevent="checkSearchExpand(false)"
+              @focus="checkSearchExpand(true)"
+              @blur="checkSearchExpand(false)"
+            />
+            <button
+              :class="[
+                `${carbonPrefix}--search-close`,
+                { [`${carbonPrefix}--search-close--hidden`]: !clearSearchVisible },
+              ]"
+              :title="searchClearLabel"
+              :aria-label="searchClearLabel"
+              @click="onClearClick"
+              type="button"
+            >
+              <Close16 />
+            </button>
           </div>
           <slot name="actions" />
         </div>
@@ -196,6 +193,7 @@ import { uidMixin, carbonPrefixMixin } from '../../mixins';
 import Search16 from '@carbon/icons-vue/es/search/16';
 import Close16 from '@carbon/icons-vue/es/close/16';
 import ChevronRight16 from '@carbon/icons-vue/es/chevron--right/16';
+import clickout from '../../directives/clickout';
 export default {
   name: 'CvDataTable',
   components: {
@@ -210,6 +208,7 @@ export default {
     Close16,
     ChevronRight16,
   },
+  directives: { clickout },
   mixins: [uidMixin, carbonPrefixMixin],
   props: {
     actionBarAriaLabel: { type: String, default: 'Table Action Bar' },
@@ -362,6 +361,9 @@ export default {
       this.hasActions = !!this.$slots.actions;
       this.hasToolbar = !!(this.$slots.actions || this.$listeners.search || this.$slots['batch-actions']);
       this.isHelper = !!(this.$slots['helper-text'] || (this.helperText && this.helperText.length));
+    },
+    onClickout(ev) {
+      this.checkSearchExpand(false);
     },
     onCvMount(thing) {
       if (thing.$_CvDataTableHeading) {
