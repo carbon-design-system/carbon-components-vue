@@ -36,6 +36,16 @@ Please refer to the [Contribution Guidelines](../../.github/CONTRIBUTING.md) bef
 
 Fork this repository, create a new branch, and submit a pull request to this repository. The PR will be used as part of a review process.
 
+NOTE: PR titles need to conform to sematic versioning pattern described <https://github.com/amannn/action-semantic-pull-request>
+
+e.g.
+Examples for valid PR titles:
+
+- fix: Correct typo.
+- feat: Add support for Node 12.
+- refactor!: Drop support for Node 6.
+- feat(ui): Add Button component.
+
 ## Usage
 
 ### General
