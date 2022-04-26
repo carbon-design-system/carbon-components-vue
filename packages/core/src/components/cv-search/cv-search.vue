@@ -39,7 +39,6 @@
         v-model="internalValue"
         v-on="inputListeners"
         type="text"
-        role="search"
         ref="input"
         :placeholder="placeholder"
         :aria-labelledby="uid"
