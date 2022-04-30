@@ -1,4 +1,4 @@
-# carbon-components-vue
+# @carbon/vue-3
 
 <p align="center">
   <a href="https://github.com/carbon-design-system/carbon/blob/master/LICENSE">
@@ -34,21 +34,12 @@ As a community project contributions are not only welcome, but essential for the
 
 [Usage and getting started instructions](./packages/core/README.md#getting-started) for @carbon/vue.
 
-## Packages
-
-### [@carbon/vue](./packages/core)
-
-A library of the Carbon core components
-
-<img src="./docs/AtCarbonVue2.png" alt="@carbon/vue"></div>
-
 ### List of available components
 
 View available Vue Components [here](http://vue.carbondesignsystem.com). Usage information is available in the notes provided with each story.
 
 ## Building and publishing
 
-This is a monorepo using `lerna`.
 The following steps will build and publish the packages:
 
 - clone or download the repo;
