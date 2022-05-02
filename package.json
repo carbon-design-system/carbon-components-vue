@@ -1,21 +1,25 @@
 {
   "name": "@carbon/vue-3",
+  "license": "Apache-2.0",
   "version": "0.5.0",
+  "description": "A collection of components for the Carbon Design System built using Vue.js",
   "private": true,
   "packageManager": "yarn@3.2.0",
   "scripts": {
-    "serve": "start-storybook -p 6006",
     "build": "vue-cli-service build --target lib --name carbon-vue-3 ./src/index.js --no-clean",
+    "lint": "vue-cli-service lint",
+    "build-storybook": "build-storybook",
+    "serve": "start-storybook -p 6006",
+    "ci-check": "yarn format:diff && yarn test --maxWorkers=5 && yarn build && yarn build-storybook --quiet",
     "format": "prettier --write '**/*.{scss,css,js,md,vue}' '!**/{build,es,lib,storybook,ts,umd,.coverage}/**'",
     "format:diff": "prettier --list-different '**/*.{scss,css,js,md,vue}' '!**/{dist,storybook-static,.coverage}/**'",
     "format:staged": "prettier --write '**/*.{scss,css,js,md,vue}' '!**/{dist,storybook-static,.coverage}/**'",
     "lint:css": "stylelint '{packages,storybook}/**/*.{vue,scss}'",
     "lint:es": "eslint {packages,storybook}/**/*.{js,vue}",
     "lint:style": "vue-cli-service lint:style",
-    "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint",
-    "storybook": "start-storybook -p 6006 --no-manager-cache",
-    "build-storybook": "build-storybook"
+    "test": "vue-cli-service test:unit",
+    "a11test": "node -v",
+    "storybook": "start-storybook -p 6006 --no-manager-cache"
   },
   "dependencies": {
     "@carbon/icons-vue": "^10",
@@ -33,6 +37,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",
+    "@babel/eslint-parser": "^7.17.0",
+    "@commitlint/cli": "^16.2.4",
+    "@commitlint/config-conventional": "^16.2.4",
     "@storybook/addon-actions": "^6.4.22",
     "@storybook/addon-essentials": "^6.4.22",
     "@storybook/addon-links": "^6.4.22",
@@ -45,13 +52,14 @@
     "@vue/eslint-config-prettier": "^7.0.0",
     "@vue/test-utils": "next",
     "babel-core": "^6.26.3",
-    "babel-eslint": "^10.1.0",
     "babel-jest": "^28.0.3",
     "babel-loader": "^8.2.5",
     "copy-webpack-plugin": "^10.2.4",
     "eslint": "^8.14.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.7.1",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.4.1",
     "postcss": "^8.4.13",
     "postcss-loader": "^6.2.1",
     "prettier": "^2.6.2",
@@ -73,10 +81,40 @@
       "eslint:recommended",
       "@vue/prettier"
     ],
-    "parserOptions": {
-      "parser": "babel-eslint"
+    "rules": {
+      "no-console": [
+        "error",
+        {
+          "allow": [
+            "warn",
+            "error"
+          ]
+        }
+      ],
+      "no-debugger": "warn",
+      "no-unused-vars": [
+        "warn",
+        {
+          "ignoreRestSiblings": true
+        }
+      ],
+      "no-plusplus": "off",
+      "no-undef": "off",
+      "no-var": "error",
+      "semi": [
+        "error",
+        "always"
+      ],
+      "no-param-reassign": [
+        "error",
+        {
+          "props": false
+        }
+      ]
     },
-    "rules": {},
+    "parserOptions": {
+      "parser": "@babel/eslint-parser"
+    },
     "overrides": [
       {
         "files": [
@@ -88,6 +126,13 @@
         }
       }
     ]
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": true,
+    "arrowParens": "avoid"
   },
   "browserslist": [
     "> 1%",
@@ -127,6 +172,26 @@
     "/dist",
     "/src"
   ],
-  "sideEffects": true,
-
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{scss,css,js,md,vue}": [
+      "yarn format:staged",
+      "git add"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carbon-design-system/carbon-components-vue.git"
+  },
+  "sideEffects": true
 }

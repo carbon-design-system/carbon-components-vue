@@ -5,6 +5,10 @@ module.exports = {
     resolve: {
       extensions: ['.js', '.vue', '.json', '.jsonl'],
     },
+    performance: {
+      maxEntrypointSize: 768000,
+      maxAssetSize: 768000,
+    },
     // plugins: [
     //   new CopyWebpackPlugin({
     //     patterns: [{ from: "public", to: "wibble", toType: "dir" }]

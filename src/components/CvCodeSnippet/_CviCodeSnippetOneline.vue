@@ -88,9 +88,8 @@ export default {
     const text = ref(null);
     const container = ref(null);
 
-    const { hasOverflowLeft, hasOverflowRight } = useElementHasOverflow(
-      container
-    );
+    const { hasOverflowLeft, hasOverflowRight } =
+      useElementHasOverflow(container);
 
     const handleCopy = () => emit('copy', text.value?.innerText);
 
