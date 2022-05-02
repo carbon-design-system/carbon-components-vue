@@ -6,6 +6,9 @@
   "private": true,
   "packageManager": "yarn@3.2.0",
   "scripts": {
+    "postinstall": "husky install",
+    "prepack": "pinst --disable",
+    "postpack": "pinst --enable",
     "build": "vue-cli-service build --target lib --name carbon-vue-3 ./src/index.js --no-clean",
     "lint": "vue-cli-service lint",
     "build-storybook": "build-storybook",
@@ -60,6 +63,7 @@
     "eslint-plugin-vue": "^8.7.1",
     "husky": "^7.0.4",
     "lint-staged": "^12.4.1",
+    "pinst": "^3.0.0",
     "postcss": "^8.4.13",
     "postcss-loader": "^6.2.1",
     "prettier": "^2.6.2",
@@ -164,10 +168,6 @@
       "/node_modules/(?!@carbon)"
     ]
   },
-  "resolutions": {
-    "vue": "^3.0.0",
-    "vue-loader": "^16.1.2"
-  },
   "files": [
     "/dist",
     "/src"
@@ -177,16 +177,9 @@
       "@commitlint/config-conventional"
     ]
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "*.{scss,css,js,md,vue}": [
-      "yarn format:staged",
-      "git add"
+      "yarn format:staged"
     ]
   },
   "repository": {
