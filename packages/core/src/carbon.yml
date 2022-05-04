@@ -384,4 +384,4 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvuishell--header-base
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvuishell
