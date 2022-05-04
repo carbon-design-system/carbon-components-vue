@@ -188,7 +188,7 @@ assets:
         name: Storybook
         action: link
         url: https://vue.carbondesignsystem.com/?path=/story/components-cvmodal--default
-  multi-select:
+  multiselect:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/dropdown/usage/#multiselect
     framework: vue
