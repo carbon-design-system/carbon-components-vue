@@ -1,0 +1,387 @@
+# yaml-language-server: $schema=https://unpkg.com/@carbon-platform/schemas@v1/carbon-resources.schema.json
+library:
+  id: carbon-components-vue
+  name: Carbon Components Vue
+  description: Vue implementation of Carbon Components.
+  externalDocsUrl: https://angular.carbondesignsystem.com
+  inherits: carbon-styles
+assets:
+  accordion:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/accordion/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvaccordion
+  aspect-ratio:
+    status: stable
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvaspectratio
+  breadcrumb:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/breadcrumb/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvbreadcrumb
+  button:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/button/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvbutton--default
+  checkbox:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/checkbox/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvcheckbox--default
+  code-snippet:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/code-snippet/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvcodesnippet--default
+  combo-box:
+    status: stable
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvcombobox--default
+  content-switcher:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/data-table/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvcontentswitcher--default
+  data-table:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/accordion/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvdatatable--default
+  date-picker:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/date-picker/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvdatatable--default
+  dropdown:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/dropdown/usage/
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvdropdown--default
+  file-uploader:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/file-uploader/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvfileuploader--default
+  form:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/form/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvform--default
+  grid:
+    status: stable
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvgrid
+  inline-loading:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/inline-loading/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvinlineloading--default
+  inline-notification:
+    name: Inline notification
+    status: stable
+    type: component
+    platform: web
+    framework: vue
+    thumbnailPath: './thumbnails/inline-notification.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url:  https://vue.carbondesignsystem.com/?path=/story/components-cvinlinenotification--default
+    tags:
+      - system-feedback
+  link:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/link/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvlink
+  list:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/list/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvlist--default
+  loading:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/loading/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvloading--default
+  modal:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/modal/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvmodal--default
+  multi-select:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/dropdown/usage/#multiselect
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvmultiselect--default
+  number-input:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/number-input/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvnumberinput--default
+  overflow-menu:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/overflow-menu/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvoverflowmenu--default
+  pagination:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/pagination/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvpagination--default
+  progress-indicator:
+    status: stable
+    externalDocsUrl: https://carbondesignsystem.com/components/progress-indicator/usage/
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvprogress--default
+  radio-button:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/radio-button/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvradiobutton--default
+  search:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/search/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvsearch--default
+  select:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/select/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvselect--default
+  skeleton-text:
+    name: Skeleton text
+    status: stable
+    type: component
+    platform: web
+    framework: vue
+    thumbnailPath: './thumbnails/skeleton-text.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvskeletontext--default
+    tags:
+      - data-display
+  slider:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/slider/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvslider--default
+  structured-list:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/structured-list/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvstructuredlist--default
+  tabs:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/tabs/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvtabs--default
+  tag:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/tag/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvtag
+  text-area:
+    status: stable
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvtextarea--default
+  text-input:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/text-input/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvtextinput--default
+  tile:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/tile/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvtile--default
+  time-picker:
+    status: stable
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvtimepicker--default
+  toast-notification:
+    name: Toast notification
+    status: stable
+    type: component
+    platform: web
+    framework: vue
+    thumbnailPath: './thumbnails/toast-notification.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvtoastnotification--default
+    tags:
+      - system-feedback
+  toggle:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/toggle/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvtoggle--default
+  tooltip:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/tooltip/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvtooltip--default-interactive-tootlip
+  ui-shell-header:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-header/usage
+    framework: vue
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvuishell--header-base
