@@ -3,7 +3,7 @@ library:
   id: carbon-components-vue
   name: Carbon Components Vue
   description: Vue implementation of Carbon Components.
-  externalDocsUrl: https://angular.carbondesignsystem.com
+  externalDocsUrl: https://vue.carbondesignsystem.com/?path=/story/welcome
   inherits: carbon-styles
 assets:
   accordion:
