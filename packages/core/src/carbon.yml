@@ -40,7 +40,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvbutton--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvbutton
   checkbox:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/checkbox/usage
@@ -49,7 +49,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvcheckbox--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvcheckbox
   code-snippet:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/code-snippet/usage
@@ -58,7 +58,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvcodesnippet--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvcodesnippet
   combo-box:
     status: stable
     framework: vue
@@ -66,7 +66,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvcombobox--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvcombobox
   content-switcher:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/data-table/usage
@@ -75,7 +75,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvcontentswitcher--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvcontentswitcher
   data-table:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/accordion/usage
@@ -84,7 +84,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvdatatable--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvdatatable
   date-picker:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/date-picker/usage
@@ -93,7 +93,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvdatatable--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvdatatable
   dropdown:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/dropdown/usage/
@@ -102,7 +102,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvdropdown--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvdropdown
   file-uploader:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/file-uploader/usage
@@ -111,7 +111,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvfileuploader--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvfileuploader
   form:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/form/usage
@@ -120,7 +120,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvform--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvform
   grid:
     status: stable
     framework: vue
@@ -137,7 +137,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvinlineloading--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvinlineloading
   inline-notification:
     name: Inline notification
     status: stable
@@ -149,7 +149,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url:  https://vue.carbondesignsystem.com/?path=/story/components-cvinlinenotification--default
+        url:  https://vue.carbondesignsystem.com/?path=/story/components-cvinlinenotification
     tags:
       - system-feedback
   link:
@@ -169,7 +169,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvlist--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvlist
   loading:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/loading/usage
@@ -178,7 +178,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvloading--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvloading
   modal:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/modal/usage
@@ -187,7 +187,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvmodal--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvmodal
   multi-select:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/dropdown/usage/#multiselect
@@ -196,7 +196,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvmultiselect--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvmultiselect
   number-input:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/number-input/usage
@@ -205,7 +205,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvnumberinput--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvnumberinput
   overflow-menu:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/overflow-menu/usage
@@ -214,7 +214,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvoverflowmenu--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvoverflowmenu
   pagination:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/pagination/usage
@@ -223,7 +223,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvpagination--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvpagination
   progress-indicator:
     status: stable
     externalDocsUrl: https://carbondesignsystem.com/components/progress-indicator/usage/
@@ -232,7 +232,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvprogress--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvprogress
   radio-button:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/radio-button/usage
@@ -241,7 +241,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvradiobutton--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvradiobutton
   search:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/search/usage
@@ -250,7 +250,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvsearch--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvsearch
   select:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/select/usage
@@ -259,7 +259,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvselect--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvselect
   skeleton-text:
     name: Skeleton text
     status: stable
@@ -271,7 +271,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvskeletontext--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvskeletontext
     tags:
       - data-display
   slider:
@@ -282,7 +282,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvslider--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvslider
   structured-list:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/structured-list/usage
@@ -291,7 +291,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvstructuredlist--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvstructuredlist
   tabs:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/tabs/usage
@@ -300,7 +300,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvtabs--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvtabs
   tag:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/tag/usage
@@ -317,7 +317,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvtextarea--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvtextarea
   text-input:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/text-input/usage
@@ -326,7 +326,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvtextinput--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvtextinput
   tile:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/tile/usage
@@ -335,7 +335,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvtile--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvtile
   time-picker:
     status: stable
     framework: vue
@@ -343,7 +343,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvtimepicker--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvtimepicker
   toast-notification:
     name: Toast notification
     status: stable
@@ -355,7 +355,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvtoastnotification--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvtoastnotification
     tags:
       - system-feedback
   toggle:
@@ -366,7 +366,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvtoggle--default
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvtoggle
   tooltip:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/tooltip/usage
@@ -375,7 +375,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://vue.carbondesignsystem.com/?path=/story/components-cvtooltip--default-interactive-tootlip
+        url: https://vue.carbondesignsystem.com/?path=/story/components-cvtooltip-interactive-tootlip
   ui-shell-header:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-header/usage
