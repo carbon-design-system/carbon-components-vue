@@ -14,79 +14,80 @@
 </template>
 
 <script>
+export default {
+  name: 'CvAccordion',
+};
+</script>
+
+<script setup>
 import { computed, provide, reactive } from 'vue';
 import { carbonPrefix } from '../../global/settings';
 import { alignConsts, sizeConsts } from './consts';
 
-export default {
-  name: 'CvAccordion',
-  props: {
-    /**
-     * optional align, defaults to 'end'
-     */
-    align: {
-      type: String,
-      default: null,
-      validator: val => alignConsts.includes(val),
-    },
-    /**
-     * optional size setting
-     */
-    size: {
-      type: String,
-      default: null,
-      validator: val => sizeConsts.includes(val),
-    },
+defineProps({
+  /**
+   * optional align, defaults to 'end'
+   */
+  align: {
+    type: String,
+    default: null,
+    validator: val => alignConsts.includes(val),
   },
-  emits: {
-    /**
-     * Triggers when the clear button is pressed on a filter CvTag
-     */
-    change: payload => {
-      return (
-        typeof payload?.change?.id === 'string' &&
-        typeof payload?.change?.open === 'boolean' &&
-        Array.isArray(payload?.state)
-      );
-    },
+  /**
+   * optional size setting
+   */
+  size: {
+    type: String,
+    default: null,
+    validator: val => sizeConsts.includes(val),
   },
-  setup(props, { emit }) {
-    const items = reactive(new Map());
-    const state = computed({
-      get() {
-        return Array.from(items).map(item => ({
-          id: item[0], // key
-          open: item[1].open, // value
-        }));
-      },
-      set(newStates) {
-        newStates.forEach(newState => {
-          const item = items.get(newState.id);
-          if (item?.open !== newState.open) {
-            item.toggleOpen();
-          }
-        });
-      },
-    });
+});
 
-    // Functions provided to CvAccordionItem
-    provide('registerItem', (itemCvId, item) => {
-      items.set(itemCvId, item);
-    });
-    provide('deregisterItem', itemCvId => {
-      items.delete(itemCvId);
-    });
-    provide('onAccItemChagne', (clickedItemCvId, open) => {
-      items.get(clickedItemCvId).open = open;
-      emit('change', {
-        change: { id: clickedItemCvId, open },
-        state: state.value,
-      });
-    });
-
-    return { carbonPrefix, state };
+const emit = defineEmits({
+  /**
+   * Triggers when the clear button is pressed on a filter CvTag
+   */
+  change: payload => {
+    return (
+      typeof payload?.change?.id === 'string' &&
+      typeof payload?.change?.open === 'boolean' &&
+      Array.isArray(payload?.state)
+    );
   },
-};
+});
+
+const items = reactive(new Map());
+const state = computed({
+  get() {
+    return Array.from(items).map(item => ({
+      id: item[0], // key
+      open: item[1].open, // value
+    }));
+  },
+  set(newStates) {
+    newStates.forEach(newState => {
+      const item = items.get(newState.id);
+      if (item?.open !== newState.open) {
+        item.toggleOpen();
+      }
+    });
+  },
+});
+
+// Functions provided to CvAccordionItem
+provide('registerItem', (itemCvId, item) => {
+  items.set(itemCvId, item);
+});
+provide('deregisterItem', itemCvId => {
+  items.delete(itemCvId);
+});
+provide('onAccItemChange', (clickedItemCvId, open) => {
+  items.get(clickedItemCvId).open = open;
+  emit('change', {
+    change: { id: clickedItemCvId, open },
+    state: state.value,
+  });
+});
 </script>
 
 <style lang="scss"></style>
