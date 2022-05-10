@@ -31,6 +31,7 @@
     "@carbon/type": "^10",
     "@vueuse/core": "^4",
     "carbon-components": "^10",
+    "remove": "^0.1.5",
     "stylelint-config-property-sort-order-smacss": "^9.0.0",
     "stylelint-config-sass-guidelines": "^9.0.1",
     "vue": "^3.2.33"
@@ -69,6 +70,8 @@
     "postcss": "^8.4.13",
     "postcss-loader": "^6.2.1",
     "prettier": "^2.6.2",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
     "sass": "^1.51.0",
     "sass-loader": "^12.6.0",
     "storybook": "^6.4.22",
