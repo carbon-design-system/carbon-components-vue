@@ -31,6 +31,7 @@
     "@carbon/type": "^10",
     "@vueuse/core": "^4",
     "carbon-components": "^10",
+    "remove": "^0.1.5",
     "stylelint-config-property-sort-order-smacss": "^9.0.0",
     "stylelint-config-sass-guidelines": "^9.0.1",
     "vue": "^3.2.33"
@@ -55,20 +56,24 @@
     "@vue/cli-service": "^5.0.4",
     "@vue/compiler-sfc": "^3.2.33",
     "@vue/eslint-config-prettier": "^7.0.0",
-    "@vue/test-utils": "next",
+    "@vue/test-utils": "^2.0.0-rc.21",
+    "@vue/vue3-jest": "^27.0.0",
     "babel-core": "^6.26.3",
-    "babel-jest": "^28.0.3",
+    "babel-jest": "27.x",
     "babel-loader": "^8.2.5",
     "copy-webpack-plugin": "^10.2.4",
     "eslint": "^8.14.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.7.1",
     "husky": "^7.0.4",
+    "jest": "27.x",
     "lint-staged": "^12.4.1",
     "pinst": "^3.0.0",
     "postcss": "^8.4.13",
     "postcss-loader": "^6.2.1",
     "prettier": "^2.6.2",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
     "sass": "^1.51.0",
     "sass-loader": "^12.6.0",
     "storybook": "^6.4.22",
@@ -165,10 +170,20 @@
     },
     "preset": "@vue/cli-plugin-unit-jest",
     "transform": {
-      "^.+\\.vue$": "vue-jest"
+      "^.+\\.vue$": "@vue/vue3-jest",
+      "^.+\\js$": "babel-jest"
     },
     "transformIgnorePatterns": [
       "/node_modules/(?!@carbon)"
+    ],
+    "moduleFileExtensions": [
+      "vue",
+      "js",
+      "json",
+      "jsx",
+      "ts",
+      "tsx",
+      "node"
     ]
   },
   "files": [
