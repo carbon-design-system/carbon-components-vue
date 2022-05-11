@@ -43,7 +43,7 @@ describe('CvList', () => {
     );
   });
 
-  it('CvList - nested ordering', async () => {
+  it('CvList - nested unordered', async () => {
     const wrapper = mount(CvList, {
       props: {
         ordered: false,
@@ -63,8 +63,22 @@ describe('CvList', () => {
         `${carbonPrefix}--list--unordered`,
       ])
     );
+  });
 
-    await wrapper.setProps({ ordered: true });
+  it('CvList - nested ordered', async () => {
+    const wrapper = mount(CvList, {
+      props: {
+        ordered: true,
+      },
+      slots: {
+        default: {
+          render: () =>
+            h(CvListItem, {}, () =>
+              h(CvList, { nested: true, ordered: true }, () => '')
+            ),
+        },
+      },
+    });
 
     const orderedChildListTag = wrapper.find('ol ol');
     expect(new Set(orderedChildListTag.classes())).toEqual(

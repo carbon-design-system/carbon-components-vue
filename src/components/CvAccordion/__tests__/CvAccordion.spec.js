@@ -8,7 +8,7 @@ const dummyContent = 'Dummy content';
 const AccordionWithItemContent = {
   emits: ['change'],
   components: { CvAccordion, CvAccordionItem },
-  template: /* html */ `<cv-accordion @change="handleChange">
+  template: /* html */ `<cv-accordion @change="handleChange" ref="componentRef">
     <cv-accordion-item v-for="n in numbers" :key="\`acc-item-\${n}\`" :id="\`acc-item-\${n}\`" :data-id="\`acc-item-\${n}\`">
       <template v-slot:title>Section {{n}} title </template>
       <template v-slot:content>
@@ -17,12 +17,14 @@ const AccordionWithItemContent = {
     </cv-accordion-item>
   </cv-accordion>`,
   setup(props, { emit }) {
+    const componentRef = ref(null);
     const numbers = ref([1, 2, 3, 4]);
     const oneLess = () => numbers.value.pop();
     const handleChange = changeValue => {
       emit('change', changeValue);
     };
-    return { handleChange, numbers, oneLess };
+
+    return { handleChange, numbers, oneLess, componentRef };
   },
 };
 
@@ -72,7 +74,7 @@ describe('CvAccordion', () => {
       },
     ];
 
-    expect(acc.vm.state).toEqual(expectedState);
+    expect(acc.vm.componentRef.state).toEqual(expectedState);
 
     const item1 = wrapper.find('[data-id="acc-item-1"]');
     const item1Button = wrapper.find('button[aria-controls="acc-item-1"]');
@@ -89,7 +91,7 @@ describe('CvAccordion', () => {
     );
     await item1Button.trigger('click');
     expectedState[0].open = true; // 0 open
-    expect(acc.vm.state).toEqual(expectedState);
+    expect(acc.vm.componentRef.state).toEqual(expectedState);
     const classes1 = item1.classes();
     expect(classes1).toContain(`${carbonPrefix}--accordion__item--active`);
     expect(classes1).toContain(`${carbonPrefix}--accordion__item--expanding`);
@@ -109,12 +111,12 @@ describe('CvAccordion', () => {
     // Click item[1] and see change in state
     await item2Button.trigger('click');
     expectedState[1].open = true; // 0 and 1 open
-    expect(acc.vm.state).toEqual(expectedState);
+    expect(acc.vm.componentRef.state).toEqual(expectedState);
 
     // Click item[0] and see change in state and animation classes
     await item1Button.trigger('click');
     expectedState[0].open = false; // 1 open
-    expect(acc.vm.state).toEqual(expectedState);
+    expect(acc.vm.componentRef.state).toEqual(expectedState);
     expect(item1.classes()).toContain(
       `${carbonPrefix}--accordion__item--collapsing`
     );
@@ -126,17 +128,17 @@ describe('CvAccordion', () => {
     // Click remove an item and see change registration (confirms deregister)
     await wrapper.vm.oneLess();
     expectedState.pop();
-    expect(acc.vm.state).toEqual(expectedState); // 1 open still
+    expect(acc.vm.componentRef.state).toEqual(expectedState); // 1 open still
 
     // Change item 2 view setting state
     expectedState[2].open = true;
-    acc.vm.state = expectedState;
-    expect(acc.vm.state).toEqual(expectedState); // nothing open
+    acc.vm.componentRef.state = expectedState;
+    expect(acc.vm.componentRef.state).toEqual(expectedState); // nothing open
 
     // check state still updating via click after being set
     await item1Button.trigger('click');
     expectedState[0].open = true; // 0 open
-    expect(acc.vm.state).toEqual(expectedState);
+    expect(acc.vm.componentRef.state).toEqual(expectedState);
   });
 
   // it('Register, deregister, onActionItemClick work to produced state', () => {
