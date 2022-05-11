@@ -12,7 +12,6 @@
             [`${carbonPrefix}--btn--primary`]: kind === 'button',
           },
         ]"
-        role="button"
         tabindex="0"
         ref="focusTarget"
         @keydown.enter.prevent="onShow()"

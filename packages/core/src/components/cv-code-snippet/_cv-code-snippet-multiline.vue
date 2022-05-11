@@ -15,7 +15,8 @@
       v-if="!hideCopyButton"
       :disabled="disabled"
       :feedback="copyFeedback"
-      :aria-label="feedbackAriaLabel"
+      :title="feedbackAriaLabel"
+      :ariaLabel="feedbackAriaLabel"
       @click="$emit('copy-code')"
     >
       <Copy16 :class="`${carbonPrefix}--snippet__icon`" />

@@ -20,6 +20,7 @@
 
     <div
       role="listbox"
+      aria-label="list"
       tabindex="-1"
       :class="[
         `${carbonPrefix}--multi-select ${carbonPrefix}--list-box`,
