@@ -1,7 +1,19 @@
 # carbon-components-vue
 
-[![Carbon Components Vue is released under the Apache-2.0 license](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](./LICENSE)
-[![CircleCI](https://circleci.com/gh/carbon-design-system/carbon-components-vue.svg?style=shield)](https://circleci.com/gh/carbon-design-system/carbon-components-vue)
+<p align="center">
+  <a href="https://github.com/carbon-design-system/carbon/blob/master/LICENSE">
+    <img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="Carbon is released under the Apache-2.0 license" />
+  </a>
+  <a href="https://github.com/carbon-design-system/carbon/actions/workflows/ci.yml">
+    <img src="https://github.com/carbon-design-system/carbon/actions/workflows/ci.yml/badge.svg" alt="CI workflow status" />
+  </a>
+  <a href="https://lerna.js.org/">
+    <img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg" alt="Maintained with Lerna" />
+  </a>
+  <a href="https://github.com/carbon-design-system/carbon/blob/master/.github/CONTRIBUTING.md">
+    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome" />
+  </a>
+</p>
 
 > Vue implementation of the Carbon Design System
 > A collection of [Carbon Components](https://github.com/carbon-design-system/carbon-components) implemented using <img src="https://vuejs.org/images/logo.png" width="20" alt="Vue logo"> [Vue.js](https://vuejs.org/).
@@ -35,6 +47,16 @@ Please refer to the [Contribution Guidelines](../../.github/CONTRIBUTING.md) bef
 ## Contributing
 
 Fork this repository, create a new branch, and submit a pull request to this repository. The PR will be used as part of a review process.
+
+NOTE: PR titles need to conform to sematic versioning pattern described <https://github.com/amannn/action-semantic-pull-request>
+
+e.g.
+Examples for valid PR titles:
+
+- fix: Correct typo.
+- feat: Add support for Node 12.
+- refactor!: Drop support for Node 6.
+- feat(ui): Add Button component.
 
 ## Usage
 

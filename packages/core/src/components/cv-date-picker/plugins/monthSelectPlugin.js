@@ -21,7 +21,7 @@ const monthToStr = (monthNumber, shorthand, locale) => locale.months[shorthand ?
  */
 export default config => fp => {
   const setupElements = () => {
-    if (!fp.monthElements) {
+    if (!fp.monthElements || fp.monthElements.length < 1) {
       return;
     }
     fp.monthElements.forEach(elem => {
