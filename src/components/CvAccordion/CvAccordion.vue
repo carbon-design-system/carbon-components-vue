@@ -74,6 +74,8 @@ const state = computed({
   },
 });
 
+defineExpose({ state });
+
 // Functions provided to CvAccordionItem
 provide('registerItem', (itemCvId, item) => {
   items.set(itemCvId, item);
