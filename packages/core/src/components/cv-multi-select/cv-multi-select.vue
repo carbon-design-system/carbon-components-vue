@@ -20,7 +20,7 @@
 
     <div
       role="listbox"
-      aria-label="list"
+      :aria-labelledby="ariaLabelledBy"
       tabindex="-1"
       :class="[
         `${carbonPrefix}--multi-select ${carbonPrefix}--list-box`,
@@ -170,6 +170,7 @@ export default {
   mixins: [themeMixin, uidMixin, carbonPrefixMixin, methodsMixin({ button: ['blur', 'focus'] })],
   components: { WarningFilled16, ChevronDown16, CvCheckbox, CvTag, Close16 },
   props: {
+    ariaLabelledBy: String,
     autoFilter: Boolean,
     autoHighlight: Boolean,
     disabled: Boolean,

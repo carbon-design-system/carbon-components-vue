@@ -15,7 +15,7 @@
     <textarea
       class="cv-code-snippet__clippy"
       style="position: absolute; left: -9999px; max-width: 0; opacity: 0; overflow: hidden"
-      aria-label="ariaLabel"
+      aria-hidden="true"
       tabindex="-1"
       ref="clippy"
     ></textarea>
@@ -38,7 +38,6 @@ export default {
     CvCodeSnippetOneline,
   },
   props: {
-    ariaLabel: String,
     disabled: Boolean,
     feedbackAriaLabel: { type: String, default: 'Copy code' },
     copyFeedback: { type: String, default: 'Copied!' },

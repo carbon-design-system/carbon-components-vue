@@ -150,17 +150,15 @@ export default {
     dialogAttrs() {
       const passive = !this.hasFooter;
       const attrs = {};
-
+      attrs['aria-label'] = this.$slots.title[0].text;
       if (this.alert) {
         if (passive) {
           attrs.role = 'alert';
         } else {
           attrs.role = 'alertdialog';
-          attrs['aria-label'] = this.$slots.title[0].text;
         }
       } else {
         attrs.role = 'dialog';
-        attrs['aria-label'] = this.$slots.title[0].text;
       }
       return attrs;
     },

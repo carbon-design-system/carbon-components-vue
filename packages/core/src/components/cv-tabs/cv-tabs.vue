@@ -43,15 +43,14 @@
               [`${carbonPrefix}--tabs--scrollable__nav-item--selected`]: selectedId == tab.uid,
             },
           ]"
-          role="tab"
-          :aria-selected="selectedId == tab.uid ? 'true' : 'false'"
-          :aria-disabled="disabledTabs.indexOf(tab.uid) !== -1"
+          role="presentation"
         >
           <button
             :class="`${carbonPrefix}--tabs--scrollable__nav-link`"
-            role="button"
+            role="tab"
             :aria-controls="tab.uid"
             :aria-disabled="disabledTabs.indexOf(tab.uid) !== -1"
+            :aria-selected="selectedId == tab.uid"
             :id="`${tab.uid}-link`"
             @click="onTabClick(tab.uid)"
             ref="link"
