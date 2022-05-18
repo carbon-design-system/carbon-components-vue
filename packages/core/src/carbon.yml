@@ -5,6 +5,7 @@ library:
   description: Vue implementation of Carbon Components.
   externalDocsUrl: https://vue.carbondesignsystem.com/?path=/story/welcome
   inherits: carbon-styles
+  packageJsonPath: /../package.json
 assets:
   accordion:
     status: stable
