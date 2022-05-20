@@ -13,14 +13,14 @@
   >
     <label
       v-if="title"
-      :for="uid"
+      :id="`${uid}-label`"
       :class="[`${carbonPrefix}--label`, { [`${carbonPrefix}--label--disabled`]: disabled }]"
       >{{ title }}</label
     >
 
     <div
+      :aria-labelledby="`${uid}-label`"
       role="listbox"
-      :aria-labelledby="ariaLabelledBy"
       tabindex="-1"
       :class="[
         `${carbonPrefix}--multi-select ${carbonPrefix}--list-box`,
@@ -110,7 +110,13 @@
         </div>
       </div>
 
-      <div :id="uid" :class="`${carbonPrefix}--list-box__menu`" role="listbox" ref="list">
+      <div
+        :id="uid"
+        :aria-labelledby="`${uid}-label`"
+        :class="`${carbonPrefix}--list-box__menu`"
+        role="listbox"
+        ref="list"
+      >
         <div
           v-for="(item, index) in dataOptions"
           :key="`multi-select-${index}`"
@@ -170,7 +176,6 @@ export default {
   mixins: [themeMixin, uidMixin, carbonPrefixMixin, methodsMixin({ button: ['blur', 'focus'] })],
   components: { WarningFilled16, ChevronDown16, CvCheckbox, CvTag, Close16 },
   props: {
-    ariaLabelledBy: String,
     autoFilter: Boolean,
     autoHighlight: Boolean,
     disabled: Boolean,
