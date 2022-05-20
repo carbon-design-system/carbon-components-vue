@@ -122,7 +122,7 @@ export default {
       } else if (this.label) {
         attrs['aria-labelledby'] = this.uid;
       } else {
-        attrs['aria-label'] = "Search box";
+        attrs['aria-label'] = 'Search box';
       }
       return attrs;
     },

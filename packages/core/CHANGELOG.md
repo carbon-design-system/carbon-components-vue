@@ -5,16 +5,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [2.43.1](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@2.43.0...@carbon/vue@2.43.1) (2022-04-26)
 
-
 ### Bug Fixes
 
-* data search size n expand ([475fed3](https://github.com/carbon-design-system/carbon-components-vue/commit/475fed39c669019812213a61126ee44bc7d364de))
-* reaadme badges ([96428eb](https://github.com/carbon-design-system/carbon-components-vue/commit/96428eb68823886ff51179766af9e317f1c87830))
-* remove invalid role on input ([#1320](https://github.com/carbon-design-system/carbon-components-vue/issues/1320)) ([4b94b37](https://github.com/carbon-design-system/carbon-components-vue/commit/4b94b37d0d21c55ae3fda75c19b10bacfacc99bb))
-
-
-
-
+- data search size n expand ([475fed3](https://github.com/carbon-design-system/carbon-components-vue/commit/475fed39c669019812213a61126ee44bc7d364de))
+- reaadme badges ([96428eb](https://github.com/carbon-design-system/carbon-components-vue/commit/96428eb68823886ff51179766af9e317f1c87830))
+- remove invalid role on input ([#1320](https://github.com/carbon-design-system/carbon-components-vue/issues/1320)) ([4b94b37](https://github.com/carbon-design-system/carbon-components-vue/commit/4b94b37d0d21c55ae3fda75c19b10bacfacc99bb))
 
 # [2.43.0](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@2.42.0...@carbon/vue@2.43.0) (2022-04-20)
 
