@@ -6,7 +6,8 @@
     :disabled="disabled"
     :feedback="copyFeedback"
     inline
-    :aria-label="feedbackAriaLabel"
+    :title="feedbackAriaLabel"
+    :ariaLabel="feedbackAriaLabel"
     @click="$emit('copy-code')"
     ><slot
   /></cv-feedback-button>

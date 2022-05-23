@@ -149,15 +149,16 @@ export default {
   computed: {
     dialogAttrs() {
       const passive = !this.hasFooter;
-      const attrs = { role: 'dialog' };
-
+      const attrs = {};
+      attrs['aria-label'] = this.$slots.title[0].text;
       if (this.alert) {
         if (passive) {
           attrs.role = 'alert';
         } else {
           attrs.role = 'alertdialog';
-          attrs['aria-describedBy'] = this.uid;
         }
+      } else {
+        attrs.role = 'dialog';
       }
       return attrs;
     },

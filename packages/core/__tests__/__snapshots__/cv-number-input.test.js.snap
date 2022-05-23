@@ -2,7 +2,7 @@
 
 exports[`CvNumberInput should match snapshot when all props are default 1`] = `
 <cv-wrapper-stub tagtype="div" class="cv-number-input bx--form-item">
-  <div class="bx--number"><label for="1" class="bx--label"></label>
+  <div class="bx--number"><label for="1" class="bx--label" style="display: none;"></label>
     <div class="bx--number__input-wrapper"><input id="1" type="number">
       <!---->
       <!---->
@@ -46,7 +46,7 @@ exports[`CvNumberInput should match snapshot when all props are provided 1`] = `
 
 exports[`CvNumberInput should match snapshot when helper-text slot is provided 1`] = `
 <cv-wrapper-stub tagtype="div" class="cv-number-input bx--form-item">
-  <div class="bx--number bx--number--helpertext"><label for="1" class="bx--label"></label>
+  <div class="bx--number bx--number--helpertext"><label for="1" class="bx--label" style="display: none;"></label>
     <div class="bx--number__input-wrapper"><input id="1" type="number">
       <!---->
       <!---->
@@ -70,7 +70,7 @@ exports[`CvNumberInput should match snapshot when helper-text slot is provided 1
 
 exports[`CvNumberInput should match snapshot when invalid-message slot is provided 1`] = `
 <cv-wrapper-stub tagtype="div" class="cv-number-input bx--form-item">
-  <div class="bx--number" data-invalid="true"><label for="1" class="bx--label"></label>
+  <div class="bx--number" data-invalid="true"><label for="1" class="bx--label" style="display: none;"></label>
     <div class="bx--number__input-wrapper"><input id="1" type="number" data-invalid="true">
       <warningfilled16-stub class="bx--number__invalid"></warningfilled16-stub>
       <!---->
@@ -94,7 +94,7 @@ exports[`CvNumberInput should match snapshot when invalid-message slot is provid
 
 exports[`CvNumberInput should match snapshot when it is not a formItem 1`] = `
 <cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item">
-  <div class="bx--number cv-number-input"><label for="1" class="bx--label"></label>
+  <div class="bx--number cv-number-input"><label for="1" class="bx--label" style="display: none;"></label>
     <div class="bx--number__input-wrapper"><input id="1" type="number">
       <!---->
       <!---->
@@ -116,7 +116,7 @@ exports[`CvNumberInput should match snapshot when it is not a formItem 1`] = `
 
 exports[`CvNumberInput should match snapshot when light theme 1`] = `
 <cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item">
-  <div class="bx--number bx--number--light cv-number-input"><label for="1" class="bx--label"></label>
+  <div class="bx--number bx--number--light cv-number-input"><label for="1" class="bx--label" style="display: none;"></label>
     <div class="bx--number__input-wrapper"><input id="1" type="number">
       <!---->
       <!---->
@@ -138,7 +138,7 @@ exports[`CvNumberInput should match snapshot when light theme 1`] = `
 
 exports[`CvNumberInput should match snapshot when mobile variant requested 1`] = `
 <cv-wrapper-stub tagtype="div" class="cv-number-input bx--form-item">
-  <div class="bx--number bx--number--helpertext bx--number--mobile"><label for="1" class="bx--label"></label>
+  <div class="bx--number bx--number--helpertext bx--number--mobile"><label for="1" class="bx--label" style="display: none;"></label>
     <div class="bx--number__input-wrapper"><input id="1" type="number">
       <!---->
       <!---->
@@ -162,7 +162,7 @@ exports[`CvNumberInput should match snapshot when mobile variant requested 1`] =
 
 exports[`CvNumberInput should match snapshot when value is Number 1`] = `
 <cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item">
-  <div class="bx--number cv-number-input"><label for="1" class="bx--label"></label>
+  <div class="bx--number cv-number-input"><label for="1" class="bx--label" style="display: none;"></label>
     <div class="bx--number__input-wrapper"><input id="1" type="number">
       <!---->
       <!---->
@@ -184,7 +184,7 @@ exports[`CvNumberInput should match snapshot when value is Number 1`] = `
 
 exports[`CvNumberInput should match snapshot when value is String 1`] = `
 <cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item">
-  <div class="bx--number cv-number-input"><label for="1" class="bx--label"></label>
+  <div class="bx--number cv-number-input"><label for="1" class="bx--label" style="display: none;"></label>
     <div class="bx--number__input-wrapper"><input id="1" type="number">
       <!---->
       <!---->
@@ -206,7 +206,7 @@ exports[`CvNumberInput should match snapshot when value is String 1`] = `
 
 exports[`CvNumberInput should match snapshot with min, max and step as Strings 1`] = `
 <cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item">
-  <div class="bx--number cv-number-input"><label for="1" class="bx--label"></label>
+  <div class="bx--number cv-number-input"><label for="1" class="bx--label" style="display: none;"></label>
     <div class="bx--number__input-wrapper"><input id="1" type="number" step="2" min="-10" max="10">
       <!---->
       <!---->
@@ -228,7 +228,7 @@ exports[`CvNumberInput should match snapshot with min, max and step as Strings 1
 
 exports[`CvNumberInput should match snapshot with optional min, max and step as numbers 1`] = `
 <cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item">
-  <div class="bx--number cv-number-input"><label for="1" class="bx--label"></label>
+  <div class="bx--number cv-number-input"><label for="1" class="bx--label" style="display: none;"></label>
     <div class="bx--number__input-wrapper"><input id="1" type="number" step="2" min="-10" max="10">
       <!---->
       <!---->

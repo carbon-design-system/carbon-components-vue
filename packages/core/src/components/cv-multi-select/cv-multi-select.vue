@@ -13,12 +13,13 @@
   >
     <label
       v-if="title"
-      :for="uid"
+      :id="`${uid}-label`"
       :class="[`${carbonPrefix}--label`, { [`${carbonPrefix}--label--disabled`]: disabled }]"
       >{{ title }}</label
     >
 
     <div
+      :aria-labelledby="`${uid}-label`"
       role="listbox"
       tabindex="-1"
       :class="[
@@ -109,7 +110,13 @@
         </div>
       </div>
 
-      <div :id="uid" :class="`${carbonPrefix}--list-box__menu`" role="listbox" ref="list">
+      <div
+        :id="uid"
+        :aria-labelledby="`${uid}-label`"
+        :class="`${carbonPrefix}--list-box__menu`"
+        role="listbox"
+        ref="list"
+      >
         <div
           v-for="(item, index) in dataOptions"
           :key="`multi-select-${index}`"

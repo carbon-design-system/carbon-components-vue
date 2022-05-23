@@ -16,6 +16,7 @@
       class="cv-code-snippet__clippy"
       style="position: absolute; left: -9999px; max-width: 0; opacity: 0; overflow: hidden"
       aria-hidden="true"
+      tabindex="-1"
       ref="clippy"
     ></textarea>
   </component>

@@ -12,7 +12,7 @@
       ]"
       :data-invalid="isInvalid"
     >
-      <label :for="uid" :class="`${carbonPrefix}--label`">{{ label }}</label>
+      <label v-show="label" :for="uid" :class="`${carbonPrefix}--label`">{{ label }}</label>
       <div
         :class="[
           `${carbonPrefix}--number__input-wrapper`,

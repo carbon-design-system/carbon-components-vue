@@ -1,7 +1,7 @@
 <template>
   <cv-wrapper :tag-type="formItem ? 'div' : ''" :class="`cv-search ${carbonPrefix}--form-item`">
     <div
-      :aria-labelledby="uid"
+      v-bind="wrapperAttrs"
       :class="[
         `${carbonPrefix}--search`,
         {
@@ -30,7 +30,7 @@
         <Search20 :class="`${carbonPrefix}--search-magnifier-icon`" />
       </div>
 
-      <label :for="uid" :class="`${carbonPrefix}--label`">{{ label }}</label>
+      <label v-show="label" :for="uid" :class="`${carbonPrefix}--label`">{{ label }}</label>
 
       <input
         :id="uid"
@@ -71,6 +71,7 @@ export default {
   components: { Close16, CvWrapper, Search20 },
   inheritAttrs: false,
   props: {
+    ariaLabel: String,
     clearAriaLabel: { type: String, default: 'Clear search input' },
     formItem: { type: Boolean, default: true },
     kind: { type: String, default: undefined },
@@ -114,6 +115,17 @@ export default {
     },
   },
   computed: {
+    wrapperAttrs() {
+      const attrs = {};
+      if (this.ariaLabel) {
+        attrs['aria-label'] = this.ariaLabel;
+      } else if (this.label) {
+        attrs['aria-labelledby'] = this.uid;
+      } else {
+        attrs['aria-label'] = 'Search box';
+      }
+      return attrs;
+    },
     // Bind listeners at the component level to the embedded input element and
     // add our own input listener to service the v-model. See:
     // https://vuejs.org/v2/guide/components-custom-events.html#Customizing-Component-v-model
