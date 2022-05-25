@@ -11,6 +11,16 @@ function genCvId() {
     (c ^ randomValues(c)).toString(16)
   );
 }
+const base58characters =
+  '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'.split('');
+function shortId() {
+  let s = '';
+  for (let i = 0; i < length; i++) {
+    const c = Math.floor(Math.random() * 58);
+    s += base58characters[c];
+  }
+  return `uid-${s}`;
+}
 
 export const props = {
   id: String,
