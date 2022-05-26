@@ -17,6 +17,7 @@
       @change="onChange"
       :value="value"
       :id="cvId"
+      data-testid="checkbox"
     /><label
       :for="cvId"
       :class="[
@@ -44,7 +45,6 @@ import { ref, toRefs } from 'vue';
 import { carbonPrefix } from '@/global/settings';
 import { useCheck, props as propsCvCheck } from '../../use/cvCheck';
 import { useCvId, props as propsCvId } from '../../use/cvId';
-import { defineEmits } from 'vue/dist/vue';
 
 const props = defineProps({
   hideLabel: { type: Boolean, default: null },

@@ -1,81 +1,81 @@
 /*
  * Provides common checkbox behaviour
  */
-import { ref, computed, watch, onMounted, defineEmits } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
 
 export const props = {
-  modelValue: { type: [Array, Boolean], default: () => undefined },
+  modelValue: { type: [Array, Boolean], default: undefined },
   mixed: { type: Boolean, default: null },
   checked: { type: Boolean, default: undefined },
   name: String,
   value: { type: String, required: true },
 };
 
-const isArrayModel = computed(() => {
-  return Array.isArray(props.modelValue);
-});
-
 export function useCheck(props, emit) {
+  const isArrayModel = computed(() => {
+    return Array.isArray(props.modelValue.value);
+  });
+
   // Maintain the state of the checkbox
   let dataChecked = ref(undefined);
   let isChecked = computed({
     get() {
-      if (props.modelValue !== undefined) {
+      if (props.modelValue.value !== undefined) {
         // model value always comes first
         if (isArrayModel.value) {
-          if (props.modelValue.includes(props.value)) {
+          if (props.modelValue.includes(props.value.value)) {
             return true;
           } else {
             return false;
           }
         } else {
-          return this.modelValue;
+          return props.modelValue.value;
         }
       } else {
         if (dataChecked.value !== undefined) {
-          return dataChecked;
+          return dataChecked.value;
         } else if (dataMixed.value) {
           return 'mixed';
         }
         return false;
       }
     },
-    set() {
+    set(checked) {
       if (isArrayModel.value) {
-        let modelSet = new Set(props.modelValue);
+        let modelSet = new Set(props.modelValue.value);
 
-        if (!props.checked) {
-          modelSet.delete(props.value);
+        if (!checked) {
+          modelSet.delete(props.value.value);
         } else {
-          modelSet.add(props.value);
+          modelSet.add(props.value.value);
         }
-        dataChecked = Array.from(modelSet);
+        dataChecked.value = Array.from(modelSet);
       } else {
-        dataChecked = props.checked ? true : undefined;
+        dataChecked.value = checked ? true : undefined;
         if (dataChecked.value !== undefined) {
-          dataMixed = false;
+          dataMixed.value = false;
         }
       }
     },
   });
   onMounted(() => {
-    if (props.modelValue === undefined) {
-      isChecked = props.checked;
+    if (props.modelValue.value === undefined) {
+      isChecked.value = props.checked.value;
     }
   });
 
   // Maintain the state of the aria-checkbox
-  let dataMixed = ref(props.mixed);
+  let dataMixed = ref(props.mixed.value);
   watch(props.mixed, val => {
-    dataMixed = val;
-    if (dataMixed && props.checked !== true) {
+    dataMixed.value = val;
+    if (dataMixed.value && props.checked.value !== true) {
       isChecked = false; // reset check state so mixed takes
     }
   });
 
   watch(props.checked, val => {
-    if (props.modelValue === undefined) isChecked = val;
-    if (!val && dataMixed) {
+    if (props.modelValue.value === undefined) isChecked = val;
+    if (!val && dataMixed.value) {
       dataMixed.value = true;
     }
   });

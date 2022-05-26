@@ -3,13 +3,13 @@
     v-if="overlay"
     class="cv-loading"
     :class="overlayClasses"
-    ref="overlayDiv"
+    id="overlayDiv"
   />
-  <teleport :disabled="!overlay" to="overlayDiv">
+  <teleport :disabled="!overlay" to="body">
     <div
       data-loading
       :class="{
-        [`${carbonPrefix}-loading`]: !overlay,
+        'cv-loading': !overlay,
         [`${carbonPrefix}--loading`]: active || stopping,
         [`${carbonPrefix}--loading--stop`]: (!active && stopping) || stopped,
         [`${carbonPrefix}--loading--small`]: small,
@@ -60,8 +60,8 @@ let stopping = ref(false);
 let stopped = ref(false);
 const overlayClasses = computed(() => {
   const classes = [];
-  if (this.overlay) {
-    if (this.active || stopping) {
+  if (props.overlay) {
+    if (props.active || stopping) {
       classes.push(`${carbonPrefix}--loading-overlay`);
     } else {
       classes.push(`${carbonPrefix}--loading-overlay--stop`);
@@ -82,19 +82,23 @@ function onEnd(ev) {
   if (ev.animationName === 'rotate-end-p2') {
     loading.value.removeEventListener('animationend', onEnd);
 
-    stopping = false;
-    stopped = true;
+    stopping.value = false;
+    stopped.value = true;
+
     emit('loading-end');
   }
 }
 function onActiveUpdate(newValue) {
-  stopped = false;
-  stopping = !newValue;
+  stopped.value = false;
+  stopping.value = !newValue;
   if (!newValue) {
     loading.value.addEventListener('animationend', onEnd);
   }
 }
-watch(toRef(props, 'active'), val => {
-  onActiveUpdate(val);
-});
+watch(
+  () => props.active,
+  val => {
+    onActiveUpdate(val);
+  }
+);
 </script>
