@@ -11,7 +11,7 @@ describe('CvCheckbox', () => {
     const checkbox = getByTestId('checkbox');
 
     await fireEvent.click(checkbox);
-
+    expect(checkbox.checked).toBe(true);
     expect(emitted().change).toBeTruthy();
   });
 
@@ -32,5 +32,6 @@ describe('CvCheckbox', () => {
     const checkbox = getByTestId('checkbox');
     expect(checkbox.id).toBe(props.id);
     expect(checkbox.value).toBe(props.value);
+    expect(checkbox.checked).toBe(true);
   });
 });

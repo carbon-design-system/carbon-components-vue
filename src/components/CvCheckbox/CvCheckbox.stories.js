@@ -7,6 +7,7 @@ import {
 import { CvCheckbox } from '.';
 import { action } from '@storybook/addon-actions';
 import { props as propsCvCheck } from '@/use/cvCheck';
+import { ref } from 'vue';
 
 export default {
   title: `${sbCompPrefix}/CvCheckbox`,
@@ -72,4 +73,33 @@ Default.parameters = storyParametersObject(
   Default.parameters,
   template,
   Default.args
+);
+let modelValue = ref(false);
+const template2 = `<div>
+<cv-checkbox @change="onChange" v-bind='args' v-model="modelValue" >
+</cv-checkbox>
+<div style="margin-top:1rem; background-color: #888888;  padding:1rem"><div style="font-size: 150%">Sample interaction</div>
+<label for="checkbox">V-model: Check 1:</label>
+<input id="checkbox" type="checkbox" @change="(ev) => {modelValue = ev.currentTarget.checked}" />
+<div>Checked: {{modelValue}}</div>
+</div>
+</div>
+  `;
+
+const Template2 = args => {
+  return {
+    components: { CvCheckbox },
+    setup: () => ({ args, modelValue, onChange: action('change') }),
+    template: template2,
+  };
+};
+export const vModel = Template2.bind({});
+vModel.args = {
+  label: 'checkbox',
+  value: 'check-1',
+};
+vModel.parameters = storyParametersObject(
+  vModel.parameters,
+  template2,
+  vModel.args
 );
