@@ -81,7 +81,7 @@ const template2 = `<div>
 <div style="margin-top:1rem; background-color: #888888;  padding:1rem"><div style="font-size: 150%">Sample interaction</div>
 <label for="checkbox">V-model: Check 1:</label>
 <input id="checkbox" type="checkbox" @change="(ev) => {modelValue = ev.currentTarget.checked}" />
-<div>Checked: {{modelValue}}</div>
+<div>Checked: <span style="font-weight: bold;">{{modelValue}}</span></div>
 </div>
 </div>
   `;
