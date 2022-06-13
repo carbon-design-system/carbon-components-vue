@@ -1,12 +1,11 @@
 <template>
-  <div
-    v-if="overlay"
+  <cv-wrapper
+    :tag-type="overlay ? 'div' : ''"
     class="cv-loading"
     :class="overlayClasses"
-    id="overlayDiv"
-  />
-  <teleport :disabled="!overlay" to="body">
+  >
     <div
+      v-bind="$attrs"
       data-loading
       :class="{
         'cv-loading': !overlay,
@@ -18,6 +17,8 @@
       aria-atomic="true"
       :aria-labelledby="cvId"
       aria-live="assertive"
+      role="progressbar"
+      :aria-busy="active || stopping"
     >
       <label :id="cvId" :class="`${carbonPrefix}--visually-hidden`">
         {{ description }}
@@ -39,11 +40,12 @@
         />
       </svg>
     </div>
-  </teleport>
+  </cv-wrapper>
 </template>
 
 <script setup>
-import { ref, computed, watch, toRef } from 'vue';
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
+import CvWrapper from '../CvWrapper/CvWrapper';
 import { carbonPrefix } from '@/global/settings';
 import { useCvId, props as propsCvId } from '../../use/cvId';
 
@@ -56,12 +58,13 @@ const props = defineProps({
 });
 const cvId = useCvId(props);
 
+let overlayEl = ref(null);
 let stopping = ref(false);
 let stopped = ref(false);
 const overlayClasses = computed(() => {
   const classes = [];
   if (props.overlay) {
-    if (props.active || stopping) {
+    if (props.active || stopping.value) {
       classes.push(`${carbonPrefix}--loading-overlay`);
     } else {
       classes.push(`${carbonPrefix}--loading-overlay--stop`);

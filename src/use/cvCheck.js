@@ -41,9 +41,6 @@ export function useCheck(props, emit) {
       }
     },
     set(checked) {
-      // eslint-disable-next-line no-console
-      console.log('set checked', checked, unref(dataChecked));
-
       if (isArrayModel.value) {
         let modelSet = new Set(props.modelValue.value);
 
@@ -55,9 +52,6 @@ export function useCheck(props, emit) {
         dataChecked.value = Array.from(modelSet);
       } else {
         dataChecked.value = checked ? true : undefined;
-        // eslint-disable-next-line no-console
-        console.log('set checked', checked, unref(dataChecked));
-
         if (dataChecked.value !== undefined) {
           dataMixed.value = false;
         }
@@ -88,8 +82,6 @@ export function useCheck(props, emit) {
 
   // Watch for change
   function onChangeInner(checkedVal) {
-    // eslint-disable-next-line no-console
-    console.log('checked', checkedVal, dataChecked.value || false);
     isChecked.value = checkedVal;
     emit('update:modelValue', dataChecked.value || false); // or false in case dataChecked is undefined
     emit('change', checkedVal);

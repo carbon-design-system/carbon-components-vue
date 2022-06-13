@@ -1700,6 +1700,8 @@ __metadata:
     "@storybook/builder-webpack5": ^6.4.22
     "@storybook/manager-webpack5": ^6.4.22
     "@storybook/vue3": ^6.4.22
+    "@testing-library/dom": ^8.13.0
+    "@testing-library/user-event": ^14.2.0
     "@testing-library/vue": ^6
     "@vue/cli-plugin-babel": ^5.0.4
     "@vue/cli-plugin-eslint": ^5.0.4
@@ -4058,7 +4060,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/dom@npm:^8.5.0":
+"@testing-library/dom@npm:^8.13.0, @testing-library/dom@npm:^8.5.0":
   version: 8.13.0
   resolution: "@testing-library/dom@npm:8.13.0"
   dependencies:
@@ -4071,6 +4073,15 @@ __metadata:
     lz-string: ^1.4.4
     pretty-format: ^27.0.2
   checksum: 880f1872b9949800d4444e3bdbd03df86d6f41ec7c27136dff1da29e87d2df2d7ee904afcdf895ffce351c25bd12119117eae023354d50e707ad56d43b2ed3ed
+  languageName: node
+  linkType: hard
+
+"@testing-library/user-event@npm:^14.2.0":
+  version: 14.2.0
+  resolution: "@testing-library/user-event@npm:14.2.0"
+  peerDependencies:
+    "@testing-library/dom": ">=7.21.4"
+  checksum: b34f19bbfe938d03778831b9c083d451c53f983f6f6c0db05a572b71ba5323c4125097bb4b8c97595bc9b946610d2c2f65cf1e113f047eed7a3078f28a1027e2
   languageName: node
   linkType: hard
 

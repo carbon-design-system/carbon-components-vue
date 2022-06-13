@@ -17,7 +17,6 @@
       @change="onChange"
       :value="value"
       :id="cvId"
-      data-testid="checkbox"
     /><label
       :for="cvId"
       :class="[

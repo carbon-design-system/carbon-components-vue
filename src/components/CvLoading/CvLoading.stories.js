@@ -3,6 +3,7 @@ import CvLoading from '.';
 import { ref, computed } from 'vue';
 import { action } from '@storybook/addon-actions';
 import { sbCompPrefix, storyParametersObject } from '@/global/storybook-utils';
+import './CvLoading.stories.scss';
 
 export default {
   title: `${sbCompPrefix}/CvLoading`,
@@ -20,11 +21,12 @@ export default {
 };
 
 const template = `<div>
-<div style="width: 7rem; height: 7rem">
-<cv-loading @loading-end="onLoadingEnd" v-bind="args" :active="isActive" />
-</div>
+<div class="loading-story">
+<cv-loading @loading-end="onLoadingEnd" v-bind="args" :active="isActive"/>
+</divclass>
 <button @click="makeActive" :disabled="isActive" style="margin-top: 2rem;">{{buttonLabel}}</button>
 </div>`;
+let hidden = ref(true);
 let isActive = ref(false);
 let countDown = ref(0);
 const buttonLabel = computed(() => {
@@ -45,6 +47,7 @@ function runCountDown() {
   }, 1000);
 }
 function makeActive() {
+  hidden.value = false;
   isActive.value = true;
   countDown.value = 5;
   runCountDown();

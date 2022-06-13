@@ -76,7 +76,7 @@ Default.parameters = storyParametersObject(
 );
 let modelValue = ref(false);
 const template2 = `<div>
-<cv-checkbox @change="onChange" v-bind='args' v-model="modelValue" >
+<cv-checkbox @change="onChange" v-bind='args' v-model="modelValue">
 </cv-checkbox>
 <div style="margin-top:1rem; background-color: #888888;  padding:1rem"><div style="font-size: 150%">Sample interaction</div>
 <label for="checkbox">V-model: Check 1:</label>
@@ -89,7 +89,11 @@ const template2 = `<div>
 const Template2 = args => {
   return {
     components: { CvCheckbox },
-    setup: () => ({ args, modelValue, onChange: action('change') }),
+    setup: () => ({
+      args,
+      modelValue,
+      onChange: action('change'),
+    }),
     template: template2,
   };
 };
