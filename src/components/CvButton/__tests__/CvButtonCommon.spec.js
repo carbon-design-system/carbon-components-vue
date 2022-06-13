@@ -1,3 +1,6 @@
+/**
+ * NOTE: This test needs to be converted to use the new library `@testing-library/vue`. See CvCheckbox test for example.
+ */
 import { carbonPrefix } from '../../../global/settings';
 import { props, useCvButtonCommon } from '../CvButtonCommon';
 import { CvButtonConsts } from '..';

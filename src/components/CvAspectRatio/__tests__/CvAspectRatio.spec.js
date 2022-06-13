@@ -1,6 +1,8 @@
+/**
+ * NOTE: This test needs to be converted to use the new library `@testing-library/vue`. See CvCheckbox test for example.
+ */
 import { shallowMount } from '@vue/test-utils';
 import { carbonPrefix } from '../../../global/settings';
-
 import { CvAspectRatio, CvAspectRatioConsts } from '..';
 
 describe('CvAspectRatio', () => {
