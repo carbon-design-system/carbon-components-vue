@@ -32,7 +32,7 @@ We are actively working on components for Vue 3 and would love to get your help 
 
 1. Fork this repo and checkout the `vNext` branch
 2. Look to see which components have not yet been implemented. You can do this by comparing the components listed in the [Carbon React storybook](https://react.carbondesignsystem.com/?path=/story/getting-started-welcome--welcome) with the components in the `src/components` directory.
-3. When you find a component that interests you, look in the open issue list to see if someone else might already be working on it. Look for issues with a "V3 - Vue3" label. A "dibs" issue will have that label and a title of "[component name] work in progress" so for example "CvDatePicker work in progress".
+3. When you find a component that interests you, look in the open issue list to see if someone else might already be working on it. Look for issues with a "V3 - Vue3" label. A "dibs" issue will have that label and a title of "[component name] work in progress" so for example "**CvDatePicker work in progress**".
 4. If no one else is already working on it, create an issue and label it as above.
    - Work on the component and create a PR when you are ready.
    - Components are expected to be implemented as [single file components](https://vuejs.org/guide/scaling-up/sfc.html) using the Vue [composition api](https://vuejs.org/guide/extras/composition-api-faq.html). See `CvCheckbox` as an example. The Vue 2 components use the options API.
