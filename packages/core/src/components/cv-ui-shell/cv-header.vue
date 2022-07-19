@@ -79,7 +79,16 @@ export default {
         for (let index in this.panelControllers) {
           this.panelControllers[index].panelExpanded = false;
         }
-
+        const componentChildren = document.getElementsByClassName('cv-header-panel bx--header-panel');
+        if (newValue === false) {
+          for (let index = 0; index < componentChildren.length; index++) {
+            componentChildren[index].hidden = true;
+          }
+        } else {
+          for (let index = 0; index < componentChildren.length; index++) {
+            componentChildren[index].hidden = false;
+          }
+        }
         srcComponent.panelExpanded = newValue;
         this.panels[foundIndex].panelExpanded = newValue;
       }
