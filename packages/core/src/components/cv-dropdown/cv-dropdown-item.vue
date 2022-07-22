@@ -17,6 +17,7 @@
       `cv-dropdown-item ${carbonPrefix}--dropdown-item`,
       { [`${carbonPrefix}--dropdown--selected`]: internalSelected },
     ]"
+    role="menuitem"
   >
     <a
       :aria-checked="internalSelected"
