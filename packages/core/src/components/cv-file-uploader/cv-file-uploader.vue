@@ -12,11 +12,7 @@
             [`${carbonPrefix}--btn--primary`]: kind === 'button',
           },
         ]"
-        tabindex="0"
         ref="focusTarget"
-        @keydown.enter.prevent="onShow()"
-        @keydown.space.prevent
-        @keyup.space.prevent="onShow()"
       >
         <cv-wrapper
           :tag-type="kind !== 'button' ? 'div' : ''"
@@ -25,6 +21,10 @@
           @dragover="onDragEvent"
           @dragleave="onDragEvent"
           @drop="onDragEvent"
+          tabindex="0"
+          @keydown.enter.prevent="onShow()"
+          @keydown.space.prevent
+          @keyup.space.prevent="onShow()"
         >
           <slot name="drop-target">{{ internalDropTargetLabel }}</slot>
           <input
