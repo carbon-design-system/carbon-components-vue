@@ -21,6 +21,7 @@
           @dragover="onDragEvent"
           @dragleave="onDragEvent"
           @drop="onDragEvent"
+          role="button"
           tabindex="0"
           @keydown.enter.prevent="onShow()"
           @keydown.space.prevent
