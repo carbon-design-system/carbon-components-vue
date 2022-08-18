@@ -13,22 +13,30 @@ function genCvId() {
 }
 const base58characters =
   '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'.split('');
-function shortId() {
+
+/**
+ * Return a shorter, nicer, more readable id
+ * @param {number} length
+ * @returns {string}
+ */
+function shortId(length) {
   let s = '';
   for (let i = 0; i < length; i++) {
     const c = Math.floor(Math.random() * 58);
     s += base58characters[c];
   }
-  return `uid-${s}`;
+  return s;
 }
 
 export const props = {
   id: String,
 };
 
-export const useCvId = props => {
+export const useCvId = (props, readable = false, prefix = '') => {
   const cvId = computed(() => {
-    return props?.id && props.id.length ? props.id : genCvId();
+    if (props?.id && props.id.length) return props.id;
+    else if (readable) return prefix + shortId(5);
+    return prefix + genCvId();
   });
 
   return cvId;
