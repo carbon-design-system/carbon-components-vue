@@ -17,12 +17,12 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
-    "@carbon/icons-vue": "10.49.1",
+    "@carbon/icons-vue": "10.56.0",
     "@carbon/layout": "^10.37.1",
-    "@carbon/themes": "^10.54.0",
-    "@carbon/type": "^10.44.0",
+    "@carbon/themes": "^10.55.0",
+    "@carbon/type": "^10.45.0",
     "@vueuse/core": "^4.8.1",
-    "carbon-components": "^10.56.0",
+    "carbon-components": "^10.58.0",
     "core-js": "^3.6.5",
     "flatpickr": "^4.6.9",
     "stylelint-config-property-sort-order-smacss": "^7.0.0",
