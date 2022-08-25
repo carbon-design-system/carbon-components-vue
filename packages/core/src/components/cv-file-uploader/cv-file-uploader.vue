@@ -3,26 +3,17 @@
     <p :class="`${carbonPrefix}--file--label`">{{ label }}</p>
     <p :class="`${carbonPrefix}--label-description`">{{ helperText }}</p>
     <div :class="`${carbonPrefix}--file`" data-file>
-      <label
-        :for="uid"
-        :class="[
-          {
-            [`${carbonPrefix}--file-browse-btn`]: kind !== 'button',
-            [`${carbonPrefix}--btn`]: kind === 'button',
-            [`${carbonPrefix}--btn--primary`]: kind === 'button',
-          },
-        ]"
-        ref="focusTarget"
-      >
+      <label :for="uid">
         <cv-wrapper
+          tabindex="0"
+          ref="focusTarget"
           :tag-type="kind !== 'button' ? 'div' : ''"
           data-file-drop-container
-          :class="`${carbonPrefix}--file__drop-container${allowDropClass}`"
+          :class="wrapperClass"
+          role="button"
           @dragover="onDragEvent"
           @dragleave="onDragEvent"
           @drop="onDragEvent"
-          role="button"
-          tabindex="0"
           @keydown.enter.prevent="onShow()"
           @keydown.space.prevent
           @keyup.space.prevent="onShow()"
@@ -205,6 +196,15 @@ export default {
     },
     allowDropClass() {
       return this.allowDrop ? ` ${this.carbonPrefix}--file__drop-container--drag-over` : '';
+    },
+    wrapperClass() {
+      const staticClass = `${this.carbonPrefix}--file__drop-container${this.allowDropClass}`;
+      const dynamicClass =
+        this.kind !== 'button'
+          ? `${this.carbonPrefix}--file-browse-btn`
+          : `${this.carbonPrefix}--btn ${this.carbonPrefix}--btn--primary`;
+
+      return `${staticClass} ${dynamicClass}`;
     },
   },
   methods: {
