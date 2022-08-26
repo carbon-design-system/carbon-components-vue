@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.44.1](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@2.44.0...@carbon/vue@2.44.1) (2022-08-26)
+
+
+### Bug Fixes
+
+* role menuitem into li ([29d3087](https://github.com/carbon-design-system/carbon-components-vue/commit/29d308762d4634e79392e04cfaecbfd6228c03ac))
+
+
+
+
+
 # [2.44.0](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@2.43.1...@carbon/vue@2.44.0) (2022-05-23)
 
 
