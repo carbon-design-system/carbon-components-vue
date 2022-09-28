@@ -7,6 +7,8 @@ library:
   inherits: carbon-styles
   packageJsonPath: /../package.json
   navData:
+    - title: Get started
+      path: "https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/developing/frameworks/vue.mdx"
     - title: Tutorial
       items:
         - title: Overview
