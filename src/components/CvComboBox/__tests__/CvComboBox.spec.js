@@ -92,7 +92,7 @@ describe('CvComboBox', () => {
     const wrapper = result.container.querySelector('.bx--list-box__wrapper');
     expect(wrapper.getAttribute('aria-label')).toBe(ariaLabel);
 
-    await result.rerender({ ...props, invalidMessage: '' });
+    await result.rerender({ invalidMessage: '' });
     await result.findByText(props.helperText);
   });
 
