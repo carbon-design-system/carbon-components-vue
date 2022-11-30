@@ -3,8 +3,38 @@
     <p :class="`${carbonPrefix}--file--label`">{{ label }}</p>
     <p :class="`${carbonPrefix}--label-description`">{{ helperText }}</p>
     <div :class="`${carbonPrefix}--file`" data-file>
-      <label :for="uid">
-        <cv-wrapper
+      <label
+        v-if="kind === 'button'"
+        :for="uid"
+        :class="[
+          {
+            [`${carbonPrefix}--file-browse-btn`]: kind !== 'button',
+            [`${carbonPrefix}--btn`]: kind === 'button',
+            [`${carbonPrefix}--btn--primary`]: kind === 'button',
+          },
+        ]"
+        tabindex="0"
+        ref="focusTarget"
+        @keydown.enter.prevent="onShow()"
+        @keydown.space.prevent
+        @keyup.space.prevent="onShow()"
+      >
+        <slot name="drop-target">{{ internalDropTargetLabel }}</slot>
+        <input
+          v-if="kind !== 'button'"
+          v-bind="$attrs"
+          type="file"
+          :accept="accept"
+          :class="`${carbonPrefix}--file-input`"
+          :id="uid"
+          data-file-uploader
+          data-target="[data-file-container]"
+          v-on="inputListeners"
+          ref="file-input"
+        />
+      </label>
+      <label v-else :for="uid">
+        <div
           tabindex="0"
           ref="focusTarget"
           :tag-type="kind !== 'button' ? 'div' : ''"
@@ -31,7 +61,7 @@
             v-on="inputListeners"
             ref="file-input"
           />
-        </cv-wrapper>
+        </div>
       </label>
       <input
         v-if="kind === 'button'"
