@@ -4,6 +4,7 @@
     <p :class="`${carbonPrefix}--label-description`">{{ helperText }}</p>
     <div :class="`${carbonPrefix}--file`" data-file>
       <label
+        v-if="kind === 'button'"
         :for="uid"
         :class="[
           {
@@ -18,13 +19,33 @@
         @keydown.space.prevent
         @keyup.space.prevent="onShow()"
       >
-        <cv-wrapper
-          :tag-type="kind !== 'button' ? 'div' : ''"
+        <slot name="drop-target">{{ internalDropTargetLabel }}</slot>
+        <input
+          v-if="kind !== 'button'"
+          v-bind="$attrs"
+          type="file"
+          :accept="accept"
+          :class="`${carbonPrefix}--file-input`"
+          :id="uid"
+          data-file-uploader
+          data-target="[data-file-container]"
+          v-on="inputListeners"
+          ref="file-input"
+        />
+      </label>
+      <label v-else :for="uid">
+        <div
+          tabindex="0"
+          ref="focusTarget"
           data-file-drop-container
-          :class="`${carbonPrefix}--file__drop-container${allowDropClass}`"
+          :class="wrapperClass"
+          role="button"
           @dragover="onDragEvent"
           @dragleave="onDragEvent"
           @drop="onDragEvent"
+          @keydown.enter.prevent="onShow()"
+          @keydown.space.prevent
+          @keyup.space.prevent="onShow()"
         >
           <slot name="drop-target">{{ internalDropTargetLabel }}</slot>
           <input
@@ -39,7 +60,7 @@
             v-on="inputListeners"
             ref="file-input"
           />
-        </cv-wrapper>
+        </div>
       </label>
       <input
         v-if="kind === 'button'"
@@ -204,6 +225,15 @@ export default {
     },
     allowDropClass() {
       return this.allowDrop ? ` ${this.carbonPrefix}--file__drop-container--drag-over` : '';
+    },
+    wrapperClass() {
+      const staticClass = `${this.carbonPrefix}--file__drop-container${this.allowDropClass}`;
+      const dynamicClass =
+        this.kind !== 'button'
+          ? `${this.carbonPrefix}--file-browse-btn`
+          : `${this.carbonPrefix}--btn ${this.carbonPrefix}--btn--primary`;
+
+      return `${staticClass} ${dynamicClass}`;
     },
   },
   methods: {
