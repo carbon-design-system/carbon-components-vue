@@ -37,7 +37,6 @@
         <div
           tabindex="0"
           ref="focusTarget"
-          :tag-type="kind !== 'button' ? 'div' : ''"
           data-file-drop-container
           :class="wrapperClass"
           role="button"
