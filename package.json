@@ -27,8 +27,12 @@
     "start": "yarn info @carbon/vue --json > package-info.jsonl && vue-cli-service storybook:serve -p 9001 -c storybook/.storybook",
     "test": "vue-cli-service test:unit",
     "a11test": "node -v",
-    "upgrade:carbon": "npm-check-updates -u --dep dev,peer,prod --packageFile '{package.json,{config/**,packages/**}/package.json}' --filter '/carbon/' --target minor"
-
+    "upgrade:dependencies:top": "npm-check-updates -u --dep dev,peer,prod --reject '/(carbon|^vue$||^@vue)/'",
+    "upgrade:dependencies:packages": "yarn run-all --no-sort --concurrency 1 upgrade:dependencies",
+    "upgrade:dependencies:yarn": "yarn set version latest",
+    "upgrade:automatic": "run-s -s 'upgrade:dependencies:*'",
+    "upgrade:carbon": "npm-check-updates -u --dep dev,peer,prod --packageFile '{package.json,{config/**,packages/**}/package.json}' --filter '/carbon/' --target minor",
+    "upgrade:manual": "sh ./scripts/monorepo-npm-upgrade.sh"
   },
   "dependencies": {
     "@babel/runtime": "^7.18.9",
@@ -64,6 +68,7 @@
     "jsonlines-loader": "^1.1.1",
     "lerna": "^4.0.0",
     "lint-staged": "^8.2.1",
+    "npm-check-updates": "^16.3.16",
     "npm-run-all": "^4.1.5",
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
