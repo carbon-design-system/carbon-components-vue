@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.44.2](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@2.44.1...@carbon/vue@2.44.2) (2022-12-02)
+
+
+### Bug Fixes
+
+* pr now works with kind button ([31cadd2](https://github.com/carbon-design-system/carbon-components-vue/commit/31cadd27929d547ec8a97a2774a58a2e4ef4e1f6))
+* pr now works with kind button ([c581c94](https://github.com/carbon-design-system/carbon-components-vue/commit/c581c945a751646e208802df601c2e8b61422852))
+* remove tabindex from label to cv-wrapper div ([47436ff](https://github.com/carbon-design-system/carbon-components-vue/commit/47436ff54ade9247709a5c657e369a1d560ef8d8))
+
+
+
+
+
 ## [2.44.1](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@2.44.0...@carbon/vue@2.44.1) (2022-08-26)
 
 
