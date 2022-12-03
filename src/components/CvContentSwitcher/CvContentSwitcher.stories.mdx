@@ -1,0 +1,196 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+import { CvContentSwitcher } from '.';
+import CvContentSwitcherButton from './CvContentSwitcherButton';
+import CvContentSwitcherContent from './CvContentSwitcherContent';
+import { IbmSecurity20 } from '@carbon/icons-vue';
+import { action } from '@storybook/addon-actions';
+import { sbCompPrefix, storyParametersObject } from '@/global/storybook-utils';
+
+<Meta title={`${sbCompPrefix}/CvContentSwitcher`} component={CvContentSwitcher} />
+
+export const Template = args => ({
+  // Components used in your story `template` are defined in the `components` object
+  components: {
+    CvContentSwitcher,
+    CvContentSwitcherButton,
+    CvContentSwitcherContent,
+  },
+  // The story's `args` need to be mapped into the template through the `setup()` method
+  setup() {
+    return {
+      args: { ...args.data },
+      iconSample: IbmSecurity20,
+      selectedIndex: args.selectedIndex,
+      onSelected: action('selected'),
+    };
+  },
+  // And then the `args` are bound to your component with `v-bind="args"`
+  template: args.template,
+});
+const defaultTemplate = `
+<div>
+  <cv-content-switcher aria-label='Choose content' v-bind='args' @selected="onSelected">
+    <cv-content-switcher-button owner-id="csb-1" :selected="selectedIndex === 0">Button Name 1</cv-content-switcher-button>
+    <cv-content-switcher-button owner-id="csb-2" :selected="selectedIndex === 1">Button Name 2</cv-content-switcher-button>
+    <cv-content-switcher-button :icon="iconSample" owner-id="csb-3" :selected="selectedIndex === 2">Button Name 3</cv-content-switcher-button>
+  </cv-content-switcher>
+  <section style="margin: 10px 0;">
+    <cv-content-switcher-content owner-id="csb-1">
+      <p>This is the content for option 1</p>
+    </cv-content-switcher-content>
+    <cv-content-switcher-content owner-id="csb-2">
+      <p>This is the content for option 2</p>
+    </cv-content-switcher-content>
+    <cv-content-switcher-content owner-id="csb-2" >
+      <p>This is more content for option 2</p>
+    </cv-content-switcher-content>
+    <cv-content-switcher-content owner-id="csb-3">
+      <p>This is the content for option 3</p>
+  </cv-content-switcher-content>
+  </section>
+</div>
+`;
+const defaultCode = defaultTemplate.replace("v-bind='args'", '');
+const domTemplate = `
+<div>
+  <cv-content-switcher aria-label='Choose content' v-bind='args' @selected="onSelected">
+    <cv-content-switcher-button content-selector=".content-1" :selected="selectedIndex === 0">Button Name 1</cv-content-switcher-button>
+    <cv-content-switcher-button content-selector=".content-2" :selected="selectedIndex === 1">Button Name 2</cv-content-switcher-button>
+    <cv-content-switcher-button :icon="iconSample" content-selector=".content-3" :selected="selectedIndex === 2">Button Name 3</cv-content-switcher-button>
+  </cv-content-switcher>
+  <section style="margin: 10px 0;">
+    <div class="content-1">
+      <p>This is the DOM content for option 1</p>
+    </div>
+    <div class="content-2">
+      <p>This is the DOM content for option 2</p>
+    </div>
+    <div class="content-2" >
+      <p>This is more DOM content for option 2</p>
+    </div>
+    <div class="content-3">
+      <p>This is the DOM content for option 3</p>
+    </div>
+  </section>
+</div>
+`;
+const domCode = domTemplate.replace("v-bind='args'", '');
+const multipleTemplate = `
+<div>
+  <cv-content-switcher aria-label='Choose content' v-bind='args' @selected="onSelected" id="star-wars">
+    <cv-content-switcher-button parent-switcher="star-wars" owner-id="episode-1" :selected="selectedIndex === 0">Episode 1</cv-content-switcher-button>
+    <cv-content-switcher-button parent-switcher="star-wars" owner-id="episode-2" :selected="selectedIndex === 1">Episode 2</cv-content-switcher-button>
+    <cv-content-switcher-button parent-switcher="star-wars" :icon="iconSample" owner-id="episode-3" :selected="selectedIndex === 2">Episode 3</cv-content-switcher-button>
+  </cv-content-switcher>
+  <section style="margin: 10px 0;">
+    <cv-content-switcher-content parent-switcher="star-wars" owner-id="episode-1">
+      <p>Padme</p>
+    </cv-content-switcher-content>
+    <cv-content-switcher-content parent-switcher="star-wars" owner-id="episode-2">
+      <p>Anakin</p>
+    </cv-content-switcher-content>
+    <cv-content-switcher-content parent-switcher="star-wars" owner-id="episode-2" >
+      <p>Zam</p>
+    </cv-content-switcher-content>
+    <cv-content-switcher-content parent-switcher="star-wars" owner-id="episode-3">
+      <p>Yoda</p>
+    </cv-content-switcher-content>
+  </section>
+  <cv-content-switcher aria-label='Choose content' v-bind='args' @selected="onSelected" id="LotR">
+    <cv-content-switcher-button parent-switcher="LotR" owner-id="book-1" :selected="selectedIndex === 0">Book 1</cv-content-switcher-button>
+    <cv-content-switcher-button parent-switcher="LotR" owner-id="book-2" :selected="selectedIndex === 1">Book 2</cv-content-switcher-button>
+    <cv-content-switcher-button parent-switcher="LotR" :icon="iconSample" owner-id="book-3" :selected="selectedIndex === 2">Book 3</cv-content-switcher-button>
+  </cv-content-switcher>
+  <section style="margin: 10px 0;">
+    <cv-content-switcher-content parent-switcher="LotR" owner-id="book-1">
+      <p>Bilbo</p>
+    </cv-content-switcher-content>
+    <cv-content-switcher-content parent-switcher="LotR" owner-id="book-2">
+      <p>Frodo</p>
+    </cv-content-switcher-content>
+    <cv-content-switcher-content parent-switcher="LotR" owner-id="book-2" >
+      <p>Sauron</p>
+    </cv-content-switcher-content>
+    <cv-content-switcher-content parent-switcher="LotR" owner-id="book-3">
+      <p>Gandalf</p>
+    </cv-content-switcher-content>
+  </section>
+</div>
+`;
+const multipleCode = multipleTemplate.replace("v-bind='args'", '');
+
+# CvContentSwitcher
+
+**Migration notes:**
+
+- The `light` and '`theme` options continue to be supported but neither seem to have any effect with Carbon 10.
+  The React component does not have these properties listed at all. Even so the `--content-switcher--light` is still
+  applied if `light` is set to true.
+- In the Vue 2 component `cv-content-switcher-content` is set to visible if the controlling `cv-content-switcher` is
+  removed from the DOM. This is no longer supported. If you need this behaviour you can probably achieve the same effect
+  with the direct DOM version of the component plus some visibility logic.
+
+<Canvas>
+  <Story
+    name="Default"
+    parameters={{
+      controls: { exclude: ['default', 'selected', 'template', 'data'] },
+      docs: { source: { code: defaultCode } },
+    }}
+    args={{
+      data: {
+        light: true
+      },
+      selectedIndex: 0,
+      template: defaultTemplate,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+Manipulate DOM elements directly. For this mode define `content-selector`. The selector will be passed to
+`document.querySelectorAll()` to find and show or hide elements by setting or removing the `hidden` attribute.
+
+<Canvas>
+  <Story
+    name="Direct DOM"
+    parameters={{
+      controls: { exclude: ['default', 'selected', 'template', 'data'] },
+      docs: { source: { code: domCode } },
+    }}
+    args={{
+      data: {
+        light: true,
+      },
+      selectedIndex: 0,
+      template: domTemplate,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+Does it seem like a good idea to have multiple content switchers on the page? Who am I to judge.
+
+If you want to do this you need to define an `id` for the `cv-content-switcher` and share that with the
+`cv-content-switcher-button` and `cv-content-switcher-content` components via the `parent-switcher` property.
+
+<Canvas>
+  <Story
+    name="Multiple Switchers"
+    parameters={{
+      controls: { exclude: ['default', 'selected', 'template', 'data'] },
+      docs: { source: { code: multipleCode } },
+    }}
+    args={{
+      data: {
+        light: true,
+      },
+      selectedIndex: 0,
+      template: multipleTemplate,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
