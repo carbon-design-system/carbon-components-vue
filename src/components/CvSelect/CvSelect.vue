@@ -147,9 +147,6 @@ onMounted(() => {
   // value for options that include the selected attribute. By the time we get here the  `selected` has
   // already been unset by internalValue
 
-  // eslint-disable-next-line no-console
-  console.log('init modelValue', props.modelValue);
-
   dataValue.value = props.modelValue || props.value;
   if (dataValue.value === undefined) {
     const dom = el.value?.$el;
@@ -182,9 +179,13 @@ watch(
 watch(
   () => props.modelValue,
   () => {
-    // eslint-disable-next-line no-console
-    console.log('changed modelValue', props.modelValue);
     dataValue.value = props.modelValue;
+  }
+);
+watch(
+  () => props.value,
+  () => {
+    dataValue.value = props.value;
   }
 );
 const internalValue = computed(() => {
