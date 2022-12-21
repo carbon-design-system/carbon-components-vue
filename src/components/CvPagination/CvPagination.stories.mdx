@@ -57,11 +57,14 @@ const slotsTemplate = `
   <template v-slot:of-n-pages="{scope}">
     <span v-if="locale === 'en'"> out of {{scope.pages}} pages</span>
     <span v-else> von {{scope.pages}} Seiten</span>
-</template>
+  </template>
   </cv-pagination>
 `;
 
 # CvPagination
+
+Migration notes:
+- If you specify `pageNumberLabel` a trailing colon (:) is no longer automatically appended to the text
 
 <Canvas>
   <Story
@@ -82,10 +85,10 @@ const slotsTemplate = `
     args={{
       data: {},
       template: defaultTemplate,
-      backwardText: 'Previous page',
-      forwardText: 'Next page',
-      pageNumberLabel: 'Page number',
-      pageSizesLabel: 'Items per page:',
+      backwardText: undefined,
+      forwardText: undefined,
+      pageNumberLabel: undefined,
+      pageSizesLabel: undefined,
       numberOfItems: 103,
       page: 2,
       pageSizes: [
@@ -130,10 +133,10 @@ Use slots to set the range text and "of n pages" text. A good use case for this 
     args={{
       data: {},
       template: slotsTemplate,
-      backwardText: 'Previous page',
-      forwardText: 'Next page',
-      pageNumberLabel: 'Page number',
-      pageSizesLabel: 'Items per page:',
+      backwardText: undefined,
+      forwardText: undefined,
+      pageNumberLabel: undefined,
+      pageSizesLabel: undefined,
       numberOfItems: 103,
       page: 2,
       pageSizes: [

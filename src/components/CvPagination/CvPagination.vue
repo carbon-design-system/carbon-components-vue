@@ -3,7 +3,7 @@
     <div :class="`${carbonPrefix}--pagination__left`">
       <cv-select
         :class="`${carbonPrefix}--select__item-count`"
-        :label="`${pageSizesLabel}`"
+        :label="pageSizesLabel"
         inline
         ref="pageSizeSelect"
         @change="onPageSizeChange"
@@ -31,7 +31,7 @@
     <div :class="`${carbonPrefix}--pagination__right`">
       <cv-select
         :class="`${carbonPrefix}--select__page-number`"
-        :label="`${pageNumberLabel}:`"
+        :label="pageNumberLabel"
         inline
         hideLabel
         ref="pageSelect"
