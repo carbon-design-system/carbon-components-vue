@@ -21,7 +21,6 @@ export const Template = args => ({
   template: args.template,
 });
 const defaultTemplate = `
-<div class="carbon-theme--white">
   <cv-pagination
     @change="onChange"
     :backward-text="backwardText"
@@ -35,7 +34,6 @@ const defaultTemplate = `
     :backwards-button-disabled="backwardsButtonDisabled"
     :forwards-button-disabled="forwardsButtonDisabled">
   </cv-pagination>
-</div>
 `;
 const slotsTemplate = `
 <cv-pagination

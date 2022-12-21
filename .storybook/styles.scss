@@ -15,6 +15,7 @@ $carbon--theme: $carbon--theme--white;
   );
 }
 
+[data-carbon-theme='g10'],
 .carbon-theme--g10 {
   @include carbon--theme(
     $theme: $carbon--theme--g10,
@@ -22,6 +23,7 @@ $carbon--theme: $carbon--theme--white;
   );
 }
 
+[data-carbon-theme='g90'],
 .carbon-theme--g90 {
   @include carbon--theme(
     $theme: $carbon--theme--g90,
@@ -29,6 +31,7 @@ $carbon--theme: $carbon--theme--white;
   );
 }
 
+[data-carbon-theme='g100'],
 .carbon-theme--g100 {
   @include carbon--theme(
     $theme: $carbon--theme--g100,
@@ -46,7 +49,7 @@ $carbon--theme: $carbon--theme--white;
 
 // set default color and background for stories
 .cv-vue-3 {
-  margin: $layout-04;
+  padding: $layout-04;
   background-color: $ui-background;
   color: $text-01;
 }

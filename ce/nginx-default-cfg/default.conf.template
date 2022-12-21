@@ -1,0 +1,31 @@
+map $sent_http_content_type $spacache {
+    default             '';
+    text/html           'no-store, must-revalidate, proxy-revalidate';
+}
+
+map $sent_http_content_type $expires {
+    default             7d;
+    text/html           epoch;
+    application/json    epoch;
+}
+
+server {
+    listen       ${NGINX_PORT};
+    server_name  localhost;
+
+    # redirect server error pages to the static page /50x.html
+    #
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+
+    # Do not cache index for single page app
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html;
+        try_files $uri $uri/ /index.html;
+        add_header Cache-Control $spacache;
+        expires $expires;
+    }
+}
