@@ -1,0 +1,119 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+import { CvOverflowMenu } from '.';
+import { sbCompPrefix } from '@/global/storybook-utils';
+import { action } from '@storybook/addon-actions';
+import CvOverflowMenuItem from './CvOverflowMenuItem.vue';
+import { Meter20 as MeterIcon  } from '@carbon/icons-vue'
+
+<Meta title={`${sbCompPrefix}/CvOverflowMenu`} component={CvOverflowMenu} />
+
+export const Template = args => ({
+  // Components used in your story `template` are defined in the `components` object
+  components: {
+    CvOverflowMenu,
+    CvOverflowMenuItem,
+    MeterIcon,
+  },
+  // The story's `args` need to be mapped into the template through the `setup()` method
+  setup() {
+    return {
+      ...args,
+      onChange: action('change', {clearOnStoryChange:true}),
+    };
+  },
+  // And then the `args` are bound to your component with `v-bind="args"`
+  template: args.template,
+});
+const defaultTemplate = `
+<cv-overflow-menu
+  :flip-menu="flipMenu"
+  :up="up"
+  :offset="offset"
+  :label="label"
+  :tip-position="tipPosition"
+  :tip-alignment="tipAlignment"
+  @change=onChange>
+  <cv-overflow-menu-item value="item 1" primary-focus>list item 1</cv-overflow-menu-item>
+  <cv-overflow-menu-item value="item 2" disabled>list item 2</cv-overflow-menu-item>
+  <cv-overflow-menu-item value="item 3" danger>list item 3</cv-overflow-menu-item>
+</cv-overflow-menu>
+`;
+const slotsTemplate = `
+<cv-overflow-menu
+  :flip-menu="flipMenu"
+  :up="up"
+  :offset="offset"
+  :label="label"
+  :tip-position="tipPosition"
+  :tip-alignment="tipAlignment"
+  @change=onChange>
+  <template v-slot:trigger><meter-icon/></template>
+  <cv-overflow-menu-item value="item 1" primary-focus>list item 1</cv-overflow-menu-item>
+  <cv-overflow-menu-item value="item 2" disabled>list item 2</cv-overflow-menu-item>
+  <cv-overflow-menu-item value="item 3" danger>list item 3</cv-overflow-menu-item>
+</cv-overflow-menu>
+`;
+
+
+# CvOverflowMenu
+
+**Migration notes:**
+
+- The component now emits the "change" event when an item in the menu is clicked
+- The `flipMenu` parameter is supported but does not appear to work in Vue 2 or here
+
+<Canvas>
+  <Story
+    name="Default"
+    parameters={{
+      controls: {
+        exclude: ['default', 'template', 'trigger', 'change'],
+      },
+      docs: { source: { code: defaultTemplate } },
+    }}
+    args={{
+      template: defaultTemplate,
+      label: 'Overflow menu',
+      flipMenu: undefined,
+      up: undefined,
+      offset: undefined,
+      tipPosition: undefined,
+      tipAlignment: undefined,
+    }}
+    argTypes={{
+      tipPosition: { control: 'select', default: 'right', options: ['top', 'left', 'bottom', 'right'] },
+      tipAlignment: { control: 'select', default: 'center', options: ['start', 'center', 'end'] },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+Use slots for more control over the display.
+
+<Canvas>
+  <Story
+    name="Slots"
+    parameters={{
+      controls: {
+        exclude: ['default', 'template', 'trigger', 'change'],
+      },
+      docs: { source: { code: slotsTemplate } },
+    }}
+    args={{
+      template: slotsTemplate,
+      label: 'Overflow menu',
+      flipMenu: undefined,
+      up: undefined,
+      offset: undefined,
+      tipPosition: undefined,
+      tipAlignment: undefined,
+    }}
+    argTypes={{
+      tipPosition: { control: 'select', default: 'right', options: ['top', 'left', 'bottom', 'right'] },
+      tipAlignment: { control: 'select', default: 'center', options: ['start', 'center', 'end'] },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>

@@ -198,7 +198,7 @@ export const parameters = {
 };
 
 configureActions({
-  depth: 3,
+  clearOnStoryChange: true,
   limit: 10,
 });
 export const decorators = [
