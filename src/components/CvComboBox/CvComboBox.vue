@@ -159,7 +159,7 @@ import {
   nextTick,
   useSlots,
 } from 'vue';
-import { carbonPrefix } from '@/global/settings';
+import { carbonPrefix } from '../../global/settings';
 import { props as propsCvId, useCvId } from '@/use/cvId';
 import { WarningFilled16, Close16, ChevronDown16 } from '@carbon/icons-vue';
 

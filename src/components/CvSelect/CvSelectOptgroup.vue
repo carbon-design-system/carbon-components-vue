@@ -5,5 +5,5 @@
 </template>
 
 <script setup>
-import { carbonPrefix } from '@/global/settings';
+import { carbonPrefix } from '../../global/settings';
 </script>

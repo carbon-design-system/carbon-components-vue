@@ -86,7 +86,7 @@
 </template>
 
 <script setup>
-import { carbonPrefix } from '@/global/settings';
+import { carbonPrefix } from '../../global/settings';
 import { computed, onMounted, onUpdated, ref, useSlots, watch } from 'vue';
 import {
   WarningFilled16 as WarningFilled,

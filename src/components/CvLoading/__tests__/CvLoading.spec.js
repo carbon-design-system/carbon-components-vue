@@ -1,6 +1,6 @@
 import { render } from '@testing-library/vue';
 import CvLoading from '../CvLoading';
-import { carbonPrefix } from '@/global/settings';
+import { carbonPrefix } from '../../../global/settings';
 
 test('CvLoading - test all props and attrs', async () => {
   const RADIUS_SMALL = '42';

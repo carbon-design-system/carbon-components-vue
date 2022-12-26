@@ -39,7 +39,7 @@
 </template>
 
 <script setup>
-import { carbonPrefix } from '@/global/settings';
+import { carbonPrefix } from '../../global/settings';
 import CvSvg from '../CvSvg/_CvSvg';
 import { computed, onMounted, watch } from 'vue';
 import { props as propsCvId, useCvId } from '@/use/cvId';

@@ -46,7 +46,7 @@
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
 import CvWrapper from '../CvWrapper/CvWrapper';
-import { carbonPrefix } from '@/global/settings';
+import { carbonPrefix } from '../../global/settings';
 import { useCvId, props as propsCvId } from '../../use/cvId';
 
 const props = defineProps({
