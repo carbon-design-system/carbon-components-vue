@@ -77,7 +77,7 @@
 
 <script setup>
 import { carbonPrefix } from '../../global/settings';
-import { props as propsCvId, useCvId } from '@/use/cvId';
+import { props as propsCvId, useCvId } from '../../use/cvId';
 import OverflowMenuVertical16 from '@carbon/icons-vue/es/overflow-menu--vertical/16';
 import { computed, nextTick, onBeforeMount, onUnmounted, ref } from 'vue';
 import { getBus, removeBus } from '../../global/component-utils/event-bus';

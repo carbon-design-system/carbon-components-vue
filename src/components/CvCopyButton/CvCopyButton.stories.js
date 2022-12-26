@@ -1,7 +1,10 @@
 import CvCopyButton from '.';
 
 import { action } from '@storybook/addon-actions';
-import { sbCompPrefix, storyParametersObject } from '@/global/storybook-utils';
+import {
+  sbCompPrefix,
+  storyParametersObject,
+} from '../../global/storybook-utils';
 
 export default {
   title: `${sbCompPrefix}/CvCopyButton`,

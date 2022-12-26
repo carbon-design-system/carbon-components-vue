@@ -16,7 +16,7 @@
 
 <script setup>
 import { carbonPrefix } from '../../global/settings';
-import { props as propsCvId, useCvId } from '@/use/cvId';
+import { props as propsCvId, useCvId } from '../../use/cvId';
 import { useIsLight, props as propsTheme } from '../../use/cvTheme';
 import { onUnmounted, watch } from 'vue';
 import store from './cvContentSwitcherStore';

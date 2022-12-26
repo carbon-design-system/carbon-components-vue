@@ -4,7 +4,8 @@
 import { shallowMount } from '@vue/test-utils';
 import { carbonPrefix } from '../../../global/settings';
 
-import { CvBreadcrumb, CvBreadcrumbItem } from '@/components/CvBreadcrumb';
+import CvBreadcrumb from '../CvBreadcrumb.vue';
+import CvBreadcrumbItem from '../CvBreadcrumbItem.vue';
 
 describe('CvBreadcrumb', () => {
   it('CvBreadcrumb - default', () => {

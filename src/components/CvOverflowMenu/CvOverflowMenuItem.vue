@@ -27,7 +27,7 @@
 <script setup>
 import { carbonPrefix } from '../../global/settings';
 import { onMounted, ref, useAttrs } from 'vue';
-import { getBus } from '@/global/component-utils/event-bus';
+import { getBus } from '../../global/component-utils/event-bus';
 
 defineProps({
   primaryFocus: Boolean,

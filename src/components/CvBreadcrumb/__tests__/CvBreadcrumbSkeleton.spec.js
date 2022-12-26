@@ -4,11 +4,8 @@
 import { shallowMount } from '@vue/test-utils';
 import { carbonPrefix } from '../../../global/settings';
 
-import {
-  CvBreadcrumbSkeleton,
-  CvBreadcrumbSkeletonItem,
-} from '@/components/CvBreadcrumb';
-
+import CvBreadcrumbSkeleton from '../CvBreadcrumbSkeleton.vue';
+import CvBreadcrumbSkeletonItem from '../CvBreadcrumbSkeletonItem.vue';
 describe('CvBreadcrumbSkeleton', () => {
   it('CvBreadcrumbSkeleton - default', () => {
     const wrapper = shallowMount(CvBreadcrumbSkeleton);

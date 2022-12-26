@@ -93,7 +93,7 @@ import {
   ChevronDown16 as ChevronDown,
   WarningAltFilled16 as WarningAltFilled,
 } from '@carbon/icons-vue';
-import { props as propsCvId, useCvId } from '@/use/cvId';
+import { props as propsCvId, useCvId } from '../../use/cvId';
 import CvWrapper from '../CvWrapper/CvWrapper';
 import { useIsLight, props as propsTheme } from '../../use/cvTheme';
 
