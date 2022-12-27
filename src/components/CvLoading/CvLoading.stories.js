@@ -2,7 +2,10 @@ import CvLoading from '.';
 
 import { ref, computed } from 'vue';
 import { action } from '@storybook/addon-actions';
-import { sbCompPrefix, storyParametersObject } from '@/global/storybook-utils';
+import {
+  sbCompPrefix,
+  storyParametersObject,
+} from '../../global/storybook-utils';
 import './CvLoading.stories.scss';
 
 export default {

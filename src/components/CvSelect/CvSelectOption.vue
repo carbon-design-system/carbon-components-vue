@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import { carbonPrefix } from '@/global/settings';
+import { carbonPrefix } from '../../global/settings';
 import { computed, useAttrs } from 'vue';
 const attrs = useAttrs();
 const isSelected = computed(() => {

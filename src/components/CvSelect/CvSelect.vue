@@ -86,14 +86,14 @@
 </template>
 
 <script setup>
-import { carbonPrefix } from '@/global/settings';
+import { carbonPrefix } from '../../global/settings';
 import { computed, onMounted, onUpdated, ref, useSlots, watch } from 'vue';
 import {
   WarningFilled16 as WarningFilled,
   ChevronDown16 as ChevronDown,
   WarningAltFilled16 as WarningAltFilled,
 } from '@carbon/icons-vue';
-import { props as propsCvId, useCvId } from '@/use/cvId';
+import { props as propsCvId, useCvId } from '../../use/cvId';
 import CvWrapper from '../CvWrapper/CvWrapper';
 import { useIsLight, props as propsTheme } from '../../use/cvTheme';
 

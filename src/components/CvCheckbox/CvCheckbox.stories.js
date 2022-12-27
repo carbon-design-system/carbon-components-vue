@@ -2,11 +2,11 @@ import {
   sbCompPrefix,
   storybookControlsFromProps,
   storyParametersObject,
-} from '@/global/storybook-utils';
+} from '../../global/storybook-utils';
 
 import { CvCheckbox } from '.';
 import { action } from '@storybook/addon-actions';
-import { props as propsCvCheck } from '@/use/cvCheck';
+import { props as propsCvCheck } from '../../use/cvCheck';
 import { ref } from 'vue';
 
 export default {

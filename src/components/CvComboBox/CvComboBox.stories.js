@@ -1,4 +1,7 @@
-import { sbCompPrefix, storyParametersObject } from '@/global/storybook-utils';
+import {
+  sbCompPrefix,
+  storyParametersObject,
+} from '../../global/storybook-utils';
 
 import { CvComboBox } from '.';
 import { action } from '@storybook/addon-actions';

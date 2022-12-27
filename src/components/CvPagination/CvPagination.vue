@@ -85,7 +85,7 @@
 </template>
 
 <script setup>
-import { carbonPrefix } from '@/global/settings';
+import { carbonPrefix } from '../../global/settings';
 import { computed, nextTick, onMounted, ref } from 'vue';
 import { CaretLeft16, CaretRight16 } from '@carbon/icons-vue';
 import CvSelect from '../CvSelect';

@@ -41,7 +41,7 @@
 
 <script setup>
 import { ref, toRefs } from 'vue';
-import { carbonPrefix } from '@/global/settings';
+import { carbonPrefix } from '../../global/settings';
 import { useCheck, props as propsCvCheck } from '../../use/cvCheck';
 import { useCvId, props as propsCvId } from '../../use/cvId';
 
