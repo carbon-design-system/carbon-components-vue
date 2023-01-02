@@ -1,0 +1,181 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+import { CvDataTable } from '.';
+import CvDataTableHeading from './CvDataTableHeading.vue';
+import CvDataTableRow from "./CvDataTableRow.vue";
+import CvDataTableCell from "./CvDataTableCell.vue";
+import CvDataTableAction from "./CvDataTableAction.vue";
+import CvButton from '../CvButton/CvButton.vue'
+import { sbCompPrefix } from '../../global/storybook-utils';
+import { action } from '@storybook/addon-actions';
+import { Terminal16 as CompileIcon, Debug16 as DebugIcon, Chip16 as EmbedIcon,
+  TrashCan16 as TrashCanIcon} from '@carbon/icons-vue'
+
+<Meta title={`${sbCompPrefix}/CvDataTable`} component={CvDataTable} />
+
+export const Template = args => ({
+// Components used in your story `template` are defined in the `components` object
+components: {
+  CvDataTable,
+  CvDataTableHeading,
+  CvDataTableRow,
+  CvDataTableCell,
+  CvDataTableAction,
+  CompileIcon,
+  DebugIcon,
+  EmbedIcon,
+  CvButton,
+},
+// The story's `args` need to be mapped into the template through the `setup()` method
+setup() {
+  return {
+    args: {...args,
+      useActions: undefined,
+      useBatchActions: undefined,
+      useHelperTextSlot: undefined,
+      template: undefined},
+    trashIcon: TrashCanIcon,
+    onSort: action('sort'),
+    onSearch: action('search'),
+    onRowSelectChange: action('row-select-change'),
+    onRowSelectChanges: action('row-select-changes'),
+    onOverflowMenuClick: action('overflow-menu-click'),
+    onRowExpanded: action('row-expanded'),
+    onPagination: action('pagination'),
+    onAction1: action('compile'),
+    onAction2: action('debug'),
+    onAction3: action('firmware'),
+    onDelete: action('delete'),
+    useActions: args.useActions,
+    useBatchActions: args.useBatchActions,
+    useHelperTextSlot: args.useHelperTextSlot
+    };
+},
+// And then the `args` are bound to your component with `v-bind="args"`
+template: args.template,
+});
+const defaultTemplate = `
+<cv-data-table
+  @sort="onSort"
+  @search="onSearch"
+  @row-select-change="onRowSelectChange"
+  @row-select-changes="onRowSelectChanges"
+  @overflow-menu-click="onOverflowMenuClick"
+  @row-expanded="onRowExpanded"
+  @pagination="onPagination"
+  v-bind="args"
+  >
+  <template v-if="useBatchActions" v-slot:batch-actions>
+    <cv-button :icon="trashIcon" @click="onDelete">Delete</cv-button>
+  </template>
+  <template v-if="useActions" v-slot:actions>
+    <cv-data-table-action @click="onAction1" aria-label="compile" alt="compile">
+      <compile-icon>
+        <title>Compile</title>
+      </compile-icon>
+    </cv-data-table-action>
+    <cv-data-table-action @click="onAction2" aria-label="debug" alt="debug">
+      <debug-icon>
+        <title>Debug</title>
+      </debug-icon>
+    </cv-data-table-action>
+    <cv-data-table-action @click="onAction3" aria-label="firmware" alt="firmware">
+      <embed-icon>
+        <title>Install Firmware</title>
+      </embed-icon>
+    </cv-data-table-action>
+  </template>
+  <template v-slot:headings>
+    <cv-data-table-heading heading="Name" name="name" sortable/>
+    <cv-data-table-heading heading="Year" name="year" sortable/>
+    <cv-data-table-heading heading="Object Oriented"/>
+    <cv-data-table-heading heading="Purpose" />
+    <cv-data-table-heading heading="Standard" />
+  </template>
+  <template v-slot:data>
+    <cv-data-table-row value="java">
+      <cv-data-table-cell>Java</cv-data-table-cell>
+      <cv-data-table-cell>1995</cv-data-table-cell>
+      <cv-data-table-cell>Yes</cv-data-table-cell>
+      <cv-data-table-cell>Applications</cv-data-table-cell>
+      <cv-data-table-cell>Java Language Specification</cv-data-table-cell>
+    </cv-data-table-row>
+    <cv-data-table-row value="cobol">
+      <cv-data-table-cell>COBOL</cv-data-table-cell>
+      <cv-data-table-cell>1959</cv-data-table-cell>
+      <cv-data-table-cell>Yes</cv-data-table-cell>
+      <cv-data-table-cell>Business applications</cv-data-table-cell>
+      <cv-data-table-cell>COBOL 2014</cv-data-table-cell>
+    </cv-data-table-row>
+    <cv-data-table-row value="pascal">
+      <cv-data-table-cell>Turbo Pascal</cv-data-table-cell>
+      <cv-data-table-cell>1983</cv-data-table-cell>
+      <cv-data-table-cell>No</cv-data-table-cell>
+      <cv-data-table-cell>Applications</cv-data-table-cell>
+      <cv-data-table-cell>None</cv-data-table-cell>
+    </cv-data-table-row>
+  </template>
+</cv-data-table>
+`;
+
+# CvDataTable
+
+**Usage:**
+- Sorting, filtering and pagination are the responsibility of the component user. This component raises events to facilitate this.
+- The search bar appears only if the search event is listened for.
+
+**Row attributes:**
+- aria-label-for-batch-checkbox: Aria label for batch checkbox. default 'Select row N for batch action'.
+- aria-label-expand-row: Aria label for expanding row expansion button. default: 'Expand current row'
+- aria-label-collapse-row: Aria label for expanding row collapse button. default: 'Collapse current row'
+- expanded: initial state of the expanded row
+
+**Migration notes:**
+
+- Default batch cancel label changed from "cancel" to "Cancel"
+- The sort event now returns an additional value "name" for example
+`{index: "1", order: "ascending", name: "year"}`. You can set the name value as a property on the
+`cv-data-table-heading` element
+- The `search` emit is not defined on the component and so your IDE likely will not suggest a type-ahead
+completion for it. See [discussion](https://github.com/vuejs/core/issues/3432) for the reason for this. The
+`search` emit is still emitted it is just not defined directly on the component.
+- The Vue 3 implementation uses an internal store to manage the state of the table. You can see updates
+to the state by setting the debug variable in the local storage. `localStorage.debug="cv:data-table-store"`
+and then reloading the page.
+
+<Canvas>
+  <Story
+    name="Default"
+    parameters={{
+      controls: { exclude: ['default',
+          'template',
+          'overflow-menu-click',
+          'pagination',
+          'row-expanded',
+          'row-select-change',
+          'row-select-changes',
+          'search',
+          'sort',
+          'actions',
+          'batch-actions',
+          'data',
+          'headings',
+          'helper-text',
+          'items-selected',
+          'of-n-pages',
+          'range-text'
+        ] },
+      docs: { source: { code: defaultTemplate.replace('v-bind="args"', '') } },
+    }}
+    args={{
+      template: defaultTemplate,
+      title: 'Programming Languages',
+      useActions: false,
+      useBatchActions: false,
+    }}
+    argTypes={{
+      rowSize: { control: 'select', default: 'standard', options: ['compact', 'short', 'standard', 'tall'] },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
