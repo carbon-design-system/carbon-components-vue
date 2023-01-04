@@ -9,7 +9,6 @@
       :rowId="cvId"
       v-bind="$attrs"
       :expanding-row="dataExpandable"
-      some-expanding-rows
       @expanded-change="onExpandedChange"
       @checked-change="onCheckedChange"
       :expanded="dataExpanded"
@@ -69,13 +68,13 @@ const dataExpandable = ref(false);
 const attrs = useAttrs();
 const slots = useSlots();
 const row = ref(null);
-let parent;
+const parent = ref(null);
 let bus;
 onMounted(() => {
   const el = row.value?.$el;
   const pe = el?.closest('.cv-data-table');
-  parent = pe?.getAttribute('id');
-  if (parent) {
+  parent.value = pe?.getAttribute('id');
+  if (parent.value) {
     bus = getBus(parent);
     store.getParent(parent);
   } else console.warn('data table not found');
@@ -96,17 +95,19 @@ onMounted(() => {
     });
 });
 onUpdated(() => {
+  const curr = dataExpandable.value;
   dataExpandable.value = !!slots.expandedContent;
-  store.updateRow(parent, {
-    id: cvId.value,
-    expandable: dataExpandable.value,
-  });
+  if (dataExpandable.value !== curr)
+    store.updateRow(parent, {
+      id: cvId.value,
+      expandable: dataExpandable.value,
+    });
 });
 onBeforeUnmount(() => {
   store.removeRow(parent, cvId);
 });
 const dataExpanded = computed(() => {
-  return props.expanded || store.findRow(parent, cvId);
+  return Boolean(props.expanded || store.isRowExpanded(parent, cvId));
 });
 watch(
   () => props.expanded,

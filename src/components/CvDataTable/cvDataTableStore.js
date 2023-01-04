@@ -5,7 +5,12 @@ export default reactive({
   state: { global: { rows: [], headings: [] } },
   addParent(parentId) {
     const parent = unref(parentId);
-    this.state[parent] = { rows: [], headings: [], hasBatchActions: false };
+    this.state[parent] = {
+      rows: [],
+      headings: [],
+      hasBatchActions: false,
+      hasExpandable: false,
+    };
     logger(`added parent:${parent}`);
   },
   removeParent(parentId) {
@@ -20,15 +25,18 @@ export default reactive({
   },
   hasBatchActions(parentId) {
     const parent = unref(parentId);
+    if (!this.state[parent]) return;
     const hasBatchActions = this.state[parent]?.hasBatchActions;
     logger(`get hasBatchActions:${parent} result:${hasBatchActions}`);
     return hasBatchActions;
   },
   setBatchActions(parentId, val) {
     const parent = unref(parentId);
-    logger(`update batch actions:${parent} payload:${val}`);
-    if (!this.state[parent]) this.addParent(parent);
-    this.state[parent].hasBatchActions = val;
+    if (!this.state[parent]) return;
+    if (this.state[parent].hasBatchActions !== val) {
+      this.state[parent].hasBatchActions = val;
+      logger(`setBatchActions:${parent} payload:${val}`);
+    }
   },
   findHeading(parentId, headingId) {
     const parent = unref(parentId);
@@ -93,16 +101,29 @@ export default reactive({
     if (!this.state[parent]) return undefined;
     return this.state[parent].rows.find(row => row.id === id);
   },
+  isRowExpanded(parentId, rowId) {
+    const row = this.findRow(parentId, rowId);
+    return row?.isExpanded;
+  },
+  setSomeExpandingRows(parentId) {
+    const parent = unref(parentId);
+    if (!this.state[parent]) return undefined;
+    const rows = this.state[parent].rows;
+    const some = rows?.some(item => item.expandable);
+    logger(`set someExpandingRows:${parent} result:${some}`);
+    this.state[parent].hasExpandable = some;
+  },
   someExpandingRows(parentId) {
     const parent = unref(parentId);
-    const rows = this.state[parent]?.rows;
-    const some = rows?.some(item => item.expandable);
+    if (!parent) return false;
+    const some = this.state[parent]?.hasExpandable;
     logger(`get someExpandingRows:${parent} result:${some}`);
     return some;
   },
   allExpandedRows(parentId) {
     const parent = unref(parentId);
-    const rows = this.state[parent]?.rows;
+    if (!parent) return false;
+    const rows = this.state[parent].rows;
     const every = rows?.every(item => item.isExpanded);
     logger(`get allExpandedRows:${parent} result:${every}`);
     return every;

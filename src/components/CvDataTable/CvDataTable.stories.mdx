@@ -9,6 +9,16 @@ import { sbCompPrefix } from '../../global/storybook-utils';
 import { action } from '@storybook/addon-actions';
 import { Terminal16 as CompileIcon, Debug16 as DebugIcon, Chip16 as EmbedIcon,
   TrashCan16 as TrashCanIcon} from '@carbon/icons-vue'
+const testData = [
+  { name:"Java", year:1995, oo:"Yes", purpose:"Applications", standard:"Java Language Specification", desc: "As of September 2022, Java 19 is the latest version, while Java 17, 11 and 8 are the current long-term support (LTS) versions."},
+  { name:"COBOL", year:1959, oo:"Yes", purpose:"Business applications", standard:"COBOL 2014", desc: "COBOL statements have an English-like syntax, which was designed to be self-documenting and highly readable."},
+  { name:"Pascal", year:1970, oo:"No", purpose:"Applications", standard:"None", desc: "Pascal was developed on the pattern of the ALGOL 60 language."},
+  { name:"Ada", year:1980, oo:"Yes", purpose:"US DoD projects", standard:"Ada 2012 TC1", desc: "Ada was named after Ada Lovelace (1815–1852), who has been credited as the first computer programmer."},
+  { name:"BASIC", year:1964, oo:"No", purpose:"Education", standard:"ANSI", desc: "BASIC declined in popularity in the 1990s"},
+  { name:"C++", year:1985, oo:"Yes", purpose:"Systems programming", standard:"ISO/IEC 2017", desc: "C++ is standardized by the International Organization for Standardization (ISO), with the latest standard version ratified and published by ISO in December 2020 as ISO/IEC 14882:2020 (informally known as C++20)."},
+  { name:"Fortran", year:1957, oo:"No", purpose:"Engineering applications", standard:"ANSI", desc: "Fortran was originally developed by IBM in the 1950s for scientific and engineering applications, and subsequently came to dominate scientific computing."},
+  { name:"Go", year:2009, oo:"Maybe", purpose:"Networked applications", standard:"Go Spec", desc: "Go's designers were primarily motivated by their shared dislike of C++."},
+];
 
 <Meta title={`${sbCompPrefix}/CvDataTable`} component={CvDataTable} />
 
@@ -47,7 +57,8 @@ setup() {
     onDelete: action('delete'),
     useActions: args.useActions,
     useBatchActions: args.useBatchActions,
-    useHelperTextSlot: args.useHelperTextSlot
+    useHelperTextSlot: args.useHelperTextSlot,
+    testData
     };
 },
 // And then the `args` are bound to your component with `v-bind="args"`
@@ -55,8 +66,8 @@ template: args.template,
 });
 const defaultTemplate = `
 <cv-data-table
-  @sort="onSort"
   @search="onSearch"
+  @sort="onSort"
   @row-select-change="onRowSelectChange"
   @row-select-changes="onRowSelectChanges"
   @overflow-menu-click="onOverflowMenuClick"
@@ -92,30 +103,21 @@ const defaultTemplate = `
     <cv-data-table-heading heading="Standard" />
   </template>
   <template v-slot:data>
-    <cv-data-table-row value="java">
-      <cv-data-table-cell>Java</cv-data-table-cell>
-      <cv-data-table-cell>1995</cv-data-table-cell>
-      <cv-data-table-cell>Yes</cv-data-table-cell>
-      <cv-data-table-cell>Applications</cv-data-table-cell>
-      <cv-data-table-cell>Java Language Specification</cv-data-table-cell>
-    </cv-data-table-row>
-    <cv-data-table-row value="cobol">
-      <cv-data-table-cell>COBOL</cv-data-table-cell>
-      <cv-data-table-cell>1959</cv-data-table-cell>
-      <cv-data-table-cell>Yes</cv-data-table-cell>
-      <cv-data-table-cell>Business applications</cv-data-table-cell>
-      <cv-data-table-cell>COBOL 2014</cv-data-table-cell>
-    </cv-data-table-row>
-    <cv-data-table-row value="pascal">
-      <cv-data-table-cell>Turbo Pascal</cv-data-table-cell>
-      <cv-data-table-cell>1983</cv-data-table-cell>
-      <cv-data-table-cell>No</cv-data-table-cell>
-      <cv-data-table-cell>Applications</cv-data-table-cell>
-      <cv-data-table-cell>None</cv-data-table-cell>
+    <cv-data-table-row v-for="row in testData" :key="row.name" :value="row.name">
+      <cv-data-table-cell>{{row.name}}</cv-data-table-cell>
+      <cv-data-table-cell>{{row.year}}</cv-data-table-cell>
+      <cv-data-table-cell>{{row.oo}}</cv-data-table-cell>
+      <cv-data-table-cell>{{row.purpose}}</cv-data-table-cell>
+      <cv-data-table-cell>{{row.standard}}</cv-data-table-cell>
+      <!-- Add optional expanding data here -->
     </cv-data-table-row>
   </template>
 </cv-data-table>
 `;
+const expandingRowsTemplate = defaultTemplate.replace(
+  "<!-- Add optional expanding data here -->",
+  `<template v-slot:expandedContent>{{row.desc}}</template>`)
+  .replace('@search="onSearch"', '')
 
 # CvDataTable
 
@@ -168,12 +170,54 @@ and then reloading the page.
     }}
     args={{
       template: defaultTemplate,
-      title: 'Programming Languages',
+      title: 'Table title: Programming Languages',
+      helperText: 'Table helper text',
       useActions: false,
       useBatchActions: false,
     }}
     argTypes={{
       rowSize: { control: 'select', default: 'standard', options: ['compact', 'short', 'standard', 'tall'] },
+      rowsSelected: { control: 'multi-select',  options: ['Java', 'COBOL', 'C++'] },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Expanding rows"
+    parameters={{
+      controls: { exclude: ['default',
+          'template',
+          'overflow-menu-click',
+          'pagination',
+          'row-expanded',
+          'row-select-change',
+          'row-select-changes',
+          'search',
+          'sort',
+          'actions',
+          'batch-actions',
+          'data',
+          'headings',
+          'helper-text',
+          'items-selected',
+          'of-n-pages',
+          'range-text'
+        ] },
+      docs: { source: { code: expandingRowsTemplate.replace('v-bind="args"', '') } },
+    }}
+    args={{
+      template: expandingRowsTemplate,
+      title: 'Table with expanding rows',
+      helperText: 'Click row to expand',
+      useActions: false,
+      useBatchActions: false,
+    }}
+    argTypes={{
+      rowSize: { control: 'select', default: 'standard', options: ['compact', 'short', 'standard', 'tall'] },
+      rowsSelected: { control: 'multi-select',  options: ['Java', 'COBOL', 'C++'] },
     }}
   >
     {Template.bind({})}

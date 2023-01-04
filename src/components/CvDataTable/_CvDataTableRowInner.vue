@@ -21,6 +21,7 @@
       >
         <ChevronRight16 :class="`${carbonPrefix}--table-expand__svg`" />
       </button>
+      <div v-else>{{ expandingRow }}</div>
     </td>
     <td
       v-if="hasBatchActions"
@@ -76,12 +77,13 @@ const props = defineProps({
   ariaLabelExpandRow: { type: String, default: 'Expand current row' },
   ariaLabelCollapseRow: { type: String, default: 'Collapse current row' },
   overflowMenu: Array,
-  someExpandingRows: Boolean,
   value: String,
   rowId: String,
 });
 
-const dataSomeExpandingRows = ref(props.someExpandingRows);
+const dataSomeExpandingRows = computed(() => {
+  return store.someExpandingRows(parent);
+});
 
 const overflowMenuButtons = computed(() => {
   return props.overflowMenu.filter(item => typeof item === 'string');

@@ -67,17 +67,17 @@
             </div>
             <label
               :id="`${uid}-search`"
-              :for="uid"
+              :for="`searchbox-${uid}`"
               :class="`${carbonPrefix}--label`"
               >{{ searchLabel }}</label
             >
             <input
               :class="`${carbonPrefix}--search-input`"
               type="text"
-              :id="uid"
-              role="search"
+              :id="`searchbox-${uid}`"
+              role="searchbox"
               :placeholder="searchPlaceholder"
-              :aria-labelledby="uid"
+              :aria-labelledby="`searchbox-${uid}`"
               ref="search"
               v-model="searchValue"
               @input="onSearch"
@@ -176,7 +176,7 @@
               </tr>
             </thead>
 
-            <component :is="hasExpandables ? 'div' : 'tbody'">
+            <component :is="hasExpandables ? Empty : 'tbody'">
               <slot name="data">
                 <cv-data-table-row
                   v-for="(row, rowIndex) in data"
@@ -190,9 +190,9 @@
                     :key="`cell:${colIndex}:${rowIndex}`"
                     :style="dataStyle(colIndex)"
                   >
-                    <cv-wrapper :tag-type="skeleton ? 'span' : ''">{{
+                    <component :is="skeleton ? 'span' : Empty">{{
                       cell
-                    }}</cv-wrapper>
+                    }}</component>
                   </cv-data-table-cell>
                 </cv-data-table-row>
               </slot>
@@ -227,7 +227,6 @@ import CvDataTableCell from './CvDataTableCell.vue';
 import CvButton from '../CvButton';
 import CvCheckbox from '../CvCheckbox';
 import CvPagination from '../CvPagination';
-import CvWrapper from '../CvWrapper/CvWrapper';
 import Search16 from '@carbon/icons-vue/es/search/16';
 import Close16 from '@carbon/icons-vue/es/close/16';
 import ChevronRight16 from '@carbon/icons-vue/es/chevron--right/16';
@@ -246,6 +245,7 @@ import {
 } from 'vue';
 import { props as propsCvId, useCvId } from '../../use/cvId';
 import store from './cvDataTableStore';
+import Empty from '../CvEmpty/CvEmpty.vue';
 
 const props = defineProps({
   actionBarAriaLabel: { type: String, default: 'Table Action Bar' },
@@ -358,6 +358,7 @@ onMounted(() => {
   }
   updateRowsSelected();
   checkSlots();
+  store.setSomeExpandingRows(uid);
 });
 
 onUnmounted(() => {

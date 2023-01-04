@@ -20,30 +20,30 @@
       @click="onSortClick"
       :style="headingStyle"
     >
-      <cv-wrapper
-        :tag-type="headingLabelTag"
+      <component
+        :is="headingLabelTag"
         :class="`${carbonPrefix}--table-header-label`"
       >
         <slot>{{ heading }}</slot>
-      </cv-wrapper>
+      </component>
       <ArrowDown16 :class="`${carbonPrefix}--table-sort__icon`" />
       <Arrows16 :class="`${carbonPrefix}--table-sort__icon-unsorted`" />
     </button>
-    <cv-wrapper
+    <component
       v-else
-      :tag-type="headingLabelTag"
+      :is="headingLabelTag"
       :class="`${carbonPrefix}--table-header-label`"
       :style="headingStyle"
     >
       <slot>{{ heading }}</slot>
-    </cv-wrapper>
+    </component>
   </th>
 </template>
 
 <script setup>
 import ArrowDown16 from '@carbon/icons-vue/es/arrow--down/16';
 import Arrows16 from '@carbon/icons-vue/es/arrows--vertical/16';
-import CvWrapper from '../CvWrapper/CvWrapper';
+import CvEmpty from '../CvEmpty/CvEmpty.vue';
 import { props as propsCvId, useCvId } from '../../use/cvId';
 import { carbonPrefix } from '../../global/settings';
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
@@ -138,7 +138,7 @@ const internalOrder = computed(() => {
 const headingLabelTag = computed(() => {
   // no tag if non-blank skeleton
   return props.skeleton && props.heading && props.heading.length > 0
-    ? ''
+    ? CvEmpty
     : 'span';
 });
 </script>
