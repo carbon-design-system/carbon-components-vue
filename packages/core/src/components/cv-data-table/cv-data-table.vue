@@ -54,7 +54,7 @@
               :class="`${carbonPrefix}--search-input`"
               type="text"
               :id="uid"
-              role="search"
+              role="searchbox"
               :placeholder="searchPlaceholder"
               :aria-labelledby="uid"
               ref="search"
