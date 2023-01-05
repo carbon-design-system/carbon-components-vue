@@ -339,11 +339,11 @@ onBeforeMount(() => {
   bus.on('cv:click', onMenuItemClick);
   bus.on('cv:sort', onSort);
   bus.on('cv:expanded-change', onCvExpandedChange);
-  store.addParent(uid.value);
+  store.addTable(uid);
 });
 onUnmounted(() => {
   removeBus(uid.value);
-  store.removeParent(uid.value);
+  store.removeTable(uid.value);
 });
 
 watch(() => props.rowsSelected, updateRowsSelected);
@@ -533,7 +533,7 @@ function onHeadingCheckChange() {
     }
 
     if (child.isChecked !== headingChecked.value) {
-      store.updateRow(uid, { ...child, isChecked: headingChecked.value });
+      store.updateRow(uid, { id: child.id, isChecked: headingChecked.value });
 
       emit('row-select-change', {
         value: child.value,
@@ -593,7 +593,7 @@ function toggleExpandAll() {
   const toggle = !dataExpandAll.value;
   const rows = store.rows(uid);
   for (const row of rows) {
-    store.updateRow(uid, { ...row, isExpanded: toggle });
+    store.updateRow(uid, { id: row.id, isExpanded: toggle });
   }
 }
 

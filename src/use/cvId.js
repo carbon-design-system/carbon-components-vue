@@ -1,6 +1,10 @@
 import { computed } from 'vue';
 
 // https://stackoverflow.com/a/2117523
+/**
+ * Longish unique id
+ * @returns {string}
+ */
 function genCvId() {
   const randomValues = c =>
     typeof crypto !== 'undefined'
@@ -32,7 +36,17 @@ export const props = {
   id: String,
 };
 
+/**
+ * Get a unique id or use the one found in props
+ * @param {object} props
+ * @param {boolean} readable
+ * @param {string} prefix
+ * @returns {ComputedRef<unknown>|string}
+ */
 export const useCvId = (props, readable = false, prefix = '') => {
+  /**
+   * @type {ComputedRef<unknown>}
+   */
   const cvId = computed(() => {
     if (props?.id && props.id.length) return props.id;
     else if (readable) return prefix + shortId(5);

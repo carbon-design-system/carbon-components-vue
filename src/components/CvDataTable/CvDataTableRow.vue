@@ -76,7 +76,7 @@ onMounted(() => {
   parent.value = pe?.getAttribute('id');
   if (parent.value) {
     bus = getBus(parent);
-    store.getParent(parent);
+    store.getTable(parent);
   } else console.warn('data table not found');
 
   dataExpandable.value = !!slots.expandedContent;

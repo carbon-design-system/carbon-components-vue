@@ -118,7 +118,7 @@ onMounted(() => {
   const pe = el.value.closest('.cv-data-table');
   parent.value = pe?.getAttribute('id');
   if (parent.value) {
-    store.getParent(parent);
+    store.getTable(parent);
     bus = getBus(parent);
   } else console.warn('data table not found');
 });
