@@ -239,6 +239,7 @@ import {
   onUnmounted,
   onUpdated,
   ref,
+  unref,
   useAttrs,
   useSlots,
   watch,
@@ -391,22 +392,24 @@ function checkSlots() {
   );
 }
 
-const columnHeading = computed(col => {
+function columnHeading(c) {
+  const col = unref(c);
   if (typeof col === 'object') {
     return col.label || '';
   } else {
     return col;
   }
-});
+}
 
 const isSortable = computed(() => {
   // is any column sortable
   return props.sortable || store.someSortableHeadings(uid.value);
 });
-const isColSortable = computed(col => {
+function isColSortable(c) {
+  const col = unref(c);
   // is specific column or all sortable
   return (col && col.sortable) || props.sortable;
-});
+}
 
 const isHelper = ref(false);
 const hasTableHeader = computed(() => {
@@ -451,9 +454,10 @@ const internalNumberOfItems = computed(() => {
   }
 });
 
-const headingStyle = computed(col => {
+function headingStyle(c) {
+  const col = unref(c);
   return typeof col === 'object' ? col.headingStyle : {};
-});
+}
 
 const dataStyle = computed(() => {
   return index =>

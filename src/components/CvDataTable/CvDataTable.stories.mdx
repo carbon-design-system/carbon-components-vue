@@ -4,6 +4,7 @@ import CvDataTableHeading from './CvDataTableHeading.vue';
 import CvDataTableRow from "./CvDataTableRow.vue";
 import CvDataTableCell from "./CvDataTableCell.vue";
 import CvDataTableAction from "./CvDataTableAction.vue";
+import CvDataTableSkeleton from "./CvDataTableSkeleton.vue";
 import CvButton from '../CvButton/CvButton.vue'
 import { sbCompPrefix } from '../../global/storybook-utils';
 import { action } from '@storybook/addon-actions';
@@ -34,6 +35,7 @@ components: {
   DebugIcon,
   EmbedIcon,
   CvButton,
+  CvDataTableSkeleton,
 },
 // The story's `args` need to be mapped into the template through the `setup()` method
 setup() {
@@ -58,6 +60,10 @@ setup() {
     useActions: args.useActions,
     useBatchActions: args.useBatchActions,
     useHelperTextSlot: args.useHelperTextSlot,
+    skeletonRows: args.skeletonRows,
+    skeletonCols: args.skeletonCols,
+    skeletonTitle: args.title,
+    skeletonHelper: args.helperText,
     testData
     };
 },
@@ -118,6 +124,14 @@ const expandingRowsTemplate = defaultTemplate.replace(
   "<!-- Add optional expanding data here -->",
   `<template v-slot:expandedContent>{{row.desc}}</template>`)
   .replace('@search="onSearch"', '')
+const skeletonTemplate = `
+<cv-data-table-skeleton
+  :columns="skeletonCols"
+  :rows="skeletonRows"
+  :title="skeletonTitle"
+  :helperText="skeletonHelper">
+</cv-data-table-skeleton>
+`;
 
 # CvDataTable
 
@@ -164,7 +178,8 @@ and then reloading the page.
           'helper-text',
           'items-selected',
           'of-n-pages',
-          'range-text'
+          'range-text',
+          'skeleton'
         ] },
       docs: { source: { code: defaultTemplate.replace('v-bind="args"', '') } },
     }}
@@ -204,7 +219,8 @@ and then reloading the page.
           'helper-text',
           'items-selected',
           'of-n-pages',
-          'range-text'
+          'range-text',
+          'skeleton',
         ] },
       docs: { source: { code: expandingRowsTemplate.replace('v-bind="args"', '') } },
     }}
@@ -218,6 +234,67 @@ and then reloading the page.
     argTypes={{
       rowSize: { control: 'select', default: 'standard', options: ['compact', 'short', 'standard', 'tall'] },
       rowsSelected: { control: 'multi-select',  options: ['Java', 'COBOL', 'C++'] },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+# CvDataTableSkeleton
+
+<Canvas>
+  <Story
+    name="Skeleton"
+    parameters={{
+      controls: { exclude: [
+          'template',
+          'actionBarAriaLabel',
+          'autoWidth',
+          'batchCancelLabel',
+          'borderless',
+          'collapseAllAriaLabel',
+          'expandAllAriaLabel',
+          'expandingSearch',
+          'hasExpandAll',
+          'initialSearchValue',
+          'overflowMenu',
+          'rowSize',
+          'rowsSelected',
+          'searchClearLabel',
+          'searchLabel',
+          'searchPlaceholder',
+          'selectAllAriaLabel',
+          'skeleton',
+          'sortable',
+          'staticWidth',
+          'stickyHeader',
+          'zebra',
+          'overflow-menu-click',
+          'pagination',
+          'row-expanded',
+          'actions',
+          'batch-actions',
+          'data',
+          'headings',
+          'row-select-change',
+          'row-select-changes',
+          'sort',
+          'helper-text',
+          'items-selected',
+          'of-n-pages',
+          'range-text',
+          'columns'
+        ] },
+      docs: { source: { code: skeletonTemplate.replace('v-bind="args"', '') } },
+    }}
+    args={{
+      template: skeletonTemplate,
+      title: 'Table title',
+      helperText: 'Data has been requested...',
+      skeletonRows: 5,
+      skeletonCols: 5,
+    }}
+    argTypes={{
     }}
   >
     {Template.bind({})}
