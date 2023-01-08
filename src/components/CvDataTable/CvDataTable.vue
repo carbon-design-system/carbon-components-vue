@@ -1,6 +1,14 @@
 <template>
   <div :style="tableStyle" class="cv-data-table" :id="uid">
-    <div :class="`${carbonPrefix}--data-table-container`">
+    <div
+      :class="[
+        `${carbonPrefix}--data-table-container`,
+        {
+          [`${carbonPrefix}--data-table-container--static`]: staticWidth,
+          [`${carbonPrefix}--data-table--max-width`]: !staticWidth,
+        },
+      ]"
+    >
       <div v-if="hasTableHeader" :class="`${carbonPrefix}--data-table-header`">
         <h4 :class="`${carbonPrefix}--data-table-header__title`" v-if="title">
           {{ title }}
@@ -12,7 +20,6 @@
           <slot name="helper-text">{{ helperText }}</slot>
         </p>
       </div>
-
       <section v-if="hasToolbar" :class="`${carbonPrefix}--table-toolbar`">
         <div
           :aria-hidden="!batchActive"
@@ -49,7 +56,7 @@
             v-if="$attrs.onSearch"
             :aria-labelledby="`${uid}-search`"
             :class="[
-              `${carbonPrefix}--search ${carbonPrefix}--search--xl`,
+              `${carbonPrefix}--search `,
               {
                 [`${carbonPrefix}--toolbar-search-container-active`]:
                   searchActive || searchValue.length > 0,
@@ -111,10 +118,8 @@
           <table
             :class="[
               `${carbonPrefix}--data-table`,
+              `${carbonPrefix}--data-table--${rowSize || 'lg'}`,
               {
-                [`${carbonPrefix}--data-table--${rowSize} `]: !(
-                  rowSize.length === 0 || rowSize === 'standard'
-                ),
                 [`${carbonPrefix}--data-table--zebra `]: zebra,
                 [`${carbonPrefix}--data-table--sticky-header `]: stickyHeader,
                 [`${carbonPrefix}--data-table--no-border `]: borderless,
@@ -282,9 +287,25 @@ const props = defineProps({
    */
   rowSize: {
     type: String,
-    default: 'standard',
-    validator: val =>
-      ['compact', 'short', 'standard', 'tall', ''].includes(val),
+    default: 'lg',
+    validator: val => {
+      if (['compact', 'short', 'standard', 'tall', ''].includes(val))
+        console.warn(
+          `rowSize ${val} is deprecated. Use "xs", "sm", "md", "lg", or "lg" instead`
+        );
+      return [
+        'compact',
+        'short',
+        'standard',
+        'tall',
+        '',
+        'xs',
+        'sm',
+        'md',
+        'lg',
+        'xl',
+      ].includes(val);
+    },
   },
   searchLabel: { type: String, default: 'Search' },
   searchPlaceholder: { type: String, default: 'Search' },
@@ -316,6 +337,9 @@ const props = defineProps({
    * the table striped
    */
   zebra: { type: Boolean, default: false },
+  /**
+   * Specify whether the header should be sticky. Still experimental: may not work with every combination of table props.
+   */
   stickyHeader: { type: Boolean, default: false },
   /**
    * An array containing the selected row values. Supports v-model via the row-select-changes event.
@@ -357,8 +381,8 @@ onMounted(() => {
     magnifier.value?.addEventListener('blur', checkSearchFocus);
     search.value?.addEventListener('blur', checkSearchFocus);
   }
+  if (props.initialSearchValue) clearSearchVisible.value = true;
   updateRowsSelected();
-  checkSlots();
   store.setSomeExpandingRows(uid);
 });
 
@@ -369,6 +393,7 @@ onUnmounted(() => {
   }
 });
 const slots = useSlots();
+onMounted(checkSlots);
 onUpdated(checkSlots);
 
 const attrs = useAttrs();
