@@ -5,7 +5,7 @@
   "description": "A collection of components for the Carbon Design System built using Vue.js",
   "private": true,
   "packageManager": "yarn@3.2.0",
-  "main": "./src/index.js",
+  "main": "./main.js",
   "scripts": {
     "postinstall": "node prepare.js",
     "prepack": "pinst --disable",
@@ -19,7 +19,7 @@
     "format:diff": "prettier --list-different '**/*.{scss,css,js,md,vue}' '!**/{dist,storybook-static,.coverage}/**'",
     "format:staged": "prettier --write '**/*.{scss,css,js,md,vue}' '!**/{dist,storybook-static,.coverage}/**'",
     "lint:css": "stylelint '{packages,storybook}/**/*.{vue,scss}'",
-    "lint:es": "eslint {packages,storybook}/**/*.{js,vue}",
+    "lint:es": "eslint src/**/*.{js,vue}",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
     "a11test": "node -v",

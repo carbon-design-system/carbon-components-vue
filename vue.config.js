@@ -3,7 +3,10 @@
 module.exports = {
   configureWebpack: {
     resolve: {
-      extensions: ['.js', '.vue', '.json', '.jsonl'],
+      alias: {
+        '@': undefined,
+      },
+      extensions: ['.js'],
     },
     performance: {
       maxEntrypointSize: 768000,
