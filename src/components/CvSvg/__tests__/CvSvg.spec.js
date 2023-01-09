@@ -3,8 +3,8 @@
  */
 import { shallowMount } from '@vue/test-utils';
 
-import CvSvg from '../_CvSvg';
-import TestIcon from './_TestIcon';
+import CvSvg from '../_CvSvg.vue';
+import TestIcon from './_TestIcon.vue';
 
 const notAComponent = {};
 const fakeComponentVue = { render: 'Vue 2' };

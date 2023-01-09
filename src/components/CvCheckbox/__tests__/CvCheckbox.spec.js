@@ -1,6 +1,6 @@
 import { render, fireEvent } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
-import CvCheckbox from '../CvCheckbox';
+import CvCheckbox from '../CvCheckbox.vue';
 
 describe('CvCheckbox', () => {
   it('CvCheckbox - test default and attrs', async () => {

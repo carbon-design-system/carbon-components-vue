@@ -40,7 +40,7 @@
 
 <script setup>
 import { carbonPrefix } from '../../global/settings';
-import CvSvg from '../CvSvg/_CvSvg';
+import CvSvg from '../CvSvg/_CvSvg.vue';
 import { computed, onMounted, watch } from 'vue';
 import { props as propsCvId, useCvId } from '../../use/cvId';
 import store from './cvContentSwitcherStore';

@@ -60,7 +60,7 @@ import { computed, ref, toRefs } from 'vue';
 import { useResizeObserver } from '@vueuse/core';
 import { carbonPrefix } from '../../global/settings';
 import { useElementHasOverflow } from '../../use/overflow';
-import CvCopyButton from '../CvCopyButton/CvCopyButton';
+import CvCopyButton from '../CvCopyButton/CvCopyButton.vue';
 import CvButton from '../CvButton';
 import { ChevronDown16 } from '@carbon/icons-vue';
 

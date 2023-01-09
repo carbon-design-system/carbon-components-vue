@@ -44,7 +44,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
+import { ref, computed, watch } from 'vue';
 import CvWrapper from '../CvWrapper/CvWrapper';
 import { carbonPrefix } from '../../global/settings';
 import { useCvId, props as propsCvId } from '../../use/cvId';
@@ -58,7 +58,6 @@ const props = defineProps({
 });
 const cvId = useCvId(props);
 
-let overlayEl = ref(null);
 let stopping = ref(false);
 let stopped = ref(false);
 const overlayClasses = computed(() => {

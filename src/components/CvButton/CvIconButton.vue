@@ -22,7 +22,7 @@ import {
   props as commonCvButtonProps,
   useCvButtonCommon,
 } from './CvButtonCommon';
-import CvSvg from '../CvSvg/_CvSvg';
+import CvSvg from '../CvSvg/_CvSvg.vue';
 
 const { disabled, icon, kind, size } = commonCvButtonProps;
 
