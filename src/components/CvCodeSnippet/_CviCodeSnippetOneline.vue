@@ -42,7 +42,7 @@
 import { ref } from 'vue';
 import { carbonPrefix } from '../../global/settings';
 import { useElementHasOverflow } from '../../use/overflow';
-import CvCopyButton from '../CvCopyButton/CvCopyButton';
+import CvCopyButton from '../CvCopyButton/CvCopyButton.vue';
 
 export default {
   props: {
