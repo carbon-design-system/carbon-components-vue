@@ -7,7 +7,6 @@
       type="checkbox"
       :id="uid"
       :checked="isChecked === true"
-      :aria-checked="`${isChecked}`"
       :value="value"
       ref="input"
     />

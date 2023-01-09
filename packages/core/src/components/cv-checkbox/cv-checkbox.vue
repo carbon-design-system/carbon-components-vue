@@ -7,7 +7,6 @@
       :class="`${carbonPrefix}--checkbox`"
       type="checkbox"
       :checked="isChecked === true"
-      :aria-checked="`${isChecked}`"
       @focus="onFocus"
       @blur="onBlur"
       :value="value"

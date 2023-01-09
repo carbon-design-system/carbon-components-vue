@@ -37,8 +37,9 @@ jobs:
         run: yarn ci-check
 
       # Dry run - `yarn lerna version --no-git-tag-version --no-push --yes`
+      # With dist tag - `run: yarn lerna publish --create-release github --yes --dist-tag next`
       - name: Publish
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: yarn lerna publish --create-release github --yes --dist-tag next
+        run: yarn lerna publish --create-release github --yes

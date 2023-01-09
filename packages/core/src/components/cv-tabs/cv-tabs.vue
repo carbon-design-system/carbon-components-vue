@@ -44,8 +44,6 @@
             },
           ]"
           role="presentation"
-          :aria-selected="selectedId == tab.uid ? 'true' : 'false'"
-          :aria-disabled="disabledTabs.indexOf(tab.uid) !== -1"
         >
           <button
             :class="`${carbonPrefix}--tabs--scrollable__nav-link`"
@@ -61,6 +59,7 @@
               // eslint-disable-nextx-line
               selectedId == tab.uid ? 0 : -1
             "
+            type="button"
           >
             {{ tab.label }}
           </button>

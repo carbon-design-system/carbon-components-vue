@@ -1,6 +1,7 @@
 <template>
   <div :class="`cv-slider ${carbonPrefix}--form-item`">
     <label
+      v-show="label"
       :for="uid"
       :class="[`${carbonPrefix}--label`, { [`${carbonPrefix}--label--disabled`]: disabled }]"
       :id="labelId"
