@@ -217,17 +217,7 @@ const input = ref(null);
 const button = ref(null);
 const slots = useSlots();
 
-const emit = defineEmits({
-  change: payload => {
-    return 'string';
-  },
-  filter: payload => {
-    return 'string';
-  },
-  'update:modelValue': payload => {
-    return 'string';
-  },
-});
+const emit = defineEmits(['change', 'filter', 'update:modelValue']);
 
 // data
 const open = ref(false);
@@ -383,7 +373,7 @@ function updateHighlight() {
     highlighted.value = dataOptions.value[firstMatchIndex].value;
   }
 }
-function onInput(val) {
+function onInput() {
   if (props.disabled) return;
   doOpen(true);
 

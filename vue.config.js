@@ -9,8 +9,8 @@ module.exports = {
       extensions: ['.js'],
     },
     performance: {
-      maxEntrypointSize: 768000,
-      maxAssetSize: 768000,
+      maxEntrypointSize: 1000000,
+      maxAssetSize: 1000000,
     },
     // plugins: [
     //   new CopyWebpackPlugin({

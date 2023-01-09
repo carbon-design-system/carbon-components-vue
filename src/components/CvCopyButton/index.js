@@ -1,1 +1,3 @@
-export { default, default as CvCopyButton } from './CvCopyButton';
+import CvCopyButton from './CvCopyButton.vue';
+export { CvCopyButton };
+export default CvCopyButton;

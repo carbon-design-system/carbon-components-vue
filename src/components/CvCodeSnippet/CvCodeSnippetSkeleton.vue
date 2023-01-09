@@ -20,7 +20,7 @@
 
 <script>
 import { carbonPrefix } from '../../global/settings';
-import { CvCodeSnippetConsts } from '.';
+import { codeSnippetKinds as CvCodeSnippetConsts } from '.';
 import { includesOrError } from '../../global/component-utils/validators';
 
 export default {

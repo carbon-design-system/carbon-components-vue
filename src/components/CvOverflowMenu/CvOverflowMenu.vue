@@ -169,11 +169,7 @@ function checkFocusOut(ev) {
   }
 }
 
-const emit = defineEmits({
-  change: payload => {
-    return 'string';
-  },
-});
+const emit = defineEmits(['change']);
 function menuItemClick(value) {
   emit('change', `${value}`);
   open.value = false;

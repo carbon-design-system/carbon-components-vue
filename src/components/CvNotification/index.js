@@ -1,3 +1,5 @@
-export { default as CvInlineNotification } from './CvInlineNotification';
-export { default as CvToastNotification } from './CvToastNotification';
-export { default as CvNotificationConsts } from './consts';
+import CvInlineNotification from './CvInlineNotification';
+import CvToastNotification from './CvToastNotification';
+import CvNotificationConsts from './consts';
+export { CvInlineNotification, CvToastNotification, CvNotificationConsts };
+export default CvInlineNotification;

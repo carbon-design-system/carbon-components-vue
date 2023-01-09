@@ -129,14 +129,7 @@ const props = defineProps({
 });
 const cvId = useCvId(props, true);
 const isLight = useIsLight(props);
-const emit = defineEmits({
-  change: payload => {
-    return 'string';
-  },
-  'update:modelValue': payload => {
-    return 'string';
-  },
-});
+const emit = defineEmits(['change', 'update:modelValue']);
 
 const el = ref(null);
 const dataValue = ref(props.modelValue || props.value);

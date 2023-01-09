@@ -1,2 +1,4 @@
-export { default, default as CvAspectRatio } from './CvAspectRatio';
-export { default as CvAspectRatioConsts } from './consts';
+import CvAspectRatio from './CvAspectRatio';
+import CvAspectRatioConsts from './consts';
+export { CvAspectRatio, CvAspectRatioConsts };
+export default CvAspectRatio;

@@ -1,3 +1,5 @@
-export { default, default as CvCodeSnippet } from './CvCodeSnippet';
-export { default as CvCodeSnippetConsts } from './consts';
-export { default as CvCodeSnippetSkeleton } from './CvCodeSnippetSkeleton';
+import CvCodeSnippet from './CvCodeSnippet.vue';
+import CvCodeSnippetSkeleton from './CvCodeSnippetSkeleton.vue';
+import { codeSnippetKinds } from './consts';
+export { CvCodeSnippet, CvCodeSnippetSkeleton, codeSnippetKinds };
+export default CvCodeSnippet;
