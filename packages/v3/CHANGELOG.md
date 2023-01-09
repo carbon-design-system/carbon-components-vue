@@ -7,10 +7,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @carbon/vue-3
 
-
-
-
-
 # [0.5.0](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue-3@0.4.0...@carbon/vue-3@0.5.0) (2022-04-20)
 
 ### Features
