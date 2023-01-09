@@ -1470,17 +1470,17 @@
     "@carbon/import-once" "^10.7.0"
     "@carbon/layout" "^10.37.1"
 
-"@carbon/icon-helpers@^10.32.0":
-  version "10.32.0"
-  resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-10.32.0.tgz#700c3ffbe6350cf481f174c0fb06c9a4269a5248"
-  integrity sha512-t5kAnx0STZhUo6F0cLnnecKHYg2I7w84i53XiKZz3FGqiEZLFMpljKnQDe6/I7VNwzgBq0PN1dlDhZ8qqKXj5Q==
+"@carbon/icon-helpers@^10.37.0":
+  version "10.37.0"
+  resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-10.37.0.tgz#354f50f4269b1a455fb4d848508c5e7f7adc6ea8"
+  integrity sha512-YXed2JUSCGddp3UnY5OffR3W8Pl+dy9a+vfUtYhSLH9TbIEBR6EvYIfvruFMhA8JIVMCUClUqgyMQXM5oMFQ0g==
 
-"@carbon/icons-vue@10.56.0":
-  version "10.56.0"
-  resolved "https://registry.yarnpkg.com/@carbon/icons-vue/-/icons-vue-10.56.0.tgz#720d046b46fa21593a0468ab5607ad363fc102b5"
-  integrity sha512-roB9Hfs2XHjxJ4SHxvK9hQojXXkn7UAea6IxTDatjkGTW8qFZXUQH9ktowZQSxTO6NpwRpYjecm7l/q1J/hPuw==
+"@carbon/icons-vue@10.63.0":
+  version "10.63.0"
+  resolved "https://registry.yarnpkg.com/@carbon/icons-vue/-/icons-vue-10.63.0.tgz#7e6dd8602537a77acfdf06c51585a51bc905c6e7"
+  integrity sha512-JLvq0gYc6S25kOy4JvyGe6jykJezfngsUoTX18nSauE4T5Ikho7osQw/uXzsJNqPlk7HksnNrkrj142omO1PRA==
   dependencies:
-    "@carbon/icon-helpers" "^10.32.0"
+    "@carbon/icon-helpers" "^10.37.0"
 
 "@carbon/import-once@^10.7.0":
   version "10.7.0"
@@ -1497,20 +1497,20 @@
   resolved "https://registry.yarnpkg.com/@carbon/telemetry/-/telemetry-0.1.0.tgz#57b331cd5a855b4abbf55457456da8211624d879"
   integrity sha512-kNWt0bkgPwGW0i5h7HFuljbKRXPvIhsKbB+1tEURAYLXoJg9iJLF1eGvWN5iVoFCS2zje4GR3OGOsvvKVe7Hlg==
 
-"@carbon/themes@^10.55.0":
-  version "10.55.0"
-  resolved "https://registry.yarnpkg.com/@carbon/themes/-/themes-10.55.0.tgz#f97eb71687633764b3e5bdd2b46b8b8d8438e54a"
-  integrity sha512-P0BZr/dA8Xh/jEEV4szSqToMIZ0TE8dMs/kzaQIdrV4IXo/hFSsNFXAjakffjzOPVMzihzMvyDcbFbG/R7geVw==
+"@carbon/themes@^10.55.1":
+  version "10.55.1"
+  resolved "https://registry.yarnpkg.com/@carbon/themes/-/themes-10.55.1.tgz#2e7aaaf29e1ad82625fb2ecfb1afabe80afced7c"
+  integrity sha512-4dmtEeca8TtsgVA3gEnQuo82s/0hOTdFHWmAqoh1z15Zc+Looxb9kK3BDnvIIPfTpsg74qW7NF6Q+gfHid2tgQ==
   dependencies:
     "@carbon/colors" "^10.37.0"
     "@carbon/layout" "^10.37.0"
-    "@carbon/type" "^10.45.0"
+    "@carbon/type" "^10.45.1"
     color "^3.1.2"
 
-"@carbon/type@^10.45.0":
-  version "10.45.0"
-  resolved "https://registry.yarnpkg.com/@carbon/type/-/type-10.45.0.tgz#78d388a2b8b45e427de1dfab7328625899b737ab"
-  integrity sha512-ObeozCPbGJveztkz30avGoGlNsFsRtQ8RUpOCaCqa7PPN9hXjN2wonlwdOGExSbUqHVHkwONJQlNSwWnJlE9PA==
+"@carbon/type@^10.45.1":
+  version "10.45.1"
+  resolved "https://registry.yarnpkg.com/@carbon/type/-/type-10.45.1.tgz#aa3f630035f64fe468f4adee6700395c4876bbc6"
+  integrity sha512-c7+5xDu6VXrseC578ED/qiZkoxCPZCRrgXE/ruFFQSsW2URLUGV6naxIbNewUnJ/pyIliGBCUKzQP8FDvGSvWA==
   dependencies:
     "@carbon/grid" "^10.43.0"
     "@carbon/import-once" "^10.7.0"
