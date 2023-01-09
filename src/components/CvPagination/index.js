@@ -1,3 +1,3 @@
-import CvPagination from './CvPagination';
+import CvPagination from './CvPagination.vue';
 export { CvPagination };
 export default CvPagination;

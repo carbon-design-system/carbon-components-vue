@@ -1,3 +1,3 @@
-import CvSelect from './CvSelect';
+import CvSelect from './CvSelect.vue';
 export { CvSelect };
 export default CvSelect;

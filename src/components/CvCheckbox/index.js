@@ -1,3 +1,3 @@
-import CvCheckbox from './CvCheckbox';
+import CvCheckbox from './CvCheckbox.vue';
 export { CvCheckbox };
 export default CvCheckbox;
