@@ -64,9 +64,9 @@
   },
   "sideEffects": true,
   "dependencies": {
-    "@carbon/icons-vue": "10.56.0",
+    "@carbon/icons-vue": "10.63.0",
     "@carbon/telemetry": "^0.1.0",
-    "carbon-components": "10.58.0",
+    "carbon-components": "10.58.5",
     "flatpickr": "4.6.13",
     "vue": "^2.7.10"
   },
