@@ -59,6 +59,7 @@
               // eslint-disable-nextx-line
               selectedId == tab.uid ? 0 : -1
             "
+            type="button"
           >
             {{ tab.label }}
           </button>
