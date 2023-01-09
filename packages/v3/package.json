@@ -17,10 +17,10 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
-    "@carbon/icons-vue": "10.56.0",
+    "@carbon/icons-vue": "10.63.0",
     "@carbon/layout": "^10.37.1",
-    "@carbon/themes": "^10.55.0",
-    "@carbon/type": "^10.45.0",
+    "@carbon/themes": "^10.55.1",
+    "@carbon/type": "^10.45.1",
     "@vueuse/core": "^4.11.2",
     "carbon-components": "^10.58.0",
     "core-js": "^3.25.0",
@@ -30,7 +30,7 @@
     "vue": "^3.2.37"
   },
   "peerDependencies": {
-    "carbon-components": "10.56.0",
+    "carbon-components": "10.58.5",
     "carbon-icons": "^7.0.7"
   },
   "devDependencies": {
