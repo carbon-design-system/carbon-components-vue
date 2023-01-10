@@ -35,7 +35,7 @@ import CvInlineNotification from './src/components/CvNotification/CvInlineNotifi
 import CvToastNotification from './src/components/CvNotification/CvToastNotification.vue';
 import CvLoading from './src/components/CvLoading/CvLoading.vue';
 import CvCheckbox from './src/components/CvCheckbox/CvCheckbox.vue';
-export {
+const all = {
   CvAspectRatio,
   CvListItem,
   CvList,
@@ -73,4 +73,13 @@ export {
   CvToastNotification,
   CvLoading,
   CvCheckbox,
+};
+export default {
+  install(app, options) {
+    const allNames = options || Object.keys(all);
+    for (let i = 0; i < allNames.length; i++) {
+      const name = allNames[i];
+      app.component(name, all[name]);
+    }
+  },
 };

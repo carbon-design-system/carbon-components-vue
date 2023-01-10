@@ -1,7 +1,7 @@
 {
   "name": "@carbon/vue-3",
   "license": "Apache-2.0",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "A collection of components for the Carbon Design System built using Vue.js",
   "private": true,
   "packageManager": "yarn@3.2.0",
@@ -33,7 +33,6 @@
     "@storybook/addon-storysource": "^6.5.15",
     "@vueuse/core": "^4.11.2",
     "carbon-components": "^10.58.5",
-    "debug": "^4.3.4",
     "mitt": "^3.0.0",
     "remove": "^0.1.5",
     "stylelint-config-property-sort-order-smacss": "^9.0.0",

@@ -1,6 +1,5 @@
 import { reactive, unref } from 'vue';
-import createDebug from 'debug';
-const logger = createDebug('cv:data-table-store');
+const logger = () => {};
 
 /**
  * @typedef {string|ComputedRef<string>|Ref<string>} CvTableDataString
