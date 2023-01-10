@@ -28,6 +28,7 @@
       :aria-label="clearAriaLabel"
       @click.stop.prevent="onRemove"
       :disabled="disabled"
+      type="button"
     >
       <Close16 />
     </button>
