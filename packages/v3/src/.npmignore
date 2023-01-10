@@ -1,8 +1,0 @@
-*.story.js
-*.notes.md
-*.test.js
-*.spec.js
-.storybook
-.npmignore
-.DS_Store
-/public
