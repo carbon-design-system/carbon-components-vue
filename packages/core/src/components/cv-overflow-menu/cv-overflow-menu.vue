@@ -15,7 +15,7 @@
       :aria-expanded="open ? 'true' : 'false'"
       :aria-controls="`${uid}-menu`"
       :aria-labelledby="`${uid}`"
-      :aria-label=ariaLabel
+      :aria-label="ariaLabel"
       :id="`${uid}-trigger`"
       ref="trigger"
       @click="doToggle"
