@@ -34,6 +34,7 @@
     "@vueuse/core": "^4.11.2",
     "carbon-components": "^10.58.5",
     "debug": "^4.3.4",
+    "mitt": "^3.0.0",
     "remove": "^0.1.5",
     "stylelint-config-property-sort-order-smacss": "^9.0.0",
     "stylelint-config-sass-guidelines": "^9.0.1",

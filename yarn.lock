@@ -1936,6 +1936,7 @@ __metadata:
     husky: ^7.0.4
     jest: ^27.5.1
     lint-staged: ^12.5.0
+    mitt: ^3.0.0
     pinst: ^3.0.0
     postcss: ^8.4.19
     postcss-loader: ^6.2.1
@@ -15197,6 +15198,13 @@ __metadata:
     stream-each: ^1.1.0
     through2: ^2.0.0
   checksum: 84b3d9889621d293f9a596bafe60df863b330c88fc19215ced8f603c605fc7e1bf06f8e036edf301bd630a03fd5d9d7d23d5d6b9a4802c30ca864d800f0bd9f8
+  languageName: node
+  linkType: hard
+
+"mitt@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "mitt@npm:3.0.0"
+  checksum: f7be5049d27d18b1dbe9408452d66376fa60ae4a79fe9319869d1b90ae8cbaedadc7e9dab30b32d781411256d468be5538996bb7368941c09009ef6bbfa6bfc7
   languageName: node
   linkType: hard
 
