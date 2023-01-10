@@ -15,6 +15,7 @@
       :aria-expanded="open ? 'true' : 'false'"
       :aria-controls="`${uid}-menu`"
       :aria-labelledby="`${uid}`"
+      :aria-label="ariaLabel"
       :id="`${uid}-trigger`"
       ref="trigger"
       @click="doToggle"
@@ -76,6 +77,7 @@ export default {
   mixins: [uidMixin, carbonPrefixMixin, methodsMixin({ trigger: ['blur', 'focus'] })],
   props: {
     label: String,
+    ariaLabel: String,
     flipMenu: Boolean,
     up: Boolean,
     offset: {
