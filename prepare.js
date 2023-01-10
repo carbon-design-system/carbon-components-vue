@@ -2,5 +2,9 @@
 // https://github.com/typicode/husky
 const isCi = process.env.CI !== undefined;
 if (!isCi) {
-  require('husky').install();
+  try {
+    require('husky').install();
+  } catch (e) {
+    if (e.code !== 'MODULE_NOT_FOUND') throw e;
+  }
 }
