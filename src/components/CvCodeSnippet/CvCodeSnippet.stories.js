@@ -6,7 +6,8 @@ import {
 } from '../../global/storybook-utils';
 import { action } from '@storybook/addon-actions';
 
-import { CvCodeSnippet, CvCodeSnippetConsts, CvCodeSnippetSkeleton } from '.';
+import { CvCodeSnippet, CvCodeSnippetSkeleton } from '.';
+import CvCodeSnippetConsts from './consts';
 
 import './CvCodeSnippet.stories.scss';
 

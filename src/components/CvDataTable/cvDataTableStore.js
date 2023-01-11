@@ -1,6 +1,10 @@
 import { reactive, unref } from 'vue';
-import createDebug from 'debug';
-const logger = createDebug('cv:data-table-store');
+const loggerEnabled = localStorage
+  ?.getItem('debug')
+  ?.split(' ')
+  .includes('cv:data-table-store');
+// eslint-disable-next-line no-console
+const logger = loggerEnabled ? console.debug : () => {};
 
 /**
  * @typedef {string|ComputedRef<string>|Ref<string>} CvTableDataString

@@ -3,11 +3,14 @@
 module.exports = {
   configureWebpack: {
     resolve: {
-      extensions: ['.js', '.vue', '.json', '.jsonl'],
+      alias: {
+        '@': undefined,
+      },
+      extensions: ['.js'],
     },
     performance: {
-      maxEntrypointSize: 768000,
-      maxAssetSize: 768000,
+      maxEntrypointSize: 1000000,
+      maxAssetSize: 1000000,
     },
     // plugins: [
     //   new CopyWebpackPlugin({

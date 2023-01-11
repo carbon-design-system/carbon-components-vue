@@ -1,2 +1,4 @@
-export { default, default as CvList } from './CvList';
-export { default as CvListItem } from './CvListItem';
+import CvList from './CvList.vue';
+import CvListItem from './CvListItem.vue';
+export { CvList, CvListItem };
+export default CvList;

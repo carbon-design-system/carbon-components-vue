@@ -1,7 +1,7 @@
 import { render } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
 import { within } from '@testing-library/dom';
-import CvComboBox from '../CvComboBox';
+import CvComboBox from '../CvComboBox.vue';
 
 const fruits = [
   'Apple',

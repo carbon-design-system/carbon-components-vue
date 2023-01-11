@@ -18,7 +18,7 @@
 import { computed, ref } from 'vue';
 import { carbonPrefix } from '../../global/settings';
 import { useCvId } from '../../use';
-import CviCopyButton from '../CvCopyButton/_CviCopyButton';
+import CviCopyButton from '../CvCopyButton/_CviCopyButton.vue';
 
 export default {
   props: {

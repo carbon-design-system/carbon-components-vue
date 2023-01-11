@@ -1,4 +1,4 @@
-import CvTag from './CvTag';
+import CvTag from './CvTag.vue';
 import { tagKinds } from './consts.js';
 import { action } from '@storybook/addon-actions';
 import {

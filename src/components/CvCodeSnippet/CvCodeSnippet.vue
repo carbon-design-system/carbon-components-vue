@@ -11,9 +11,9 @@ import { includesOrError } from '../../global/component-utils/validators';
 import { carbonPrefix } from '../../global/settings';
 import { useSubComponent } from '../../use/components';
 
-import CviCodeSnippetInline from './_CviCodeSnippetInline';
-import CviCodeSnippetOneline from './_CviCodeSnippetOneline';
-import CviCodeSnippetMultiline from './_CviCodeSnippetMultiline';
+import CviCodeSnippetInline from './_CviCodeSnippetInline.vue';
+import CviCodeSnippetOneline from './_CviCodeSnippetOneline.vue';
+import CviCodeSnippetMultiline from './_CviCodeSnippetMultiline.vue';
 
 export default {
   name: 'CvCodeSnippet',

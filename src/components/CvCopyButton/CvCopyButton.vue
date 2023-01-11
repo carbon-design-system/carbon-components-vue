@@ -14,7 +14,7 @@
 <script>
 import { Copy16 } from '@carbon/icons-vue';
 import { carbonPrefix } from '../../global/settings';
-import CviCopyButton from './_CviCopyButton';
+import CviCopyButton from './_CviCopyButton.vue';
 
 export default {
   name: 'CvCopyButton',

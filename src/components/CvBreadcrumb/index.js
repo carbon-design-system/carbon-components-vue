@@ -1,4 +1,11 @@
-export { default, default as CvBreadcrumb } from './CvBreadcrumb';
-export { default as CvBreadcrumbItem } from './CvBreadcrumbItem';
-export { default as CvBreadcrumbSkeleton } from './CvBreadcrumbSkeleton';
-export { default as CvBreadcrumbSkeletonItem } from './CvBreadcrumbSkeletonItem';
+import CvBreadcrumb from './CvBreadcrumb.vue';
+import CvBreadcrumbItem from './CvBreadcrumbItem.vue';
+import CvBreadcrumbSkeleton from './CvBreadcrumbSkeleton.vue';
+import CvBreadcrumbSkeletonItem from './CvBreadcrumbSkeletonItem.vue';
+export {
+  CvBreadcrumb,
+  CvBreadcrumbItem,
+  CvBreadcrumbSkeleton,
+  CvBreadcrumbSkeletonItem,
+};
+export default CvBreadcrumb;

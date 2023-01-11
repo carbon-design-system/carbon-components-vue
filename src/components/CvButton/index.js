@@ -1,6 +1,6 @@
-import CvButton from './CvButton';
-import CvIconButton from './CvIconButton';
-import CvButtonSet from './CvButtonSet';
+import CvButton from './CvButton.vue';
+import CvIconButton from './CvIconButton.vue';
+import CvButtonSet from './CvButtonSet.vue';
 import CvButtonConsts from './consts';
 
 export { CvButton, CvButtonConsts, CvButtonSet, CvIconButton };

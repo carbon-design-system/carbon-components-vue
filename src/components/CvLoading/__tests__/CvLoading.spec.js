@@ -1,5 +1,5 @@
 import { render } from '@testing-library/vue';
-import CvLoading from '../CvLoading';
+import CvLoading from '../CvLoading.vue';
 import { carbonPrefix } from '../../../global/settings';
 
 test('CvLoading - test all props and attrs', async () => {

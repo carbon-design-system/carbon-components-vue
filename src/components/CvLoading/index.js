@@ -1,4 +1,4 @@
-import CvLoading from './CvLoading';
+import CvLoading from './CvLoading.vue';
 
 export { CvLoading };
 export default CvLoading;

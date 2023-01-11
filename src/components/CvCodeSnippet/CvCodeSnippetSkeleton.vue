@@ -20,9 +20,8 @@
 
 <script>
 import { carbonPrefix } from '../../global/settings';
-import { CvCodeSnippetConsts } from '.';
 import { includesOrError } from '../../global/component-utils/validators';
-
+import CvCodeSnippetConsts from './consts';
 export default {
   props: {
     kind: {

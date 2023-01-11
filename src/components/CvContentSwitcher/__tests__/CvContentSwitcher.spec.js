@@ -1,7 +1,7 @@
 import { render } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
-import CvContentSwitcher from '../CvContentSwitcher';
-import CvContentSwitcherButton from '../CvContentSwitcherButton';
+import CvContentSwitcher from '../CvContentSwitcher.vue';
+import CvContentSwitcherButton from '../CvContentSwitcherButton.vue';
 
 const ContentTabs = {
   components: { CvContentSwitcherButton },
