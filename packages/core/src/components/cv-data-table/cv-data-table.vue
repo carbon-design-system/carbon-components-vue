@@ -99,8 +99,9 @@
             ]"
           >
             <thead>
-              <tr>
+              <tr scope="colgroup">
                 <th
+                scope="col"
                   v-if="hasExpandables"
                   :class="`${carbonPrefix}--table-expand`"
                   :data-previous-value="dataExpandAll ? 'collapsed' : 'expanded'"
@@ -115,7 +116,7 @@
                     <ChevronRight16 :class="`${carbonPrefix}--table-expand__svg`" />
                   </button>
                 </th>
-                <th v-if="hasBatchActions" :class="`${carbonPrefix}--table-column-checkbox`">
+                <th scope="col" v-if="hasBatchActions" :class="`${carbonPrefix}--table-column-checkbox`">
                   <cv-checkbox
                     :form-item="false"
                     value="headingCheck"
