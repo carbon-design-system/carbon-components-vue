@@ -1,7 +1,7 @@
 .DS_Store
 node_modules
 /dist
-/storybook-static
+/storybook/storybook-static
 
 # local env files
 .env.local
