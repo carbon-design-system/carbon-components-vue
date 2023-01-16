@@ -5,25 +5,20 @@
   "description": "A collection of components for the Carbon Design System built using Vue.js",
   "private": true,
   "packageManager": "yarn@3.2.0",
-  "main": "./main.js",
+  "engines": {
+    "node": ">=16"
+  },
   "scripts": {
-    "postinstall": "node prepare.js",
     "prepack": "pinst --disable",
     "postpack": "pinst --enable",
-    "build": "vue-cli-service build --target lib --name carbon-vue-3 ./src/index.js --no-clean",
-    "lint": "vue-cli-service lint",
-    "build-storybook": "build-storybook",
-    "serve": "start-storybook -p 6006",
+    "build-storybook": "build-storybook -c ../.storybook",
+    "serve": "start-storybook -p 6006 -c ../.storybook",
     "ci-check": "yarn format:diff && yarn test --maxWorkers=5 && yarn build && yarn build-storybook --quiet",
     "format": "prettier --write '**/*.{scss,css,js,md,vue}' '!**/{build,es,lib,storybook,ts,umd,.coverage}/**'",
     "format:diff": "prettier --list-different '**/*.{scss,css,js,md,vue}' '!**/{dist,storybook-static,.coverage}/**'",
     "format:staged": "prettier --write '**/*.{scss,css,js,md,vue}' '!**/{dist,storybook-static,.coverage}/**'",
     "lint:css": "stylelint '{packages,storybook}/**/*.{vue,scss}'",
-    "lint:es": "eslint src/**/*.{js,vue}",
-    "lint:style": "vue-cli-service lint:style",
-    "test": "vue-cli-service test:unit",
-    "a11test": "node -v",
-    "storybook": "start-storybook -p 6006 --no-manager-cache"
+    "storybook": "start-storybook -p 6006 --no-manager-cache -c ../.storybook"
   },
   "dependencies": {
     "@carbon/icons-vue": "^10.60.0",
@@ -38,9 +33,6 @@
     "stylelint-config-property-sort-order-smacss": "^9.0.0",
     "stylelint-config-sass-guidelines": "^9.0.1",
     "vue": "^3.2.45"
-  },
-  "peerDependencies": {
-    "carbon-icons": "^7"
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",
@@ -159,45 +151,6 @@
     "last 2 versions",
     "not dead"
   ],
-  "jest": {
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "src/*/**/*.{js,vue}",
-      "!**/node_modules/**",
-      "!**/*.stories.js",
-      "!**/*.spec.js",
-      "!**/*.test.js"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 100,
-        "functions": 100,
-        "lines": 100,
-        "statements": 0
-      }
-    },
-    "preset": "@vue/cli-plugin-unit-jest",
-    "transform": {
-      "^.+\\.vue$": "@vue/vue3-jest",
-      "^.+\\js$": "babel-jest"
-    },
-    "transformIgnorePatterns": [
-      "/node_modules/(?!@carbon)"
-    ],
-    "moduleFileExtensions": [
-      "vue",
-      "js",
-      "json",
-      "jsx",
-      "ts",
-      "tsx",
-      "node"
-    ]
-  },
-  "files": [
-    "/dist",
-    "/src"
-  ],
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
@@ -207,10 +160,6 @@
     "*.{scss,css,js,md,vue}": [
       "yarn format:staged"
     ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/carbon-design-system/carbon-components-vue.git"
   },
   "sideEffects": true
 }
