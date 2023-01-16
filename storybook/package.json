@@ -21,15 +21,7 @@
     "storybook": "start-storybook -p 6006 --no-manager-cache -c ../.storybook"
   },
   "dependencies": {
-    "@carbon/icons-vue": "^10.60.0",
-    "@carbon/layout": "^10.37.1",
-    "@carbon/themes": "^10.55.1",
-    "@carbon/type": "^10.45.1",
     "@storybook/addon-storysource": "^6.5.15",
-    "@vueuse/core": "^4.11.2",
-    "carbon-components": "^10.58.5",
-    "mitt": "^3.0.0",
-    "remove": "^0.1.5",
     "stylelint-config-property-sort-order-smacss": "^9.0.0",
     "stylelint-config-sass-guidelines": "^9.0.1",
     "vue": "^3.2.45"
