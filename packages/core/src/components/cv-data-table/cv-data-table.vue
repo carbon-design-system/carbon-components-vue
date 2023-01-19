@@ -46,7 +46,7 @@
             role="search"
             ref="searchContainer"
           >
-            <div :class="`${carbonPrefix}--search-magnifier`" ref="magnifier" role="button" aria-label="Search">
+            <div :id="`${uid}-search`" :class="`${carbonPrefix}--search-magnifier`" ref="magnifier" role="button">
               <Search16 :class="`${carbonPrefix}--search-magnifier-icon`" />
             </div>
             <label :id="`${uid}-search`" :for="uid" :class="`${carbonPrefix}--label`">{{ searchLabel }}</label>
