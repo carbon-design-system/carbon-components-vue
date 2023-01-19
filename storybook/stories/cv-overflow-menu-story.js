@@ -37,6 +37,12 @@ const preKnobs = {
     config: ['label for assistive text', 'Oveflow menu'],
     prop: 'label',
   },
+  ariaLabel: {
+    group: 'attr',
+    type: text,
+    config: ['aria label for accessibility assistive text', 'Oveflow menu'],
+    prop: 'label',
+  },
   tipPosition: {
     group: 'attr',
     type: select,

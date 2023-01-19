@@ -3,50 +3,52 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [2.44.2](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@2.44.1...@carbon/vue@2.44.2) (2022-12-02)
+# [2.45.0](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@2.44.2...@carbon/vue@2.45.0) (2023-01-10)
 
 
 ### Bug Fixes
 
-* pr now works with kind button ([31cadd2](https://github.com/carbon-design-system/carbon-components-vue/commit/31cadd27929d547ec8a97a2774a58a2e4ef4e1f6))
-* pr now works with kind button ([c581c94](https://github.com/carbon-design-system/carbon-components-vue/commit/c581c945a751646e208802df601c2e8b61422852))
-* remove tabindex from label to cv-wrapper div ([47436ff](https://github.com/carbon-design-system/carbon-components-vue/commit/47436ff54ade9247709a5c657e369a1d560ef8d8))
-
-
-
-
-
-## [2.44.1](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@2.44.0...@carbon/vue@2.44.1) (2022-08-26)
-
-
-### Bug Fixes
-
-* role menuitem into li ([29d3087](https://github.com/carbon-design-system/carbon-components-vue/commit/29d308762d4634e79392e04cfaecbfd6228c03ac))
-
-
-
-
-
-# [2.44.0](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@2.43.1...@carbon/vue@2.44.0) (2022-05-23)
-
-
-### Bug Fixes
-
-* address a11y issue raised in ([262ae16](https://github.com/carbon-design-system/carbon-components-vue/commit/262ae16ef5ea67b8979f52610079f1263e746725))
-* use existing multi select label ([de1123c](https://github.com/carbon-design-system/carbon-components-vue/commit/de1123ceb5f8dc92fe22ea8f9e5a84e2fd562a2c))
+* **combo box:** set filter correctly for inital value ([f43a0b9](https://github.com/carbon-design-system/carbon-components-vue/commit/f43a0b97b73b988c8bdcb39ecc677d9b7ab024c2))
+* **cv-data-table:** fix searchbox role ([51f0ebb](https://github.com/carbon-design-system/carbon-components-vue/commit/51f0ebb763f2e2b5a8de77c3f8c5b32e789bbb7b))
+* tag close button should have type button ([fa57623](https://github.com/carbon-design-system/carbon-components-vue/commit/fa57623e173088d06cc23994d6aac3c842fb91a7))
 
 
 ### Features
 
-* index carbon components vue ([5aa61b3](https://github.com/carbon-design-system/carbon-components-vue/commit/5aa61b34533c7e1458a094fa268bc3004666750d))
-* update link ([bdfd0d2](https://github.com/carbon-design-system/carbon-components-vue/commit/bdfd0d241d08279a8b41452653500b4fa238d48d))
-* update links ([525ce6a](https://github.com/carbon-design-system/carbon-components-vue/commit/525ce6afdd6cd3c4928addadbfd80b48cca1281c))
-* update links ([c5ab853](https://github.com/carbon-design-system/carbon-components-vue/commit/c5ab85386ef60f08557d9ad8219d87fddb311ce8))
-* update links ([9a88535](https://github.com/carbon-design-system/carbon-components-vue/commit/9a88535cdb8aabaee839f7df661f11962aa3702b))
+* update carbon versions ([05ba3e4](https://github.com/carbon-design-system/carbon-components-vue/commit/05ba3e487ac975b04b7de1a10d8b3363add6756d))
 
 
 
 
+
+## [2.44.2](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@2.44.1...@carbon/vue@2.44.2) (2022-12-02)
+
+### Bug Fixes
+
+- pr now works with kind button ([31cadd2](https://github.com/carbon-design-system/carbon-components-vue/commit/31cadd27929d547ec8a97a2774a58a2e4ef4e1f6))
+- pr now works with kind button ([c581c94](https://github.com/carbon-design-system/carbon-components-vue/commit/c581c945a751646e208802df601c2e8b61422852))
+- remove tabindex from label to cv-wrapper div ([47436ff](https://github.com/carbon-design-system/carbon-components-vue/commit/47436ff54ade9247709a5c657e369a1d560ef8d8))
+
+## [2.44.1](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@2.44.0...@carbon/vue@2.44.1) (2022-08-26)
+
+### Bug Fixes
+
+- role menuitem into li ([29d3087](https://github.com/carbon-design-system/carbon-components-vue/commit/29d308762d4634e79392e04cfaecbfd6228c03ac))
+
+# [2.44.0](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@2.43.1...@carbon/vue@2.44.0) (2022-05-23)
+
+### Bug Fixes
+
+- address a11y issue raised in ([262ae16](https://github.com/carbon-design-system/carbon-components-vue/commit/262ae16ef5ea67b8979f52610079f1263e746725))
+- use existing multi select label ([de1123c](https://github.com/carbon-design-system/carbon-components-vue/commit/de1123ceb5f8dc92fe22ea8f9e5a84e2fd562a2c))
+
+### Features
+
+- index carbon components vue ([5aa61b3](https://github.com/carbon-design-system/carbon-components-vue/commit/5aa61b34533c7e1458a094fa268bc3004666750d))
+- update link ([bdfd0d2](https://github.com/carbon-design-system/carbon-components-vue/commit/bdfd0d241d08279a8b41452653500b4fa238d48d))
+- update links ([525ce6a](https://github.com/carbon-design-system/carbon-components-vue/commit/525ce6afdd6cd3c4928addadbfd80b48cca1281c))
+- update links ([c5ab853](https://github.com/carbon-design-system/carbon-components-vue/commit/c5ab85386ef60f08557d9ad8219d87fddb311ce8))
+- update links ([9a88535](https://github.com/carbon-design-system/carbon-components-vue/commit/9a88535cdb8aabaee839f7df661f11962aa3702b))
 
 ## [2.43.1](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@2.43.0...@carbon/vue@2.43.1) (2022-04-26)
 

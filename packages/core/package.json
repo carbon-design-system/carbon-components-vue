@@ -1,7 +1,7 @@
 {
   "name": "@carbon/vue",
   "description": "A collection of components for the Carbon Design System built using Vue.js",
-  "version": "2.44.2",
+  "version": "2.45.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -57,22 +57,26 @@
   "scripts": {
     "build": "vue-cli-service build --target lib --name carbon-vue ./src/index.js --no-clean",
     "clean": "rimraf dist node_modules/.cache",
-    "postinstall": "carbon-telemetry collect --install"
+    "postinstall": "carbon-telemetry collect --install",
+    "upgrade:dependencies": "run-s -s 'upgrade:dependencies:*'",
+    "upgrade:dependencies:carbon": "npm-check-updates -u --dep dev,peer,prod  --filter '/carbon/' --target minor",
+    "upgrade:dependencies:other": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^vue$|^@vue)/'",
+    "upgrade:dependencies:yarn": "yarn set version latest"
   },
   "engines": {
     "node": ">=10.x"
   },
   "sideEffects": true,
   "dependencies": {
-    "@carbon/icons-vue": "10.56.0",
+    "@carbon/icons-vue": "10.63.0",
     "@carbon/telemetry": "^0.1.0",
-    "carbon-components": "10.58.0",
+    "carbon-components": "10.58.5",
     "flatpickr": "4.6.13",
     "vue": "^2.7.10"
   },
   "devDependencies": {
-    "@vue/cli-service": "^3.12.1",
-    "eslint-plugin-prettier": "^3.4.1",
-    "vue-template-compiler": "^2.7.10"
+    "@vue/cli-service": "~4.5.19",
+    "eslint-plugin-prettier": "^4.2.1",
+    "vue-template-compiler": "^2.7.14"
   }
 }

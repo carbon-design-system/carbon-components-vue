@@ -179,6 +179,7 @@ for (const story of storySet) {
     story.name,
     () => {
       const settings = story.knobs();
+      const defaultValue = story.name === 'vModel' ? 'val-mango' : '';
 
       const templateString = `<cv-combo-box ${settings.group.attr}
   :options="options">${settings.group.slots}
@@ -224,7 +225,7 @@ for (const story of storySet) {
         props: settings.props,
         data() {
           return {
-            value: '',
+            value: defaultValue,
             options: fruits,
             highlight: '',
           };
