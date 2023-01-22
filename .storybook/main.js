@@ -60,10 +60,9 @@ module.exports = {
 
     config.performance = {
       ...config.performance,
-      maxEntrypointSize: 4194000,
-      maxAssetSize: 2097000,
+      maxEntrypointSize: 5000000,
+      maxAssetSize: 4000000,
     };
-    // config.resolve.alias['@'] = path.resolve(__dirname, '../src');
 
     // Return the altered config
     return config;
