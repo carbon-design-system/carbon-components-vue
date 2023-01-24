@@ -30,7 +30,7 @@ As a community project contributions are not only welcome, but essential for the
 
 [CHANGELOG.md](./packages/core/CHANGELOG.md)
 
-## Gettting started
+## Getting started
 
 [Usage and getting started instructions](./packages/core/README.md#getting-started) for @carbon/vue.
 
