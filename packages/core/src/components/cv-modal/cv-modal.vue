@@ -25,7 +25,9 @@
         class="cv-modal__before-content"
         ref="beforeContent"
         tabindex="0"
-        style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+        style="position: absolute; height: 1px; width: 1px; left: -9999px"
+        role="separator"
+        aria-valuenow="0"
         @focus="focusBeforeContent"
       />
       <div :class="`${carbonPrefix}--modal-header`">
@@ -82,7 +84,9 @@
         class="cv-modal__after-content"
         ref="afterContent"
         tabindex="0"
-        style="position: absolute; height: 1px; width: 1px; left: -9999px;"
+        style="position: absolute; height: 1px; width: 1px; left: -9999px"
+        role="separator"
+        aria-valuenow="1"
         @focus="focusAfterContent"
       />
     </div>
