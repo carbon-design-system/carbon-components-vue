@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.45.1](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@2.45.0...@carbon/vue@2.45.1) (2023-01-24)
+
+
+### Bug Fixes
+
+* set aria role seperator on modal before/after content ([#1409](https://github.com/carbon-design-system/carbon-components-vue/issues/1409)) ([21b3756](https://github.com/carbon-design-system/carbon-components-vue/commit/21b375650de2e020ff96c5e3810e3393bbd318a8))
+
+
+
+
+
 # [2.45.0](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@2.44.2...@carbon/vue@2.45.0) (2023-01-10)
 
 
