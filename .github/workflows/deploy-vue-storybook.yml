@@ -33,28 +33,9 @@ jobs:
           node-version: '14.x'
       - name: Install dependencies from our offline mirror
         run: yarn install --offline
-      - name: Install ibmcloud CLI
-        run: curl -fsSL https://clis.cloud.ibm.com/install/osx | sh
-      - name: Login to IBM Cloud
-        env:
-          CLOUD_API_KEY: ${{ secrets.CLOUD_API_KEY}}
-        run: |
-          ibmcloud login \
-            -a 'https://cloud.ibm.com' \
-            --apikey "$CLOUD_API_KEY" \
-            -r 'us-south'
-          ibmcloud target -o 'carbon-design-system' -s 'production'
-      - name: Install IBM Cloud plugins
-        run: |
-          ibmcloud cf install
-          ibmcloud cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
-          ibmcloud cf install-plugin blue-green-deploy -f -r CF-Community
-      - name: Deploy Vue storybook
+      - name: Build Vue storybook
         run: |
           yarn build:storybook --quiet
-          ibmcloud cf blue-green-deploy carbon-storybook-vue \
-            -f storybook/manifest.yml \
-            --delete-old-apps
       - name: Setup Pages
         uses: actions/configure-pages@v2
       - name: Upload artifact
