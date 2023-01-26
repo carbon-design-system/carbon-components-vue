@@ -58,9 +58,6 @@ const panelExpanded = computed({
     data.dataExpanded = val;
   },
 });
-watch(panelExpanded, val => {
-  emit('panel-resize', { id: props.id, expanded: val });
-});
 
 /**
  * @type {CvHeaderPanel}

@@ -62,10 +62,7 @@ export const Template = args => ({
       actionNotifications: () => {},
       actionUserAvatar: () => { loggedIn.value = !loggedIn.value},
       actionAppSwitcher: () => {},
-      onNotificationPanel: action('notification panel expanded'),
-      onUserPanel: action('user panel expanded'),
-      onSwitcherPanel: action('switcher panel expanded'),
-      onSideNav: action('side nav expanded'),
+      onPanelResize: action('panel-resize'),
       loggedIn
     }
   },
@@ -133,13 +130,13 @@ const defaultTemplate = `
     </cv-header-global-action>
   </template>
   <template v-slot:right-panels>
-    <cv-header-panel  id="user-panel" @onPanelResize="onUserPanel">
+    <cv-header-panel  id="user-panel" @panel-resize="onPanelResize">
       An empty user panel
     </cv-header-panel>
-    <cv-header-panel  id="notifications-panel" @onPanelResize="onNotificationPanel">
+    <cv-header-panel  id="notifications-panel" @panel-resize="onPanelResize">
       An empty panel
     </cv-header-panel>
-    <cv-header-panel id="switcher-panel" @onPanelResize="onSwitcherPanel">
+    <cv-header-panel id="switcher-panel" @panel-resize="onPanelResize">
       <cv-switcher>
         <cv-switcher-item>
           <cv-switcher-item-link href="javascript:void(0)" selected>Selected app</cv-switcher-item-link>
@@ -161,7 +158,7 @@ const railTemplate = `
   <cv-skip-to-content href="#main-content">Skip to content</cv-skip-to-content>
   <cv-header-name href="javascript:void(0)" prefix="IBM">[Platform]</cv-header-name>
   <template v-slot:left-panels>
-    <cv-side-nav id="side-nav" @panel-resize="onSideNav" :rail="true" :fixed="useFixed" :expanded="expandedSideNav">
+    <cv-side-nav id="side-nav" @panel-resize="onPanelResize" :rail="true" :fixed="useFixed" :expanded="expandedSideNav">
       <cv-side-nav-items>
         <cv-side-nav-menu title="Home">
           <template v-slot:nav-icon><home16 /></template>
@@ -198,7 +195,7 @@ const fixedSideNavTemplate = `
     [Platform]
   </cv-header-name>
 </cv-header>
-<cv-side-nav id="side-nav" @panel-resize="onSideNav" :rail="false" :fixed="true" :expanded="true">
+<cv-side-nav id="side-nav" @panel-resize="onPanelResize" :rail="false" :fixed="true" :expanded="true">
   <cv-side-nav-items>
     <cv-side-nav-menu title="Home">
       <template v-slot:nav-icon><home16 /></template>
