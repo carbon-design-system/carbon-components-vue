@@ -12,7 +12,9 @@
   >
     <span :class="`${carbonPrefix}--assistive-text`">{{ label }}</span>
 
-    <cv-svg :svg="icon" :class="`${carbonPrefix}--btn__icon`" />
+    <slot name="icon">
+      <cv-svg :svg="icon" :class="`${carbonPrefix}--btn__icon`" />
+    </slot>
   </button>
 </template>
 
