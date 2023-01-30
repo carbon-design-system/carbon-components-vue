@@ -7,7 +7,7 @@
   "packageManager": "yarn@3.2.0",
   "main": "./main.js",
   "scripts": {
-    "xpostinstall": "node prepare.js",
+    "postinstall": "node prepare.js",
     "prepack": "pinst --disable",
     "postpack": "pinst --enable",
     "build": "vue-cli-service build --target lib --name carbon-vue-3 ./src/index.js --no-clean",
