@@ -33,7 +33,8 @@ exports[`CvSearch should render correctly when \`kind\` is toolbar 1`] = `
     </button>
     <!----> <label for="test-1" class="bx--label" style="display: none;"></label> <input id="test-1" type="text" placeholder="Search" aria-labelledby="test-1" class="bx--search-input"> <button type="button" title="Clear search input" aria-label="Clear search input" class="bx--search-close">
       <close16-stub></close16-stub>
-    </button></div>
+    </button>
+  </div>
 </cv-wrapper-stub>
 `;
 
@@ -96,7 +97,8 @@ exports[`CvSearch should render correctly when \`toolbarAriaLabel\` is set 1`] =
     </button>
     <!----> <label for="test-1" class="bx--label" style="display: none;"></label> <input id="test-1" type="text" placeholder="Search" aria-labelledby="test-1" class="bx--search-input"> <button type="button" title="Clear search input" aria-label="Clear search input" class="bx--search-close">
       <close16-stub></close16-stub>
-    </button></div>
+    </button>
+  </div>
 </cv-wrapper-stub>
 `;
 
