@@ -5,21 +5,15 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [2.45.0](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@2.44.2...@carbon/vue@2.45.0) (2023-01-10)
 
-
 ### Bug Fixes
 
-* **combo box:** set filter correctly for inital value ([f43a0b9](https://github.com/carbon-design-system/carbon-components-vue/commit/f43a0b97b73b988c8bdcb39ecc677d9b7ab024c2))
-* **cv-data-table:** fix searchbox role ([51f0ebb](https://github.com/carbon-design-system/carbon-components-vue/commit/51f0ebb763f2e2b5a8de77c3f8c5b32e789bbb7b))
-* tag close button should have type button ([fa57623](https://github.com/carbon-design-system/carbon-components-vue/commit/fa57623e173088d06cc23994d6aac3c842fb91a7))
-
+- **combo box:** set filter correctly for inital value ([f43a0b9](https://github.com/carbon-design-system/carbon-components-vue/commit/f43a0b97b73b988c8bdcb39ecc677d9b7ab024c2))
+- **cv-data-table:** fix searchbox role ([51f0ebb](https://github.com/carbon-design-system/carbon-components-vue/commit/51f0ebb763f2e2b5a8de77c3f8c5b32e789bbb7b))
+- tag close button should have type button ([fa57623](https://github.com/carbon-design-system/carbon-components-vue/commit/fa57623e173088d06cc23994d6aac3c842fb91a7))
 
 ### Features
 
-* update carbon versions ([05ba3e4](https://github.com/carbon-design-system/carbon-components-vue/commit/05ba3e487ac975b04b7de1a10d8b3363add6756d))
-
-
-
-
+- update carbon versions ([05ba3e4](https://github.com/carbon-design-system/carbon-components-vue/commit/05ba3e487ac975b04b7de1a10d8b3363add6756d))
 
 ## [2.44.2](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@2.44.1...@carbon/vue@2.44.2) (2022-12-02)
 
