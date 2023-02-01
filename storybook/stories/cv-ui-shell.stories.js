@@ -20,7 +20,7 @@ import {
   CvSwitcherItemLink,
   CvHeaderSideNavItems,
 } from '../../packages/core/src/';
-import { Notification20, Login20, UserAvatar20, AppSwitcher20, Fade16 } from '@carbon/icons-vue';
+import { Notification20, Login20, UserAvatar20, Switcher20, Fade16 } from '@carbon/icons-vue';
 
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
@@ -89,7 +89,7 @@ const Template = (args, { argTypes }) => ({
     Notification20,
     Login20,
     UserAvatar20,
-    AppSwitcher20,
+    Switcher20,
     Fade16,
   },
   data() {
@@ -167,7 +167,7 @@ const Template = (args, { argTypes }) => ({
       tipPosition="bottom"
       tipAlignment="end"
       >
-      <AppSwitcher20 />
+      <Switcher20 />
     </cv-header-global-action>
   </template>
 

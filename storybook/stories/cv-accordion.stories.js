@@ -29,7 +29,7 @@ export default {
     },
     size: {
       controls: { type: 'select' },
-      options: [undefined, 'sm', 'xl'],
+      options: [undefined, 'sm', 'md', 'lg', 'xl'],
       defaultValue: undefined,
     },
     // ...deprecatedArgTypes(CvAccordion),

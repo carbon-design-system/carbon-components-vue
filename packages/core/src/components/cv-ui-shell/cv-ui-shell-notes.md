@@ -90,7 +90,7 @@ For slotting into cv-header.
       aria-label="App switcher"
       aria-controls="switcher-panel"
       @click="actionAppSwitcher">
-      <AppSwitcher20 />
+      <Switcher20 />
     </cv-header-global-action>
   </template>
 
