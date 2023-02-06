@@ -127,10 +127,12 @@ const classes = computed(() => {
         classnames.push(`${carbonPrefix}--offset-${name}-${offset}`);
       }
 
+      // Carbon 11
       if (typeof start === 'number') {
         classnames.push(`${carbonPrefix}--${name}:col-start-${start}`);
       }
 
+      // Carbon 11
       if (typeof end === 'number') {
         classnames.push(`${carbonPrefix}--${name}:col-end-${end}`);
       }

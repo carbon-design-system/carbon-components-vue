@@ -7,6 +7,7 @@
         [`${carbonPrefix}--grid--full-width`]: fullWidth,
         [`${carbonPrefix}--grid--condensed`]: kind === 'condensed',
         [`${carbonPrefix}--grid--narrow`]: kind === 'narrow',
+        [`${carbonPrefix}--subgrid`]: subgrid,
       },
     ]"
   >
@@ -16,6 +17,7 @@
 
 <script setup>
 import { carbonPrefix } from '../../global/settings';
+import { inject, provide } from 'vue';
 
 defineProps({
   /**
@@ -33,4 +35,8 @@ defineProps({
     validator: val => ['wide', 'narrow', 'condensed'].includes(val),
   },
 });
+
+// Carbon 11 - a bit of a head start on Carbon 11 support
+const subgrid = inject('cv-parent-grid', false);
+if (!subgrid) provide('cv-parent-grid', true);
 </script>
