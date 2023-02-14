@@ -1,6 +1,6 @@
 <template>
   <div
-    style="{position: relative}"
+    style="{position: 'relative'}"
     class="cv-checkbox"
     :class="[`${carbonPrefix}--checkbox-wrapper`, { [`${carbonPrefix}--form-item`]: formItem }]"
   >
