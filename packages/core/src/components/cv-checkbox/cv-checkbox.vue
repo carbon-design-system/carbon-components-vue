@@ -1,5 +1,9 @@
 <template>
-  <div class="cv-checkbox" :class="[`${carbonPrefix}--checkbox-wrapper`, { [`${carbonPrefix}--form-item`]: formItem }]">
+  <div
+    style="{position: relative}"
+    class="cv-checkbox"
+    :class="[`${carbonPrefix}--checkbox-wrapper`, { [`${carbonPrefix}--form-item`]: formItem }]"
+  >
     <input
       ref="input"
       v-bind="$attrs"
