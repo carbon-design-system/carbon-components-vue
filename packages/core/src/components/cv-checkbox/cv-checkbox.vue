@@ -1,8 +1,10 @@
 <template>
   <div
-    style="{position: 'relative'}"
     class="cv-checkbox"
-    :class="[`${carbonPrefix}--checkbox-wrapper`, { [`${carbonPrefix}--form-item`]: formItem }]"
+    :class="[
+      `${carbonPrefix}--checkbox-${inline ? 'inline' : 'wrapper'}`,
+      { [`${carbonPrefix}--form-item`]: formItem },
+    ]"
   >
     <input
       ref="input"
@@ -47,6 +49,7 @@ export default {
     label: String,
     mixed: Boolean,
     formItem: { type: Boolean, default: true },
+    inline: { type: Boolean, default: false },
   },
   watch: {
     mixed() {
