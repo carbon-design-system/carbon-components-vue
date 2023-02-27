@@ -2,7 +2,7 @@
   <div
     class="cv-checkbox"
     :class="[
-      `${carbonPrefix}--checkbox-${inline ? 'inline' : 'wrapper'}`,
+      `${carbonPrefix}--checkbox-${inline ? '-inline' : 'wrapper'}`,
       { [`${carbonPrefix}--form-item`]: formItem },
     ]"
   >
