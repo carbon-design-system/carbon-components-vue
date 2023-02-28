@@ -53,7 +53,7 @@
         </div>
         <div :class="`${carbonPrefix}--toolbar-content`">
           <div
-            v-if="$attrs.onSearch"
+            v-if="onSearch"
             :aria-labelledby="`${uid}-search`"
             :class="[
               `${carbonPrefix}--search `,
@@ -87,7 +87,7 @@
               :aria-labelledby="`searchbox-${uid}`"
               ref="search"
               v-model="searchValue"
-              @input="onSearch"
+              @input="onInternalSearch"
               @click="checkSearchExpand(true)"
               @keydown.esc.prevent="checkSearchExpand(false)"
               @focus="checkSearchExpand(true)"
@@ -210,7 +210,6 @@
       v-if="pagination"
       v-bind="internalPagination"
       :number-of-items="internalNumberOfItems"
-      :actual-items-on-page="registeredRows.length"
       @change="$emit('pagination', $event)"
     >
       <template v-slot:range-text="{ scope }">
@@ -245,7 +244,6 @@ import {
   onUpdated,
   ref,
   unref,
-  useAttrs,
   useSlots,
   watch,
 } from 'vue';
@@ -353,6 +351,7 @@ const props = defineProps({
    * Use a width of 'auto' instead of 100%
    */
   staticWidth: { type: Boolean, default: false },
+  onSearch: { type: Function },
   ...propsCvId,
 });
 const uid = useCvId(props, true);
@@ -396,7 +395,6 @@ const slots = useSlots();
 onMounted(checkSlots);
 onUpdated(checkSlots);
 
-const attrs = useAttrs();
 const hasActions = ref(false);
 const hasToolbar = ref(false);
 const hasBatchActions = computed(() => {
@@ -408,7 +406,7 @@ function checkSlots() {
   hasActions.value = !!slots.actions;
   hasToolbar.value = !!(
     slots.actions ||
-    attrs.onSearch ||
+    props.onSearch ||
     slots['batch-actions']
   );
   isHelper.value = !!(
@@ -516,6 +514,15 @@ function checkSearchExpand(force) {
 const dataRowsSelected = ref(props.rowsSelected);
 const batchActive = ref(false);
 const headingChecked = ref(false);
+
+watch(
+  () => store.state[uid.value],
+  () => {
+    const rows = store.rows(uid);
+    headingChecked.value = dataRowsSelected.value.length === rows.length;
+  },
+  { deep: true }
+);
 function updateRowsSelected() {
   dataRowsSelected.value = [];
   const rows = store.rows(uid);
@@ -536,6 +543,7 @@ const emit = defineEmits([
   // 'search', // Do not define the search emit here. We need to know if it is specified on the component but if we include it here it is not available in attrs.
   'row-select-change',
   'row-select-changes',
+  'update:rowsSelected',
   'overflow-menu-click',
   'sort',
   'row-expanded',
@@ -571,12 +579,14 @@ function onHeadingCheckChange() {
     }
   }
   emit('row-select-changes', dataRowsSelected.value);
+  emit('update:rowsSelected', dataRowsSelected.value);
 }
 function deselect() {
   headingChecked.value = false;
   onHeadingCheckChange();
 }
-function onRowCheckChange(value, checked) {
+function onRowCheckChange(payload) {
+  const { value, checked } = payload;
   let modelSet = new Set(dataRowsSelected.value);
 
   if (!checked) {
@@ -591,15 +601,17 @@ function onRowCheckChange(value, checked) {
 
   emit('row-select-change', { value, selected: checked });
   emit('row-select-changes', dataRowsSelected.value);
+  emit('update:rowsSelected', dataRowsSelected.value);
 }
 function onMenuItemClick(val) {
   emit('overflow-menu-click', val);
 }
-function onSearch() {
+function onInternalSearch() {
   clearSearchVisible.value = searchValue.value.length > 0;
   emit('search', searchValue.value);
 }
-function onSort(heading, val) {
+function onSort(payload) {
+  const { heading, val } = payload;
   const headings = store.headings(uid);
   let index;
   for (let colIndex in headings) {

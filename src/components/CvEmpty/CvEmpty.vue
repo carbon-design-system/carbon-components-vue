@@ -18,5 +18,5 @@ Instead of that use the built-in component tag like this:
 </component>
 -->
 <template>
-  <slot></slot>
+  <slot v-bind="$attrs"></slot>
 </template>

@@ -8,6 +8,7 @@ import CvIconButton from './src/components/CvButton/CvIconButton.vue';
 import CvButton from './src/components/CvButton/CvButton.vue';
 import CvAccordionItem from './src/components/CvAccordion/CvAccordionItem.vue';
 import CvAccordion from './src/components/CvAccordion/CvAccordion.vue';
+import CvAccordionSkeleton from './src/components/CvAccordion/CvAccordionSkeleton.vue';
 import CvTag from './src/components/CvTag/CvTag.vue';
 import CvComboBox from './src/components/CvComboBox/CvComboBox.vue';
 import CvPagination from './src/components/CvPagination/CvPagination.vue';
@@ -54,6 +55,9 @@ import CvSkipToContent from './src/components/CvUIShell/CvSkipToContent.vue';
 import CvSwitcher from './src/components/CvUIShell/CvSwitcher.vue';
 import CvSwitcherItem from './src/components/CvUIShell/CvSwitcherItem.vue';
 import CvSwitcherItemLink from './src/components/CvUIShell/CvSwitcherItemLink.vue';
+import CvColumn from './src/components/CvGrid/CvColumn.vue';
+import CvGrid from './src/components/CvGrid/CvGrid.vue';
+import CvRow from './src/components/CvGrid/CvRow.vue';
 
 const all = {
   CvAspectRatio,
@@ -66,6 +70,7 @@ const all = {
   CvButton,
   CvAccordionItem,
   CvAccordion,
+  CvAccordionSkeleton,
   CvTag,
   CvComboBox,
   CvPagination,
@@ -112,6 +117,9 @@ const all = {
   CvSwitcher,
   CvSwitcherItem,
   CvSwitcherItemLink,
+  CvColumn,
+  CvGrid,
+  CvRow,
 };
 export default {
   install(app, options) {
