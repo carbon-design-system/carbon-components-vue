@@ -117,11 +117,10 @@ onBeforeUnmount(() => {
   store.removeHeading(parent, cvId);
 });
 function onSortClick() {
-  bus?.emit(
-    'cv:sort',
-    { id: cvId.value, name: props.name },
-    nextOrder[internalOrder.value]
-  );
+  bus?.emit('cv:sort', {
+    heading: { id: cvId.value, name: props.name },
+    value: nextOrder[internalOrder.value],
+  });
 }
 const internalOrder = computed(() => {
   if (!props.sortable) {

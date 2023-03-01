@@ -86,7 +86,7 @@
 
 <script setup>
 import { carbonPrefix } from '../../global/settings';
-import { computed, nextTick, onMounted, ref } from 'vue';
+import { computed, nextTick, onMounted, ref, watch } from 'vue';
 import { CaretLeft16, CaretRight16 } from '@carbon/icons-vue';
 import CvSelect from '../CvSelect';
 import CvSelectOption from '../CvSelect/CvSelectOption.vue';
@@ -175,6 +175,10 @@ function onPageChange(newVal) {
   firstItem.value = newFirstItem(pageValue.value, pageSizeValue.value);
   emit('change', internalValue.value);
 }
+watch(
+  () => props.numberOfItems,
+  () => onPageSizeChange(pageSizeValue.value)
+);
 function onPageSizeChange(newVal) {
   pageSizeValue.value = parseInt(newVal, 10);
   pageCount.value = newPageCount(props.numberOfItems, pageSizeValue.value);

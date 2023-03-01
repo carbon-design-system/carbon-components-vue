@@ -1,8 +1,9 @@
 <template>
   <div
+    class="cv-checkbox"
     :class="[
+      `${carbonPrefix}--checkbox--${inline ? 'inline' : 'wrapper'}`,
       { [`${carbonPrefix}--form-item`]: formItem },
-      `${carbonPrefix}--checkbox-wrapper`,
     ]"
   >
     <input
@@ -49,6 +50,7 @@ const props = defineProps({
   hideLabel: { type: Boolean, default: null },
   label: { type: String, default: null },
   formItem: { type: Boolean, default: true },
+  inline: { type: Boolean, default: false },
   ...propsCvCheck,
   ...propsCvId,
 });

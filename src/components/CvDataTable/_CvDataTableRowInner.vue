@@ -30,6 +30,7 @@
       <cv-checkbox
         :form-item="false"
         :value="value"
+        :inline="true"
         v-model="dataChecked"
         @change="onChange"
         ref="rowChecked"

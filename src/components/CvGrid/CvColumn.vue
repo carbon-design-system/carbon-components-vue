@@ -7,92 +7,28 @@
 <script setup>
 import { carbonPrefix } from '../../global/settings';
 import { computed } from 'vue';
+import { columnValidator } from './_cvColumnValidation';
 
 const props = defineProps({
   sm: {
     type: [Boolean, Number, Object],
-    validator: value => {
-      if (typeof value === 'number' || typeof value === 'boolean') {
-        return true;
-      } else if (typeof value === 'object') {
-        return (
-          'span' in value &&
-          typeof value.span === 'number' &&
-          'offset' in value &&
-          typeof value.offset === 'number'
-        );
-      }
-
-      return false;
-    },
+    validator: value => columnValidator('sm', value),
   },
   md: {
     type: [Boolean, Number, Object],
-    validator: value => {
-      if (typeof value === 'number' || typeof value === 'boolean') {
-        return true;
-      } else if (typeof value === 'object') {
-        return (
-          'span' in value &&
-          typeof value.span === 'number' &&
-          'offset' in value &&
-          typeof value.offset === 'number'
-        );
-      }
-
-      return false;
-    },
+    validator: value => columnValidator('md', value),
   },
   lg: {
     type: [Boolean, Number, Object],
-    validator: value => {
-      if (typeof value === 'number' || typeof value === 'boolean') {
-        return true;
-      } else if (typeof value === 'object') {
-        return (
-          'span' in value &&
-          typeof value.span === 'number' &&
-          'offset' in value &&
-          typeof value.offset === 'number'
-        );
-      }
-
-      return false;
-    },
+    validator: value => columnValidator('lg', value),
   },
   xlg: {
     type: [Boolean, Number, Object],
-    validator: value => {
-      if (typeof value === 'number' || typeof value === 'boolean') {
-        return true;
-      } else if (typeof value === 'object') {
-        return (
-          'span' in value &&
-          typeof value.span === 'number' &&
-          'offset' in value &&
-          typeof value.offset === 'number'
-        );
-      }
-
-      return false;
-    },
+    validator: value => columnValidator('xlg', value),
   },
   max: {
     type: [Boolean, Number, Object],
-    validator: value => {
-      if (typeof value === 'number' || typeof value === 'boolean') {
-        return true;
-      } else if (typeof value === 'object') {
-        return (
-          'span' in value &&
-          typeof value.span === 'number' &&
-          'offset' in value &&
-          typeof value.offset === 'number'
-        );
-      }
-
-      return false;
-    },
+    validator: value => columnValidator('max', value),
   },
 });
 const classes = computed(() => {
