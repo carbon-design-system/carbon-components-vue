@@ -2001,9 +2001,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/vue-3@workspace:.":
+"@carbon/vue3@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@carbon/vue-3@workspace:."
+  resolution: "@carbon/vue3@workspace:."
   dependencies:
     "@babel/core": ^7.17.10
     "@babel/eslint-parser": ^7.17.0

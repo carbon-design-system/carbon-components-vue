@@ -249,7 +249,7 @@ import {
 } from 'vue';
 import { props as propsCvId, useCvId } from '../../use/cvId';
 import store from './cvDataTableStore';
-import Empty from '../CvEmpty/CvEmpty.vue';
+import Empty from '../CvEmpty/_CvEmpty.vue';
 
 const props = defineProps({
   actionBarAriaLabel: { type: String, default: 'Table Action Bar' },
