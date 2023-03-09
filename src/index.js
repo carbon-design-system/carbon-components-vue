@@ -3,7 +3,11 @@ const ctx = require.context(
   true,
   /^(?!.*(?:\/_|\.stories\.vue|\.test\.vue|\.spec\.vue)).*\.vue$/
 );
-const components = ctx.keys().map(ctx);
+const components = ctx.keys().map(k => {
+  const fn = k.split('/').slice(-1)[0];
+  const compName = fn.slice(0, -4);
+  return { name: compName, component: ctx(k) };
+});
 
 // Export the components as a plugin
 export default {
@@ -12,7 +16,7 @@ export default {
   install(Vue, options) {
     if (typeof options === 'undefined') {
       for (let c of components) {
-        Vue.component(c.default.name, c.default);
+        Vue.component(c.name, c.component.default);
       }
     } else {
       if (!(options instanceof Array)) {
@@ -21,14 +25,10 @@ export default {
 
       for (let c of components) {
         // register only components specified in the options
-        if (options.includes(c.default.name)) {
-          Vue.component(c.default.name, c.default);
+        if (options.includes(c.name)) {
+          Vue.component(c.name, c.component.default);
         }
       }
     }
   },
 };
-
-// import/export individual components
-export { CvAccordion, CvAccordionItem } from './components/CvAccordion';
-export { CvButton, CvIconButton, CvButtonSet } from './components/CvButton';

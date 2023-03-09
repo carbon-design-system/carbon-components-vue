@@ -1,11 +1,10 @@
 {
-  "name": "@carbon/vue-3",
+  "name": "@carbon/vue3",
   "license": "Apache-2.0",
   "version": "0.6.0",
   "description": "A collection of components for the Carbon Design System built using Vue.js",
-  "private": true,
   "packageManager": "yarn@3.2.0",
-  "main": "./main.js",
+  "main": "dist/carbon-vue-3.umd.min.js",
   "scripts": {
     "postinstall": "node prepare.js",
     "prepack": "pinst --disable",
@@ -178,6 +177,13 @@
       "tsx",
       "node"
     ]
+  },
+  "directories": {
+    "src": "src",
+    "test": "__tests__"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "files": [
     "/dist",
