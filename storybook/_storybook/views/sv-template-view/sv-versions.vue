@@ -15,7 +15,7 @@
     <div class="versions__info">
       <div class="bx--row">
         <div class="bx--no-gutter-md--left bx--col-md-4 bx--col-lg-4">
-          <a class="versions__card" href="https://carbon-components-vue-3.netlify.app/">
+          <a class="versions__card" href="/carbon-components-vue/vue3/">
             <div class="bx--aspect-ratio bx--aspect-ratio--2x1">
               <div class="bx--aspect-ratio--object">
                 <div class="versions__card-content">
