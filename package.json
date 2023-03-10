@@ -26,7 +26,6 @@
   ],
   "dependencies": {
     "@carbon/icons-vue": "^10.60.0",
-    "@carbon/type": "^10.45.1",
     "@vueuse/core": "^4.11.2",
     "carbon-components": "^10.58.5",
     "mitt": "^3.0.0",
