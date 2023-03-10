@@ -28,7 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: chore-combine-storybooks
+          ref: main
       - name: Use Node.js 16.x
         uses: actions/setup-node@v3
         with:
