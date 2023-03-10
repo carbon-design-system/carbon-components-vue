@@ -28,11 +28,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: main
-      - name: Use Node.js 14.x
+          ref: chore-combine-storybooks
+      - name: Use Node.js 16.x
         uses: actions/setup-node@v3
         with:
-          node-version: '14.x'
+          node-version: '16.x'
       - name: Install dependencies from our offline mirror
         run: yarn install --offline
       - name: Build Vue 2 storybook
