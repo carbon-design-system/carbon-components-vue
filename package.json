@@ -1,7 +1,7 @@
 {
-  "name": "@carbon/vue3",
+  "name": "@carbon/vue",
   "license": "Apache-2.0",
-  "version": "0.6.0",
+  "version": "3.0.3-alpha.0",
   "description": "A collection of components for the Carbon Design System built using Vue.js",
   "packageManager": "yarn@3.2.0",
   "main": "dist/carbon-vue-3.umd.min.js",
@@ -26,13 +26,9 @@
   ],
   "dependencies": {
     "@carbon/icons-vue": "^10.60.0",
-    "@carbon/layout": "^10.37.1",
-    "@carbon/themes": "^10.55.1",
-    "@carbon/type": "^10.45.1",
     "@vueuse/core": "^4.11.2",
     "carbon-components": "^10.58.5",
-    "mitt": "^3.0.0",
-    "vue": "^3.2.45"
+    "mitt": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",
@@ -60,6 +56,7 @@
     "eslint-plugin-vue": "^8.7.1",
     "husky": "^7.0.4",
     "jest": "^27.5.1",
+    "lerna": "^6.5.1",
     "lint-staged": "^12.5.0",
     "pinst": "^3.0.0",
     "postcss": "^8.4.19",
@@ -72,6 +69,7 @@
     "stylelint": "^14.15.0",
     "stylelint-config-property-sort-order-smacss": "^9.0.0",
     "stylelint-config-sass-guidelines": "^9.0.1",
+    "vue": "^3.2.45",
     "vue-loader": "^17.0.1",
     "webpack": "^5.75.0"
   },
