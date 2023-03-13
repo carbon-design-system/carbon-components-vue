@@ -288,7 +288,6 @@ describe('CvDataTable', () => {
     await result.findByText(title);
     await result.findByText(helperText);
     const table = result.container.querySelector('.cv-data-table');
-    result.debug(table);
     expect(table.classList.contains('ABC-class-123')).toBe(true);
     expect(table.getAttribute('aria-label')).toBe(ariaLabel);
     let cols = table.querySelectorAll('.bx--table-header-label');
