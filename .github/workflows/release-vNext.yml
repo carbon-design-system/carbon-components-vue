@@ -34,8 +34,8 @@ jobs:
       - name: Continuous integration check & build
         run: yarn ci-check
 
-      # Dry run - `yarn lerna version --no-git-tag-version --no-push --yes`
-      # With dist tag - `run: yarn lerna publish --create-release github --yes --dist-tag next`
+      # Dry run - `yarn lerna version prepatch --no-git-tag-version --no-push --yes`
+      # With dist tag - `run: yarn lerna publish prepatch --dist-tag next --yes`
       - name: Publish
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
