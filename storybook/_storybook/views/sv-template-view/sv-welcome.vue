@@ -83,7 +83,7 @@
           </a>
         </div>
         <div class="bx--no-gutter-md--left bx--col-md-4 bx--col-lg-4">
-          <a class="welcome__card" href="https://carbon-components-vue-3.netlify.app/">
+          <a class="welcome__card" href="/carbon-components-vue/vue3/">
             <div class="bx--aspect-ratio bx--aspect-ratio--2x1">
               <div class="bx--aspect-ratio--object">
                 <div class="welcome__card-content">
