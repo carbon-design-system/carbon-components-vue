@@ -1,0 +1,43 @@
+name: Release
+
+on:
+  workflow_dispatch:
+#   schedule:
+#     - cron: '0 4 * * WED'
+
+jobs:
+  Release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3 # https://github.com/actions/checkout
+        with:
+          fetch-depth: 0 # https://github.com/actions/checkout/issues/217
+          token: ${{ secrets.GH_TOKEN_LERNA }} # https://github.com/lerna/lerna/issues/1957
+          ref: vNext
+
+      # https://github.com/actions/checkout#push-a-commit-using-the-built-in-token
+      - run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@3 # https://github.com/actions/setup-node
+        with:
+          node-version: 18
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Continuous integration check & build
+        run: yarn ci-check
+
+      # Dry run - `yarn lerna version prepatch --no-git-tag-version --no-push --yes`
+      # With dist tag - `run: yarn lerna publish prepatch --dist-tag next --yes`
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: yarn lerna publish prepatch --dist-tag next --yes
