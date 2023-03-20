@@ -23,6 +23,7 @@ export const useLinkProps = props => {
     if (props.disabled) {
       return {
         'aria-disabled': true,
+        role: 'link',
       };
     } else if (props.to && !props.href) {
       return { to: props.to };
