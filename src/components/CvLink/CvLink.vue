@@ -8,6 +8,7 @@
       {
         [`${carbonPrefix}--link--disabled`]: disabled,
         [`${carbonPrefix}--link--inline`]: inline,
+        [`${carbonPrefix}--link--visited`]: visited,
       },
     ]"
   >
@@ -25,6 +26,7 @@ import {
 
 const props = defineProps({
   inline: Boolean,
+  visited: Boolean,
   ...linkPropsDefinition,
 });
 const linkProps = useLinkProps(props);

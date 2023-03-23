@@ -51,6 +51,16 @@ export default {
       description:
         "Replace `<a>` node for vue-router's `router-link`, providing `to` property to it. Cannot be used with href.",
     },
+    visited: {
+      type: 'boolean',
+      table: {
+        type: { summary: 'boolean' },
+        category: 'props',
+      },
+      defaultValue: false,
+      description:
+        'Specify whether you want the link to receive visited styles after the link has been clicked.',
+    },
     default: {
       type: 'string',
       table: {

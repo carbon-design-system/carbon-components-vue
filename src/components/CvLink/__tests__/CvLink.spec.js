@@ -69,4 +69,13 @@ describe('CvLink', () => {
     const element = container.firstElementChild;
     expect(element.classList.contains('bx--link--inline')).toBe(true);
   });
+
+  it("sets link in visited state when 'visited' is true", () => {
+    const { container } = render(CvLink, {
+      props: { visited: true },
+    });
+
+    const element = container.firstElementChild;
+    expect(element.classList.contains('bx--link--visited')).toBe(true);
+  });
 });
