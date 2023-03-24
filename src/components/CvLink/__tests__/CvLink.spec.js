@@ -78,4 +78,38 @@ describe('CvLink', () => {
     const element = container.firstElementChild;
     expect(element.classList.contains('bx--link--visited')).toBe(true);
   });
+
+  it("update link size to small when 'size' is sm", () => {
+    const { container } = render(CvLink, {
+      props: { size: 'sm' },
+    });
+
+    const element = container.firstElementChild;
+    expect(element.classList.contains('bx--link--sm')).toBe(true);
+  });
+
+  it("update link size to medium when 'size' is md", () => {
+    const { container } = render(CvLink, {
+      props: { size: 'md' },
+    });
+
+    const element = container.firstElementChild;
+    expect(element.classList.contains('bx--link--md')).toBe(true);
+  });
+
+  it("update link size to large when 'size' is lg", () => {
+    const { container } = render(CvLink, {
+      props: { size: 'lg' },
+    });
+
+    const element = container.firstElementChild;
+    expect(element.classList.contains('bx--link--lg')).toBe(true);
+  });
+
+  it('sets link size to medium when no size is passed', () => {
+    const { container } = render(CvLink);
+
+    const element = container.firstElementChild;
+    expect(element.classList.contains('bx--link--md')).toBe(true);
+  });
 });

@@ -9,6 +9,7 @@
         [`${carbonPrefix}--link--disabled`]: disabled,
         [`${carbonPrefix}--link--inline`]: inline,
         [`${carbonPrefix}--link--visited`]: visited,
+        [`${carbonPrefix}--link--${size}`]: size,
       },
     ]"
   >

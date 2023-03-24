@@ -5,7 +5,7 @@ import {
 } from '../../global/storybook-utils';
 
 import { CvLink } from '.';
-import { props as propsCvLink } from '../../use/cvLink';
+import { props as propsCvLink, linkSizes } from '../../use/cvLink';
 
 export default {
   title: `${sbCompPrefix}/CvLink`,
@@ -60,6 +60,26 @@ export default {
       defaultValue: false,
       description:
         'Specify whether you want the link to receive visited styles after the link has been clicked.',
+    },
+    size: {
+      type: 'string',
+      table: {
+        type: { summary: linkSizes.join(' | ') },
+        defaultValue: { summary: 'medium (md)' },
+        category: 'props',
+      },
+      options: linkSizes,
+      control: {
+        type: 'select',
+        labels: {
+          sm: 'small (sm)',
+          md: 'medium (md)',
+          lg: 'large (lg)',
+        },
+      },
+      defaultValue: 'md',
+      description:
+        'Specify the size of the Link. Currently supports either `sm`, `md` (default) or `lg` as an option.',
     },
     default: {
       type: 'string',
