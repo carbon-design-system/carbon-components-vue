@@ -1,0 +1,61 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+import CvTile from './CvTile.vue';
+import CvTileStandard from "./CvTileStandard.vue";
+import CvTileClickable from "./CvTileClickable.vue";
+import { sbCompPrefix } from '../../global/storybook-utils';
+import { action } from '@storybook/addon-actions';
+
+<Meta title={`${sbCompPrefix}/CvTile`} component={CvTile} />
+
+export const Template = args => ({
+  // Components used in your story `template` are defined in the `components` object
+  components: {
+    CvTile,CvTileStandard,CvTileClickable
+  },
+  // The story's `args` need to be mapped into the template through the `setup()` method
+  setup() {
+    return {
+      args: { light: args.light, kind: args.kind,  disabled: args.disabled},
+      onChange: action('change'),
+    };
+  },
+  // And then the `args` are bound to your component with `v-bind="args"`
+  template: args.template,
+});
+const defaultTemplate = `
+<div>
+  <cv-tile v-bind='args' @change="onChange">Hello!</cv-tile>
+</div>
+`;
+const defaultCode = defaultTemplate.replace("v-bind='args'", '');
+
+# CvTile
+
+**Migration notes:**
+
+- The `light` and '`theme` options continue to be supported but neither seem to have any effect with Carbon 10.
+  The React component does not have these properties listed at all. Even so the `--content-switcher--light` is still
+  applied if `light` is set to true.
+- In the Vue 2 component `cv-content-switcher-content` is set to visible if the controlling `cv-content-switcher` is
+  removed from the DOM. This is no longer supported. If you need this behaviour you can probably achieve the same effect
+  with the direct DOM version of the component plus some visibility logic.
+
+<Canvas>
+  <Story
+    name="Default"
+    parameters={{
+      controls: { exclude: ['default', 'selected', 'template', 'data'] },
+      docs: { source: { code: defaultCode } },
+    }}
+    args={{
+      light: true,
+      disabled: false,
+      template: defaultTemplate,
+    }}
+    argTypes={{
+      kind: { control: 'select', default: 'standard', options: ['clickable', 'expandable', 'selectable', 'standard'] },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
