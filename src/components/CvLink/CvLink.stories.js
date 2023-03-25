@@ -5,6 +5,7 @@ import {
 } from '../../global/storybook-utils';
 
 import { CvLink } from '.';
+import { Download16 } from '@carbon/icons-vue';
 import { props as propsCvLink, linkSizes } from '../../use/cvLink';
 
 export default {
@@ -81,6 +82,15 @@ export default {
       description:
         'Specify the size of the Link. Currently supports either `sm`, `md` (default) or `lg` as an option.',
     },
+    icon: {
+      table: {
+        type: { summary: 'string | object' },
+        category: 'props',
+      },
+      control: { type: null },
+      description:
+        'Render an icon next to the link. Can be a component object or a svg string',
+    },
     default: {
       type: 'string',
       table: {
@@ -148,4 +158,12 @@ Inline.parameters = storyParametersObject(
   Inline.parameters,
   inlineTemplate,
   Inline.args
+);
+
+export const PariedWithIcon = Template.bind({});
+PariedWithIcon.args = { default: 'Download', icon: Download16 };
+PariedWithIcon.parameters = storyParametersObject(
+  PariedWithIcon.parameters,
+  template,
+  PariedWithIcon.args
 );

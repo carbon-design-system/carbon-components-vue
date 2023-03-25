@@ -14,10 +14,12 @@
     ]"
   >
     <slot></slot>
+    <CvSvg v-if="icon" :class="`${carbonPrefix}--link__icon`" :svg="icon" />
   </component>
 </template>
 
 <script setup>
+import CvSvg from '../CvSvg/_CvSvg.vue';
 import { carbonPrefix } from '../../global/settings';
 import {
   props as linkPropsDefinition,
@@ -26,6 +28,7 @@ import {
 } from '../../use/cvLink';
 
 const props = defineProps({
+  icon: { type: [String, Object] },
   inline: Boolean,
   visited: Boolean,
   ...linkPropsDefinition,

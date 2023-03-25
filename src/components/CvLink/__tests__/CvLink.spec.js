@@ -1,4 +1,6 @@
+import { Download16 } from '@carbon/icons-vue';
 import { render } from '@testing-library/vue';
+import { markRaw } from 'vue';
 import CvLink from '..';
 
 describe('CvLink', () => {
@@ -111,5 +113,54 @@ describe('CvLink', () => {
 
     const element = container.firstElementChild;
     expect(element.classList.contains('bx--link--md')).toBe(true);
+  });
+
+  it("sets an icon, when 'icon' is set with a svg string", () => {
+    const dummyIcon = `
+      <svg height="10" width="10">
+        <circle cx="50" cy="50" r="40" fill="red" />
+      </svg>
+    `;
+    const { container } = render(CvLink, {
+      props: { icon: dummyIcon },
+    });
+
+    expect(container.querySelector('svg')).toBeDefined();
+  });
+
+  it("sets an icon, when 'icon' is set with a vue component", () => {
+    /**
+     * Without `markRaw`, vue triggers a warning at CvSvg:
+     * [Vue warn]: Vue received a Component which was made a reactive object. This can lead to
+     * unnecessary performance overhead, and should be avoided by marking the component with
+     * `markRaw` or using `shallowRef` instead of `ref`.
+     */
+    const dummyIcon = markRaw(Download16);
+    const { container } = render(CvLink, {
+      props: { icon: dummyIcon },
+    });
+
+    expect(container.querySelector('svg')).toBeDefined();
+  });
+
+  it('places icon next to link text (default slot) per carbon spec', () => {
+    const dummyLinkText = 'Link';
+    const dummyIcon = `
+      <svg height="10" width="10">
+        <circle cx="50" cy="50" r="40" fill="red" />
+      </svg>
+    `;
+    const { getByText } = render(CvLink, {
+      props: { icon: dummyIcon },
+      slots: { default: dummyLinkText },
+    });
+
+    const anchor = getByText(dummyLinkText);
+    expect(anchor.innerHTML.startsWith(`${dummyLinkText}<svg `)).toBe(true);
+  });
+
+  it("does not set icon if 'icon' is not set", () => {
+    const { container } = render(CvLink);
+    expect(container.querySelector('svg')).toBeNull();
   });
 });
