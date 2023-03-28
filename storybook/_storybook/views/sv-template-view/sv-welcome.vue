@@ -58,7 +58,7 @@
           </a>
         </div>
         <div class="bx--no-gutter-md--left bx--col-md-4 bx--col-lg-4">
-          <a class="welcome__card" href="/?path=/story/versions--default">
+          <a class="welcome__card" :href="vue2Url">
             <div class="bx--aspect-ratio bx--aspect-ratio--2x1">
               <div class="bx--aspect-ratio--object">
                 <div class="welcome__card-content">
@@ -83,7 +83,7 @@
           </a>
         </div>
         <div class="bx--no-gutter-md--left bx--col-md-4 bx--col-lg-4">
-          <a class="welcome__card" href="/carbon-components-vue/vue3/">
+          <a class="welcome__card" :href="vue3Url">
             <div class="bx--aspect-ratio bx--aspect-ratio--2x1">
               <div class="bx--aspect-ratio--object">
                 <div class="welcome__card-content">
@@ -157,7 +157,7 @@
             <a
               target="blank"
               href="https://github.com/carbon-design-system/carbon-components-vue/issues/new/choose"
-              style="text-decoration: underline;"
+              style="text-decoration: underline"
               >GitHub.</a
             >
           </p>
@@ -213,6 +213,17 @@ export default {
         day: 'numeric',
         year: 'numeric',
       });
+    },
+    prefix() {
+      const currentLocation = window.location;
+      if (currentLocation.pathname.includes('/carbon-components-vue/')) return '/carbon-components-vue';
+      return '';
+    },
+    vue3Url() {
+      return `${this.prefix}/vue3/`;
+    },
+    vue2Url() {
+      return `${this.prefix}/?path=/story/versions--default`;
     },
   },
 };

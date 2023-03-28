@@ -15,7 +15,7 @@
     <div class="versions__info">
       <div class="bx--row">
         <div class="bx--no-gutter-md--left bx--col-md-4 bx--col-lg-4">
-          <a class="versions__card" href="/carbon-components-vue/vue3/">
+          <a class="versions__card" :href="vue3Url">
             <div class="bx--aspect-ratio bx--aspect-ratio--2x1">
               <div class="bx--aspect-ratio--object">
                 <div class="versions__card-content">
@@ -41,7 +41,7 @@
           </a>
         </div>
         <div class="bx--no-gutter-md--left bx--col-md-4 bx--col-lg-4">
-          <a class="versions__card" href="/?path=/story/welcome--default">
+          <a class="versions__card" :href="vue2Url">
             <div class="bx--aspect-ratio bx--aspect-ratio--2x1">
               <div class="bx--aspect-ratio--object">
                 <div class="versions__card-content">
@@ -103,12 +103,19 @@
 <script>
 export default {
   name: 'SvVersions',
-};
-</script>
-
-<script>
-export default {
-  name: 'SvVersions',
+  computed: {
+    prefix() {
+      const currentLocation = window.location;
+      if (currentLocation.pathname.includes('/carbon-components-vue/')) return '/carbon-components-vue';
+      return '';
+    },
+    vue3Url() {
+      return `${this.prefix}/vue3/`;
+    },
+    vue2Url() {
+      return `${this.prefix}/?path=/story/welcome--default`;
+    },
+  },
 };
 </script>
 
