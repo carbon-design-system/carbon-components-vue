@@ -250,6 +250,9 @@ export default {
         <rect width="16" height="16" style="fill:none" />
       </svg>`;
 
+      // issue with flatpickr package https://github.com/flatpickr/flatpickr/issues/1508
+      _options.disableMobile: "true"
+
       return _options;
     },
     onChange() {
