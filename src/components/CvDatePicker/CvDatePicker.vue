@@ -28,7 +28,11 @@
         }"
         @change="onChange"
       >
-        <label :for="`${cvId}-input-1`" :class="`${carbonPrefix}--label`">
+        <label
+          v-if="getDateLabel.length > 0"
+          :for="`${cvId}-input-1`"
+          :class="`${carbonPrefix}--label`"
+        >
           {{ getDateLabel }}
         </label>
         <div :class="`${carbonPrefix}--date-picker-input__wrapper`">
@@ -59,9 +63,11 @@ import {
 import { carbonPrefix } from '../../global/settings';
 import { props as propsCvId, useCvId } from '../../use/cvId';
 import { Calendar16 } from '@carbon/icons-vue';
+import CvWrapper from '../CvWrapper/CvWrapper';
 
 const props = defineProps({
-  label: { type: String, default: 'Date' },
+  dateLabel: { type: String, default: undefined },
+  dateEndLabel: { type: String, default: 'End date' },
   pattern: { type: String, default: '\\d{1,2}/\\d{1,2}/\\d{4}' },
   placeholder: { type: String, default: 'mm/dd/yyyy' },
   formItem: { type: Boolean, default: true },
@@ -74,6 +80,14 @@ const props = defineProps({
 
 const getDateLabel = computed({
   get() {
+    if (props.kind === 'range' && !props.dateLabel) {
+      return 'Start date';
+    }
+
+    if (!props.dateLabel) {
+      return 'Date Label';
+    }
+
     return props.label;
   },
 });
