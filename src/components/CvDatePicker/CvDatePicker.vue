@@ -37,12 +37,15 @@
         </label>
         <div :class="`${carbonPrefix}--date-picker-input__wrapper`">
           <input
+            ref="input_1"
             type="text"
+            data-date-picker-input
             :id="`${cvId}-input-1`"
             :class="`${carbonPrefix}--date-picker__input`"
-            data-date-picker-input
             :pattern="pattern"
             :placeholder="placeholder"
+            :value="modelValue"
+            @change="emit('update:modelValue', $event.target.value)"
           />
         </div>
       </div>
@@ -64,9 +67,12 @@ import { carbonPrefix } from '../../global/settings';
 import { props as propsCvId, useCvId } from '../../use/cvId';
 import { Calendar16 } from '@carbon/icons-vue';
 import CvWrapper from '../CvWrapper/CvWrapper';
+import { props as propsCvTheme, useIsLight } from '../../use/cvTheme';
 
 const props = defineProps({
+  modelValue: String,
   dateLabel: { type: String, default: undefined },
+  invalidText: { type: String },
   dateEndLabel: { type: String, default: 'End date' },
   pattern: { type: String, default: '\\d{1,2}/\\d{1,2}/\\d{4}' },
   placeholder: { type: String, default: 'mm/dd/yyyy' },
@@ -76,6 +82,8 @@ const props = defineProps({
     default: 'simple',
     validator: val => ['short', 'simple', 'single', 'range'].includes(val),
   },
+  ...propsCvId,
+  ...propsCvTheme,
 });
 
 const getDateLabel = computed({
@@ -88,11 +96,14 @@ const getDateLabel = computed({
       return 'Date Label';
     }
 
-    return props.label;
+    return props.dateLabel;
   },
 });
 
 const cvId = useCvId(props, true, 'date-picker-');
+const isLight = useIsLight(props);
+
+const emit = defineEmits(['update:modelValue']);
 </script>
 
 <style lang="scss"></style>
