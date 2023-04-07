@@ -34,8 +34,8 @@ export default {
 
 const template = `
 <div>
-<cv-date-picker aria-label='Date picker' v-bind='args' >
-</cv-date-picker>
+  <cv-date-picker v-bind='args' @change='onChange'>
+  </cv-date-picker>
 </div>
 `;
 const Template = args => {
@@ -55,4 +55,42 @@ Default.parameters = storyParametersObject(
   Default.parameters,
   template,
   Default.args
+);
+
+const now = new Date();
+const modelValue = ref(now.toLocaleDateString());
+const templateVModel = `
+<div>
+  <cv-date-picker v-bind='args' @change='onChange' v-model="modelValue">
+  </cv-date-picker>
+</div>
+<div style="margin: 32px 0;">
+  <div style="font-size: 150%;">Sample interaction</div>
+  <label for="date-model" style='margin-right: 0.5rem'>V-model:</label>
+  <input id="date-model" type="text" :value="modelValue" @change="ev => modelValue = new Date(ev.currentTarget.value).toLocaleDateString()"/>
+</div>
+`;
+
+// <input id="date-model" type="date" :value="now.toLocaleDateString('en-CA')" @change="ev => modelValue = new Date(ev.currentTarget.value).toLocaleDateString()"/>
+
+const TemplateVModel = args => {
+  return {
+    components: { CvDatePicker },
+    setup: () => ({
+      args,
+      modelValue,
+      now,
+      onChange: action('change'),
+      onFilter: action('filter'),
+    }),
+    template: templateVModel,
+  };
+};
+
+export const vModel = TemplateVModel.bind({});
+vModel.args = initArgs;
+vModel.parameters = storyParametersObject(
+  vModel.parameters,
+  templateVModel,
+  vModel.args
 );

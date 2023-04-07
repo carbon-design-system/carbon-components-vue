@@ -5,12 +5,12 @@
     :id="cvId"
   >
     <div
-      :data-date-picker="['single', 'range'].includes(kind)"
-      :data-date-picker-type="kind"
+      :data-date-picker="['single', 'range'].includes(getKind)"
+      :data-date-picker-type="getKind"
       :class="[
-        `${carbonPrefix}--date-picker ${carbonPrefix}--date-picker--${kind}`,
+        `${carbonPrefix}--date-picker ${carbonPrefix}--date-picker--${getKind}`,
         {
-          [`${carbonPrefix}--date-picker--simple`]: kind === 'short',
+          [`${carbonPrefix}--date-picker--simple`]: getKind === 'short',
           [`${carbonPrefix}--date-picker--light`]: isLight,
           'cv-date-pciker': !formItem,
         },
@@ -23,7 +23,7 @@
           [`${carbonPrefix}--date-picker-container`]: [
             'single',
             'range',
-          ].includes(kind),
+          ].includes(getKind),
           [`${carbonPrefix}--date-picker--nolabel`]: getDateLabel !== undefined,
         }"
         @change="onChange"
@@ -37,15 +37,22 @@
         </label>
         <div :class="`${carbonPrefix}--date-picker-input__wrapper`">
           <input
-            ref="input_1"
+            ref="date"
             type="text"
             data-date-picker-input
+            :data-date-picker-input-from="getKind === 'range'"
             :id="`${cvId}-input-1`"
             :class="`${carbonPrefix}--date-picker__input`"
             :pattern="pattern"
             :placeholder="placeholder"
             :value="modelValue"
-            @change="emit('update:modelValue', $event.target.value)"
+            @change="handleUpdateEvent"
+          />
+          <Calendar16
+            v-if="['single', 'range'].includes(getKind)"
+            :class="`${carbonPrefix}--date-picker__icon`"
+            data-date-picker-icon
+            @click="console.log($event.target)"
           />
         </div>
       </div>
@@ -88,7 +95,7 @@ const props = defineProps({
 
 const getDateLabel = computed({
   get() {
-    if (props.kind === 'range' && !props.dateLabel) {
+    if (props.getKind === 'range' && !props.dateLabel) {
       return 'Start date';
     }
 
@@ -100,10 +107,30 @@ const getDateLabel = computed({
   },
 });
 
+const getKind = computed({
+  get() {
+    if (['short', 'simple', 'single', 'range'].includes(props.kind)) {
+      return props.kind;
+    }
+
+    return 'simple';
+  },
+});
+
 const cvId = useCvId(props, true, 'date-picker-');
 const isLight = useIsLight(props);
 
 const emit = defineEmits(['update:modelValue']);
+
+const handleUpdateEvent = event => {
+  // if (['range'].includes(props.kind)) {
+  //   emit('update:modelValue', event.target.value);
+  // } else if (['short', 'simple', 'single'].includes(props.kind)) {
+  //   emit('update:modelValue', event.target.value);
+  // }
+
+  emit('update:modelValue', event.target.value);
+};
 </script>
 
 <style lang="scss"></style>
