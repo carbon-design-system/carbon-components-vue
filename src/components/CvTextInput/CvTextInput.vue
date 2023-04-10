@@ -45,6 +45,9 @@
     <div v-if="isWarn" :class="`${carbonPrefix}--form__requirement`">
       <slot name="warn-text">{{ warnText }}</slot>
     </div>
+    <div v-if="isHelper" :class="[`${carbonPrefix}--form__helper-text`]">
+      <slot name="helper-text">{{ helperText }}</slot>
+    </div>
   </div>
 </template>
 
@@ -55,6 +58,7 @@ import { useCvId, props as propsCvId } from '../../use/cvId';
 import { WarningFilled16, WarningAltFilled16 } from '@carbon/icons-vue';
 
 const props = defineProps({
+  helperText: { type: String, default: undefined },
   invalidMessage: { type: String, default: undefined },
   label: String,
   modelValue: String,
@@ -67,6 +71,7 @@ const emit = defineEmits(['update:modelValue']);
 const slots = useSlots();
 const isInvalid = ref(false);
 const isWarn = ref(false);
+const isHelper = ref(false);
 
 function updateMessageFlags() {
   isInvalid.value = !!(
@@ -74,6 +79,10 @@ function updateMessageFlags() {
   );
   isWarn.value =
     !isInvalid.value && !!(props.warnText?.length || slots['warn-text']);
+  isHelper.value =
+    !isInvalid.value &&
+    !isWarn.value &&
+    !!(props.helperText?.length || slots['helper-text']);
 }
 
 onBeforeMount(updateMessageFlags);

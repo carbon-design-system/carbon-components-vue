@@ -208,4 +208,97 @@ describe('CvTextInput', () => {
       expect(queryByText(dummySlottedWarnMessage)).toBeNull();
     });
   });
+
+  describe('Helper text', () => {
+    it("displays 'helper-text' slot content", () => {
+      const dummySlottedMessage = 'Slotted helper text';
+      const { getByText } = render(CvTextInput, {
+        slots: { 'helper-text': dummySlottedMessage },
+      });
+
+      const wrapper = getByText(dummySlottedMessage);
+      expect(wrapper.textContent).toBe(dummySlottedMessage);
+      expect(wrapper.classList.contains('bx--form__helper-text')).toBeTruthy();
+    });
+
+    it("displays 'helper-text' prop", () => {
+      const dummyHelperText = 'Prop helper text';
+      const { getByText } = render(CvTextInput, {
+        props: { helperText: dummyHelperText },
+      });
+
+      const wrapper = getByText(dummyHelperText);
+      expect(wrapper.textContent).toBe(dummyHelperText);
+      expect(wrapper.classList.contains('bx--form__helper-text')).toBeTruthy();
+    });
+
+    it('favors helper text slot when both prop and slot are set', () => {
+      const dummyHelperText = 'Prop helper text';
+      const dummySlottedMessage = 'Slotted helper text';
+      const { getByText } = render(CvTextInput, {
+        props: { helperText: dummyHelperText },
+        slots: { 'helper-text': dummySlottedMessage },
+      });
+
+      const wrapper = getByText(dummySlottedMessage);
+      expect(wrapper.textContent).toBe(dummySlottedMessage);
+      expect(wrapper.classList.contains('bx--form__helper-text')).toBeTruthy();
+    });
+
+    it('does not display helper text prop when invalid message slot is set', () => {
+      const dummyHelperText = 'Prop helper text';
+      const dummySlottedMessage = 'Slotted invalid message';
+      const { getByText, queryByText } = render(CvTextInput, {
+        props: { helperText: dummyHelperText },
+        slots: { 'invalid-message': dummySlottedMessage },
+      });
+
+      const wrapper = getByText(dummySlottedMessage);
+      expect(wrapper.textContent).toBe(dummySlottedMessage);
+      expect(queryByText(dummyHelperText)).toBeNull();
+    });
+
+    it('does not display helper text prop when warn text slot is set', () => {
+      const dummyHelperText = 'Prop helper text';
+      const dummySlottedMessage = 'Slotted warn text';
+      const { getByText, queryByText } = render(CvTextInput, {
+        props: { helperText: dummyHelperText },
+        slots: { 'warn-text': dummySlottedMessage },
+      });
+
+      const wrapper = getByText(dummySlottedMessage);
+      expect(wrapper.textContent).toBe(dummySlottedMessage);
+      expect(queryByText(dummyHelperText)).toBeNull();
+    });
+
+    it('does not display helper slot when invalid message slot is set', () => {
+      const dummySlottedHelperMessage = 'Slotted helper text';
+      const dummySlottedInvalidMessage = 'Slotted invalid message';
+      const { getByText, queryByText } = render(CvTextInput, {
+        slots: {
+          'invalid-message': dummySlottedInvalidMessage,
+          'helper-text': dummySlottedHelperMessage,
+        },
+      });
+
+      const wrapper = getByText(dummySlottedInvalidMessage);
+      expect(wrapper.textContent).toBe(dummySlottedInvalidMessage);
+      expect(queryByText(dummySlottedHelperMessage)).toBeNull();
+    });
+
+    it('does not display helper slot when warn text slot is set', () => {
+      const dummySlottedHelperMessage = 'Slotted helper text';
+      const dummySlottedWarnMessage = 'Slotted warn text';
+      const { getByText, queryByText } = render(CvTextInput, {
+        slots: {
+          'warn-text': dummySlottedWarnMessage,
+          'helper-text': dummySlottedHelperMessage,
+        },
+      });
+
+      const wrapper = getByText(dummySlottedWarnMessage);
+      expect(wrapper.textContent).toBe(dummySlottedWarnMessage);
+      expect(queryByText(dummySlottedHelperMessage)).toBeNull();
+    });
+  });
 });
