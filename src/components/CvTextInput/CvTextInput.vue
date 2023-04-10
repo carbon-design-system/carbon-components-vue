@@ -38,6 +38,7 @@
           `${carbonPrefix}--text-input`,
           {
             [`${carbonPrefix}--text-input--invalid`]: isInvalid,
+            [`${carbonPrefix}--text-input--light`]: isLight,
             [`${carbonPrefix}--text-input--warning`]: isWarn,
           },
         ]"
@@ -69,6 +70,7 @@
 import { onBeforeMount, onBeforeUpdate, ref, useSlots } from 'vue';
 import { carbonPrefix } from '../../global/settings';
 import { useCvId, props as propsCvId } from '../../use/cvId';
+import { useIsLight, props as propsTheme } from '../../use/cvTheme';
 import { WarningFilled16, WarningAltFilled16 } from '@carbon/icons-vue';
 
 const props = defineProps({
@@ -78,6 +80,7 @@ const props = defineProps({
   modelValue: String,
   warnText: { type: String, default: undefined },
   ...propsCvId,
+  ...propsTheme,
 });
 
 const cvId = useCvId(props);
@@ -86,6 +89,7 @@ const slots = useSlots();
 const isInvalid = ref(false);
 const isWarn = ref(false);
 const isHelper = ref(false);
+const isLight = useIsLight(props);
 
 function updateMessageFlags() {
   isInvalid.value = !!(
