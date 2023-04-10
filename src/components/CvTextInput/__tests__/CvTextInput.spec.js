@@ -47,6 +47,15 @@ describe('CvTextInput', () => {
     expect(input).toBeDefined();
   });
 
+  it("'disable' label when attribute disabled is set", () => {
+    const { container } = render(CvTextInput, {
+      attrs: { disabled: true },
+    });
+
+    const label = container.querySelector('label.bx--label--disabled');
+    expect(label).toBeTruthy();
+  });
+
   describe('Attribute & event binding', () => {
     it('binds attributes to native input', async () => {
       const dummyName = 'dummy-name';
@@ -299,6 +308,18 @@ describe('CvTextInput', () => {
       const wrapper = getByText(dummySlottedWarnMessage);
       expect(wrapper.textContent).toBe(dummySlottedWarnMessage);
       expect(queryByText(dummySlottedHelperMessage)).toBeNull();
+    });
+
+    it("'disable' helper text when attribute disabled is set", () => {
+      const { container } = render(CvTextInput, {
+        attrs: { disabled: true },
+        slots: { 'helper-text': 'dummy helper text' },
+      });
+
+      const helperTextContainer = container.querySelector(
+        '.bx--form__helper-text--disabled'
+      );
+      expect(helperTextContainer).toBeTruthy();
     });
   });
 });

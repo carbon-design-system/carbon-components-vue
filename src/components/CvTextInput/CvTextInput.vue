@@ -6,7 +6,15 @@
       `${carbonPrefix}--text-input-wrapper`,
     ]"
   >
-    <label :for="cvId" :class="[`${carbonPrefix}--label`]">
+    <label
+      :for="cvId"
+      :class="[
+        `${carbonPrefix}--label`,
+        {
+          [`${carbonPrefix}--label--disabled`]: $attrs.disabled,
+        },
+      ]"
+    >
       {{ label }}
     </label>
     <div
@@ -45,7 +53,13 @@
     <div v-if="isWarn" :class="`${carbonPrefix}--form__requirement`">
       <slot name="warn-text">{{ warnText }}</slot>
     </div>
-    <div v-if="isHelper" :class="[`${carbonPrefix}--form__helper-text`]">
+    <div
+      v-if="isHelper"
+      :class="[
+        `${carbonPrefix}--form__helper-text`,
+        { [`${carbonPrefix}--form__helper-text--disabled`]: $attrs.disabled },
+      ]"
+    >
       <slot name="helper-text">{{ helperText }}</slot>
     </div>
   </div>
