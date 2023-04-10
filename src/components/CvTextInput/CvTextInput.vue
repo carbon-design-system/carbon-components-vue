@@ -11,9 +11,10 @@
     </label>
     <div :class="[`${carbonPrefix}--text-input__field-wrapper`]">
       <input
-        :class="[`${carbonPrefix}--text-input`]"
-        type="text"
         :id="cvId"
+        :class="[`${carbonPrefix}--text-input`]"
+        v-bind="$attrs"
+        type="text"
         :value="modelValue"
         @input="$event => $emit('update:modelValue', $event.target.value)"
       />
@@ -33,4 +34,10 @@ const props = defineProps({
 
 const cvId = useCvId(props);
 const emit = defineEmits(['update:modelValue']);
+</script>
+
+<script>
+export default {
+  inheritAttrs: false,
+};
 </script>

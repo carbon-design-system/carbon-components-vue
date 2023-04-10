@@ -46,4 +46,36 @@ describe('CvTextInput', () => {
     const input = getByLabelText(dummyLabel);
     expect(input).toBeDefined();
   });
+
+  describe('Attribute & event binding', () => {
+    it('binds attributes to native input', async () => {
+      const dummyName = 'dummy-name';
+      const { container } = render(CvTextInput, {
+        attrs: { name: dummyName },
+      });
+      const input = container.querySelector('input');
+      expect(input.getAttribute('name')).toBe(dummyName);
+      expect(container.firstChild.getAttribute('name')).not.toBe(dummyName);
+    });
+
+    it('does not overwrite native input type if attribute type is set', async () => {
+      const dummyType = 'number';
+      const { container } = render(CvTextInput, {
+        attrs: { type: dummyType },
+      });
+
+      const input = container.querySelector('input');
+      expect(input.getAttribute('type')).toBe('text');
+    });
+
+    it('does not overwrite native input value if attribute value is set', async () => {
+      const dummyValue = 'Dummy Value';
+      const { container } = render(CvTextInput, {
+        attrs: { value: dummyValue },
+      });
+
+      const input = container.querySelector('input');
+      expect(input.value).toBe('');
+    });
+  });
 });
