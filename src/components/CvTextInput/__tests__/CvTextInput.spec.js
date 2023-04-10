@@ -36,4 +36,14 @@ describe('CvTextInput', () => {
     const input = container.querySelector('input');
     expect(input.value).toBe(dummyInitialText);
   });
+
+  it('associates label & native input', async () => {
+    const dummyLabel = 'Dummy Label';
+    const { getByLabelText } = render(CvTextInput, {
+      props: { label: dummyLabel },
+    });
+
+    const input = getByLabelText(dummyLabel);
+    expect(input).toBeDefined();
+  });
 });

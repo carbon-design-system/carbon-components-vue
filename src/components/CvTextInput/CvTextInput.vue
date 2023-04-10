@@ -6,13 +6,14 @@
       `${carbonPrefix}--text-input-wrapper`,
     ]"
   >
-    <label :class="[`${carbonPrefix}--label`]">
+    <label :for="cvId" :class="[`${carbonPrefix}--label`]">
       {{ label }}
     </label>
     <div :class="[`${carbonPrefix}--text-input__field-wrapper`]">
       <input
         :class="[`${carbonPrefix}--text-input`]"
         type="text"
+        :id="cvId"
         :value="modelValue"
         @input="$event => $emit('update:modelValue', $event.target.value)"
       />
@@ -22,11 +23,14 @@
 
 <script setup>
 import { carbonPrefix } from '../../global/settings';
+import { useCvId, props as propsCvId } from '../../use/cvId';
 
 const props = defineProps({
   label: String,
   modelValue: String,
+  ...propsCvId,
 });
 
+const cvId = useCvId(props);
 const emit = defineEmits(['update:modelValue']);
 </script>
