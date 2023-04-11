@@ -69,5 +69,3 @@ const cvId = useCvId(props);
 const emit = defineEmits(['update:modelValue', 'change']);
 const { onChange, isChecked } = useCheck(toRefs(props), emit);
 </script>
-
-<style scoped></style>

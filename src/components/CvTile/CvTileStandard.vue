@@ -1,7 +1,7 @@
 <template>
-  <bx-tile><slot>Default tile</slot></bx-tile>
+  <div class="cv-tile-standard">
+    <slot></slot>
+  </div>
 </template>
 
-<script setup>
-import '@carbon/web-components/es/components/tile/index.js';
-</script>
+<script setup></script>

@@ -5,6 +5,10 @@
     :expanded="checkProp('expanded', expanded)"
     :tileCollapsedLabel="checkProp('tileCollapsedLabel', tileCollapsedLabel)"
     :tileExpandedLabel="checkProp('tileCollapsedLabel', tileExpandedLabel)"
+    :class="[
+      `cv-tile ${carbonPrefix}--tile`,
+      { [`${carbonPrefix}--tile--light`]: isLight },
+    ]"
   >
     <template v-for="(_, name) in $slots" v-slot:[name]="slotData"
       ><slot :name="name" v-bind="slotData"
@@ -14,6 +18,8 @@
 
 <script setup>
 import { computed } from 'vue';
+import { carbonPrefix } from '../../global/settings';
+import { props as propsTheme, useIsLight } from '../../use/cvTheme';
 import CvTileStandard from './CvTileStandard.vue';
 import CvTileClickable from './CvTileClickable.vue';
 import CvTileSelectable from './CvTileSelectable.vue';
@@ -30,6 +36,7 @@ const props = defineProps({
     validator: value =>
       ['clickable', 'expandable', 'selectable', 'standard', ''].includes(value),
   },
+  ...propsTheme,
 });
 
 const tagType = computed(() => {
@@ -44,6 +51,7 @@ const tagType = computed(() => {
       return CvTileStandard;
   }
 });
+const isLight = useIsLight(props);
 
 /**
  * If the prop is defined on the tagType pass it along otherwise, discard it.

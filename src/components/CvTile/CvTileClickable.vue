@@ -1,15 +1,23 @@
 <template>
-  <bx-clickable-tile
-    :color-scheme="light ? 'light' : undefined"
-    :disabled="disabled ? 'disabled' : undefined"
-    ><slot>Clickable tile</slot></bx-clickable-tile
+  <component
+    :is="tagType"
+    ref="target"
+    data-tile="clickable"
+    :class="`cv-tile-clickable ${carbonPrefix}--tile--clickable`"
+    v-bind="{ ...$attrs, ...linkProps }"
+    tabindex="0"
   >
+    <slot></slot>
+  </component>
 </template>
 
 <script setup>
-import '@carbon/web-components/es/components/tile/index.js';
-defineProps({
-  light: { type: Boolean, default: false },
-  disabled: { type: Boolean, default: false },
+import { carbonPrefix } from '../../global/settings';
+import { props as propsLink, useLinkProps, useTagType } from '../../use/cvLink';
+
+const props = defineProps({
+  ...propsLink,
 });
+const tagType = useTagType(props);
+const linkProps = useLinkProps(props);
 </script>
