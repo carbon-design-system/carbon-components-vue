@@ -12,6 +12,7 @@
         `${carbonPrefix}--label`,
         {
           [`${carbonPrefix}--label--disabled`]: $attrs.disabled,
+          [`${carbonPrefix}--visually-hidden`]: hideLabel,
         },
       ]"
     >
@@ -75,6 +76,7 @@ import { WarningFilled16, WarningAltFilled16 } from '@carbon/icons-vue';
 
 const props = defineProps({
   helperText: { type: String, default: undefined },
+  hideLabel: { type: Boolean, default: false },
   invalidMessage: { type: String, default: undefined },
   label: String,
   modelValue: String,

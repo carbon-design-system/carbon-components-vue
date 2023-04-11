@@ -56,6 +56,15 @@ describe('CvTextInput', () => {
     expect(label).toBeTruthy();
   });
 
+  it('visually hide label when hideLabel is set', () => {
+    const { container } = render(CvTextInput, {
+      props: { hideLabel: true },
+    });
+
+    const label = container.querySelector('label.bx--visually-hidden');
+    expect(label).toBeTruthy();
+  });
+
   describe('Attribute & event binding', () => {
     it('binds attributes to native input', async () => {
       const dummyName = 'dummy-name';
