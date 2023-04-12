@@ -67,7 +67,7 @@ const templateVModel = `
 <div style="margin: 32px 0;">
   <div style="font-size: 150%;">Sample interaction</div>
   <label for="date-model" style='margin-right: 0.5rem'>V-model:</label>
-  <input id="date-model" type="text" :value="modelValue" @change="ev => modelValue = new Date(ev.currentTarget.value).toLocaleDateString()"/>
+  <input id="date-model" type="text" :value="modelValue" @change="ev => modelValue = ev.currentTarget.value"/>
 </div>
 `;
 
