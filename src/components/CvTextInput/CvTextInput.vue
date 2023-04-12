@@ -4,6 +4,7 @@
       'cv-text-input',
       `${carbonPrefix}--form-item`,
       `${carbonPrefix}--text-input-wrapper`,
+      { [`${carbonPrefix}--password-input-wrapper`]: isPassword },
     ]"
   >
     <label
@@ -34,6 +35,7 @@
         :class="`${carbonPrefix}--text-input__invalid-icon ${carbonPrefix}--text-input__invalid-icon--warning`"
       />
       <input
+        ref="input"
         :id="cvId"
         :class="[
           `${carbonPrefix}--text-input`,
@@ -41,13 +43,40 @@
             [`${carbonPrefix}--text-input--invalid`]: isInvalid,
             [`${carbonPrefix}--text-input--light`]: isLight,
             [`${carbonPrefix}--text-input--warning`]: isWarn,
+            [`${carbonPrefix}--password-input`]: isPassword,
           },
         ]"
         v-bind="$attrs"
-        type="text"
+        :type="dataType"
         :value="modelValue"
+        :data-toggle-password-visibility="isPassword"
         @input="$event => $emit('update:modelValue', $event.target.value)"
       />
+      <button
+        v-if="isPassword"
+        :class="[
+          `${carbonPrefix}--btn`,
+          `${carbonPrefix}--btn--icon-only`,
+          `${carbonPrefix}--text-input--password__visibility__toggle`,
+          `${carbonPrefix}--tooltip__trigger`,
+          `${carbonPrefix}--tooltip--a11y`,
+          `${carbonPrefix}--tooltip--bottom`,
+          `${carbonPrefix}--tooltip--align-center`,
+          { [`${carbonPrefix}--btn--disabled`]: $attrs.disabled },
+        ]"
+        @click="togglePasswordVisibility"
+        type="button"
+        :disabled="$attrs.disabled"
+      >
+        <span :class="`${carbonPrefix}--assistive-text`">
+          {{ passwordHideShowLabel }}
+        </span>
+        <ViewOff16
+          v-if="isPasswordVisible"
+          :class="`${carbonPrefix}--icon-visibility-off`"
+        />
+        <View16 v-else :class="`${carbonPrefix}--icon-visibility-on`" />
+      </button>
     </div>
     <div v-if="isInvalid" :class="`${carbonPrefix}--form-requirement`">
       <slot name="invalid-message">{{ invalidMessage }}</slot>
@@ -68,11 +97,25 @@
 </template>
 
 <script setup>
-import { onBeforeMount, onBeforeUpdate, ref, useSlots } from 'vue';
+import {
+  onBeforeMount,
+  onBeforeUpdate,
+  ref,
+  useSlots,
+  computed,
+  watch,
+  nextTick,
+} from 'vue';
+import {
+  WarningFilled16,
+  WarningAltFilled16,
+  ViewOff16,
+  View16,
+} from '@carbon/icons-vue';
 import { carbonPrefix } from '../../global/settings';
 import { useCvId, props as propsCvId } from '../../use/cvId';
 import { useIsLight, props as propsTheme } from '../../use/cvTheme';
-import { WarningFilled16, WarningAltFilled16 } from '@carbon/icons-vue';
+import { inputTypes } from './const';
 
 const props = defineProps({
   helperText: { type: String, default: undefined },
@@ -80,6 +123,14 @@ const props = defineProps({
   invalidMessage: { type: String, default: undefined },
   label: String,
   modelValue: String,
+  passwordHideLabel: { type: String, default: 'Hide password' },
+  passwordShowLabel: { type: String, default: 'Show password' },
+  passwordVisible: { type: Boolean, default: undefined },
+  type: {
+    type: String,
+    default: 'text',
+    validator: value => inputTypes.has(value),
+  },
   warnText: { type: String, default: undefined },
   ...propsCvId,
   ...propsTheme,
@@ -92,6 +143,41 @@ const isInvalid = ref(false);
 const isWarn = ref(false);
 const isHelper = ref(false);
 const isLight = useIsLight(props);
+const input = ref();
+const dataType = ref(props.type);
+const dataPasswordVisible = ref(false);
+const isPassword = computed(() => props.type === 'password');
+const isPasswordVisible = computed(
+  () => isPassword.value && dataPasswordVisible.value
+);
+const passwordHideShowLabel = computed(() =>
+  isPasswordVisible.value ? props.passwordHideLabel : props.passwordShowLabel
+);
+
+watch(
+  () => props.passwordVisible,
+  newValue => {
+    if (newValue !== dataPasswordVisible.value) {
+      togglePasswordVisibility();
+    }
+  }
+);
+
+watch(
+  () => props.type,
+  newValue => {
+    dataType.value = newValue;
+  }
+);
+
+function togglePasswordVisibility() {
+  const currentValue = input.value.value;
+  dataPasswordVisible.value = !dataPasswordVisible.value;
+  dataType.value = dataPasswordVisible.value ? 'text' : 'password';
+  nextTick(() => {
+    input.value.value = currentValue;
+  });
+}
 
 function updateMessageFlags() {
   isInvalid.value = !!(
@@ -105,7 +191,14 @@ function updateMessageFlags() {
     !!(props.helperText?.length || slots['helper-text']);
 }
 
-onBeforeMount(updateMessageFlags);
+onBeforeMount(() => {
+  updateMessageFlags();
+
+  if (isPassword.value && props.passwordVisible) {
+    dataPasswordVisible.value = true;
+    dataType.value = 'text';
+  }
+});
 onBeforeUpdate(updateMessageFlags);
 </script>
 

@@ -83,6 +83,43 @@ export default {
       description:
         "Input's value, modelValue is the vue3 default 'prop' for two-way data binding with v-model",
     },
+    passwordHideLabel: {
+      type: 'string',
+      table: {
+        type: { summary: 'string' },
+        category: 'props',
+      },
+      description: '"Hide password" tooltip text on password visibility toggle',
+    },
+    passwordShowLabel: {
+      type: 'string',
+      table: {
+        type: { summary: 'string' },
+        category: 'props',
+      },
+      description: '"Show password" tooltip text on password visibility toggle',
+    },
+    passwordVisible: {
+      type: 'boolean',
+      table: {
+        type: { summary: 'boolean' },
+        category: 'props',
+      },
+      description: 'Toggle password visibility.',
+    },
+    type: {
+      type: 'string',
+      table: {
+        type: { summary: 'string' },
+        category: 'props',
+        defaultValue: { summary: 'text' },
+      },
+      options: ['text', 'password'],
+      control: {
+        type: 'select',
+      },
+      description: 'Input type, only `text` and `password` are available',
+    },
     warnText: {
       type: 'string',
       table: {
@@ -193,4 +230,15 @@ vModel.parameters = storyParametersObject(
   vModel.parameters,
   vModelTemplate,
   vModel.args
+);
+
+export const Password = Template.bind({});
+Password.args = {
+  label: 'Password input label',
+  type: 'password',
+};
+Password.parameters = storyParametersObject(
+  Password.parameters,
+  template,
+  Password.args
 );

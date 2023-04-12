@@ -76,16 +76,6 @@ describe('CvTextInput', () => {
       expect(container.firstChild.getAttribute('name')).not.toBe(dummyName);
     });
 
-    it('does not overwrite native input type if attribute type is set', async () => {
-      const dummyType = 'number';
-      const { container } = render(CvTextInput, {
-        attrs: { type: dummyType },
-      });
-
-      const input = container.querySelector('input');
-      expect(input.getAttribute('type')).toBe('text');
-    });
-
     it('does not overwrite native input value if attribute value is set', async () => {
       const dummyValue = 'Dummy Value';
       const { container } = render(CvTextInput, {
@@ -329,6 +319,143 @@ describe('CvTextInput', () => {
         '.bx--form__helper-text--disabled'
       );
       expect(helperTextContainer).toBeTruthy();
+    });
+  });
+
+  describe('Password', () => {
+    it('updates native input type to password when type is password', () => {
+      const { container } = render(CvTextInput, {
+        props: { type: 'password' },
+      });
+
+      const input = container.querySelector('input[type="password"]');
+      expect(input).not.toBeNull();
+    });
+
+    it('displays password visibility toggle button when type is password', () => {
+      const { container } = render(CvTextInput, {
+        props: { type: 'password' },
+      });
+
+      const button = container.querySelector('button.bx--btn');
+      expect(button).toBeTruthy();
+    });
+
+    it('retains input value when password visibility is open', async () => {
+      const dummyText = '123456';
+      const user = userEvent.setup();
+      const { container } = render(CvTextInput, {
+        props: { type: 'password' },
+      });
+
+      const input = container.querySelector('input');
+      const toggleButton = container.querySelector('button');
+      await user.type(input, dummyText);
+      await user.click(toggleButton);
+
+      expect(input.value).toBe(dummyText);
+    });
+
+    it('retains input value when password visibility is closed after opened', async () => {
+      const dummyText = '123456';
+      const user = userEvent.setup();
+      const { container } = render(CvTextInput, {
+        props: { type: 'password' },
+      });
+
+      const input = container.querySelector('input');
+      const toggleButton = container.querySelector('button');
+      await user.type(input, dummyText);
+      await user.click(toggleButton);
+      await user.click(toggleButton);
+
+      expect(input.value).toBe(dummyText);
+    });
+
+    it("sets 'show password' as assistive text when password is hidden", async () => {
+      const dummySupportText = 'show password';
+      const { findByText } = render(CvTextInput, {
+        props: { type: 'password', passwordShowLabel: dummySupportText },
+      });
+
+      const element = await findByText(dummySupportText);
+      expect(element.textContent).toBe(dummySupportText);
+      expect(element.classList.contains('bx--assistive-text')).toBeTruthy();
+    });
+
+    it("sets 'hide password' as assistive text when password is hidden", async () => {
+      const initialDummySupportText = 'show password';
+      const dummySupportText = 'hide password';
+      const user = userEvent.setup();
+      const { findByText } = render(CvTextInput, {
+        props: {
+          type: 'password',
+          passwordShowLabel: initialDummySupportText,
+          passwordHideLabel: dummySupportText,
+        },
+      });
+
+      let element = await findByText(initialDummySupportText);
+      await user.click(element);
+
+      element = await findByText(dummySupportText);
+      expect(element.textContent).toBe(dummySupportText);
+      expect(element.classList.contains('bx--assistive-text')).toBeTruthy();
+    });
+
+    it("toggles visibility when 'passwordVisible' changes and doesn't match internal state (true)", async () => {
+      const { findByText, rerender } = render(CvTextInput, {
+        props: { type: 'password' },
+      });
+
+      const element = await findByText('Show password');
+
+      await rerender({ passwordVisible: true });
+
+      expect(element.textContent).toBe('Hide password');
+    });
+
+    it("toggles visibility when 'passwordVisible' changes and doesn't match internal state (false)", async () => {
+      const user = userEvent.setup();
+      const { findByText, rerender } = render(CvTextInput, {
+        props: { type: 'password' },
+      });
+
+      const element = await findByText('Show password');
+
+      await user.click(element);
+      await rerender({ passwordVisible: false });
+
+      expect(element.textContent).toBe('Show password');
+    });
+
+    it("retains value when visibility changes through 'passwordVisible'", async () => {
+      const dummyText = '123456';
+      const user = userEvent.setup();
+      const { rerender, container } = render(CvTextInput, {
+        props: { type: 'password' },
+      });
+
+      let input = container.querySelector('input');
+
+      await user.type(input, dummyText);
+      await rerender({ passwordVisible: true });
+      // input value is reinserted on the nextTick, we need to wait that to fetch the input value
+      await rerender({});
+
+      expect(input.value).toBe(dummyText);
+    });
+
+    it("enables password visibility when component bootstraps with 'passwordVisible' true", async () => {
+      const { container, findByText } = render(CvTextInput, {
+        props: { type: 'password', passwordVisible: true },
+      });
+
+      const input = container.querySelector('input[type="text"]');
+      const button = await findByText('Hide password');
+
+      expect(input).not.toBeNull();
+      expect(button).not.toBeNull();
     });
   });
 });
