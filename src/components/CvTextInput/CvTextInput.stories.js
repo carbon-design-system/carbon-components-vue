@@ -160,6 +160,7 @@ export default {
     'update:modelValue': {
       type: 'event',
       table: {
+        type: { summary: 'event' },
         category: 'events',
       },
       control: { type: null },

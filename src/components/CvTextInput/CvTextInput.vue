@@ -137,15 +137,20 @@ const props = defineProps({
 });
 
 const cvId = useCvId(props);
-const emit = defineEmits(['update:modelValue']);
+
+// DOM Elements
+const input = ref();
 const slots = useSlots();
+
+// Data
 const isInvalid = ref(false);
 const isWarn = ref(false);
 const isHelper = ref(false);
 const isLight = useIsLight(props);
-const input = ref();
 const dataType = ref(props.type);
 const dataPasswordVisible = ref(false);
+
+// Computed Values
 const isPassword = computed(() => props.type === 'password');
 const isPasswordVisible = computed(
   () => isPassword.value && dataPasswordVisible.value
@@ -154,6 +159,7 @@ const passwordHideShowLabel = computed(() =>
   isPasswordVisible.value ? props.passwordHideLabel : props.passwordShowLabel
 );
 
+// Watchers
 watch(
   () => props.passwordVisible,
   newValue => {
@@ -162,7 +168,6 @@ watch(
     }
   }
 );
-
 watch(
   () => props.type,
   newValue => {
@@ -170,6 +175,7 @@ watch(
   }
 );
 
+// Methods
 function togglePasswordVisibility() {
   const currentValue = input.value.value;
   dataPasswordVisible.value = !dataPasswordVisible.value;
@@ -179,7 +185,8 @@ function togglePasswordVisibility() {
   });
 }
 
-function updateMessageFlags() {
+function checkSlots() {
+  // NOTE: slots is not reactive so needs to be managed on updated
   isInvalid.value = !!(
     props.invalidMessage?.length || slots['invalid-message']
   );
@@ -191,15 +198,16 @@ function updateMessageFlags() {
     !!(props.helperText?.length || slots['helper-text']);
 }
 
+// Lifecycle Hooks
 onBeforeMount(() => {
-  updateMessageFlags();
-
+  checkSlots();
+  // update initial state for dataPasswordVisible & dataType
   if (isPassword.value && props.passwordVisible) {
     dataPasswordVisible.value = true;
     dataType.value = 'text';
   }
 });
-onBeforeUpdate(updateMessageFlags);
+onBeforeUpdate(checkSlots);
 </script>
 
 <script>
