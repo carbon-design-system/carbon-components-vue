@@ -72,3 +72,22 @@ If you just want to build an individual package you can limit the scope:
 `yarn build --scope storybook`
 
 To start the storybook in a local server use `yarn start`.
+
+## How to run the storybook
+
+:bulb: **In this case, it's best to run using `npm`!**
+
+Just follow the steps listed below and you will be able to run the storybook.
+
+1. After the checkout to the `vNext` branch, in order to install the dependencies run the command `npm i` on the root;
+2. Now, run the command `cd storybook` to enter the storybook folder, then again run the command `npm i` to install the dependencies inside the storybook folder;
+3. Finally, run the command `npm run serve` inside the storybook folder.
+
+In other words, these are the commands you're going to use in order of execution:
+
+```
+npm i
+cd storybook
+npm i
+npm run serve
+```
