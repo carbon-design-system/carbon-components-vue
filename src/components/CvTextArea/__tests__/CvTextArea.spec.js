@@ -69,4 +69,41 @@ describe('CvTextArea', () => {
       expect(textarea.value).toBe('');
     });
   });
+
+  describe('Invalid state', () => {
+    it("displays 'invalid-message' slot content", () => {
+      const dummySlottedMessage = 'Slotted invalid message';
+      const { getByText } = render(CvTextArea, {
+        slots: { 'invalid-message': dummySlottedMessage },
+      });
+
+      const wrapper = getByText(dummySlottedMessage);
+      expect(wrapper.textContent).toBe(dummySlottedMessage);
+      expect(wrapper.classList.contains('bx--form-requirement')).toBeTruthy();
+    });
+
+    it("displays 'invalid-message' prop", () => {
+      const dummyInvalidMessage = 'Prop invalid message';
+      const { getByText } = render(CvTextArea, {
+        props: { invalidMessage: dummyInvalidMessage },
+      });
+
+      const wrapper = getByText(dummyInvalidMessage);
+      expect(wrapper.textContent).toBe(dummyInvalidMessage);
+      expect(wrapper.classList.contains('bx--form-requirement')).toBeTruthy();
+    });
+
+    it('favors invalid message slot when both prop and slot are set', () => {
+      const dummyInvalidMessage = 'Prop invalid message';
+      const dummySlottedMessage = 'Slotted invalid message';
+      const { getByText } = render(CvTextArea, {
+        props: { invalidMessage: dummyInvalidMessage },
+        slots: { 'invalid-message': dummySlottedMessage },
+      });
+
+      const wrapper = getByText(dummySlottedMessage);
+      expect(wrapper.textContent).toBe(dummySlottedMessage);
+      expect(wrapper.classList.contains('bx--form-requirement')).toBeTruthy();
+    });
+  });
 });
