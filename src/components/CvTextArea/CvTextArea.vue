@@ -1,6 +1,14 @@
 <template>
   <div :class="`cv-text-area ${carbonPrefix}--form-item`">
-    <label :for="cvId" :class="[`${carbonPrefix}--label`]">
+    <label
+      :for="cvId"
+      :class="[
+        `${carbonPrefix}--label`,
+        {
+          [`${carbonPrefix}--label--disabled`]: $attrs.disabled,
+        },
+      ]"
+    >
       {{ label }}
     </label>
     <div
@@ -33,7 +41,13 @@
     >
       <slot name="invalid-message">{{ invalidMessage }}</slot>
     </div>
-    <div v-if="isHelper" :class="[`${carbonPrefix}--form__helper-text`]">
+    <div
+      v-if="isHelper"
+      :class="[
+        `${carbonPrefix}--form__helper-text`,
+        { [`${carbonPrefix}--form__helper-text--disabled`]: $attrs.disabled },
+      ]"
+    >
       <slot name="helper-text">{{ helperText }}</slot>
     </div>
   </div>
