@@ -46,4 +46,27 @@ describe('CvTextArea', () => {
     const textarea = getByLabelText(dummyLabel);
     expect(textarea).toBeDefined();
   });
+
+  describe('Attribute & event binding', () => {
+    it('binds attributes to native textarea', async () => {
+      const dummyName = 'dummy-name';
+      const { container } = render(CvTextArea, {
+        attrs: { name: dummyName },
+      });
+
+      const textarea = container.querySelector('textarea');
+      expect(textarea.getAttribute('name')).toBe(dummyName);
+      expect(container.firstChild.getAttribute('name')).not.toBe(dummyName);
+    });
+
+    it('does not overwrite native textarea value if attribute value is set', async () => {
+      const dummyValue = 'Dummy Value';
+      const { container } = render(CvTextArea, {
+        attrs: { value: dummyValue },
+      });
+
+      const textarea = container.querySelector('textarea');
+      expect(textarea.value).toBe('');
+    });
+  });
 });

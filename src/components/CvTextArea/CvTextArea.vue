@@ -5,9 +5,10 @@
     </label>
     <div :class="`${carbonPrefix}--text-area__wrapper`">
       <textarea
-        :class="[`${carbonPrefix}--text-area`]"
-        :value="modelValue"
         :id="cvId"
+        :class="[`${carbonPrefix}--text-area`]"
+        v-bind="$attrs"
+        :value="modelValue"
         @input="$event => $emit('update:modelValue', $event.target.value)"
       ></textarea>
     </div>
@@ -25,4 +26,10 @@ const props = defineProps({
 });
 
 const cvId = useCvId(props);
+</script>
+
+<script>
+export default {
+  inheritAttrs: false,
+};
 </script>
