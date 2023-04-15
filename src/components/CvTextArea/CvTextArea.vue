@@ -33,6 +33,9 @@
     >
       <slot name="invalid-message">{{ invalidMessage }}</slot>
     </div>
+    <div v-if="isHelper" :class="[`${carbonPrefix}--form__helper-text`]">
+      <slot name="helper-text">{{ helperText }}</slot>
+    </div>
   </div>
 </template>
 
@@ -43,6 +46,7 @@ import { carbonPrefix } from '../../global/settings';
 import { useCvId, props as propsCvId } from '../../use/cvId';
 
 const props = defineProps({
+  helperText: { type: String, default: undefined },
   invalidMessage: { type: String, default: undefined },
   label: String,
   modelValue: String,
@@ -56,6 +60,7 @@ const slots = useSlots();
 
 // Data
 const isInvalid = ref(false);
+const isHelper = ref(false);
 
 // Computed
 const errorId = computed(() => `error-${cvId.value}`);
@@ -66,6 +71,8 @@ function checkSlots() {
   isInvalid.value = !!(
     props.invalidMessage?.length || slots['invalid-message']
   );
+  isHelper.value =
+    !isInvalid.value && !!(props.helperText?.length || slots['helper-text']);
 }
 
 // Life Hooks
