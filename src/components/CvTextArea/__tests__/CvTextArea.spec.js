@@ -36,4 +36,14 @@ describe('CvTextArea', () => {
     const textarea = container.querySelector('textarea');
     expect(textarea.value).toBe(dummyInitialText);
   });
+
+  it('associates label & native textarea', async () => {
+    const dummyLabel = 'Dummy Label';
+    const { getByLabelText } = render(CvTextArea, {
+      props: { label: dummyLabel },
+    });
+
+    const textarea = getByLabelText(dummyLabel);
+    expect(textarea).toBeDefined();
+  });
 });
