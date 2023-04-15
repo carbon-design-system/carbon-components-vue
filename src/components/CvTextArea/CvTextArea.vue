@@ -6,6 +6,7 @@
         `${carbonPrefix}--label`,
         {
           [`${carbonPrefix}--label--disabled`]: $attrs.disabled,
+          [`${carbonPrefix}--visually-hidden`]: hideLabel,
         },
       ]"
     >
@@ -63,6 +64,7 @@ import { useIsLight, props as propsTheme } from '../../use/cvTheme';
 
 const props = defineProps({
   helperText: { type: String, default: undefined },
+  hideLabel: { type: Boolean, default: false },
   invalidMessage: { type: String, default: undefined },
   label: String,
   modelValue: String,
