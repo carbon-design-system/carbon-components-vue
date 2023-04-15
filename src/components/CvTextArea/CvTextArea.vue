@@ -27,6 +27,7 @@
           `${carbonPrefix}--text-area`,
           {
             [`${carbonPrefix}--text-area--invalid`]: isInvalid,
+            [`${carbonPrefix}--text-area--light`]: isLight,
           },
         ]"
         v-bind="$attrs"
@@ -58,6 +59,7 @@ import { computed, ref, useSlots, onBeforeMount, onBeforeUpdate } from 'vue';
 import { WarningFilled16 } from '@carbon/icons-vue';
 import { carbonPrefix } from '../../global/settings';
 import { useCvId, props as propsCvId } from '../../use/cvId';
+import { useIsLight, props as propsTheme } from '../../use/cvTheme';
 
 const props = defineProps({
   helperText: { type: String, default: undefined },
@@ -65,6 +67,7 @@ const props = defineProps({
   label: String,
   modelValue: String,
   ...propsCvId,
+  ...propsTheme,
 });
 
 const cvId = useCvId(props);
@@ -73,8 +76,9 @@ const cvId = useCvId(props);
 const slots = useSlots();
 
 // Data
-const isInvalid = ref(false);
 const isHelper = ref(false);
+const isInvalid = ref(false);
+const isLight = useIsLight(props);
 
 // Computed
 const errorId = computed(() => `error-${cvId.value}`);
