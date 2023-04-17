@@ -3,10 +3,17 @@
  */
 import { computed } from 'vue';
 
+export const linkSizes = ['sm', 'md', 'lg'];
+
 export const props = {
   disabled: Boolean,
   to: { type: [String, Object] },
   href: String,
+  size: {
+    type: String,
+    validator: size => linkSizes.includes(size),
+    default: 'md',
+  },
 };
 
 export const useTagType = props => {
@@ -23,6 +30,7 @@ export const useLinkProps = props => {
     if (props.disabled) {
       return {
         'aria-disabled': true,
+        role: 'link',
       };
     } else if (props.to && !props.href) {
       return { to: props.to };

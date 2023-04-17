@@ -79,6 +79,7 @@ watch(
   () => props.expanded,
   value => {
     data.isExpanded = value;
-  }
+  },
+  { immediate: true }
 );
 </script>
