@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.5-alpha.0](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.4-alpha.0...@carbon/vue@3.0.5-alpha.0) (2023-04-17)
+
+### Features
+
+- cv tile components & story working ([926341e](https://github.com/carbon-design-system/carbon-components-vue/commit/926341ec6f9141fc717998714d0c809031b96b5a))
+- **text-area:** add 'hide label' ([84469f3](https://github.com/carbon-design-system/carbon-components-vue/commit/84469f3b50da8aedd5dfb0fcd9e945a21739cd5d))
+- **text-area:** add native text-area & 'v-model' capabilities ([daa5c6b](https://github.com/carbon-design-system/carbon-components-vue/commit/daa5c6bd037d4b8936e810bd69c82d10dedadcdb))
+- **text-area:** binds component attributes to native textarea ([c504cdb](https://github.com/carbon-design-system/carbon-components-vue/commit/c504cdbc71a100a788b95d7079e1ad1079f673a4))
+- **text-area:** handle 'disabled' state ([041ed28](https://github.com/carbon-design-system/carbon-components-vue/commit/041ed281e1279d2b122b1d9831b543935bf91f2f))
+- **text-area:** initial setup & input label ([bbb2d65](https://github.com/carbon-design-system/carbon-components-vue/commit/bbb2d65c6599e072c63c24f8fd23ee71b95287bf))
+- **text-area:** setup helper text props & slot ([8abf3af](https://github.com/carbon-design-system/carbon-components-vue/commit/8abf3af12b51a3bfd07ac6df2d9feeab5f69aed1))
+- **text-area:** setup id & label association ([a6567ed](https://github.com/carbon-design-system/carbon-components-vue/commit/a6567ede24f8b324af02529722a9752c43e355e2))
+- **text-area:** setup invalid state ([af12cb3](https://github.com/carbon-design-system/carbon-components-vue/commit/af12cb3b9404307d606cd03f98812fd77056e234))
+- **text-area:** setup theme/light option ([d32ab7f](https://github.com/carbon-design-system/carbon-components-vue/commit/d32ab7f924ad444dd292cb78a00cf255e8ed65e8))
+- **text-input:** add 'CvPasswordInput' capabilities ([169b3a5](https://github.com/carbon-design-system/carbon-components-vue/commit/169b3a57b778538d4236be823dda9284758c8840))
+- **text-input:** add 'hide label' ([09fbcfc](https://github.com/carbon-design-system/carbon-components-vue/commit/09fbcfc3de0ca03744695bb880faee07faae3faa))
+- **text-input:** add input & 'v-model' capabilities ([60e7b5a](https://github.com/carbon-design-system/carbon-components-vue/commit/60e7b5a03b1214614530cd94f492f83caa035311))
+- **text-input:** binds component attributes to native input ([18b8dbf](https://github.com/carbon-design-system/carbon-components-vue/commit/18b8dbfb3251b55cc8cd9e4579c2f89c6902b1e1))
+- **text-input:** handle 'disabled' state ([f9f811d](https://github.com/carbon-design-system/carbon-components-vue/commit/f9f811d4432a5b37dcf2dedf2f9c2e49439ff25d))
+- **text-input:** initial setup & input label ([ed2d603](https://github.com/carbon-design-system/carbon-components-vue/commit/ed2d60345e6405d3068311e290080e62d9efb8e8))
+- **text-input:** setup helper text props & slot ([4c86386](https://github.com/carbon-design-system/carbon-components-vue/commit/4c86386d70886460bf1928c8b7b6f3ade80657d9))
+- **text-input:** setup id & label association ([94f0972](https://github.com/carbon-design-system/carbon-components-vue/commit/94f097224ba4b39937274e7dad48e11f9b15b21a))
+- **text-input:** setup invalid state ([0972a4f](https://github.com/carbon-design-system/carbon-components-vue/commit/0972a4f9c3f8e34a1da2a4f1a79d87b5b3d6322b))
+- **text-input:** setup theme/light option ([e9d5da6](https://github.com/carbon-design-system/carbon-components-vue/commit/e9d5da64145507194e81380b9409a606015b064d))
+- **text-input:** setup warn state ([24ec986](https://github.com/carbon-design-system/carbon-components-vue/commit/24ec986c57643bcafcbe7e1dd4bca84c85ad3f40))
+
 ## [3.0.4-alpha.0](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@2.43.1...@carbon/vue@3.0.4-alpha.0) (2023-03-27)
 
 ### Bug Fixes
