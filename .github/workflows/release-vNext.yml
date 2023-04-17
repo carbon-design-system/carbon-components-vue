@@ -1,4 +1,4 @@
-name: Release
+name: Release vNext
 
 on:
   workflow_dispatch:
@@ -23,7 +23,7 @@ jobs:
           git config user.email github-actions@github.com
 
       - name: Use Node.js 18.x
-        uses: actions/setup-node@3 # https://github.com/actions/setup-node
+        uses: actions/setup-node@v3 # https://github.com/actions/setup-node
         with:
           node-version: 18
           registry-url: https://registry.npmjs.org
