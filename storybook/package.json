@@ -21,6 +21,7 @@
     "storybook": "start-storybook -p 6006 --no-manager-cache -c ../.storybook"
   },
   "dependencies": {
+    "@carbon/themes": "10",
     "@storybook/addon-storysource": "^6.5.15",
     "stylelint-config-property-sort-order-smacss": "^9.0.0",
     "stylelint-config-sass-guidelines": "^9.0.1",
