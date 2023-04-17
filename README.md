@@ -86,6 +86,5 @@ In other words, these are the commands you're going to use in order of execution
 ```
 yarn install
 cd storybook
-yarn install
 yarn serve
 ```
