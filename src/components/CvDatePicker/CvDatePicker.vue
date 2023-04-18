@@ -40,6 +40,8 @@
             ref="date"
             type="text"
             data-date-picker-input
+            :data-invalid="isInvalid || null"
+            :disabled="disabled"
             :data-date-picker-input-from="getKind === 'range'"
             :id="`${cvId}-input-1`"
             :class="`${carbonPrefix}--date-picker__input`"
@@ -53,14 +55,17 @@
             v-if="['single', 'range'].includes(getKind)"
             :class="`${carbonPrefix}--date-picker__icon`"
             data-date-picker-icon
-            @click="console.log($event.target)"
           />
+        </div>
+
+        <div :class="`${carbonPrefix}--form-requirement`" v-if="isInvalid">
+          <slot name="invalid-message">{{ invalidMessage }}</slot>
         </div>
       </div>
 
       <!-- maybe use input as another component? -->
       <div
-        v-if="getKind === 'range'"
+        v-if="isRange"
         :class="{
           [`${carbonPrefix}--date-picker-container`]: getKind === 'range',
           [`${carbonPrefix}--date-picker--nolabel`]: dateEndLabel !== undefined,
@@ -81,6 +86,9 @@
             ref="todate"
             type="text"
             data-date-picker-input
+            :data-date-picker-input-to="kind === 'range'"
+            :data-invalid="isInvalid || null"
+            :disabled="disabled"
             :id="`${cvId}-input-2`"
             :class="`${carbonPrefix}--date-picker__input`"
             :pattern="pattern"
@@ -91,8 +99,10 @@
           <Calendar16
             :class="`${carbonPrefix}--date-picker__icon`"
             data-date-picker-icon
-            @click="console.log($event)"
           />
+        </div>
+        <div :class="`${carbonPrefix}--form-requirement`" v-if="isInvalid">
+          <span id="invalid-message-placeholder"></span>
         </div>
       </div>
     </div>
@@ -115,6 +125,11 @@ import { Calendar16 } from '@carbon/icons-vue';
 import CvWrapper from '../CvWrapper/CvWrapper';
 import { props as propsCvTheme, useIsLight } from '../../use/cvTheme';
 import flatpickr from 'flatpickr';
+import l10n from 'flatpickr/dist/l10n/index';
+// import carbonFlatpickrAppendToPlugin from './plugins/appendToPlugin';
+import carbonFlatpickrFixEventsPlugin from './plugins/fixEventsPlugin';
+import carbonFlatpickrRangePlugin from './plugins/rangePlugin';
+import carbonFlatpickrMonthSelectPlugin from './plugins/monthSelectPlugin';
 
 const dateWrapper = ref(null);
 const date = ref(null);
@@ -130,7 +145,8 @@ const props = defineProps({
   dateLabel: { type: String, default: undefined },
   dateEndLabel: { type: String, default: 'End date' },
   invalid: { type: Boolean, default: false },
-  invalidText: { type: String },
+  disabled: { type: Boolean, default: false },
+  invalidMessage: { type: String },
   pattern: { type: String, default: '\\d{1,2}/\\d{1,2}/\\d{4}' },
   placeholder: { type: String, default: 'mm/dd/yyyy' },
   calOptions: {
@@ -147,6 +163,7 @@ const props = defineProps({
     default: 'simple',
     validator: val => ['short', 'simple', 'single', 'range'].includes(val),
   },
+  value: [String, Object, Array, Date],
   ...propsCvId,
   ...propsCvTheme,
 });
@@ -165,7 +182,7 @@ const getKind = computed({
 
 const getDateLabel = computed({
   get() {
-    if (props.getKind === 'range' && !props.dateLabel) {
+    if (props.kind === 'range' && !props.dateLabel) {
       return 'Start date';
     }
 
@@ -179,27 +196,120 @@ const getDateLabel = computed({
 
 const getStartDate = computed({
   get() {
-    if (props.modelValue) {
-      return props.modelValue?.startDate || props.modelValue;
-    }
+    return (
+      props.modelValue?.startDate ||
+      props.modelValue ||
+      props.value?.startDate ||
+      props.value
+    );
   },
 });
 
 const getEndDate = computed({
   get() {
-    if (props.modelValue) {
-      return props.modelValue?.endDate || props.modelValue;
-    }
+    return props.modelValue?.endDate || props.value?.endDate;
   },
+});
+
+const isRange = computed(() => {
+  return props.kind === 'range';
+});
+
+const isSingle = computed(() => {
+  return props.kind === 'single';
+});
+
+const isInvalid = computed(() => {
+  return !!props.invalidMessage;
 });
 
 const getFlatpickrOptions = () => {
   const options = { ...props.calOptions };
 
+  options.plugins = [
+    props.kind === 'range'
+      ? carbonFlatpickrRangePlugin({
+          input: todate.value,
+        })
+      : () => {},
+    carbonFlatpickrMonthSelectPlugin({
+      selectorFlatpickrMonthYearContainer: '.flatpickr-current-month',
+      selectorFlatpickrYearContainer: '.numInputWrapper',
+      selectorFlatpickrCurrentMonth: '.cur-month',
+      classFlatpickrCurrentMonth: 'cur-month',
+    }),
+    carbonFlatpickrFixEventsPlugin({
+      inputFrom: date.value,
+      inputTo: todate.value,
+    }),
+  ];
+
+  options.nextArrow = `
+    <svg width="16px" height="16px" viewBox="0 0 16 16">
+      <polygon points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3 "/>
+      <rect width="16" height="16" style="fill:none" />
+    </svg>
+  `;
+
+  options.prevArrow = `
+    <svg width="16px" height="16px" viewBox="0 0 16 16">
+      <polygon points="5,8 10,3 10.7,3.7 6.4,8 10.7,12.3 10,13 "/>
+      <rect width="16" height="16" style="fill:none" />
+    </svg>
+  `;
+
   options.mode = props.kind;
+  // add events update based on parameters
   options.onChange = handleDatePick;
+  // options.onOpen = onOpen;
+  options.onReady = onCalReady;
 
   return options;
+};
+
+const onCalReady = (selectedDates, dateStr, instance) => {
+  const calendarContainer = instance.calendarContainer;
+  const options = {
+    classCalendarContainer: `${carbonPrefix}--date-picker__calendar`,
+    classMonth: `${carbonPrefix}--date-picker__month`,
+    classWeekdays: `${carbonPrefix}--date-picker__weekdays`,
+    classDays: `${carbonPrefix}--date-picker__days`,
+    classWeekday: `${carbonPrefix}--date-picker__weekday`,
+    classDay: `${carbonPrefix}--date-picker__day`,
+    classFocused: `${carbonPrefix}--focused`,
+    classVisuallyHidden: `${carbonPrefix}--visually-hidden`,
+  };
+
+  if (calendarContainer) {
+    calendarContainer.classList.add(options.classCalendarContainer);
+    calendarContainer
+      .querySelector('.flatpickr-month')
+      .classList.add(options.classMonth);
+    calendarContainer
+      .querySelector('.flatpickr-weekdays')
+      .classList.add(options.classWeekdays);
+    calendarContainer
+      .querySelector('.flatpickr-days')
+      .classList.add(options.classDays);
+    for (const item of calendarContainer.querySelectorAll(
+      '.flatpickr-weekday'
+    )) {
+      const currentItem = item;
+      currentItem.innerHTML = currentItem.innerHTML.replace(/\s+/g, '');
+      currentItem.classList.add(options.classWeekday);
+    }
+    for (const item of calendarContainer.querySelectorAll('.flatpickr-day')) {
+      item.classList.add(options.classDay);
+      if (item.classList.contains('today') && selectedDates.length > 0) {
+        item.classList.add('no-border');
+      } else if (
+        item.classList.contains('today') &&
+        selectedDates.length === 0
+      ) {
+        item.classList.remove('no-border');
+      }
+    }
+  }
 };
 
 const initFlatpickr = () => {
@@ -207,19 +317,12 @@ const initFlatpickr = () => {
 };
 
 let dateToString = val => {
-  if (typeof val === 'number') {
-    return this.cal.formatDate(val, this.calOptions.dateFormat);
-  } else {
-    return val || '';
-  }
+  return calendar.formatDate(val, props.calOptions.dateFormat);
 };
 
 const handleDatePick = (selectedDates, dateStr, instance) => {
   if (selectedDates.length === 1) {
-    const temp = calendar.formatDate(
-      selectedDates[0],
-      props.calOptions.dateFormat
-    );
+    const temp = dateToString(selectedDates[0]);
 
     nextTick(() => {
       date.value.value = temp;
@@ -227,14 +330,8 @@ const handleDatePick = (selectedDates, dateStr, instance) => {
 
     emit('update:modelValue', temp);
   } else {
-    const startDate = calendar.formatDate(
-      selectedDates[0],
-      props.calOptions.dateFormat
-    );
-    const endDate = calendar.formatDate(
-      selectedDates[1],
-      props.calOptions.dateFormat
-    );
+    const startDate = dateToString(selectedDates[0]);
+    const endDate = dateToString(selectedDates[1]);
 
     nextTick(() => {
       date.value.value = startDate;
@@ -261,4 +358,9 @@ onMounted(() => {
 });
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+#invalid-message-placeholder {
+  display: block;
+  height: 16px;
+}
+</style>

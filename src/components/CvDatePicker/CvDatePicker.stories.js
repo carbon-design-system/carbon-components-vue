@@ -9,7 +9,7 @@ import { ref } from 'vue';
 
 const initArgs = {
   dateLabel: 'Date label',
-  invalidText: 'Invalid value',
+  invalidMessage: '',
 };
 
 export default {
@@ -25,7 +25,7 @@ export default {
   },
   argTypes: {
     dateLabel: { type: String, description: 'Date picker label' },
-    invalidText: {
+    invalidMessage: {
       type: String,
       description: 'Date picker text on invalid value',
     },
@@ -58,7 +58,7 @@ Default.parameters = storyParametersObject(
 );
 
 const now = new Date();
-const modelValue = ref(now.toLocaleDateString());
+const modelValue = ref('');
 const templateVModel = `
 <div>
   <cv-date-picker v-bind='args' @change='onChange' v-model="modelValue">
@@ -67,11 +67,10 @@ const templateVModel = `
 <div style="margin: 32px 0;">
   <div style="font-size: 150%;">Sample interaction</div>
   <label for="date-model" style='margin-right: 0.5rem'>V-model:</label>
-  <input id="date-model" type="text" :value="modelValue" @change="ev => modelValue = ev.currentTarget.value"/>
+  <input id="date-model" type="text" :value="modelValue.startDate || modelValue" @change="ev => { if (args.kind === 'range') { modelValue.startDate = ev.currentTarget.value } else { modelValue = ev.currentTarget.value } }"/>
+  <input v-if="args.kind === 'range'" id="date-model" type="text" :value="modelValue.endDate" @change="ev => modelValue.endDate = ev.currentTarget.value"/>
 </div>
 `;
-
-// <input id="date-model" type="date" :value="now.toLocaleDateString('en-CA')" @change="ev => modelValue = new Date(ev.currentTarget.value).toLocaleDateString()"/>
 
 const TemplateVModel = args => {
   return {
