@@ -12,7 +12,7 @@
         {
           [`${carbonPrefix}--date-picker--simple`]: getKind === 'short',
           [`${carbonPrefix}--date-picker--light`]: isLight,
-          'cv-date-pciker': !formItem,
+          'cv-date-picker': !formItem,
         },
       ]"
       ref="dateWrapper"
@@ -26,7 +26,6 @@
           ].includes(getKind),
           [`${carbonPrefix}--date-picker--nolabel`]: getDateLabel !== undefined,
         }"
-        @change="onChange"
       >
         <label
           v-if="getDateLabel.length > 0"
@@ -115,6 +114,8 @@ import {
   computed,
   onMounted,
   onUpdated,
+  onBeforeMount,
+  onUnmounted,
   watch,
   nextTick,
   useSlots,
@@ -321,7 +322,7 @@ let dateToString = val => {
 };
 
 const handleDatePick = (selectedDates, dateStr, instance) => {
-  if (selectedDates.length === 1) {
+  if (isSingle) {
     const temp = dateToString(selectedDates[0]);
 
     nextTick(() => {
@@ -351,9 +352,40 @@ const handleUpdateEvent = event => {
   }
 };
 
+watch(
+  () => props.modelValue,
+  newValue => {
+    if (isSingle) {
+      calendar.setDate(newValue, true);
+    } else if (isRange) {
+      calendar.setDate([newValue.startDate, newValue.endDate], true);
+    } else {
+      date.value.value = newValue;
+    }
+  }
+);
+
+onBeforeMount(() => {
+  // Weekdays shorthand for english locale
+  l10n.en.weekdays.shorthand.forEach((day, index) => {
+    const currentDay = l10n.en.weekdays.shorthand;
+    if (currentDay[index] === 'Thu' || currentDay[index] === 'Th') {
+      currentDay[index] = 'Th';
+    } else {
+      currentDay[index] = currentDay[index].charAt(0);
+    }
+  });
+});
+
 onMounted(() => {
   if (['range', 'single'].includes(props.kind)) {
     calendar = initFlatpickr();
+  }
+});
+
+onUnmounted(() => {
+  if (calendar) {
+    calendar.destroy();
   }
 });
 </script>
