@@ -127,10 +127,11 @@ import CvWrapper from '../CvWrapper/CvWrapper';
 import { props as propsCvTheme, useIsLight } from '../../use/cvTheme';
 import flatpickr from 'flatpickr';
 import l10n from 'flatpickr/dist/l10n/index';
-// import carbonFlatpickrAppendToPlugin from './plugins/appendToPlugin';
 import carbonFlatpickrFixEventsPlugin from './plugins/fixEventsPlugin';
 import carbonFlatpickrRangePlugin from './plugins/rangePlugin';
 import carbonFlatpickrMonthSelectPlugin from './plugins/monthSelectPlugin';
+
+const slots = useSlots();
 
 const dateWrapper = ref(null);
 const date = ref(null);
@@ -188,7 +189,7 @@ const getDateLabel = computed({
     }
 
     if (!props.dateLabel) {
-      return 'Date Label';
+      return 'Date label';
     }
 
     return props.dateLabel;
@@ -197,18 +198,20 @@ const getDateLabel = computed({
 
 const getStartDate = computed({
   get() {
-    return (
-      props.modelValue?.startDate ||
+    return props.modelValue?.startDate ||
       props.modelValue ||
       props.value?.startDate ||
       props.value
-    );
+      ? new Date(props.value)
+      : '';
   },
 });
 
 const getEndDate = computed({
   get() {
-    return props.modelValue?.endDate || props.value?.endDate;
+    return props.modelValue?.endDate || props.value.endDate
+      ? new Date(props.value.endDate)
+      : '';
   },
 });
 
@@ -221,7 +224,7 @@ const isSingle = computed(() => {
 });
 
 const isInvalid = computed(() => {
-  return !!props.invalidMessage;
+  return !!props.invalidMessage || !!slots['invalid-message'];
 });
 
 const getFlatpickrOptions = () => {
@@ -322,7 +325,7 @@ let dateToString = val => {
 };
 
 const handleDatePick = (selectedDates, dateStr, instance) => {
-  if (isSingle) {
+  if (isSingle.value) {
     const temp = dateToString(selectedDates[0]);
 
     nextTick(() => {
@@ -352,16 +355,20 @@ const handleUpdateEvent = event => {
   }
 };
 
+const setCalendar = value => {
+  if (isSingle.value) {
+    calendar.setDate(value, true);
+  } else if (isRange.value) {
+    calendar.setDate([value.startDate, value.endDate], true);
+  } else {
+    date.value.value = value;
+  }
+};
+
 watch(
   () => props.modelValue,
   newValue => {
-    if (isSingle) {
-      calendar.setDate(newValue, true);
-    } else if (isRange) {
-      calendar.setDate([newValue.startDate, newValue.endDate], true);
-    } else {
-      date.value.value = newValue;
-    }
+    setCalendar(newValue);
   }
 );
 
@@ -380,6 +387,7 @@ onBeforeMount(() => {
 onMounted(() => {
   if (['range', 'single'].includes(props.kind)) {
     calendar = initFlatpickr();
+    setCalendar(props.value);
   }
 });
 

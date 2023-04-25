@@ -32,6 +32,8 @@ export default {
   },
 };
 
+/* DEFAULT STORY */
+
 const template = `
 <div>
   <cv-date-picker v-bind='args' @change='onChange'>
@@ -57,6 +59,8 @@ Default.parameters = storyParametersObject(
   Default.args
 );
 
+/* V-MODEL STORY */
+
 const now = new Date();
 const modelValue = ref('');
 const templateVModel = `
@@ -80,7 +84,6 @@ const TemplateVModel = args => {
       modelValue,
       now,
       onChange: action('change'),
-      onFilter: action('filter'),
     }),
     template: templateVModel,
   };
@@ -109,7 +112,6 @@ const TemplateInvalidMessage = args => {
     setup: () => ({
       args,
       onChange: action('change'),
-      onFilter: action('filter'),
     }),
     template: templateInvalidMessage,
   };
@@ -123,7 +125,7 @@ InvalidMessage.args = { ...initArgs, invalidMessage: 'Invalid date' };
 const templateInvalidMessageSlot = `
 <div>
   <cv-date-picker v-bind='args' @change='onChange'>
-    <template v-slot:invalid-message>Invalid date</template>
+    <template #invalid-message>Invalid date slot</template>
   </cv-date-picker>
 </div>
 `;
@@ -134,11 +136,78 @@ const TemplateInvalidMessageSlot = args => {
     setup: () => ({
       args,
       onChange: action('change'),
-      onFilter: action('filter'),
     }),
     template: templateInvalidMessageSlot,
   };
 };
 
 export const InvalidMessageSlot = TemplateInvalidMessageSlot.bind({});
-// InvalidMessageSlot.args = { ...initArgs, invalidMessage: 'Invalid date' };
+InvalidMessageSlot.args = initArgs;
+
+/* SINGLE USING DATE STORY */
+
+const templateSingleUsingDate = `
+<div>
+  <cv-date-picker v-bind='args' @change='onChange' kind="single" :value="new Date()">
+  </cv-date-picker>
+</div>
+`;
+
+const TemplateSingleUsingDate = args => {
+  return {
+    components: { CvDatePicker },
+    setup: () => ({
+      args,
+      onChange: action('change'),
+    }),
+    template: templateSingleUsingDate,
+  };
+};
+
+export const SingleUsingDate = TemplateSingleUsingDate.bind({});
+SingleUsingDate.args = initArgs;
+
+/* SINGLE USING DATE STORY */
+
+const templateRangeUsingDate = `
+<div>
+  <cv-date-picker v-bind='args' @change='onChange' kind="range" :value="{startDate: new Date(), endDate: new Date()}">
+  </cv-date-picker>
+</div>
+`;
+
+const TemplateRangeUsingDate = args => {
+  return {
+    components: { CvDatePicker },
+    setup: () => ({
+      args,
+      onChange: action('change'),
+    }),
+    template: templateRangeUsingDate,
+  };
+};
+
+export const RangeUsingDate = TemplateRangeUsingDate.bind({});
+RangeUsingDate.args = initArgs;
+
+/* MINIMAL STORY */
+
+const templateMinimal = `
+<div>
+  <cv-date-picker @change='onChange'>
+  </cv-date-picker>
+</div>
+`;
+
+const TemplateMinimal = args => {
+  return {
+    components: { CvDatePicker },
+    setup: () => ({
+      args,
+      onChange: action('change'),
+    }),
+    template: templateMinimal,
+  };
+};
+
+export const Minimal = TemplateMinimal.bind({});
