@@ -93,3 +93,52 @@ vModel.parameters = storyParametersObject(
   templateVModel,
   vModel.args
 );
+
+/* INVALID MESSAGE STORY */
+
+const templateInvalidMessage = `
+<div>
+  <cv-date-picker v-bind='args' @change='onChange'>
+  </cv-date-picker>
+</div>
+`;
+
+const TemplateInvalidMessage = args => {
+  return {
+    components: { CvDatePicker },
+    setup: () => ({
+      args,
+      onChange: action('change'),
+      onFilter: action('filter'),
+    }),
+    template: templateInvalidMessage,
+  };
+};
+
+export const InvalidMessage = TemplateInvalidMessage.bind({});
+InvalidMessage.args = { ...initArgs, invalidMessage: 'Invalid date' };
+
+/* INVALID MESSAGE SLOT STORY */
+
+const templateInvalidMessageSlot = `
+<div>
+  <cv-date-picker v-bind='args' @change='onChange'>
+    <template v-slot:invalid-message>Invalid date</template>
+  </cv-date-picker>
+</div>
+`;
+
+const TemplateInvalidMessageSlot = args => {
+  return {
+    components: { CvDatePicker },
+    setup: () => ({
+      args,
+      onChange: action('change'),
+      onFilter: action('filter'),
+    }),
+    template: templateInvalidMessageSlot,
+  };
+};
+
+export const InvalidMessageSlot = TemplateInvalidMessageSlot.bind({});
+// InvalidMessageSlot.args = { ...initArgs, invalidMessage: 'Invalid date' };
