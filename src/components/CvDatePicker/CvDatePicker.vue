@@ -39,6 +39,7 @@
             ref="date"
             type="text"
             data-date-picker-input
+            role="datepicker"
             :data-invalid="isInvalid || null"
             :disabled="disabled"
             :data-date-picker-input-from="getKind === 'range'"
@@ -46,7 +47,6 @@
             :class="`${carbonPrefix}--date-picker__input`"
             :pattern="pattern"
             :placeholder="placeholder"
-            :value="getStartDate"
             @change="handleUpdateEvent"
             @click="handleClick"
           />
@@ -85,6 +85,7 @@
             ref="todate"
             type="text"
             data-date-picker-input
+            role="todatepicker"
             :data-date-picker-input-to="kind === 'range'"
             :data-invalid="isInvalid || null"
             :disabled="disabled"
@@ -92,7 +93,6 @@
             :class="`${carbonPrefix}--date-picker__input`"
             :pattern="pattern"
             :placeholder="placeholder"
-            :value="getEndDate"
             @change="handleUpdateEvent"
           />
           <Calendar16
@@ -143,7 +143,7 @@ const isLight = useIsLight(props);
 let calendar;
 
 const props = defineProps({
-  modelValue: String,
+  modelValue: [String, Object, Array, Date],
   dateLabel: { type: String, default: undefined },
   dateEndLabel: { type: String, default: 'End date' },
   invalid: { type: Boolean, default: false },
@@ -193,25 +193,6 @@ const getDateLabel = computed({
     }
 
     return props.dateLabel;
-  },
-});
-
-const getStartDate = computed({
-  get() {
-    return props.modelValue?.startDate ||
-      props.modelValue ||
-      props.value?.startDate ||
-      props.value
-      ? new Date(props.value)
-      : '';
-  },
-});
-
-const getEndDate = computed({
-  get() {
-    return props.modelValue?.endDate || props.value.endDate
-      ? new Date(props.value.endDate)
-      : '';
   },
 });
 
@@ -333,7 +314,7 @@ const handleDatePick = (selectedDates, dateStr, instance) => {
     });
 
     emit('update:modelValue', temp);
-  } else {
+  } else if (isRange.value && selectedDates[0] && selectedDates[1]) {
     const startDate = dateToString(selectedDates[0]);
     const endDate = dateToString(selectedDates[1]);
 
@@ -355,7 +336,9 @@ const handleUpdateEvent = event => {
   }
 };
 
-const setCalendar = value => {
+const setDate = value => {
+  if (!value) return;
+
   if (isSingle.value) {
     calendar.setDate(value, true);
   } else if (isRange.value) {
@@ -368,8 +351,20 @@ const setCalendar = value => {
 watch(
   () => props.modelValue,
   newValue => {
-    setCalendar(newValue);
-  }
+    if (isRange.value) {
+      if (
+        date.value.value !== newValue.startDate ||
+        todate.value.value !== newValue.endDate
+      ) {
+        setDate(newValue);
+      }
+    } else {
+      if (date.value.value !== newValue) {
+        setDate(newValue);
+      }
+    }
+  },
+  { deep: true }
 );
 
 onBeforeMount(() => {
@@ -387,8 +382,9 @@ onBeforeMount(() => {
 onMounted(() => {
   if (['range', 'single'].includes(props.kind)) {
     calendar = initFlatpickr();
-    setCalendar(props.value);
   }
+
+  setDate(props.modelValue || props.value);
 });
 
 onUnmounted(() => {

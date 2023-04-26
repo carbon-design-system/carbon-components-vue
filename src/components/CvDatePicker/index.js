@@ -1,3 +1,4 @@
 import CvDatePicker from './CvDatePicker.vue';
-export { CvDatePicker };
+import CvDatePickerSkeleton from './CvDatePickerSkeleton.vue';
+export { CvDatePicker, CvDatePickerSkeleton };
 export default CvDatePicker;

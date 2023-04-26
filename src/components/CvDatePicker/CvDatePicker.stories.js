@@ -4,6 +4,7 @@ import {
 } from '../../global/storybook-utils';
 
 import { CvDatePicker } from '.';
+import { CvDatePickerSkeleton } from '.';
 import { action } from '@storybook/addon-actions';
 import { ref } from 'vue';
 
@@ -11,6 +12,10 @@ const initArgs = {
   dateLabel: 'Date label',
   invalidMessage: '',
 };
+
+const now = new Date();
+const tomorrow = new Date();
+tomorrow.setDate(now.getDate() + 1);
 
 export default {
   title: `${sbCompPrefix}/CvDatePicker`,
@@ -61,7 +66,6 @@ Default.parameters = storyParametersObject(
 
 /* V-MODEL STORY */
 
-const now = new Date();
 const modelValue = ref('');
 const templateVModel = `
 <div>
@@ -148,7 +152,7 @@ InvalidMessageSlot.args = initArgs;
 
 const templateSingleUsingDate = `
 <div>
-  <cv-date-picker v-bind='args' @change='onChange' kind="single" :value="new Date()">
+  <cv-date-picker v-bind='args' @change='onChange' kind="single" :value="now">
   </cv-date-picker>
 </div>
 `;
@@ -158,6 +162,7 @@ const TemplateSingleUsingDate = args => {
     components: { CvDatePicker },
     setup: () => ({
       args,
+      now,
       onChange: action('change'),
     }),
     template: templateSingleUsingDate,
@@ -167,11 +172,11 @@ const TemplateSingleUsingDate = args => {
 export const SingleUsingDate = TemplateSingleUsingDate.bind({});
 SingleUsingDate.args = initArgs;
 
-/* SINGLE USING DATE STORY */
+/* RANGE USING DATE STORY */
 
 const templateRangeUsingDate = `
 <div>
-  <cv-date-picker v-bind='args' @change='onChange' kind="range" :value="{startDate: new Date(), endDate: new Date()}">
+  <cv-date-picker v-bind='args' @change='onChange' kind="range" :value="{startDate: now.toLocaleDateString(), endDate: tomorrow.toLocaleDateString()}">
   </cv-date-picker>
 </div>
 `;
@@ -181,6 +186,8 @@ const TemplateRangeUsingDate = args => {
     components: { CvDatePicker },
     setup: () => ({
       args,
+      now,
+      tomorrow,
       onChange: action('change'),
     }),
     template: templateRangeUsingDate,
@@ -194,7 +201,7 @@ RangeUsingDate.args = initArgs;
 
 const templateMinimal = `
 <div>
-  <cv-date-picker @change='onChange'>
+  <cv-date-picker v-bind='args' @change='onChange'>
   </cv-date-picker>
 </div>
 `;
@@ -211,3 +218,24 @@ const TemplateMinimal = args => {
 };
 
 export const Minimal = TemplateMinimal.bind({});
+
+/* SKELETON STORY */
+
+const templateSkeleton = `
+<div>
+  <cv-date-picker-skeleton v-bind='args'></cv-date-picker-skeleton>
+</div>
+`;
+
+const TemplateSkeleton = args => {
+  return {
+    components: { CvDatePicker, CvDatePickerSkeleton },
+    setup: () => ({
+      args,
+      onChange: action('change'),
+    }),
+    template: templateSkeleton,
+  };
+};
+
+export const Skeleton = TemplateSkeleton.bind({});

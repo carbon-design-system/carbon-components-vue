@@ -1,203 +1,131 @@
 import { render } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
-import { within } from '@testing-library/dom';
-import CvComboBox from '../CvComboBox.vue';
+import CvDatePicker from '../CvDatePicker.vue';
+import { nextTick } from 'vue';
 
-const fruits = [
-  'Apple',
-  'Banana',
-  'Cherry',
-  'Date',
-  'Elderberry',
-  'Fig',
-  'Grape',
-  'Kiwi Fruit',
-  'Lemon',
-  'Lime',
-  'Mango',
-  'Orange',
-  'Passion Fruit',
-  'Raisin',
-  'Satsuma',
-  'Tangerine',
-  'Ugli Fruit',
-  'Watermelon',
-].map(item => {
-  const nameVal = item.replace(/\W/, '_').toLowerCase();
-  return {
-    name: nameVal,
-    label: item,
-    value: `val-${nameVal}`,
-  };
-});
-
-describe('CvComboBox', () => {
-  it('CvComboBox - test default and attrs', async () => {
-    const ariaLabel = 'ABC-aria-label-123';
+describe('CvDatePicker', () => {
+  it('CvDatePicker - test default', async () => {
     const handler = jest.fn();
+
     // The render method returns a collection of utilities to query your component.
-    const result = render(CvComboBox, {
-      props: {
-        title: 'Combo Box title',
-        options: fruits,
-      },
+    const result = render(CvDatePicker, {
       attrs: {
-        class: 'ABC-class-123',
-        onkeydown: handler,
-        'aria-label': ariaLabel,
+        onchange: handler,
       },
     });
 
-    const combobox = await result.findByRole('combobox');
-    const listbox = await result.findByRole('listbox');
+    const datepicker = await result.findByRole('datepicker');
 
     const user = userEvent.setup();
-    await user.click(combobox);
-    await user.keyboard('foo');
-    expect(result.emitted().filter).toBeTruthy();
-    expect(listbox.classList.contains('ABC-class-123')).toBe(true);
-    expect(listbox.getAttribute('aria-label')).toBe(ariaLabel);
+
+    await user.click(datepicker);
+    await user.keyboard('01/07/2023');
+    await user.tab();
+
+    expect(datepicker.value).toBe('01/07/2023');
     expect(handler).toHaveBeenCalled();
   });
 
-  it('CvComboBox - test all props', async () => {
-    const ariaLabel = 'ABC-aria-label-123';
-    const props = {
-      title: 'TITLE XYZ123',
-      label: 'LABEL XYZ123',
-      id: 'ABC-123',
-      value: 'val-elderberry',
-      helperText: 'HELPER ABC',
-      invalidMessage: 'INVALID ABC',
-      options: fruits,
-    };
+  it('CvDatePicker - invalid message', async () => {
     // The render method returns a collection of utilities to query your component.
-    const result = render(CvComboBox, {
-      props,
-      attrs: {
-        'aria-label': ariaLabel,
+    const result = render(CvDatePicker, {
+      props: {
+        invalidMessage: 'Invalid date',
       },
     });
 
-    await result.findByPlaceholderText(props.label);
-    await result.findByText(props.title);
-    await result.findByText(props.invalidMessage);
-    await result.findByDisplayValue('Elderberry');
+    const message = result.getByText('Invalid date');
 
-    const listbox = await result.findByRole('listbox');
-    const menu = listbox.querySelector(`#${props.id}`);
-    expect(menu).toBeTruthy();
-
-    // check the aria label
-    const wrapper = result.container.querySelector('.bx--list-box__wrapper');
-    expect(wrapper.getAttribute('aria-label')).toBe(ariaLabel);
-
-    await result.rerender({ invalidMessage: '' });
-    await result.findByText(props.helperText);
+    expect(message).toBeTruthy();
   });
 
-  it('CvComboBox - v-model', async () => {
-    const props = {
-      modelValue: 'val-elderberry',
-      options: fruits,
-    };
+  it('CvDatePicker - test single with datepicker', async () => {
+    const handler = jest.fn();
+
     // The render method returns a collection of utilities to query your component.
-    const result = render(CvComboBox, {
-      props,
+    const result = render(CvDatePicker, {
+      props: {
+        kind: 'single',
+      },
+      attrs: {
+        onchange: handler,
+      },
     });
 
-    await result.findByDisplayValue('Elderberry');
-    await result.rerender({ ...props, modelValue: 'val-tangerine' });
-    await result.findByDisplayValue('Tangerine');
-  });
-
-  it('CvComboBox - autoFilter', async () => {
-    const props = {
-      autoFilter: true,
-      options: fruits,
-    };
-    // The render method returns a collection of utilities to query your component.
-    const result = render(CvComboBox, {
-      props,
-    });
-
-    const combobox = await result.findByRole('combobox');
+    const datepicker = await result.findByRole('datepicker');
 
     const user = userEvent.setup();
-    await user.click(combobox);
-    await user.keyboard('ap');
-    const filtered = result.container.querySelectorAll(
-      '.bx--list-box__menu-item__option'
+
+    await user.click(datepicker);
+    await nextTick();
+
+    const datePickerDay = result.getByText('15');
+    const flatpickrContainer =
+      datePickerDay.parentNode.parentNode.parentNode.parentNode.parentNode;
+
+    expect(flatpickrContainer.classList.contains('open')).toBeTruthy();
+
+    await user.click(datePickerDay);
+    await nextTick();
+
+    const now = new Date();
+    now.setDate(15);
+
+    const selectedDate = new Date(datepicker.value);
+
+    expect(selectedDate.toLocaleDateString('en')).toBe(
+      now.toLocaleDateString('en')
     );
-    expect(filtered.length).toBe(2);
-    await within(filtered.item(0)).findByText('Apple');
-    await within(filtered.item(1)).findByText('Grape');
+    expect(handler).toHaveBeenCalled();
   });
 
-  it('CvComboBox - autoHighlight', async () => {
-    const props = {
-      autoHighlight: true,
-      options: fruits,
-    };
+  it('CvDatePicker - test range with datepicker', async () => {
+    const handler = jest.fn();
+
     // The render method returns a collection of utilities to query your component.
-    const result = render(CvComboBox, {
-      props,
+    const result = render(CvDatePicker, {
+      props: {
+        kind: 'range',
+      },
+      attrs: {
+        onchange: handler,
+      },
     });
 
-    const combobox = await result.findByRole('combobox');
+    const datepicker = await result.findByRole('datepicker');
+    const todatepicker = await result.findByRole('todatepicker');
 
     const user = userEvent.setup();
-    await user.click(combobox);
-    await user.keyboard('Cher');
-    const highlighted = result.container.querySelector(
-      '.bx--list-box__menu-item--highlighted'
+
+    await user.click(datepicker);
+    await nextTick();
+    const datePickerStartDate = result.getByText('15');
+    const flatpickrContainer =
+      datePickerStartDate.parentNode.parentNode.parentNode.parentNode
+        .parentNode;
+    expect(flatpickrContainer.classList.contains('open')).toBeTruthy();
+    await user.click(datePickerStartDate);
+    await nextTick();
+
+    await user.click(todatepicker);
+    await nextTick();
+    await user.click(result.getByText('16'));
+    await nextTick();
+
+    const startDate = new Date();
+    startDate.setDate(15);
+    const endDate = new Date();
+    endDate.setDate(16);
+
+    const selectedStartDate = new Date(datepicker.value);
+    const selectedEndDate = new Date(todatepicker.value);
+
+    expect(selectedStartDate.toLocaleDateString('en')).toBe(
+      startDate.toLocaleDateString('en')
     );
-    expect(highlighted).toBeTruthy();
-    await within(highlighted).findByText('Cherry');
-  });
-
-  it('CvComboBox - disabled', async () => {
-    const props = {
-      disabled: true,
-      options: fruits,
-    };
-    // The render method returns a collection of utilities to query your component.
-    const result = render(CvComboBox, {
-      props,
-    });
-
-    const combobox = await result.findByRole('combobox');
-
-    const user = userEvent.setup();
-    await user.click(combobox);
-    await user.keyboard('Cherry');
-    expect(combobox.value).toBe(''); // typing should be ignored
-
-    const disabled = result.container.querySelector('.bx--list-box--disabled');
-    expect(disabled).toBeTruthy();
-  });
-
-  it('CvComboBox - highlight', async () => {
-    const props = {
-      highlight: 'val-passion_fruit',
-      options: fruits,
-    };
-    // The render method returns a collection of utilities to query your component.
-    const result = render(CvComboBox, {
-      props,
-    });
-
-    const combobox = await result.findByRole('combobox');
-
-    const highlighted = result.container.querySelector(
-      '.bx--list-box__menu-item--highlighted'
+    expect(selectedEndDate.toLocaleDateString('en')).toBe(
+      endDate.toLocaleDateString('en')
     );
-    expect(highlighted).toBeTruthy();
-    await within(highlighted).findByText('Passion Fruit');
-
-    const user = userEvent.setup();
-    await user.click(combobox);
-    await user.keyboard('{Enter}');
-    await result.findByDisplayValue('Passion Fruit');
+    expect(handler).toHaveBeenCalled();
   });
 });
