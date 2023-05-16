@@ -52,6 +52,11 @@ $carbon--theme: $carbon--theme--white;
   padding: $layout-04;
   background-color: $ui-background;
   color: $text-01;
+
+  // set space between form items
+  .bx--form-item {
+    margin-bottom: 2rem;
+  }
 }
 
 /**
