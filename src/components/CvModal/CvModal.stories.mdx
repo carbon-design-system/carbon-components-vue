@@ -18,7 +18,6 @@ export const Template = args => ({
     return {
       ...args,
       props: args.props,
-      onAfterModalHidden: action('after-modal-hidden'),
       onModalHidden: action('modal-hidden'),
       onModalHideRequest: action('modal-hide-request'),
       onModalShown: action('modal-shown'),
@@ -31,6 +30,7 @@ export const Template = args => ({
       size: args.size,
       autoHideOff: args.autoHideOff,
       primaryButtonDisabled: args.primaryButtonDisabled,
+      disableTeleport: args.disableTeleport,
       show: () => {
         if (visible.value) visible.value = false;
         nextTick(() => {
@@ -43,6 +43,11 @@ export const Template = args => ({
           visible3btn.value = true;
         }).catch(() => console.warn('cannot show'));
       },
+      onAfterModalHidden() {
+        action('after-modal-hidden')()
+        visible.value = false;
+        visible3btn.value = false
+      }
     };
   },
   // And then the `args` are bound to your component with `v-bind="args"`
@@ -174,7 +179,7 @@ Set `disableTeleport` to true to revert to the Vue 2 behaviour.
   </Story>
 </Canvas>
 
-# CvModal with buttons
+# CvModal with three buttons
 
 <Canvas>
   <Story
