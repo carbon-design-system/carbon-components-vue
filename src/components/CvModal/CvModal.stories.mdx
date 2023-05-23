@@ -44,10 +44,10 @@ export const Template = args => ({
         }).catch(() => console.warn('cannot show'));
       },
       onAfterModalHidden() {
-        action('after-modal-hidden')()
+        action('after-modal-hidden')();
         visible.value = false;
-        visible3btn.value = false
-      }
+        visible3btn.value = false;
+      },
     };
   },
   // And then the `args` are bound to your component with `v-bind="args"`
@@ -118,7 +118,7 @@ const buttonTemplate = `
 Migration notes:
 
 - The modal uses the Vue [teleport](https://vuejs.org/guide/built-ins/teleport.html#basic-usage) to move the modal to the document body. This resolves some scrolling issues seen in the Vue 2 implementation.
-Set `disableTeleport` to true to revert to the Vue 2 behaviour.
+  Set `disableTeleport` to true to revert to the Vue 2 behaviour.
 - The `v-model` is different in Vue 3 than Vue 2. You can still specify the `v-model=something` to control the visibility but
   if you specify it like this you will see a deprecation message in the log. Please use `v-model:visible=something` instead.
 - For the `size` attribute please use of the standard sizes 'xs', 'sm', 'md', or 'lg'. The 'large' and 'small' values still
