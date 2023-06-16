@@ -1,0 +1,342 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+import { sbCompPrefix } from '../../global/storybook-utils';
+import CvDropdown from './CvDropdown.vue';
+import CvDropdownItem from './CvDropdownItem.vue'
+import { action } from '@storybook/addon-actions';
+import { ref } from "vue";
+const myValue = ref('baby-yoda');
+
+<Meta title={`${sbCompPrefix}/CvDropdown`} component={CvDropdown} />
+
+export const Template = args => ({
+  // Components used in your story `template` are defined in the `components` object
+  components: {
+    CvDropdown,CvDropdownItem
+  },
+  // The story's `args` need to be mapped into the template through the `setup()` method
+  setup() {
+    return {
+      ...args,
+      props: args.props,
+      light: args.light,
+      placeholder: args.placeholder,
+      value: args.value,
+      label: args.label,
+      up: args.up,
+      inline: args.inline,
+      helperText: args.helperText,
+      hideSelected: args.hideSelected,
+      warnText: args.warnText,
+      invalidMessage: args.invalidMessage,
+      disabled: args.disabled,
+      size: args.size,
+      items: args.items,
+      onChange: action('change'),
+      myValue: myValue,
+      slotInvalidText: args.slotInvalidText,
+      slotWarningText: args.slotWarningText,
+      slotHelperText: args.slotHelperText
+    };
+  },
+  template: args.template,
+});
+const defaultTemplate = `
+<div :style="{width: '300px', paddingTop: up ? '90px' : undefined}">
+<cv-dropdown
+  :light="light"
+  :placeholder="placeholder"
+  :value="value"
+  :up="up"
+  :inline="inline"
+  :helper-text="helperText"
+  :warn-text="warnText"
+  :hide-selected="hideSelected"
+  :invalid-message="invalidMessage"
+  :label="label"
+  :disabled="disabled"
+  :size="size"
+  @change="onChange">
+          <cv-dropdown-item value="mando"><span>Din Djarin</span></cv-dropdown-item>
+          <cv-dropdown-item value="nite-owl">Bo-Katan Kryze</cv-dropdown-item>
+          <cv-dropdown-item value="baby-yoda">Din Grogu</cv-dropdown-item>
+          <cv-dropdown-item value="mysterious">The Armorer</cv-dropdown-item>
+          <cv-dropdown-item value="bounty-hunter">Greef Karga</cv-dropdown-item>
+ </cv-dropdown>
+</div>
+`;
+const slotsTemplate = `
+<div :style="{width: '300px'}">
+<cv-dropdown
+  :light="light"
+  :placeholder="placeholder"
+  :value="value"
+  :up="up"
+  :inline="inline"
+  :helper-text="helperText"
+  :warn-text="warnText"
+  :hide-selected="hideSelected"
+  :invalid-message="invalidMessage"
+  :label="label"
+  :disabled="disabled"
+  :size="size"
+  @change="onChange">
+    <template v-if="slotInvalidText"v-slot:invalid-message>Do not go to the dark side</template>
+    <template v-if="slotWarningText" v-slot:warning-message>Can this ally be trusted?</template>
+    <template v-if="slotHelperText" v-slot:helper-text>Choose ally strong with the force</template>
+    <cv-dropdown-item value="mando"><span>Din Djarin</span></cv-dropdown-item>
+    <cv-dropdown-item value="nite-owl">Bo-Katan Kryze</cv-dropdown-item>
+    <cv-dropdown-item value="baby-yoda">Din Grogu</cv-dropdown-item>
+    <cv-dropdown-item value="mysterious">The Armorer</cv-dropdown-item>
+    <cv-dropdown-item value="bounty-hunter">Greef Karga</cv-dropdown-item>
+ </cv-dropdown>
+</div>
+`;
+const itemsTemplate = `
+<div :style="{width: '300px'}">
+<cv-dropdown
+  :light="light"
+  :placeholder="placeholder"
+  :value="value"
+  :up="up"
+  :inline="inline"
+  :helper-text="helperText"
+  :warn-text="warnText"
+  :hide-selected="hideSelected"
+  :invalid-message="invalidMessage"
+  :label="label"
+  :disabled="disabled"
+  :size="size"
+  :items="items"
+  @change="onChange">
+ </cv-dropdown>
+</div>
+`;
+const vmodelTemplate = `
+<div :style="{width: '300px'}">
+<cv-dropdown
+  v-model:value="myValue"
+  :label="label"
+  :placeholder="placeholder"
+  @change="onChange">
+    <cv-dropdown-item value="mando"><span>Din Djarin</span></cv-dropdown-item>
+    <cv-dropdown-item value="nite-owl">Bo-Katan Kryze</cv-dropdown-item>
+    <cv-dropdown-item value="baby-yoda">Din Grogu</cv-dropdown-item>
+    <cv-dropdown-item value="mysterious">The Armorer</cv-dropdown-item>
+    <cv-dropdown-item value="bounty-hunter">Greef Karga</cv-dropdown-item>
+ </cv-dropdown>
+ <div>V-Model value: {{ myValue }}</div>
+  <select v-model="myValue">
+    <option value="mando">Mandalorian</option>
+    <option value="nite-owl">Bo-Katan</option>
+    <option value="baby-yoda">Grogu</option>
+    <option value="mysterious">Armorer</option>
+    <option value="bounty-hunter">Karga</option>
+  </select>
+</div>
+`;
+
+
+
+# CvDropdown
+Notes:
+- You can place a Dropdown inline with other content by using the inline variant
+Migration notes:
+
+- The `v-model` is different in Vue 3 than Vue 2. You can still specify the `v-model=something` to control the visibility but
+  if you specify it like this you will see a deprecation message in the log. Please use `v-model:value=something` instead.
+- Add the `size` option to match Carbon React
+- Add the `warnText` option to match Carbon React
+
+<Canvas>
+  <Story
+    name="Default"
+    parameters={{
+      controls: {
+        exclude: [
+          'props',
+          'default',
+          'template',
+          'change',
+          'update:modelValue',
+          'update:value',
+          'helper-text',
+          'invalid-message',
+          'warning-message',
+          'modelValue'
+        ],
+      },
+      docs: { source: { code: defaultTemplate } },
+    }}
+    args={{
+      template: defaultTemplate,
+      props: {
+        modelValue: undefined,
+      },
+      label: "Characters",
+      placeholder: "Choose an ally",
+      helperText: "May the force be with you",
+      light: false
+    }}
+    argTypes={{
+      light: {type: String, description: "`true` to use the light version",  table: {category: 'props'}},
+      size: {
+        control: 'select',
+        default: 'md',
+        options: ['sm', 'md', 'lg'],
+      },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+  # Use slots with helper, invalid, and warning text
+
+<Canvas>
+  <Story
+    name="Slots"
+    parameters={{
+      controls: {
+        exclude: [
+          'props',
+          'default',
+          'template',
+          'change',
+          'update:modelValue',
+          'update:value',
+          'helper-text',
+          'invalid-message',
+          'warning-message',
+          'modelValue',
+          'ariaLabel',
+          'disabled',
+          'formItem',
+          'helperText',
+          'hideSelected',
+          'inline',
+          'invalidMessage',
+          'items',
+          'label',
+          'placeholder',
+          'size',
+          'up',
+          'value',
+          'warnText'
+        ],
+      },
+      docs: { source: { code: slotsTemplate } },
+    }}
+    args={{
+      template: slotsTemplate,
+      label: "Characters",
+      placeholder: "Choose an ally",
+      slotInvalidText: false,
+      slotWarningText: false,
+      slotHelperText: true
+    }}
+    argTypes={{
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+
+# Use an array of strings as the dropdown options
+- Notes: this version does not seem very useful. Please comment in the slack channel if you are using this.
+Curious to know how it might be currently used.
+
+<Canvas>
+  <Story
+    name="Items"
+    parameters={{
+      controls: {
+        exclude: [
+          'props',
+          'default',
+          'template',
+          'change',
+          'update:modelValue',
+          'update:value',
+          'helper-text',
+          'invalid-message',
+          'warning-message',
+          'modelValue',
+          'ariaLabel',
+          'disabled',
+          'formItem',
+          'helperText',
+          'hideSelected',
+          'inline',
+          'invalidMessage',
+          'items',
+          'label',
+          'placeholder',
+          'size',
+          'up',
+          'value',
+          'warnText'
+        ],
+      },
+      docs: { source: { code: itemsTemplate } },
+    }}
+    args={{
+      template: itemsTemplate,
+      label: "Planets",
+      placeholder: "Where will you visit",
+      items: ["Coruscant", "Tatooine", "Naboo", "Hoth", "Kamino", "Mandalore"],
+    }}
+    argTypes={{
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+# Use with v-model
+
+<Canvas>
+  <Story
+    name="v-model"
+    parameters={{
+      controls: {
+        exclude: [
+          'props',
+          'default',
+          'template',
+          'change',
+          'update:modelValue',
+          'update:value',
+          'helper-text',
+          'invalid-message',
+          'warning-message',
+          'modelValue',
+          'ariaLabel',
+          'disabled',
+          'formItem',
+          'helperText',
+          'hideSelected',
+          'inline',
+          'invalidMessage',
+          'items',
+          'label',
+          'placeholder',
+          'size',
+          'up',
+          'value',
+          'warnText'
+        ],
+      },
+      docs: { source: { code: vmodelTemplate } },
+    }}
+    args={{
+      template: vmodelTemplate,
+      label: "Characters",
+      placeholder: "Choose an ally",
+    }}
+    argTypes={{
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
