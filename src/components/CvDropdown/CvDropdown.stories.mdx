@@ -2,6 +2,7 @@ import { Canvas, Meta, Story } from '@storybook/addon-docs';
 import { sbCompPrefix } from '../../global/storybook-utils';
 import CvDropdown from './CvDropdown.vue';
 import CvDropdownItem from './CvDropdownItem.vue'
+import CvDropdownSkeleton from "./CvDropdownSkeleton.vue";
 import { action } from '@storybook/addon-actions';
 import { ref } from "vue";
 const myValue = ref('baby-yoda');
@@ -11,7 +12,7 @@ const myValue = ref('baby-yoda');
 export const Template = args => ({
   // Components used in your story `template` are defined in the `components` object
   components: {
-    CvDropdown,CvDropdownItem
+    CvDropdown,CvDropdownItem,CvDropdownSkeleton
   },
   // The story's `args` need to be mapped into the template through the `setup()` method
   setup() {
@@ -134,7 +135,11 @@ const vmodelTemplate = `
   </select>
 </div>
 `;
-
+const skeletonTemplate = `
+<div :style="{width: '300px'}">
+<cv-dropdown-skeleton :inline="inline"></cv-dropdown-skeleton>
+</div>
+`;
 
 
 # CvDropdown
@@ -146,6 +151,7 @@ Migration notes:
   if you specify it like this you will see a deprecation message in the log. Please use `v-model:value=something` instead.
 - Add the `size` option to match Carbon React
 - Add the `warnText` option to match Carbon React
+
 
 <Canvas>
   <Story
@@ -333,6 +339,55 @@ Curious to know how it might be currently used.
       template: vmodelTemplate,
       label: "Characters",
       placeholder: "Choose an ally",
+    }}
+    argTypes={{
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+
+# Skeleton - loading mode
+- Notes: The Vue 2 story shows the `inline` attribute for the skeleton mode but this seems to have no effect on the display.
+It is still supported but do not expect a change in display.
+
+<Canvas>
+  <Story
+    name="skeleton"
+    parameters={{
+      controls: {
+        exclude: [
+          'props',
+          'default',
+          'template',
+          'change',
+          'update:modelValue',
+          'update:value',
+          'helper-text',
+          'invalid-message',
+          'warning-message',
+          'modelValue',
+          'ariaLabel',
+          'disabled',
+          'formItem',
+          'helperText',
+          'hideSelected',
+          'invalidMessage',
+          'items',
+          'label',
+          'placeholder',
+          'size',
+          'up',
+          'value',
+          'warnText',
+          'inline'
+        ],
+      },
+      docs: { source: { code: skeletonTemplate } },
+    }}
+    args={{
+      template: skeletonTemplate,
     }}
     argTypes={{
     }}
