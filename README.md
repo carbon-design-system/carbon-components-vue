@@ -13,6 +13,9 @@
   <a href="https://github.com/carbon-design-system/carbon/blob/master/.github/CONTRIBUTING.md">
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome" />
   </a>
+  <a href="https://discord.gg/J7JEUEkTRX">
+      <img src="https://img.shields.io/discord/689212587170201628?color=5865F2" alt="Chat with us on Discord">
+  </a>
 </p>
 
 > Vue implementation of the Carbon Design System
