@@ -21,6 +21,7 @@
     <td v-if="hasBatchActions" :class="`${carbonPrefix}--table-column-checkbox`">
       <cv-checkbox
         :form-item="false"
+        :inline="true"
         :value="value"
         v-model="dataChecked"
         @change="onChange"
