@@ -127,7 +127,7 @@
         <slot name="invalid-message">{{ invalidMessage }}</slot>
       </div>
       <div v-else-if="isWarning" :class="`${carbonPrefix}--form-requirement`">
-        <slot name="warning-message">{{ warnText }}</slot>
+        <slot name="warning-message">{{ warningMessage }}</slot>
       </div>
       <div
         v-else-if="data.isHelper"
@@ -220,7 +220,11 @@ const props = defineProps({
    * Specify the size of the ListBox. Currently, supports either `sm`, `md` or `lg` as an option.
    * @values sm,md,lg
    */
-  size: { type: String, default: 'md' },
+  size: {
+    type: String,
+    default: 'md',
+    validator: val => ['sm', 'md', 'lg'].includes(val),
+  },
   /**
    * Specify the direction of the dropdown. Can be either true (top) or (false) bottom.
    */
@@ -232,7 +236,7 @@ const props = defineProps({
   /**
    * Provide the text that is displayed and put the control in warning state
    */
-  warnText: { type: String, default: undefined },
+  warningMessage: { type: String, default: undefined },
   /**
    * @deprecated - use v-model:value
    */
@@ -275,7 +279,7 @@ function checkSlots() {
   // NOTE: slots is not reactive so needs to be managed on updated
   data.isInvalid =
     !!(slots['invalid-message'] || props.invalidMessage?.length) || undefined;
-  data.isWarning = !!(slots['warning-message'] || props.warnText?.length);
+  data.isWarning = !!(slots['warning-message'] || props.warningMessage?.length);
   data.isHelper = !!(slots['helper-text'] || props.helperText?.length);
 }
 const isWarning = computed(() => {

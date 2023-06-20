@@ -1,10 +1,10 @@
 import { Canvas, Meta, Story } from '@storybook/addon-docs';
 import { sbCompPrefix } from '../../global/storybook-utils';
 import CvDropdown from './CvDropdown.vue';
-import CvDropdownItem from './CvDropdownItem.vue'
-import CvDropdownSkeleton from "./CvDropdownSkeleton.vue";
+import CvDropdownItem from './CvDropdownItem.vue';
+import CvDropdownSkeleton from './CvDropdownSkeleton.vue';
 import { action } from '@storybook/addon-actions';
-import { ref } from "vue";
+import { ref } from 'vue';
 const myValue = ref('baby-yoda');
 
 <Meta title={`${sbCompPrefix}/CvDropdown`} component={CvDropdown} />
@@ -12,7 +12,9 @@ const myValue = ref('baby-yoda');
 export const Template = args => ({
   // Components used in your story `template` are defined in the `components` object
   components: {
-    CvDropdown,CvDropdownItem,CvDropdownSkeleton
+    CvDropdown,
+    CvDropdownItem,
+    CvDropdownSkeleton,
   },
   // The story's `args` need to be mapped into the template through the `setup()` method
   setup() {
@@ -27,7 +29,7 @@ export const Template = args => ({
       inline: args.inline,
       helperText: args.helperText,
       hideSelected: args.hideSelected,
-      warnText: args.warnText,
+      warningMessage: args.warningMessage,
       invalidMessage: args.invalidMessage,
       disabled: args.disabled,
       size: args.size,
@@ -36,7 +38,7 @@ export const Template = args => ({
       myValue: myValue,
       slotInvalidText: args.slotInvalidText,
       slotWarningText: args.slotWarningText,
-      slotHelperText: args.slotHelperText
+      slotHelperText: args.slotHelperText,
     };
   },
   template: args.template,
@@ -50,7 +52,7 @@ const defaultTemplate = `
   :up="up"
   :inline="inline"
   :helper-text="helperText"
-  :warn-text="warnText"
+  :warning-message="warningMessage"
   :hide-selected="hideSelected"
   :invalid-message="invalidMessage"
   :label="label"
@@ -74,14 +76,14 @@ const slotsTemplate = `
   :up="up"
   :inline="inline"
   :helper-text="helperText"
-  :warn-text="warnText"
+  :warning-message="warningMessage"
   :hide-selected="hideSelected"
   :invalid-message="invalidMessage"
   :label="label"
   :disabled="disabled"
   :size="size"
   @change="onChange">
-    <template v-if="slotInvalidText"v-slot:invalid-message>Do not go to the dark side</template>
+    <template v-if="slotInvalidText" v-slot:invalid-message>Do not go to the dark side</template>
     <template v-if="slotWarningText" v-slot:warning-message>Can this ally be trusted?</template>
     <template v-if="slotHelperText" v-slot:helper-text>Choose ally strong with the force</template>
     <cv-dropdown-item value="mando"><span>Din Djarin</span></cv-dropdown-item>
@@ -101,7 +103,7 @@ const itemsTemplate = `
   :up="up"
   :inline="inline"
   :helper-text="helperText"
-  :warn-text="warnText"
+  :warning-message="warningMessage"
   :hide-selected="hideSelected"
   :invalid-message="invalidMessage"
   :label="label"
@@ -141,17 +143,17 @@ const skeletonTemplate = `
 </div>
 `;
 
-
 # CvDropdown
+
 Notes:
+
 - You can place a Dropdown inline with other content by using the inline variant
-Migration notes:
+  Migration notes:
 
 - The `v-model` is different in Vue 3 than Vue 2. You can still specify the `v-model=something` to control the visibility but
   if you specify it like this you will see a deprecation message in the log. Please use `v-model:value=something` instead.
 - Add the `size` option to match Carbon React
-- Add the `warnText` option to match Carbon React
-
+- Add the `warningMessage` option to match Carbon React
 
 <Canvas>
   <Story
@@ -168,7 +170,7 @@ Migration notes:
           'helper-text',
           'invalid-message',
           'warning-message',
-          'modelValue'
+          'modelValue',
         ],
       },
       docs: { source: { code: defaultTemplate } },
@@ -178,13 +180,17 @@ Migration notes:
       props: {
         modelValue: undefined,
       },
-      label: "Characters",
-      placeholder: "Choose an ally",
-      helperText: "May the force be with you",
-      light: false
+      label: 'Characters',
+      placeholder: 'Choose an ally',
+      helperText: 'May the force be with you',
+      light: false,
     }}
     argTypes={{
-      light: {type: String, description: "`true` to use the light version",  table: {category: 'props'}},
+      light: {
+        type: String,
+        description: '`true` to use the light version',
+        table: { category: 'props' },
+      },
       size: {
         control: 'select',
         default: 'md',
@@ -196,7 +202,7 @@ Migration notes:
   </Story>
 </Canvas>
 
-  # Use slots with helper, invalid, and warning text
+# Use slots with helper, invalid, and warning text
 
 <Canvas>
   <Story
@@ -227,30 +233,29 @@ Migration notes:
           'size',
           'up',
           'value',
-          'warnText'
+          'warningMessage',
         ],
       },
       docs: { source: { code: slotsTemplate } },
     }}
     args={{
       template: slotsTemplate,
-      label: "Characters",
-      placeholder: "Choose an ally",
+      label: 'Characters',
+      placeholder: 'Choose an ally',
       slotInvalidText: false,
       slotWarningText: false,
-      slotHelperText: true
+      slotHelperText: true,
     }}
-    argTypes={{
-    }}
+    argTypes={{}}
   >
     {Template.bind({})}
   </Story>
 </Canvas>
 
-
 # Use an array of strings as the dropdown options
-- Notes: this version does not seem very useful. Please comment in the slack channel if you are using this.
-Curious to know how it might be currently used.
+
+- Notes: this version does not seem very useful. Please comment in the Slack channel if you are using this.
+  Curious to know how it might be currently used.
 
 <Canvas>
   <Story
@@ -281,19 +286,18 @@ Curious to know how it might be currently used.
           'size',
           'up',
           'value',
-          'warnText'
+          'warningMessage',
         ],
       },
       docs: { source: { code: itemsTemplate } },
     }}
     args={{
       template: itemsTemplate,
-      label: "Planets",
-      placeholder: "Where will you visit",
-      items: ["Coruscant", "Tatooine", "Naboo", "Hoth", "Kamino", "Mandalore"],
+      label: 'Planets',
+      placeholder: 'Where will you visit',
+      items: ['Coruscant', 'Tatooine', 'Naboo', 'Hoth', 'Kamino', 'Mandalore'],
     }}
-    argTypes={{
-    }}
+    argTypes={{}}
   >
     {Template.bind({})}
   </Story>
@@ -330,27 +334,26 @@ Curious to know how it might be currently used.
           'size',
           'up',
           'value',
-          'warnText'
+          'warningMessage',
         ],
       },
       docs: { source: { code: vmodelTemplate } },
     }}
     args={{
       template: vmodelTemplate,
-      label: "Characters",
-      placeholder: "Choose an ally",
+      label: 'Characters',
+      placeholder: 'Choose an ally',
     }}
-    argTypes={{
-    }}
+    argTypes={{}}
   >
     {Template.bind({})}
   </Story>
 </Canvas>
 
-
 # Skeleton - loading mode
+
 - Notes: The Vue 2 story shows the `inline` attribute for the skeleton mode but this seems to have no effect on the display.
-It is still supported but do not expect a change in display.
+  It is still supported but do not expect a change in display.
 
 <Canvas>
   <Story
@@ -380,8 +383,8 @@ It is still supported but do not expect a change in display.
           'size',
           'up',
           'value',
-          'warnText',
-          'inline'
+          'warningMessage',
+          'inline',
         ],
       },
       docs: { source: { code: skeletonTemplate } },
@@ -389,8 +392,7 @@ It is still supported but do not expect a change in display.
     args={{
       template: skeletonTemplate,
     }}
-    argTypes={{
-    }}
+    argTypes={{}}
   >
     {Template.bind({})}
   </Story>

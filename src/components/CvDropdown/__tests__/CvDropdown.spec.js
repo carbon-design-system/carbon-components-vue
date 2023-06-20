@@ -1,36 +1,31 @@
 import { render } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
-import CvSelect from '../CvSelect.vue';
-import CvSelectOption from '../CvSelectOption.vue';
-import CvSelectOptgroup from '../CvSelectOptgroup.vue';
+import CvDropdown from '../CvDropdown.vue';
+import CvDropdownItem from '../CvDropdownItem.vue';
 
-const SelectOptions = {
-  components: { CvSelectOption, CvSelectOptgroup },
+const slotItems = {
+  components: { CvDropdownItem },
   template: `
-    <cv-select-option disabled selected hidden value="placeholder-item">Choose an option</cv-select-option>
-    <cv-select-option value="so-long">A much longer cv-select-option that is worth having around to check how text flows</cv-select-option>
-    <cv-select-optgroup label="Category 1">
-      <cv-select-option value="cv-select-option1">cv-select-option 1</cv-select-option>
-      <cv-select-option value="cv-select-option2">cv-select-option 2</cv-select-option>
-    </cv-select-optgroup>
-    <cv-select-optgroup label="Category 2">
-      <cv-select-option value="cv-select-option3">cv-select-option 3</cv-select-option>
-      <cv-select-option value="cv-select-option4">cv-select-option 4</cv-select-option>
-    </cv-select-optgroup>
+    <cv-dropdown-item value="mando"><span>Din Djarin</span></cv-dropdown-item>
+    <cv-dropdown-item value="nite-owl">Bo-Katan Kryze</cv-dropdown-item>
+    <cv-dropdown-item value="baby-yoda">Din Grogu</cv-dropdown-item>
+    <cv-dropdown-item value="mysterious">The Armorer</cv-dropdown-item>
+    <cv-dropdown-item value="bounty-hunter">Greef Karga</cv-dropdown-item>
   `,
 };
 
-describe('CvSelect', () => {
-  it('CvSelect - test default and attrs', async () => {
+describe('CvDropdown', () => {
+  it('CvDropdown - test default and attrs', async () => {
+    window.focus = () => {}; // provide an empty implementation for window.focus
     const ariaLabel = 'ABC-aria-label-123';
     const label = 'ABC-label-123';
     // The render method returns a collection of utilities to query your component.
-    const result = render(CvSelect, {
+    const result = render(CvDropdown, {
       props: {
         label: label,
       },
       slots: {
-        default: SelectOptions,
+        default: slotItems,
       },
       attrs: {
         class: 'ABC-class-123',
@@ -38,48 +33,64 @@ describe('CvSelect', () => {
       },
     });
 
-    const select = await result.findByLabelText(label);
-    await result.findByDisplayValue('Choose an option');
+    const dd = await result.findByLabelText(ariaLabel);
+    await result.findByText('Choose an option');
+    const button = await result.findByRole('button');
 
     const user = userEvent.setup();
-    await user.selectOptions(select, ['so-long']);
+    await user.click(button);
 
-    expect(select.classList.contains('ABC-class-123')).toBe(true);
-    expect(select.getAttribute('aria-label')).toBe(ariaLabel);
+    const menuItems = await result.findAllByRole('menuitemradio');
+    expect(menuItems.length).toBe(5);
+    await user.click(menuItems[2]);
+
+    expect(dd.classList.contains('ABC-class-123')).toBe(true);
+    expect(dd.getAttribute('aria-label')).toBe(ariaLabel);
     expect(result.emitted('change')?.length).toBe(1);
-    expect(result.emitted('change')[0][0]).toBe('so-long');
+    expect(result.emitted('change')[0][0]).toBe('baby-yoda');
   });
-
-  it('CvSelect - all props', async () => {
+  it('CvDropdown - all props', async () => {
+    window.focus = () => {}; // provide an empty implementation for window.focus
     const ariaLabel = 'ABC-aria-label-123';
     const label = 'ABC-label-123';
     const helper = 'ABC-helper-123';
     const warning = 'ABC-warning-123';
     const invalid = 'ABC-invalid-123';
+    const placeholder = 'ABC-placeholder-123';
     // The render method returns a collection of utilities to query your component.
-    const result = render(CvSelect, {
+    const result = render(CvDropdown, {
       props: {
-        label: label,
-        size: 'md',
+        ariaLabel: ariaLabel,
+        disabled: false,
+        formItem: true,
+        helperText: helper,
         inline: false,
         invalidMessage: '',
+        label: label,
+        placeholder: placeholder,
+        size: 'md',
+        up: false,
+        value: undefined,
         warningMessage: '',
-        helperText: helper,
-        hideLabel: false,
         light: false,
-        disabled: false,
       },
       slots: {
-        default: SelectOptions,
+        default: slotItems,
       },
       attrs: {
         class: 'ABC-class-123',
-        'aria-label': ariaLabel,
       },
     });
 
-    const select = await result.findByLabelText(label);
-    await result.findByDisplayValue('Choose an option');
+    const dd = await result.findByLabelText(ariaLabel);
+    await result.findByText(placeholder);
+    await result.findByText(label);
+
+    let mysteriousLabels = await result.findAllByText('The Armorer');
+    expect(mysteriousLabels.length).toBe(1);
+    await result.rerender({ value: 'mysterious' });
+    mysteriousLabels = await result.findAllByText('The Armorer');
+    expect(mysteriousLabels.length).toBe(2);
 
     await result.findByText(helper);
     await result.rerender({ warningMessage: warning });
@@ -87,102 +98,105 @@ describe('CvSelect', () => {
     await result.rerender({ invalidMessage: invalid });
     await result.findByText(invalid);
 
-    expect(select.classList.contains('bx--select-input--md'));
+    expect(dd.classList.contains('bx--dropdown--md')).toBe(true);
     await result.rerender({ size: 'sm' });
-    expect(select.classList.contains('bx--select-input--sm'));
+    expect(dd.classList.contains('bx--dropdown--sm')).toBe(true);
     await result.rerender({ size: 'lg' });
-    expect(select.classList.contains('bx--select-input--lg'));
+    expect(dd.classList.contains('bx--dropdown--lg')).toBe(true);
 
-    const labelElement = await result.findByText(label);
-    expect(labelElement.classList.contains('bx--visually-hidden')).toBe(false);
-    await result.rerender({ hideLabel: true });
-    expect(labelElement.classList.contains('bx--visually-hidden'));
-
-    expect(result.container.classList.contains('bx--select--light')).toBe(
-      false
-    );
+    expect(dd.classList.contains('bx--dropdown--light')).toBe(false);
     await result.rerender({ light: true });
-    expect(result.container.classList.contains('bx--select--light'));
+    expect(dd.classList.contains('bx--dropdown--light')).toBe(true);
 
-    expect(result.container.classList.contains('bx--select--inline')).toBe(
-      false
-    );
+    expect(dd.classList.contains('bx--dropdown--inline')).toBe(false);
     await result.rerender({ inline: true });
-    expect(result.container.classList.contains('bx--select--inline'));
+    expect(dd.classList.contains('bx--dropdown--inline')).toBe(true);
 
-    expect(result.container.classList.contains('bx--select--disabled')).toBe(
-      false
-    );
+    expect(dd.classList.contains('bx--list-box--up')).toBe(false);
+    await result.rerender({ up: true });
+    expect(dd.classList.contains('bx--list-box--up')).toBe(true);
+
+    expect(dd.classList.contains('bx--dropdown--disabled')).toBe(false);
     await result.rerender({ disabled: true });
-    expect(result.container.classList.contains('bx--select--disabled'));
+    expect(dd.classList.contains('bx--dropdown--disabled')).toBe(true);
   });
-
-  it('CvSelect - test helper slot', async () => {
-    const label = 'ABC-label-123';
-    const helper = 'ABC-helper-123';
-    const helperSlot = 'ABC-helper-slot-text-123';
-
-    // The render method returns a collection of utilities to query your component.
-    const result = render(CvSelect, {
-      props: {
-        label: label,
-        helperText: helper,
-      },
-      slots: {
-        default: SelectOptions,
-        'helper-text': helperSlot,
-      },
-    });
-
-    const select = await result.findByLabelText(label);
-    await result.findByText(helperSlot);
-  });
-  it('CvSelect - test warning slot', async () => {
-    const label = 'ABC-label-123';
-    const helperSlot = 'ABC-helper-slot-text-123';
-    const warning = 'ABC-warning-123';
-    const warningSlot = 'ABC-warning-slot-text-123';
-
-    // The render method returns a collection of utilities to query your component.
-    const result = render(CvSelect, {
-      props: {
-        label: label,
-        warningMessage: warning,
-      },
-      slots: {
-        default: SelectOptions,
-        'helper-text': helperSlot,
-        'warning-message': warningSlot,
-      },
-    });
-
-    await result.findByLabelText(label);
-    await result.findByText(warningSlot);
-    expect(result.container.classList.contains('bx--select--warning'));
-  });
-  it('CvSelect - test invalid slot', async () => {
+  it('CvDropdown - slots', async () => {
+    window.focus = () => {}; // provide an empty implementation for window.focus
+    const ariaLabel = 'ABC-aria-label-123';
     const label = 'ABC-label-123';
     const helperSlot = 'ABC-helper-slot-text-123';
     const warningSlot = 'ABC-warning-slot-text-123';
-    const invalid = 'ABC-invalid-123';
     const invalidSlot = 'ABC-invalid-slot-text-123';
-
-    // The render method returns a collection of utilities to query your component.
-    const result = render(CvSelect, {
+    const placeholder = 'ABC-placeholder-123';
+    const options = {
       props: {
+        ariaLabel: ariaLabel,
+        inline: false,
         label: label,
-        invalidMessage: invalid,
+        placeholder: placeholder,
       },
       slots: {
-        default: SelectOptions,
+        default: slotItems,
         'helper-text': helperSlot,
-        'warning-message': warningSlot,
-        'invalid-message': invalidSlot,
+      },
+      attrs: {
+        class: 'ABC-class-123',
+      },
+    };
+    // The render method returns a collection of utilities to query your component.
+    let result = render(CvDropdown, options);
+
+    await result.findByLabelText(ariaLabel);
+    await result.findByText(placeholder);
+    await result.findByText(label);
+
+    await result.findByText(helperSlot);
+
+    options.slots['warning-message'] = warningSlot;
+    result = render(CvDropdown, options);
+    await result.findByText(warningSlot);
+
+    options.slots['invalid-message'] = invalidSlot;
+    result = render(CvDropdown, options);
+    await result.findByText(invalidSlot);
+  });
+  it('CvDropdown - items array', async () => {
+    window.focus = () => {}; // provide an empty implementation for window.focus
+    const ariaLabel = 'ABC-aria-label-123';
+    const label = 'ABC-label-123';
+    // The render method returns a collection of utilities to query your component.
+    const result = render(CvDropdown, {
+      props: {
+        label: label,
+        items: [
+          'Dune',
+          'Frankenstein',
+          "The Ultimate Hitchhiker's Guide",
+          'Foundation',
+          "Ender's Game",
+          'Do Androids Dream of Electric Sheep?',
+        ],
+      },
+      attrs: {
+        class: 'ABC-class-123',
+        'aria-label': ariaLabel,
       },
     });
 
-    await result.findByLabelText(label);
-    await result.findByText(invalidSlot);
-    expect(result.container.classList.contains('bx--select--invalid'));
+    const dd = await result.findByLabelText(ariaLabel);
+    await result.findByText('Choose an option');
+    const button = await result.findByRole('button');
+
+    const user = userEvent.setup();
+    await user.click(button);
+
+    const menuItems = await result.findAllByRole('menuitemradio');
+    expect(menuItems.length).toBe(6);
+    await user.click(menuItems[3]);
+
+    expect(dd.classList.contains('ABC-class-123')).toBe(true);
+    expect(dd.getAttribute('aria-label')).toBe(ariaLabel);
+    expect(result.emitted('change')?.length).toBe(1);
+    expect(result.emitted('change')[0][0]).toBe('Foundation');
   });
 });
