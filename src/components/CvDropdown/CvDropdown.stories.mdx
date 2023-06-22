@@ -39,6 +39,7 @@ export const Template = args => ({
       slotInvalidText: args.slotInvalidText,
       slotWarningText: args.slotWarningText,
       slotHelperText: args.slotHelperText,
+      slotInternalCaption: args.slotInternalCaption,
     };
   },
   template: args.template,
@@ -70,9 +71,9 @@ const defaultTemplate = `
 const slotsTemplate = `
 <div :style="{width: '300px'}">
 <cv-dropdown
+  v-model:value="myValue"
   :light="light"
   :placeholder="placeholder"
-  :value="value"
   :up="up"
   :inline="inline"
   :helper-text="helperText"
@@ -83,6 +84,7 @@ const slotsTemplate = `
   :disabled="disabled"
   :size="size"
   @change="onChange">
+    <template v-if="slotInternalCaption" v-slot:internal-caption><h5>Edge case: {{ myValue }}</h5></template>
     <template v-if="slotInvalidText" v-slot:invalid-message>Do not go to the dark side</template>
     <template v-if="slotWarningText" v-slot:warning-message>Can this ally be trusted?</template>
     <template v-if="slotHelperText" v-slot:helper-text>Choose ally strong with the force</template>
@@ -153,7 +155,10 @@ Notes:
 - The `v-model` is different in Vue 3 than Vue 2. You can still specify the `v-model=something` to control the visibility but
   if you specify it like this you will see a deprecation message in the log. Please use `v-model:value=something` instead.
 - Add the `size` option to match Carbon React
-- Add the `warningMessage` option to match Carbon React
+- Added the `warningMessage` option to match Carbon React
+- The Vue 2 component uses `v-html` for the placeholder and display values. This no longer works as
+  it seems unsafe and could be used as part of a XSS attack. Use the `internal-caption` slot
+  if you need this functionality.
 
 <Canvas>
   <Story
@@ -170,6 +175,7 @@ Notes:
           'helper-text',
           'invalid-message',
           'warning-message',
+          'internal-caption',
           'modelValue',
         ],
       },
@@ -202,7 +208,7 @@ Notes:
   </Story>
 </Canvas>
 
-# Use slots with helper, invalid, and warning text
+# Use slots with helper, invalid, warning text, and the internal caption
 
 <Canvas>
   <Story
@@ -219,6 +225,7 @@ Notes:
           'helper-text',
           'invalid-message',
           'warning-message',
+          'internal-caption',
           'modelValue',
           'ariaLabel',
           'disabled',
@@ -245,6 +252,7 @@ Notes:
       slotInvalidText: false,
       slotWarningText: false,
       slotHelperText: true,
+      slotInternalCaption: false,
     }}
     argTypes={{}}
   >
@@ -272,6 +280,7 @@ Notes:
           'helper-text',
           'invalid-message',
           'warning-message',
+          'internal-caption',
           'modelValue',
           'ariaLabel',
           'disabled',
@@ -320,6 +329,7 @@ Notes:
           'helper-text',
           'invalid-message',
           'warning-message',
+          'internal-caption',
           'modelValue',
           'ariaLabel',
           'disabled',
@@ -370,6 +380,7 @@ Notes:
           'helper-text',
           'invalid-message',
           'warning-message',
+          'internal-caption',
           'modelValue',
           'ariaLabel',
           'disabled',

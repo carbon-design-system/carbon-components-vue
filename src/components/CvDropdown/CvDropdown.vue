@@ -93,8 +93,9 @@
             :id="`${uid}-value`"
             :class="`${carbonPrefix}--list-box__label`"
             data-test="internalCaption"
-            v-html="internalCaption"
-          />
+          >
+            <slot name="internal-caption">{{ internalCaption }}</slot>
+          </span>
           <div
             :class="[
               `${carbonPrefix}--list-box__menu-icon`,
