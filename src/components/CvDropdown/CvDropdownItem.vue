@@ -68,7 +68,7 @@ watch(parentFocus, () => {
 watch(dataSelected, val => {
   if (val) {
     parentSelected.value = props.value;
-    parentCaption.value = link.value?.innerHTML || props.value;
+    parentCaption.value = link.value?.text || props.value;
   }
 });
 const parentList = inject('dropdown-items');

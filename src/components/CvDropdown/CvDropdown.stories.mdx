@@ -60,7 +60,7 @@ const defaultTemplate = `
   :disabled="disabled"
   :size="size"
   @change="onChange">
-          <cv-dropdown-item value="mando"><span>Din Djarin</span></cv-dropdown-item>
+          <cv-dropdown-item value="mando"><span style="color: darkred">Din Djarin</span></cv-dropdown-item>
           <cv-dropdown-item value="nite-owl">Bo-Katan Kryze</cv-dropdown-item>
           <cv-dropdown-item value="baby-yoda">Din Grogu</cv-dropdown-item>
           <cv-dropdown-item value="mysterious">The Armorer</cv-dropdown-item>
@@ -156,7 +156,6 @@ Notes:
   if you specify it like this you will see a deprecation message in the log. Please use `v-model:value=something` instead.
 - Add the `size` option to match Carbon React
 - Added the `warningMessage` option to match Carbon React
-
 
 <Canvas>
   <Story
