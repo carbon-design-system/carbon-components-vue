@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="el"
     :class="[
       `cv-multi-select ${carbonPrefix}--multi-select__wrapper ${carbonPrefix}--list-box__wrapper`,
       {
@@ -12,7 +13,6 @@
       },
     ]"
     @focusout="onFocusOut"
-    ref="el"
   >
     <label
       v-if="title"
@@ -62,6 +62,7 @@
         :class="`${carbonPrefix}--list-box__invalid-icon`"
       />
       <button
+        ref="elButton"
         type="button"
         :class="`${carbonPrefix}--list-box__field`"
         :aria-disabled="disabled"
@@ -72,7 +73,6 @@
         tabindex="0"
         :aria-label="data.open ? 'close menu' : 'open menu'"
         data-toggle="true"
-        ref="elButton"
       >
         <span ref="elTag">
           <cv-tag
@@ -85,8 +85,8 @@
             :kind="filterTagKind"
             :filter="true"
             :label="`${data.selectedItems.length}`"
-            @remove="clearValues"
             :style="filterableTagOverride"
+            @remove="clearValues"
           />
         </span>
         <span
@@ -97,6 +97,7 @@
         <template v-else>
           <input
             ref="elInput"
+            v-model="internalFilter"
             :class="[
               `${carbonPrefix}--text-input`,
               {
@@ -110,7 +111,6 @@
             :aria-expanded="data.open ? 'true' : 'false'"
             autocomplete="off"
             :placeholder="label"
-            v-model="internalFilter"
             @input="onInput"
             @focus="inputFocus"
             @click.stop.prevent="inputClick"
@@ -142,13 +142,14 @@
 
       <div
         :id="uid"
+        ref="elList"
         :aria-labelledby="`${uid}-label`"
         :class="`${carbonPrefix}--list-box__menu`"
         role="listbox"
-        ref="elList"
       >
         <div
           v-for="(item, index) in data.options"
+          ref="elOption"
           :key="`multi-select-${index}`"
           :class="[
             `${carbonPrefix}--list-box__menu-item`,
@@ -157,16 +158,15 @@
                 highlighted === item.value,
             },
           ]"
-          ref="elOption"
           @click.stop.prevent="onItemClick(item.value)"
           @mousemove="onMousemove(item.value)"
           @mousedown.prevent
         >
           <div :class="`${carbonPrefix}--list-box__menu-item__option`">
             <cv-checkbox
+              v-model="data.selectedItems"
               tabindex="-1"
               :form-item="false"
-              v-model="data.selectedItems"
               :value="item.value"
               :name="item.name"
               :label="item.label"
