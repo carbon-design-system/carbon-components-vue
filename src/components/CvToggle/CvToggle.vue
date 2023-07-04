@@ -1,6 +1,7 @@
 <template>
   <div :class="{ [`${carbonPrefix}--form-item`]: formItem }">
     <input
+      role="toggle"
       v-bind="$attrs"
       :class="[
         `${carbonPrefix}--toggle-input`,
