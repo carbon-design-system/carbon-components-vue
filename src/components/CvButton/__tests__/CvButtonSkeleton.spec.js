@@ -3,7 +3,7 @@
  */
 import { shallowMount } from '@vue/test-utils';
 import { carbonPrefix } from '../../../global/settings';
-import { CvButtonSkeleton } from '..';
+import CvButtonSkeleton from '../CvButtonSkeleton.vue';
 
 describe('CvButtonSkeleton', () => {
   test.each([[undefined], [''], ['default']])(
