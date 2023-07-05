@@ -6,6 +6,7 @@ import CvOverflowMenu from './src/components/CvOverflowMenu/CvOverflowMenu.vue';
 import CvButtonSet from './src/components/CvButton/CvButtonSet.vue';
 import CvIconButton from './src/components/CvButton/CvIconButton.vue';
 import CvButton from './src/components/CvButton/CvButton.vue';
+import CvButtonSkeleton from './src/components/CvButton/CvButtonSkeleton.vue';
 import CvAccordionItem from './src/components/CvAccordion/CvAccordionItem.vue';
 import CvAccordion from './src/components/CvAccordion/CvAccordion.vue';
 import CvTag from './src/components/CvTag/CvTag.vue';
@@ -44,6 +45,7 @@ const all = {
   CvButtonSet,
   CvIconButton,
   CvButton,
+  CvButtonSkeleton,
   CvAccordionItem,
   CvAccordion,
   CvTag,
