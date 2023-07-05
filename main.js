@@ -9,6 +9,7 @@ import CvButton from './src/components/CvButton/CvButton.vue';
 import CvButtonSkeleton from './src/components/CvButton/CvButtonSkeleton.vue';
 import CvAccordionItem from './src/components/CvAccordion/CvAccordionItem.vue';
 import CvAccordion from './src/components/CvAccordion/CvAccordion.vue';
+import CvAccordionSkeleton from './src/components/CvAccordion/CvAccordionSkeleton.vue';
 import CvTag from './src/components/CvTag/CvTag.vue';
 import CvComboBox from './src/components/CvComboBox/CvComboBox.vue';
 import CvPagination from './src/components/CvPagination/CvPagination.vue';
@@ -36,6 +37,29 @@ import CvInlineNotification from './src/components/CvNotification/CvInlineNotifi
 import CvToastNotification from './src/components/CvNotification/CvToastNotification.vue';
 import CvLoading from './src/components/CvLoading/CvLoading.vue';
 import CvCheckbox from './src/components/CvCheckbox/CvCheckbox.vue';
+import CvHeader from './src/components/CvUIShell/CvHeader.vue';
+import CvHeaderGlobalAction from './src/components/CvUIShell/CvHeaderGlobalAction.vue';
+import CvHeaderMenu from './src/components/CvUIShell/CvHeaderMenu.vue';
+import CvHeaderMenuButton from './src/components/CvUIShell/CvHeaderMenuButton.vue';
+import CvHeaderMenuItem from './src/components/CvUIShell/CvHeaderMenuItem.vue';
+import CvHeaderName from './src/components/CvUIShell/CvHeaderName.vue';
+import CvHeaderNav from './src/components/CvUIShell/CvHeaderNav.vue';
+import CvHeaderPanel from './src/components/CvUIShell/CvHeaderPanel.vue';
+import CvSideNav from './src/components/CvUIShell/CvSideNav.vue';
+import CvSideNavIcon from './src/components/CvUIShell/CvSideNavIcon.vue';
+import CvSideNavItems from './src/components/CvUIShell/CvSideNavItems.vue';
+import CvSideNavLink from './src/components/CvUIShell/CvSideNavLink.vue';
+import CvSideNavMenu from './src/components/CvUIShell/CvSideNavMenu.vue';
+import CvSideNavMenuDivider from './src/components/CvUIShell/CvSideNavMenuDivider.vue';
+import CvSideNavMenuItem from './src/components/CvUIShell/CvSideNavMenuItem.vue';
+import CvSkipToContent from './src/components/CvUIShell/CvSkipToContent.vue';
+import CvSwitcher from './src/components/CvUIShell/CvSwitcher.vue';
+import CvSwitcherItem from './src/components/CvUIShell/CvSwitcherItem.vue';
+import CvSwitcherItemLink from './src/components/CvUIShell/CvSwitcherItemLink.vue';
+import CvColumn from './src/components/CvGrid/CvColumn.vue';
+import CvGrid from './src/components/CvGrid/CvGrid.vue';
+import CvRow from './src/components/CvGrid/CvRow.vue';
+
 const all = {
   CvAspectRatio,
   CvListItem,
@@ -48,6 +72,7 @@ const all = {
   CvButtonSkeleton,
   CvAccordionItem,
   CvAccordion,
+  CvAccordionSkeleton,
   CvTag,
   CvComboBox,
   CvPagination,
@@ -75,6 +100,28 @@ const all = {
   CvToastNotification,
   CvLoading,
   CvCheckbox,
+  CvHeader,
+  CvHeaderGlobalAction,
+  CvHeaderMenu,
+  CvHeaderMenuButton,
+  CvHeaderMenuItem,
+  CvHeaderName,
+  CvHeaderNav,
+  CvHeaderPanel,
+  CvSideNav,
+  CvSideNavIcon,
+  CvSideNavItems,
+  CvSideNavLink,
+  CvSideNavMenu,
+  CvSideNavMenuDivider,
+  CvSideNavMenuItem,
+  CvSkipToContent,
+  CvSwitcher,
+  CvSwitcherItem,
+  CvSwitcherItemLink,
+  CvColumn,
+  CvGrid,
+  CvRow,
 };
 export default {
   install(app, options) {

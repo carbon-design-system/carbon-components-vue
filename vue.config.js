@@ -1,30 +1,31 @@
-// const CopyWebpackPlugin = require("copy-webpack-plugin");
-
+// vue.config.js
 module.exports = {
   configureWebpack: {
     resolve: {
-      alias: {
-        '@': undefined,
-      },
       extensions: ['.js'],
     },
     performance: {
-      maxEntrypointSize: 1000000,
-      maxAssetSize: 1000000,
+      assetFilter: function (assetFilename) {
+        return assetFilename.endsWith('min.js');
+      },
+      maxEntrypointSize: 300000,
+      maxAssetSize: 300000,
     },
-    // plugins: [
-    //   new CopyWebpackPlugin({
-    //     patterns: [{ from: "public", to: "wibble", toType: "dir" }]
-    //   })
-    // ]
   },
-
+  chainWebpack: config => {
+    config.module
+      .rule('vue')
+      .use('vue-loader')
+      .tap(options => ({
+        ...options,
+        compilerOptions: {
+          // treat any tag that starts with ion- as custom elements
+          isCustomElement: tag => tag.startsWith('bx-'),
+        },
+      }));
+  },
   pluginOptions: {
     lintStyleOnBuild: true,
     stylelint: {},
-  },
-
-  css: {
-    extract: true, // FALSE: causes a problem with SSR, prefer :style
   },
 };

@@ -1,5 +1,0 @@
-*
-!Staticfile
-!storybook
-storybook/*
-!storybook/storybook-static

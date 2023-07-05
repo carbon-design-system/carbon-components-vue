@@ -134,6 +134,6 @@ function onCheckedChange(val) {
     id: cvId.value,
     isChecked: val,
   });
-  bus?.emit('cv:check-change', attrs.value, val);
+  bus?.emit('cv:check-change', { value: attrs.value, checked: val });
 }
 </script>

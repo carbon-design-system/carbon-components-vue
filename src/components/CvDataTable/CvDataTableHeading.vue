@@ -43,7 +43,7 @@
 <script setup>
 import ArrowDown16 from '@carbon/icons-vue/es/arrow--down/16';
 import Arrows16 from '@carbon/icons-vue/es/arrows--vertical/16';
-import CvEmpty from '../CvEmpty/CvEmpty.vue';
+import CvEmpty from '../CvEmpty/_CvEmpty.vue';
 import { props as propsCvId, useCvId } from '../../use/cvId';
 import { carbonPrefix } from '../../global/settings';
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
@@ -117,11 +117,10 @@ onBeforeUnmount(() => {
   store.removeHeading(parent, cvId);
 });
 function onSortClick() {
-  bus?.emit(
-    'cv:sort',
-    { id: cvId.value, name: props.name },
-    nextOrder[internalOrder.value]
-  );
+  bus?.emit('cv:sort', {
+    heading: { id: cvId.value, name: props.name },
+    value: nextOrder[internalOrder.value],
+  });
 }
 const internalOrder = computed(() => {
   if (!props.sortable) {

@@ -1,0 +1,23 @@
+{
+  "useWorkspaces": false,
+  "version": "independent",
+  "packages":["."],
+  "npmClient": "yarn",
+  "command": {
+    "version": {
+      "conventionalCommits": true,
+      "message": "chore(release): publish [skip ci]"
+    }
+  },
+  "ignoreChanges": [
+    "**/__fixtures__/**",
+    "**/__tests__/**",
+    "**/docs/**",
+    "**/e2e/**",
+    "**/examples/**",
+    "**/*.md",
+    "**/*-story.js",
+    "**/*-stories.*",
+    "**/*.stories.*"
+  ]
+}

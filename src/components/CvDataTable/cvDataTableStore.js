@@ -1,8 +1,13 @@
 import { reactive, unref } from 'vue';
-const loggerEnabled = localStorage
-  ?.getItem('debug')
-  ?.split(' ')
-  .includes('cv:data-table-store');
+let loggerEnabled = false;
+try {
+  loggerEnabled = localStorage
+    ?.getItem('debug')
+    ?.split(' ')
+    .includes('cv:data-table-store');
+} catch (e) {
+  // ignore
+}
 // eslint-disable-next-line no-console
 const logger = loggerEnabled ? console.debug : () => {};
 

@@ -72,3 +72,19 @@ If you just want to build an individual package you can limit the scope:
 `yarn build --scope storybook`
 
 To start the storybook in a local server use `yarn start`.
+
+## How to run the storybook
+
+Just follow the steps listed below and you will be able to run the storybook.
+
+1. After the checkout to the `vNext` branch, in order to install the dependencies run the command `yarn install` on the root;
+2. Now, run the command `cd storybook` to enter the storybook folder, then again run the command `yarn install` to install the dependencies inside the storybook folder;
+3. Finally, run the command `yarn serve` inside the storybook folder.
+
+In other words, these are the commands you're going to use in order of execution:
+
+```
+yarn install
+cd storybook
+yarn serve
+```

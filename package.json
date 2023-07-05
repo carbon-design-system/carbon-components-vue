@@ -1,20 +1,17 @@
 {
-  "name": "@carbon/vue-3",
+  "name": "@carbon/vue",
   "license": "Apache-2.0",
-  "version": "0.6.0",
+  "version": "3.0.6-alpha.0",
   "description": "A collection of components for the Carbon Design System built using Vue.js",
-  "private": true,
   "packageManager": "yarn@3.2.0",
-  "main": "./main.js",
+  "main": "dist/carbon-vue-3.umd.min.js",
   "scripts": {
     "postinstall": "node prepare.js",
     "prepack": "pinst --disable",
     "postpack": "pinst --enable",
     "build": "vue-cli-service build --target lib --name carbon-vue-3 ./src/index.js --no-clean",
     "lint": "vue-cli-service lint",
-    "build-storybook": "build-storybook",
-    "serve": "start-storybook -p 6006",
-    "ci-check": "yarn format:diff && yarn test --maxWorkers=5 && yarn build && yarn build-storybook --quiet",
+    "ci-check": "yarn format:diff && yarn test --no-coverage && yarn build",
     "format": "prettier --write '**/*.{scss,css,js,md,vue}' '!**/{build,es,lib,storybook,ts,umd,.coverage}/**'",
     "format:diff": "prettier --list-different '**/*.{scss,css,js,md,vue}' '!**/{dist,storybook-static,.coverage}/**'",
     "format:staged": "prettier --write '**/*.{scss,css,js,md,vue}' '!**/{dist,storybook-static,.coverage}/**'",
@@ -22,38 +19,23 @@
     "lint:es": "eslint src/**/*.{js,vue}",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
-    "a11test": "node -v",
-    "storybook": "start-storybook -p 6006 --no-manager-cache"
+    "a11test": "node -v"
   },
+  "workspaces": [
+    "storybook"
+  ],
   "dependencies": {
     "@carbon/icons-vue": "^10.60.0",
-    "@carbon/layout": "^10.37.1",
-    "@carbon/themes": "^10.55.1",
-    "@carbon/type": "^10.45.1",
-    "@storybook/addon-storysource": "^6.5.15",
     "@vueuse/core": "^4.11.2",
     "carbon-components": "^10.58.5",
-    "mitt": "^3.0.0",
-    "remove": "^0.1.5",
-    "stylelint-config-property-sort-order-smacss": "^9.0.0",
-    "stylelint-config-sass-guidelines": "^9.0.1",
-    "vue": "^3.2.45"
-  },
-  "peerDependencies": {
-    "carbon-icons": "^7"
+    "flatpickr": "^4.6.13",
+    "mitt": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",
     "@babel/eslint-parser": "^7.17.0",
     "@commitlint/cli": "^16.3.0",
     "@commitlint/config-conventional": "^16.2.4",
-    "@storybook/addon-a11y": "^6.5.13",
-    "@storybook/addon-actions": "^6.5.13",
-    "@storybook/addon-essentials": "^6.5.13",
-    "@storybook/addon-links": "^6.5.13",
-    "@storybook/builder-webpack5": "^6.5.13",
-    "@storybook/manager-webpack5": "^6.5.13",
-    "@storybook/vue3": "^6.5.13",
     "@testing-library/dom": "^8.19.0",
     "@testing-library/user-event": "^14.4.3",
     "@testing-library/vue": "^6.6.1",
@@ -75,19 +57,20 @@
     "eslint-plugin-vue": "^8.7.1",
     "husky": "^7.0.4",
     "jest": "^27.5.1",
+    "lerna": "^6.5.1",
     "lint-staged": "^12.5.0",
     "pinst": "^3.0.0",
     "postcss": "^8.4.19",
     "postcss-loader": "^6.2.1",
     "prettier": "^2.8.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
     "sass": "^1.56.1",
     "sass-loader": "^12.6.0",
     "storybook": "^6.5.13",
     "style-loader": "^3.3.1",
     "stylelint": "^14.15.0",
-    "typescript": "^4.9.3",
+    "stylelint-config-property-sort-order-smacss": "^9.0.0",
+    "stylelint-config-sass-guidelines": "^9.0.1",
+    "vue": "^3.2.45",
     "vue-loader": "^17.0.1",
     "webpack": "^5.75.0"
   },
@@ -193,6 +176,13 @@
       "tsx",
       "node"
     ]
+  },
+  "directories": {
+    "src": "src",
+    "test": "__tests__"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "files": [
     "/dist",

@@ -1,0 +1,217 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+import { sbCompPrefix } from '../../global/storybook-utils';
+import CvGrid from "./CvGrid.vue";
+import CvRow from "./CvRow.vue";
+import CvColumn from "./CvColumn.vue";
+import SbContainer from "./_SbContainer.vue";
+
+<Meta title={`${sbCompPrefix}/CvGrid`}
+      component={CvGrid}
+      decorators={[() => ({
+        components: { SbContainer, Story },
+        template: `<SbContainer><story/></SbContainer>`,
+      })]}
+/>
+
+export const Template = args => ({
+  // Components used in your story `template` are defined in the `components` object
+  components: {
+    CvGrid,CvRow,CvColumn,SbContainer
+  },
+  // The story's `args` need to be mapped into the template through the `setup()` method
+  setup() {
+    return {
+      ...args,
+    };
+  },
+  // And then the `args` are bound to your component with `v-bind="args"`
+  template: args.template,
+});
+const defaultTemplate = `
+<cv-grid :full-width="fullWidth" :kind="kind">
+  <cv-row>
+    <cv-column><div>span 25%</div></cv-column>
+    <cv-column><div>span 25%</div></cv-column>
+    <cv-column><div>span 25%</div></cv-column>
+    <cv-column><div>span 25%</div></cv-column>
+  </cv-row>
+</cv-grid>
+`;
+const rowOptionsTemplate = `
+<cv-grid>
+  <cv-row :kind="rowKind1">
+    <cv-column><div><h3>{{rowKind1}}</h3></div></cv-column>
+    <cv-column><div>Elora Danan</div></cv-column>
+    <cv-column><div>Queen Bavmorda</div></cv-column>
+    <cv-column><div>Willow Ufgood</div></cv-column>
+  </cv-row>
+  <cv-row :kind="rowKind2">
+    <cv-column><div><h3>{{rowKind2}}</h3></div></cv-column>
+    <cv-column><div>Jade Claymore</div></cv-column>
+    <cv-column><div>Graydon Hastur</div></cv-column>
+    <cv-column><div>Thraxus Boorman</div></cv-column>
+  </cv-row>
+  <cv-row :kind="rowKind3">
+    <cv-column><div><h3>{{rowKind3}}</h3></div></cv-column>
+    <cv-column><div>Madmartigan</div></cv-column>
+    <cv-column><div>Princess Kit</div></cv-column>
+    <cv-column><div>Airk Tanthalos</div></cv-column>
+  </cv-row>
+</cv-grid>
+`
+const responsiveTemplate = `
+<cv-grid>
+  <cv-row>
+    <cv-column :sm="2" :md="4" :lg="6"><div>
+      <p>small: span 2 of 4</p>
+      <p>medium: span 4 of 8</p>
+      <p>large: span 6 of 12</p>
+    </div></cv-column>
+    <cv-column :sm="2" :md="2" :lg="3"><div>
+      <p>small: span 2 of 4</p>
+      <p>medium: span 2 of 8</p>
+      <p>large: span 3 of 12</p>
+    </div></cv-column>
+    <cv-column :sm="0" :md="2" :lg="3"><div>
+      <p>small: span 0 (hidden at this break point) of 4</p>
+      <p>medium: span 2 of 8</p>
+      <p>large: span 3 of 12</p>
+    </div></cv-column>
+  </cv-row>
+</cv-grid>
+`
+const offsetTemplate = `
+<cv-grid>
+  <cv-row>
+    <cv-column :sm="{ span: 1, offset: 3 }"><div>span 1, offset 3</div></cv-column>
+    <cv-column :sm="{ span: 2, offset: 2 }"><div>span 2, offset 2</div></cv-column>
+    <cv-column :sm="{ span: 3, offset: 1 }"><div>span 3, offset 1</div></cv-column>
+    <cv-column :sm="{ span: 4, offset: 0 }"><div>span 4, offset 0</div></cv-column>
+  </cv-row>
+</cv-grid>
+`
+const startEndTemplate = `
+<cv-grid>
+  <cv-row>
+    <cv-column :sm="{ span: 1, start: 4 }"><div>span 1, start 4</div></cv-column>
+    <cv-column :sm="{ span: 2, end: 5 }"><div>span 2, end 5</div></cv-column>
+    <cv-column :sm="{ start: 1, end: 4 }"><div>start 1, end 5</div></cv-column>
+  </cv-row>
+</cv-grid>
+`
+
+# CvGrid
+
+A Vue utility component for the Carbon Grid
+
+<Canvas isColumn>
+  <h4>Size columns automatically</h4>
+  <h5>Properties:</h5>
+  <ul>
+    <li>fullWidth - Remove the default max width that the grid has set</li>
+    <li>kind - "wide", "narrow", or "condensed"</li>
+  </ul>
+  <Story
+    name="Default"
+    parameters={{
+      controls: {
+        exclude: [
+          'default',
+          'template',
+        ],
+      },
+      docs: { source: { code: defaultTemplate } },
+    }}
+    args={{
+      fullWidth: false,
+      kind: 'wide',
+      template: defaultTemplate,
+    }}
+    argTypes={{
+      kind: { control: 'select', default: 'wide', options: ['wide', 'condensed', 'narrow'] },
+    }}
+    >
+    {Template.bind({})}
+  </Story>
+  <hr/>
+  <h4>Row options</h4>
+  <h5>Properties:</h5>
+  <ul>
+    <li>kind - "wide", "narrow", or "condensed". Override the gid setting for a row.</li>
+  </ul>
+  <Story
+    name="Rows"
+    parameters={{
+      controls: {
+        exclude: [
+          'default',
+          'template',
+          'kind',
+          'fullWidth',
+        ],
+      },
+      docs: { source: { code: rowOptionsTemplate } },
+    }}
+    args={{
+      rowKind1: 'wide',
+      rowKind2: 'condensed',
+      rowKind3: 'narrow',
+      template: rowOptionsTemplate,
+    }}
+    argTypes={{
+      rowKind1: { control: 'select', default: 'wide', options: ['wide', 'condensed', 'narrow'] },
+      rowKind2: { control: 'select', default: 'condensed', options: ['wide', 'condensed', 'narrow'] },
+      rowKind3: { control: 'select', default: 'narrow', options: ['wide', 'condensed', 'narrow'] },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+  <hr/>
+  <h4>Responsive</h4>
+  <Story
+    name="Responsive"
+    parameters={{
+      controls: {
+        exclude: [
+          'default',
+          'template',
+          'kind',
+          'fullWidth',
+        ],
+      },
+      docs: { source: { code: responsiveTemplate } },
+    }}
+    args={{
+      template: responsiveTemplate,
+    }}
+    argTypes={{
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+  <hr/>
+  <h4>Offset - Fun! But useful?</h4>
+  <Story
+    name="Offset"
+    parameters={{
+      controls: {
+        exclude: [
+          'default',
+          'template',
+          'kind',
+          'fullWidth',
+        ],
+      },
+      docs: { source: { code: offsetTemplate } },
+    }}
+    args={{
+      template: offsetTemplate,
+    }}
+    argTypes={{
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+

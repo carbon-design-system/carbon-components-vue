@@ -40,6 +40,18 @@ module.exports = {
     // 'PRODUCTION' is used when building the static version of storybook.
 
     // Make whatever fine-grained changes you need
+
+    const vueLoader = config.module.rules.find(
+      r => r.loader && r.loader.includes('/vue-loader/')
+    );
+    if (vueLoader)
+      vueLoader.options = {
+        ...vueLoader.options,
+        compilerOptions: {
+          // treat any tag that starts with ion- as custom elements
+          isCustomElement: tag => tag.startsWith('bx-'),
+        },
+      };
     config.module.rules.push({
       test: /\.scss$/,
       use: ['style-loader', 'css-loader', 'sass-loader'],
@@ -60,10 +72,9 @@ module.exports = {
 
     config.performance = {
       ...config.performance,
-      maxEntrypointSize: 4194000,
-      maxAssetSize: 2097000,
+      maxEntrypointSize: 5000000,
+      maxAssetSize: 4000000,
     };
-    // config.resolve.alias['@'] = path.resolve(__dirname, '../src');
 
     // Return the altered config
     return config;
