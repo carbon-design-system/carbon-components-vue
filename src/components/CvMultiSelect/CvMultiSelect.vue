@@ -150,6 +150,7 @@
         <div
           v-for="(item, index) in data.options"
           ref="elOption"
+          role="menuitem"
           :key="`multi-select-${index}`"
           :class="[
             `${carbonPrefix}--list-box__menu-item`,
@@ -225,6 +226,10 @@ import {
   TOP_AFTER_REOPEN,
 } from './consts';
 import { tagKinds } from '../CvTag/consts';
+
+defineOptions({
+  inheritAttrs: false,
+});
 
 /**
  * Select options shape

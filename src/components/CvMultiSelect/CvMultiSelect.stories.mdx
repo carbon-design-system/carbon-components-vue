@@ -95,8 +95,8 @@ const defaultTemplate = `
   :title="title"
   :value="value"
   :warningMessage="warningMessage"
-  @change="change"
-  @filter="filter"
+  @change="onChange"
+  @filter="onFilter"
   >
   </cv-multi-select>
   </div>
@@ -107,8 +107,8 @@ const slotsTemplate = `
   :label="label"
   :options="options"
   :title="title"
-  @change="change"
-  @filter="filter"
+  @change="onChange"
+  @filter="onFilter"
   >
     <template v-if="slotInvalidText" v-slot:invalid-message>That is <span style="font-weight:900">NOT</span> a replicant</template>
     <template v-if="slotWarningText" v-slot:warning-message>Are you sure that is a <span style="font-variant-caps: petite-caps;">Replicant</span></template>
