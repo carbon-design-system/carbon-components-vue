@@ -58,6 +58,8 @@ import CvSwitcherItemLink from './src/components/CvUIShell/CvSwitcherItemLink.vu
 import CvColumn from './src/components/CvGrid/CvColumn.vue';
 import CvGrid from './src/components/CvGrid/CvGrid.vue';
 import CvRow from './src/components/CvGrid/CvRow.vue';
+import CvNumberInput from './src/components/CvNumberInput/CvNumberInput.vue';
+import CvNumberInputSkeleton from './src/components/CvNumberInput/CvNumberInputSkeleton.vue';
 
 const all = {
   CvAspectRatio,
@@ -120,6 +122,8 @@ const all = {
   CvColumn,
   CvGrid,
   CvRow,
+  CvNumberInput,
+  CvNumberInputSkeleton,
 };
 export default {
   install(app, options) {
