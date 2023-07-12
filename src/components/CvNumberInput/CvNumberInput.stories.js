@@ -11,6 +11,22 @@ export default {
   component: CvNumberInput,
   argTypes: {
     // attrs
+    ariaLabelForDownButton: {
+      type: 'string',
+      table: {
+        type: { summary: 'string' },
+        category: 'attributes',
+      },
+      description: 'Aria label for down (decrease) button',
+    },
+    ariaLabelForUpButton: {
+      type: 'string',
+      table: {
+        type: { summary: 'string' },
+        category: 'attributes',
+      },
+      description: 'Aria label for up (increase) button',
+    },
     disabled: {
       type: 'boolean',
       table: {
@@ -19,15 +35,41 @@ export default {
       },
       description: 'Specify whether the `<input>` should be disabled',
     },
-    placeholder: {
+    max: {
       type: 'string',
       table: {
-        type: { summary: 'string' },
+        type: { summary: 'string | number' },
         category: 'attributes',
       },
-      description: 'Specify the placeholder attribute for the `<input>`',
+      description: '`max` attribute for input HTML element',
+    },
+    min: {
+      type: 'string',
+      table: {
+        type: { summary: 'string | number' },
+        category: 'attributes',
+      },
+      description: '`min` attribute for input HTML element',
+    },
+    step: {
+      type: 'string',
+      table: {
+        type: { summary: 'string | number' },
+        category: 'attributes',
+      },
+      description: '`step` attribute for input HTML element',
     },
     // props
+    formItem: {
+      type: 'boolean',
+      table: {
+        type: { summary: 'boolean' },
+        category: 'props',
+        defaultValue: true,
+      },
+      description:
+        "Adds .bx--form-item class to component's wrapping HTML element",
+    },
     helperText: {
       type: 'string',
       table: {
@@ -36,16 +78,6 @@ export default {
       },
       description:
         'Provide text that is used alongside the control label for additional help',
-    },
-    hideLabel: {
-      type: 'boolean',
-      table: {
-        type: { summary: 'boolean' },
-        category: 'props',
-        defaultValue: false,
-      },
-      description:
-        'Specify whether you want the underlying label to be visually hidden',
     },
     invalidMessage: {
       type: 'string',
@@ -83,43 +115,6 @@ export default {
       description:
         "Input's value, modelValue is the vue3 default 'prop' for two-way data binding with v-model",
     },
-    passwordHideLabel: {
-      type: 'string',
-      table: {
-        type: { summary: 'string' },
-        category: 'props',
-      },
-      description: '"Hide password" tooltip text on password visibility toggle',
-    },
-    passwordShowLabel: {
-      type: 'string',
-      table: {
-        type: { summary: 'string' },
-        category: 'props',
-      },
-      description: '"Show password" tooltip text on password visibility toggle',
-    },
-    passwordVisible: {
-      type: 'boolean',
-      table: {
-        type: { summary: 'boolean' },
-        category: 'props',
-      },
-      description: 'Toggle password visibility.',
-    },
-    type: {
-      type: 'string',
-      table: {
-        type: { summary: 'string' },
-        category: 'props',
-        defaultValue: { summary: 'text' },
-      },
-      options: ['text', 'password'],
-      control: {
-        type: 'select',
-      },
-      description: 'Input type, only `text` and `password` are available',
-    },
     warnText: {
       type: 'string',
       table: {
@@ -130,6 +125,14 @@ export default {
         'Provide the text that is displayed when the control is in warning state',
     },
     // slots
+    'label ': {
+      type: 'string',
+      table: {
+        type: { summary: 'string | html | Component' },
+        category: 'slots',
+      },
+      description: 'Input label slot',
+    },
     'helper-text': {
       type: 'string',
       table: {

@@ -15,8 +15,14 @@
       ]"
       :data-invalid="dataInvalidAttributeValue"
     >
-      <label v-show="label" :for="cvId" :class="`${carbonPrefix}--label`">
-        {{ label }}
+      <label
+        v-show="label || slots['label']"
+        :for="cvId"
+        :class="`${carbonPrefix}--label`"
+      >
+        <slot name="label">
+          {{ label }}
+        </slot>
       </label>
 
       <div
@@ -27,7 +33,7 @@
       >
         <input
           ref="input"
-          v-model.number="internalValue"
+          v-model="internalValue"
           :id="cvId"
           :data-invalid="dataInvalidAttributeValue"
           type="number"
@@ -95,7 +101,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref, useSlots } from 'vue';
 import Add16 from '@carbon/icons-vue/es/add/16';
 import Subtract16 from '@carbon/icons-vue/es/subtract/16';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
@@ -156,6 +162,7 @@ const props = defineProps({
   ...propsTheme,
 });
 
+const modelValueType = typeof props.modelValue;
 const cvId = useCvId(props);
 const { isInvalid, isWarn, isHelper, isLight } = useCvInputHelpers(props);
 const dataInvalidAttributeValue = computed(() =>
@@ -177,16 +184,19 @@ const iconClasses = computed(() => {
 });
 
 const emit = defineEmits(['update:modelValue']);
+
 const input = ref(null);
+const formatInputValueType = value => {
+  return modelValueType === 'string' ? value : Number(value);
+};
+
 const internalValue = computed({
   get() {
-    const { modelValue } = props;
-    if (typeof modelValue === 'number') return modelValue;
-    const valueAsNumber = Number(modelValue);
-    return Number.isNaN(valueAsNumber) ? '' : valueAsNumber;
+    return props.modelValue;
   },
   set(value) {
-    onInput(value);
+    const valueFormatted = formatInputValueType(value);
+    onInput(valueFormatted);
   },
 });
 
@@ -211,6 +221,8 @@ const doDown = () => {
   input.value.stepDown();
   onProgrammaticValueChanged(input);
 };
+
+const slots = useSlots();
 </script>
 
 <script>
