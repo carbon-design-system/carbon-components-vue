@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+import { ref } from 'vue';
 import {
   sbCompPrefix,
   storyParametersObject,
@@ -173,7 +173,14 @@ export default {
   },
 };
 
-const template = `<cv-number-input @change="onChange" @input="onInput" v-bind="args"></cv-number-input>`;
+const template = `
+  <cv-number-input v-bind="args">
+    <template v-if="args['helper-text']" v-slot:helper-text />
+    <template v-if="args['warn-text']" v-slot:warn-text />
+    <template v-if="args['invalid-message']" v-slot:invalid-message />
+    <template v-if="args['label']" v-slot:label />
+  </cv-number-input>
+`;
 const Template = (args, { argTypes }) => {
   return {
     props: Object.keys(argTypes),
@@ -181,8 +188,6 @@ const Template = (args, { argTypes }) => {
     template,
     setup: () => ({
       args,
-      onInput: action('input'),
-      onChange: action('change'),
     }),
   };
 };
@@ -192,4 +197,42 @@ Default.parameters = storyParametersObject(
   Default.parameters,
   template,
   Default.args
+);
+
+const vModelTemplate = `
+  <cv-number-input v-bind="args" v-model="value" />
+  <p style="margin-top: 1rem;">Entered value: {{ value }}</p>
+`;
+const VModelTemplate = args => {
+  return {
+    components: { CvNumberInput },
+    setup: () => ({ args, value: ref(3) }),
+    template: vModelTemplate,
+  };
+};
+export const vModel = VModelTemplate.bind({});
+vModel.parameters = storyParametersObject(
+  vModel.parameters,
+  vModelTemplate,
+  vModel.args
+);
+
+export const NumberValue = VModelTemplate.bind({});
+NumberValue.parameters = storyParametersObject(
+  NumberValue.parameters,
+  template,
+  NumberValue.args
+);
+
+export const Slots = Template.bind({});
+Slots.args = {
+  'invalid-message': 'Some invalid message from slot',
+  'warn-text': 'Some warn message from slot',
+  'helper-text': 'Some help message from slot',
+  label: 'Number input label from slot',
+};
+Slots.parameters = storyParametersObject(
+  Slots.parameters,
+  template,
+  Slots.args
 );

@@ -20,13 +20,7 @@ export const useCvInputHelpers = props => {
       !isWarn.value &&
       !!(props.helperText?.length || slots['helper-text']);
   }
-  console.log('useCvInputHelpers: ', {
-    slots,
-    isInvalid: isInvalid.value,
-    isWarn: isWarn.value,
-    isHelper: isHelper.value,
-    isLight: isLight.value,
-  });
+
   onBeforeMount(checkSlots);
   onBeforeUpdate(checkSlots);
 

@@ -83,17 +83,11 @@
         <slot name="invalid-message">{{ invalidMessage }}</slot>
       </div>
 
-      <div
-        v-if="isWarn && !isInvalid"
-        :class="`${carbonPrefix}--form-requirement`"
-      >
+      <div v-else-if="isWarn" :class="`${carbonPrefix}--form-requirement`">
         <slot name="warn-text">{{ warnText }}</slot>
       </div>
 
-      <div
-        v-if="!(isInvalid || isWarn) && isHelper"
-        :class="`${carbonPrefix}--form__helper-text`"
-      >
+      <div v-if="isHelper" :class="`${carbonPrefix}--form__helper-text`">
         <slot name="helper-text">{{ helperText }}</slot>
       </div>
     </div>
@@ -162,32 +156,33 @@ const props = defineProps({
   ...propsTheme,
 });
 
-const modelValueType = typeof props.modelValue;
+const emit = defineEmits(['update:modelValue']);
 const cvId = useCvId(props);
 const { isInvalid, isWarn, isHelper, isLight } = useCvInputHelpers(props);
 const dataInvalidAttributeValue = computed(() =>
-  isInvalid ? undefined : true
+  isInvalid.value ? true : undefined
 );
 
 const iconClasses = computed(() => {
   const classes = [];
-
-  if (isInvalid || isWarn) {
+  if (isInvalid.value || isWarn.value) {
     classes.push(`${carbonPrefix}--number__invalid`);
   }
-
-  if (isWarn && !isInvalid) {
+  if (isWarn.value && !isInvalid.value) {
     classes.push(`${carbonPrefix}--number__invalid--warning`);
   }
 
   return classes.join(' ');
 });
 
-const emit = defineEmits(['update:modelValue']);
-
 const input = ref(null);
+const modelValueType = typeof props.modelValue;
+const valuesToNaN = ['', null, undefined];
+
 const formatInputValueType = value => {
-  return modelValueType === 'string' ? value : Number(value);
+  if (modelValueType === 'string') return value.toString();
+  // According to Vue2 component if there is no value NaN is emitted
+  return valuesToNaN.includes(value) ? NaN : Number(value);
 };
 
 const internalValue = computed({
