@@ -148,7 +148,7 @@ const props = defineProps({
    */
   scrollIntoView: { type: Boolean, default: true },
 });
-const emit = defineEmits(['tab-selected']);
+const emit = defineEmits(['tab-selected', 'tab-selected-id']);
 
 const selectedId = ref('');
 provide('tab-selected', selectedId);
@@ -294,6 +294,7 @@ function doTabClick(id, setFocus = false) {
       }
 
       emit('tab-selected', newIndex);
+      emit('tab-selected-id', tabs.value[newIndex].uid);
     }
   }
 }

@@ -32,6 +32,7 @@ export const Template = args => ({
       selectedId: args.selectedId,
       disabledIds: args.disabledIds,
       onTabSelected: action('tab-selected'),
+      onTabSelectedId: action('tab-selected-id'),
     };
   },
   // And then the `args` are bound to your component with `v-bind="args"`
@@ -42,6 +43,7 @@ const defaultTemplate = `
   :container="container"
   :no-default-to-first="noDefaultToFirst"
   @tab-selected="onTabSelected"
+  @tab-selected-id="onTabSelectedId"
   aria-label="navigation tab label">
     <cv-tab id="tab-1" label="House" :selected="selectedId === 'tab-1'" :disabled="disabledIds.includes('tab-1')">
       <p>
@@ -97,8 +99,10 @@ Migration notes:
   applied as is shown in the React storybook. Also note that the background color applied when this property is
   specified is not from Carbon. The selector `.bx--tabs--container ~ div` can be used to set the background color and
   other properties but that is up to the user.
+- A new event emits `tab-selected-id` with the selected tab's id attribute.
 
 ## Mobile
+
 In my opinion, this component is not suitable for mobile formats. The navigation of the tabs becomes awkward on smaller
 screens, and so I suggest using a different component for mobile cases.
 
@@ -114,6 +118,7 @@ screens, and so I suggest using a different component for mobile cases.
           'rightOverflowIconButtonProps',
           'scrollIntoView',
           'tab-selected',
+          'tab-selected-id',
         ],
       },
       docs: { source: { code: defaultTemplate } },
@@ -153,6 +158,7 @@ screens, and so I suggest using a different component for mobile cases.
           'rightOverflowIconButtonProps',
           'scrollIntoView',
           'tab-selected',
+          'tab-selected-id',
           'container',
           'noDefaultToFirst',
         ],
