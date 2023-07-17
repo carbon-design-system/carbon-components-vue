@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CvNumberInput should match snapshot when all props are default 1`] = `<cv-wrapper-stub tagtype="div" class="cv-number-input bx--form-item"></cv-wrapper-stub>`;
+
+exports[`CvNumberInput should match snapshot when all props are provided 1`] = `<cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item"></cv-wrapper-stub>`;
+
+exports[`CvNumberInput should match snapshot when helper-text slot is provided 1`] = `<cv-wrapper-stub tagtype="div" class="cv-number-input bx--form-item"></cv-wrapper-stub>`;
+
+exports[`CvNumberInput should match snapshot when invalid-message slot is provided 1`] = `<cv-wrapper-stub tagtype="div" class="cv-number-input bx--form-item"></cv-wrapper-stub>`;
+
+exports[`CvNumberInput should match snapshot when it is not a formItem 1`] = `<cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item"></cv-wrapper-stub>`;
+
+exports[`CvNumberInput should match snapshot when light theme 1`] = `<cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item"></cv-wrapper-stub>`;
+
+exports[`CvNumberInput should match snapshot when value is Number 1`] = `<cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item"></cv-wrapper-stub>`;
+
+exports[`CvNumberInput should match snapshot when value is String 1`] = `<cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item"></cv-wrapper-stub>`;
+
+exports[`CvNumberInput should match snapshot with min, max and step as Strings 1`] = `<cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item"></cv-wrapper-stub>`;
+
+exports[`CvNumberInput should match snapshot with optional min, max and step as numbers 1`] = `<cv-wrapper-stub tagtype="" class="cv-number-input bx--form-item"></cv-wrapper-stub>`;

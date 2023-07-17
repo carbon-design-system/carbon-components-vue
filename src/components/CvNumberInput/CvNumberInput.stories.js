@@ -106,15 +106,6 @@ export default {
       description:
         "Toggles light version. For use on `$ui-01` backgrounds only. Don't use this to make tile background color same as container background color.",
     },
-    modelValue: {
-      type: 'string',
-      table: {
-        type: { summary: 'string' },
-        category: 'props',
-      },
-      description:
-        "Input's value, modelValue is the vue3 default 'prop' for two-way data binding with v-model",
-    },
     warnText: {
       type: 'string',
       table: {
@@ -199,28 +190,43 @@ Default.parameters = storyParametersObject(
   Default.args
 );
 
-const vModelTemplate = `
-  <cv-number-input v-bind="args" v-model="value" />
-  <p style="margin-top: 1rem;">Entered value: {{ value }}</p>
+const vModelHTML = `
+  <cv-number-input v-bind="args" v-model="modelValue" />
+  <p style="margin-top: 1rem;">Entered value: {{ modelValue }} | typeof: {{ typeof modelValue }}</p>
 `;
-const VModelTemplate = args => {
+const NumericVModelTemplate = args => {
   return {
     components: { CvNumberInput },
-    setup: () => ({ args, value: ref(3) }),
-    template: vModelTemplate,
+    setup: () => ({ args, modelValue: ref(3) }),
+    template: vModelHTML,
   };
 };
-export const vModel = VModelTemplate.bind({});
+export const vModel = NumericVModelTemplate.bind({});
 vModel.parameters = storyParametersObject(
   vModel.parameters,
-  vModelTemplate,
+  vModelHTML,
   vModel.args
 );
 
-export const NumberValue = VModelTemplate.bind({});
+export const NumberValue = NumericVModelTemplate.bind({});
 NumberValue.parameters = storyParametersObject(
   NumberValue.parameters,
-  template,
+  vModelHTML,
+  NumberValue.args
+);
+
+const StringVModelTemplate = args => {
+  return {
+    components: { CvNumberInput },
+    setup: () => ({ args, modelValue: ref('3') }),
+    template: vModelHTML,
+  };
+};
+
+export const StringValue = StringVModelTemplate.bind({});
+NumberValue.parameters = storyParametersObject(
+  NumberValue.parameters,
+  vModelHTML,
   NumberValue.args
 );
 
