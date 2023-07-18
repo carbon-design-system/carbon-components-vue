@@ -184,6 +184,7 @@ const Template = (args, { argTypes }) => {
 };
 
 export const Default = Template.bind({});
+Default.args = { label: 'Number input label' };
 Default.parameters = storyParametersObject(
   Default.parameters,
   template,
@@ -192,42 +193,57 @@ Default.parameters = storyParametersObject(
 
 const vModelHTML = `
   <cv-number-input v-bind="args" v-model="modelValue" />
-  <p style="margin-top: 1rem;">Entered value: {{ modelValue }} | typeof: {{ typeof modelValue }}</p>
+  <div style="margin-top:1rem; background-color: #888888;  padding:1rem"><div style="font-size: 150%">Sample interaction</div>
+  <input v-model="modelValue" type="number" />
+  <div>Entered value: <span style="font-weight: bold;">{{modelValue}}</span></div>
+  </div>
+  </div>
 `;
-const NumericVModelTemplate = args => {
+
+const VModelTemplate = args => {
   return {
     components: { CvNumberInput },
     setup: () => ({ args, modelValue: ref(3) }),
     template: vModelHTML,
   };
 };
-export const vModel = NumericVModelTemplate.bind({});
+export const vModel = VModelTemplate.bind({});
 vModel.parameters = storyParametersObject(
   vModel.parameters,
   vModelHTML,
   vModel.args
 );
 
-export const NumberValue = NumericVModelTemplate.bind({});
+const withTypeofMessageHTML = `
+  <cv-number-input v-bind="args" v-model="modelValue" />
+  <p style="margin-top: 1rem;">Entered value: {{ modelValue }} | typeof: {{ typeof modelValue }}</p>
+`;
+const NumberTemplate = args => {
+  return {
+    components: { CvNumberInput },
+    setup: () => ({ args, modelValue: ref(3) }),
+    template: withTypeofMessageHTML,
+  };
+};
+export const NumberValue = NumberTemplate.bind({});
 NumberValue.parameters = storyParametersObject(
   NumberValue.parameters,
-  vModelHTML,
+  withTypeofMessageHTML,
   NumberValue.args
 );
 
-const StringVModelTemplate = args => {
+const StringTemplate = args => {
   return {
     components: { CvNumberInput },
     setup: () => ({ args, modelValue: ref('3') }),
-    template: vModelHTML,
+    template: withTypeofMessageHTML,
   };
 };
-
-export const StringValue = StringVModelTemplate.bind({});
-NumberValue.parameters = storyParametersObject(
-  NumberValue.parameters,
-  vModelHTML,
-  NumberValue.args
+export const StringValue = StringTemplate.bind({});
+StringValue.parameters = storyParametersObject(
+  StringValue.parameters,
+  withTypeofMessageHTML,
+  StringValue.args
 );
 
 export const Slots = Template.bind({});
