@@ -4,7 +4,7 @@ import {
   storyParametersObject,
 } from '../../global/storybook-utils';
 
-import { CvCheckbox } from '.';
+import { CvCheckbox, CvCheckboxSkeleton } from '.';
 import { action } from '@storybook/addon-actions';
 import { props as propsCvCheck } from '../../use/cvCheck';
 import { ref } from 'vue';
@@ -109,3 +109,15 @@ vModel.parameters = storyParametersObject(
   templateVModel,
   vModel.args
 );
+
+const templateSkeleton = `<cv-checkbox-skeleton></cv-checkbox-skeleton>`;
+
+const TemplateSkeleton = args => {
+  return {
+    components: { CvCheckboxSkeleton },
+    setup: () => {},
+    template: templateSkeleton,
+  };
+};
+
+export const Skeleton = TemplateSkeleton.bind({});
