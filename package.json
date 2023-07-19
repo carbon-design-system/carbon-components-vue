@@ -19,7 +19,8 @@
     "lint:es": "eslint src/**/*.{js,vue}",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
-    "a11test": "node -v"
+    "a11test": "node -v",
+    "serve:storybook": "cd ./storybook && npm run serve"
   },
   "workspaces": [
     "storybook"
