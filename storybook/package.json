@@ -26,7 +26,7 @@
     "@storybook/addon-storysource": "^6.5.15",
     "stylelint-config-property-sort-order-smacss": "^9.0.0",
     "stylelint-config-sass-guidelines": "^9.0.1",
-    "vue": "^3.2.45"
+    "vue": "^3.3.4"
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",
@@ -48,7 +48,7 @@
     "@vue/cli-plugin-eslint": "^5.0.8",
     "@vue/cli-plugin-unit-jest": "^5.0.8",
     "@vue/cli-service": "^5.0.8",
-    "@vue/compiler-sfc": "^3.2.45",
+    "@vue/compiler-sfc": "^3.3.4",
     "@vue/eslint-config-prettier": "^7.0.0",
     "@vue/test-utils": "^2.2.4",
     "@vue/vue3-jest": "^27.0.0",

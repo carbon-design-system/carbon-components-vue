@@ -87,7 +87,7 @@ Secondary.parameters = storyParametersObject(
 
 export const Field = Template.bind({});
 Field.args = {
-  'slotArgs.default': 'Field size',
+  default: 'Field size',
   size: 'field',
 };
 Field.parameters = storyParametersObject(
@@ -98,7 +98,7 @@ Field.parameters = storyParametersObject(
 
 export const Small = Template.bind({});
 Small.args = {
-  'slotArgs.default': 'sm',
+  default: 'sm',
   size: 'sm',
 };
 Small.parameters = storyParametersObject(
@@ -109,7 +109,7 @@ Small.parameters = storyParametersObject(
 
 export const Large = Template.bind({});
 Large.args = {
-  'slotArgs.default': 'Large size',
+  default: 'Large size',
   size: 'lg',
 };
 Large.parameters = storyParametersObject(
