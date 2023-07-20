@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.6-alpha.0](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.5-alpha.0...@carbon/vue@3.0.6-alpha.0) (2023-06-07)
+
+### Bug Fixes
+
+- add yarn cache to .gitignore and install @mdx-js/react ([#1443](https://github.com/carbon-design-system/carbon-components-vue/issues/1443)) ([ee2810f](https://github.com/carbon-design-system/carbon-components-vue/commit/ee2810f121d70463309f50d602afcbb1f234750f))
+- **datepicker:** fix cv wrapper & label ([b9ce4fc](https://github.com/carbon-design-system/carbon-components-vue/commit/b9ce4fc451fa1e5b6717ffdf225834dca240e423))
+- **datepicker:** handle lifecicle hooks ([d7d5b5c](https://github.com/carbon-design-system/carbon-components-vue/commit/d7d5b5c869110e4c572f98256d550aa65012a406))
+- prettier ([c8f3092](https://github.com/carbon-design-system/carbon-components-vue/commit/c8f309295b838016ac768ed0b87c8d719c68bdb3))
+- resolve review comment - modal stiuck open after when switching storybook tabs ([bb54ea0](https://github.com/carbon-design-system/carbon-components-vue/commit/bb54ea0c86696b875812963135fc6ab1c0ca3dc1))
+- update readme to include storybook instructions ([4229407](https://github.com/carbon-design-system/carbon-components-vue/commit/4229407e5dc59f057228226bfb68343828aa19bf))
+- update readme to include storybook instructions ([974d727](https://github.com/carbon-design-system/carbon-components-vue/commit/974d7275fcf0e6de7fa2b36d30fc8e1376f2c1f4))
+- update readme to include storybook instructions ([65b40e1](https://github.com/carbon-design-system/carbon-components-vue/commit/65b40e1b7f75f179c38bb4c957c52c3f80b2b67f))
+
+### Features
+
+- add cv-modal ([b732521](https://github.com/carbon-design-system/carbon-components-vue/commit/b73252189091f2cdd534832022d58e6bab883cb8))
+- **datepicker:** add flatpickr plugins ([4ea62b4](https://github.com/carbon-design-system/carbon-components-vue/commit/4ea62b4d39698801d35b7010322094856faec860))
+- **datepicker:** add range support & flatpickr ([b040f51](https://github.com/carbon-design-system/carbon-components-vue/commit/b040f512860e9988274009f56bf635a84eb6ff60))
+- **datepicker:** add simple date field ([5f0a26a](https://github.com/carbon-design-system/carbon-components-vue/commit/5f0a26a64793ceb50a03179d223e71ebb4306c0d))
+- **datepicker:** add v-model support ([12face8](https://github.com/carbon-design-system/carbon-components-vue/commit/12face84f07670b6c4987d775b6325959aa227d8))
+- implement CvForm, CvFormGroup and CvFormItem ([#1452](https://github.com/carbon-design-system/carbon-components-vue/issues/1452)) ([d93b825](https://github.com/carbon-design-system/carbon-components-vue/commit/d93b8256b650ef75a65797bd9dbf5aec0214df44))
+
 ## [3.0.5-alpha.0](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.4-alpha.0...@carbon/vue@3.0.5-alpha.0) (2023-04-17)
 
 ### Features
