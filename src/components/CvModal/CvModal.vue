@@ -262,7 +262,7 @@ function onShown() {
   } else {
     focusBeforeContent();
   }
-  emit('modal-shown');
+  emit('modal-shown', uid.value);
 
   // check to see if content scrollable
   data.scrollable = content.value?.scrollHeight > content.value?.clientHeight;
@@ -306,10 +306,10 @@ function hide() {
 
   if (dataVisible.value) {
     el.value?.addEventListener('transitionend', afterHide);
+    emit('modal-hidden', uid.value);
   }
 
   dataVisible.value = false;
-  emit('modal-hidden');
 }
 function afterHide(event) {
   if (event.propertyName === 'opacity') {
@@ -396,8 +396,6 @@ function onOtherBtnClick(ev) {
   onFooterButtonClick('other-btn-click', ev);
 }
 onBeforeUnmount(() => {
-  if (dataVisible.value) {
-    emit('after-modal-hidden');
-  }
+  if (dataVisible.value) hide();
 });
 </script>

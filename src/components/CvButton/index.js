@@ -9,6 +9,6 @@ export {
   CvButtonConsts,
   CvButtonSet,
   CvIconButton,
-  CvButtonSkeleton
+  CvButtonSkeleton,
 };
 export default CvButton;
