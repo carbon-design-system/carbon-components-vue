@@ -58,6 +58,8 @@ import CvSwitcherItemLink from './src/components/CvUIShell/CvSwitcherItemLink.vu
 import CvColumn from './src/components/CvGrid/CvColumn.vue';
 import CvGrid from './src/components/CvGrid/CvGrid.vue';
 import CvRow from './src/components/CvGrid/CvRow.vue';
+import CvRadioButton from './src/components/CvRadioButton/CvRadioButton.vue';
+import CvRadioGroup from './src/components/CvRadioButton/CvRadioGroup.vue';
 
 const all = {
   CvAspectRatio,
@@ -120,6 +122,8 @@ const all = {
   CvColumn,
   CvGrid,
   CvRow,
+  CvRadioButton,
+  CvRadioGroup,
 };
 export default {
   install(app, options) {
