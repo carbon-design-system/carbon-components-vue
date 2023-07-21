@@ -193,10 +193,15 @@ Default.parameters = storyParametersObject(
 
 const vModelHTML = `
   <cv-number-input v-bind="args" v-model="modelValue" />
-  <div style="margin-top:1rem; background-color: #888888;  padding:1rem"><div style="font-size: 150%">Sample interaction</div>
-  <input v-model="modelValue" type="number" />
-  <div>Entered value: <span style="font-weight: bold;">{{modelValue}}</span></div>
-  </div>
+  <div style="margin-top:1rem; background-color: #888888; padding:1rem">
+    <div style="font-size: 150%">
+      Sample interaction
+    </div>
+    <input v-model="modelValue" type="number" />
+    <div>
+      Entered value:
+      <span style="font-weight: bold;">{{modelValue}}</span>
+    </div>
   </div>
 `;
 
