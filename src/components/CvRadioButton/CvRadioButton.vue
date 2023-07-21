@@ -43,8 +43,10 @@ const props = defineProps({
 });
 
 const cvId = useCvId(props);
+const emit = defineEmits(['update:modelValue', 'change']);
+
 useMethods({ input: ['blur', 'focus'] });
-const { isChecked, onChange } = useRadio(props);
+const { isChecked, onChange } = useRadio(props, emit);
 </script>
 
 <script>
