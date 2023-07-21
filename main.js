@@ -6,6 +6,7 @@ import CvOverflowMenu from './src/components/CvOverflowMenu/CvOverflowMenu.vue';
 import CvButtonSet from './src/components/CvButton/CvButtonSet.vue';
 import CvIconButton from './src/components/CvButton/CvIconButton.vue';
 import CvButton from './src/components/CvButton/CvButton.vue';
+import CvButtonSkeleton from './src/components/CvButton/CvButtonSkeleton.vue';
 import CvAccordionItem from './src/components/CvAccordion/CvAccordionItem.vue';
 import CvAccordion from './src/components/CvAccordion/CvAccordion.vue';
 import CvAccordionSkeleton from './src/components/CvAccordion/CvAccordionSkeleton.vue';
@@ -60,6 +61,7 @@ import CvGrid from './src/components/CvGrid/CvGrid.vue';
 import CvRow from './src/components/CvGrid/CvRow.vue';
 import CvNumberInput from './src/components/CvNumberInput/CvNumberInput.vue';
 import CvNumberInputSkeleton from './src/components/CvNumberInput/CvNumberInputSkeleton.vue';
+import CvToggle from './src/components/CvToggle/CvToggle.vue';
 
 const all = {
   CvAspectRatio,
@@ -70,6 +72,7 @@ const all = {
   CvButtonSet,
   CvIconButton,
   CvButton,
+  CvButtonSkeleton,
   CvAccordionItem,
   CvAccordion,
   CvAccordionSkeleton,
@@ -124,6 +127,7 @@ const all = {
   CvRow,
   CvNumberInput,
   CvNumberInputSkeleton,
+  CvToggle,
 };
 export default {
   install(app, options) {
