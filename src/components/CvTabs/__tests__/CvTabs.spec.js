@@ -1,4 +1,4 @@
-import { findByText, render } from '@testing-library/vue';
+import { render } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
 import CvTabs from '../CvTabs.vue';
 import CvTab from '../CvTab.vue';

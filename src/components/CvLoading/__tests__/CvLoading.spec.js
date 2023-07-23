@@ -37,7 +37,7 @@ test('CvLoading - test all props and attrs', async () => {
 });
 
 test('CvLoading - overlay', async () => {
-  const { debug, getByRole, rerender } = render(CvLoading, {
+  const { getByRole, rerender } = render(CvLoading, {
     props: { overlay: true, active: false },
   });
 
