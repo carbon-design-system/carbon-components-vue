@@ -30,6 +30,7 @@ const template = `<cv-accordion @change="onChange" v-bind="args">
   </cv-accordion-item>
 </cv-accordion>`;
 const Template = (args, { argTypes }) => {
+  // eslint-disable-next-line no-param-reassign
   args = {
     ...args,
     align: alignConsts[alignConsts.$labels[args.align]],

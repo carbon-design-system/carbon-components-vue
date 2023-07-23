@@ -2,7 +2,6 @@ import { render } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
 import CvMultiSelect from '../CvMultiSelect.vue';
 import CvSelect from '@/components/CvSelect/CvSelect.vue';
-import { ref } from 'vue';
 const pkdCharacters = [
   'Rick Deckard',
   'Garland',
@@ -256,7 +255,7 @@ describe('CvMultiSelect', () => {
     expect(button).not.toBeUndefined();
     const user = userEvent.setup();
     await user.click(button);
-    const closeButton = await result.findByLabelText('close menu');
+    await result.findByLabelText('close menu');
     let menuItems = await result.findAllByRole('menuitem');
 
     // Verify selected items are at the top by default

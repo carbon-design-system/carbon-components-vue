@@ -35,9 +35,6 @@ const Template = (args, { argTypes }) => {
 };
 
 export const Default = Template.bind({});
-console.log('Story: ', {
-  Default,
-});
 Default.args = {
   size: 'default',
 };

@@ -102,23 +102,16 @@ describe('CvSelect', () => {
       false
     );
     await result.rerender({ light: true });
-    expect(result.container.classList.contains('bx--select--light')).toBe(true);
+    const wrapper = result.container.querySelector('.bx--select');
+    expect(wrapper.classList.contains('bx--select--light')).toBe(true);
 
-    expect(result.container.classList.contains('bx--select--inline')).toBe(
-      false
-    );
+    expect(wrapper.classList.contains('bx--select--inline')).toBe(false);
     await result.rerender({ inline: true });
-    expect(result.container.classList.contains('bx--select--inline')).toBe(
-      true
-    );
+    expect(wrapper.classList.contains('bx--select--inline')).toBe(true);
 
-    expect(result.container.classList.contains('bx--select--disabled')).toBe(
-      false
-    );
+    expect(wrapper.classList.contains('bx--select--disabled')).toBe(false);
     await result.rerender({ disabled: true });
-    expect(result.container.classList.contains('bx--select--disabled')).toBe(
-      true
-    );
+    expect(wrapper.classList.contains('bx--select--disabled')).toBe(true);
   });
 
   it('CvSelect - test helper slot', async () => {
@@ -138,7 +131,7 @@ describe('CvSelect', () => {
       },
     });
 
-    const select = await result.findByLabelText(label);
+    await result.findByLabelText(label);
     await result.findByText(helperSlot);
   });
   it('CvSelect - test warning slot', async () => {
@@ -162,9 +155,8 @@ describe('CvSelect', () => {
 
     await result.findByLabelText(label);
     await result.findByText(warningSlot);
-    expect(result.container.classList.contains('bx--select--warning')).toBe(
-      true
-    );
+    const wrapper = result.container.querySelector('.bx--select');
+    expect(wrapper.classList.contains('bx--select--warning')).toBe(true);
   });
   it('CvSelect - test invalid slot', async () => {
     const label = 'ABC-label-123';
@@ -189,8 +181,7 @@ describe('CvSelect', () => {
 
     await result.findByLabelText(label);
     await result.findByText(invalidSlot);
-    expect(result.container.classList.contains('bx--select--invalid')).toBe(
-      true
-    );
+    const wrapper = result.container.querySelector('.bx--select');
+    expect(wrapper.classList.contains('bx--select--invalid')).toBe(true);
   });
 });
