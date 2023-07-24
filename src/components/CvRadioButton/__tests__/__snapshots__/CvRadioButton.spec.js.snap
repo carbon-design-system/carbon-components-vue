@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CvRadioButton matches render when checked 1`] = `<div class="cv-radio-button bx--radio-button-wrapper"><input id="a9fce735-250f-4cf5-b8f7-67d4e6a36515" class="bx--radio-button" type="radio" value=""><!-- symbol causes problem in codepen? --><label for="a9fce735-250f-4cf5-b8f7-67d4e6a36515" class="bx--radio-button__label"><span class="bx--radio-button__appearance"></span><span class="">test label</span></label></div>`;
+
+exports[`CvRadioButton matches render when modelValue is equal to value 1`] = `<div class="cv-radio-button bx--radio-button-wrapper"><input id="462d9c61-1c9f-4344-a8bf-52e2578c85c6" class="bx--radio-button" type="radio" value="test value"><!-- symbol causes problem in codepen? --><label for="462d9c61-1c9f-4344-a8bf-52e2578c85c6" class="bx--radio-button__label"><span class="bx--radio-button__appearance"></span><span class="">test label</span></label></div>`;
+
+exports[`CvRadioButton matches render when modelValue is not equal to value 1`] = `<div class="cv-radio-button bx--radio-button-wrapper"><input id="531901de-675a-4f39-acc9-1a7d0736dd42" class="bx--radio-button" type="radio" value="test value"><!-- symbol causes problem in codepen? --><label for="531901de-675a-4f39-acc9-1a7d0736dd42" class="bx--radio-button__label"><span class="bx--radio-button__appearance"></span><span class="">test label</span></label></div>`;
+
+exports[`CvRadioButton matches render with left label 1`] = `<div class="cv-radio-button bx--radio-button-wrapper bx--radio-button-wrapper--label-left"><input id="6ae49b22-c453-4b3f-85c0-1f294c7eceed" class="bx--radio-button" type="radio" value=""><!-- symbol causes problem in codepen? --><label for="6ae49b22-c453-4b3f-85c0-1f294c7eceed" class="bx--radio-button__label"><span class="bx--radio-button__appearance"></span><span class="">left label</span></label></div>`;
+
+exports[`CvRadioButton matches render with right label 1`] = `<div class="cv-radio-button bx--radio-button-wrapper"><input id="bd6434d7-7761-4fd3-8c78-94fb1383d23c" class="bx--radio-button" type="radio" value=""><!-- symbol causes problem in codepen? --><label for="bd6434d7-7761-4fd3-8c78-94fb1383d23c" class="bx--radio-button__label"><span class="bx--radio-button__appearance"></span><span class="">right label</span></label></div>`;
+
+exports[`CvRadioGroup matches render when horizontal 1`] = `
+<div class="cv-radio-group bx--form-item">
+  <div class="bx--radio-button-group">
+    <div class="cv-radio-button-stub">StubbyMcStubFace</div>
+  </div>
+</div>
+`;
+
+exports[`CvRadioGroup matches render when vertical 1`] = `
+<div class="cv-radio-group bx--form-item">
+  <div class="bx--radio-button-group bx--radio-button-group--vertical">
+    <div class="cv-radio-button-stub">StubbyMcStubFace</div>
+  </div>
+</div>
+`;
