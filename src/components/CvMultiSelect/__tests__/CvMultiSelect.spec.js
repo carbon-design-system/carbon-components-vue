@@ -1,7 +1,6 @@
 import { render } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
 import CvMultiSelect from '../CvMultiSelect.vue';
-import CvSelect from '@/components/CvSelect/CvSelect.vue';
 const pkdCharacters = [
   'Rick Deckard',
   'Garland',
@@ -147,15 +146,20 @@ describe('CvMultiSelect', () => {
     };
 
     // The render method returns a collection of utilities to query your component.
-    let result = render(CvSelect, {
+    let result = render(CvMultiSelect, {
       props: {
-        label: label,
+        title: label,
         helperText: helper,
+        options: pkdOptions,
+      },
+      attrs: {
+        'aria-label': label,
       },
       slots: slots,
     });
 
-    await result.findByLabelText(label);
+    const labels = await result.findAllByLabelText(label);
+    expect(labels.length).toBe(2);
     await result.findByText(helperSlot);
     const ht = await result.queryByText(helper);
     expect(ht).toBeFalsy();
@@ -172,16 +176,21 @@ describe('CvMultiSelect', () => {
     };
 
     // The render method returns a collection of utilities to query your component.
-    let result = render(CvSelect, {
+    let result = render(CvMultiSelect, {
       props: {
-        label: label,
+        options: pkdOptions,
+        title: label,
         helperText: helper,
         warningMessage: warning,
+      },
+      attrs: {
+        'aria-label': label,
       },
       slots: slots,
     });
 
-    await result.findByLabelText(label);
+    const labels = await result.findAllByLabelText(label);
+    expect(labels.length).toBe(2);
     const ht = await result.queryByText(helper);
     expect(ht).toBeFalsy();
     const hs = await result.queryByText(helperSlot);
@@ -205,9 +214,10 @@ describe('CvMultiSelect', () => {
     };
 
     // The render method returns a collection of utilities to query your component.
-    let result = render(CvSelect, {
+    let result = render(CvMultiSelect, {
       props: {
-        label: label,
+        options: pkdOptions,
+        title: label,
         helperText: helper,
         warningMessage: warning,
         invalidMessage: invalid,
@@ -215,7 +225,9 @@ describe('CvMultiSelect', () => {
       slots: slots,
     });
 
-    await result.findByLabelText(label);
+    const labels = await result.findAllByLabelText(label);
+    expect(labels.length).toBe(2);
+
     const ht = await result.queryByText(helper);
     expect(ht).toBeFalsy();
     const hs = await result.queryByText(helperSlot);

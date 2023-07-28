@@ -11,7 +11,7 @@
     <slot>
       <cv-progress-step
         v-for="(step, index) in steps"
-        :key="`step:${index}`"
+        :key="`step:${index}:${initialStep > index}`"
         :label="step"
         :complete="initialStep > index"
         @step-clicked="emit('step-clicked', { ...$event, index })"
@@ -24,7 +24,7 @@
 // noinspection ES6PreferShortImport
 import { carbonPrefix } from '../../global/settings';
 import CvProgressStep from './CvProgressStep.vue';
-import { onMounted, provide, ref } from 'vue';
+import { computed, onMounted, provide, ref, watch } from 'vue';
 
 const props = defineProps({
   /**
@@ -46,7 +46,7 @@ const props = defineProps({
 });
 const emit = defineEmits(['step-clicked']);
 
-const isEqual = ref(props.spaceEqually && !props.vertical);
+const isEqual = computed(() => props.spaceEqually && !props.vertical);
 provide('progress-space-equally', isEqual);
 const completedSteps = ref(new Set());
 provide('progress-completed-steps', completedSteps);
@@ -64,13 +64,15 @@ provide('progress-steps', progressSteps);
 
 const currentStep = ref('');
 provide('progress-current-step', currentStep);
-onMounted(() => {
+function updateSteps() {
   if (
     props.initialStep > -1 &&
     props.initialStep < progressSteps.value.length
   ) {
     const step = progressSteps.value[props.initialStep];
     currentStep.value = step.uid;
-  }
-});
+  } else currentStep.value = '';
+}
+onMounted(updateSteps);
+watch(() => props.initialStep, updateSteps);
 </script>
