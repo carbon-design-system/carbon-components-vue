@@ -23,8 +23,7 @@
       :class="[
         `${carbonPrefix}--checkbox-label`,
         {
-          [`${carbonPrefix}--label--disabled`]:
-            $attrs.disabled !== undefined && this.$attrs.disabled,
+          [`${carbonPrefix}--label--disabled`]: disabled,
           [`${carbonPrefix}--checkbox-label__focus`]: hasFocus,
         },
       ]"
@@ -41,16 +40,33 @@
 </template>
 
 <script setup>
-import { ref, toRefs } from 'vue';
+// noinspection ES6PreferShortImport
 import { carbonPrefix } from '../../global/settings';
+import { ref, toRefs } from 'vue';
 import { useCheck, props as propsCvCheck } from '../../use/cvCheck';
 import { useCvId, props as propsCvId } from '../../use/cvId';
 
 const props = defineProps({
+  /**
+   * Specify whether the label should be hidden, or not
+   */
   hideLabel: { type: Boolean, default: null },
+  /**
+   * Provide a label to provide a description of the Checkbox input that you are exposing to the user
+   */
   label: { type: String, default: null },
+  /**
+   * Specify whether the "bx--form-item" style should be applied
+   */
   formItem: { type: Boolean, default: true },
+  /**
+   * Specify whether the "bx--checkbox--inline" style should be applied
+   */
   inline: { type: Boolean, default: false },
+  /**
+   * Specify whether the Checkbox should be disabled
+   */
+  disabled: { type: Boolean, default: false },
   ...propsCvCheck,
   ...propsCvId,
 });
