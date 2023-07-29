@@ -1,13 +1,10 @@
-name: CI
+name: CI vNext
 
 on:
   workflow_dispatch:
   pull_request:
     branches:
-      - main
-  push:
-    branches:
-      - main
+      - vNext
 
 jobs:
   build:
@@ -15,53 +12,53 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-
+      - uses: actions/checkout@v3
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: lts/fermium
 
       - name: Install
-        run: yarn --offline
+        run: yarn
 
-        # yarn build is part of ci-check
-        # yarn test is also part of ci-check
       - name: Package CI checks
-        run: yarn ci-check
+        run: yarn build
 
   lint:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: lts/fermium
 
       - name: Install
-        run: yarn --offline
+        run: yarn
 
       - name: Lint
-        run: yarn run lint
+        run: yarn run lint --max-warnings 0 --no-fix
 
   tests:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: lts/fermium
 
       - name: Install
-        run: yarn --offline
+        run: yarn 
 
-      - name: Tests
+      - name: Run component tests
+        run: yarn test
+
+      - name: Accessability tests
         run: yarn a11test
