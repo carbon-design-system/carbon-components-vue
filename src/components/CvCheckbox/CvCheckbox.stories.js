@@ -14,21 +14,18 @@ export default {
   component: CvCheckbox,
   argTypes: {
     ...storybookControlsFromProps(propsCvCheck),
-    label: { description: 'checkbox label' },
     value: {
       type: 'string',
+      description:
+        'The value associated with the input (this is also the value that is sent on submit)',
       table: {
         type: { summary: 'string' },
         category: 'props',
       },
     },
-    hideLabel: {
-      description:
-        'makes the label visually hidden but still labels the checkbox',
-    },
     mixed: {
       type: 'boolean',
-      description: 'if true aria-checkbox set to mixed if checked is false',
+      description: 'Specify whether the Checkbox is in an indeterminate state',
       table: {
         type: { summary: 'boolean' },
         category: 'props',
@@ -47,12 +44,14 @@ export default {
     },
     checked: {
       type: 'boolean',
+      description: 'Specify whether the underlying input should be checked',
       table: {
         type: { summary: 'boolean' },
         category: 'props',
       },
     },
   },
+  parameters: { controls: { exclude: ['change', 'update:modelValue'] } },
 };
 
 const template = `

@@ -1,7 +1,7 @@
 {
   "name": "@carbon/vue",
   "license": "Apache-2.0",
-  "version": "3.0.6-alpha.0",
+  "version": "3.0.7-alpha.0",
   "description": "A collection of components for the Carbon Design System built using Vue.js",
   "packageManager": "yarn@3.2.0",
   "main": "dist/carbon-vue-3.umd.min.js",
@@ -11,16 +11,16 @@
     "postpack": "pinst --enable",
     "build": "vue-cli-service build --target lib --name carbon-vue-3 ./src/index.js --no-clean",
     "lint": "vue-cli-service lint",
-    "ci-check": "yarn format:diff && yarn test --no-coverage && yarn build",
+    "ci-check": "yarn format:diff && yarn test && yarn build",
     "format": "prettier --write '**/*.{scss,css,js,md,vue}' '!**/{build,es,lib,storybook,ts,umd,.coverage}/**'",
     "format:diff": "prettier --list-different '**/*.{scss,css,js,md,vue}' '!**/{dist,storybook-static,.coverage}/**'",
     "format:staged": "prettier --write '**/*.{scss,css,js,md,vue}' '!**/{dist,storybook-static,.coverage}/**'",
     "lint:css": "stylelint '{packages,storybook}/**/*.{vue,scss}'",
     "lint:es": "eslint src/**/*.{js,vue}",
     "lint:style": "vue-cli-service lint:style",
-    "test": "vue-cli-service test:unit",
-    "a11test": "node -v",
-    "serve:storybook": "cd ./storybook && npm run serve"
+    "serve:storybook": "yarn --cwd storybook storybook"
+    "test": "vue-cli-service test:unit --no-coverage",
+    "a11test": "node -v"
   },
   "workspaces": [
     "storybook"
@@ -44,7 +44,7 @@
     "@vue/cli-plugin-eslint": "^5.0.8",
     "@vue/cli-plugin-unit-jest": "^5.0.8",
     "@vue/cli-service": "^5.0.8",
-    "@vue/compiler-sfc": "^3.2.45",
+    "@vue/compiler-sfc": "^3.3.4",
     "@vue/eslint-config-prettier": "^7.0.0",
     "@vue/test-utils": "^2.2.4",
     "@vue/vue3-jest": "^27.0.0",
@@ -71,7 +71,7 @@
     "stylelint": "^14.15.0",
     "stylelint-config-property-sort-order-smacss": "^9.0.0",
     "stylelint-config-sass-guidelines": "^9.0.1",
-    "vue": "^3.2.45",
+    "vue": "^3.3.4",
     "vue-loader": "^17.0.1",
     "webpack": "^5.75.0"
   },

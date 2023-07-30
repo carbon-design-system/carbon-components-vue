@@ -19,7 +19,7 @@
 <script setup>
 import { carbonPrefix } from '../../global/settings';
 
-const props = defineProps({
+defineProps({
   invalid: Boolean,
   message: String,
   noMargin: Boolean,

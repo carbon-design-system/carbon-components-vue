@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.7-alpha.0](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.6-alpha.0...@carbon/vue@3.0.7-alpha.0) (2023-07-23)
+
+### Bug Fixes
+
+- comments ([33fc1d4](https://github.com/carbon-design-system/carbon-components-vue/commit/33fc1d4b190a7cb5ac210fad03e91e0a5dcee336))
+- **cv-button:** fix CvButton stories, where buttons are blank (label is not shown) ([1937f82](https://github.com/carbon-design-system/carbon-components-vue/commit/1937f824fcfb91e8036d27b3ac8030ffd33f25b9))
+- lint and failed tests ([2fca1c3](https://github.com/carbon-design-system/carbon-components-vue/commit/2fca1c3eb87bf4dde88fc44967e7d7c4b7bc2a6e))
+- remove unnecessary div ([65082ff](https://github.com/carbon-design-system/carbon-components-vue/commit/65082fffba06efa7f106a764e8d39b09117d5f0b))
+- remove v-html ([d1fb551](https://github.com/carbon-design-system/carbon-components-vue/commit/d1fb5510bd9003d8c6b4de975d607cf992e8da40))
+- span display ([01f4ec9](https://github.com/carbon-design-system/carbon-components-vue/commit/01f4ec9b65758e8768a65e2567887284d0d3397d))
+- unrelated test issues in CvSelect ([dec1e52](https://github.com/carbon-design-system/carbon-components-vue/commit/dec1e52fca38fff6ea7e2ca2006fec62c7803a91))
+- unrelated to cv-dropdown ... fix modal oddness in storybook metioned by Felipe ([d5da856](https://github.com/carbon-design-system/carbon-components-vue/commit/d5da8564d5cff42ead421d403718f66ca64c87a0))
+
+### Features
+
+- add button skeleton to exports [PR comment resolved] ([93583c9](https://github.com/carbon-design-system/carbon-components-vue/commit/93583c9b503913adfa8db56a95d251084c79377d))
+- add cv-tab tests and update caniuse-lite ([9ce3dda](https://github.com/carbon-design-system/carbon-components-vue/commit/9ce3dda99017819a8d2a906c0b0225804c15f342))
+- add folder's index.js with exports ([0f324d6](https://github.com/carbon-design-system/carbon-components-vue/commit/0f324d631244d7cb81edfea572ae912d56219976))
+- add story for dropdown skeleton ([a76c8d4](https://github.com/carbon-design-system/carbon-components-vue/commit/a76c8d43ce95df2687552f3fd99d4ba10828bc35))
+- add test scripts and bump Vue version to 3.3 to use inheritAttrs: false ([e38e0f0](https://github.com/carbon-design-system/carbon-components-vue/commit/e38e0f0e5da50a5a8a25b85fdcc2a36853be0940))
+- all stories and tests complete ([b45955d](https://github.com/carbon-design-system/carbon-components-vue/commit/b45955df1dc84f301bf729876ccc9e5a23ff0071))
+- code and storybook complete ([eafeb5b](https://github.com/carbon-design-system/carbon-components-vue/commit/eafeb5bf2844934a9e454de3a455f5be7903993f))
+- component and stories working ([c5f52a8](https://github.com/carbon-design-system/carbon-components-vue/commit/c5f52a827483423c2eec6bfb19ad7ce093658e75))
+- component reactivity fixes; stories updates ([e62582b](https://github.com/carbon-design-system/carbon-components-vue/commit/e62582b3933f69cbe7ff2894d89261a83b300afb))
+- cv toggle vue3 ([017915d](https://github.com/carbon-design-system/carbon-components-vue/commit/017915d64ca34605886b9e307127156233ed20a1))
+- cvNumberInput improved stories ([55ab836](https://github.com/carbon-design-system/carbon-components-vue/commit/55ab83671d29af4e9899034235d3f86c48804abf))
+- cvNumberInput tests ([2b5b046](https://github.com/carbon-design-system/carbon-components-vue/commit/2b5b04627810e579614ad2547d34419ac4e30b68))
+- dropdown ported - used provide/inject pattern instead of Vue 2 this.$children pattern ([2ffe689](https://github.com/carbon-design-system/carbon-components-vue/commit/2ffe689af84a0207bffc839c2b014a38bd052cb7))
+- implement CvButtonSkeleton ([1e11666](https://github.com/carbon-design-system/carbon-components-vue/commit/1e116663881c927cbeaf3b5a7c96ae3810625f0a))
+- improve import and spacings ([09d4be6](https://github.com/carbon-design-system/carbon-components-vue/commit/09d4be63113c1727dbf8400c48af73d9b841922c))
+- index ([f76edc2](https://github.com/carbon-design-system/carbon-components-vue/commit/f76edc2867e915657a122a83a0b0ecdd3a401a5d))
+- number input fix emitted value type, add label slot, progress on stories ([304a4b1](https://github.com/carbon-design-system/carbon-components-vue/commit/304a4b112e12274b7173090dca4ea7f1ba437275))
+- port CvNumberInput component to Vue3 ([52ae758](https://github.com/carbon-design-system/carbon-components-vue/commit/52ae7584c1ecdef480fb72ddaa65a51de884e2e8))
+- port CvNumberInputSkeleton to Vue3 ([4b0f1da](https://github.com/carbon-design-system/carbon-components-vue/commit/4b0f1da18231ccd2152320699d7c1e8a1884c79c))
+- storybook working ([19b82a9](https://github.com/carbon-design-system/carbon-components-vue/commit/19b82a97f62147333a8a0ba8a0d01da59068a730))
+- tweak code to match Vue style guide ([a72ce97](https://github.com/carbon-design-system/carbon-components-vue/commit/a72ce979fd6e2eb2fea3a47f4a32b91e9bc15def))
+
 ## [3.0.6-alpha.0](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.5-alpha.0...@carbon/vue@3.0.6-alpha.0) (2023-06-07)
 
 ### Bug Fixes
