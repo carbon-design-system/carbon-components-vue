@@ -87,34 +87,38 @@ describe('CvSelect', () => {
     await result.rerender({ invalidMessage: invalid });
     await result.findByText(invalid);
 
-    expect(select.classList.contains('bx--select-input--md'));
+    expect(select.classList.contains('bx--select-input--md')).toBe(true);
     await result.rerender({ size: 'sm' });
-    expect(select.classList.contains('bx--select-input--sm'));
+    expect(select.classList.contains('bx--select-input--sm')).toBe(true);
     await result.rerender({ size: 'lg' });
-    expect(select.classList.contains('bx--select-input--lg'));
+    expect(select.classList.contains('bx--select-input--lg')).toBe(true);
 
     const labelElement = await result.findByText(label);
     expect(labelElement.classList.contains('bx--visually-hidden')).toBe(false);
     await result.rerender({ hideLabel: true });
-    expect(labelElement.classList.contains('bx--visually-hidden'));
+    expect(labelElement.classList.contains('bx--visually-hidden')).toBe(true);
 
     expect(result.container.classList.contains('bx--select--light')).toBe(
       false
     );
     await result.rerender({ light: true });
-    expect(result.container.classList.contains('bx--select--light'));
+    expect(result.container.classList.contains('bx--select--light')).toBe(true);
 
     expect(result.container.classList.contains('bx--select--inline')).toBe(
       false
     );
     await result.rerender({ inline: true });
-    expect(result.container.classList.contains('bx--select--inline'));
+    expect(result.container.classList.contains('bx--select--inline')).toBe(
+      true
+    );
 
     expect(result.container.classList.contains('bx--select--disabled')).toBe(
       false
     );
     await result.rerender({ disabled: true });
-    expect(result.container.classList.contains('bx--select--disabled'));
+    expect(result.container.classList.contains('bx--select--disabled')).toBe(
+      true
+    );
   });
 
   it('CvSelect - test helper slot', async () => {
@@ -158,7 +162,9 @@ describe('CvSelect', () => {
 
     await result.findByLabelText(label);
     await result.findByText(warningSlot);
-    expect(result.container.classList.contains('bx--select--warning'));
+    expect(result.container.classList.contains('bx--select--warning')).toBe(
+      true
+    );
   });
   it('CvSelect - test invalid slot', async () => {
     const label = 'ABC-label-123';
@@ -183,6 +189,8 @@ describe('CvSelect', () => {
 
     await result.findByLabelText(label);
     await result.findByText(invalidSlot);
-    expect(result.container.classList.contains('bx--select--invalid'));
+    expect(result.container.classList.contains('bx--select--invalid')).toBe(
+      true
+    );
   });
 });

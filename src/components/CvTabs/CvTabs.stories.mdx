@@ -1,0 +1,175 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+import { sbCompPrefix } from '../../global/storybook-utils';
+import CvTabs from './CvTabs.vue';
+import CvTab from './CvTab.vue';
+import CvTabsSkeleton from './CvTabsSkeleton.vue';
+import SbContainer from './_SbContainer.vue';
+import { action } from '@storybook/addon-actions';
+
+<Meta
+  title={`${sbCompPrefix}/CvTabs`}
+  component={CvTabs}
+  decorators={[
+    () => ({
+      components: { SbContainer, Story },
+      template: `<SbContainer><story/></SbContainer>`,
+    }),
+  ]}
+/>
+
+export const Template = args => ({
+  // Components used in your story `template` are defined in the `components` object
+  components: {
+    CvTabs,
+    CvTab,
+    CvTabsSkeleton,
+  },
+  // The story's `args` need to be mapped into the template through the `setup()` method
+  setup() {
+    return {
+      container: args.container,
+      noDefaultToFirst: args.noDefaultToFirst,
+      selectedId: args.selectedId,
+      disabledIds: args.disabledIds,
+      onTabSelected: action('tab-selected'),
+      onTabSelectedId: action('tab-selected-id'),
+    };
+  },
+  // And then the `args` are bound to your component with `v-bind="args"`
+  template: args.template,
+});
+const defaultTemplate = `
+<cv-tabs
+  :container="container"
+  :no-default-to-first="noDefaultToFirst"
+  @tab-selected="onTabSelected"
+  @tab-selected-id="onTabSelectedId"
+  aria-label="navigation tab label">
+    <cv-tab id="tab-1" label="House" :selected="selectedId === 'tab-1'" :disabled="disabledIds.includes('tab-1')">
+      <p>
+        29 Arlington Avenue is a house in Islington, London. Douglas Adams shared the house for a time
+        with Jonny Brock and Clare Gorst. It is mentioned in the dedication of The Hitchhiker's Guide to
+        the Galaxy, which is dedicated to the "Arlingtonians for tea, sympathy, and a sofa."
+      </p>
+    </cv-tab>
+    <cv-tab id="tab-2" label="Bar" :selected="selectedId === 'tab-2'" :disabled="disabledIds.includes('tab-2')">
+      <p>
+        The Old Pink Dog Bar was the bar in Han Dold City that Ford Prefect was in when he discovered
+        that his Guide had his full entry on Earth on it.
+      </p>
+    </cv-tab>
+    <cv-tab id="tab-3" label="Reach" :selected="selectedId === 'tab-3'" :disabled="disabledIds.includes('tab-3')">
+      <p>
+        The Third Reach of the Unknown is what might be loosely described as a "place" which exists only
+        under high improbability conditions and was created on the starship Heart of Gold due to the
+        Infinite Improbability Drive. During Arthur Dent and Ford Prefect's first trip on board the Heart
+        of Gold they witnessed many strange things happening.
+      </p>
+    </cv-tab>
+    <cv-tab id="tab-4" label="Zone" :selected="selectedId === 'tab-4'" :disabled="disabledIds.includes('tab-4')">
+      <p>Plural Zones are instabilities in space-time.
+        The effects of the Plural Zones on the beings and objects that inhabit and originate from them,
+        for the most part, remain largely unnoticed.
+      </p>
+    </cv-tab>
+    <cv-tab id="tab-5" label="Planet" :selected="selectedId === 'tab-5'" :disabled="disabledIds.includes('tab-5')">
+      <p>
+        Ursa Minor Beta is a rich and sunny planet and one of the most popular holiday destinations in
+        the Universe. It is always Saturday afternoon on this planet, just before the beach bars close -
+        except for the few places where it is eternally Saturday evening. This is why the locals always
+        invite visitors to "Have a nice diurnal anomaly!"
+        <a target='_blank' href='https://hitchhikers.fandom.com/wiki/Main_Page'>credits</a>
+      </p>
+    </cv-tab>
+</cv-tabs>
+`;
+const skeletonTemplate = `<cv-tabs-skeleton></cv-tabs-skeleton>`;
+
+# CvTabs
+
+Migration notes:
+
+- The property `leftOverflowIconButtonProps` is deprecated. It does not seem to be used at all in Vue 2 and thus does
+  nothing when specified.
+- The property `rightOverflowIconButtonProps` is deprecated. It does not seem to be used at all in Vue 2 and thus does
+  nothing when specified.
+- The property `scrollIntoView` is deprecated. It does not seem to be used at all in Vue 2 and thus does nothing when
+  specified.
+- The `container` property in Vue 2 acts differently as compared to the React story book. Here the class/styles are
+  applied as is shown in the React storybook. Also note that the background color applied when this property is
+  specified is not from Carbon. The selector `.bx--tabs--container ~ div` can be used to set the background color and
+  other properties but that is up to the user.
+- A new event emits `tab-selected-id` with the selected tab's id attribute.
+
+## Mobile
+
+In my opinion, this component is not suitable for mobile formats. The navigation of the tabs becomes awkward on smaller
+screens, and so I suggest using a different component for mobile cases.
+
+<Canvas>
+  <Story
+    name="Default"
+    parameters={{
+      controls: {
+        exclude: [
+          'default',
+          'template',
+          'leftOverflowIconButtonProps',
+          'rightOverflowIconButtonProps',
+          'scrollIntoView',
+          'tab-selected',
+          'tab-selected-id',
+        ],
+      },
+      docs: { source: { code: defaultTemplate } },
+    }}
+    args={{
+      template: defaultTemplate,
+      selectedId: '',
+      disabledIds: [],
+    }}
+    argTypes={{
+      selectedId: {
+        control: 'select',
+        default: '',
+        options: ['', 'tab-1', 'tab-2', 'tab-3', 'tab-4', 'tab-5'],
+      },
+      disabledIds: {
+        control: 'multi-select',
+        options: ['tab-1', 'tab-2', 'tab-3', 'tab-4', 'tab-5'],
+      },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+# Skeleton
+
+<Canvas>
+  <Story
+    name="skeleton"
+    parameters={{
+      controls: {
+        exclude: [
+          'default',
+          'template',
+          'leftOverflowIconButtonProps',
+          'rightOverflowIconButtonProps',
+          'scrollIntoView',
+          'tab-selected',
+          'tab-selected-id',
+          'container',
+          'noDefaultToFirst',
+        ],
+      },
+      docs: { source: { code: skeletonTemplate } },
+    }}
+    args={{
+      template: skeletonTemplate,
+    }}
+    argTypes={{}}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>

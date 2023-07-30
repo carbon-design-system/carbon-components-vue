@@ -3,8 +3,6 @@ import { sbCompPrefix } from '../../global/storybook-utils';
 import CvModal from './CvModal.vue';
 import { action } from '@storybook/addon-actions';
 import { nextTick, ref } from 'vue';
-const visible = ref(false);
-const visible3btn = ref(false);
 
 <Meta title={`${sbCompPrefix}/CvModal`} component={CvModal} />
 
@@ -15,6 +13,8 @@ export const Template = args => ({
   },
   // The story's `args` need to be mapped into the template through the `setup()` method
   setup() {
+    const visible = ref(false);
+    const visible3btn = ref(false);
     return {
       ...args,
       props: args.props,
@@ -32,12 +32,14 @@ export const Template = args => ({
       primaryButtonDisabled: args.primaryButtonDisabled,
       disableTeleport: args.disableTeleport,
       show: () => {
+        if (visible3btn.value) visible3btn.value = false;
         if (visible.value) visible.value = false;
         nextTick(() => {
           visible.value = true;
         }).catch(() => console.warn('cannot show'));
       },
       show3btn: () => {
+        if (visible.value) visible.value = false;
         if (visible3btn.value) visible3btn.value = false;
         nextTick(() => {
           visible3btn.value = true;
