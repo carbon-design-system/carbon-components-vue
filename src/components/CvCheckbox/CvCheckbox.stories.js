@@ -112,7 +112,7 @@ vModel.parameters = storyParametersObject(
 
 const templateSkeleton = `<cv-checkbox-skeleton></cv-checkbox-skeleton>`;
 
-const TemplateSkeleton = args => {
+const TemplateSkeleton = () => {
   return {
     components: { CvCheckboxSkeleton },
     setup: () => {},
