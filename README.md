@@ -88,3 +88,10 @@ yarn install
 cd storybook
 yarn serve
 ```
+
+or
+
+```
+yarn install
+yarn serve:storybook
+```
