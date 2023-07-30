@@ -3,6 +3,8 @@ import { KINDS } from '../const';
 import { carbonPrefix } from '../../../global/settings';
 import CvFileUploader from '..';
 
+const inputKinds = [KINDS.DRAG_TARGET];
+
 describe('CvFileUploader', () => {
   it('renders label', async () => {
     const dummyLabel = 'Dummy File Input';
@@ -28,74 +30,90 @@ describe('CvFileUploader', () => {
     expect(label).toBeDefined();
   });
 
-  describe('kind: button', () => {
-    it('renders button configuration when kind is button', async () => {
-      const { container } = render(CvFileUploader, {
-        props: { kind: KINDS.BUTTON },
-      });
-
-      const label = container.querySelector(`label.${carbonPrefix}--btn`);
-      const fileInput = label.querySelector('input[type:file]');
-      expect(label).toBeDefined();
-      expect(fileInput).toBeDefined();
-    });
-
-    it('binds attributes to inner input element', async () => {
+  it.each(inputKinds)(
+    'binds attributes to inner input element (kind: %s)',
+    async inputKind => {
       const dummyId = 'dummy-id';
       const { container } = render(CvFileUploader, {
-        props: { kind: KINDS.BUTTON, id: dummyId },
+        props: { kind: inputKind, id: dummyId },
         attrs: { 'random-attr': 'dummy' },
       });
 
       const input = container.querySelector(`#${dummyId}`);
       expect(input.getAttribute('random-attr')).toBe('dummy');
       expect(input.tagName).toBe('INPUT');
-    });
+    }
+  );
 
-    it('triggers file input when pressing enter on label', async () => {
+  it.each(inputKinds)(
+    'triggers file input when pressing enter on label/drop zone (kind: %s)',
+    async inputKind => {
       const dummyId = 'dummy-id';
       const { container } = render(CvFileUploader, {
         props: {
-          kind: KINDS.BUTTON,
+          kind: inputKind,
           id: dummyId,
         },
       });
 
-      const label = container.querySelector(`label.${carbonPrefix}--btn`);
+      const wrapper = container.querySelector(
+        inputKind === KINDS.BUTTON
+          ? 'label'
+          : `div.${carbonPrefix}--file-browse-btn`
+      );
       const fileInput = container.querySelector(`#${dummyId}`);
       const clickSpy = jest.spyOn(fileInput, 'click');
-      await label.focus();
-      await fireEvent.keyDown(label, { key: 'Enter', code: 13, charCode: 13 });
+      await wrapper.focus();
+      await fireEvent.keyDown(wrapper, {
+        key: 'Enter',
+        code: 13,
+        charCode: 13,
+      });
 
       expect(clickSpy).toHaveBeenCalled();
-    });
+    }
+  );
 
-    it('triggers file input when pressing space on label', async () => {
+  it.each(inputKinds)(
+    'triggers file input when pressing space on label/drop zone (kind: %s)',
+    async inputKind => {
       const dummyId = 'dummy-id';
       const { container } = render(CvFileUploader, {
         props: {
-          kind: KINDS.BUTTON,
+          kind: inputKind,
           id: dummyId,
         },
       });
 
-      const label = container.querySelector(`label.${carbonPrefix}--btn`);
+      const wrapper = container.querySelector(
+        inputKind === KINDS.BUTTON
+          ? 'label'
+          : `div.${carbonPrefix}--file-browse-btn`
+      );
       const fileInput = container.querySelector(`#${dummyId}`);
       const clickSpy = jest.spyOn(fileInput, 'click');
-      await label.focus();
-      await fireEvent.keyDown(label, { key: 'Space', code: 32, charCode: 32 });
+      await wrapper.focus();
+      await fireEvent.keyDown(wrapper, {
+        key: ' ',
+        code: 32,
+        keyCode: 32,
+        charCode: 32,
+      });
 
       expect(clickSpy).toHaveBeenCalled();
-    });
+    }
+  );
 
-    it('emits change when native input change', async () => {
+  it.each(inputKinds)(
+    'emits change when native input change (kind: %s)',
+    async inputKind => {
       const dummyFile = new File(['file content'], 'dummy-file.txt', {
         type: 'text/plain',
       });
       const dummyId = 'dummy-id';
       const { container, emitted } = render(CvFileUploader, {
         props: {
-          kind: KINDS.BUTTON,
+          kind: inputKind,
           id: dummyId,
         },
       });
@@ -106,9 +124,12 @@ describe('CvFileUploader', () => {
       const emitResult = emitted('update:modelValue').at(0);
       expect(emitResult[0]).toHaveLength(1);
       expect(emitResult[0][0].file.name).toBe(dummyFile.name);
-    });
+    }
+  );
 
-    it('resets current file list when clearOnReselect is passed', async () => {
+  it.each(inputKinds)(
+    'resets current file list when clearOnReselect is passed (kind: %s)',
+    async inputKind => {
       const dummyFile1 = new File(['file content1'], 'dummy-file1.txt', {
         type: 'text/plain',
       });
@@ -118,7 +139,7 @@ describe('CvFileUploader', () => {
       const dummyId = 'dummy-id';
       const { container, emitted } = render(CvFileUploader, {
         props: {
-          kind: KINDS.BUTTON,
+          kind: inputKind,
           id: dummyId,
           clearOnReselect: true,
         },
@@ -131,9 +152,12 @@ describe('CvFileUploader', () => {
       const emitResult = emitted('update:modelValue').at(1);
       expect(emitResult[0]).toHaveLength(1);
       expect(emitResult[0][0].file.name).toBe(dummyFile2.name);
-    });
+    }
+  );
 
-    it('accumulate files when clearOnReselect is not passed or false', async () => {
+  it.each(inputKinds)(
+    'accumulate files when clearOnReselect is not passed or false (kind: %s)',
+    async inputKind => {
       const dummyFile1 = new File(['file content1'], 'dummy-file1.txt', {
         type: 'text/plain',
       });
@@ -143,7 +167,7 @@ describe('CvFileUploader', () => {
       const dummyId = 'dummy-id';
       const { container, emitted } = render(CvFileUploader, {
         props: {
-          kind: KINDS.BUTTON,
+          kind: inputKind,
           id: dummyId,
           clearOnReselect: false,
         },
@@ -157,16 +181,19 @@ describe('CvFileUploader', () => {
       expect(emitResult[0]).toHaveLength(2);
       expect(emitResult[0][0].file.name).toBe(dummyFile1.name);
       expect(emitResult[0][1].file.name).toBe(dummyFile2.name);
-    });
+    }
+  );
 
-    it('correctly identifies a valid file by its type', async () => {
+  it.each(inputKinds)(
+    'correctly identifies a valid file by its type (kind: %s)',
+    async inputKind => {
       const dummyFile = new File(['file content'], 'dummy-file.txt', {
         type: 'text/plain',
       });
       const dummyId = 'dummy-id';
       const { container, emitted } = render(CvFileUploader, {
         props: {
-          kind: KINDS.BUTTON,
+          kind: inputKind,
           id: dummyId,
           accept: 'text/plain',
         },
@@ -178,16 +205,19 @@ describe('CvFileUploader', () => {
       const emitResult = emitted('update:modelValue').at(0);
       expect(emitResult[0][0].invalidMessageTitle).toBe('');
       expect(emitResult[0][0].invalidMessage).toBe('');
-    });
+    }
+  );
 
-    it('correctly identifies an invalid file by its type', async () => {
+  it.each(inputKinds)(
+    'correctly identifies an invalid file by its type (kind: %s)',
+    async inputKind => {
       const dummyFile = new File(['file content'], 'dummy-file.txt', {
         type: 'text/plain',
       });
       const dummyId = 'dummy-id';
       const { container, emitted } = render(CvFileUploader, {
         props: {
-          kind: KINDS.BUTTON,
+          kind: inputKind,
           id: dummyId,
           accept: 'image/png',
         },
@@ -201,16 +231,19 @@ describe('CvFileUploader', () => {
       expect(emitResult[0][0].invalidMessage).toBe(
         `"${dummyFile.name}" does not have a valid file type.`
       );
-    });
+    }
+  );
 
-    it('correctly identifies a valid file by its extension', async () => {
+  it.each(inputKinds)(
+    'correctly identifies a valid file by its extension (kind: %s)',
+    async inputKind => {
       const dummyFile = new File(['file content'], 'dummy-file.txt', {
         type: 'text/plain',
       });
       const dummyId = 'dummy-id';
       const { container, emitted } = render(CvFileUploader, {
         props: {
-          kind: KINDS.BUTTON,
+          kind: inputKind,
           id: dummyId,
           accept: '.txt',
         },
@@ -222,16 +255,19 @@ describe('CvFileUploader', () => {
       const emitResult = emitted('update:modelValue').at(0);
       expect(emitResult[0][0].invalidMessageTitle).toBe('');
       expect(emitResult[0][0].invalidMessage).toBe('');
-    });
+    }
+  );
 
-    it('correctly identifies an invalid file by its extension', async () => {
+  it.each(inputKinds)(
+    'correctly identifies an invalid file by its extension (kind: %s)',
+    async inputKind => {
       const dummyFile = new File(['file content'], 'dummy-file.txt', {
         type: 'text/plain',
       });
       const dummyId = 'dummy-id';
       const { container, emitted } = render(CvFileUploader, {
         props: {
-          kind: KINDS.BUTTON,
+          kind: inputKind,
           id: dummyId,
           accept: '.png',
         },
@@ -245,16 +281,19 @@ describe('CvFileUploader', () => {
       expect(emitResult[0][0].invalidMessage).toBe(
         `"${dummyFile.name}" does not have a valid file type.`
       );
-    });
+    }
+  );
 
-    it('considers .jpeg when accepting .jpg files', async () => {
+  it.each(inputKinds)(
+    'considers .jpeg when accepting .jpg files (kind: %s)',
+    async inputKind => {
       const dummyFile = new File([''], 'dummy-file.jpeg', {
         type: 'image/jpeg',
       });
       const dummyId = 'dummy-id';
       const { container, emitted } = render(CvFileUploader, {
         props: {
-          kind: KINDS.BUTTON,
+          kind: inputKind,
           id: dummyId,
           accept: '.jpg',
         },
@@ -266,46 +305,72 @@ describe('CvFileUploader', () => {
       const emitResult = emitted('update:modelValue').at(0);
       expect(emitResult[0][0].invalidMessageTitle).toBe('');
       expect(emitResult[0][0].invalidMessage).toBe('');
-    });
+    }
+  );
 
-    describe('Drop target label', () => {
-      it('renders drop target label when dropTargetLabel is passed', async () => {
+  it.each(inputKinds)(
+    'renders drop-target slot content (kind: %s)',
+    async inputKind => {
+      const { getByText } = render(CvFileUploader, {
+        props: {
+          kind: inputKind,
+        },
+        slots: {
+          'drop-target': '<p>dummy slot content</p>',
+        },
+      });
+
+      const slotContent = getByText('dummy slot content');
+      expect(slotContent).toBeDefined;
+    }
+  );
+
+  describe('Drop target label', () => {
+    it.each(inputKinds)(
+      'renders drop target label when dropTargetLabel is passed (kind: %s)',
+      async inputKind => {
         const dummyDropTargetLabel = 'Dummy Label';
         const { findByText } = render(CvFileUploader, {
           props: {
-            kind: KINDS.BUTTON,
+            kind: inputKind,
             dropTargetLabel: dummyDropTargetLabel,
           },
         });
 
         const label = await findByText(dummyDropTargetLabel);
         expect(label.tagName).toBeDefined();
-      });
+      }
+    );
 
-      it('renders drop target label when buttonLabel is passed', async () => {
+    it.each(inputKinds)(
+      'renders drop target label when buttonLabel is passed (kind: %s)',
+      async inputKind => {
         const dummyDropTargetLabel = 'Dummy Button Label';
         const { findByText } = render(CvFileUploader, {
           props: {
-            kind: KINDS.BUTTON,
+            kind: inputKind,
             dropTargetLabel: dummyDropTargetLabel,
           },
         });
 
         const label = await findByText(dummyDropTargetLabel);
         expect(label.tagName).toBeDefined();
-      });
+      }
+    );
 
-      it('renders default drop target label when neither dropTargetLabel and buttonLabel is passed', async () => {
+    it.each(inputKinds)(
+      'renders default drop target label when neither dropTargetLabel and buttonLabel is passed  (kind: %s)',
+      async inputKind => {
         const dummyDropTargetLabel = 'Drag and drop files here or upload';
         const { findByText } = render(CvFileUploader, {
           props: {
-            kind: KINDS.BUTTON,
+            kind: inputKind,
           },
         });
 
         const label = await findByText(dummyDropTargetLabel);
         expect(label.tagName).toBeDefined();
-      });
-    });
+      }
+    );
   });
 });

@@ -24,6 +24,32 @@
         @change="onChange"
       />
     </div>
+    <div v-else :class="`${carbonPrefix}--file`" data-file>
+      <label :for="cvId">
+        <div
+          role="button"
+          tabindex="0"
+          data-file-drop-container
+          :class="[`${carbonPrefix}--file-browse-btn`]"
+          @keydown.enter.prevent="onKeyHit"
+          @keydown.space.prevent="onKeyHit"
+        >
+          <slot name="drop-target">{{ internalDropTargetLabel }}</slot>
+        </div>
+        <input
+          :id="cvId"
+          ref="fileInput"
+          :class="`${carbonPrefix}--file-input`"
+          :accept="accept"
+          type="file"
+          v-bind="$attrs"
+          tabindex="-1"
+          data-file-uploader
+          data-target="[data-file-container]"
+          @change="onChange"
+        />
+      </label>
+    </div>
   </cv-form-item>
 </template>
 
