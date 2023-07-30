@@ -18,7 +18,7 @@
     "lint:css": "stylelint '{packages,storybook}/**/*.{vue,scss}'",
     "lint:es": "eslint src/**/*.{js,vue}",
     "lint:style": "vue-cli-service lint:style",
-    "serve:storybook": "yarn --cwd storybook storybook"
+    "serve:storybook": "yarn --cwd storybook storybook",
     "test": "vue-cli-service test:unit --no-coverage",
     "a11test": "node -v"
   },
