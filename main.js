@@ -62,6 +62,9 @@ import CvRow from './src/components/CvGrid/CvRow.vue';
 import CvNumberInput from './src/components/CvNumberInput/CvNumberInput.vue';
 import CvNumberInputSkeleton from './src/components/CvNumberInput/CvNumberInputSkeleton.vue';
 import CvToggle from './src/components/CvToggle/CvToggle.vue';
+import CvTooltip from './src/components/CvTooltip/CvTooltip.vue';
+import CvDefinitionTooltip from './src/components/CvTooltip/CvDefinitionTooltip.vue';
+import CvInteractiveTooltip from './src/components/CvTooltip/CvInteractiveTooltip.vue';
 
 const all = {
   CvAspectRatio,
@@ -128,6 +131,9 @@ const all = {
   CvNumberInput,
   CvNumberInputSkeleton,
   CvToggle,
+  CvTooltip,
+  CvDefinitionTooltip,
+  CvInteractiveTooltip,
 };
 export default {
   install(app, options) {
