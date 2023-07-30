@@ -1,3 +1,4 @@
 import CvCheckbox from './CvCheckbox.vue';
-export { CvCheckbox };
+import CvCheckboxSkeleton from './CvCheckboxSkeleton.vue';
+export { CvCheckbox, CvCheckboxSkeleton };
 export default CvCheckbox;
