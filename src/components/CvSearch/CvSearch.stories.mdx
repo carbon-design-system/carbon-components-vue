@@ -21,6 +21,7 @@ export const Template = args => ({
       placeholder: args.placeholder,
       disabled: args.disabled,
       size: args.size,
+      ariaLabel: args.ariaLabel,
       clearAriaLabel: args.clearAriaLabel,
       formItem: args.formItem,
       expandable: args.expandable,
@@ -42,7 +43,7 @@ const defaultTemplate = `
   :value="value"
   :form-item="formItem"
   :aria-label="ariaLabel"
-  :clear-aria-label="clearArialabel"
+  :clear-aria-label="clearAriaLabel"
   @input="onInput"
   >
 </cv-search>
@@ -59,7 +60,7 @@ const vModelTemplate = `
     :expandable="expandable"
     :form-item="formItem"
     :aria-label="ariaLabel"
-    :clear-aria-label="clearArialabel"
+    :clear-aria-label="clearAriaLabel"
     >
   </cv-search>
   <div style="margin-top:1rem; background-color: #888888;  padding:1rem">

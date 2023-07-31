@@ -33,6 +33,7 @@
       }}</label>
 
       <input
+        role="searchbox"
         :id="uid"
         :class="`${carbonPrefix}--search-input`"
         v-bind="$attrs"
@@ -43,6 +44,8 @@
         :placeholder="placeholder"
         :aria-labelledby="uid"
         @blur="checkFocus"
+        @click="toggleActive"
+        @keydown.esc="onClearClick"
         :disabled="disabled ? 'true' : undefined"
       />
 
@@ -56,7 +59,7 @@
         :aria-label="clearAriaLabel"
         @click="onClearClick"
       >
-        <Close16 />
+        <close-icon />
       </button>
     </div>
   </component>
@@ -67,7 +70,7 @@ import { carbonPrefix } from '../../global/settings';
 import { useIsLight, props as propsTheme } from '../../use/cvTheme';
 import { useCvId, props as propsCvId } from '../../use/cvId';
 import SearchIcon from '@carbon/icons-vue/es/search/16';
-import Close16 from '@carbon/icons-vue/es/close/16';
+import CloseIcon from '@carbon/icons-vue/es/close/16';
 import { computed, ref, watch } from 'vue';
 import { SEARCH_SIZES } from '.';
 import CvEmpty from '../CvEmpty/_CvEmpty.vue';
@@ -122,9 +125,13 @@ const props = defineProps({
    */
   small: {
     type: Boolean,
-    validator: () => {
-      console.error('Error: Use size property: sm, lg or xl (default)');
-      return false;
+    default: undefined,
+    validator: val => {
+      if (val !== undefined) {
+        console.error('Error: Use size property: sm, lg or xl (default)');
+        return false;
+      }
+      return true;
     },
   },
   /**
@@ -132,9 +139,13 @@ const props = defineProps({
    */
   large: {
     type: Boolean,
-    validator: () => {
-      console.error('Error: Use size property: sm, lg or xl (default)');
-      return false;
+    default: undefined,
+    validator: val => {
+      if (val !== undefined) {
+        console.error('Error: Use size property: sm, lg or xl (default)');
+        return false;
+      }
+      return true;
     },
   },
   /**
@@ -201,20 +212,24 @@ watch(internalSearchText, () => {
     emit('update:modelValue', internalSearchText.value);
   }
 });
-function onClearClick(ev) {
+function onClearClick() {
   internalSearchText.value = '';
   clearVisible.value = false;
-  checkFocus(ev);
+  if (props.expandable) {
+    elInput.value?.focus();
+  }
+  checkFocus();
 }
 function onInput() {
   clearVisible.value = internalSearchText.value.length > 0;
-  return emit('input', internalSearchText.value);
 }
 const elInput = ref(null);
 const isExpanded = computed(() => {
   return props.expandable && searchActive.value;
 });
 function toggleActive(force) {
+  if (props.disabled) return;
+
   if (typeof force === 'boolean') searchActive.value = force;
   else if (internalSearchText.value?.length > 0) searchActive.value = true;
   else searchActive.value = !searchActive.value;
@@ -224,11 +239,12 @@ function toggleActive(force) {
   }
 }
 const elSearch = ref(null);
-function checkFocus(ev) {
+function checkFocus() {
+  if (props.disabled) return;
+
   if (props.expandable) {
-    if (!elSearch.value?.contains(ev.relatedTarget)) {
+    if (elInput.value !== document.activeElement)
       searchActive.value = internalSearchText.value?.length > 0;
-    }
   }
 }
 </script>
