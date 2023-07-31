@@ -12,12 +12,16 @@ export default {
   argTypes: {
     checked: {
       type: 'boolean',
+      control: false,
       table: {
         type: { summary: 'boolean' },
         category: 'props',
       },
     },
-    label: { description: 'radio-button label' },
+    label: {
+      description: 'radio-button label',
+      control: false,
+    },
     hideLabel: {
       description:
         'makes the label visually hidden but still labels the radio input',
@@ -59,6 +63,12 @@ const DefaultRadioItems = [
   },
 ];
 
+const DefaultStoryParameters = {
+  controls: {
+    exclude: ['change', 'update:modelValue', 'modelValue'],
+  },
+};
+
 const defaultTemplate = `
   <cv-radio-group v-bind="args" @change="onChange">
     <cv-radio-button
@@ -69,6 +79,8 @@ const defaultTemplate = `
       :value="id"
       :checked="checked"
       :disabled="disabled"
+      :hide-label="hideLabel"
+      :label-left='labelLeft'
     />
   </cv-radio-group>
 `;
@@ -81,6 +93,8 @@ const Template = (args, { argTypes }) => {
     setup() {
       return {
         args,
+        hideLabel: args.hideLabel,
+        labelLeft: args.labelLeft,
         onChange: action('change'),
         DefaultRadioItems,
       };
@@ -93,7 +107,7 @@ Default.args = {
   vertical: false,
 };
 Default.parameters = storyParametersObject(
-  Default.parameters,
+  DefaultStoryParameters,
   defaultTemplate,
   Default.args
 );
@@ -108,6 +122,8 @@ const vModelTemplate = `
       :label="label"
       :value="id"
       :disabled="disabled"
+      :hide-label="hideLabel"
+      :label-left='labelLeft'
     />
   </cv-radio-group>
 
@@ -132,6 +148,8 @@ const VModelTemplate = args => {
     setup() {
       return {
         args,
+        hideLabel: args.hideLabel,
+        labelLeft: args.labelLeft,
         modelValue: ref(DefaultRadioItems[0].id),
         onChange: action('change'),
         DefaultRadioItems,
@@ -142,7 +160,7 @@ const VModelTemplate = args => {
 
 export const VModel = VModelTemplate.bind({});
 VModel.parameters = storyParametersObject(
-  VModel.parameters,
+  DefaultStoryParameters,
   vModelTemplate,
   VModel.args
 );
