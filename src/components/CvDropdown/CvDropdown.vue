@@ -325,8 +325,6 @@ const wrapperStyleOverride = computed(() => {
 });
 const el = ref(null);
 function onClickOut() {
-  // eslint-disable-next-line no-console
-  console.log('onClickOut');
   open.value = false;
 }
 onClickOutside(el, onClickOut);
