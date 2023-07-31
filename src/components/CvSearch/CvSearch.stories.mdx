@@ -1,0 +1,103 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+import CvSearch from './CvSearch.vue';
+import { sbCompPrefix } from '../../global/storybook-utils';
+import { SEARCH_SIZES } from './index';
+import { action } from '@storybook/addon-actions';
+import { ref } from 'vue';
+const myValue = ref('searching');
+
+
+<Meta title={`${sbCompPrefix}/CvSearch`} component={CvSearch} />
+
+export const Template = args => ({
+  // Components used in your story `template` are defined in the `components` object
+  components: {
+    CvSearch,
+  },
+  // The story's `args` need to be mapped into the template through the `setup()` method
+  setup() {
+    return {
+      light: args.light,
+      label: args.label,
+      placeholder: args.placeholder,
+      disabled: args.disabled,
+      size: args.size,
+      clearAriaLabel: args.clearAriaLabel,
+      formItem: args.formItem,
+      expandable: args.expandable,
+      value: args.value,
+      onInput: action('input'),
+      onVModel: action('update:value'),
+    };
+  },
+  template: args.template,
+});
+const defaultTemplate = `
+  <cv-search
+  :light="light"
+  :label="label"
+  :placeholder="placeholder"
+  :disabled="disabled"
+  :size="size"
+  :expandable="expandable"
+  :value="value"
+  :form-item="formItem"
+  :aria-label="ariaLabel"
+  :clear-aria-label="clearArialabel"
+  >
+</cv-search>
+`;
+
+# CvSearch
+
+Migration notes:
+
+- The `v-model` is different in Vue 3 than Vue 2.If you specify it you will see an error deprecation message in the log.
+  Please use `v-model:value=something` instead.
+
+<Canvas>
+  <Story
+    name="Default"
+    parameters={{
+      controls: {
+        exclude: [
+          'input',
+          'modelValue',
+          'template',
+          'update:modelValue',
+          'update:value',
+          'large',
+          'small','toolbarAriaLabel',
+          'kind',
+        ],
+      },
+      docs: { source: { code: defaultTemplate } },
+    }}
+    args={{
+      template: defaultTemplate,
+      light: false,
+      disabled: false,
+      placeholder: 'JWST: search for light from the first stars'
+    }}
+    argTypes={{
+      light: {
+        description: '`true` to use the light version.',
+        table: { category: 'props', defaultValue: { summary: false } },
+      },
+      size: {
+        control: 'select',
+        default: 'xl',
+        options: SEARCH_SIZES,
+        table: { defaultValue: { summary: 'xl' } },
+      },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+# v-model
+
+- The `v-model` is different in Vue 3 than Vue 2.If you specify it you will see an error deprecation message in the log.
+Please use `v-model:value=something` instead.
+
