@@ -373,4 +373,27 @@ describe('CvFileUploader', () => {
       }
     );
   });
+
+  describe('Drag & Drop', () => {
+    it('emits change when native input change', async () => {
+      const dummyFile = new File(['file content'], 'dummy-file.txt', {
+        type: 'text/plain',
+      });
+      const { container, emitted } = render(CvFileUploader);
+
+      const dropZone = container.querySelector(
+        `div.${carbonPrefix}--file-browse-btn`
+      );
+      await fireEvent.drop(dropZone, {
+        dataTransfer: {
+          files: [dummyFile],
+          types: ['Files'],
+        },
+      });
+
+      const emitResult = emitted('update:modelValue').at(0);
+      expect(emitResult[0]).toHaveLength(1);
+      expect(emitResult[0][0].file.name).toBe(dummyFile.name);
+    });
+  });
 });

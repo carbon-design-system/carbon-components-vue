@@ -30,7 +30,16 @@
           role="button"
           tabindex="0"
           data-file-drop-container
-          :class="[`${carbonPrefix}--file-browse-btn`]"
+          :class="[
+            `${carbonPrefix}--file-browse-btn`,
+            `${carbonPrefix}--file__drop-container`,
+            {
+              [`${carbonPrefix}--file__drop-container--drag-over`]: allowDrop,
+            },
+          ]"
+          @dragover="onDragEvent"
+          @dragleave="onDragEvent"
+          @drop="onDragEvent"
           @keydown.enter.prevent="onKeyHit"
           @keydown.space.prevent="onKeyHit"
         >
@@ -104,6 +113,7 @@ const props = defineProps({
 const fileInput = ref(null);
 
 // Data
+const allowDrop = ref(false);
 const internalFiles = ref([]);
 
 // Computed
@@ -182,6 +192,38 @@ function onChange(ev) {
     internalFiles.value = [];
   }
   addFiles(ev.target.files);
+}
+
+function onDragEvent(evt) {
+  if (Array.prototype.indexOf.call(evt.dataTransfer.types, 'Files') === -1) {
+    return;
+  }
+
+  if (evt.type === 'dragleave') {
+    allowDrop.value = false;
+    return;
+  }
+
+  if (evt.type === 'dragover') {
+    evt.preventDefault();
+    const dropEffect = 'copy';
+    if (Array.isArray(evt.dataTransfer.types)) {
+      try {
+        // IE11 throws a "permission denied" error accessing `.effectAllowed`
+        evt.dataTransfer.effectAllowed = dropEffect;
+      } catch (e) {
+        // ignore
+      }
+    }
+    evt.dataTransfer.dropEffect = dropEffect;
+    allowDrop.value = true;
+  }
+
+  if (evt.type === 'drop') {
+    evt.preventDefault();
+    addFiles(evt.dataTransfer.files);
+    allowDrop.value = false;
+  }
 }
 
 function onKeyHit() {
