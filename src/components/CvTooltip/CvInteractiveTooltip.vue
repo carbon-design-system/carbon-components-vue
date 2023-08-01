@@ -23,7 +23,7 @@
 
     <div
       :id="cvId"
-      aria-hidden="true"
+      :aria-hidden="!dataVisible"
       :data-floating-menu-direction="direction"
       :class="[
         `${carbonPrefix}--tooltip`,

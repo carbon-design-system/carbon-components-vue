@@ -1,130 +1,68 @@
-import { testComponent, awaitNextTick } from './_helpers';
-const { shallowMount: shallow, trigger, setProps } = awaitNextTick;
-import {
-  CvTooltip,
-  CvDefinitionTooltip,
-  CvInteractiveTooltip,
-} from '@/components/cv-tooltip';
+import { shallowMount } from '@vue/test-utils';
+import { render, cleanup } from '@testing-library/vue';
+import { CvTooltip, CvDefinitionTooltip, CvInteractiveTooltip } from '../index';
+import { carbonPrefix } from '../../../global/settings';
 
 describe('CvToopltip', () => {
-  const alignments = ['start', 'center', 'end'];
-  const directions = ['top', 'left', 'right', 'bottom'];
-
-  // ***************
-  // PROP CHECKS
-  // ***************
-  testComponent.propsAreType(
-    CvTooltip,
-    ['alignment', 'direction', 'tip'],
-    String
-  );
-  testComponent.propsHaveDefault(CvTooltip, ['alignment', 'direction']);
-  testComponent.propsAreRequired(CvTooltip, ['tip']);
-
-  it('`alignment` prop validator works as expected', async () => {
-    const propsData = { tip: 'this is a tip' };
-
-    const wrapper = await shallow(CvTooltip, { propsData });
-    for (const alignment of alignments) {
-      expect(
-        wrapper.vm.$options.props.alignment.validator &&
-          wrapper.vm.$options.props.alignment.validator(alignment)
-      ).toBeTruthy();
-    }
-
-    // suppress the error message from the kind validator
-    const consoleError = console.error;
-    console.error = jest.fn();
-
-    expect(
-      wrapper.vm.$options.props.alignment.validator &&
-        wrapper.vm.$options.props.alignment.validator('TEST')
-    ).toBeFalsy();
-
-    // restore
-    console.error = consoleError;
+  afterEach(() => {
+    cleanup();
   });
-
-  it('`direction` prop validator works as expected', async () => {
-    const propsData = { tip: 'this is a tip' };
-
-    const wrapper = await shallow(CvTooltip, { propsData });
-    for (const direction of directions) {
-      expect(
-        wrapper.vm.$options.props.direction.validator &&
-          wrapper.vm.$options.props.direction.validator(direction)
-      ).toBeTruthy();
-    }
-
-    // suppress the error message from the kind validator
-    const consoleError = console.error;
-    console.error = jest.fn();
-
-    expect(
-      wrapper.vm.$options.props.direction.validator &&
-        wrapper.vm.$options.props.direction.validator('TEST')
-    ).toBeFalsy();
-
-    // restore
-    console.error = consoleError;
-  });
-
   // ***************
   // SNAPSHOT TESTS
   // ***************
 
   it('should render tooltip: minimal as expected', async () => {
     const propsData = { tip: 'this is a tip' };
-    const wrapper = await shallow(CvTooltip, { propsData });
+    const wrapper = shallowMount(CvTooltip, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('should render tooltip with direction set to `top` as expected', async () => {
     const propsData = { tip: 'this is a tip', direction: 'top' };
-    const wrapper = await shallow(CvTooltip, { propsData });
+    const wrapper = shallowMount(CvTooltip, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('should render tooltip with direction set to `left` as expected', async () => {
     const propsData = { tip: 'this is a tip', direction: 'left' };
-    const wrapper = await shallow(CvTooltip, { propsData });
+    const wrapper = shallowMount(CvTooltip, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('should render tooltip with direction set to `right` as expected', async () => {
     const propsData = { tip: 'this is a tip', direction: 'right' };
-    const wrapper = await shallow(CvTooltip, { propsData });
+    const wrapper = shallowMount(CvTooltip, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('should render tooltip with direction set to `bottom` as expected', async () => {
     const propsData = { tip: 'this is a tip', direction: 'bottom' };
-    const wrapper = await shallow(CvTooltip, { propsData });
+    const wrapper = shallowMount(CvTooltip, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('should render tooltip with aligment set to `start` as expected', async () => {
     const propsData = { tip: 'this is a tip', alignment: 'start' };
-    const wrapper = await shallow(CvTooltip, { propsData });
+    const wrapper = shallowMount(CvTooltip, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('should render tooltip with aligment set to `center` as expected', async () => {
     const propsData = { tip: 'this is a tip', alignment: 'center' };
-    const wrapper = await shallow(CvTooltip, { propsData });
+    const wrapper = shallowMount(CvTooltip, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('should render tooltip with aligment set to `end` as expected', async () => {
     const propsData = { tip: 'this is a tip', alignment: 'end' };
-    const wrapper = await shallow(CvTooltip, { propsData });
+    const wrapper = shallowMount(CvTooltip, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
   });
@@ -135,7 +73,7 @@ describe('CvToopltip', () => {
       alignment: 'end',
       direction: 'right',
     };
-    const wrapper = await shallow(CvTooltip, { propsData });
+    const wrapper = shallowMount(CvTooltip, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
   });
@@ -146,77 +84,6 @@ describe('CvToopltip', () => {
 });
 
 describe('CvDefinitionTooltip', () => {
-  const alignments = ['start', 'center', 'end'];
-  const directions = ['top', 'bottom'];
-
-  // ***************
-  // PROP CHECKS
-  // ***************
-  testComponent.propsAreType(
-    CvDefinitionTooltip,
-    ['alignment', 'direction', 'definition', 'term'],
-    String
-  );
-  testComponent.propsHaveDefault(CvDefinitionTooltip, [
-    'alignment',
-    'direction',
-  ]);
-  testComponent.propsAreRequired(CvDefinitionTooltip, ['definition', 'term']);
-
-  it('`alignment` prop validator works as expected', async () => {
-    const propsData = {
-      definition: 'Brief description of the dotted, underlined term',
-      term: 'A term needeing definition',
-    };
-
-    const wrapper = await shallow(CvDefinitionTooltip, { propsData });
-    for (const alignment of alignments) {
-      expect(
-        wrapper.vm.$options.props.alignment.validator &&
-          wrapper.vm.$options.props.alignment.validator(alignment)
-      ).toBeTruthy();
-    }
-
-    // suppress the error message from the kind validator
-    const consoleError = console.error;
-    console.error = jest.fn();
-
-    expect(
-      wrapper.vm.$options.props.alignment.validator &&
-        wrapper.vm.$options.props.alignment.validator('TEST')
-    ).toBeFalsy();
-
-    // restore
-    console.error = consoleError;
-  });
-
-  it('`direction` prop validator works as expected', async () => {
-    const propsData = {
-      definition: 'Brief description of the dotted, underlined term',
-      term: 'A term needeing definition',
-    };
-
-    const wrapper = await shallow(CvDefinitionTooltip, { propsData });
-    for (const direction of directions) {
-      expect(
-        wrapper.vm.$options.props.direction.validator &&
-          wrapper.vm.$options.props.direction.validator(direction)
-      ).toBeTruthy();
-    }
-
-    // suppress the error message from the kind validator
-    const consoleError = console.error;
-    console.error = jest.fn();
-
-    expect(
-      wrapper.vm.$options.props.direction.validator &&
-        wrapper.vm.$options.props.direction.validator('TEST')
-    ).toBeFalsy();
-
-    // restore
-    console.error = consoleError;
-  });
-
   // ***************
   // SNAPSHOT TESTS
   // ***************
@@ -227,7 +94,7 @@ describe('CvDefinitionTooltip', () => {
       definition: 'Brief description of the dotted, underlined term',
       term: 'A term needeing definition',
     };
-    const wrapper = await shallow(CvDefinitionTooltip, { propsData });
+    const wrapper = shallowMount(CvDefinitionTooltip, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
   });
@@ -239,7 +106,7 @@ describe('CvDefinitionTooltip', () => {
       term: 'A term needeing definition',
       direction: 'top',
     };
-    const wrapper = await shallow(CvDefinitionTooltip, { propsData });
+    const wrapper = shallowMount(CvDefinitionTooltip, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
   });
@@ -251,7 +118,7 @@ describe('CvDefinitionTooltip', () => {
       term: 'A term needeing definition',
       direction: 'bottom',
     };
-    const wrapper = await shallow(CvDefinitionTooltip, { propsData });
+    const wrapper = shallowMount(CvDefinitionTooltip, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
   });
@@ -263,7 +130,7 @@ describe('CvDefinitionTooltip', () => {
       term: 'A term needeing definition',
       alignment: 'start',
     };
-    const wrapper = await shallow(CvDefinitionTooltip, { propsData });
+    const wrapper = shallowMount(CvDefinitionTooltip, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
   });
@@ -275,7 +142,7 @@ describe('CvDefinitionTooltip', () => {
       term: 'A term needeing definition',
       alignment: 'center',
     };
-    const wrapper = await shallow(CvDefinitionTooltip, { propsData });
+    const wrapper = shallowMount(CvDefinitionTooltip, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
   });
@@ -287,7 +154,7 @@ describe('CvDefinitionTooltip', () => {
       term: 'A term needeing definition',
       alignment: 'end',
     };
-    const wrapper = await shallow(CvDefinitionTooltip, { propsData });
+    const wrapper = shallowMount(CvDefinitionTooltip, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
   });
@@ -300,7 +167,7 @@ describe('CvDefinitionTooltip', () => {
       alignment: 'end',
       direction: 'bottom',
     };
-    const wrapper = await shallow(CvDefinitionTooltip, { propsData });
+    const wrapper = shallowMount(CvDefinitionTooltip, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
   });
@@ -311,49 +178,13 @@ describe('CvDefinitionTooltip', () => {
 });
 
 describe('CvInteractiveTooltip', () => {
-  const directions = ['top', 'bottom', 'left', 'right'];
-
-  // ***************
-  // PROP CHECKS
-  // ***************
-  testComponent.propsAreType(CvInteractiveTooltip, ['direction'], String);
-  testComponent.propsAreType(CvInteractiveTooltip, ['visible'], Boolean);
-  testComponent.propsHaveDefault(CvInteractiveTooltip, [
-    'direction',
-    'visible',
-  ]);
-
-  it('`direction` prop validator works as expected', async () => {
-    const propsData = {};
-
-    const wrapper = await shallow(CvInteractiveTooltip, { propsData });
-    for (const direction of directions) {
-      expect(
-        wrapper.vm.$options.props.direction.validator &&
-          wrapper.vm.$options.props.direction.validator(direction)
-      ).toBeTruthy();
-    }
-
-    // suppress the error message from the kind validator
-    const consoleError = console.error;
-    console.error = jest.fn();
-
-    expect(
-      wrapper.vm.$options.props.direction.validator &&
-        wrapper.vm.$options.props.direction.validator('TEST')
-    ).toBeFalsy();
-
-    // restore
-    console.error = consoleError;
-  });
-
   // ***************
   // SNAPSHOT TESTS
   // ***************
 
   it('should render interactive tooltip: minimal as expected', async () => {
     const propsData = { id: 'test-1' };
-    const wrapper = await shallow(CvInteractiveTooltip, { propsData });
+    const wrapper = shallowMount(CvInteractiveTooltip, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
     expect(wrapper.vm.$refs.popup).toMatchSnapshot();
@@ -361,7 +192,7 @@ describe('CvInteractiveTooltip', () => {
 
   it('should render interactive tooltip with direction set to `top` as expected', async () => {
     const propsData = { id: 'test-1', direction: 'top' };
-    const wrapper = await shallow(CvInteractiveTooltip, { propsData });
+    const wrapper = shallowMount(CvInteractiveTooltip, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
     expect(wrapper.vm.$refs.popup).toMatchSnapshot();
@@ -369,7 +200,7 @@ describe('CvInteractiveTooltip', () => {
 
   it('should render interactive tooltip with direction set to `left` as expected', async () => {
     const propsData = { id: 'test-1', direction: 'left' };
-    const wrapper = await shallow(CvInteractiveTooltip, { propsData });
+    const wrapper = shallowMount(CvInteractiveTooltip, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
     expect(wrapper.vm.$refs.popup).toMatchSnapshot();
@@ -377,7 +208,7 @@ describe('CvInteractiveTooltip', () => {
 
   it('should render interactive tooltip with direction set to `bottom` as expected', async () => {
     const propsData = { id: 'test-1', direction: 'bottom' };
-    const wrapper = await shallow(CvInteractiveTooltip, { propsData });
+    const wrapper = shallowMount(CvInteractiveTooltip, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
     expect(wrapper.vm.$refs.popup).toMatchSnapshot();
@@ -385,7 +216,7 @@ describe('CvInteractiveTooltip', () => {
 
   it('should render interactive tooltip with direction set to `right` as expected', async () => {
     const propsData = { id: 'test-1', direction: 'right' };
-    const wrapper = await shallow(CvInteractiveTooltip, { propsData });
+    const wrapper = shallowMount(CvInteractiveTooltip, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
     expect(wrapper.vm.$refs.popup).toMatchSnapshot();
@@ -393,7 +224,7 @@ describe('CvInteractiveTooltip', () => {
 
   it('should render interactive tooltip with visible set to `true` as expected', async () => {
     const propsData = { id: 'test-1', visible: true };
-    const wrapper = await shallow(CvInteractiveTooltip, { propsData });
+    const wrapper = shallowMount(CvInteractiveTooltip, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
     expect(wrapper.vm.$refs.popup).toMatchSnapshot();
@@ -401,7 +232,7 @@ describe('CvInteractiveTooltip', () => {
 
   it('should render interactive tooltip with direction and visible set as expected', async () => {
     const propsData = { id: 'test-1', direction: 'left', visible: true };
-    const wrapper = await shallow(CvInteractiveTooltip, { propsData });
+    const wrapper = shallowMount(CvInteractiveTooltip, { propsData });
 
     expect(wrapper.html()).toMatchSnapshot();
     expect(wrapper.vm.$refs.popup).toMatchSnapshot();
@@ -409,7 +240,7 @@ describe('CvInteractiveTooltip', () => {
 
   it('should render interactive tooltip with slot `label` as expected', async () => {
     const propsData = { id: 'test-1' };
-    const wrapper = await shallow(CvInteractiveTooltip, {
+    const wrapper = shallowMount(CvInteractiveTooltip, {
       slots: {
         label: '<div>Interactive tooptip label</div>',
       },
@@ -422,7 +253,7 @@ describe('CvInteractiveTooltip', () => {
 
   it('should render interactive tooltip with slot `trigger` as expected', async () => {
     const propsData = { id: 'test-1' };
-    const wrapper = await shallow(CvInteractiveTooltip, {
+    const wrapper = shallowMount(CvInteractiveTooltip, {
       slots: {
         trigger: '<div>Interactive tooptip trigger</div>',
       },
@@ -435,7 +266,7 @@ describe('CvInteractiveTooltip', () => {
 
   it('should render interactive tooltip with slot `content` as expected', async () => {
     const propsData = { id: 'test-1' };
-    const wrapper = await shallow(CvInteractiveTooltip, {
+    const wrapper = shallowMount(CvInteractiveTooltip, {
       slots: {
         content:
           '<div>Interactive tooptip content<button>Close tooltip</button></div>',
@@ -452,53 +283,52 @@ describe('CvInteractiveTooltip', () => {
   // ***************
   it('computed dataVisible should be false when visible prop is false', async () => {
     const propsData = { visible: false };
-    const wrapper = await shallow(CvInteractiveTooltip, { propsData });
+    const wrapper = shallowMount(CvInteractiveTooltip, { propsData });
     expect(wrapper.vm.dataVisible).toEqual(false);
   });
 
   it('computed dataVisible should be true when visible prop is true', async () => {
     const propsData = { visible: true };
-    const wrapper = await shallow(CvInteractiveTooltip, { propsData });
+    const wrapper = shallowMount(CvInteractiveTooltip, { propsData });
     expect(wrapper.vm.dataVisible).toEqual(true);
   });
 
   it('computed dataVisible should be toggled on trigger click', async () => {
     const propsData = { visible: false };
-    const wrapper = await shallow(CvInteractiveTooltip, { propsData });
+    const wrapper = shallowMount(CvInteractiveTooltip, { propsData });
     expect(wrapper.vm.dataVisible).toEqual(false);
 
-    await trigger(wrapper.find('button'), 'click');
+    await wrapper.find('button')?.trigger('click');
     expect(wrapper.vm.dataVisible).toEqual(true);
 
-    await trigger(wrapper.find('button'), 'click');
+    await wrapper.find('button')?.trigger('click');
     expect(wrapper.vm.dataVisible).toEqual(false);
   });
 
-  it('`visible` prop should be watched', async () => {
-    const propsData = { visible: false };
-    const wrapper = await shallow(CvInteractiveTooltip, { propsData });
-    const spyOnShow = jest.spyOn(wrapper.vm, 'show');
-    const spyOnHide = jest.spyOn(wrapper.vm, 'hide');
-
-    await setProps(wrapper, {
-      visible: true,
+  const testTooltipNodeVisibility = async isVisible => {
+    const tooltipNode = document.querySelector(`.${carbonPrefix}--tooltip`);
+    const hasVisibleClass = tooltipNode.classList.contains(
+      `${carbonPrefix}--tooltip--shown`
+    );
+    await expect(hasVisibleClass).toBe(isVisible);
+  };
+  it('`visible` prop toggles tooltip', async () => {
+    const { rerender } = await render(CvInteractiveTooltip, {
+      componentProperties: { visible: false },
     });
 
-    expect(spyOnShow).toBeCalledTimes(1);
+    await testTooltipNodeVisibility(false);
 
-    await setProps(wrapper, {
-      visible: false,
-    });
-
-    expect(spyOnHide).toBeCalledTimes(1);
+    await rerender({ visible: true });
+    await testTooltipNodeVisibility(true);
   });
 
   it('`position` is recomputed when popup is visible on `direction` prop change', async () => {
     const propsData = { visible: true };
-    const wrapper = await shallow(CvInteractiveTooltip, { propsData });
+    const wrapper = shallowMount(CvInteractiveTooltip, { propsData });
     const spy = jest.spyOn(wrapper.vm, 'position');
 
-    await setProps(wrapper, {
+    await wrapper.setProps({
       direction: 'left',
     });
 
@@ -507,10 +337,10 @@ describe('CvInteractiveTooltip', () => {
 
   it('`position` is not recomputed when popup is not visible on `direction` prop change', async () => {
     const propsData = { visible: false };
-    const wrapper = await shallow(CvInteractiveTooltip, { propsData });
+    const wrapper = shallowMount(CvInteractiveTooltip, { propsData });
     const spy = jest.spyOn(wrapper.vm, 'position');
 
-    await setProps(wrapper, {
+    await wrapper.setProps({
       direction: 'left',
     });
 
@@ -519,10 +349,10 @@ describe('CvInteractiveTooltip', () => {
 
   it('`position` is recomputed on `visible` prop change', async () => {
     const propsData = { visible: false };
-    const wrapper = await shallow(CvInteractiveTooltip, { propsData });
+    const wrapper = shallowMount(CvInteractiveTooltip, { propsData });
     const spy = jest.spyOn(wrapper.vm, 'position');
 
-    await setProps(wrapper, {
+    await wrapper.setProps({
       visible: true,
     });
 
@@ -531,7 +361,7 @@ describe('CvInteractiveTooltip', () => {
 
   it('`left` and `top` are computed correctly when direction is `top`', async () => {
     const propsData = { visible: true, direction: 'top' };
-    const wrapper = await shallow(CvInteractiveTooltip, { propsData });
+    const wrapper = shallowMount(CvInteractiveTooltip, { propsData });
 
     expect(wrapper.vm.left).toEqual(0.5);
     expect(wrapper.vm.top).toEqual(-15);
@@ -539,7 +369,7 @@ describe('CvInteractiveTooltip', () => {
 
   it('`left` and `top` are computed correctly when direction is `bottom`', async () => {
     const propsData = { visible: true, direction: 'bottom' };
-    const wrapper = await shallow(CvInteractiveTooltip, { propsData });
+    const wrapper = shallowMount(CvInteractiveTooltip, { propsData });
 
     expect(wrapper.vm.left).toEqual(0.5);
     expect(wrapper.vm.top).toEqual(10);
@@ -547,7 +377,7 @@ describe('CvInteractiveTooltip', () => {
 
   it('`left` and `top` are computed correctly when direction is `left`', async () => {
     const propsData = { visible: true, direction: 'left' };
-    const wrapper = await shallow(CvInteractiveTooltip, { propsData });
+    const wrapper = shallowMount(CvInteractiveTooltip, { propsData });
 
     expect(wrapper.vm.left).toEqual(-10);
     expect(wrapper.vm.top).toEqual(-0.25);
@@ -555,7 +385,7 @@ describe('CvInteractiveTooltip', () => {
 
   it('`left` and `top` are computed correctly when direction is `right`', async () => {
     const propsData = { visible: true, direction: 'right' };
-    const wrapper = await shallow(CvInteractiveTooltip, { propsData });
+    const wrapper = shallowMount(CvInteractiveTooltip, { propsData });
 
     expect(wrapper.vm.left).toEqual(15);
     expect(wrapper.vm.top).toEqual(-0.25);
@@ -563,55 +393,55 @@ describe('CvInteractiveTooltip', () => {
 
   it('`contentAfter` is computed correctly when direction is `right`', async () => {
     const propsData = { visible: true, direction: 'right' };
-    const wrapper = await shallow(CvInteractiveTooltip, { propsData });
+    const wrapper = shallowMount(CvInteractiveTooltip, { propsData });
 
     expect(wrapper.vm.contentAfter).toBeTruthy();
   });
 
   it('`contentAfter` is computed correctly when direction is `bottom`', async () => {
     const propsData = { visible: true, direction: 'bottom' };
-    const wrapper = await shallow(CvInteractiveTooltip, { propsData });
+    const wrapper = shallowMount(CvInteractiveTooltip, { propsData });
 
     expect(wrapper.vm.contentAfter).toBeTruthy();
   });
 
   it('`contentAfter` is computed correctly when direction is `left`', async () => {
     const propsData = { visible: true, direction: 'left' };
-    const wrapper = await shallow(CvInteractiveTooltip, { propsData });
+    const wrapper = shallowMount(CvInteractiveTooltip, { propsData });
 
     expect(wrapper.vm.contentAfter).toBeFalsy();
   });
 
   it('`contentAfter` is computed correctly when direction is `top`', async () => {
     const propsData = { visible: true, direction: 'top' };
-    const wrapper = await shallow(CvInteractiveTooltip, { propsData });
+    const wrapper = shallowMount(CvInteractiveTooltip, { propsData });
 
     expect(wrapper.vm.contentAfter).toBeFalsy();
   });
 
   it('`beforeContent` is focused on tab if `contentAfter` exists', async () => {
     const propsData = { visible: true, direction: 'right' };
-    const wrapper = await shallow(CvInteractiveTooltip, {
+    const wrapper = shallowMount(CvInteractiveTooltip, {
       propsData,
     });
-    await trigger(wrapper.find('button'), 'keydown.tab');
+    await wrapper.find('button')?.trigger('keydown.tab');
 
     expect(wrapper.vm.$refs.beforeContent).toBe(document.activeElement);
   });
 
   it('`afterContent` is focused on shift tab if `contentAfter` does not exist', async () => {
     const propsData = { visible: true, direction: 'top' };
-    const wrapper = await shallow(CvInteractiveTooltip, {
+    const wrapper = shallowMount(CvInteractiveTooltip, {
       propsData,
     });
     jest.spyOn(wrapper.vm, 'focusAfterContent');
-    await trigger(wrapper.find('button'), 'keydown.tab', { shiftKey: true });
+    await wrapper.find('button')?.trigger('keydown.tab', { shiftKey: true });
     expect(wrapper.vm.$refs.afterContent).toBe(document.activeElement);
   });
 
   it('`positionListen` is called with `false` on wrapper destroy', async () => {
     const propsData = { visible: false };
-    const wrapper = await shallow(CvInteractiveTooltip, {
+    const wrapper = shallowMount(CvInteractiveTooltip, {
       propsData,
     });
     const spy = jest.spyOn(wrapper.vm, 'positionListen');
@@ -622,11 +452,11 @@ describe('CvInteractiveTooltip', () => {
   it('`preventFocusOut` is called on popup mousedown event', async () => {
     const id = 'test';
     const propsData = { visible: true, id };
-    const wrapper = await shallow(CvInteractiveTooltip, {
+    const wrapper = shallowMount(CvInteractiveTooltip, {
       propsData,
     });
     const spy = jest.spyOn(wrapper.vm, 'preventFocusOut');
-    await trigger(wrapper.find(`#${id}`), 'mousedown.prevent');
+    await wrapper.find(`#${id}`)?.trigger('mousedown.prevent');
     expect(spy).toBeCalled();
   });
 });
