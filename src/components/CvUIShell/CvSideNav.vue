@@ -15,6 +15,8 @@
     :id="id"
     @focusout="onFocusout"
     @mousedown="onMouseDown"
+    @mouseenter="onHoverToggle(true)"
+    @mouseleave="onHoverToggle(false)"
     ref="el"
   >
     <slot></slot>
@@ -62,6 +64,7 @@ const props = defineProps({
 });
 
 const el = ref(null);
+const expandedViaHoverState = ref(false);
 const panelExpanded = computed({
   get() {
     return data.dataExpanded;
@@ -107,7 +110,10 @@ watch(
   }
 );
 const emit = defineEmits(['update:expanded', 'panel-resize']);
-watch(panelExpanded, current => {
+const isPanelExpanded = computed(
+  () => panelExpanded.value || expandedViaHoverState.value
+);
+watch(isPanelExpanded, current => {
   emit('update:expanded', current);
   emit('panel-resize', { id: props.id, expanded: current });
 });
@@ -124,6 +130,9 @@ function onMouseDown(ev) {
     // ignore mousedown on panel can cause focus event
     ev.preventDefault();
   }
+}
+function onHoverToggle(value) {
+  if (props.rail) expandedViaHoverState.value = value;
 }
 function toggleExpand() {
   panelExpanded.value = data.dataExpanded;
