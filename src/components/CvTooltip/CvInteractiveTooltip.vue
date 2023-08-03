@@ -124,7 +124,7 @@ watch(visible, newValue => {
 });
 
 watch(direction, () => {
-  if (!visible) return;
+  if (!visible.value) return;
   position();
 });
 

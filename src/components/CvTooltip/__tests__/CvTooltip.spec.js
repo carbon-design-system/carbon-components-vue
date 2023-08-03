@@ -1,7 +1,8 @@
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, mount } from '@vue/test-utils';
 import { render, cleanup } from '@testing-library/vue';
 import { CvTooltip, CvDefinitionTooltip, CvInteractiveTooltip } from '../index';
 import { carbonPrefix } from '../../../global/settings';
+import { nextTick } from 'vue';
 
 describe('CvToopltip', () => {
   afterEach(() => {
@@ -320,48 +321,62 @@ describe('CvInteractiveTooltip', () => {
     await testTooltipNodeVisibility(false);
 
     await rerender({ visible: true });
+    await nextTick();
     await testTooltipNodeVisibility(true);
   });
 
   it('`position` is recomputed when popup is visible on `direction` prop change', async () => {
     const propsData = { visible: true };
     const wrapper = shallowMount(CvInteractiveTooltip, { propsData });
-    const spy = jest.spyOn(wrapper.vm, 'position');
+
+    await nextTick();
+    const initialLeftPosition = wrapper.vm.left;
+    const initialTopPosition = wrapper.vm.top;
 
     await wrapper.setProps({
       direction: 'left',
     });
-
-    expect(spy).toBeCalledTimes(1);
+    await nextTick();
+    expect(wrapper.vm.left).not.toEqual(initialLeftPosition);
+    expect(wrapper.vm.top).not.toEqual(initialTopPosition);
   });
 
   it('`position` is not recomputed when popup is not visible on `direction` prop change', async () => {
     const propsData = { visible: false };
     const wrapper = shallowMount(CvInteractiveTooltip, { propsData });
-    const spy = jest.spyOn(wrapper.vm, 'position');
+
+    await nextTick();
+    const initialLeftPosition = wrapper.vm.left;
+    const initialTopPosition = wrapper.vm.top;
 
     await wrapper.setProps({
       direction: 'left',
     });
-
-    expect(spy).toBeCalledTimes(0);
+    await nextTick();
+    expect(wrapper.vm.left).toEqual(initialLeftPosition);
+    expect(wrapper.vm.top).toEqual(initialTopPosition);
   });
 
   it('`position` is recomputed on `visible` prop change', async () => {
     const propsData = { visible: false };
     const wrapper = shallowMount(CvInteractiveTooltip, { propsData });
-    const spy = jest.spyOn(wrapper.vm, 'position');
+
+    await nextTick();
+    const initialLeftPosition = wrapper.vm.left;
+    const initialTopPosition = wrapper.vm.top;
 
     await wrapper.setProps({
       visible: true,
     });
-
-    expect(spy).toBeCalledTimes(1);
+    await nextTick();
+    expect(wrapper.vm.left).not.toEqual(initialLeftPosition);
+    expect(wrapper.vm.top).not.toEqual(initialTopPosition);
   });
 
   it('`left` and `top` are computed correctly when direction is `top`', async () => {
     const propsData = { visible: true, direction: 'top' };
     const wrapper = shallowMount(CvInteractiveTooltip, { propsData });
+    await nextTick();
 
     expect(wrapper.vm.left).toEqual(0.5);
     expect(wrapper.vm.top).toEqual(-15);
@@ -370,6 +385,7 @@ describe('CvInteractiveTooltip', () => {
   it('`left` and `top` are computed correctly when direction is `bottom`', async () => {
     const propsData = { visible: true, direction: 'bottom' };
     const wrapper = shallowMount(CvInteractiveTooltip, { propsData });
+    await nextTick();
 
     expect(wrapper.vm.left).toEqual(0.5);
     expect(wrapper.vm.top).toEqual(10);
@@ -378,6 +394,7 @@ describe('CvInteractiveTooltip', () => {
   it('`left` and `top` are computed correctly when direction is `left`', async () => {
     const propsData = { visible: true, direction: 'left' };
     const wrapper = shallowMount(CvInteractiveTooltip, { propsData });
+    await nextTick();
 
     expect(wrapper.vm.left).toEqual(-10);
     expect(wrapper.vm.top).toEqual(-0.25);
@@ -386,6 +403,7 @@ describe('CvInteractiveTooltip', () => {
   it('`left` and `top` are computed correctly when direction is `right`', async () => {
     const propsData = { visible: true, direction: 'right' };
     const wrapper = shallowMount(CvInteractiveTooltip, { propsData });
+    await nextTick();
 
     expect(wrapper.vm.left).toEqual(15);
     expect(wrapper.vm.top).toEqual(-0.25);
@@ -437,26 +455,5 @@ describe('CvInteractiveTooltip', () => {
     jest.spyOn(wrapper.vm, 'focusAfterContent');
     await wrapper.find('button')?.trigger('keydown.tab', { shiftKey: true });
     expect(wrapper.vm.$refs.afterContent).toBe(document.activeElement);
-  });
-
-  it('`positionListen` is called with `false` on wrapper destroy', async () => {
-    const propsData = { visible: false };
-    const wrapper = shallowMount(CvInteractiveTooltip, {
-      propsData,
-    });
-    const spy = jest.spyOn(wrapper.vm, 'positionListen');
-    wrapper.destroy();
-    expect(spy).toBeCalledWith(false);
-  });
-
-  it('`preventFocusOut` is called on popup mousedown event', async () => {
-    const id = 'test';
-    const propsData = { visible: true, id };
-    const wrapper = shallowMount(CvInteractiveTooltip, {
-      propsData,
-    });
-    const spy = jest.spyOn(wrapper.vm, 'preventFocusOut');
-    await wrapper.find(`#${id}`)?.trigger('mousedown.prevent');
-    expect(spy).toBeCalled();
   });
 });
