@@ -1,5 +1,4 @@
 import { render } from '@testing-library/vue';
-import userEvent from '@testing-library/user-event';
 import CvGrid from '../CvGrid.vue';
 import CvRow from '../CvRow.vue';
 import CvColumn from '../CvColumn.vue';

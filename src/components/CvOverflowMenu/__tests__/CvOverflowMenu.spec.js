@@ -61,7 +61,7 @@ describe('CvOverflowMenu', () => {
     });
 
     const select = await result.findByLabelText(label);
-    const menu = result.container.querySelector('[data-overflow-menu]');
+    result.container.querySelector('[data-overflow-menu]');
     const buttons = await result.findAllByRole('button');
 
     const user = userEvent.setup();

@@ -113,7 +113,6 @@ import {
   ref,
   computed,
   onMounted,
-  onUpdated,
   onBeforeMount,
   onUnmounted,
   watch,
@@ -305,6 +304,7 @@ let dateToString = val => {
   return calendar.formatDate(val, props.calOptions.dateFormat);
 };
 
+// eslint-disable-next-line no-unused-vars
 const handleDatePick = (selectedDates, dateStr, instance) => {
   if (isSingle.value) {
     const temp = dateToString(selectedDates[0]);

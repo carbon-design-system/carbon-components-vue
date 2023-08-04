@@ -65,6 +65,8 @@ import CvToggle from './src/components/CvToggle/CvToggle.vue';
 import CvTooltip from './src/components/CvTooltip/CvTooltip.vue';
 import CvDefinitionTooltip from './src/components/CvTooltip/CvDefinitionTooltip.vue';
 import CvInteractiveTooltip from './src/components/CvTooltip/CvInteractiveTooltip.vue';
+import CvRadioButton from './src/components/CvRadioButton/CvRadioButton.vue';
+import CvRadioGroup from './src/components/CvRadioButton/CvRadioGroup.vue';
 
 const all = {
   CvAspectRatio,
@@ -134,6 +136,8 @@ const all = {
   CvTooltip,
   CvDefinitionTooltip,
   CvInteractiveTooltip,
+  CvRadioButton,
+  CvRadioGroup,
 };
 export default {
   install(app, options) {

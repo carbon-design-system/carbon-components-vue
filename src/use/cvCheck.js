@@ -5,6 +5,9 @@ import { unref, ref, computed, watch, onMounted } from 'vue';
 
 export const props = {
   modelValue: { type: [Array, Boolean], default: undefined },
+  /**
+   * Specify whether the Checkbox is in an indeterminate state
+   */
   mixed: { type: Boolean, default: null },
   checked: { type: Boolean, default: undefined },
   name: String,

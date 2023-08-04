@@ -36,6 +36,7 @@ export const storyParametersObject = (
   const code = storySourceCode(templateSource, args, replacing);
 
   if (!parameters) {
+    // eslint-disable-next-line no-param-reassign
     parameters = { docs: { source: { code } } };
   } else {
     if (!parameters.docs) {
