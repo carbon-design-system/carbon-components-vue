@@ -1,13 +1,9 @@
 import { shallowMount, mount } from '@vue/test-utils';
-import { render, cleanup } from '@testing-library/vue';
 import { CvTooltip, CvDefinitionTooltip, CvInteractiveTooltip } from '../index';
 import { carbonPrefix } from '../../../global/settings';
 import { nextTick } from 'vue';
 
 describe('CvToopltip', () => {
-  afterEach(() => {
-    cleanup();
-  });
   // ***************
   // SNAPSHOT TESTS
   // ***************
@@ -306,23 +302,17 @@ describe('CvInteractiveTooltip', () => {
     expect(wrapper.vm.dataVisible).toEqual(false);
   });
 
-  const testTooltipNodeVisibility = async isVisible => {
-    const tooltipNode = document.querySelector(`.${carbonPrefix}--tooltip`);
-    const hasVisibleClass = tooltipNode.classList.contains(
-      `${carbonPrefix}--tooltip--shown`
-    );
-    await expect(hasVisibleClass).toBe(isVisible);
-  };
   it('`visible` prop toggles tooltip', async () => {
-    const { rerender } = await render(CvInteractiveTooltip, {
-      componentProperties: { visible: false },
+    const wrapper = mount(CvInteractiveTooltip, {
+      propsData: { visible: false },
     });
+    expect(wrapper.vm.dataVisible).toBe(false);
 
-    await testTooltipNodeVisibility(false);
-
-    await rerender({ visible: true });
+    await wrapper.setProps({
+      visible: true,
+    });
     await nextTick();
-    await testTooltipNodeVisibility(true);
+    expect(wrapper.vm.dataVisible).toBe(true);
   });
 
   it('`position` is recomputed when popup is visible on `direction` prop change', async () => {
