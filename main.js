@@ -64,6 +64,8 @@ import CvNumberInputSkeleton from './src/components/CvNumberInput/CvNumberInputS
 import CvToggle from './src/components/CvToggle/CvToggle.vue';
 import CvRadioButton from './src/components/CvRadioButton/CvRadioButton.vue';
 import CvRadioGroup from './src/components/CvRadioButton/CvRadioGroup.vue';
+import CvSlider from './src/components/CvSlider/CvSlider.vue';
+import CvSliderSkeleton from './src/components/CvSlider/CvSliderSkeleton.vue';
 
 const all = {
   CvAspectRatio,
@@ -132,6 +134,8 @@ const all = {
   CvToggle,
   CvRadioButton,
   CvRadioGroup,
+  CvSlider,
+  CvSliderSkeleton,
 };
 export default {
   install(app, options) {
