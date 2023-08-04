@@ -1,6 +1,5 @@
 import { shallowMount, mount } from '@vue/test-utils';
 import { CvTooltip, CvDefinitionTooltip, CvInteractiveTooltip } from '../index';
-import { carbonPrefix } from '../../../global/settings';
 import { nextTick } from 'vue';
 
 describe('CvToopltip', () => {
