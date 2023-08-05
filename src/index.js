@@ -13,6 +13,16 @@ const components = ctx.keys().map(k => {
 export default {
   // options is an array of components to be registered
   // e.g. ['c-button', 'c-modal']
+
+  /**
+   * @typedef {import("vue").App} App
+   */
+
+  /**
+   * Install plugin in Vue
+   * @param {App} Vue
+   * @param {Array<string>} options
+   */
   install(Vue, options) {
     if (typeof options === 'undefined') {
       for (let c of components) {

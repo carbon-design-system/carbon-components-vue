@@ -1,27 +1,36 @@
 import { Canvas, Meta, Story } from '@storybook/addon-docs';
 import { sbCompPrefix } from '../../global/storybook-utils';
 import { action } from '@storybook/addon-actions';
-import CvHeader from './CvHeader.vue'
-import CvSkipToContent from "./CvSkipToContent.vue";
-import CvHeaderName from "./CvHeaderName.vue";
-import CvHeaderNav from "./CvHeaderNav.vue";
-import CvHeaderMenuItem from "./CvHeaderMenuItem.vue";
-import CvHeaderMenuButton from "./CvHeaderMenuButton.vue";
-import CvHeaderMenu from "./CvHeaderMenu.vue";
-import CvHeaderGlobalAction from "./CvHeaderGlobalAction.vue";
-import CvHeaderPanel from "./CvHeaderPanel.vue";
-import CvSwitcher from "./CvSwitcher.vue";
-import CvSwitcherItem from "./CvSwitcherItem.vue";
-import CvSwitcherItemLink from "./CvSwitcherItemLink.vue";
-import CvSideNav from "./CvSideNav.vue";
-import CvSideNavItems from "./CvSideNavItems.vue";
-import CvSideNavLink from "./CvSideNavLink.vue";
-import CvSideNavMenu from "./CvSideNavMenu.vue";
-import CvSideNavMenuDivider from "./CvSideNavMenuDivider.vue";
-import CvSideNavMenuItem from "./CvSideNavMenuItem.vue";
-import { Notification20, UserAvatar20, Login20, Switcher20, Home16, ChatBot16, ConnectionTwoWay16, MachineLearningModel16 } from '@carbon/icons-vue'
-import { ref } from "vue";
-const loggedIn = ref(false)
+import CvHeader from './CvHeader.vue';
+import CvSkipToContent from './CvSkipToContent.vue';
+import CvHeaderName from './CvHeaderName.vue';
+import CvHeaderNav from './CvHeaderNav.vue';
+import CvHeaderMenuItem from './CvHeaderMenuItem.vue';
+import CvHeaderMenuButton from './CvHeaderMenuButton.vue';
+import CvHeaderMenu from './CvHeaderMenu.vue';
+import CvHeaderGlobalAction from './CvHeaderGlobalAction.vue';
+import CvHeaderPanel from './CvHeaderPanel.vue';
+import CvSwitcher from './CvSwitcher.vue';
+import CvSwitcherItem from './CvSwitcherItem.vue';
+import CvSwitcherItemLink from './CvSwitcherItemLink.vue';
+import CvSideNav from './CvSideNav.vue';
+import CvSideNavItems from './CvSideNavItems.vue';
+import CvSideNavLink from './CvSideNavLink.vue';
+import CvSideNavMenu from './CvSideNavMenu.vue';
+import CvSideNavMenuDivider from './CvSideNavMenuDivider.vue';
+import CvSideNavMenuItem from './CvSideNavMenuItem.vue';
+import {
+  Notification20,
+  UserAvatar20,
+  Login20,
+  Switcher20,
+  Home16,
+  ChatBot16,
+  ConnectionTwoWay16,
+  MachineLearningModel16,
+} from '@carbon/icons-vue';
+import { ref } from 'vue';
+const loggedIn = ref(false);
 
 <Meta title={`${sbCompPrefix}/ui-select/CvHeader`} component={CvHeader} />
 
@@ -53,18 +62,20 @@ export const Template = args => ({
     Home16,
     ChatBot16,
     ConnectionTwoWay16,
-    MachineLearningModel16
+    MachineLearningModel16,
   },
   // The story's `args` need to be mapped into the template through the `setup()` method
   setup() {
     return {
-        ...args,
+      ...args,
       actionNotifications: () => {},
-      actionUserAvatar: () => { loggedIn.value = !loggedIn.value},
+      actionUserAvatar: () => {
+        loggedIn.value = !loggedIn.value;
+      },
       actionAppSwitcher: () => {},
       onPanelResize: action('panel-resize'),
-      loggedIn
-    }
+      loggedIn,
+    };
   },
   // And then the `args` are bound to your component with `v-bind="args"`
   template: args.template,
@@ -151,7 +162,7 @@ const defaultTemplate = `
     </cv-header-panel>
   </template>
 </cv-header>
-`
+`;
 const railTemplate = `
 <cv-header aria-label="Carbon header">
   <cv-header-menu-button aria-label="Header menu" aria-controls="side-nav" :active="expandedSideNav"/>
@@ -185,7 +196,7 @@ const railTemplate = `
     </cv-side-nav>
   </template>
 </cv-header>
-`
+`;
 const fixedSideNavTemplate = `
 <cv-header aria-label="Carbon header">
   <cv-skip-to-content href="#main-content">
@@ -220,21 +231,25 @@ const fixedSideNavTemplate = `
     </cv-side-nav-link>
   </cv-side-nav-items>
 </cv-side-nav>
-`
+`;
 
 # UI Shell components
+
 Set of components for managing navigation and header bars.
 
 ## CvHeader
+
 Slots:
+
 - default - buttons links etc
 - header-global - Global button content
 - left-panels - Content panel on the left - side nav
 - right-panels - Right panel content - users, languages, notifications, switcher, etc
 
-
 ## CvHeaderGlobalAction
+
 Properties:
+
 - active - `Boolean` - Specify whether the menu button is "active".
 - ariaControls - `String` Specify the id of a panel that this button controls
 - label - `String` - button label
@@ -242,23 +257,31 @@ Properties:
 - tipAlignment - `String` - `start`, `center`, `end`. Default `center`
 
 Slots:
+
 - icon - Icon for the action
 
 ## CvHeaderMenu
+
 Properties:
+
 - title - `String` - Provide a label for the link text
 - hoverToggle - `Boolean` - activate the menu on hover. Default `true`
 
 Slots:
+
 - default - menu content
 
 ## CvHeaderMenuButton
+
 Properties:
+
 - active - `Boolean` - Specify whether the menu button is "active".
 - ariaControls - **required** `String` Specify the id of a panel that this button controls
 
 ## CvHeaderMenuItem
+
 Properties:
+
 - disabled - `Boolean` link is disabled
 - to - link router path
 - href - `String` destination. If `to` is specified this value is ignored
@@ -267,36 +290,48 @@ Properties:
 - role - `String` - role value for the main component. Default `undefned`
 
 Slots:
+
 - default - menu content
 
 ## CvHeaderName
+
 Properties:
+
 - prefix - `String` - Optionally specify a prefix to your header name. Useful for companies, for example: IBM [Product Name] versus solely [Product Name]
 - disabled - `Boolean` link is disabled
 - to - link router path
 - href - `String` destination. If `to` is specified this value is ignored
 
 Slots:
+
 - default - header content
 
 ## CvHeaderNav
+
 Properties:
-- ariaLabelledBy - `String` `aria-labelledby`  value
+
+- ariaLabelledBy - `String` `aria-labelledby` value
 
 Slots:
+
 - default - nav content
 
 ## CvHeaderPanel
+
 Properties:
+
 - **Migration Note** - The `v-model` has changed in Vue 3. To control expanded as a `v-model` specify `v-model:expanded`
 - expanded - `Boolean` - Specify whether the panel is expanded
 - id - `String` - **required** this id must match the `ariaControls` value of the button that controls this panel
 
 Slots:
+
 - default - panel content
 
 ## CvSideNav
+
 Properties:
+
 - **Migration Note** - The `v-model` has changed in Vue 3. To control expanded as a `v-model` specify `v-model:expanded`
 - expanded - `Boolean` - Specify whether the panel is expanded
 - id - `String` - **required** this id must match the `ariaControls` value of the button that controls this side nav
@@ -305,17 +340,23 @@ Properties:
 - assistiveToggleText - `String` - Assistive text for a non-rail, non-fixed, non-header controlled side nav
 
 Slots:
+
 - default - nav content
 
 ## CvSideNavIcon
+
 Properties:
+
 - small - `Boolean` - Use a smaller icon
 
 Slots:
+
 - default - icon
 
 ## CvSideNavLink
+
 Properties:
+
 - active - `Boolean` - Specify whether the menu button is "active".
 - icon - icon object to display with the link
 - disabled - `Boolean` link is disabled
@@ -323,96 +364,120 @@ Properties:
 - href - `String` destination. If `to` is specified this value is ignored
 
 Slots:
+
 - default - nav content
 
 ## CvSideNavMenu
+
 Properties:
+
 - active - `Boolean` - Specify whether the menu is "active".
 - title - `String` - Provide a label for the link text
 - expanded - `Boolean` - Specify whether the menu is expanded
 
 Slots:
+
 - default - menu content
 - nav-icon - icon
 
 ## CvSideNavMenuDivider
+
 Draw a divider line. No props or slots.
 
 ## CvSideNavMenuItem
+
 Properties:
+
 - active - `Boolean` - Specify whether the menu is "active".
 - disabled - `Boolean` link is disabled
 - to - Vue router path
 - href - `String` destination. If `to` is specified this value is ignored
 
 Slots:
+
 - default - menu content
 
 ## CvSkipToContent
+
 Properties:
+
 - disabled - `Boolean` link is disabled
 - to - Vue router path
 - href - `String` destination. If `to` is specified this value is ignored
 
 Slots:
+
 - default - default "Skip to main content"
 
 ## CvSwitcher
+
 Slots:
+
 - default - include switcher content
 
 ## CvSwitcherItem
+
 Slots:
+
 - default - include switcher item content
 
 ## CvSwitcherItemLink
+
 Properties:
+
 - disabled - `Boolean` link is disabled
 - to - Vue router path
 - href - `String` destination. If `to` is specified this value is ignored
 - selected - `Boolean` is this item selected
 
 Slots:
-- default - item content
 
+- default - item content
 
 <Canvas>
   <Story
     name="Default"
     parameters={{
-      controls: { exclude: [
+      controls: {
+        exclude: [
           'template',
           'default',
           'header-global',
           'left-panels',
-          'right-panels'
-        ] },
+          'right-panels',
+        ],
+      },
       docs: { source: { code: defaultTemplate.replace('v-bind="args"', '') } },
     }}
     args={{
       template: defaultTemplate,
     }}
-    argTypes={{
-    }}
+    argTypes={{}}
   >
     {Template.bind({})}
   </Story>
 </Canvas>
 
-
 # CvHeader with side rail
+
+Migration notes:
+
+- The `panel-resize` event is emitted anytime the rail is expanded or collapsed including for hover events. In the Vue 2
+  version this event was only emitted when the "hamburger" menu button was clicked.
 
 <Canvas>
   <Story
     name="Side rail"
     parameters={{
-      controls: { exclude: [
+      controls: {
+        exclude: [
           'template',
           'default',
           'header-global',
           'left-panels',
-          'right-panels'
-        ] },
+          'right-panels',
+        ],
+      },
       docs: { source: { code: railTemplate.replace('v-bind="args"', '') } },
     }}
     args={{
@@ -420,13 +485,11 @@ Slots:
       useFixed: false,
       expandedSideNav: false,
     }}
-    argTypes={{
-    }}
+    argTypes={{}}
   >
     {Template.bind({})}
   </Story>
 </Canvas>
-
 
 # CvHeader with fixed side nav
 
@@ -434,20 +497,23 @@ Slots:
   <Story
     name="Fixed side nav"
     parameters={{
-      controls: { exclude: [
+      controls: {
+        exclude: [
           'template',
           'default',
           'header-global',
           'left-panels',
-          'right-panels'
-        ] },
-      docs: { source: { code: fixedSideNavTemplate.replace('v-bind="args"', '') } },
+          'right-panels',
+        ],
+      },
+      docs: {
+        source: { code: fixedSideNavTemplate.replace('v-bind="args"', '') },
+      },
     }}
     args={{
       template: fixedSideNavTemplate,
     }}
-    argTypes={{
-    }}
+    argTypes={{}}
   >
     {Template.bind({})}
   </Story>
