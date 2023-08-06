@@ -5,6 +5,7 @@
   "description": "A collection of components for the Carbon Design System built using Vue.js",
   "packageManager": "yarn@3.2.0",
   "main": "dist/carbon-vue-3.umd.min.js",
+  "types": "src/index.d.ts",
   "scripts": {
     "postinstall": "node prepare.js",
     "prepack": "pinst --disable",
@@ -29,6 +30,7 @@
     "@carbon/icons-vue": "^10.60.0",
     "@vueuse/core": "^4.11.2",
     "carbon-components": "^10.58.5",
+    "eslint-plugin-prettier-vue": "^4.2.0",
     "flatpickr": "^4.6.13",
     "mitt": "^3.0.0"
   },
