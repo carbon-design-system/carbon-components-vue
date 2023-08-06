@@ -5,6 +5,7 @@
   "description": "A collection of components for the Carbon Design System built using Vue.js",
   "packageManager": "yarn@3.2.0",
   "main": "dist/carbon-vue-3.umd.min.js",
+  "types": "src/index.d.ts",
   "scripts": {
     "postinstall": "node prepare.js",
     "prepack": "pinst --disable",

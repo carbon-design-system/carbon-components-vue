@@ -1,3 +1,4 @@
+/// <reference path="index.d.ts" />
 const ctx = require.context(
   './components/',
   true,
