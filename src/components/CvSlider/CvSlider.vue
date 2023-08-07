@@ -11,10 +11,12 @@
     >
       {{ label }}
     </label>
+
     <div :class="`${carbonPrefix}--slider-container`">
-      <span :class="`${carbonPrefix}--slider__range-label`">{{
-        internalMinLabel
-      }}</span>
+      <span :class="`${carbonPrefix}--slider__range-label`">
+        {{ internalMinLabel }}
+      </span>
+
       <div
         :class="[
           `${carbonPrefix}--slider`,
@@ -28,10 +30,12 @@
           @click="onTrackClick"
           ref="track"
         ></div>
+
         <div
           :class="`${carbonPrefix}--slider__filled-track`"
           :style="`width: ${percentage};`"
         ></div>
+
         <div
           :class="[
             `${carbonPrefix}--slider__thumb`,
@@ -47,6 +51,7 @@
           @keydown.down.left.prevent="onDown"
           @mousedown="onStartDrag"
         ></div>
+
         <input
           :id="cvId"
           :class="`${carbonPrefix}--slider__input`"
@@ -57,11 +62,13 @@
           ref="range"
         />
       </div>
-      <span :class="`${carbonPrefix}--slider__range-label`">{{
-        internalMaxLabel
-      }}</span>
+
+      <span :class="`${carbonPrefix}--slider__range-label`">
+        {{ internalMaxLabel }}
+      </span>
+
       <input
-        type="number"
+        type="string"
         :class="[
           `${carbonPrefix}--text-input ${carbonPrefix}--slider-text-input`,
           { [`${carbonPrefix}--text-input--light`]: isLight },
@@ -79,17 +86,17 @@
 </template>
 
 <script setup>
-import { computed, ref, onMounted, nextTick } from 'vue';
+import { computed, ref, onMounted, nextTick, watch } from 'vue';
 import { carbonPrefix } from '../../global/settings';
 import { props as propsCvId, useCvId } from '../../use/cvId';
 import { useIsLight, props as propsTheme } from '../../use/cvTheme';
 
 const props = defineProps({
-  value: {
+  modelValue: {
     type: String,
     default: undefined,
   },
-  modelValue: {
+  value: {
     type: String,
     default: undefined,
   },
@@ -114,6 +121,10 @@ const props = defineProps({
   maxLabel: {
     type: String,
     default: undefined,
+  },
+  step: {
+    type: String,
+    default: '1',
   },
   stepMultiplier: {
     type: String,
@@ -141,6 +152,8 @@ const StepNaNReplacement = 0;
 const StepDefaultValue = 1;
 const DefaultMultiplier = 4;
 
+const emit = defineEmits(['update:modelValue', 'change', 'update:value']);
+
 const cvId = useCvId(props, true);
 const isLight = useIsLight(props);
 const internalValue = ref('');
@@ -151,6 +164,8 @@ const dragStartValue = ref(0);
 const percentage = ref('0%');
 
 const range = ref(null);
+const thumb = ref(null);
+const track = ref(null);
 
 const labelId = computed(() => `${cvId.value}-label`);
 
@@ -198,72 +213,90 @@ function getStep() {
   return getRangeAttributeValue('step', StepNaNReplacement, StepDefaultValue);
 }
 
-// setValue(newValue) {
-//       if (this.disabled) return;
+function setValue(newValue) {
+  if (props.disabled) return;
 
-//       this.$refs.range.value = newValue;
-//       this.internalValue = this.$refs.range.value;
+  range.value.value = newValue;
+  internalValue.value = range.value.value;
 
-//       this.percentage = `${((this.internalValue - this.getMin()) * 100) / (this.getMax() - this.getMin())}%`;
+  percentage.value = `${
+    ((internalValue.value - getMin()) * 100) / (getMax() - getMin())
+  }%`;
 
-//       this.$emit('modelEvent', this.$refs.range.value);
-//       this.$emit('change', this.$refs.range.value);
-//     },
-//     onChange() {
-//       let newValue = this.internalValue.length ? parseFloat(this.internalValue) : this.getMin();
-//       this.setValue(newValue);
-//     },
-//     onStartDrag(ev) {
-//       document.body.addEventListener('mousemove', this.onDrag);
-//       document.body.addEventListener('mouseup', this.onStopDrag);
+  const { value: rangeValue } = range.value;
+  emit('update:modelValue', rangeValue);
+  emit('update:value', rangeValue);
+  emit('change', rangeValue);
+}
 
-//       this.dragStartX = ev.clientX;
-//       this.dragStartValue = this.getValue();
-//       this.isDragging = true;
-//     },
-//     onDrag(ev) {
-//       if (this.isDragging) {
-//         // percentage change
-//         let newValue = (ev.clientX - this.dragStartX) / this.$refs.track.offsetWidth;
-//         // uncapped new value
-//         newValue = this.dragStartValue + (this.getMax() - this.getMin()) * newValue;
+function onChange() {
+  let newValue = internalValue.value.length
+    ? parseFloat(internalValue.value)
+    : getMin();
+  setValue(newValue);
+}
 
-//         this.setValue(newValue, ev);
-//       }
-//     },
-//     onStopDrag() {
-//       this.isDragging = false;
-//       document.body.removeEventListener('mousemove', this.onDrag);
-//       document.body.removeEventListener('mouseup', this.onStopDrag);
-//     },
-//     onTrackClick(ev) {
-//       const afterAnimate = ev => {
-//         if (ev.propertyName === 'left') {
-//           this.animateClick = false;
-//           this.$refs.thumb.removeEventListener('transitionend', afterAnimate);
-//         }
-//       };
+function onStartDrag(ev) {
+  document.body.addEventListener('mousemove', onDrag);
+  document.body.addEventListener('mouseup', onStopDrag);
 
-//       let newValue = ev.offsetX / this.$refs.track.offsetWidth;
-//       newValue = (this.getMax() - this.getMin()) * newValue + this.getMin();
-//       this.$refs.thumb.addEventListener('transitionend', afterAnimate);
-//       this.animateClick = true;
+  dragStartX.value = ev.clientX;
+  dragStartValue.value = getValue();
+  isDragging.value = true;
+}
 
-//       this.setValue(newValue, ev);
-//     },
-//     onUp(ev) {
-//       let curValue = ev.target.type === 'number' ? parseFloat(ev.target.value) : this.getValue();
-//       let newValue = curValue + (ev.shiftKey ? this.internalMultiplier * this.getStep() : this.getStep());
-//       this.setValue(newValue, ev);
-//     },
-//     onDown(ev) {
-//       let curValue = ev.target.type === 'number' ? parseFloat(ev.target.value) : this.getValue();
-//       let newValue = curValue - (ev.shiftKey ? this.internalMultiplier * this.getStep() : this.getStep());
-//       this.setValue(newValue, ev);
-//     },
+function onDrag(ev) {
+  if (isDragging.value) {
+    // percentage change
+    let newValue = (ev.clientX - dragStartX.value) / track.value.offsetWidth;
+    // uncapped new value
+    newValue = dragStartValue.value + (getMax() - getMin()) * newValue;
+    setValue(newValue);
+  }
+}
+
+function onStopDrag() {
+  isDragging.value = false;
+  document.body.removeEventListener('mousemove', onDrag);
+  document.body.removeEventListener('mouseup', onStopDrag);
+}
+
+function onTrackClick(ev) {
+  const afterAnimate = ev => {
+    if (ev.propertyName === 'left') {
+      animateClick.value = false;
+      thumb.value.removeEventListener('transitionend', afterAnimate);
+    }
+  };
+
+  let newValue = ev.offsetX / track.value.offsetWidth;
+  const min = getMin();
+  newValue = (getMax() - min) * newValue + min;
+  thumb.value.addEventListener('transitionend', afterAnimate);
+  animateClick.value = true;
+  setValue(newValue);
+}
+
+function onUpDown(ev, isUp = true) {
+  let curValue =
+    ev.target.type === 'number' ? parseFloat(ev.target.value) : getValue();
+  const step = getStep();
+  const progressValue = ev.shiftKey ? internalMultiplier.value * step : step;
+  const direction = isUp ? 1 : -1;
+  let newValue = curValue + progressValue * direction;
+  setValue(newValue);
+}
+
+function onUp(ev) {
+  onUpDown(ev);
+}
+
+function onDown(ev) {
+  onUpDown(ev, false);
+}
 
 onMounted(() => {
-  range.value.value = props.modelValue;
+  range.value.value = props.value;
   internalValue.value = range.value.value;
   percentage.value = `${
     ((internalValue.value - getMin()) * 100) / (getMax() - getMin())
