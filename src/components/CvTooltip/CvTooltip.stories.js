@@ -88,6 +88,9 @@ const TriggerSlotTemplate = args => {
 };
 
 export const TriggerSlot = TriggerSlotTemplate.bind({});
+TriggerSlot.args = {
+  tip: TipText,
+};
 TriggerSlot.parameters = storyParametersObject(
   TriggerSlot.parameters,
   triggerSlotTemplate,
