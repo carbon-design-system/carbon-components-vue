@@ -396,4 +396,52 @@ describe('CvFileUploader', () => {
       expect(emitResult[0][0].file.name).toBe(dummyFile.name);
     });
   });
+
+  describe('File listing', () => {
+    it('list files when they are inputted', async () => {
+      const dummyFile = new File(['file content'], 'dummy-file.txt', {
+        type: 'text/plain',
+      });
+      const { container, getAllByText } = render(CvFileUploader);
+
+      const dropZone = container.querySelector(
+        `div.${carbonPrefix}--file-browse-btn`
+      );
+      await fireEvent.drop(dropZone, {
+        dataTransfer: {
+          files: [dummyFile],
+          types: ['Files'],
+        },
+      });
+
+      expect(getAllByText(dummyFile.name)).toBeDefined();
+    });
+
+    it("removes a file from the file list when clicking on 'Remove Item' button", async () => {
+      const dummyFile = new File(['file content'], 'dummy-file.txt', {
+        type: 'text/plain',
+      });
+      const { container, emitted } = render(CvFileUploader, {
+        props: { removable: true },
+      });
+
+      const dropZone = container.querySelector(
+        `div.${carbonPrefix}--file-browse-btn`
+      );
+      await fireEvent.drop(dropZone, {
+        dataTransfer: {
+          files: [dummyFile],
+          types: ['Files'],
+        },
+      });
+
+      const removeButton = container.querySelector(
+        `button.${carbonPrefix}--file-close`
+      );
+      await fireEvent.click(removeButton, new MouseEvent('click'));
+
+      const emitResult = emitted('update:modelValue').at(1);
+      expect(emitResult[0]).toHaveLength(0);
+    });
+  });
 });

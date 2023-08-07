@@ -59,11 +59,25 @@
         />
       </label>
     </div>
+    <div
+      :class="`${carbonPrefix}--file ${carbonPrefix}--file-container`"
+      data-file-container
+    >
+      <cv-file-uploader-item
+        v-for="(item, index) in internalFiles"
+        :key="item.file.name"
+        :item="item"
+        :removable="removable"
+        :removeAriaLabel="removeAriaLabel"
+        @remove="onItemRemove(index)"
+      />
+    </div>
   </cv-form-item>
 </template>
 
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
+import CvFileUploaderItem from './CvFileUploaderItem.vue';
 import { carbonPrefix } from '../../global/settings';
 import { CvFormItem } from '../CvForm';
 import { useCvId, props as cvIdProps } from '../../use/cvId';
@@ -224,6 +238,11 @@ function onDragEvent(evt) {
     addFiles(evt.dataTransfer.files);
     allowDrop.value = false;
   }
+}
+
+function onItemRemove(index) {
+  internalFiles.value.splice(index, 1);
+  emit('update:modelValue', this.internalFiles);
 }
 
 function onKeyHit() {
