@@ -1,4 +1,4 @@
-import { shallowMount, mount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import { nextTick } from 'vue';
 import { carbonPrefix } from '../../../global/settings';
 import CvSlider from '../CvSlider.vue';
