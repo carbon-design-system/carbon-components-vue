@@ -144,9 +144,11 @@ const props = defineProps({
   ...propsCvId,
 });
 
+const range = ref(null);
+const thumb = ref(null);
+const track = ref(null);
 const DefaultRangeMin = 0;
 const DefaultRangeMax = 100;
-const MiddleValue = (getMax() + getMin()) / 2;
 const DefaultValue = 0;
 const StepNaNReplacement = 0;
 const StepDefaultValue = 1;
@@ -163,10 +165,6 @@ const dragStartX = ref(0);
 const dragStartValue = ref(0);
 const percentage = ref('0%');
 
-const range = ref(null);
-const thumb = ref(null);
-const track = ref(null);
-
 const labelId = computed(() => `${cvId.value}-label`);
 
 const internalMinLabel = computed(() => props.minLabel ?? getMin());
@@ -180,40 +178,41 @@ const rangePropsObserver = computed(() => ({
 }));
 
 const internalMultiplier = computed(() => {
-  let intMultiplier = parseInt(stepMultiplier);
+  let intMultiplier = parseInt(props.stepMultiplier);
   // default to 4 fro multiplier
   return isNaN(intMultiplier) ? DefaultMultiplier : Math.max(intMultiplier, 1);
 });
 
-function getRangeAttributeValue(
+const getRangeAttributeValue = (
   attributeName,
   defaultForNaN,
   defaultReturnValue
-) {
+) => {
   if (range?.value) {
     const val = parseFloat(range.value[attributeName]);
     return isNaN(val) ? defaultForNaN : val;
   }
   return defaultReturnValue ?? defaultForNaN;
-}
+};
 
-function getMin() {
+const getMin = () => {
   return getRangeAttributeValue('min', DefaultRangeMin);
-}
+};
 
-function getMax() {
+const getMax = () => {
   return getRangeAttributeValue('max', DefaultRangeMax);
-}
+};
 
-function getValue() {
-  return getRangeAttributeValue('value', DefaultValue, MiddleValue);
-}
+const getValue = () => {
+  const middleValue = (getMax() + getMin()) / 2;
+  return getRangeAttributeValue('value', DefaultValue, middleValue);
+};
 
-function getStep() {
+const getStep = () => {
   return getRangeAttributeValue('step', StepNaNReplacement, StepDefaultValue);
-}
+};
 
-function setValue(newValue) {
+const setValue = newValue => {
   if (props.disabled) return;
 
   range.value.value = newValue;
@@ -227,25 +226,25 @@ function setValue(newValue) {
   emit('update:modelValue', rangeValue);
   emit('update:value', rangeValue);
   emit('change', rangeValue);
-}
+};
 
-function onChange() {
+const onChange = () => {
   let newValue = internalValue.value.length
     ? parseFloat(internalValue.value)
     : getMin();
   setValue(newValue);
-}
+};
 
-function onStartDrag(ev) {
+const onStartDrag = ev => {
   document.body.addEventListener('mousemove', onDrag);
   document.body.addEventListener('mouseup', onStopDrag);
 
   dragStartX.value = ev.clientX;
   dragStartValue.value = getValue();
   isDragging.value = true;
-}
+};
 
-function onDrag(ev) {
+const onDrag = ev => {
   if (isDragging.value) {
     // percentage change
     let newValue = (ev.clientX - dragStartX.value) / track.value.offsetWidth;
@@ -253,15 +252,15 @@ function onDrag(ev) {
     newValue = dragStartValue.value + (getMax() - getMin()) * newValue;
     setValue(newValue);
   }
-}
+};
 
-function onStopDrag() {
+const onStopDrag = () => {
   isDragging.value = false;
   document.body.removeEventListener('mousemove', onDrag);
   document.body.removeEventListener('mouseup', onStopDrag);
-}
+};
 
-function onTrackClick(ev) {
+const onTrackClick = ev => {
   const afterAnimate = ev => {
     if (ev.propertyName === 'left') {
       animateClick.value = false;
@@ -275,9 +274,9 @@ function onTrackClick(ev) {
   thumb.value.addEventListener('transitionend', afterAnimate);
   animateClick.value = true;
   setValue(newValue);
-}
+};
 
-function onUpDown(ev, isUp = true) {
+const onUpDown = (ev, isUp = true) => {
   let curValue =
     ev.target.type === 'number' ? parseFloat(ev.target.value) : getValue();
   const step = getStep();
@@ -285,18 +284,18 @@ function onUpDown(ev, isUp = true) {
   const direction = isUp ? 1 : -1;
   let newValue = curValue + progressValue * direction;
   setValue(newValue);
-}
+};
 
-function onUp(ev) {
+const onUp = ev => {
   onUpDown(ev);
-}
+};
 
-function onDown(ev) {
+const onDown = ev => {
   onUpDown(ev, false);
-}
+};
 
 onMounted(() => {
-  range.value.value = props.value;
+  range.value.value = props.value ?? props.modelValue;
   internalValue.value = range.value.value;
   percentage.value = `${
     ((internalValue.value - getMin()) * 100) / (getMax() - getMin())
