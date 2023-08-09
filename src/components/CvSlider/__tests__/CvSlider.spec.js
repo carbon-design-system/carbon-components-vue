@@ -125,24 +125,32 @@ describe('CvSlider', () => {
     expect(wrapper.emitted('change')[1][0]).toEqual('1');
   });
 
-  // it.only('updates value when track is clicked', async () => {
-  //   const wrapper = shallowMount(CvSlider);
+  it('updates value when track is clicked', async () => {
+    const wrapper = shallowMount(CvSlider, {
+      props: {
+        value: '1',
+      },
+    });
 
-  //   const track = wrapper.find(HTMLNodesClasses.track);
-  //   await track.trigger('click', { offsetX: 50 });
+    const track = wrapper.find(HTMLNodesClasses.track);
+    await track.trigger('click', { offsetX: 40 });
+    await nextTick();
 
-  //   // internalValue should be updated based on click position
-  //   expect(wrapper.vm.internalValue).toBeGreaterThan(0);
-  // });
+    expect(Number(wrapper.emitted('change')[0][0])).toBeGreaterThan(1);
+  });
 
-  // it('handles arrow key press on thumb correctly', async () => {
-  //   const wrapper = mount(CvSlider);
-  //   const thumb = wrapper.find('.cv-slider__thumb');
+  it('handles arrow key press on thumb correctly', async () => {
+    const wrapper = shallowMount(CvSlider, {
+      props: {
+        value: '10',
+      },
+    });
+    const thumb = wrapper.find(HTMLNodesClasses.thumb);
 
-  //   await thumb.trigger('keydown.up');
-  //   expect(wrapper.vm.internalValue).toBeGreaterThan(0);
+    await thumb.trigger('keydown.up');
+    await thumb.trigger('keydown.down');
 
-  //   await thumb.trigger('keydown.down');
-  //   expect(wrapper.vm.internalValue).toBe(0);
-  // });
+    expect(wrapper.emitted('change')[0][0]).toEqual('11');
+    expect(wrapper.emitted('change')[1][0]).toEqual('10');
+  });
 });
