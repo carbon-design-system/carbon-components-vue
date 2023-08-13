@@ -253,6 +253,23 @@ function onKeyHit() {
 onMounted(() => {
   internalFiles.value = props.modelValue || [];
 });
+
+// exposed methods
+defineExpose({
+  setState(index, state) {
+    if ([STATES.COMPLETE, STATES.UPLOADING, STATES.NONE].includes(state)) {
+      internalFiles.value[index].state = state;
+    }
+  },
+  clear() {
+    internalFiles.value = [];
+    emit('update:modelValue', internalFiles);
+  },
+  setInvalidMessage(index, message) {
+    internalFiles.value[index].invalidMessage = message;
+  },
+  remove: onItemRemove,
+});
 </script>
 
 <script>
