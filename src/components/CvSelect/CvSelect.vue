@@ -1,13 +1,14 @@
 <template>
-  <cv-wrapper
-    :tag-type="formItem ? 'div' : ''"
-    :class="`cv-select ${carbonPrefix}--form-item`"
+  <component
+    :is="formItem ? 'div' : CvEmpty"
     ref="el"
+    :class="`cv-select ${carbonPrefix}--form-item`"
   >
     <div
       :data-test="value"
       :class="[
         `${carbonPrefix}--select`,
+        `${carbonClasses}`,
         {
           'cv-select': !formItem,
           [`${carbonPrefix}--select--inline`]: inline,
@@ -30,8 +31,8 @@
         >{{ label }}</label
       >
 
-      <cv-wrapper
-        :tag-type="inline ? 'div' : ''"
+      <component
+        :is="inline ? 'div' : CvEmpty"
         :class="`${carbonPrefix}--select-input--inline__wrapper`"
       >
         <div
@@ -48,9 +49,8 @@
                   size || 'md',
               },
             ]"
-            @change="onChange"
-            ref="select"
             :value="internalValue"
+            @change="onChange"
           >
             <slot></slot>
           </select>
@@ -77,24 +77,29 @@
         >
           <slot name="helper-text">{{ helperText }}</slot>
         </div>
-
-        <!-- cv-wrapper div ${carbonPrefix}--select-input--inline__wrapper -->
-      </cv-wrapper>
+      </component>
     </div>
-    <!-- cv-wrapper div ${carbonPrefix}--form-item -->
-  </cv-wrapper>
+  </component>
 </template>
 
 <script setup>
 import { carbonPrefix } from '../../global/settings';
-import { computed, onMounted, onUpdated, ref, useSlots, watch } from 'vue';
+import {
+  computed,
+  onMounted,
+  onUpdated,
+  ref,
+  useAttrs,
+  useSlots,
+  watch,
+} from 'vue';
 import {
   WarningFilled16 as WarningFilled,
   ChevronDown16 as ChevronDown,
   WarningAltFilled16 as WarningAltFilled,
 } from '@carbon/icons-vue';
 import { props as propsCvId, useCvId } from '../../use/cvId';
-import CvWrapper from '../CvWrapper/CvWrapper';
+import CvEmpty from '../CvEmpty/_CvEmpty.vue';
 import { useIsLight, props as propsTheme } from '../../use/cvTheme';
 
 const slots = useSlots();
@@ -112,6 +117,7 @@ const props = defineProps({
   // multiple does not work with styling from carbon-components 9.20
   multiple: {
     type: String,
+    default: undefined,
     validator: () => {
       console.warn('property multiple not supported in CvSelect');
       return false;
@@ -123,7 +129,7 @@ const props = defineProps({
     default: 'md',
     validator: val => ['sm', 'md', 'lg'].includes(val),
   },
-  modelValue: { type: String },
+  modelValue: { type: String, default: undefined },
   ...propsTheme,
   ...propsCvId,
 });
@@ -221,4 +227,17 @@ function updateWarning() {
 }
 onMounted(updateWarning);
 onUpdated(updateWarning);
+
+// There is an oddity here with Vue2 vs Vue3. The Vue2 component uses CvWrapper to determine if this component
+// is wrapped in a div or not. Either way the class attributes are applied in Vue2. In Vue3 the attributes are
+// not applied. The CvTimePicker consumes this component and needs to apply styles in both the wrapped and
+// unwrapped case. Here we apply any carbon styles to the outer div.
+const attrs = useAttrs();
+const carbonClasses = computed(() => {
+  if (props.formItem || !attrs.class) return '';
+  return attrs.class
+    ?.split(' ')
+    .filter(c => c.startsWith(`${carbonPrefix}--`))
+    .join(' ');
+});
 </script>
