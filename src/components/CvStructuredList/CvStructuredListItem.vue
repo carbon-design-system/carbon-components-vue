@@ -32,17 +32,16 @@ defineProps({
 
 const selectable = inject('selectable');
 const change = inject('change');
-
-const tagType = computed(() => {
-  return selectable
-    ? CvStructuredListItemSelectable
-    : CvStructuredListItemStandard;
-});
-
 const emit = defineEmits(['change']);
 
 provide('onRadioItemChange', clickedItemCvId => {
   emit('change', clickedItemCvId);
   change(clickedItemCvId); //emit to parent
+});
+
+const tagType = computed(() => {
+  return selectable
+    ? CvStructuredListItemSelectable
+    : CvStructuredListItemStandard;
 });
 </script>
