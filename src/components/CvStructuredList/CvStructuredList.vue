@@ -31,16 +31,16 @@ import { defineEmits, provide } from 'vue';
 import { carbonPrefix } from '../../global/settings';
 
 const props = defineProps({
-  /**
-   * makes cv-structured-list-item selectable
-   */
   selectable: Boolean,
   condensed: Boolean,
 });
 
 const emit = defineEmits(['change']);
 
-provide('on', val => {
+provide('change', val => {
+  console.log('CvStructuredListItem change: ', {
+    val,
+  });
   emit('change', val);
 });
 provide('selectable', props.selectable);

@@ -17,6 +17,7 @@
       :checked="isChecked"
       :value="value"
       type="radio"
+      @change="onChange"
     />
     <div :class="`${carbonPrefix}--structured-list-td`">
       <CheckmarkFilled16 :class="`${carbonPrefix}--structured-list-svg`" />
@@ -50,5 +51,6 @@ const props = defineProps({
 });
 
 const cvId = useCvId(props);
-const { isChecked } = useRadio(props, emit);
+const emit = defineEmits(['update:modelValue', 'change']);
+const { isChecked, onChange } = useRadio(props, emit);
 </script>

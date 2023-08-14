@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, inject, provide, watch } from 'vue';
 import CvStructuredListItemStandard from './CvStructuredListItemStandard.vue';
 import CvStructuredListItemSelectable from './CvStructuredListItemSelectable.vue';
 
@@ -19,7 +19,7 @@ defineOptions({
   inheritAttrs: false,
 });
 
-defineProps({
+const props = defineProps({
   modelValue: {
     type: String,
     default: undefined,
@@ -35,14 +35,31 @@ const change = inject('change');
 
 const tagType = computed(() => {
   return selectable
-    ? CvStructuredListItemStandard
-    : CvStructuredListItemSelectable;
+    ? CvStructuredListItemSelectable
+    : CvStructuredListItemStandard;
 });
 
 const emit = defineEmits(['change']);
 
-provide('on', val => {
-  emit('change', val);
-  change(val); //emit to parent
+provide('onRadioItemChange', clickedItemCvId => {
+  emit('change', clickedItemCvId);
+  change(clickedItemCvId); //emit to parent
 });
+
+watch(
+  () => props.modelValue,
+  val => {
+    console.log('WATCH modelValue: ', {
+      val,
+    });
+  }
+);
+watch(
+  () => props.value,
+  val => {
+    console.log('WATCH value: ', {
+      val,
+    });
+  }
+);
 </script>
