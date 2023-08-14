@@ -1,3 +1,5 @@
+import { action } from '@storybook/addon-actions';
+import { ref } from 'vue';
 import {
   sbCompPrefix,
   storyParametersObject,
@@ -43,42 +45,60 @@ export default {
   },
 };
 
+const DefaultListItems = [
+  {
+    id: 'item-1',
+    data: [
+      'Item_1',
+      'Item_1',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.',
+    ],
+  },
+  {
+    id: 'item-2',
+    data: [
+      'Item_2',
+      'Item_2',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.',
+    ],
+  },
+];
+
 const template = `
-<cv-structured-list v-bind="args">
-  <template v-slot:headings>
-    <cv-structured-list-heading>
-      Heading 1
-    </cv-structured-list-heading>
-    <cv-structured-list-heading>
-      Heading 2
-    </cv-structured-list-heading>
-    <cv-structured-list-heading>
-      Heading 3
-    </cv-structured-list-heading>
-  </template>
+<div>
+  <cv-structured-list v-bind="args">
+    <template v-slot:headings>
+      <cv-structured-list-heading>
+        Heading 1
+      </cv-structured-list-heading>
+      <cv-structured-list-heading>
+        Heading 2
+      </cv-structured-list-heading>
+      <cv-structured-list-heading>
+        Heading 3
+      </cv-structured-list-heading>
+    </template>
 
-  <template v-slot:items>
-    <cv-structured-list-item>
-      <cv-structured-list-data v-bind="{noWrap: args.noWrap}">Item_1</cv-structured-list-data>
-      <cv-structured-list-data v-bind="{noWrap: args.noWrap}">Item_1</cv-structured-list-data>
-      <cv-structured-list-data v-bind="{noWrap: args.noWrap}"
-        >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet
-        bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a
-        porttitor interdum.</cv-structured-list-data
-      >
-    </cv-structured-list-item>
+    <template v-slot:items>
+      <cv-structured-list-item v-for="({id, data}, index) in DefaultListItems" :key="index" name="group-1" :value="id" v-model="listValue" @change="onChange">
+        <cv-structured-list-data v-for="(itemData, dataIndex) in data" :key="dataIndex" :no-wrap="args.noWrap">{{ itemData }}</cv-structured-list-data>
+      </cv-structured-list-item>
+    </template>
+  </cv-structured-list>
 
-    <cv-structured-list-item>
-      <cv-structured-list-data v-bind="{noWrap: args.noWrap}">Item_2</cv-structured-list-data>
-      <cv-structured-list-data v-bind="{noWrap: args.noWrap}">Item_2</cv-structured-list-data>
-      <cv-structured-list-data v-bind="{noWrap: args.noWrap}"
-        >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet
-        bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a
-        porttitor interdum.</cv-structured-list-data
-      >
-    </cv-structured-list-item>
-  </template>
-</cv-structured-list>
+  <div style="margin-top:1rem; background-color: #888888; padding:1rem" v-if="withVModel">
+    <div style="font-size: 150%">Sample interaction</div>
+    <template
+      v-for="({id}, vmodelIndex) in DefaultListItems"
+      :key="vmodelIndex"
+    >
+      <input name="listValue" :id="id" type="radio" @change="(ev) => {listValue = ev.target.id}" :checked="id === listValue" />
+      <label :for="id" style="margin-right: 16px;">{{id}}:</label>
+    </template>
+
+    <div style="margin-top: 16px;">Checked: <span style="font-weight: bold;">{{ listValue }}</span></div>
+  </div>
+</div>
 `;
 
 const Template = args => {
@@ -89,7 +109,10 @@ const Template = args => {
       CvStructuredListData,
       CvStructuredListItem,
     },
-    setup: () => ({ args }),
+    setup: () => ({
+      args,
+      DefaultListItems,
+    }),
     template,
   };
 };
@@ -100,4 +123,33 @@ Default.parameters = storyParametersObject(
   Default.parameters,
   template,
   Default.args
+);
+
+const VModelTemplate = args => {
+  return {
+    components: {
+      CvStructuredList,
+      CvStructuredListHeading,
+      CvStructuredListData,
+      CvStructuredListItem,
+    },
+    setup: () => ({
+      args,
+      listValue: ref(DefaultListItems[0].id),
+      DefaultListItems,
+      onChange: action('change'),
+      withVModel: true,
+    }),
+    template,
+  };
+};
+
+export const VModel = VModelTemplate.bind({});
+VModel.args = {
+  selectable: true,
+};
+VModel.parameters = storyParametersObject(
+  VModel.parameters,
+  template,
+  VModel.args
 );

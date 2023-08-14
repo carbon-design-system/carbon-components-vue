@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import { computed, inject, provide, watch } from 'vue';
+import { computed, inject, provide } from 'vue';
 import CvStructuredListItemStandard from './CvStructuredListItemStandard.vue';
 import CvStructuredListItemSelectable from './CvStructuredListItemSelectable.vue';
 
@@ -19,7 +19,7 @@ defineOptions({
   inheritAttrs: false,
 });
 
-const props = defineProps({
+defineProps({
   modelValue: {
     type: String,
     default: undefined,
@@ -45,21 +45,4 @@ provide('onRadioItemChange', clickedItemCvId => {
   emit('change', clickedItemCvId);
   change(clickedItemCvId); //emit to parent
 });
-
-watch(
-  () => props.modelValue,
-  val => {
-    console.log('WATCH modelValue: ', {
-      val,
-    });
-  }
-);
-watch(
-  () => props.value,
-  val => {
-    console.log('WATCH value: ', {
-      val,
-    });
-  }
-);
 </script>

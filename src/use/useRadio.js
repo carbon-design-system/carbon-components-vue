@@ -13,9 +13,6 @@ export const useRadio = (props, emit) => {
 
   const onChange = () => {
     onRadioItemChange(props.value); // emit to parent
-    console.log('useRadio onChange: ', {
-      value: props.value,
-    });
     emit('update:modelValue', props.value); // emit for v-model
     emit('change', props.value);
   };

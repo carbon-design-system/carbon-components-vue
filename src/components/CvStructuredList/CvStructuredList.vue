@@ -38,9 +38,6 @@ const props = defineProps({
 const emit = defineEmits(['change']);
 
 provide('change', val => {
-  console.log('CvStructuredListItem change: ', {
-    val,
-  });
   emit('change', val);
 });
 provide('selectable', props.selectable);
