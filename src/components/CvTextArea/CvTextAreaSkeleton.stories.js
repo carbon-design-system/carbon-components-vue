@@ -11,9 +11,8 @@ export default {
 };
 
 const template = `<cv-text-area-skeleton></cv-text-area-skeleton>`;
-const Template = (args, { argTypes }) => {
+const Template = args => {
   return {
-    props: Object.keys(argTypes),
     components: { CvTextAreaSkeleton },
     template,
     setup() {
