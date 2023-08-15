@@ -40,7 +40,6 @@ describe('CvTimePicker', () => {
     await result.findByLabelText(xyzAmpmSelectLabel123);
     await result.findByLabelText(labelText);
     const timeInput = await result.findByPlaceholderText(placeholderText);
-    result.debug(element);
 
     // check AM/PM choice
     let selects = await element.querySelectorAll('select');
@@ -143,7 +142,6 @@ describe('CvTimePicker', () => {
       },
     });
     const el = result.container.querySelector('.bx--time-picker');
-    result.debug(el);
     const selects = result.container.querySelectorAll('select');
 
     expect(el.classList).toContain(

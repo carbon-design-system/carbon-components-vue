@@ -1,8 +1,8 @@
 <template>
-  <component
-    :is="formItem ? 'div' : CvEmpty"
-    ref="el"
+  <cv-wrapper
+    :tag-type="formItem ? 'div' : ''"
     :class="`cv-select ${carbonPrefix}--form-item`"
+    ref="el"
   >
     <div
       :data-test="value"
@@ -31,8 +31,8 @@
         >{{ label }}</label
       >
 
-      <component
-        :is="inline ? 'div' : CvEmpty"
+      <cv-wrapper
+        :tag-type="inline ? 'div' : ''"
         :class="`${carbonPrefix}--select-input--inline__wrapper`"
       >
         <div
@@ -77,9 +77,11 @@
         >
           <slot name="helper-text">{{ helperText }}</slot>
         </div>
-      </component>
+        <!-- cv-wrapper div ${carbonPrefix}--select-input--inline__wrapper -->
+      </cv-wrapper>
     </div>
-  </component>
+    <!-- cv-wrapper div ${carbonPrefix}--form-item -->
+  </cv-wrapper>
 </template>
 
 <script setup>
@@ -99,7 +101,7 @@ import {
   WarningAltFilled16 as WarningAltFilled,
 } from '@carbon/icons-vue';
 import { props as propsCvId, useCvId } from '../../use/cvId';
-import CvEmpty from '../CvEmpty/_CvEmpty.vue';
+import CvWrapper from '../CvWrapper/CvWrapper';
 import { useIsLight, props as propsTheme } from '../../use/cvTheme';
 
 const slots = useSlots();
