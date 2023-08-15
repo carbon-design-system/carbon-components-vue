@@ -5,7 +5,7 @@
     <div v-if="kind === 'button'" :class="`${carbonPrefix}--file`" data-file>
       <label
         :for="cvId"
-        :class="[`${carbonPrefix}--btn`, `${carbonPrefix}--btn--primary`]"
+        :class="buttonClasses"
         tabindex="0"
         @keydown.enter.prevent="onKeyHit"
         @keydown.space.prevent="onKeyHit"
@@ -82,11 +82,16 @@ import { carbonPrefix } from '../../global/settings';
 import { CvFormItem } from '../CvForm';
 import { useCvId, props as cvIdProps } from '../../use/cvId';
 import { KINDS, STATES } from './const';
+import {
+  props as commonCvButtonProps,
+  useCvButtonCommon,
+} from '../CvButton/CvButtonCommon';
 
 const emit = defineEmits(['update:modelValue']);
 
 const props = defineProps({
   accept: String,
+  buttonKind: commonCvButtonProps.kind,
   buttonLabel: {
     type: String,
     default: undefined,
@@ -100,6 +105,7 @@ const props = defineProps({
       return true;
     },
   },
+  buttonSize: commonCvButtonProps.size,
   clearOnReselect: Boolean,
   dropTargetLabel: String,
   helperText: String,
@@ -131,6 +137,7 @@ const allowDrop = ref(false);
 const internalFiles = ref([]);
 
 // Computed
+const { buttonClasses } = useCvButtonCommon(props.buttonKind, props.buttonSize);
 const cvId = useCvId(props);
 const internalDropTargetLabel = computed(() => {
   return (
