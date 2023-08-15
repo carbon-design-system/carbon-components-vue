@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CvTextAreaSkeleton should match snapshot 1`] = `
+<div class="bx--form-item"><label class="bx--label bx--skeleton"></label>
+  <div class="bx--text-area bx--skeleton"></div>
+</div>
+`;
