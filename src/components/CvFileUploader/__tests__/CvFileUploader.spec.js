@@ -1,6 +1,7 @@
 import { render, fireEvent } from '@testing-library/vue';
 import { KINDS } from '../const';
 import { carbonPrefix } from '../../../global/settings';
+import { buttonKinds, buttonSizes } from '../../CvButton/consts';
 import CvFileUploader from '..';
 
 const inputKinds = [KINDS.DRAG_TARGET];
@@ -443,5 +444,38 @@ describe('CvFileUploader', () => {
       const emitResult = emitted('update:modelValue').at(1);
       expect(emitResult[0]).toHaveLength(0);
     });
+  });
+
+  describe('Button kind', () => {
+    it.each(buttonKinds)(
+      'changes "button kind" based on buttonKind prop (button kind: "%s")',
+      async kind => {
+        const kindClass = kind ? `.${carbonPrefix}--btn--${kind}` : '';
+        const { container } = render(CvFileUploader, {
+          props: { buttonKind: kind, kind: KINDS.BUTTON },
+        });
+        const wrapper = container.querySelector(`label${kindClass}`);
+
+        expect(wrapper).not.toBeNull();
+      }
+    );
+  });
+
+  describe('Button size', () => {
+    it.each(buttonSizes)(
+      'changes "button size" based on buttonSize prop (button size: "%s")',
+      async size => {
+        const classSuffix = size === 'small' ? 'sm' : size;
+        const sizeClassSuffix = classSuffix
+          ? `.${carbonPrefix}--btn--${classSuffix}`
+          : '';
+        const { container } = render(CvFileUploader, {
+          props: { buttonSize: size, kind: KINDS.BUTTON },
+        });
+        const wrapper = container.querySelector(`label${sizeClassSuffix}`);
+
+        expect(wrapper).not.toBeNull();
+      }
+    );
   });
 });
