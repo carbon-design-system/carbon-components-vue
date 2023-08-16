@@ -1,0 +1,333 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+import { sbCompPrefix } from '../../global/storybook-utils';
+import { CvFileUploader, CvFileUploaderSkeleton } from '.';
+import { KINDS } from './const';
+import { action } from '@storybook/addon-actions';
+import { nextTick, ref } from 'vue';
+import { Add16 } from '@carbon/icons-vue';
+import { buttonKinds, buttonSizes } from '../CvButton/consts';
+
+<Meta title={`${sbCompPrefix}/CvFileUploader`} component={CvFileUploader} />
+
+export const Template = args => ({
+  components: {
+    CvFileUploader,
+    CvFileUploaderSkeleton,
+    Add16
+  },
+  setup() {
+    return {
+      slotContent: args.slot,
+      args: {
+        ...args,
+        template: undefined,
+      },
+    };
+  },
+  template: args.template,
+});
+const defaultTemplate = `
+  <div style="display: inline-flex; align-items: flex-start;">
+    <cv-file-uploader v-bind="args" />
+  </div>
+`;
+const slotTemplate = `
+  <div style="display: inline-flex; align-items: flex-start;">
+    <cv-file-uploader v-bind="args">
+      <template v-slot:drop-target>
+        <Add16 />
+        <span>File Drop</span>
+        <Add16 />
+      </template>
+    </cv-file-uploader>
+  </div>
+`;
+const skeletonTemplate = `
+  <div style="display: inline-flex; align-items: flex-start;">
+    <cv-file-uploader-skeleton />
+  </div>
+`;
+
+export const args = {
+  // attributes
+  multiple: {
+    type: 'boolean',
+    table: {
+      type: { summary: 'boolean' },
+      category: 'attributes',
+    },
+    description: 'standard input attribute for file type, allow multiple files to be added in a single prompt',
+  },
+  // props
+  accept: {
+    type: 'string',
+    table: {
+      type: { summary: 'string' },
+      category: 'props',
+    },
+    description: 'standard input attribute for file type',
+  },
+  buttonKind: {
+    control: 'select',
+    options: buttonKinds,
+    defaultValue: 'primary',
+    table: {
+      type: { summary: 'string' },
+      category: 'props',
+      defaultValue: { summary: 'primary' },
+    },
+    description: 'Button kind',
+  },
+  buttonLabel: {
+    type: 'string',
+    deprecated: true,
+    table: {
+      type: { summary: 'string' },
+      category: 'props',
+    },
+    description: '`button-label` prop deprecated in favour of drop-target-label',
+  },
+  buttonSize: {
+    control: 'select',
+    options: buttonSizes,
+    defaultValue: '',
+    table: {
+      type: { summary: 'string' },
+      category: 'props',
+      defaultValue: { summary: '' },
+    },
+    description: 'Button size',
+  },
+  clearOnReselect: {
+    type: 'boolean',
+    table: {
+      type: { summary: 'boolean' },
+      category: 'props',
+    },
+    description: 'Reset file list when files are added',
+  },
+  dropTargetLabel: {
+    type: 'string',
+    table: {
+      type: { summary: 'string' },
+      category: 'props',
+    },
+    description: "Drag & drop zone label. Also used as button label for button kind file uploader",
+  },
+  helperText: {
+    type: 'string',
+    table: {
+      type: { summary: 'string' },
+      category: 'props',
+    },
+    description: 'Helper text positioned below label',
+  },
+  kind: {
+    type: 'string',
+    control: 'select',
+    defaultValue: KINDS.DRAG_TARGET,
+    options: [KINDS.DRAG_TARGET, KINDS.BUTTON],
+    table: {
+      type: { summary: `${KINDS.DRAG_TARGET} | ${KINDS.BUTTON}` },
+      category: 'props',
+      defaultValue: { summary: KINDS.DRAG_TARGET },
+    },
+    description: 'Kind of file uploader to present',
+  },
+  label: {
+    table: {
+      type: { summary: 'text' },
+      category: 'props',
+    },
+    description: 'File input label',
+  },
+  removable: {
+    type: 'boolean',
+    table: {
+      type: { summary: 'boolean' },
+      category: 'props',
+    },
+    description: 'Enable file items remove button',
+  },
+  removeAriaLabel: {
+    type: 'string',
+    defaultValue: 'Remove selected file',
+    table: {
+      type: { summary: 'string' },
+      category: 'props',
+      defaultValue: { summary: 'Remove selected file' },
+    },
+    description: 'Aria label for item remove button',
+  },
+  // exposed methods
+  clear: {
+    control: 'none',
+    type: 'function',
+    table: {
+      type: { summary: '() => void' },
+      category: 'exposed methods',
+    },
+    description: 'Clear file list',
+  },
+  remove: {
+    control: 'none',
+    type: 'function',
+    table: {
+      type: { summary: '(index: number) => void' },
+      category: 'exposed methods',
+    },
+    description: 'Removes an individual file',
+  },
+  setState: {
+    control: 'none',
+    type: 'function',
+    table: {
+      type: { summary: '(index: number, state: string) => void' },
+      category: 'exposed methods',
+    },
+    description: 'Update the "state" field of a file. State must be `""`, `complete` or `loading`',
+  },
+  setInvalidMessage: {
+    control: 'none',
+    type: 'function',
+    table: {
+      type: { summary: '(index: number, invalidMessage: string) => void' },
+      category: 'exposed methods',
+    },
+    description: 'Update the "invalidMessage" field of a file.',
+  },
+  // slots
+  'drop-target': {
+    control: 'none',
+    type: 'string',
+    table: {
+      type: { summary: 'string | HTML | Component' },
+      category: 'slots',
+    },
+    description: 'Overrides the drop-target-label with slotted content',
+  },
+};
+
+# CvFileUploader
+
+Migration notes:
+
+- The `v-model` is different in Vue 3 than Vue 2. You can still specify the `v-model="something"` for two way data bind,
+  but the value property is now `modelValue` instead of `files` and event linked to v-model is `update:modelValue`.
+
+<Canvas>
+  <Story
+    name="Default"
+    parameters={{
+      controls: {
+        exclude: [
+          'template',
+          'props',
+          'modelValue',
+          'update:modelValue',
+        ],
+      },
+      docs: { source: { code: defaultTemplate } },
+    }}
+    args={{
+      template: defaultTemplate,
+      label: 'Choose files to upload',
+      helperText: 'Select the files you want to upload',
+      removable: true,
+    }}
+    argTypes={args}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+# CvFileUploader Button
+
+<Canvas>
+  <Story
+    name="FilerUploader Button"
+    parameters={{
+      controls: {
+        exclude: [
+          'template',
+          'props',
+          'modelValue',
+          'update:modelValue',
+        ],
+      },
+      docs: { source: { code: defaultTemplate } },
+    }}
+    args={{
+      template: defaultTemplate,
+      label: 'Choose files to upload',
+      helperText: 'Select the files you want to upload',
+      kind: KINDS.BUTTON,
+      removable: true,
+    }}
+    argTypes={{
+      ...args,
+      kind: {
+        ...args.kind,
+        control: 'none',
+      },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+# CvFileUploader Slotted
+
+<Canvas>
+  <Story
+    name="Slot"
+    parameters={{
+      controls: {
+        exclude: [
+          'template',
+          'props',
+          'modelValue',
+          'update:modelValue',
+        ],
+      },
+      docs: { source: { code: slotTemplate } },
+    }}
+    args={{
+      template: slotTemplate,
+      label: 'Choose files to upload',
+      helperText: 'Select the files you want to upload',
+      removable: true,
+    }}
+    argTypes={{
+      ...args,
+      kind: {
+        ...args.kind,
+        control: 'none',
+      },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+# CvFileUploaderSkeleton
+
+<Canvas>
+  <Story
+    name="Skeleton"
+    parameters={{
+      controls: {
+        exclude: [
+          'template',
+        ],
+      },
+      docs: { source: { code: skeletonTemplate } },
+    }}
+    args={{
+      template: skeletonTemplate,
+    }}
+    argTypes={{}}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
