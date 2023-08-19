@@ -1,8 +1,8 @@
 <template>
   <cv-wrapper
+    ref="el"
     :tag-type="formItem ? 'div' : ''"
     :class="`cv-select ${carbonPrefix}--form-item`"
-    ref="el"
   >
     <div
       :data-test="value"
