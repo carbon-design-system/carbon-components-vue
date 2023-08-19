@@ -1,0 +1,21 @@
+import CvTimePicker from './CvTimePicker.vue';
+const FIELD_SMALL = 'sm';
+const FIELD_MEDIUM = 'md';
+const FIELD_LARGE = 'lg';
+const TIME_PICKER_SIZES = [FIELD_SMALL, FIELD_MEDIUM, FIELD_LARGE];
+const TIME_PICKER_AM = 'AM';
+const TIME_PICKER_PM = 'PM';
+const TIME_PICKER_24 = '24';
+const TIME_PICKER_HOURS = [TIME_PICKER_AM, TIME_PICKER_PM, TIME_PICKER_24];
+
+export {
+  CvTimePicker,
+  FIELD_SMALL,
+  FIELD_MEDIUM,
+  FIELD_LARGE,
+  TIME_PICKER_SIZES,
+  TIME_PICKER_AM,
+  TIME_PICKER_PM,
+  TIME_PICKER_24,
+  TIME_PICKER_HOURS,
+};
