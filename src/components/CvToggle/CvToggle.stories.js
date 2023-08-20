@@ -31,7 +31,6 @@ export default {
     },
   },
   argTypes: {
-    label: { description: 'Toggle label' },
     checked: {
       type: 'boolean',
       table: {
@@ -63,6 +62,11 @@ const Template = args => {
 
 export const Default = Template.bind({});
 Default.args = initArgs;
+Default.parameters = {
+  controls: {
+    exclude: ['change', 'update:modelValue', 'text-left', 'text-right'],
+  },
+};
 Default.parameters = storyParametersObject(
   Default.parameters,
   template,
@@ -214,7 +218,7 @@ arrayVModel.parameters = storyParametersObject(
 
 const templateSkeleton = `
 <div>
-  <cv-toggle-skeleton></cv-toggle-skeleton>
+  <cv-toggle-skeleton :small="small"></cv-toggle-skeleton>
 </div>
 `;
 
@@ -223,10 +227,23 @@ const TemplateSkeleton = args => {
     components: { CvToggle, CvToggleSkeleton },
     setup: () => ({
       args,
-      onChange: action('change'),
+      small: args.small,
     }),
     template: templateSkeleton,
   };
 };
 
 export const Skeleton = TemplateSkeleton.bind({});
+Skeleton.parameters = {
+  controls: {
+    exclude: [
+      'change',
+      'text-left',
+      'text-right',
+      'update:modelValue',
+      'hideLabel',
+      'formItem',
+      'checked',
+    ],
+  },
+};

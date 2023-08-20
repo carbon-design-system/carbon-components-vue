@@ -138,7 +138,7 @@ describe('CvRadioGroup', () => {
 
   it('CvRadioButton renders slot content', async () => {
     const stubId = 'radioBtn';
-    const radioButtonStub = `<cvradiobutton id="${stubId}"></cvradiobutton>`;
+    const radioButtonStub = `<div id="${stubId}"></div>`;
     const wrapper = shallowMount(CvRadioGroup, {
       slots: {
         default: radioButtonStub,

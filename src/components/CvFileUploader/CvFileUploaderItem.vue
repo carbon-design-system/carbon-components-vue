@@ -71,7 +71,7 @@
 </template>
 
 <script setup>
-import { computed, defineEmits } from 'vue';
+import { computed } from 'vue';
 import { carbonPrefix } from '../../global/settings';
 import CheckmarkFilled16 from '@carbon/icons-vue/es/checkmark--filled/16';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
