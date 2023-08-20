@@ -7,6 +7,8 @@ import CvFileUploader from '..';
 const inputKinds = [KINDS.DRAG_TARGET];
 
 describe('CvFileUploader', () => {
+  process.env.VTL_SKIP_WARN_EVENT_UPDATE = 'suppress';
+
   it('renders label', async () => {
     const dummyLabel = 'Dummy File Input';
     const { findByText } = render(CvFileUploader, {
