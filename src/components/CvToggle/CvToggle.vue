@@ -1,18 +1,20 @@
 <template>
   <div :class="{ [`${carbonPrefix}--form-item`]: formItem }">
     <input
+      :id="cvId"
+      ref="input"
       role="toggle"
       v-bind="$attrs"
       :class="[
         `${carbonPrefix}--toggle-input`,
-        { 'bx--toggle-input--small': small },
+        {
+          [`${carbonPrefix}--toggle-input--small`]: small,
+        },
       ]"
       type="checkbox"
-      :id="cvId"
       :checked="isChecked"
-      @change="onChange"
       :value="value"
-      ref="input"
+      @change="onChange"
     />
     <label
       :class="`${carbonPrefix}--toggle-input__label`"
@@ -55,9 +57,24 @@ const visibleLabel = computed(() => {
 });
 
 const props = defineProps({
+  /**
+   * Specify the size of the Toggle. Default is medium. Set to `true` for small.
+   */
   small: Boolean,
-  label: String,
+  /**
+   * Label and aria-label for the toggle
+   */
+  label: {
+    type: String,
+    default: 'Toggle element',
+  },
+  /**
+   * Set the carbon form-item class
+   */
   formItem: { type: Boolean, default: true },
+  /**
+   * Visibly hide the toggle label
+   */
   hideLabel: Boolean,
   ...propsCvId,
   ...propsCvCheck,
