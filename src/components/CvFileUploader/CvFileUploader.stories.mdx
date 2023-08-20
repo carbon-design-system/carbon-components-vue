@@ -48,7 +48,7 @@ const skeletonTemplate = `
   </div>
 `;
 
-export const args = {
+export const argTypes = {
   // attributes
   multiple: {
     type: 'boolean',
@@ -236,7 +236,7 @@ Migration notes:
       helperText: 'Select the files you want to upload',
       removable: true,
     }}
-    argTypes={args}
+    argTypes={argTypes}
   >
     {Template.bind({})}
   </Story>
@@ -267,9 +267,9 @@ Migration notes:
       dropTargetLabel: 'Add file',
     }}
     argTypes={{
-      ...args,
+      ...argTypes,
       kind: {
-        ...args.kind,
+        ...argTypes.kind,
         control: 'none',
       },
     }}
@@ -301,9 +301,9 @@ Migration notes:
       removable: true,
     }}
     argTypes={{
-      ...args,
+      ...argTypes,
       kind: {
-        ...args.kind,
+        ...argTypes.kind,
         control: 'none',
       },
     }}
