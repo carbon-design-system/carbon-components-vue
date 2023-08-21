@@ -1,7 +1,7 @@
 {
   "name": "@carbon/vue",
   "license": "Apache-2.0",
-  "version": "3.0.7-alpha.0",
+  "version": "3.0.8-alpha.0",
   "description": "A collection of components for the Carbon Design System built using Vue.js",
   "packageManager": "yarn@3.2.0",
   "main": "dist/carbon-vue-3.umd.min.js",

@@ -3,6 +3,59 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.8-alpha.0](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.7-alpha.0...@carbon/vue@3.0.8-alpha.0) (2023-08-21)
+
+### Bug Fixes
+
+- add doc for rail expand event. side effect add ts file ([341a260](https://github.com/carbon-design-system/carbon-components-vue/commit/341a260d58aea8add717d9bdbe43b39fcef2c4c7))
+- add story args ([d5e7e4e](https://github.com/carbon-design-system/carbon-components-vue/commit/d5e7e4e5d7dd96842cc12459f18f09282905cc06))
+- correct ts file ([d7d48e3](https://github.com/carbon-design-system/carbon-components-vue/commit/d7d48e392f4ac698d0579a25dc8befe1c609ad0f))
+- emit expanded for rail hover events ([02e6bd2](https://github.com/carbon-design-system/carbon-components-vue/commit/02e6bd25ef499ac98ce303d50e877b812e7fd012))
+- fix checkbox disabled attriubute to solve CvMultiSelect story issue ([bd455a7](https://github.com/carbon-design-system/carbon-components-vue/commit/bd455a70822176a8d7116e0f494d4919bdb99a91))
+- **lint:** fix eslint err ([c413b52](https://github.com/carbon-design-system/carbon-components-vue/commit/c413b5249428d7ab98c3b0abf8269bfb1fb30444))
+- remove unused var ([9a6d349](https://github.com/carbon-design-system/carbon-components-vue/commit/9a6d3495e1e956732792eb6d4c137a94100d3e1b))
+- remove unused var ([5532463](https://github.com/carbon-design-system/carbon-components-vue/commit/553246352952f47f1ee413ea3bebe8c49d7ef57d))
+- review comments ([6f30dc0](https://github.com/carbon-design-system/carbon-components-vue/commit/6f30dc01d98b1b09a930d2f25de1b0523d04782c))
+- scrub test console warnings ([c97fb23](https://github.com/carbon-design-system/carbon-components-vue/commit/c97fb23b7b32701ee008bcd1b2c111c823a9e433))
+- story params reactive ([dbe5ee6](https://github.com/carbon-design-system/carbon-components-vue/commit/dbe5ee69a965c48cede7ad19abab53840c22552a))
+- test cases ([874c4e4](https://github.com/carbon-design-system/carbon-components-vue/commit/874c4e4470968b68e012a92c99c5f1dd6e51af2c))
+- toggle tests related to eslint changes ([744d127](https://github.com/carbon-design-system/carbon-components-vue/commit/744d1271bbee189498d2dab95f676aa898ec9f3d))
+- vue2 toggle issue mentioned in [#1485](https://github.com/carbon-design-system/carbon-components-vue/issues/1485) ([eccab18](https://github.com/carbon-design-system/carbon-components-vue/commit/eccab18026e378ae477c7a53974f5f26b43b0751))
+
+### Features
+
+- add v-model ([7e8e8ae](https://github.com/carbon-design-system/carbon-components-vue/commit/7e8e8aec9409aec98bfb2a95caeb874e29957b65))
+- all working. needs tests ([2e55955](https://github.com/carbon-design-system/carbon-components-vue/commit/2e55955172812b17bab72195f77c4eace239445b))
+- compoent working. needs tests ([3eb87a1](https://github.com/carbon-design-system/carbon-components-vue/commit/3eb87a1086a4f9038424166dabc8abc0e5d9a8cd))
+- cv-slider component done, stories done ([c55f447](https://github.com/carbon-design-system/carbon-components-vue/commit/c55f447815decfbcb5cb13615d5e3f8ed88dda40))
+- cv-slider component in progress ([657d9f2](https://github.com/carbon-design-system/carbon-components-vue/commit/657d9f2dac605f23ef239bbaf3958ad30f2c3217))
+- cv-slider foundations, cv-slider-skeleton component & story ready ([f6be77f](https://github.com/carbon-design-system/carbon-components-vue/commit/f6be77fb56c961b072ded285d2c431dc9fa1198c))
+- cv-slider tests in progress ([0bb298e](https://github.com/carbon-design-system/carbon-components-vue/commit/0bb298eb772198fcb89666ec4a4f64fc48e3245e))
+- cv-slider-skeleton tests ([56d7b0d](https://github.com/carbon-design-system/carbon-components-vue/commit/56d7b0de40d25e17131cbbce047d27dca7fbaf0f))
+- cv-text-area-skeleton ported from React to Vue3 ([7cae62b](https://github.com/carbon-design-system/carbon-components-vue/commit/7cae62bb71b6a3c0a3ae99dbaf88ea438cfab09b))
+- cv-tooltip export static values ([6cd072f](https://github.com/carbon-design-system/carbon-components-vue/commit/6cd072ffce584a8d95c8a7edb7ca50908182b658))
+- cvInteractiveTooltip ported to vue3 ([7e639e3](https://github.com/carbon-design-system/carbon-components-vue/commit/7e639e3e39737bb1c9119ccc30d1371b51b7f466))
+- cvTooltip and cvDefinitionTooltip ported to Vue3 ([796363a](https://github.com/carbon-design-system/carbon-components-vue/commit/796363ae870a0f2841ac28eddf923af84cdb875c))
+- cvTooltip tests in progress ([b659e87](https://github.com/carbon-design-system/carbon-components-vue/commit/b659e876c842a36e18d6c7cbbcb2cc94e7a6328e))
+- **file-uploader:** add 'button' functionality flow for CvFileUploader ([6bb566a](https://github.com/carbon-design-system/carbon-components-vue/commit/6bb566a73af0a76c94e74618779014b87ae1a42a))
+- **file-uploader:** add 'drag&drop' template & update test ([7621bf1](https://github.com/carbon-design-system/carbon-components-vue/commit/7621bf117c79b8fedf140518223e68da143ab539))
+- **file-uploader:** add buttonKind & buttonSize props ([69a6e54](https://github.com/carbon-design-system/carbon-components-vue/commit/69a6e54accbad9d51a9991d7f890c9ac19049cfa))
+- **file-uploader:** add CvFileUploader constants file ([4124c8f](https://github.com/carbon-design-system/carbon-components-vue/commit/4124c8f11a192b3cfb0b2baf54c7818ae4d3c7ea))
+- **file-uploader:** add CvFileUploader w/ label & helper text ([8c832ac](https://github.com/carbon-design-system/carbon-components-vue/commit/8c832acad94c109d45c87def7f4550f3807ea4d1))
+- **file-uploader:** add CvFileUploaderItem ([ed9600c](https://github.com/carbon-design-system/carbon-components-vue/commit/ed9600c77f627f01a6659b86c3c58f6fb6299e7b))
+- **file-uploader:** add drag&drop functionality ([2906891](https://github.com/carbon-design-system/carbon-components-vue/commit/29068919f936108788dd580600ae6ab76e0e20e3))
+- **file-uploader:** add file item listing to CvFileUploader ([6a69c6f](https://github.com/carbon-design-system/carbon-components-vue/commit/6a69c6fb6da946c0c4d7cf02aa1081d708f44f6a))
+- **file-uploader:** add skeleton component ([2b3f1e3](https://github.com/carbon-design-system/carbon-components-vue/commit/2b3f1e3ed4fa9e127e47d2463c6e7212d20edce6))
+- **file-uploader:** expose file items manipulation methods ([e59e499](https://github.com/carbon-design-system/carbon-components-vue/commit/e59e499bfcfc3397cb1aab66b351912cef346f14))
+- implement time picker ([57c3f60](https://github.com/carbon-design-system/carbon-components-vue/commit/57c3f6098c3c2e708578368e7af6f960ba683655))
+- merge vNext update package.json ([8b8275d](https://github.com/carbon-design-system/carbon-components-vue/commit/8b8275dac3a1f53c0e63c1ee2f5954f80fea27d5))
+- port CvCheckboxSkeleton to Vue3 ([f7b10cb](https://github.com/carbon-design-system/carbon-components-vue/commit/f7b10cb52eb0a24db4353294c60025c174894413))
+- ported CvRadioButton to Vue3 ([9ba9ce6](https://github.com/carbon-design-system/carbon-components-vue/commit/9ba9ce66fd0c792a6c6850b11a329e64b9c8f65c))
+- remove unnecessary props in story ([6d2e5b3](https://github.com/carbon-design-system/carbon-components-vue/commit/6d2e5b332d52a67a00bbc0763a11f364eb9e1f1f))
+- test finished ([996d0c6](https://github.com/carbon-design-system/carbon-components-vue/commit/996d0c6bbdd7630ad08bbab67ff06d3b3f1c6f2d))
+- tests ([98a1a37](https://github.com/carbon-design-system/carbon-components-vue/commit/98a1a37d3dd2151858cb8710695a969e85d6802b))
+- unit tests in progress ([4abb219](https://github.com/carbon-design-system/carbon-components-vue/commit/4abb21976f220fec6f7697b8a0077bcad0b95a2c))
+
 ## [3.0.7-alpha.0](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.6-alpha.0...@carbon/vue@3.0.7-alpha.0) (2023-07-23)
 
 ### Bug Fixes
