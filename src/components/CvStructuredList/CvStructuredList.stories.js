@@ -86,7 +86,7 @@ const template = `
     </template>
   </cv-structured-list>
 
-  <div style="margin-top:1rem; background-color: #888888; padding:1rem" v-if="withVModel">
+  <div style="margin-top:1rem; background-color: #888888; padding:1rem" v-if="args.withVModel">
     <div style="font-size: 150%">Sample interaction</div>
     <template
       v-for="({id}, vmodelIndex) in DefaultListItems"
@@ -111,42 +111,28 @@ const Template = args => {
     },
     setup: () => ({
       args,
+      listValue: ref(DefaultListItems[0].id),
       DefaultListItems,
+      onChange: action('change'),
     }),
     template,
   };
 };
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  withVModel: false,
+};
 Default.parameters = storyParametersObject(
   Default.parameters,
   template,
   Default.args
 );
 
-const VModelTemplate = args => {
-  return {
-    components: {
-      CvStructuredList,
-      CvStructuredListHeading,
-      CvStructuredListData,
-      CvStructuredListItem,
-    },
-    setup: () => ({
-      args,
-      listValue: ref(DefaultListItems[0].id),
-      DefaultListItems,
-      onChange: action('change'),
-      withVModel: true,
-    }),
-    template,
-  };
-};
-
-export const VModel = VModelTemplate.bind({});
+export const VModel = Template.bind({});
 VModel.args = {
   selectable: true,
+  withVModel: true,
 };
 VModel.parameters = storyParametersObject(
   VModel.parameters,

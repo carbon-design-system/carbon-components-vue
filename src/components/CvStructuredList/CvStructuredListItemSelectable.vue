@@ -27,7 +27,7 @@
 
 <script setup>
 import { carbonPrefix } from '../../global/settings';
-import { useCvId, props as propsCvId, useRadio } from '../../use';
+import { useCvId, propsCvId, useRadio } from '../../use';
 import CheckmarkFilled16 from '@carbon/icons-vue/es/checkmark--filled/16';
 
 defineOptions({
