@@ -1,20 +1,24 @@
 import { render } from '@testing-library/vue';
+import { mount } from '@vue/test-utils';
 import userEvent from '@testing-library/user-event';
 import CvTabs from '../CvTabs.vue';
 import CvTab from '../CvTab.vue';
 
+const Tab1Label = 'Tab 1 label';
+const Tab2Label = 'Tab 2 label';
+const ariaLabel = 'ABC-aria-label-123';
+
 const ContentTabs = {
   components: { CvTab },
   template: `
-    <cv-tab  id="tab-1" label="Tab 1 label">Tab 1 content</cv-tab>
-    <cv-tab  id="tab-2" label="Tab 2 label">Tab 2 content</cv-tab>
+    <cv-tab  id="tab-1" label="${Tab1Label}">Tab 1 content</cv-tab>
+    <cv-tab  id="tab-2" label="${Tab2Label}">Tab 2 content</cv-tab>
     <cv-tab  id="tab-3" label="Tab 3 label">Tab 3 content</cv-tab>
   `,
 };
 
 describe('CvTabs', () => {
   it('CvTabs - test default and attrs', async () => {
-    const ariaLabel = 'ABC-aria-label-123';
     // The render method returns a collection of utilities to query your component.
     const result = render(CvTabs, {
       props: {},
@@ -59,7 +63,6 @@ describe('CvTabs', () => {
   });
 
   it('CvTabs - test all props', async () => {
-    const ariaLabel = 'ABC-aria-label-123';
     const props = {
       id: 'ABC-123',
       container: false,
@@ -85,5 +88,22 @@ describe('CvTabs', () => {
     expect(tabNav.classList.contains('bx--tabs--scrollable--container')).toBe(
       true
     );
+  });
+
+  it('CvTabs - test slotted tab buttons to match snapshot', async () => {
+    const wrapper = await mount(CvTabs, {
+      props: {},
+      slots: {
+        default: ContentTabs,
+        [Tab1Label]: 'Hello <strong style="color: red;">(*)</strong>',
+        [Tab2Label]: 'Origin<strong style="color: orange;">(!)</strong>',
+      },
+      attrs: {
+        class: 'ABC-class-123',
+        'aria-label': ariaLabel,
+      },
+    });
+
+    expect(wrapper.html()).toMatchSnapshot();
   });
 });
