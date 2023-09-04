@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CvStructuredListData should render correctly when not wrapping text 1`] = `<div class="cv-structured-list-data bx--structured-list-td bx--structured-list-content--nowrap" id="test-3"></div>`;
+
+exports[`CvStructuredListData should render correctly when wrapping text 1`] = `<div class="cv-structured-list-data bx--structured-list-td" id="test-3"></div>`;
