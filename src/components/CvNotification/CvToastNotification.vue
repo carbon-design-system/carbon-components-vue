@@ -13,12 +13,14 @@
       :class="`${carbonPrefix}--toast-notification__icon`"
     />
     <div :class="`${carbonPrefix}--toast-notification__details`">
-      <h3 :class="`${carbonPrefix}--toast-notification__title`">{{ title }}</h3>
+      <h3 :class="`${carbonPrefix}--toast-notification__title`">
+        <slot name="title">{{ title }}</slot>
+      </h3>
       <div :class="`${carbonPrefix}--toast-notification__subtitle`">
-        {{ subTitle }}
+        <slot name="subtitle">{{ subTitle }}</slot>
       </div>
       <div :class="`${carbonPrefix}--toast-notification__caption`">
-        {{ caption }}
+        <slot name="caption">{{ caption }}</slot>
       </div>
       <slot />
     </div>
@@ -28,7 +30,7 @@
       :class="`${carbonPrefix}--toast-notification__close-button`"
       @click="$emit('close')"
     >
-      <close20 :class="`${carbonPrefix}--inline-notification__close-icon`" />
+      <close20 :class="`${carbonPrefix}--toast-notification__close-icon`" />
     </button>
   </div>
 </template>
