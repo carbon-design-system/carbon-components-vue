@@ -53,7 +53,7 @@ const defaultTemplate = `
         To customise tab look, in CvTabs component use scoped slot named with tab's label.
         Example: current tab has label "<strong>House</strong>", so the code for customising tab looks like:
         <div style="background-color: lightgrey; padding: 0.5rem;">
-          &lt;template #House="tab"&gt;
+          &lt;template #tab-1="tab"&gt;
             {&nbsp;{ tab.label }&nbsp;} &lt;IbmSecurity20 /&gt;
           &lt;template&gt;
         </div>
@@ -69,7 +69,7 @@ const defaultTemplate = `
         To customise tab look, in CvTabs component use scoped slot named with tab's label.
         Example: current tab has label "<strong>Bar</strong>", so the code for customising tab looks like:
         <div style="background-color: lightgrey; padding: 0.5rem;">
-          &lt;template #Bar="tab"&gt;
+          &lt;template #tab-2="tab"&gt;
             {&nbsp;{ tab.label }&nbsp;} &lt;strong style="color: red;"&gt;(*)&lt;/strong&gt;
           &lt;template&gt;
         </div>
@@ -84,7 +84,7 @@ const defaultTemplate = `
         To customise tab look, in CvTabs component use scoped slot named with tab's label.
         Example: current tab has label "<strong>Reach</strong>", so the code for customising tab looks like:
         <div style="background-color: lightgrey; padding: 0.5rem;">
-          &lt;template #Reach="tab"&gt;
+          &lt;template #tab-3="tab"&gt;
             {&nbsp;{ tab.label }&nbsp;} &lt;strong style="color: orange;"&gt;(!)&lt;/strong&gt;
           &lt;template&gt;
         </div>
@@ -111,13 +111,13 @@ const defaultTemplate = `
         <a target='_blank' href='https://hitchhikers.fandom.com/wiki/Main_Page'>credits</a>
       </p>
     </cv-tab>
-    <template v-if="slottedTabs" #House="tab">
+    <template v-if="slottedTabs" #tab-1="tab">
       House <SampleIcon/>
     </template>
-    <template v-if="slottedTabs" #Bar="tab">
+    <template v-if="slottedTabs" #tab-2="tab">
       {{tab.label}} <strong style="color: red;">(*)</strong>
     </template>
-    <template v-if="slottedTabs" #Reach="tab">
+    <template v-if="slottedTabs" #tab-3="tab">
       {{tab.label}} <strong style="color: orange;">(!)</strong>
     </template>
 </cv-tabs>

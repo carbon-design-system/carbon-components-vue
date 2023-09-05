@@ -76,7 +76,7 @@
             :tabindex="selectedId === tab.uid ? 0 : -1"
             type="button"
           >
-            <slot :name="tab.label" v-bind="tab">
+            <slot :name="tab.uid" v-bind="tab">
               {{ tab.label }}
             </slot>
           </button>

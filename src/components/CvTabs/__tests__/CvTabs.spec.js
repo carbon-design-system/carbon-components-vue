@@ -4,17 +4,31 @@ import userEvent from '@testing-library/user-event';
 import CvTabs from '../CvTabs.vue';
 import CvTab from '../CvTab.vue';
 
-const Tab1Label = 'Tab 1 label';
-const Tab2Label = 'Tab 2 label';
 const ariaLabel = 'ABC-aria-label-123';
+
+const tab1 = {
+  id: 'tab-1',
+  label: 'Tab 1 label',
+  content: 'Tab 1 content',
+};
+const tab2 = {
+  id: 'tab-2',
+  label: 'Tab 2 label',
+  content: 'Tab 2 content',
+};
+const tab3 = {
+  id: 'tab-3',
+  label: 'Tab 3 label',
+  content: 'Tab 3 content',
+};
 
 const ContentTabs = {
   components: { CvTab },
   template: `
-    <cv-tab  id="tab-1" label="${Tab1Label}">Tab 1 content</cv-tab>
-    <cv-tab  id="tab-2" label="${Tab2Label}">Tab 2 content</cv-tab>
-    <cv-tab  id="tab-3" label="Tab 3 label">Tab 3 content</cv-tab>
-  `,
+      <cv-tab id="${tab1.id}" label="${tab1.label}">${tab1.content}</cv-tab>
+      <cv-tab id="${tab2.id}" label="${tab2.label}">${tab2.content}</cv-tab>
+      <cv-tab id="${tab3.id}" label="${tab3.label}">${tab3.content}</cv-tab>
+    `,
 };
 
 describe('CvTabs', () => {
@@ -95,8 +109,8 @@ describe('CvTabs', () => {
       props: {},
       slots: {
         default: ContentTabs,
-        [Tab1Label]: 'Hello <strong style="color: red;">(*)</strong>',
-        [Tab2Label]: 'Origin<strong style="color: orange;">(!)</strong>',
+        [tab1.id]: 'Hello <strong style="color: red;">(*)</strong>',
+        [tab2.id]: 'Origin<strong style="color: orange;">(!)</strong>',
       },
       attrs: {
         class: 'ABC-class-123',
