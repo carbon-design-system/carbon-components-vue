@@ -81,8 +81,7 @@
 import { carbonPrefix } from '../../global/settings';
 import { props as propsCvId, useCvId } from '../../use/cvId';
 import OverflowMenuVertical16 from '@carbon/icons-vue/es/overflow-menu--vertical/16';
-import { computed, nextTick, onBeforeMount, onUnmounted, ref } from 'vue';
-import { getBus, removeBus } from '../../global/component-utils/event-bus';
+import { computed, nextTick, provide, ref } from 'vue';
 const props = defineProps({
   /**
    * assistive text shown as a tooltip
@@ -137,15 +136,8 @@ const offsetTop = computed(() => {
   return props.offset ? props.offset.top : 0;
 });
 
-let bus = undefined;
-onBeforeMount(() => {
-  bus = getBus(uid.value);
-  bus.on('cv:close', doClose);
-  bus.on('cv:click', menuItemClick);
-});
-onUnmounted(() => {
-  removeBus(uid.value);
-});
+provide('cv:close', doClose);
+provide('cv:click', menuItemClick);
 
 const trigger = ref(null);
 const popup = ref(null);
