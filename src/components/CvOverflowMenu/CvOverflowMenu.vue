@@ -38,40 +38,42 @@
         />
       </slot>
     </button>
-    <div
-      :class="[
-        `${carbonPrefix}--overflow-menu-options`,
-        {
-          [`${carbonPrefix}--overflow-menu--flip`]: flipMenu,
-          [`${carbonPrefix}--overflow-menu-options--open`]: open,
-        },
-      ]"
-      tabindex="-1"
-      ref="popup"
-      :aria-labelledby="`${uid}-trigger`"
-      :id="`${uid}-menu`"
-      :style="{ left: left + 'px', top: top + 'px' }"
-      @focusout="checkFocusOut"
-      @mousedown.prevent="preventFocusOut"
-    >
+    <Teleport to="body">
       <div
-        class="cv-overflow-menu__before-content"
-        ref="beforeContent"
-        tabindex="0"
-        style="position: absolute; height: 1px; width: 1px; left: -9999px"
-        @focus="focusBeforeContent"
-      />
-      <ul :class="`${carbonPrefix}--overflow-menu-options__content`">
-        <slot></slot>
-      </ul>
-      <div
-        class="cv-overflow-menu__after-content"
-        ref="afterContent"
-        tabindex="0"
-        style="position: absolute; height: 1px; width: 1px; left: -9999px"
-        @focus="focusAfterContent"
-      />
-    </div>
+        :class="[
+          `${carbonPrefix}--overflow-menu-options`,
+          {
+            [`${carbonPrefix}--overflow-menu--flip`]: flipMenu,
+            [`${carbonPrefix}--overflow-menu-options--open`]: open,
+          },
+        ]"
+        tabindex="-1"
+        ref="popup"
+        :aria-labelledby="`${uid}-trigger`"
+        :id="`${uid}-menu`"
+        :style="{ left: left + 'px', top: top + 'px' }"
+        @focusout="checkFocusOut"
+        @mousedown.prevent="preventFocusOut"
+      >
+        <div
+          class="cv-overflow-menu__before-content"
+          ref="beforeContent"
+          tabindex="0"
+          style="position: absolute; height: 1px; width: 1px; left: -9999px"
+          @focus="focusBeforeContent"
+        />
+        <ul :class="`${carbonPrefix}--overflow-menu-options__content`">
+          <slot></slot>
+        </ul>
+        <div
+          class="cv-overflow-menu__after-content"
+          ref="afterContent"
+          tabindex="0"
+          style="position: absolute; height: 1px; width: 1px; left: -9999px"
+          @focus="focusAfterContent"
+        />
+      </div>
+    </Teleport>
   </div>
 </template>
 
@@ -216,7 +218,7 @@ async function positionMenu() {
           popup.value.offsetHeight +
           pixelsScrolledY;
       } else {
-        top.value = menuPosition.left + offsetLeft.value + pixelsScrolledX;
+        top.value = menuPosition.bottom + offsetTop.value + pixelsScrolledY;
       }
     });
   }
