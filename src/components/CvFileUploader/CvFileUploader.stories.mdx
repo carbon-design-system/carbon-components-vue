@@ -123,6 +123,14 @@ export const argTypes = {
     },
     description: 'Helper text positioned below label',
   },
+  initialStateUploading: {
+    type: 'boolean',
+    table: {
+      type: { summary: 'boolean' },
+      category: 'props',
+    },
+    description: 'Set "UPLOADING" state to new files',
+  },
   kind: {
     type: 'string',
     control: 'select',

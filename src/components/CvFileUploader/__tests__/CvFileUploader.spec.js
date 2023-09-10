@@ -1,5 +1,5 @@
 import { render, fireEvent } from '@testing-library/vue';
-import { KINDS } from '../const';
+import { KINDS, STATES } from '../const';
 import { carbonPrefix } from '../../../global/settings';
 import { buttonKinds, buttonSizes } from '../../CvButton/consts';
 import CvFileUploader from '..';
@@ -325,6 +325,62 @@ describe('CvFileUploader', () => {
       expect(slotContent).toBeDefined;
     }
   );
+
+  it(`sets "${STATES.UPLOADING}" state to new files when initialStateUploading is true`, async () => {
+    const dummyFile = new File([''], 'dummy-file.jpeg', {
+      type: 'image/jpeg',
+    });
+    const dummyId = 'dummy-id';
+    const { container, emitted } = render(CvFileUploader, {
+      props: {
+        initialStateUploading: true,
+        id: dummyId,
+      },
+    });
+
+    const fileInput = container.querySelector(`#${dummyId}`);
+    await fireEvent.change(fileInput, { target: { files: [dummyFile] } });
+
+    const emitResult = emitted('update:modelValue').at(0);
+    expect(emitResult[0][0].state).toBe(STATES.UPLOADING);
+  });
+
+  it(`sets "${STATES.NONE}" state to new files when initialStateUploading is false`, async () => {
+    const dummyFile = new File([''], 'dummy-file.jpeg', {
+      type: 'image/jpeg',
+    });
+    const dummyId = 'dummy-id';
+    const { container, emitted } = render(CvFileUploader, {
+      props: {
+        initialStateUploading: false,
+        id: dummyId,
+      },
+    });
+
+    const fileInput = container.querySelector(`#${dummyId}`);
+    await fireEvent.change(fileInput, { target: { files: [dummyFile] } });
+
+    const emitResult = emitted('update:modelValue').at(0);
+    expect(emitResult[0][0].state).toBe(STATES.NONE);
+  });
+
+  it(`sets "${STATES.NONE}" state to new files when initialStateUploading is not set`, async () => {
+    const dummyFile = new File([''], 'dummy-file.jpeg', {
+      type: 'image/jpeg',
+    });
+    const dummyId = 'dummy-id';
+    const { container, emitted } = render(CvFileUploader, {
+      props: {
+        id: dummyId,
+      },
+    });
+
+    const fileInput = container.querySelector(`#${dummyId}`);
+    await fireEvent.change(fileInput, { target: { files: [dummyFile] } });
+
+    const emitResult = emitted('update:modelValue').at(0);
+    expect(emitResult[0][0].state).toBe(STATES.NONE);
+  });
 
   describe('Drop target label', () => {
     it.each(inputKinds)(

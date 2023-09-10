@@ -109,6 +109,7 @@ const props = defineProps({
   clearOnReselect: Boolean,
   dropTargetLabel: String,
   helperText: String,
+  initialStateUploading: Boolean,
   kind: {
     type: String,
     default: KINDS.DRAG_TARGET,
