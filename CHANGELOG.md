@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.9-alpha.0](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.8-alpha.0...@carbon/vue@3.0.9-alpha.0) (2023-09-11)
+
+### Bug Fixes
+
+- adjust unit tests ([d4586f4](https://github.com/carbon-design-system/carbon-components-vue/commit/d4586f42d38e3e6ed8da3f0524f7086810ec7a24))
+- overflow menu dropdown placement and position ([7f37680](https://github.com/carbon-design-system/carbon-components-vue/commit/7f376809224ad6a4d86d01fa200bd681aa1299e9))
+- story template fix, import name fix ([2ec0511](https://github.com/carbon-design-system/carbon-components-vue/commit/2ec0511041b7102ffaedef26ac2da26f205a20fd))
+
+### Features
+
+- add slots stories ([2750ab9](https://github.com/carbon-design-system/carbon-components-vue/commit/2750ab93c6a424ba9c5854db194270696cd33a5c))
+- components finished ([fe7c255](https://github.com/carbon-design-system/carbon-components-vue/commit/fe7c255397097e6065312843d972ec72439ba51a))
+- components unit tests ([49b944b](https://github.com/carbon-design-system/carbon-components-vue/commit/49b944b057aa70e7d25d6f370bc23fe7c3ac3bfc))
+- cv-structured-list components in progress ([c4e0959](https://github.com/carbon-design-system/carbon-components-vue/commit/c4e09598f9455f304f811acc1eae8f618c4b0592))
+- cv-toast-notification add more slots ([71ef1b6](https://github.com/carbon-design-system/carbon-components-vue/commit/71ef1b62f75007efc48b486893e4f1689e0d92b9))
+- structured list components in progress ([706a2cd](https://github.com/carbon-design-system/carbon-components-vue/commit/706a2cdaddb869bb97085da40b692d5de575872a))
+- structured-list wireframe ([ee958cb](https://github.com/carbon-design-system/carbon-components-vue/commit/ee958cb4b4107c68319e79fef49ecbf512650005))
+
 ## [3.0.8-alpha.0](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.7-alpha.0...@carbon/vue@3.0.8-alpha.0) (2023-08-21)
 
 ### Bug Fixes
