@@ -50,8 +50,8 @@ const defaultTemplate = `
   aria-label="navigation tab label">
     <cv-tab id="tab-1" label="House" :selected="selectedId === 'tab-1'" :disabled="disabledIds.includes('tab-1')">
       <p v-if="slottedTabs">
-        To customise tab look, in CvTabs component use scoped slot named with tab's label.
-        Example: current tab has label "<strong>House</strong>", so the code for customising tab looks like:
+        To customise tab look, in CvTabs component use scoped slot named with tab's id.
+        Example: current tab has id "<strong>tab-1</strong>", so the code for customising tab looks like:
         <div style="background-color: lightgrey; padding: 0.5rem;">
           &lt;template #tab-1="tab"&gt;
             {&nbsp;{ tab.label }&nbsp;} &lt;IbmSecurity20 /&gt;
@@ -66,8 +66,8 @@ const defaultTemplate = `
     </cv-tab>
     <cv-tab id="tab-2" label="Bar" :selected="selectedId === 'tab-2'" :disabled="disabledIds.includes('tab-2')">
       <p v-if="slottedTabs">
-        To customise tab look, in CvTabs component use scoped slot named with tab's label.
-        Example: current tab has label "<strong>Bar</strong>", so the code for customising tab looks like:
+        To customise tab look, in CvTabs component use scoped slot named with tab's id.
+        Example: current tab has id "<strong>tab-2</strong>", so the code for customising tab looks like:
         <div style="background-color: lightgrey; padding: 0.5rem;">
           &lt;template #tab-2="tab"&gt;
             {&nbsp;{ tab.label }&nbsp;} &lt;strong style="color: red;"&gt;(*)&lt;/strong&gt;
@@ -81,8 +81,8 @@ const defaultTemplate = `
     </cv-tab>
     <cv-tab id="tab-3" label="Reach" :selected="selectedId === 'tab-3'" :disabled="disabledIds.includes('tab-3')">
       <p v-if="slottedTabs">
-        To customise tab look, in CvTabs component use scoped slot named with tab's label.
-        Example: current tab has label "<strong>Reach</strong>", so the code for customising tab looks like:
+        To customise tab look, in CvTabs component use scoped slot named with tab's id.
+        Example: current tab has id "<strong>tab-3</strong>", so the code for customising tab looks like:
         <div style="background-color: lightgrey; padding: 0.5rem;">
           &lt;template #tab-3="tab"&gt;
             {&nbsp;{ tab.label }&nbsp;} &lt;strong style="color: orange;"&gt;(!)&lt;/strong&gt;
