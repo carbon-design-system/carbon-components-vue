@@ -14,7 +14,7 @@ export default {
   },
 };
 
-const template = `<CvTag @remove="onRemove" v-bind="args" />`;
+const template = `<cv-tag @remove="onRemove" v-bind="args" />`;
 const Template = (args, { argTypes }) => {
   return {
     props: Object.keys(argTypes),
@@ -56,6 +56,7 @@ Filter.parameters = storyParametersObject(
 export const Skeleton = Template.bind({});
 Skeleton.args = {
   skeleton: true,
+  label: '',
 };
 Skeleton.parameters = storyParametersObject(
   Skeleton.parameters,
