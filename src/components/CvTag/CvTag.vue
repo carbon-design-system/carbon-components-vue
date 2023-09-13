@@ -56,6 +56,10 @@ export default {
      * skeleton used when loading
      */
     skeleton: Boolean,
+    /**
+     * tag size small
+     */
+    small: Boolean,
   },
   emits: [
     /**
@@ -70,6 +74,8 @@ export default {
 
     const tagClasses = computed(() => {
       const classes = [`${carbonPrefix}--tag`];
+
+      if (props.small) classes.push(`${carbonPrefix}--tag--sm`);
 
       if (props.skeleton) {
         classes.push(`${carbonPrefix}--skeleton`);
