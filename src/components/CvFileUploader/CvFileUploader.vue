@@ -179,7 +179,7 @@ function addFiles(files) {
     const newFile = createInternalFile(internalFile?.file || file);
 
     if (internalFile) {
-      internalFile.state = newFile.initialState;
+      internalFile.state = newFile.state;
       internalFile.invalidMessageTitle = newFile.invalidMessageTitle;
       internalFile.invalidMessage = newFile.invalidMessage;
     } else {

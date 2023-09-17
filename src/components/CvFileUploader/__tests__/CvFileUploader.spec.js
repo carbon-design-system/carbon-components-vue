@@ -382,6 +382,32 @@ describe('CvFileUploader', () => {
     expect(emitResult[0][0].state).toBe(STATES.NONE);
   });
 
+  it(`sets "${STATES.UPLOADING}" state to files when initialStateUploading is set and uploaded file already exists`, async () => {
+    const dummyFile = new File([''], 'dummy-file.jpeg', {
+      type: 'image/jpeg',
+    });
+    const dummyId = 'dummy-id';
+    const { container, emitted, rerender } = render(CvFileUploader, {
+      props: {
+        initialStateUploading: true,
+        id: dummyId,
+      },
+    });
+
+    const fileInput = container.querySelector(`#${dummyId}`);
+    await fireEvent.change(fileInput, { target: { files: [dummyFile] } });
+
+    await rerender({ initialStateUploading: false });
+    await fireEvent.change(fileInput, { target: { files: [dummyFile] } });
+
+    await rerender({ initialStateUploading: true });
+    await fireEvent.change(fileInput, { target: { files: [dummyFile] } });
+
+    expect(emitted('update:modelValue').at(2)[0][0].state).toBe(
+      STATES.UPLOADING
+    );
+  });
+
   describe('Drop target label', () => {
     it.each(inputKinds)(
       'renders drop target label when dropTargetLabel is passed (kind: %s)',
