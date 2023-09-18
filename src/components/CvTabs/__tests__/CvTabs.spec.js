@@ -1,20 +1,38 @@
 import { render } from '@testing-library/vue';
+import { mount } from '@vue/test-utils';
 import userEvent from '@testing-library/user-event';
 import CvTabs from '../CvTabs.vue';
 import CvTab from '../CvTab.vue';
 
+const ariaLabel = 'ABC-aria-label-123';
+
+const tab1 = {
+  id: 'tab-1',
+  label: 'Tab 1 label',
+  content: 'Tab 1 content',
+};
+const tab2 = {
+  id: 'tab-2',
+  label: 'Tab 2 label',
+  content: 'Tab 2 content',
+};
+const tab3 = {
+  id: 'tab-3',
+  label: 'Tab 3 label',
+  content: 'Tab 3 content',
+};
+
 const ContentTabs = {
   components: { CvTab },
   template: `
-    <cv-tab  id="tab-1" label="Tab 1 label">Tab 1 content</cv-tab>
-    <cv-tab  id="tab-2" label="Tab 2 label">Tab 2 content</cv-tab>
-    <cv-tab  id="tab-3" label="Tab 3 label">Tab 3 content</cv-tab>
-  `,
+      <cv-tab id="${tab1.id}" label="${tab1.label}">${tab1.content}</cv-tab>
+      <cv-tab id="${tab2.id}" label="${tab2.label}">${tab2.content}</cv-tab>
+      <cv-tab id="${tab3.id}" label="${tab3.label}">${tab3.content}</cv-tab>
+    `,
 };
 
 describe('CvTabs', () => {
   it('CvTabs - test default and attrs', async () => {
-    const ariaLabel = 'ABC-aria-label-123';
     // The render method returns a collection of utilities to query your component.
     const result = render(CvTabs, {
       props: {},
@@ -59,7 +77,6 @@ describe('CvTabs', () => {
   });
 
   it('CvTabs - test all props', async () => {
-    const ariaLabel = 'ABC-aria-label-123';
     const props = {
       id: 'ABC-123',
       container: false,
@@ -85,5 +102,22 @@ describe('CvTabs', () => {
     expect(tabNav.classList.contains('bx--tabs--scrollable--container')).toBe(
       true
     );
+  });
+
+  it('CvTabs - test slotted tab buttons to match snapshot', async () => {
+    const wrapper = await mount(CvTabs, {
+      props: {},
+      slots: {
+        default: ContentTabs,
+        [tab1.id]: 'Hello <strong style="color: red;">(*)</strong>',
+        [tab2.id]: 'Origin<strong style="color: orange;">(!)</strong>',
+      },
+      attrs: {
+        class: 'ABC-class-123',
+        'aria-label': ariaLabel,
+      },
+    });
+
+    expect(wrapper.html()).toMatchSnapshot();
   });
 });

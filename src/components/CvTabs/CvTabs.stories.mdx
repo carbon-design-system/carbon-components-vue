@@ -5,6 +5,7 @@ import CvTab from './CvTab.vue';
 import CvTabsSkeleton from './CvTabsSkeleton.vue';
 import SbContainer from './_SbContainer.vue';
 import { action } from '@storybook/addon-actions';
+import { IbmSecurity20 as SampleIcon } from '@carbon/icons-vue';
 
 <Meta
   title={`${sbCompPrefix}/CvTabs`}
@@ -23,6 +24,7 @@ export const Template = args => ({
     CvTabs,
     CvTab,
     CvTabsSkeleton,
+    SampleIcon,
   },
   // The story's `args` need to be mapped into the template through the `setup()` method
   setup() {
@@ -31,6 +33,7 @@ export const Template = args => ({
       noDefaultToFirst: args.noDefaultToFirst,
       selectedId: args.selectedId,
       disabledIds: args.disabledIds,
+      slottedTabs: args.slottedTabs,
       onTabSelected: action('tab-selected'),
       onTabSelectedId: action('tab-selected-id'),
     };
@@ -46,20 +49,47 @@ const defaultTemplate = `
   @tab-selected-id="onTabSelectedId"
   aria-label="navigation tab label">
     <cv-tab id="tab-1" label="House" :selected="selectedId === 'tab-1'" :disabled="disabledIds.includes('tab-1')">
-      <p>
+      <p v-if="slottedTabs">
+        To customise tab look, in CvTabs component use scoped slot named with tab's id.
+        Example: current tab has id "<strong>tab-1</strong>", so the code for customising tab looks like:
+        <div style="background-color: lightgrey; padding: 0.5rem;">
+          &lt;template #tab-1="tab"&gt;
+            {&nbsp;{ tab.label }&nbsp;} &lt;IbmSecurity20 /&gt;
+          &lt;template&gt;
+        </div>
+      </p>
+      <p v-else>
         29 Arlington Avenue is a house in Islington, London. Douglas Adams shared the house for a time
         with Jonny Brock and Clare Gorst. It is mentioned in the dedication of The Hitchhiker's Guide to
         the Galaxy, which is dedicated to the "Arlingtonians for tea, sympathy, and a sofa."
       </p>
     </cv-tab>
     <cv-tab id="tab-2" label="Bar" :selected="selectedId === 'tab-2'" :disabled="disabledIds.includes('tab-2')">
-      <p>
+      <p v-if="slottedTabs">
+        To customise tab look, in CvTabs component use scoped slot named with tab's id.
+        Example: current tab has id "<strong>tab-2</strong>", so the code for customising tab looks like:
+        <div style="background-color: lightgrey; padding: 0.5rem;">
+          &lt;template #tab-2="tab"&gt;
+            {&nbsp;{ tab.label }&nbsp;} &lt;strong style="color: red;"&gt;(*)&lt;/strong&gt;
+          &lt;template&gt;
+        </div>
+      </p>
+      <p v-else>
         The Old Pink Dog Bar was the bar in Han Dold City that Ford Prefect was in when he discovered
         that his Guide had his full entry on Earth on it.
       </p>
     </cv-tab>
     <cv-tab id="tab-3" label="Reach" :selected="selectedId === 'tab-3'" :disabled="disabledIds.includes('tab-3')">
-      <p>
+      <p v-if="slottedTabs">
+        To customise tab look, in CvTabs component use scoped slot named with tab's id.
+        Example: current tab has id "<strong>tab-3</strong>", so the code for customising tab looks like:
+        <div style="background-color: lightgrey; padding: 0.5rem;">
+          &lt;template #tab-3="tab"&gt;
+            {&nbsp;{ tab.label }&nbsp;} &lt;strong style="color: orange;"&gt;(!)&lt;/strong&gt;
+          &lt;template&gt;
+        </div>
+      </p>
+      <p v-else>
         The Third Reach of the Unknown is what might be loosely described as a "place" which exists only
         under high improbability conditions and was created on the starship Heart of Gold due to the
         Infinite Improbability Drive. During Arthur Dent and Ford Prefect's first trip on board the Heart
@@ -81,6 +111,15 @@ const defaultTemplate = `
         <a target='_blank' href='https://hitchhikers.fandom.com/wiki/Main_Page'>credits</a>
       </p>
     </cv-tab>
+    <template v-if="slottedTabs" #tab-1="tab">
+      House <SampleIcon/>
+    </template>
+    <template v-if="slottedTabs" #tab-2="tab">
+      {{tab.label}} <strong style="color: red;">(*)</strong>
+    </template>
+    <template v-if="slottedTabs" #tab-3="tab">
+      {{tab.label}} <strong style="color: orange;">(!)</strong>
+    </template>
 </cv-tabs>
 `;
 const skeletonTemplate = `<cv-tabs-skeleton></cv-tabs-skeleton>`;
@@ -169,6 +208,48 @@ screens, and so I suggest using a different component for mobile cases.
       template: skeletonTemplate,
     }}
     argTypes={{}}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+# Tabs slotted
+
+<Canvas>
+  <Story
+    name="tabsSlot"
+    parameters={{
+      controls: {
+        exclude: [
+          'default',
+          'template',
+          'leftOverflowIconButtonProps',
+          'rightOverflowIconButtonProps',
+          'scrollIntoView',
+          'tab-selected',
+          'tab-selected-id',
+          'slottedTabs',
+        ],
+      },
+      docs: { source: { code: defaultTemplate } },
+    }}
+    args={{
+      template: defaultTemplate,
+      selectedId: '',
+      disabledIds: [],
+      slottedTabs: true
+    }}
+    argTypes={{
+      selectedId: {
+        control: 'select',
+        default: '',
+        options: ['', 'tab-1', 'tab-2', 'tab-3', 'tab-4', 'tab-5'],
+      },
+      disabledIds: {
+        control: 'multi-select',
+        options: ['tab-1', 'tab-2', 'tab-3', 'tab-4', 'tab-5'],
+      },
+    }}
   >
     {Template.bind({})}
   </Story>
