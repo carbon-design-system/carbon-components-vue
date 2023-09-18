@@ -1,5 +1,5 @@
 <template>
-  <div v-if="skeleton" :class="tagClasses" />
+  <div v-if="skeleton" :class="tagClasses"></div>
   <div v-else :class="tagClasses" role="listitem" :title="title">
     <span :class="`${carbonPrefix}--tag__label`">
       {{ label }}
@@ -56,6 +56,10 @@ export default {
      * skeleton used when loading
      */
     skeleton: Boolean,
+    /**
+     * tag size small
+     */
+    small: Boolean,
   },
   emits: [
     /**
@@ -69,14 +73,15 @@ export default {
     });
 
     const tagClasses = computed(() => {
-      const classes = [
-        `${carbonPrefix}--tag`,
-        `${carbonPrefix}--tag--${props.kind}`,
-      ];
+      const classes = [`${carbonPrefix}--tag`];
+
+      if (props.small) classes.push(`${carbonPrefix}--tag--sm`);
 
       if (props.skeleton) {
         classes.push(`${carbonPrefix}--skeleton`);
       } else {
+        classes.push(`${carbonPrefix}--tag--${props.kind}`);
+
         if (props.filter) {
           classes.push(`${carbonPrefix}--tag--filter`);
         }
