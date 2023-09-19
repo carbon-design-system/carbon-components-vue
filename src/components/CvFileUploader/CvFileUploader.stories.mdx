@@ -3,7 +3,7 @@ import { sbCompPrefix } from '../../global/storybook-utils';
 import { CvFileUploader, CvFileUploaderSkeleton } from '.';
 import { KINDS } from './const';
 import { action } from '@storybook/addon-actions';
-import { nextTick, ref } from 'vue';
+import { nextTick, ref, watch } from 'vue';
 import { Add16 } from '@carbon/icons-vue';
 import { buttonKinds, buttonSizes } from '../CvButton/consts';
 
@@ -16,7 +16,12 @@ export const Template = args => ({
     Add16
   },
   setup() {
+    const files = ref(storage.files);
+    watch(() => files.value, (newValue) => {
+      storage.files = newValue;
+    }, { deep: true });
     return {
+      files,
       slotContent: args.slot,
       args: {
         ...args,
@@ -26,9 +31,12 @@ export const Template = args => ({
   },
   template: args.template,
 });
+const storage = {
+  files: [],
+};
 const defaultTemplate = `
   <div style="display: inline-flex; align-items: flex-start;">
-    <cv-file-uploader v-bind="args" />
+    <cv-file-uploader v-bind="args" v-model="files" />
   </div>
 `;
 const slotTemplate = `
