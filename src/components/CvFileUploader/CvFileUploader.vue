@@ -1,11 +1,28 @@
 <template>
   <cv-form-item class="cv-file-uploader">
-    <p :class="`${carbonPrefix}--file--label`">{{ label }}</p>
-    <p :class="`${carbonPrefix}--label-description`">{{ helperText }}</p>
+    <p
+      :class="[
+        `${carbonPrefix}--file--label`,
+        { [`${carbonPrefix}--file--label--disabled`]: disabled },
+      ]"
+    >
+      {{ label }}
+    </p>
+    <p
+      :class="[
+        `${carbonPrefix}--label-description`,
+        { [`${carbonPrefix}--label-description--disabled`]: disabled },
+      ]"
+    >
+      {{ helperText }}
+    </p>
     <div v-if="kind === 'button'" :class="`${carbonPrefix}--file`" data-file>
       <label
         :for="cvId"
-        :class="buttonClasses"
+        :class="[
+          buttonClasses,
+          { [`${carbonPrefix}--btn--disabled`]: disabled },
+        ]"
         tabindex="0"
         @keydown.enter.prevent="onKeyHit"
         @keydown.space.prevent="onKeyHit"
@@ -17,6 +34,7 @@
         ref="fileInput"
         :class="`${carbonPrefix}--file-input`"
         :accept="accept"
+        :disabled="disabled"
         type="file"
         v-bind="$attrs"
         data-file-uploader
@@ -34,8 +52,10 @@
             `${carbonPrefix}--file-browse-btn`,
             `${carbonPrefix}--file__drop-container`,
             {
-              [`${carbonPrefix}--file__drop-container--drag-over`]: allowDrop,
+              [`${carbonPrefix}--file__drop-container--drag-over`]:
+                allowDrop && !disabled,
             },
+            { [`${carbonPrefix}--file-browse-btn--disabled`]: disabled },
           ]"
           @dragover="onDragEvent"
           @dragleave="onDragEvent"
@@ -50,6 +70,7 @@
           ref="fileInput"
           :class="`${carbonPrefix}--file-input`"
           :accept="accept"
+          :disabled="disabled"
           type="file"
           v-bind="$attrs"
           tabindex="-1"
@@ -107,6 +128,7 @@ const props = defineProps({
   },
   buttonSize: commonCvButtonProps.size,
   clearOnReselect: Boolean,
+  disabled: Boolean,
   dropTargetLabel: String,
   helperText: String,
   initialStateUploading: Boolean,
@@ -217,6 +239,11 @@ function onChange(ev) {
 }
 
 function onDragEvent(evt) {
+  if (props.disabled) {
+    evt.preventDefault();
+    return;
+  }
+
   if (Array.prototype.indexOf.call(evt.dataTransfer.types, 'Files') === -1) {
     return;
   }

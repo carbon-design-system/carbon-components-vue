@@ -1,4 +1,5 @@
 import { render, fireEvent } from '@testing-library/vue';
+import userEvent from '@testing-library/user-event';
 import { KINDS, STATES } from '../const';
 import { carbonPrefix } from '../../../global/settings';
 import { buttonKinds, buttonSizes } from '../../CvButton/consts';
@@ -406,6 +407,117 @@ describe('CvFileUploader', () => {
     expect(emitted('update:modelValue').at(2)[0][0].state).toBe(
       STATES.UPLOADING
     );
+  });
+
+  describe('Disabled state', () => {
+    it('renders label in disabled state', async () => {
+      const dummyLabel = 'Dummy File Input';
+      const { findByText } = render(CvFileUploader, {
+        props: {
+          label: dummyLabel,
+          disabled: true,
+        },
+      });
+
+      const label = await findByText(dummyLabel);
+      expect(
+        label.classList.contains(`${carbonPrefix}--file--label--disabled`)
+      ).toBeTruthy();
+    });
+
+    it('renders helper text in disable state', async () => {
+      const dummyHelperText = 'Dummy Helper Text';
+      const { findByText } = render(CvFileUploader, {
+        props: {
+          helperText: dummyHelperText,
+          disabled: true,
+        },
+      });
+
+      const element = await findByText(dummyHelperText);
+      expect(
+        element.classList.contains(
+          `${carbonPrefix}--label-description--disabled`
+        )
+      ).toBeTruthy();
+    });
+
+    it('renders "button" in disabled state', async () => {
+      const dummyId = 'dummy-id';
+      const { container } = render(CvFileUploader, {
+        props: {
+          kind: KINDS.BUTTON,
+          id: dummyId,
+          disabled: true,
+        },
+      });
+
+      const fileInput = container.querySelector(`#${dummyId}`);
+      const label = container.querySelector('label');
+
+      expect(fileInput.getAttribute('disabled')).not.toBeNull();
+      expect(
+        label.classList.contains(`${carbonPrefix}--btn--disabled`)
+      ).toBeTruthy();
+    });
+
+    it('does not emit changes on click when button is disabled', async () => {
+      const dummyFile = new File(['file content'], 'dummy-file.txt', {
+        type: 'text/plain',
+      });
+      const dummyId = 'dummy-id';
+      const { container, emitted } = render(CvFileUploader, {
+        props: {
+          kind: KINDS.BUTTON,
+          id: dummyId,
+          disabled: true,
+        },
+      });
+
+      const fileInput = container.querySelector(`#${dummyId}`);
+      await userEvent.upload(fileInput, dummyFile);
+
+      expect(emitted('update:modelValue')).toBeUndefined();
+    });
+
+    it('renders "drag & drop" in disabled state', async () => {
+      const dummyId = 'dummy-id';
+      const { container } = render(CvFileUploader, {
+        props: {
+          kind: KINDS.DRAG_TARGET,
+          id: dummyId,
+          disabled: true,
+        },
+      });
+
+      const fileInput = container.querySelector(`#${dummyId}`);
+      const wrapper = container.querySelector(
+        `div.${carbonPrefix}--file-browse-btn`
+      );
+
+      expect(fileInput.getAttribute('disabled')).not.toBeNull();
+      expect(
+        wrapper.classList.contains(`${carbonPrefix}--file-browse-btn--disabled`)
+      ).toBeTruthy();
+    });
+
+    it("does not emit changes when drag & drop's input is disabled", async () => {
+      const dummyFile = new File(['file content'], 'dummy-file.txt', {
+        type: 'text/plain',
+      });
+      const dummyId = 'dummy-id';
+      const { container, emitted } = render(CvFileUploader, {
+        props: {
+          id: dummyId,
+          disabled: true,
+        },
+      });
+
+      const fileInput = container.querySelector(`#${dummyId}`);
+      await userEvent.upload(fileInput, dummyFile);
+
+      expect(emitted('update:modelValue')).toBeUndefined();
+    });
   });
 
   describe('Drop target label', () => {
