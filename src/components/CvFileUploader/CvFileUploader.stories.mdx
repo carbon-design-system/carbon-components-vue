@@ -19,6 +19,13 @@ export const Template = args => ({
     const fileUploader = ref(null);
     const files = ref(storage.files);
     // exposed methods handlers
+    function clear() {
+      if (args.clear && args.clear > storage.clearCount) {
+        storage.clearCount = args.clear;
+        fileUploader.value.clear();
+        action('cv-file-uploader clear')()
+      }
+    }
     function setInvalidMessage(index) {
       if (files.value[index].invalidMessage !== args.setInvalidMessage) {
         fileUploader.value.setInvalidMessage(index, args.setInvalidMessage);
@@ -45,6 +52,7 @@ export const Template = args => ({
       changeFiles();
     }, { deep: true });
     onMounted(() => {
+      clear();
       changeFiles();
     });
     return {
@@ -61,6 +69,7 @@ export const Template = args => ({
 });
 const storage = {
   files: [],
+  clearCount: 0,
 };
 const setStateOptionMap = {
   [`Set files status to: None`]: STATES.NONE,
@@ -219,7 +228,8 @@ export const argTypes = {
   },
   // exposed methods
   clear: {
-    control: 'none',
+    control: 'button',
+    buttonLabel: 'Clear',
     type: 'function',
     table: {
       type: { summary: '() => void' },
