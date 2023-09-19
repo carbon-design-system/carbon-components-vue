@@ -26,6 +26,14 @@ export const Template = args => ({
         action('cv-file-uploader clear')()
       }
     }
+    function remove() {
+      if (args.remove && args.remove > storage.removeCount && files.value.length > 0) {
+        const randomIndex = Math.floor(Math.random() * files.value.length);
+        storage.removeCount = args.remove;
+        fileUploader.value.remove(randomIndex);
+        action('cv-file-uploader remove')(randomIndex)
+      }
+    }
     function setInvalidMessage(index) {
       if (files.value[index].invalidMessage !== args.setInvalidMessage) {
         fileUploader.value.setInvalidMessage(index, args.setInvalidMessage);
@@ -53,6 +61,7 @@ export const Template = args => ({
     }, { deep: true });
     onMounted(() => {
       clear();
+      remove();
       changeFiles();
     });
     return {
@@ -70,6 +79,7 @@ export const Template = args => ({
 const storage = {
   files: [],
   clearCount: 0,
+  removeCount: 0,
 };
 const setStateOptionMap = {
   [`Set files status to: None`]: STATES.NONE,
@@ -238,7 +248,8 @@ export const argTypes = {
     description: 'Clear file list',
   },
   remove: {
-    control: 'none',
+    control: 'button',
+    buttonLabel: 'Remove a random file',
     type: 'function',
     table: {
       type: { summary: '(index: number) => void' },
