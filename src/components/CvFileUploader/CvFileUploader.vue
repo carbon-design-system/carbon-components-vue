@@ -277,7 +277,7 @@ function onDragEvent(evt) {
 
 function onItemRemove(index) {
   internalFiles.value.splice(index, 1);
-  emit('update:modelValue', this.internalFiles);
+  emit('update:modelValue', internalFiles.value);
 }
 
 function onKeyHit() {
@@ -298,7 +298,7 @@ defineExpose({
   },
   clear() {
     internalFiles.value = [];
-    emit('update:modelValue', internalFiles);
+    emit('update:modelValue', internalFiles.value);
   },
   setInvalidMessage(index, message) {
     internalFiles.value[index].invalidMessage = message;
