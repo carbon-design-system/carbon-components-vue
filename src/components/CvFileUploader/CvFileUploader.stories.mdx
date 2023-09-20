@@ -1,4 +1,4 @@
-import { Canvas, Meta, Story } from '@storybook/addon-docs';
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
 import { sbCompPrefix } from '../../global/storybook-utils';
 import { CvFileUploader, CvFileUploaderSkeleton } from '.';
 import { KINDS, STATES } from './const';
@@ -299,6 +299,8 @@ Migration notes:
     {Template.bind({})}
   </Story>
 </Canvas>
+
+<ArgsTable story="Default" />
 
 # CvFileUploader Button
 
