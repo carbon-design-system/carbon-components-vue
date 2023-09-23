@@ -1,11 +1,23 @@
 import { render, fireEvent } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
+import { shallowMount } from '@vue/test-utils';
 import { KINDS, STATES } from '../const';
 import { carbonPrefix } from '../../../global/settings';
 import { buttonKinds, buttonSizes } from '../../CvButton/consts';
 import CvFileUploader from '..';
 
 const inputKinds = [KINDS.DRAG_TARGET];
+const createFileItem = (
+  file,
+  invalidMessage = '',
+  invalidMessageTitle = '',
+  state = ''
+) => ({
+  file,
+  invalidMessage,
+  invalidMessageTitle,
+  state,
+});
 
 describe('CvFileUploader', () => {
   it('renders label', async () => {
@@ -671,5 +683,34 @@ describe('CvFileUploader', () => {
         expect(wrapper).not.toBeNull();
       }
     );
+  });
+
+  describe('Exposed methods', () => {
+    describe('clear', () => {
+      it('should clear files when clear function is called', async () => {
+        const wrapper = await shallowMount(CvFileUploader, {
+          props: {
+            modelValue: [
+              createFileItem(
+                new File(['content1'], 'dummy-file1.txt', {
+                  type: 'text/plain',
+                })
+              ),
+              createFileItem(
+                new File(['content2'], 'dummy-file2.txt', {
+                  type: 'text/plain',
+                })
+              ),
+            ],
+            'onUpdate:modelValue': e => wrapper.setProps({ modelValue: e }),
+          },
+        });
+
+        wrapper.vm.clear();
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.props('modelValue')).toEqual([]);
+      });
+    });
   });
 });
