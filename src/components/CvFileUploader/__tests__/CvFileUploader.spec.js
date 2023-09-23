@@ -742,5 +742,33 @@ describe('CvFileUploader', () => {
         );
       });
     });
+
+    describe('setInvalidMessage', () => {
+      it('should set "ERROR" as invalid message of the first file when calling setInvalidMessage function with 0 and "ERROR"', async () => {
+        const wrapper = await shallowMount(CvFileUploader, {
+          props: {
+            modelValue: [
+              createFileItem(
+                new File(['content1'], 'dummy-file1.txt', {
+                  type: 'text/plain',
+                })
+              ),
+              createFileItem(
+                new File(['content2'], 'dummy-file2.txt', {
+                  type: 'text/plain',
+                })
+              ),
+            ],
+            'onUpdate:modelValue': e => wrapper.setProps({ modelValue: e }),
+          },
+        });
+
+        wrapper.vm.setInvalidMessage(0, 'ERROR');
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.props('modelValue').length).toBe(2);
+        expect(wrapper.props('modelValue')[0].invalidMessage).toBe('ERROR');
+      });
+    });
   });
 });

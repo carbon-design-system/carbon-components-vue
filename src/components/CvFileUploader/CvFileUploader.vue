@@ -299,17 +299,19 @@ function remove(index) {
   onItemRemove(index);
 }
 
+function setInvalidMessage(index, message) {
+  internalFiles.value[index].invalidMessage = message;
+}
+
 // exposing methods
 defineExpose({
   clear,
   remove,
+  setInvalidMessage,
   setState(index, state) {
     if ([STATES.COMPLETE, STATES.UPLOADING, STATES.NONE].includes(state)) {
       internalFiles.value[index].state = state;
     }
-  },
-  setInvalidMessage(index, message) {
-    internalFiles.value[index].invalidMessage = message;
   },
 });
 </script>
