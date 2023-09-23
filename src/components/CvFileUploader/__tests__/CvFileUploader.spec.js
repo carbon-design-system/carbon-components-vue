@@ -712,5 +712,35 @@ describe('CvFileUploader', () => {
         expect(wrapper.props('modelValue')).toEqual([]);
       });
     });
+
+    describe('remove', () => {
+      it('should remove the second item of files when remove function is called with 1', async () => {
+        const wrapper = await shallowMount(CvFileUploader, {
+          props: {
+            modelValue: [
+              createFileItem(
+                new File(['content1'], 'dummy-file1.txt', {
+                  type: 'text/plain',
+                })
+              ),
+              createFileItem(
+                new File(['content2'], 'dummy-file2.txt', {
+                  type: 'text/plain',
+                })
+              ),
+            ],
+            'onUpdate:modelValue': e => wrapper.setProps({ modelValue: e }),
+          },
+        });
+
+        wrapper.vm.remove(1);
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.props('modelValue').length).toBe(1);
+        expect(wrapper.props('modelValue')[0].file.name).toBe(
+          'dummy-file1.txt'
+        );
+      });
+    });
   });
 });

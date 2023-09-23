@@ -295,9 +295,14 @@ function clear() {
   emit('update:modelValue', internalFiles.value);
 }
 
+function remove(index) {
+  onItemRemove(index);
+}
+
 // exposing methods
 defineExpose({
   clear,
+  remove,
   setState(index, state) {
     if ([STATES.COMPLETE, STATES.UPLOADING, STATES.NONE].includes(state)) {
       internalFiles.value[index].state = state;
@@ -306,7 +311,6 @@ defineExpose({
   setInvalidMessage(index, message) {
     internalFiles.value[index].invalidMessage = message;
   },
-  remove: onItemRemove,
 });
 </script>
 
