@@ -6,7 +6,7 @@ import { carbonPrefix } from '../../../global/settings';
 import { buttonKinds, buttonSizes } from '../../CvButton/consts';
 import CvFileUploader from '..';
 
-const inputKinds = [KINDS.DRAG_TARGET];
+const inputKinds = [KINDS.DRAG_TARGET, KINDS.BUTTON];
 const createFileItem = (
   file,
   invalidMessage = '',
