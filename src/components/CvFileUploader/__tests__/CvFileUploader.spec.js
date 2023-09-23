@@ -770,5 +770,131 @@ describe('CvFileUploader', () => {
         expect(wrapper.props('modelValue')[0].invalidMessage).toBe('ERROR');
       });
     });
+
+    describe('setState', () => {
+      it(`should set second file status to 'none' state when calling setState function with 1 and ${STATES.NONE}`, async () => {
+        const wrapper = await shallowMount(CvFileUploader, {
+          props: {
+            modelValue: [
+              createFileItem(
+                new File(['content1'], 'dummy-file1.txt', {
+                  type: 'text/plain',
+                }),
+                '',
+                '',
+                STATES.UPLOADING
+              ),
+              createFileItem(
+                new File(['content2'], 'dummy-file2.txt', {
+                  type: 'text/plain',
+                }),
+                '',
+                '',
+                STATES.COMPLETE
+              ),
+            ],
+            'onUpdate:modelValue': e => wrapper.setProps({ modelValue: e }),
+          },
+        });
+
+        wrapper.vm.setState(1, STATES.NONE);
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.props('modelValue')[1].state).toBe(STATES.NONE);
+      });
+
+      it(`should set first file status to 'uploading' state when calling setState function with 0 and ${STATES.UPLOADING}`, async () => {
+        const wrapper = await shallowMount(CvFileUploader, {
+          props: {
+            modelValue: [
+              createFileItem(
+                new File(['content1'], 'dummy-file1.txt', {
+                  type: 'text/plain',
+                }),
+                '',
+                '',
+                STATES.COMPLETE
+              ),
+              createFileItem(
+                new File(['content2'], 'dummy-file2.txt', {
+                  type: 'text/plain',
+                }),
+                '',
+                '',
+                STATES.COMPLETE
+              ),
+            ],
+            'onUpdate:modelValue': e => wrapper.setProps({ modelValue: e }),
+          },
+        });
+
+        wrapper.vm.setState(0, STATES.UPLOADING);
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.props('modelValue')[0].state).toBe(STATES.UPLOADING);
+      });
+
+      it(`should set second file status to 'complete' state when calling setState function with 1 and ${STATES.COMPLETE}`, async () => {
+        const wrapper = await shallowMount(CvFileUploader, {
+          props: {
+            modelValue: [
+              createFileItem(
+                new File(['content1'], 'dummy-file1.txt', {
+                  type: 'text/plain',
+                }),
+                '',
+                '',
+                STATES.UPLOADING
+              ),
+              createFileItem(
+                new File(['content2'], 'dummy-file2.txt', {
+                  type: 'text/plain',
+                }),
+                '',
+                '',
+                STATES.UPLOADING
+              ),
+            ],
+            'onUpdate:modelValue': e => wrapper.setProps({ modelValue: e }),
+          },
+        });
+
+        wrapper.vm.setState(1, STATES.COMPLETE);
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.props('modelValue')[1].state).toBe(STATES.COMPLETE);
+      });
+
+      it(`should not set first file status to 'random', when calling setState function with 0 and 'random', as 'random' is not a valid state`, async () => {
+        const wrapper = await shallowMount(CvFileUploader, {
+          props: {
+            modelValue: [
+              createFileItem(
+                new File(['content1'], 'dummy-file1.txt', {
+                  type: 'text/plain',
+                }),
+                '',
+                '',
+                STATES.NONE
+              ),
+              createFileItem(
+                new File(['content2'], 'dummy-file2.txt', {
+                  type: 'text/plain',
+                }),
+                '',
+                '',
+                STATES.NONE
+              ),
+            ],
+            'onUpdate:modelValue': e => wrapper.setProps({ modelValue: e }),
+          },
+        });
+
+        wrapper.vm.setState(0, 'random');
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.props('modelValue')[0].state).toBe(STATES.NONE);
+      });
+    });
   });
 });
