@@ -26,25 +26,25 @@ The [library](http://vue.carbondesignsystem.com/) provides front-end developers 
 
 As a community project contributions are not only welcome, but essential for the maintenance and growth of this project.
 
-### Vue 3 Guidance
+### Vue 3
 
-We are actively working on components for Vue 3 and would love to get your help with this. If you want to contribute follow this guidance:
+- Vue 2 support will end on Dec 31, 2023. Learn [more](https://vuejs.org/guide/introduction.html).
+- Upgrading from Vue 2? Check out the [Migration Guide](https://v3-migration.vuejs.org/).
+- Vue 2 components can be found on the `vue2` [branch](https://github.com/carbon-design-system/carbon-components-vue/tree/vue2)
 
-1. Fork this repo and checkout the `vNext` branch
-2. Look to see which components have not yet been implemented. You can do this by comparing the components listed in the [Carbon React storybook](https://react.carbondesignsystem.com/?path=/story/getting-started-welcome--welcome) with the components in the `src/components` directory.
-3. When you find a component that interests you, look in the open issue list to see if someone else might already be working on it. Look for issues with a "V3 - Vue3" label. A "dibs" issue will have that label and a title of "[component name] work in progress" so for example "**CvDatePicker work in progress**".
-4. If no one else is already working on it, create an issue and label it as above.
+Vue 3 components for Carbon 10 have reached parity with the Vue 2 components.
+More work is needed especially around accessibility. If you want to improve Vue 3 components follow these guidelines.
+
+1. Fork this repo and checkout the `main` branch
+2. Look to see which components are currently being improved. You can do this by looking in the [issues list](https://github.com/carbon-design-system/carbon-components-vue/issues).
+3. If you want to improve a component, look in the open issue list to see if someone else might already be working on it. Look for issues with a "V3 - Vue3" label and the name of the component. For example "**CvDatePicker - improving accessibility**".
+4. If no one else is already working on it, create an issue using the "🍪 Vue 3 - improve component" and label it as above.
    - Work on the component and create a PR when you are ready.
    - Components are expected to be implemented as [single file components](https://vuejs.org/guide/scaling-up/sfc.html) using the Vue [composition api](https://vuejs.org/guide/extras/composition-api-faq.html). See `CvCheckbox` as an example. The Vue 2 components use the options API.
-   - You should reference the existing Vue 2 component while developing the code. The existing components often have the community enhancements that need to be maintained.
-   - You should reference the DOM in the React components storybook and be sure to include any accessibility improvements that might be there.
-   - You should provide a story and test case for the component. For example:
-     ```
-     src/components/CvCheckbox/CvCheckbox.stories.js
-     src/components/CvCheckbox/CvCheckbox.vue
-     src/components/CvCheckbox/__tests__/CvCheckbox.spec.js
-     src/components/CvCheckbox/index.js
-     ```
+   - You should reference the DOM in the React components storybook and be sure to include any accessibility
+     improvements that might be there.
+   - You should update the story and test cases for the component if applicable. Sometimes the story might need updating
+     almost always the test cases for the component will need updates.
    - If you have question tag @davidnixon in your issue and let me know how I can help.
 
 ### Changelog
