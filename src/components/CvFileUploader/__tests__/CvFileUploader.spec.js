@@ -1,10 +1,23 @@
 import { render, fireEvent } from '@testing-library/vue';
-import { KINDS } from '../const';
+import userEvent from '@testing-library/user-event';
+import { shallowMount } from '@vue/test-utils';
+import { KINDS, STATES } from '../const';
 import { carbonPrefix } from '../../../global/settings';
 import { buttonKinds, buttonSizes } from '../../CvButton/consts';
 import CvFileUploader from '..';
 
-const inputKinds = [KINDS.DRAG_TARGET];
+const inputKinds = [KINDS.DRAG_TARGET, KINDS.BUTTON];
+const createFileItem = (
+  file,
+  invalidMessage = '',
+  invalidMessageTitle = '',
+  state = ''
+) => ({
+  file,
+  invalidMessage,
+  invalidMessageTitle,
+  state,
+});
 
 describe('CvFileUploader', () => {
   process.env.VTL_SKIP_WARN_EVENT_UPDATE = 'suppress';
@@ -328,6 +341,199 @@ describe('CvFileUploader', () => {
     }
   );
 
+  it(`sets "${STATES.UPLOADING}" state to new files when initialStateUploading is true`, async () => {
+    const dummyFile = new File([''], 'dummy-file.jpeg', {
+      type: 'image/jpeg',
+    });
+    const dummyId = 'dummy-id';
+    const { container, emitted } = render(CvFileUploader, {
+      props: {
+        initialStateUploading: true,
+        id: dummyId,
+      },
+    });
+
+    const fileInput = container.querySelector(`#${dummyId}`);
+    await fireEvent.change(fileInput, { target: { files: [dummyFile] } });
+
+    const emitResult = emitted('update:modelValue').at(0);
+    expect(emitResult[0][0].state).toBe(STATES.UPLOADING);
+  });
+
+  it(`sets "${STATES.NONE}" state to new files when initialStateUploading is false`, async () => {
+    const dummyFile = new File([''], 'dummy-file.jpeg', {
+      type: 'image/jpeg',
+    });
+    const dummyId = 'dummy-id';
+    const { container, emitted } = render(CvFileUploader, {
+      props: {
+        initialStateUploading: false,
+        id: dummyId,
+      },
+    });
+
+    const fileInput = container.querySelector(`#${dummyId}`);
+    await fireEvent.change(fileInput, { target: { files: [dummyFile] } });
+
+    const emitResult = emitted('update:modelValue').at(0);
+    expect(emitResult[0][0].state).toBe(STATES.NONE);
+  });
+
+  it(`sets "${STATES.NONE}" state to new files when initialStateUploading is not set`, async () => {
+    const dummyFile = new File([''], 'dummy-file.jpeg', {
+      type: 'image/jpeg',
+    });
+    const dummyId = 'dummy-id';
+    const { container, emitted } = render(CvFileUploader, {
+      props: {
+        id: dummyId,
+      },
+    });
+
+    const fileInput = container.querySelector(`#${dummyId}`);
+    await fireEvent.change(fileInput, { target: { files: [dummyFile] } });
+
+    const emitResult = emitted('update:modelValue').at(0);
+    expect(emitResult[0][0].state).toBe(STATES.NONE);
+  });
+
+  it(`sets "${STATES.UPLOADING}" state to files when initialStateUploading is set and uploaded file already exists`, async () => {
+    const dummyFile = new File([''], 'dummy-file.jpeg', {
+      type: 'image/jpeg',
+    });
+    const dummyId = 'dummy-id';
+    const { container, emitted, rerender } = render(CvFileUploader, {
+      props: {
+        initialStateUploading: true,
+        id: dummyId,
+      },
+    });
+
+    const fileInput = container.querySelector(`#${dummyId}`);
+    await fireEvent.change(fileInput, { target: { files: [dummyFile] } });
+
+    await rerender({ initialStateUploading: false });
+    await fireEvent.change(fileInput, { target: { files: [dummyFile] } });
+
+    await rerender({ initialStateUploading: true });
+    await fireEvent.change(fileInput, { target: { files: [dummyFile] } });
+
+    expect(emitted('update:modelValue').at(2)[0][0].state).toBe(
+      STATES.UPLOADING
+    );
+  });
+
+  describe('Disabled state', () => {
+    it('renders label in disabled state', async () => {
+      const dummyLabel = 'Dummy File Input';
+      const { findByText } = render(CvFileUploader, {
+        props: {
+          label: dummyLabel,
+          disabled: true,
+        },
+      });
+
+      const label = await findByText(dummyLabel);
+      expect(
+        label.classList.contains(`${carbonPrefix}--file--label--disabled`)
+      ).toBeTruthy();
+    });
+
+    it('renders helper text in disable state', async () => {
+      const dummyHelperText = 'Dummy Helper Text';
+      const { findByText } = render(CvFileUploader, {
+        props: {
+          helperText: dummyHelperText,
+          disabled: true,
+        },
+      });
+
+      const element = await findByText(dummyHelperText);
+      expect(
+        element.classList.contains(
+          `${carbonPrefix}--label-description--disabled`
+        )
+      ).toBeTruthy();
+    });
+
+    it('renders "button" in disabled state', async () => {
+      const dummyId = 'dummy-id';
+      const { container } = render(CvFileUploader, {
+        props: {
+          kind: KINDS.BUTTON,
+          id: dummyId,
+          disabled: true,
+        },
+      });
+
+      const fileInput = container.querySelector(`#${dummyId}`);
+      const label = container.querySelector('label');
+
+      expect(fileInput.getAttribute('disabled')).not.toBeNull();
+      expect(
+        label.classList.contains(`${carbonPrefix}--btn--disabled`)
+      ).toBeTruthy();
+    });
+
+    it('does not emit changes on click when button is disabled', async () => {
+      const dummyFile = new File(['file content'], 'dummy-file.txt', {
+        type: 'text/plain',
+      });
+      const dummyId = 'dummy-id';
+      const { container, emitted } = render(CvFileUploader, {
+        props: {
+          kind: KINDS.BUTTON,
+          id: dummyId,
+          disabled: true,
+        },
+      });
+
+      const fileInput = container.querySelector(`#${dummyId}`);
+      await userEvent.upload(fileInput, dummyFile);
+
+      expect(emitted('update:modelValue')).toBeUndefined();
+    });
+
+    it('renders "drag & drop" in disabled state', async () => {
+      const dummyId = 'dummy-id';
+      const { container } = render(CvFileUploader, {
+        props: {
+          kind: KINDS.DRAG_TARGET,
+          id: dummyId,
+          disabled: true,
+        },
+      });
+
+      const fileInput = container.querySelector(`#${dummyId}`);
+      const wrapper = container.querySelector(
+        `div.${carbonPrefix}--file-browse-btn`
+      );
+
+      expect(fileInput.getAttribute('disabled')).not.toBeNull();
+      expect(
+        wrapper.classList.contains(`${carbonPrefix}--file-browse-btn--disabled`)
+      ).toBeTruthy();
+    });
+
+    it("does not emit changes when drag & drop's input is disabled", async () => {
+      const dummyFile = new File(['file content'], 'dummy-file.txt', {
+        type: 'text/plain',
+      });
+      const dummyId = 'dummy-id';
+      const { container, emitted } = render(CvFileUploader, {
+        props: {
+          id: dummyId,
+          disabled: true,
+        },
+      });
+
+      const fileInput = container.querySelector(`#${dummyId}`);
+      await userEvent.upload(fileInput, dummyFile);
+
+      expect(emitted('update:modelValue')).toBeUndefined();
+    });
+  });
+
   describe('Drop target label', () => {
     it.each(inputKinds)(
       'renders drop target label when dropTargetLabel is passed (kind: %s)',
@@ -479,5 +685,218 @@ describe('CvFileUploader', () => {
         expect(wrapper).not.toBeNull();
       }
     );
+  });
+
+  describe('Exposed methods', () => {
+    describe('clear', () => {
+      it('should clear files when clear function is called', async () => {
+        const wrapper = await shallowMount(CvFileUploader, {
+          props: {
+            modelValue: [
+              createFileItem(
+                new File(['content1'], 'dummy-file1.txt', {
+                  type: 'text/plain',
+                })
+              ),
+              createFileItem(
+                new File(['content2'], 'dummy-file2.txt', {
+                  type: 'text/plain',
+                })
+              ),
+            ],
+            'onUpdate:modelValue': e => wrapper.setProps({ modelValue: e }),
+          },
+        });
+
+        wrapper.vm.clear();
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.props('modelValue')).toEqual([]);
+      });
+    });
+
+    describe('remove', () => {
+      it('should remove the second item of files when remove function is called with 1', async () => {
+        const wrapper = await shallowMount(CvFileUploader, {
+          props: {
+            modelValue: [
+              createFileItem(
+                new File(['content1'], 'dummy-file1.txt', {
+                  type: 'text/plain',
+                })
+              ),
+              createFileItem(
+                new File(['content2'], 'dummy-file2.txt', {
+                  type: 'text/plain',
+                })
+              ),
+            ],
+            'onUpdate:modelValue': e => wrapper.setProps({ modelValue: e }),
+          },
+        });
+
+        wrapper.vm.remove(1);
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.props('modelValue').length).toBe(1);
+        expect(wrapper.props('modelValue')[0].file.name).toBe(
+          'dummy-file1.txt'
+        );
+      });
+    });
+
+    describe('setInvalidMessage', () => {
+      it('should set "ERROR" as invalid message of the first file when calling setInvalidMessage function with 0 and "ERROR"', async () => {
+        const wrapper = await shallowMount(CvFileUploader, {
+          props: {
+            modelValue: [
+              createFileItem(
+                new File(['content1'], 'dummy-file1.txt', {
+                  type: 'text/plain',
+                })
+              ),
+              createFileItem(
+                new File(['content2'], 'dummy-file2.txt', {
+                  type: 'text/plain',
+                })
+              ),
+            ],
+            'onUpdate:modelValue': e => wrapper.setProps({ modelValue: e }),
+          },
+        });
+
+        wrapper.vm.setInvalidMessage(0, 'ERROR');
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.props('modelValue').length).toBe(2);
+        expect(wrapper.props('modelValue')[0].invalidMessage).toBe('ERROR');
+      });
+    });
+
+    describe('setState', () => {
+      it(`should set second file status to 'none' state when calling setState function with 1 and ${STATES.NONE}`, async () => {
+        const wrapper = await shallowMount(CvFileUploader, {
+          props: {
+            modelValue: [
+              createFileItem(
+                new File(['content1'], 'dummy-file1.txt', {
+                  type: 'text/plain',
+                }),
+                '',
+                '',
+                STATES.UPLOADING
+              ),
+              createFileItem(
+                new File(['content2'], 'dummy-file2.txt', {
+                  type: 'text/plain',
+                }),
+                '',
+                '',
+                STATES.COMPLETE
+              ),
+            ],
+            'onUpdate:modelValue': e => wrapper.setProps({ modelValue: e }),
+          },
+        });
+
+        wrapper.vm.setState(1, STATES.NONE);
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.props('modelValue')[1].state).toBe(STATES.NONE);
+      });
+
+      it(`should set first file status to 'uploading' state when calling setState function with 0 and ${STATES.UPLOADING}`, async () => {
+        const wrapper = await shallowMount(CvFileUploader, {
+          props: {
+            modelValue: [
+              createFileItem(
+                new File(['content1'], 'dummy-file1.txt', {
+                  type: 'text/plain',
+                }),
+                '',
+                '',
+                STATES.COMPLETE
+              ),
+              createFileItem(
+                new File(['content2'], 'dummy-file2.txt', {
+                  type: 'text/plain',
+                }),
+                '',
+                '',
+                STATES.COMPLETE
+              ),
+            ],
+            'onUpdate:modelValue': e => wrapper.setProps({ modelValue: e }),
+          },
+        });
+
+        wrapper.vm.setState(0, STATES.UPLOADING);
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.props('modelValue')[0].state).toBe(STATES.UPLOADING);
+      });
+
+      it(`should set second file status to 'complete' state when calling setState function with 1 and ${STATES.COMPLETE}`, async () => {
+        const wrapper = await shallowMount(CvFileUploader, {
+          props: {
+            modelValue: [
+              createFileItem(
+                new File(['content1'], 'dummy-file1.txt', {
+                  type: 'text/plain',
+                }),
+                '',
+                '',
+                STATES.UPLOADING
+              ),
+              createFileItem(
+                new File(['content2'], 'dummy-file2.txt', {
+                  type: 'text/plain',
+                }),
+                '',
+                '',
+                STATES.UPLOADING
+              ),
+            ],
+            'onUpdate:modelValue': e => wrapper.setProps({ modelValue: e }),
+          },
+        });
+
+        wrapper.vm.setState(1, STATES.COMPLETE);
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.props('modelValue')[1].state).toBe(STATES.COMPLETE);
+      });
+
+      it(`should not set first file status to 'random', when calling setState function with 0 and 'random', as 'random' is not a valid state`, async () => {
+        const wrapper = await shallowMount(CvFileUploader, {
+          props: {
+            modelValue: [
+              createFileItem(
+                new File(['content1'], 'dummy-file1.txt', {
+                  type: 'text/plain',
+                }),
+                '',
+                '',
+                STATES.NONE
+              ),
+              createFileItem(
+                new File(['content2'], 'dummy-file2.txt', {
+                  type: 'text/plain',
+                }),
+                '',
+                '',
+                STATES.NONE
+              ),
+            ],
+            'onUpdate:modelValue': e => wrapper.setProps({ modelValue: e }),
+          },
+        });
+
+        wrapper.vm.setState(0, 'random');
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.props('modelValue')[0].state).toBe(STATES.NONE);
+      });
+    });
   });
 });

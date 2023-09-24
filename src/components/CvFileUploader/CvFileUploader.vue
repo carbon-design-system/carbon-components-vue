@@ -1,11 +1,28 @@
 <template>
   <cv-form-item class="cv-file-uploader">
-    <p :class="`${carbonPrefix}--file--label`">{{ label }}</p>
-    <p :class="`${carbonPrefix}--label-description`">{{ helperText }}</p>
+    <p
+      :class="[
+        `${carbonPrefix}--file--label`,
+        { [`${carbonPrefix}--file--label--disabled`]: disabled },
+      ]"
+    >
+      {{ label }}
+    </p>
+    <p
+      :class="[
+        `${carbonPrefix}--label-description`,
+        { [`${carbonPrefix}--label-description--disabled`]: disabled },
+      ]"
+    >
+      {{ helperText }}
+    </p>
     <div v-if="kind === 'button'" :class="`${carbonPrefix}--file`" data-file>
       <label
         :for="cvId"
-        :class="buttonClasses"
+        :class="[
+          buttonClasses,
+          { [`${carbonPrefix}--btn--disabled`]: disabled },
+        ]"
         tabindex="0"
         @keydown.enter.prevent="onKeyHit"
         @keydown.space.prevent="onKeyHit"
@@ -17,6 +34,7 @@
         ref="fileInput"
         :class="`${carbonPrefix}--file-input`"
         :accept="accept"
+        :disabled="disabled"
         type="file"
         v-bind="$attrs"
         data-file-uploader
@@ -34,8 +52,10 @@
             `${carbonPrefix}--file-browse-btn`,
             `${carbonPrefix}--file__drop-container`,
             {
-              [`${carbonPrefix}--file__drop-container--drag-over`]: allowDrop,
+              [`${carbonPrefix}--file__drop-container--drag-over`]:
+                allowDrop && !disabled,
             },
+            { [`${carbonPrefix}--file-browse-btn--disabled`]: disabled },
           ]"
           @dragover="onDragEvent"
           @dragleave="onDragEvent"
@@ -50,6 +70,7 @@
           ref="fileInput"
           :class="`${carbonPrefix}--file-input`"
           :accept="accept"
+          :disabled="disabled"
           type="file"
           v-bind="$attrs"
           tabindex="-1"
@@ -107,8 +128,10 @@ const props = defineProps({
   },
   buttonSize: commonCvButtonProps.size,
   clearOnReselect: Boolean,
+  disabled: Boolean,
   dropTargetLabel: String,
   helperText: String,
+  initialStateUploading: Boolean,
   kind: {
     type: String,
     default: KINDS.DRAG_TARGET,
@@ -178,7 +201,7 @@ function addFiles(files) {
     const newFile = createInternalFile(internalFile?.file || file);
 
     if (internalFile) {
-      internalFile.state = newFile.initialState;
+      internalFile.state = newFile.state;
       internalFile.invalidMessageTitle = newFile.invalidMessageTitle;
       internalFile.invalidMessage = newFile.invalidMessage;
     } else {
@@ -216,6 +239,11 @@ function onChange(ev) {
 }
 
 function onDragEvent(evt) {
+  if (props.disabled) {
+    evt.preventDefault();
+    return;
+  }
+
   if (Array.prototype.indexOf.call(evt.dataTransfer.types, 'Files') === -1) {
     return;
   }
@@ -249,7 +277,7 @@ function onDragEvent(evt) {
 
 function onItemRemove(index) {
   internalFiles.value.splice(index, 1);
-  emit('update:modelValue', this.internalFiles);
+  emit('update:modelValue', internalFiles.value);
 }
 
 function onKeyHit() {
@@ -262,20 +290,31 @@ onMounted(() => {
 });
 
 // exposed methods
+function clear() {
+  internalFiles.value = [];
+  emit('update:modelValue', internalFiles.value);
+}
+
+function remove(index) {
+  onItemRemove(index);
+}
+
+function setInvalidMessage(index, message) {
+  internalFiles.value[index].invalidMessage = message;
+}
+
+function setState(index, state) {
+  if ([STATES.COMPLETE, STATES.UPLOADING, STATES.NONE].includes(state)) {
+    internalFiles.value[index].state = state;
+  }
+}
+
+// exposing methods
 defineExpose({
-  setState(index, state) {
-    if ([STATES.COMPLETE, STATES.UPLOADING, STATES.NONE].includes(state)) {
-      internalFiles.value[index].state = state;
-    }
-  },
-  clear() {
-    internalFiles.value = [];
-    emit('update:modelValue', internalFiles);
-  },
-  setInvalidMessage(index, message) {
-    internalFiles.value[index].invalidMessage = message;
-  },
-  remove: onItemRemove,
+  clear,
+  remove,
+  setInvalidMessage,
+  setState,
 });
 </script>
 
