@@ -1,6 +1,6 @@
 # @carbon/vue-3
 
-<p align="center">
+<p>
   <a href="https://github.com/carbon-design-system/carbon/blob/master/LICENSE">
     <img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="Carbon is released under the Apache-2.0 license" />
   </a>
@@ -12,6 +12,9 @@
   </a>
   <a href="https://github.com/carbon-design-system/carbon/blob/master/.github/CONTRIBUTING.md">
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome" />
+  </a>
+  <a href="https://discord.gg/J7JEUEkTRX">
+      <img src="https://img.shields.io/discord/689212587170201628?color=5865F2" alt="Chat with us on Discord">
   </a>
 </p>
 
@@ -25,6 +28,46 @@ The [library](http://vue.carbondesignsystem.com/) provides front-end developers 
 ## Community Contributions Needed
 
 As a community project contributions are not only welcome, but essential for the maintenance and growth of this project.
+
+## Install
+
+```shell
+npm add @carbon/vue
+```
+
+or
+
+```shell
+$ yarn add @carbon/vue
+```
+
+### Add to Vue project
+
+`src/main.js`
+
+```js
+import CarbonVue3 from '@carbon/vue';
+import App from './App.vue';
+const app = createApp(App);
+app.use(CarbonVue3);
+app.mount('#app');
+```
+
+See [Hello Carbon Vue](https://github.com/IBM/hello-carbon-vue3) for an example Vue project with Carbon.
+
+### Add to Nuxt project
+
+`plugins/carbon-vue.js`
+
+```js
+import CarbonVue from '@carbon/vue'
+
+export default defineNuxtPlugin((nuxtApp) => {
+    nuxtApp.vueApp.use(CarbonVue)
+}
+```
+
+See [Hello Carbon Nuxt](#add-to-nuxt-project) **coming soon**
 
 ### Vue 3
 
@@ -49,11 +92,7 @@ More work is needed especially around accessibility. If you want to improve Vue 
 
 ### Changelog
 
-[CHANGELOG.md](./packages/core/CHANGELOG.md)
-
-## Getting started
-
-[Usage and getting started instructions](./packages/core/README.md#getting-started) for @carbon/vue.
+[CHANGELOG.md](./CHANGELOG.md)
 
 ### List of available components
 
