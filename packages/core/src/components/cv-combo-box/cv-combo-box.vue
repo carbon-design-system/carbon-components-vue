@@ -8,7 +8,6 @@
     >
 
     <div
-      role="listbox"
       tabindex="-1"
       class=""
       :class="[
@@ -30,9 +29,7 @@
     >
       <WarningFilled16 v-if="isInvalid" :class="[`${carbonPrefix}--list-box__invalid-icon`]" />
       <div
-        role="button"
         aria-haspopup="true"
-        :aria-expanded="open ? 'true' : 'false'"
         :aria-owns="uid"
         :aria-controls="uid"
         :class="[`${carbonPrefix}--list-box__field`]"
