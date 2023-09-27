@@ -17,9 +17,14 @@
         >
           <div :class="`${carbonPrefix}--action-list`">
             <slot name="batch-actions" />
-            <cv-button :class="`${carbonPrefix}--batch-summary__cancel`" size="small" @click="deselect">{{
-              batchCancelLabel
-            }}</cv-button>
+            <cv-button
+              :tabindex="batchActive ? '0' : '-1'"
+              :class="`${carbonPrefix}--batch-summary__cancel`"
+              size="small"
+              @click="deselect"
+            >
+              {{ batchCancelLabel }}
+            </cv-button>
           </div>
           <div :class="`${carbonPrefix}--batch-summary`">
             <p :class="`${carbonPrefix}--batch-summary__para`">
@@ -216,7 +221,7 @@ export default {
     expandAllAriaLabel: { type: String, default: 'Expand all rows' },
     selectAllAriaLabel: { type: String, default: 'Select all rows' },
     autoWidth: Boolean,
-    batchCancelLabel: { type: String, default: 'cancel' },
+    batchCancelLabel: { type: String, default: 'Cancel' },
     borderless: Boolean,
     overflowMenu: { type: [Boolean, Array], default: () => [] },
     pagination: {
