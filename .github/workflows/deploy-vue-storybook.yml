@@ -56,9 +56,7 @@ jobs:
       - name: Build Vue 2 storybook
         run: |
           cd ${GITHUB_WORKSPACE}/vue2
-          pwd
-          ls packages
-          grep build package.json
+          yarn info @carbon/vue --json > package-info.jsonl
           npx vue-cli-service storybook:build -c storybook/.storybook  --output-dir ${GITHUB_WORKSPACE}/storybook/storybook-static/vue2
 
       - name: Setup Pages
