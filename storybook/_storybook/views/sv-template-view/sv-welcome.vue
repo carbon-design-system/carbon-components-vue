@@ -220,10 +220,10 @@ export default {
       return '';
     },
     vue3Url() {
-      return `${this.prefix}/vue3/`;
+      return `${this.prefix}/`;
     },
     vue2Url() {
-      return `${this.prefix}/?path=/story/versions--default`;
+      return `${this.prefix}/vue2/?path=/story/versions--default`;
     },
   },
 };
