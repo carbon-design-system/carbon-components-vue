@@ -55,7 +55,12 @@ jobs:
           yarn install --offline
       - name: Build Vue 2 storybook
         run: |
-          yarn build:storybook --quiet --output-dir ${GITHUB_WORKSPACE}/storybook/storybook-static/vue2
+          cd ${GITHUB_WORKSPACE}/vue2
+          pwd
+          ls packages
+          grep build package.json
+          npx browserslist@latest --update-db
+          npx vue-cli-service storybook:build -c storybook/.storybook  --output-dir ${GITHUB_WORKSPACE}/storybook/storybook-static/vue2
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
