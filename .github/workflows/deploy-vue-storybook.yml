@@ -59,7 +59,6 @@ jobs:
           pwd
           ls packages
           grep build package.json
-          npx browserslist@latest --update-db
           npx vue-cli-service storybook:build -c storybook/.storybook  --output-dir ${GITHUB_WORKSPACE}/storybook/storybook-static/vue2
 
       - name: Setup Pages
