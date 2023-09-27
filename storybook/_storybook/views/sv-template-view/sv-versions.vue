@@ -67,33 +67,6 @@
           </a>
         </div>
         <div class="bx--no-gutter-md--left bx--col-md-4 bx--col-lg-4">
-          <a
-            class="versions__card"
-            href="https://carbon-design-system.github.io/carbon-components-vue/?path=/story/welcome--default"
-          >
-            <div class="bx--aspect-ratio bx--aspect-ratio--2x1">
-              <div class="bx--aspect-ratio--object">
-                <div class="versions__card-content">
-                  <h4>V1 (previous version)</h4>
-                  <h5>built using Carbon Components v9</h5>
-                  <div class="versions__card-icon">
-                    <svg
-                      focusable="false"
-                      preserveAspectRatio="xMidYMid meet"
-                      aria-label="Open resource"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 20 20"
-                      role="img"
-                    >
-                      <path fill="white" d="M11.8 2.8l-1 1 5.4 5.5H1v1.4h15.2l-5.4 5.5 1 1L19 10z" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a>
         </div>
       </div>
     </div>
@@ -110,10 +83,10 @@ export default {
       return '';
     },
     vue3Url() {
-      return `${this.prefix}/vue3/`;
+      return `${this.prefix}/`;
     },
     vue2Url() {
-      return `${this.prefix}/?path=/story/welcome--default`;
+      return `${this.prefix}/vue2/`;
     },
   },
 };
