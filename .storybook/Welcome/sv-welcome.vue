@@ -28,7 +28,7 @@
                 <div class="welcome__card-content">
                   <h5>Go to</h5>
                   <h4>the source repository</h4>
-                  <div>(currently Vue3 is on the vNext branch)</div>
+                  <div>(Vue 2 components are on the vue2 branch)</div>
                   <div class="welcome__card-image">
                     <svg
                       focusable="false"
@@ -72,15 +72,16 @@
         </div>
         <div class="bx--no-gutter-md--left bx--col-md-4 bx--col-lg-4"></div>
         <div class="bx--no-gutter-md--left bx--col-md-4 bx--col-lg-4">
-          <a class="welcome__card" href="https://vue.carbondesignsystem.com/">
+          <a
+            class="welcome__card"
+            href="https://vue.carbondesignsystem.com/vue2/"
+          >
             <div class="bx--aspect-ratio bx--aspect-ratio--2x1">
               <div class="bx--aspect-ratio--object">
                 <div class="welcome__card-content">
                   <h5>Take a look at our</h5>
                   <h4>Vue 2 version</h4>
-                  <div>
-                    (currently Vue 2 is the only production-ready version)
-                  </div>
+                  <div>(currently Vue 2 version is nearing end-of-life)</div>
                   <div class="welcome__card-image">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
