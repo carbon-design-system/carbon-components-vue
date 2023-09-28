@@ -20,8 +20,7 @@
     "lint:es": "eslint src/**/*.{js,vue}",
     "lint:style": "vue-cli-service lint:style",
     "serve:storybook": "cd ./storybook && yarn run serve",
-    "test": "vue-cli-service test:unit --no-coverage",
-    "a11test": "node -v"
+    "test": "vue-cli-service test:unit --no-coverage"
   },
   "workspaces": [
     "storybook"
@@ -50,6 +49,7 @@
     "@vue/eslint-config-prettier": "^7.0.0",
     "@vue/test-utils": "^2.2.4",
     "@vue/vue3-jest": "^27.0.0",
+    "accessibility-checker": "^3.1.59",
     "babel-core": "^6.26.3",
     "babel-jest": "^27.5.1",
     "babel-loader": "^8.3.0",
@@ -145,41 +145,6 @@
     "last 2 versions",
     "not dead"
   ],
-  "jest": {
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "src/*/**/*.{js,vue}",
-      "!**/node_modules/**",
-      "!**/*.stories.js",
-      "!**/*.spec.js",
-      "!**/*.test.js"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 100,
-        "functions": 100,
-        "lines": 100,
-        "statements": 0
-      }
-    },
-    "preset": "@vue/cli-plugin-unit-jest",
-    "transform": {
-      "^.+\\.vue$": "@vue/vue3-jest",
-      "^.+\\js$": "babel-jest"
-    },
-    "transformIgnorePatterns": [
-      "/node_modules/(?!@carbon)"
-    ],
-    "moduleFileExtensions": [
-      "vue",
-      "js",
-      "json",
-      "jsx",
-      "ts",
-      "tsx",
-      "node"
-    ]
-  },
   "directories": {
     "src": "src",
     "test": "__tests__"

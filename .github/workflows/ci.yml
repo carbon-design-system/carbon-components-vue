@@ -58,6 +58,3 @@ jobs:
 
       - name: Run component tests
         run: yarn test
-
-      - name: Accessability tests
-        run: yarn a11test

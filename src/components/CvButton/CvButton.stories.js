@@ -48,7 +48,7 @@ export default {
   },
 };
 
-const template = `<cv-button @click="onClick" v-bind="args">{{slotArgs.default}}</cv-button>`;
+const template = `<cv-button @click="onClick" aria-label="button story" v-bind="args">{{slotArgs.default}}</cv-button>`;
 const Template = (argsIn, { argTypes }) => {
   let { args, slotArgs } = splitSlotArgs(argsIn, ['default']);
   args = { ...args, icon: icons[args.icon] };

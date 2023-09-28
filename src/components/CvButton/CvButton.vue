@@ -2,6 +2,7 @@
   <button
     :class="buttonClasses"
     :disabled="disabled || skeleton"
+    :aria-label="ariaLabel"
     @click="$emit('click', $event)"
   >
     <!-- @slot Default content of button -->
@@ -51,6 +52,21 @@ export default {
      * skeleton - shows the skeleton version of the button
      */
     skeleton: Boolean,
+    /**
+     * CvButton needs a relevant arial label for accessibility
+     */
+    ariaLabel: {
+      type: String,
+      default: 'Button',
+      validator(aria) {
+        if (aria === 'Button' && process.env.NODE_ENV !== 'test') {
+          console.warn(
+            'CvButton needs a relevant arial label for accessibility'
+          );
+        }
+        return true;
+      },
+    },
   },
   setup(props) {
     const { buttonClasses } = useCvButtonCommon(
