@@ -5,10 +5,7 @@ describe('CvButton - accessibility', () => {
     const main = document.createElement('main');
     const result = render(CvButton, {
       container: document.body.appendChild(main),
-      slots: {},
-      attrs: {
-        'aria-label': 'default button',
-      },
+      slots: { default: 'test button' },
     });
     await expect(result.container).toBeAccessible('cv-button');
   }, 10000);
