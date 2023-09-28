@@ -13,7 +13,7 @@
     <span :class="`${carbonPrefix}--assistive-text`">{{ label }}</span>
 
     <slot name="icon">
-      <cv-svg :svg="icon" :class="`${carbonPrefix}--btn__icon`" />
+      <cv-svg alt="" :svg="icon" :class="`${carbonPrefix}--btn__icon`" />
     </slot>
   </button>
 </template>
@@ -47,9 +47,9 @@ export default {
      */
     kind,
     /**
-     * label displayed as a tooltip for the icon
+     * label displayed as a tooltip for the icon. This is required for accessibility.
      */
-    label: { type: String, default: undefined },
+    label: { type: String, default: undefined, required: true },
     /**
      * Size of the button
      */

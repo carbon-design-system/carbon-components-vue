@@ -1,0 +1,4 @@
+failLevels:
+    - violation
+reportLevels:
+    - violation

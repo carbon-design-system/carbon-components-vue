@@ -13,6 +13,9 @@ describe('CvButton', () => {
       slots: {
         default: slotContent,
       },
+      props: {
+        'aria-label': 'default button',
+      },
     });
 
     const button = wrapper.find('button');
@@ -23,7 +26,14 @@ describe('CvButton', () => {
   });
 
   it('Raises click event when clicked', async () => {
-    const wrapper = shallowMount(CvButton);
+    const wrapper = shallowMount(CvButton, {
+      slots: {
+        default: 'slot content',
+      },
+      props: {
+        'aria-label': 'default button',
+      },
+    });
     await wrapper.find('button').trigger('click');
     expect(wrapper.emitted('click')).toHaveLength(1);
   });
