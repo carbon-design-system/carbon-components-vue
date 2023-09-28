@@ -24,7 +24,12 @@ describe('CvIconButton', () => {
   });
 
   it('Raises click event when clicked', async () => {
-    const wrapper = shallowMount(CvIconButton);
+    const labelContent = 'label content';
+    const wrapper = shallowMount(CvIconButton, {
+      props: {
+        label: labelContent,
+      },
+    });
     await wrapper.find('button').trigger('click');
     expect(wrapper.emitted('click')).toHaveLength(1);
   });

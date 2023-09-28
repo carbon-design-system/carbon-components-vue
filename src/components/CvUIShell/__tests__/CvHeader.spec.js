@@ -13,7 +13,7 @@ import CvSideNavLink from '../CvSideNavLink.vue';
 const globalHeader = {
   components: { CvHeaderGlobalAction },
   template: `
-    <cv-header-global-action aria-controls="test-panel">
+    <cv-header-global-action aria-controls="test-panel" label="test label">
     Test
     </cv-header-global-action>
   `,
