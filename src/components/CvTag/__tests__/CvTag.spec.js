@@ -114,4 +114,16 @@ describe('CvTag', () => {
     const removeButton = wrapper.find('button');
     expect(removeButton.exists()).toBe(false);
   });
+
+  it('CvTag - small', () => {
+    const label = 'test tag label';
+    const wrapper = shallowMount(CvTag, {
+      props: {
+        label,
+        small: true,
+      },
+    });
+    // - verify sm class on the root span
+    expect(wrapper.classes()).toContain(`${carbonPrefix}--tag--sm`);
+  });
 });

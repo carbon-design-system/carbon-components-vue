@@ -1,5 +1,6 @@
 import { render } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
+import { carbonPrefix } from '../../../global/settings';
 import CvOverflowMenu from '../CvOverflowMenu.vue';
 import CvOverflowMenuItem from '../CvOverflowMenuItem.vue';
 
@@ -30,7 +31,6 @@ describe('CvOverflowMenu', () => {
       },
     });
 
-    await result.findByLabelText(label);
     const menu = result.container.querySelector('[data-overflow-menu]');
     const buttons = await result.findAllByRole('button');
 
@@ -60,17 +60,18 @@ describe('CvOverflowMenu', () => {
       },
     });
 
-    const select = await result.findByLabelText(label);
+    const select = await result.baseElement.querySelector(
+      `.${carbonPrefix}--overflow-menu-options`
+    );
     result.container.querySelector('[data-overflow-menu]');
     const buttons = await result.findAllByRole('button');
-
     const user = userEvent.setup();
     await user.click(buttons[0]); // activate menu
     await user.click(buttons[0]); // deactivate menu
 
     await result.rerender({ offset: { top: -32, left: -48 } });
     await user.click(buttons[0]); // activate menu
-    expect(select.style.top).toBe('-48px');
+    expect(select.style.top).toBe('-32px');
     expect(select.style.left).toBe('-48px');
     await user.click(buttons[0]); // deactivate menu
 

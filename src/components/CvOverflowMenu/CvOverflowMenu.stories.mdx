@@ -25,18 +25,20 @@ export const Template = args => ({
   template: args.template,
 });
 const defaultTemplate = `
-<cv-overflow-menu
-  :flip-menu="flipMenu"
-  :up="up"
-  :offset="offset"
-  :label="label"
-  :tip-position="tipPosition"
-  :tip-alignment="tipAlignment"
-  @change=onChange>
-  <cv-overflow-menu-item value="item 1" primary-focus>list item 1</cv-overflow-menu-item>
-  <cv-overflow-menu-item value="item 2" disabled>list item 2</cv-overflow-menu-item>
-  <cv-overflow-menu-item value="item 3" danger>list item 3</cv-overflow-menu-item>
-</cv-overflow-menu>
+<div style="padding: 100px;">
+  <cv-overflow-menu
+    :flip-menu="flipMenu"
+    :up="up"
+    :offset="offset"
+    :label="label"
+    :tip-position="tipPosition"
+    :tip-alignment="tipAlignment"
+    @change=onChange>
+    <cv-overflow-menu-item value="item 1" primary-focus>list item 1</cv-overflow-menu-item>
+    <cv-overflow-menu-item value="item 2" disabled>list item 2</cv-overflow-menu-item>
+    <cv-overflow-menu-item value="item 3" danger>list item 3</cv-overflow-menu-item>
+  </cv-overflow-menu>
+</div>
 `;
 const slotsTemplate = `
 <cv-overflow-menu
@@ -105,6 +107,60 @@ Use slots for more control over the display.
       label: 'Overflow menu',
       flipMenu: undefined,
       up: undefined,
+      offset: undefined,
+      tipPosition: undefined,
+      tipAlignment: undefined,
+    }}
+    argTypes={{
+      tipPosition: { control: 'select', default: 'right', options: ['top', 'left', 'bottom', 'right'] },
+      tipAlignment: { control: 'select', default: 'center', options: ['start', 'center', 'end'] },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Flipped"
+    parameters={{
+      controls: {
+        exclude: ['default', 'template', 'trigger', 'change'],
+      },
+      docs: { source: { code: defaultTemplate } },
+    }}
+    args={{
+      template: defaultTemplate,
+      label: 'Overflow menu',
+      flipMenu: true,
+      up: undefined,
+      offset: undefined,
+      tipPosition: undefined,
+      tipAlignment: undefined,
+    }}
+    argTypes={{
+      tipPosition: { control: 'select', default: 'right', options: ['top', 'left', 'bottom', 'right'] },
+      tipAlignment: { control: 'select', default: 'center', options: ['start', 'center', 'end'] },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Up"
+    parameters={{
+      controls: {
+        exclude: ['default', 'template', 'trigger', 'change'],
+      },
+      docs: { source: { code: defaultTemplate } },
+    }}
+    args={{
+      template: defaultTemplate,
+      label: 'Overflow menu',
+      flipMenu: undefined,
+      up: true,
       offset: undefined,
       tipPosition: undefined,
       tipAlignment: undefined,

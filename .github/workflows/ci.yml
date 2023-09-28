@@ -1,9 +1,14 @@
-name: CI vNext
+name: CI
 
 on:
   workflow_dispatch:
   pull_request:
     branches:
+      - main
+      - vNext
+  push:
+    branches:
+      - main
       - vNext
 
 jobs:
@@ -11,7 +16,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:

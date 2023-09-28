@@ -3,6 +3,46 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.9](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.9-alpha.0...@carbon/vue@3.0.9) (2023-09-27)
+
+### Bug Fixes
+
+- **file-uploader:** add 'button' to inputKind array @ test ([22128da](https://github.com/carbon-design-system/carbon-components-vue/commit/22128da8dd5ecda12dbde1f298dfa9c61cf20a98))
+- **file-uploader:** define 'initialStateUploading' as props ([07f4e58](https://github.com/carbon-design-system/carbon-components-vue/commit/07f4e586093ad9d22c29bcfe2a6bf854edad7508))
+- **file-uploader:** setup 'disabled' as props ([6298294](https://github.com/carbon-design-system/carbon-components-vue/commit/6298294a975af4c672f63aa4683a2e9ead5afd6b))
+- **file-uploader:** update emitted values at clear & onItemRemove ([25ef2f4](https://github.com/carbon-design-system/carbon-components-vue/commit/25ef2f4dad44dd6d606e1ab0326d300ec3528817))
+- **file-uploader:** update initial state of existing files ([b986494](https://github.com/carbon-design-system/carbon-components-vue/commit/b9864946a16697003fc2a790fe6de6fd030fa4b6))
+- remove console errors from CvTag Storybook ([bf0c5b3](https://github.com/carbon-design-system/carbon-components-vue/commit/bf0c5b3bc3ab57ef35f689498c32437580432fd1))
+- slot name value ([78fb362](https://github.com/carbon-design-system/carbon-components-vue/commit/78fb362a95cf951c6c5d0d29869fe05798622705))
+- stories text updated to align with changes ([2839f66](https://github.com/carbon-design-system/carbon-components-vue/commit/2839f66d506f9c13ac181fb7bac58a56df4c2692))
+
+### Features
+
+- add CvTagSkeleton component and it's Storybook ([07fd62b](https://github.com/carbon-design-system/carbon-components-vue/commit/07fd62bf726534e46bf65bc4abeb9ca92aa6ab58))
+- add slot to gain control over tabs switching buttons ([ccdd8af](https://github.com/carbon-design-system/carbon-components-vue/commit/ccdd8af25b7d82d93f95cf151f74fd4dcf28f04c))
+- add small (sizing) option to CvTag component ([125d054](https://github.com/carbon-design-system/carbon-components-vue/commit/125d054567c1beae70500698b9c99f9522aef211))
+- add test for new cv-tabs slot ([e30f275](https://github.com/carbon-design-system/carbon-components-vue/commit/e30f275f4d5666245a71c9f5d3ca4b59b5d0b943))
+- tweak workflows, issue template, & README ([e5c8eb9](https://github.com/carbon-design-system/carbon-components-vue/commit/e5c8eb9f59992e8e87ae4a245350303a55d08662))
+- updates docs and actions for switch to Vue 3 ([f24a526](https://github.com/carbon-design-system/carbon-components-vue/commit/f24a5263cfc0963cbd214e8fb4908f5e71ceb3ae))
+
+## [3.0.9-alpha.0](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.8-alpha.0...@carbon/vue@3.0.9-alpha.0) (2023-09-11)
+
+### Bug Fixes
+
+- adjust unit tests ([d4586f4](https://github.com/carbon-design-system/carbon-components-vue/commit/d4586f42d38e3e6ed8da3f0524f7086810ec7a24))
+- overflow menu dropdown placement and position ([7f37680](https://github.com/carbon-design-system/carbon-components-vue/commit/7f376809224ad6a4d86d01fa200bd681aa1299e9))
+- story template fix, import name fix ([2ec0511](https://github.com/carbon-design-system/carbon-components-vue/commit/2ec0511041b7102ffaedef26ac2da26f205a20fd))
+
+### Features
+
+- add slots stories ([2750ab9](https://github.com/carbon-design-system/carbon-components-vue/commit/2750ab93c6a424ba9c5854db194270696cd33a5c))
+- components finished ([fe7c255](https://github.com/carbon-design-system/carbon-components-vue/commit/fe7c255397097e6065312843d972ec72439ba51a))
+- components unit tests ([49b944b](https://github.com/carbon-design-system/carbon-components-vue/commit/49b944b057aa70e7d25d6f370bc23fe7c3ac3bfc))
+- cv-structured-list components in progress ([c4e0959](https://github.com/carbon-design-system/carbon-components-vue/commit/c4e09598f9455f304f811acc1eae8f618c4b0592))
+- cv-toast-notification add more slots ([71ef1b6](https://github.com/carbon-design-system/carbon-components-vue/commit/71ef1b62f75007efc48b486893e4f1689e0d92b9))
+- structured list components in progress ([706a2cd](https://github.com/carbon-design-system/carbon-components-vue/commit/706a2cdaddb869bb97085da40b692d5de575872a))
+- structured-list wireframe ([ee958cb](https://github.com/carbon-design-system/carbon-components-vue/commit/ee958cb4b4107c68319e79fef49ecbf512650005))
+
 ## [3.0.8-alpha.0](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.7-alpha.0...@carbon/vue@3.0.8-alpha.0) (2023-08-21)
 
 ### Bug Fixes

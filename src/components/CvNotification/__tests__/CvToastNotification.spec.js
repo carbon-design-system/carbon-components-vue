@@ -1,7 +1,7 @@
 /**
  * NOTE: This test needs to be converted to use the new library `@testing-library/vue`. See CvCheckbox test for example.
  */
-import { mount } from '@vue/test-utils';
+import { mount, shallowMount } from '@vue/test-utils';
 import { carbonPrefix } from '../../../global/settings';
 
 import { CvToastNotification, CvNotificationConsts } from '..';
@@ -93,5 +93,25 @@ describe('CvToastNotification', () => {
     await closeButton.trigger('click');
 
     expect(wrapper.emitted().close).toBeTruthy();
+  });
+
+  test.each([
+    ['default', `${carbonPrefix}--toast-notification__details`],
+    ['title', `${carbonPrefix}--toast-notification__title`],
+    ['subtitle', `${carbonPrefix}--toast-notification__subtitle`],
+    ['caption', `${carbonPrefix}--toast-notification__caption`],
+  ])('Renders %s slot content', async (slotName, immediateParentClass) => {
+    const SlotTestId = slotName;
+    const wrapper = shallowMount(CvToastNotification, {
+      slots: {
+        [slotName]: `<div test-id="${SlotTestId}">Test</div>`,
+      },
+    });
+
+    const defaultSlotContent = wrapper.find(
+      `.${immediateParentClass} > [test-id=${SlotTestId}]`
+    );
+
+    expect(defaultSlotContent.exists()).toBe(true);
   });
 });

@@ -26,27 +26,22 @@
 
 <script setup>
 import { carbonPrefix } from '../../global/settings';
-import { onMounted, ref, useAttrs } from 'vue';
-import { getBus } from '../../global/component-utils/event-bus';
+import { ref, useAttrs, inject } from 'vue';
 
 defineProps({
   primaryFocus: Boolean,
   disabled: Boolean,
   danger: Boolean,
 });
-let bus = undefined;
 const el = ref(null);
-onMounted(() => {
-  const pe = el.value.closest('[data-overflow-menu]');
-  const parent = pe?.getAttribute('id');
-  if (parent) bus = getBus(parent);
-  else console.warn('overflow menu not found');
-});
+const emitClick = inject('cv:click');
+const emitClose = inject('cv:close');
+
 const attrs = useAttrs();
 function onClick() {
-  bus?.emit('cv:click', attrs.value);
+  emitClick(attrs.value);
 }
 function onEsc() {
-  bus?.emit('cv:close');
+  emitClose();
 }
 </script>

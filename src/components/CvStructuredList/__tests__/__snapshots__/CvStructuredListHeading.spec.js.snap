@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CvStructuredListHeading should render correctly 1`] = `<div class="cv-structured-list-heading bx--structured-list-th"></div>`;
+
+exports[`CvStructuredListHeading should render with slot correctly 1`] = `
+<div class="cv-structured-list-heading bx--structured-list-th">
+  <div class="headings-slot-default-test">Headings slot default test</div>
+</div>
+`;

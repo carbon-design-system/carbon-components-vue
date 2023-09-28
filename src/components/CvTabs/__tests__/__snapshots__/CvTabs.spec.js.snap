@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CvTabs CvTabs - test slotted tab buttons to match snapshot 1`] = `
+<div class="cv-tabs ABC-class-123" style="width: 100%;" aria-label="ABC-aria-label-123">
+  <div data-tabs="" class="cv-tab bx--tabs--scrollable ABC-class-123" role="navigation" aria-label="ABC-aria-label-123"><button aria-hidden="true" aria-label="scroll left" class="bx--tab--overflow-nav-button--hidden" tabindex="-1" type="button"><svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+        <path d="M5 8L10 3 10.7 3.7 6.4 8 10.7 12.3 10 13z"></path>
+      </svg></button>
+    <!--v-if-->
+    <ul class="bx--tabs--scrollable__nav" role="tablist">
+      <li class="cv-tabs-button  bx--tabs--scrollable__nav-item bx--tabs__nav-item--selected bx--tabs--scrollable__nav-item--selected" role="presentation"><button class="bx--tabs--scrollable__nav-link" role="tab" aria-controls="tab-1" aria-disabled="false" aria-selected="true" id="tab-1-link" tabindex="0" type="button">Hello <strong style="color: red;">(*)</strong></button></li>
+      <li class="cv-tabs-button  bx--tabs--scrollable__nav-item" role="presentation"><button class="bx--tabs--scrollable__nav-link" role="tab" aria-controls="tab-2" aria-disabled="false" aria-selected="false" id="tab-2-link" tabindex="-1" type="button">Origin<strong style="color: orange;">(!)</strong></button></li>
+      <li class="cv-tabs-button  bx--tabs--scrollable__nav-item" role="presentation"><button class="bx--tabs--scrollable__nav-link" role="tab" aria-controls="tab-3" aria-disabled="false" aria-selected="false" id="tab-3-link" tabindex="-1" type="button">Tab 3 label</button></li>
+    </ul>
+    <!--v-if--><button aria-hidden="true" aria-label="scroll right" class="bx--tab--overflow-nav-button--hidden" tabindex="-1" type="button"><svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+        <path d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"></path>
+      </svg></button>
+  </div>
+  <div class="cv-tabs__panels">
+    <div class="cv-tab bx--tab-content" id="tab-1" role="tabpanel" aria-labelledby="tab-1-link" aria-hidden="false">Tab 1 content</div>
+    <div class="cv-tab bx--tab-content" id="tab-2" role="tabpanel" aria-labelledby="tab-2-link" aria-hidden="true" hidden="">Tab 2 content</div>
+    <div class="cv-tab bx--tab-content" id="tab-3" role="tabpanel" aria-labelledby="tab-3-link" aria-hidden="true" hidden="">Tab 3 content</div>
+  </div>
+</div>
+`;

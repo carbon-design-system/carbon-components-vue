@@ -48,7 +48,7 @@ const skeletonTemplate = `
   </div>
 `;
 
-export const args = {
+export const argTypes = {
   // attributes
   multiple: {
     type: 'boolean',
@@ -61,6 +61,7 @@ export const args = {
   // props
   accept: {
     type: 'string',
+    defaultValue: '.jpg,.png',
     table: {
       type: { summary: 'string' },
       category: 'props',
@@ -106,6 +107,14 @@ export const args = {
     },
     description: 'Reset file list when files are added',
   },
+  disabled: {
+    type: 'boolean',
+    table: {
+      type: { summary: 'boolean' },
+      category: 'props',
+    },
+    description: 'Disables input',
+  },
   dropTargetLabel: {
     type: 'string',
     table: {
@@ -121,6 +130,14 @@ export const args = {
       category: 'props',
     },
     description: 'Helper text positioned below label',
+  },
+  initialStateUploading: {
+    type: 'boolean',
+    table: {
+      type: { summary: 'boolean' },
+      category: 'props',
+    },
+    description: 'Set "UPLOADING" state to new files',
   },
   kind: {
     type: 'string',
@@ -235,7 +252,7 @@ Migration notes:
       helperText: 'Select the files you want to upload',
       removable: true,
     }}
-    argTypes={args}
+    argTypes={argTypes}
   >
     {Template.bind({})}
   </Story>
@@ -263,11 +280,12 @@ Migration notes:
       helperText: 'Select the files you want to upload',
       kind: KINDS.BUTTON,
       removable: true,
+      dropTargetLabel: 'Add file',
     }}
     argTypes={{
-      ...args,
+      ...argTypes,
       kind: {
-        ...args.kind,
+        ...argTypes.kind,
         control: 'none',
       },
     }}
@@ -299,9 +317,9 @@ Migration notes:
       removable: true,
     }}
     argTypes={{
-      ...args,
+      ...argTypes,
       kind: {
-        ...args.kind,
+        ...argTypes.kind,
         control: 'none',
       },
     }}

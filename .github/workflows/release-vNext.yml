@@ -15,7 +15,7 @@ jobs:
         with:
           fetch-depth: 0 # https://github.com/actions/checkout/issues/217
           token: ${{ secrets.GH_TOKEN_LERNA }} # https://github.com/lerna/lerna/issues/1957
-          ref: vNext
+          ref: main
 
       # https://github.com/actions/checkout#push-a-commit-using-the-built-in-token
       - run: |
@@ -40,4 +40,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: yarn lerna publish prepatch --dist-tag next --yes
+        run: yarn lerna publish patch --yes

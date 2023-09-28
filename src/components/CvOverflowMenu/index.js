@@ -1,3 +1,4 @@
 import CvOverflowMenu from './CvOverflowMenu.vue';
-export { CvOverflowMenu };
+import CvOverflowMenuItem from './CvOverflowMenuItem.vue';
+export { CvOverflowMenu, CvOverflowMenuItem };
 export default CvOverflowMenu;
