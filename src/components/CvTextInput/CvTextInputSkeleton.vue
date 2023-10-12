@@ -1,9 +1,9 @@
 <template>
   <div :class="[`${carbonPrefix}--form-item`]">
-    <label
+    <span
       v-if="!hideLabel"
       :class="[`${carbonPrefix}--label`, `${carbonPrefix}--skeleton`]"
-    ></label>
+    ></span>
     <div
       :class="[`${carbonPrefix}--text-input`, `${carbonPrefix}--skeleton`]"
     ></div>
