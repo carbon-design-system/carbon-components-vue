@@ -1,8 +1,9 @@
 <template>
   <div :class="[`${carbonPrefix}--form-item`]">
-    <span
+    <label
+      v-if="!hideLabel"
       :class="[`${carbonPrefix}--label`, `${carbonPrefix}--skeleton`]"
-    ></span>
+    ></label>
     <div
       :class="[`${carbonPrefix}--text-input`, `${carbonPrefix}--skeleton`]"
     ></div>
@@ -11,4 +12,6 @@
 
 <script setup>
 import { carbonPrefix } from '../../global/settings';
+
+defineProps({ hideLabel: { type: Boolean, default: false } });
 </script>
