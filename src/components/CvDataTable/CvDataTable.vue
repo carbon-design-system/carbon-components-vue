@@ -611,19 +611,19 @@ function onInternalSearch() {
   emit('search', searchValue.value);
 }
 function onSort(payload) {
-  const { heading, val } = payload;
+  const { heading, value } = payload;
   const headings = store.headings(uid);
   let index;
   for (let colIndex in headings) {
     const column = headings[colIndex];
     if (column.id === heading.id) {
-      store.updateHeading(uid, { ...column, order: val });
+      store.updateHeading(uid, { ...column, order: value });
       index = colIndex;
     } else {
       store.updateHeading(uid, { ...column, order: 'none' });
     }
   }
-  emit('sort', { index, order: val, name: heading.name });
+  emit('sort', { index, order: value, name: heading.name });
 }
 
 // are all rows expanded
