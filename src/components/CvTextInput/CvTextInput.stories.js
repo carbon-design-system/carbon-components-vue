@@ -254,6 +254,13 @@ const TemplateSkeleton = args => {
 };
 
 export const Skeleton = TemplateSkeleton.bind({});
+
+Skeleton.parameters = {
+  controls: {
+    include: ['hideLabel'],
+  },
+};
+
 Skeleton.parameters = storyParametersObject(
   Skeleton.parameters,
   templateSkeleton,
