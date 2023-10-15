@@ -244,7 +244,7 @@ Password.parameters = storyParametersObject(
   Password.args
 );
 
-const templateSkeleton = `<cv-text-input-skeleton v-bind='args'>`;
+const templateSkeleton = `<cv-text-input-skeleton v-bind='args'/>`;
 const TemplateSkeleton = args => {
   return {
     components: { CvTextInputSkeleton },
