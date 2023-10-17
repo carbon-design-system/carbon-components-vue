@@ -4,7 +4,7 @@
       `cv-form-group ${carbonPrefix}--fieldset`,
       { [`${carbonPrefix}--fieldset--no-margin`]: noMargin },
     ]"
-    :data-invalid="invalid"
+    :data-invalid="invalid || null"
   >
     <legend :class="`${carbonPrefix}--label`">
       <slot name="label"></slot>

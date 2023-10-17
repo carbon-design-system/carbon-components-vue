@@ -14,14 +14,14 @@
     </label>
     <div
       :class="`${carbonPrefix}--text-area__wrapper`"
-      :data-invalid="isInvalid"
+      :data-invalid="isInvalid || null"
     >
       <WarningFilled16
         v-if="isInvalid"
         :class="`${carbonPrefix}--text-area__invalid-icon`"
       />
       <textarea
-        :aria-invalid="isInvalid"
+        :aria-invalid="isInvalid || null"
         :aria-describedby="isInvalid ? errorId : undefined"
         :id="cvId"
         :class="[

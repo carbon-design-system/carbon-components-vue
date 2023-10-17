@@ -26,7 +26,7 @@
           [`${carbonPrefix}--list-box--disabled`]: disabled,
         },
       ]"
-      :data-invalid="isInvalid ? 'true' : undefined"
+      :data-invalid="isInvalid || null"
       v-bind="$attrs"
       @keydown.down.prevent="onDown"
       @keydown.up.prevent="onUp"

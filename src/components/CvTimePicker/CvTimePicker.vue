@@ -7,7 +7,7 @@
         `${carbonPrefix}--time-picker--${fieldSize}`,
         { [`${carbonPrefix}--time-picker--light`]: isLight },
       ]"
-      :data-invalid="isInvalid"
+      :data-invalid="isInvalid || null"
     >
       <div :class="`${carbonPrefix}--time-picker__input`">
         <label :for="uid" :class="`${carbonPrefix}--label`">{{ label }}</label>

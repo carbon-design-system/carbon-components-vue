@@ -59,7 +59,7 @@
             [`${carbonPrefix}--dropdown--inline`]: inline,
           },
         ]"
-        :data-invalid="data.isInvalid"
+        :data-invalid="data.isInvalid || null"
         :data-value="dataValue"
         data-dropdown
         v-bind="$attrs"

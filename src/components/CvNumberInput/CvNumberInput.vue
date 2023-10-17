@@ -13,7 +13,7 @@
           [`cv-number-input`]: !formItem,
         },
       ]"
-      :data-invalid="dataInvalidAttributeValue"
+      :data-invalid="isInvalid || null"
     >
       <label
         v-show="label || slots['label']"
@@ -35,7 +35,7 @@
           ref="input"
           v-model="internalValue"
           :id="cvId"
-          :data-invalid="dataInvalidAttributeValue"
+          :data-invalid="isInvalid || null"
           type="number"
           v-bind="$attrs"
           :disabled="disabled"
@@ -159,9 +159,6 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue']);
 const cvId = useCvId(props);
 const { isInvalid, isWarn, isHelper, isLight } = useCvInputHelpers(props);
-const dataInvalidAttributeValue = computed(() =>
-  isInvalid.value ? true : undefined
-);
 
 const iconClasses = computed(() => {
   const classes = [];

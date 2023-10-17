@@ -45,7 +45,7 @@
           [`${carbonPrefix}--combo-box`]: isFilterable,
         },
       ]"
-      :data-invalid="data.isInvalid ? true : undefined"
+      :data-invalid="data.isInvalid || null"
       v-bind="$attrs"
       @keydown.down.prevent="onDown"
       @keydown.up.prevent="onUp"

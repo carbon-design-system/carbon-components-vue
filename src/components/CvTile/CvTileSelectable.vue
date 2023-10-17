@@ -8,7 +8,7 @@
     ]"
     data-tile="selectable"
     tabindex="0"
-    :data-contained-checkbox-state="isChecked"
+    :data-contained-checkbox-state="isChecked || null"
   >
     <input
       tabindex="-1"

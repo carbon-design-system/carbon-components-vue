@@ -24,7 +24,7 @@
         `${carbonPrefix}--text-input__field-wrapper`,
         { [`${carbonPrefix}--text-input__field-wrapper--warning`]: isWarn },
       ]"
-      :data-invalid="isInvalid"
+      :data-invalid="isInvalid || null"
     >
       <WarningFilled16
         v-if="isInvalid"
@@ -49,7 +49,7 @@
         v-bind="$attrs"
         :type="dataType"
         :value="modelValue"
-        :data-toggle-password-visibility="isPassword"
+        :data-toggle-password-visibility="isPassword || null"
         @input="$event => $emit('update:modelValue', $event.target.value)"
       />
       <button

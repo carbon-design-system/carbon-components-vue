@@ -18,6 +18,7 @@
       @change="onChange"
       :value="value"
       :id="cvId"
+      :disabled="disabled || null"
     /><label
       :for="cvId"
       :class="[
