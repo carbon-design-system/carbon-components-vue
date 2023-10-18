@@ -28,7 +28,7 @@ import {
 } from '../../use/cvLink';
 
 const props = defineProps({
-  icon: { type: [String, Object] },
+  icon: { type: [String, Object], default: undefined },
   inline: Boolean,
   visited: Boolean,
   ...linkPropsDefinition,

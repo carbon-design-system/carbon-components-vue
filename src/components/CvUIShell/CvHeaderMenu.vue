@@ -44,7 +44,7 @@ import ChevronDownGlyph from '@carbon/icons-vue/es/chevron--down';
 import { reactive, ref } from 'vue';
 
 const props = defineProps({
-  title: String,
+  title: { type: String, default: undefined },
   hoverToggle: { type: Boolean, default: true },
 });
 const data = reactive({

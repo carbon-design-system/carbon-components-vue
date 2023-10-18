@@ -59,6 +59,6 @@ is found. To resolve this the label is now marked as required.
 label: { type: String, default: undefined, required: true },
 ```
 
-
 # React Story book with Carbon 10
-The accessability rules seems to have changed since Carbon 10 was relesed but still it might be helpful to reference the [React Carbon 10 Storybook](https://v7-react.carbondesignsystem.com/?path=/story/getting-started--welcome)  to see if there are difference in the DOM for accessability.
+
+The accessability rules seems to have changed since Carbon 10 was relesed but still it might be helpful to reference the [React Carbon 10 Storybook](https://v7-react.carbondesignsystem.com/?path=/story/getting-started--welcome) to see if there are difference in the DOM for accessability.

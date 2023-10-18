@@ -202,11 +202,12 @@ const props = defineProps({
       }
       return arr;
     },
+    default: () => [],
   },
   /**
    * Generic label that will be used as the textual representation of what this field is for
    */
-  label: String,
+  label: { type: String, default: undefined },
   /**
    * Value shown when nothing has been selected
    */
@@ -230,7 +231,7 @@ const props = defineProps({
   /**
    * Render with a value already selected. Available as `v-model:value`.
    */
-  value: String,
+  value: { type: String, default: undefined },
   /**
    * Provide the text that is displayed and put the control in warning state
    */

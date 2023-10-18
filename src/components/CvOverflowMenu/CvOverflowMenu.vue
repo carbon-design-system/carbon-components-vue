@@ -86,7 +86,7 @@ const props = defineProps({
   /**
    * assistive text shown as a tooltip
    */
-  label: String,
+  label: { type: String, default: undefined },
   /**
    * moves caret from right to left of popup menu
    */
@@ -105,6 +105,7 @@ const props = defineProps({
       return value && value.left !== undefined && value.top !== undefined;
       // value.hasOwnProperty('left') && value.hasOwnProperty('top');
     },
+    default: undefined,
   },
   /**
    * top, left, right(default) or bottom

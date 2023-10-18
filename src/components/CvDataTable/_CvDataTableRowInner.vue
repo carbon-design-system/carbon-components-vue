@@ -71,15 +71,15 @@ import store from './cvDataTableStore';
 import { getBus } from '../../global/component-utils/event-bus';
 
 const props = defineProps({
-  ariaLabelForBatchCheckbox: String,
+  ariaLabelForBatchCheckbox: { type: String, default: undefined },
   checked: Boolean,
   expanded: Boolean,
   expandingRow: Boolean,
   ariaLabelExpandRow: { type: String, default: 'Expand current row' },
   ariaLabelCollapseRow: { type: String, default: 'Collapse current row' },
-  overflowMenu: Array,
-  value: String,
-  rowId: String,
+  overflowMenu: { type: Array, default: () => [] },
+  value: { type: String, default: undefined },
+  rowId: { type: String, default: undefined },
 });
 
 const dataSomeExpandingRows = computed(() => {

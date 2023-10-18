@@ -111,7 +111,7 @@ const props = defineProps({
   /**
    * Provide the label text for the Search icon
    */
-  label: String,
+  label: { type: String, default: undefined },
   /**
    * Specify the search size ('sm', 'md', 'lg', 'xl')
    */
@@ -151,7 +151,7 @@ const props = defineProps({
   /**
    * Optionally provide the default value of the `<input>`
    */
-  value: String,
+  value: { type: String, default: undefined },
   /**
    * @deprecated use value
    */
@@ -172,10 +172,11 @@ const props = defineProps({
    */
   toolbarAriaLabel: {
     type: String,
-    validator: () => {
-      console.warn('Deprecated: probably you want expandable=true');
+    validator: s => {
+      if (s) console.warn('Deprecated: probably you want expandable=true');
       return true;
     },
+    default: undefined,
   },
   ...propsTheme,
   ...propsCvId,

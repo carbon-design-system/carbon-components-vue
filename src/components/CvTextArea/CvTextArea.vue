@@ -66,12 +66,12 @@ const props = defineProps({
   helperText: { type: String, default: undefined },
   hideLabel: { type: Boolean, default: false },
   invalidMessage: { type: String, default: undefined },
-  label: String,
-  modelValue: String,
+  label: { type: String, default: undefined },
+  modelValue: { type: String, default: undefined },
   ...propsCvId,
   ...propsTheme,
 });
-
+defineEmits(['update:modelValue']);
 const cvId = useCvId(props);
 
 // DOM

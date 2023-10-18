@@ -13,22 +13,27 @@ const props = defineProps({
   sm: {
     type: [Boolean, Number, Object],
     validator: value => columnValidator('sm', value),
+    default: undefined,
   },
   md: {
     type: [Boolean, Number, Object],
     validator: value => columnValidator('md', value),
+    default: undefined,
   },
   lg: {
     type: [Boolean, Number, Object],
     validator: value => columnValidator('lg', value),
+    default: undefined,
   },
   xlg: {
     type: [Boolean, Number, Object],
     validator: value => columnValidator('xlg', value),
+    default: undefined,
   },
   max: {
     type: [Boolean, Number, Object],
     validator: value => columnValidator('max', value),
+    default: undefined,
   },
 });
 const classes = computed(() => {

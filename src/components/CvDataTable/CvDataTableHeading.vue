@@ -56,13 +56,13 @@ const nextOrder = {
   none: 'ascending',
 };
 const props = defineProps({
-  dataStyle: Object,
-  heading: String,
-  name: String,
+  dataStyle: { type: Object, default: undefined },
+  heading: { type: String, default: undefined },
+  name: { type: String, default: undefined },
   sortable: Boolean,
   order: { type: String, default: 'none' },
   skeleton: Boolean,
-  headingStyle: Object,
+  headingStyle: { type: Object, default: undefined },
   ...propsCvId,
 });
 const cvId = useCvId(props, true);

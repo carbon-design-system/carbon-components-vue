@@ -28,7 +28,7 @@ import { onMounted, onUpdated, reactive, useSlots } from 'vue';
 
 const props = defineProps({
   active: Boolean,
-  icon: Object,
+  icon: { type: Object, default: undefined },
   ...propsLink,
 });
 const tagType = useTagType(props);

@@ -55,11 +55,12 @@ const props = defineProps({
       }
       return true;
     },
+    default: undefined,
   },
   expanded: Boolean,
   fixed: Boolean,
   id: { type: String, required: true },
-  assistiveToggleText: String,
+  assistiveToggleText: { type: String, default: undefined },
   rail: Boolean,
 });
 

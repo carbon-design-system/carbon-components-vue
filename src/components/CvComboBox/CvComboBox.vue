@@ -172,9 +172,9 @@ const props = defineProps({
   isLight: { type: Boolean, default: false },
   autoFilter: { type: Boolean, default: false },
   autoHighlight: { type: Boolean, default: false },
-  value: { type: String },
-  highlight: { type: String },
-  modelValue: { type: String },
+  value: { type: String, default: undefined },
+  highlight: { type: String, default: undefined },
+  modelValue: { type: String, default: undefined },
   options: {
     type: Array,
     required: true,

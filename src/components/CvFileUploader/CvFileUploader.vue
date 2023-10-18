@@ -111,7 +111,7 @@ import {
 const emit = defineEmits(['update:modelValue']);
 
 const props = defineProps({
-  accept: String,
+  accept: { type: String, default: undefined },
   buttonKind: commonCvButtonProps.kind,
   buttonLabel: {
     type: String,
@@ -129,8 +129,8 @@ const props = defineProps({
   buttonSize: commonCvButtonProps.size,
   clearOnReselect: Boolean,
   disabled: Boolean,
-  dropTargetLabel: String,
-  helperText: String,
+  dropTargetLabel: { type: String, default: undefined },
+  helperText: { type: String, default: undefined },
   initialStateUploading: Boolean,
   kind: {
     type: String,
@@ -145,10 +145,10 @@ const props = defineProps({
       return true;
     },
   },
-  label: String,
-  modelValue: Array,
+  label: { type: String, default: undefined },
+  modelValue: { type: Array, default: () => [] },
   removable: Boolean,
-  removeAriaLabel: String,
+  removeAriaLabel: { type: String, default: undefined },
   ...cvIdProps,
 });
 

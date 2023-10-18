@@ -98,7 +98,7 @@ const props = defineProps({
   pageSizesLabel: { type: String, default: 'Items per page:' },
   numberOfItems: { type: Number, default: Infinity },
   actualItemsOnPage: { type: Number, default: Infinity },
-  page: Number,
+  page: { type: Number, default: undefined },
   pageSizes: { type: Array, default: () => [10, 20, 30, 40, 50] },
 });
 

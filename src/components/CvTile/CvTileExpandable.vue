@@ -43,8 +43,8 @@ import { computed, nextTick, reactive, ref, watch } from 'vue';
 
 const props = defineProps({
   expanded: Boolean,
-  tileCollapsedLabel: String,
-  tileExpandedLabel: String,
+  tileCollapsedLabel: { type: String, default: undefined },
+  tileExpandedLabel: { type: String, default: undefined },
 });
 const data = reactive({
   styleObject: {

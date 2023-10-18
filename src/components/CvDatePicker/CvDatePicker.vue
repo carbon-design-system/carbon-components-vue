@@ -142,12 +142,12 @@ const isLight = useIsLight(props);
 let calendar;
 
 const props = defineProps({
-  modelValue: [String, Object, Array, Date],
+  modelValue: { type: [String, Object, Array, Date], default: undefined },
   dateLabel: { type: String, default: undefined },
   dateEndLabel: { type: String, default: 'End date' },
   invalid: { type: Boolean, default: false },
   disabled: { type: Boolean, default: false },
-  invalidMessage: { type: String },
+  invalidMessage: { type: String, default: undefined },
   pattern: { type: String, default: '\\d{1,2}/\\d{1,2}/\\d{4}' },
   placeholder: { type: String, default: 'mm/dd/yyyy' },
   calOptions: {
@@ -164,7 +164,7 @@ const props = defineProps({
     default: 'simple',
     validator: val => ['short', 'simple', 'single', 'range'].includes(val),
   },
-  value: [String, Object, Array, Date],
+  value: { type: [String, Object, Array, Date], default: undefined },
   ...propsCvId,
   ...propsCvTheme,
 });

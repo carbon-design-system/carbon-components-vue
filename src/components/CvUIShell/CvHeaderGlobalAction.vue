@@ -1,6 +1,7 @@
 <template>
   <cv-icon-button
     :id="uid"
+    ref="el"
     :class="[
       `cv-header-global-action`,
       `${carbonPrefix}--header__action`,
@@ -9,7 +10,6 @@
     type="button"
     aria-haspopup="true"
     :aria-controls="ariaControls"
-    ref="el"
     :aria-expanded="active ? 'true' : 'false'"
     :label="label"
     :tip-alignment="tipAlignment"
@@ -39,7 +39,7 @@ import CvIconButton from '../CvButton/CvIconButton.vue';
 
 const props = defineProps({
   active: { type: Boolean, default: false },
-  ariaControls: { type: String },
+  ariaControls: { type: String, default: undefined },
   label: { type: String, default: undefined },
   tipPosition: {
     type: String,

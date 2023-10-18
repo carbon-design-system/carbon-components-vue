@@ -33,4 +33,5 @@ defineProps({
   assistiveText: { type: String, default: 'Open / close side nav' },
   expanded: Boolean,
 });
+defineEmits(['toggle-expand']);
 </script>

@@ -33,9 +33,9 @@ import { carbonPrefix } from '../../global/settings';
 import { useCvId, propsCvId, useMethods, useRadio } from '../../use';
 
 const props = defineProps({
-  modelValue: String,
+  modelValue: { type: String, default: undefined },
   checked: Boolean,
-  label: String,
+  label: { type: String, default: undefined },
   value: { type: String, required: true },
   hideLabel: Boolean,
   labelLeft: Boolean,

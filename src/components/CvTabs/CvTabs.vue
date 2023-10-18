@@ -136,7 +136,7 @@ const props = defineProps({
   /**
    * @deprecated not used in component
    */
-  leftOverflowIconButtonProps: Object,
+  leftOverflowIconButtonProps: { type: Object, default: undefined },
   /**
    * This is an edge use case. By default, if no tab is explicitly selected, the first non-disabled tab is selected.
    */
@@ -144,7 +144,7 @@ const props = defineProps({
   /**
    * @deprecated not used in component
    */
-  rightOverflowIconButtonProps: Object,
+  rightOverflowIconButtonProps: { type: Object, default: undefined },
   /**
    * @deprecated not used in component
    */

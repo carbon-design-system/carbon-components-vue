@@ -21,7 +21,7 @@ import { carbonPrefix } from '../../global/settings';
 
 defineProps({
   invalid: Boolean,
-  message: String,
+  message: { type: String, default: undefined },
   noMargin: Boolean,
 });
 </script>

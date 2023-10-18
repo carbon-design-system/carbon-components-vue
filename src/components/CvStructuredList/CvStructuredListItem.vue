@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import { computed, inject, provide, ref } from 'vue';
+import { computed, inject, provide } from 'vue';
 import CvStructuredListItemStandard from './CvStructuredListItemStandard.vue';
 import CvStructuredListItemSelectable from './CvStructuredListItemSelectable.vue';
 

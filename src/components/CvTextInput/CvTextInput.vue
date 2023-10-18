@@ -121,8 +121,8 @@ const props = defineProps({
   helperText: { type: String, default: undefined },
   hideLabel: { type: Boolean, default: false },
   invalidMessage: { type: String, default: undefined },
-  label: String,
-  modelValue: String,
+  label: { type: String, default: undefined },
+  modelValue: { type: String, default: undefined },
   passwordHideLabel: { type: String, default: 'Hide password' },
   passwordShowLabel: { type: String, default: 'Show password' },
   passwordVisible: { type: Boolean, default: undefined },
@@ -135,7 +135,7 @@ const props = defineProps({
   ...propsCvId,
   ...propsTheme,
 });
-
+defineEmits(['update:modelValue']);
 const cvId = useCvId(props);
 
 // DOM Elements

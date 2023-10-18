@@ -17,6 +17,11 @@ import CviCodeSnippetMultiline from './_CviCodeSnippetMultiline.vue';
 
 export default {
   name: 'CvCodeSnippet',
+  components: {
+    CviCodeSnippetInline,
+    CviCodeSnippetOneline,
+    CviCodeSnippetMultiline,
+  },
   props: {
     /** Type of code snippet */
     kind: {
@@ -89,11 +94,6 @@ export default {
       type: Number,
       default: 16,
     },
-  },
-  components: {
-    CviCodeSnippetInline,
-    CviCodeSnippetOneline,
-    CviCodeSnippetMultiline,
   },
   emits: [
     /** Emitted when user uses the copy function */

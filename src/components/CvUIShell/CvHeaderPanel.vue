@@ -39,6 +39,7 @@ const props = defineProps({
       }
       return true;
     },
+    default: undefined,
   },
   expanded: Boolean,
   id: { type: String, required: true },

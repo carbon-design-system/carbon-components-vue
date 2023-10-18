@@ -34,7 +34,7 @@ const props = defineProps({
   /**
    * An array of labels for the steps. Use `cv-progress-step` components for more control over the step logic.
    */
-  steps: Array,
+  steps: { type: Array, default: () => [] },
   /**
    * Determines whether the ProgressIndicator should be rendered vertically.
    */

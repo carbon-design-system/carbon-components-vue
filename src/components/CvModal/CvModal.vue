@@ -201,9 +201,9 @@ const props = defineProps({
   disableTeleport: { type: Boolean, default: false },
 
   // Listeners
-  onPrimaryClick: { type: Function },
-  onSecondaryClick: { type: Function },
-  onOtherBtnClick: { type: Function },
+  onPrimaryClick: { type: Function, default: undefined },
+  onSecondaryClick: { type: Function, default: undefined },
+  onOtherBtnClick: { type: Function, default: undefined },
 
   ...propsCvId,
 });
