@@ -30,8 +30,7 @@ const { disabled, icon, kind, size } = commonCvButtonProps;
 
 export default {
   name: 'CvIconButton',
-  components: { CvSvg },
-  emits: ['click'], // emitted to allow testing of click
+  components: { CvSvg }, // emitted to allow testing of click
   props: {
     // Docgen comments added for storybook doc page
     /**
@@ -71,6 +70,7 @@ export default {
       validator: val => ['start', 'center', 'end'].includes(val),
     },
   },
+  emits: ['click'],
   setup(props) {
     const { buttonClasses } = useCvButtonCommon(
       props.kind,

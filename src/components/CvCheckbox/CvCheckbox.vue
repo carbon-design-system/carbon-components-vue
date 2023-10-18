@@ -7,18 +7,18 @@
     ]"
   >
     <input
-      ref="input"
       v-bind="$attrs"
+      :id="cvId"
+      ref="input"
       type="checkbox"
       :class="`${carbonPrefix}--checkbox`"
       :checked="isChecked === true"
       :aria-checked="`${isChecked}`"
+      :value="value"
+      :disabled="disabled || null"
       @focus="onFocus"
       @blur="onBlur"
       @change="onChange"
-      :value="value"
-      :id="cvId"
-      :disabled="disabled || null"
     /><label
       :for="cvId"
       :class="[

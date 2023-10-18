@@ -1,7 +1,7 @@
 <template>
   <div
-    :class="`cv-definition-tooltip ${carbonPrefix}--tooltip--definition ${carbonPrefix}--tooltip--a11y`"
     :id="cvId"
+    :class="`cv-definition-tooltip ${carbonPrefix}--tooltip--definition ${carbonPrefix}--tooltip--a11y`"
   >
     <button
       :aria-describedby="`${cvId}-label`"
@@ -19,8 +19,8 @@
       </slot>
     </button>
     <div
-      :class="`${carbonPrefix}--assistive-text`"
       :id="`${cvId}-label`"
+      :class="`${carbonPrefix}--assistive-text`"
       role="tooltip"
     >
       <slot name="definition">

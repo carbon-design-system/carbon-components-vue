@@ -1,5 +1,7 @@
 <template>
   <button
+    :id="uid"
+    ref="el"
     class="cv-header-menu-button"
     :class="[
       `${carbonPrefix}--header__action`,
@@ -16,8 +18,6 @@
     :aria-expanded="active ? 'true' : 'false'"
     @click="gaToggle"
     @focusout="gaFocusout"
-    :id="uid"
-    ref="el"
   >
     <close20 v-if="dataActive" />
     <menu20 v-if="!dataActive" />

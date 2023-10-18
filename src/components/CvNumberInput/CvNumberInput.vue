@@ -32,9 +32,9 @@
         ]"
       >
         <input
+          :id="cvId"
           ref="input"
           v-model="internalValue"
-          :id="cvId"
           :data-invalid="isInvalid || null"
           type="number"
           v-bind="$attrs"

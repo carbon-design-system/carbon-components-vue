@@ -8,9 +8,9 @@
     <input
       v-bind="$attrs"
       :id="cvId"
+      ref="input"
       :checked="isChecked"
       :class="`${carbonPrefix}--radio-button`"
-      ref="input"
       type="radio"
       :value="value"
       @change="onChange"

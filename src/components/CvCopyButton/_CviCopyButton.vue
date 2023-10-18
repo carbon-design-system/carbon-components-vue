@@ -8,10 +8,10 @@
         [`${carbonPrefix}--copy-btn--${activeAnimation}`]: isAnimating,
       },
     ]"
-    @click="handleClick"
-    @animationend="handleAnimationEnd"
     aria-live="polite"
     :aria-label="feedback"
+    @click="handleClick"
+    @animationend="handleAnimationEnd"
   >
     <slot />
     {{ feedback }}

@@ -11,11 +11,11 @@
     ]"
   >
     <div
+      ref="container"
       role="textbox"
       :tabindex="disabled ? -1 : 0"
       :class="`${carbonPrefix}--snippet-container`"
       :aria-label="ariaLabel || 'code-snippet'"
-      ref="container"
     >
       <pre><code ref="text"><slot /></code></pre>
     </div>
@@ -32,8 +32,8 @@
       :feedback="copyFeedback"
       :feedback-timeout="copyFeedbackTimeout"
       :icon-description="ariaLabel"
-      @copy="handleCopy"
       :disabled="disabled"
+      @copy="handleCopy"
     />
   </div>
 </template>
@@ -45,6 +45,7 @@ import { useElementHasOverflow } from '../../use/overflow';
 import CvCopyButton from '../CvCopyButton/CvCopyButton.vue';
 
 export default {
+  components: { CvCopyButton },
   props: {
     /** Text shown to user when copying code */
     copyFeedback: {
@@ -83,7 +84,6 @@ export default {
     },
   },
   emits: ['copy'],
-  components: { CvCopyButton },
   setup: (props, { emit }) => {
     const text = ref(null);
     const container = ref(null);

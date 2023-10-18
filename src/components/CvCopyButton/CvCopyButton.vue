@@ -18,6 +18,7 @@ import CviCopyButton from './_CviCopyButton.vue';
 
 export default {
   name: 'CvCopyButton',
+  components: { CviCopyButton, Copy16 },
   props: {
     /** Text shown when button is clicked */
     feedback: {
@@ -39,7 +40,6 @@ export default {
     /** Emitted when user clicks on the button */
     'copy',
   ],
-  components: { CviCopyButton, Copy16 },
   setup: () => ({ carbonPrefix }),
 };
 </script>

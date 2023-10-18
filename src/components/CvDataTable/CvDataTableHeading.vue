@@ -1,13 +1,13 @@
 <template>
   <th
-    :aria-sort="internalOrder"
-    :style="skeleton && headingStyle"
     :id="cvId"
     ref="el"
+    :aria-sort="internalOrder"
+    :style="skeleton && headingStyle"
   >
     <button
-      type="button"
       v-if="sortable"
+      type="button"
       :class="[
         `${carbonPrefix}--table-sort`,
         {
@@ -17,8 +17,8 @@
             internalOrder === 'ascending',
         },
       ]"
-      @click="onSortClick"
       :style="headingStyle"
+      @click="onSortClick"
     >
       <component
         :is="headingLabelTag"
@@ -30,8 +30,8 @@
       <Arrows16 :class="`${carbonPrefix}--table-sort__icon-unsorted`" />
     </button>
     <component
-      v-else
       :is="headingLabelTag"
+      v-else
       :class="`${carbonPrefix}--table-header-label`"
       :style="headingStyle"
     >

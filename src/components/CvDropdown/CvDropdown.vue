@@ -115,12 +115,9 @@
           tabindex="-1"
         >
           <slot>
-            <cv-dropdown-item
-              v-for="item in items"
-              v-bind:key="item"
-              :value="item"
-              >{{ item }}</cv-dropdown-item
-            >
+            <cv-dropdown-item v-for="item in items" :key="item" :value="item">{{
+              item
+            }}</cv-dropdown-item>
           </slot>
         </ul>
       </div>

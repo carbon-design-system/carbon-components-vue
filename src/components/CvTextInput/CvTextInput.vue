@@ -35,8 +35,8 @@
         :class="`${carbonPrefix}--text-input__invalid-icon ${carbonPrefix}--text-input__invalid-icon--warning`"
       />
       <input
-        ref="input"
         :id="cvId"
+        ref="input"
         :class="[
           `${carbonPrefix}--text-input`,
           {
@@ -64,9 +64,9 @@
           `${carbonPrefix}--tooltip--align-center`,
           { [`${carbonPrefix}--btn--disabled`]: $attrs.disabled },
         ]"
-        @click="togglePasswordVisibility"
         type="button"
         :disabled="$attrs.disabled"
+        @click="togglePasswordVisibility"
       >
         <span :class="`${carbonPrefix}--assistive-text`">
           {{ passwordHideShowLabel }}

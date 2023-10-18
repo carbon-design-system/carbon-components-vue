@@ -1,11 +1,11 @@
 <!--suppress HtmlUnknownTag -->
 <template>
   <li
+    :id="uid"
     :class="[
       `cv-progress-step ${carbonPrefix}--progress-step`,
       `${carbonPrefix}--progress-step--${internalState}`,
     ]"
-    :id="uid"
     :aria-disabled="disabled"
   >
     <button

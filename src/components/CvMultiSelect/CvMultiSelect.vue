@@ -150,8 +150,8 @@
         <div
           v-for="(item, index) in data.options"
           ref="elOption"
-          role="menuitem"
           :key="`multi-select-${index}`"
+          role="menuitem"
           :class="[
             `${carbonPrefix}--list-box__menu-item`,
             {

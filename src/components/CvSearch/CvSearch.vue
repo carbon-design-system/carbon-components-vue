@@ -4,6 +4,7 @@
     :class="`cv-search ${carbonPrefix}--form-item`"
   >
     <div
+      ref="elSearch"
       :aria-label="internalAriaLabel"
       :aria-labelledby="internalAriaLabelBy"
       :class="[
@@ -18,7 +19,6 @@
         },
       ]"
       role="search"
-      ref="elSearch"
     >
       <div
         :class="`${carbonPrefix}--search-magnifier`"
@@ -33,20 +33,20 @@
       }}</label>
 
       <input
-        role="searchbox"
         :id="uid"
-        :class="`${carbonPrefix}--search-input`"
         v-bind="$attrs"
-        v-model="internalSearchText"
-        @input="onInput"
-        type="text"
         ref="elInput"
+        v-model="internalSearchText"
+        role="searchbox"
+        :class="`${carbonPrefix}--search-input`"
+        type="text"
         :placeholder="placeholder"
         :aria-labelledby="uid"
+        :disabled="disabled ? 'true' : undefined"
+        @input="onInput"
         @blur="checkFocus"
         @click="toggleActive"
         @keydown.esc="onClearClick"
-        :disabled="disabled ? 'true' : undefined"
       />
 
       <button

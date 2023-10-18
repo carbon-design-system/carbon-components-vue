@@ -1,11 +1,13 @@
 <template>
   <div
-    data-overflow-menu
-    :class="`cv-overflow-menu ${carbonPrefix}--overflow-menu`"
     :id="uid"
     ref="el"
+    data-overflow-menu
+    :class="`cv-overflow-menu ${carbonPrefix}--overflow-menu`"
   >
     <button
+      :id="`${uid}-trigger`"
+      ref="trigger"
       :class="[
         `${carbonPrefix}--overflow-menu__trigger ${carbonPrefix}--tooltip__trigger`,
         `${carbonPrefix}--tooltip--a11y`,
@@ -20,15 +22,13 @@
       :aria-expanded="open ? 'true' : 'false'"
       :aria-controls="`${uid}-menu`"
       :aria-labelledby="`${uid}`"
-      :id="`${uid}-trigger`"
-      ref="trigger"
       @click="doToggle"
       @keydown.space.prevent
       @keyup.space.prevent="doToggle"
       @keydown.enter.prevent="doToggle"
       @keydown.tab="onOverflowMenuTab"
     >
-      <span :class="`${carbonPrefix}--assistive-text`" v-if="label">{{
+      <span v-if="label" :class="`${carbonPrefix}--assistive-text`">{{
         label
       }}</span>
 
@@ -40,6 +40,8 @@
     </button>
     <Teleport to="body">
       <div
+        :id="`${uid}-menu`"
+        ref="popup"
         :class="[
           `${carbonPrefix}--overflow-menu-options`,
           {
@@ -48,16 +50,14 @@
           },
         ]"
         tabindex="-1"
-        ref="popup"
         :aria-labelledby="`${uid}-trigger`"
-        :id="`${uid}-menu`"
         :style="{ left: left + 'px', top: top + 'px' }"
         @focusout="checkFocusOut"
         @mousedown.prevent="preventFocusOut"
       >
         <div
-          class="cv-overflow-menu__before-content"
           ref="beforeContent"
+          class="cv-overflow-menu__before-content"
           tabindex="0"
           style="position: absolute; height: 1px; width: 1px; left: -9999px"
           @focus="focusBeforeContent"
@@ -66,8 +66,8 @@
           <slot></slot>
         </ul>
         <div
-          class="cv-overflow-menu__after-content"
           ref="afterContent"
+          class="cv-overflow-menu__after-content"
           tabindex="0"
           style="position: absolute; height: 1px; width: 1px; left: -9999px"
           @focus="focusAfterContent"

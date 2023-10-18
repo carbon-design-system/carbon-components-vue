@@ -21,9 +21,9 @@
         :class="`${carbonPrefix}--text-area__invalid-icon`"
       />
       <textarea
+        :id="cvId"
         :aria-invalid="isInvalid || null"
         :aria-describedby="isInvalid ? errorId : undefined"
-        :id="cvId"
         :class="[
           `${carbonPrefix}--text-area`,
           {

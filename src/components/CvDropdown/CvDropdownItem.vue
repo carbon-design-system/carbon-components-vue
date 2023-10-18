@@ -20,10 +20,10 @@
     role="menuitem"
   >
     <a
+      ref="link"
       :aria-checked="dataSelected"
       :class="`${carbonPrefix}--dropdown-link`"
       href="javascript:void(0)"
-      ref="link"
       role="menuitemradio"
       tabindex="-1"
     >

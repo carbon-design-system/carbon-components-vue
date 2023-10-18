@@ -1,14 +1,14 @@
 <template>
   <cv-data-table skeleton :data="data" :columns="cols" v-bind="$attrs">
-    <template v-if="hasHelperText" v-slot:helper-text>
+    <template v-if="hasHelperText" #helper-text>
       <slot name="helper-text" />
     </template>
 
-    <template v-if="hasBatchActions" v-slot:batch-actions>
+    <template v-if="hasBatchActions" #batch-actions>
       <slot name="batch-actions" />
     </template>
 
-    <template v-if="hasActions" v-slot:actions>
+    <template v-if="hasActions" #actions>
       <slot name="actions" />
     </template>
   </cv-data-table>

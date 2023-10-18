@@ -1,5 +1,7 @@
 <template>
   <nav
+    :id="id"
+    ref="el"
     :class="[
       `cv-side-nav`,
       `${carbonPrefix}--side-nav`,
@@ -12,18 +14,16 @@
       },
     ]"
     :aria-hidden="!panelExpanded && !fixed ? 'true' : 'false'"
-    :id="id"
     @focusout="onFocusout"
     @mousedown="onMouseDown"
     @mouseenter="onHoverToggle(true)"
     @mouseleave="onHoverToggle(false)"
-    ref="el"
   >
     <slot></slot>
     <cv-side-nav-footer
       v-if="!fixed && !rail && !panelData.headerEmbedded"
       :expanded="panelExpanded"
-      :assistiveText="assistiveToggleText"
+      :assistive-text="assistiveToggleText"
       @toggle-expand="toggleExpand"
     />
   </nav>

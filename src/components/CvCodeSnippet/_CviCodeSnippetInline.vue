@@ -5,10 +5,10 @@
   <cvi-copy-button
     v-else
     :class="classes"
-    @copy="handleCopy"
     :feedback="copyFeedback"
     :feedback-timeout="copyFeedbackTimeout"
     :aria-describedby="codeId"
+    @copy="handleCopy"
   >
     <code :id="codeId" ref="text"><slot /></code>
   </cvi-copy-button>
@@ -21,6 +21,7 @@ import { useCvId } from '../../use';
 import CviCopyButton from '../CvCopyButton/_CviCopyButton.vue';
 
 export default {
+  components: { CviCopyButton },
   props: {
     /** Text shown to user when copying code */
     copyFeedback: {
@@ -44,7 +45,6 @@ export default {
     },
   },
   emits: ['copy'],
-  components: { CviCopyButton },
   setup(props, { emit }) {
     const codeId = useCvId();
     const classes = computed(() => [

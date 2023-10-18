@@ -1,15 +1,15 @@
 <template>
-  <div class="cv-interactive-tooltip" ref="root">
+  <div ref="root" class="cv-interactive-tooltip">
     <div :id="`${cvId}-label`" :class="`${carbonPrefix}--tooltip__label`">
       <slot name="label"></slot>
 
       <button
+        ref="trigger"
         :aria-expanded="dataVisible ? 'true' : 'false'"
         :aria-labelledby="`${cvId}-label`"
         :class="`${carbonPrefix}--tooltip__trigger`"
         :aria-controls="`${cvId}`"
         aria-haspopup="true"
-        ref="trigger"
         type="button"
         @click="toggle(dataVisible)"
         @keydown.tab="onTriggerTab"
@@ -23,6 +23,7 @@
 
     <div
       :id="cvId"
+      ref="popup"
       :aria-hidden="!dataVisible"
       :data-floating-menu-direction="direction"
       :class="[
@@ -33,18 +34,17 @@
           [`${carbonPrefix}--tooltip--align-${alignment}`]: alignment,
         },
       ]"
-      ref="popup"
       role="dialog"
       :aria-describedby="`${cvId}-body`"
       :aria-labelledby="`${cvId}-label`"
-      @focusout="checkFocusOut"
       :style="{ left: left + 'px', top: top + 'px' }"
       tabindex="-1"
+      @focusout="checkFocusOut"
       @mousedown.prevent="preventFocusOut"
     >
       <div
-        class="cv-interactive-tooltip__before-content"
         ref="beforeContent"
+        class="cv-interactive-tooltip__before-content"
         tabindex="0"
         style="position: absolute; left: -9999px; width: 1px; height: 1px"
         @focus="focusBeforeContent"
@@ -54,8 +54,8 @@
         <slot name="content"></slot>
       </div>
       <div
-        class="cv-interactive-tooltip__after-content"
         ref="afterContent"
+        class="cv-interactive-tooltip__after-content"
         tabindex="0"
         style="position: absolute; left: -9999px; width: 1px; height: 1px"
         @focus="focusAfterContent"

@@ -1,5 +1,6 @@
 <template>
   <cv-icon-button
+    :id="uid"
     :class="[
       `cv-header-global-action`,
       `${carbonPrefix}--header__action`,
@@ -8,16 +9,15 @@
     type="button"
     aria-haspopup="true"
     :aria-controls="ariaControls"
+    ref="el"
     :aria-expanded="active ? 'true' : 'false'"
+    :label="label"
+    :tip-alignment="tipAlignment"
+    :tip-position="tipPosition"
     @click="gaToggle"
     @focusout="gaFocusout"
-    :id="uid"
-    :label="label"
-    :tipAlignment="tipAlignment"
-    :tipPosition="tipPosition"
-    ref="el"
   >
-    <template v-slot:icon>
+    <template #icon>
       <slot />
     </template>
   </cv-icon-button>

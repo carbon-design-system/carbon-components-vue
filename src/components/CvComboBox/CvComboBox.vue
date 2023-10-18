@@ -35,6 +35,7 @@
       @click="onClick"
     >
       <div
+        ref="button"
         role="button"
         aria-haspopup="true"
         :aria-expanded="open ? 'true' : 'false'"
@@ -44,10 +45,10 @@
         tabindex="-1"
         :aria-label="open ? 'close menu' : 'open menu'"
         data-toggle="true"
-        ref="button"
       >
         <input
           ref="input"
+          v-model="filter"
           :class="[
             `${carbonPrefix}--text-input`,
             {
@@ -63,7 +64,6 @@
           autocomplete="off"
           :disabled="disabled"
           :placeholder="label"
-          v-model="filter"
           @input="onInput"
           @focus="inputFocus"
           @click.stop.prevent="inputClick"
@@ -107,13 +107,14 @@
       <div
         v-show="open"
         :id="cvId"
+        ref="list"
         :class="[`${carbonPrefix}--list-box__menu`]"
         role="listbox"
-        ref="list"
       >
         <div
           v-for="(item, index) in dataOptions"
           :key="`combo-box-${index}`"
+          ref="option"
           :class="[
             `${carbonPrefix}--list-box__menu-item`,
             {
@@ -121,7 +122,6 @@
                 highlighted === item.value,
             },
           ]"
-          ref="option"
           role="option"
           @click.stop.prevent="onItemClick(item.value)"
           @mousemove="onMousemove(item.value)"

@@ -2,12 +2,12 @@
   <div :class="`cv-pagination ${carbonPrefix}--pagination`" data-pagination>
     <div :class="`${carbonPrefix}--pagination__left`">
       <cv-select
+        ref="pageSizeSelect"
         :class="`${carbonPrefix}--select__item-count`"
         :label="pageSizesLabel"
         inline
-        ref="pageSizeSelect"
-        @change="onPageSizeChange"
         :value="`${pageSizeValue}`"
+        @change="onPageSizeChange"
       >
         <cv-select-option
           v-for="(size, index) in pageSizes"
@@ -21,23 +21,21 @@
 
       <span :class="`${carbonPrefix}--pagination__text`">
         <span data-displayed-item-range>
-          <slot name="range-text" v-bind:scope="rangeProps">{{
-            rangeText
-          }}</slot>
+          <slot name="range-text" :scope="rangeProps">{{ rangeText }}</slot>
         </span>
       </span>
     </div>
 
     <div :class="`${carbonPrefix}--pagination__right`">
       <cv-select
+        v-if="numberOfItems !== Infinity"
+        ref="pageSelect"
         :class="`${carbonPrefix}--select__page-number`"
         :label="pageNumberLabel"
         inline
-        hideLabel
-        ref="pageSelect"
-        @change="onPageChange"
+        hide-label
         :value="`${pageValue}`"
-        v-if="numberOfItems !== Infinity"
+        @change="onPageChange"
       >
         <cv-select-option
           v-for="pageNumber in pages"
@@ -48,9 +46,7 @@
         >
       </cv-select>
       <span :class="`${carbonPrefix}--pagination__text`">
-        <slot name="of-n-pages" v-bind:scope="ofNPagesProps">{{
-          pageOfPages
-        }}</slot>
+        <slot name="of-n-pages" :scope="ofNPagesProps">{{ pageOfPages }}</slot>
       </span>
 
       <button
@@ -61,8 +57,8 @@
         ]"
         data-page-backward
         :aria-label="backwardText"
-        @click="onPrevPage"
         :disabled="noWayBack"
+        @click="onPrevPage"
       >
         <CaretLeft16 :class="`${carbonPrefix}--pagination__button-icon`" />
       </button>
@@ -75,8 +71,8 @@
         ]"
         data-page-forward
         :aria-label="forwardText"
-        @click="onNextPage"
         :disabled="noWayForward"
+        @click="onNextPage"
       >
         <CaretRight16 :class="`${carbonPrefix}--pagination__button-icon`" />
       </button>

@@ -11,6 +11,7 @@
 -->
 <template>
   <button
+    :id="cvId"
     type="button"
     role="tab"
     class="cv-content-switcher-button"
@@ -22,7 +23,6 @@
     ]"
     :data-target="contentSelector"
     :aria-selected="isSelected ? 'true' : 'false'"
-    :id="cvId"
     @click="open"
   >
     <CvSvg

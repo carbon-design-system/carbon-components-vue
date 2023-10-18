@@ -6,6 +6,7 @@
   >
     <div
       v-bind="$attrs"
+      ref="loading"
       data-loading
       :class="{
         'cv-loading': !overlay,
@@ -13,7 +14,6 @@
         [`${carbonPrefix}--loading--stop`]: (!active && stopping) || stopped,
         [`${carbonPrefix}--loading--small`]: small,
       }"
-      ref="loading"
       aria-atomic="true"
       :aria-labelledby="cvId"
       aria-live="assertive"

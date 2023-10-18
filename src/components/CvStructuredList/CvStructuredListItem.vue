@@ -4,7 +4,7 @@
     v-bind="$attrs"
     class="cv-structured-list-item"
     :value="value"
-    :modelValue="modelValue"
+    :model-value="modelValue"
   >
     <slot></slot>
   </component>

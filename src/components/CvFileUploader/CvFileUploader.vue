@@ -89,7 +89,7 @@
         :key="item.file.name"
         :item="item"
         :removable="removable"
-        :removeAriaLabel="removeAriaLabel"
+        :remove-aria-label="removeAriaLabel"
         @remove="onItemRemove(index)"
       />
     </div>
