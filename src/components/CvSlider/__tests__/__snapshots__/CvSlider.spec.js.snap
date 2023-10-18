@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CvSlider should match snapshot 1`] = `
-<div class="cv-slider bx--form-item"><label for="abc" class="bx--label" id="abc-label" style="display: none;"></label>
+<div class="cv-slider bx--form-item"><label id="abc-label" for="abc" class="bx--label" style="display: none;"></label>
   <div class="bx--slider-container"><span class="bx--slider__range-label">0</span>
     <div class="bx--slider" data-slider="" data-slider-input-box="#slider-input-box">
       <div class="bx--slider__track"></div>
