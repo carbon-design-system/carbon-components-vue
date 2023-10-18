@@ -493,4 +493,11 @@ describe('CvTextInputSkeleton', () => {
     );
     expect(div).toBeTruthy();
   });
+  it('is accessible', async () => {
+    const main = document.createElement('main');
+    const skeleton = render(CvTextInputSkeleton, {
+      container: document.body.appendChild(main),
+    });
+    await expect(skeleton.container).toBeAccessible('cv-text-input-skeleton');
+  }, 10000);
 });
