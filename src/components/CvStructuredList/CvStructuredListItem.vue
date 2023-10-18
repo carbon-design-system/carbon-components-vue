@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import { computed, inject, provide } from 'vue';
+import { computed, inject, provide, ref } from 'vue';
 import CvStructuredListItemStandard from './CvStructuredListItemStandard.vue';
 import CvStructuredListItemSelectable from './CvStructuredListItemSelectable.vue';
 
@@ -30,8 +30,8 @@ defineProps({
   },
 });
 
-const selectable = inject('selectable');
-const change = inject('change');
+const selectable = inject('selectable', false);
+const change = inject('change', () => {});
 const emit = defineEmits(['change']);
 
 provide('onRadioItemChange', clickedItemCvId => {
