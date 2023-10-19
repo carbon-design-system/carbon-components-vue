@@ -1,5 +1,5 @@
 import { Canvas, Meta, Story } from '@storybook/addon-docs';
-import { CvProgress, CvProgressStep } from '.';
+import { CvProgress, CvProgressStep, CvProgressSkeleton } from '.';
 import { Time20 as TimeIcon } from '@carbon/icons-vue';
 // noinspection ES6PreferShortImport
 import { sbCompPrefix } from '../../global/storybook-utils';
@@ -13,6 +13,7 @@ export const Template = args => ({
     CvProgress,
     CvProgressStep,
     TimeIcon,
+    CvProgressSkeleton
   },
   // The story's `args` need to be mapped into the template through the `setup()` method
   setup() {
@@ -106,6 +107,7 @@ const slotTemplate = `
     </cv-progress-step>
   </cv-progress>
 `;
+const skeletonTemplate = `<cv-progress-skeleton :vertical="vertical" />`;
 
 # CvProgress
 
@@ -195,6 +197,26 @@ Use `cv-progress-step` for more control over the display.
         control: 'multi-select',
         options: ['step-1', 'step-2', 'step-3', 'step-4', 'step-5'],
       },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+# Skeleton
+
+<Canvas>
+  <Story
+    name="skeleton"
+    parameters={{
+      controls: {
+        include: ['vertical']
+      },
+      docs: { source: { code: skeletonTemplate } },
+    }}
+    args={{
+      template: skeletonTemplate,
+      vertical: false,
     }}
   >
     {Template.bind({})}

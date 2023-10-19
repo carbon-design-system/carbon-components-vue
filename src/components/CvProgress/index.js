@@ -1,4 +1,6 @@
 import CvProgress from './CvProgress.vue';
 import CvProgressStep from './CvProgressStep.vue';
 
-export { CvProgress, CvProgressStep };
+import CvProgressSkeleton from './CvProgressSkeleton.vue';
+
+export { CvProgress, CvProgressStep, CvProgressSkeleton };
