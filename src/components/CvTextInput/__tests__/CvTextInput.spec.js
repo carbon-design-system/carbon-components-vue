@@ -1,6 +1,6 @@
 import { render } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
-import CvTextInput from '..';
+import { CvTextInput, CvTextInputSkeleton } from '..';
 
 describe('CvTextInput', () => {
   it("renders label when 'label' prop is passed", () => {
@@ -458,4 +458,46 @@ describe('CvTextInput', () => {
       expect(button).not.toBeNull();
     });
   });
+});
+
+describe('CvTextInputSkeleton', () => {
+  it("renders label when 'hideLabel' prop is omitted", async () => {
+    const skeleton = render(CvTextInputSkeleton);
+    const label = skeleton.container.querySelector(
+      'span.bx--label.bx--skeleton'
+    );
+    expect(label).toBeTruthy();
+  });
+  it("renders label when 'hideLabel' prop is false", async () => {
+    const skeleton = render(CvTextInputSkeleton, {
+      props: { hideLabel: false },
+    });
+    const label = skeleton.container.querySelector(
+      'span.bx--label.bx--skeleton'
+    );
+    expect(label).toBeTruthy();
+  });
+  it("does not render label when 'hideLabel' prop is true", async () => {
+    const skeleton = render(CvTextInputSkeleton, {
+      props: { hideLabel: true },
+    });
+    const label = skeleton.container.querySelector(
+      'span.bx--label.bx--skeleton'
+    );
+    expect(label).toBeFalsy();
+  });
+  it('renders div with correct class', async () => {
+    const skeleton = render(CvTextInputSkeleton);
+    const div = skeleton.container.querySelector(
+      'div.bx--text-input.bx--skeleton'
+    );
+    expect(div).toBeTruthy();
+  });
+  it('is accessible', async () => {
+    const main = document.createElement('main');
+    const skeleton = render(CvTextInputSkeleton, {
+      container: document.body.appendChild(main),
+    });
+    await expect(skeleton.container).toBeAccessible('cv-text-input-skeleton');
+  }, 10000);
 });

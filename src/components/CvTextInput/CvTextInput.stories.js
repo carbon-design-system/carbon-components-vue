@@ -3,7 +3,7 @@ import {
   storyParametersObject,
 } from '../../global/storybook-utils';
 
-import CvTextInput from '.';
+import { CvTextInput, CvTextInputSkeleton } from '.';
 import { ref } from 'vue';
 
 export default {
@@ -242,4 +242,27 @@ Password.parameters = storyParametersObject(
   Password.parameters,
   template,
   Password.args
+);
+
+const templateSkeleton = `<cv-text-input-skeleton v-bind='args'/>`;
+const TemplateSkeleton = args => {
+  return {
+    components: { CvTextInputSkeleton },
+    setup: () => ({ args }),
+    template: templateSkeleton,
+  };
+};
+
+export const Skeleton = TemplateSkeleton.bind({});
+
+Skeleton.parameters = {
+  controls: {
+    include: ['hideLabel'],
+  },
+};
+
+Skeleton.parameters = storyParametersObject(
+  Skeleton.parameters,
+  templateSkeleton,
+  Skeleton.args
 );
