@@ -10,7 +10,7 @@ export default {
   title: `${sbCompPrefix}/CvTag`,
   component: CvTag,
   argTypes: {
-    kind: { control: { type: 'select', options: tagKinds } },
+    kind: { control: 'select', options: tagKinds },
   },
 };
 

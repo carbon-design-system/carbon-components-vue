@@ -26,7 +26,7 @@ export default {
 const template = `<div>
 <div class="loading-story">
 <cv-loading @loading-end="onLoadingEnd" v-bind="args" :active="isActive"/>
-</divclass>
+</div>
 <button @click="makeActive" :disabled="isActive" style="margin-top: 2rem;">{{buttonLabel}}</button>
 </div>`;
 let hidden = ref(true);
