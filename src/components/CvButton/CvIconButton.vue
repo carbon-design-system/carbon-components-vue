@@ -24,6 +24,7 @@ import {
   props as commonCvButtonProps,
   useCvButtonCommon,
 } from './CvButtonCommon';
+import { TipAlignments } from '../CvTooltip/consts.js';
 import CvSvg from '../CvSvg/_CvSvg.vue';
 
 const { disabled, icon, kind, size } = commonCvButtonProps;
@@ -38,7 +39,7 @@ export default {
      */
     disabled,
     /**
-     * \@carbon/icons-vue icon, href, svg or symbol
+     * @carbon/icons-vue icon, href, svg or symbol
      */
     icon,
     /**
@@ -67,7 +68,7 @@ export default {
     tipAlignment: {
       type: String,
       default: 'center',
-      validator: val => ['start', 'center', 'end'].includes(val),
+      validator: val => Object.values(TipAlignments).includes(val),
     },
   },
   emits: ['click'],
