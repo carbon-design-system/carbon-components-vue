@@ -8,6 +8,7 @@
   >
     <li
       v-for="n in 4"
+      v-bind:key="n"
       :class="[
         `${carbonPrefix}--progress-step`,
         `${carbonPrefix}--progress-step--incomplete`,
