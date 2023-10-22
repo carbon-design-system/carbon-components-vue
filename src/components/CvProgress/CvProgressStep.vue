@@ -1,11 +1,11 @@
 <!--suppress HtmlUnknownTag -->
 <template>
   <li
+    :id="uid"
     :class="[
       `cv-progress-step ${carbonPrefix}--progress-step`,
       `${carbonPrefix}--progress-step--${internalState}`,
     ]"
-    :id="uid"
     :aria-disabled="disabled"
   >
     <button
@@ -62,12 +62,12 @@ const STEP_INCOMPLETE = 'incomplete';
 const STEP_DISABLED = 'disabled';
 
 const props = defineProps({
-  additionalInfo: String,
-  description: String,
+  additionalInfo: { type: String, default: undefined },
+  description: { type: String, default: undefined },
   disabled: Boolean,
   invalid: Boolean,
-  label: String,
-  tipText: String,
+  label: { type: String, default: undefined },
+  tipText: { type: String, default: undefined },
   complete: Boolean,
   ...propsCvId,
 });

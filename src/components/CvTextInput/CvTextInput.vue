@@ -24,7 +24,7 @@
         `${carbonPrefix}--text-input__field-wrapper`,
         { [`${carbonPrefix}--text-input__field-wrapper--warning`]: isWarn },
       ]"
-      :data-invalid="isInvalid"
+      :data-invalid="isInvalid || null"
     >
       <WarningFilled16
         v-if="isInvalid"
@@ -35,8 +35,8 @@
         :class="`${carbonPrefix}--text-input__invalid-icon ${carbonPrefix}--text-input__invalid-icon--warning`"
       />
       <input
-        ref="input"
         :id="cvId"
+        ref="input"
         :class="[
           `${carbonPrefix}--text-input`,
           {
@@ -49,7 +49,7 @@
         v-bind="$attrs"
         :type="dataType"
         :value="modelValue"
-        :data-toggle-password-visibility="isPassword"
+        :data-toggle-password-visibility="isPassword || null"
         @input="$event => $emit('update:modelValue', $event.target.value)"
       />
       <button
@@ -64,9 +64,9 @@
           `${carbonPrefix}--tooltip--align-center`,
           { [`${carbonPrefix}--btn--disabled`]: $attrs.disabled },
         ]"
-        @click="togglePasswordVisibility"
         type="button"
         :disabled="$attrs.disabled"
+        @click="togglePasswordVisibility"
       >
         <span :class="`${carbonPrefix}--assistive-text`">
           {{ passwordHideShowLabel }}
@@ -118,24 +118,54 @@ import { useIsLight, props as propsTheme } from '../../use/cvTheme';
 import { inputTypes } from './const';
 
 const props = defineProps({
+  /**
+   * Provide text that is used alongside the control label for additional help
+   */
   helperText: { type: String, default: undefined },
+  /**
+   * Specify whether you want the underlying label to be visually hidden
+   */
   hideLabel: { type: Boolean, default: false },
+  /**
+   * Provide the text that is displayed when the control is in an invalid state
+   */
   invalidMessage: { type: String, default: undefined },
-  label: String,
-  modelValue: String,
+  /**
+   * Input's label
+   */
+  label: { type: String, default: undefined },
+  /**
+   * Input's value, modelValue is the vue3 default 'prop' for two-way data binding with v-model
+   */
+  modelValue: { type: String, default: undefined },
+  /**
+   * Hide password" tooltip text on password visibility toggle
+   */
   passwordHideLabel: { type: String, default: 'Hide password' },
+  /**
+   * Show password tooltip text on password visibility toggle
+   */
   passwordShowLabel: { type: String, default: 'Show password' },
+  /**
+   * Toggle password visibility
+   */
   passwordVisible: { type: Boolean, default: undefined },
+  /**
+   * Input type, only `text` and `password` are available
+   */
   type: {
     type: String,
     default: 'text',
     validator: value => inputTypes.has(value),
   },
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
   warnText: { type: String, default: undefined },
   ...propsCvId,
   ...propsTheme,
 });
-
+defineEmits(['update:modelValue']);
 const cvId = useCvId(props);
 
 // DOM Elements

@@ -1,9 +1,9 @@
 <template>
   <Teleport to="body" :disabled="disableTeleport">
     <div
+      :id="uid"
       ref="el"
       data-modal
-      :id="uid"
       :class="[
         `cv-modal ${carbonPrefix}--modal`,
         {
@@ -12,24 +12,24 @@
         },
       ]"
       tabindex="-1"
+      v-bind="$attrs"
       @keydown.esc.prevent="onEsc"
       @click.self="onExternalClick"
-      v-bind="$attrs"
     >
       <div
+        v-bind="dialogAttrs"
+        ref="modalDialog"
         :class="[
           `${carbonPrefix}--modal-container`,
           {
             [`${carbonPrefix}--modal-container--${internalSize}`]: internalSize,
           },
         ]"
-        v-bind="dialogAttrs"
         :aria-label="ariaLabel"
-        ref="modalDialog"
       >
         <div
-          class="cv-modal__before-content"
           ref="beforeContent"
+          class="cv-modal__before-content"
           tabindex="0"
           style="position: absolute; height: 1px; width: 1px; left: -9999px"
           role="separator"
@@ -44,28 +44,29 @@
             <slot name="title">Modal Title</slot>
           </p>
           <button
+            ref="closeBtn"
             :class="`${carbonPrefix}--modal-close`"
             type="button"
-            @click="onClose"
-            ref="closeBtn"
             :aria-label="closeAriaLabel"
+            @click="onClose"
           >
             <Close16 :class="`${carbonPrefix}--modal-close__icon`" />
           </button>
         </div>
 
         <div
+          ref="content"
           :class="[
             `${carbonPrefix}--modal-content`,
             { [`${carbonPrefix}--modal-content--with-form`]: hasFormContent },
           ]"
-          ref="content"
           :tabindex="data.scrollable ? 0 : undefined"
         >
           <slot name="content"></slot>
         </div>
 
         <cv-button-set
+          v-if="data.hasFooter"
           :class="[
             `${carbonPrefix}--modal-footer`,
             {
@@ -73,40 +74,39 @@
                 data.hasPrimary && data.hasSecondary && data.hasOtherBtn,
             },
           ]"
-          v-if="data.hasFooter"
         >
           <cv-button
+            v-if="data.hasOtherBtn"
+            ref="otherBtn"
             type="button"
             kind="secondary"
             @click="onOtherBtnClick"
-            v-if="data.hasOtherBtn"
-            ref="otherBtn"
           >
             <slot name="other-button">Other button</slot>
           </cv-button>
           <cv-button
+            v-if="data.hasSecondary"
+            ref="secondaryBtn"
             type="button"
             kind="secondary"
             @click="onSecondaryClick"
-            v-if="data.hasSecondary"
-            ref="secondaryBtn"
           >
             <slot name="secondary-button">Secondary button</slot>
           </cv-button>
           <cv-button
+            v-if="data.hasPrimary"
+            ref="primary"
             :disabled="primaryButtonDisabled"
             type="button"
             :kind="primaryKind"
             @click="onPrimaryClick"
-            v-if="data.hasPrimary"
-            ref="primary"
           >
             <slot name="primary-button">Primary button</slot>
           </cv-button>
         </cv-button-set>
         <div
-          class="cv-modal__after-content"
           ref="afterContent"
+          class="cv-modal__after-content"
           tabindex="0"
           style="position: absolute; height: 1px; width: 1px; left: -9999px"
           role="separator"
@@ -201,9 +201,9 @@ const props = defineProps({
   disableTeleport: { type: Boolean, default: false },
 
   // Listeners
-  onPrimaryClick: { type: Function },
-  onSecondaryClick: { type: Function },
-  onOtherBtnClick: { type: Function },
+  onPrimaryClick: { type: Function, default: undefined },
+  onSecondaryClick: { type: Function, default: undefined },
+  onOtherBtnClick: { type: Function, default: undefined },
 
   ...propsCvId,
 });

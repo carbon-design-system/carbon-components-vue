@@ -56,7 +56,7 @@ export default {
       type: String,
       default: '',
     },
-    /** Notification sub title (supports HTML) */
+    /** Notification subtitle (supports HTML) */
     subTitle: {
       type: String,
       default: '',

@@ -15,9 +15,9 @@
       <button
         v-if="expandingRow"
         :class="`${carbonPrefix}--table-expand__button`"
-        @click="toggleExpand"
         type="button"
         :aria-label="dataExpanded ? ariaLabelCollapseRow : ariaLabelExpandRow"
+        @click="toggleExpand"
       >
         <ChevronRight16 :class="`${carbonPrefix}--table-expand__svg`" />
       </button>
@@ -28,16 +28,16 @@
       :class="`${carbonPrefix}--table-column-checkbox`"
     >
       <cv-checkbox
+        ref="rowChecked"
+        v-model="dataChecked"
         :form-item="false"
         :value="value"
         :inline="true"
-        v-model="dataChecked"
-        @change="onChange"
-        ref="rowChecked"
         :label="
           ariaLabelForBatchCheckbox || `Select row ${value} for batch action`
         "
-        hideLabel
+        hide-label
+        @change="onChange"
       />
     </td>
     <slot />
@@ -71,15 +71,15 @@ import store from './cvDataTableStore';
 import { getBus } from '../../global/component-utils/event-bus';
 
 const props = defineProps({
-  ariaLabelForBatchCheckbox: String,
+  ariaLabelForBatchCheckbox: { type: String, default: undefined },
   checked: Boolean,
   expanded: Boolean,
   expandingRow: Boolean,
   ariaLabelExpandRow: { type: String, default: 'Expand current row' },
   ariaLabelCollapseRow: { type: String, default: 'Collapse current row' },
-  overflowMenu: Array,
-  value: String,
-  rowId: String,
+  overflowMenu: { type: Array, default: () => [] },
+  value: { type: String, default: undefined },
+  rowId: { type: String, default: undefined },
 });
 
 const dataSomeExpandingRows = computed(() => {

@@ -1,5 +1,5 @@
 <template>
-  <div :style="tableStyle" class="cv-data-table" :id="uid">
+  <div :id="uid" :style="tableStyle" class="cv-data-table">
     <div
       :class="[
         `${carbonPrefix}--data-table-container`,
@@ -10,7 +10,7 @@
       ]"
     >
       <div v-if="hasTableHeader" :class="`${carbonPrefix}--data-table-header`">
-        <h4 :class="`${carbonPrefix}--data-table-header__title`" v-if="title">
+        <h4 v-if="title" :class="`${carbonPrefix}--data-table-header__title`">
           {{ title }}
         </h4>
         <p
@@ -22,8 +22,8 @@
       </div>
       <section v-if="hasToolbar" :class="`${carbonPrefix}--table-toolbar`">
         <div
-          :aria-hidden="!batchActive"
           v-show="hasBatchActions"
+          :aria-hidden="!batchActive"
           :class="[
             `${carbonPrefix}--batch-actions`,
             { [`${carbonPrefix}--batch-actions--active`]: batchActive },
@@ -44,7 +44,7 @@
               <span data-items-selected>
                 <slot
                   name="items-selected"
-                  v-bind:scope="{ count: dataRowsSelected.length }"
+                  :scope="{ count: dataRowsSelected.length }"
                   >{{ dataRowsSelected.length }} items selected</slot
                 >
               </span>
@@ -54,6 +54,7 @@
         <div :class="`${carbonPrefix}--toolbar-content`">
           <div
             v-if="onSearch"
+            ref="searchContainer"
             :aria-labelledby="`${uid}-search`"
             :class="[
               `${carbonPrefix}--search `,
@@ -67,9 +68,8 @@
               },
             ]"
             role="search"
-            ref="searchContainer"
           >
-            <div :class="`${carbonPrefix}--search-magnifier`" ref="magnifier">
+            <div ref="magnifier" :class="`${carbonPrefix}--search-magnifier`">
               <Search16 :class="`${carbonPrefix}--search-magnifier-icon`" />
             </div>
             <label
@@ -79,14 +79,14 @@
               >{{ searchLabel }}</label
             >
             <input
+              :id="`searchbox-${uid}`"
+              ref="search"
+              v-model="searchValue"
               :class="`${carbonPrefix}--search-input`"
               type="text"
-              :id="`searchbox-${uid}`"
               role="searchbox"
               :placeholder="searchPlaceholder"
               :aria-labelledby="`searchbox-${uid}`"
-              ref="search"
-              v-model="searchValue"
               @input="onInternalSearch"
               @click="checkSearchExpand(true)"
               @keydown.esc.prevent="checkSearchExpand(false)"
@@ -103,8 +103,8 @@
               ]"
               :title="searchClearLabel"
               :aria-label="searchClearLabel"
-              @click="onClearClick"
               type="button"
+              @click="onClearClick"
             >
               <Close16 />
             </button>
@@ -141,11 +141,11 @@
                   <button
                     v-if="hasExpandAll"
                     :class="`${carbonPrefix}--table-expand__button`"
-                    @click="toggleExpandAll"
                     type="button"
                     :aria-label="
                       dataExpandAll ? collapseAllAriaLabel : expandAllAriaLabel
                     "
+                    @click="toggleExpandAll"
                   >
                     <ChevronRight16
                       :class="`${carbonPrefix}--table-expand__svg`"
@@ -158,12 +158,12 @@
                   :class="`${carbonPrefix}--table-column-checkbox`"
                 >
                   <cv-checkbox
+                    v-model="headingChecked"
                     :form-item="false"
                     value="headingCheck"
-                    v-model="headingChecked"
-                    @change="onHeadingCheckChange"
                     :label="selectAllAriaLabel"
-                    hideLabel
+                    hide-label
+                    @change="onHeadingCheckChange"
                   />
                 </th>
                 <slot name="headings">
@@ -186,8 +186,8 @@
                 <cv-data-table-row
                   v-for="(row, rowIndex) in data"
                   :key="`row:${rowIndex}`"
-                  :value="`${rowIndex}`"
                   ref="dataRows"
+                  :value="`${rowIndex}`"
                   :overflow-menu="overflowMenu"
                 >
                   <cv-data-table-cell
@@ -212,12 +212,12 @@
       :number-of-items="internalNumberOfItems"
       @change="$emit('pagination', $event)"
     >
-      <template v-slot:range-text="{ scope }">
-        <slot name="range-text" v-bind:scope="scope" />
+      <template #range-text="{ scope }">
+        <slot name="range-text" :scope="scope" />
       </template>
 
-      <template v-slot:of-n-pages="{ scope }">
-        <slot name="of-n-pages" v-bind:scope="scope"></slot>
+      <template #of-n-pages="{ scope }">
+        <slot name="of-n-pages" :scope="scope"></slot>
       </template>
     </cv-pagination>
   </div>
@@ -316,7 +316,7 @@ const props = defineProps({
    * can be sorted
    */
   sortable: { type: Boolean, default: false },
-  title: String,
+  title: { type: String, default: undefined },
   /**
    * An array containing a list of columns
    * - Columns can be string labels or objects
@@ -326,11 +326,11 @@ const props = defineProps({
    *   - Optionally a dataStyle object to be applied to the data in the column.
    *   - Optionally a sortable property - if any column sets this to true then only columns with sortable set to true are sortable. NOTE: table sortable property not required.
    */
-  columns: Array,
+  columns: { type: Array, default: () => [] },
   /**
    * Two-dimensional array of strings.
    */
-  data: Array,
+  data: { type: Array, default: () => [] },
   /**
    * the table striped
    */
@@ -351,7 +351,7 @@ const props = defineProps({
    * Use a width of 'auto' instead of 100%
    */
   staticWidth: { type: Boolean, default: false },
-  onSearch: { type: Function },
+  onSearch: { type: Function, default: undefined },
   ...propsCvId,
 });
 const uid = useCvId(props, true);
@@ -554,7 +554,8 @@ const clearSearchVisible = ref(false);
 function onClearClick() {
   searchValue.value = '';
   clearSearchVisible.value = false;
-  emit('search', searchValue.value);
+  // eslint-disable-next-line vue/require-explicit-emits
+  emit('search', searchValue.value); // see comment above in defineEmits
   nextTick(() => {
     search.value?.focus();
   });
@@ -608,6 +609,7 @@ function onMenuItemClick(val) {
 }
 function onInternalSearch() {
   clearSearchVisible.value = searchValue.value.length > 0;
+  // eslint-disable-next-line vue/require-explicit-emits
   emit('search', searchValue.value);
 }
 function onSort(payload) {

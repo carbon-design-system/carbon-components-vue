@@ -1,17 +1,17 @@
 <template>
   <tbody
     v-if="dataSomeExpandingRows"
-    class="cv-data-table-row cv-data-table-row--expandable"
     :id="cvId"
+    class="cv-data-table-row cv-data-table-row--expandable"
   >
     <cv-data-table-row-inner
       ref="row"
-      :rowId="cvId"
+      :row-id="cvId"
       v-bind="$attrs"
       :expanding-row="dataExpandable"
+      :expanded="dataExpanded"
       @expanded-change="onExpandedChange"
       @checked-change="onCheckedChange"
-      :expanded="dataExpanded"
     >
       <slot />
     </cv-data-table-row-inner>
@@ -29,11 +29,11 @@
   </tbody>
   <cv-data-table-row-inner
     v-else
-    ref="row"
     v-bind="$attrs"
-    class="cv-data-table-row"
     :id="cvId"
-    :rowId="cvId"
+    ref="row"
+    class="cv-data-table-row"
+    :row-id="cvId"
     @checked-change="onCheckedChange"
   >
     <slot />

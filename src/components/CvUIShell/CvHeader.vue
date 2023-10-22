@@ -1,5 +1,5 @@
 <template>
-  <header :class="`cv-header ${carbonPrefix}--header`" data-header :id="uid">
+  <header :id="uid" :class="`cv-header ${carbonPrefix}--header`" data-header>
     <slot />
     <div v-if="hasGlobalHeader" :class="`${carbonPrefix}--header__global`">
       <slot name="header-global" />

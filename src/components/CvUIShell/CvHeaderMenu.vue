@@ -1,9 +1,9 @@
 <template>
   <li
+    ref="el"
     :class="`cv-header-menu ${carbonPrefix}--header__submenu`"
     @mouseenter="doHoverToggle(true)"
     @mouseleave="doHoverToggle(false)"
-    ref="el"
   >
     <a
       aria-haspopup="true"
@@ -26,11 +26,11 @@
       />
     </a>
     <ul
+      ref="menu"
       :aria-label="$attrs.ariaLabel"
       :aria-labelledby="$attrs.ariaLabelledBy"
       :class="`${carbonPrefix}--header__menu`"
       role="menu"
-      ref="menu"
       @focusout="onFocusout"
     >
       <slot></slot>
@@ -44,7 +44,7 @@ import ChevronDownGlyph from '@carbon/icons-vue/es/chevron--down';
 import { reactive, ref } from 'vue';
 
 const props = defineProps({
-  title: String,
+  title: { type: String, default: undefined },
   hoverToggle: { type: Boolean, default: true },
 });
 const data = reactive({

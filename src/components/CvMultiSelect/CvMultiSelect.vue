@@ -45,7 +45,7 @@
           [`${carbonPrefix}--combo-box`]: isFilterable,
         },
       ]"
-      :data-invalid="data.isInvalid ? true : undefined"
+      :data-invalid="data.isInvalid || null"
       v-bind="$attrs"
       @keydown.down.prevent="onDown"
       @keydown.up.prevent="onUp"
@@ -150,8 +150,8 @@
         <div
           v-for="(item, index) in data.options"
           ref="elOption"
-          role="menuitem"
           :key="`multi-select-${index}`"
+          role="menuitem"
           :class="[
             `${carbonPrefix}--list-box__menu-item`,
             {
@@ -281,7 +281,7 @@ const props = defineProps({
   /**
    * The value of an option to initially highlight
    */
-  highlight: String,
+  highlight: { type: String, default: undefined },
   /**
    * Specify 'true' to create an inline multi-select.
    */
@@ -341,7 +341,7 @@ const props = defineProps({
   /**
    * Provide text to be used in a <label> element that is tied to the multiselect via ARIA attributes.
    */
-  title: String,
+  title: { type: String, default: undefined },
   /***
    * Allow users to pass in arbitrary items from their collection that are pre-selected
    */

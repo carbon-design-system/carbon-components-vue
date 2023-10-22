@@ -1,5 +1,6 @@
 <template>
   <li
+    ref="el"
     :class="[
       `cv-overflow-menu-item ${carbonPrefix}--overflow-menu-options__option`,
       {
@@ -8,7 +9,6 @@
       },
     ]"
     @keydown.esc.prevent="onEsc"
-    ref="el"
   >
     <button
       type="button"

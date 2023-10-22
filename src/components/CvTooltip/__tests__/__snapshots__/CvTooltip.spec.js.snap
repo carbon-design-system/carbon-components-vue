@@ -1,44 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CvDefinitionTooltip should render definition tooltip with aligment and direction set as expected 1`] = `
-<div class="cv-definition-tooltip bx--tooltip--definition bx--tooltip--a11y" id="test-1"><button aria-describedby="test-1-label" class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--bottom bx--tooltip--align-end" type="button">A term needeing definition</button>
-  <div class="bx--assistive-text" id="test-1-label" role="tooltip">Brief description of the dotted, underlined term</div>
+<div id="test-1" class="cv-definition-tooltip bx--tooltip--definition bx--tooltip--a11y"><button aria-describedby="test-1-label" class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--bottom bx--tooltip--align-end" type="button">A term needeing definition</button>
+  <div id="test-1-label" class="bx--assistive-text" role="tooltip">Brief description of the dotted, underlined term</div>
 </div>
 `;
 
 exports[`CvDefinitionTooltip should render definition tooltip with aligment set to \`center\` as expected 1`] = `
-<div class="cv-definition-tooltip bx--tooltip--definition bx--tooltip--a11y" id="test-1"><button aria-describedby="test-1-label" class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--top bx--tooltip--align-center" type="button">A term needeing definition</button>
-  <div class="bx--assistive-text" id="test-1-label" role="tooltip">Brief description of the dotted, underlined term</div>
+<div id="test-1" class="cv-definition-tooltip bx--tooltip--definition bx--tooltip--a11y"><button aria-describedby="test-1-label" class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--top bx--tooltip--align-center" type="button">A term needeing definition</button>
+  <div id="test-1-label" class="bx--assistive-text" role="tooltip">Brief description of the dotted, underlined term</div>
 </div>
 `;
 
 exports[`CvDefinitionTooltip should render definition tooltip with aligment set to \`end\` as expected 1`] = `
-<div class="cv-definition-tooltip bx--tooltip--definition bx--tooltip--a11y" id="test-1"><button aria-describedby="test-1-label" class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--top bx--tooltip--align-end" type="button">A term needeing definition</button>
-  <div class="bx--assistive-text" id="test-1-label" role="tooltip">Brief description of the dotted, underlined term</div>
+<div id="test-1" class="cv-definition-tooltip bx--tooltip--definition bx--tooltip--a11y"><button aria-describedby="test-1-label" class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--top bx--tooltip--align-end" type="button">A term needeing definition</button>
+  <div id="test-1-label" class="bx--assistive-text" role="tooltip">Brief description of the dotted, underlined term</div>
 </div>
 `;
 
 exports[`CvDefinitionTooltip should render definition tooltip with aligment set to \`start\` as expected 1`] = `
-<div class="cv-definition-tooltip bx--tooltip--definition bx--tooltip--a11y" id="test-1"><button aria-describedby="test-1-label" class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--top bx--tooltip--align-start" type="button">A term needeing definition</button>
-  <div class="bx--assistive-text" id="test-1-label" role="tooltip">Brief description of the dotted, underlined term</div>
+<div id="test-1" class="cv-definition-tooltip bx--tooltip--definition bx--tooltip--a11y"><button aria-describedby="test-1-label" class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--top bx--tooltip--align-start" type="button">A term needeing definition</button>
+  <div id="test-1-label" class="bx--assistive-text" role="tooltip">Brief description of the dotted, underlined term</div>
 </div>
 `;
 
 exports[`CvDefinitionTooltip should render definition tooltip with direction set to \`bottom\` as expected 1`] = `
-<div class="cv-definition-tooltip bx--tooltip--definition bx--tooltip--a11y" id="test-1"><button aria-describedby="test-1-label" class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--bottom bx--tooltip--align-center" type="button">A term needeing definition</button>
-  <div class="bx--assistive-text" id="test-1-label" role="tooltip">Brief description of the dotted, underlined term</div>
+<div id="test-1" class="cv-definition-tooltip bx--tooltip--definition bx--tooltip--a11y"><button aria-describedby="test-1-label" class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--bottom bx--tooltip--align-center" type="button">A term needeing definition</button>
+  <div id="test-1-label" class="bx--assistive-text" role="tooltip">Brief description of the dotted, underlined term</div>
 </div>
 `;
 
 exports[`CvDefinitionTooltip should render definition tooltip with direction set to \`top\` as expected 1`] = `
-<div class="cv-definition-tooltip bx--tooltip--definition bx--tooltip--a11y" id="test-1"><button aria-describedby="test-1-label" class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--top bx--tooltip--align-center" type="button">A term needeing definition</button>
-  <div class="bx--assistive-text" id="test-1-label" role="tooltip">Brief description of the dotted, underlined term</div>
+<div id="test-1" class="cv-definition-tooltip bx--tooltip--definition bx--tooltip--a11y"><button aria-describedby="test-1-label" class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--top bx--tooltip--align-center" type="button">A term needeing definition</button>
+  <div id="test-1-label" class="bx--assistive-text" role="tooltip">Brief description of the dotted, underlined term</div>
 </div>
 `;
 
 exports[`CvDefinitionTooltip should render definition tooltip: minimal as expected 1`] = `
-<div class="cv-definition-tooltip bx--tooltip--definition bx--tooltip--a11y" id="test-1"><button aria-describedby="test-1-label" class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--top bx--tooltip--align-center" type="button">A term needeing definition</button>
-  <div class="bx--assistive-text" id="test-1-label" role="tooltip">Brief description of the dotted, underlined term</div>
+<div id="test-1" class="cv-definition-tooltip bx--tooltip--definition bx--tooltip--a11y"><button aria-describedby="test-1-label" class="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--top bx--tooltip--align-center" type="button">A term needeing definition</button>
+  <div id="test-1-label" class="bx--assistive-text" role="tooltip">Brief description of the dotted, underlined term</div>
 </div>
 `;
 

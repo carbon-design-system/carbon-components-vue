@@ -6,6 +6,7 @@ import {
   storybookControlsFromProps,
   storyParametersObject,
 } from '../../global/storybook-utils';
+import { TipAlignments } from '../CvTooltip/consts.js';
 import { sbBtnPrefix } from './sbBtnPrefix';
 
 import { props as commonCvButtonProps } from './CvButtonCommon';
@@ -32,28 +33,24 @@ export default {
   component: CvIconButton,
   argTypes: {
     ...storybookControlsFromProps(commonCvButtonProps),
-    /**
-     * \@carbon/icons-vue icon, href, svg or symbol
-     */
     icon: {
-      control: {
-        type: 'select',
-        options: Object.keys(icons),
-      },
+      control: 'select',
+      options: Object.keys(icons),
     },
-    /**
-     * Carbon button kind
-     */
     kind: {
-      control: { type: 'select', options: buttonKinds },
-      defaultValue: CvIconButton.props.kind.default,
+      control: 'select',
+      options: buttonKinds,
+      default: CvIconButton.props.kind.default,
     },
-    /**
-     * Size of the button
-     */
     size: {
-      control: { type: 'select', options: buttonSizes },
-      defaultValue: CvIconButton.props.size.default,
+      control: 'select',
+      options: buttonSizes,
+      default: CvIconButton.props.size.default,
+    },
+    tipAlignment: {
+      control: 'select',
+      options: Object.values(TipAlignments),
+      default: CvIconButton.props.tipAlignment.default,
     },
   },
 };

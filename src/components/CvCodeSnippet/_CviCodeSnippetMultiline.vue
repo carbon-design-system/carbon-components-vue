@@ -32,8 +32,8 @@
       :feedback="copyFeedback"
       :feedback-timeout="copyFeedbackTimeout"
       :icon-description="ariaLabel"
-      @copy="handleCopy"
       :disabled="disabled"
+      @copy="handleCopy"
     />
     <cv-button
       v-if="showMoreLessButton"
@@ -67,6 +67,11 @@ import { ChevronDown16 } from '@carbon/icons-vue';
 const ROW_HEIGHT_IN_PX = 16;
 
 export default {
+  components: {
+    CvCopyButton,
+    CvButton,
+    ChevronDown16,
+  },
   props: {
     /** Text shown to user when copying code */
     copyFeedback: {
@@ -135,11 +140,6 @@ export default {
     },
   },
   emits: ['copy'],
-  components: {
-    CvCopyButton,
-    CvButton,
-    ChevronDown16,
-  },
   setup: (props, { emit }) => {
     const {
       minCollapsedNumberOfRows: minCollapsed,

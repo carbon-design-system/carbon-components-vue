@@ -16,7 +16,7 @@ import { carbonPrefix } from '../../global/settings';
 import { useTagType, useLinkProps, props as propsLink } from '../../use/cvLink';
 
 const props = defineProps({
-  prefix: String,
+  prefix: { type: String, default: undefined },
   ...propsLink,
 });
 

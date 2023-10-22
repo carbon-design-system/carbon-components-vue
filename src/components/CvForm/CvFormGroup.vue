@@ -4,7 +4,7 @@
       `cv-form-group ${carbonPrefix}--fieldset`,
       { [`${carbonPrefix}--fieldset--no-margin`]: noMargin },
     ]"
-    :data-invalid="invalid"
+    :data-invalid="invalid || null"
   >
     <legend :class="`${carbonPrefix}--label`">
       <slot name="label"></slot>
@@ -21,7 +21,7 @@ import { carbonPrefix } from '../../global/settings';
 
 defineProps({
   invalid: Boolean,
-  message: String,
+  message: { type: String, default: undefined },
   noMargin: Boolean,
 });
 </script>

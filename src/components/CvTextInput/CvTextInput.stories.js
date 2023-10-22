@@ -34,8 +34,6 @@ export default {
         type: { summary: 'string' },
         category: 'props',
       },
-      description:
-        'Provide text that is used alongside the control label for additional help',
     },
     hideLabel: {
       type: 'boolean',
@@ -44,8 +42,6 @@ export default {
         category: 'props',
         defaultValue: false,
       },
-      description:
-        'Specify whether you want the underlying label to be visually hidden',
     },
     invalidMessage: {
       type: 'string',
@@ -53,8 +49,6 @@ export default {
         type: { summary: 'string' },
         category: 'props',
       },
-      description:
-        'Provide the text that is displayed when the control is in an invalid state',
     },
     label: {
       type: 'string',
@@ -62,7 +56,6 @@ export default {
         type: { summary: 'string' },
         category: 'props',
       },
-      description: "Input's label",
     },
     light: {
       type: 'boolean',
@@ -80,8 +73,6 @@ export default {
         type: { summary: 'string' },
         category: 'props',
       },
-      description:
-        "Input's value, modelValue is the vue3 default 'prop' for two-way data binding with v-model",
     },
     passwordHideLabel: {
       type: 'string',
@@ -89,7 +80,6 @@ export default {
         type: { summary: 'string' },
         category: 'props',
       },
-      description: '"Hide password" tooltip text on password visibility toggle',
     },
     passwordShowLabel: {
       type: 'string',
@@ -97,7 +87,6 @@ export default {
         type: { summary: 'string' },
         category: 'props',
       },
-      description: '"Show password" tooltip text on password visibility toggle',
     },
     passwordVisible: {
       type: 'boolean',
@@ -105,7 +94,6 @@ export default {
         type: { summary: 'boolean' },
         category: 'props',
       },
-      description: 'Toggle password visibility.',
     },
     type: {
       type: 'string',
@@ -118,7 +106,6 @@ export default {
       control: {
         type: 'select',
       },
-      description: 'Input type, only `text` and `password` are available',
     },
     warnText: {
       type: 'string',
@@ -126,8 +113,6 @@ export default {
         type: { summary: 'string' },
         category: 'props',
       },
-      description:
-        'Provide the text that is displayed when the control is in warning state',
     },
     // slots
     'helper-text': {
@@ -171,11 +156,13 @@ export default {
 };
 
 const template = `
+<form @submit.prevent='()=>{}'>
   <cv-text-input v-bind="args">
     <template v-if="args['helper-text']" v-slot:helper-text />
     <template v-if="args['warn-text']" v-slot:warn-text />
     <template v-if="args['invalid-message']" v-slot:invalid-message />
   </cv-text-input>
+</form>
 `;
 const Template = args => {
   return {
@@ -191,6 +178,7 @@ Default.args = {
   label: 'Text input label',
   placeholder: 'Sample placeholder',
 };
+
 Default.parameters = storyParametersObject(
   Default.parameters,
   template,
@@ -237,6 +225,7 @@ export const Password = Template.bind({});
 Password.args = {
   label: 'Password input label',
   type: 'password',
+  autocomplete: 'password',
 };
 Password.parameters = storyParametersObject(
   Password.parameters,

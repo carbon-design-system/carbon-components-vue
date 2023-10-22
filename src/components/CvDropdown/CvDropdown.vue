@@ -59,7 +59,7 @@
             [`${carbonPrefix}--dropdown--inline`]: inline,
           },
         ]"
-        :data-invalid="data.isInvalid"
+        :data-invalid="data.isInvalid || null"
         :data-value="dataValue"
         data-dropdown
         v-bind="$attrs"
@@ -115,12 +115,9 @@
           tabindex="-1"
         >
           <slot>
-            <cv-dropdown-item
-              v-for="item in items"
-              v-bind:key="item"
-              :value="item"
-              >{{ item }}</cv-dropdown-item
-            >
+            <cv-dropdown-item v-for="item in items" :key="item" :value="item">{{
+              item
+            }}</cv-dropdown-item>
           </slot>
         </ul>
       </div>
@@ -205,11 +202,12 @@ const props = defineProps({
       }
       return arr;
     },
+    default: () => [],
   },
   /**
    * Generic label that will be used as the textual representation of what this field is for
    */
-  label: String,
+  label: { type: String, default: undefined },
   /**
    * Value shown when nothing has been selected
    */
@@ -233,7 +231,7 @@ const props = defineProps({
   /**
    * Render with a value already selected. Available as `v-model:value`.
    */
-  value: String,
+  value: { type: String, default: undefined },
   /**
    * Provide the text that is displayed and put the control in warning state
    */

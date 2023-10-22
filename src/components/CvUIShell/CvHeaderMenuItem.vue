@@ -24,8 +24,8 @@ import { computed } from 'vue';
 
 const props = defineProps({
   active: Boolean,
-  ariaCurrent: String,
-  role: String,
+  ariaCurrent: { type: String, default: undefined },
+  role: { type: String, default: undefined },
   ...propsLink,
 });
 

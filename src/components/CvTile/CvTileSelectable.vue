@@ -8,12 +8,12 @@
     ]"
     data-tile="selectable"
     tabindex="0"
-    :data-contained-checkbox-state="isChecked"
+    :data-contained-checkbox-state="isChecked || null"
   >
     <input
+      :id="uid"
       tabindex="-1"
       data-tile-input
-      :id="uid"
       type="checkbox"
       :checked="isChecked === true"
       :aria-checked="`${isChecked}`"

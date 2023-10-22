@@ -16,6 +16,7 @@
       @keydown.left.prevent.stop="onLeft"
     >
       <button
+        ref="elLeftOverflow"
         aria-hidden="true"
         aria-label="scroll left"
         :class="[
@@ -25,12 +26,11 @@
               leftOverflowNavButtonHidden,
           },
         ]"
+        tabIndex="-1"
+        type="button"
         @click.stop.prevent="e => onOverflowClick(e, { direction: -1 })"
         @mousedown.stop.prevent="e => onOverflowMouseDown(e, { direction: -1 })"
         @mouseup.stop.prevent="onOverflowMouseUp"
-        tabIndex="-1"
-        type="button"
-        ref="elLeftOverflow"
       >
         <ChevronLeft16 />
       </button>
@@ -40,9 +40,9 @@
       />
 
       <ul
+        ref="elTabList"
         :class="`${carbonPrefix}--tabs--scrollable__nav`"
         role="tablist"
-        ref="elTabList"
       >
         <li
           v-for="tab in tabs"
@@ -65,16 +65,16 @@
           role="presentation"
         >
           <button
+            :id="`${tab.uid}-link`"
+            ref="elLink"
             :class="`${carbonPrefix}--tabs--scrollable__nav-link`"
             role="tab"
             :aria-controls="tab.uid"
             :aria-disabled="disabledTabs.has(tab.uid)"
             :aria-selected="selectedId === tab.uid"
-            :id="`${tab.uid}-link`"
-            @click="onTabClick(tab.uid)"
-            ref="elLink"
             :tabindex="selectedId === tab.uid ? 0 : -1"
             type="button"
+            @click="onTabClick(tab.uid)"
           >
             <slot :name="tab.uid" v-bind="tab">
               {{ tab.label }}
@@ -88,6 +88,7 @@
         :class="`${carbonPrefix}--tabs__overflow-indicator--right`"
       />
       <button
+        ref="elRightOverflow"
         aria-hidden="true"
         aria-label="scroll right"
         :class="[
@@ -97,12 +98,11 @@
               rightOverflowNavButtonHidden,
           },
         ]"
+        tabIndex="-1"
+        type="button"
         @click="e => onOverflowClick(e, { direction: 1 })"
         @mousedown="e => onOverflowMouseDown(e, { direction: 1 })"
         @mouseup="onOverflowMouseUp"
-        tabIndex="-1"
-        type="button"
-        ref="elRightOverflow"
       >
         <ChevronRight16 />
       </button>
@@ -136,7 +136,7 @@ const props = defineProps({
   /**
    * @deprecated not used in component
    */
-  leftOverflowIconButtonProps: Object,
+  leftOverflowIconButtonProps: { type: Object, default: undefined },
   /**
    * This is an edge use case. By default, if no tab is explicitly selected, the first non-disabled tab is selected.
    */
@@ -144,7 +144,7 @@ const props = defineProps({
   /**
    * @deprecated not used in component
    */
-  rightOverflowIconButtonProps: Object,
+  rightOverflowIconButtonProps: { type: Object, default: undefined },
   /**
    * @deprecated not used in component
    */

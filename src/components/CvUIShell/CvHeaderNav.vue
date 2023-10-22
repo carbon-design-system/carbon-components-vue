@@ -13,6 +13,6 @@
 <script setup>
 import { carbonPrefix } from '../../global/settings';
 defineProps({
-  ariaLabelledBy: String,
+  ariaLabelledBy: { type: String, default: undefined },
 });
 </script>

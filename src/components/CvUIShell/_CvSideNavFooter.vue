@@ -4,8 +4,8 @@
       :class="`${carbonPrefix}--side-nav__toggle`"
       type="button"
       v-bind="$attrs"
-      @click="$emit('toggle-expand')"
       :title="assistiveText"
+      @click="$emit('toggle-expand')"
     >
       <div :class="`${carbonPrefix}--side-nav__icon`">
         <close20
@@ -33,4 +33,5 @@ defineProps({
   assistiveText: { type: String, default: 'Open / close side nav' },
   expanded: Boolean,
 });
+defineEmits(['toggle-expand']);
 </script>

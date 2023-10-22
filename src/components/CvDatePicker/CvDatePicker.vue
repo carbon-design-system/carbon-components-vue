@@ -1,10 +1,12 @@
 <template>
   <cv-wrapper
+    :id="cvId"
     :tag-type="formItem ? 'div' : ''"
     :class="`cv-date-picker ${carbonPrefix}--form-item`"
-    :id="cvId"
   >
     <div
+      :id="formItem ? undefined : cvId"
+      ref="dateWrapper"
       :data-date-picker="['single', 'range'].includes(getKind)"
       :data-date-picker-type="getKind"
       :class="[
@@ -15,8 +17,6 @@
           'cv-date-picker': !formItem,
         },
       ]"
-      ref="dateWrapper"
-      :id="formItem ? undefined : cvId"
     >
       <div
         :class="{
@@ -36,6 +36,7 @@
         </label>
         <div :class="`${carbonPrefix}--date-picker-input__wrapper`">
           <input
+            :id="`${cvId}-input-1`"
             ref="date"
             type="text"
             data-date-picker-input
@@ -43,7 +44,6 @@
             :data-invalid="isInvalid || null"
             :disabled="disabled"
             :data-date-picker-input-from="getKind === 'range'"
-            :id="`${cvId}-input-1`"
             :class="`${carbonPrefix}--date-picker__input`"
             :pattern="pattern"
             :placeholder="placeholder"
@@ -57,7 +57,7 @@
           />
         </div>
 
-        <div :class="`${carbonPrefix}--form-requirement`" v-if="isInvalid">
+        <div v-if="isInvalid" :class="`${carbonPrefix}--form-requirement`">
           <slot name="invalid-message">{{ invalidMessage }}</slot>
         </div>
       </div>
@@ -82,6 +82,7 @@
           @click="calendar.open()"
         >
           <input
+            :id="`${cvId}-input-2`"
             ref="todate"
             type="text"
             data-date-picker-input
@@ -89,7 +90,6 @@
             :data-date-picker-input-to="kind === 'range'"
             :data-invalid="isInvalid || null"
             :disabled="disabled"
-            :id="`${cvId}-input-2`"
             :class="`${carbonPrefix}--date-picker__input`"
             :pattern="pattern"
             :placeholder="placeholder"
@@ -100,7 +100,7 @@
             data-date-picker-icon
           />
         </div>
-        <div :class="`${carbonPrefix}--form-requirement`" v-if="isInvalid">
+        <div v-if="isInvalid" :class="`${carbonPrefix}--form-requirement`">
           <span id="invalid-message-placeholder"></span>
         </div>
       </div>
@@ -142,12 +142,12 @@ const isLight = useIsLight(props);
 let calendar;
 
 const props = defineProps({
-  modelValue: [String, Object, Array, Date],
+  modelValue: { type: [String, Object, Array, Date], default: undefined },
   dateLabel: { type: String, default: undefined },
   dateEndLabel: { type: String, default: 'End date' },
   invalid: { type: Boolean, default: false },
   disabled: { type: Boolean, default: false },
-  invalidMessage: { type: String },
+  invalidMessage: { type: String, default: undefined },
   pattern: { type: String, default: '\\d{1,2}/\\d{1,2}/\\d{4}' },
   placeholder: { type: String, default: 'mm/dd/yyyy' },
   calOptions: {
@@ -164,7 +164,7 @@ const props = defineProps({
     default: 'simple',
     validator: val => ['short', 'simple', 'single', 'range'].includes(val),
   },
-  value: [String, Object, Array, Date],
+  value: { type: [String, Object, Array, Date], default: undefined },
   ...propsCvId,
   ...propsCvTheme,
 });

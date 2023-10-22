@@ -1,7 +1,7 @@
 <template>
   <div
-    :class="`cv-tab ${carbonPrefix}--tab-content`"
     :id="uid"
+    :class="`cv-tab ${carbonPrefix}--tab-content`"
     role="tabpanel"
     :aria-labelledby="`${uid}-link`"
     :aria-hidden="!dataSelected ? 'true' : 'false'"

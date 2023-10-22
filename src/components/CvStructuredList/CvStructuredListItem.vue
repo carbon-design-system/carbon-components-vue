@@ -4,7 +4,7 @@
     v-bind="$attrs"
     class="cv-structured-list-item"
     :value="value"
-    :modelValue="modelValue"
+    :model-value="modelValue"
   >
     <slot></slot>
   </component>
@@ -30,8 +30,8 @@ defineProps({
   },
 });
 
-const selectable = inject('selectable');
-const change = inject('change');
+const selectable = inject('selectable', false);
+const change = inject('change', () => {});
 const emit = defineEmits(['change']);
 
 provide('onRadioItemChange', clickedItemCvId => {

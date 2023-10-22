@@ -8,20 +8,17 @@ export default {
   component: CvToastNotification,
   argTypes: {
     kind: {
-      control: {
-        type: 'select',
-        options: CvNotificationConsts.notificationKinds,
-      },
-      defaultValue: CvNotificationConsts.notificationKinds[0],
+      control: 'select',
+      options: CvNotificationConsts.notificationKinds,
       table: {
         defaultValue: {
-          summary: `"${CvNotificationConsts.notificationKinds[0]}"`,
+          summary: `"${CvToastNotification.props.kind.default}"`,
         },
       },
     },
     title: {
-      control: { type: 'text' },
-      defaultValue: 'Notification title',
+      control: 'text',
+      default: 'Notification title',
       table: {
         defaultValue: {
           summary: `"${CvToastNotification.props.title.default}"`,
@@ -29,8 +26,8 @@ export default {
       },
     },
     subTitle: {
-      control: { type: 'text' },
-      defaultValue: 'Subtitle text goes here.',
+      control: 'text',
+      default: 'Subtitle text goes here.',
       table: {
         defaultValue: {
           summary: `"${CvToastNotification.props.subTitle.default}"`,
@@ -38,8 +35,8 @@ export default {
       },
     },
     caption: {
-      control: { type: 'text' },
-      defaultValue: '00:00:00 AM',
+      control: 'text',
+      default: '00:00:00 AM',
       table: {
         defaultValue: {
           summary: `"${CvToastNotification.props.caption.default}"`,
@@ -47,8 +44,8 @@ export default {
       },
     },
     closeAriaLabel: {
-      control: { type: 'text' },
-      defaultValue: CvToastNotification.props.closeAriaLabel.default,
+      control: 'text',
+      default: CvToastNotification.props.closeAriaLabel.default,
       table: {
         defaultValue: {
           summary: `"${CvToastNotification.props.closeAriaLabel.default}"`,
@@ -56,7 +53,7 @@ export default {
       },
     },
     lowContrast: {
-      control: { type: 'boolean' },
+      control: 'boolean',
     },
     // slots
     default: {

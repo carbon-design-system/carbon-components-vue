@@ -80,7 +80,7 @@ import Close16 from '@carbon/icons-vue/es/close/16';
 const emit = defineEmits(['remove']);
 
 const props = defineProps({
-  item: Object,
+  item: { type: Object, default: () => Object() },
   removable: Boolean,
   removeAriaLabel: { type: String, default: 'Remove selected file' },
 });

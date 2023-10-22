@@ -1,19 +1,19 @@
 <template>
   <button
+    ref="el"
     type="button"
     :style="data.styleObject"
-    @click="toggle"
     :class="[
       `cv-tile-expandable ${carbonPrefix}--tile--expandable`,
       { [`${carbonPrefix}--tile--is-expanded`]: data.internalExpanded },
     ]"
-    ref="el"
+    @click="toggle"
   >
     <div :class="`${carbonPrefix}--tile-content`">
       <span
+        ref="aboveFold"
         data-tile-atf
         :class="`${carbonPrefix}--tile-content__above-the-fold`"
-        ref="aboveFold"
       >
         <slot>
           <!-- Above the fold content here -->
@@ -24,9 +24,9 @@
         <ChevronDown16 />
       </div>
       <span
-        :class="`${carbonPrefix}--tile-content__below-the-fold`"
-        ref="belowFold"
         v-show="data.internalExpanded || data.initialized"
+        ref="belowFold"
+        :class="`${carbonPrefix}--tile-content__below-the-fold`"
       >
         <slot name="below">
           <!-- Rest of the content here -->
@@ -43,8 +43,8 @@ import { computed, nextTick, reactive, ref, watch } from 'vue';
 
 const props = defineProps({
   expanded: Boolean,
-  tileCollapsedLabel: String,
-  tileExpandedLabel: String,
+  tileCollapsedLabel: { type: String, default: undefined },
+  tileExpandedLabel: { type: String, default: undefined },
 });
 const data = reactive({
   styleObject: {

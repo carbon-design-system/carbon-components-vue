@@ -1,15 +1,15 @@
 <template>
   <div
+    :id="id"
+    ref="el"
     :class="[
       `cv-header-panel`,
       `${carbonPrefix}--header-panel`,
       { [`${carbonPrefix}--header-panel--expanded`]: panelExpanded },
     ]"
     :aria-hidden="!panelExpanded ? 'true' : 'false'"
-    :id="id"
     @focusout="onFocusout"
     @mousedown="onMouseDown"
-    ref="el"
   >
     <slot></slot>
   </div>
@@ -39,6 +39,7 @@ const props = defineProps({
       }
       return true;
     },
+    default: undefined,
   },
   expanded: Boolean,
   id: { type: String, required: true },

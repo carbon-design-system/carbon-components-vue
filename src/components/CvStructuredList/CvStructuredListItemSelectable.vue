@@ -11,8 +11,8 @@
     <slot></slot>
     <input
       v-bind="$attrs"
-      tabindex="-1"
       :id="cvId"
+      tabindex="-1"
       :class="`${carbonPrefix}--structured-list-input`"
       :checked="isChecked"
       :value="value"

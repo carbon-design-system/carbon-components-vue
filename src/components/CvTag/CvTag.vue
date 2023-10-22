@@ -8,8 +8,8 @@
       v-if="filter"
       :class="`${carbonPrefix}--tag__close-icon`"
       :aria-label="clearAriaLabel"
-      @click.stop.prevent="onRemove"
       :disabled="disabled"
+      @click.stop.prevent="onRemove"
     >
       <Close16 />
     </button>

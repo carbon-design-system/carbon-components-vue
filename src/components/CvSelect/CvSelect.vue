@@ -37,7 +37,7 @@
       >
         <div
           :class="`${carbonPrefix}--select-input__wrapper`"
-          :data-invalid="isInvalid ? true : undefined"
+          :data-invalid="isInvalid || null"
         >
           <select
             v-bind="$attrs"

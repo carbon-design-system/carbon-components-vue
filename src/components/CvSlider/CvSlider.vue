@@ -2,12 +2,12 @@
   <div :class="`cv-slider ${carbonPrefix}--form-item`">
     <label
       v-show="label"
+      :id="labelId"
       :for="cvId"
       :class="[
         `${carbonPrefix}--label`,
         { [`${carbonPrefix}--label--disabled`]: disabled },
       ]"
-      :id="labelId"
     >
       {{ label }}
     </label>
@@ -26,9 +26,9 @@
         data-slider-input-box="#slider-input-box"
       >
         <div
+          ref="track"
           :class="`${carbonPrefix}--slider__track`"
           @click="onTrackClick"
-          ref="track"
         ></div>
 
         <div
@@ -37,6 +37,7 @@
         ></div>
 
         <div
+          ref="thumb"
           :class="[
             `${carbonPrefix}--slider__thumb`,
             {
@@ -46,7 +47,6 @@
           tabindex="0"
           :aria-labelledby="labelId"
           :style="`left: ${percentage};`"
-          ref="thumb"
           @keydown.up.right.prevent="onUp"
           @keydown.down.left.prevent="onDown"
           @mousedown="onStartDrag"
@@ -54,12 +54,12 @@
 
         <input
           :id="cvId"
+          ref="range"
           :class="`${carbonPrefix}--slider__input`"
           type="range"
           :step="step"
           :min="min"
           :max="max"
-          ref="range"
         />
       </div>
 
@@ -68,18 +68,18 @@
       </span>
 
       <input
+        ref="inputBox"
+        v-model="internalValue"
         type="string"
         :class="[
           `${carbonPrefix}--text-input ${carbonPrefix}--slider-text-input`,
           { [`${carbonPrefix}--text-input--light`]: isLight },
         ]"
         :placeholder="min"
-        v-model="internalValue"
+        :disabled="disabled"
         @change="onChange"
-        ref="inputBox"
         @keydown.up.prevent="onUp"
         @keydown.down.prevent="onDown"
-        :disabled="disabled"
       />
     </div>
   </div>

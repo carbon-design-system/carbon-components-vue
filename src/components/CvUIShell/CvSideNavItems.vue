@@ -1,8 +1,8 @@
 <template>
   <ul
+    ref="el"
     :class="`cv-side-nav-items ${carbonPrefix}--side-nav__items`"
     @mousedown="onMousedown"
-    ref="el"
   >
     <slot />
   </ul>

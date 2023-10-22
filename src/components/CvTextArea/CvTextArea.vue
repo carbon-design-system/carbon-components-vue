@@ -14,16 +14,16 @@
     </label>
     <div
       :class="`${carbonPrefix}--text-area__wrapper`"
-      :data-invalid="isInvalid"
+      :data-invalid="isInvalid || null"
     >
       <WarningFilled16
         v-if="isInvalid"
         :class="`${carbonPrefix}--text-area__invalid-icon`"
       />
       <textarea
-        :aria-invalid="isInvalid"
-        :aria-describedby="isInvalid ? errorId : undefined"
         :id="cvId"
+        :aria-invalid="isInvalid || null"
+        :aria-describedby="isInvalid ? errorId : undefined"
         :class="[
           `${carbonPrefix}--text-area`,
           {
@@ -66,12 +66,12 @@ const props = defineProps({
   helperText: { type: String, default: undefined },
   hideLabel: { type: Boolean, default: false },
   invalidMessage: { type: String, default: undefined },
-  label: String,
-  modelValue: String,
+  label: { type: String, default: undefined },
+  modelValue: { type: String, default: undefined },
   ...propsCvId,
   ...propsTheme,
 });
-
+defineEmits(['update:modelValue']);
 const cvId = useCvId(props);
 
 // DOM

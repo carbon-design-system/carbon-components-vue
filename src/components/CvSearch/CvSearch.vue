@@ -4,6 +4,7 @@
     :class="`cv-search ${carbonPrefix}--form-item`"
   >
     <div
+      ref="elSearch"
       :aria-label="internalAriaLabel"
       :aria-labelledby="internalAriaLabelBy"
       :class="[
@@ -18,7 +19,6 @@
         },
       ]"
       role="search"
-      ref="elSearch"
     >
       <div
         :class="`${carbonPrefix}--search-magnifier`"
@@ -33,20 +33,20 @@
       }}</label>
 
       <input
-        role="searchbox"
         :id="uid"
-        :class="`${carbonPrefix}--search-input`"
         v-bind="$attrs"
-        v-model="internalSearchText"
-        @input="onInput"
-        type="text"
         ref="elInput"
+        v-model="internalSearchText"
+        role="searchbox"
+        :class="`${carbonPrefix}--search-input`"
+        type="text"
         :placeholder="placeholder"
         :aria-labelledby="uid"
+        :disabled="disabled ? 'true' : undefined"
+        @input="onInput"
         @blur="checkFocus"
         @click="toggleActive"
         @keydown.esc="onClearClick"
-        :disabled="disabled ? 'true' : undefined"
       />
 
       <button
@@ -111,7 +111,7 @@ const props = defineProps({
   /**
    * Provide the label text for the Search icon
    */
-  label: String,
+  label: { type: String, default: undefined },
   /**
    * Specify the search size ('sm', 'md', 'lg', 'xl')
    */
@@ -151,7 +151,7 @@ const props = defineProps({
   /**
    * Optionally provide the default value of the `<input>`
    */
-  value: String,
+  value: { type: String, default: undefined },
   /**
    * @deprecated use value
    */
@@ -172,10 +172,11 @@ const props = defineProps({
    */
   toolbarAriaLabel: {
     type: String,
-    validator: () => {
-      console.warn('Deprecated: probably you want expandable=true');
+    validator: s => {
+      if (s) console.warn('Deprecated: probably you want expandable=true');
       return true;
     },
+    default: undefined,
   },
   ...propsTheme,
   ...propsCvId,

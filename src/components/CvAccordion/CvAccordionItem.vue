@@ -14,8 +14,8 @@
     @animationend="onAnimationEnd"
   >
     <button
-      :disabled="disabled"
       ref="button"
+      :disabled="disabled"
       type="button"
       :class="`${carbonPrefix}--accordion__heading`"
       :aria-expanded="isOpen ? 'true' : 'false'"

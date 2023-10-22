@@ -3,14 +3,14 @@
     :is="tagType"
     :checked="checkProp('checked', selected)"
     :expanded="checkProp('expanded', expanded)"
-    :tileCollapsedLabel="checkProp('tileCollapsedLabel', tileCollapsedLabel)"
-    :tileExpandedLabel="checkProp('tileCollapsedLabel', tileExpandedLabel)"
+    :tile-collapsed-label="checkProp('tileCollapsedLabel', tileCollapsedLabel)"
+    :tile-expanded-label="checkProp('tileCollapsedLabel', tileExpandedLabel)"
     :class="[
       `cv-tile ${carbonPrefix}--tile`,
       { [`${carbonPrefix}--tile--light`]: isLight },
     ]"
   >
-    <template v-for="(_, name) in $slots" v-slot:[name]="slotData"
+    <template v-for="(_, name) in $slots" #[name]="slotData"
       ><slot :name="name" v-bind="slotData"
     /></template>
   </component>

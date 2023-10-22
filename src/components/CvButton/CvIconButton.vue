@@ -24,14 +24,14 @@ import {
   props as commonCvButtonProps,
   useCvButtonCommon,
 } from './CvButtonCommon';
+import { TipAlignments } from '../CvTooltip/consts.js';
 import CvSvg from '../CvSvg/_CvSvg.vue';
 
 const { disabled, icon, kind, size } = commonCvButtonProps;
 
 export default {
   name: 'CvIconButton',
-  components: { CvSvg },
-  emits: ['click'], // emitted to allow testing of click
+  components: { CvSvg }, // emitted to allow testing of click
   props: {
     // Docgen comments added for storybook doc page
     /**
@@ -39,7 +39,7 @@ export default {
      */
     disabled,
     /**
-     * \@carbon/icons-vue icon, href, svg or symbol
+     * @carbon/icons-vue icon, href, svg or symbol
      */
     icon,
     /**
@@ -68,9 +68,10 @@ export default {
     tipAlignment: {
       type: String,
       default: 'center',
-      validator: val => ['start', 'center', 'end'].includes(val),
+      validator: val => Object.values(TipAlignments).includes(val),
     },
   },
+  emits: ['click'],
   setup(props) {
     const { buttonClasses } = useCvButtonCommon(
       props.kind,

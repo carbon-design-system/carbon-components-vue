@@ -1,5 +1,6 @@
 <template>
   <div
+    :id="cvId"
     :class="[
       `cv-content-switcher ${carbonPrefix}--content-switcher`,
       {
@@ -8,7 +9,6 @@
       },
     ]"
     role="tablist"
-    :id="cvId"
   >
     <slot></slot>
   </div>
