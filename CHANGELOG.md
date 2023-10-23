@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.10](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.9...@carbon/vue@3.0.10) (2023-10-23)
+
+### Bug Fixes
+
+- add label for cv-icon-button usages ([ba32b16](https://github.com/carbon-design-system/carbon-components-vue/commit/ba32b168526c2533904397a94d3c41c224efa468))
+- cv:sort payload uses 'value', not 'val' ([#1543](https://github.com/carbon-design-system/carbon-components-vue/issues/1543)) ([15b0eb3](https://github.com/carbon-design-system/carbon-components-vue/commit/15b0eb35d123485692313ff830d84fa1afb70260))
+- lint cv-button ([4944ff7](https://github.com/carbon-design-system/carbon-components-vue/commit/4944ff7d9363927bf8a07878e7d326c074fff1c7))
+- resolve other console warning from storybook ([6f53d83](https://github.com/carbon-design-system/carbon-components-vue/commit/6f53d837c4bc692171488a3c66d3712cc5da037c))
+- review comment for CvGrid story ([79a742a](https://github.com/carbon-design-system/carbon-components-vue/commit/79a742ac79a6d5ff0644495cc6ea8eba0fb44314))
+- review comment for CvIconButton story ([00df52f](https://github.com/carbon-design-system/carbon-components-vue/commit/00df52f7addd78a3a19e6caf8f6a07751b824540))
+- review comment for CvPagination story ([315618b](https://github.com/carbon-design-system/carbon-components-vue/commit/315618bc3a4d5d696241ce6e60861a37f949f964))
+- suppres [Vue warn]: injection ([c092974](https://github.com/carbon-design-system/carbon-components-vue/commit/c092974646e8b6d67e3cbc5cf3b92ddeac55e80f))
+
+### Features
+
+- **cv-text-input-skeleton:** add CvTextInputSkeleton ([#1542](https://github.com/carbon-design-system/carbon-components-vue/issues/1542)) ([c3469f5](https://github.com/carbon-design-system/carbon-components-vue/commit/c3469f55747418a48b451f3da1b082f931dd3e4d))
+
 ## [3.0.9](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.9-alpha.0...@carbon/vue@3.0.9) (2023-09-27)
 
 ### Bug Fixes
