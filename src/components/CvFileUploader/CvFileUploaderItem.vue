@@ -9,8 +9,12 @@
       {{ item.file?.name }}
     </p>
     <span :class="`${carbonPrefix}--file__state-container`">
+      <WarningFilled16
+        v-if="isInvalid"
+        :class="`${carbonPrefix}--file--invalid`"
+      />
       <div
-        v-if="item.state === 'uploading'"
+        v-if="!isInvalid && item.state === 'uploading'"
         :class="`${carbonPrefix}--inline-loading__animation`"
       >
         <div
@@ -37,15 +41,12 @@
         </div>
       </div>
       <CheckmarkFilled16
-        v-if="item.state === 'complete'"
+        v-else-if="!isInvalid && item.state === 'complete'"
         :class="`${carbonPrefix}--file-complete`"
       />
-      <WarningFilled16
-        v-if="isInvalid"
-        :class="`${carbonPrefix}--file--invalid`"
-      />
+      <!-- "edit" state at react -->
       <button
-        v-if="removable"
+        v-else-if="removable"
         type="button"
         :class="`${carbonPrefix}--file-close`"
         :alt="removeAriaLabel"

@@ -160,4 +160,61 @@ describe('CvFileUploaderItem', () => {
     );
     expect(removableButton).toBeDefined();
   });
+
+  it('favors invalid state representation instead of complete state', async () => {
+    const { container } = render(CvFileUploaderItem, {
+      props: {
+        item: {},
+        state: STATES.COMPLETE,
+        invalidMessage: 'random invalid message',
+      },
+    });
+
+    const warningIcon = await container.querySelector(
+      `.${carbonPrefix}--file--invalid`
+    );
+    const completeIcon = await container.querySelector(
+      `.${carbonPrefix}--file-complete`
+    );
+    expect(warningIcon).toBeDefined();
+    expect(completeIcon).toBeNull();
+  });
+
+  it('favors invalid state representation instead of uploading state', async () => {
+    const { container } = render(CvFileUploaderItem, {
+      props: {
+        item: {},
+        state: STATES.UPLOADING,
+        invalidMessage: 'random invalid message',
+      },
+    });
+
+    const warningIcon = await container.querySelector(
+      `.${carbonPrefix}--file--invalid`
+    );
+    const completeIcon = await container.querySelector(
+      `.${carbonPrefix}--inline-loading__animation`
+    );
+    expect(warningIcon).toBeDefined();
+    expect(completeIcon).toBeNull();
+  });
+
+  it('displays removable button when removable is true and file is also in invalid state', async () => {
+    const { container } = render(CvFileUploaderItem, {
+      props: {
+        item: {},
+        removable: true,
+        invalidMessage: 'random invalid message',
+      },
+    });
+
+    const warningIcon = await container.querySelector(
+      `.${carbonPrefix}--file--invalid`
+    );
+    const removableButton = await container.querySelector(
+      `button.${carbonPrefix}--file-close`
+    );
+    expect(warningIcon).toBeDefined();
+    expect(removableButton).toBeDefined();
+  });
 });

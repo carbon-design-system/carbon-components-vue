@@ -8,7 +8,7 @@
   "types": "src/index.d.ts",
   "web-types": "dist/web-types.json",
   "scripts": {
-    "postinstall": "node prepare.js",
+    "postinstall": "node prepare.js && node .storybook/postinstall.js",
     "prepack": "pinst --disable",
     "postpack": "pinst --enable",
     "build": "vue-cli-service build --target lib --name carbon-vue-3 ./src/index.js --no-clean",

@@ -1,9 +1,9 @@
-import { Canvas, Meta, Story } from '@storybook/addon-docs';
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
 import { sbCompPrefix } from '../../global/storybook-utils';
 import { CvFileUploader, CvFileUploaderSkeleton } from '.';
-import { KINDS } from './const';
+import { KINDS, STATES } from './const';
 import { action } from '@storybook/addon-actions';
-import { nextTick, ref } from 'vue';
+import { nextTick, ref, watch, onMounted } from 'vue';
 import { Add16 } from '@carbon/icons-vue';
 import { buttonKinds, buttonSizes } from '../CvButton/consts';
 
@@ -16,7 +16,57 @@ export const Template = args => ({
     Add16
   },
   setup() {
+    const fileUploader = ref(null);
+    const files = ref(storage.files);
+    // exposed methods handlers
+    function clear() {
+      if (args.clear && args.clear > storage.clearCount) {
+        storage.clearCount = args.clear;
+        fileUploader.value.clear();
+        action('cv-file-uploader clear')()
+      }
+    }
+    function remove() {
+      if (args.remove && args.remove > storage.removeCount && files.value.length > 0) {
+        const randomIndex = Math.floor(Math.random() * files.value.length);
+        storage.removeCount = args.remove;
+        fileUploader.value.remove(randomIndex);
+        action('cv-file-uploader remove')(randomIndex)
+      }
+    }
+    function setInvalidMessage(index) {
+      if (files.value[index].invalidMessage !== args.setInvalidMessage) {
+        fileUploader.value.setInvalidMessage(index, args.setInvalidMessage);
+        action('cv-file-uploader setInvalidMessage')(index, args.setInvalidMessage);
+      }
+    }
+    function setState(index) {
+      const newState = setStateOptionMap[args.setState];
+      if (files.value[index].state !== newState) {
+        fileUploader.value.setState(index, newState);
+        action('cv-file-uploader setState')(index, newState);
+      }
+    }
+    // exposed methods setState & setInvalidMessage handler
+    function changeFiles() {
+      const callbacks = [
+        typeof args.setState === 'string' ? setState : null,
+        typeof args.setInvalidMessage === 'string' ? setInvalidMessage : null,
+      ];
+      files.value.forEach((_, index) => callbacks.forEach(callback => callback && callback(index)));
+    }
+    watch(() => files.value, (newValue) => {
+      storage.files = newValue;
+      changeFiles();
+    }, { deep: true });
+    onMounted(() => {
+      clear();
+      remove();
+      changeFiles();
+    });
     return {
+      fileUploader,
+      files,
       slotContent: args.slot,
       args: {
         ...args,
@@ -26,9 +76,19 @@ export const Template = args => ({
   },
   template: args.template,
 });
+const storage = {
+  files: [],
+  clearCount: 0,
+  removeCount: 0,
+};
+const setStateOptionMap = {
+  [`Set files status to: None`]: STATES.NONE,
+  [`Set files status to: Complete (${STATES.COMPLETE})`]: STATES.COMPLETE,
+  [`Set files status to: Uploading (${STATES.UPLOADING})`]: STATES.UPLOADING,
+};
 const defaultTemplate = `
   <div style="display: inline-flex; align-items: flex-start;">
-    <cv-file-uploader v-bind="args" />
+    <cv-file-uploader v-bind="args" ref="fileUploader" v-model="files" />
   </div>
 `;
 const slotTemplate = `
@@ -178,7 +238,8 @@ export const argTypes = {
   },
   // exposed methods
   clear: {
-    control: 'none',
+    control: 'button',
+    buttonLabel: 'Clear',
     type: 'function',
     table: {
       type: { summary: '() => void' },
@@ -187,7 +248,8 @@ export const argTypes = {
     description: 'Clear file list',
   },
   remove: {
-    control: 'none',
+    control: 'button',
+    buttonLabel: 'Remove a random file',
     type: 'function',
     table: {
       type: { summary: '(index: number) => void' },
@@ -195,23 +257,24 @@ export const argTypes = {
     },
     description: 'Removes an individual file',
   },
-  setState: {
-    control: 'none',
-    type: 'function',
-    table: {
-      type: { summary: '(index: number, state: string) => void' },
-      category: 'exposed methods',
-    },
-    description: 'Update the "state" field of a file. State must be `""`, `complete` or `loading`',
-  },
   setInvalidMessage: {
-    control: 'none',
+    control: 'text',
     type: 'function',
     table: {
       type: { summary: '(index: number, invalidMessage: string) => void' },
       category: 'exposed methods',
     },
     description: 'Update the "invalidMessage" field of a file.',
+  },
+  setState: {
+    control: 'select',
+    options: Object.keys(setStateOptionMap),
+    type: 'function',
+    table: {
+      type: { summary: '(index: number, state: string) => void' },
+      category: 'exposed methods',
+    },
+    description: 'Update the "state" field of a file. State must be `""`, `complete` or `uploading`',
   },
   // slots
   'drop-target': {
@@ -257,6 +320,8 @@ Migration notes:
     {Template.bind({})}
   </Story>
 </Canvas>
+
+<ArgsTable story="Default" />
 
 # CvFileUploader Button
 
