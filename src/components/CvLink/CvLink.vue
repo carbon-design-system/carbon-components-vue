@@ -14,7 +14,12 @@
     ]"
   >
     <slot></slot>
-    <CvSvg v-if="icon" :class="`${carbonPrefix}--link__icon`" :svg="icon" />
+    <CvSvg
+      v-if="icon"
+      :class="`${carbonPrefix}--link__icon`"
+      :svg="icon"
+      alt=""
+    />
   </component>
 </template>
 
