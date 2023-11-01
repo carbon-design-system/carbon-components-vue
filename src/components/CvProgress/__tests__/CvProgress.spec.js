@@ -2,8 +2,7 @@
 
 import { render } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
-import CvProgress from '../CvProgress.vue';
-import CvProgressStep from '../CvProgressStep.vue';
+import { CvProgress, CvProgressStep, CvProgressSkeleton } from '..';
 
 const TestSteps = {
   components: { CvProgressStep },
@@ -155,4 +154,47 @@ describe('CvProgress', () => {
       true
     );
   });
+});
+
+describe('CvProgressSkeleton', () => {
+  it('renders 4 steps', async () => {
+    const result = render(CvProgressSkeleton);
+
+    const steps = result.container.querySelectorAll('ul li');
+    expect(steps.length).toBe(4);
+  });
+
+  it('renders correct classes', async () => {
+    const result = render(CvProgressSkeleton);
+
+    const skeleton = result.container.querySelector(
+      '.bx--progress.bx--skeleton'
+    );
+    expect(skeleton).toBeTruthy();
+    expect(skeleton.classList.contains('bx--progress--vertical')).toBeFalsy(); // CvProgress is horizontal by default
+
+    const steps = skeleton.querySelectorAll(
+      '.bx--progress-step.bx--progress-step--incomplete'
+    );
+    for (const step of steps) {
+      const div = step.querySelector(
+        'div.bx--progress-step-button.bx--progress-step-button--unclickable'
+      );
+      expect(div).toBeTruthy();
+
+      const label = step.querySelector('p.bx--progress-label');
+      expect(label).toBeTruthy();
+
+      const span = step.querySelector('span.bx--progress-line');
+      expect(span).toBeTruthy();
+    }
+  });
+
+  it('is accessible', async () => {
+    const main = document.createElement('main');
+    const skeleton = render(CvProgressSkeleton, {
+      container: document.body.appendChild(main),
+    });
+    await expect(skeleton.container).toBeAccessible('cv--progress');
+  }, 10000);
 });
