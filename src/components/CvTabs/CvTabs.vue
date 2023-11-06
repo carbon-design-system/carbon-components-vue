@@ -70,7 +70,7 @@
             :class="`${carbonPrefix}--tabs--scrollable__nav-link`"
             role="tab"
             :aria-controls="tab.uid"
-            :aria-disabled="disabledTabs.has(tab.uid)"
+            :aria-disabled="disabledTabs.has(tab.uid) || null"
             :aria-selected="selectedId === tab.uid"
             :tabindex="selectedId === tab.uid ? 0 : -1"
             type="button"

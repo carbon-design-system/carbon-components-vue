@@ -73,7 +73,7 @@
         <button
           ref="button"
           :aria-controls="`${uid}-menu`"
-          :aria-disabled="disabled"
+          :aria-disabled="disabled || null"
           :aria-expanded="open ? 'true' : 'false'"
           :aria-labelledby="ariaLabeledBy"
           :class="`${carbonPrefix}--list-box__field`"
@@ -129,7 +129,7 @@
       </div>
       <div
         v-else-if="data.isHelper"
-        :aria-disabled="disabled"
+        :aria-disabled="disabled || null"
         :class="[
           `${carbonPrefix}--form__helper-text`,
           { [`${carbonPrefix}--form__helper-text--disabled`]: disabled },

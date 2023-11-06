@@ -65,7 +65,7 @@
         ref="elButton"
         type="button"
         :class="`${carbonPrefix}--list-box__field`"
-        :aria-disabled="disabled"
+        :aria-disabled="disabled || null"
         aria-haspopup="listbox"
         :aria-expanded="data.open ? 'true' : 'false'"
         :aria-owns="uid"
