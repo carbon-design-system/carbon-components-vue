@@ -342,23 +342,16 @@ const props = defineProps({
    * Provide text to be used in a <label> element that is tied to the multiselect via ARIA attributes.
    */
   title: { type: String, default: undefined },
-  /***
-   * Allow users to pass in arbitrary items from their collection that are pre-selected
-   */
-  value: { type: Array, default: () => [] },
   /**
    * Provide the text that is displayed and put the control in warning state
    */
   warningMessage: { type: String, default: undefined },
+  /***
+   * Allow users to pass in arbitrary items from their collection that are pre-selected
+   */
   modelValue: {
     type: Array,
-    validator: val => {
-      console.error(
-        `v-model for cv-multi-select is deprecated. Specify "v-model:value" instead [${val}]`
-      );
-      return true;
-    },
-    default: undefined,
+    default: () => [],
   },
   ...propsCvId,
   ...propsTheme,
@@ -379,13 +372,15 @@ const data = reactive({
   isWarning: false,
   isInvalid: false,
 });
-const emit = defineEmits(['update:value', 'change', 'filter']);
+const emit = defineEmits(['update:modelValue', 'change', 'filter']);
 watch(
   () => data.selectedItems,
   () => {
-    if (JSON.stringify(data.selectedItems) !== JSON.stringify(props.value)) {
+    if (
+      JSON.stringify(data.selectedItems) !== JSON.stringify(props.modelValue)
+    ) {
       emit('change', data.selectedItems);
-      emit('update:value', data.selectedItems);
+      emit('update:modelValue', data.selectedItems);
     }
   },
   {
@@ -409,7 +404,7 @@ const isFilterable = computed(() => {
 });
 
 function updateSelectedItems() {
-  data.selectedItems = props.value.filter(
+  data.selectedItems = props.modelValue.filter(
     /***
      * @param {string} item
      * @returns {boolean}
@@ -431,7 +426,7 @@ onUpdated(checkSlots);
 onMounted(updateOptions);
 onMounted(updateSelectedItems);
 
-watch(() => props.value, updateSelectedItems);
+watch(() => props.modelValue, updateSelectedItems);
 watch(() => props.options, updateOptions);
 watch(() => props.selectionFeedback, updateOptions);
 
@@ -462,7 +457,7 @@ const highlighted = computed({
   },
 });
 onMounted(() => {
-  highlighted.value = props.value ? props.value : props.highlight; // override highlight with value if provided
+  highlighted.value = props.modelValue ? props.modelValue : props.highlight; // override highlight with modelValue if provided
 });
 
 const internalFilter = computed({

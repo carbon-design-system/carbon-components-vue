@@ -49,7 +49,7 @@ const defaultTemplate = `
 <cv-dropdown
   :light="light"
   :placeholder="placeholder"
-  :value="value"
+  :modelValue="modelValue"
   :up="up"
   :inline="inline"
   :helper-text="helperText"
@@ -71,7 +71,7 @@ const defaultTemplate = `
 const slotsTemplate = `
 <div :style="{width: '300px'}">
 <cv-dropdown
-  v-model:value="myValue"
+  v-model="myValue"
   :light="light"
   :placeholder="placeholder"
   :up="up"
@@ -101,7 +101,7 @@ const itemsTemplate = `
 <cv-dropdown
   :light="light"
   :placeholder="placeholder"
-  :value="value"
+  :modelValue="modelValue"
   :up="up"
   :inline="inline"
   :helper-text="helperText"
@@ -119,7 +119,7 @@ const itemsTemplate = `
 const vmodelTemplate = `
 <div :style="{width: '300px'}">
 <cv-dropdown
-  v-model:value="myValue"
+  v-model="myValue"
   :label="label"
   :placeholder="placeholder"
   @change="onChange">
@@ -151,10 +151,7 @@ Notes:
 
 - You can place a Dropdown inline with other content by using the inline variant
   Migration notes:
-
-- The `v-model` is different in Vue 3 than Vue 2. You can still specify the `v-model=something` to control the visibility but
-  if you specify it like this you will see a deprecation message in the log. Please use `v-model:value=something` instead.
-- Add the `size` option to match Carbon React
+- Added the `size` option to match Carbon React
 - Added the `warningMessage` option to match Carbon React
 
 <Canvas>
@@ -168,21 +165,16 @@ Notes:
           'template',
           'change',
           'update:modelValue',
-          'update:value',
           'helper-text',
           'invalid-message',
           'warning-message',
           'internal-caption',
-          'modelValue',
         ],
       },
       docs: { source: { code: defaultTemplate } },
     }}
     args={{
       template: defaultTemplate,
-      props: {
-        modelValue: undefined,
-      },
       label: 'Characters',
       placeholder: 'Choose an ally',
       helperText: 'May the force be with you',
@@ -273,7 +265,6 @@ Notes:
           'template',
           'change',
           'update:modelValue',
-          'update:value',
           'helper-text',
           'invalid-message',
           'warning-message',
@@ -316,32 +307,7 @@ Notes:
     name="v-model"
     parameters={{
       controls: {
-        exclude: [
-          'props',
-          'default',
-          'template',
-          'change',
-          'update:modelValue',
-          'update:value',
-          'helper-text',
-          'invalid-message',
-          'warning-message',
-          'internal-caption',
-          'modelValue',
-          'ariaLabel',
-          'disabled',
-          'formItem',
-          'helperText',
-          'hideSelected',
-          'inline',
-          'invalidMessage',
-          'items',
-          'label',
-          'placeholder',
-          'size',
-          'up',
-          'value',
-          'warningMessage',
+        include: [
         ],
       },
       docs: { source: { code: vmodelTemplate } },
@@ -367,32 +333,7 @@ Notes:
     name="skeleton"
     parameters={{
       controls: {
-        exclude: [
-          'props',
-          'default',
-          'template',
-          'change',
-          'update:modelValue',
-          'update:value',
-          'helper-text',
-          'invalid-message',
-          'warning-message',
-          'internal-caption',
-          'modelValue',
-          'ariaLabel',
-          'disabled',
-          'formItem',
-          'helperText',
-          'hideSelected',
-          'invalidMessage',
-          'items',
-          'label',
-          'placeholder',
-          'size',
-          'up',
-          'value',
-          'warningMessage',
-          'inline',
+        include: [
         ],
       },
       docs: { source: { code: skeletonTemplate } },
