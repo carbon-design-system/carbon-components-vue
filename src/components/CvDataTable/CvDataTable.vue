@@ -23,7 +23,7 @@
       <section v-if="hasToolbar" :class="`${carbonPrefix}--table-toolbar`">
         <div
           v-show="hasBatchActions"
-          :aria-hidden="!batchActive"
+          :aria-hidden="`${!batchActive}`"
           :class="[
             `${carbonPrefix}--batch-actions`,
             { [`${carbonPrefix}--batch-actions--active`]: batchActive },

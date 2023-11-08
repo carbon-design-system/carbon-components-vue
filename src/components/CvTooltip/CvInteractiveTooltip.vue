@@ -24,7 +24,7 @@
     <div
       :id="cvId"
       ref="popup"
-      :aria-hidden="!dataVisible"
+      :aria-hidden="`${!dataVisible}`"
       :data-floating-menu-direction="direction"
       :class="[
         `${carbonPrefix}--tooltip`,
