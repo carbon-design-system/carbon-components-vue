@@ -21,7 +21,7 @@
   >
     <a
       ref="link"
-      :aria-checked="dataSelected"
+      :aria-checked="`${dataSelected}`"
       :class="`${carbonPrefix}--dropdown-link`"
       href="javascript:void(0)"
       role="menuitemradio"
