@@ -18,7 +18,7 @@
       :aria-labelledby="cvId"
       aria-live="assertive"
       role="progressbar"
-      :aria-busy="active || stopping"
+      :aria-busy="`${active || stopping}`"
     >
       <label :id="cvId" :class="`${carbonPrefix}--visually-hidden`">
         {{ description }}
