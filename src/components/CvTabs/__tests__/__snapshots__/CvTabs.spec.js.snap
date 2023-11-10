@@ -7,9 +7,9 @@ exports[`CvTabs CvTabs - test slotted tab buttons to match snapshot 1`] = `
       </svg></button>
     <!--v-if-->
     <ul class="bx--tabs--scrollable__nav" role="tablist">
-      <li class="cv-tabs-button  bx--tabs--scrollable__nav-item bx--tabs__nav-item--selected bx--tabs--scrollable__nav-item--selected" role="presentation"><button id="tab-1-link" class="bx--tabs--scrollable__nav-link" role="tab" aria-controls="tab-1" aria-disabled="false" aria-selected="true" tabindex="0" type="button">Hello <strong style="color: red;">(*)</strong></button></li>
-      <li class="cv-tabs-button  bx--tabs--scrollable__nav-item" role="presentation"><button id="tab-2-link" class="bx--tabs--scrollable__nav-link" role="tab" aria-controls="tab-2" aria-disabled="false" aria-selected="false" tabindex="-1" type="button">Origin<strong style="color: orange;">(!)</strong></button></li>
-      <li class="cv-tabs-button  bx--tabs--scrollable__nav-item" role="presentation"><button id="tab-3-link" class="bx--tabs--scrollable__nav-link" role="tab" aria-controls="tab-3" aria-disabled="false" aria-selected="false" tabindex="-1" type="button">Tab 3 label</button></li>
+      <li class="cv-tabs-button  bx--tabs--scrollable__nav-item bx--tabs__nav-item--selected bx--tabs--scrollable__nav-item--selected" role="presentation"><button id="tab-1-link" class="bx--tabs--scrollable__nav-link" role="tab" aria-controls="tab-1" aria-selected="true" tabindex="0" type="button">Hello <strong style="color: red;">(*)</strong></button></li>
+      <li class="cv-tabs-button  bx--tabs--scrollable__nav-item" role="presentation"><button id="tab-2-link" class="bx--tabs--scrollable__nav-link" role="tab" aria-controls="tab-2" aria-selected="false" tabindex="-1" type="button">Origin<strong style="color: orange;">(!)</strong></button></li>
+      <li class="cv-tabs-button  bx--tabs--scrollable__nav-item" role="presentation"><button id="tab-3-link" class="bx--tabs--scrollable__nav-link" role="tab" aria-controls="tab-3" aria-selected="false" tabindex="-1" type="button">Tab 3 label</button></li>
     </ul>
     <!--v-if--><button aria-hidden="true" aria-label="scroll right" class="bx--tab--overflow-nav-button--hidden" tabindex="-1" type="button"><svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
         <path d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"></path>

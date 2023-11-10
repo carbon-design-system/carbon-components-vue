@@ -38,7 +38,7 @@ describe('CvMultiSelect', () => {
     const result = render(CvMultiSelect, {
       props: {
         options: pkdOptions,
-        value: pkdValues.slice(3, 6), // select 3 items
+        modelValue: pkdValues.slice(3, 6), // select 3 items
       },
       attrs: {
         class: 'ABC-class-123',
@@ -63,7 +63,7 @@ describe('CvMultiSelect', () => {
     const result = render(CvMultiSelect, {
       props: {
         options: pkdOptions,
-        value: initiallySelected,
+        modelValue: initiallySelected,
       },
       attrs: {
         class: 'ABC-class-123',
@@ -246,8 +246,8 @@ describe('CvMultiSelect', () => {
     const options = {
       props: {
         options: pkdOptions,
-        value: myValue,
-        'onUpdate:value': e => {
+        modelValue: myValue,
+        'onUpdate:modelValue': e => {
           myValue = e;
         },
       },
