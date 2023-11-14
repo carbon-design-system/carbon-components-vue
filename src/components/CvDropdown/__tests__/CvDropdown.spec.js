@@ -70,7 +70,7 @@ describe('CvDropdown', () => {
         placeholder: placeholder,
         size: 'md',
         up: false,
-        value: undefined,
+        modelValue: undefined,
         warningMessage: '',
         light: false,
       },
@@ -88,7 +88,7 @@ describe('CvDropdown', () => {
 
     let mysteriousLabels = await result.findAllByText('The Armorer');
     expect(mysteriousLabels.length).toBe(1);
-    await result.rerender({ value: 'mysterious' });
+    await result.rerender({ modelValue: 'mysterious' });
     mysteriousLabels = await result.findAllByText('The Armorer');
     expect(mysteriousLabels.length).toBe(2);
 

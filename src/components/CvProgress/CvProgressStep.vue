@@ -6,7 +6,7 @@
       `cv-progress-step ${carbonPrefix}--progress-step`,
       `${carbonPrefix}--progress-step--${internalState}`,
     ]"
-    :aria-disabled="disabled"
+    :aria-disabled="disabled || null"
   >
     <button
       type="button"

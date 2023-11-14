@@ -59,7 +59,7 @@
           :aria-controls="cvId"
           aria-autocomplete="list"
           role="combobox"
-          :aria-disabled="disabled"
+          :aria-disabled="disabled || null"
           :aria-expanded="open ? 'true' : 'false'"
           autocomplete="off"
           :disabled="disabled"

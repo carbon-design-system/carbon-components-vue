@@ -25,7 +25,7 @@ export const Template = args => ({
       clearAriaLabel: args.clearAriaLabel,
       formItem: args.formItem,
       expandable: args.expandable,
-      value: args.value,
+      modelValue: args.modelValue,
       myValue: myValue,
       onInput: action('input'),
     };
@@ -40,7 +40,7 @@ const defaultTemplate = `
   :disabled="disabled"
   :size="size"
   :expandable="expandable"
-  :value="value"
+  :modelValue="modelValue"
   :form-item="formItem"
   :aria-label="ariaLabel"
   :clear-aria-label="clearAriaLabel"
@@ -51,7 +51,7 @@ const defaultTemplate = `
 const vModelTemplate = `
 <div>
   <cv-search
-    v-model:value="myValue"
+    v-model="myValue"
     :light="light"
     :label="label"
     :placeholder="placeholder"
@@ -64,7 +64,7 @@ const vModelTemplate = `
     >
   </cv-search>
   <div style="margin-top:1rem; background-color: #888888;  padding:1rem">
-    <div style="padding:1rem">v-model value: {{ myValue }}</div>
+    <div style="padding:1rem">v-model: {{ myValue }}</div>
     <input type="search" v-model="myValue"/>
   </div>
 </div>
@@ -74,8 +74,6 @@ const vModelTemplate = `
 
 Migration notes:
 
-- The `v-model` is different in Vue 3 than Vue 2. If you specify it you will see an error deprecation message in the log.
-  Please use `v-model:value=something` instead.
 - The "toolbar" mode is removed in this version. Please use the `expandable` mode instead.
 
 <Canvas>
@@ -85,10 +83,8 @@ Migration notes:
       controls: {
         exclude: [
           'input',
-          'modelValue',
           'template',
           'update:modelValue',
-          'update:value',
           'large',
           'small',
           'toolbarAriaLabel',
@@ -122,9 +118,6 @@ Migration notes:
 
 # v-model
 
-- The `v-model` is different in Vue 3 than Vue 2.If you specify it you will see an error deprecation message in the log.
-  Please use `v-model:value=something` instead.
-
 <Canvas>
   <Story
     name="v-model"
@@ -132,10 +125,8 @@ Migration notes:
       controls: {
         exclude: [
           'input',
-          'modelValue',
           'template',
           'update:modelValue',
-          'update:value',
           'large',
           'small',
           'toolbarAriaLabel',

@@ -151,17 +151,9 @@ const props = defineProps({
   /**
    * Optionally provide the default value of the `<input>`
    */
-  value: { type: String, default: undefined },
-  /**
-   * @deprecated use value
-   */
   modelValue: {
     type: String,
     default: undefined,
-    validator: () => {
-      console.warn('Deprecated: use v-model:value instead');
-      return true;
-    },
   },
   /**
    * Provide an optional placeholder text for the Search. Note: if the label and placeholder differ, VoiceOver on Mac will read both
@@ -184,14 +176,14 @@ const props = defineProps({
 const uid = useCvId(props, true);
 const isLight = useIsLight(props);
 
-const clearVisible = ref(props.value ? props.value.length : false);
-const internalSearchText = ref(props.value || props.modelValue);
+const clearVisible = ref(props.modelValue ? props.modelValue.length : false);
+const internalSearchText = ref(props.modelValue);
 const searchActive = ref(false);
 watch(
-  () => props.value,
+  () => props.modelValue,
   () => {
-    clearVisible.value = props.value ? props.value.length : false;
-    internalSearchText.value = props.value;
+    clearVisible.value = props.modelValue ? props.modelValue.length : false;
+    internalSearchText.value = props.modelValue;
   }
 );
 
@@ -204,14 +196,10 @@ const internalAriaLabelBy = computed(() => {
   else return undefined;
 });
 
-const emit = defineEmits(['input', 'update:value', 'update:modelValue']);
+const emit = defineEmits(['input', 'update:modelValue']);
 watch(internalSearchText, () => {
   emit('input', internalSearchText.value);
-  emit('update:value', internalSearchText.value);
-  if (props.modelValue) {
-    console.warn('Deprecated: use v-model:value instead');
-    emit('update:modelValue', internalSearchText.value);
-  }
+  emit('update:modelValue', internalSearchText.value);
 });
 function onClearClick() {
   internalSearchText.value = '';

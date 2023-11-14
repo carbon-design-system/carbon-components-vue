@@ -58,7 +58,7 @@ export const Template = args => ({
       title: args.title,
       label: args.label,
       highlight: args.highlight,
-      value: args.value,
+      modelValue: args.modelValue,
       selectionFeedback: args.selectionFeedback,
       filterable: args.filterable,
       light: args.light,
@@ -70,7 +70,7 @@ export const Template = args => ({
       myValue: myValue,
       onChange: action('change'),
       onFilter: action('filter'),
-      onVmodel: action('update:value'),
+      onVmodel: action('update:modelValue'),
     };
   },
   template: args.template,
@@ -93,7 +93,7 @@ const defaultTemplate = `
   :options="options"
   :selectionFeedback="selectionFeedback"
   :title="title"
-  :value="value"
+  :modelValue="modelValue"
   :warningMessage="warningMessage"
   @change="onChange"
   @filter="onFilter"
@@ -123,13 +123,13 @@ const vModelTemplate = `
   :label="label"
   :options="options"
   :title="title"
-  v-model:value="myValue"
+  v-model="myValue"
   @change="onChange"
   @filter="onFilter"
   >
   </cv-multi-select>
   <div style="margin-top:2rem">
-    <div>v-model:value</div>
+    <div>v-model</div>
     <select name="cars" id="cars" v-model="myValue" multiple>
       <option v-for="opt in options" :key="opt.value" :value="opt.value">{{opt.value}}</option>
     </select>
@@ -147,8 +147,6 @@ Migration notes:
 - Added the `warningMessage` option to match Carbon React
 - Setting `autoFilter` to true now implies `filterable`. Previous versions required `filterable` to
   be explicitly set to `true` for `autoFilter` to work properly.
-- The `v-model` is different in Vue 3 than Vue 2.If you specify it you will see a error deprecation message in the log.
-  Please use `v-model:value=something` instead.
 
 <Canvas>
   <Story
@@ -160,10 +158,8 @@ Migration notes:
           'filter',
           'helper-text',
           'invalid-message',
-          'modelValue',
           'template',
           'update:modelValue',
-          'update:value',
           'warning-message',
         ],
       },
@@ -210,7 +206,7 @@ Migration notes:
         control: 'inline-radio',
         options: [],
       },
-      value: {
+      modelValue: {
         control: 'multi-select',
         options: pkdValues,
       },
@@ -242,15 +238,13 @@ Migration notes:
           'invalid-message',
           'invalidMessage',
           'light',
-          'modelValue',
           'options',
           'selectionFeedback',
           'template',
           'update:modelValue',
-          'update:value',
-          'value',
           'warning-message',
           'warningMessage',
+          'modelValue'
         ],
       },
       docs: { source: { code: slotsTemplate } },
@@ -271,8 +265,6 @@ Migration notes:
 </Canvas>
 
 # v-model
-
-Note: Specifying `v-model="something"` will not work. Use `v-model:value=something` instead.
 
 <Canvas>
   <Story
@@ -300,8 +292,6 @@ Note: Specifying `v-model="something"` will not work. Use `v-model:value=somethi
           'selectionFeedback',
           'template',
           'update:modelValue',
-          'update:value',
-          'value',
           'warning-message',
           'warningMessage',
         ],
@@ -322,7 +312,7 @@ Note: Specifying `v-model="something"` will not work. Use `v-model:value=somethi
         control: 'inline-radio',
         options: [],
       },
-      value: {
+      modelValue: {
         control: 'multi-select',
         options: pkdValues,
       },

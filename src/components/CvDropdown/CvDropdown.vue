@@ -73,7 +73,7 @@
         <button
           ref="button"
           :aria-controls="`${uid}-menu`"
-          :aria-disabled="disabled"
+          :aria-disabled="disabled || null"
           :aria-expanded="open ? 'true' : 'false'"
           :aria-labelledby="ariaLabeledBy"
           :class="`${carbonPrefix}--list-box__field`"
@@ -129,7 +129,7 @@
       </div>
       <div
         v-else-if="data.isHelper"
-        :aria-disabled="disabled"
+        :aria-disabled="disabled || null"
         :class="[
           `${carbonPrefix}--form__helper-text`,
           { [`${carbonPrefix}--form__helper-text--disabled`]: disabled },
@@ -229,24 +229,14 @@ const props = defineProps({
    */
   up: { type: Boolean, default: false },
   /**
-   * Render with a value already selected. Available as `v-model:value`.
-   */
-  value: { type: String, default: undefined },
-  /**
    * Provide the text that is displayed and put the control in warning state
    */
   warningMessage: { type: String, default: undefined },
   /**
-   * @deprecated - use v-model:value
+   * Render with a value already selected. Available as `v-model`.
    */
   modelValue: {
     type: String,
-    validator: val => {
-      console.warn(
-        `v-model for cv-dropdown is deprecated. Specify "v-model:value" instead [${val}]`
-      );
-      return true;
-    },
     default: undefined,
   },
 
@@ -255,7 +245,7 @@ const props = defineProps({
 });
 const uid = useCvId(props, true);
 const isLight = useIsLight(props);
-const dataValue = ref(props.value);
+const dataValue = ref(props.modelValue);
 provide('dropdown-selected', dataValue);
 const focusItem = ref(undefined);
 provide('dropdown-focus', focusItem);
@@ -287,16 +277,15 @@ const isWarning = computed(() => {
 });
 onMounted(checkSlots);
 onUpdated(checkSlots);
-const emit = defineEmits(['update:value', 'update:modelValue', 'change']);
+const emit = defineEmits(['update:modelValue', 'change']);
 watch(
-  () => props.value,
+  () => props.modelValue,
   () => {
-    dataValue.value = props.value;
+    dataValue.value = props.modelValue;
   }
 );
 watch(dataValue, () => {
   emit('change', dataValue.value);
-  emit('update:value', dataValue.value);
   emit('update:modelValue', dataValue.value);
 });
 watch(open, () => {
