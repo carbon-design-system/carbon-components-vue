@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.11](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.10...@carbon/vue@3.0.11) (2023-11-14)
+
+### Bug Fixes
+
+- aria-busy should be 'true' or 'false' string ([834260d](https://github.com/carbon-design-system/carbon-components-vue/commit/834260d0d3647ccece17b561274d149483792cbf))
+- aria-checked should be 'true' or 'false' string ([01afbfb](https://github.com/carbon-design-system/carbon-components-vue/commit/01afbfb4652209d4915985849cac9d807b8b5a22))
+- aria-hidden should be 'true' or 'false' string ([4d259ba](https://github.com/carbon-design-system/carbon-components-vue/commit/4d259ba069681f5763c70002ad2da523da12eab5))
+- update test to match aria and v-model changes ([ccba212](https://github.com/carbon-design-system/carbon-components-vue/commit/ccba212a2465b536a9d9e8d8e9414efd58f96e18))
+- use null instead of false to remove aria-disabled ([a071aae](https://github.com/carbon-design-system/carbon-components-vue/commit/a071aae513f16a34111c933f20c9d93c96f06136))
+- v-model misunderstanding ([5372cfd](https://github.com/carbon-design-system/carbon-components-vue/commit/5372cfd7be7cd4559606aeb3e0b09752c01d144f))
+
+### Features
+
+- **cv-progress-skeleton:** add initial implementation ([#1546](https://github.com/carbon-design-system/carbon-components-vue/issues/1546)) ([5c59c5b](https://github.com/carbon-design-system/carbon-components-vue/commit/5c59c5b59d10eca7b341c8e919553bdfdef54543))
+
 ## [3.0.10](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.9...@carbon/vue@3.0.10) (2023-10-23)
 
 ### Bug Fixes
