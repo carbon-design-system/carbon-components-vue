@@ -64,7 +64,7 @@ import CarbonVue from '@carbon/vue'
 
 export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.use(CarbonVue)
-}
+})
 ```
 
 See [Hello Carbon Nuxt](#add-to-nuxt-project) **coming soon**
