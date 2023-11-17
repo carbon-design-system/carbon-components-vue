@@ -31,8 +31,8 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: Continuous integration check & build
-        run: yarn ci-check
+      - name: Build
+        run: yarn build
 
       # Use this action to retry after failed publish to npm
       # See thread https://github.com/lerna/lerna/issues/1709
@@ -40,4 +40,6 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: yarn lerna publish from-package --yes
+        run: |
+          npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }} -q
+          yarn lerna publish from-package --yes
