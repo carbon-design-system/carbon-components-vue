@@ -19,8 +19,8 @@ jobs:
 
       # https://github.com/actions/checkout#push-a-commit-using-the-built-in-token
       - run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+          git config user.name carbon-bot
+          git config user.email carbon@us.ibm.com
 
       - name: Use Node.js 18.x
         uses: actions/setup-node@v4 # https://github.com/actions/setup-node
@@ -39,5 +39,5 @@ jobs:
       - name: Publish
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: yarn lerna publish from-package --no-verify-access --yes
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+        run: yarn lerna publish from-package --yes
