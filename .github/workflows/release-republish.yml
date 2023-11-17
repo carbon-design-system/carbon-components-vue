@@ -40,6 +40,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }} -q
-          yarn lerna publish from-package --yes
+        run: yarn lerna publish from-package --no-verify-access --yes
