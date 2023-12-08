@@ -48,7 +48,6 @@
             :pattern="pattern"
             :placeholder="placeholder"
             @change="handleUpdateEvent"
-            @click="handleClick"
           />
           <Calendar16
             v-if="['single', 'range'].includes(getKind)"
@@ -136,9 +135,6 @@ const dateWrapper = ref(null);
 const date = ref(null);
 const todate = ref(null);
 
-const cvId = useCvId(props, true, 'date-picker-');
-const isLight = useIsLight(props);
-
 let calendar;
 
 const props = defineProps({
@@ -168,6 +164,9 @@ const props = defineProps({
   ...propsCvId,
   ...propsCvTheme,
 });
+
+const cvId = useCvId(props, true, 'date-picker-');
+const isLight = useIsLight(props);
 
 const emit = defineEmits(['update:modelValue']);
 
