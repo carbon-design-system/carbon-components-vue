@@ -71,7 +71,7 @@
             role="tab"
             :aria-controls="tab.uid"
             :aria-disabled="disabledTabs.has(tab.uid) || null"
-            :aria-selected="selectedId === tab.uid"
+            :aria-selected="`${selectedId === tab.uid}`"
             :tabindex="selectedId === tab.uid ? 0 : -1"
             type="button"
             @click="onTabClick(tab.uid)"
@@ -187,7 +187,7 @@ function maybeSelectFirstTab() {
   if (index > -1) selectedId.value = tabs.value[index].uid;
 }
 onMounted(maybeSelectFirstTab);
-watch(tabs, maybeSelectFirstTab);
+watch(tabs, maybeSelectFirstTab, { deep: true });
 watch(selectedId, () => {
   nextTick(() => {
     doTabClick(selectedId.value);

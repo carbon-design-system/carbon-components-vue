@@ -1,7 +1,7 @@
 <template>
   <component
     :is="formItem ? 'div' : CvEmpty"
-    :class="`cv-search ${carbonPrefix}--form-item`"
+    :class="[`cv-search`, `${carbonPrefix}--form-item`, $attrs.class]"
   >
     <div
       ref="elSearch"

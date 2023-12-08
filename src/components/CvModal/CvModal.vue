@@ -8,7 +8,7 @@
         `cv-modal ${carbonPrefix}--modal`,
         {
           'is-visible': dataVisible,
-          [`${carbonPrefix}--modal--danger`]: kind === 'danger',
+          [`${carbonPrefix}--modal--danger`]: kind === MODAL_KIND_DANGER,
         },
       ]"
       tabindex="-1"
@@ -119,6 +119,15 @@
 </template>
 
 <script setup>
+import {
+  MODAL_KIND_DANGER,
+  MODAL_KIND_PRIMARY,
+  MODAL_KINDS,
+  MODAL_SIZE_EXTRA_SMALL,
+  MODAL_SIZE_LARGE,
+  MODAL_SIZE_SMALL,
+  MODAL_SIZES,
+} from './index';
 import CvButton from '../CvButton/CvButton.vue';
 import { carbonPrefix } from '../../global/settings';
 import { props as propsCvId, useCvId } from '../../use/cvId';
@@ -155,7 +164,11 @@ const props = defineProps({
   kind: {
     type: String,
     default: '',
-    validator: val => ['', 'danger'].includes(val),
+    validator: val => {
+      const valid = MODAL_KINDS.includes(val);
+      if (!valid) console.warn('valid kinds:', MODAL_KINDS);
+      return valid;
+    },
   },
   /**
    * boolean value if true the component user is expected to close the modal via visible property.
@@ -187,8 +200,11 @@ const props = defineProps({
    */
   size: {
     type: String,
-    validator: val =>
-      ['', 'xs', 'sm', 'small', 'md', 'large', 'lg'].includes(val),
+    validator: val => {
+      const valid = MODAL_SIZES.includes(val);
+      if (!valid) console.warn('valid sizes:', MODAL_SIZES);
+      return valid;
+    },
     default: '',
   },
   /**
@@ -333,22 +349,22 @@ const dialogAttrs = computed(() => {
   return attrs;
 });
 const primaryKind = computed(() => {
-  if (props.kind === 'danger') {
-    return 'danger';
+  if (props.kind === MODAL_KIND_DANGER) {
+    return MODAL_KIND_DANGER;
   } else {
-    return 'primary';
+    return MODAL_KIND_PRIMARY;
   }
 });
 const internalSize = computed(() => {
   switch (props.size) {
-    case 'xs':
-      return 'xs';
-    case 'sm':
+    case MODAL_SIZE_EXTRA_SMALL:
+      return MODAL_SIZE_EXTRA_SMALL;
+    case MODAL_SIZE_SMALL:
     case 'small':
-      return 'sm';
-    case 'lg':
+      return MODAL_SIZE_SMALL;
+    case MODAL_SIZE_LARGE:
     case 'large':
-      return 'lg';
+      return MODAL_SIZE_LARGE;
     default:
       return '';
   }
@@ -397,5 +413,11 @@ function onOtherBtnClick(ev) {
 }
 onBeforeUnmount(() => {
   if (dataVisible.value) hide();
+});
+
+// exposing methods
+defineExpose({
+  show,
+  hide,
 });
 </script>

@@ -42,8 +42,8 @@
             data-date-picker-input
             role="datepicker"
             :data-invalid="isInvalid || null"
-            :disabled="disabled"
-            :data-date-picker-input-from="getKind === 'range'"
+            :disabled="disabled || null"
+            :data-date-picker-input-from="`${getKind === 'range'}`"
             :class="`${carbonPrefix}--date-picker__input`"
             :pattern="pattern"
             :placeholder="placeholder"
@@ -87,9 +87,9 @@
             type="text"
             data-date-picker-input
             role="todatepicker"
-            :data-date-picker-input-to="kind === 'range'"
+            :data-date-picker-input-to="`${kind === 'range'}`"
             :data-invalid="isInvalid || null"
-            :disabled="disabled"
+            :disabled="disabled || null"
             :class="`${carbonPrefix}--date-picker__input`"
             :pattern="pattern"
             :placeholder="placeholder"
