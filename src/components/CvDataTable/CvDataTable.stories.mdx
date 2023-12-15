@@ -10,16 +10,28 @@ import { sbCompPrefix } from '../../global/storybook-utils';
 import { action } from '@storybook/addon-actions';
 import { Terminal16 as CompileIcon, Debug16 as DebugIcon, Chip16 as EmbedIcon,
   TrashCan16 as TrashCanIcon} from '@carbon/icons-vue'
-const testData = [
-  { name:"Java", year:1995, oo:"Yes", purpose:"Applications", standard:"Java Language Specification", desc: "As of September 2022, Java 19 is the latest version, while Java 17, 11 and 8 are the current long-term support (LTS) versions."},
-  { name:"COBOL", year:1959, oo:"Yes", purpose:"Business applications", standard:"COBOL 2014", desc: "COBOL statements have an English-like syntax, which was designed to be self-documenting and highly readable."},
-  { name:"Pascal", year:1970, oo:"No", purpose:"Applications", standard:"None", desc: "Pascal was developed on the pattern of the ALGOL 60 language."},
-  { name:"Ada", year:1980, oo:"Yes", purpose:"US DoD projects", standard:"Ada 2012 TC1", desc: "Ada was named after Ada Lovelace (1815–1852), who has been credited as the first computer programmer."},
-  { name:"BASIC", year:1964, oo:"No", purpose:"Education", standard:"ANSI", desc: "BASIC declined in popularity in the 1990s"},
-  { name:"C++", year:1985, oo:"Yes", purpose:"Systems programming", standard:"ISO/IEC 2017", desc: "C++ is standardized by the International Organization for Standardization (ISO), with the latest standard version ratified and published by ISO in December 2020 as ISO/IEC 14882:2020 (informally known as C++20)."},
-  { name:"Fortran", year:1957, oo:"No", purpose:"Engineering applications", standard:"ANSI", desc: "Fortran was originally developed by IBM in the 1950s for scientific and engineering applications, and subsequently came to dominate scientific computing."},
-  { name:"Go", year:2009, oo:"Maybe", purpose:"Networked applications", standard:"Go Spec", desc: "Go's designers were primarily motivated by their shared dislike of C++."},
-];
+import { ref } from 'vue';
+const testData = ref([
+  { index:"0", name:"Java", year:1995, oo:"Yes", purpose:"Applications", standard:"Java Language Specification", desc: "As of September 2022, Java 19 is the latest version, while Java 17, 11 and 8 are the current long-term support (LTS) versions."},
+  { index:"1", name:"COBOL", year:1959, oo:"Yes", purpose:"Business applications", standard:"COBOL 2014", desc: "COBOL statements have an English-like syntax, which was designed to be self-documenting and highly readable."},
+  { index:"2", name:"Pascal", year:1970, oo:"No", purpose:"Applications", standard:"None", desc: "Pascal was developed on the pattern of the ALGOL 60 language."},
+  { index:"3", name:"Ada", year:1980, oo:"Yes", purpose:"US DoD projects", standard:"Ada 2012 TC1", desc: "Ada was named after Ada Lovelace (1815–1852), who has been credited as the first computer programmer."},
+  { index:"4", name:"BASIC", year:1964, oo:"No", purpose:"Education", standard:"ANSI", desc: "BASIC declined in popularity in the 1990s"},
+  { index:"5", name:"C++", year:1985, oo:"Yes", purpose:"Systems programming", standard:"ISO/IEC 2017", desc: "C++ is standardized by the International Organization for Standardization (ISO), with the latest standard version ratified and published by ISO in December 2020 as ISO/IEC 14882:2020 (informally known as C++20)."},
+  { index:"6", name:"Fortran", year:1957, oo:"No", purpose:"Engineering applications", standard:"ANSI", desc: "Fortran was originally developed by IBM in the 1950s for scientific and engineering applications, and subsequently came to dominate scientific computing."},
+  { index:"7", name:"Go", year:2009, oo:"Maybe", purpose:"Networked applications", standard:"Go Spec", desc: "Go's designers were primarily motivated by their shared dislike of C++."},
+]);
+function sortTestData(opts) {
+  action('sort')(opts)
+  if (opts.order === 'none')
+    return testData.value.sort((a, b) => a.index.localeCompare(b.index, 'en', { sensitivity: 'base' }));
+  let direction = 1
+  if (opts.order === 'descending') direction = -1
+  if (opts.name === 'name')
+    return testData.value.sort((a, b) => direction * a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+  else if (opts.name === 'year')
+    return testData.value.sort((a, b) => direction * (a.year - b.year));
+}
 
 <Meta title={`${sbCompPrefix}/CvDataTable`} component={CvDataTable} />
 
@@ -46,7 +58,7 @@ setup() {
       useHelperTextSlot: undefined,
       template: undefined},
     trashIcon: TrashCanIcon,
-    onSort: action('sort'),
+    onSort: sortTestData,
     onSearch: action('search'),
     onRowSelectChange: action('row-select-change'),
     onRowSelectChanges: action('row-select-changes'),
@@ -101,14 +113,14 @@ const defaultTemplate = `
       </embed-icon>
     </cv-data-table-action>
   </template>
-  <template v-slot:headings>
+  <template #headings>
     <cv-data-table-heading heading="Name" name="name" sortable/>
     <cv-data-table-heading heading="Year" name="year" sortable/>
     <cv-data-table-heading heading="Object Oriented"/>
     <cv-data-table-heading heading="Purpose" />
     <cv-data-table-heading heading="Standard" />
   </template>
-  <template v-slot:data>
+  <template #data>
     <cv-data-table-row v-for="row in testData" :key="row.name" :value="row.name">
       <cv-data-table-cell>{{row.name}}</cv-data-table-cell>
       <cv-data-table-cell>{{row.year}}</cv-data-table-cell>
@@ -122,7 +134,7 @@ const defaultTemplate = `
 `;
 const expandingRowsTemplate = defaultTemplate.replace(
   "<!-- Add optional expanding data here -->",
-  `<template v-slot:expandedContent>{{row.desc}}</template>`)
+  `<template #expandedContent>{{row.desc}}</template>`)
   .replace('@search="onSearch"', '')
 const skeletonTemplate = `
 <cv-data-table-skeleton
@@ -137,6 +149,19 @@ const skeletonTemplate = `
 
 **Usage:**
 - Sorting, filtering and pagination are the responsibility of the component user. This component raises events to facilitate this.
+  For example the test data is sorted like this but this is very specific to this data. Users will need to provide their own sort and filtering.
+  ```javascript
+  function sortTestData(opts) {
+    if (opts.order === 'none')
+      return testData.value.sort((a, b) => a.index.localeCompare(b.index, 'en', { sensitivity: 'base' }));
+    let direction = 1
+    if (opts.order === 'descending') direction = -1
+    if (opts.name === 'name')
+      return testData.value.sort((a, b) => direction * a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+    else if (opts.name === 'year')
+      return testData.value.sort((a, b) => direction * (a.year - b.year));
+  }
+  ```
 - The search bar appears only if the search event is listened for.
 
 **Row attributes:**

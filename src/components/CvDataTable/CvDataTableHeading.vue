@@ -127,11 +127,9 @@ const internalOrder = computed(() => {
     return undefined;
   }
   const heading = store.findHeading(parent, cvId);
-  if (heading?.order !== 'ascending' && heading?.order !== 'descending') {
-    return 'none';
-  } else {
-    return heading?.order;
-  }
+  if (['ascending', 'descending', 'none'].includes(heading?.order))
+    return heading.order;
+  else return 'none';
 });
 
 const headingLabelTag = computed(() => {
