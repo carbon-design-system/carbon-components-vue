@@ -11,7 +11,6 @@ These supported versions include the different discrete version numbers of
 individual packages as listed in the
 [release changelogs](https://github.com/carbon-design-system/carbon-components-vue/blob/main/CHANGELOG.md)
 
-
 ## Reporting a Vulnerability
 
 _Please do not report security vulnerabilities through public GitHub issues._

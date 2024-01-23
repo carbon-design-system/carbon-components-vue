@@ -60,11 +60,11 @@ See [Hello Carbon Vue](https://github.com/IBM/hello-carbon-vue3) for an example 
 `plugins/carbon-vue.js`
 
 ```js
-import CarbonVue from '@carbon/vue'
+import CarbonVue from '@carbon/vue';
 
-export default defineNuxtPlugin((nuxtApp) => {
-    nuxtApp.vueApp.use(CarbonVue)
-})
+export default defineNuxtPlugin(nuxtApp => {
+  nuxtApp.vueApp.use(CarbonVue);
+});
 ```
 
 See [Hello Carbon Nuxt](#add-to-nuxt-project) **coming soon**
