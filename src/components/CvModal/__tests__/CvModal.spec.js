@@ -1,6 +1,7 @@
 import { render } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
 import CvModal from '../CvModal.vue';
+import { MODAL_KIND_DANGER, MODAL_SIZE_LARGE } from '@/components/CvModal';
 
 describe('CvModal', () => {
   it('CvModal - test default and attrs', async () => {
@@ -86,9 +87,9 @@ describe('CvModal', () => {
 
     await result.rerender({
       visible: true,
-      kind: 'danger',
+      kind: MODAL_KIND_DANGER,
       primaryButtonDisabled: true,
-      size: 'lg',
+      size: MODAL_SIZE_LARGE,
       hasFormContent: true,
     });
 

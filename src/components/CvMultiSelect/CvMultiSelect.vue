@@ -426,8 +426,8 @@ onUpdated(checkSlots);
 onMounted(updateOptions);
 onMounted(updateSelectedItems);
 
-watch(() => props.modelValue, updateSelectedItems);
-watch(() => props.options, updateOptions);
+watch(() => props.modelValue, updateSelectedItems, { deep: true });
+watch(() => props.options, updateOptions, { deep: true });
 watch(() => props.selectionFeedback, updateOptions);
 
 const highlighted = computed({

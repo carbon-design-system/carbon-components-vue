@@ -42,13 +42,12 @@
             data-date-picker-input
             role="datepicker"
             :data-invalid="isInvalid || null"
-            :disabled="disabled"
-            :data-date-picker-input-from="getKind === 'range'"
+            :disabled="disabled || null"
+            :data-date-picker-input-from="`${getKind === 'range'}`"
             :class="`${carbonPrefix}--date-picker__input`"
             :pattern="pattern"
             :placeholder="placeholder"
             @change="handleUpdateEvent"
-            @click="handleClick"
           />
           <Calendar16
             v-if="['single', 'range'].includes(getKind)"
@@ -87,9 +86,9 @@
             type="text"
             data-date-picker-input
             role="todatepicker"
-            :data-date-picker-input-to="kind === 'range'"
+            :data-date-picker-input-to="`${kind === 'range'}`"
             :data-invalid="isInvalid || null"
-            :disabled="disabled"
+            :disabled="disabled || null"
             :class="`${carbonPrefix}--date-picker__input`"
             :pattern="pattern"
             :placeholder="placeholder"
@@ -136,9 +135,6 @@ const dateWrapper = ref(null);
 const date = ref(null);
 const todate = ref(null);
 
-const cvId = useCvId(props, true, 'date-picker-');
-const isLight = useIsLight(props);
-
 let calendar;
 
 const props = defineProps({
@@ -168,6 +164,9 @@ const props = defineProps({
   ...propsCvId,
   ...propsCvTheme,
 });
+
+const cvId = useCvId(props, true, 'date-picker-');
+const isLight = useIsLight(props);
 
 const emit = defineEmits(['update:modelValue']);
 

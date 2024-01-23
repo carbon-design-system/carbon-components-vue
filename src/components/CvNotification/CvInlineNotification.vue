@@ -15,10 +15,14 @@
       />
       <div :class="`${carbonPrefix}--inline-notification__text-wrapper`">
         <p :class="`${carbonPrefix}--inline-notification__title`">
-          {{ title }}
+          <slot name="title">
+            {{ title }}
+          </slot>
         </p>
         <div :class="`${carbonPrefix}--inline-notification__subtitle`">
-          {{ subTitle }}
+          <slot name="subtitle">
+            {{ subTitle }}
+          </slot>
         </div>
       </div>
     </div>
@@ -35,6 +39,7 @@
       {{ actionLabel }}
     </button>
     <button
+      v-if="!hideCloseButton"
       type="button"
       :aria-label="closeAriaLabel"
       :class="`${carbonPrefix}--inline-notification__close-button`"
@@ -66,7 +71,7 @@ export default {
       type: String,
       default: '',
     },
-    /** Notification sub title (supports HTML) */
+    /** Notification subtitle */
     subTitle: {
       type: String,
       default: '',
@@ -83,6 +88,11 @@ export default {
     },
     /** Use lower contrast version of the notification */
     lowContrast: {
+      type: Boolean,
+      default: false,
+    },
+    /** Set to true to hide the code button */
+    hideCloseButton: {
       type: Boolean,
       default: false,
     },
