@@ -39,5 +39,5 @@ jobs:
       - name: Publish
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: yarn lerna publish patch --yes
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+        run: yarn lerna publish patch --create-release github --yes
