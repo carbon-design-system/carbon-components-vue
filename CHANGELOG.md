@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.12](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.11...@carbon/vue@3.0.12) (2024-01-23)
+
+### Bug Fixes
+
+- add html option for inline notification ([f0fe1de](https://github.com/carbon-design-system/carbon-components-vue/commit/f0fe1de5a7c41f452ad987e1bd96389f124e9932))
+- fixes related to migration/compat build ([525bc93](https://github.com/carbon-design-system/carbon-components-vue/commit/525bc93ea426caf1276d2380ecebe9da6e4913e1))
+- moving cvId and isLight per [#1549](https://github.com/carbon-design-system/carbon-components-vue/issues/1549) ([56be4b7](https://github.com/carbon-design-system/carbon-components-vue/commit/56be4b7af2632a97acb5cfd645499fa89dac5a42))
+- sort in datatable story. [#1560](https://github.com/carbon-design-system/carbon-components-vue/issues/1560) ([7c4d439](https://github.com/carbon-design-system/carbon-components-vue/commit/7c4d4397ce63313973422493edb3d70901c4cfa6))
+
 ## [3.0.11](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.10...@carbon/vue@3.0.11) (2023-11-14)
 
 ### Bug Fixes
