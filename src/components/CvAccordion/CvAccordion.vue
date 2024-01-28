@@ -45,7 +45,7 @@ defineProps({
 
 const emit = defineEmits({
   /**
-   * Triggers when the clear button is pressed on a filter CvTag
+   * Triggers when state of an accordion item changes
    */
   change: payload => {
     return (
@@ -83,6 +83,19 @@ provide('registerItem', (itemCvId, item) => {
 provide('deregisterItem', itemCvId => {
   items.delete(itemCvId);
 });
+
+/**
+ * @typedef {Object} AccordianChangeElement
+ * @property {string} id
+ * @property {boolean} open
+ */
+
+/**
+ * @typedef {Object} AccordianChangeEvent
+ * @property {AccordianChangeElement} change
+ * @property {Array<AccordianChangeElement>} state
+ * @param ev
+ */
 provide('onAccItemChange', (clickedItemCvId, open) => {
   items.get(clickedItemCvId).open = open;
   emit('change', {

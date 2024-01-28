@@ -46,18 +46,18 @@ export default {
 </script>
 
 <script setup>
-import { onMounted, onBeforeUnmount, inject, ref } from 'vue';
+import { onMounted, onBeforeUnmount, inject, ref, watch } from 'vue';
 import { carbonPrefix } from '../../global/settings';
 import { useCvId, props as propsCvId } from '../../use/cvId';
 import { ChevronRight16 } from '@carbon/icons-vue/';
 
 const props = defineProps({
   /**
-   * disables this accodion item
+   * disables this accordion item
    */
   disabled: Boolean,
   /**
-   * initial open state of the accordion item
+   * open state of the accordion item. available as a v-model
    */
   open: Boolean,
   ...propsCvId,
@@ -66,10 +66,21 @@ const props = defineProps({
 // Accordion methods
 const registerItem = inject('registerItem', () => {});
 const deregisterItem = inject('deregisterItem', () => {});
-const onAccItemChagne = inject('onAccItemChange', () => {});
+const onAccItemChange = inject(
+  'onAccItemChange',
+  (clickedItemCvId, open) => {}
+);
+
+const emit = defineEmits(['update:open']);
+watch(
+  () => props.open,
+  () => {
+    if (props.open !== isOpen.value) toggleOpen(props.open);
+  }
+);
 
 // Accordion item methods
-const cvId = useCvId(props);
+const cvId = useCvId(props, true);
 const isOpen = ref(props.open);
 const animation = ref('');
 
@@ -77,8 +88,9 @@ const toggleOpen = force => {
   const newValue = typeof force !== 'undefined' ? force : !isOpen.value;
 
   animation.value = newValue ? 'expanding' : 'collapsing';
+  if (newValue !== props.open) emit('update:open', newValue);
+  if (isOpen.value !== newValue) onAccItemChange(cvId.value, newValue);
   isOpen.value = newValue;
-  onAccItemChagne(cvId.value, newValue);
 };
 
 const onClick = () => {
