@@ -26,7 +26,7 @@ import { alignConsts, sizeConsts } from './consts';
 
 defineProps({
   /**
-   * optional align, defaults to 'end'
+   * Specify the alignment of the accordion heading title and chevron.
    */
   align: {
     type: String,
@@ -34,7 +34,7 @@ defineProps({
     validator: val => alignConsts.includes(val),
   },
   /**
-   * optional size setting
+   * Specify the size of the Accordion
    */
   size: {
     type: String,
