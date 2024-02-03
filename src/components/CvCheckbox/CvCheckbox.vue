@@ -13,7 +13,6 @@
       type="checkbox"
       :class="`${carbonPrefix}--checkbox`"
       :checked="isChecked === true"
-      :aria-checked="`${isChecked}`"
       :value="value"
       :disabled="disabled || null"
       @focus="onFocus"
@@ -55,7 +54,12 @@ const props = defineProps({
   /**
    * Provide a label to provide a description of the Checkbox input that you are exposing to the user
    */
-  label: { type: String, default: null },
+  label: {
+    type: String,
+    default: null,
+    required: true,
+    validator: label => !!label.length,
+  },
   /**
    * Specify whether the "bx--form-item" style should be applied
    */

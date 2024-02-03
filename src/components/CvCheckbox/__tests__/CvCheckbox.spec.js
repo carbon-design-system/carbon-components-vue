@@ -8,7 +8,11 @@ describe('CvCheckbox', () => {
     const handler = jest.fn();
     // The render method returns a collection of utilities to query your component.
     const { emitted, getByRole } = render(CvCheckbox, {
-      props: { value: 'checkbox-1', class: 'ABC-class-123' },
+      props: {
+        value: 'checkbox-1',
+        class: 'ABC-class-123',
+        label: 'input label',
+      },
       attrs: {
         onkeydown: handler,
         'aria-label': ariaLabel,
