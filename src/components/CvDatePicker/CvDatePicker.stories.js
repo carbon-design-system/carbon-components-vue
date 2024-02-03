@@ -15,7 +15,9 @@ const initArgs = {
 
 const now = new Date();
 const tomorrow = new Date();
+const nextWeek = new Date();
 tomorrow.setDate(now.getDate() + 1);
+nextWeek.setDate(now.getDate() + 7);
 
 export default {
   title: `${sbCompPrefix}/CvDatePicker`,
@@ -30,9 +32,29 @@ export default {
   },
   argTypes: {
     dateLabel: { type: String, description: 'Date picker label' },
+    dateEndLabel: {
+      type: String,
+      description: 'Date picker end label (when using kind="range")',
+    },
     invalidMessage: {
       type: String,
       description: 'Date picker text on invalid value',
+    },
+    kind: {
+      type: String,
+      description: 'Date picker kind (also known as mode in flatpickr).',
+      options: ['short', 'simple', 'single', 'range'],
+      control: { type: 'select' },
+    },
+    disabled: {
+      type: Boolean,
+      description: 'If true, the date picker will be disabled',
+    },
+    calOptions: {
+      type: Object,
+      description: `You can pass flatpickr options through this prop.
+       See https://flatpickr.js.org/options/ for more details.
+       Some of the options is not supported (for example, onChange, onReady, mode, nextArrow, prevArrow).`,
     },
   },
 };
@@ -171,6 +193,35 @@ const TemplateSingleUsingDate = args => {
 
 export const SingleUsingDate = TemplateSingleUsingDate.bind({});
 SingleUsingDate.args = initArgs;
+
+/* SINGLE USING MIN MAX PARAMS STORY */
+
+const templateSingleUsingMinMax = `
+<div>
+  <cv-date-picker v-bind='args' @change='onChange' kind="single" :value="now" :cal-options="calOptions">
+  </cv-date-picker>
+</div>
+`;
+
+const TemplateSingleUsingMinMax = args => {
+  return {
+    components: { CvDatePicker },
+    setup: () => ({
+      args,
+      now,
+      calOptions: {
+        minDate: now,
+        maxDate: nextWeek,
+        dateFormat: 'm/d/Y',
+      },
+      onChange: action('change'),
+    }),
+    template: templateSingleUsingMinMax,
+  };
+};
+
+export const SingleUsingMinMax = TemplateSingleUsingMinMax.bind({});
+SingleUsingMinMax.args = initArgs;
 
 /* RANGE USING DATE STORY */
 

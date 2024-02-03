@@ -141,7 +141,6 @@ const props = defineProps({
   modelValue: { type: [String, Object, Array, Date], default: undefined },
   dateLabel: { type: String, default: undefined },
   dateEndLabel: { type: String, default: 'End date' },
-  invalid: { type: Boolean, default: false },
   disabled: { type: Boolean, default: false },
   invalidMessage: { type: String, default: undefined },
   pattern: { type: String, default: '\\d{1,2}/\\d{1,2}/\\d{4}' },
