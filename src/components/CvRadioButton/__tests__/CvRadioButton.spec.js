@@ -117,7 +117,7 @@ describe('CvRadioGroup', () => {
   // ***************
   it('matches render when vertical', async () => {
     const wrapper = shallowMount(CvRadioGroup, {
-      props: { vertical: true },
+      props: { vertical: true, legendText: 'test legend' },
       slots: {
         default: '<div class="cv-radio-button-stub">RadioButtonStub</div>',
       },
@@ -127,7 +127,7 @@ describe('CvRadioGroup', () => {
 
   it('matches render when horizontal', async () => {
     const wrapper = shallowMount(CvRadioGroup, {
-      props: { vertical: false },
+      props: { vertical: false, legendText: 'test legend' },
       slots: {
         default: '<div class="cv-radio-button-stub">RadioButtonStub</div>',
       },
@@ -143,6 +143,9 @@ describe('CvRadioGroup', () => {
     const stubId = 'radioBtn';
     const radioButtonStub = `<div id="${stubId}"></div>`;
     const wrapper = shallowMount(CvRadioGroup, {
+      props: {
+        legendText: 'test legend',
+      },
       slots: {
         default: radioButtonStub,
       },

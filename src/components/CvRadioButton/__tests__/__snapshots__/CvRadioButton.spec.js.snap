@@ -12,16 +12,18 @@ exports[`CvRadioButton matches render with right label 1`] = `<div class="cv-rad
 
 exports[`CvRadioGroup matches render when horizontal 1`] = `
 <div class="cv-radio-group bx--form-item">
-  <div class="bx--radio-button-group">
+  <fieldset class="bx--radio-button-group">
+    <legend class="bx--label" dir="auto">test legend</legend>
     <div class="cv-radio-button-stub">RadioButtonStub</div>
-  </div>
+  </fieldset>
 </div>
 `;
 
 exports[`CvRadioGroup matches render when vertical 1`] = `
 <div class="cv-radio-group bx--form-item">
-  <div class="bx--radio-button-group bx--radio-button-group--vertical">
+  <fieldset class="bx--radio-button-group bx--radio-button-group--vertical">
+    <legend class="bx--label" dir="auto">test legend</legend>
     <div class="cv-radio-button-stub">RadioButtonStub</div>
-  </div>
+  </fieldset>
 </div>
 `;

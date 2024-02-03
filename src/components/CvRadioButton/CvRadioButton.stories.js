@@ -38,10 +38,27 @@ export default {
       type: 'boolean',
       table: {
         type: { summary: 'boolean' },
-        category: 'props',
+        category: 'CvRadioGroup - props',
       },
       description:
         'Property of CvRadioGroup component - stacks inside radio components vertically',
+    },
+    legendText: {
+      control: 'text',
+      table: {
+        type: { summary: 'text' },
+        category: 'CvRadioGroup - props',
+      },
+      description: 'Property of CvRadioGroup component',
+    },
+    hideLegend: {
+      type: 'boolean',
+      table: {
+        type: { summary: 'boolean' },
+        category: 'CvRadioGroup - props',
+      },
+      description:
+        'Property of CvRadioGroup component - makes the legend visually hidden',
     },
   },
 };
@@ -105,6 +122,8 @@ const Template = (args, { argTypes }) => {
 export const Default = Template.bind({});
 Default.args = {
   vertical: false,
+  legendText: 'CvRadioGroup legend',
+  hideLegend: false,
 };
 Default.parameters = storyParametersObject(
   DefaultStoryParameters,
