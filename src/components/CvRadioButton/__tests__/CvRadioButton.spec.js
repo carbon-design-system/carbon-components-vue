@@ -74,6 +74,7 @@ describe('CvRadioButton', () => {
   it('is not checked when checked and modelValue props are not set', async () => {
     const wrapper = shallowMount(CvRadioButton, {
       props: {
+        label: 'test label',
         labelLeft: false,
         id: '1',
         value: 'test value',
@@ -85,6 +86,7 @@ describe('CvRadioButton', () => {
   it('is checked when checked prop is set to true and modelValue prop is not set', async () => {
     const wrapper = shallowMount(CvRadioButton, {
       props: {
+        label: 'test label',
         labelLeft: false,
         id: '1',
         value: 'test value',
@@ -97,6 +99,7 @@ describe('CvRadioButton', () => {
   it('modelValue prop has higher priority than checked prop', async () => {
     const wrapper = shallowMount(CvRadioButton, {
       props: {
+        label: 'test label',
         labelLeft: false,
         id: '1',
         value: 'test value',
