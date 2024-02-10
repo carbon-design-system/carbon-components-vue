@@ -1,13 +1,22 @@
 <template>
   <div :class="`cv-radio-group ${carbonPrefix}--form-item`">
-    <div
+    <fieldset
       :class="[
         `${carbonPrefix}--radio-button-group`,
         { [`${carbonPrefix}--radio-button-group--vertical`]: vertical },
       ]"
     >
+      <legend
+        :class="[
+          `${carbonPrefix}--label`,
+          { [`${carbonPrefix}--visually-hidden`]: hideLegend },
+        ]"
+        dir="auto"
+      >
+        {{ legendText }}
+      </legend>
       <slot></slot>
-    </div>
+    </fieldset>
   </div>
 </template>
 
@@ -17,6 +26,13 @@ import { carbonPrefix } from '../../global/settings';
 
 defineProps({
   vertical: Boolean,
+  legendText: {
+    type: String,
+    default: null,
+    required: true,
+    validator: legend => !!legend.length,
+  },
+  hideLegend: Boolean,
 });
 
 const emit = defineEmits(['change']);

@@ -18,10 +18,7 @@
     <!-- symbol causes problem in codepen? -->
     <label :for="cvId" :class="`${carbonPrefix}--radio-button__label`">
       <span :class="`${carbonPrefix}--radio-button__appearance`"></span>
-      <span
-        v-if="label"
-        :class="{ [`${carbonPrefix}--visually-hidden`]: hideLabel }"
-      >
+      <span :class="{ [`${carbonPrefix}--visually-hidden`]: hideLabel }">
         {{ label }}
       </span>
     </label>
@@ -35,7 +32,12 @@ import { useCvId, propsCvId, useMethods, useRadio } from '../../use';
 const props = defineProps({
   modelValue: { type: String, default: undefined },
   checked: Boolean,
-  label: { type: String, default: undefined },
+  label: {
+    type: String,
+    default: null,
+    required: true,
+    validator: label => !!label.length,
+  },
   value: { type: String, required: true },
   hideLabel: Boolean,
   labelLeft: Boolean,
