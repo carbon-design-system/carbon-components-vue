@@ -26,26 +26,26 @@ import { alignConsts, sizeConsts } from './consts';
 
 defineProps({
   /**
-   * optional align, defaults to 'end'
+   * Specify the alignment of the accordion heading title and chevron.
    */
   align: {
     type: String,
-    default: null,
+    default: '',
     validator: val => alignConsts.includes(val),
   },
   /**
-   * optional size setting
+   * Specify the size of the Accordion
    */
   size: {
     type: String,
-    default: null,
+    default: '',
     validator: val => sizeConsts.includes(val),
   },
 });
 
 const emit = defineEmits({
   /**
-   * Triggers when the clear button is pressed on a filter CvTag
+   * Triggers when state of an accordion item changes
    */
   change: payload => {
     return (
@@ -83,6 +83,19 @@ provide('registerItem', (itemCvId, item) => {
 provide('deregisterItem', itemCvId => {
   items.delete(itemCvId);
 });
+
+/**
+ * @typedef {Object} AccordionChangeElement
+ * @property {string} id
+ * @property {boolean} open
+ */
+
+/**
+ * @typedef {Object} AccordionChangeEvent
+ * @property {AccordionChangeElement} change
+ * @property {Array<AccordionChangeElement>} state
+ * @param ev
+ */
 provide('onAccItemChange', (clickedItemCvId, open) => {
   items.get(clickedItemCvId).open = open;
   emit('change', {
