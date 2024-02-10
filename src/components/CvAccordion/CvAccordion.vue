@@ -30,7 +30,7 @@ defineProps({
    */
   align: {
     type: String,
-    default: null,
+    default: '',
     validator: val => alignConsts.includes(val),
   },
   /**
@@ -38,7 +38,7 @@ defineProps({
    */
   size: {
     type: String,
-    default: null,
+    default: '',
     validator: val => sizeConsts.includes(val),
   },
 });
@@ -85,15 +85,15 @@ provide('deregisterItem', itemCvId => {
 });
 
 /**
- * @typedef {Object} AccordianChangeElement
+ * @typedef {Object} AccordionChangeElement
  * @property {string} id
  * @property {boolean} open
  */
 
 /**
- * @typedef {Object} AccordianChangeEvent
- * @property {AccordianChangeElement} change
- * @property {Array<AccordianChangeElement>} state
+ * @typedef {Object} AccordionChangeEvent
+ * @property {AccordionChangeElement} change
+ * @property {Array<AccordionChangeElement>} state
  * @param ev
  */
 provide('onAccItemChange', (clickedItemCvId, open) => {

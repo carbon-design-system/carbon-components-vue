@@ -1,16 +1,15 @@
-export const alignConsts = [null, 'start', 'end', ''];
+export const alignConsts = ['', 'start', 'end'];
 alignConsts.$labels = {
-  'Not supplied (end)': 0,
+  'Default (end)': 0,
   'Start (start)': 1,
   'End (end)': 2,
-  'Empty string (end)': 3,
 };
-export const sizeConsts = [null, 'sm', 'xl', ''];
+export const sizeConsts = ['', 'sm', 'md', 'xl'];
 sizeConsts.$labels = {
-  'Not supplied (md)': 0,
+  'Default (md)': 0,
   'Small (sm)': 1,
-  'Large (xl)': 2,
-  'Empty string (md)': 3,
+  'Medium (md)': 2,
+  'Extra large (xl)': 3,
 };
 
 const CvAccordionConsts = { alignConsts, sizeConsts };
