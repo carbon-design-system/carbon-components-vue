@@ -139,12 +139,22 @@ let calendar;
 
 const props = defineProps({
   modelValue: { type: [String, Object, Array, Date], default: undefined },
+  /** Date picker label */
   dateLabel: { type: String, default: undefined },
+  /** Date picker end label (when using kind="range") */
   dateEndLabel: { type: String, default: 'End date' },
+  /** If true, the date picker will be disabled */
   disabled: { type: Boolean, default: false },
+  /** Date picker text on invalid value */
   invalidMessage: { type: String, default: undefined },
+  /** Regex pattern used for form validation, default \d{1,2}/\d{1,2}/\d{4} */
   pattern: { type: String, default: '\\d{1,2}/\\d{1,2}/\\d{4}' },
+  /** Date picker input placeholder, shown when date picker is empty. Default 'mm/dd/yyyy' */
   placeholder: { type: String, default: 'mm/dd/yyyy' },
+  /** You can pass flatpickr options through this prop.
+   See https://flatpickr.js.org/options/ for more details.
+   Some of the options is not supported (for example, onChange, onReady, mode, nextArrow, prevArrow).
+   Also, you have to pass dateFormat field in calOptions object if you use it. */
   calOptions: {
     type: Object,
     default() {
@@ -154,6 +164,8 @@ const props = defineProps({
     },
   },
   formItem: { type: Boolean, default: true },
+  /** Date picker kind (also known as mode in flatpickr options).
+   Possible values: 'short', 'simple', 'single', 'range' */
   kind: {
     type: String,
     default: 'simple',

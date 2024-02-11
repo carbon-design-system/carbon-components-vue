@@ -31,31 +31,18 @@ export default {
     },
   },
   argTypes: {
-    dateLabel: { type: String, description: 'Date picker label' },
-    dateEndLabel: {
-      type: String,
-      description: 'Date picker end label (when using kind="range")',
-    },
-    invalidMessage: {
-      type: String,
-      description: 'Date picker text on invalid value',
-    },
+    dateLabel: { type: String },
+    dateEndLabel: { type: String },
+    invalidMessage: { type: String },
     kind: {
       type: String,
-      description: 'Date picker kind (also known as mode in flatpickr).',
       options: ['short', 'simple', 'single', 'range'],
       control: { type: 'select' },
     },
-    disabled: {
-      type: Boolean,
-      description: 'If true, the date picker will be disabled',
-    },
-    calOptions: {
-      type: Object,
-      description: `You can pass flatpickr options through this prop.
-       See https://flatpickr.js.org/options/ for more details.
-       Some of the options is not supported (for example, onChange, onReady, mode, nextArrow, prevArrow).`,
-    },
+    disabled: { type: Boolean },
+    placeholder: { type: String },
+    pattern: { type: String },
+    calOptions: { type: Object },
   },
 };
 
@@ -220,8 +207,29 @@ const TemplateSingleUsingMinMax = args => {
   };
 };
 
+const codeMinMax = `
+const now = new Date();
+const nextWeek = new Date();
+nextWeek.setDate(now.getDate() + 7);
+const calOptions = ref({
+        minDate: now,
+        maxDate: nextWeek,
+        dateFormat: 'm/d/Y'
+      })
+${templateSingleUsingMinMax}
+`;
+const docMinMax = `Example showing how "calOptions" prop can be used to control the min/max date.`;
 export const SingleUsingMinMax = TemplateSingleUsingMinMax.bind({});
 SingleUsingMinMax.args = initArgs;
+
+SingleUsingMinMax.parameters = {
+  docs: {
+    source: { code: codeMinMax },
+    description: {
+      story: docMinMax,
+    },
+  },
+};
 
 /* RANGE USING DATE STORY */
 
