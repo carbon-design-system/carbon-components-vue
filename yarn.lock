@@ -2096,6 +2096,7 @@ __metadata:
     "@carbon/icons-vue": ^10.60.0
     "@commitlint/cli": ^16.3.0
     "@commitlint/config-conventional": ^16.2.4
+    "@ibm/telemetry-js": ^1.2.1
     "@testing-library/dom": ^8.19.0
     "@testing-library/user-event": ^14.4.3
     "@testing-library/vue": ^6.6.1
@@ -2474,6 +2475,15 @@ __metadata:
   version: 3.0.2
   resolution: "@hutson/parse-repository-url@npm:3.0.2"
   checksum: 39992c5f183c5ca3d761d6ed9dfabcb79b5f3750bf1b7f3532e1dc439ca370138bbd426ee250fdaba460bc948e6761fbefd484b8f4f36885d71ded96138340d1
+  languageName: node
+  linkType: hard
+
+"@ibm/telemetry-js@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@ibm/telemetry-js@npm:1.2.1"
+  bin:
+    ibmtelemetry: dist/collect.js
+  checksum: cb4423f3f9cba10ea2f74e6a7cb831490a028f5c2a4a09cc98f361b9b95b2b547bdbce5a46dd695e6984b92e963e7056cc6b32391d124a30b77c3022f5050687
   languageName: node
   linkType: hard
 
