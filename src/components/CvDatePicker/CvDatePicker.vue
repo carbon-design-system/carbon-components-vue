@@ -349,6 +349,7 @@ const handleUpdateEvent = event => {
 
 const setDate = value => {
   try {
+    if (value === undefined) return;
     if (isSingle.value) {
       calendar.setDate(value, true);
     } else if (isRange.value) {
