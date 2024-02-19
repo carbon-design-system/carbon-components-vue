@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.13](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.12...@carbon/vue@3.0.13) (2024-02-19)
+
+### Bug Fixes
+
+- **cv-date-picker:** + add a code example; + move props descriptions from the story to the component ([e8c85bc](https://github.com/carbon-design-system/carbon-components-vue/commit/e8c85bcaec067476991ca32fb1a6f879ea5d010c))
+- **cv-date-picker:** improve date picker story ([a6bee73](https://github.com/carbon-design-system/carbon-components-vue/commit/a6bee73af4ed373bb2f6367b824428b5e1cd1075))
+- **cv-radio-group:** basic a11y tests ([3da0a02](https://github.com/carbon-design-system/carbon-components-vue/commit/3da0a0237cc864d77c49282f1add7fc48a0f02c7))
+- date picker input backspace ([3b8b59e](https://github.com/carbon-design-system/carbon-components-vue/commit/3b8b59ee5c590a0bbf0ea1cb64ba9bab9cca2ffc))
+- date picker test case ([19908a7](https://github.com/carbon-design-system/carbon-components-vue/commit/19908a77adca40f281750f9806822623f48db458))
+- resolve PR comments ([0a43706](https://github.com/carbon-design-system/carbon-components-vue/commit/0a437063b2df83dbcc949075a01b712ab2229641))
+
+### Features
+
+- add v-model for open sections ([d32bc62](https://github.com/carbon-design-system/carbon-components-vue/commit/d32bc62d87a5c84b73ff5371ce0798916a2f5c1f))
+- prelim implementation ([5ef7621](https://github.com/carbon-design-system/carbon-components-vue/commit/5ef76218b2489ddecf57e42c187243dc917b1263))
+
 ## [3.0.12](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.11...@carbon/vue@3.0.12) (2024-01-23)
 
 ### Bug Fixes
