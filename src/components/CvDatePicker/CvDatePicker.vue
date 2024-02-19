@@ -311,6 +311,7 @@ const initFlatpickr = () => {
 };
 
 let dateToString = val => {
+  if (!val) return '';
   return calendar.formatDate(val, props.calOptions.dateFormat);
 };
 
@@ -347,14 +348,17 @@ const handleUpdateEvent = event => {
 };
 
 const setDate = value => {
-  if (!value) return;
-
-  if (isSingle.value) {
-    calendar.setDate(value, true);
-  } else if (isRange.value) {
-    calendar.setDate([value.startDate, value.endDate], true);
-  } else {
-    date.value.value = value;
+  try {
+    if (value === undefined) return;
+    if (isSingle.value) {
+      calendar.setDate(value, true);
+    } else if (isRange.value) {
+      calendar.setDate([value.startDate, value.endDate], true);
+    } else {
+      date.value.value = value;
+    }
+  } catch (e) {
+    console.error('setDate', e);
   }
 };
 
