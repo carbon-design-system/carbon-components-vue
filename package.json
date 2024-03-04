@@ -8,7 +8,7 @@
   "types": "src/index.d.ts",
   "web-types": "dist/web-types.json",
   "scripts": {
-    "postinstall": "node prepare.js && node .storybook/postinstall.js",
+    "postinstall": "node prepare.js && node .storybook/postinstall.js && ibmtelemetry --config=telemetry.yml",
     "prepack": "pinst --disable",
     "postpack": "pinst --enable",
     "build": "vue-cli-service build --target lib --name carbon-vue-3 ./src/index.js --no-clean",
@@ -29,6 +29,7 @@
   ],
   "dependencies": {
     "@carbon/icons-vue": "^10.60.0",
+    "@ibm/telemetry-js": "^1.2.1",
     "@vueuse/core": "^4.11.2",
     "carbon-components": "^10.58.5",
     "eslint-plugin-prettier-vue": "^4.2.0",
@@ -157,7 +158,8 @@
   },
   "files": [
     "/dist",
-    "/src"
+    "/src",
+    "telemetry.yml"
   ],
   "commitlint": {
     "extends": [
