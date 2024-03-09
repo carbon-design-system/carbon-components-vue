@@ -106,6 +106,8 @@ function checkCurrentStep() {
 onMounted(checkCurrentStep);
 watch(currentStep, checkCurrentStep);
 watch(completedSteps, checkCurrentStep);
+watch(() => props.complete, checkCurrentStep);
+watch(() => props.disabled, checkCurrentStep);
 
 onBeforeUnmount(() => {
   const index = progressSteps.value.findIndex(step => step.uid === uid.value);

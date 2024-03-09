@@ -4,6 +4,19 @@ import { Time20 as TimeIcon } from '@carbon/icons-vue';
 // noinspection ES6PreferShortImport
 import { sbCompPrefix } from '../../global/storybook-utils';
 import { action } from '@storybook/addon-actions';
+import {ref } from "vue";
+const step3Invalid = ref(false)
+const step4Disable = ref(false)
+const step5Complete = ref(false)
+function onStep4Disable() {
+  step4Disable.value = !step4Disable.value
+}
+function onStep3Invalid() {
+  step3Invalid.value = !step3Invalid.value
+}
+function onStep5Complete() {
+  step5Complete.value = !step5Complete.value
+}
 
 <Meta title={`${sbCompPrefix}/CvProgress`} component={CvProgress} />
 
@@ -31,6 +44,12 @@ export const Template = args => ({
       invalidIds: args.invalidIds,
       disabledIds: args.disabledIds,
       onStepClicked: action('step-clicked'),
+      step3Invalid,
+      onStep3Invalid,
+      step4Disable,
+      onStep4Disable,
+      step5Complete,
+      onStep5Complete,
     };
   },
   // And then the `args` are bound to your component with `v-bind="args"`
@@ -79,7 +98,7 @@ const slotTemplate = `
       id="step-3"
       :label="step3"
       :complete="completeIds.includes('step-3')"
-      :invalid="invalidIds.includes('step-3')"
+      :invalid="step3Invalid"
       :disabled="disabledIds.includes('step-3')"
       additionalInfo="save the world"
       @step-clicked="onStepClicked"
@@ -90,7 +109,7 @@ const slotTemplate = `
       :label="step4"
       :complete="completeIds.includes('step-4')"
       :invalid="invalidIds.includes('step-4')"
-      :disabled="disabledIds.includes('step-4')"
+      :disabled="step4Disable"
       additionalInfo="Twins Dennys and Sandy"
       @step-clicked="onStepClicked"
       >
@@ -98,7 +117,7 @@ const slotTemplate = `
     <cv-progress-step
       id="step-5"
       :label="step5"
-      :complete="completeIds.includes('step-5')"
+      :complete="step5Complete"
       :invalid="invalidIds.includes('step-5')"
       :disabled="disabledIds.includes('step-5')"
       additionalInfo="with Polyhymnia O'Keefe"
@@ -106,6 +125,9 @@ const slotTemplate = `
       >
     </cv-progress-step>
   </cv-progress>
+  <div><button @click=onStep3Invalid>Toggle step 3 invalid</button></div>
+  <div><button @click=onStep4Disable>Toggle step 4 disabled</button></div>
+  <div><button @click=onStep5Complete>Toggle step 5 complete</button></div>
 `;
 const skeletonTemplate = `<cv-progress-skeleton :vertical="vertical" />`;
 
@@ -187,15 +209,15 @@ Use `cv-progress-step` for more control over the display.
       },
       disabledIds: {
         control: 'multi-select',
-        options: ['step-1', 'step-2', 'step-3', 'step-4', 'step-5'],
+        options: ['step-1', 'step-2', 'step-3', 'step-5'],
       },
       completeIds: {
         control: 'multi-select',
-        options: ['step-1', 'step-2', 'step-3', 'step-4', 'step-5'],
+        options: ['step-1', 'step-2', 'step-3', 'step-4'],
       },
       invalidIds: {
         control: 'multi-select',
-        options: ['step-1', 'step-2', 'step-3', 'step-4', 'step-5'],
+        options: ['step-1', 'step-2', 'step-4', 'step-5'],
       },
     }}
   >

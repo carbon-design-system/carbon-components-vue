@@ -75,4 +75,5 @@ function updateSteps() {
 }
 onMounted(updateSteps);
 watch(() => props.initialStep, updateSteps);
+watch(progressSteps, updateSteps);
 </script>
