@@ -13,8 +13,8 @@
     <button
       type="button"
       :class="`${carbonPrefix}--overflow-menu-options__btn`"
-      :data-floating-menu-primary-focus="primaryFocus"
-      :disabled="disabled"
+      :data-floating-menu-primary-focus="primaryFocus || null"
+      :disabled="disabled || null"
       @click="onClick"
     >
       <span :class="`${carbonPrefix}--overflow-menu-options__option-content`">

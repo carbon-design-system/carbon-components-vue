@@ -15,7 +15,7 @@
   >
     <button
       ref="button"
-      :disabled="disabled"
+      :disabled="disabled || null"
       type="button"
       :class="`${carbonPrefix}--accordion__heading`"
       :aria-expanded="isOpen ? 'true' : 'false'"

@@ -77,7 +77,7 @@
           :aria-expanded="open ? 'true' : 'false'"
           :aria-labelledby="ariaLabeledBy"
           :class="`${carbonPrefix}--list-box__field`"
-          :disabled="disabled"
+          :disabled="disabled || null"
           aria-haspopup="true"
           type="button"
         >
@@ -293,9 +293,9 @@ watch(open, () => {
 });
 const ariaLabeledBy = computed(() => {
   if (props.label) {
-    return `${uid}-label ${uid}-value`;
+    return `${uid.value}-label ${uid.value}-value`;
   } else {
-    return `${uid}-value`;
+    return `${uid.value}-value`;
   }
 });
 const internalCaption = computed(() => {

@@ -34,7 +34,7 @@
         ref="fileInput"
         :class="`${carbonPrefix}--file-input`"
         :accept="accept"
-        :disabled="disabled"
+        :disabled="disabled || null"
         type="file"
         v-bind="$attrs"
         data-file-uploader
@@ -70,7 +70,7 @@
           ref="fileInput"
           :class="`${carbonPrefix}--file-input`"
           :accept="accept"
-          :disabled="disabled"
+          :disabled="disabled || null"
           type="file"
           v-bind="$attrs"
           tabindex="-1"
