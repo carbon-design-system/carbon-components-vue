@@ -2,8 +2,9 @@
   <div
     class="cv-checkbox"
     :class="[
-      `${carbonPrefix}--checkbox--${inline ? 'inline' : 'wrapper'}`,
       { [`${carbonPrefix}--form-item`]: formItem },
+      { [`${carbonPrefix}--checkbox--inline`]: inline },
+      { [`${carbonPrefix}--checkbox-wrapper`]: !inline },
     ]"
   >
     <input
