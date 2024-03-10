@@ -53,6 +53,7 @@ import {
   useAttrs,
   useSlots,
   watch,
+  inject,
 } from 'vue';
 import store from './cvDataTableStore';
 import { getBus } from '../../global/component-utils/event-bus';
@@ -63,7 +64,16 @@ const props = defineProps({
 });
 const cvId = useCvId(props, true);
 
+/** @type {Ref<Set<String>>} */
+const expandingRowIds = inject('expanding-row-ids', ref(new Set()));
 const dataExpandable = ref(false);
+watch(dataExpandable, () => {
+  if (dataExpandable.value) expandingRowIds.value?.add(cvId.value);
+  else expandingRowIds.value?.delete(cvId.value);
+});
+const dataSomeExpandingRows = computed(() => {
+  return expandingRowIds.value?.size > 0;
+});
 
 const attrs = useAttrs();
 const slots = useSlots();
@@ -118,9 +128,7 @@ watch(
     });
   }
 );
-const dataSomeExpandingRows = computed(() => {
-  return store.someExpandingRows(parent);
-});
+
 function onExpandedChange(val) {
   const row = store.findRow(parent, cvId);
   store.updateRow(parent, {
