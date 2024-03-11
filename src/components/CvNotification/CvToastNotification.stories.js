@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
+import DocumentationTemplate from './CvToastNotificationTemplate.mdx';
 import { sbCompPrefix } from '../../global/storybook-utils';
-
 import { CvToastNotification, CvNotificationConsts } from '.';
 
 export default {
@@ -83,6 +83,11 @@ export default {
         category: 'slots',
       },
       description: 'Caption slot for more custom content.',
+    },
+  },
+  parameters: {
+    docs: {
+      page: DocumentationTemplate,
     },
   },
 };

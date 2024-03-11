@@ -150,9 +150,13 @@ const skeletonTemplate = `
 Notes:
 
 - You can place a Dropdown inline with other content by using the inline variant
-  Migration notes:
-- Added the `size` option to match Carbon React
+
+Migration notes:
+- **Breaking**. The selected item contents are no longer copied directly to the "internal caption". If you are trying to style both
+the drop-down item and its appearance after it is selected, please see the `internal-caption` slot. See the "Slots"
+story for an example.- Added the `size` option to match Carbon React
 - Added the `warningMessage` option to match Carbon React
+
 
 <Canvas>
   <Story
