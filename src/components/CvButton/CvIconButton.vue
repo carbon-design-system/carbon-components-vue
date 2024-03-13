@@ -7,7 +7,7 @@
       `${carbonPrefix}--tooltip--${tipPosition || 'bottom'}`,
       `${carbonPrefix}--tooltip--align-${tipAlignment || 'center'}`,
     ]"
-    :disabled="disabled"
+    :disabled="disabled || null"
     @click="$emit('click', $event)"
   >
     <span :class="`${carbonPrefix}--assistive-text`">{{ label }}</span>

@@ -12,6 +12,9 @@ describe('CvDatePicker', () => {
       attrs: {
         onchange: handler,
       },
+      props: {
+        dateLabel: 'XYZ-ABC-Label',
+      },
     });
 
     const datepicker = await result.findByRole('datepicker');
@@ -46,6 +49,7 @@ describe('CvDatePicker', () => {
     const result = render(CvDatePicker, {
       props: {
         kind: 'single',
+        dateLabel: 'XYZ-ABC-Label',
       },
       attrs: {
         onchange: handler,
@@ -77,6 +81,28 @@ describe('CvDatePicker', () => {
       now.toLocaleDateString('en')
     );
     expect(handler).toHaveBeenCalled();
+
+    // Verify label state
+    result.getByLabelText('XYZ-ABC-Label');
+    const carbonContainer = result.container.querySelector(
+      '.bx--date-picker-container'
+    );
+    expect(
+      carbonContainer.classList.contains('bx--date-picker-container')
+    ).toBeTruthy();
+    expect(
+      carbonContainer.classList.contains('bx--date-picker--nolabel')
+    ).toBeFalsy();
+
+    await result.rerender({ dateLabel: '' });
+    expect(
+      carbonContainer.classList.contains('bx--date-picker--nolabel')
+    ).toBeTruthy();
+
+    await result.rerender({ dateLabel: undefined });
+    expect(
+      carbonContainer.classList.contains('bx--date-picker--nolabel')
+    ).toBeFalsy();
   });
 
   it('CvDatePicker - test range with datepicker', async () => {

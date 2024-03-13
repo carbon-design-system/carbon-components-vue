@@ -76,7 +76,7 @@
           { [`${carbonPrefix}--text-input--light`]: isLight },
         ]"
         :placeholder="min"
-        :disabled="disabled"
+        :disabled="disabled || null"
         @change="onChange"
         @keydown.up.prevent="onUp"
         @keydown.down.prevent="onDown"

@@ -132,7 +132,7 @@
             <thead>
               <tr>
                 <th
-                  v-if="hasExpandables"
+                  v-if="hasExpandingRows"
                   :class="`${carbonPrefix}--table-expand`"
                   :data-previous-value="
                     dataExpandAll ? 'collapsed' : 'expanded'
@@ -181,7 +181,7 @@
               </tr>
             </thead>
 
-            <component :is="hasExpandables ? Empty : 'tbody'">
+            <component :is="hasExpandingRows ? Empty : 'tbody'">
               <slot name="data">
                 <cv-data-table-row
                   v-for="(row, rowIndex) in data"
@@ -246,8 +246,10 @@ import {
   unref,
   useSlots,
   watch,
+  provide,
 } from 'vue';
 import { props as propsCvId, useCvId } from '../../use/cvId';
+//TODO: Remove this store and replace with provide/inject
 import store from './cvDataTableStore';
 import Empty from '../CvEmpty/_CvEmpty.vue';
 
@@ -316,6 +318,8 @@ const props = defineProps({
    * can be sorted
    */
   sortable: { type: Boolean, default: false },
+  /** Table will have expandable rows */
+  expandable: { type: Boolean, default: false },
   title: { type: String, default: undefined },
   /**
    * An array containing a list of columns
@@ -375,6 +379,25 @@ watch(() => props.rowsSelected, updateRowsSelected);
 const searchContainer = ref(null);
 const magnifier = ref(null);
 const search = ref(null);
+
+/** @type {Ref<Set<String>>} */
+const expandingRowIds = ref(new Set());
+const hasExpandingRows = computed(() => {
+  return expandingRowIds.value.size > 0;
+});
+provide('expanding-row-ids', expandingRowIds);
+provide('has-expanding-rows', hasExpandingRows);
+onMounted(() => {
+  if (props.expandable) expandingRowIds.value.add('table-expand-row');
+});
+watch(
+  () => props.expandable,
+  () => {
+    if (props.expandable) expandingRowIds.value.add('table-expand-row');
+    else expandingRowIds.value.delete('table-expand-row');
+  }
+);
+
 onMounted(() => {
   if (searchContainer.value) {
     magnifier.value?.addEventListener('blur', checkSearchFocus);
@@ -382,7 +405,6 @@ onMounted(() => {
   }
   if (props.initialSearchValue) clearSearchVisible.value = true;
   updateRowsSelected();
-  store.setSomeExpandingRows(uid);
 });
 
 onUnmounted(() => {
@@ -428,6 +450,7 @@ const isSortable = computed(() => {
   // is any column sortable
   return props.sortable || store.someSortableHeadings(uid.value);
 });
+
 function isColSortable(c) {
   const col = unref(c);
   // is specific column or all sortable
@@ -437,10 +460,6 @@ function isColSortable(c) {
 const isHelper = ref(false);
 const hasTableHeader = computed(() => {
   return props.title || isHelper.value;
-});
-
-const hasExpandables = computed(() => {
-  return store.someExpandingRows(uid);
 });
 
 const hasOverflowMenu = computed(() => {

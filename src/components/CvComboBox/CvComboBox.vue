@@ -62,7 +62,7 @@
           :aria-disabled="disabled || null"
           :aria-expanded="open ? 'true' : 'false'"
           autocomplete="off"
-          :disabled="disabled"
+          :disabled="disabled || null"
           :placeholder="label"
           @input="onInput"
           @focus="inputFocus"

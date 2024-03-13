@@ -13,6 +13,11 @@ const open = ref({
   accItem3: false,
   accItem4: false,
 });
+const disabledItems = ref(new Set())
+function onToggleEpisode3(){
+  if (disabledItems.value.has(3)) disabledItems.value.delete(3)
+  else disabledItems.value.add(3)
+}
 
 <Meta title={`${sbCompPrefix}/CvAccordion`} component={CvAccordion} />
 
@@ -24,19 +29,23 @@ export const Template = args => ({
       align: alignConsts[alignConsts.$labels[args.align]],
       size: sizeConsts[sizeConsts.$labels[args.size]],
       onChange: action('change'),
+      disabledItems,
+      onToggleEpisode3,
       open,
     };
   },
   template: args.template,
 });
 const template = `<cv-accordion @change="onChange" :align="align" :size="size">
-  <cv-accordion-item v-for="n in 4" :key="\`acc-item-\${n}\`" :id="n % 2 ? \`acc-item-\${n}\` : ''">
+  <cv-accordion-item v-for="n in 4" :key="\`acc-item-\${n}\`" :id="n % 2 ? \`acc-item-\${n}\` : ''" :disabled="disabledItems.has(n)">
     <template v-slot:title>Episode {{n}} </template>
     <template v-slot:content>
       <p>Did you hear that? They've shut down the main reactor. We'll be destroyed for sure. This is madness! We're doomed! There'll be no escape for the Princess this time. What's that? R2! R2-D2, where are you? At last! Where have you been? They're heading in this direction.</p>
     </template>
   </cv-accordion-item>
-</cv-accordion>`;
+</cv-accordion>
+<div><button @click="onToggleEpisode3">Disable Episode 3</button></div>
+`;
 const Default = Template.bind({});
 Default.args = {};
 Default.parameters = storyParametersObject(

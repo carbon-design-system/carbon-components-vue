@@ -21,7 +21,6 @@
       >
         <ChevronRight16 :class="`${carbonPrefix}--table-expand__svg`" />
       </button>
-      <div v-else>{{ expandingRow }}</div>
     </td>
     <td
       v-if="hasBatchActions"
@@ -66,7 +65,15 @@ import CvCheckbox from '../CvCheckbox';
 import CvOverflowMenu from '../CvOverflowMenu';
 import CvOverflowMenuItem from '../CvOverflowMenu/CvOverflowMenuItem.vue';
 import ChevronRight16 from '@carbon/icons-vue/es/chevron--right/16';
-import { computed, onMounted, onUpdated, ref, useSlots, watch } from 'vue';
+import {
+  computed,
+  onMounted,
+  onUpdated,
+  ref,
+  useSlots,
+  watch,
+  inject,
+} from 'vue';
 import store from './cvDataTableStore';
 import { getBus } from '../../global/component-utils/event-bus';
 
@@ -82,8 +89,10 @@ const props = defineProps({
   rowId: { type: String, default: undefined },
 });
 
+/** @type {Ref<UnwrapRef<Set<>>>} */
+const expandingRowIds = inject('expanding-row-ids', ref(new Set()));
 const dataSomeExpandingRows = computed(() => {
-  return store.someExpandingRows(parent);
+  return expandingRowIds.value.size > 0;
 });
 
 const overflowMenuButtons = computed(() => {

@@ -24,7 +24,7 @@
             'single',
             'range',
           ].includes(getKind),
-          [`${carbonPrefix}--date-picker--nolabel`]: getDateLabel !== undefined,
+          [`${carbonPrefix}--date-picker--nolabel`]: !getDateLabel,
         }"
       >
         <label
@@ -191,18 +191,16 @@ const getKind = computed({
   },
 });
 
-const getDateLabel = computed({
-  get() {
-    if (props.kind === 'range' && !props.dateLabel) {
-      return 'Start date';
-    }
-
-    if (!props.dateLabel) {
-      return 'Date label';
-    }
-
+const getDateLabel = computed(() => {
+  if (props.dateLabel !== undefined) {
     return props.dateLabel;
-  },
+  } else {
+    if (props.kind === 'range') {
+      return 'Start date';
+    } else {
+      return 'Date';
+    }
+  }
 });
 
 const isRange = computed(() => {
