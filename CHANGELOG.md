@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.14](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.13...@carbon/vue@3.0.14) (2024-03-18)
+
+### Bug Fixes
+
+- cv-checkbox wrong wrapper class/jump scroll ([8b032ab](https://github.com/carbon-design-system/carbon-components-vue/commit/8b032abb4fc27759302493705ce79ade0c617819))
+- cv-data-table expandable rows not reactive ([c35afbb](https://github.com/carbon-design-system/carbon-components-vue/commit/c35afbb03c6779d8a4048742f635d0656c5ba006))
+- cv-datepicker allow empty label ([fb54660](https://github.com/carbon-design-system/carbon-components-vue/commit/fb54660bcf9ec3bec92503f7bf68230d4693182a))
+- cv-overflow-menu-item & several other components - resolve attribute coercion warning ([ed0e34d](https://github.com/carbon-design-system/carbon-components-vue/commit/ed0e34de3e4bb4dac1d042060ca4cbafebfcba18))
+- cv-progress-step complete & disable not reactive ([52a8c5d](https://github.com/carbon-design-system/carbon-components-vue/commit/52a8c5de29700b5d827817f473a3e94995b4392d))
+
 ## [3.0.13](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.12...@carbon/vue@3.0.13) (2024-02-19)
 
 ### Bug Fixes
