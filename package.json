@@ -11,6 +11,7 @@
     "postinstall": "node prepare.js && node .storybook/postinstall.js && ibmtelemetry --config=telemetry.yml",
     "prepack": "pinst --disable",
     "postpack": "pinst --enable",
+    "prebuild": "node addNamedComponentExports.js",
     "build": "vue-cli-service build --target lib --name carbon-vue-3 ./src/index.js --no-clean",
     "lint": "vue-cli-service lint",
     "build-web-types": "vue-docgen-web-types --outFile dist/web-types.json",
