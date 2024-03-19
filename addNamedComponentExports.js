@@ -27,9 +27,13 @@ function addNamedComponentExports(dir) {
   const exportsContent = componentsExports.join(NEW_LINE_ENTITY);
   const fileContentToSave = indexFileContent + exportsContent + NEW_LINE_ENTITY;
 
-  if (indexFileContent.includes(fileContentToSave)) return;
+  if (exportsWereAddedToIndex(indexFileContent, exportsContent)) return;
 
   fs.writeFileSync(INDEX_FILE_PATH, fileContentToSave, FILE_ENCODING);
+}
+
+function exportsWereAddedToIndex(indexFileContent, exportsContent) {
+  return indexFileContent.includes(exportsContent);
 }
 
 function readFilesFromPath(dirPath) {
