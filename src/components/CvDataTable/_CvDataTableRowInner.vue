@@ -26,7 +26,9 @@
       v-if="hasBatchActions"
       :class="`${carbonPrefix}--table-column-checkbox`"
     >
+      <cv-checkbox-skeleton v-if="isSkeleton" />
       <cv-checkbox
+        v-else
         ref="rowChecked"
         v-model="dataChecked"
         :form-item="false"
@@ -35,7 +37,7 @@
         :label="
           ariaLabelForBatchCheckbox || `Select row ${value} for batch action`
         "
-        hide-label
+        :hide-label="true"
         @change="onChange"
       />
     </td>
@@ -61,7 +63,7 @@
 
 <script setup>
 import { carbonPrefix } from '../../global/settings';
-import CvCheckbox from '../CvCheckbox';
+import { CvCheckbox, CvCheckboxSkeleton } from '../CvCheckbox';
 import CvOverflowMenu from '../CvOverflowMenu';
 import CvOverflowMenuItem from '../CvOverflowMenu/CvOverflowMenuItem.vue';
 import ChevronRight16 from '@carbon/icons-vue/es/chevron--right/16';
@@ -89,6 +91,7 @@ const props = defineProps({
   rowId: { type: String, default: undefined },
 });
 
+const isSkeleton = inject('is-skeleton', ref(false));
 /** @type {Ref<UnwrapRef<Set<>>>} */
 const expandingRowIds = inject('expanding-row-ids', ref(new Set()));
 const dataSomeExpandingRows = computed(() => {
@@ -132,9 +135,7 @@ onMounted(() => {
     bus = getBus(parent);
   } else console.warn('data table not found');
 });
-const hasBatchActions = computed(() => {
-  return store.hasBatchActions(parent);
-});
+const hasBatchActions = inject('has-batch-actions', ref(false));
 
 function onMenuItemClick(val) {
   bus.emit('cv:click', val);
