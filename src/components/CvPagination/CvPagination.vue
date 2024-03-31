@@ -156,15 +156,30 @@ const internalValue = computed(() => {
   };
 });
 
-onMounted(() => {
+function adjustValues() {
   pageSizeValue.value = newPageSizeValue(props.pageSizes);
   pageCount.value = newPageCount(props.numberOfItems, pageSizeValue.value);
   pageValue.value = newPageValue(props.page, pageCount.value);
   pages.value = newPagesArray(pageCount.value);
   firstItem.value = newFirstItem(pageValue.value, pageSizeValue.value);
+}
+onMounted(() => {
+  adjustValues();
   // always emit on mount
   emit('change', internalValue.value);
 });
+watch(
+  () => props.pageSizes,
+  () => adjustValues()
+);
+watch(
+  () => props.page,
+  () => adjustValues()
+);
+watch(
+  () => props.numberOfItems,
+  () => adjustValues()
+);
 
 function onPageChange(newVal) {
   pageValue.value = parseInt(newVal, 10);
