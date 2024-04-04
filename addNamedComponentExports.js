@@ -11,8 +11,18 @@ const NEW_LINE_ENTITY = '\n';
 const COMPONENTS_PATH = path.join(__dirname, './src/components/');
 const FILE_ENCODING = 'utf8';
 const INDEX_FILE_PATH = path.join(__dirname, './src/index.js');
+const INDEX_DIR = `./${path.relative(
+  path.dirname(INDEX_FILE_PATH),
+  systemPath
+)}`;
+
+/**
+ * Matches all '.vue' file names that do not contain stories/test/spec;
+ * copied from src\index.js and extended by file name not starting from underscore
+ */
 const VUE_COMPONENT_FILENAME_REGEX =
-  /^(?!.*(?:\/_|\.stories\.vue|\.test\.vue|\.spec\.vue)).*\.vue$/;
+  /^[^_](?!.*(?:\/_|\.stories\.vue|\.test\.vue|\.spec\.vue)).*\.vue$/;
+
 const NON_CHECK_PATHS = /\\__tests__/;
 const FORBIDDEN_COMPONENT_NAME_CHARACTERS_REGEX = /[_-]/;
 const UNNECESSARY_SYSTEM_PATH_CHUNK_REGEX = /.*\\src\\(.*)/;
@@ -23,13 +33,13 @@ let componentsExports = [];
 function addNamedComponentExports(dir) {
   readFilesFromPath(dir);
 
-  const indexFileContent = fs.readFileSync(INDEX_FILE_PATH, FILE_ENCODING);
+  const indexFileContent = fs.readFileSync(INDEX_DIR, FILE_ENCODING);
   const exportsContent = componentsExports.join(NEW_LINE_ENTITY);
   const fileContentToSave = indexFileContent + exportsContent + NEW_LINE_ENTITY;
 
   if (exportsWereAddedToIndex(indexFileContent, exportsContent)) return;
 
-  fs.writeFileSync(INDEX_FILE_PATH, fileContentToSave, FILE_ENCODING);
+  fs.writeFileSync(INDEX_DIR, fileContentToSave, FILE_ENCODING);
 }
 
 function exportsWereAddedToIndex(indexFileContent, exportsContent) {
