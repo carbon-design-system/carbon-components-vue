@@ -11,14 +11,13 @@ const NEW_LINE_ENTITY = '\n';
 const COMPONENTS_PATH = path.join(__dirname, './src/components/');
 const FILE_ENCODING = 'utf8';
 const INDEX_FILE_PATH = path.join(__dirname, './src/index.js');
-const INDEX_DIR = `./${path.relative(
-  path.dirname(INDEX_FILE_PATH),
-  systemPath
-)}`;
 
 /**
- * Matches all '.vue' file names that do not contain stories/test/spec;
- * copied from src\index.js and extended by file name not starting from underscore
+ * regex from index.js extended by: not starting from underscore
+ * It matches file names that:
+ *  - do not start from underscore
+ *  - do not contain '.stories.vue', '.test.vue', '.spec.vue' in it
+ *  - ends with .vue extension
  */
 const VUE_COMPONENT_FILENAME_REGEX =
   /^[^_](?!.*(?:\/_|\.stories\.vue|\.test\.vue|\.spec\.vue)).*\.vue$/;
@@ -33,13 +32,13 @@ let componentsExports = [];
 function addNamedComponentExports(dir) {
   readFilesFromPath(dir);
 
-  const indexFileContent = fs.readFileSync(INDEX_DIR, FILE_ENCODING);
+  const indexFileContent = fs.readFileSync(INDEX_FILE_PATH, FILE_ENCODING);
   const exportsContent = componentsExports.join(NEW_LINE_ENTITY);
   const fileContentToSave = indexFileContent + exportsContent + NEW_LINE_ENTITY;
 
   if (exportsWereAddedToIndex(indexFileContent, exportsContent)) return;
 
-  fs.writeFileSync(INDEX_DIR, fileContentToSave, FILE_ENCODING);
+  fs.writeFileSync(INDEX_FILE_PATH, fileContentToSave, FILE_ENCODING);
 }
 
 function exportsWereAddedToIndex(indexFileContent, exportsContent) {
@@ -54,6 +53,7 @@ function readFilesFromPath(dirPath) {
     const itemPathMetaData = fs.statSync(itemPath);
     const isDirectory = itemPathMetaData.isDirectory();
 
+    // exclude NON_CHECK_PATHS paths to not to lookup for .vue files inside of them
     if (NON_CHECK_PATHS.test(itemPath)) return;
     if (isDirectory) {
       readFilesFromPath(itemPath);
@@ -78,7 +78,6 @@ function readFilesFromPath(dirPath) {
 }
 
 function isVueComponentFile(fileName) {
-  // following regex condition from src\index.js
   return VUE_COMPONENT_FILENAME_REGEX.test(fileName);
 }
 
