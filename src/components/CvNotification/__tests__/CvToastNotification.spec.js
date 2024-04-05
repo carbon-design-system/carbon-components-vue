@@ -12,6 +12,7 @@ describe('CvToastNotification', () => {
 
     expect(new Set(wrapper.classes())).toEqual(
       new Set([
+        'cv-notification',
         `${carbonPrefix}--toast-notification`,
         `${carbonPrefix}--toast-notification--info`,
       ])
@@ -26,6 +27,7 @@ describe('CvToastNotification', () => {
       await wrapper.setProps({ kind });
       expect(new Set(divTag.classes())).toEqual(
         new Set([
+          'cv-notification',
           `${carbonPrefix}--toast-notification`,
           `${carbonPrefix}--toast-notification--${kind}`,
         ])

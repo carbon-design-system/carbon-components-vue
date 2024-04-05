@@ -12,6 +12,7 @@ describe('CvInlineNotification', () => {
 
     expect(new Set(wrapper.classes())).toEqual(
       new Set([
+        'cv-inline-notification',
         `${carbonPrefix}--inline-notification`,
         `${carbonPrefix}--inline-notification--info`,
       ])
@@ -26,6 +27,7 @@ describe('CvInlineNotification', () => {
       await wrapper.setProps({ kind });
       expect(new Set(divTag.classes())).toEqual(
         new Set([
+          'cv-inline-notification',
           `${carbonPrefix}--inline-notification`,
           `${carbonPrefix}--inline-notification--${kind}`,
         ])
