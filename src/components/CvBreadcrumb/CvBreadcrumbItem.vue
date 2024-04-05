@@ -1,5 +1,6 @@
 <template>
   <li
+    class="cv-breadcrumb-item"
     :class="[
       `${carbonPrefix}--breadcrumb-item`,
       { [`${carbonPrefix}--breadcrumb-item--current`]: isCurrentPage },

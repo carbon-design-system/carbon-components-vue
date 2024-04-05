@@ -1,5 +1,6 @@
 <template>
   <button
+    class="cv-button"
     :class="[
       buttonClasses,
       `${carbonPrefix}--tooltip__trigger`,

@@ -1,5 +1,6 @@
 <template>
   <button
+    class="cv-button"
     :class="buttonClasses"
     :disabled="disabled || skeleton"
     @click="$emit('click', $event)"

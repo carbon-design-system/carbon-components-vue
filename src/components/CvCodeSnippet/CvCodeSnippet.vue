@@ -1,7 +1,12 @@
 <template>
-  <component :is="component" v-bind="subProps" @copy="handleCopy"
-    ><slot
-  /></component>
+  <component
+    :is="component"
+    v-bind="subProps"
+    class="cv-code-snippet"
+    @copy="handleCopy"
+  >
+    <slot />
+  </component>
 </template>
 
 <script>

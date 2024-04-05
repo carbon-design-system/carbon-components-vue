@@ -1,5 +1,5 @@
 <template>
-  <li :class="`${carbonPrefix}--list__item`"><slot /></li>
+  <li class="cv-list-item" :class="`${carbonPrefix}--list__item`"><slot /></li>
 </template>
 
 <script>

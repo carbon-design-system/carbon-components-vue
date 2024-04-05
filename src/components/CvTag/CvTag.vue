@@ -73,7 +73,7 @@ export default {
     });
 
     const tagClasses = computed(() => {
-      const classes = [`${carbonPrefix}--tag`];
+      const classes = [`cv-tag ${carbonPrefix}--tag`];
 
       if (props.small) classes.push(`${carbonPrefix}--tag--sm`);
 
