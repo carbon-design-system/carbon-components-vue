@@ -157,7 +157,9 @@
                   v-if="hasBatchActions"
                   :class="`${carbonPrefix}--table-column-checkbox`"
                 >
+                  <cv-checkbox-skeleton v-if="isSkeleton" />
                   <cv-checkbox
+                    v-else
                     v-model="headingChecked"
                     :form-item="false"
                     value="headingCheck"
@@ -229,7 +231,7 @@ import CvDataTableHeading from './CvDataTableHeading.vue';
 import CvDataTableRow from './CvDataTableRow.vue';
 import CvDataTableCell from './CvDataTableCell.vue';
 import CvButton from '../CvButton';
-import CvCheckbox from '../CvCheckbox';
+import { CvCheckbox, CvCheckboxSkeleton } from '../CvCheckbox';
 import CvPagination from '../CvPagination';
 import Search16 from '@carbon/icons-vue/es/search/16';
 import Close16 from '@carbon/icons-vue/es/close/16';
@@ -254,37 +256,31 @@ import store from './cvDataTableStore';
 import Empty from '../CvEmpty/_CvEmpty.vue';
 
 const props = defineProps({
+  /** Arial label for the action bar. */
   actionBarAriaLabel: { type: String, default: 'Table Action Bar' },
+  /** Arial label for the "collapse all" button in tables with expandable rows". */
   collapseAllAriaLabel: { type: String, default: 'Collapse all rows' },
+  /** Arial label for the "expand all" button in tables with expandable rows". */
   expandAllAriaLabel: { type: String, default: 'Expand all rows' },
+  /** Arial label for the "select all" button in tables with selectable rows". */
   selectAllAriaLabel: { type: String, default: 'Select all rows' },
-  /**
-   * Table will size use auto sizing
-   */
+  /** Table will size use auto sizing */
   autoWidth: { type: Boolean, default: false },
-  /**
-   * Label for the button to cancel batch actions
-   */
+  /** Label for the button to cancel batch actions */
   batchCancelLabel: { type: String, default: 'Cancel' },
-  /**
-   * Table will have no border
-   */
+  /** Table will have no border */
   borderless: { type: Boolean, default: false },
   /**
    * An array of overflow menu labels. On click CvDataTable will raise an 'overflow-menu-click' event passing an object containing menuIndex, menuLabel and rowValue
    * - As part of the array pass an object containing props for the overflowMenu. E.g. { label: 'Overflow menu', tipAlignment: 'end', tipPosition: 'top' },
    */
   overflowMenu: { type: [Boolean, Array], default: () => [] },
-  /**
-   * can be set to true or an object containing camel case props for a CvPagination component
-   */
+  /** can be set to true or an object containing camel case props for a CvPagination component */
   pagination: {
     type: [Boolean, Object],
     default: false,
   },
-  /**
-   * 'compact', 'small', or 'tall'
-   */
+  /** 'compact', 'small', or 'tall' */
   rowSize: {
     type: String,
     default: 'lg',
@@ -310,13 +306,9 @@ const props = defineProps({
   searchLabel: { type: String, default: 'Search' },
   searchPlaceholder: { type: String, default: 'Search' },
   searchClearLabel: { type: String, default: 'Clear search' },
-  /**
-   * Set text in search bar on table generation
-   */
+  /** Set text in search bar on table generation */
   initialSearchValue: { type: String, default: '' },
-  /**
-   * can be sorted
-   */
+  /** can be sorted */
   sortable: { type: Boolean, default: false },
   /** Table will have expandable rows */
   expandable: { type: Boolean, default: false },
@@ -331,34 +323,38 @@ const props = defineProps({
    *   - Optionally a sortable property - if any column sets this to true then only columns with sortable set to true are sortable. NOTE: table sortable property not required.
    */
   columns: { type: Array, default: () => [] },
-  /**
-   * Two-dimensional array of strings.
-   */
+  /** Two-dimensional array of strings. */
   data: { type: Array, default: () => [] },
-  /**
-   * the table striped
-   */
+  /** `true` to use Zebra style striping. */
   zebra: { type: Boolean, default: false },
-  /**
-   * Specify whether the header should be sticky. Still experimental: may not work with every combination of table props.
-   */
+  /** Specify whether the header should be sticky. Still experimental: may not work with every combination of table props. */
   stickyHeader: { type: Boolean, default: false },
-  /**
-   * An array containing the selected row values. Supports v-model via the row-select-changes event.
-   */
+  /** An array containing the selected row values. Supports v-model via the row-select-changes event. */
   rowsSelected: { type: Array, default: () => [] },
+  /** Normally batch actions are hidden if no items are selected. Set this to true to always show batch actions */
+  stickyBatchActive: { type: Boolean, default: false },
+  /** subtext on the table */
   helperText: { type: String, default: undefined },
+  /** Animate the search bar opening */
   expandingSearch: { type: Boolean, default: true },
+  /** Show table loading / skeleton state */
   skeleton: { type: Boolean, default: false },
+  /** Should the expand all button be available */
   hasExpandAll: { type: Boolean, default: false },
-  /**
-   * Use a width of 'auto' instead of 100%
-   */
+  /** Use a width of 'auto' instead of 100% */
   staticWidth: { type: Boolean, default: false },
+  /** User defined search action */
   onSearch: { type: Function, default: undefined },
   ...propsCvId,
 });
 const uid = useCvId(props, true);
+
+const isSkeleton = ref(props.skeleton);
+provide('is-skeleton', isSkeleton);
+watch(
+  () => props.skeleton,
+  () => (isSkeleton.value = props.skeleton)
+);
 
 let bus = undefined;
 onBeforeMount(() => {
@@ -419,12 +415,12 @@ onUpdated(checkSlots);
 
 const hasActions = ref(false);
 const hasToolbar = ref(false);
-const hasBatchActions = computed(() => {
-  return store.hasBatchActions(uid);
-});
+const hasBatchActions = ref(false);
+provide('has-batch-actions', hasBatchActions);
+
 function checkSlots() {
   // NOTE: slots is not reactive so needs to be managed on updated
-  store.setBatchActions(uid, !!slots['batch-actions']);
+  hasBatchActions.value = !!slots['batch-actions'];
   hasActions.value = !!slots.actions;
   hasToolbar.value = !!(
     slots.actions ||
@@ -531,7 +527,14 @@ function checkSearchExpand(force) {
 }
 
 const dataRowsSelected = ref(props.rowsSelected);
-const batchActive = ref(false);
+const batchActive = computed(() => {
+  return (
+    props.stickyBatchActive ||
+    dataRowsSelected.value.length > 0 ||
+    headingChecked.value
+  );
+});
+
 const headingChecked = ref(false);
 
 watch(
@@ -555,7 +558,6 @@ function updateRowsSelected() {
     }
   }
   headingChecked.value = dataRowsSelected.value.length === rows.length;
-  batchActive.value = dataRowsSelected.value.length > 0;
 }
 
 const emit = defineEmits([
@@ -581,7 +583,6 @@ function onClearClick() {
 }
 function onHeadingCheckChange() {
   // check /uncheck all children
-  batchActive.value = headingChecked.value;
   dataRowsSelected.value = [];
   const rows = store.rows(uid);
   for (const child of rows) {
@@ -617,7 +618,6 @@ function onRowCheckChange(payload) {
   dataRowsSelected.value = Array.from(modelSet);
   const rows = store.rows(uid);
   headingChecked.value = dataRowsSelected.value.length === rows.length;
-  batchActive.value = dataRowsSelected.value.length > 0;
 
   emit('row-select-change', { value, selected: checked });
   emit('row-select-changes', dataRowsSelected.value);

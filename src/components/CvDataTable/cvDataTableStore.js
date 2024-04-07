@@ -83,7 +83,6 @@ const logger = loggerEnabled ? console.debug : () => {};
  * @typedef {Object} CvTableData
  * @property {Array<CvRowData>} rows - table row data
  * @property {Array<CvHeadingData>} headings - table heading data
- * @property {boolean} hasBatchActions - Batch actions are available
  * @property {boolean} hasExpandable - At least some rows are expandable
  */
 
@@ -98,7 +97,6 @@ export default reactive({
     this.state[table] = {
       rows: [],
       headings: [],
-      hasBatchActions: false,
       hasExpandable: false,
     };
     logger(`added table:${table}`);
@@ -121,31 +119,6 @@ export default reactive({
     const table = unref(tableId);
     if (!this.state[table]) this.addTable(table);
     return this.state[table];
-  },
-  /**
-   * Does the table have batch actions
-   * @param {CvTableDataString} tableId
-   * @returns {boolean|undefined}
-   */
-  hasBatchActions(tableId) {
-    const table = unref(tableId);
-    if (!this.state[table]) return;
-    const hasBatchActions = this.state[table]?.hasBatchActions;
-    logger(`get hasBatchActions:${table} result:${hasBatchActions}`);
-    return hasBatchActions;
-  },
-  /**
-   * Set if the table has batch actions or not
-   * @param {CvTableDataString} tableId
-   * @param {boolean} val
-   */
-  setBatchActions(tableId, val) {
-    const table = unref(tableId);
-    if (!this.state[table]) return;
-    if (this.state[table].hasBatchActions !== val) {
-      this.state[table].hasBatchActions = val;
-      logger(`setBatchActions:${table} payload:${val}`);
-    }
   },
   /**
    * Find a heading by table + heading id

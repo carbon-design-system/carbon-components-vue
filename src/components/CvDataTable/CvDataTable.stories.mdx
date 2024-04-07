@@ -6,7 +6,7 @@ import CvDataTableCell from "./CvDataTableCell.vue";
 import CvDataTableAction from "./CvDataTableAction.vue";
 import CvDataTableSkeleton from "./CvDataTableSkeleton.vue";
 import CvButton from '../CvButton/CvButton.vue'
-import { sbCompPrefix } from '../../global/storybook-utils';
+import { sbCompPrefix, storySourceCode } from '../../global/storybook-utils';
 import { action } from '@storybook/addon-actions';
 import { Terminal16 as CompileIcon, Debug16 as DebugIcon, Chip16 as EmbedIcon,
   TrashCan16 as TrashCanIcon} from '@carbon/icons-vue'
@@ -76,14 +76,14 @@ setup() {
     skeletonCols: args.skeletonCols,
     skeletonTitle: args.title,
     skeletonHelper: args.helperText,
-    testData
+    testData,
     };
 },
 // And then the `args` are bound to your component with `v-bind="args"`
 template: args.template,
 });
 const defaultTemplate = `
-<cv-data-table
+<cv-data-table v-bind="args"
   @search="onSearch"
   @sort="onSort"
   @row-select-change="onRowSelectChange"
@@ -91,12 +91,11 @@ const defaultTemplate = `
   @overflow-menu-click="onOverflowMenuClick"
   @row-expanded="onRowExpanded"
   @pagination="onPagination"
-  v-bind="args"
   >
-  <template v-if="useBatchActions" v-slot:batch-actions>
+  <template v-if="useBatchActions" #batch-actions>
     <cv-button :icon="trashIcon" @click="onDelete">Delete</cv-button>
   </template>
-  <template v-if="useActions" v-slot:actions>
+  <template v-if="useActions" #actions>
     <cv-data-table-action @click="onAction1" aria-label="compile" alt="compile">
       <compile-icon>
         <title>Compile</title>
@@ -142,6 +141,16 @@ const skeletonTemplate = `
   :rows="skeletonRows"
   :title="skeletonTitle"
   :helperText="skeletonHelper">
+  <template v-if="useBatchActions" #batch-actions>
+    <cv-button :icon="trashIcon" @click="onDelete">Delete</cv-button>
+  </template>
+  <template v-if="useActions" #actions>
+    <cv-data-table-action @click="onAction1" aria-label="compile" alt="compile">
+      <compile-icon>
+        <title>Compile</title>
+      </compile-icon>
+    </cv-data-table-action>
+  </template>
 </cv-data-table-skeleton>
 `;
 
@@ -184,6 +193,8 @@ completion for it. See [discussion](https://github.com/vuejs/core/issues/3432) f
 - The Vue 3 implementation uses an internal store to manage the state of the table. You can see updates
 to the state by setting the debug variable in the local storage. `localStorage.debug="cv:data-table-store"`
 and then reloading the page.
+- If you were using something like `this.$refs.tableEditPath.batchActive = true` to force batch actions to show even
+when no items were select, please now use the new property `stickyBatchActive`.
 
 <Canvas>
   <Story
@@ -206,9 +217,10 @@ and then reloading the page.
           'items-selected',
           'of-n-pages',
           'range-text',
-          'skeleton'
+          'skeleton',
+          'update:rowsSelected',
         ] },
-      docs: { source: { code: defaultTemplate.replace('v-bind="args"', '') } },
+      docs: { source: { code: storySourceCode(defaultTemplate, Template.args) } },
     }}
     args={{
       template: defaultTemplate,
@@ -248,8 +260,9 @@ and then reloading the page.
           'of-n-pages',
           'range-text',
           'skeleton',
+          'update:rowsSelected',
         ] },
-      docs: { source: { code: expandingRowsTemplate.replace('v-bind="args"', '') } },
+      docs: { source: { code: storySourceCode(expandingRowsTemplate, Template.args) } },
     }}
     args={{
       template: expandingRowsTemplate,
@@ -273,46 +286,8 @@ and then reloading the page.
   <Story
     name="Skeleton"
     parameters={{
-      controls: { exclude: [
-          'template',
-          'actionBarAriaLabel',
-          'autoWidth',
-          'batchCancelLabel',
-          'borderless',
-          'collapseAllAriaLabel',
-          'expandAllAriaLabel',
-          'expandingSearch',
-          'hasExpandAll',
-          'initialSearchValue',
-          'overflowMenu',
-          'rowSize',
-          'rowsSelected',
-          'searchClearLabel',
-          'searchLabel',
-          'searchPlaceholder',
-          'selectAllAriaLabel',
-          'skeleton',
-          'sortable',
-          'staticWidth',
-          'stickyHeader',
-          'zebra',
-          'overflow-menu-click',
-          'pagination',
-          'row-expanded',
-          'actions',
-          'batch-actions',
-          'data',
-          'headings',
-          'row-select-change',
-          'row-select-changes',
-          'sort',
-          'helper-text',
-          'items-selected',
-          'of-n-pages',
-          'range-text',
-          'columns'
-        ] },
-      docs: { source: { code: skeletonTemplate.replace('v-bind="args"', '') } },
+      controls: { include: [ 'skeletonCols', 'skeletonRows', 'title', 'helperText', 'useBatchActions', 'useActions'] },
+      docs: { source: { code: storySourceCode(skeletonTemplate, Template.args) } },
     }}
     args={{
       template: skeletonTemplate,
@@ -320,6 +295,8 @@ and then reloading the page.
       helperText: 'Data has been requested...',
       skeletonRows: 5,
       skeletonCols: 5,
+      useBatchActions: false,
+      useActions: false
     }}
     argTypes={{
     }}

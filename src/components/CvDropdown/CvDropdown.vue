@@ -282,6 +282,7 @@ watch(
   () => props.modelValue,
   () => {
     dataValue.value = props.modelValue;
+    dataCaption.value = undefined;
   }
 );
 watch(dataValue, () => {

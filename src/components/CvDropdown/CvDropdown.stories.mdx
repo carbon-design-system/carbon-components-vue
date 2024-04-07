@@ -129,6 +129,7 @@ const vmodelTemplate = `
     <cv-dropdown-item value="mysterious">The Armorer</cv-dropdown-item>
     <cv-dropdown-item value="bounty-hunter">Greef Karga</cv-dropdown-item>
  </cv-dropdown>
+ <div style="margin-top:2rem; background-color: #888888;  padding:1rem">
  <div>V-Model value: {{ myValue }}</div>
   <select v-model="myValue">
     <option value="mando">Mandalorian</option>
@@ -136,7 +137,12 @@ const vmodelTemplate = `
     <option value="baby-yoda">Grogu</option>
     <option value="mysterious">Armorer</option>
     <option value="bounty-hunter">Karga</option>
+    <option value="none">None</option>
   </select>
+  <div>
+  <button @click="myValue = undefined">Clear value</button>
+  </div>
+  </div>
 </div>
 `;
 const skeletonTemplate = `
