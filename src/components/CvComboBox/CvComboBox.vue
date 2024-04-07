@@ -1,6 +1,7 @@
 <template>
   <div
     ref="root"
+    class="cv-combo-box"
     :class="`${carbonPrefix}--list-box__wrapper`"
     @focusout="onFocusOut"
   >

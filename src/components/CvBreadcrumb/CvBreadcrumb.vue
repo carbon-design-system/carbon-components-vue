@@ -1,6 +1,7 @@
 <template>
   <nav :aria-label="ariaLabel">
     <ol
+      class="cv-breadcrumb"
       :class="[
         `${carbonPrefix}--breadcrumb`,
         { [`${carbonPrefix}--breadcrumb--no-trailing-slash`]: noTrailingSlash },

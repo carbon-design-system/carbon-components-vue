@@ -2,6 +2,7 @@
   <div
     role="alert"
     :kind="kind"
+    class="cv-inline-notification"
     :class="[
       `${carbonPrefix}--inline-notification`,
       `${carbonPrefix}--inline-notification--${kind}`,

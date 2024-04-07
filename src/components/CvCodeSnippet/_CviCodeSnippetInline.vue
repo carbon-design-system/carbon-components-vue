@@ -48,6 +48,7 @@ export default {
   setup(props, { emit }) {
     const codeId = useCvId();
     const classes = computed(() => [
+      'cv-code-snippet-inline',
       `${carbonPrefix}--snippet`,
       `${carbonPrefix}--snippet--inline`,
       {

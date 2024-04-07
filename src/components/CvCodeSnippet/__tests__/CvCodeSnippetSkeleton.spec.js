@@ -20,6 +20,8 @@ describe('CvCodeSnippet', () => {
       const outsideDiv = wrapper.find('div');
       expect(new Set(outsideDiv.classes())).toEqual(
         new Set([
+          'cv-code-snippet',
+          'cv-code-snippet-oneline',
           `${carbonPrefix}--snippet`,
           `${carbonPrefix}--snippet--single`,
         ])
@@ -54,7 +56,12 @@ describe('CvCodeSnippet', () => {
 
       const outsideDiv = wrapper.find('div');
       expect(new Set(outsideDiv.classes())).toEqual(
-        new Set([`${carbonPrefix}--snippet`, `${carbonPrefix}--snippet--multi`])
+        new Set([
+          'cv-code-snippet',
+          'cv-code-snippet-multiline',
+          `${carbonPrefix}--snippet`,
+          `${carbonPrefix}--snippet--multi`,
+        ])
       );
 
       const buttonTag = wrapper.find('button');
@@ -110,6 +117,8 @@ describe('CvCodeSnippet', () => {
 
       expect(new Set(divTag.classes())).toEqual(
         new Set([
+          'cv-code-snippet',
+          'cv-code-snippet-multiline',
           `${carbonPrefix}--snippet`,
           `${carbonPrefix}--snippet--multi`,
           `${carbonPrefix}--snippet--expand`,
@@ -123,7 +132,12 @@ describe('CvCodeSnippet', () => {
       await nextTick();
 
       expect(new Set(divTag.classes())).toEqual(
-        new Set([`${carbonPrefix}--snippet`, `${carbonPrefix}--snippet--multi`])
+        new Set([
+          'cv-code-snippet',
+          `${carbonPrefix}--snippet`,
+          `${carbonPrefix}--snippet--multi`,
+          'cv-code-snippet-multiline',
+        ])
       );
 
       await wrapper.setProps({
@@ -147,6 +161,8 @@ describe('CvCodeSnippet', () => {
       const buttonTag = wrapper.find('button');
       expect(new Set(buttonTag.classes())).toEqual(
         new Set([
+          'cv-code-snippet',
+          'cv-code-snippet-inline',
           `${carbonPrefix}--copy`,
           `${carbonPrefix}--snippet`,
           `${carbonPrefix}--snippet--inline`,

@@ -1,6 +1,7 @@
 <template>
   <component
     :is="listType"
+    class="cv-list"
     :class="{
       [`${carbonPrefix}--list--nested`]: nested,
       [`${carbonPrefix}--list--ordered`]: isActuallyOrdered,

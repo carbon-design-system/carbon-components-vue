@@ -2,6 +2,7 @@
   <div
     role="alert"
     :kind="kind"
+    class="cv-notification"
     :class="[
       `${carbonPrefix}--toast-notification`,
       `${carbonPrefix}--toast-notification--${kind}`,

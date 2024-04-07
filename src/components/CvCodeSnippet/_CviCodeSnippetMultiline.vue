@@ -1,5 +1,6 @@
 <template>
   <div
+    class="cv-code-snippet-multiline"
     :class="[
       `${carbonPrefix}--snippet`,
       `${carbonPrefix}--snippet--multi`,
