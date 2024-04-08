@@ -135,7 +135,7 @@ const dateWrapper = ref(null);
 const date = ref(null);
 const todate = ref(null);
 
-let calendar;
+const calendar = ref(null);
 
 const props = defineProps({
   modelValue: { type: [String, Object, Array, Date], default: undefined },
@@ -307,10 +307,19 @@ const onCalReady = (selectedDates, dateStr, instance) => {
 const initFlatpickr = () => {
   return flatpickr(date.value, getFlatpickrOptions());
 };
+watch(
+  () => props.calOptions,
+  () => {
+    for (const [key, value] of Object.entries(props.calOptions)) {
+      calendar.value.set(key, value);
+    }
+  },
+  { deep: true }
+);
 
 let dateToString = val => {
   if (!val) return '';
-  return calendar.formatDate(val, props.calOptions.dateFormat);
+  return calendar.value?.formatDate(val, props.calOptions.dateFormat);
 };
 
 // eslint-disable-next-line no-unused-vars
@@ -349,9 +358,9 @@ const setDate = value => {
   try {
     if (value === undefined) return;
     if (isSingle.value) {
-      calendar.setDate(value, true);
+      calendar.value?.setDate(value, true);
     } else if (isRange.value) {
-      calendar.setDate([value.startDate, value.endDate], true);
+      calendar.value?.setDate([value.startDate, value.endDate], true);
     } else {
       date.value.value = value;
     }
@@ -393,16 +402,14 @@ onBeforeMount(() => {
 
 onMounted(() => {
   if (['range', 'single'].includes(props.kind)) {
-    calendar = initFlatpickr();
+    calendar.value = initFlatpickr();
   }
 
   setDate(props.modelValue || props.value);
 });
 
 onUnmounted(() => {
-  if (calendar) {
-    calendar.destroy();
-  }
+  calendar.value?.destroy();
 });
 </script>
 
