@@ -23,7 +23,7 @@ const VUE_COMPONENT_FILENAME_REGEX =
   /^[^_](?!.*(?:\/_|\.stories\.vue|\.test\.vue|\.spec\.vue)).*\.vue$/;
 
 const NON_CHECK_PATHS = /(?:\/|\\)__test__/;
-const FORBIDDEN_COMPONENT_NAME_CHARACTERS_REGEX = /[_-]/;
+const FORBIDDEN_COMPONENT_NAME_CHARACTERS_REGEX = /[_-]/g;
 let componentsExports = [];
 
 function addNamedComponentExports(dir) {
