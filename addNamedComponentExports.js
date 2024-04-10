@@ -22,11 +22,8 @@ const INDEX_FILE_PATH = path.join(__dirname, './src/index.js');
 const VUE_COMPONENT_FILENAME_REGEX =
   /^[^_](?!.*(?:\/_|\.stories\.vue|\.test\.vue|\.spec\.vue)).*\.vue$/;
 
-const NON_CHECK_PATHS = /\\__tests__/;
+const NON_CHECK_PATHS = /(?:\/|\\)__test__/;
 const FORBIDDEN_COMPONENT_NAME_CHARACTERS_REGEX = /[_-]/;
-const UNNECESSARY_SYSTEM_PATH_CHUNK_REGEX = /.*\\src\\(.*)/;
-const SYSTEM_PATH_CHUNKS_CONNECTORS_REGEX = /\\/g;
-const IMPORT_STATEMENT_PATH_CHUNKS_CONNECTOR = '/';
 let componentsExports = [];
 
 function addNamedComponentExports(dir) {
@@ -106,17 +103,8 @@ function formatComponentNameForExport(fileName) {
 }
 
 function convertToImportPathRelativeToIndex(systemPath) {
-  const match = systemPath.match(UNNECESSARY_SYSTEM_PATH_CHUNK_REGEX);
-  if (Array.isArray(match) && match[1]) {
-    return (
-      './' +
-      match[1].replace(
-        SYSTEM_PATH_CHUNKS_CONNECTORS_REGEX,
-        IMPORT_STATEMENT_PATH_CHUNKS_CONNECTOR
-      )
-    );
-  }
-  return null;
+  const indexDir = path.dirname(INDEX_FILE_PATH);
+  return './' + path.relative(indexDir, systemPath);
 }
 
 function isComponentExported(componentsExports, componentExportChunk) {
