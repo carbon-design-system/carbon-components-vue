@@ -104,9 +104,16 @@ function formatComponentNameForExport(fileName) {
 
 function convertToImportPathRelativeToIndex(systemPath) {
   const indexDir = path.dirname(INDEX_FILE_PATH);
-  return './' + path.relative(indexDir, systemPath);
+  const importPath = './' + path.relative(indexDir, systemPath);
+  return normalizePathPerSystem(importPath);
 }
 
+function normalizePathPerSystem(string) {
+  // ensure it will always return expected separators in path e.g. './components/CvAccordion/CvAccordion.vue'
+  return typeof string === 'string' && path.sep === '\\'
+    ? string.replace(/\\/g, '/')
+    : string;
+}
 function isComponentExported(componentsExports, componentExportChunk) {
   return componentsExports.find(el => el.startsWith(componentExportChunk));
 }
