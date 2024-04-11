@@ -20,6 +20,6 @@ export default create({
 
   brandTitle: '@carbon/vue3',
   brandUrl:
-    'https://github.com/carbon-design-system/carbon-components-vue/tree/main/packages/v3',
+    'https://github.com/carbon-design-system/carbon-components-vue/tree/main',
   brandTarget: '_blank',
 });
