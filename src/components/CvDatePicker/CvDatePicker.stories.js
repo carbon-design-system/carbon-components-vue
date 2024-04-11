@@ -237,15 +237,19 @@ SingleUsingDate.parameters = storyParametersObject(
 );
 
 /* SINGLE USING MIN MAX PARAMS STORY */
+const DATE_SHORT = 'm/d/Y';
+const DATE_MED = 'M j, Y';
 const calOptions = ref({
   minDate: now,
   maxDate: nextWeek,
-  dateFormat: 'm/d/Y',
+  dateFormat: DATE_SHORT,
 });
 function toggleDateFormat() {
-  if (calOptions.value.dateFormat === 'm/d/Y')
-    calOptions.value.dateFormat = 'Y-m-d';
-  else calOptions.value.dateFormat = 'm/d/Y';
+  calOptions.value.dateFormat =
+    calOptions.value.dateFormat === DATE_SHORT ? DATE_MED : DATE_SHORT;
+}
+function buttonLabel() {
+  return calOptions.value.dateFormat === DATE_SHORT ? DATE_MED : DATE_SHORT;
 }
 function changeMaxDate(inc) {
   calOptions.value.maxDate = new Date(
@@ -258,7 +262,7 @@ const templateSingleUsingMinMax = `
   </cv-date-picker>
   <div style="margin-top:2rem; background-color: #888888;  padding:1rem; width:fit-content">
   <div>Reactive updates</div>
-  <button @click='toggleDateFormat'>change date format to 'm/d/Y' or 'Y-m-d'</button><br/>
+  <button @click='toggleDateFormat'>change date format &quot;{{buttonLabel()}}&quot;</button><br/>
   <button @click='changeMaxDate(1)'>+1 day to max date</button>
   <button @click='changeMaxDate(-1)'>-1 day from max date</button>
   <div>Max date: {{calOptions.maxDate}}</div>
@@ -274,6 +278,7 @@ const TemplateSingleUsingMinMax = args => {
       now,
       calOptions,
       toggleDateFormat,
+      buttonLabel,
       changeMaxDate,
       onChange: action('change'),
     }),
