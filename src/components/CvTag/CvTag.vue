@@ -40,7 +40,7 @@ export default {
      */
     kind: {
       type: String,
-      default: 'red',
+      default: undefined,
       validator(val) {
         return tagKinds.includes(val);
       },
@@ -80,7 +80,9 @@ export default {
       if (props.skeleton) {
         classes.push(`${carbonPrefix}--skeleton`);
       } else {
-        classes.push(`${carbonPrefix}--tag--${props.kind}`);
+        if (props.kind) {
+          classes.push(`${carbonPrefix}--tag--${props.kind}`);
+        }
 
         if (props.filter) {
           classes.push(`${carbonPrefix}--tag--filter`);
