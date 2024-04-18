@@ -31,7 +31,6 @@ const Template = (args, { argTypes }) => {
 
 export const Default = Template.bind({});
 Default.args = {
-  kind: 'red',
   label: 'This is a tag',
   filter: false,
 };
@@ -43,7 +42,6 @@ Default.parameters = storyParametersObject(
 
 export const Filter = Template.bind({});
 Filter.args = {
-  kind: 'teal',
   label: 'This is a tag',
   filter: true,
 };
