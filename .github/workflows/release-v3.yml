@@ -38,6 +38,6 @@ jobs:
       # With dist tag - `run: yarn lerna publish prepatch --dist-tag next --yes`
       - name: Publish
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA
+          GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
         run: yarn lerna publish patch --ignore-changes src/index.js --create-release github --yes
