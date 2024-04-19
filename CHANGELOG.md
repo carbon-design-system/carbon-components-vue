@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.15](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.14...@carbon/vue@3.0.15) (2024-04-19)
+
+### Bug Fixes
+
+- add calOptions as reactive prop ([0cd0485](https://github.com/carbon-design-system/carbon-components-vue/commit/0cd0485ff0381237354450244dfcd655e634e342))
+- cv-dropdown v-model does not clear caption when set to empty ([b01cf04](https://github.com/carbon-design-system/carbon-components-vue/commit/b01cf046ad9cfff6eda58fc522d89cc9d8dadde9))
+- cv-pagination make page, pageSizes, & numberOfItems properties reactive ([b9c4c09](https://github.com/carbon-design-system/carbon-components-vue/commit/b9c4c0930da92d8ee1d852d179a7a59235b220fc))
+- replicated missing `cv-` classes from Vue2 repo ([ea305ad](https://github.com/carbon-design-system/carbon-components-vue/commit/ea305ad27016810fe3d05c04aeab097b59ed8182))
+- restore CvTag default color from Vue2 ([#1589](https://github.com/carbon-design-system/carbon-components-vue/issues/1589)) ([1d7a2df](https://github.com/carbon-design-system/carbon-components-vue/commit/1d7a2df06828bc3d3dee87f53f4a685b1345e95e))
+- **storybook:** brandUrl point to main root ([#1586](https://github.com/carbon-design-system/carbon-components-vue/issues/1586)) ([8217814](https://github.com/carbon-design-system/carbon-components-vue/commit/821781454f4d90e8ca0e23949927de910e30dc26))
+
+### Features
+
+- cv-data-table add property to force showing batch actions ([64cbe0c](https://github.com/carbon-design-system/carbon-components-vue/commit/64cbe0c98c0d44375878eb8d478c6bafedd2215a))
+
 ## [3.0.14](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.13...@carbon/vue@3.0.14) (2024-03-18)
 
 ### Bug Fixes
