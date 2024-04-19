@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`CvStructuredListItem should render correctly when \`value\` is default 1`] = `<cv-structured-list-item-standard-stub id="test-2" class="cv-structured-list-item" model-value="test"></cv-structured-list-item-standard-stub>`;
-
-exports[`CvStructuredListItem should render correctly when \`value\` is set 1`] = `<cv-structured-list-item-standard-stub id="test-2" class="cv-structured-list-item" model-value="test" value="strictured list item value test"></cv-structured-list-item-standard-stub>`;
-
-exports[`CvStructuredListItem should render correctly when slot is specified 1`] = `<cv-structured-list-item-standard-stub id="test-2" class="cv-structured-list-item" model-value="test"></cv-structured-list-item-standard-stub>`;

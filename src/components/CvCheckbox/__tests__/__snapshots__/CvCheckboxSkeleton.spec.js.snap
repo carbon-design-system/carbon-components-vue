@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`CvCheckboxSkeleton renders checkbox skeleton 1`] = `<div class="cv-checkbox bx--form-item bx--checkbox-wrapper"><label class="bx--checkbox-label bx--skeleton"><span class="bx--checkbox-label-text bx--skeleton"></span></label></div>`;
