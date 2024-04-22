@@ -1,19 +1,20 @@
 <template>
-  <button disabled :class="buttonClasses" type="button"></button>
+  <cds-button-skeleton v-bind="props" />
 </template>
 
 <script setup>
-import {
-  props as commonCvButtonProps,
-  useCvButtonCommon,
-} from './CvButtonCommon';
+import '@carbon/web-components/es/components/button/button-skeleton.js';
+import { BUTTON_SIZE } from '@carbon/web-components/es/components/button/button';
 
 const props = defineProps({
-  /**
-   * Size of the button
-   */
-  size: commonCvButtonProps.size,
+  /** Button size. */
+  size: {
+    type: String,
+    default: undefined,
+    /** @param {string} value */
+    validator(value) {
+      return Object.values(BUTTON_SIZE).includes(value);
+    },
+  },
 });
-
-const { buttonClasses } = useCvButtonCommon(undefined, props.size, true);
 </script>

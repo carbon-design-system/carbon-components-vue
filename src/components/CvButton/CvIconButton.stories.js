@@ -1,15 +1,12 @@
-import { action } from '@storybook/addon-actions';
 import { CvIconButton } from './';
-import { buttonKinds, buttonSizes } from './consts.js';
+import { fn } from '@storybook/test';
 import {
-  sbCompPrefix,
-  storybookControlsFromProps,
-  storyParametersObject,
-} from '../../global/storybook-utils';
-import { TipAlignments } from '../CvTooltip/consts.js';
-import { sbBtnPrefix } from './sbBtnPrefix';
-
-import { props as commonCvButtonProps } from './CvButtonCommon';
+  BUTTON_KIND,
+  BUTTON_TOOLTIP_ALIGNMENT,
+  BUTTON_TOOLTIP_POSITION,
+  BUTTON_TYPE,
+  BUTTON_SIZE,
+} from '@carbon/web-components/es/components/button/button';
 import {
   Bee20,
   Carbon20,
@@ -18,119 +15,89 @@ import {
   EdtLoop20,
   IbmSecurity20,
 } from '@carbon/icons-vue';
+import { markRaw } from 'vue';
 
 const icons = {
-  Bee20,
-  Carbon20,
-  Watson20,
-  IbmCloud20,
-  EdtLoop20,
-  IbmSecurity20,
+  Bee: markRaw(Bee20),
+  Carbon: markRaw(Carbon20),
+  Watson: markRaw(Watson20),
+  'IBM Cloud': markRaw(IbmCloud20),
+  EdtLoop: markRaw(EdtLoop20),
+  'IBM Security': markRaw(IbmSecurity20),
 };
 
-export default {
-  title: `${sbCompPrefix}/${sbBtnPrefix}/CvIconButton`,
+const meta = {
+  title: 'Components/CvButtons/CvIconButton',
   component: CvIconButton,
-  argTypes: {
-    ...storybookControlsFromProps(commonCvButtonProps),
-    icon: {
-      control: 'select',
-      options: Object.keys(icons),
+  tags: ['autodocs'],
+  args: {
+    onClick: fn(),
+    tooltipText: 'This is only a icon',
+    tooltipAlignment: BUTTON_TOOLTIP_ALIGNMENT.START,
+    tooltipPosition: BUTTON_TOOLTIP_POSITION.BOTTOM,
+    icon: Bee20,
+  },
+  parameters: {
+    docs: {
+      controls: {
+        exclude: ['onClick'],
+      },
     },
+  },
+  argTypes: {
     kind: {
       control: 'select',
-      options: buttonKinds,
-      default: CvIconButton.props.kind.default,
+      options: Object.values(BUTTON_KIND),
+      default: BUTTON_KIND.SECONDARY,
+    },
+    tooltipAlignment: {
+      control: 'select',
+      options: Object.values(BUTTON_TOOLTIP_ALIGNMENT),
+      default: BUTTON_TOOLTIP_ALIGNMENT,
+    },
+    tooltipPosition: {
+      control: 'select',
+      options: Object.values(BUTTON_TOOLTIP_POSITION),
+      default: BUTTON_TOOLTIP_POSITION,
+    },
+    type: {
+      control: 'select',
+      options: Object.values(BUTTON_TYPE),
+      default: BUTTON_TYPE.BUTTON,
     },
     size: {
       control: 'select',
-      options: buttonSizes,
-      default: CvIconButton.props.size.default,
+      options: Object.values(BUTTON_SIZE),
+      default: BUTTON_SIZE.LARGE,
     },
-    tipAlignment: {
+    icon: {
       control: 'select',
-      options: Object.values(TipAlignments),
-      default: CvIconButton.props.tipAlignment.default,
+      options: Object.keys(icons),
+      mapping: icons,
     },
   },
 };
+export default meta;
 
-const template = `<cv-icon-button @click="onClick" v-bind="newArgs" />`;
-const Template = (args, { argTypes }) => {
-  const newArgs = { ...args, icon: icons[args.icon] };
-  return {
-    props: Object.keys(argTypes),
-    components: { CvIconButton },
-    template,
-    setup() {
-      return { newArgs, onClick: action('click') };
-    },
-  };
+export const Primary = {
+  args: {
+    kind: BUTTON_KIND.PRIMARY,
+  },
 };
-
-const defaultArgs = { icon: 'Bee20' };
-
-export const Primary = Template.bind({});
-Primary.args = {
-  ...defaultArgs,
-  kind: 'primary',
-  label: 'primary',
+export const Secondary = {
+  args: {
+    kind: BUTTON_KIND.SECONDARY,
+  },
 };
-Primary.parameters = storyParametersObject(
-  Primary.parameters,
-  template,
-  Primary.args,
-  'v-bind="newArgs"'
-);
-
-export const Secondary = Template.bind({});
-Secondary.args = {
-  kind: 'secondary',
-  label: 'Secondary',
-  icon: 'Bee20',
+export const Small = {
+  args: {
+    kind: BUTTON_KIND.PRIMARY,
+    size: BUTTON_SIZE.SMALL,
+  },
 };
-Secondary.parameters = storyParametersObject(
-  Secondary.parameters,
-  template,
-  Secondary.args,
-  'v-bind="newArgs"'
-);
-
-export const Field = Template.bind({});
-Field.args = {
-  label: 'Field size',
-  size: 'field',
-  icon: 'Bee20',
+export const ExtraLarge = {
+  args: {
+    kind: BUTTON_KIND.PRIMARY,
+    size: BUTTON_SIZE.EXTRA_LARGE,
+  },
 };
-Field.parameters = storyParametersObject(
-  Field.parameters,
-  template,
-  Field.args,
-  'v-bind="newArgs"'
-);
-
-export const Small = Template.bind({});
-Small.args = {
-  label: 'sm',
-  size: 'sm',
-  icon: 'Bee20',
-};
-Small.parameters = storyParametersObject(
-  Small.parameters,
-  template,
-  Small.args,
-  'v-bind="newArgs"'
-);
-
-export const Large = Template.bind({});
-Large.args = {
-  label: 'Large size',
-  size: 'lg',
-  icon: 'Bee20',
-};
-Large.parameters = storyParametersObject(
-  Large.parameters,
-  template,
-  Large.args,
-  'v-bind="newArgs"'
-);

@@ -4,14 +4,13 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
-import { create } from '@storybook/theming';
+import { create } from '@storybook/theming/create';
 
 /**
  * @see https://storybook.js.org/docs/react/configure/theming
  */
 export default create({
-  base: 'light',
+  base: 'dark',
 
   // Typography
   fontBase: "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
@@ -22,4 +21,5 @@ export default create({
   brandUrl:
     'https://github.com/carbon-design-system/carbon-components-vue/tree/main',
   brandTarget: '_blank',
+  // brandImage: 'https://storybook.js.org/images/placeholders/350x150.png',
 });

@@ -1,90 +1,83 @@
 <template>
-  <button
-    class="cv-button"
-    :class="[
-      buttonClasses,
-      `${carbonPrefix}--tooltip__trigger`,
-      `${carbonPrefix}--tooltip--a11y`,
-      `${carbonPrefix}--tooltip--${tipPosition || 'bottom'}`,
-      `${carbonPrefix}--tooltip--align-${tipAlignment || 'center'}`,
-    ]"
-    :disabled="disabled || null"
-    @click="$emit('click', $event)"
-  >
-    <span :class="`${carbonPrefix}--assistive-text`">{{ label }}</span>
-
-    <slot name="icon">
-      <cv-svg alt="" :svg="icon" :class="`${carbonPrefix}--btn__icon`" />
-    </slot>
-  </button>
+  <cds-button v-bind="props">
+    <cv-svg slot="icon" alt="" :svg="icon" />
+  </cds-button>
 </template>
 
-<script>
-import { carbonPrefix } from '../../global/settings';
-import {
-  props as commonCvButtonProps,
-  useCvButtonCommon,
-} from './CvButtonCommon';
-import { TipAlignments } from '../CvTooltip/consts.js';
+<script setup>
 import CvSvg from '../CvSvg/_CvSvg.vue';
+import {
+  BUTTON_KIND,
+  BUTTON_TOOLTIP_ALIGNMENT,
+  BUTTON_TOOLTIP_POSITION,
+  BUTTON_TYPE,
+  BUTTON_SIZE,
+} from '@carbon/web-components/es/components/button/button';
 
-const { disabled, icon, kind, size } = commonCvButtonProps;
-
-export default {
-  name: 'CvIconButton',
-  components: { CvSvg }, // emitted to allow testing of click
-  props: {
-    // Docgen comments added for storybook doc page
-    /**
-     * disabled by property or if skeleton
-     */
-    disabled,
-    /**
-     * @carbon/icons-vue icon, href, svg or symbol
-     */
-    icon,
-    /**
-     * Carbon button kind
-     */
-    kind,
-    /**
-     * label displayed as a tooltip for the icon. This is required for accessibility.
-     */
-    label: { type: String, default: undefined, required: true },
-    /**
-     * Size of the button
-     */
-    size,
-    /**
-     * tipPosition as per CvTooltip
-     */
-    tipPosition: {
-      type: String,
-      default: 'bottom',
-      validator: val => ['top', 'left', 'bottom', 'right'.includes(val)],
-    },
-    /**
-     * tipAlignment as per CvTooltip
-     */
-    tipAlignment: {
-      type: String,
-      default: 'center',
-      validator: val => Object.values(TipAlignments).includes(val),
+const props = defineProps({
+  /** Icon to display. `import { Bee20 } from '@carbon/icons-vue';` */
+  icon: { type: Object, required: true },
+  /**
+   * Specify the alignment of the tooltip to the icon-only button.
+   * Can be one of: start, center, or end.
+   */
+  tooltipAlignment: {
+    type: String,
+    default: undefined,
+    /** @param {string} value */
+    validator(value) {
+      return Object.values(BUTTON_TOOLTIP_ALIGNMENT).includes(value);
     },
   },
-  emits: ['click'],
-  setup(props) {
-    const { buttonClasses } = useCvButtonCommon(
-      props.kind,
-      props.size,
-      false,
-      true
-    );
-
-    return {
-      buttonClasses,
-      carbonPrefix,
-    };
+  /**
+   * Specify the direction of the tooltip for icon-only buttons.
+   * Can be either top, right, bottom, or left.
+   */
+  tooltipPosition: {
+    type: String,
+    default: undefined,
+    /** @param {string} value */
+    validator(value) {
+      return Object.values(BUTTON_TOOLTIP_POSITION).includes(value);
+    },
   },
-};
+  /**
+   * Specify the direction of the tooltip for icon-only buttons.
+   * Can be either top, right, bottom, or left.
+   */
+  tooltipText: { type: String, default: undefined },
+  /**
+   * Button kind.
+   */
+  kind: {
+    type: String,
+    default: BUTTON_KIND.PRIMARY,
+    /** @param {string} value */
+    validator(value) {
+      return Object.values(BUTTON_KIND).includes(value);
+    },
+  },
+  /**
+   * Button type.
+   */
+  type: {
+    type: String,
+    default: undefined,
+    /** @param {string} value */
+    validator(value) {
+      return Object.values(BUTTON_TYPE).includes(value);
+    },
+  },
+  /**
+   * Button size.
+   */
+  size: {
+    type: String,
+    default: undefined,
+    /** @param {string} value */
+    validator(value) {
+      return Object.values(BUTTON_SIZE).includes(value);
+    },
+  },
+});
 </script>

@@ -1,119 +1,96 @@
-import { action } from '@storybook/addon-actions';
 import { CvButton } from './';
-import { buttonKinds, buttonSizes } from './consts';
+import { fn } from '@storybook/test';
 import {
-  sbCompPrefix,
-  splitSlotArgs,
-  storybookControlsFromProps,
-  storyParametersObject,
-} from '../../global/storybook-utils';
-import { sbBtnPrefix } from './sbBtnPrefix';
-import { props as commonCvButtonProps } from './CvButtonCommon';
-import {
-  Bee20,
-  Carbon20,
-  Watson20,
-  IbmCloud20,
-  EdtLoop20,
-  IbmSecurity20,
-} from '@carbon/icons-vue';
+  BUTTON_KIND,
+  BUTTON_TOOLTIP_ALIGNMENT,
+  BUTTON_TOOLTIP_POSITION,
+  BUTTON_TYPE,
+  BUTTON_SIZE,
+} from '@carbon/web-components/es/components/button/button';
 
-const icons = {
-  Bee20,
-  Carbon20,
-  Watson20,
-  IbmCloud20,
-  EdtLoop20,
-  IbmSecurity20,
-};
-
-export default {
-  title: `${sbCompPrefix}/${sbBtnPrefix}/CvButton`,
+const meta = {
+  title: 'Components/CvButtons/CvButton',
   component: CvButton,
+  tags: ['autodocs'],
+  args: {
+    onClick: fn(),
+  },
   argTypes: {
-    ...storybookControlsFromProps(commonCvButtonProps),
-    default: { control: { type: 'text' } },
-    icon: { control: { type: 'select', options: Object.keys(icons) } },
     kind: {
-      control: { type: 'select', options: buttonKinds },
-      defaultValue: CvButton.props.kind.default,
+      control: 'select',
+      options: Object.values(BUTTON_KIND),
+      default: BUTTON_KIND.SECONDARY,
+    },
+    tooltipAlignment: {
+      control: 'select',
+      options: Object.values(BUTTON_TOOLTIP_ALIGNMENT),
+      default: BUTTON_TOOLTIP_ALIGNMENT,
+    },
+    tooltipPosition: {
+      control: 'select',
+      options: Object.values(BUTTON_TOOLTIP_POSITION),
+      default: BUTTON_TOOLTIP_POSITION,
+    },
+    type: {
+      control: 'select',
+      options: Object.values(BUTTON_TYPE),
+      default: BUTTON_TYPE.BUTTON,
     },
     size: {
-      control: {
-        type: 'select',
-        options: buttonSizes,
-      },
-      defaultValue: CvButton.props.size.default,
+      control: 'select',
+      options: Object.values(BUTTON_SIZE),
+      default: BUTTON_SIZE.LARGE,
     },
   },
 };
+export default meta;
 
-const template = `<cv-button @click="onClick" aria-label="button story" v-bind="args">{{slotArgs.default}}</cv-button>`;
-const Template = (argsIn, { argTypes }) => {
-  let { args, slotArgs } = splitSlotArgs(argsIn, ['default']);
-  args = { ...args, icon: icons[args.icon] };
-
-  return {
-    props: Object.keys(argTypes),
-    components: { CvButton },
-    setup() {
-      return { args, onClick: action('click'), slotArgs };
-    },
-    template,
-  };
+export const Primary = {
+  args: {
+    kind: BUTTON_KIND.PRIMARY,
+    default: 'Primary',
+  },
+};
+export const Secondary = {
+  args: {
+    kind: BUTTON_KIND.SECONDARY,
+    default: 'Secondary',
+  },
+};
+export const Danger = {
+  args: {
+    kind: BUTTON_KIND.DANGER,
+    default: 'Danger',
+  },
 };
 
-export const Primary = Template.bind({});
-Primary.args = {
-  kind: 'primary',
-  default: 'Primary',
+export const Ghost = {
+  args: {
+    kind: BUTTON_KIND.GHOST,
+    default: 'Ghost',
+  },
 };
-Primary.parameters = storyParametersObject(
-  Primary.parameters,
-  template,
-  Primary.args
-);
 
-export const Secondary = Template.bind({});
-Secondary.args = {
-  kind: 'secondary',
-  default: 'Secondary',
+export const Small = {
+  args: {
+    kind: BUTTON_KIND.PRIMARY,
+    size: BUTTON_SIZE.SMALL,
+    default: 'Small size',
+  },
 };
-Secondary.parameters = storyParametersObject(
-  Secondary.parameters,
-  template,
-  Secondary.args
-);
 
-export const Field = Template.bind({});
-Field.args = {
-  default: 'Field size',
-  size: 'field',
+export const ExtraExtraLarge = {
+  args: {
+    kind: BUTTON_KIND.PRIMARY,
+    size: BUTTON_SIZE.EXTRA_EXTRA_LARGE,
+    default: 'Extra extra large size',
+  },
 };
-Field.parameters = storyParametersObject(
-  Field.parameters,
-  template,
-  Field.args
-);
 
-export const Small = Template.bind({});
-Small.args = {
-  default: 'sm',
-  size: 'sm',
+export const Link = {
+  args: {
+    href: 'https://www.ibm.com',
+    default: 'Click to open ibm.com',
+    target: '_blank',
+  },
 };
-Small.parameters = storyParametersObject(
-  Small.parameters,
-  template,
-  Small.args
-);
-
-export const Large = Template.bind({});
-Large.args = {
-  default: 'Large size',
-  size: 'lg',
-};
-Large.parameters = storyParametersObject(
-  Large.parameters,
-  template,
-  Large.args
-);
