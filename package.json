@@ -8,9 +8,10 @@
   "types": "src/index.d.ts",
   "web-types": "dist/web-types.json",
   "scripts": {
-    "postinstall": "node prepare.js && node .storybook/postinstall.js && ibmtelemetry --config=telemetry.yml",
-    "prepack": "pinst --disable",
-    "postpack": "pinst --enable",
+    "postinstall": "node prepare.js && node .storybook/postinstall.js",
+    "pack_postinstall": "ibmtelemetry --config=telemetry.yml",
+    "prepack": "node packrat.js --disable",
+    "postpack": "node packrat.js --enable",
     "build": "vue-cli-service build --target lib --name carbon-vue-3 ./src/index.js --no-clean",
     "lint": "vue-cli-service lint",
     "build-web-types": "vue-docgen-web-types --outFile dist/web-types.json",
@@ -23,6 +24,7 @@
     "lint:es": "eslint src/**/*.{js,vue}",
     "lint:style": "vue-cli-service lint:style",
     "serve:storybook": "cd ./storybook && yarn run serve",
+    "prepare": "echo hello lifecycle hook",
     "test": "vue-cli-service test:unit --no-coverage"
   },
   "workspaces": [
@@ -42,6 +44,7 @@
     "@babel/eslint-parser": "^7.17.0",
     "@commitlint/cli": "^16.3.0",
     "@commitlint/config-conventional": "^16.2.4",
+    "@npmcli/package-json": "^5.1.0",
     "@testing-library/dom": "^8.19.0",
     "@testing-library/user-event": "^14.4.3",
     "@testing-library/vue": "^6.6.1",
@@ -66,7 +69,6 @@
     "jest": "^27.5.1",
     "lerna": "^6.5.1",
     "lint-staged": "^12.5.0",
-    "pinst": "^3.0.0",
     "postcss": "^8.4.19",
     "postcss-loader": "^6.2.1",
     "prettier": "^2.8.0",
