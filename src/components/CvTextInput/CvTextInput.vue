@@ -1,247 +1,258 @@
 <template>
-  <div
-    :class="[
-      'cv-text-input',
-      `${carbonPrefix}--form-item`,
-      `${carbonPrefix}--text-input-wrapper`,
-      { [`${carbonPrefix}--password-input-wrapper`]: isPassword },
-    ]"
+  <cds-text-input
+    v-bind="wcProps()"
+    :warn="isWarn || null"
+    :invalid="isInvalid || null"
+    :show-password-visibility-toggle="compatPasswordToggle"
+    :show-password-label="compatShowPasswordLabel"
+    :hide-password-label="compatHidePasswordLabel"
+    :value="modelValue"
+    @input="$event => $emit('update:modelValue', $event.target.value)"
+    class="cv-text-input"
   >
-    <label
-      :for="cvId"
-      :class="[
-        `${carbonPrefix}--label`,
-        {
-          [`${carbonPrefix}--label--disabled`]: $attrs.disabled,
-          [`${carbonPrefix}--visually-hidden`]: hideLabel,
-        },
-      ]"
-    >
-      {{ label }}
-    </label>
-    <div
-      :class="[
-        `${carbonPrefix}--text-input__field-wrapper`,
-        { [`${carbonPrefix}--text-input__field-wrapper--warning`]: isWarn },
-      ]"
-      :data-invalid="isInvalid || null"
-    >
-      <WarningFilled16
-        v-if="isInvalid"
-        :class="`${carbonPrefix}--text-input__invalid-icon`"
-      />
-      <WarningAltFilled16
-        v-if="isWarn"
-        :class="`${carbonPrefix}--text-input__invalid-icon ${carbonPrefix}--text-input__invalid-icon--warning`"
-      />
-      <input
-        :id="cvId"
-        ref="input"
-        :class="[
-          `${carbonPrefix}--text-input`,
-          {
-            [`${carbonPrefix}--text-input--invalid`]: isInvalid,
-            [`${carbonPrefix}--text-input--light`]: isLight,
-            [`${carbonPrefix}--text-input--warning`]: isWarn,
-            [`${carbonPrefix}--password-input`]: isPassword,
-          },
-        ]"
-        v-bind="$attrs"
-        :type="dataType"
-        :value="modelValue"
-        :data-toggle-password-visibility="isPassword || null"
-        @input="$event => $emit('update:modelValue', $event.target.value)"
-      />
-      <button
-        v-if="isPassword"
-        :class="[
-          `${carbonPrefix}--btn`,
-          `${carbonPrefix}--btn--icon-only`,
-          `${carbonPrefix}--text-input--password__visibility__toggle`,
-          `${carbonPrefix}--tooltip__trigger`,
-          `${carbonPrefix}--tooltip--a11y`,
-          `${carbonPrefix}--tooltip--bottom`,
-          `${carbonPrefix}--tooltip--align-center`,
-          { [`${carbonPrefix}--btn--disabled`]: $attrs.disabled },
-        ]"
-        type="button"
-        :disabled="$attrs.disabled"
-        @click="togglePasswordVisibility"
-      >
-        <span :class="`${carbonPrefix}--assistive-text`">
-          {{ passwordHideShowLabel }}
-        </span>
-        <ViewOff16
-          v-if="isPasswordVisible"
-          :class="`${carbonPrefix}--icon-visibility-off`"
-        />
-        <View16 v-else :class="`${carbonPrefix}--icon-visibility-on`" />
-      </button>
+    <div v-if="$slots['label-text']" slot="label-text">
+      <slot name="label-text" />
     </div>
-    <div v-if="isInvalid" :class="`${carbonPrefix}--form-requirement`">
-      <slot name="invalid-message">{{ invalidMessage }}</slot>
+    <div v-if="$slots['helper-text']" slot="helper-text">
+      <slot name="helper-text" />
     </div>
-    <div v-if="isWarn" :class="`${carbonPrefix}--form__requirement`">
-      <slot name="warn-text">{{ warnText }}</slot>
-    </div>
-    <div
-      v-if="isHelper"
-      :class="[
-        `${carbonPrefix}--form__helper-text`,
-        { [`${carbonPrefix}--form__helper-text--disabled`]: $attrs.disabled },
-      ]"
-    >
-      <slot name="helper-text">{{ helperText }}</slot>
-    </div>
-  </div>
+    <slot></slot>
+  </cds-text-input>
 </template>
 
 <script setup>
+import '@carbon/web-components/es/components/text-input/index.js';
 import {
-  onBeforeMount,
-  onBeforeUpdate,
-  ref,
-  useSlots,
-  computed,
-  watch,
-  nextTick,
-} from 'vue';
-import {
-  WarningFilled16,
-  WarningAltFilled16,
-  ViewOff16,
-  View16,
-} from '@carbon/icons-vue';
-import { carbonPrefix } from '../../global/settings';
-import { useCvId, props as propsCvId } from '../../use/cvId';
-import { useIsLight, props as propsTheme } from '../../use/cvTheme';
-import { inputTypes } from './const';
+  INPUT_SIZE,
+  INPUT_TOOLTIP_ALIGNMENT,
+  INPUT_TOOLTIP_DIRECTION,
+  INPUT_TYPE,
+} from '@carbon/web-components/es/components/text-input/text-input';
+import { computed, onBeforeMount, onBeforeUpdate, ref, useSlots } from 'vue';
 
 const props = defineProps({
   /**
-   * Provide text that is used alongside the control label for additional help
+   * May be any of the standard HTML autocomplete options
+   */
+  autocomplete: { type: String, default: undefined },
+  /**
+   * Sets the input to be focussed automatically on page load. Defaults to false
+   */
+  autofocus: { type: Boolean, default: false },
+  /**
+   * Controls the disabled state of the input
+   */
+  disabled: { type: Boolean, default: false },
+  /**
+   * Specify whether to display the character counter
+   */
+  enableCounter: { type: Boolean, default: false },
+  /**
+   * The helper text.
    */
   helperText: { type: String, default: undefined },
+  /**
+   * Specify if the current value is invalid.
+   */
+  invalid: { type: Boolean, default: false },
+  /**
+   * Message which is displayed if the value is invalid.
+   */
+  invalidText: { type: String, default: undefined },
+  /**
+   * Max character count allowed for input. This is needed in order for enableCounter to display
+   */
+  maxCount: { type: Number, default: undefined },
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn: { type: Boolean, default: false },
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText: { type: String, default: undefined },
   /**
    * Specify whether you want the underlying label to be visually hidden
    */
   hideLabel: { type: Boolean, default: false },
   /**
-   * Provide the text that is displayed when the control is in an invalid state
-   */
-  invalidMessage: { type: String, default: undefined },
-  /**
-   * Input's label
+   * Generic label that will be used as the textual representation of what this field is for
    */
   label: { type: String, default: undefined },
+  /**
+   * Name for the input in the `FormData`
+   */
+  name: { type: String, default: undefined },
+  /**
+   * Pattern to validate the input against for HTML validity checking
+   */
+  pattern: { type: String, default: undefined },
+  /**
+   * Value to display when the input has an empty `value`
+   */
+  placeholder: { type: String, default: undefined },
+  /**
+   * Specify if the component should be read-only
+   */
+  readonly: { type: Boolean, default: false },
+  /**
+   * Boolean property to set the required status
+   */
+  required: { type: Boolean, default: false },
+  /**
+   * The special validity message for `required`.
+   */
+  requiredValidityMessage: { type: String, default: undefined },
+  /**
+   * "Hide password" tooltip text on password visibility toggle
+   */
+  hidePasswordLabel: { type: String, default: undefined },
+  /**
+   * "Show password" tooltip text on password visibility toggle
+   */
+  showPasswordLabel: { type: String, default: undefined },
+  /**
+   * Boolean property to render password visibility toggle
+   */
+  showPasswordVisibilityToggle: { type: Boolean, default: undefined },
+  /**
+   * The input box size.
+   */
+  size: {
+    type: String,
+    default: INPUT_SIZE.MEDIUM,
+    /** @param {string} value */
+    validator(value) {
+      return Object.values(INPUT_SIZE).includes(value);
+    },
+  },
+  /**
+   * true to use the inline version.
+   */
+  inline: { type: Boolean, default: false },
+  /**
+   * Specify the alignment of the tooltip to the icon-only button.
+   * Can be one of: start, center, or end.
+   */
+  tooltipAlignment: {
+    type: String,
+    default: undefined,
+    /** @param {string} value */
+    validator(value) {
+      return Object.values(INPUT_TOOLTIP_ALIGNMENT).includes(value);
+    },
+  },
+  /**
+   * Specify the direction of the tooltip for icon-only buttons.
+   * Can be either top, right, bottom, or left.
+   */
+  tooltipDirection: {
+    type: String,
+    default: undefined,
+    /** @param {string} value */
+    validator(value) {
+      return Object.values(INPUT_TOOLTIP_DIRECTION).includes(value);
+    },
+  },
+  /**
+   * The type of the input. Can be one of the types listed in the INPUT_TYPE enum
+   */
+  type: {
+    type: String,
+    default: INPUT_TYPE.TEXT,
+    /** @param {string} value */
+    validator(value) {
+      return Object.values(INPUT_TYPE).includes(value);
+    },
+  },
+  /**
+   * The validity message. If present and non-empty, this input shows the UI of its invalid state.
+   */
+  validityMessage: { type: String, default: undefined },
+
+  // ---- current vue 3 -------
+  /**
+   * @deprecated use invalidText
+   */
+  invalidMessage: { type: String, default: undefined },
   /**
    * Input's value, modelValue is the vue3 default 'prop' for two-way data binding with v-model
    */
   modelValue: { type: String, default: undefined },
   /**
-   * Hide password" tooltip text on password visibility toggle
+   * @deprecated use hidePasswordLabel
    */
   passwordHideLabel: { type: String, default: 'Hide password' },
   /**
-   * Show password tooltip text on password visibility toggle
+   * @deprecated use showPasswordLabel
    */
   passwordShowLabel: { type: String, default: 'Show password' },
   /**
-   * Toggle password visibility
+   * @deprecated does not work in Carbon 11
    */
   passwordVisible: { type: Boolean, default: undefined },
-  /**
-   * Input type, only `text` and `password` are available
-   */
-  type: {
-    type: String,
-    default: 'text',
-    validator: value => inputTypes.has(value),
-  },
-  /**
-   * Provide the text that is displayed when the control is in warning state
-   */
-  warnText: { type: String, default: undefined },
-  ...propsCvId,
-  ...propsTheme,
 });
 defineEmits(['update:modelValue']);
-const cvId = useCvId(props);
-
-// DOM Elements
-const input = ref();
-const slots = useSlots();
-
+const wcProps = () => {
+  return {
+    ...props,
+    passwordVisible: undefined,
+    passwordShowLabel: undefined,
+    passwordHideLabel: undefined,
+    modelValue: undefined,
+    invalidMessage: undefined,
+    hidePasswordLabel: undefined, // compatHidePasswordLabel
+    showPasswordVisibilityToggle: undefined, //compatPasswordToggle
+    invalid: undefined, // isInvalid
+    warn: undefined, // isWarn
+    helperText: props.helperText || null,
+  };
+};
 // Data
 const isInvalid = ref(false);
 const isWarn = ref(false);
-const isHelper = ref(false);
-const isLight = useIsLight(props);
-const dataType = ref(props.type);
-const dataPasswordVisible = ref(false);
 
-// Computed Values
-const isPassword = computed(() => props.type === 'password');
-const isPasswordVisible = computed(
-  () => isPassword.value && dataPasswordVisible.value
-);
-const passwordHideShowLabel = computed(() =>
-  isPasswordVisible.value ? props.passwordHideLabel : props.passwordShowLabel
-);
+const compatInvalid = computed(() => props.invalidText || props.invalidMessage);
+const compatHidePasswordLabel = computed(() => {
+  if (props.type === INPUT_TYPE.PASSWORD)
+    return props.hidePasswordLabel || props.passwordHideLabel || null;
+});
+const compatShowPasswordLabel = computed(() => {
+  if (props.type === INPUT_TYPE.PASSWORD)
+    return props.showPasswordLabel || props.passwordShowLabel || null;
+});
+const compatPasswordToggle = computed(() => {
+  if (props.showPasswordVisibilityToggle !== undefined)
+    return props.showPasswordVisibilityToggle || null;
+  else return props.type === INPUT_TYPE.PASSWORD || null;
+});
 
-// Watchers
-watch(
-  () => props.passwordVisible,
-  newValue => {
-    if (newValue !== dataPasswordVisible.value) {
-      togglePasswordVisibility();
-    }
-  }
-);
-watch(
-  () => props.type,
-  newValue => {
-    dataType.value = newValue;
-  }
-);
-
-// Methods
-function togglePasswordVisibility() {
-  const currentValue = input.value.value;
-  dataPasswordVisible.value = !dataPasswordVisible.value;
-  dataType.value = dataPasswordVisible.value ? 'text' : 'password';
-  nextTick(() => {
-    input.value.value = currentValue;
-  });
-}
-
+const slots = useSlots();
+const useInvalidSlot = ref(false);
+const useWarningSlot = ref(false);
+const hasHelperSlot = ref(false);
 function checkSlots() {
   // NOTE: slots is not reactive so needs to be managed on updated
   isInvalid.value = !!(
-    props.invalidMessage?.length || slots['invalid-message']
+    props.invalid ||
+    compatInvalid.value?.length ||
+    slots['invalid-message']
   );
   isWarn.value =
-    !isInvalid.value && !!(props.warnText?.length || slots['warn-text']);
-  isHelper.value =
     !isInvalid.value &&
-    !isWarn.value &&
-    !!(props.helperText?.length || slots['helper-text']);
+    !!(props.warn || props.warnText?.length || slots['warn-text']);
+
+  hasHelperSlot.value = !!slots['helper-text'];
 }
 
 // Lifecycle Hooks
-onBeforeMount(() => {
-  checkSlots();
-  // update initial state for dataPasswordVisible & dataType
-  if (isPassword.value && props.passwordVisible) {
-    dataPasswordVisible.value = true;
-    dataType.value = 'text';
-  }
-});
-onBeforeUpdate(checkSlots);
+onBeforeMount(() => checkSlots());
+onBeforeUpdate(() => checkSlots());
 </script>
-
-<script>
-export default {
-  inheritAttrs: false,
-};
-</script>
+<style>
+/*Work around for web component bugs*/
+.cv-text-input {
+  --cds-field: var(--cds-field-01);
+  --cds-border-strong: var(--cds-border-strong-01);
+}
+</style>

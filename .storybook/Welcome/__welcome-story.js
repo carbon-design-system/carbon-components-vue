@@ -1,23 +1,15 @@
-import { storiesOf } from '@storybook/vue3';
 import SvWelcome from './sv-welcome.vue';
+import { BUTTON_KIND } from '@carbon/web-components/es/components/button/button.js';
 
-const stories = storiesOf('Carbon', module);
-
-stories.add(
-  'Welcome',
-  () => {
-    // ----------------------------------------------------------------
-    const templateViewString = `<sv-welcome></sv-welcome>`;
-
-    return {
-      components: { SvWelcome },
-      template: templateViewString,
-    };
+export default {
+  title: 'Welcome',
+  component: SvWelcome,
+  options: {
+    isToolshown: false,
+    showPanel: false,
   },
-  {
-    options: {
-      isToolshown: false,
-      showPanel: false,
-    },
-  }
-);
+};
+
+export const Vue3Carbon11 = {
+  args: {},
+};

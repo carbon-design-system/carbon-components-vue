@@ -1,31 +1,15 @@
 <template>
-  <div
-    class="cv-button-set"
-    :class="[
-      `${carbonPrefix}--btn-set`,
-      { [`${carbonPrefix}--btn-set--stacked`]: stacked },
-    ]"
-  >
+  <cds-button-set :stacked="stacked || null">
     <!-- @slot Default content of button set, expects buttons -->
     <slot />
-  </div>
+  </cds-button-set>
 </template>
 
-<script>
-import { carbonPrefix } from '../../global/settings';
+<script setup>
+import '@carbon/web-components/es/components/button/index.js';
 
-export default {
-  name: 'CvButtonSet',
-  props: {
-    /**
-     * Button set stacked vertically
-     */
-    stacked: Boolean,
-  },
-  setup() {
-    return {
-      carbonPrefix,
-    };
-  },
-};
+const props = defineProps({
+  /** Button set stacked vertically */
+  stacked: Boolean,
+});
 </script>

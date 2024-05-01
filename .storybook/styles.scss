@@ -1,57 +1,43 @@
-$feature-flags: (
-  ui-shell: true,
-  enable-css-custom-properties: true,
-);
-
 // Use the white as default theme
-@import '~@carbon/themes/scss';
-$carbon--theme: $carbon--theme--white;
+@use '@carbon/themes/scss/themes';
+@use '@carbon/themes/scss/theme';
 
 // Themes
+[data-carbon-theme='white'],
 .carbon-theme--white {
-  @include carbon--theme(
-    $theme: $carbon--theme--white,
-    $emit-custom-properties: true
-  );
+  @include theme.theme(themes.$white);
 }
 
 [data-carbon-theme='g10'],
 .carbon-theme--g10 {
-  @include carbon--theme(
-    $theme: $carbon--theme--g10,
-    $emit-custom-properties: true
-  );
+  @include theme.theme(themes.$g10);
 }
 
 [data-carbon-theme='g90'],
 .carbon-theme--g90 {
-  @include carbon--theme(
-    $theme: $carbon--theme--g90,
-    $emit-custom-properties: true
-  );
+  @include theme.theme(themes.$g90);
 }
 
 [data-carbon-theme='g100'],
 .carbon-theme--g100 {
-  @include carbon--theme(
-    $theme: $carbon--theme--g100,
-    $emit-custom-properties: true
-  );
+  @include theme.theme(themes.$g100);
 }
 
-@import '~carbon-components/scss/globals/scss/vendor/@carbon/type/scss/font-family';
-@import '~carbon-components/scss/globals/scss/vendor/@carbon/layout/scss/breakpoint';
-@import '~carbon-components/scss/globals/scss/typography';
-@import '~carbon-components/scss/globals/scss/vars';
-
-// @import '~carbon-components/css/carbon-components.min.css';
-@import '~carbon-components/scss/globals/scss/styles';
-
+:root {
+  --cds-field: var(--cds-field-01);
+}
 // set default color and background for stories
 .cv-vue-3 {
-  padding: $layout-04;
-  background-color: $ui-background;
-  color: $text-01;
+  padding: var(--cds-layout-04);
+  background-color: var(--cds-ui-background);
+  color: var(--cds-text-01);
+  font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+
+  .v-model-demo {
+    margin-top: 1rem;
+    background-color: #888888;
+    padding: 1rem;
+  }
 }
 
 /**
@@ -61,6 +47,6 @@ $carbon--theme: $carbon--theme--white;
   modals in mdx files should now be formatted like this to prevent z-index issues
 */
 // stylelint-disable-next-line
-.preview-position--fix > div {
-  position: static !important; /* stylelint-disable-line declaration-no-important */
-}
+//.preview-position--fix > div {
+//  position: static !important; /* stylelint-disable-line declaration-no-important */
+//}

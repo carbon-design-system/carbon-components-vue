@@ -1,6 +1,5 @@
 storybook
 Staticfile
-babel.config.js
 .kodiak.toml
 .gitattributes
 .editorconfig

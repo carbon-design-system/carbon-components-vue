@@ -18,8 +18,13 @@
   </a>
 </p>
 
-> Vue implementation of the Carbon Design System
+> Vue implementation of the Carbon 11 Design System
 > A collection of [Carbon Components](https://github.com/carbon-design-system/carbon-components) implemented using <img src="https://vuejs.org/images/logo.png" width="20" alt="Vue logo"> [Vue.js](https://vuejs.org/).
+
+# CAUTION - this branch is incomplete and experimental
+
+The goal is to wrap [carbon web components](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components) in thin Vue
+wrappers. The methodology for this is evolving so expect turbulence ahead.
 
 ## Carbon Vue library - A Carbon Community Project
 

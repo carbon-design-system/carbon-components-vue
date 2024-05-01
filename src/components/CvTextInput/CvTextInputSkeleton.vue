@@ -1,17 +1,15 @@
 <template>
-  <div :class="[`${carbonPrefix}--form-item`]">
-    <span
-      v-if="!hideLabel"
-      :class="[`${carbonPrefix}--label`, `${carbonPrefix}--skeleton`]"
-    ></span>
-    <div
-      :class="[`${carbonPrefix}--text-input`, `${carbonPrefix}--skeleton`]"
-    ></div>
-  </div>
+  <cds-text-input-skeleton class="cv-text-input-skeleton" />
 </template>
 
 <script setup>
-import { carbonPrefix } from '../../global/settings';
+import '@carbon/web-components/es/components/text-input/text-input-skeleton';
 
-defineProps({ hideLabel: { type: Boolean, default: false } });
+defineProps({
+  /**
+   * Specify whether the label should be hidden, or not
+   */
+  hideLabel: { type: Boolean, default: false },
+});
 </script>
+<style lang="scss"></style>
