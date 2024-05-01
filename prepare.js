@@ -1,10 +1,8 @@
 // Install husky githooks
 // https://github.com/typicode/husky
-const isCi = process.env.CI !== undefined;
-if (!isCi) {
-  try {
-    require('husky').install();
-  } catch (e) {
-    if (e.code !== 'MODULE_NOT_FOUND') throw e;
-  }
+// Skip Husky install in production and CI
+if (process.env.NODE_ENV === 'production' || process.env.CI === 'true') {
+  process.exit(0);
 }
+const husky = (await import('husky')).default;
+console.log(husky());

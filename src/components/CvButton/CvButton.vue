@@ -5,6 +5,7 @@
 </template>
 
 <script setup>
+import '@carbon/web-components/es/components/button/index.js';
 import {
   BUTTON_KIND,
   BUTTON_TOOLTIP_ALIGNMENT,

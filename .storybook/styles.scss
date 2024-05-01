@@ -23,12 +23,21 @@
   @include theme.theme(themes.$g100);
 }
 
+:root {
+  --cds-field: var(--cds-field-01);
+}
 // set default color and background for stories
 .cv-vue-3 {
   padding: var(--cds-layout-04);
   background-color: var(--cds-ui-background);
   color: var(--cds-text-01);
   font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+
+  .v-model-demo {
+    margin-top: 1rem;
+    background-color: #888888;
+    padding: 1rem;
+  }
 }
 
 /**

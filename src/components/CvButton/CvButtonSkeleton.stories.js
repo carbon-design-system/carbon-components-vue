@@ -16,18 +16,5 @@ const meta = {
 export default meta;
 
 export const Default = {
-  args: {
-    size: BUTTON_SIZE.LARGE,
-  },
-};
-export const Small = {
-  args: {
-    size: BUTTON_SIZE.SMALL,
-  },
-};
-
-export const ExtraExtraLarge = {
-  args: {
-    size: BUTTON_SIZE.EXTRA_EXTRA_LARGE,
-  },
+  args: {},
 };

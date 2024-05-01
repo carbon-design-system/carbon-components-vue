@@ -53,7 +53,7 @@ export const Primary = {
 };
 export const Secondary = {
   args: {
-    kind: BUTTON_KIND.SECONDARY,
+    kind: BUTTON_KIND.DANGER_GHOST,
     default: 'Secondary',
   },
 };

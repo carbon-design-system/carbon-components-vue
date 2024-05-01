@@ -1,12 +1,5 @@
 import { CvButtonSet, CvButton } from './';
 
-const template = `
-<cv-button-set v-bind="args">
-  <cv-button>One</cv-button>
-  <cv-button kind="secondary">Two</cv-button>
-  <cv-button kind="danger">Three</cv-button>
-</cv-button-set>`;
-
 const meta = {
   title: 'Components/CvButtons/CvButtonSet',
   render: args => ({
@@ -14,7 +7,11 @@ const meta = {
     setup() {
       return { args };
     },
-    template,
+    template: `
+<cv-button-set v-bind="args">
+  <cv-button> Secondary 1</cv-button>
+  <cv-button> Primary 2</cv-button>
+</cv-button-set>`,
   }),
   args: {
     stacked: false,
