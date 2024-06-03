@@ -8,8 +8,8 @@
   "types": "src/index.d.ts",
   "web-types": "dist/web-types.json",
   "scripts": {
-    "postinstall": "node prepare.js && node .storybook/postinstall.js",
-    "pack_postinstall": "ibmtelemetry --config=telemetry.yml",
+    "postinstall": "node devPreinstall.js && node .storybook/postinstall.js",
+    "pack_postinstall": "node ibmtelemetry --config=telemetry.yml || true",
     "prepack": "node packrat.js --disable",
     "postpack": "node packrat.js --enable",
     "build": "vue-cli-service build --target lib --name carbon-vue-3 ./src/index.js --no-clean",
