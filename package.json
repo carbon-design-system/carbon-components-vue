@@ -31,7 +31,7 @@
   ],
   "dependencies": {
     "@carbon/icons-vue": "^10.60.0",
-    "@ibm/telemetry-js": "^1.2.1",
+    "@ibm/telemetry-js": "^1.5.1",
     "@vueuse/core": "^4.11.2",
     "carbon-components": "^10.58.5",
     "eslint-plugin-prettier-vue": "^4.2.0",
