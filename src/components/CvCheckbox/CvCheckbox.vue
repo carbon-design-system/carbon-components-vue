@@ -80,10 +80,10 @@ const props = defineProps({
 // Track focus
 let hasFocus = ref(false);
 function onFocus() {
-  hasFocus = true;
+  hasFocus.value = true;
 }
 function onBlur() {
-  hasFocus = false;
+  hasFocus.value = false;
 }
 
 const cvId = useCvId(props);
