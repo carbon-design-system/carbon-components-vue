@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.16](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.15...@carbon/vue@3.0.16) (2024-06-09)
+
+### Bug Fixes
+
+- ibmtelemetry not run in prod ([#1593](https://github.com/carbon-design-system/carbon-components-vue/issues/1593)) ([3ae3f22](https://github.com/carbon-design-system/carbon-components-vue/commit/3ae3f2260743ae26bcab0681862531399eab6448))
+- npm 20+ install ([#1602](https://github.com/carbon-design-system/carbon-components-vue/issues/1602)) ([de71c59](https://github.com/carbon-design-system/carbon-components-vue/commit/de71c590903028a53e4459fd624bd32c3e6dcfe0))
+- publish ([21f108a](https://github.com/carbon-design-system/carbon-components-vue/commit/21f108afb509b686add1eef751ff73c2d5b46c7a))
+- unfocus CvCheckbox (add missing 'value' access to ref) ([#1595](https://github.com/carbon-design-system/carbon-components-vue/issues/1595)) ([fb225c0](https://github.com/carbon-design-system/carbon-components-vue/commit/fb225c067344081b47b686e77a44ce26971357af))
+- update @ibm/telemetry-js to latest ([#1598](https://github.com/carbon-design-system/carbon-components-vue/issues/1598)) ([17d861e](https://github.com/carbon-design-system/carbon-components-vue/commit/17d861e76576a620ec1518c177c740e531f9d03a))
+
 ## [3.0.15](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.14...@carbon/vue@3.0.15) (2024-04-19)
 
 ### Bug Fixes
