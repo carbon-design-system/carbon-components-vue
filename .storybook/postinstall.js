@@ -13,7 +13,12 @@ const { readFileSync, writeFileSync } = require('fs');
  * https://github.com/storybookjs/storybook/issues/11971#issuecomment-1240831460
  */
 
-addCustomControls();
+try {
+  addCustomControls();
+  console.log('storybook custom controls added');
+} catch (e) {
+  console.warn('@carbon/vue [.storybook/postinstall]', e.message);
+}
 
 function addCustomControls() {
   const file = resolve(
