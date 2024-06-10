@@ -1,5 +1,6 @@
 name: stale
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 8 * * *'
 
@@ -7,10 +8,10 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/stale@v7
+      - uses: actions/stale@v9
         with:
-          any-of-issue-labels:
-            "status: waiting for author's response 💬,status: needs more info 🤷‍♀️"
+          any-of-labels:
+            "waiting for author's response 💬,needs more info 🤷‍♀️,stale 🍞"
           only-pr-labels: ''
           stale-issue-message: |
             This issue has been marked as stale because it has required additional
@@ -20,7 +21,8 @@ jobs:
           close-issue-message: |
             This issue has been closed because it has received no activity for
             28 days.
-          stale-issue-label: 'status: stale 🍞'
+          stale-issue-label: 'stale 🍞'
+          stale-pr-label: 'stale 🍞'
           days-before-stale: 14
-          days-before-close: 14
+          days-before-close: 28
           debug-only: true
