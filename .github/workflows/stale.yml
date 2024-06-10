@@ -10,9 +10,8 @@ jobs:
     steps:
       - uses: actions/stale@v9
         with:
-          any-of-labels:
-            "waiting for author's response 💬,needs more info 🤷‍♀️,stale 🍞"
-          only-pr-labels: ''
+          #any-of-labels:
+          #  "waiting for author's response 💬,needs more info 🤷‍♀️,stale 🍞"
           stale-issue-message: |
             This issue has been marked as stale because it has required additional
             info or a response from the author for over 14 days. When you get the
