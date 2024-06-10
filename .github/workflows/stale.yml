@@ -24,4 +24,4 @@ jobs:
           stale-pr-label: 'stale 🍞'
           days-before-stale: 14
           days-before-close: 28
-          debug-only: true
+          debug-only: false
