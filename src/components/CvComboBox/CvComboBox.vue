@@ -342,7 +342,7 @@ function doMove(up) {
         newHighlight = currentHighlight + 1;
       }
     }
-    highlighted.value = dataOptions[newHighlight].value;
+    highlighted.value = dataOptions.value[newHighlight].value;
   }
 }
 function updateOptions() {
