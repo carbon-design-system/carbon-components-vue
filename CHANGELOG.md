@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.17](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.16...@carbon/vue@3.0.17) (2024-06-18)
+
+### Bug Fixes
+
+- cvComboBox arrows navigation failing due to missing value access to Proxy ([#1605](https://github.com/carbon-design-system/carbon-components-vue/issues/1605)) ([6815a25](https://github.com/carbon-design-system/carbon-components-vue/commit/6815a252b77c9d766d33fe5f336822a2daaf24a9))
+
 ## [3.0.16](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.15...@carbon/vue@3.0.16) (2024-06-09)
 
 ### Bug Fixes
