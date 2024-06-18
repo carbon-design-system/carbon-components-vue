@@ -1,5 +1,5 @@
-import CvForm from './CvForm';
-import CvFormGroup from './CvFormGroup';
-import CvFormItem from './CvFormItem';
+import CvForm from './CvForm.vue';
+import CvFormGroup from './CvFormGroup.vue';
+import CvFormItem from './CvFormItem.vue';
 
 export { CvForm, CvFormGroup, CvFormItem };
