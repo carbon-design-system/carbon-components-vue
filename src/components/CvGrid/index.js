@@ -3,3 +3,4 @@ import CvGrid from './CvGrid.vue';
 import CvRow from './CvRow.vue';
 
 export { CvColumn, CvGrid, CvRow };
+export default CvGrid;
