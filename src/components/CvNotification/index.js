@@ -1,5 +1,5 @@
-import CvInlineNotification from './CvInlineNotification';
-import CvToastNotification from './CvToastNotification';
+import CvInlineNotification from './CvInlineNotification.vue';
+import CvToastNotification from './CvToastNotification.vue';
 import CvNotificationConsts from './consts';
 export { CvInlineNotification, CvToastNotification, CvNotificationConsts };
 export default CvInlineNotification;
