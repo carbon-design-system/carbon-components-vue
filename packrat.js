@@ -37,11 +37,10 @@ if (process.argv.length !== 3) {
   console.error('usage: node packrat.js');
   console.error('Options');
   console.error('\t--enable   Enable pack (production) postinstall hook');
-  console.error(`\t\trename postinstall to ${devPostinstall}`);
-  console.error(`\t\trename ${packPostinstall} to postinstall`);
+  console.error(`\t\tmove postinstall to "packrat".${devPostinstall}`);
+  console.error(`\t\tcopy "packrat".${packPostinstall} to postinstall`);
   console.error('\t--disable  Disable pack (production) postinstall hook');
-  console.error(`\t\trename postinstall to ${packPostinstall}`);
-  console.error(`\t\trename ${devPostinstall} to postinstall`);
+  console.error(`\t\tmove "packrat".${devPostinstall} to postinstall`);
   process.exit(1);
 }
 
