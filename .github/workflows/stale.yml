@@ -10,18 +10,17 @@ jobs:
     steps:
       - uses: actions/stale@v9
         with:
-          #any-of-labels:
-          #  "waiting for author's response 💬,needs more info 🤷‍♀️,stale 🍞"
-          stale-issue-message: |
+          exempt-issue-labels:"hacktoberfest,good first issue"
+          stale-issue-message:|
             This issue has been marked as stale because it has required additional
             info or a response from the author for over 14 days. When you get the
             chance, please comment with the additional info requested.
             Otherwise, this issue will be closed in 14 days.
-          close-issue-message: |
+          close-issue-message:|
             This issue has been closed because it has received no activity for
             28 days.
-          stale-issue-label: 'stale 🍞'
-          stale-pr-label: 'stale 🍞'
-          days-before-stale: 14
-          days-before-close: 28
-          debug-only: false
+          stale-issue-label:'stale 🍞'
+          stale-pr-label:'stale 🍞'
+          days-before-stale:14
+          days-before-close:28
+          debug-only:false
