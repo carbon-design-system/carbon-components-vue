@@ -1,32 +1,28 @@
+/* eslint no-console: 0 */
+
 const PackageJson = require('@npmcli/package-json');
+
+const devPostinstall = 'dev_setup';
+const packPostinstall = 'prod_setup';
 
 async function prepack() {
   const pkgJson = await PackageJson.load('./');
-  pkgJson.content.scripts['dev_postinstall'] =
+  pkgJson.content['packrat'][devPostinstall] =
     pkgJson.content.scripts['postinstall'];
   pkgJson.content.scripts['postinstall'] =
-    pkgJson.content.scripts['pack_postinstall'];
-  pkgJson.content.scripts['pack_postinstall'] = 'echo removed by packrat.js';
+    pkgJson.content['packrat'][packPostinstall];
   await pkgJson.save();
-  // eslint-disable-next-line no-console
-  console.log('scripts:', {
-    postinstall: pkgJson.content.scripts['postinstall'],
-    dev_postinstall: pkgJson.content.scripts['dev_postinstall'],
-  });
+  console.log('postinstall:', pkgJson.content.scripts['postinstall']);
+  console.log(pkgJson.content['packrat']);
 }
 async function postpack() {
   const pkgJson = await PackageJson.load('./');
-  pkgJson.content.scripts['pack_postinstall'] =
-    pkgJson.content.scripts['postinstall'];
   pkgJson.content.scripts['postinstall'] =
-    pkgJson.content.scripts['dev_postinstall'];
-  delete pkgJson.content.scripts['dev_postinstall'];
+    pkgJson.content['packrat'][devPostinstall];
+  delete pkgJson.content['packrat'][devPostinstall];
   await pkgJson.save();
-  // eslint-disable-next-line no-console
-  console.log('scripts:', {
-    postinstall: pkgJson.content.scripts['postinstall'],
-    pack_postinstall: pkgJson.content.scripts['pack_postinstall'],
-  });
+  console.log('postinstall:', pkgJson.content.scripts['postinstall']);
+  console.log(pkgJson.content['packrat']);
 }
 
 if (process.argv.length !== 3) {
@@ -41,18 +37,16 @@ if (process.argv.length !== 3) {
   console.error('usage: node packrat.js');
   console.error('Options');
   console.error('\t--enable   Enable pack (production) postinstall hook');
-  console.error('\t\trename postinstall to dev_postinstall');
-  console.error('\t\trename pack_postinstall to postinstall');
+  console.error(`\t\trename postinstall to ${devPostinstall}`);
+  console.error(`\t\trename ${packPostinstall} to postinstall`);
   console.error('\t--disable  Disable pack (production) postinstall hook');
-  console.error('\t\trename postinstall to pack_postinstall');
-  console.error('\t\trename dev_postinstall to postinstall');
+  console.error(`\t\trename postinstall to ${packPostinstall}`);
+  console.error(`\t\trename ${devPostinstall} to postinstall`);
   process.exit(1);
 }
 
 if (process.argv[2] === '--disable') {
-  // eslint-disable-next-line no-console
   prepack().then(() => console.log('updated package.json'));
 } else if (process.argv[2] === '--enable') {
-  // eslint-disable-next-line no-console
   postpack().then(() => console.log('updated package.json'));
 } else console.error('unknown argument', process.argv[2]);
