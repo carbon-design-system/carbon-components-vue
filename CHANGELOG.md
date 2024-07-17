@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.18](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.17...@carbon/vue@3.0.18) (2024-07-17)
+
+### Bug Fixes
+
+- created index.js for cv-grid and related components ([#1610](https://github.com/carbon-design-system/carbon-components-vue/issues/1610)) ([ebe44ce](https://github.com/carbon-design-system/carbon-components-vue/commit/ebe44ce908bf942bc307eded481b7aa459cd7426))
+- import with vue extension ([#1606](https://github.com/carbon-design-system/carbon-components-vue/issues/1606)) ([8c48aad](https://github.com/carbon-design-system/carbon-components-vue/commit/8c48aadd650209849bb3e2ee9e5846c2c921248a))
+
+### Features
+
+- cv-file-uploader update to current File object coming from event to internalFile ([#1609](https://github.com/carbon-design-system/carbon-components-vue/issues/1609)) ([3068ec0](https://github.com/carbon-design-system/carbon-components-vue/commit/3068ec048012abbbb319d87efbb8f4b5a0fad862))
+
 ## [3.0.17](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.16...@carbon/vue@3.0.17) (2024-06-18)
 
 ### Bug Fixes
