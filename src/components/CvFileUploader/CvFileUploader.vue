@@ -204,6 +204,7 @@ function addFiles(files) {
       internalFile.state = newFile.state;
       internalFile.invalidMessageTitle = newFile.invalidMessageTitle;
       internalFile.invalidMessage = newFile.invalidMessage;
+      internalFile.file = file;
     } else {
       internalFiles.value.push(newFile);
     }
