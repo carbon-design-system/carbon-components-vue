@@ -112,6 +112,25 @@ If you just want to build an individual package you can limit the scope:
 
 To start the storybook in a local server use `yarn start`.
 
+## Test publish
+
+To test publishing to a npm registry:
+
+```shell
+cd local-dev
+docker-compose up
+# open a new terminal
+yarn build
+npm add-user --registry http://0.0.0.0:4873/
+# any username, password, & email will work
+# try: carbon, vue, & carbon-vue@example.com
+yarn test:publish
+# maybe change some things and try again
+yarn build
+yarn test:unpublish
+yarn test:publish
+```
+
 ## How to run the storybook
 
 Just follow the steps listed below and you will be able to run the storybook.

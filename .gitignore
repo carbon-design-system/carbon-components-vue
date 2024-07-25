@@ -66,5 +66,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+
+#local build artifacts
 carbon-vue-*.tgz
-local-dev
+local-dev/npm-registry/storage/*
+!local-dev/npm-registry/storage/.gitkeep
