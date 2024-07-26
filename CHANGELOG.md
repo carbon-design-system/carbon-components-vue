@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.19](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.18...@carbon/vue@3.0.19) (2024-07-26)
+
+### Bug Fixes
+
+- 1576 again ([#1617](https://github.com/carbon-design-system/carbon-components-vue/issues/1617)) ([a80a3a1](https://github.com/carbon-design-system/carbon-components-vue/commit/a80a3a1c1b4c49b8817774f0a3629175d8fdaec7))
+
 ## [3.0.18](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.17...@carbon/vue@3.0.18) (2024-07-17)
 
 ### Bug Fixes
