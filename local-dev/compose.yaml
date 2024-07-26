@@ -1,0 +1,14 @@
+services:
+  npm-registry:
+    # npm add-user --registry http://0.0.0.0:4873/
+    # carbon
+    # vue
+    # carbon-vue@example.com
+    image: docker.io/verdaccio/verdaccio:nightly-master
+    ports:
+      - '4873:4873'
+    volumes:
+      - './npm-registry/storage:/verdaccio/storage'
+volumes:
+  verdaccio:
+    driver: local

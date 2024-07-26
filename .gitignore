@@ -13,6 +13,7 @@ lib
 dist
 umd
 storybook-static
+local-pack.sh
 
 # Config files
 .npmrc
@@ -65,3 +66,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+
+#local build artifacts
+carbon-vue-*.tgz
+local-dev/npm-registry/storage/*
+!local-dev/npm-registry/storage/.gitkeep
