@@ -1,6 +1,11 @@
 <template>
   <div v-if="skeleton" :class="tagClasses"></div>
   <div v-else :class="tagClasses" role="listitem" :title="title">
+    <cv-svg
+      v-if="!skeleton && renderIcon"
+      :svg="renderIcon"
+      :class="`${carbonPrefix}--tag__custom-icon`"
+    />
     <span :class="`${carbonPrefix}--tag__label`">
       {{ label }}
     </span>
@@ -21,23 +26,19 @@ import { computed } from 'vue';
 import { carbonPrefix } from '../../global/settings';
 import { tagKinds } from './consts';
 import Close16 from '@carbon/icons-vue/es/close/16';
+import CvSvg from '../CvSvg/_CvSvg.vue';
 
 export default {
   name: 'CvTag',
-  components: { Close16 },
+  components: { CvSvg, Close16 },
   props: {
+    /** aria label to use for the x icon for the filter tag */
     clearAriaLabel: { type: String, default: 'Clear filter' },
-    /**
-     * disabled by property or if skeleton
-     */
+    /** disabled by property or if skeleton */
     disabled: Boolean,
-    /**
-     * label to be used in the CvTag component
-     */
+    /** label to be used in the CvTag component */
     label: { type: String, required: true },
-    /**
-     * kind of the CvTag
-     */
+    /** kind of the CvTag */
     kind: {
       type: String,
       default: undefined,
@@ -46,20 +47,22 @@ export default {
       },
     },
     /**
-     * If filter is true, the CvTag will include a remove button on the right side, which on a click, will emit the 'remove' event.
+     * If filter is true, the CvTag will include a remove button on the right side, which on a click, will emit the
+     * 'remove' event.
      */
     filter: {
       type: Boolean,
       default: false,
     },
-    /**
-     * skeleton used when loading
-     */
+    /** skeleton used when loading */
     skeleton: Boolean,
-    /**
-     * tag size small
-     */
+    /** tag size small */
     small: Boolean,
+    /** Optional prop to render a custom icon. \@carbon/icons-vue icon, href, svg or symbol */
+    renderIcon: {
+      type: [String, Object],
+      default: undefined,
+    },
   },
   emits: [
     /**
