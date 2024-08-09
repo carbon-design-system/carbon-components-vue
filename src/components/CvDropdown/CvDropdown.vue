@@ -121,12 +121,22 @@
           </slot>
         </ul>
       </div>
-      <div v-if="data.isInvalid" :class="`${carbonPrefix}--form-requirement`">
+      <p
+        v-if="data.isInvalid"
+        :class="`${carbonPrefix}--form-requirement`"
+        role="alert"
+        aria-atomic="true"
+      >
         <slot name="invalid-message">{{ invalidMessage }}</slot>
-      </div>
-      <div v-else-if="isWarning" :class="`${carbonPrefix}--form-requirement`">
+      </p>
+      <p
+        v-else-if="isWarning"
+        :class="`${carbonPrefix}--form-requirement`"
+        role="alert"
+        aria-atomic="true"
+      >
         <slot name="warning-message">{{ warningMessage }}</slot>
-      </div>
+      </p>
       <div
         v-else-if="data.isHelper"
         :aria-disabled="disabled || null"
