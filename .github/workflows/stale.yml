@@ -1,26 +1,27 @@
-name: stale
+name: 'Close stale issues and PRs'
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 8 * * *'
+    - cron: '0 8 * * 4,0'
 
 jobs:
-  comment:
+  stale:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/stale@v9
         with:
-          exempt-issue-labels:"hacktoberfest,good first issue"
-          stale-issue-message:|
+          exempt-issue-labels: 'hacktoberfest,good first issue'
+          exempt-all-milestones: true
+          stale-issue-message: |
             This issue has been marked as stale because it has required additional
             info or a response from the author for over 14 days. When you get the
             chance, please comment with the additional info requested.
-            Otherwise, this issue will be closed in 14 days.
-          close-issue-message:|
+            Otherwise, this issue will be closed in 28 days.
+          close-issue-message: |
             This issue has been closed because it has received no activity for
             28 days.
-          stale-issue-label:'stale 🍞'
-          stale-pr-label:'stale 🍞'
-          days-before-stale:14
-          days-before-close:28
-          debug-only:false
+          stale-issue-label: 'stale 🍞'
+          stale-pr-label: 'stale 🍞'
+          days-before-stale: 14
+          days-before-close: 28
+          debug-only: false
