@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.20](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.19...@carbon/vue@3.0.20) (2024-08-22)
+
+### Bug Fixes
+
+- dropdown menu fix for accessability announcement ([#1619](https://github.com/carbon-design-system/carbon-components-vue/issues/1619)) ([31cd6ee](https://github.com/carbon-design-system/carbon-components-vue/commit/31cd6ee3c98d8d086c43ea5bcf665fffd8d4e49f))
+
+### Features
+
+- add support for tag icons ([#1618](https://github.com/carbon-design-system/carbon-components-vue/issues/1618)) ([e2cbd28](https://github.com/carbon-design-system/carbon-components-vue/commit/e2cbd2855fcc381d09919c78b6e0661d83430f09))
+
 ## [3.0.19](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.18...@carbon/vue@3.0.19) (2024-07-26)
 
 ### Bug Fixes
