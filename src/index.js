@@ -43,6 +43,8 @@ export default {
     }
   },
 };
+
+// AUTO-GENERATED EXPORTS - DO NOT EDIT BELOW
 export { default as CvAccordion } from './components/CvAccordion/CvAccordion.vue';
 export { default as CvAccordionItem } from './components/CvAccordion/CvAccordionItem.vue';
 export { default as CvAccordionSkeleton } from './components/CvAccordion/CvAccordionSkeleton.vue';

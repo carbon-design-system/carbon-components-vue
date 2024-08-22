@@ -11,6 +11,7 @@ const NEW_LINE_ENTITY = '\n';
 const COMPONENTS_PATH = path.join(__dirname, './src/components/');
 const FILE_ENCODING = 'utf8';
 const INDEX_FILE_PATH = path.join(__dirname, './src/index.js');
+const INDEX_EXPORT_MARKER = '// AUTO-GENERATED EXPORTS - DO NOT EDIT BELOW';
 
 /**
  * regex from index.js extended by: not starting from underscore
@@ -29,11 +30,21 @@ let componentsExports = [];
 function addNamedComponentExports(dir) {
   readFilesFromPath(dir);
 
-  const indexFileContent = fs.readFileSync(INDEX_FILE_PATH, FILE_ENCODING);
+  let indexFileContent = fs.readFileSync(INDEX_FILE_PATH, FILE_ENCODING);
   const exportsContent = componentsExports.join(NEW_LINE_ENTITY);
-  const fileContentToSave = indexFileContent + exportsContent + NEW_LINE_ENTITY;
 
   if (exportsWereAddedToIndex(indexFileContent, exportsContent)) return;
+
+  // remove existing exports
+  const automaticExports = indexFileContent.indexOf(INDEX_EXPORT_MARKER);
+  if (automaticExports > -1) {
+    indexFileContent = indexFileContent.substring(
+      0,
+      automaticExports + INDEX_EXPORT_MARKER.length + NEW_LINE_ENTITY.length
+    );
+  }
+
+  const fileContentToSave = indexFileContent + exportsContent + NEW_LINE_ENTITY;
 
   fs.writeFileSync(INDEX_FILE_PATH, fileContentToSave, FILE_ENCODING);
 }
