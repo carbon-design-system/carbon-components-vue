@@ -36,8 +36,10 @@ function sortTestData(opts) {
 }
 // duplicate the test data
 const originalTestData = ref(JSON.parse(JSON.stringify(testData.value)))
+const searchOpts = ref("")
 function searchTestData(opts) {
   action('search')(opts)
+  searchOpts.value = opts
   if (!opts) testData.value = JSON.parse(JSON.stringify(originalTestData.value))
   else testData.value = originalTestData.value.filter(data => data.name.indexOf(opts) > -1)
   return sortTestData(sortOpts.value)
@@ -87,7 +89,8 @@ setup() {
     skeletonTitle: args.title,
     skeletonHelper: args.helperText,
     testData,
-    originalTestData
+    originalTestData,
+    searchOpts
     };
 },
 // And then the `args` are bound to your component with `v-bind="args"`
@@ -102,6 +105,7 @@ const defaultTemplate = `
   @overflow-menu-click="onOverflowMenuClick"
   @row-expanded="onRowExpanded"
   @pagination="onPagination"
+  :initialSearchValue="searchOpts"
   >
   <template v-if="useBatchActions" #batch-actions>
     <cv-button :icon="trashIcon" @click="onDelete">Delete</cv-button>
