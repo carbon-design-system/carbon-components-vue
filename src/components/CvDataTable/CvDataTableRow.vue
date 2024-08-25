@@ -31,9 +31,9 @@
   <cv-data-table-row-inner
     v-else
     v-bind="$attrs"
-    :value="value"
     :id="cvId"
     ref="row"
+    :value="value"
     class="cv-data-table-row"
     :row-id="cvId"
     @checked-change="onCheckedChange"
