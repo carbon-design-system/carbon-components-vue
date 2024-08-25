@@ -8,6 +8,7 @@
       ref="row"
       :row-id="cvId"
       v-bind="$attrs"
+      :value="value"
       :expanding-row="dataExpandable"
       :expanded="dataExpanded"
       @expanded-change="onExpandedChange"
@@ -30,6 +31,7 @@
   <cv-data-table-row-inner
     v-else
     v-bind="$attrs"
+    :value="value"
     :id="cvId"
     ref="row"
     class="cv-data-table-row"
@@ -59,6 +61,9 @@ import store from './cvDataTableStore';
 import { getBus } from '../../global/component-utils/event-bus';
 
 const props = defineProps({
+  /** The value associated with the input (required for tables with batch actions) */
+  value: { type: String, default: undefined },
+  /** This row will be initially expanded */
   expanded: Boolean,
   ...propsCvId,
 });
@@ -142,6 +147,6 @@ function onCheckedChange(val) {
     id: cvId.value,
     isChecked: val,
   });
-  bus?.emit('cv:check-change', { value: attrs.value, checked: val });
+  bus?.emit('cv:check-change', { value: props.value, checked: val });
 }
 </script>
