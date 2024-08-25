@@ -21,8 +21,10 @@ const testData = ref([
   { index:"6", name:"Fortran", year:1957, oo:"No", purpose:"Engineering applications", standard:"ANSI", desc: "Fortran was originally developed by IBM in the 1950s for scientific and engineering applications, and subsequently came to dominate scientific computing."},
   { index:"7", name:"Go", year:2009, oo:"Maybe", purpose:"Networked applications", standard:"Go Spec", desc: "Go's designers were primarily motivated by their shared dislike of C++."},
 ]);
+const sortOpts = ref({index: "0", order: "none", name: "name"})
 function sortTestData(opts) {
   action('sort')(opts)
+  sortOpts.value = opts
   if (opts.order === 'none')
     return testData.value.sort((a, b) => a.index.localeCompare(b.index, 'en', { sensitivity: 'base' }));
   let direction = 1
@@ -31,6 +33,14 @@ function sortTestData(opts) {
     return testData.value.sort((a, b) => direction * a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
   else if (opts.name === 'year')
     return testData.value.sort((a, b) => direction * (a.year - b.year));
+}
+// duplicate the test data
+const originalTestData = ref(JSON.parse(JSON.stringify(testData.value)))
+function searchTestData(opts) {
+  action('search')(opts)
+  if (!opts) testData.value = JSON.parse(JSON.stringify(originalTestData.value))
+  else testData.value = originalTestData.value.filter(data => data.name.indexOf(opts) > -1)
+  return sortTestData(sortOpts.value)
 }
 
 <Meta title={`${sbCompPrefix}/CvDataTable`} component={CvDataTable} />
@@ -59,7 +69,7 @@ setup() {
       template: undefined},
     trashIcon: TrashCanIcon,
     onSort: sortTestData,
-    onSearch: action('search'),
+    onSearch: searchTestData,
     onRowSelectChange: action('row-select-change'),
     onRowSelectChanges: action('row-select-changes'),
     onOverflowMenuClick: action('overflow-menu-click'),
@@ -77,6 +87,7 @@ setup() {
     skeletonTitle: args.title,
     skeletonHelper: args.helperText,
     testData,
+    originalTestData
     };
 },
 // And then the `args` are bound to your component with `v-bind="args"`
@@ -135,6 +146,7 @@ const expandingRowsTemplate = defaultTemplate.replace(
   "<!-- Add optional expanding data here -->",
   `<template #expandedContent>{{row.desc}}</template>`)
   .replace('@search="onSearch"', '')
+  .replace('testData', 'originalTestData')
 const skeletonTemplate = `
 <cv-data-table-skeleton
   :columns="skeletonCols"
@@ -160,7 +172,10 @@ const skeletonTemplate = `
 - Sorting, filtering and pagination are the responsibility of the component user. This component raises events to facilitate this.
   For example the test data is sorted like this but this is very specific to this data. Users will need to provide their own sort and filtering.
   ```javascript
+  // sort example
+  const sortOpts = ref({index: "0", order: "none", name: "name"})
   function sortTestData(opts) {
+    sortOpts.value = opts // remember this so it can be used in filtering
     if (opts.order === 'none')
       return testData.value.sort((a, b) => a.index.localeCompare(b.index, 'en', { sensitivity: 'base' }));
     let direction = 1
@@ -169,6 +184,12 @@ const skeletonTemplate = `
       return testData.value.sort((a, b) => direction * a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
     else if (opts.name === 'year')
       return testData.value.sort((a, b) => direction * (a.year - b.year));
+  }
+  // filter example
+  function searchTestData(opts) {
+    if (!opts) testData.value = allData.value
+    else testData.value = allData.value.filter(data => data.name.indexOf(opts) > -1)
+    return sortTestData(sortOpts.value)
   }
   ```
 - The search bar appears only if the search event is listened for.

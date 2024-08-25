@@ -541,7 +541,8 @@ watch(
   () => store.state[uid.value],
   () => {
     const rows = store.rows(uid);
-    headingChecked.value = dataRowsSelected.value.length === rows.length;
+    headingChecked.value =
+      rows.length > 0 && dataRowsSelected.value.length === rows.length;
   },
   { deep: true }
 );
