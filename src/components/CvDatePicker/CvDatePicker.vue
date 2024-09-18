@@ -179,7 +179,7 @@ const props = defineProps({
 const cvId = useCvId(props, true, 'date-picker-');
 const isLight = useIsLight(props);
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue', 'dateChange']);
 
 const getKind = computed({
   get() {
@@ -332,6 +332,7 @@ const handleDatePick = (selectedDates, dateStr, instance) => {
     });
 
     emit('update:modelValue', temp);
+    emit('dateChange', selectedDates);
   } else if (isRange.value && selectedDates[0] && selectedDates[1]) {
     const startDate = dateToString(selectedDates[0]);
     const endDate = dateToString(selectedDates[1]);
@@ -345,6 +346,7 @@ const handleDatePick = (selectedDates, dateStr, instance) => {
       startDate: startDate,
       endDate: endDate,
     });
+    emit('dateChange', selectedDates);
   }
 };
 
