@@ -21,8 +21,10 @@ const testData = ref([
   { index:"6", name:"Fortran", year:1957, oo:"No", purpose:"Engineering applications", standard:"ANSI", desc: "Fortran was originally developed by IBM in the 1950s for scientific and engineering applications, and subsequently came to dominate scientific computing."},
   { index:"7", name:"Go", year:2009, oo:"Maybe", purpose:"Networked applications", standard:"Go Spec", desc: "Go's designers were primarily motivated by their shared dislike of C++."},
 ]);
+const sortOpts = ref({index: "0", order: "none", name: "name"})
 function sortTestData(opts) {
   action('sort')(opts)
+  sortOpts.value = opts
   if (opts.order === 'none')
     return testData.value.sort((a, b) => a.index.localeCompare(b.index, 'en', { sensitivity: 'base' }));
   let direction = 1
@@ -31,6 +33,16 @@ function sortTestData(opts) {
     return testData.value.sort((a, b) => direction * a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
   else if (opts.name === 'year')
     return testData.value.sort((a, b) => direction * (a.year - b.year));
+}
+// duplicate the test data
+const originalTestData = ref(JSON.parse(JSON.stringify(testData.value)))
+const searchOpts = ref("")
+function searchTestData(opts) {
+  action('search')(opts)
+  searchOpts.value = opts
+  if (!opts) testData.value = JSON.parse(JSON.stringify(originalTestData.value))
+  else testData.value = originalTestData.value.filter(data => data.name.indexOf(opts) > -1)
+  return sortTestData(sortOpts.value)
 }
 
 <Meta title={`${sbCompPrefix}/CvDataTable`} component={CvDataTable} />
@@ -59,7 +71,7 @@ setup() {
       template: undefined},
     trashIcon: TrashCanIcon,
     onSort: sortTestData,
-    onSearch: action('search'),
+    onSearch: searchTestData,
     onRowSelectChange: action('row-select-change'),
     onRowSelectChanges: action('row-select-changes'),
     onOverflowMenuClick: action('overflow-menu-click'),
@@ -77,6 +89,8 @@ setup() {
     skeletonTitle: args.title,
     skeletonHelper: args.helperText,
     testData,
+    originalTestData,
+    searchOpts
     };
 },
 // And then the `args` are bound to your component with `v-bind="args"`
@@ -91,6 +105,7 @@ const defaultTemplate = `
   @overflow-menu-click="onOverflowMenuClick"
   @row-expanded="onRowExpanded"
   @pagination="onPagination"
+  :initialSearchValue="searchOpts"
   >
   <template v-if="useBatchActions" #batch-actions>
     <cv-button :icon="trashIcon" @click="onDelete">Delete</cv-button>
@@ -135,6 +150,7 @@ const expandingRowsTemplate = defaultTemplate.replace(
   "<!-- Add optional expanding data here -->",
   `<template #expandedContent>{{row.desc}}</template>`)
   .replace('@search="onSearch"', '')
+  .replace('testData', 'originalTestData')
 const skeletonTemplate = `
 <cv-data-table-skeleton
   :columns="skeletonCols"
@@ -160,7 +176,10 @@ const skeletonTemplate = `
 - Sorting, filtering and pagination are the responsibility of the component user. This component raises events to facilitate this.
   For example the test data is sorted like this but this is very specific to this data. Users will need to provide their own sort and filtering.
   ```javascript
+  // sort example
+  const sortOpts = ref({index: "0", order: "none", name: "name"})
   function sortTestData(opts) {
+    sortOpts.value = opts // remember this so it can be used in filtering
     if (opts.order === 'none')
       return testData.value.sort((a, b) => a.index.localeCompare(b.index, 'en', { sensitivity: 'base' }));
     let direction = 1
@@ -170,6 +189,12 @@ const skeletonTemplate = `
     else if (opts.name === 'year')
       return testData.value.sort((a, b) => direction * (a.year - b.year));
   }
+  // filter example
+  function searchTestData(opts) {
+    if (!opts) testData.value = allData.value
+    else testData.value = allData.value.filter(data => data.name.indexOf(opts) > -1)
+    return sortTestData(sortOpts.value)
+  }
   ```
 - The search bar appears only if the search event is listened for.
 
@@ -178,6 +203,7 @@ const skeletonTemplate = `
 - aria-label-expand-row: Aria label for expanding row expansion button. default: 'Expand current row'
 - aria-label-collapse-row: Aria label for expanding row collapse button. default: 'Collapse current row'
 - expanded: initial state of the expanded row
+- value: this is the value assign to the checkbox for tables with batch actions.
 
 **Migration notes:**
 
@@ -190,9 +216,6 @@ completion for it. See [discussion](https://github.com/vuejs/core/issues/3432) f
 `search` emit is still emitted it is just not defined directly on the component.
 - The React does not seem to have an "autoWidth" property. It is still supported here but likely the better choice is `staticWidth`.
 - Row sizes in the React component are 'xs', 'sm', 'md', 'lg', & 'xl'. The rowSizes from Vue2 are still supported.
-- The Vue 3 implementation uses an internal store to manage the state of the table. You can see updates
-to the state by setting the debug variable in the local storage. `localStorage.debug="cv:data-table-store"`
-and then reloading the page.
 - If you were using something like `this.$refs.tableEditPath.batchActive = true` to force batch actions to show even
 when no items were select, please now use the new property `stickyBatchActive`.
 
