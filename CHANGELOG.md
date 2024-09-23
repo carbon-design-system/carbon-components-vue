@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.21](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.20...@carbon/vue@3.0.21) (2024-09-23)
+
+### Bug Fixes
+
+- do not show batch actions if no rows ([fa32398](https://github.com/carbon-design-system/carbon-components-vue/commit/fa3239810895ba10c4f5f5c9956289a3cb6d6539))
+- emit date change event to match React ([ee173f4](https://github.com/carbon-design-system/carbon-components-vue/commit/ee173f4c1418f28b72dfe5dea0fcb88900a926ac))
+- lint attribute order ([253aea8](https://github.com/carbon-design-system/carbon-components-vue/commit/253aea8beefca659c32d3f09fc785902b27fdb3f))
+- make clear that checkbox value is required in checkboxes and in batch actions ([7909f7e](https://github.com/carbon-design-system/carbon-components-vue/commit/7909f7eb5b269746d3afae13a5150c5e29b818dc))
+
 ## [3.0.20](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.19...@carbon/vue@3.0.20) (2024-08-22)
 
 ### Bug Fixes
