@@ -1,13 +1,9 @@
 import { CvButtonSet, CvButton } from './';
 
-import {
-  sbCompPrefix,
-  storyParametersObject,
-} from '../../global/storybook-utils';
-import { sbBtnPrefix } from './sbBtnPrefix';
+import { storyParametersObject } from '../../global/storybook-utils';
 
 export default {
-  title: `${sbCompPrefix}/${sbBtnPrefix}/CvButtonSet`,
+  title: 'Component/CvButtonSet',
   component: CvButtonSet,
 };
 

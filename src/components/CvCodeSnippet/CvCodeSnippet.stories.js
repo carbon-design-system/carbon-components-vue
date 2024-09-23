@@ -1,6 +1,5 @@
 import { carbonPrefix } from '../../global/settings';
 import {
-  sbCompPrefix,
   splitSlotArgs,
   storyParametersObject,
 } from '../../global/storybook-utils';
@@ -12,7 +11,7 @@ import CvCodeSnippetConsts from './consts';
 import './CvCodeSnippet.stories.scss';
 
 export default {
-  title: `${sbCompPrefix}/CvCodeSnippet`,
+  title: 'Component/CvCodeSnippet',
   component: CvCodeSnippet,
   argTypes: {
     default: { control: { type: 'text' } },

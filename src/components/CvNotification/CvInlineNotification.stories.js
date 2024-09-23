@@ -1,11 +1,11 @@
 import { action } from '@storybook/addon-actions';
-import { sbCompPrefix, storySourceCode } from '../../global/storybook-utils';
+import { storySourceCode } from '../../global/storybook-utils';
 
 import { CvInlineNotification, CvNotificationConsts } from '.';
 import DocumentationTemplate from './CvInlineNotificationTemplate.mdx';
 
 export default {
-  title: `${sbCompPrefix}/CvInlineNotification`,
+  title: 'Component/CvInlineNotification',
   component: CvInlineNotification,
   argTypes: {
     kind: {

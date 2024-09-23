@@ -1,16 +1,14 @@
 import { CvButtonSkeleton } from '.';
 import { buttonSizes } from './consts.js';
 import {
-  sbCompPrefix,
   storybookControlsFromProps,
   storyParametersObject,
 } from '../../global/storybook-utils';
-import { sbBtnPrefix } from './sbBtnPrefix';
 
 import { props as commonCvButtonProps } from './CvButtonCommon';
 
 export default {
-  title: `${sbCompPrefix}/${sbBtnPrefix}/CvButtonSkeleton`,
+  title: 'Component/CvButtonSkeleton',
   component: CvButtonSkeleton,
   argTypes: {
     ...storybookControlsFromProps({ size: commonCvButtonProps.size }),

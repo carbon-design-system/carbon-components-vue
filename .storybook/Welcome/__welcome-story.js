@@ -1,23 +1,14 @@
-import { storiesOf } from '@storybook/vue3';
 import SvWelcome from './sv-welcome.vue';
 
-const stories = storiesOf('Carbon', module);
-
-stories.add(
-  'Welcome',
-  () => {
-    // ----------------------------------------------------------------
-    const templateViewString = `<sv-welcome></sv-welcome>`;
-
-    return {
-      components: { SvWelcome },
-      template: templateViewString,
-    };
+export default {
+  title: 'Welcome',
+  component: SvWelcome,
+  options: {
+    isToolshown: false,
+    showPanel: false,
   },
-  {
-    options: {
-      isToolshown: false,
-      showPanel: false,
-    },
-  }
-);
+};
+
+export const Vue3Carbon10 = {
+  args: {},
+};

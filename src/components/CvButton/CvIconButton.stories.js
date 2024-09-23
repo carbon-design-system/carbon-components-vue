@@ -2,12 +2,10 @@ import { action } from '@storybook/addon-actions';
 import { CvIconButton } from './';
 import { buttonKinds, buttonSizes } from './consts.js';
 import {
-  sbCompPrefix,
   storybookControlsFromProps,
   storyParametersObject,
 } from '../../global/storybook-utils';
 import { TipAlignments } from '../CvTooltip/consts.js';
-import { sbBtnPrefix } from './sbBtnPrefix';
 
 import { props as commonCvButtonProps } from './CvButtonCommon';
 import {
@@ -29,7 +27,7 @@ const icons = {
 };
 
 export default {
-  title: `${sbCompPrefix}/${sbBtnPrefix}/CvIconButton`,
+  title: 'Component/CvIconButton',
   component: CvIconButton,
   argTypes: {
     ...storybookControlsFromProps(commonCvButtonProps),

@@ -1,13 +1,9 @@
 import { ref } from 'vue';
-import {
-  sbCompPrefix,
-  storyParametersObject,
-} from '../../global/storybook-utils';
-import { StorybookGroupConst } from './StorybookGroupConst';
+import { storyParametersObject } from '../../global/storybook-utils';
 import CvNumberInput from './CvNumberInput.vue';
 
 export default {
-  title: `${sbCompPrefix}/${StorybookGroupConst}/CvNumberInput`,
+  title: 'Component/CvNumberInput',
   component: CvNumberInput,
   argTypes: {
     // attrs

@@ -1,7 +1,4 @@
-import {
-  sbCompPrefix,
-  storyParametersObject,
-} from '../../global/storybook-utils';
+import { storyParametersObject } from '../../global/storybook-utils';
 
 import { CvComboBox } from '.';
 import { action } from '@storybook/addon-actions';
@@ -41,7 +38,7 @@ const initArgs = {
 };
 
 export default {
-  title: `${sbCompPrefix}/CvComboBox`,
+  title: 'Component/CvComboBox',
   component: CvComboBox,
   parameters: {
     a11y: {

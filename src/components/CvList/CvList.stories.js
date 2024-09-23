@@ -1,12 +1,9 @@
 import { CvList, CvListItem } from '.';
 
-import {
-  sbCompPrefix,
-  storyParametersObject,
-} from '../../global/storybook-utils';
+import { storyParametersObject } from '../../global/storybook-utils';
 
 export default {
-  title: `${sbCompPrefix}/CvList`,
+  title: 'Component/CvList',
   component: CvList,
   argTypes: {
     ordered: {

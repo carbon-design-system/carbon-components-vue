@@ -1,5 +1,4 @@
 import {
-  sbCompPrefix,
   storybookControlsFromProps,
   storyParametersObject,
 } from '../../global/storybook-utils';
@@ -9,7 +8,7 @@ import { Download16 } from '@carbon/icons-vue';
 import { props as propsCvLink, linkSizes } from '../../use/cvLink';
 
 export default {
-  title: `${sbCompPrefix}/CvLink`,
+  title: 'Component/CvLink',
   component: CvLink,
   argTypes: {
     ...storybookControlsFromProps(propsCvLink),

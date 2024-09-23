@@ -1,7 +1,4 @@
-import {
-  sbCompPrefix,
-  storyParametersObject,
-} from '../../global/storybook-utils';
+import { storyParametersObject } from '../../global/storybook-utils';
 
 import { CvDatePicker } from '.';
 import { CvDatePickerSkeleton } from '.';
@@ -20,7 +17,7 @@ tomorrow.setDate(now.getDate() + 1);
 nextWeek.setDate(now.getDate() + 7);
 
 export default {
-  title: `${sbCompPrefix}/CvDatePicker`,
+  title: 'Component/CvDatePicker',
   component: CvDatePicker,
   parameters: {
     a11y: {

@@ -1,0 +1,18 @@
+# recipe from https://github.com/storybookjs/test-runner
+# https://github.com/storybookjs/test-runner?tab=readme-ov-file#2-running-against-locally-built-storybooks-in-ci
+# "Running against locally built Storybooks in CI"
+name: Storybook Tests
+on: push
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+      - name: Install dependencies
+        run: yarn
+      - name: Run Storybook tests
+        run: yarn test-storybook:ci
