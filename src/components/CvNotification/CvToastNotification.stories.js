@@ -1,10 +1,10 @@
 import { action } from '@storybook/addon-actions';
 import DocumentationTemplate from './CvToastNotificationTemplate.mdx';
-import { sbCompPrefix, storySourceCode } from '../../global/storybook-utils';
+import { storySourceCode } from '../../global/storybook-utils';
 import { CvToastNotification, CvNotificationConsts } from '.';
 
 export default {
-  title: `${sbCompPrefix}/CvToastNotification`,
+  title: 'Component/CvToastNotification',
   component: CvToastNotification,
   argTypes: {
     kind: {

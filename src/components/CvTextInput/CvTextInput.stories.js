@@ -1,13 +1,10 @@
-import {
-  sbCompPrefix,
-  storyParametersObject,
-} from '../../global/storybook-utils';
+import { storyParametersObject } from '../../global/storybook-utils';
 
 import { CvTextInput, CvTextInputSkeleton } from '.';
 import { ref } from 'vue';
 
 export default {
-  title: `${sbCompPrefix}/CvTextInput`,
+  title: 'Component/CvTextInput',
   component: CvTextInput,
   argTypes: {
     // attrs

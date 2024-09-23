@@ -1,14 +1,10 @@
 import { ref } from 'vue';
 import { action } from '@storybook/addon-actions';
-import {
-  sbCompPrefix,
-  storyParametersObject,
-} from '../../global/storybook-utils';
-import { sbSliderPrefix } from './sbSliderPrefix';
+import { storyParametersObject } from '../../global/storybook-utils';
 import { CvSlider } from '.';
 
 export default {
-  title: `${sbCompPrefix}/${sbSliderPrefix}/CvSlider`,
+  title: 'Component/CvSlider',
   component: CvSlider,
   argTypes: {
     disabled: {

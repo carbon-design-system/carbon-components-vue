@@ -1,5 +1,4 @@
 import {
-  sbCompPrefix,
   storybookControlsFromProps,
   storyParametersObject,
 } from '../../global/storybook-utils';
@@ -10,7 +9,7 @@ import { props as propsCvCheck } from '../../use/cvCheck';
 import { ref } from 'vue';
 
 export default {
-  title: `${sbCompPrefix}/CvCheckbox`,
+  title: 'Component/CvCheckbox',
   component: CvCheckbox,
   argTypes: {
     ...storybookControlsFromProps(propsCvCheck),

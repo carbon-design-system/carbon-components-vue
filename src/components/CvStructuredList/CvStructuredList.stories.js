@@ -1,9 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { ref } from 'vue';
-import {
-  sbCompPrefix,
-  storyParametersObject,
-} from '../../global/storybook-utils';
+import { storyParametersObject } from '../../global/storybook-utils';
 import {
   CvStructuredList,
   CvStructuredListHeading,
@@ -12,7 +9,7 @@ import {
 } from '.';
 
 export default {
-  title: `${sbCompPrefix}/CvStructuredList`,
+  title: 'Component/CvStructuredList',
   component: CvStructuredList,
   argTypes: {
     selectable: {

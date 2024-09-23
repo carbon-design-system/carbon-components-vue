@@ -1,12 +1,8 @@
-import {
-  sbCompPrefix,
-  storyParametersObject,
-} from '../../global/storybook-utils';
-import { sbSliderPrefix } from './sbSliderPrefix';
+import { storyParametersObject } from '../../global/storybook-utils';
 import { CvSliderSkeleton } from '.';
 
 export default {
-  title: `${sbCompPrefix}/${sbSliderPrefix}/CvSliderSkeleton`,
+  title: 'Component/CvSliderSkeleton',
   component: CvSliderSkeleton,
 };
 

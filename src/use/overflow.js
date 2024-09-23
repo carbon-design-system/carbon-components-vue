@@ -13,8 +13,8 @@ export const useElementHasOverflow = element => {
   const scrollWidth = ref(0);
 
   const updateStaticValues = () => {
-    clientWidth.value = element.value.clientWidth;
-    scrollWidth.value = element.value.scrollWidth;
+    clientWidth.value = element.value?.clientWidth;
+    scrollWidth.value = element.value?.scrollWidth;
   };
   const debouncedUpdateStaticValues = useDebounceFn(
     updateStaticValues,

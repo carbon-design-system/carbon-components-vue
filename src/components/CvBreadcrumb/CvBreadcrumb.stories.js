@@ -5,13 +5,10 @@ import {
   CvBreadcrumbSkeletonItem,
 } from '.';
 
-import {
-  sbCompPrefix,
-  storyParametersObject,
-} from '../../global/storybook-utils';
+import { storyParametersObject } from '../../global/storybook-utils';
 
 export default {
-  title: `${sbCompPrefix}/CvBreadcrumb`,
+  title: 'Component/CvBreadcrumb',
   component: CvBreadcrumb,
   argTypes: {
     ariaLabel: {

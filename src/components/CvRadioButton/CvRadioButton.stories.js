@@ -1,13 +1,10 @@
 import { action } from '@storybook/addon-actions';
 import { CvRadioButton, CvRadioGroup } from '.';
-import {
-  sbCompPrefix,
-  storyParametersObject,
-} from '../../global/storybook-utils';
+import { storyParametersObject } from '../../global/storybook-utils';
 import { ref } from 'vue';
 
 export default {
-  title: `${sbCompPrefix}/CvRadioButton`,
+  title: 'Component/CvRadioButton',
   component: CvRadioButton,
   argTypes: {
     checked: {

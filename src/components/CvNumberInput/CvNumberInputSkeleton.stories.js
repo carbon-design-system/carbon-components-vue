@@ -1,12 +1,8 @@
-import {
-  sbCompPrefix,
-  storyParametersObject,
-} from '../../global/storybook-utils';
-import { StorybookGroupConst } from './StorybookGroupConst';
+import { storyParametersObject } from '../../global/storybook-utils';
 import CvNumberInputSkeleton from './CvNumberInputSkeleton.vue';
 
 export default {
-  title: `${sbCompPrefix}/${StorybookGroupConst}/CvNumberInputSkeleton`,
+  title: 'Component/CvNumberInputSkeleton',
   component: CvNumberInputSkeleton,
 };
 

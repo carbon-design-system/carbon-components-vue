@@ -1,11 +1,8 @@
-import {
-  sbCompPrefix,
-  storyParametersObject,
-} from '../../global/storybook-utils';
+import { storyParametersObject } from '../../global/storybook-utils';
 import CvTagSkeleton from './CvTagSkeleton.vue';
 
 export default {
-  title: `${sbCompPrefix}/CvTagSkeleton`,
+  title: 'Component/CvTagSkeleton',
   component: CvTagSkeleton,
 };
 
