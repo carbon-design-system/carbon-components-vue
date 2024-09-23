@@ -44,7 +44,7 @@ export default {
 
 const template = `
 <div>
-  <cv-date-picker v-bind="args" @change="onChange" :value="now">
+  <cv-date-picker v-bind="args" :value="now" @change="onChange">
   </cv-date-picker>
 </div>
 `;
@@ -64,7 +64,12 @@ export const Default = Template.bind({});
 Default.args = initArgs;
 Default.parameters = {
   controls: {
-    exclude: ['update:modelValue', 'invalid-message', 'modelValue'],
+    exclude: [
+      'update:modelValue',
+      'invalid-message',
+      'modelValue',
+      'dateChange',
+    ],
   },
 };
 Default.parameters = storyParametersObject(
@@ -78,14 +83,13 @@ Default.parameters = storyParametersObject(
 const modelValue = ref(now);
 const templateVModel = `
 <div>
-  <cv-date-picker v-bind="args" @change="onChange" v-model="modelValue">
+  <cv-date-picker v-bind="args" v-model="modelValue">
   </cv-date-picker>
 </div>
 <div style="margin-top:2rem; background-color: #888888;  padding:1rem">
   <div style="font-size: 150%;">Sample interaction</div>
   <label for="date-model" style='margin-right: 0.5rem'>V-model:</label>
-  <input id="date-model" type="text" :value="modelValue.startDate || modelValue" @change="ev => { if (args.kind === 'range') { modelValue.startDate = ev.currentTarget.value } else { modelValue = ev.currentTarget.value } }"/>
-  <input v-if="args.kind === 'range'" id="date-model" type="text" :value="modelValue.endDate" @change="ev => modelValue.endDate = ev.currentTarget.value"/>
+  <input id="date-model" type="text" :value="modelValue" @change="ev => { modelValue = ev.currentTarget.value }"/>
 </div>
 `;
 
@@ -96,7 +100,6 @@ const TemplateVModel = args => {
       args,
       modelValue,
       now,
-      onChange: action('change'),
     }),
     template: templateVModel,
   };
@@ -106,7 +109,14 @@ export const vModel = TemplateVModel.bind({});
 vModel.args = initArgs;
 vModel.parameters = {
   controls: {
-    exclude: ['update:modelValue', 'invalid-message', 'modelValue'],
+    exclude: [
+      'update:modelValue',
+      'invalid-message',
+      'modelValue',
+      'kind',
+      'value',
+      'dateChange',
+    ],
   },
 };
 vModel.parameters = storyParametersObject(
@@ -115,11 +125,58 @@ vModel.parameters = storyParametersObject(
   vModel.args
 );
 
+/* range v-model */
+const rangeValue = ref({ startDate: now, endDate: now });
+const templateRangeVModel = `
+<div>
+  <cv-date-picker v-bind="args" kind="range" v-model="rangeValue">
+  </cv-date-picker>
+</div>
+<div style="margin-top:2rem; background-color: #888888;  padding:1rem">
+  <div style="font-size: 150%;">Sample range interaction</div>
+  <label for="date-model-1" style='margin-right: 0.5rem'>V-model:</label>
+  <input id="date-model-1" type="text" :value="rangeValue.startDate" @change="ev => { rangeValue.startDate = ev.currentTarget.value }"/>
+  <input id="date-model-2" type="text" :value="rangeValue.endDate" @change="ev => rangeValue.endDate = ev.currentTarget.value"/>
+</div>
+`;
+
+const TemplateRangeVModel = args => {
+  return {
+    components: { CvDatePicker },
+    setup: () => ({
+      args,
+      rangeValue,
+      now,
+    }),
+    template: templateRangeVModel,
+  };
+};
+
+export const rangeVmodel = TemplateRangeVModel.bind({});
+rangeVmodel.args = initArgs;
+rangeVmodel.parameters = {
+  controls: {
+    exclude: [
+      'update:modelValue',
+      'invalid-message',
+      'modelValue',
+      'kind',
+      'value',
+      'dateChange',
+    ],
+  },
+};
+rangeVmodel.parameters = storyParametersObject(
+  rangeVmodel.parameters,
+  templateRangeVModel,
+  rangeVmodel.args
+);
+
 /* INVALID MESSAGE STORY */
 
 const templateInvalidMessage = `
 <div>
-  <cv-date-picker v-bind="args" @change="onChange" :value="now">
+  <cv-date-picker v-bind="args" :value="now" @change="onChange">
   </cv-date-picker>
 </div>
 `;
@@ -153,7 +210,7 @@ InvalidMessage.parameters = storyParametersObject(
 
 const templateInvalidMessageSlot = `
 <div>
-  <cv-date-picker v-bind="args" @change="onChange" :value="now">
+  <cv-date-picker v-bind="args" :value="now" @change="onChange">
     <template #invalid-message>Invalid date slot</template>
   </cv-date-picker>
 </div>
@@ -194,7 +251,7 @@ InvalidMessageSlot.parameters = storyParametersObject(
 const singleValue = ref(now);
 const templateSingleUsingDate = `
 <div>
-  <cv-date-picker v-bind="args" @change="onChange" kind="single" v-model="singleValue">
+  <cv-date-picker v-bind="args" kind="single" v-model="singleValue" @dateChange="onDateChange">
   </cv-date-picker>
 </div>`;
 const templateSingleUsingDateVModel = `
@@ -212,7 +269,7 @@ const TemplateSingleUsingDate = args => {
       args,
       now,
       singleValue,
-      onChange: action('change'),
+      onDateChange: action('dateChange'),
     }),
     template: templateSingleUsingDate + templateSingleUsingDateVModel,
   };
@@ -258,7 +315,7 @@ function changeMaxDate(inc) {
 }
 const templateSingleUsingMinMax = `
 <div>
-  <cv-date-picker v-bind='args' @change="onChange" kind="single" :value="now" :cal-options="calOptions">
+  <cv-date-picker v-bind='args' kind="single" :value="now" :cal-options="calOptions" @dateChange="onDateChange">
   </cv-date-picker>
   <div style="margin-top:2rem; background-color: #888888;  padding:1rem; width:fit-content">
   <div>Reactive updates</div>
@@ -280,7 +337,7 @@ const TemplateSingleUsingMinMax = args => {
       toggleDateFormat,
       buttonLabel,
       changeMaxDate,
-      onChange: action('change'),
+      onDateChange: action('dateChange'),
     }),
     template: templateSingleUsingMinMax,
   };
@@ -303,7 +360,14 @@ SingleUsingMinMax.args = initArgs;
 
 SingleUsingMinMax.parameters = {
   controls: {
-    exclude: ['update:modelValue', 'invalid-message', 'modelValue', 'kind'],
+    exclude: [
+      'update:modelValue',
+      'invalid-message',
+      'modelValue',
+      'kind',
+      'dateChange',
+      'value',
+    ],
   },
   docs: {
     source: { code: codeMinMax },
@@ -317,8 +381,10 @@ SingleUsingMinMax.parameters = {
 
 const templateRangeUsingDate = `
 <div>
-  <cv-date-picker v-bind="args" @change="onChange" kind="range"
-      :value="{startDate: now.toLocaleDateString(), endDate: tomorrow.toLocaleDateString()}">
+  <cv-date-picker v-bind="args"
+      kind="range"
+      :value="{startDate: now.toLocaleDateString(), endDate: tomorrow.toLocaleDateString()}"
+      @dateChange="onDateChange">
   </cv-date-picker>
 </div>
 `;
@@ -330,7 +396,7 @@ const TemplateRangeUsingDate = args => {
       args,
       now,
       tomorrow,
-      onChange: action('change'),
+      onDateChange: action('dateChange'),
     }),
     template: templateRangeUsingDate,
   };
@@ -340,7 +406,14 @@ export const RangeUsingDate = TemplateRangeUsingDate.bind({});
 RangeUsingDate.args = initArgs;
 RangeUsingDate.parameters = {
   controls: {
-    exclude: ['update:modelValue', 'invalid-message', 'kind', 'modelValue'],
+    exclude: [
+      'update:modelValue',
+      'invalid-message',
+      'kind',
+      'modelValue',
+      'dateChange',
+      'value',
+    ],
   },
 };
 RangeUsingDate.parameters = storyParametersObject(
@@ -353,8 +426,7 @@ RangeUsingDate.parameters = storyParametersObject(
 
 const templateMinimal = `
 <div>
-  <cv-date-picker v-bind="args" @change="onChange" :value="now">
-  </cv-date-picker>
+  <cv-date-picker v-bind="args" :value="now" @change="onChange"/>
 </div>
 `;
 
@@ -373,7 +445,13 @@ const TemplateMinimal = args => {
 export const Minimal = TemplateMinimal.bind({});
 Minimal.parameters = {
   controls: {
-    exclude: ['update:modelValue', 'invalid-message', 'modelValue'],
+    exclude: [
+      'update:modelValue',
+      'invalid-message',
+      'modelValue',
+      'dateChange',
+      'value',
+    ],
   },
 };
 Minimal.parameters = storyParametersObject(
@@ -395,7 +473,6 @@ const TemplateSkeleton = args => {
     components: { CvDatePicker, CvDatePickerSkeleton },
     setup: () => ({
       args,
-      onChange: action('change'),
     }),
     template: templateSkeleton,
   };
