@@ -2,12 +2,10 @@ import { action } from '@storybook/addon-actions';
 import { CvButton } from './';
 import { buttonKinds, buttonSizes } from './consts';
 import {
-  sbCompPrefix,
   splitSlotArgs,
   storybookControlsFromProps,
   storyParametersObject,
 } from '../../global/storybook-utils';
-import { sbBtnPrefix } from './sbBtnPrefix';
 import { props as commonCvButtonProps } from './CvButtonCommon';
 import {
   Bee20,
@@ -28,7 +26,7 @@ const icons = {
 };
 
 export default {
-  title: `${sbCompPrefix}/${sbBtnPrefix}/CvButton`,
+  title: 'Component/CvButton',
   component: CvButton,
   argTypes: {
     ...storybookControlsFromProps(commonCvButtonProps),

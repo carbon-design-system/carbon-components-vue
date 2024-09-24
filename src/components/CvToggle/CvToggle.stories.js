@@ -1,7 +1,4 @@
-import {
-  sbCompPrefix,
-  storyParametersObject,
-} from '../../global/storybook-utils';
+import { storyParametersObject } from '../../global/storybook-utils';
 
 import { CvToggle } from '.';
 import { CvToggleSkeleton } from '.';
@@ -20,7 +17,7 @@ const initArgsMinimal = {
 };
 
 export default {
-  title: `${sbCompPrefix}/CvToggle`,
+  title: 'Component/CvToggle',
   component: CvToggle,
   parameters: {
     a11y: {

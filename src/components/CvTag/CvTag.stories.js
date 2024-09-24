@@ -1,10 +1,7 @@
 import CvTag from './CvTag.vue';
 import { tagKinds } from './consts.js';
 import { action } from '@storybook/addon-actions';
-import {
-  sbCompPrefix,
-  storyParametersObject,
-} from '../../global/storybook-utils';
+import { storyParametersObject } from '../../global/storybook-utils';
 import {
   DataDefinition20,
   Bee20,
@@ -27,7 +24,7 @@ const icons = {
 };
 
 export default {
-  title: `${sbCompPrefix}/CvTag`,
+  title: 'Component/CvTag',
   component: CvTag,
   argTypes: {
     kind: { control: 'select', options: tagKinds },

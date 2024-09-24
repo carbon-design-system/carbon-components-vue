@@ -1,13 +1,9 @@
 import CvTooltip from './CvTooltip.vue';
-import {
-  sbCompPrefix,
-  storyParametersObject,
-} from '../../global/storybook-utils';
+import { storyParametersObject } from '../../global/storybook-utils';
 import { alignments, directions } from './consts';
-import { sbTooltipPrefix } from './sbTooltipPrefix';
 
 export default {
-  title: `${sbCompPrefix}/${sbTooltipPrefix}/CvTooltip`,
+  title: 'Component/CvTooltip',
   component: CvTooltip,
   argTypes: {
     alignment: {

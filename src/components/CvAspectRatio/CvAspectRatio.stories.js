@@ -1,15 +1,12 @@
 import { h } from 'vue';
-import {
-  sbCompPrefix,
-  storyParametersObject,
-} from '../../global/storybook-utils';
+import { storyParametersObject } from '../../global/storybook-utils';
 
 import { CvAspectRatio, CvAspectRatioConsts } from '.';
 
 import './CvAspectRatio.stories.scss';
 
 export default {
-  title: `${sbCompPrefix}/CvAspectRatio`,
+  title: 'Component/CvAspectRatio',
   component: CvAspectRatio,
   decorators: [
     story => h('div', { class: 'aspect-ratio-story' }, story().render()),

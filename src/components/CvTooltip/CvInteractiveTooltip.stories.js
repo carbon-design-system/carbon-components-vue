@@ -1,14 +1,10 @@
 import CvInteractiveTooltip from './CvInteractiveTooltip.vue';
-import {
-  sbCompPrefix,
-  storyParametersObject,
-} from '../../global/storybook-utils';
+import { storyParametersObject } from '../../global/storybook-utils';
 import { alignments, directions } from './consts';
-import { sbTooltipPrefix } from './sbTooltipPrefix';
 import Filter16 from '@carbon/icons-vue/es/filter/16';
 
 export default {
-  title: `${sbCompPrefix}/${sbTooltipPrefix}/CvInteractiveTooltip`,
+  title: 'Component/CvInteractiveTooltip',
   component: CvInteractiveTooltip,
   argTypes: {
     alignment: {

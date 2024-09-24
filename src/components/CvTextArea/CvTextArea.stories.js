@@ -1,13 +1,9 @@
-import {
-  sbCompPrefix,
-  storyParametersObject,
-} from '../../global/storybook-utils';
-import { StorybookGroupConst } from './StorybookGroupConst';
+import { storyParametersObject } from '../../global/storybook-utils';
 import CvTextArea from '.';
 import { ref } from 'vue';
 
 export default {
-  title: `${sbCompPrefix}/${StorybookGroupConst}/CvTextArea`,
+  title: 'Component/CvTextArea',
   component: CvTextArea,
   argTypes: {
     // attrs

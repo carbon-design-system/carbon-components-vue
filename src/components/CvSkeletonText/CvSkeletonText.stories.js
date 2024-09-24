@@ -1,12 +1,9 @@
-import {
-  sbCompPrefix,
-  storyParametersObject,
-} from '../../global/storybook-utils';
+import { storyParametersObject } from '../../global/storybook-utils';
 
 import { CvSkeletonText } from '.';
 
 export default {
-  title: `${sbCompPrefix}/CvSkeletonText`,
+  title: 'Component/CvSkeletonText',
   component: CvSkeletonText,
   argTypes: {
     heading: { control: { type: 'boolean' } },

@@ -1,12 +1,8 @@
-import {
-  sbCompPrefix,
-  storyParametersObject,
-} from '../../global/storybook-utils';
-import { StorybookGroupConst } from './StorybookGroupConst';
+import { storyParametersObject } from '../../global/storybook-utils';
 import { CvTextAreaSkeleton } from './';
 
 export default {
-  title: `${sbCompPrefix}/${StorybookGroupConst}/CvTextAreaSkeleton`,
+  title: 'Component/CvTextAreaSkeleton',
   component: CvTextAreaSkeleton,
 };
 
