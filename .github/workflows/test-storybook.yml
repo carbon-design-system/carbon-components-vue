@@ -15,7 +15,7 @@ jobs:
       - name: Install packages
         run: yarn
       - name: Build Storybook
-        run: yarn workspace @carbon/vue-3-storybook build-storybook --silent
+        run: yarn workspace @carbon/vue-3-storybook build-storybook --quiet
       - name: Launch storybook
         run: npx http-server storybook/storybook-static --port 6006 &
       - name: Run Storybook tests
