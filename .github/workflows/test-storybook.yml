@@ -14,7 +14,11 @@ jobs:
           node-version: '18.x'
       - name: Install packages
         run: yarn
+      - name: Build Storybook
+        run: yarn workspace @carbon/vue-3-storybook build-storybook --silent
+      - name: Launch storybook
+        run: npx http-server storybook/storybook-static --port 6006 &
       - name: Run Storybook tests
         run: |
-          yarn workspace @carbon/vue-3-storybook build-storybook
-          npx http-server storybook/storybook-static --port 6006
+          sleep 20
+          yarn test-storybook
