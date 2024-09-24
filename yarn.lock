@@ -11145,14 +11145,14 @@ __metadata:
   linkType: hard
 
 "carbon-components@npm:^10.58.5":
-  version: 10.58.5
-  resolution: "carbon-components@npm:10.58.5"
+  version: 10.58.15
+  resolution: "carbon-components@npm:10.58.15"
   dependencies:
     "@carbon/telemetry": 0.1.0
     flatpickr: 4.6.1
     lodash.debounce: ^4.0.8
     warning: ^3.0.0
-  checksum: 120de6f43908a90310230dedde194ab2a8751da257c4258306aa35900df6c0e97cda2d73e7455be9a49ca529d4a579c3b721a41ed6665d0c4abc98efb38488ca
+  checksum: 09ee9efd424c32ef2a239096ecbeee4ac6a38b2b738b1e586a7193c940be22f9cad40aab1351bb12481b7950af7e09fd20fad3656a169e5f801fc22df0ca8436
   languageName: node
   linkType: hard
 
