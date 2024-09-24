@@ -12,6 +12,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '18.x'
+      - name: Install packages
+        run: yarn
       - name: Run Storybook tests
         run: |
           yarn workspace @carbon/vue-3-storybook build-storybook
