@@ -14,8 +14,10 @@ jobs:
           node-version: '18.x'
       - name: Install packages
         run: yarn
-      - name: Install playwright
-        run: npm init playwright@latest --yes
+      - name: Add playright
+        run: yarn add @playwright/test -D
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
       - name: Build Storybook
         run: yarn workspace @carbon/vue-3-storybook build-storybook --quiet
       - name: Launch storybook
