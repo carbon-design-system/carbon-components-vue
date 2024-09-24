@@ -2,7 +2,12 @@
 # https://github.com/storybookjs/test-runner?tab=readme-ov-file#2-running-against-locally-built-storybooks-in-ci
 # "Running against locally built Storybooks in CI"
 name: Storybook Tests
-on: push
+on:
+  pull_request_target:
+    types:
+      - opened
+      - edited
+      - synchronize
 jobs:
   test:
     timeout-minutes: 60
