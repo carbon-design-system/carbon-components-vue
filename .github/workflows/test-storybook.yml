@@ -1,4 +1,4 @@
-# recipe from https://github.com/storybookjs/test-runner
+# recipe based on https://github.com/storybookjs/test-runner
 # https://github.com/storybookjs/test-runner?tab=readme-ov-file#2-running-against-locally-built-storybooks-in-ci
 # "Running against locally built Storybooks in CI"
 name: Storybook Tests
@@ -16,6 +16,8 @@ jobs:
         run: yarn
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
+      - name: Install http-server for CI
+        run: npm install -g http-server@^14.1.1
       - name: Build Storybook
         run: yarn workspace @carbon/vue-3-storybook build-storybook --quiet
       - name: Launch storybook
@@ -23,4 +25,4 @@ jobs:
       - name: Run Storybook tests
         run: |
           sleep 20
-          yarn test-storybook
+          yarn workspace @carbon/vue-3-storybook test-storybook
