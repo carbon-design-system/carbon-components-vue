@@ -3333,7 +3333,7 @@ __metadata:
     react: ^17.0.2
     react-dom: ^17.0.2
     sass: ^1.56.1
-    sass-loader: ^12.6.0
+    sass-loader: ^16.0.2
     storybook: ^6.5.13
     style-loader: ^3.3.1
     stylelint: ^14.15.0
@@ -3390,7 +3390,7 @@ __metadata:
     postcss-loader: ^6.2.1
     prettier: ^2.8.0
     sass: ^1.56.1
-    sass-loader: ^12.6.0
+    sass-loader: ^16.0.2
     storybook: ^6.5.13
     style-loader: ^3.3.1
     stylelint: ^14.15.0
@@ -25288,20 +25288,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass-loader@npm:^12.6.0":
-  version: 12.6.0
-  resolution: "sass-loader@npm:12.6.0"
+"sass-loader@npm:^16.0.2":
+  version: 16.0.2
+  resolution: "sass-loader@npm:16.0.2"
   dependencies:
-    klona: ^2.0.4
     neo-async: ^2.6.2
   peerDependencies:
-    fibers: ">= 3.1.0"
-    node-sass: ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
+    "@rspack/core": 0.x || 1.x
+    node-sass: ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
     sass: ^1.3.0
     sass-embedded: "*"
     webpack: ^5.0.0
   peerDependenciesMeta:
-    fibers:
+    "@rspack/core":
       optional: true
     node-sass:
       optional: true
@@ -25309,7 +25308,9 @@ __metadata:
       optional: true
     sass-embedded:
       optional: true
-  checksum: 5d73a428588150f704016aa27397941bb9246cecd2ee083b573e95d969fc080ac6a16f2fe1cc64aca08f6e70da6f3c586ee68f0efc9f527fecc360e5f1c299ec
+    webpack:
+      optional: true
+  checksum: 233afba0b1cfa7af9221cd5e93a10706750fba2c7c86937f6a9c0a89effc10e44900a164b270f72b10a543b0b8988df0036c23c66a4df01f5013bd4907f37e49
   languageName: node
   linkType: hard
 
