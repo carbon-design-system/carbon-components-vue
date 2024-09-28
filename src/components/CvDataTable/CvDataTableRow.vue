@@ -33,7 +33,7 @@
     v-bind="$attrs"
     :id="cvId"
     ref="row"
-    :value="value"
+    :value="rowValue"
     class="cv-data-table-row"
     :row-id="cvId"
     @checked-change="onCheckedChange"
@@ -50,15 +50,13 @@ import {
   computed,
   onBeforeUnmount,
   onMounted,
-  onUpdated,
   ref,
   useAttrs,
   useSlots,
   watch,
   inject,
+  onUpdated,
 } from 'vue';
-import store from './cvDataTableStore';
-import { getBus } from '../../global/component-utils/event-bus';
 
 const props = defineProps({
   /** The value associated with the input (required for tables with batch actions) */
@@ -68,85 +66,83 @@ const props = defineProps({
   ...propsCvId,
 });
 const cvId = useCvId(props, true);
+// For historical reasons we have a prop named "value" but this makes the code
+// hard to read since .value is used for refs. So it would be props.value
+// which is weird. Let's shadow this as "rowValue"
+const rowValue = ref(props.value);
+watch(
+  () => props.value,
+  () => (rowValue.value = props.value)
+);
 
 /** @type {Ref<Set<String>>} */
 const expandingRowIds = inject('expanding-row-ids', ref(new Set()));
 const dataExpandable = ref(false);
 watch(dataExpandable, () => {
-  if (dataExpandable.value) expandingRowIds.value?.add(cvId.value);
+  if (dataExpandable.value) expandingRowIds.value.add(cvId.value);
   else expandingRowIds.value?.delete(cvId.value);
 });
 const dataSomeExpandingRows = computed(() => {
   return expandingRowIds.value?.size > 0;
 });
-
 const attrs = useAttrs();
+const rowIds = inject('row-ids', ref(new Set()));
+const expandedRowIds = inject('expanded-row-ids', ref(new Set()));
+
 const slots = useSlots();
 const row = ref(null);
-const parent = ref(null);
-let bus;
-onMounted(() => {
-  const el = row.value?.$el;
-  const pe = el?.closest('.cv-data-table');
-  parent.value = pe?.getAttribute('id');
-  if (parent.value) {
-    bus = getBus(parent);
-    store.getTable(parent);
-  } else console.warn('data table not found');
+const rowsSelected = inject('rows-selected');
 
+onMounted(() => {
   dataExpandable.value = !!slots.expandedContent;
-  const exists = store.findRow(parent, cvId);
-  if (exists)
-    console.error(
-      `CvDataTable: Duplicate ID specified for CvDataTableRow, may cause issues. {id: ${cvId.value}, value: ${attrs.value}}`
-    );
-  else
-    store.updateRow(parent, {
-      id: cvId.value,
-      value: attrs.value,
-      expandable: dataExpandable.value,
-      isExpanded: props.expanded,
-      isChecked: false,
-    });
+  rowIds.value.add(cvId.value);
+  if (props.expanded) expandedRowIds.value.add(cvId.value);
 });
 onUpdated(() => {
-  const curr = dataExpandable.value;
   dataExpandable.value = !!slots.expandedContent;
-  if (dataExpandable.value !== curr)
-    store.updateRow(parent, {
-      id: cvId.value,
-      expandable: dataExpandable.value,
-    });
 });
 onBeforeUnmount(() => {
-  store.removeRow(parent, cvId);
+  rowIds.value.delete(cvId.value);
+  expandingRowIds.value.delete(cvId.value);
+  expandedRowIds.value.delete(cvId.value);
+  const index = rowsSelected.value.indexOf(rowValue.value);
+  if (index > -1) rowsSelected.value.splice(index, 1);
 });
 const dataExpanded = computed(() => {
-  return Boolean(props.expanded || store.isRowExpanded(parent, cvId));
+  return Boolean(props.expanded || expandedRowIds.value.has(cvId.value));
 });
 watch(
   () => props.expanded,
   () => {
-    store.updateRow(parent, {
-      id: cvId.value,
-      isExpanded: props.expanded,
-    });
+    if (props.expanded) expandedRowIds.value.add(cvId.value);
+    else expandingRowIds.value.delete(cvId.value);
   }
 );
 
+const notifyExpandedChange = inject('cv:expanded-change');
+
 function onExpandedChange(val) {
-  const row = store.findRow(parent, cvId);
-  store.updateRow(parent, {
+  notifyExpandedChange({
     id: cvId.value,
+    value: rowValue.value,
+    expandable: expandingRowIds.value.has(cvId.value),
     isExpanded: val,
+    isChecked: rowsSelected.value.includes(rowValue.value),
   });
-  bus?.emit('cv:expanded-change', row);
 }
-function onCheckedChange(val) {
-  store.updateRow(parent, {
-    id: cvId.value,
-    isChecked: val,
-  });
-  bus?.emit('cv:check-change', { value: props.value, checked: val });
+
+// Manage the checkmark on the row. Notify the table if it changes.
+const notifyCheckedChange = inject('cv:check-change');
+function onCheckedChange(isChecked) {
+  if (!rowsSelected.value) return;
+  const index = rowsSelected.value.indexOf(rowValue.value);
+  if (isChecked) {
+    // if the row value is not already in the rowsSelected array, add it.
+    if (index === -1) rowsSelected.value.push(rowValue.value);
+  } else {
+    // if the row value is in the rowsSelected array, delete it.
+    if (index > -1) rowsSelected.value.splice(index, 1);
+  }
+  notifyCheckedChange(attrs.value, isChecked);
 }
 </script>

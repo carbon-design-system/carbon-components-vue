@@ -44,6 +44,7 @@ function searchTestData(opts) {
   else testData.value = originalTestData.value.filter(data => data.name.indexOf(opts) > -1)
   return sortTestData(sortOpts.value)
 }
+const selectedRows = ref(["COBOL"])
 
 <Meta title={`${sbCompPrefix}/CvDataTable`} component={CvDataTable} />
 
@@ -75,6 +76,7 @@ setup() {
     onRowSelectChange: action('row-select-change'),
     onRowSelectChanges: action('row-select-changes'),
     onOverflowMenuClick: action('overflow-menu-click'),
+    onVmodel: action('v-model'),
     onRowExpanded: action('row-expanded'),
     onPagination: action('pagination'),
     onAction1: action('compile'),
@@ -84,13 +86,15 @@ setup() {
     useActions: args.useActions,
     useBatchActions: args.useBatchActions,
     useHelperTextSlot: args.useHelperTextSlot,
+    usePagination: args.usePagination,
     skeletonRows: args.skeletonRows,
     skeletonCols: args.skeletonCols,
     skeletonTitle: args.title,
     skeletonHelper: args.helperText,
     testData,
     originalTestData,
-    searchOpts
+    searchOpts,
+    selectedRows
     };
 },
 // And then the `args` are bound to your component with `v-bind="args"`
@@ -105,6 +109,7 @@ const defaultTemplate = `
   @overflow-menu-click="onOverflowMenuClick"
   @row-expanded="onRowExpanded"
   @pagination="onPagination"
+  :pagination="usePagination"
   :initialSearchValue="searchOpts"
   >
   <template v-if="useBatchActions" #batch-actions>
@@ -128,14 +133,14 @@ const defaultTemplate = `
     </cv-data-table-action>
   </template>
   <template #headings>
-    <cv-data-table-heading heading="Name" name="name" sortable/>
-    <cv-data-table-heading heading="Year" name="year" sortable/>
-    <cv-data-table-heading heading="Object Oriented"/>
-    <cv-data-table-heading heading="Purpose" />
-    <cv-data-table-heading heading="Standard" />
+    <cv-data-table-heading id="sb-name" heading="Name" name="name" sortable order="ascending"/>
+    <cv-data-table-heading id="sb-year" heading="Year" name="year" sortable/>
+    <cv-data-table-heading id="sb-oo" heading="Object Oriented"/>
+    <cv-data-table-heading id="sb-purpose" heading="Purpose" />
+    <cv-data-table-heading id="sb-standard" heading="Standard" />
   </template>
   <template #data>
-    <cv-data-table-row v-for="row in testData" :key="row.name" :value="row.name">
+    <cv-data-table-row v-for="row in testData" :id="row.name" :key="row.name" :value="row.name">
       <cv-data-table-cell>{{row.name}}</cv-data-table-cell>
       <cv-data-table-cell>{{row.year}}</cv-data-table-cell>
       <cv-data-table-cell>{{row.oo}}</cv-data-table-cell>
@@ -169,6 +174,17 @@ const skeletonTemplate = `
   </template>
 </cv-data-table-skeleton>
 `;
+const vModelTemplate = defaultTemplate
+  .replace('@search="onSearch"', 'v-model:rows-selected="selectedRows"')
+  .replace('@row-select-change="onRowSelectChange"', '@update:rows-selected="onVmodel"')
+  .replace('@row-select-changes="onRowSelectChanges"','')
+  .replace('testData', 'originalTestData') + `
+<div style="margin-top:1rem; background-color: #888888;  padding:1rem"><div style="font-size: 150%">Sample interaction</div>
+<select name="programming-languages" id="programming-languages" v-model="selectedRows" multiple>
+  <option v-for="l in originalTestData" :id="l.name" :key="l.name" :value="l.name">{{l.name}}</option>
+</select>
+<div>selections: {{ selectedRows }} </div>
+</div>`
 
 # CvDataTable
 
@@ -251,10 +267,12 @@ when no items were select, please now use the new property `stickyBatchActive`.
       helperText: 'Table helper text',
       useActions: false,
       useBatchActions: false,
+      usePagination: true
     }}
     argTypes={{
       rowSize: { control: 'select', default: 'lg', options: ['xs', 'sm', 'md', 'lg', 'xl'] },
       rowsSelected: { control: 'multi-select',  options: ['Java', 'COBOL', 'C++'] },
+      useBatchActions: { description: "To use batch actions you should assign a usable `id` to each row. i.e. `<cv-data-table-row :id=\"item.id\" ...` This `id` value is passed to the row selection events." }
     }}
   >
     {Template.bind({})}
@@ -268,7 +286,6 @@ when no items were select, please now use the new property `stickyBatchActive`.
       controls: { exclude: ['default',
           'template',
           'overflow-menu-click',
-          'pagination',
           'row-expanded',
           'row-select-change',
           'row-select-changes',
@@ -293,6 +310,7 @@ when no items were select, please now use the new property `stickyBatchActive`.
       helperText: 'Click row to expand',
       useActions: false,
       useBatchActions: false,
+      usePagination: true
     }}
     argTypes={{
       rowSize: { control: 'select', default: 'standard', options: ['compact', 'short', 'standard', 'tall'] },
@@ -319,7 +337,36 @@ when no items were select, please now use the new property `stickyBatchActive`.
       skeletonRows: 5,
       skeletonCols: 5,
       useBatchActions: false,
-      useActions: false
+      useActions: false,
+      usePagination: true
+    }}
+    argTypes={{
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+
+# Using v-model selected rows
+If you are using the selected rows for batch actions or any other purpose, you should assign usable ids to the rows.
+  It is these ids that are include the selected rows events and in the selected rows v-model. Set the v-model on the
+  cv-table like `<cv-table v-model:rows-selected="selectedRows" ...`
+
+<Canvas>
+  <Story
+    name="v-model Selected Rows"
+    parameters={{
+      controls: { include: [ ] },
+      docs: { source: { code: storySourceCode(vModelTemplate, Template.args) } },
+    }}
+    args={{
+      template: vModelTemplate,
+      title: 'v-model example',
+      helperText: 'select rows to see updates',
+      useBatchActions: true,
+      useActions: false,
+      usePagination: false
     }}
     argTypes={{
     }}

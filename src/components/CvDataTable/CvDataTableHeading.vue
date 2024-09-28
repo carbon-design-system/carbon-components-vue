@@ -1,10 +1,5 @@
 <template>
-  <th
-    :id="cvId"
-    ref="el"
-    :aria-sort="internalOrder"
-    :style="skeleton && headingStyle"
-  >
+  <th :id="cvId" :aria-sort="internalOrder" :style="skeleton && headingStyle">
     <button
       v-if="sortable"
       type="button"
@@ -46,9 +41,7 @@ import Arrows16 from '@carbon/icons-vue/es/arrows--vertical/16';
 import CvEmpty from '../CvEmpty/_CvEmpty.vue';
 import { props as propsCvId, useCvId } from '../../use/cvId';
 import { carbonPrefix } from '../../global/settings';
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
-import { getBus } from '../../global/component-utils/event-bus';
-import store from './cvDataTableStore';
+import { computed, onBeforeUnmount, onMounted, ref, watch, inject } from 'vue';
 
 const nextOrder = {
   ascending: 'descending',
@@ -67,69 +60,56 @@ const props = defineProps({
 });
 const cvId = useCvId(props, true);
 const dataOrder = ref(props.order);
-const parent = ref(null);
 watch(
   () => props.order,
   () => {
     if (dataOrder.value !== props.order) {
       dataOrder.value = props.order;
-      store.updateHeading(parent, {
-        id: cvId.value,
-        order: dataOrder.value,
-      });
       onSortClick();
     }
   }
 );
+const sortableHeaders = inject('sortableHeadings', ref(new Set()));
 watch(
   () => props.sortable,
   () => {
-    store.updateHeading(parent, {
-      id: cvId.value,
-      sortable: props.sortable,
-    });
+    if (props.sortable) sortableHeaders.value.add(cvId.value);
+    else sortableHeaders.value.delete(cvId.value);
   }
 );
 
-let bus = undefined;
-const el = ref(null);
+const headingIds = inject('heading-ids', ref(new Set()));
 onMounted(() => {
-  const pe = el.value.closest('.cv-data-table');
-  parent.value = pe?.getAttribute('id');
-  if (parent.value) bus = getBus(parent);
-  else console.warn('data table not found');
-
-  const exists = store.findHeading(parent, cvId);
-  if (exists)
-    console.error(
-      `CvDataTable: Duplicate ID specified for CvDataTableHeading, may cause issues. {id: ${cvId.value}, name: ${props.name}`
-    );
-  else
-    store.updateHeading(parent, {
-      id: cvId.value,
-      name: props.name,
-      order: dataOrder.value,
-      sortable: props.sortable,
-    });
+  headingIds.value.add(cvId.value);
+  if (props.sortable) {
+    sortableHeaders.value.add(cvId.value);
+    if (props.order !== 'none') onSortClick();
+  }
 });
 
 onBeforeUnmount(() => {
-  store.removeHeading(parent, cvId);
+  headingIds.value.delete(cvId.value);
+  sortableHeaders.value.delete(cvId.value);
 });
-function onSortClick() {
-  bus?.emit('cv:sort', {
+
+const notifyHeaderSort = inject('cv:sort');
+function onSortClick(ev) {
+  // If this is a click event, update to next sort order. Otherwise, this is
+  // being called from a watcher.
+  if (ev) dataOrder.value = nextOrder[dataOrder.value];
+  notifyHeaderSort({
     heading: { id: cvId.value, name: props.name },
-    value: nextOrder[internalOrder.value],
+    value: dataOrder.value,
   });
 }
+
+const currentSortHeadingId = inject('current-sort-heading-id', ref(null));
 const internalOrder = computed(() => {
   if (!props.sortable) {
     return undefined;
   }
-  const heading = store.findHeading(parent, cvId);
-  if (['ascending', 'descending', 'none'].includes(heading?.order))
-    return heading.order;
-  else return 'none';
+  if (currentSortHeadingId.value !== cvId.value) return 'none';
+  return dataOrder.value;
 });
 
 const headingLabelTag = computed(() => {

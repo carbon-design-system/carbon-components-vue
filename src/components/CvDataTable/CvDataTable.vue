@@ -236,11 +236,9 @@ import CvPagination from '../CvPagination';
 import Search16 from '@carbon/icons-vue/es/search/16';
 import Close16 from '@carbon/icons-vue/es/close/16';
 import ChevronRight16 from '@carbon/icons-vue/es/chevron--right/16';
-import { getBus, removeBus } from '../../global/component-utils/event-bus';
 import {
   computed,
   nextTick,
-  onBeforeMount,
   onMounted,
   onUnmounted,
   onUpdated,
@@ -251,8 +249,6 @@ import {
   provide,
 } from 'vue';
 import { props as propsCvId, useCvId } from '../../use/cvId';
-//TODO: Remove this store and replace with provide/inject
-import store from './cvDataTableStore';
 import Empty from '../CvEmpty/_CvEmpty.vue';
 
 const props = defineProps({
@@ -356,20 +352,6 @@ watch(
   () => (isSkeleton.value = props.skeleton)
 );
 
-let bus = undefined;
-onBeforeMount(() => {
-  bus = getBus(uid.value);
-  bus.on('cv:check-change', onRowCheckChange);
-  bus.on('cv:click', onMenuItemClick);
-  bus.on('cv:sort', onSort);
-  bus.on('cv:expanded-change', onCvExpandedChange);
-  store.addTable(uid);
-});
-onUnmounted(() => {
-  removeBus(uid.value);
-  store.removeTable(uid.value);
-});
-
 watch(() => props.rowsSelected, updateRowsSelected);
 
 const searchContainer = ref(null);
@@ -393,6 +375,7 @@ watch(
     else expandingRowIds.value.delete('table-expand-row');
   }
 );
+const clearSearchVisible = ref(false);
 
 onMounted(() => {
   if (searchContainer.value) {
@@ -416,6 +399,8 @@ onUpdated(checkSlots);
 const hasActions = ref(false);
 const hasToolbar = ref(false);
 const hasBatchActions = ref(false);
+const isHelper = ref(false);
+
 provide('has-batch-actions', hasBatchActions);
 
 function checkSlots() {
@@ -442,9 +427,11 @@ function columnHeading(c) {
   }
 }
 
+const sortableHeadings = ref(new Set());
+provide('sortableHeadings', sortableHeadings);
 const isSortable = computed(() => {
   // is any column sortable
-  return props.sortable || store.someSortableHeadings(uid.value);
+  return props.sortable || sortableHeadings.value.size > 0;
 });
 
 function isColSortable(c) {
@@ -453,7 +440,6 @@ function isColSortable(c) {
   return (col && col.sortable) || props.sortable;
 }
 
-const isHelper = ref(false);
 const hasTableHeader = computed(() => {
   return props.title || isHelper.value;
 });
@@ -482,13 +468,15 @@ const internalPagination = computed(() => {
   return false;
 });
 
-const registeredRows = ref([]);
+const rowIds = ref(new Set());
+provide('row-ids', rowIds);
+
 const internalNumberOfItems = computed(() => {
   const internal = internalPagination.value;
   if (internal.numberOfItems !== undefined) {
     return internal.numberOfItems;
   } else {
-    return registeredRows.value.length;
+    return rowIds.value.size;
   }
 });
 
@@ -527,6 +515,19 @@ function checkSearchExpand(force) {
 }
 
 const dataRowsSelected = ref(props.rowsSelected);
+provide('rows-selected', dataRowsSelected);
+
+const headingChecked = ref(false);
+watch(
+  () => dataRowsSelected,
+  () => {
+    headingChecked.value =
+      rowIds.value.size > 0 &&
+      dataRowsSelected.value.length === rowIds.value.size;
+  },
+  { deep: true }
+);
+
 const batchActive = computed(() => {
   return (
     props.stickyBatchActive ||
@@ -535,30 +536,8 @@ const batchActive = computed(() => {
   );
 });
 
-const headingChecked = ref(false);
-
-watch(
-  () => store.state[uid.value],
-  () => {
-    const rows = store.rows(uid);
-    headingChecked.value =
-      rows.length > 0 && dataRowsSelected.value.length === rows.length;
-  },
-  { deep: true }
-);
 function updateRowsSelected() {
-  dataRowsSelected.value = [];
-  const rows = store.rows(uid);
-  for (const i in rows) {
-    let child = rows[i];
-    const checked = props.rowsSelected.includes(child.value);
-    store.updateRow(uid, { id: child.id, isChecked: checked });
-
-    if (checked) {
-      dataRowsSelected.value.push(child.value);
-    }
-  }
-  headingChecked.value = dataRowsSelected.value.length === rows.length;
+  dataRowsSelected.value = [...props.rowsSelected];
 }
 
 const emit = defineEmits([
@@ -572,7 +551,6 @@ const emit = defineEmits([
   'pagination',
 ]);
 const searchValue = ref(props.initialSearchValue);
-const clearSearchVisible = ref(false);
 function onClearClick() {
   searchValue.value = '';
   clearSearchVisible.value = false;
@@ -584,87 +562,83 @@ function onClearClick() {
 }
 function onHeadingCheckChange() {
   // check /uncheck all children
-  dataRowsSelected.value = [];
-  const rows = store.rows(uid);
-  for (const child of rows) {
-    if (headingChecked.value) {
-      dataRowsSelected.value.push(child.value);
-    }
-
-    if (child.isChecked !== headingChecked.value) {
-      store.updateRow(uid, { id: child.id, isChecked: headingChecked.value });
-
-      emit('row-select-change', {
-        value: child.value,
-        selected: headingChecked.value,
-      });
-    }
-  }
-  emit('row-select-changes', dataRowsSelected.value);
-  emit('update:rowsSelected', dataRowsSelected.value);
+  if (headingChecked.value) dataRowsSelected.value = [...rowIds.value];
+  else dataRowsSelected.value = [];
 }
 function deselect() {
   headingChecked.value = false;
   onHeadingCheckChange();
 }
-function onRowCheckChange(payload) {
-  const { value, checked } = payload;
-  let modelSet = new Set(dataRowsSelected.value);
 
-  if (!checked) {
-    modelSet.delete(value);
-  } else {
-    modelSet.add(value);
-  }
-  dataRowsSelected.value = Array.from(modelSet);
-  const rows = store.rows(uid);
-  headingChecked.value = dataRowsSelected.value.length === rows.length;
-
+const previousEmit = ref([...props.rowsSelected]);
+watch(
+  dataRowsSelected,
+  () => {
+    // was tempted to use Set.symmetricDifference but support for that was only
+    // add in Feb/June 2024
+    const diff = dataRowsSelected.value
+      .filter(x => !previousEmit.value.includes(x))
+      .concat(
+        previousEmit.value.filter(x => !dataRowsSelected.value.includes(x))
+      );
+    if (diff.length > 0) {
+      emit('row-select-changes', dataRowsSelected.value);
+      emit('update:rowsSelected', dataRowsSelected.value);
+      previousEmit.value = [...dataRowsSelected.value];
+    }
+  },
+  { deep: true }
+);
+function onRowCheckChange(value, checked) {
   emit('row-select-change', { value, selected: checked });
-  emit('row-select-changes', dataRowsSelected.value);
-  emit('update:rowsSelected', dataRowsSelected.value);
 }
+provide('cv:check-change', onRowCheckChange);
+
 function onMenuItemClick(val) {
   emit('overflow-menu-click', val);
 }
+provide('cv:click', onMenuItemClick);
+
 function onInternalSearch() {
   clearSearchVisible.value = searchValue.value.length > 0;
   // eslint-disable-next-line vue/require-explicit-emits
   emit('search', searchValue.value);
 }
+
+const headingIds = ref(new Set());
+provide('heading-ids', headingIds);
+const currentSortHeadingId = ref(null);
+provide('current-sort-heading-id', currentSortHeadingId);
 function onSort(payload) {
   const { heading, value } = payload;
-  const headings = store.headings(uid);
-  let index;
-  for (let colIndex in headings) {
-    const column = headings[colIndex];
-    if (column.id === heading.id) {
-      store.updateHeading(uid, { ...column, order: value });
-      index = colIndex;
-    } else {
-      store.updateHeading(uid, { ...column, order: 'none' });
-    }
-  }
+  const headings = Array.from(headingIds.value);
+  currentSortHeadingId.value = heading.id;
+  const index = headings.indexOf(heading.id);
   emit('sort', { index, order: value, name: heading.name });
 }
+provide('cv:sort', onSort);
 
 // are all rows expanded
-const dataExpandAll = computed(() => {
-  return store.allExpandedRows(uid);
-});
+/** @type {Ref<Set<String>>} */
+const expandedRowIds = ref(new Set());
+provide('expanded-row-ids', expandedRowIds);
+
+const dataExpandAll = computed(
+  () => expandedRowIds.value.size === rowIds.value.size
+);
 function toggleExpandAll() {
   const toggle = !dataExpandAll.value;
-  const rows = store.rows(uid);
-  for (const row of rows) {
-    store.updateRow(uid, { id: row.id, isExpanded: toggle });
-  }
+  if (toggle) {
+    rowIds.value.forEach(rowId => expandedRowIds.value.add(rowId));
+  } else expandedRowIds.value.clear();
 }
 
 /**
  * A child row is changed
- * @param {{kind:string, uid:string, value:string, isExpanded:boolean}} row
+ * @param {{id:string, value:string, expandable:string, isExpanded:boolean, isChecked:boolean}} row
  */
 function onCvExpandedChange(row) {
   emit('row-expanded', row);
 }
+provide('cv:expanded-change', onCvExpandedChange);
 </script>

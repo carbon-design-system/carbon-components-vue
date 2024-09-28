@@ -1,7 +1,7 @@
 <template>
   <tr
-    ref="el"
     class="cv-data-table-row-inner"
+    :data-value="value"
     :class="{
       [`${carbonPrefix}--parent-row`]: expandingRow,
       [`${carbonPrefix}--expandable-row`]: dataExpanded,
@@ -76,8 +76,6 @@ import {
   watch,
   inject,
 } from 'vue';
-import store from './cvDataTableStore';
-import { getBus } from '../../global/component-utils/event-bus';
 
 const props = defineProps({
   ariaLabelForBatchCheckbox: { type: String, default: undefined },
@@ -124,21 +122,11 @@ function checkSlots() {
 onMounted(checkSlots);
 onUpdated(checkSlots);
 
-const el = ref(null);
-const parent = ref(null);
-let bus;
-onMounted(() => {
-  const pe = el.value.closest('.cv-data-table');
-  parent.value = pe?.getAttribute('id');
-  if (parent.value) {
-    store.getTable(parent);
-    bus = getBus(parent);
-  } else console.warn('data table not found');
-});
 const hasBatchActions = inject('has-batch-actions', ref(false));
 
+const emitClick = inject('cv:click');
 function onMenuItemClick(val) {
-  bus.emit('cv:click', val);
+  emitClick(val);
 }
 
 const emit = defineEmits(['expanded-change', 'checked-change']);
@@ -165,11 +153,14 @@ watch(
     emit('checked-change', dataExpanded.value);
   }
 );
+const rowsSelected = inject('rows-selected');
 watch(
-  () => store.state[parent.value]?.rows,
+  () => rowsSelected,
   () => {
-    const row = store.findRow(parent, props.rowId);
-    const isChecked = row?.isChecked;
+    // For historical reasons we have a prop named "value" but this makes the code
+    // below look weird since .value is used for refs. So just a note that this
+    // is not a ref is a prop named "value"
+    const isChecked = rowsSelected.value.includes(props.value);
     if (isChecked !== undefined) {
       dataChecked.value = isChecked;
     }
