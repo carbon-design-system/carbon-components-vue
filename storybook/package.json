@@ -45,7 +45,7 @@
     "@storybook/vue3": "^6.5.13",
     "@testing-library/dom": "^8.19.0",
     "@testing-library/user-event": "^14.4.3",
-    "@testing-library/vue": "^6.6.1",
+    "@testing-library/vue": "^8.1.0",
     "@vue/cli-plugin-babel": "^5.0.8",
     "@vue/cli-plugin-eslint": "^5.0.8",
     "@vue/cli-plugin-unit-jest": "^5.0.8",
