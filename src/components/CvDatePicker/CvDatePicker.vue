@@ -311,7 +311,7 @@ watch(
   () => props.calOptions,
   () => {
     for (const [key, value] of Object.entries(props.calOptions)) {
-      calendar.value.set(key, value);
+      calendar.value?.set(key, value);
     }
   },
   { deep: true }
