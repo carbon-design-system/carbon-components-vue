@@ -135,7 +135,11 @@ export const parameters = {
       // By default, sort by the story "kind". The "kind" refers to the
       // top-level title of the story, either through Component Story Format
       // with the default export, or the `storiesOf('kind', module)` format
+
       if (storyA[1].kind !== storyB[1].kind) {
+        if (storyA[1].kind === 'Welcome') return -1;
+        else if (storyB[1].kind === 'Welcome') return 1;
+
         return storyA[1].kind.localeCompare(storyB[1].kind);
       }
 
