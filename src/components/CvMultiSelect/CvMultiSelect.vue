@@ -163,7 +163,10 @@
           @mousemove="onMousemove(item.value)"
           @mousedown.prevent
         >
-          <div :class="`${carbonPrefix}--list-box__menu-item__option`" :title="item.label">
+          <div
+            :class="`${carbonPrefix}--list-box__menu-item__option`"
+            :title="item.label"
+          >
             <cv-checkbox
               v-model="data.selectedItems"
               tabindex="-1"
