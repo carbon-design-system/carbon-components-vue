@@ -41,7 +41,7 @@
     "@storybook/addon-links": "^6.5.13",
     "@storybook/builder-webpack5": "^6.5.13",
     "@storybook/manager-webpack5": "^6.5.13",
-    "@storybook/test-runner": "~0.9.4",
+    "@storybook/test-runner": "~0.19.1",
     "@storybook/vue3": "^6.5.13",
     "@testing-library/dom": "^8.19.0",
     "@testing-library/user-event": "^14.4.3",
