@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.22](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.21...@carbon/vue@3.0.22) (2024-10-15)
+
+### Bug Fixes
+
+- fix batch action docs ([0f58880](https://github.com/carbon-design-system/carbon-components-vue/commit/0f58880a288063264a54f7700485ece02ec187d4))
+- lint ([66682bf](https://github.com/carbon-design-system/carbon-components-vue/commit/66682bf907c7d4ecab8a70cddb336b73e8347f0f))
+- protect watcher against null calendar ([ef66b51](https://github.com/carbon-design-system/carbon-components-vue/commit/ef66b519fda01d74bd1ce3fe441e78eed42d233e))
+- set default story to Welcome ([#1641](https://github.com/carbon-design-system/carbon-components-vue/issues/1641)) ([46528a9](https://github.com/carbon-design-system/carbon-components-vue/commit/46528a90c8da6f03ca205ac3d11e6d8bd51e4291))
+- vmodel broken in 3.0.21 ([72eb80a](https://github.com/carbon-design-system/carbon-components-vue/commit/72eb80afabe6fa1ce9c0c9d00b54726c367a85f8))
+
+### Features
+
+- cv-multi-select add title attribute to div "list-box**menu-item**option" to allow user to read all content from a label that exceeds the component width size ([ea415a0](https://github.com/carbon-design-system/carbon-components-vue/commit/ea415a0bb620fa1a5cec10914d3ff3c62c437cde))
+
 ## [3.0.21](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.20...@carbon/vue@3.0.21) (2024-09-23)
 
 ### Bug Fixes
