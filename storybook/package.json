@@ -51,7 +51,7 @@
     "@vue/cli-plugin-unit-jest": "^5.0.8",
     "@vue/cli-service": "^5.0.8",
     "@vue/compiler-sfc": "^3.3.4",
-    "@vue/eslint-config-prettier": "^7.0.0",
+    "@vue/eslint-config-prettier": "^10.1.0",
     "@vue/test-utils": "^2.2.4",
     "@vue/vue3-jest": "^27.0.0",
     "babel-core": "^6.26.3",
