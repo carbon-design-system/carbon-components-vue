@@ -38,7 +38,7 @@
     "@storybook/addon-a11y": "^6.5.13",
     "@storybook/addon-actions": "^6.5.13",
     "@storybook/addon-essentials": "^6.5.13",
-    "@storybook/addon-links": "^6.5.13",
+    "@storybook/addon-links": "^8.4.2",
     "@storybook/builder-webpack5": "^6.5.13",
     "@storybook/manager-webpack5": "^6.5.13",
     "@storybook/test-runner": "~0.9.4",
