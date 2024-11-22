@@ -3312,7 +3312,7 @@ __metadata:
     "@vue/cli-plugin-unit-jest": ^5.0.8
     "@vue/cli-service": ^5.0.8
     "@vue/compiler-sfc": ^3.3.4
-    "@vue/eslint-config-prettier": ^7.0.0
+    "@vue/eslint-config-prettier": ^10.1.0
     "@vue/test-utils": ^2.2.4
     "@vue/vue3-jest": ^27.0.0
     babel-core: ^6.26.3
@@ -3365,7 +3365,7 @@ __metadata:
     "@vue/cli-plugin-unit-jest": ^5.0.8
     "@vue/cli-service": ^5.0.8
     "@vue/compiler-sfc": ^3.3.4
-    "@vue/eslint-config-prettier": ^7.0.0
+    "@vue/eslint-config-prettier": ^10.1.0
     "@vue/test-utils": ^2.2.4
     "@vue/vue3-jest": ^27.0.0
     "@vueuse/core": ^4.11.2
@@ -8495,16 +8495,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/eslint-config-prettier@npm:^7.0.0":
-  version: 7.0.0
-  resolution: "@vue/eslint-config-prettier@npm:7.0.0"
+"@vue/eslint-config-prettier@npm:^10.1.0":
+  version: 10.1.0
+  resolution: "@vue/eslint-config-prettier@npm:10.1.0"
   dependencies:
-    eslint-config-prettier: ^8.3.0
-    eslint-plugin-prettier: ^4.0.0
+    eslint-config-prettier: ^9.1.0
+    eslint-plugin-prettier: ^5.2.1
   peerDependencies:
-    eslint: ">= 7.28.0"
-    prettier: ">= 2.0.0"
-  checksum: febfd7f70369426bc3a481845b26a5d0c2cf26be8bf6b45dd96134529ce63f436e070785084c5c6b9579021cdca5ab26926cc75ea4b08f2cbe6cf9f8857f09e2
+    eslint: ">= 8.21.0"
+    prettier: ">= 3.0.0"
+  checksum: cba714f54908397c99a8f36979b073cf0292c685e4ca41915ce93680aff143ecff58e185d3fe390b53466de5d55baf7a2c382f968e7141f248fb2b0d4f3c2df1
   languageName: node
   linkType: hard
 
@@ -14165,14 +14165,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-prettier@npm:^8.3.0":
-  version: 8.5.0
-  resolution: "eslint-config-prettier@npm:8.5.0"
+"eslint-config-prettier@npm:^9.1.0":
+  version: 9.1.0
+  resolution: "eslint-config-prettier@npm:9.1.0"
   peerDependencies:
     eslint: ">=7.0.0"
   bin:
     eslint-config-prettier: bin/cli.js
-  checksum: 0d0f5c32e7a0ad91249467ce71ca92394ccd343178277d318baf32063b79ea90216f4c81d1065d60f96366fdc60f151d4d68ae7811a58bd37228b84c2083f893
+  checksum: 9229b768c879f500ee54ca05925f31b0c0bafff3d9f5521f98ff05127356de78c81deb9365c86a5ec4efa990cb72b74df8612ae15965b14136044c73e1f6a907
   languageName: node
   linkType: hard
 
@@ -14185,21 +14185,6 @@ __metadata:
     prettier: ^2.7.1
     prettier-linter-helpers: ^1.0.0
   checksum: 478de835518133fb0559356a519e04f6684b3c58f175159bc47d967f850c499d7708c480599bc773295647ea6098721ad82f455261dcc01315dd88c5fc459409
-  languageName: node
-  linkType: hard
-
-"eslint-plugin-prettier@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "eslint-plugin-prettier@npm:4.0.0"
-  dependencies:
-    prettier-linter-helpers: ^1.0.0
-  peerDependencies:
-    eslint: ">=7.28.0"
-    prettier: ">=2.0.0"
-  peerDependenciesMeta:
-    eslint-config-prettier:
-      optional: true
-  checksum: 03d69177a3c21fa2229c7e427ce604429f0b20ab7f411e2e824912f572a207c7f5a41fd1f0a95b9b8afe121e291c1b1f1dc1d44c7aad4b0837487f9c19f5210d
   languageName: node
   linkType: hard
 
