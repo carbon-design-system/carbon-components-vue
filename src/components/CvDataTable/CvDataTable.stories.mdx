@@ -154,7 +154,7 @@ const defaultTemplate = `
 const expandingRowsTemplate = defaultTemplate.replace(
   "<!-- Add optional expanding data here -->",
   `<template #expandedContent>{{row.desc}}</template>`)
-  .replace('@search="onSearch"', '')
+  .replace('@search="onSearch"', ':expandable="true"')
   .replace('testData', 'originalTestData')
 const skeletonTemplate = `
 <cv-data-table-skeleton
@@ -213,6 +213,7 @@ const vModelTemplate = defaultTemplate
   }
   ```
 - The search bar appears only if the search event is listened for.
+- If your table has expanding rows, you MUST set the `expandable` property on CvTable to `true`. `<cv-table :expandable="true" ...`
 
 **Row attributes:**
 - aria-label-for-batch-checkbox: Aria label for batch checkbox. default 'Select row N for batch action'.
@@ -283,34 +284,17 @@ when no items were select, please now use the new property `stickyBatchActive`.
   <Story
     name="Expanding rows"
     parameters={{
-      controls: { exclude: ['default',
-          'template',
-          'overflow-menu-click',
-          'row-expanded',
-          'row-select-change',
-          'row-select-changes',
-          'search',
-          'sort',
-          'actions',
-          'batch-actions',
-          'data',
-          'headings',
-          'helper-text',
-          'items-selected',
-          'of-n-pages',
-          'range-text',
-          'skeleton',
-          'update:rowsSelected',
-        ] },
+      controls: { include: [ "helperText", "title"] },
       docs: { source: { code: storySourceCode(expandingRowsTemplate, Template.args) } },
     }}
     args={{
       template: expandingRowsTemplate,
-      title: 'Table with expanding rows',
+      title: 'Table with expanding rows - NOTE: expandable property must be set to true',
       helperText: 'Click row to expand',
       useActions: false,
       useBatchActions: false,
-      usePagination: true
+      usePagination: true,
+      expandable: true
     }}
     argTypes={{
       rowSize: { control: 'select', default: 'standard', options: ['compact', 'short', 'standard', 'tall'] },

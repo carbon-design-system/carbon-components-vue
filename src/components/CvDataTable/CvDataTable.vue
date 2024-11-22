@@ -132,7 +132,7 @@
             <thead>
               <tr>
                 <th
-                  v-if="hasExpandingRows"
+                  v-if="expandable"
                   :class="`${carbonPrefix}--table-expand`"
                   :data-previous-value="
                     dataExpandAll ? 'collapsed' : 'expanded'
@@ -183,7 +183,7 @@
               </tr>
             </thead>
 
-            <component :is="hasExpandingRows ? Empty : 'tbody'">
+            <component :is="expandable ? Empty : 'tbody'">
               <slot name="data">
                 <cv-data-table-row
                   v-for="(row, rowIndex) in data"
@@ -360,11 +360,7 @@ const search = ref(null);
 
 /** @type {Ref<Set<String>>} */
 const expandingRowIds = ref(new Set());
-const hasExpandingRows = computed(() => {
-  return expandingRowIds.value.size > 0;
-});
 provide('expanding-row-ids', expandingRowIds);
-provide('has-expanding-rows', hasExpandingRows);
 onMounted(() => {
   if (props.expandable) expandingRowIds.value.add('table-expand-row');
 });
