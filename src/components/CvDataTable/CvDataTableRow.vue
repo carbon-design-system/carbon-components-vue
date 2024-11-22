@@ -78,7 +78,12 @@ watch(
 /** @type {Ref<Set<String>>} */
 const expandingRowIds = inject('expanding-row-ids', ref(new Set()));
 const dataExpandable = ref(false);
-watch(dataExpandable, () => {
+watch(dataExpandable, value => {
+  if (value && !expandingRowIds.value.has('table-expand-row')) {
+    console.warn(
+      `row ${cvId.value} is expandable but the expandable property is not set to true on the table`
+    );
+  }
   if (dataExpandable.value) expandingRowIds.value.add(cvId.value);
   else expandingRowIds.value?.delete(cvId.value);
 });
