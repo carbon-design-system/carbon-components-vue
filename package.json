@@ -169,8 +169,11 @@
     ]
   },
   "lint-staged": {
-    "*.{scss,css,js,md,vue}": [
+    "**/*.{scss,css,js,md,vue}": [
       "yarn format:staged"
+    ],
+    "src/**/*.{js,vue}": [
+      "eslint --fix --max-warnings 0"
     ]
   },
   "repository": {
