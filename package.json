@@ -169,10 +169,10 @@
     ]
   },
   "lint-staged": {
-    "**/*.{scss,css,js,md,vue}": [
-      "yarn format:staged"
+    "*.{scss,css,js,md,vue}": [
+      "prettier --write"
     ],
-    "src/**/*.{js,vue}": [
+    "*.{js,vue}": [
       "eslint --fix --max-warnings 0"
     ]
   },
