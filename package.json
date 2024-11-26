@@ -170,7 +170,10 @@
   },
   "lint-staged": {
     "*.{scss,css,js,md,vue}": [
-      "yarn format:staged"
+      "prettier --write"
+    ],
+    "*.{js,vue}": [
+      "eslint --fix --max-warnings 0"
     ]
   },
   "repository": {
