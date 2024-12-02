@@ -138,6 +138,7 @@ export { default as CvToggle } from './components/CvToggle/CvToggle.vue';
 export { default as CvDefinitionTooltip } from './components/CvTooltip/CvDefinitionTooltip.vue';
 export { default as CvInteractiveTooltip } from './components/CvTooltip/CvInteractiveTooltip.vue';
 export { default as CvTooltip } from './components/CvTooltip/CvTooltip.vue';
+export { default as CvContent } from './components/CvUIShell/CvContent.vue';
 export { default as CvHeader } from './components/CvUIShell/CvHeader.vue';
 export { default as CvHeaderGlobalAction } from './components/CvUIShell/CvHeaderGlobalAction.vue';
 export { default as CvHeaderMenu } from './components/CvUIShell/CvHeaderMenu.vue';
