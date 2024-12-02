@@ -8,7 +8,9 @@ on:
 jobs:
   Release:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4 # https://github.com/actions/checkout
@@ -19,8 +21,8 @@ jobs:
 
       # https://github.com/actions/checkout#push-a-commit-using-the-built-in-token
       - run: |
-          git config user.name carbon-bot
-          git config user.email carbon@us.ibm.com
+          git config user.name github-actions
+          git config user.email github-actions@github.com
 
       - name: Use Node.js 18.x
         uses: actions/setup-node@v4 # https://github.com/actions/setup-node
