@@ -40,4 +40,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-        run: yarn lerna publish from-package --yes
+        run: npm publish --provenance
