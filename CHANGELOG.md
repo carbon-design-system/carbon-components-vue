@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.23](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.22...@carbon/vue@3.0.23) (2024-12-02)
+
+### Bug Fixes
+
+- data table recursive issue with expanding rows ([58eef27](https://github.com/carbon-design-system/carbon-components-vue/commit/58eef27c7c5a4fa7424543892a8f5924c58f0212))
+- data table recursive issue with expanding rows ([e66b259](https://github.com/carbon-design-system/carbon-components-vue/commit/e66b2592c3d9ffa70a153fc2d6a36293cd5acf63))
+- eslint not properly run by lint-staged ([34b1a93](https://github.com/carbon-design-system/carbon-components-vue/commit/34b1a934b0da6753def19f2972ed1448faca7879))
+- glob ([1f88e76](https://github.com/carbon-design-system/carbon-components-vue/commit/1f88e764a0c6a4fe88f40dc006f536057f08fb96))
+
+### Features
+
+- add CvContent ([c69aaa4](https://github.com/carbon-design-system/carbon-components-vue/commit/c69aaa4d8cd40e36bac023b24e3842e7ac42abb5))
+
 ## [3.0.22](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.21...@carbon/vue@3.0.22) (2024-10-15)
 
 ### Bug Fixes
