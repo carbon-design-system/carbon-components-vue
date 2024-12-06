@@ -155,8 +155,7 @@ const props = defineProps({
   /** Specify the size of the Text Input. Currently, supports the following:
    `sm`,
    `md`,
-   `lg`,
-   `xl` */
+   `lg` */
   size: {
     type: String,
     default: undefined,
