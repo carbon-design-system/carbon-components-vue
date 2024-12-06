@@ -20,7 +20,6 @@ const AccordionWithItemContent = {
     </cv-accordion-item>
   </cv-accordion>`,
   setup(props, { emit }) {
-    const componentRef = ref(null);
     const numbers = ref([1, 2, 3, 4]);
     const oneLess = () => numbers.value.pop();
     const handleChange = changeValue => {
