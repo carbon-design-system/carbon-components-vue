@@ -1,6 +1,7 @@
 import { ref } from 'vue';
 import { storyParametersObject } from '../../global/storybook-utils';
 import CvNumberInput from './CvNumberInput.vue';
+import { sizeTypes } from './const';
 
 export default {
   title: 'Component/CvNumberInput',
@@ -54,6 +55,10 @@ export default {
         category: 'attributes',
       },
       description: '`step` attribute for input HTML element',
+    },
+    size: {
+      type: 'select',
+      options: Array.from(sizeTypes),
     },
     // props
     formItem: {
