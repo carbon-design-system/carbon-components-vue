@@ -10,6 +10,9 @@
         {
           [`${carbonPrefix}--number--light`]: isLight,
           [`${carbonPrefix}--number--helpertext`]: isHelper,
+          [`${carbonPrefix}--number--sm`]: size === 'sm',
+          [`${carbonPrefix}--number--md`]: size === 'md',
+          [`${carbonPrefix}--number--lg`]: size === 'lg',
           [`cv-number-input`]: !formItem,
         },
       ]"
@@ -105,6 +108,7 @@ import { props as propsTheme } from '../../use/cvTheme';
 import { useCvInputHelpers } from '../../use/cvInput';
 import { carbonPrefix } from '../../global/settings';
 import CvWrapper from '../CvWrapper/CvWrapper';
+import { sizeTypes } from './const';
 
 const props = defineProps({
   disabled: Boolean,
@@ -147,6 +151,15 @@ const props = defineProps({
   step: {
     type: [String, Number],
     default: undefined,
+  },
+  /** Specify the size of the Text Input. Currently, supports the following:
+   `sm`,
+   `md`,
+   `lg` */
+  size: {
+    type: String,
+    default: undefined,
+    validator: value => sizeTypes.has(value),
   },
   warnText: {
     type: String,

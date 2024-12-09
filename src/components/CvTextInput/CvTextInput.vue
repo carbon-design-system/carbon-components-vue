@@ -44,6 +44,10 @@
             [`${carbonPrefix}--text-input--light`]: isLight,
             [`${carbonPrefix}--text-input--warning`]: isWarn,
             [`${carbonPrefix}--password-input`]: isPassword,
+            [`${carbonPrefix}--text-input--sm`]: size === 'sm',
+            [`${carbonPrefix}--text-input--md`]: size === 'md',
+            [`${carbonPrefix}--text-input--lg`]: size === 'lg',
+            [`${carbonPrefix}--text-input--xl`]: size === 'xl',
           },
         ]"
         v-bind="$attrs"
@@ -115,7 +119,7 @@ import {
 import { carbonPrefix } from '../../global/settings';
 import { useCvId, props as propsCvId } from '../../use/cvId';
 import { useIsLight, props as propsTheme } from '../../use/cvTheme';
-import { inputTypes } from './const';
+import { inputTypes, sizeTypes } from './const';
 
 const props = defineProps({
   /**
@@ -150,6 +154,16 @@ const props = defineProps({
    * Toggle password visibility
    */
   passwordVisible: { type: Boolean, default: undefined },
+  /** Specify the size of the Text Input. Currently, supports the following:
+   `sm`,
+   `md`,
+   `lg`,
+   `xl` */
+  size: {
+    type: String,
+    default: undefined,
+    validator: value => sizeTypes.has(value),
+  },
   /**
    * Input type, only `text` and `password` are available
    */

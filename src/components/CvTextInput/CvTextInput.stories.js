@@ -2,6 +2,7 @@ import { storyParametersObject } from '../../global/storybook-utils';
 
 import { CvTextInput, CvTextInputSkeleton } from '.';
 import { ref } from 'vue';
+import { sizeTypes, inputTypes } from './const';
 
 export default {
   title: 'Component/CvTextInput',
@@ -92,17 +93,13 @@ export default {
         category: 'props',
       },
     },
+    size: {
+      type: 'select',
+      options: Array.from(sizeTypes),
+    },
     type: {
-      type: 'string',
-      table: {
-        type: { summary: 'string' },
-        category: 'props',
-        defaultValue: { summary: 'text' },
-      },
-      options: ['text', 'password'],
-      control: {
-        type: 'select',
-      },
+      type: 'select',
+      options: Array.from(inputTypes),
     },
     warnText: {
       type: 'string',
