@@ -3326,7 +3326,7 @@ __metadata:
     eslint: ^8.28.0
     eslint-plugin-prettier: ^5.2.1
     eslint-plugin-vue: ^8.7.1
-    husky: ^7.0.4
+    husky: ^9.1.7
     jest: ^27.5.1
     lint-staged: ^15.2.10
     pinst: ^3.0.0
@@ -3384,7 +3384,7 @@ __metadata:
     eslint-plugin-prettier-vue: ^4.2.0
     eslint-plugin-vue: ^8.7.1
     flatpickr: ^4.6.13
-    husky: ^7.0.4
+    husky: ^9.1.7
     jest: ^27.5.1
     lerna: ^6.5.1
     lint-staged: ^15.2.10
@@ -16905,12 +16905,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"husky@npm:^7.0.4":
-  version: 7.0.4
-  resolution: "husky@npm:7.0.4"
+"husky@npm:^9.1.7":
+  version: 9.1.7
+  resolution: "husky@npm:9.1.7"
   bin:
-    husky: lib/bin.js
-  checksum: c6ec4af63da2c9522da8674a20ad9b48362cc92704896cc8a58c6a2a39d797feb2b806f93fbd83a6d653fbdceb2c3b6e0b602c6b2e8565206ffc2882ef7db9e9
+    husky: bin.js
+  checksum: c2412753f15695db369634ba70f50f5c0b7e5cb13b673d0826c411ec1bd9ddef08c1dad89ea154f57da2521d2605bd64308af748749b27d08c5f563bcd89975f
   languageName: node
   linkType: hard
 
