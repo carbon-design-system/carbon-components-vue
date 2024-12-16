@@ -24,7 +24,7 @@
   "dependencies": {
     "@carbon/themes": "10",
     "@storybook/addon-docs": "6",
-    "@storybook/addon-storysource": "^6.5.15",
+    "@storybook/addon-storysource": "^8.4.7",
     "stylelint-config-property-sort-order-smacss": "^9.0.0",
     "stylelint-config-sass-guidelines": "^9.0.1",
     "vue": "^3.3.4"
