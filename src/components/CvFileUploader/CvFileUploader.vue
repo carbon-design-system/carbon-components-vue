@@ -97,7 +97,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue';
+import { ref, computed, onMounted, watch, useAttrs } from 'vue';
 import CvFileUploaderItem from './CvFileUploaderItem.vue';
 import { carbonPrefix } from '../../global/settings';
 import { CvFormItem } from '../CvForm';
@@ -109,6 +109,8 @@ import {
 } from '../CvButton/CvButtonCommon';
 
 const emit = defineEmits(['update:modelValue']);
+
+const attrs = useAttrs();
 
 const props = defineProps({
   accept: { type: String, default: undefined },
@@ -271,7 +273,10 @@ function onDragEvent(evt) {
 
   if (evt.type === 'drop') {
     evt.preventDefault();
-    addFiles(evt.dataTransfer.files);
+    const files = attrs.multiple
+      ? evt.dataTransfer.files
+      : [evt.dataTransfer.files[0]];
+    addFiles(files);
     allowDrop.value = false;
   }
 }
