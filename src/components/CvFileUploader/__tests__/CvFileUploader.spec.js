@@ -604,6 +604,103 @@ describe('CvFileUploader', () => {
       expect(emitResult[0]).toHaveLength(1);
       expect(emitResult[0][0].file.name).toBe(dummyFile.name);
     });
+
+    it('emits a single file when attr multiple is falsy', async () => {
+      const dummyFiles = [
+        new File(['file content'], 'dummy-file1.txt', {
+          type: 'text/plain',
+        }),
+        new File(['file content'], 'dummy-file2.txt', {
+          type: 'text/plain',
+        }),
+      ];
+      const { container, emitted } = render(CvFileUploader);
+
+      const dropZone = container.querySelector(
+        `div.${carbonPrefix}--file-browse-btn`
+      );
+      await fireEvent.drop(dropZone, {
+        dataTransfer: {
+          files: dummyFiles,
+          types: ['Files'],
+        },
+      });
+
+      const emitResult = emitted('update:modelValue').at(0);
+      expect(emitResult[0]).toHaveLength(1);
+    });
+
+    it('emits a single file on multiple iterations when attr multiple is falsy', async () => {
+      const initialDummyFiles = [
+        new File(['file content'], 'dummy-file1.txt', {
+          type: 'text/plain',
+        }),
+        new File(['file content'], 'dummy-file2.txt', {
+          type: 'text/plain',
+        }),
+      ];
+      const secondDummyFiles = [
+        new File(['file content'], 'dummy-file3.txt', {
+          type: 'text/plain',
+        }),
+        new File(['file content'], 'dummy-file4.txt', {
+          type: 'text/plain',
+        }),
+      ];
+
+      const { container, emitted } = render(CvFileUploader, {
+        attrs: { multiple: false },
+      });
+
+      const dropZone = container.querySelector(
+        `div.${carbonPrefix}--file-browse-btn`
+      );
+      await fireEvent.drop(dropZone, {
+        dataTransfer: {
+          files: initialDummyFiles,
+          types: ['Files'],
+        },
+      });
+      await fireEvent.drop(dropZone, {
+        dataTransfer: {
+          files: secondDummyFiles,
+          types: ['Files'],
+        },
+      });
+
+      const emitResult = emitted('update:modelValue').at(0);
+      expect(emitResult[0]).toHaveLength(1);
+    });
+
+    it('emits all dropped files when attr multiple is truthy', async () => {
+      const dummyFiles = [
+        new File(['file content'], 'dummy-file1.txt', {
+          type: 'text/plain',
+        }),
+        new File(['file content'], 'dummy-file2.txt', {
+          type: 'text/plain',
+        }),
+        new File(['file content'], 'dummy-file3.txt', {
+          type: 'text/plain',
+        }),
+      ];
+      const { container, emitted } = render(CvFileUploader, {
+        attrs: { multiple: true },
+      });
+
+      const dropZone = container.querySelector(
+        `div.${carbonPrefix}--file-browse-btn`
+      );
+      await fireEvent.drop(dropZone, {
+        dataTransfer: {
+          files: dummyFiles,
+          types: ['Files'],
+        },
+      });
+
+      const emitResult = emitted('update:modelValue').at(0);
+      expect(emitResult[0]).toHaveLength(3);
+    });
   });
 
   describe('File listing', () => {
