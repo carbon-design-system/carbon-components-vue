@@ -37,6 +37,7 @@
         :disabled="disabled || null"
         type="file"
         v-bind="$attrs"
+        :multiple="multiple"
         data-file-uploader
         data-target="[data-file-container]"
         @change="onChange"
@@ -73,6 +74,7 @@
           :disabled="disabled || null"
           type="file"
           v-bind="$attrs"
+          :multiple="multiple"
           tabindex="-1"
           data-file-uploader
           data-target="[data-file-container]"
@@ -97,7 +99,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch, useAttrs } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import CvFileUploaderItem from './CvFileUploaderItem.vue';
 import { carbonPrefix } from '../../global/settings';
 import { CvFormItem } from '../CvForm';
@@ -109,8 +111,6 @@ import {
 } from '../CvButton/CvButtonCommon';
 
 const emit = defineEmits(['update:modelValue']);
-
-const attrs = useAttrs();
 
 const props = defineProps({
   accept: { type: String, default: undefined },
@@ -149,6 +149,7 @@ const props = defineProps({
   },
   label: { type: String, default: undefined },
   modelValue: { type: Array, default: () => [] },
+  multiple: { type: Boolean, default: true },
   removable: Boolean,
   removeAriaLabel: { type: String, default: undefined },
   ...cvIdProps,
@@ -273,7 +274,7 @@ function onDragEvent(evt) {
 
   if (evt.type === 'drop') {
     evt.preventDefault();
-    if (attrs.multiple) {
+    if (props.multiple) {
       addFiles(evt.dataTransfer.files);
     } else {
       internalFiles.value = [];

@@ -614,7 +614,9 @@ describe('CvFileUploader', () => {
           type: 'text/plain',
         }),
       ];
-      const { container, emitted } = render(CvFileUploader);
+      const { container, emitted } = render(CvFileUploader, {
+        props: { multiple: false },
+      });
 
       const dropZone = container.querySelector(
         `div.${carbonPrefix}--file-browse-btn`
@@ -649,7 +651,7 @@ describe('CvFileUploader', () => {
       ];
 
       const { container, emitted } = render(CvFileUploader, {
-        attrs: { multiple: false },
+        props: { multiple: false },
       });
 
       const dropZone = container.querySelector(
@@ -685,7 +687,7 @@ describe('CvFileUploader', () => {
         }),
       ];
       const { container, emitted } = render(CvFileUploader, {
-        attrs: { multiple: true },
+        props: { multiple: true },
       });
 
       const dropZone = container.querySelector(
