@@ -37,6 +37,7 @@
         :disabled="disabled || null"
         type="file"
         v-bind="$attrs"
+        :multiple="multiple"
         data-file-uploader
         data-target="[data-file-container]"
         @change="onChange"
@@ -73,6 +74,7 @@
           :disabled="disabled || null"
           type="file"
           v-bind="$attrs"
+          :multiple="multiple"
           tabindex="-1"
           data-file-uploader
           data-target="[data-file-container]"
@@ -147,6 +149,7 @@ const props = defineProps({
   },
   label: { type: String, default: undefined },
   modelValue: { type: Array, default: () => [] },
+  multiple: { type: Boolean, default: true },
   removable: Boolean,
   removeAriaLabel: { type: String, default: undefined },
   ...cvIdProps,
@@ -271,7 +274,12 @@ function onDragEvent(evt) {
 
   if (evt.type === 'drop') {
     evt.preventDefault();
-    addFiles(evt.dataTransfer.files);
+    if (props.multiple) {
+      addFiles(evt.dataTransfer.files);
+    } else {
+      internalFiles.value = [];
+      addFiles([evt.dataTransfer.files[0]]);
+    }
     allowDrop.value = false;
   }
 }
