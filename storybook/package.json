@@ -22,17 +22,17 @@
     "test-storybook": "cd ..; test-storybook"
   },
   "dependencies": {
-    "@carbon/themes": "10",
+    "@carbon/themes": "10.55.5",
     "@storybook/addon-docs": "6",
     "@storybook/addon-storysource": "^6.5.15",
     "stylelint-config-property-sort-order-smacss": "^9.0.0",
     "stylelint-config-sass-guidelines": "^9.0.1",
-    "vue": "^3.3.4"
+    "vue": "^3.5.13"
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",
     "@babel/eslint-parser": "^7.17.0",
-    "@carbon/themes": "10",
+    "@carbon/themes": "10.55.5",
     "@commitlint/cli": "^16.3.0",
     "@commitlint/config-conventional": "^16.2.4",
     "@storybook/addon-a11y": "^6.5.13",
@@ -42,7 +42,7 @@
     "@storybook/builder-webpack5": "^6.5.13",
     "@storybook/manager-webpack5": "^6.5.13",
     "@storybook/test-runner": "~0.9.4",
-    "@storybook/vue3": "^6.5.13",
+    "@storybook/vue3": "^6.5.16",
     "@testing-library/dom": "^8.19.0",
     "@testing-library/user-event": "^14.4.3",
     "@testing-library/vue": "^6.6.1",
@@ -50,9 +50,9 @@
     "@vue/cli-plugin-eslint": "^5.0.8",
     "@vue/cli-plugin-unit-jest": "^5.0.8",
     "@vue/cli-service": "^5.0.8",
-    "@vue/compiler-sfc": "^3.3.4",
+    "@vue/compiler-sfc": "^3.5.13",
     "@vue/eslint-config-prettier": "^10.1.0",
-    "@vue/test-utils": "^2.2.4",
+    "@vue/test-utils": "^2.4.6",
     "@vue/vue3-jest": "^27.0.0",
     "babel-core": "^6.26.3",
     "babel-jest": "^27.5.1",
@@ -73,11 +73,11 @@
     "react-dom": "^17.0.2",
     "sass": "^1.56.1",
     "sass-loader": "^16.0.2",
-    "storybook": "^6.5.13",
+    "storybook": "^6.5.16",
     "style-loader": "^3.3.1",
     "stylelint": "^14.15.0",
     "typescript": "^5.7.2",
-    "vue-loader": "^17.0.1",
+    "vue-loader": "^17.4.2",
     "webpack": "^5.75.0"
   },
   "eslintConfig": {
