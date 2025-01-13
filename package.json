@@ -29,7 +29,7 @@
     "storybook"
   ],
   "dependencies": {
-    "@carbon/icons-vue": "^10.60.0",
+    "@carbon/icons-vue": "^10.102.0",
     "@ibm/telemetry-js": "^1.5.1",
     "@vueuse/core": "^4.11.2",
     "carbon-components": "^10.58.5",
@@ -50,9 +50,9 @@
     "@vue/cli-plugin-eslint": "^5.0.8",
     "@vue/cli-plugin-unit-jest": "^5.0.8",
     "@vue/cli-service": "^5.0.8",
-    "@vue/compiler-sfc": "^3.3.4",
+    "@vue/compiler-sfc": "^3.5.13",
     "@vue/eslint-config-prettier": "^10.1.0",
-    "@vue/test-utils": "^2.2.4",
+    "@vue/test-utils": "^2.4.6",
     "@vue/vue3-jest": "^27.0.0",
     "accessibility-checker": "^3.1.59",
     "babel-core": "^6.26.3",
@@ -72,14 +72,14 @@
     "prettier": "^2.8.0",
     "sass": "^1.56.1",
     "sass-loader": "^16.0.2",
-    "storybook": "^6.5.13",
+    "storybook": "^6.5.16",
     "style-loader": "^3.3.1",
     "stylelint": "^14.15.0",
     "stylelint-config-property-sort-order-smacss": "^9.0.0",
     "stylelint-config-sass-guidelines": "^9.0.1",
-    "vue": "^3.3.4",
+    "vue": "^3.5.13",
     "vue-docgen-web-types": "^0.1.8",
-    "vue-loader": "^17.0.1",
+    "vue-loader": "^17.4.2",
     "webpack": "^5.75.0"
   },
   "eslintConfig": {
