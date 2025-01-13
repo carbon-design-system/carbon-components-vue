@@ -76,7 +76,7 @@
     "style-loader": "^3.3.1",
     "stylelint": "^14.15.0",
     "stylelint-config-property-sort-order-smacss": "^9.0.0",
-    "stylelint-config-sass-guidelines": "^9.0.1",
+    "stylelint-config-sass-guidelines": "^12.1.0",
     "vue": "^3.3.4",
     "vue-docgen-web-types": "^0.1.8",
     "vue-loader": "^17.0.1",
