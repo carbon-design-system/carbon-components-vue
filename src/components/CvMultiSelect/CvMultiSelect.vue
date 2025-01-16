@@ -168,6 +168,7 @@
             :title="item.label"
           >
             <cv-checkbox
+              :id="`${uid}-cb-${item.value}`"
               v-model="data.selectedItems"
               tabindex="-1"
               :form-item="false"

@@ -1,10 +1,10 @@
 <template>
   <li
+    data-allow-mismatch="children"
     data-accordion-item
     class="cv-accordion-item"
     :class="[
       `${carbonPrefix}--accordion__item`,
-
       {
         [`${carbonPrefix}--accordion__item--disabled`]: disabled,
         [`${carbonPrefix}--accordion__item--active`]: isOpen,
@@ -23,17 +23,11 @@
       @click.prevent.stop="onClick"
     >
       <ChevronRight16 :class="`${carbonPrefix}--accordion__arrow`" />
-
       <p :class="`${carbonPrefix}--accordion__title`">
-        <!-- @slot title of the accordion item -->
-
         <slot name="title"></slot>
       </p>
     </button>
-
     <div :id="cvId" :class="`${carbonPrefix}--accordion__content`">
-      <!-- @slot content of accordion item -->
-
       <slot name="content"></slot>
     </div>
   </li>

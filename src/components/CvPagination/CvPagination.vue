@@ -2,6 +2,7 @@
   <div :class="`cv-pagination ${carbonPrefix}--pagination`" data-pagination>
     <div :class="`${carbonPrefix}--pagination__left`">
       <cv-select
+        :id="`${id}-select-page-size`"
         ref="pageSizeSelect"
         :class="`${carbonPrefix}--select__item-count`"
         :label="pageSizesLabel"
@@ -29,6 +30,7 @@
     <div :class="`${carbonPrefix}--pagination__right`">
       <cv-select
         v-if="numberOfItems !== Infinity"
+        :id="`${id}-select-page`"
         ref="pageSelect"
         :class="`${carbonPrefix}--select__page-number`"
         :label="pageNumberLabel"
@@ -82,10 +84,11 @@
 
 <script setup>
 import { carbonPrefix } from '../../global/settings';
-import { computed, nextTick, onMounted, ref, watch } from 'vue';
+import { computed, nextTick, onMounted, ref, useAttrs, watch } from 'vue';
 import { CaretLeft16, CaretRight16 } from '@carbon/icons-vue';
 import CvSelect from '../CvSelect';
 import CvSelectOption from '../CvSelect/CvSelectOption.vue';
+import { useCvId } from '../../use/cvId';
 
 const emit = defineEmits(['change']);
 
@@ -101,6 +104,8 @@ const props = defineProps({
   page: { type: Number, default: undefined },
   pageSizes: { type: Array, default: () => [10, 20, 30, 40, 50] },
 });
+const attrs = useAttrs();
+const id = useCvId(attrs, true);
 
 const firstItem = ref(1);
 const pageValue = ref(1);

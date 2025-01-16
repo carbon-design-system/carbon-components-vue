@@ -160,6 +160,7 @@
                   <cv-checkbox-skeleton v-if="isSkeleton" />
                   <cv-checkbox
                     v-else
+                    :id="`col-cb-${uid}`"
                     v-model="headingChecked"
                     :form-item="false"
                     value="headingCheck"
@@ -187,6 +188,7 @@
               <slot name="data">
                 <cv-data-table-row
                   v-for="(row, rowIndex) in data"
+                  :id="`${uid}-${rowIndex}`"
                   :key="`row:${rowIndex}`"
                   ref="dataRows"
                   :value="`${rowIndex}`"
@@ -211,6 +213,7 @@
     <cv-pagination
       v-if="pagination"
       v-bind="internalPagination"
+      :id="`pagination-${uid}`"
       :number-of-items="internalNumberOfItems"
       @change="$emit('pagination', $event)"
     >
@@ -361,12 +364,16 @@ const search = ref(null);
 /** @type {Ref<Set<String>>} */
 const expandingRowIds = ref(new Set());
 provide('expanding-row-ids', expandingRowIds);
+
+const tableExpandable = ref(props.expandable);
+provide('table-expandable', tableExpandable);
 onMounted(() => {
   if (props.expandable) expandingRowIds.value.add('table-expand-row');
 });
 watch(
   () => props.expandable,
   () => {
+    tableExpandable.value = props.expandable;
     if (props.expandable) expandingRowIds.value.add('table-expand-row');
     else expandingRowIds.value.delete('table-expand-row');
   }
