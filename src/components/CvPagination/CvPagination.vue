@@ -2,7 +2,7 @@
   <div :class="`cv-pagination ${carbonPrefix}--pagination`" data-pagination>
     <div :class="`${carbonPrefix}--pagination__left`">
       <cv-select
-        :id="`${id}-select-page-size`"
+        :id="`${cvId}-select-page-size`"
         ref="pageSizeSelect"
         :class="`${carbonPrefix}--select__item-count`"
         :label="pageSizesLabel"
@@ -30,7 +30,7 @@
     <div :class="`${carbonPrefix}--pagination__right`">
       <cv-select
         v-if="numberOfItems !== Infinity"
-        :id="`${id}-select-page`"
+        :id="`${cvId}-select-page`"
         ref="pageSelect"
         :class="`${carbonPrefix}--select__page-number`"
         :label="pageNumberLabel"
@@ -105,7 +105,7 @@ const props = defineProps({
   pageSizes: { type: Array, default: () => [10, 20, 30, 40, 50] },
 });
 const attrs = useAttrs();
-const id = useCvId(attrs, true);
+const cvId = useCvId(attrs, true);
 
 const firstItem = ref(1);
 const pageValue = ref(1);

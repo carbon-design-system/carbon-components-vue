@@ -16,7 +16,7 @@
   >
     <label
       v-if="title"
-      :id="`${uid}-label`"
+      :id="`${cvId}-label`"
       :class="[
         `${carbonPrefix}--label`,
         { [`${carbonPrefix}--label--disabled`]: disabled },
@@ -24,7 +24,7 @@
       >{{ title }}</label
     >
     <div
-      :aria-labelledby="`${uid}-label`"
+      :aria-labelledby="`${cvId}-label`"
       role="listbox"
       tabindex="-1"
       :class="[
@@ -68,8 +68,8 @@
         :aria-disabled="disabled || null"
         aria-haspopup="listbox"
         :aria-expanded="data.open ? 'true' : 'false'"
-        :aria-owns="uid"
-        :aria-controls="uid"
+        :aria-owns="cvId"
+        :aria-controls="cvId"
         tabindex="0"
         :aria-label="data.open ? 'close menu' : 'open menu'"
         data-toggle="true"
@@ -105,7 +105,7 @@
                   !internalFilter || internalFilter.length === 0,
               },
             ]"
-            :aria-controls="uid"
+            :aria-controls="cvId"
             aria-autocomplete="list"
             role="combobox"
             :aria-expanded="data.open ? 'true' : 'false'"
@@ -141,9 +141,9 @@
       </button>
 
       <div
-        :id="uid"
+        :id="cvId"
         ref="elList"
-        :aria-labelledby="`${uid}-label`"
+        :aria-labelledby="`${cvId}-label`"
         :class="`${carbonPrefix}--list-box__menu`"
         role="listbox"
       >
@@ -168,7 +168,7 @@
             :title="item.label"
           >
             <cv-checkbox
-              :id="`${uid}-cb-${item.value}`"
+              :id="`${cvId}-cb-${item.value}`"
               v-model="data.selectedItems"
               tabindex="-1"
               :form-item="false"
@@ -360,7 +360,7 @@ const props = defineProps({
   ...propsCvId,
   ...propsTheme,
 });
-const uid = useCvId(props, true);
+const cvId = useCvId(props, true);
 const isLight = useIsLight(props);
 
 const data = reactive({

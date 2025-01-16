@@ -29,7 +29,7 @@
       <cv-checkbox-skeleton v-if="isSkeleton" />
       <cv-checkbox
         v-else
-        :id="`row-checked-${id}`"
+        :id="`${cvId}-row-checked`"
         ref="rowChecked"
         v-model="dataChecked"
         :form-item="false"
@@ -44,7 +44,10 @@
     </td>
     <slot />
     <td v-if="hasOverflowMenu" :class="`${carbonPrefix}--table-column-menu`">
-      <cv-overflow-menu v-bind="overflowMenuOptions" :id="`om-${id}`">
+      <cv-overflow-menu
+        v-bind="overflowMenuOptions"
+        :id="`${cvId}-overflow-menu`"
+      >
         <cv-overflow-menu-item
           v-for="(item, index) in overflowMenuButtons"
           :key="`${index}`"
@@ -93,7 +96,7 @@ const props = defineProps({
 });
 
 const attrs = useAttrs();
-const id = useCvId(attrs, true);
+const cvId = useCvId(attrs, true);
 
 const isSkeleton = inject('is-skeleton', ref(false));
 /** @type {Ref<UnwrapRef<Set<>>>} */
