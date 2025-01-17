@@ -1,5 +1,5 @@
 <template>
-  <div :id="uid" :style="tableStyle" class="cv-data-table">
+  <div :id="cvId" :style="tableStyle" class="cv-data-table">
     <div
       :class="[
         `${carbonPrefix}--data-table-container`,
@@ -55,7 +55,7 @@
           <div
             v-if="onSearch"
             ref="searchContainer"
-            :aria-labelledby="`${uid}-search`"
+            :aria-labelledby="`${cvId}-search`"
             :class="[
               `${carbonPrefix}--search `,
               {
@@ -73,20 +73,20 @@
               <Search16 :class="`${carbonPrefix}--search-magnifier-icon`" />
             </div>
             <label
-              :id="`${uid}-search`"
-              :for="`searchbox-${uid}`"
+              :id="`${cvId}-search`"
+              :for="`searchbox-${cvId}`"
               :class="`${carbonPrefix}--label`"
               >{{ searchLabel }}</label
             >
             <input
-              :id="`searchbox-${uid}`"
+              :id="`searchbox-${cvId}`"
               ref="search"
               v-model="searchValue"
               :class="`${carbonPrefix}--search-input`"
               type="text"
               role="searchbox"
               :placeholder="searchPlaceholder"
-              :aria-labelledby="`searchbox-${uid}`"
+              :aria-labelledby="`searchbox-${cvId}`"
               @input="onInternalSearch"
               @click="checkSearchExpand(true)"
               @keydown.esc.prevent="checkSearchExpand(false)"
@@ -160,6 +160,7 @@
                   <cv-checkbox-skeleton v-if="isSkeleton" />
                   <cv-checkbox
                     v-else
+                    :id="`${cvId}-headingCheck`"
                     v-model="headingChecked"
                     :form-item="false"
                     value="headingCheck"
@@ -187,6 +188,7 @@
               <slot name="data">
                 <cv-data-table-row
                   v-for="(row, rowIndex) in data"
+                  :id="`${cvId}-${rowIndex}`"
                   :key="`row:${rowIndex}`"
                   ref="dataRows"
                   :value="`${rowIndex}`"
@@ -211,6 +213,7 @@
     <cv-pagination
       v-if="pagination"
       v-bind="internalPagination"
+      :id="`${cvId}-pagination`"
       :number-of-items="internalNumberOfItems"
       @change="$emit('pagination', $event)"
     >
@@ -343,7 +346,7 @@ const props = defineProps({
   onSearch: { type: Function, default: undefined },
   ...propsCvId,
 });
-const uid = useCvId(props, true);
+const cvId = useCvId(props, true);
 
 const isSkeleton = ref(props.skeleton);
 provide('is-skeleton', isSkeleton);
@@ -361,12 +364,16 @@ const search = ref(null);
 /** @type {Ref<Set<String>>} */
 const expandingRowIds = ref(new Set());
 provide('expanding-row-ids', expandingRowIds);
+
+const tableExpandable = ref(props.expandable);
+provide('table-expandable', tableExpandable);
 onMounted(() => {
   if (props.expandable) expandingRowIds.value.add('table-expand-row');
 });
 watch(
   () => props.expandable,
   () => {
+    tableExpandable.value = props.expandable;
     if (props.expandable) expandingRowIds.value.add('table-expand-row');
     else expandingRowIds.value.delete('table-expand-row');
   }

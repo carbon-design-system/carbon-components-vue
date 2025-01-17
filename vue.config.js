@@ -8,8 +8,8 @@ module.exports = {
       assetFilter: function (assetFilename) {
         return assetFilename.endsWith('min.js');
       },
-      maxEntrypointSize: 300000,
-      maxAssetSize: 300000,
+      maxEntrypointSize: 600000,
+      maxAssetSize: 600000,
     },
   },
   chainWebpack: config => {

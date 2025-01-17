@@ -29,6 +29,7 @@
       <cv-checkbox-skeleton v-if="isSkeleton" />
       <cv-checkbox
         v-else
+        :id="`${cvId}-row-checked`"
         ref="rowChecked"
         v-model="dataChecked"
         :form-item="false"
@@ -43,7 +44,10 @@
     </td>
     <slot />
     <td v-if="hasOverflowMenu" :class="`${carbonPrefix}--table-column-menu`">
-      <cv-overflow-menu v-bind="overflowMenuOptions">
+      <cv-overflow-menu
+        v-bind="overflowMenuOptions"
+        :id="`${cvId}-overflow-menu`"
+      >
         <cv-overflow-menu-item
           v-for="(item, index) in overflowMenuButtons"
           :key="`${index}`"
@@ -75,7 +79,9 @@ import {
   useSlots,
   watch,
   inject,
+  useAttrs,
 } from 'vue';
+import { useCvId } from '../../use/cvId';
 
 const props = defineProps({
   ariaLabelForBatchCheckbox: { type: String, default: undefined },
@@ -88,6 +94,9 @@ const props = defineProps({
   value: { type: String, default: undefined },
   rowId: { type: String, default: undefined },
 });
+
+const attrs = useAttrs();
+const cvId = useCvId(attrs, true);
 
 const isSkeleton = inject('is-skeleton', ref(false));
 /** @type {Ref<UnwrapRef<Set<>>>} */

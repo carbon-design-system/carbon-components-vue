@@ -1,10 +1,11 @@
 <template>
   <tbody
-    v-if="dataSomeExpandingRows"
+    v-if="tableExpandable"
     :id="cvId"
     class="cv-data-table-row cv-data-table-row--expandable"
   >
     <cv-data-table-row-inner
+      :id="`${cvId}-ri`"
       ref="row"
       :row-id="cvId"
       v-bind="$attrs"
@@ -75,9 +76,11 @@ watch(
   () => (rowValue.value = props.value)
 );
 
+/** @type {Ref<boolean>} */
+const tableExpandable = inject('table-expandable', ref(false));
 /** @type {Ref<Set<String>>} */
 const expandingRowIds = inject('expanding-row-ids', ref(new Set()));
-const dataExpandable = ref(false);
+const dataExpandable = ref(tableExpandable.value);
 watch(dataExpandable, value => {
   if (value && !expandingRowIds.value.has('table-expand-row')) {
     console.warn(
@@ -86,9 +89,6 @@ watch(dataExpandable, value => {
   }
   if (dataExpandable.value) expandingRowIds.value.add(cvId.value);
   else expandingRowIds.value?.delete(cvId.value);
-});
-const dataSomeExpandingRows = computed(() => {
-  return expandingRowIds.value?.size > 0;
 });
 const attrs = useAttrs();
 const rowIds = inject('row-ids', ref(new Set()));
