@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.24](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.23...@carbon/vue@3.0.24) (2025-01-21)
+
+### Bug Fixes
+
+- adjust CvFileUploader drop handler ([20808d8](https://github.com/carbon-design-system/carbon-components-vue/commit/20808d8365f88573d138c620fd116ab917bbcb76))
+- make ids consistent ([905eb2c](https://github.com/carbon-design-system/carbon-components-vue/commit/905eb2c76f4f159a35023a070085ffed7f70e757))
+- remove xl for numer ([b4bd1c3](https://github.com/carbon-design-system/carbon-components-vue/commit/b4bd1c3d1c497cad2e0fa7530a2bb5c5d89915df))
+- standardize on cvId and suffixes ([d6964cc](https://github.com/carbon-design-system/carbon-components-vue/commit/d6964ccfe0e349876fc1dcb9f36ba061814e551f))
+- unit test - seems to be a change in vue 3 ([c581059](https://github.com/carbon-design-system/carbon-components-vue/commit/c581059d1cb0bf1b23382b67d73c25bb67fa7422))
+
+### Features
+
+- add size property to text and number input to match react version as mentioned in [#1669](https://github.com/carbon-design-system/carbon-components-vue/issues/1669) ([d14944b](https://github.com/carbon-design-system/carbon-components-vue/commit/d14944b2098de77049f58a5261fe04cc7e4f3f9b))
+
 ## [3.0.23](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.22...@carbon/vue@3.0.23) (2024-12-02)
 
 ### Bug Fixes
