@@ -3409,7 +3409,7 @@ __metadata:
     "@commitlint/cli": ^16.3.0
     "@commitlint/config-conventional": ^16.2.4
     "@storybook/addon-a11y": ^6.5.13
-    "@storybook/addon-actions": ^6.5.13
+    "@storybook/addon-actions": ^8.5.1
     "@storybook/addon-docs": 6
     "@storybook/addon-essentials": ^6.5.13
     "@storybook/addon-links": ^6.5.13
@@ -5607,7 +5607,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-actions@npm:6.5.15, @storybook/addon-actions@npm:^6.5.13":
+"@storybook/addon-actions@npm:6.5.15":
   version: 6.5.15
   resolution: "@storybook/addon-actions@npm:6.5.15"
   dependencies:
@@ -5639,6 +5639,21 @@ __metadata:
     react-dom:
       optional: true
   checksum: ce0ca5fddeb196adec7757dd287085c19d89d26506539d07445df3759eca9817a779f2923cc5fd7dfc9f515788628f6c0f604b10366659ca46562fab980c64f5
+  languageName: node
+  linkType: hard
+
+"@storybook/addon-actions@npm:^8.5.1":
+  version: 8.5.1
+  resolution: "@storybook/addon-actions@npm:8.5.1"
+  dependencies:
+    "@storybook/global": ^5.0.0
+    "@types/uuid": ^9.0.1
+    dequal: ^2.0.2
+    polished: ^4.2.2
+    uuid: ^9.0.0
+  peerDependencies:
+    storybook: ^8.5.1
+  checksum: b9a7fae337f6cb922ad929321676b1dae3ca1a57b2fd074757de7759f8d4cb5b5bc15564da48baca1217f457795e99fbea302b2e4f23844f904d90eff732daed
   languageName: node
   linkType: hard
 
@@ -6848,6 +6863,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/global@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@storybook/global@npm:5.0.0"
+  checksum: ede0ad35ec411fe31c61150dbd118fef344d1d0e72bf5d3502368e35cf68126f6b7ae4a0ab5e2ffe2f0baa3b4286f03ad069ba3e098e1725449ef08b7e154ba8
+  languageName: node
+  linkType: hard
+
 "@storybook/manager-webpack4@npm:6.5.16":
   version: 6.5.16
   resolution: "@storybook/manager-webpack4@npm:6.5.16"
@@ -7993,6 +8015,13 @@ __metadata:
   version: 2.0.6
   resolution: "@types/unist@npm:2.0.6"
   checksum: 25cb860ff10dde48b54622d58b23e66214211a61c84c0f15f88d38b61aa1b53d4d46e42b557924a93178c501c166aa37e28d7f6d994aba13d24685326272d5db
+  languageName: node
+  linkType: hard
+
+"@types/uuid@npm:^9.0.1":
+  version: 9.0.8
+  resolution: "@types/uuid@npm:9.0.8"
+  checksum: b8c60b7ba8250356b5088302583d1704a4e1a13558d143c549c408bf8920535602ffc12394ede77f8a8083511b023704bc66d1345792714002bfa261b17c5275
   languageName: node
   linkType: hard
 
@@ -13541,6 +13570,13 @@ __metadata:
   version: 2.3.1
   resolution: "deprecation@npm:2.3.1"
   checksum: f56a05e182c2c195071385455956b0c4106fe14e36245b00c689ceef8e8ab639235176a96977ba7c74afb173317fac2e0ec6ec7a1c6d1e6eaa401c586c714132
+  languageName: node
+  linkType: hard
+
+"dequal@npm:^2.0.2":
+  version: 2.0.3
+  resolution: "dequal@npm:2.0.3"
+  checksum: 8679b850e1a3d0ebbc46ee780d5df7b478c23f335887464023a631d1b9af051ad4a6595a44220f9ff8ff95a8ddccf019b5ad778a976fd7bbf77383d36f412f90
   languageName: node
   linkType: hard
 
@@ -29146,6 +29182,15 @@ __metadata:
   bin:
     uuid: ./bin/uuid
   checksum: 58de2feed61c59060b40f8203c0e4ed7fd6f99d42534a499f1741218a1dd0c129f4aa1de797bcf822c8ea5da7e4137aa3673431a96dae729047f7aca7b27866f
+  languageName: node
+  linkType: hard
+
+"uuid@npm:^9.0.0":
+  version: 9.0.1
+  resolution: "uuid@npm:9.0.1"
+  bin:
+    uuid: dist/bin/uuid
+  checksum: 39931f6da74e307f51c0fb463dc2462807531dc80760a9bff1e35af4316131b4fc3203d16da60ae33f07fdca5b56f3f1dd662da0c99fea9aaeab2004780cc5f4
   languageName: node
   linkType: hard
 
