@@ -17,7 +17,7 @@ describe('CvDatePicker', () => {
       },
     });
 
-    const datepicker = await result.findByRole('datepicker');
+    const datepicker = await result.findByTestId('datepicker');
 
     const user = userEvent.setup();
 
@@ -56,7 +56,7 @@ describe('CvDatePicker', () => {
       },
     });
 
-    const datepicker = await result.findByRole('datepicker');
+    const datepicker = await result.findByTestId('datepicker');
 
     const user = userEvent.setup();
 
@@ -118,8 +118,8 @@ describe('CvDatePicker', () => {
       },
     });
 
-    const datepicker = await result.findByRole('datepicker');
-    const todatepicker = await result.findByRole('todatepicker');
+    const datepicker = await result.findByTestId('datepicker');
+    const todatepicker = await result.findByTestId('todatepicker');
 
     const user = userEvent.setup();
 
