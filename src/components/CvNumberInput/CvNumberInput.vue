@@ -98,7 +98,7 @@
 </template>
 
 <script setup>
-import { computed, ref, useSlots, nextTick } from 'vue';
+import { computed, ref, useSlots } from 'vue';
 import Add16 from '@carbon/icons-vue/es/add/16';
 import Subtract16 from '@carbon/icons-vue/es/subtract/16';
 import WarningFilled16 from '@carbon/icons-vue/es/warning--filled/16';
@@ -202,9 +202,8 @@ const internalValue = computed({
   },
   set(value) {
     displayValue.value = formatInputValueType(value);
-    if (Number.isNaN(displayValue.value) || displayValue.value === 'NaN') {
-      displayValue.value = 0;
-      nextTick(() => (displayValue.value = NaN));
+    if (typeof value === 'string') {
+      input.value.value = '';
     }
     onInput(displayValue.value);
   },
