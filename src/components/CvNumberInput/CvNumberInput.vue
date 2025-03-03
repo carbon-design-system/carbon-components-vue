@@ -114,7 +114,7 @@ const props = defineProps({
   disabled: Boolean,
   modelValue: {
     type: [String, Number],
-    default: '',
+    default: undefined,
   },
   formItem: {
     type: Boolean,
@@ -190,18 +190,22 @@ const modelValueType = typeof props.modelValue;
 const valuesToNaN = ['', null, undefined];
 
 const formatInputValueType = value => {
-  if (modelValueType === 'string') return value.toString();
+  if (modelValueType === 'string') return Number(value).toString();
   // According to Vue2 component if there is no value NaN is emitted
   return valuesToNaN.includes(value) ? NaN : Number(value);
 };
 
+const displayValue = ref(props.modelValue || props.min);
 const internalValue = computed({
   get() {
-    return props.modelValue;
+    return props.modelValue || displayValue.value;
   },
   set(value) {
-    const valueFormatted = formatInputValueType(value);
-    onInput(valueFormatted);
+    displayValue.value = formatInputValueType(value);
+    if (typeof value === 'string') {
+      input.value.value = '';
+    }
+    onInput(displayValue.value);
   },
 });
 
