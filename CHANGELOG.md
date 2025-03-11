@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.25](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.24...@carbon/vue@3.0.25) (2025-03-11)
+
+### Bug Fixes
+
+- cv-data-table related components exports ([b10ef62](https://github.com/carbon-design-system/carbon-components-vue/commit/b10ef6253624d0fe5c9f449ab3b72fdf8300ecdd))
+- prevent non-numeric input on firefox and Safari ([448b6c0](https://github.com/carbon-design-system/carbon-components-vue/commit/448b6c05cd922e2e3eaaf3f1c4b339229b8bea7b))
+- v-model string ([c3f39b0](https://github.com/carbon-design-system/carbon-components-vue/commit/c3f39b085917ad05d7fde80aab02d27ff8b5c456))
+
 ## [3.0.24](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.23...@carbon/vue@3.0.24) (2025-01-21)
 
 ### Bug Fixes
