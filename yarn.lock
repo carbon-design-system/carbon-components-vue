@@ -3309,23 +3309,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/colors@npm:^10.37.4":
-  version: 10.37.4
-  resolution: "@carbon/colors@npm:10.37.4"
+"@carbon/colors@npm:^11.32.0":
+  version: 11.32.0
+  resolution: "@carbon/colors@npm:11.32.0"
   dependencies:
     "@ibm/telemetry-js": ^1.5.0
-  checksum: 1fc814f3c4fd35683e8bed432fded82642950c82991df27e59cf07419aecfbe6da3c72eea6d11f1bf610374e55460bb9f2a246634c9f6027439cb5d5e7914a39
+  checksum: a603ef941024bf24d05a93278b1f97e589e40b551ae64140ebe00749b451441196d04f975b218c481fbffd06c1fcfb30db031be480b8ef85d602b86efae001b1
   languageName: node
   linkType: hard
 
-"@carbon/grid@npm:^10.43.4":
-  version: 10.43.4
-  resolution: "@carbon/grid@npm:10.43.4"
+"@carbon/grid@npm:^11.35.0":
+  version: 11.35.0
+  resolution: "@carbon/grid@npm:11.35.0"
   dependencies:
-    "@carbon/import-once": ^10.7.2
-    "@carbon/layout": ^10.37.4
+    "@carbon/layout": ^11.33.0
     "@ibm/telemetry-js": ^1.5.0
-  checksum: 8232491532821084a806625eee145bceeb8d90eb287cd78aed75ed0ab2b274e3f3e4919b77ec85055a1934c2858e6534b86b10da55cef5f375ac2d127794ec51
+  checksum: 4651a01ad5b3b31113ad9d548b5b4f768393d7df1b4f8409e9006e77f58c578b3a4b342c7f455a3828f27f5dd2e7ca9707e830a970115a5f755f948a83c9ec85
   languageName: node
   linkType: hard
 
@@ -3348,21 +3347,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/import-once@npm:^10.7.2":
-  version: 10.7.2
-  resolution: "@carbon/import-once@npm:10.7.2"
+"@carbon/layout@npm:^11.33.0":
+  version: 11.33.0
+  resolution: "@carbon/layout@npm:11.33.0"
   dependencies:
     "@ibm/telemetry-js": ^1.5.0
-  checksum: c13da37dca06b97a66f897260ddc5f8569d2a492b88faca923235fb76852309fc423e366398f784ba6066f971f60eea48e6b6c343972f40d3ef108ab78185eb1
-  languageName: node
-  linkType: hard
-
-"@carbon/layout@npm:^10.37.4":
-  version: 10.37.4
-  resolution: "@carbon/layout@npm:10.37.4"
-  dependencies:
-    "@ibm/telemetry-js": ^1.5.0
-  checksum: fdae21085d888b75d593b5a36e513b0ae29ae54dc5199da32e4a807dca4c26b9d1f3b5f5c32fe7a54d512441f1137703d92f99beacf7a0e57e69a0cdba717ff9
+  checksum: 5bc2e952404d87552432312d9b1960d91372671be1b2fff64d0cc2585a2ccccf5dc61717eb9900cec4226c718ba14292b30cae7fd230fbc6b0dee80287be694b
   languageName: node
   linkType: hard
 
@@ -3375,27 +3365,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/themes@npm:10.55.5":
-  version: 10.55.5
-  resolution: "@carbon/themes@npm:10.55.5"
+"@carbon/themes@npm:11.51.0":
+  version: 11.51.0
+  resolution: "@carbon/themes@npm:11.51.0"
   dependencies:
-    "@carbon/colors": ^10.37.4
-    "@carbon/layout": ^10.37.4
-    "@carbon/type": ^10.45.5
+    "@carbon/colors": ^11.32.0
+    "@carbon/layout": ^11.33.0
+    "@carbon/type": ^11.39.0
     "@ibm/telemetry-js": ^1.5.0
-    color: ^3.1.2
-  checksum: ba7a179d6de000f266a4a150247c4507f93a8012222a84fd6ac8a192cb3029f3c43b5c8ae4c822e8ac92ecfeab5eced5f560edb46c31fd8c2731346ea9a749e3
+    color: ^4.0.0
+  checksum: c86cbfc265a4c506c73b98fe1557c24894c1e8ef3ce92f29efcfacae5c3db9e80277a24fa2d1ca6cf33143054433155ca8d9e64ac58f893c5e300e6731706303
   languageName: node
   linkType: hard
 
-"@carbon/type@npm:^10.45.5":
-  version: 10.45.5
-  resolution: "@carbon/type@npm:10.45.5"
+"@carbon/type@npm:^11.39.0":
+  version: 11.39.0
+  resolution: "@carbon/type@npm:11.39.0"
   dependencies:
-    "@carbon/grid": ^10.43.4
-    "@carbon/import-once": ^10.7.2
+    "@carbon/grid": ^11.35.0
+    "@carbon/layout": ^11.33.0
     "@ibm/telemetry-js": ^1.5.0
-  checksum: 39b46d4f15d14ed8f300ae94a887b775a59eab3c7650f698e0b27bb027e79bed9692fc5f4464559c2f08c019b7787eff592911e1b25f5a1761467af4d6aa2a1b
+  checksum: d38e10162ee453502a4f07498e90afcdecd6cb35fd1ad17abd40bb6aa5817e8d0403ff5b95a17e623f8af4d3cc3a3f98627d40aee643889ad676205e6eeb7227
   languageName: node
   linkType: hard
 
@@ -3405,7 +3395,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.17.10
     "@babel/eslint-parser": ^7.17.0
-    "@carbon/themes": 10.55.5
+    "@carbon/themes": 11.51.0
     "@commitlint/cli": ^16.3.0
     "@commitlint/config-conventional": ^16.2.4
     "@storybook/addon-a11y": ^6.5.13
@@ -12009,7 +11999,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color-convert@npm:^1.9.0, color-convert@npm:^1.9.3":
+"color-convert@npm:^1.9.0":
   version: 1.9.3
   resolution: "color-convert@npm:1.9.3"
   dependencies:
@@ -12041,7 +12031,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color-string@npm:^1.6.0":
+"color-string@npm:^1.9.0":
   version: 1.9.1
   resolution: "color-string@npm:1.9.1"
   dependencies:
@@ -12060,13 +12050,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color@npm:^3.1.2":
-  version: 3.2.1
-  resolution: "color@npm:3.2.1"
+"color@npm:^4.0.0":
+  version: 4.2.3
+  resolution: "color@npm:4.2.3"
   dependencies:
-    color-convert: ^1.9.3
-    color-string: ^1.6.0
-  checksum: f81220e8b774d35865c2561be921f5652117638dcda7ca4029262046e37fc2444ac7bbfdd110cf1fd9c074a4ee5eda8f85944ffbdda26186b602dd9bb05f6400
+    color-convert: ^2.0.1
+    color-string: ^1.9.0
+  checksum: 0579629c02c631b426780038da929cca8e8d80a40158b09811a0112a107c62e10e4aad719843b791b1e658ab4e800558f2e87ca4522c8b32349d497ecb6adeb4
   languageName: node
   linkType: hard
 
