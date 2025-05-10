@@ -33,7 +33,7 @@ export default {
         return h(props.svg);
       } else if (isSvg.value) {
         // an SVG document
-        return h('svg', { domProps: { innerHTML: props.svg } });
+        return h('svg', { innerHTML: props.svg });
       } else {
         if (isSymbol.value) {
           return h('svg', {}, [h('use', { attrs: { href: props.svg } })]);

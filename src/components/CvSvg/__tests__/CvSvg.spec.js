@@ -42,7 +42,7 @@ describe('Svg with fake icon', () => {
       props: { svg: svgInline },
     });
 
-    expect(wrapper.find('svg')).not.toBeNull();
+    expect(wrapper.find('svg').html({ raw: true })).toMatchSnapshot();
   });
 
   it('validates icon', () => {
