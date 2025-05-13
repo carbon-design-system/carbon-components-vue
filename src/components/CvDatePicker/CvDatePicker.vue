@@ -40,7 +40,8 @@
             ref="date"
             type="text"
             data-date-picker-input
-            role="datepicker"
+            data-testid="datepicker"
+            :aria-description="placeholder"
             :data-invalid="isInvalid || null"
             :disabled="disabled || null"
             :data-date-picker-input-from="`${getKind === 'range'}`"
@@ -85,7 +86,8 @@
             ref="todate"
             type="text"
             data-date-picker-input
-            role="todatepicker"
+            data-testid="todatepicker"
+            :aria-description="placeholder"
             :data-date-picker-input-to="`${kind === 'range'}`"
             :data-invalid="isInvalid || null"
             :disabled="disabled || null"
