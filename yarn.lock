@@ -3429,7 +3429,7 @@ __metadata:
     sass: ^1.56.1
     sass-loader: ^16.0.2
     storybook: ^6.5.16
-    style-loader: ^3.3.1
+    style-loader: ^4.0.0
     stylelint: ^14.15.0
     stylelint-config-property-sort-order-smacss: ^9.0.0
     stylelint-config-sass-guidelines: ^9.0.1
@@ -3486,7 +3486,7 @@ __metadata:
     sass: ^1.56.1
     sass-loader: ^16.0.2
     storybook: ^6.5.16
-    style-loader: ^3.3.1
+    style-loader: ^4.0.0
     stylelint: ^14.15.0
     stylelint-config-property-sort-order-smacss: ^9.0.0
     stylelint-config-sass-guidelines: ^9.0.1
@@ -27413,12 +27413,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"style-loader@npm:^3.3.1":
-  version: 3.3.1
-  resolution: "style-loader@npm:3.3.1"
+"style-loader@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "style-loader@npm:4.0.0"
   peerDependencies:
-    webpack: ^5.0.0
-  checksum: 470feef680f59e2fce4d6601b5c55b88c01ad8d1dd693c528ffd591ff5fd7c01a4eff3bdbe62f26f847d6bd2430c9ab594be23307cfe7a3446ab236683f0d066
+    webpack: ^5.27.0
+  checksum: 0b751b4cc8394a2fe1df6194bb2f6dd68e859e36f22030994bb7b5220f24f9efb5705e78b2442226e6fa4c90f74b397529c7eb0a1d7326fb016e1e140e90151c
   languageName: node
   linkType: hard
 
