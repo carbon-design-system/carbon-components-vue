@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.26](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.25...@carbon/vue@3.0.26) (2025-05-20)
+
+### Bug Fixes
+
+- for CvSvg, update props structure for Vue 3 ([2644682](https://github.com/carbon-design-system/carbon-components-vue/commit/26446822a2daee8a3bfd66ca0f82cad280f0bfc6))
+- update snapshot to pass CI ([36fe2e5](https://github.com/carbon-design-system/carbon-components-vue/commit/36fe2e583bb1f53ecfd2188d3ca1f12a5f68ae12))
+
 ## [3.0.25](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.24...@carbon/vue@3.0.25) (2025-03-11)
 
 ### Bug Fixes
