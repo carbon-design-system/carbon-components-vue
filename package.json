@@ -73,7 +73,7 @@
     "sass": "^1.56.1",
     "sass-loader": "^16.0.2",
     "storybook": "^6.5.16",
-    "style-loader": "^3.3.1",
+    "style-loader": "^4.0.0",
     "stylelint": "^14.15.0",
     "stylelint-config-property-sort-order-smacss": "^9.0.0",
     "stylelint-config-sass-guidelines": "^9.0.1",
