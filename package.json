@@ -57,7 +57,7 @@
     "accessibility-checker": "^3.1.59",
     "babel-core": "^6.26.3",
     "babel-jest": "^27.5.1",
-    "babel-loader": "^8.3.0",
+    "babel-loader": "^10.0.0",
     "copy-webpack-plugin": "^10.2.4",
     "css-loader": "^6.7.2",
     "eslint": "^8.28.0",
