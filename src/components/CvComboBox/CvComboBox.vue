@@ -278,6 +278,7 @@ watch(
 watch(
   () => props.options,
   () => {
+    filter.value = '';
     updateOptions();
   }
 );
