@@ -192,10 +192,10 @@ function onCvPanelFocusout(payload) {
     item => item.ariaControls === srcComponent.id
   );
   if (
-    srcComponent.el !== srcEvent.relatedTarget &&
-    !srcComponent.el.contains(srcEvent.relatedTarget) &&
+    srcComponent.el.value !== srcEvent.relatedTarget &&
+    !srcComponent.el.value.contains(srcEvent.relatedTarget) &&
     found &&
-    found.el !== srcEvent.relatedTarget
+    found.el.value !== srcEvent.relatedTarget
   ) {
     onCvPanelControlToggle(found, false);
   }
