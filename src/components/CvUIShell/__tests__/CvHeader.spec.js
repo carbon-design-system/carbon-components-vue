@@ -9,6 +9,8 @@ import CvSideNavItems from '../CvSideNavItems.vue';
 import CvSideNavMenu from '../CvSideNavMenu.vue';
 import CvSideNavMenuItem from '../CvSideNavMenuItem.vue';
 import CvSideNavLink from '../CvSideNavLink.vue';
+import PanelFocusTestComponent from './PanelFocusTestComponent.vue';
+import { nextTick } from 'vue';
 
 const globalHeader = {
   components: { CvHeaderGlobalAction },
@@ -99,6 +101,52 @@ describe('CvHeader', () => {
     await user.click(testButton); // close panel
 
     expect(onResize.mock.calls.length).toBe(2);
+  });
+
+  it('should allow user to focus between elements in the right panel', async () => {
+    const user = userEvent.setup();
+    const component = render(PanelFocusTestComponent);
+
+    const testPanel = await component.findByTestId('links-panel');
+    expect(testPanel.getAttribute('aria-hidden')).toBe('true'); // panel is closed
+
+    const actionButton = await component.findByTestId('action-button');
+    await user.click(actionButton);
+
+    expect(testPanel.getAttribute('aria-hidden')).toBe('false'); // panel is open
+
+    const link1 = await component.findByTestId('link-1');
+    const link2 = await component.findByTestId('link-2');
+
+    link1.focus();
+    expect(testPanel.getAttribute('aria-hidden')).toBe('false');
+
+    link2.focus();
+    expect(testPanel.getAttribute('aria-hidden')).toBe('false');
+  });
+
+  it('should close the right panel when focusing out of its elements', async () => {
+    const user = userEvent.setup();
+    const component = render(PanelFocusTestComponent);
+
+    const testPanel = await component.findByTestId('links-panel');
+    expect(testPanel.getAttribute('aria-hidden')).toBe('true'); // panel is closed
+
+    const actionButton = await component.findByTestId('action-button');
+    await user.click(actionButton);
+
+    expect(testPanel.getAttribute('aria-hidden')).toBe('false'); // panel is open
+
+    const link1 = await component.findByTestId('link-1');
+    link1.focus();
+    expect(testPanel.getAttribute('aria-hidden')).toBe('false');
+
+    const outerInput = await component.findByTestId('outer-input');
+    outerInput.focus();
+
+    await nextTick();
+
+    expect(testPanel.getAttribute('aria-hidden')).toBe('true'); // panel is closed
   });
 
   it('CvHeader - side nav rail', async () => {
