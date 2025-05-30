@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.27](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.26...@carbon/vue@3.0.27) (2025-05-30)
+
+### Bug Fixes
+
+- **cv-header:** fix crash when focusing out of right panels ([6eb9603](https://github.com/carbon-design-system/carbon-components-vue/commit/6eb960327e412afb25c26f3c56ca91166632a49c))
+- for date picker, remove invalid aria role and add aria-description ([245d1d1](https://github.com/carbon-design-system/carbon-components-vue/commit/245d1d15e9fadf8dbee85b6e55839b47ca96f216))
+
 ## [3.0.26](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.25...@carbon/vue@3.0.26) (2025-05-20)
 
 ### Bug Fixes
