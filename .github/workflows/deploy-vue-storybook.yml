@@ -51,8 +51,9 @@ jobs:
           path: vue2
       - name: Install vue2 dependencies
         run: |
+          yarn config set ignore-engines true
           cd ${GITHUB_WORKSPACE}/vue2
-          yarn install --offline --ignore-engines
+          yarn install --offline
       - name: Build Vue 2 storybook
         run: |
           cd ${GITHUB_WORKSPACE}/vue2
