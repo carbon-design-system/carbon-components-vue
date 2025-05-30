@@ -158,3 +158,4 @@ export { default as CvSkipToContent } from './components/CvUIShell/CvSkipToConte
 export { default as CvSwitcher } from './components/CvUIShell/CvSwitcher.vue';
 export { default as CvSwitcherItem } from './components/CvUIShell/CvSwitcherItem.vue';
 export { default as CvSwitcherItemLink } from './components/CvUIShell/CvSwitcherItemLink.vue';
+export { default as PanelFocusTestComponent } from './components/CvUIShell/__tests__/PanelFocusTestComponent.vue';
