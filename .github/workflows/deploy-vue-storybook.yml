@@ -49,11 +49,10 @@ jobs:
           ref: vue2
           clean: false
           path: vue2
-      # Don't install dependencies, as we have them in the repository already, and we can't install them in Node >= 18
-      # - name: Install vue2 dependencies
-      #   run: |
-      #     cd ${GITHUB_WORKSPACE}/vue2
-      #     yarn install --offline --ignore-engines
+      - name: Install vue2 dependencies
+        run: |
+          cd ${GITHUB_WORKSPACE}/vue2
+          yarn install --offline --ignore-engines
       - name: Build Vue 2 storybook
         run: |
           cd ${GITHUB_WORKSPACE}/vue2
