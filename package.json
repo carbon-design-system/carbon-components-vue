@@ -64,7 +64,7 @@
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-vue": "^8.7.1",
     "husky": "^7.0.4",
-    "jest": "^27.5.1",
+    "jest": "^30.0.0",
     "lerna": "^6.5.1",
     "lint-staged": "^15.2.10",
     "postcss": "^8.4.19",
