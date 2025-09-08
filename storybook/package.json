@@ -59,7 +59,7 @@
     "babel-loader": "^8.3.0",
     "copy-webpack-plugin": "^10.2.4",
     "css-loader": "^6.7.2",
-    "eslint": "^8.28.0",
+    "eslint": "^9.35.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-vue": "^8.7.1",
     "husky": "^7.0.4",
