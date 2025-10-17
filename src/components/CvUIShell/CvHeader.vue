@@ -1,11 +1,6 @@
 <template>
-  <header
-    :id="uid"
-    :class="`cv-header ${carbonPrefix}--header asd`"
-    data-header
-  >
+  <header :id="uid" :class="`cv-header ${carbonPrefix}--header`" data-header>
     <slot />
-    asd
     <div v-if="hasGlobalHeader" :class="`${carbonPrefix}--header__global`">
       <slot name="header-global" />
     </div>
