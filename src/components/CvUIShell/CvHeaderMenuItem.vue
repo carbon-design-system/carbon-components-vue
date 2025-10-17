@@ -1,5 +1,5 @@
 <template>
-  <li class="cv-header-menu-item" :role="role">
+  <li class="cv-header-menu-item" role="none">
     <component
       :is="tagType"
       v-bind="{ ...$attrs, ...linkProps }"
@@ -7,8 +7,9 @@
         `${carbonPrefix}--header__menu-item`,
         { [`${carbonPrefix}--header__menu-item--current`]: activePage },
       ]"
-      role="menuitem"
       :aria-current="ariaCurrent"
+      :role="role"
+      :tabindex="tabindex"
     >
       <span :class="`${carbonPrefix}--text-truncate--end`">
         <slot />
@@ -25,7 +26,7 @@ import { computed } from 'vue';
 const props = defineProps({
   active: Boolean,
   ariaCurrent: { type: String, default: undefined },
-  role: { type: String, default: undefined },
+  role: { type: String, default: 'menuitem' },
   ...propsLink,
 });
 
@@ -34,5 +35,9 @@ const linkProps = useLinkProps(props);
 
 const activePage = computed(() => {
   return props.active && props.ariaCurrent !== 'page';
+});
+
+const tabindex = computed(() => {
+  return props.role === 'menuitem' ? '0' : undefined;
 });
 </script>

@@ -19,6 +19,7 @@ import CvSideNavLink from './CvSideNavLink.vue';
 import CvSideNavMenu from './CvSideNavMenu.vue';
 import CvSideNavMenuDivider from './CvSideNavMenuDivider.vue';
 import CvSideNavMenuItem from './CvSideNavMenuItem.vue';
+import CvContent from './CvContent.vue';
 import {
   Notification20,
   UserAvatar20,
@@ -55,6 +56,7 @@ export const Template = args => ({
     CvSideNavMenu,
     CvSideNavMenuDivider,
     CvSideNavMenuItem,
+    CvContent,
     Notification20,
     UserAvatar20,
     Login20,
@@ -89,22 +91,12 @@ const defaultTemplate = `
     [Platform]
   </cv-header-name>
   <cv-header-nav aria-label="Carbon nav">
-    <cv-header-menu-item href="javascript:void(0)">
-      Link 1
-    </cv-header-menu-item>
-    <cv-header-menu-item href="javascript:void(0)">
-      Link 2
-    </cv-header-menu-item>
+    <cv-header-menu-item href="javascript:void(0)">Link 1</cv-header-menu-item>
+    <cv-header-menu-item href="javascript:void(0)">Link 2</cv-header-menu-item>
     <cv-header-menu aria-label="Link 3" title="Link 3">
-      <cv-header-menu-item href="javascript:void(0)">
-        Submenu Link 1
-      </cv-header-menu-item>
-      <cv-header-menu-item href="javascript:void(0)">
-        Submenu Link 2
-      </cv-header-menu-item>
-      <cv-header-menu-item href="javascript:void(0)">
-        Submenu Link 3
-      </cv-header-menu-item>
+      <cv-header-menu-item href="javascript:void(0)">Submenu Link 1</cv-header-menu-item>
+      <cv-header-menu-item href="javascript:void(0)">Submenu Link 2</cv-header-menu-item>
+      <cv-header-menu-item href="javascript:void(0)">Submenu Link 3</cv-header-menu-item>
     </cv-header-menu>
   </cv-header-nav>
   <template v-slot:header-global>
@@ -162,6 +154,10 @@ const defaultTemplate = `
     </cv-header-panel>
   </template>
 </cv-header>
+<cv-content>
+  <h1>Main Content</h1>
+  <p>This is the main content area that the skip link targets.</p>
+</cv-content>
 `;
 const railTemplate = `
 <cv-header aria-label="Carbon header">
@@ -196,6 +192,10 @@ const railTemplate = `
     </cv-side-nav>
   </template>
 </cv-header>
+<cv-content>
+  <h1>Main Content</h1>
+  <p>This is the main content area that the skip link targets.</p>
+</cv-content>
 `;
 const fixedSideNavTemplate = `
 <cv-header aria-label="Carbon header">
@@ -231,6 +231,10 @@ const fixedSideNavTemplate = `
     </cv-side-nav-link>
   </cv-side-nav-items>
 </cv-side-nav>
+<cv-content>
+  <h1>Main Content</h1>
+  <p>This is the main content area that the skip link targets.</p>
+</cv-content>
 `;
 
 # UI Shell components
