@@ -323,6 +323,13 @@ const wrapperStyleOverride = computed(() => {
 });
 const el = ref(null);
 function onClickOut() {
+  // Move focus to button if focus is inside dropdown list
+  const dropListEl = dropList.value;
+  if (dropListEl && dropListEl.contains(document.activeElement)) {
+    if (button.value && typeof button.value.focus === 'function') {
+      button.value.focus();
+    }
+  }
   open.value = false;
 }
 onClickOutside(el, onClickOut);
@@ -372,8 +379,14 @@ function onUp() {
   }
 }
 function onEsc() {
+  // Move focus to button if focus is inside dropdown list
+  const dropListEl = dropList.value;
+  if (dropListEl && dropListEl.contains(document.activeElement)) {
+    if (button.value && typeof button.value.focus === 'function') {
+      button.value.focus();
+    }
+  }
   open.value = false;
-  doFocus();
 }
 const button = ref(null);
 const listBox = ref(null);
@@ -384,8 +397,10 @@ function onTab(ev) {
       open.value = false;
     } else if (ev.target === null || listBox.value?.contains(ev.target)) {
       // list has focus, close and return focus to dropdown
+      if (button.value && typeof button.value.focus === 'function') {
+        button.value.focus();
+      }
       open.value = false;
-      doFocus();
       ev.preventDefault();
     }
   }
@@ -394,9 +409,6 @@ function onClick(ev) {
   if (props.disabled) {
     ev.preventDefault();
   } else {
-    open.value = !open.value;
-    doFocus(); // open or close (Some browsers do not focus on button when clicked)
-
     let target = ev.target;
     while (
       !target.classList.contains(`${carbonPrefix}--dropdown-link`) &&
@@ -408,6 +420,14 @@ function onClick(ev) {
     if (target.classList.contains(`${carbonPrefix}--dropdown-link`)) {
       const targetItemEl = target.parentNode;
       dataValue.value = targetItemEl.getAttribute('data-value');
+      // Move focus to button before closing
+      if (button.value && typeof button.value.focus === 'function') {
+        button.value.focus();
+      }
+      open.value = false;
+    } else {
+      open.value = !open.value;
+      doFocus(); // open or close (Some browsers do not focus on button when clicked)
     }
   }
 }
