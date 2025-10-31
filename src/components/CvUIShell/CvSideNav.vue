@@ -14,6 +14,7 @@
       },
     ]"
     :aria-hidden="!panelExpanded && !fixed ? 'true' : 'false'"
+    :inert="!panelExpanded && !fixed"
     @focusout="onFocusout"
     @mousedown="onMouseDown"
     @mouseenter="onHoverToggle(true)"
@@ -33,6 +34,7 @@
 import {
   computed,
   inject,
+  nextTick,
   onBeforeUnmount,
   onMounted,
   reactive,
@@ -110,6 +112,35 @@ watch(
     panelExpanded.value = props.expanded;
   }
 );
+// Manage focusable elements when panel visibility changes
+function manageFocusableElements(isExpanded, isFixed) {
+  if (!el.value || isFixed) return;
+
+  const focusableElements = el.value.querySelectorAll(
+    'a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])'
+  );
+
+  focusableElements.forEach(element => {
+    if (isExpanded) {
+      // Restore original tabindex when expanded
+      const originalTabindex = element.getAttribute('data-original-tabindex');
+      if (originalTabindex !== null) {
+        if (originalTabindex === 'null') {
+          element.removeAttribute('tabindex');
+        } else {
+          element.setAttribute('tabindex', originalTabindex);
+        }
+        element.removeAttribute('data-original-tabindex');
+      }
+    } else {
+      // Store original tabindex and set to -1 when collapsed
+      const currentTabindex = element.getAttribute('tabindex');
+      element.setAttribute('data-original-tabindex', currentTabindex || 'null');
+      element.setAttribute('tabindex', '-1');
+    }
+  });
+}
+
 const emit = defineEmits(['update:expanded', 'panel-resize']);
 const isPanelExpanded = computed(
   () => panelExpanded.value || expandedViaHoverState.value
@@ -117,6 +148,11 @@ const isPanelExpanded = computed(
 watch(isPanelExpanded, current => {
   emit('update:expanded', current);
   emit('panel-resize', { id: props.id, expanded: current });
+
+  // Manage focusable elements for non-fixed nav
+  nextTick(() => {
+    manageFocusableElements(current, props.fixed);
+  });
 });
 
 const isChildOfHeader = computed(() => {

@@ -8,6 +8,7 @@
       { [`${carbonPrefix}--header-panel--expanded`]: panelExpanded },
     ]"
     :aria-hidden="!panelExpanded ? 'true' : 'false'"
+    :inert="!panelExpanded"
     @focusout="onFocusout"
     @mousedown="onMouseDown"
   >
@@ -20,6 +21,7 @@ import { carbonPrefix } from '../../global/settings';
 import {
   computed,
   inject,
+  nextTick,
   onBeforeUnmount,
   onMounted,
   reactive,
@@ -99,9 +101,49 @@ watch(
   }
 );
 
+function manageFocusableElements(isExpanded) {
+  if (!el.value) return;
+
+  const focusableElements = el.value.querySelectorAll(
+    'a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])'
+  );
+
+  focusableElements.forEach(element => {
+    if (isExpanded) {
+      // Restore original tabindex when expanded
+      const originalTabindex = element.getAttribute('data-original-tabindex');
+      if (originalTabindex !== null) {
+        if (originalTabindex === 'null') {
+          element.removeAttribute('tabindex');
+        } else {
+          element.setAttribute('tabindex', originalTabindex);
+        }
+        element.removeAttribute('data-original-tabindex');
+      }
+    } else {
+      // Store original tabindex and set to -1 when collapsed
+      const currentTabindex = element.getAttribute('tabindex');
+      element.setAttribute('data-original-tabindex', currentTabindex || 'null');
+      element.setAttribute('tabindex', '-1');
+    }
+  });
+}
+
 const emit = defineEmits(['update:expanded', 'panel-resize']);
 watch(panelExpanded, current => {
   emit('update:expanded', current);
   emit('panel-resize', { id: props.id, expanded: current });
+
+  // Manage focusable elements
+  nextTick(() => {
+    manageFocusableElements(current);
+  });
+});
+
+// Initial setup of focusable elements
+onMounted(() => {
+  nextTick(() => {
+    manageFocusableElements(panelExpanded.value);
+  });
 });
 </script>

@@ -2,6 +2,7 @@
   <li
     ref="el"
     :class="`cv-header-menu ${carbonPrefix}--header__submenu`"
+    role="menuitem"
     @mouseenter="doHoverToggle(true)"
     @mouseleave="doHoverToggle(false)"
   >
@@ -10,9 +11,9 @@
       :aria-expanded="data.expanded ? 'true' : 'false'"
       :class="`${carbonPrefix}--header__menu-item ${carbonPrefix}--header__menu-title`"
       href="javascript:void(0)"
-      role="menuitem"
       tabindex="0"
       :aria-label="$attrs.ariaLabel"
+      role="button"
       @click="doToggle"
       @keydown.space.prevent
       @keyup.space.prevent="doToggle"
