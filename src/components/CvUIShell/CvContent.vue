@@ -1,6 +1,6 @@
 <script setup>
 import { carbonPrefix } from '../../global/settings';
-const props = defineProps({
+defineProps({
   tagType: { type: String, default: 'main' },
   id: { type: String, default: 'main-content' },
 });
