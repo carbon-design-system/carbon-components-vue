@@ -36,8 +36,9 @@
           `${carbonPrefix}--label`,
           { [`${carbonPrefix}--label--disabled`]: disabled },
         ]"
-      >{{ label }}</label
       >
+        {{ label }}
+      </label>
 
       <div
         ref="listBox"
@@ -119,8 +120,8 @@
         >
           <slot>
             <cv-dropdown-item v-for="item in items" :key="item" :value="item">{{
-                item
-              }}</cv-dropdown-item>
+              item
+            }}</cv-dropdown-item>
           </slot>
         </ul>
       </div>
@@ -414,7 +415,7 @@ function onClick(ev) {
     while (
       !target.classList.contains(`${carbonPrefix}--dropdown-link`) &&
       dropList.value?.contains(target)
-      ) {
+    ) {
       target = target.parentNode; // try next one up
     }
 
