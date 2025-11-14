@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.28](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.27...@carbon/vue@3.0.28) (2025-11-14)
+
+### Bug Fixes
+
+- **lint:** remove unused variable assignment ([2f76714](https://github.com/carbon-design-system/carbon-components-vue/commit/2f76714e92b46449a9162cdc5703d4de692db24f))
+
+### Features
+
+- fix CvDropdown accessibility problems with focus and blur ([50b2cdb](https://github.com/carbon-design-system/carbon-components-vue/commit/50b2cdb04e8d42f3eb31a363fd3c11dad46de0c5))
+- fix CvUiShell accessibility problems ([640dbb4](https://github.com/carbon-design-system/carbon-components-vue/commit/640dbb4f019e28c8a415b2eb088f82f91361023b))
+- remove comment ([5af4995](https://github.com/carbon-design-system/carbon-components-vue/commit/5af4995846244b597755d3c426186795de4ac060))
+
 ## [3.0.27](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.26...@carbon/vue@3.0.27) (2025-05-30)
 
 ### Bug Fixes
