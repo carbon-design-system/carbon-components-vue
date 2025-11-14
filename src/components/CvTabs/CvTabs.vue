@@ -17,9 +17,10 @@
       @keydown.left.prevent.stop="onLeft"
     >
       <button
-        aria-hidden="true"
-        aria-label="scroll left"
-        :aria-label="leftOverflowNavButtonHidden ? undefined : 'Scroll tabs left'"
+        ref="elLeftOverflow"
+        :aria-label="
+          leftOverflowNavButtonHidden ? undefined : 'Scroll tabs left'
+        "
         :class="[
           {
             [`${carbonPrefix}--tab--overflow-nav-button`]: horizontalOverflow,
@@ -90,7 +91,9 @@
       />
       <button
         ref="elRightOverflow"
-        :aria-label="rightOverflowNavButtonHidden ? undefined : 'Scroll tabs right'"
+        :aria-label="
+          rightOverflowNavButtonHidden ? undefined : 'Scroll tabs right'
+        "
         :class="[
           {
             [`${carbonPrefix}--tab--overflow-nav-button`]: horizontalOverflow,
