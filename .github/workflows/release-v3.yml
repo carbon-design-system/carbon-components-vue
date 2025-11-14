@@ -24,10 +24,10 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
 
-      - name: Use Node.js 18.x
+      - name: Use Node.js 22.x
         uses: actions/setup-node@v4 # https://github.com/actions/setup-node
         with:
-          node-version: 18
+          node-version: 22
           registry-url: https://registry.npmjs.org
 
       # Ensure npm 11.5.1 or later for trusted publishing
