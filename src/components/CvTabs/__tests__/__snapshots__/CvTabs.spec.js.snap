@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CvTabs CvTabs - test slotted tab buttons to match snapshot 1`] = `
-<div class="cv-tabs ABC-class-123" style="width: 100%;" aria-label="ABC-aria-label-123">
-  <div data-tabs="" class="cv-tab bx--tabs--scrollable ABC-class-123" role="navigation" aria-label="ABC-aria-label-123"><button aria-hidden="true" aria-label="scroll left" class="bx--tab--overflow-nav-button--hidden" tabindex="-1" type="button"><svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+<div class="cv-tabs" style="width: 100%;">
+  <div data-tabs="" class="cv-tab bx--tabs--scrollable ABC-class-123" role="navigation" aria-label="ABC-aria-label-123"><button class="bx--tab--overflow-nav-button--hidden" tabindex="-1" type="button"><svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
         <path d="M5 8L10 3 10.7 3.7 6.4 8 10.7 12.3 10 13z"></path>
       </svg></button>
     <!--v-if-->
@@ -11,7 +11,7 @@ exports[`CvTabs CvTabs - test slotted tab buttons to match snapshot 1`] = `
       <li class="cv-tabs-button  bx--tabs--scrollable__nav-item" role="presentation"><button id="tab-2-link" class="bx--tabs--scrollable__nav-link" role="tab" aria-controls="tab-2" aria-selected="false" tabindex="-1" type="button">Origin<strong style="color: orange;">(!)</strong></button></li>
       <li class="cv-tabs-button  bx--tabs--scrollable__nav-item" role="presentation"><button id="tab-3-link" class="bx--tabs--scrollable__nav-link" role="tab" aria-controls="tab-3" aria-selected="false" tabindex="-1" type="button">Tab 3 label</button></li>
     </ul>
-    <!--v-if--><button aria-hidden="true" aria-label="scroll right" class="bx--tab--overflow-nav-button--hidden" tabindex="-1" type="button"><svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+    <!--v-if--><button class="bx--tab--overflow-nav-button--hidden" tabindex="-1" type="button"><svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
         <path d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"></path>
       </svg></button>
   </div>
