@@ -36,8 +36,9 @@
           `${carbonPrefix}--label`,
           { [`${carbonPrefix}--label--disabled`]: disabled },
         ]"
-        >{{ label }}</label
       >
+        {{ label }}
+      </label>
 
       <div
         ref="listBox"
@@ -110,7 +111,10 @@
           ref="dropList"
           :aria-hidden="!open ? 'true' : 'false'"
           :aria-labelledby="`${uid}-label`"
-          :class="`${carbonPrefix}--list-box__menu`"
+          :class="[
+            `${carbonPrefix}--list-box__menu`,
+            { 'cv-dropdown__menu--transition-done': transitionDone },
+          ]"
           role="menu"
           tabindex="-1"
         >
@@ -268,6 +272,7 @@ provide('dropdown-caption', dataCaption);
 const itemsList = ref([]);
 provide('dropdown-items', itemsList);
 const open = ref(false);
+const transitionDone = ref(false);
 const data = reactive({
   isHelper: false,
   isInvalid: undefined,
@@ -301,6 +306,15 @@ watch(dataValue, () => {
 });
 watch(open, () => {
   focusItem.value = '';
+  if (open.value) {
+    // Wait for the transition to complete before allowing overflow
+    transitionDone.value = false;
+    setTimeout(() => {
+      transitionDone.value = true;
+    }, 200); // Increase delay to ensure animation completes
+  } else {
+    transitionDone.value = false;
+  }
 });
 const ariaLabeledBy = computed(() => {
   if (props.label) {
@@ -432,3 +446,13 @@ function onClick(ev) {
   }
 }
 </script>
+
+<style lang="scss">
+.bx--list-box .bx--list-box__menu {
+  overflow-y: hidden !important;
+}
+
+.bx--list-box--expanded .bx--list-box__menu.cv-dropdown__menu--transition-done {
+  overflow-y: auto !important;
+}
+</style>
