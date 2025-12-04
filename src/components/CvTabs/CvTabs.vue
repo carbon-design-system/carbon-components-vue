@@ -11,14 +11,16 @@
         },
       ]"
       role="navigation"
-      v-bind="$attrs"
+      :aria-label="attrs['aria-label'] || 'Tabs'"
+      v-bind="attrsWithoutAriaLabel"
       @keydown.right.prevent.stop="onRight"
       @keydown.left.prevent.stop="onLeft"
     >
       <button
         ref="elLeftOverflow"
-        aria-hidden="true"
-        aria-label="scroll left"
+        :aria-label="
+          leftOverflowNavButtonHidden ? undefined : 'Scroll tabs left'
+        "
         :class="[
           {
             [`${carbonPrefix}--tab--overflow-nav-button`]: horizontalOverflow,
@@ -26,7 +28,7 @@
               leftOverflowNavButtonHidden,
           },
         ]"
-        tabIndex="-1"
+        :tabIndex="leftOverflowNavButtonHidden ? -1 : 0"
         type="button"
         @click.stop.prevent="e => onOverflowClick(e, { direction: -1 })"
         @mousedown.stop.prevent="e => onOverflowMouseDown(e, { direction: -1 })"
@@ -89,8 +91,9 @@
       />
       <button
         ref="elRightOverflow"
-        aria-hidden="true"
-        aria-label="scroll right"
+        :aria-label="
+          rightOverflowNavButtonHidden ? undefined : 'Scroll tabs right'
+        "
         :class="[
           {
             [`${carbonPrefix}--tab--overflow-nav-button`]: horizontalOverflow,
@@ -98,7 +101,7 @@
               rightOverflowNavButtonHidden,
           },
         ]"
-        tabIndex="-1"
+        :tabIndex="rightOverflowNavButtonHidden ? -1 : 0"
         type="button"
         @click="e => onOverflowClick(e, { direction: 1 })"
         @mousedown="e => onOverflowMouseDown(e, { direction: 1 })"
@@ -117,14 +120,20 @@
 import { carbonPrefix } from '../../global/settings';
 import { ChevronLeft16, ChevronRight16 } from '@carbon/icons-vue';
 import {
+  computed,
   nextTick,
   onBeforeUnmount,
   onMounted,
   onUpdated,
   provide,
   ref,
+  useAttrs,
   watch,
 } from 'vue';
+
+defineOptions({
+  inheritAttrs: false,
+});
 
 const OVERFLOW_BUTTON_OFFSET = 40;
 
@@ -151,6 +160,12 @@ const props = defineProps({
   scrollIntoView: { type: Boolean, default: true },
 });
 const emit = defineEmits(['tab-selected', 'tab-selected-id']);
+
+const attrs = useAttrs();
+const attrsWithoutAriaLabel = computed(() => {
+  const { 'aria-label': _, ...rest } = attrs;
+  return rest;
+});
 
 const selectedId = ref('');
 provide('tab-selected', selectedId);
