@@ -233,7 +233,7 @@ function doFocus() {
           tryOn.disabled
         )
       ) {
-        focusOn = focusOnList[0].parentElement;
+        focusOn = tryOn;
         break;
       }
     }
