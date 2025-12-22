@@ -229,7 +229,8 @@ function doFocus() {
         !(
           tryOn.classList.contains('cv-overflow-menu__before-content') ||
           tryOn.classList.contains('cv-overflow-menu__after-content') ||
-          tryOn.tabindex < 0
+          tryOn.tabindex < 0 ||
+          tryOn.disabled
         )
       ) {
         focusOn = tryOn;
