@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.30](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.29...@carbon/vue@3.0.30) (2025-12-23)
+
+### Bug Fixes
+
+- aria-label attribute was duplicating ([f835506](https://github.com/carbon-design-system/carbon-components-vue/commit/f835506906c830c859ed46af7fc44a7922cebb47))
+- cvoverflowmenu bugfix ([f279bf7](https://github.com/carbon-design-system/carbon-components-vue/commit/f279bf764c394abaa1bde3de348d94e4b7de77d4))
+- cvoverflowmenu focus ([b06d067](https://github.com/carbon-design-system/carbon-components-vue/commit/b06d06709a383c52e302122ea704e22011b21353))
+- fix linting errors ([efd8a76](https://github.com/carbon-design-system/carbon-components-vue/commit/efd8a76c6b519a5328b361e4e7bed6bf1f5ae01b))
+- update test ([752832d](https://github.com/carbon-design-system/carbon-components-vue/commit/752832da115afac56cca97bb7110d1ace8f4ce28))
+
+### Features
+
+- fix CvDropdown overflow flashing when expanding ([d068af6](https://github.com/carbon-design-system/carbon-components-vue/commit/d068af6b0a150c26dd5133d361446165b2b39ca6))
+- fix CvTabs accessibility warnings and errors clicking overflow control buttons ([e609beb](https://github.com/carbon-design-system/carbon-components-vue/commit/e609beb67894f8dcaf8cb693176fe6ec6c54357f))
+
 ## [3.0.29](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.28...@carbon/vue@3.0.29) (2025-11-17)
 
 **Note:** Version bump only for package @carbon/vue
