@@ -77,7 +77,7 @@ const domTemplate = `
 const domCode = domTemplate.replace("v-bind='args'", '');
 const multipleTemplate = `
 <div>
-  <cv-content-switcher aria-label='Choose content' v-bind='args' @selected="onSelected" id="star-wars">
+  <cv-content-switcher tabindex="0" aria-label='Choose content' v-bind='args' @selected="onSelected" id="star-wars">
     <cv-content-switcher-button parent-switcher="star-wars" owner-id="episode-1" :selected="selectedIndex === 0">Episode 1</cv-content-switcher-button>
     <cv-content-switcher-button parent-switcher="star-wars" owner-id="episode-2" :selected="selectedIndex === 1">Episode 2</cv-content-switcher-button>
     <cv-content-switcher-button parent-switcher="star-wars" :icon="iconSample" owner-id="episode-3" :selected="selectedIndex === 2">Episode 3</cv-content-switcher-button>
@@ -96,7 +96,7 @@ const multipleTemplate = `
       <p>Yoda</p>
     </cv-content-switcher-content>
   </section>
-  <cv-content-switcher aria-label='Choose content' v-bind='args' @selected="onSelected" id="LotR">
+  <cv-content-switcher tabindex="1" aria-label='Choose content' v-bind='args' @selected="onSelected" id="LotR">
     <cv-content-switcher-button parent-switcher="LotR" owner-id="book-1" :selected="selectedIndex === 0">Book 1</cv-content-switcher-button>
     <cv-content-switcher-button parent-switcher="LotR" owner-id="book-2" :selected="selectedIndex === 1">Book 2</cv-content-switcher-button>
     <cv-content-switcher-button parent-switcher="LotR" :icon="iconSample" owner-id="book-3" :selected="selectedIndex === 2">Book 3</cv-content-switcher-button>
