@@ -18,7 +18,7 @@
 import { carbonPrefix } from '../../global/settings';
 import { props as propsCvId, useCvId } from '../../use/cvId';
 import { useIsLight, props as propsTheme } from '../../use/cvTheme';
-import { onUnmounted, watch } from 'vue';
+import { onUnmounted, watch, onMounted, nextTick } from 'vue';
 import store from './cvContentSwitcherStore';
 
 const emit = defineEmits(['selected']);
@@ -39,7 +39,9 @@ store.setContentSelected('global', undefined);
 
 // Check for initial selection after child components have set up
 let hadInitialSelection = null;
-Promise.resolve().then(() => {
+onMounted(async () => {
+  // Use nextTick to ensure child components have mounted and set their initial state
+  await nextTick();
   hadInitialSelection =
     store.state[cvId.value]?.selected !== undefined &&
     store.state[cvId.value]?.selected !== '';
