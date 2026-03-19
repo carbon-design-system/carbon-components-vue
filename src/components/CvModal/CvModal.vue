@@ -14,6 +14,7 @@
       tabindex="-1"
       v-bind="$attrs"
       @keydown.esc.prevent="onEsc"
+      @mousedown.self="onMouseDown"
       @click.self="onExternalClick"
     >
       <div
@@ -145,6 +146,8 @@ import {
   watch,
 } from 'vue';
 
+const mouseDownTarget = ref(null);
+
 const props = defineProps({
   /**
    * When set to true, the aria role will be either "alert" or "alertdialog"
@@ -269,6 +272,7 @@ function show() {
 
   el.value?.addEventListener('transitionend', onShown);
   dataVisible.value = true;
+  mouseDownTarget.value = null;
 }
 const content = ref(null);
 function onShown() {
@@ -326,6 +330,7 @@ function hide() {
   }
 
   dataVisible.value = false;
+  mouseDownTarget.value = null;
 }
 function afterHide(event) {
   if (event.propertyName === 'opacity') {
@@ -375,9 +380,12 @@ function focusAfterContent() {
 }
 
 function onExternalClick(ev) {
-  if (ev.target === el.value) {
+  if (ev.target === el.value && mouseDownTarget.value === el.value) {
     _maybeHide(ev, 'external-click');
   }
+}
+function onMouseDown(ev) {
+  mouseDownTarget.value = ev.target;
 }
 function onEsc(ev) {
   _maybeHide(ev, 'escape-press');
