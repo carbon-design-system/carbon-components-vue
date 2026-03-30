@@ -13,8 +13,8 @@
         [`${carbonPrefix}--side-nav--ux`]: isChildOfHeader,
       },
     ]"
-    :aria-hidden="!panelExpanded && !fixed ? 'true' : 'false'"
-    :inert="!panelExpanded && !fixed"
+    :aria-hidden="isHidden ? 'true' : 'false'"
+    :inert="isHidden"
     @focusout="onFocusout"
     @mousedown="onMouseDown"
     @mouseenter="onHoverToggle(true)"
@@ -78,6 +78,9 @@ const panelExpanded = computed({
   set(val) {
     data.dataExpanded = val;
   },
+});
+const isHidden = computed(() => {
+  return !panelExpanded.value && !props.fixed && !props.rail;
 });
 /**
  * @type {CvHeaderPanel}
