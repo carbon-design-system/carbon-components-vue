@@ -199,4 +199,79 @@ describe('CvDropdown', () => {
     expect(result.emitted('change')?.length).toBe(1);
     expect(result.emitted('change')[0][0]).toBe('Foundation');
   });
+
+  it('CvDropdown - same value rerender', async () => {
+    // Rerendering with the same modelValue that is already selected must not clear the
+    // displayed caption. Previously, the modelValue watcher fired on every prop update
+    // and reset dataCaption to undefined, reverting the button label to
+    // the placeholder even when the value had not changed.
+    window.focus = () => {};
+    const placeholder = 'Choose an option';
+
+    const result = render(CvDropdown, {
+      props: {
+        placeholder,
+        modelValue: 'nite-owl',
+      },
+      slots: { default: slotItems },
+    });
+
+    // Read caption text directly from the button span to avoid false positives from the
+    // same label appearing inside the hidden menu list.
+    const getCaption = () =>
+      result.container
+        .querySelector('[data-test="internalCaption"]')
+        ?.textContent?.trim();
+
+    await result.findByText('Bo-Katan Kryze');
+    expect(getCaption()).toBe('Bo-Katan Kryze');
+    expect(result.queryByText(placeholder)).toBeNull();
+
+    // User selects a different item
+    const user = userEvent.setup();
+    const button = await result.findByRole('button');
+    await user.click(button);
+    const menuItems = await result.findAllByRole('menuitemradio');
+    await user.click(menuItems[0]); // Din Djarin / value: mando
+
+    expect(getCaption()).toBe('Din Djarin');
+    expect(result.queryByText(placeholder)).toBeNull();
+
+    // Parent rerenders passing back the same modelValue — caption must remain stable
+    await result.rerender({ modelValue: 'mando' });
+
+    expect(result.queryByText(placeholder)).toBeNull();
+    expect(getCaption()).toBe('Din Djarin');
+  });
+
+  it('CvDropdown - same value rerender from initial', async () => {
+    // Variant: modelValue is provided at initial render,
+    // then the parent rerenders with the identical modelValue.
+    window.focus = () => {};
+    const placeholder = 'Choose an option';
+
+    const result = render(CvDropdown, {
+      props: {
+        placeholder,
+        modelValue: 'baby-yoda',
+      },
+      slots: { default: slotItems },
+    });
+
+    const getCaption = () =>
+      result.container
+        .querySelector('[data-test="internalCaption"]')
+        ?.textContent?.trim();
+
+    // findByText waits for child items to mount and populate the caption via provide/inject
+    await result.findByText('Din Grogu');
+    expect(getCaption()).toBe('Din Grogu');
+    expect(result.queryByText(placeholder)).toBeNull();
+
+    // Parent rerenders with the same modelValue. Caption must not revert
+    await result.rerender({ modelValue: 'baby-yoda' });
+
+    expect(result.queryByText(placeholder)).toBeNull();
+    expect(getCaption()).toBe('Din Grogu');
+  });
 });
