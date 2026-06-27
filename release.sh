@@ -1,7 +1,7 @@
 echo
 printf "Releease checklist"
 echo
-read  -n 1 -p "Has http://vue.carbondesignsystem.com been sucessfully deployed with the updates [yN]? " answer1
+read  -n 1 -p "Has http://vue.carbondesignsystem.com been successfully deployed with the updates [yN]? " answer1
 [ -z "$answer1" ] && answer1="n"  # if 'no' have to be default choice
 
 if [ "$answer1" != "y" ] && [ "$answer1" != "Y" ]
