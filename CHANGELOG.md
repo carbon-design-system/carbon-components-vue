@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.31](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.30...@carbon/vue@3.0.31) (2026-07-07)
+
+### Bug Fixes
+
+- change to onmounted ([0d50cfa](https://github.com/carbon-design-system/carbon-components-vue/commit/0d50cfaaa8b8d6a658277c30b548e91acd0e3f55))
+- cvcontentswitcher selected event bug ([489318e](https://github.com/carbon-design-system/carbon-components-vue/commit/489318ea1bbc71d059d7a7a52757ee94ef288a58))
+- ensure CvSideNav side rail remains interactive when collapsed ([420c002](https://github.com/carbon-design-system/carbon-components-vue/commit/420c0022ae1c944ff969e8647923c3523719c1cd))
+- fixing test and test for no initial selection ([f369960](https://github.com/carbon-design-system/carbon-components-vue/commit/f3699602f411b4f3098cd069abb4cc7c21726f07))
+
 ## [3.0.30](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.29...@carbon/vue@3.0.30) (2025-12-23)
 
 ### Bug Fixes
