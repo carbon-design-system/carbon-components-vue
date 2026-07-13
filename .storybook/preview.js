@@ -10,6 +10,7 @@ import { white, g10, g90, g100 } from '@carbon/themes';
 import { breakpoints } from '@carbon/layout';
 import theme from './theme';
 
+/** @type {import('@storybook/vue3').Preview['globalTypes']} */
 const globalTypes = {
   locale: {
     name: 'Locale',
@@ -42,6 +43,7 @@ const globalTypes = {
   },
 };
 
+/** @type {import('@storybook/vue3').Preview['parameters']} */
 const parameters = {
   backgrounds: {
     // https://storybook.js.org/docs/react/essentials/backgrounds#grid
@@ -131,73 +133,43 @@ const parameters = {
     },
   },
   options: {
+    /**
+     *
+     * @param {import('storybook/internal/types').IndexEntry} storyA
+     * @param {import('storybook/internal/types').IndexEntry} storyB
+     */
     storySort: (storyA, storyB) => {
-      // By default, sort by the story "kind". The "kind" refers to the
-      // top-level title of the story, either through Component Story Format
-      // with the default export, or the `storiesOf('kind', module)` format
+      // "title" contains the full path, like "Component/CvAccordion"; although Welcome does not have a `X/` part...
+      // So we try to extract this first classification from it.
+      // And then we weight these to compare. Lower weights goes first.
+      const storyANamespace = storyA.title.split('/')[0] ?? storyA.title;
+      const storyBNamespace = storyB.title.split('/')[0] ?? storyB.title;
 
-      if (storyA[1].kind !== storyB[1].kind) {
-        if (storyA[1].kind === 'Welcome') return -1;
-        else if (storyB[1].kind === 'Welcome') return 1;
+      const namespaceWeight = {
+        'Welcome': 1,
+        'Components': 2,
+        // EverythingElse: 99
+      };
 
-        return storyA[1].kind.localeCompare(storyB[1].kind);
+      const namespaceCompare = (namespaceWeight[storyANamespace] ?? 99) - (namespaceWeight[storyBNamespace] ?? 99);
+      if (namespaceCompare !== 0) {
+        return namespaceCompare; // They have different weights, so go with it.
       }
 
-      const idA = storyA[0];
-      const idB = storyB[0];
+      // Both are in the same namespace weight, try by name "name" contains the final name of the page (e.g. "Default")
+      const nameWeight = {
+        'Default': 1,
+        // EverythingElse: 99
+      };
 
-      // To story the stories, we first build up a list of matches based on
-      // keywords. Each keyword has a specific weight that will be used to
-      // determine order later on.
-      const UNKNOWN_KEYWORD = 3;
-      const keywords = new Map([
-        ['welcome', 0],
-        ['default', 1],
-        ['usage', 2],
-        ['playground', 4],
-        ['development', 5],
-        ['deprecated', 6],
-        ['unstable', 7],
-      ]);
-      const matches = new Map();
-
-      // We use this list of keywords to determine a collection of matches. By
-      // default, we will look for the greatest valued matched
-      for (const [keyword, weight] of keywords) {
-        // If we already have a match for a given id that is greater than the
-        // specific keyword we're looking for, break early
-        if (matches.get(idA) > weight || matches.get(idB) > weight) {
-          break;
-        }
-
-        // If we don't have a match already for either id, we check to see if
-        // the id includes the keyword and assigns the relevant weight, if so
-        if (idA.includes(keyword)) {
-          matches.set(idA, weight);
-        }
-
-        if (idB.includes(keyword)) {
-          matches.set(idB, weight);
-        }
+      const nameOrder = (nameWeight[storyA.name] ?? 99) - (nameWeight[storyB.name] ?? 99);
+      if (nameOrder !== 0) {
+        return nameOrder; // They have different weights, go with it.
       }
 
-      // If we have matches for either id, then we will compare the ids based on
-      // the weight assigned to the matching keyword
-      if (matches.size > 0) {
-        const weightA = matches.get(idA) ?? UNKNOWN_KEYWORD;
-        const weightB = matches.get(idB) ?? UNKNOWN_KEYWORD;
-        // If we have the same weight for the ids, then we should compare them
-        // using locale compare instead of by weight
-        if (weightA === weightB) {
-          return idA.localeCompare(idB);
-        }
-        return weightA - weightB;
-      }
-
-      // By default, if we have no matches we'll do a locale compare between the
-      // two ids
-      return idA.localeCompare(idB);
-    },
+      // We couldn't match by any other option, so order the name alphabetically.
+      return storyA.name.localeCompare(storyB.name);
+    }
   },
 };
 
@@ -205,6 +177,8 @@ configureActions({
   clearOnStoryChange: true,
   limit: 10,
 });
+
+/** @type {import('@storybook/vue3').Preview['decorators']} */
 const decorators = [
   (story, context) => ({
     data() {
