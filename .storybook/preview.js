@@ -10,7 +10,7 @@ import { white, g10, g90, g100 } from '@carbon/themes';
 import { breakpoints } from '@carbon/layout';
 import theme from './theme';
 
-export const globalTypes = {
+const globalTypes = {
   locale: {
     name: 'Locale',
     description: 'Set the localization for the storybook',
@@ -42,7 +42,7 @@ export const globalTypes = {
   },
 };
 
-export const parameters = {
+const parameters = {
   backgrounds: {
     // https://storybook.js.org/docs/react/essentials/backgrounds#grid
     grid: {
@@ -205,7 +205,7 @@ configureActions({
   clearOnStoryChange: true,
   limit: 10,
 });
-export const decorators = [
+const decorators = [
   (story, context) => ({
     data() {
       const { locale, theme } = context.globals;
@@ -219,3 +219,12 @@ export const decorators = [
       '<div :data-carbon-theme="theme" :lang="locale" class="cv-vue-3"><story /></div>',
   }),
 ];
+
+/** @type {import('@storybook/vue3').Preview} */
+const preview = {
+  globalTypes,
+  parameters,
+  decorators,
+};
+export default preview;
+

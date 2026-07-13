@@ -40,6 +40,7 @@
   "devDependencies": {
     "@babel/core": "^7.17.10",
     "@babel/eslint-parser": "^7.17.0",
+    "@babel/preset-env": "^8.0.2",
     "@commitlint/cli": "^16.3.0",
     "@commitlint/config-conventional": "^16.2.4",
     "@npmcli/package-json": "^5.1.0",
@@ -72,7 +73,7 @@
     "prettier": "^2.8.0",
     "sass": "^1.56.1",
     "sass-loader": "^16.0.2",
-    "storybook": "^6.5.16",
+    "storybook": "7.6.24",
     "style-loader": "^3.3.1",
     "stylelint": "^14.15.0",
     "stylelint-config-property-sort-order-smacss": "^9.0.0",
@@ -180,5 +181,8 @@
     "type": "git",
     "url": "git+https://github.com/carbon-design-system/carbon-components-vue.git"
   },
-  "sideEffects": true
+  "sideEffects": true,
+  "resolutions": {
+    "webpack": "^5.108.0"
+  }
 }

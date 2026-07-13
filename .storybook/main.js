@@ -1,3 +1,4 @@
+import { dirname, join } from "path";
 /**
  * Copyright IBM Corp. 2022
  *
@@ -7,7 +8,13 @@
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 
-module.exports = {
+/** @type {import('@storybook/vue3-webpack5').StorybookConfig} */
+const config = {
+  framework: {
+    name: '@storybook/vue3-webpack5',
+    options: {},
+  },
+
   addons: [
     {
       name: '@storybook/addon-essentials',
@@ -20,15 +27,14 @@ module.exports = {
         viewport: true,
       },
     },
-    '@storybook/addon-storysource',
-    '@storybook/addon-a11y',
+    getAbsolutePath("@storybook/addon-storysource"),
+    getAbsolutePath("@storybook/addon-a11y"),
   ],
-  core: {
-    builder: 'webpack5',
-  },
+
   features: {
-    previewCsfV3: true,
+    // No feature flags for now
   },
+
   stories: [
     './Welcome/__welcome-story.js',
     '../src/**/*.stories.@(js|jsx|ts|tsx|mdx)',
@@ -79,4 +85,13 @@ module.exports = {
     // Return the altered config
     return config;
   },
+
+  docs: {
+    autodocs: true
+  }
 };
+export default config;
+
+function getAbsolutePath(value) {
+  return dirname(require.resolve(join(value, "package.json")));
+}

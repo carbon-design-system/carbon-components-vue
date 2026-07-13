@@ -146,13 +146,13 @@ const defaultTemplate = `
       <cv-data-table-cell>{{row.oo}}</cv-data-table-cell>
       <cv-data-table-cell>{{row.purpose}}</cv-data-table-cell>
       <cv-data-table-cell>{{row.standard}}</cv-data-table-cell>
-      <!-- Add optional expanding data here -->
+      {/* Add optional expanding data here */}
     </cv-data-table-row>
   </template>
 </cv-data-table>
 `;
 const expandingRowsTemplate = defaultTemplate.replace(
-  "<!-- Add optional expanding data here -->",
+  "{/* Add optional expanding data here */}",
   `<template #expandedContent>{{row.desc}}</template>`)
   .replace('@search="onSearch"', ':expandable="true"')
   .replace('testData', 'originalTestData')
