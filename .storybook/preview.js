@@ -70,6 +70,9 @@ const parameters = {
       },
     ],
   },
+  // Make the default layout fullscreen, so components can use the entire space for the story
+  // otherwise they will "flick" when growing/shrinking based on display
+  layout: 'fullscreen',
   controls: {
     // https://storybook.js.org/docs/react/essentials/controls#show-full-documentation-for-each-property
     expanded: true,
@@ -158,7 +161,8 @@ const parameters = {
 
       // Both are in the same namespace weight, try by name "name" contains the final name of the page (e.g. "Default")
       const nameWeight = {
-        'Default': 1,
+        'Docs': 1,
+        'Default': 2,
         // EverythingElse: 99
       };
 
