@@ -1,0 +1,34 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import * as CvAccordionStories from './CvAccordion.stories';
+
+<Meta of={CvAccordionStories} />
+
+# CvAccordion
+
+<Canvas of={CvAccordionStories.Default} />
+
+# Control open state with v-model
+
+- Notes: The Vue 2 component does not support v-model. One interesting implementation using this would be to create an
+  "auto close" component such that opening one section closes other sections.
+
+```javascript
+// example auto close
+// <cv-accordion @change="onAutoClose">
+const open = ref({
+  accItem1: false,
+  accItem2: false,
+  accItem3: false,
+  accItem4: false,
+});
+
+function autoClose(ev) {
+  if (ev.change.open) {
+    for (let state in open.value) {
+      if (state !== ev.change.id) open.value[state] = false;
+    }
+  }
+}
+```
+
+<Canvas of={CvAccordionStories.VModel} />
