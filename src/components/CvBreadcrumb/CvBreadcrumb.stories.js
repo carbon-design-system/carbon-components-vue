@@ -1,10 +1,10 @@
+import { computed } from 'vue';
 import {
   CvBreadcrumb,
   CvBreadcrumbItem,
   CvBreadcrumbSkeleton,
   CvBreadcrumbSkeletonItem,
 } from '.';
-
 import { storyParametersObject } from '../../global/storybook-utils';
 
 export default {
@@ -13,7 +13,6 @@ export default {
   argTypes: {
     ariaLabel: {
       control: { type: 'text' },
-      defaultValue: CvBreadcrumb.props.ariaLabel.default,
       table: {
         defaultValue: { summary: `"${CvBreadcrumb.props.ariaLabel.default}"` },
       },
@@ -22,51 +21,61 @@ export default {
       control: { type: 'boolean' },
     },
   },
+  args: {
+    ariaLabel: CvBreadcrumb.props.ariaLabel.default,
+    noTrailingSlash: false,
+  },
 };
 
-const template = `<cv-breadcrumb v-bind="args">
+const Template = (args, storyTemplate) => ({
+  components: { CvBreadcrumb, CvBreadcrumbItem },
+  setup() {
+    return {
+      ariaLabel: computed(() => args.ariaLabel),
+      noTrailingSlash: computed(() => args.noTrailingSlash),
+    };
+  },
+  template: storyTemplate,
+});
+
+const templateDefault = `
+<cv-breadcrumb :aria-label="ariaLabel" :no-trailing-slash="noTrailingSlash">
   <cv-breadcrumb-item>Breadcrumb 1</cv-breadcrumb-item>
   <cv-breadcrumb-item>Breadcrumb 2</cv-breadcrumb-item>
   <cv-breadcrumb-item>Breadcrumb 3</cv-breadcrumb-item>
-</cv-breadcrumb>`;
-const Template = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-  components: { CvBreadcrumb, CvBreadcrumbItem },
-  setup() {
-    return { args };
-  },
-  template,
+</cv-breadcrumb>
+`;
+
+export const Default = args => Template(args, templateDefault);
+Default.args = {};
+Default.parameters = storyParametersObject(null, templateDefault, {
+  ariaLabel: '',
+  noTrailingSlash: false,
 });
 
-export const Default = Template.bind({});
-Default.args = {};
-Default.parameters = storyParametersObject(
-  Default.parameters,
-  template,
-  Default.args
-);
-
-const skeletonTemplate = `<cv-breadcrumb-skeleton v-bind="args">
-  <cv-breadcrumb-skeleton-item />
-  <cv-breadcrumb-skeleton-item />
-  <cv-breadcrumb-skeleton-item />
-</cv-breadcrumb-skeleton>`;
-const SkeletonTemplate = args => ({
-  props: ['noTrailingSlash'],
+// ======= Skeleton
+const SkeletonTemplate = (args, storyTemplate) => ({
   components: { CvBreadcrumbSkeleton, CvBreadcrumbSkeletonItem },
   setup() {
-    return { args };
+    return {
+      ariaLabel: computed(() => args.ariaLabel),
+      noTrailingSlash: computed(() => args.noTrailingSlash),
+    };
   },
-  template: skeletonTemplate,
+  template: storyTemplate,
 });
 
-export const Skeleton = SkeletonTemplate.bind({});
+const skeletonTemplate = `
+<cv-breadcrumb-skeleton :no-trailing-slash="noTrailingSlash">
+  <cv-breadcrumb-skeleton-item />
+  <cv-breadcrumb-skeleton-item />
+  <cv-breadcrumb-skeleton-item />
+</cv-breadcrumb-skeleton>
+`;
+
+export const Skeleton = args => SkeletonTemplate(args, skeletonTemplate);
 Skeleton.args = {};
-Skeleton.argTypes = {
-  ariaLabel: { table: { disable: true } },
-};
-Skeleton.parameters = storyParametersObject(
-  Skeleton.parameters,
-  template,
-  Skeleton.args
-);
+Skeleton.parameters = storyParametersObject(null, skeletonTemplate, {
+  ariaLabel: '',
+  noTrailingSlash: false,
+});
