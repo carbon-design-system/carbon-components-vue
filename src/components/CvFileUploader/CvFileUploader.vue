@@ -99,7 +99,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue';
+import { ref, computed, onMounted, watch, toRefs } from 'vue';
 import CvFileUploaderItem from './CvFileUploaderItem.vue';
 import { carbonPrefix } from '../../global/settings';
 import { CvFormItem } from '../CvForm';
@@ -163,7 +163,8 @@ const allowDrop = ref(false);
 const internalFiles = ref([]);
 
 // Computed
-const { buttonClasses } = useCvButtonCommon(props.buttonKind, props.buttonSize);
+const { buttonKind, buttonSize } = toRefs(props);
+const { buttonClasses } = useCvButtonCommon(buttonKind, buttonSize);
 const cvId = useCvId(props);
 const internalDropTargetLabel = computed(() => {
   return (

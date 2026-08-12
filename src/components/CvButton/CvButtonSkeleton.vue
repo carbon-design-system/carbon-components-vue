@@ -3,6 +3,7 @@
 </template>
 
 <script setup>
+import { ref, toRefs } from 'vue';
 import {
   props as commonCvButtonProps,
   useCvButtonCommon,
@@ -15,5 +16,6 @@ const props = defineProps({
   size: commonCvButtonProps.size,
 });
 
-const { buttonClasses } = useCvButtonCommon(undefined, props.size, true);
+const { size } = toRefs(props);
+const { buttonClasses } = useCvButtonCommon(ref(undefined), size, ref(true));
 </script>

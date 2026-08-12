@@ -27,6 +27,7 @@ import {
 } from './CvButtonCommon';
 import { TipAlignments } from '../CvTooltip/consts.js';
 import CvSvg from '../CvSvg/_CvSvg.vue';
+import { ref, toRefs } from 'vue';
 
 const { disabled, icon, kind, size } = commonCvButtonProps;
 
@@ -74,11 +75,12 @@ export default {
   },
   emits: ['click'],
   setup(props) {
+    const { kind, size } = toRefs(props);
     const { buttonClasses } = useCvButtonCommon(
-      props.kind,
-      props.size,
-      false,
-      true
+      kind,
+      size,
+      ref(false),
+      ref(true)
     );
 
     return {

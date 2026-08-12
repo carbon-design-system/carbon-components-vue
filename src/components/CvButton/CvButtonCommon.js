@@ -1,4 +1,4 @@
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { carbonPrefix } from '../../global/settings';
 import { buttonKinds, buttonSizes } from './consts.js';
 
@@ -45,13 +45,13 @@ export const props = {
 export const useCvButtonCommon = (
   kind,
   size,
-  skeleton = false,
-  iconOnly = false
+  skeleton = ref(false),
+  iconOnly = ref(false)
 ) => {
   const buttonClasses = computed(() => {
     const classes = [`${carbonPrefix}--btn`];
 
-    if (skeleton) {
+    if (skeleton.value) {
       classes.push(`${carbonPrefix}--skeleton`);
     }
 
@@ -59,12 +59,12 @@ export const useCvButtonCommon = (
       classes.push(`${carbonPrefix}--btn--icon-only`);
     }
 
-    if (kind && !skeleton) {
-      classes.push(`${carbonPrefix}--btn--${kind.toLowerCase()}`);
+    if (kind.value && !skeleton.value) {
+      classes.push(`${carbonPrefix}--btn--${kind.value.toLowerCase()}`);
     }
 
-    if (size) {
-      const _size = size === 'small' ? 'sm' : size;
+    if (size.value) {
+      const _size = size.value === 'small' ? 'sm' : size.value;
       classes.push(`${carbonPrefix}--btn--${_size}`);
     }
 

@@ -23,6 +23,7 @@ import {
   useCvButtonCommon,
 } from './CvButtonCommon';
 import CvSvg from '../CvSvg/_CvSvg.vue';
+import { toRefs } from 'vue';
 
 const { disabled, icon, kind, size } = commonCvButtonProps;
 
@@ -54,11 +55,8 @@ export default {
   },
   emits: ['click'],
   setup(props) {
-    const { buttonClasses } = useCvButtonCommon(
-      props.kind,
-      props.size,
-      props.skeleton
-    );
+    const { kind, size, skeleton } = toRefs(props);
+    const { buttonClasses } = useCvButtonCommon(kind, size, skeleton);
 
     return {
       buttonClasses,
