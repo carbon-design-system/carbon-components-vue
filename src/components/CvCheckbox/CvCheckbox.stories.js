@@ -2,7 +2,6 @@ import {
   storybookControlsFromProps,
   storyParametersObject,
 } from '../../global/storybook-utils';
-
 import { CvCheckbox, CvCheckboxSkeleton } from '.';
 import { action } from '@storybook/addon-actions';
 import { props as propsCvCheck } from '../../use/cvCheck';
@@ -32,14 +31,10 @@ export default {
     },
     change: { description: 'emitted when state changes' },
     modelValue: {
-      table: {
-        disable: true,
-      },
+      table: { disable: true },
     },
     name: {
-      table: {
-        disable: true,
-      },
+      table: { disable: true },
     },
     checked: {
       type: 'boolean',
@@ -54,22 +49,19 @@ export default {
 };
 
 const template = `
-<cv-checkbox @change="onChange" v-bind='args' >
-</cv-checkbox>
-  `;
-const Template = args => {
-  return {
-    components: { CvCheckbox },
-    setup: () => ({ args, onChange: action('change') }),
-    template,
-  };
-};
+<cv-checkbox @change="onChange" v-bind="args">
+</cv-checkbox>`;
 
-export const Default = Template.bind({});
+const Template = args => ({
+  components: { CvCheckbox },
+  setup: () => ({ args, onChange: action('change') }),
+  template,
+});
+
+export const Default = args => Template(args);
 Default.args = { label: 'checkbox', value: 'check-1' };
-Default.parameters = { controls: { sort: 'requiredFirst' } };
 Default.parameters = storyParametersObject(
-  Default.parameters,
+  { controls: { sort: 'requiredFirst' } },
   template,
   Default.args
 );
@@ -77,47 +69,41 @@ Default.parameters = storyParametersObject(
 // v-model story
 const modelValue = ref(false);
 const templateVModel = `<div>
-<cv-checkbox @change="onChange" v-bind='args' v-model="modelValue">
+<cv-checkbox @change="onChange" v-bind="args" v-model="modelValue">
 </cv-checkbox>
-<div style="margin-top:1rem; background-color: #888888;  padding:1rem"><div style="font-size: 150%">Sample interaction</div>
-<label for="checkbox">V-model: Check 1:</label>
-<input id="checkbox" type="checkbox" v-model="modelValue" />
-<div>Checked: <span style="font-weight: bold;">{{modelValue}}</span></div>
+<div style="margin-top:1rem; background-color: #888888; padding:1rem">
+  <div style="font-size: 150%">Sample interaction</div>
+  <label for="checkbox">V-model: Check 1:</label>
+  <input id="checkbox" type="checkbox" v-model="modelValue" />
+  <div>Checked: <span style="font-weight: bold;">{{modelValue}}</span></div>
 </div>
-</div>
-  `;
+</div>`;
 
-const TemplateVModel = args => {
-  return {
-    components: { CvCheckbox },
-    setup: () => ({
-      args,
-      modelValue,
-      onChange: action('change'),
-    }),
-    template: templateVModel,
-  };
-};
-export const vModel = TemplateVModel.bind({});
-vModel.args = {
+const TemplateVModel = args => ({
+  components: { CvCheckbox },
+  setup: () => ({
+    args,
+    modelValue,
+    onChange: action('change'),
+  }),
+  template: templateVModel,
+});
+
+export const VModel = args => TemplateVModel(args);
+VModel.args = {
   label: 'checkbox',
   value: 'check-1',
 };
-vModel.parameters = { controls: { sort: 'requiredFirst' } };
-vModel.parameters = storyParametersObject(
-  vModel.parameters,
+VModel.parameters = storyParametersObject(
+  { controls: { sort: 'requiredFirst' } },
   templateVModel,
-  vModel.args
+  VModel.args
 );
 
-const templateSkeleton = `<cv-checkbox-skeleton></cv-checkbox-skeleton>`;
+const templateSkeleton = `<cv-checkbox-skeleton />`;
 
-const TemplateSkeleton = () => {
-  return {
-    components: { CvCheckboxSkeleton },
-    setup: () => {},
-    template: templateSkeleton,
-  };
-};
-
-export const Skeleton = TemplateSkeleton.bind({});
+export const Skeleton = () => ({
+  components: { CvCheckboxSkeleton },
+  template: templateSkeleton,
+});
+Skeleton.parameters = storyParametersObject(null, templateSkeleton, {});
