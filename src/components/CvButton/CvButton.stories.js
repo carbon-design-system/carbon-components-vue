@@ -1,10 +1,10 @@
 import { action } from '@storybook/addon-actions';
 import { CvButton } from './';
 import { buttonKinds, buttonSizes } from './consts';
+import { computed } from 'vue';
 import {
   splitSlotArgs,
   storybookControlsFromProps,
-  storyParametersObject,
 } from '../../global/storybook-utils';
 import { props as commonCvButtonProps } from './CvButtonCommon';
 import {
@@ -31,87 +31,57 @@ export default {
   argTypes: {
     ...storybookControlsFromProps(commonCvButtonProps),
     default: { control: { type: 'text' } },
-    icon: { control: { type: 'select', options: Object.keys(icons) } },
-    kind: {
-      control: { type: 'select', options: buttonKinds },
-      defaultValue: CvButton.props.kind.default,
-    },
-    size: {
-      control: {
-        type: 'select',
-        options: buttonSizes,
-      },
-      defaultValue: CvButton.props.size.default,
-    },
+    icon: { control: { type: 'select' }, options: Object.keys(icons) },
+    kind: { control: { type: 'select' }, options: buttonKinds },
+    size: { control: { type: 'select' }, options: buttonSizes },
+  },
+  args: {
+    kind: CvButton.props.kind.default,
+    size: CvButton.props.size.default,
   },
 };
 
-const template = `<cv-button @click="onClick" aria-label="button story" v-bind="args">{{slotArgs.default}}</cv-button>`;
-const Template = (argsIn, { argTypes }) => {
-  let { args, slotArgs } = splitSlotArgs(argsIn, ['default']);
-  args = { ...args, icon: icons[args.icon] };
-
-  return {
-    props: Object.keys(argTypes),
+const Template = argsIn => ({
+  args: argsIn,
+  render: args => ({
     components: { CvButton },
     setup() {
-      return { args, onClick: action('click'), slotArgs };
+      return {
+        args: computed(() => ({
+          ...splitSlotArgs(args, ['default']).args,
+          icon: icons[args.icon],
+        })),
+        slotArgs: computed(() => splitSlotArgs(args, ['default']).slotArgs),
+        onClick: action('click'),
+      };
     },
-    template,
-  };
-};
+    template: `
+    <cv-button @click="onClick" aria-label="button story" v-bind="args">{{slotArgs.default}}</cv-button>
+    `,
+  }),
+});
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const Primary = Template({
   kind: 'primary',
   default: 'Primary',
-};
-Primary.parameters = storyParametersObject(
-  Primary.parameters,
-  template,
-  Primary.args
-);
+});
 
-export const Secondary = Template.bind({});
-Secondary.args = {
+export const Secondary = Template({
   kind: 'secondary',
   default: 'Secondary',
-};
-Secondary.parameters = storyParametersObject(
-  Secondary.parameters,
-  template,
-  Secondary.args
-);
+});
 
-export const Field = Template.bind({});
-Field.args = {
+export const Field = Template({
   default: 'Field size',
   size: 'field',
-};
-Field.parameters = storyParametersObject(
-  Field.parameters,
-  template,
-  Field.args
-);
+});
 
-export const Small = Template.bind({});
-Small.args = {
+export const Small = Template({
   default: 'sm',
   size: 'sm',
-};
-Small.parameters = storyParametersObject(
-  Small.parameters,
-  template,
-  Small.args
-);
+});
 
-export const Large = Template.bind({});
-Large.args = {
+export const Large = Template({
   default: 'Large size',
   size: 'lg',
-};
-Large.parameters = storyParametersObject(
-  Large.parameters,
-  template,
-  Large.args
-);
+});
