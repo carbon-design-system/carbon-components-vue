@@ -84,13 +84,20 @@
 
 <script setup>
 import { carbonPrefix } from '../../global/settings';
-import { computed, nextTick, onMounted, ref, useAttrs, watch } from 'vue';
+import {
+  computed,
+  getCurrentInstance,
+  onMounted,
+  ref,
+  useAttrs,
+  watch,
+} from 'vue';
 import { CaretLeft16, CaretRight16 } from '@carbon/icons-vue';
 import CvSelect from '../CvSelect';
 import CvSelectOption from '../CvSelect/CvSelectOption.vue';
 import { useCvId } from '../../use/cvId';
 
-const emit = defineEmits(['change']);
+const emit = defineEmits(['change', 'update:page', 'update:pageSize']);
 
 const props = defineProps({
   backwardsButtonDisabled: { type: Boolean, default: false },
@@ -102,16 +109,35 @@ const props = defineProps({
   numberOfItems: { type: Number, default: Infinity },
   actualItemsOnPage: { type: Number, default: Infinity },
   page: { type: Number, default: undefined },
+  pageSize: { type: Number, default: undefined },
   pageSizes: { type: Array, default: () => [10, 20, 30, 40, 50] },
 });
 const attrs = useAttrs();
 const cvId = useCvId(attrs, true);
 
+// Read once at setup time: whether the parent bound a v-model listener for
+// this prop. vnode.props is a plain object Vue replaces on patch, not
+// something Vue's reactivity system tracks, so this can't be a computed()
+// that reacts to listeners being added/removed later - it only reflects
+// how the component was initially used.
+const instance = getCurrentInstance();
+const pageControlled = 'onUpdate:page' in (instance.vnode.props || {});
+const pageSizeControlled = 'onUpdate:pageSize' in (instance.vnode.props || {});
+
 const firstItem = ref(1);
-const pageValue = ref(1);
-const pageSizeValue = ref(10);
+const internalPage = ref(1);
+const internalPageSize = ref(10);
 const pageCount = ref(1);
 const pages = ref([1]);
+
+const pageValue = computed(() =>
+  pageControlled && props.page !== undefined ? props.page : internalPage.value
+);
+const pageSizeValue = computed(() =>
+  pageSizeControlled && props.pageSize !== undefined
+    ? props.pageSize
+    : internalPageSize.value
+);
 
 const noWayBack = computed(() => {
   return props.backwardsButtonDisabled || pageValue.value === 1;
@@ -162,16 +188,23 @@ const internalValue = computed(() => {
 });
 
 function adjustValues() {
-  pageSizeValue.value = newPageSizeValue(props.pageSizes);
+  if (!pageSizeControlled) {
+    internalPageSize.value = newPageSizeValue(props.pageSizes);
+  }
   pageCount.value = newPageCount(props.numberOfItems, pageSizeValue.value);
-  pageValue.value = newPageValue(props.page, pageCount.value);
+  if (!pageControlled) {
+    internalPage.value = newPageValue(props.page, pageCount.value);
+  }
   pages.value = newPagesArray(pageCount.value);
   firstItem.value = newFirstItem(pageValue.value, pageSizeValue.value);
 }
 onMounted(() => {
   adjustValues();
-  // always emit on mount
-  emit('change', internalValue.value);
+  // always emit on mount, unless both page and pageSize are fully
+  // controlled by the parent, in which case nothing here was derived.
+  if (!pageControlled || !pageSizeControlled) {
+    emit('change', internalValue.value);
+  }
 });
 watch(
   () => props.pageSizes,
@@ -186,36 +219,46 @@ watch(
   () => adjustValues()
 );
 
+function propose(nextPage, nextPageSize) {
+  if (!pageControlled) {
+    internalPage.value = nextPage;
+  }
+  if (!pageSizeControlled) {
+    internalPageSize.value = nextPageSize;
+  }
+  firstItem.value = newFirstItem(nextPage, nextPageSize);
+
+  if (pageControlled && nextPage !== pageValue.value) {
+    emit('update:page', nextPage);
+  }
+  if (pageSizeControlled && nextPageSize !== pageSizeValue.value) {
+    emit('update:pageSize', nextPageSize);
+  }
+  emit('change', {
+    start: firstItem.value,
+    page: nextPage,
+    length: nextPageSize,
+  });
+}
 function onPageChange(newVal) {
-  pageValue.value = parseInt(newVal, 10);
-  firstItem.value = newFirstItem(pageValue.value, pageSizeValue.value);
-  emit('change', internalValue.value);
+  propose(parseInt(newVal, 10), pageSizeValue.value);
 }
 function onPageSizeChange(newVal) {
-  pageSizeValue.value = parseInt(newVal, 10);
-  pageCount.value = newPageCount(props.numberOfItems, pageSizeValue.value);
-  pages.value = newPagesArray(pageCount.value);
-  // what page is firstItem on
-  nextTick(() => {
-    // setting pageValue immediately seems to cause a problem - test set pageSize to 40, page to 3, set pageSize to 10
-    // this previously resulted in 1 being set on Chrome (other browsers untested)
-    pageValue.value = Math.ceil(firstItem.value / pageSizeValue.value);
-    firstItem.value = newFirstItem(pageValue.value, pageSizeValue.value);
-    emit('change', internalValue.value);
-  });
+  const nextPageSize = parseInt(newVal, 10);
+  const nextPageCount = newPageCount(props.numberOfItems, nextPageSize);
+  pageCount.value = nextPageCount;
+  pages.value = newPagesArray(nextPageCount);
+  const nextPage = Math.ceil(firstItem.value / nextPageSize);
+  propose(nextPage, nextPageSize);
 }
 function onPrevPage() {
   if (pageValue.value > 1) {
-    pageValue.value--;
-    firstItem.value = newFirstItem(pageValue.value, pageSizeValue.value);
-    emit('change', internalValue.value);
+    propose(pageValue.value - 1, pageSizeValue.value);
   }
 }
 function onNextPage() {
   if (pageValue.value < pageCount.value) {
-    pageValue.value++;
-    firstItem.value = newFirstItem(pageValue.value, pageSizeValue.value);
-    emit('change', internalValue.value);
+    propose(pageValue.value + 1, pageSizeValue.value);
   }
 }
 function newPageValue(page, lastPage) {

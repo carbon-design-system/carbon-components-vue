@@ -165,4 +165,70 @@ describe('CvPagination', () => {
     expect(result.emitted('change')?.length).toBe(2);
     expect(result.emitted('change')[1][0].length).toBe(20);
   });
+
+  it('with v-model:page (onUpdate:page listener present), clicking forward emits update:page and only moves once the prop updates', async () => {
+    const result = render(CvPagination, {
+      props: {
+        numberOfItems: 30,
+        page: 1,
+        'onUpdate:page': val => result.rerender({ page: val }),
+      },
+    });
+    const [, forward] = await result.findAllByRole('button');
+
+    const user = userEvent.setup();
+    await user.click(forward);
+
+    expect(result.emitted('update:page')?.length).toBe(1);
+    expect(result.emitted('update:page')[0]).toEqual([2]);
+
+    const pageSelect = await result.findByLabelText('Page number:');
+    expect(pageSelect.value).toBe('2');
+  });
+
+  it('with v-model:page and a parent that ignores the event, the rendered page does not drift and does not get stuck', async () => {
+    const result = render(CvPagination, {
+      props: {
+        numberOfItems: 30,
+        page: 1,
+        'onUpdate:page': () => {},
+      },
+    });
+    const [, forward] = await result.findAllByRole('button');
+
+    const user = userEvent.setup();
+    await user.click(forward);
+    expect(result.emitted('update:page')?.length).toBe(1);
+
+    // parent ignored the request; re-asserting the same page value must not
+    // leave the component stuck unable to propose page 2 again.
+    await result.rerender({ page: 1 });
+    await user.click(forward);
+    expect(result.emitted('update:page')?.length).toBe(2);
+    expect(result.emitted('update:page')[1]).toEqual([2]);
+  });
+
+  it('with both v-model:page and v-model:pageSize, mounting emits no change', async () => {
+    const result = render(CvPagination, {
+      props: {
+        numberOfItems: 30,
+        page: 1,
+        pageSize: 10,
+        'onUpdate:page': () => {},
+        'onUpdate:pageSize': () => {},
+      },
+    });
+
+    await result.findByText('of 3 pages');
+    expect(result.emitted('change')).toBeUndefined();
+  });
+
+  it('uncontrolled usage (plain :page, no listener) behaves identically to today, including the mount emit', async () => {
+    const result = render(CvPagination, {
+      props: { numberOfItems: 30, page: 1 },
+    });
+
+    await result.findByText('of 3 pages');
+    expect(result.emitted('change')?.length).toBe(1);
+  });
 });
