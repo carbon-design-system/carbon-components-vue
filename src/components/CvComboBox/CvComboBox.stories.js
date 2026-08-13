@@ -1,5 +1,4 @@
 import { storyParametersObject } from '../../global/storybook-utils';
-
 import { CvComboBox } from '.';
 import { action } from '@storybook/addon-actions';
 import { ref } from 'vue';
@@ -31,6 +30,7 @@ const fruits = [
     value: `val-${nameVal}`,
   };
 });
+
 const initArgs = {
   title: 'Combo Box title',
   options: fruits,
@@ -62,24 +62,22 @@ export default {
 };
 
 const template = `
-<div style='width: 18.75rem'>
-<cv-combo-box aria-label='Choose a fruit' @change='onChange' @onFilter='onFilter' v-bind='args' >
-</cv-combo-box>
-</div>
-`;
-const Template = args => {
-  return {
-    components: { CvComboBox },
-    setup: () => ({
-      args,
-      onChange: action('change'),
-      onFilter: action('filter'),
-    }),
-    template,
-  };
-};
+<div style="width: 18.75rem">
+  <cv-combo-box aria-label="Choose a fruit" @change="onChange" @filter="onFilter" v-bind="args">
+  </cv-combo-box>
+</div>`;
 
-export const Default = Template.bind({});
+const Template = args => ({
+  components: { CvComboBox },
+  setup: () => ({
+    args,
+    onChange: action('change'),
+    onFilter: action('filter'),
+  }),
+  template,
+});
+
+export const Default = args => Template(args);
 Default.args = initArgs;
 Default.parameters = storyParametersObject(
   Default.parameters,
@@ -90,40 +88,35 @@ Default.parameters = storyParametersObject(
 /**
  * Slots
  */
-const use_invalidMessageSlot = ref(false);
-const use_helperTextSlot = ref(false);
 const templateSlots = `
-<div style='width: 18.75rem'>
-<cv-combo-box aria-label='Choose a fruit' @change='onChange' @onFilter='onFilter' v-bind='args' >
-<template v-if="use_helperTextSlot" #helper-text>Some helpful text</template>
-<template v-if="use_invalidMessageSlot" #invalid-message>Invalid message text</template>
-</cv-combo-box>
-</div>
-`;
-const TemplateSlots = args => {
-  return {
-    components: { CvComboBox },
-    setup: () => ({
-      args,
-      use_helperTextSlot: args.use_helperTextSlot,
-      use_invalidMessageSlot: args.use_invalidMessageSlot,
-      onChange: action('change'),
-      onFilter: action('filter'),
-    }),
-    template: templateSlots,
-  };
-};
-export const slots = TemplateSlots.bind({});
-slots.args = {
-  use_helperTextSlot: use_helperTextSlot.value,
-  use_invalidMessageSlot: use_invalidMessageSlot.value,
+<div style="width: 18.75rem">
+  <cv-combo-box aria-label="Choose a fruit" @change="onChange" @filter="onFilter" v-bind="args">
+    <template v-if="args.use_helperTextSlot" #helper-text>Some helpful text</template>
+    <template v-if="args.use_invalidMessageSlot" #invalid-message>Invalid message text</template>
+  </cv-combo-box>
+</div>`;
+
+const TemplateSlots = args => ({
+  components: { CvComboBox },
+  setup: () => ({
+    args,
+    onChange: action('change'),
+    onFilter: action('filter'),
+  }),
+  template: templateSlots,
+});
+
+export const Slots = args => TemplateSlots(args);
+Slots.args = {
+  use_helperTextSlot: false,
+  use_invalidMessageSlot: false,
   title: 'Combo Box title',
   options: fruits,
 };
-slots.parameters = storyParametersObject(
-  slots.parameters,
+Slots.parameters = storyParametersObject(
+  Slots.parameters,
   templateSlots,
-  slots.args
+  Slots.args
 );
 
 /**
@@ -131,41 +124,39 @@ slots.parameters = storyParametersObject(
  */
 const modelValue = ref('val-fig');
 const templateVModel = `
-<div style='width: 50%'>
-  <div style='width: 18.75rem'>
-    <cv-combo-box aria-label='Choose a fruit'  @change='onChange' @onFilter='onFilter' v-bind='args' v-model="modelValue">
+<div style="width: 50%">
+  <div style="width: 18.75rem">
+    <cv-combo-box aria-label="Choose a fruit" @change="onChange" @filter="onFilter" v-bind="args" v-model="modelValue">
     </cv-combo-box>
   </div>
-  <div style="margin-top:2rem; background-color: #888888;  padding:1rem">
+  <div style="margin-top:2rem; background-color: #888888; padding:1rem">
     <div style="font-size: 150%;">Sample interaction</div>
-    <label for="fruits" style='margin: 0.5rem'>V-model:</label>
-    <select style='margin: 0.5rem' name="fruits" id="fruits" @change="(ev) => {modelValue = ev.currentTarget.value}">
+    <label for="fruits" style="margin: 0.5rem">V-model:</label>
+    <select style="margin: 0.5rem" name="fruits" id="fruits" @change="(ev) => { modelValue = ev.currentTarget.value }">
       <option value="val-elderberry">Elderberry</option>
       <option value="val-fig">Fig</option>
       <option value="val-grape">Grape</option>
       <option value="val-apple">Apple</option>
     </select>
-    <div style='margin: 0.5rem'>Value: <span style="font-weight: bold;">{{modelValue}}</span></div>
+    <div style="margin: 0.5rem">Value: <span style="font-weight: bold;">{{modelValue}}</span></div>
   </div>
-</div>
-  `;
+</div>`;
 
-const TemplateVModel = args => {
-  return {
-    components: { CvComboBox },
-    setup: () => ({
-      args,
-      modelValue,
-      onChange: action('change'),
-      onFilter: action('filter'),
-    }),
-    template: templateVModel,
-  };
-};
-export const vModel = TemplateVModel.bind({});
-vModel.args = initArgs;
-vModel.parameters = storyParametersObject(
-  vModel.parameters,
+const TemplateVModel = args => ({
+  components: { CvComboBox },
+  setup: () => ({
+    args,
+    modelValue,
+    onChange: action('change'),
+    onFilter: action('filter'),
+  }),
+  template: templateVModel,
+});
+
+export const VModel = args => TemplateVModel(args);
+VModel.args = initArgs;
+VModel.parameters = storyParametersObject(
+  VModel.parameters,
   templateVModel,
-  vModel.args
+  VModel.args
 );
