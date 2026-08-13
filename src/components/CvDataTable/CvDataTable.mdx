@@ -1,0 +1,74 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import * as CvDataTableStories from './CvDataTable.stories';
+
+<Meta of={CvDataTableStories} />
+
+**Usage:**
+- Sorting, filtering and pagination are the responsibility of the component user. This component raises events to facilitate this.
+  For example the test data is sorted like this but this is very specific to this data. Users will need to provide their own sort and filtering.
+  ```javascript
+  // sort example
+  const sortOpts = ref({index: "0", order: "none", name: "name"})
+  function sortTestData(opts) {
+    sortOpts.value = opts // remember this so it can be used in filtering
+    if (opts.order === 'none')
+      return testData.value.sort((a, b) => a.index.localeCompare(b.index, 'en', { sensitivity: 'base' }));
+    let direction = 1
+    if (opts.order === 'descending') direction = -1
+    if (opts.name === 'name')
+      return testData.value.sort((a, b) => direction * a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+    else if (opts.name === 'year')
+      return testData.value.sort((a, b) => direction * (a.year - b.year));
+  }
+  // filter example
+  function searchTestData(opts) {
+    if (!opts) testData.value = allData.value
+    else testData.value = allData.value.filter(data => data.name.indexOf(opts) > -1)
+    return sortTestData(sortOpts.value)
+  }
+  ```
+- The search bar appears only if the search event is listened for.
+- If your table has expanding rows, you MUST set the `expandable` property on CvTable to `true`. `<cv-table :expandable="true" ...`
+
+**Row attributes:**
+- aria-label-for-batch-checkbox: Aria label for batch checkbox. default 'Select row N for batch action'.
+- aria-label-expand-row: Aria label for expanding row expansion button. default: 'Expand current row'
+- aria-label-collapse-row: Aria label for expanding row collapse button. default: 'Collapse current row'
+- expanded: initial state of the expanded row
+- value: this is the value assign to the checkbox for tables with batch actions.
+
+**Migration notes:**
+
+- Default batch cancel label changed from "cancel" to "Cancel"
+- The sort event now returns an additional value "name" for example
+`{index: "1", order: "ascending", name: "year"}`. You can set the name value as a property on the
+`cv-data-table-heading` element
+- The `search` emit is not defined on the component and so your IDE likely will not suggest a type-ahead
+completion for it. See [discussion](https://github.com/vuejs/core/issues/3432) for the reason for this. The
+`search` emit is still emitted it is just not defined directly on the component.
+- The React does not seem to have an "autoWidth" property. It is still supported here but likely the better choice is `staticWidth`.
+- Row sizes in the React component are 'xs', 'sm', 'md', 'lg', & 'xl'. The rowSizes from Vue2 are still supported.
+- If you were using something like `this.$refs.tableEditPath.batchActive = true` to force batch actions to show even
+when no items were select, please now use the new property `stickyBatchActive`.
+
+<Canvas of={CvDataTableStories.Default} />
+
+# Expanding rows
+
+Set `:expandable="true"` on the table and supply an `#expandedContent` slot on each `cv-data-table-row`.
+
+<Canvas of={CvDataTableStories.ExpandingRows} />
+
+# CvDataTableSkeleton
+
+Use the skeleton variant while the table data is loading.
+
+<Canvas of={CvDataTableStories.Skeleton} />
+
+# v-model: selected rows
+
+If you are using the selected rows for batch actions or any other purpose, you should assign usable values to the rows.
+It is these values that are included in the selected rows events and in the selected rows v-model. Set the v-model on the
+cv-table like `<cv-table v-model:rows-selected="selectedRows" ...`
+
+<Canvas of={CvDataTableStories.VModelSelectedRows} />
