@@ -1,0 +1,30 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import * as CvContentSwitcherStories from './CvContentSwitcher.stories';
+
+<Meta of={CvContentSwitcherStories} />
+
+# CvContentSwitcher
+
+**Migration notes:**
+- The `light` and `theme` options continue to be supported but neither has a visible effect with Carbon 10. The React component does not list these properties at all. Even so, `--content-switcher--light` is still applied when `light` is `true`.
+- In the Vue 2 component, `cv-content-switcher-content` was made visible when its controlling `cv-content-switcher` was removed from the DOM. This is no longer supported. Use the Direct DOM variant with custom visibility logic if you need that behaviour.
+
+<Canvas of={CvContentSwitcherStories.Default} />
+
+
+# Direct DOM
+
+Manipulate DOM elements directly. For this mode define `content-selector`. The selector will be passed to
+`document.querySelectorAll()` to find and show or hide elements by setting or removing the `hidden` attribute.
+
+<Canvas of={CvContentSwitcherStories.DirectDOM} />
+
+
+# Multiple switchers
+
+Does it seem like a good idea to have multiple content switchers on the page? Who am I to judge.
+
+If you want to do this you need to define an `id` for the `cv-content-switcher` and share that with the
+`cv-content-switcher-button` and `cv-content-switcher-content` components via the `parent-switcher` property.
+
+<Canvas of={CvContentSwitcherStories.MultipleSwitchers} />
