@@ -111,6 +111,8 @@ const props = defineProps({
   page: { type: Number, default: undefined },
   pageSize: { type: Number, default: undefined },
   pageSizes: { type: Array, default: () => [10, 20, 30, 40, 50] },
+  rangeTextFormatter: { type: Function, default: undefined },
+  pageOfPagesFormatter: { type: Function, default: undefined },
 });
 const attrs = useAttrs();
 const cvId = useCvId(attrs, true);
@@ -153,6 +155,9 @@ const ofNPagesProps = computed(() => {
 });
 const pageOfPages = computed(() => {
   const { pages, items } = ofNPagesProps.value;
+  if (props.pageOfPagesFormatter) {
+    return props.pageOfPagesFormatter({ pages, items, page: pageValue.value });
+  }
   if (items !== Infinity) {
     return `of ${pages} pages`;
   }
@@ -173,6 +178,9 @@ const rangeProps = computed(() => {
 const rangeText = computed(() => {
   const { start, end, items } = rangeProps.value;
 
+  if (props.rangeTextFormatter) {
+    return props.rangeTextFormatter({ start, end, items });
+  }
   if (items !== Infinity) {
     return `${start}-${end} of ${items} items`;
   } else {

@@ -231,4 +231,29 @@ describe('CvPagination', () => {
     await result.findByText('of 3 pages');
     expect(result.emitted('change')?.length).toBe(1);
   });
+
+  it('rangeTextFormatter and pageOfPagesFormatter override the rendered text when supplied', async () => {
+    const numberOfItems = 1223;
+    const result = render(CvPagination, {
+      props: {
+        numberOfItems,
+        rangeTextFormatter: ({ start, end, items }) =>
+          `Del ${start} al ${end} de ${items}`,
+        pageOfPagesFormatter: ({ pages }) => `von ${pages} Seiten`,
+      },
+    });
+
+    await result.findByText(`Del 1 al 10 de ${numberOfItems}`);
+    await result.findByText('von 123 Seiten');
+  });
+
+  it('omitting the formatters reproduces the default English text exactly', async () => {
+    const numberOfItems = 1223;
+    const result = render(CvPagination, {
+      props: { numberOfItems },
+    });
+
+    await result.findByText(`1-10 of ${numberOfItems} items`);
+    await result.findByText('of 123 pages');
+  });
 });
