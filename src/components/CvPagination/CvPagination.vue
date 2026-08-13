@@ -191,10 +191,6 @@ function onPageChange(newVal) {
   firstItem.value = newFirstItem(pageValue.value, pageSizeValue.value);
   emit('change', internalValue.value);
 }
-watch(
-  () => props.numberOfItems,
-  () => onPageSizeChange(pageSizeValue.value)
-);
 function onPageSizeChange(newVal) {
   pageSizeValue.value = parseInt(newVal, 10);
   pageCount.value = newPageCount(props.numberOfItems, pageSizeValue.value);

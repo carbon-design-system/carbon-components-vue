@@ -117,4 +117,52 @@ describe('CvPagination', () => {
     await result.findByText(`From 1 to 10 out of ${numberOfItems}`);
     await result.findByText(`out of 123 pages`);
   });
+
+  it('does not emit change when numberOfItems changes on its own', async () => {
+    const result = render(CvPagination, {
+      props: { numberOfItems: 10 },
+    });
+
+    await result.findByText(`of 1 pages`);
+    expect(result.emitted('change')?.length).toBe(1); // mount emit only
+
+    await result.rerender({ numberOfItems: 100 });
+    await result.findByText(`of 10 pages`);
+    expect(result.emitted('change')?.length).toBe(1);
+  });
+
+  it('emits exactly one change for a user action followed by a later numberOfItems change', async () => {
+    const result = render(CvPagination, {
+      props: { numberOfItems: 30 },
+    });
+    const [, forward] = await result.findAllByRole('button');
+
+    const user = userEvent.setup();
+    await user.click(forward);
+    expect(result.emitted('change')?.length).toBe(2);
+
+    await result.rerender({ numberOfItems: 100 });
+    await result.findByText(`of 10 pages`);
+    expect(result.emitted('change')?.length).toBe(2);
+  });
+
+  it('reports the new page size, not the abandoned one, when numberOfItems changes afterwards', async () => {
+    const result = render(CvPagination, {
+      props: {
+        numberOfItems: 200,
+        page: 5,
+        pageSizes: [10, 20],
+      },
+    });
+    const select = await result.findByLabelText('Items per page:');
+
+    const user = userEvent.setup();
+    await user.selectOptions(select, ['20']);
+    expect(result.emitted('change')?.length).toBe(2);
+    expect(result.emitted('change')[1][0].length).toBe(20);
+
+    await result.rerender({ numberOfItems: 100 });
+    expect(result.emitted('change')?.length).toBe(2);
+    expect(result.emitted('change')[1][0].length).toBe(20);
+  });
 });
