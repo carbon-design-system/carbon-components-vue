@@ -1,14 +1,12 @@
 import { carbonPrefix } from '../../global/settings';
-import {
-  splitSlotArgs,
-  storyParametersObject,
-} from '../../global/storybook-utils';
+import { splitSlotArgs } from '../../global/storybook-utils';
 import { action } from '@storybook/addon-actions';
 
 import { CvCodeSnippet, CvCodeSnippetSkeleton } from '.';
-import CvCodeSnippetConsts from './consts';
+import { codeSnippetKinds } from './consts';
 
 import './CvCodeSnippet.stories.scss';
+import { computed } from 'vue';
 
 export default {
   title: 'Component/CvCodeSnippet',
@@ -17,18 +15,18 @@ export default {
     default: { control: { type: 'text' } },
     kind: {
       control: { type: 'select' },
-      options: CvCodeSnippetConsts.codeSnippetKinds,
-      defaultValue: CvCodeSnippetConsts.codeSnippetKinds[0],
+      options: codeSnippetKinds,
       table: {
-        defaultValue: {
-          summary: `'${CvCodeSnippetConsts.codeSnippetKinds[0]}'`,
-        },
+        defaultValue: { summary: `'${codeSnippetKinds[0]}'` },
       },
     },
   },
+  args: {
+    kind: codeSnippetKinds[0],
+  },
 };
 
-const template = `
+const defaultTemplate = `
 <div class="code-snippet-story" :class="{ '${carbonPrefix}--tile': args.light }">
   <small v-if="args.light">
     The snippet container should never be the same color as the page background.<br />
@@ -37,54 +35,36 @@ const template = `
   <cv-code-snippet v-bind="args" @copy="copy">{{ slotArgs.default }}</cv-code-snippet>
 </div>
 `;
-const Template = argsIn => {
-  const { args, slotArgs } = splitSlotArgs(argsIn, ['default']);
 
-  return {
+const Template = argsIn => ({
+  args: argsIn,
+  render: args => ({
     components: { CvCodeSnippet },
-    setup: () => ({ args, slotArgs, copy: action('copy') }),
-    template,
-  };
-};
+    setup: () => ({
+      args: computed(() => splitSlotArgs(args, ['default']).args),
+      slotArgs: computed(() => splitSlotArgs(args, ['default']).slotArgs),
+      copy: action('copy'),
+    }),
+    template: defaultTemplate,
+  }),
+});
 
-export const Default = Template.bind({});
-Default.args = {
-  kind: CvCodeSnippetConsts.codeSnippetKinds[0],
+export const Default = Template({
+  kind: codeSnippetKinds[0],
   default:
     'yarn add carbon-components@latest carbon-components-react@latest @carbon/icons-react@latest carbon-icons@latest',
   ariaLabel: 'Container label',
-};
-Default.parameters = storyParametersObject(
-  Default.parameters,
-  '<cv-code-snippet v-bind="args" @copy="copy">{{ slotArgs.default }}</cv-code-snippet>',
-  Default.args
-);
+});
 
-export const Oneline = Template.bind({});
-Oneline.args = {
-  kind: CvCodeSnippetConsts.codeSnippetKinds[0],
+export const Oneline = Template({
+  kind: codeSnippetKinds[0],
   default:
     'yarn add carbon-components@latest carbon-components-react@latest @carbon/icons-react@latest carbon-icons@latest',
   ariaLabel: 'Container label',
-};
-Oneline.argTypes = {
-  wrapText: { table: { disable: true } },
-  lessText: { table: { disable: true } },
-  moreText: { table: { disable: true } },
-  minCollapsedNumberOfRows: { table: { disable: true } },
-  maxCollapsedNumberOfRows: { table: { disable: true } },
-  minExpandedNumberOfRows: { table: { disable: true } },
-  maxExpandedNumberOfRows: { table: { disable: true } },
-};
-Oneline.parameters = storyParametersObject(
-  Oneline.parameters,
-  template,
-  Oneline.args
-);
+});
 
-export const Multiline = Template.bind({});
-Multiline.args = {
-  kind: CvCodeSnippetConsts.codeSnippetKinds[1],
+export const Multiline = Template({
+  kind: codeSnippetKinds[1],
   default: `"scripts": {
     "build": "lerna run build --stream --prefix --npm-client yarn",
     "ci-check": "carbon-cli ci-check",
@@ -114,67 +94,27 @@ Multiline.args = {
     "@babel/preset-react": "^7.10.0",
     "@babel/runtime": "^7.10.0",
     "@commitlint/cli": "^8.3.5",`,
-};
-Multiline.parameters = storyParametersObject(
-  Multiline.parameters,
-  template,
-  Multiline.args
-);
-
-export const Inline = Template.bind({});
-Inline.args = {
-  kind: CvCodeSnippetConsts.codeSnippetKinds[2],
-  default: 'node -v',
-};
-Inline.argTypes = {
-  ariaLabel: { table: { disable: true } },
-  wrapText: { table: { disable: true } },
-  lessText: { table: { disable: true } },
-  moreText: { table: { disable: true } },
-  minCollapsedNumberOfRows: { table: { disable: true } },
-  maxCollapsedNumberOfRows: { table: { disable: true } },
-  minExpandedNumberOfRows: { table: { disable: true } },
-  maxExpandedNumberOfRows: { table: { disable: true } },
-};
-Inline.parameters = storyParametersObject(
-  Inline.parameters,
-  template,
-  Inline.args
-);
-
-const skeletonTemplate = `
-<div class="code-snippet-story" :class="{ '${carbonPrefix}--tile': args.light }">
-  <small v-if="args.light">
-    The snippet container should never be the same color as the page background.<br />
-    Do not use the <cv-code-snippet kind="inline" :light="true" :hide-copy-button="true">light</cv-code-snippet> variant on <cv-code-snippet kind="inline" :light="true" :hide-copy-button="true">$ui-background</cv-code-snippet> or <cv-code-snippet kind="inline" :light="true" :hide-copy-button="true">$ui-02</cv-code-snippet>.
-  </small>
-  <cv-code-snippet-skeleton v-bind="args" />
-</div>
-`;
-const SkeletonTemplate = args => ({
-  components: { CvCodeSnippet, CvCodeSnippetSkeleton },
-  setup: () => ({ args }),
-  template: skeletonTemplate,
 });
 
-export const Skeleton = SkeletonTemplate.bind({});
-Skeleton.argTypes = {
-  kind: { options: CvCodeSnippetConsts.codeSnippetKinds.slice(0, 2) },
-  copyFeedback: { table: { disable: true } },
-  copyFeedbackTimeout: { table: { disable: true } },
-  hideCopyButton: { table: { disable: true } },
-  disabled: { table: { disable: true } },
-  ariaLabel: { table: { disable: true } },
-  wrapText: { table: { disable: true } },
-  lessText: { table: { disable: true } },
-  moreText: { table: { disable: true } },
-  minCollapsedNumberOfRows: { table: { disable: true } },
-  maxCollapsedNumberOfRows: { table: { disable: true } },
-  minExpandedNumberOfRows: { table: { disable: true } },
-  maxExpandedNumberOfRows: { table: { disable: true } },
-};
-Skeleton.parameters = storyParametersObject(
-  Skeleton.parameters,
-  `<cv-code-snippet-skeleton v-bind="args" />`,
-  Skeleton.args
-);
+export const Inline = Template({
+  kind: codeSnippetKinds[2],
+  default: 'node -v',
+});
+
+const skeletonTemplate = `<cv-code-snippet-skeleton v-bind="args" />`;
+
+const SkeletonTemplate = argsIn => ({
+  args: argsIn,
+  render: args => ({
+    components: { CvCodeSnippetSkeleton },
+    setup: () => ({
+      args: computed(() => args),
+      copy: action('copy'),
+    }),
+    template: skeletonTemplate,
+  }),
+});
+
+export const Skeleton = SkeletonTemplate({
+  kind: codeSnippetKinds[0],
+});

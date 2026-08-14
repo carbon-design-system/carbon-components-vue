@@ -1,0 +1,32 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import * as CvCodeSnippetStories from './CvCodeSnippet.stories';
+
+<Meta of={CvCodeSnippetStories} />
+
+# CvCodeSnippet
+
+Code snippets display short strings of reusable code that can be copied by the user.
+
+## One-line
+
+Used for short, single-line code strings.
+
+<Canvas of={CvCodeSnippetStories.Oneline} />
+
+## Multi-line
+
+Used for longer, block-level code strings. Supports expand/collapse with configurable row limits.
+
+<Canvas of={CvCodeSnippetStories.Multiline} />
+
+## Inline
+
+Used inside body copy to embed a short code string inline with text.
+
+<Canvas of={CvCodeSnippetStories.Inline} />
+
+# Skeleton
+
+Use the skeleton variant while code snippet content is loading.
+
+<Canvas of={CvCodeSnippetStories.Skeleton} />
