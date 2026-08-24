@@ -3,9 +3,29 @@ import { CvPagination } from '.';
 import { sbCompPrefix } from '../../global/storybook-utils';
 import { action } from '@storybook/addon-actions';
 import { ref } from 'vue';
-const myPage=ref(1);
-const myPageSizes=ref([5,7,10,11,13])
-const myNumItems=ref(13)
+const myPage = ref(1);
+const myPageSizes = ref([5, 7, 10, 11, 13]);
+const myNumItems = ref(13);
+const controlledPage = ref(1);
+const controlledPageSize = ref(10);
+const maxAllowedPage = ref(3);
+const onUpdatePageAction = action('update:page');
+const onUpdatePageSizeAction = action('update:page-size');
+function onUpdatePage(page) {
+  onUpdatePageAction(page);
+  // simulate a parent that constrains the page: requests past
+  // maxAllowedPage are declined by simply not assigning them back.
+  if (page <= maxAllowedPage.value) {
+    controlledPage.value = page;
+  }
+}
+function onUpdatePageSize(pageSize) {
+  onUpdatePageSizeAction(pageSize);
+  controlledPageSize.value = pageSize;
+}
+const spanishRangeTextFormatter = ({ start, end, items }) =>
+  `Del ${start} al ${end} de ${items}`;
+const germanPageOfPagesFormatter = ({ pages }) => `von ${pages} Seiten`;
 
 <Meta title={`${sbCompPrefix}/CvPagination`} component={CvPagination} />
 
@@ -21,6 +41,13 @@ export const Template = args => ({
       myPage,
       myPageSizes,
       myNumItems,
+      controlledPage,
+      controlledPageSize,
+      maxAllowedPage,
+      onUpdatePage,
+      onUpdatePageSize,
+      spanishRangeTextFormatter,
+      germanPageOfPagesFormatter,
       onChange: action('change'),
     };
   },
@@ -75,10 +102,42 @@ const slotsTemplate = `
   </template>
   </cv-pagination>
 `;
+const controlledTemplate = `
+  <cv-pagination
+    @change="onChange"
+    v-model:page="controlledPage"
+    v-model:page-size="controlledPageSize"
+    @update:page="onUpdatePage"
+    @update:page-size="onUpdatePageSize"
+    :number-of-items="103">
+  </cv-pagination>
+  <div style="margin-top:2rem; background-color: #888888; padding:1rem">
+    <h3>Parent-owned state</h3>
+    <p>page: {{controlledPage}}, page size: {{controlledPageSize}}</p>
+    <p>
+      Requests for a page beyond max-allowed-page are declined by this
+      story (the parent simply doesn't assign the requested page back) -
+      the displayed page stays put instead of drifting or getting stuck.
+    </p>
+    max allowed page:
+    <button @click="maxAllowedPage--">-</button>
+    {{maxAllowedPage}}
+    <button @click="maxAllowedPage++">+</button>
+  </div>
+`;
+const formattersTemplate = `
+  <cv-pagination
+    @change="onChange"
+    :number-of-items="103"
+    :range-text-formatter="spanishRangeTextFormatter"
+    :page-of-pages-formatter="germanPageOfPagesFormatter">
+  </cv-pagination>
+`;
 
 # CvPagination
 
 Migration notes:
+
 - If you specify `pageNumberLabel` a trailing colon (:) is no longer automatically appended to the text
 
 <Canvas>
@@ -111,13 +170,12 @@ Migration notes:
     argTypes={{
       page: { control: false },
       pageSizes: { control: false },
-      numberOfItems: { control: false }
+      numberOfItems: { control: false },
     }}
   >
     {Template.bind({})}
   </Story>
 </Canvas>
-
 
 Use slots to set the range text and "of n pages" text. A good use case for this is internationalization.
 
@@ -126,13 +184,7 @@ Use slots to set the range text and "of n pages" text. A good use case for this 
     name="Slots"
     parameters={{
       controls: {
-        exclude: [
-          'default',
-          'template',
-          'data',
-          'change',
-          'of-n-pages',
-        ],
+        exclude: ['default', 'template', 'data', 'change', 'of-n-pages'],
       },
       docs: { source: { code: slotsTemplate } },
     }}
@@ -158,10 +210,71 @@ Use slots to set the range text and "of n pages" text. A good use case for this 
       backwardsButtonDisabled: false,
       forwardsButtonDisabled: false,
       actualItemsOnPage: Infinity,
-      locale: 'en'
+      locale: 'en',
     }}
-    argTypes={{
+    argTypes={{}}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+Bind `v-model:page` and/or `v-model:page-size` to opt in to controlled mode:
+the component no longer moves on its own, it emits `update:page` /
+`update:page-size` and only shows the new value once the parent assigns it
+back through the prop. This lets a parent veto a page change - useful when
+loading the next page's data can fail, or is gated behind other state.
+
+<Canvas>
+  <Story
+    name="Controlled"
+    parameters={{
+      controls: {
+        exclude: [
+          'default',
+          'template',
+          'data',
+          'range-text',
+          'change',
+          'of-n-pages',
+        ],
+      },
+      docs: { source: { code: controlledTemplate } },
     }}
+    args={{
+      data: {},
+      template: controlledTemplate,
+    }}
+    argTypes={{}}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+Use `rangeTextFormatter` and `pageOfPagesFormatter` to translate the range
+and page-count text without reimplementing the `range-text` / `of-n-pages`
+slots.
+
+<Canvas>
+  <Story
+    name="Formatters"
+    parameters={{
+      controls: {
+        exclude: [
+          'default',
+          'template',
+          'data',
+          'range-text',
+          'change',
+          'of-n-pages',
+        ],
+      },
+      docs: { source: { code: formattersTemplate } },
+    }}
+    args={{
+      data: {},
+      template: formattersTemplate,
+    }}
+    argTypes={{}}
   >
     {Template.bind({})}
   </Story>

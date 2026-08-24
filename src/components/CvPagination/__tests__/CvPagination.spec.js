@@ -117,4 +117,143 @@ describe('CvPagination', () => {
     await result.findByText(`From 1 to 10 out of ${numberOfItems}`);
     await result.findByText(`out of 123 pages`);
   });
+
+  it('does not emit change when numberOfItems changes on its own', async () => {
+    const result = render(CvPagination, {
+      props: { numberOfItems: 10 },
+    });
+
+    await result.findByText(`of 1 pages`);
+    expect(result.emitted('change')?.length).toBe(1); // mount emit only
+
+    await result.rerender({ numberOfItems: 100 });
+    await result.findByText(`of 10 pages`);
+    expect(result.emitted('change')?.length).toBe(1);
+  });
+
+  it('emits exactly one change for a user action followed by a later numberOfItems change', async () => {
+    const result = render(CvPagination, {
+      props: { numberOfItems: 30 },
+    });
+    const [, forward] = await result.findAllByRole('button');
+
+    const user = userEvent.setup();
+    await user.click(forward);
+    expect(result.emitted('change')?.length).toBe(2);
+
+    await result.rerender({ numberOfItems: 100 });
+    await result.findByText(`of 10 pages`);
+    expect(result.emitted('change')?.length).toBe(2);
+  });
+
+  it('reports the new page size, not the abandoned one, when numberOfItems changes afterwards', async () => {
+    const result = render(CvPagination, {
+      props: {
+        numberOfItems: 200,
+        page: 5,
+        pageSizes: [10, 20],
+      },
+    });
+    const select = await result.findByLabelText('Items per page:');
+
+    const user = userEvent.setup();
+    await user.selectOptions(select, ['20']);
+    expect(result.emitted('change')?.length).toBe(2);
+    expect(result.emitted('change')[1][0].length).toBe(20);
+
+    await result.rerender({ numberOfItems: 100 });
+    expect(result.emitted('change')?.length).toBe(2);
+    expect(result.emitted('change')[1][0].length).toBe(20);
+  });
+
+  it('with v-model:page (onUpdate:page listener present), clicking forward emits update:page and only moves once the prop updates', async () => {
+    const result = render(CvPagination, {
+      props: {
+        numberOfItems: 30,
+        page: 1,
+        'onUpdate:page': val => result.rerender({ page: val }),
+      },
+    });
+    const [, forward] = await result.findAllByRole('button');
+
+    const user = userEvent.setup();
+    await user.click(forward);
+
+    expect(result.emitted('update:page')?.length).toBe(1);
+    expect(result.emitted('update:page')[0]).toEqual([2]);
+
+    const pageSelect = await result.findByLabelText('Page number:');
+    expect(pageSelect.value).toBe('2');
+  });
+
+  it('with v-model:page and a parent that ignores the event, the rendered page does not drift and does not get stuck', async () => {
+    const result = render(CvPagination, {
+      props: {
+        numberOfItems: 30,
+        page: 1,
+        'onUpdate:page': () => {},
+      },
+    });
+    const [, forward] = await result.findAllByRole('button');
+
+    const user = userEvent.setup();
+    await user.click(forward);
+    expect(result.emitted('update:page')?.length).toBe(1);
+
+    // parent ignored the request; re-asserting the same page value must not
+    // leave the component stuck unable to propose page 2 again.
+    await result.rerender({ page: 1 });
+    await user.click(forward);
+    expect(result.emitted('update:page')?.length).toBe(2);
+    expect(result.emitted('update:page')[1]).toEqual([2]);
+  });
+
+  it('with both v-model:page and v-model:pageSize, mounting emits no change', async () => {
+    const result = render(CvPagination, {
+      props: {
+        numberOfItems: 30,
+        page: 1,
+        pageSize: 10,
+        'onUpdate:page': () => {},
+        'onUpdate:pageSize': () => {},
+      },
+    });
+
+    await result.findByText('of 3 pages');
+    expect(result.emitted('change')).toBeUndefined();
+  });
+
+  it('uncontrolled usage (plain :page, no listener) behaves identically to today, including the mount emit', async () => {
+    const result = render(CvPagination, {
+      props: { numberOfItems: 30, page: 1 },
+    });
+
+    await result.findByText('of 3 pages');
+    expect(result.emitted('change')?.length).toBe(1);
+  });
+
+  it('rangeTextFormatter and pageOfPagesFormatter override the rendered text when supplied', async () => {
+    const numberOfItems = 1223;
+    const result = render(CvPagination, {
+      props: {
+        numberOfItems,
+        rangeTextFormatter: ({ start, end, items }) =>
+          `Del ${start} al ${end} de ${items}`,
+        pageOfPagesFormatter: ({ pages }) => `von ${pages} Seiten`,
+      },
+    });
+
+    await result.findByText(`Del 1 al 10 de ${numberOfItems}`);
+    await result.findByText('von 123 Seiten');
+  });
+
+  it('omitting the formatters reproduces the default English text exactly', async () => {
+    const numberOfItems = 1223;
+    const result = render(CvPagination, {
+      props: { numberOfItems },
+    });
+
+    await result.findByText(`1-10 of ${numberOfItems} items`);
+    await result.findByText('of 123 pages');
+  });
 });
