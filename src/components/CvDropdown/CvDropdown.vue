@@ -296,6 +296,7 @@ const emit = defineEmits(['update:modelValue', 'change']);
 watch(
   () => props.modelValue,
   () => {
+    if (props.modelValue === dataValue.value) return;
     dataValue.value = props.modelValue;
     dataCaption.value = undefined;
   }
