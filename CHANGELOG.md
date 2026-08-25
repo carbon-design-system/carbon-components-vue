@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.32](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.31...@carbon/vue@3.0.32) (2026-08-25)
+
+### Bug Fixes
+
+- cvmodal closing issue on mouse up ([77ee91c](https://github.com/carbon-design-system/carbon-components-vue/commit/77ee91c6b5dae3af05608fb7aaa3bb85aee9ef88))
+- **CvPagination:** stop re-emitting change on pure numberOfItems updates ([b20d89c](https://github.com/carbon-design-system/carbon-components-vue/commit/b20d89ce2674e7f778b3663c1df402e992c282b7))
+- **dropdown:** rerender with same value ([1b41679](https://github.com/carbon-design-system/carbon-components-vue/commit/1b41679cfdc4bc7500d55234fa017ed6b3ad92d2))
+
+### Features
+
+- **CvPagination:** add opt-in controlled mode via v-model:page/pageSize ([4fb755c](https://github.com/carbon-design-system/carbon-components-vue/commit/4fb755ca3ee205318dd96c2758f7b872f28151a2))
+- **CvPagination:** add optional rangeTextFormatter/pageOfPagesFormatter props ([1005d7f](https://github.com/carbon-design-system/carbon-components-vue/commit/1005d7ff585fe3b0c536a56f2d8b378f7e206905))
+
 ## [3.0.31](https://github.com/carbon-design-system/carbon-components-vue/compare/@carbon/vue@3.0.30...@carbon/vue@3.0.31) (2026-07-07)
 
 ### Bug Fixes
