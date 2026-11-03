@@ -6,8 +6,15 @@
  */
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
+const { getIbmAnalyticsHeads } = require('./ibm-analytics');
+
+const { managerAnalyticsHead, previewAnalyticsHead } =
+  getIbmAnalyticsHeads('CarbonVueStorybook');
 
 module.exports = {
+  // `head` contains manager-head.html/preview-head.html
+  managerHead: head => `${head}${managerAnalyticsHead}`,
+  previewHead: head => `${head}${previewAnalyticsHead}`,
   addons: [
     {
       name: '@storybook/addon-essentials',
