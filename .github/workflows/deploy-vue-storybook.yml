@@ -34,34 +34,14 @@ jobs:
         with:
           node-version: 22
 
-      - name: Install Vue 3 dependencies
+      - name: Install dependencies
         run: |
           cd ${GITHUB_WORKSPACE}/storybook
           yarn install
-      - name: Build Vue 3 storybook
+      - name: Build Storybook
         run: |
           cd ${GITHUB_WORKSPACE}/storybook
           yarn build-storybook --quiet --output-dir ${GITHUB_WORKSPACE}/storybook/storybook-static/
-
-      - name: Switch to Vue 2 branch
-        uses: actions/checkout@v4
-        with:
-          ref: vue2
-          clean: false
-          path: vue2
-      - name: Use Node.js 16 for Vue 2
-        uses: actions/setup-node@v4
-        with:
-          node-version: 16
-      - name: Install vue2 dependencies
-        run: |
-          cd ${GITHUB_WORKSPACE}/vue2
-          yarn install --offline --ignore-engines
-      - name: Build Vue 2 storybook
-        run: |
-          cd ${GITHUB_WORKSPACE}/vue2
-          yarn info @carbon/vue --json > package-info.jsonl
-          npx vue-cli-service storybook:build -c storybook/.storybook  --output-dir ${GITHUB_WORKSPACE}/storybook/storybook-static/vue2
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
