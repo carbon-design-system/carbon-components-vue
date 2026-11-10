@@ -27896,8 +27896,8 @@ __metadata:
   linkType: hard
 
 "svgo@npm:^2.7.0":
-  version: 2.8.3
-  resolution: "svgo@npm:2.8.3"
+  version: 2.8.4
+  resolution: "svgo@npm:2.8.4"
   dependencies:
     commander: ^7.2.0
     css-select: ^4.1.3
@@ -27907,8 +27907,8 @@ __metadata:
     sax: ^1.5.0
     stable: ^0.1.8
   bin:
-    svgo: ./bin/svgo
-  checksum: e3636760dfb7fb898919fd8eade7ad4a69a10b8650e9b3062b3beff6045f39063da18d537b454ed5bca638a9db45bb0bfa8d9b920efac2157964ec20ff35d829
+    svgo: bin/svgo
+  checksum: 1775cd386e9f4fddeaac4f88ba9e3f046eb0cf521561362cfcb844b9c07c44ad775b7e62908fa7a2062529f391f0d5a6549af7ac5c18b2096830cb4513465dfc
   languageName: node
   linkType: hard
 
