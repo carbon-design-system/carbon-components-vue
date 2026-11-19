@@ -125,7 +125,9 @@ Migration notes:
   if you specify it like this you will see a deprecation message in the log. Please use `v-model:visible=something` instead.
 - For the `size` attribute please use of the standard sizes 'xs', 'sm', 'md', or 'lg'. The 'large' and 'small' values still
   work but avoid using them.
-- The `arial-label` was derived from the title slot but in this version it is an additional property with a default of 'Information modal'
+- By default the dialog is labelled (`aria-labelledby`) by the title slot and described (`aria-describedby`) by the content slot.
+  Use the `aria-label` property to give the dialog a label instead, or `aria-labelledby` and `aria-describedby` to
+  reference the ids of other elements. When `aria-label` is set `aria-labelledby` is not rendered.
 - The `show` and `hide` methods can no longer be called directly. Use the `visible` property to control visability.
 - The `modal-hide-request` no longer emits a `PointerEvent` instead just the reason is emitted. i.e. `{cv:reason: "external-click"}`
 

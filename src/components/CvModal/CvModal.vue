@@ -26,7 +26,9 @@
             [`${carbonPrefix}--modal-container--${internalSize}`]: internalSize,
           },
         ]"
-        :aria-label="ariaLabel"
+        :aria-label="ariaLabel || undefined"
+        :aria-labelledby="dialogLabelledby"
+        :aria-describedby="ariaDescribedby || contentId"
       >
         <div
           ref="beforeContent"
@@ -41,7 +43,7 @@
           <p :class="`${carbonPrefix}--modal-header__label`">
             <slot name="label"></slot>
           </p>
-          <p :class="`${carbonPrefix}--modal-header__heading`">
+          <p :id="titleId" :class="`${carbonPrefix}--modal-header__heading`">
             <slot name="title">Modal Title</slot>
           </p>
           <button
@@ -56,6 +58,7 @@
         </div>
 
         <div
+          :id="contentId"
           ref="content"
           :class="[
             `${carbonPrefix}--modal-content`,
@@ -158,9 +161,19 @@ const props = defineProps({
    */
   closeAriaLabel: { type: String, default: 'Close modal' },
   /**
-   * aria label for the dialog, default 'Information modal'
+   * aria label for the dialog. When not set the dialog is labelled by the title slot
+   * (or by `ariaLabelledby` if specified).
    */
-  ariaLabel: { type: String, default: 'Information modal' },
+  ariaLabel: { type: String, default: '' },
+  /**
+   * id of the element(s) that label the dialog. Defaults to the title slot.
+   * Ignored when `ariaLabel` is set.
+   */
+  ariaLabelledby: { type: String, default: '' },
+  /**
+   * id of the element(s) that describe the dialog. Defaults to the content slot.
+   */
+  ariaDescribedby: { type: String, default: '' },
   /**
    * 'danger' otherwise default modal.
    */
@@ -227,6 +240,12 @@ const props = defineProps({
   ...propsCvId,
 });
 const uid = useCvId(props, true);
+const titleId = computed(() => `${uid.value}-title`);
+const contentId = computed(() => `${uid.value}-content`);
+const dialogLabelledby = computed(() => {
+  if (props.ariaLabel) return undefined;
+  return props.ariaLabelledby || titleId.value;
+});
 
 const dataVisible = ref(false);
 const data = reactive({
