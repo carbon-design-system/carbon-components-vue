@@ -118,4 +118,46 @@ describe('CvModal', () => {
     expect(result.emitted('other-btn-click')?.length).toBe(1);
     expect(result.emitted('modal-hide-request')?.length).toBe(5);
   });
+
+  describe('dialog accessible name and description', () => {
+    const renderModal = props =>
+      render(CvModal, {
+        props: { visible: true, disableTeleport: true, id: 'm1', ...props },
+        slots: {
+          title: 'XYZ modal title',
+          content: '<p>XYZ modal content</p>',
+        },
+      });
+
+    it('is labelled by the title and described by the content by default', () => {
+      const result = renderModal();
+      const dialog = result.getByRole('dialog');
+      expect(dialog.getAttribute('aria-label')).toBe(null);
+      expect(dialog.getAttribute('aria-labelledby')).toBe('m1-title');
+      expect(dialog.getAttribute('aria-describedby')).toBe('m1-content');
+      expect(document.getElementById('m1-title').textContent).toBe(
+        'XYZ modal title'
+      );
+      expect(document.getElementById('m1-content').textContent).toContain(
+        'XYZ modal content'
+      );
+    });
+
+    it('uses ariaLabel instead of aria-labelledby when specified', () => {
+      const result = renderModal({ ariaLabel: 'my label' });
+      const dialog = result.getByRole('dialog');
+      expect(dialog.getAttribute('aria-label')).toBe('my label');
+      expect(dialog.getAttribute('aria-labelledby')).toBe(null);
+    });
+
+    it('allows aria-labelledby and aria-describedby to be overridden', () => {
+      const result = renderModal({
+        ariaLabelledby: 'other-label',
+        ariaDescribedby: 'other-desc',
+      });
+      const dialog = result.getByRole('dialog');
+      expect(dialog.getAttribute('aria-labelledby')).toBe('other-label');
+      expect(dialog.getAttribute('aria-describedby')).toBe('other-desc');
+    });
+  });
 });
